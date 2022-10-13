@@ -68,17 +68,34 @@ run_test_suite()
     secs_converter "$(($(date +%s) - ${test_suite_start}))"
 }
 
+DRY_RUN="$1"
+
 echo ""
 echo "############################################################################"
 echo "#######       Welcome to JVM Performance Benchmarks Test Suite       #######"
 echo "############################################################################"
 echo ""
 
-DRY_RUN="$1"
-
-. ./configure_arch.sh
+echo ""
+echo "+=========================+"
+echo "| [1/3] JMH Configuration |"
+echo "+=========================+"
+echo ""
 . ./configure_jvm.sh
+
+echo ""
+echo "+=========================+"
+echo "| [2/3] JVM Configuration |"
+echo "+=========================+"
+echo ""
 . ./configure_jmh.sh
+
+echo ""
+echo "+========================+"
+echo "| [3/3] OS Configuration |"
+echo "+========================+"
+echo ""
+. ./configure_linux_os.sh
 
 echo ""
 read -r -p "IMPORTANT: if the selected configuration is correct, press ENTER to continue otherwise CRTL+C to abort! "

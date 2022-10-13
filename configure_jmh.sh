@@ -1,11 +1,5 @@
 #!/bin/bash
 
-echo ""
-echo "+=========================+"
-echo "| [2/3] JMH Configuration |"
-echo "+=========================+"
-echo ""
-
 export JMH_ARCHIVE="benchmarks/target/benchmarks.jar"
 export JMH_OPTS="-foe true -wi 5 -w 10 -i 5 -r 10 -f 3"
 export JMH_OUTPUT_FOLDER="results"
@@ -49,7 +43,9 @@ export -a JMH_TEST_SUITE=(
         "StringInterpolationBenchmark|-prof gc"
     )
 
+echo ""
 echo "JMH_ARCHIVE=${JMH_ARCHIVE}"
 echo "JMH_OUTPUT_FOLDER=${JMH_OUTPUT_FOLDER}"
 echo "JMH_OPTS=${JMH_OPTS}"
 echo "JMH_OUTPUT_FORMAT_TYPE=${JMH_OUTPUT_FORMAT_TYPE}"
+echo ""

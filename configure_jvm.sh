@@ -2,6 +2,7 @@
 
 configure_openjdk_hotspot()
 {
+  export ARCH=$(uname -i)
   export JDK_VERSION="17"
   export JAVA_HOME="/usr/lib/jvm/openjdk1-17.0.2"
   export PATH=$JAVA_HOME/bin:$PATH
@@ -12,6 +13,7 @@ configure_openjdk_hotspot()
 
 configure_graalvm_ce()
 {
+  export ARCH=$(uname -i)
   export JDK_VERSION="17"
   export JAVA_HOME="/usr/lib/jvm/graalvm-ce-java17-22.2.0"
   export PATH=$JAVA_HOME/bin:$PATH
@@ -22,6 +24,7 @@ configure_graalvm_ce()
 
 configure_graalvm_ee()
 {
+  export ARCH=$(uname -i)
   export JDK_VERSION="17"
   export JAVA_HOME="/usr/lib/jvm/graalvm-ee-java17-22.2.0.1"
   export PATH=$JAVA_HOME/bin:$PATH
@@ -32,6 +35,7 @@ configure_graalvm_ee()
 
 configure_eclipse_open_j9()
 {
+  export ARCH=$(uname -i)
   export JDK_VERSION="17"
   export JAVA_HOME="/usr/lib/jvm/ibm-semeru-openj9-jdk-17.0.2+8"
   export PATH=$JAVA_HOME/bin:$PATH
@@ -39,12 +43,6 @@ configure_eclipse_open_j9()
   export TEST_SUITE_NAME="Eclipse OpenJ9 VM"
   export TEST_SUITE_OUTPUT_FOLDER="eclipse_openj9"
 }
-
-echo ""
-echo "+=========================+"
-echo "| [2/3] JVM Configuration |"
-echo "+=========================+"
-echo ""
 
 echo "Select the JVM:"
 echo "    1) - OpenJDK HotSpot VM"
@@ -80,6 +78,7 @@ do
 done
 
 echo ""
+echo "ARCH=${ARCH}"
 echo "JDK_VERSION=${JDK_VERSION}"
 echo "JAVA_HOME=${JAVA_HOME}"
 echo "JVM_OPTS=${JVM_OPTS}"
