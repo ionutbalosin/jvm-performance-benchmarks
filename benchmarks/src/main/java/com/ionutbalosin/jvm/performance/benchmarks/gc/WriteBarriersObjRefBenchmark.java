@@ -21,6 +21,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of write barrier while updating a reference belonging to a wrapper object.
  *

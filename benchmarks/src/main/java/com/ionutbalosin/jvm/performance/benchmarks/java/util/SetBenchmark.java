@@ -29,13 +29,13 @@ import org.openjdk.jmh.infra.Blackhole;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Tests the add() and contains() Set methods using different Set implementations (e.g. HashSet, LinkedHashSet, TreeSet), under following conditions:
  * - the Set is already pre-filled with 32,768 randomly generated Integers with values between [0, THRESHOLD)
  * - every addition and contains operation uses different Integer elements, in comparison to the ones already pre-filled, having values between [THRESHOLD, 2 x THRESHOLD)
  *
  */
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 3, timeUnit = TimeUnit.SECONDS)

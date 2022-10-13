@@ -28,6 +28,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Resources:
  * - see https://en.wikipedia.org/wiki/Strength_reduction
  */
+
 //  Pattern:
 //
 //    addition() {

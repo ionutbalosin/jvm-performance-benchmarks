@@ -20,7 +20,6 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

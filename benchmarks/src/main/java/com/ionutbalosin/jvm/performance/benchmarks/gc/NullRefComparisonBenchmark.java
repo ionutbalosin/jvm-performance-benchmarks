@@ -23,6 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of read barriers while iterating through an array of not null elements and checking the reference equality against null.
  * In the case of ZGC the results are influenced by the color pointers.

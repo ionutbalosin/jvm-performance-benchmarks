@@ -29,7 +29,6 @@ import org.openjdk.jmh.annotations.Warmup;
  *    - two-char String and the first char is the backslash and the second is not the ascii digit or ascii letter.
  * - pattern_split reuses the pattern: it saves a few cycles in comparison to a normal string_split
  */
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

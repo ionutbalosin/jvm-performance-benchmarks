@@ -23,6 +23,7 @@ import org.openjdk.jmh.infra.Blackhole;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Iterates through an array of custom object instances (containing null and not null values) and computes the sum of all elements using different comparison/filtering strategies:
  * - try { sum += array_element[i]; } catch(NullPointerException) {...};
@@ -30,6 +31,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * - if (array_element[i] != null) sum += array_element[i];
  * - Arrays.stream(array).filter(array_element != null).map(...).reduce(0, Integer::sum);
  */
+
 //  Pattern:
 //
 //    loop_try_catch() {

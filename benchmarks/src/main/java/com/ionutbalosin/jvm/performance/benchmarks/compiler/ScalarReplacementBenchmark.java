@@ -35,6 +35,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * Resources:
  * - see https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
  */
+
 //  Pattern:
 //
 //    no_escape_object() {
@@ -79,7 +80,7 @@ import org.openjdk.jmh.infra.Blackhole;
 //    - object2 is:
 //        - NoEscape if inlining of equals() succeeds
 //        - ArgEscape if inlining fails or is disabled
-
+//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

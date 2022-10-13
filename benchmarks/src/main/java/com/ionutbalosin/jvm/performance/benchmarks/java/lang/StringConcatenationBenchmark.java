@@ -21,6 +21,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Resources:
  * - see https://www.ethz.ch/content/dam/ethz/special-interest/infk/inst-cs/lst-dam/documents/Education/Classes/Fall2015/210_Compiler_Design/Slides/hotspot.pdf
@@ -37,6 +38,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - MH_SB_SIZED
  * - MH_SB_SIZED_EXACT
  */
+
 //  Pattern:
 //
 //    concat() {
@@ -47,7 +49,6 @@ import org.openjdk.jmh.annotations.Warmup;
 //    - aString.length() = {16, 128}
 //    - aString has the coder = {LATIN1, UTF16}
 //
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

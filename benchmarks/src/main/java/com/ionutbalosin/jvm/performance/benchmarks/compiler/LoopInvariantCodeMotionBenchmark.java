@@ -30,6 +30,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - see https://courses.cs.washington.edu/courses/cse501/03wi/slides/slides.01-30.pdf
  * - see https://mathworld.wolfram.com/TrigonometricAdditionFormulas.html
  */
+
 //    Sum of recurrent tan(nx) ;
 //        tan(ix) = [Math.tan((i - 1) * x) + Math.tan(x)] / [1 - Math.tan((i - 1) * x) *
 // Math.tan(x)]

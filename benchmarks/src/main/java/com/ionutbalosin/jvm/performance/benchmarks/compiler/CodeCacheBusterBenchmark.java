@@ -33,6 +33,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Resources:
  * - see http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/globals.hpp
  */
+
 //  Pattern:
 //
 //    method() { // size = 40002 bytes
@@ -56,7 +57,6 @@ import org.openjdk.jmh.annotations.Warmup;
 //        return i + random.nextInt(10);
 //    }
 //
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

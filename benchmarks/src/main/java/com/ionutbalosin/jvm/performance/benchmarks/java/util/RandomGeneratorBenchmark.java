@@ -23,6 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Resources:
  * - see https://www.jstatsoft.org/article/view/v008i14

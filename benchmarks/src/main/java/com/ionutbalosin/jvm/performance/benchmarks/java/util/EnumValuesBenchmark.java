@@ -32,6 +32,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * Resources:
  * - see https://dzone.com/articles/memory-hogging-enumvalues-method
  */
+
 //  Pattern:
 //
 //    // declare an ENUM with 31 values

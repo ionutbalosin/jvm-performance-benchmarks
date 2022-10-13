@@ -7,16 +7,19 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Resources:
  * - see https://stackoverflow.com/questions/47146917/are-class-cast-and-class-isinstance-methods-in-java-9-actually-intrinsic-when-in
  */
+
 /*
  * Tests different cast types using:
  * - TYPE.cast(object)
  * - A.class.cast(object)
  * - (A)object
  */
+
 //  Pattern:
 //
 //    array_of_class_instances = {}
@@ -42,7 +45,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 //    where TYPE is:
 //        - Class<A>
 //
-
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;

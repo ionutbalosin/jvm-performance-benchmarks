@@ -23,6 +23,7 @@ import org.openjdk.jol.info.GraphLayout;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * This benchmark allocates arrays of temporary objects until they fill up a certain percent of Heap (e.g. 25%, 50%, 75%)
  * and then releases them all, so they become eligible for Garbage Collector.

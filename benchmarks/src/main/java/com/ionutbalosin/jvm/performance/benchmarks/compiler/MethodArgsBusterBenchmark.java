@@ -28,6 +28,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Resources:
  * - see https://bugs.java.com/bugdatabase/view_bug.do?bug_id=5090493
  */
+
 //  Pattern:
 //
 //    method(double d00, double d01, ... double d63) {

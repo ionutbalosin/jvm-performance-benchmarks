@@ -28,6 +28,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Resources:
  * - see https://www.javatpoint.com/loop-optimization
  */
+
 //  Pattern:
 //
 //    method(accumulator) {

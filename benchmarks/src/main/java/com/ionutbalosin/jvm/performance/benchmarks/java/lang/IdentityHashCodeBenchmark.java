@@ -18,6 +18,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Tests the identityHashCode() of the Object() using different algorithms. The algorithm of generating the identity hashCode can be specified using -XX:hashCode JVM argument.
  *
@@ -32,6 +33,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - see https://stackoverflow.com/questions/25111131/whats-the-default-hash-value-of-an-object-on-64-bit-jvm
  * - see http://hg.openjdk.java.net/jdk/jdk13/file/492b644bb9c2/src/hotspot/share/runtime/synchronizer.cpp
  */
+
 //  Pattern:
 //
 //    id_hash_code_X() {

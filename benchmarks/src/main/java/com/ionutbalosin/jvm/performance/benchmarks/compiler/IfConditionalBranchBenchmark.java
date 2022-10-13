@@ -25,6 +25,7 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Tests the optimization of an if conditional branch within a loop based on a predictable or unpredictable branch pattern.
  */
+
 //  Pattern:
 //
 //    for (int value : array) {

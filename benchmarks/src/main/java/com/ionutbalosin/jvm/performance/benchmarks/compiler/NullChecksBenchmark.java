@@ -29,6 +29,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - all of them are null, hence all throw NPE
  * - only a part of them are null, hence only a part of them throw NPE
  */
+
 //  Pattern:
 //    method() {
 //        for (Object object : elements) {

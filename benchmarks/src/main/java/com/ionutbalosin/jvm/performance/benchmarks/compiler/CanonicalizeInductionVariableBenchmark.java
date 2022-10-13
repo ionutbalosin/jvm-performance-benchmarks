@@ -28,6 +28,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Resources:
  * - see https://llvm.org/docs/Passes.html#indvars-canonicalize-induction-variables
  */
+
 //  Pattern:
 //
 //    for (i = start; i*i < MAX; ++i) {

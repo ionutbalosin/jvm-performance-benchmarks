@@ -23,6 +23,7 @@ import org.openjdk.jol.info.GraphLayout;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * This benchmark initially allocates (during setup) a lot of objects, as a pre-allocated part of the Heap (i.e. ballast),
  * and keeps strong references to them until it fills up a certain percent of Heap (e.g. 25%, 50%, 75%).

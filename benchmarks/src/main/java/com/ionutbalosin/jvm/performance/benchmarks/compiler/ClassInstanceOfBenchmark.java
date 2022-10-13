@@ -7,12 +7,14 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Tests different comparisons between class type instances using:
  * - class instance type reference equality (e.g. INSTANCE.getClass() == TYPE.class). Note this way alternative does not work to compare the instance type against its superclasses or interfaces, at runtime.
  * - instanceOf
  * - isInstance
  */
+
 //  Pattern:
 //
 //    array_of_class_instances = {}
@@ -40,7 +42,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 //        - a interface
 //        - an array of classes
 //
-
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;

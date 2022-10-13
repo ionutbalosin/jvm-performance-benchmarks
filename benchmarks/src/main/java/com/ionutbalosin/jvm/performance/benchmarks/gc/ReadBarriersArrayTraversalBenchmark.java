@@ -21,6 +21,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of read barriers while iterating through the elements of an array of Objects and reading every element of it.
  *
@@ -29,6 +30,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *
  */
+
 //  Pattern:
 //
 //    public void test() {

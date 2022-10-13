@@ -23,6 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Test how Compiler can effectively merge several nested synchronized blocks that use the same (local and global) lock, thus reducing the locking overhead.
  */
+
 //  Pattern:
 //
 //    global_locks_10x() {

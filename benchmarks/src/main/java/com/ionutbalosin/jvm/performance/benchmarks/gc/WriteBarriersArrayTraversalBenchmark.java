@@ -21,6 +21,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of write barriers while iterating through the elements of an array of Objects and updating every element of it.
  * The number of allocations in the benchmark test method is kept to zero.
@@ -28,6 +29,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *
  */
+
 //  Pattern:
 //
 //    @CompilerControl(CompilerControl.Mode.DONT_INLINE)

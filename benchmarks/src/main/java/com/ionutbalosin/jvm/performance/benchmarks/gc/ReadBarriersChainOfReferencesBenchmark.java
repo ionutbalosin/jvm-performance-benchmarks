@@ -21,12 +21,14 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of read barriers while iterating through a big chain of pre-allocated composite classes (e.g. class H1 -> class H2 -> ... -> class H32) and returns a field property referenced by the innermost class.
  *
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *
  */
+
 //  Pattern:
 //
 //    Object test() {
@@ -52,7 +54,7 @@ import org.openjdk.jmh.annotations.Warmup;
 //            this.aValue = aValue;
 //        }
 //    }
-
+//
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

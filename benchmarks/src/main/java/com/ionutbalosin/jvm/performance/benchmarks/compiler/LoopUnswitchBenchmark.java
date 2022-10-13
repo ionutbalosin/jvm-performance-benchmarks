@@ -27,6 +27,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * This can increase the size of the code exponentially (e.g. doubling it every time a loop is unswitched).
  * This pass expects loopInvariantCodeMotionPredicate() to be run before it to hoist invariant conditions out of the loop, to make the unswitching opportunity obvious.
  */
+
 //  Pattern:
 //
 //      for (...) {

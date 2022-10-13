@@ -22,6 +22,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of read/write barriers while iterating through an array of Integers and
  * exchanging the values between two array entries (i.e. array[i] <-> array[j]).
@@ -45,6 +46,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *  - Epsilon GC does not use any barrier at all, it might be the baseline for all the others.
  *
  */
+
 //  Pattern:
 //
 //    void test() {

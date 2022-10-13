@@ -27,6 +27,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Resources:
  * - see https://llvm.org/devmtg/2009-10/ScalarEvolutionAndLoopOptimization.pdf
  */
+
 //  Pattern:
 //
 //    method() {

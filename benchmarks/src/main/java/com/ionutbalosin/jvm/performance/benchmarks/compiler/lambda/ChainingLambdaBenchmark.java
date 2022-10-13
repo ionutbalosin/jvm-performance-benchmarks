@@ -23,6 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Tests lambdas chaining optimizations (capture + invocation) for different depth levels.
  */
+
 // Pattern:
 //
 //    generic pattern
@@ -37,7 +38,6 @@ import org.openjdk.jmh.annotations.Warmup;
 //    // depth_3
 //    () -> () -> () -> capturedValue
 //
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

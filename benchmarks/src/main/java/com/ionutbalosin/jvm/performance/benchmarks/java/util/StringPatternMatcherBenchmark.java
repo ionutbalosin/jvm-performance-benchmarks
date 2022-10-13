@@ -35,7 +35,6 @@ import org.openjdk.jmh.infra.Blackhole;
  * Examples:
  * - 1000, 10239, 143345, 232224, 239959
  */
-
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

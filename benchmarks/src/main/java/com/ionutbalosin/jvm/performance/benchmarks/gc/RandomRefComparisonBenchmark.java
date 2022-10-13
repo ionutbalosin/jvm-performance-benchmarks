@@ -23,6 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * Test the overhead of read barriers while iterating through an array of elements and checks the reference equality between every array element and a specific reference.
  * The array contains a certain degree of equal elements (e.g. 0%, 25%, 50%, 75%, 100%)

@@ -21,9 +21,11 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+
 /*
  * This benchmark tests the allocation rate for chunks of byte arrays having different sizes.
  */
+
 //  Pattern:
 //
 //    byte[] allocate() {

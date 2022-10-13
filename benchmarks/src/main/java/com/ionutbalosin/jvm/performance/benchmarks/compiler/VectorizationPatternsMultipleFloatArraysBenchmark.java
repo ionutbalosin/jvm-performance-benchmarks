@@ -30,6 +30,7 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Tests different vectorization patterns using multiple arrays of floats. All loops have stride 1 (or 2) and the loop counter is of type int or long.
  */
+
 //  Pattern:
 //
 //    float[] A, B, R;

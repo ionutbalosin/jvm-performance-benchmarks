@@ -33,6 +33,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * target consumer into a method which internally uses a forEach() and the consumer received as an
  * argument to handle the list elements
  */
+
 //  Pattern:
 //
 //      // Scenario I
@@ -48,7 +49,6 @@ import org.openjdk.jmh.annotations.Warmup;
 //      }
 //
 //    where <consumer> implements the Consumer::accept method to handle every list element
-//
 //
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
