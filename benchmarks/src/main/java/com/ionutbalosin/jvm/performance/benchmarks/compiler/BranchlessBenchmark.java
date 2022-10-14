@@ -20,7 +20,8 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  *
- * Note: Branchless code examples originally provided by Nathan Tippy (@NathanTippy)
+ * References:
+ * - originally provided by Nathan Tippy (@NathanTippy)
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
