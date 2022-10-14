@@ -1,6 +1,5 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc;
+package com.ionutbalosin.jvm.performance.benchmarks.gc2;
 
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -9,6 +8,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -23,71 +23,97 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 
 /*
- * Test the overhead of write barrier while updating a primitive belonging to a wrapper object.
+ * Test the overhead of read barriers while iterating through the elements of an array of Objects and reading every element of it.
+ *
+ * Note: looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
  *
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
+ *
  */
+
+//  Pattern:
+//
+//    public void test() {
+//        int lSize = size;
+//
+//        for (int i = 0; i < lSize; i++) {
+//            sink(array[i]);
+//        }
+//
+//    }
+//
 @BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
 @State(Scope.Benchmark)
-public class WriteBarriersPrimitiveBenchmark {
+public class ReadBarriersLoopingOverArrayBenchmark {
 
-  private ObjWrapper objWrapper;
-  private int intValue;
+  @Param({"262144"})
+  private int size;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*WriteBarriersPrimitiveBenchmark.*" -prof gc
+  private Object[] array;
 
   @Setup()
   public void setup() {
-    objWrapper = new ObjWrapper();
-    intValue = ThreadLocalRandom.current().nextInt();
+    array = new Object[size];
+
+    for (int i = 0; i < size; i++) {
+      array[i] = new Object();
+    }
   }
+
+  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})
   public void serialGC() {
-    test(intValue);
+    test();
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseParallelGC"})
   public void parallelGC() {
-    test(intValue);
+    test();
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseG1GC"})
   public void g1GC() {
-    test(intValue);
+    test();
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseZGC"})
   public void zGC() {
-    test(intValue);
+    test();
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC"})
   public void shenandoahGC() {
-    test(intValue);
+    test();
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UnlockExperimentalVMOptions", "-XX:+UseEpsilonGC"})
   public void epsilonGC() {
-    test(intValue);
+    test();
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public void test(int intValue) {
-    objWrapper.intValue = intValue;
+  public void test() {
+    int lSize = size;
+
+    for (int i = 0; i < lSize; i++) {
+      sink(array[i]);
+    }
   }
 
-  class ObjWrapper {
-    int intValue;
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private void sink(Object anObject) {
+    // IT IS VERY IMPORTANT TO MATCH THE SIGNATURE TO AVOID AUTOBOXING.
+    // The method intentionally does nothing.
   }
 }

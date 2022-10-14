@@ -25,19 +25,18 @@ import org.openjdk.jol.info.GraphLayout;
  */
 
 /*
- * This benchmark initially allocates (during setup) a lot of objects, as a pre-allocated part of the Heap (i.e. ballast),
- * and keeps strong references to them until it fills up a certain percent of Heap (e.g. 0%, 25%, 50%, 75%).
- * The pre-allocated objects consist of a big chain of composite objects (e.g. Object 1 -> Object 2 -> … -> Object 32).
+ * This benchmark initially allocates (during setup) chunks of chained objects (i.e. ballast), until it fills up
+ * a certain percent of Heap (e.g. 0%, 25%, 50%) and keeps strong references to them from an array.
+ * Such a chain looks like Object 1 -> Object 2 -> … -> Object 32 where an object consist of pointer to the next object
+ * and an array of longs.
  * Note: the chaining might have an impact on the GC roots traversal (for example during the “parallel” marking phase),
  * since the degree of pointer indirection (i.e. reference processing) is not negligible, while traversing the object graph dependencies.
  *
- * Then, in the benchmark test method, temporary objects are further allocated until the full heap is occupied
- * (i.e. bumping the memory footprint from the initial pre-allocated threshold until it reaches the full capacity).
- * Once all of these temporary objects are allocated, they are immediately released so they become eligible for Garbage Collector.
- * Note: some objects are potentially considered big, so they would normally follow the slow path allocation,
- * residing directly in the Tenured Generation (in case of generational collectors), increasing the likelihood of full GCs.
+ * Then, in the benchmark test() method, similar object chains are concurrently allocated (by multiple threads) and immediately released,
+ * so they become eligible for Garbage Collector.
  *
- * Note: the benchmark could be run using multiple concurrent threads.
+ * Note: some objects within the chain are potentially considered big, so they would normally follow the slow path allocation,
+ * residing directly in the Tenured Generation (in case of generational collectors), increasing the likelihood of full GCs.
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
@@ -45,9 +44,9 @@ import org.openjdk.jol.info.GraphLayout;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
 @State(Scope.Benchmark)
-public class BumpHeapMemoryAllocatorBenchmark {
+public class ConstantRetrainedHeapMemoryBenchmarkV2 {
 
-  @Param private PercentageOfPreAllocatedHeap percentageOfPreAllocatedHeap;
+  @Param private PercentageOfRetainedHeap percentageOfRetainedHeap;
 
   private final long MAX_MEMORY = Runtime.getRuntime().maxMemory();
   private final int CHAIN_REFERENCE_DEPTH = 32;
@@ -56,94 +55,89 @@ public class BumpHeapMemoryAllocatorBenchmark {
 
   private int numberOfBenchThreads;
   private int numberOfObjectsPerThread;
-  private int preAllocatedArraySize;
-  private ObjWrapper[] preAllocatedArray;
+  private int retainedArraySize;
+  private ChainObject[] retainedArray;
 
   @Setup()
   public void setup(BenchmarkParams params) {
-    long objectSizeInBytes = GraphLayout.parseInstance(createInstance()).totalSize();
+    long objectSizeInBytes = GraphLayout.parseInstance(createChainedObjects()).totalSize();
     long maxNumberOfObjects = MAX_MEMORY / objectSizeInBytes;
     numberOfBenchThreads = params.getThreads();
 
-    switch (percentageOfPreAllocatedHeap) {
+    switch (percentageOfRetainedHeap) {
       case P_0:
-        preAllocatedArraySize = 0;
+        retainedArraySize = 0;
         numberOfObjectsPerThread = (int) (maxNumberOfObjects / numberOfBenchThreads);
         break;
       case P_25:
-        preAllocatedArraySize = (int) (maxNumberOfObjects * 0.25);
+        retainedArraySize = (int) (maxNumberOfObjects * 0.25);
         numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.75) / numberOfBenchThreads);
         break;
       case P_50:
-        preAllocatedArraySize = (int) (maxNumberOfObjects * 0.50);
+        retainedArraySize = (int) (maxNumberOfObjects * 0.50);
         numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.50) / numberOfBenchThreads);
-        break;
-      case P_75:
-        preAllocatedArraySize = (int) (maxNumberOfObjects * 0.75);
-        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.25) / numberOfBenchThreads);
         break;
       default:
         throw new UnsupportedOperationException(
-            "Unsupported percentage of allocated instances " + percentageOfPreAllocatedHeap);
+            "Unsupported percentage of allocated instances " + percentageOfRetainedHeap);
     }
 
-    preAllocatedArray = allocate(preAllocatedArraySize);
+    retainedArray = allocate(retainedArraySize);
   }
 
-  // java -jar benchmarks/target/benchmarks.jar ".*ConstantHeapMemoryOccupancyBenchmark.*" -t1,2,4
-  // -prof gc
+  // JMH Opts: -t1,2 -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjWrapper[] serialGC() {
+  public ChainObject[] serialGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseParallelGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjWrapper[] parallelGC() {
+  public ChainObject[] parallelGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseG1GC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjWrapper[] g1GC() {
+  public ChainObject[] g1GC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjWrapper[] shenandoahGC() {
+  public ChainObject[] shenandoahGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseZGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjWrapper[] zGC() {
+  public ChainObject[] zGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private ObjWrapper[] allocate(int numberOfObjects) {
-    ObjWrapper[] array = new ObjWrapper[numberOfObjects];
+  private ChainObject[] allocate(int numberOfObjects) {
+    ChainObject[] array = new ChainObject[numberOfObjects];
 
     for (int i = 0; i < numberOfObjects; i++) {
-      array[i] = createInstance();
+      array[i] = createChainedObjects();
     }
 
     return array;
   }
 
-  private ObjWrapper createInstance() {
+  private ChainObject createChainedObjects() {
     int arrayLength = 0;
-    ObjWrapper head = new ObjWrapper(arrayLength);
+    ChainObject head = new ChainObject(arrayLength);
 
-    ObjWrapper cursor = head;
+    ChainObject cursor = head;
     for (int i = 0; i < CHAIN_REFERENCE_DEPTH; i++) {
       arrayLength *= ARRAY_LENGTH_MULTIPLIER;
       arrayLength += ARRAY_LENGTH_INCREMENT;
 
-      ObjWrapper nextObj = new ObjWrapper(arrayLength);
+      ChainObject nextObj = new ChainObject(arrayLength);
       cursor.refObj = nextObj;
       cursor = nextObj;
     }
@@ -151,30 +145,29 @@ public class BumpHeapMemoryAllocatorBenchmark {
     return head;
   }
 
-  public enum PercentageOfPreAllocatedHeap {
+  public enum PercentageOfRetainedHeap {
     P_0,
     P_25,
-    P_50,
-    P_75
+    P_50
   }
 
-  //   ObjWrapper internals:
+  //   ChainObject internals:
   //         OFFSET  SIZE               TYPE DESCRIPTION
   //            0      4                    (object header)
   //            4      4                    (object header)
   //            8      4                    (object header)
-  //            12     4   java.lang.Object ObjWrapper.refObj
-  //            16     4             long[] ObjWrapper.longArray
+  //            12     4   java.lang.Object ChainObject.refObj
+  //            16     4             long[] ChainObject.longArray
   //            20     4                    (loss due to the next object alignment)
   //    Instance size: 24 bytes
   //    Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 
-  public class ObjWrapper {
+  public class ChainObject {
     Object refObj;
     long array[];
 
-    ObjWrapper(int objArrayLength) {
-      if (objArrayLength > 0) this.array = new long[objArrayLength];
+    ChainObject(int arrayLength) {
+      if (arrayLength > 0) this.array = new long[arrayLength];
     }
   }
 }

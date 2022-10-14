@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc;
+package com.ionutbalosin.jvm.performance.benchmarks.gc2;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -87,7 +87,7 @@ public class ReadWriteBarriersBenchmark {
     index = 0;
   }
 
-  // java -jar benchmarks/target/benchmarks.jar ".*ReadWriteBarriersBenchmark.*" -prof gc
+  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})

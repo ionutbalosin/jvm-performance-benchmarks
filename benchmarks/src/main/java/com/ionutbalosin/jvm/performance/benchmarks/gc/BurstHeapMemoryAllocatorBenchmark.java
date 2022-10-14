@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc;
+package com.ionutbalosin.jvm.performance.benchmarks.gc2;
 
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -67,8 +67,7 @@ public class BurstHeapMemoryAllocatorBenchmark {
     }
   }
 
-  // java -jar benchmarks/target/benchmarks.jar ".*BurstHeapMemoryAllocatorBenchmark.*" -t1,2,4
-  // -prof gc
+  // JMH Opts: -t1,2 -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})

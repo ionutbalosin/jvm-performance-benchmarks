@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc;
+package com.ionutbalosin.jvm.performance.benchmarks.gc2;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +33,10 @@ import org.openjdk.jmh.annotations.Warmup;
 //
 //    Object test() {
 //        return
-// baseRef.h2.h3.h4.h5.h6.h7.h8.h9.h10.h11.h12.h13.h14.h15.h16.h17.h18.h19.h20.h21.h22.h23.h24.h25.h26.h27.h28.h29.h30.h31.h32.aValue;
+//         baseRef.h2.h3.h4.h5.h6.h7.h8.h9.h10
+//         .h11.h12.h13.h14.h15.h16.h17.h18.h19
+//         .h20.h21.h22.h23.h24.h25.h26.h27.h28
+//         .h29.h30.h31.h32.aValue;
 //    }
 //
 //  Where
@@ -104,7 +107,7 @@ public class ReadBarriersChainOfReferencesBenchmark {
                                                                                                                                         aValue))))))))))))))))))))))))))))))));
   }
 
-  // java -jar benchmarks/target/benchmarks.jar ".*ReadBarriersChainOfClassesBenchmark.*" -prof gc
+  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})

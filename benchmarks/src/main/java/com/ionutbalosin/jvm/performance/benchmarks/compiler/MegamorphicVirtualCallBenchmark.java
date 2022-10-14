@@ -22,6 +22,12 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+// NOTE:
+// A side effect of testing monomorphic calls is that you'll be testing inliner as well since
+// methods can be "sharpened" after a speculative type check and then inlined.
+// So if you want to keep inliner out of equation, make the target methods large and adjust
+// time accordingly to only measure virtual call overhead.
+//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -90,12 +96,6 @@ public class MegamorphicAbsClassCallBenchmarkV2 {
         throw new UnsupportedOperationException("Unsupported mode type " + mode);
     }
   }
-
-  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicAbsClassCallBenchmarkV2.*" -prof
-  // perfasm:intelSyntax=true > MegamorphicAbsClassCallBenchmarkV2_asm.out
-  // java -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler -jar
-  // benchmarks/target/benchmarks.jar ".*MegamorphicAbsClassCallBenchmarkV2.*" -prof
-  // perfasm:intelSyntax=true > MegamorphicAbsClassCallBenchmarkV2_asm.out
 
   @Benchmark
   @OperationsPerInvocation(144000)
