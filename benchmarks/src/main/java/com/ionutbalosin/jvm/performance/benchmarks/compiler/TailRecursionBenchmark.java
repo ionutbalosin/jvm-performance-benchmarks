@@ -61,8 +61,11 @@ public class TailRecursionBenchmark {
 
   private int fibonacciRecursive(int n, int a, int b) {
     if (n == 0) return a;
-    else if (n == 1) return b;
-    else return fibonacciRecursive(n - 1, b, a + b);
+    else if (n == 1) {
+      return b;
+    } else {
+      return fibonacciRecursive(n - 1, b, a + b);
+    }
   }
 
   private final int fibonacciIterative(int n, int a, int b) {

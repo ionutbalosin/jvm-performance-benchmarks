@@ -1,6 +1,5 @@
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
-import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -11,7 +10,8 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
+
+import java.util.concurrent.TimeUnit;
 
 /*
  * (c) 2019 Ionut Balosin
@@ -123,14 +123,18 @@ public class ScalarReplacementBenchmark {
   }
 
   @Benchmark
-  public void branch_escape_object(Blackhole blackhole) {
+  public HeavyWrapper branch_escape_object() {
     HeavyWrapper wrapper = new HeavyWrapper(param, size);
     HeavyWrapper result;
 
     // wrapper is NoEscape, because "objectEscapes" is always false, hence branch is never executed
-    if (objectEscapes) result = wrapper;
-    else result = cachedWrapper;
-    blackhole.consume(result);
+    if (objectEscapes) {
+      result = wrapper;
+    } else {
+      result = cachedWrapper;
+    }
+
+    return result;
   }
 
   @Benchmark

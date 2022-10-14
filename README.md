@@ -11,27 +11,48 @@ For the full copyright and license information, please view the LICENSE file tha
 - [Ionut Balosin](https://www.ionutbalosin.com)
 - [Florin Blanaru](https://twitter.com/gigiblender)
 
-## Microbenchmarks
+## Purpose
 
-All the microbenchmarks rely on [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
+The goal of the project is to assess:
 
-> An important caveat about JMH is that it uses HotSpot-specific compiler hints to control the Just-in-Time (JIT) compiler.
+1. different Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
+2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects
 
-For that reason, at the moment the fully supported JVMs are all the HotSpot-based VMs, including vanilla OpenJDK and Oracle JDK builds.
+In this regard, all microbenchmarks are relatively simple but very focused on specific goals.
 
+The microbenchmarks rely on [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
+
+We left **out of scope**, for now, any specific language feature, the larger applications (i.e., macro benchmarking), etc.
+ 
+
+## JMH caveats
+
+### HotSpot-specific compiler hints
+
+> JMH uses HotSpot-specific compiler hints to control the Just-in-Time (JIT) compiler. 
+
+For that reason, at the moment, the fully supported JVMs are all the HotSpot-based VMs, including vanilla OpenJDK and Oracle JDK builds.
 For more details please check the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/CompilerHints.java#L37) and [supported VMs](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/format/SupportedVMs.java#L31).
 
-### JMH support for GraalVM 
+### Blackhole.consume()
 
-Since JMH 1.21, [GraalVM](https://www.graalvm.org) is also [recognized and experimentally supported](https://mail.openjdk.org/pipermail/jmh-dev/2018-May/002753.html).
+> Using JMH Blackhole.consume() might dominate the costs, obscuring the results, in comparison to a normal Java-style source code.
 
-### JMH support for Eclipse OpenJ9
+For that reason, to provide more tests fidelity we recommend (whenever it is possible) to avoid `Blackhole.consume()`
+
+### Support for GraalVM 
+
+Since JMH 1.21, [GraalVM](https://www.graalvm.org) is also [recognized and experimentally supported](https://mail.openjdk.org/pipermail/jmh-dev/2018-May/002753.html). This means we need to pay a bit more attention during experiments.
+
+### Support for Eclipse OpenJ9
 
 JMH may functionally work with [Eclipse OpenJ9](https://www.eclipse.org/openj9), nevertheless, all the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/CompilerControl.java) will not apply to Eclipse OpenJ9 and this might lead to different results (i.e., unfair advantage or disadvantage, depending on the test).
 
 For more details please check [JMH with OpenJ9](https://github.com/eclipse-openj9/openj9/issues/4649) and [Mark Stoodley on Twitter](https://twitter.com/mstoodle/status/1532344345524936704)
 
-### How to get consistent results
+At the moment we leave it **out of scope** Eclipse OpenJ9 until we find a proper alternative.
+
+## How to get consistent results
 
 When doing benchmarking it is recommended to disable potential sources of performance non-determinism, as follows:
 - disable turbo boost

@@ -112,8 +112,7 @@ public class ReadBarriersLoopingOverArrayBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private void sink(Object anObject) {
-    // IT IS VERY IMPORTANT TO MATCH THE SIGNATURE TO AVOID AUTOBOXING.
-    // The method intentionally does nothing.
+  private void sink(Object object) {
+    // Intentionally empty method
   }
 }

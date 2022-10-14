@@ -147,10 +147,12 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   @Benchmark
   public int[] if_with_masking_conditional_flow() {
     for (int i = 0; i < size; i++) {
-      if (A[i]
-          >= 0) // Conditional control flow in loop; straight-line code (no switch, if with masking)
-      B[i] = CONST * A[i];
-      else B[i] = A[i];
+      // Conditional control flow in loop; straight-line code (no switch, if with masking)
+      if (A[i] >= 0) {
+        B[i] = CONST * A[i];
+      } else {
+        B[i] = A[i];
+      }
     }
     return B;
   }

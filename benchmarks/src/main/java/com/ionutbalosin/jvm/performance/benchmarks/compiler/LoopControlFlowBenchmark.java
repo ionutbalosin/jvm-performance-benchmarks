@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -14,7 +15,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
 
 /*
  * (c) 2019 Ionut Balosin
@@ -112,13 +112,13 @@ public class LoopControlFlowBenchmark {
   }
 
   @Benchmark
-  public int loop_try_catch(Blackhole blackhole) {
+  public int loop_try_catch() {
     int dummy = 0;
     for (int i = 0; i < size; i++) {
       try {
         dummy += array[i].x;
       } catch (NullPointerException ignored) {
-        blackhole.consume(ignored);
+        sink(ignored);
       }
     }
     return dummy;
@@ -149,6 +149,11 @@ public class LoopControlFlowBenchmark {
         .filter(wrapper -> wrapper != null)
         .map(Wrapper::getX)
         .reduce(0, Integer::sum);
+  }
+
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public static void sink(final NullPointerException exception) {
+    // Intentionally empty method
   }
 
   private static class Wrapper {

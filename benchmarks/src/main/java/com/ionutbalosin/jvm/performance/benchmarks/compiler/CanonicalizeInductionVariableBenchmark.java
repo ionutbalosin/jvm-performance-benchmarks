@@ -52,9 +52,9 @@ public class CanonicalizeInductionVariableBenchmark {
   private final long newLength = 4194285L;
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public static void sink(final long d) {
-    // IT IS VERY IMPORTANT TO MATCH THE SIGNATURE TO AVOID AUTOBOXING.
-    // The method intentionally does nothing.
+  public static void sink(final long l) {
+    // Intentionally empty method
+    // Note: it is very important to match the signature to avoid autoboxing
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
