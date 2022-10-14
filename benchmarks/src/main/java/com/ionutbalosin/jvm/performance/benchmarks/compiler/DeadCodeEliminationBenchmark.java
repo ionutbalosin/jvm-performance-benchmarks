@@ -25,8 +25,8 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Test how well the Compiler could remove code which does not affect the program results within a loop.
  *
- * Resources:
- * - see https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80
+ * References:
+ * - https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80
  */
 
 //  Pattern:
@@ -45,8 +45,8 @@ import org.openjdk.jmh.annotations.Warmup;
 //    }
 //
 //    where call_to_method() is:
-//    - either a call to a native method (e.g. Math.tan, Math.atan)
-//    - or a user-defined iterative function (e.g. Leibniz formula for PI computation using an
+//    - either a call to a native method (e.g., Math.tan, Math.atan)
+//    - or a user-defined iterative function (e.g., Leibniz formula for PI computation using an
 // infinite series).
 //
 @BenchmarkMode(Mode.AverageTime)
@@ -62,8 +62,6 @@ public class DeadCodeEliminationBenchmark {
 
   @Param({"42"})
   public double circleRadius;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadCodeEliminationBenchmark.*"
 
   // Benchmark method containing multiple dead methods calls per iteration
   @Benchmark

@@ -21,12 +21,12 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * Test how the Compiler could potentially optimize a method that takes a huge number of arguments (64 double arguments).
- * Usually, the register allocation (i.e. the array of register mask bits) should be large enough to cover all the machine registers and
+ * Usually, the register allocation (i.e., the array of register mask bits) should be large enough to cover all the machine registers and
  * all parameters that need to be passed on the stack all parameters that need to be passed on the stack (stack registers) up to some "interesting" limit.
  * Methods that need more parameters will not be compiled. For example, on Intel, the limit is around 90+ parameters.
  *
- * Resources:
- * - see https://bugs.java.com/bugdatabase/view_bug.do?bug_id=5090493
+ * References:
+ * - https://bugs.java.com/bugdatabase/view_bug.do?bug_id=5090493
  */
 
 //  Pattern:

@@ -24,9 +24,9 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 
 /*
- * Resources:
- * - see https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
- * - see https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
+ * References:
+ * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
+ * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
  */
 
 /*
@@ -48,9 +48,6 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
 
   private int[] A, B, C, D;
   private short[] S;
-
-  // java -jar benchmarks/target/benchmarks.jar
-  // ".*VectorizationPatternsMultipleIntArraysBenchmark.*"
 
   @Setup
   public void setup() {

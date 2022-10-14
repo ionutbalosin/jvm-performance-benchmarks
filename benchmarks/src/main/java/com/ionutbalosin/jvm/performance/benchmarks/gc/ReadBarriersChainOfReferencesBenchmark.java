@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc2;
+package com.ionutbalosin.jvm.performance.benchmarks.gc;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 
 /*
- * Test the overhead of read barriers while iterating through a big chain of pre-allocated composite classes (e.g. class H1 -> class H2 -> ... -> class H32) and returns a field property referenced by the innermost class.
+ * Test the overhead of read barriers while iterating through a big chain of pre-allocated composite classes (e.g., class H1 -> class H2 -> ... -> class H32) and returns a field property referenced by the innermost class.
  *
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *

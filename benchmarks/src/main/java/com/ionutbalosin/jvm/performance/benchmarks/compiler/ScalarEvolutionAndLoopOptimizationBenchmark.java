@@ -24,8 +24,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * Check if the Compiler can recognize the existence of the induction variables and to replace it with simpler computations.
  * This optimization is a special case of strength reduction where all loop iterations are strengthened to a mathematical formula.
  *
- * Resources:
- * - see https://llvm.org/devmtg/2009-10/ScalarEvolutionAndLoopOptimization.pdf
+ * References:
+ * - https://llvm.org/devmtg/2009-10/ScalarEvolutionAndLoopOptimization.pdf
  */
 
 //  Pattern:
@@ -54,8 +54,6 @@ public class ScalarEvolutionAndLoopOptimizationBenchmark {
 
   @Param({"16384"})
   private int size;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*InductionVariableOptimizationBenchmark.*"
 
   @Benchmark
   public int sum_from_0_to_N() {

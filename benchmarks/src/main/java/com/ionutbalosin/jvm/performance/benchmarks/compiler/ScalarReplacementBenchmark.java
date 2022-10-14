@@ -32,8 +32,8 @@ import org.openjdk.jmh.infra.Blackhole;
  * - GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
  * For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
  *
- * Resources:
- * - see https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
+ * References:
+ * - https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
  */
 
 //  Pattern:
@@ -99,8 +99,6 @@ public class ScalarReplacementBenchmark {
   private boolean objectEscapes;
 
   private HeavyWrapper cachedWrapper = new HeavyWrapper(param, size);
-
-  // java -jar benchmarks/target/benchmarks.jar ".*ScalarReplacementBenchmark.*"
 
   @Benchmark
   public int no_escape() {

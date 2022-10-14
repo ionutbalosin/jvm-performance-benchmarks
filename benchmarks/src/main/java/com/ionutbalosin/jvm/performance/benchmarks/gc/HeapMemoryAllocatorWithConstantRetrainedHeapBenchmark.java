@@ -26,11 +26,11 @@ import org.openjdk.jol.info.GraphLayout;
 
 /*
  * This benchmark initially allocates (during setup) chunks of chained objects, until it fills up
- * a certain percent of Heap (e.g. 25%, 50%, 75%) and keeps strong references to them from an array.
+ * a certain percent of Heap (e.g., 25%, 50%, 75%) and keeps strong references to them from an array.
  * Such a chain looks like Object 1 -> Object 2 -> … -> Object 32 where an object consist of pointer to the next object
  * and an array of longs.
  * Note: the chaining might have an impact on the GC roots traversal (for example during the “parallel” marking phase),
- * since the degree of pointer indirection (i.e. reference processing) is not negligible, while traversing the object graph dependencies.
+ * since the degree of pointer indirection (i.e., reference processing) is not negligible, while traversing the object graph dependencies.
  *
  * Then, in the benchmark test() method, similar object chains are allocated, and they replace, one by one (i.e., incrementally),
  * the ones from the initial array so that the former ones become eligible for Garbage Collector.
@@ -46,7 +46,7 @@ import org.openjdk.jol.info.GraphLayout;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
 @State(Scope.Benchmark)
-public class ConstantRetrainedHeapMemoryBenchmark {
+public class HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark {
 
   @Param private PercentageOfRetainedHeap percentageOfRetainedHeap;
 
@@ -56,7 +56,7 @@ public class ConstantRetrainedHeapMemoryBenchmark {
   private final int ARRAY_LENGTH_MULTIPLIER = 1;
 
   private int retainedArraySize;
-  private ChainObject[] retainedArray;
+  private ObjectChain[] retainedArray;
   private AtomicInteger index;
 
   @Setup()
@@ -80,7 +80,7 @@ public class ConstantRetrainedHeapMemoryBenchmark {
             "Unsupported percentage of allocated instances " + percentageOfRetainedHeap);
     }
 
-    retainedArray = new ChainObject[retainedArraySize];
+    retainedArray = new ObjectChain[retainedArraySize];
     for (int i = 0; i < retainedArraySize; i++) {
       retainedArray[i] = createChainedObjects();
     }
@@ -120,20 +120,20 @@ public class ConstantRetrainedHeapMemoryBenchmark {
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private void allocate() {
-    ChainObject chainHead = createChainedObjects();
+    ObjectChain chainHead = createChainedObjects();
     retainedArray[index.getAndIncrement() % retainedArraySize] = chainHead;
   }
 
-  private ChainObject createChainedObjects() {
+  private ObjectChain createChainedObjects() {
     int arrayLength = 0;
-    ChainObject head = new ChainObject(arrayLength);
+    ObjectChain head = new ObjectChain(arrayLength);
 
-    ChainObject cursor = head;
+    ObjectChain cursor = head;
     for (int i = 0; i < CHAIN_REFERENCE_DEPTH; i++) {
       arrayLength *= ARRAY_LENGTH_MULTIPLIER;
       arrayLength += ARRAY_LENGTH_INCREMENT;
 
-      ChainObject nextObj = new ChainObject(arrayLength);
+      ObjectChain nextObj = new ObjectChain(arrayLength);
       cursor.refObj = nextObj;
       cursor = nextObj;
     }
@@ -147,22 +147,22 @@ public class ConstantRetrainedHeapMemoryBenchmark {
     P_75
   }
 
-  //   ChainObject internals:
+  //   ObjectChain internals:
   //         OFFSET  SIZE               TYPE DESCRIPTION
   //            0      4                    (object header)
   //            4      4                    (object header)
   //            8      4                    (object header)
-  //            12     4   java.lang.Object ChainObject.refObj
-  //            16     4             long[] ChainObject.longArray
+  //            12     4   java.lang.Object ObjectChain.refObj
+  //            16     4             long[] ObjectChain.longArray
   //            20     4                    (loss due to the next object alignment)
   //    Instance size: 24 bytes
   //    Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 
-  public class ChainObject {
+  public class ObjectChain {
     Object refObj;
     long array[];
 
-    ChainObject(int arrayLength) {
+    ObjectChain(int arrayLength) {
       if (arrayLength > 0) this.array = new long[arrayLength];
     }
   }

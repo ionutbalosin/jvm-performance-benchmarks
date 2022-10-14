@@ -22,9 +22,9 @@ import org.openjdk.jmh.annotations.Warmup;
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 /*
- * Resources:
- * - see https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
- * - see https://llvm.org/docs/Vectorizers.html#reductions
+ * References:
+ * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
+ * - https://llvm.org/docs/Vectorizers.html#reductions
  */
 
 /*
@@ -92,8 +92,6 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   private int size;
 
   private int[] A;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*VectorizationPatternsSingleIntArrayBenchmark.*"
 
   @Setup
   public void setup() {

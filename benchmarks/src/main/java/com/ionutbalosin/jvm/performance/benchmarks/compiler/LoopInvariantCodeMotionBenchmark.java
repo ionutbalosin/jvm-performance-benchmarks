@@ -26,9 +26,9 @@ import org.openjdk.jmh.annotations.Warmup;
  *      - hoisting a load means to move the load so that it occurs before the loop
  *      - sinking a store means to move a store to occur after a loop
  *
- * Resources:
- * - see https://courses.cs.washington.edu/courses/cse501/03wi/slides/slides.01-30.pdf
- * - see https://mathworld.wolfram.com/TrigonometricAdditionFormulas.html
+ * References:
+ * - https://courses.cs.washington.edu/courses/cse501/03wi/slides/slides.01-30.pdf
+ * - https://mathworld.wolfram.com/TrigonometricAdditionFormulas.html
  */
 
 //    Sum of recurrent tan(nx) ;
@@ -64,8 +64,6 @@ public class LoopInvariantCodeMotionBenchmark {
 
   @Param({"42"})
   public double value;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopInvariantCodeMotionBenchmark.*"
 
   @Benchmark
   public double loop_with_invariant_code() {

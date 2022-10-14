@@ -25,8 +25,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * simpler forms suitable for subsequent analysis and transformation.This optimization is a special case of strength reduction
  * where all loop iterations are strengthened to a mathematical formula.
  *
- * Resources:
- * - see https://llvm.org/docs/Passes.html#indvars-canonicalize-induction-variables
+ * References:
+ * - https://llvm.org/docs/Passes.html#indvars-canonicalize-induction-variables
  */
 
 //  Pattern:
@@ -47,11 +47,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class CanonicalizeInductionVariableBenchmark {
 
-  private final long length =
-      4194304L * 4194304L; // Make sure the multiplication uses longs but not ints!
+  // Make sure the multiplication uses longs but not ints!
+  private final long length = 4194304L * 4194304L;
   private final long newLength = 4194285L;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*CanonicalizeInductionVariableBenchmark.*"
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public static void sink(final long d) {

@@ -80,8 +80,6 @@ public class NestedLocksBenchmark {
   @Param({"42"})
   private int value;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*RecursiveLockBenchmark.*"
-
   @Benchmark
   public int global_locks_10x() {
     int sum = 0;

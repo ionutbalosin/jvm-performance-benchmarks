@@ -57,8 +57,6 @@ public class LockCoarseningBenchmark {
   @Param({"42"})
   private int value;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*LockCoarseningBenchmark.*"
-
   @Benchmark
   public int lock_coarsening_10x() {
     int sum = 0;

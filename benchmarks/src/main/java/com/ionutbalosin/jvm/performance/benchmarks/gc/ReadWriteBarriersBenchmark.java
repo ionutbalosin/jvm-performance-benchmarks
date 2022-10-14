@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc2;
+package com.ionutbalosin.jvm.performance.benchmarks.gc;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -25,17 +25,17 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * Test the overhead of read/write barriers while iterating through an array of Integers and
- * exchanging the values between two array entries (i.e. array[i] <-> array[j]).
+ * exchanging the values between two array entries (i.e., array[i] <-> array[j]).
  *
  * Read/Write barriers in the existing HotSpot Garbage Collectors. Special thanks to Jean-Philippe Bempel (Twitter: @jpbempel) for updating below description.
  * 1. Write Barriers:
- *  - one write barrier (to track the references from Tenured Generation to Young Generation – e.g. card table) for:
+ *  - one write barrier (to track the references from Tenured Generation to Young Generation – e.g., card table) for:
  *      - SerialGC
  *      - ParallelGC (note that ParallelGC in the same as ParallelGC)
  *      - ConcMarkSweepGC
- *  - one write barrier (in case of concurrent marking – e.g. Snapshot-At-The-Beginning (SATB)) for:
+ *  - one write barrier (in case of concurrent marking – e.g., Snapshot-At-The-Beginning (SATB)) for:
  *      - Shenandoah
- *  - two write barriers: first (i.e. PreWrite barrier) in case of concurrent marking (e.g. SATB), and second (i.e. PostWrite barrier) to tracking the references across regions for:
+ *  - two write barriers: first (i.e., PreWrite barrier) in case of concurrent marking (e.g., SATB), and second (i.e., PostWrite barrier) to tracking the references across regions for:
  *      - G1GC
  *
  * 2. Read Barriers

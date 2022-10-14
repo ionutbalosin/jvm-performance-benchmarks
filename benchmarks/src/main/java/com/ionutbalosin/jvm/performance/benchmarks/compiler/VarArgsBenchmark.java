@@ -57,8 +57,6 @@ public class VarArgsBenchmark {
   @Param({"21"})
   int param10;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*VarArgsBenchmark*"
-
   @Benchmark
   public int explicit_1_param() {
     return explicit_1_param(param1);

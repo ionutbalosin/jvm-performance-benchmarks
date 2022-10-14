@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc2;
+package com.ionutbalosin.jvm.performance.benchmarks.gc;
 
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;

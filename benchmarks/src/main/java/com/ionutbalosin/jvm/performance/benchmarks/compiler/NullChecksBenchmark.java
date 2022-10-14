@@ -69,8 +69,6 @@ public class NullChecksBenchmark {
 
   private Wrapper[] A;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*NullChecksBenchmark.*"
-
   @Setup
   public void setup() {
     A = new Wrapper[size];

@@ -1,4 +1,4 @@
-package com.ionutbalosin.jvm.performance.benchmarks.gc2;
+package com.ionutbalosin.jvm.performance.benchmarks.gc;
 
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -25,7 +25,7 @@ import org.openjdk.jol.info.GraphLayout;
  */
 
 /*
- * This benchmark allocates arrays of temporary objects until they fill up a certain percent of Heap (e.g. 25%, 50%, 75%)
+ * This benchmark allocates arrays of temporary objects until they fill up a certain percent of Heap (e.g., 25%, 50%, 75%)
  * and then releases them all, so they become eligible for Garbage Collector.
  *
  * Note: the benchmark could be run using multiple concurrent threads.

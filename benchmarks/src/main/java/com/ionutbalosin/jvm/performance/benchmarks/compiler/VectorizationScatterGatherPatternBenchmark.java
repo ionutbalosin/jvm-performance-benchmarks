@@ -47,8 +47,6 @@ public class VectorizationScatterGatherPatternBenchmark {
 
   private int[] A, B, C, D;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*VectorizationScatterGatherPatternBenchmark.*"
-
   @Setup
   public void setup() {
     A = new int[size];
@@ -66,8 +64,8 @@ public class VectorizationScatterGatherPatternBenchmark {
   @Benchmark
   public int[] scatter_gather() {
     for (int i = 0; i < size; i++) {
-      D[i] =
-          C[i] + A[B[i]]; // “Gatherers”: fetch data elements using vector-index memory addressing.
+      // gatherers fetch data elements using vector-index memory addressing
+      D[i] = C[i] + A[B[i]];
     }
     return D;
   }

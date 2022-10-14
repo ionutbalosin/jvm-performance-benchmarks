@@ -111,8 +111,6 @@ public class LoopControlFlowBenchmark {
     }
   }
 
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopControlFlowBenchmark.*"
-
   @Benchmark
   public int loop_try_catch(Blackhole blackhole) {
     int dummy = 0;

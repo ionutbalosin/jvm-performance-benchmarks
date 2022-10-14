@@ -25,8 +25,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * A strength reduction is a compiler optimization where expensive operations are replaced with equivalent but less expensive operations.
  * This benchmark tests how well the Compiler strengthens some arithmetic operations, as for example multiple additions, a multiplication in comparison to a bitwise shift operation.
  *
- * Resources:
- * - see https://en.wikipedia.org/wiki/Strength_reduction
+ * References:
+ * - https://en.wikipedia.org/wiki/Strength_reduction
  */
 
 //  Pattern:
@@ -59,10 +59,9 @@ public class StrengthReductionBenchmark {
   @Param({"true"})
   private boolean heavyComputation;
 
-  @Param({"179426549"}) // big prime number
+  // a big prime number
+  @Param({"179426549"})
   private long value;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*Strength0Reduction0Benchmark.*"
 
   @Benchmark
   public void shift() {

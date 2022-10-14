@@ -52,9 +52,6 @@ public class IfConditionalBranchBenchmark {
   @Param({"4096"})
   private int thresholdLimit;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*IfConditionalBranchBenchmark.*" -prof
-  // perfasm:intelSyntax=true > IfConditionalBranchBenchmark_perfasm.out
-
   @Setup
   public void setup() {
     final Random random = new Random(16384);

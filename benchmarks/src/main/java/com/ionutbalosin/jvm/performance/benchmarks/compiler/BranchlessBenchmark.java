@@ -39,8 +39,6 @@ public class BranchlessBenchmark {
   @Param({"99"})
   public int B;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*BranchlessBenchmark.*"
-
   @Benchmark
   public int x_equals_y_return_a_else_b() {
     return xEqualsYReturnAElseB(param, param, A, B);

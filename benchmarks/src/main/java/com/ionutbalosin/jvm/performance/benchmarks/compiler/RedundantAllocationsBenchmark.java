@@ -29,8 +29,6 @@ public class RedundantAllocationsBenchmark {
 
   private int size;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*RedundantAllocationsBenchmark.*"
-
   @Setup()
   public void setup() {
     size = 16;

@@ -25,8 +25,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by the number of additions within that loop.
  * This optimization is based on the induction variable to strength the additions.
  *
- * Resources:
- * - see https://www.javatpoint.com/loop-optimization
+ * References:
+ * - https://www.javatpoint.com/loop-optimization
  */
 
 //  Pattern:
@@ -57,8 +57,6 @@ public class LoopReductionBenchmark {
 
   @Param({"128"})
   private int offset;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopReductionBenchmark.*"
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private int doAuto(final int iterations, int accumulator) {

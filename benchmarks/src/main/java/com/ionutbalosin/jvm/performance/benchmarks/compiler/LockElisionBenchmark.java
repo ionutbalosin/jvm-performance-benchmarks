@@ -58,8 +58,6 @@ public class LockElisionBenchmark {
   @Param({"42"})
   private int value;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*LockElisionBenchmark.*"
-
   @Benchmark
   public int lock_elision_10x() {
     int sum = 0;

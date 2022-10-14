@@ -49,8 +49,6 @@ public class TailRecursionBenchmark {
   @Param({"32768"})
   private int param;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*TailRecursionBenchmark.*"
-
   @Benchmark
   public int fibonacci_tail_recursive() {
     return fibonacciRecursive(param, 0, 1);

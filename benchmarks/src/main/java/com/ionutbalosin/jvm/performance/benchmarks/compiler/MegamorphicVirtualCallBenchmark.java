@@ -28,18 +28,21 @@ import org.openjdk.jmh.annotations.Warmup;
 // So if you want to keep inliner out of equation, make the target methods large and adjust
 // time accordingly to only measure virtual call overhead.
 //
+/* References:
+ * - https://shipilev.net/jvm/anatomy-quarks/16-megamorphic-virtual-calls
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class MegamorphicAbsClassCallBenchmarkV2 {
+public class MegamorphicVirtualCallBenchmark {
   private CMath[] instances;
 
   @Param private Mode mode;
 
-  @Param("144000")
+  @Param("120960")
   private int size;
 
   @Setup
@@ -92,6 +95,29 @@ public class MegamorphicAbsClassCallBenchmarkV2 {
           instances[i + 5] = new Alg6();
         }
         break;
+      case MEGAMORPHIC_7:
+        for (int i = 0; i < size; i += 7) {
+          instances[i] = new Alg1();
+          instances[i + 1] = new Alg2();
+          instances[i + 2] = new Alg3();
+          instances[i + 3] = new Alg4();
+          instances[i + 4] = new Alg5();
+          instances[i + 5] = new Alg6();
+          instances[i + 6] = new Alg7();
+        }
+        break;
+      case MEGAMORPHIC_8:
+        for (int i = 0; i < size; i += 8) {
+          instances[i] = new Alg1();
+          instances[i + 1] = new Alg2();
+          instances[i + 2] = new Alg3();
+          instances[i + 3] = new Alg4();
+          instances[i + 4] = new Alg5();
+          instances[i + 5] = new Alg6();
+          instances[i + 6] = new Alg7();
+          instances[i + 7] = new Alg8();
+        }
+        break;
       default:
         throw new UnsupportedOperationException("Unsupported mode type " + mode);
     }
@@ -111,11 +137,13 @@ public class MegamorphicAbsClassCallBenchmarkV2 {
     MEGAMORPHIC_3,
     MEGAMORPHIC_4,
     MEGAMORPHIC_5,
-    MEGAMORPHIC_6
+    MEGAMORPHIC_6,
+    MEGAMORPHIC_7,
+    MEGAMORPHIC_8
   }
 
   abstract static class CMath {
-    int c1, c2, c3, c4, c5, c6;
+    int c1, c2, c3, c4, c5, c6, c7, c8;
 
     @CompilerControl(CompilerControl.Mode.DONT_INLINE)
     public abstract int compute();
@@ -154,6 +182,18 @@ public class MegamorphicAbsClassCallBenchmarkV2 {
   static class Alg6 extends CMath {
     public int compute() {
       return ++c6;
+    }
+  }
+
+  static class Alg7 extends CMath {
+    public int compute() {
+      return ++c7;
+    }
+  }
+
+  static class Alg8 extends CMath {
+    public int compute() {
+      return ++c8;
     }
   }
 }

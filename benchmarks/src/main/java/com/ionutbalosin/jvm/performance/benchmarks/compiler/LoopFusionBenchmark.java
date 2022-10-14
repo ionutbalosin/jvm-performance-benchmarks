@@ -30,8 +30,8 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * To eliminate the effect of vectorization, there is an explicit Read-after-write (RAW) case and a data dependency between loop statements.
  *
- * Resources:
- *  - see http://www.sridhargopinath.in/wp-content/uploads/2018/11/Loop-Fusion-in-LLVM-Compiler.pdf
+ * References:
+ *  - http://www.sridhargopinath.in/wp-content/uploads/2018/11/Loop-Fusion-in-LLVM-Compiler.pdf
  */
 
 //  Pattern:
@@ -65,8 +65,6 @@ public class LoopFusionBenchmark {
   private int size;
 
   private int[] A, B;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopFusionBenchmark.*"
 
   @Setup
   public void setup() {

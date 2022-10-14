@@ -23,8 +23,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
 /*
- * Resources:
- * - see https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
+ * References:
+ * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
  */
 
 /*
@@ -99,13 +99,6 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
 
   private float[] A, B, C;
   private short[] S;
-
-  // java -jar benchmarks/target/benchmarks.jar
-  // ".*VectorizationPatternsMultipleFloatArraysBenchmark.*" -prof perfasm:intelSyntax=true >
-  // VectorizationPatternsMultipleFloatArraysBenchmark.out
-  // java -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler -jar
-  // benchmarks/target/benchmarks.jar ".*VectorizationPatternsMultipleFloatArraysBenchmark.*" -prof
-  // perfasm:intelSyntax=true > VectorizationPatternsMultipleFloatArraysBenchmark.out
 
   @Setup
   public void setup() {

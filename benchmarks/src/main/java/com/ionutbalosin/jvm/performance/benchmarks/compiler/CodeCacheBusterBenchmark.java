@@ -20,7 +20,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Tests the compilation (i.e. the code cache) of a big method which calls in sequence a bunch of other small methods (~5000 small methods).
+ * Tests the compilation (i.e., the code cache) of a big method which calls in sequence a bunch of other small methods (~5000 small methods).
  * Every small method either returns the received argument incremented by a random value or dispatches it to another small method which returns another random value.
  * The big method counts around 40,002 bytes in total, where every small method has either 8 or 12 bytes.
  * As a side note, HotSpot has a HugeMethodLimit threshold which is set to 8,000 bytes, which means methods larger than this threshold are not implicitly compiled, unless JVM argument -XX:-DontCompileHugeMethods is enabled.
@@ -30,8 +30,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * where:
  * - HugeMethodLimit,  8000 bytes
  *
- * Resources:
- * - see http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/globals.hpp
+ * References:
+ * - http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/globals.hpp
  */
 
 //  Pattern:
@@ -66,8 +66,6 @@ import org.openjdk.jmh.annotations.Warmup;
 public class CodeCacheBusterBenchmark {
 
   private final Random random = new Random(16384);
-
-  // java -jar benchmarks/target/benchmarks.jar ".*CodeCacheBusterBenchmark.*"
 
   @Benchmark
   public int code_cache_buster() {

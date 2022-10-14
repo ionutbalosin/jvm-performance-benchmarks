@@ -25,15 +25,18 @@ import org.openjdk.jol.info.GraphLayout;
  */
 
 /*
- * This benchmark initially allocates (during setup) chunks of chained objects (i.e. ballast), until it fills up
- * a certain percent of Heap (e.g. 0%, 25%, 50%) and keeps strong references to them from an array.
+ * This benchmark initially allocates (during setup) chunks of chained objects (i.e., ballast), until it fills up
+ * a certain percent of Heap (e.g., 0%, 25%, 50%) and keeps strong references to them from an array.
  * Such a chain looks like Object 1 -> Object 2 -> … -> Object 32 where an object consist of pointer to the next object
  * and an array of longs.
  * Note: the chaining might have an impact on the GC roots traversal (for example during the “parallel” marking phase),
- * since the degree of pointer indirection (i.e. reference processing) is not negligible, while traversing the object graph dependencies.
+ * since the degree of pointer indirection (i.e., reference processing) is not negligible, while traversing the object graph dependencies.
  *
  * Then, in the benchmark test() method, similar object chains are concurrently allocated (by multiple threads) and immediately released,
  * so they become eligible for Garbage Collector.
+ *
+ * Note: During the lifecycle of the benchmark the amount of retained memory by strong references is fixed (i.e., the objects initialized
+ * in the setup phase are kept alive during the benchmark test() method)
  *
  * Note: some objects within the chain are potentially considered big, so they would normally follow the slow path allocation,
  * residing directly in the Tenured Generation (in case of generational collectors), increasing the likelihood of full GCs.
@@ -44,7 +47,7 @@ import org.openjdk.jol.info.GraphLayout;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
 @State(Scope.Benchmark)
-public class ConstantRetrainedHeapMemoryBenchmarkV2 {
+public class HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark {
 
   @Param private PercentageOfRetainedHeap percentageOfRetainedHeap;
 
@@ -56,7 +59,7 @@ public class ConstantRetrainedHeapMemoryBenchmarkV2 {
   private int numberOfBenchThreads;
   private int numberOfObjectsPerThread;
   private int retainedArraySize;
-  private ChainObject[] retainedArray;
+  private ObjectChain[] retainedArray;
 
   @Setup()
   public void setup(BenchmarkParams params) {
@@ -89,37 +92,37 @@ public class ConstantRetrainedHeapMemoryBenchmarkV2 {
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ChainObject[] serialGC() {
+  public ObjectChain[] serialGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseParallelGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ChainObject[] parallelGC() {
+  public ObjectChain[] parallelGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseG1GC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ChainObject[] g1GC() {
+  public ObjectChain[] g1GC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ChainObject[] shenandoahGC() {
+  public ObjectChain[] shenandoahGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseZGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ChainObject[] zGC() {
+  public ObjectChain[] zGC() {
     return allocate(numberOfObjectsPerThread);
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private ChainObject[] allocate(int numberOfObjects) {
-    ChainObject[] array = new ChainObject[numberOfObjects];
+  private ObjectChain[] allocate(int numberOfObjects) {
+    ObjectChain[] array = new ObjectChain[numberOfObjects];
 
     for (int i = 0; i < numberOfObjects; i++) {
       array[i] = createChainedObjects();
@@ -128,16 +131,16 @@ public class ConstantRetrainedHeapMemoryBenchmarkV2 {
     return array;
   }
 
-  private ChainObject createChainedObjects() {
+  private ObjectChain createChainedObjects() {
     int arrayLength = 0;
-    ChainObject head = new ChainObject(arrayLength);
+    ObjectChain head = new ObjectChain(arrayLength);
 
-    ChainObject cursor = head;
+    ObjectChain cursor = head;
     for (int i = 0; i < CHAIN_REFERENCE_DEPTH; i++) {
       arrayLength *= ARRAY_LENGTH_MULTIPLIER;
       arrayLength += ARRAY_LENGTH_INCREMENT;
 
-      ChainObject nextObj = new ChainObject(arrayLength);
+      ObjectChain nextObj = new ObjectChain(arrayLength);
       cursor.refObj = nextObj;
       cursor = nextObj;
     }
@@ -151,22 +154,22 @@ public class ConstantRetrainedHeapMemoryBenchmarkV2 {
     P_50
   }
 
-  //   ChainObject internals:
+  //   ObjectChain internals:
   //         OFFSET  SIZE               TYPE DESCRIPTION
   //            0      4                    (object header)
   //            4      4                    (object header)
   //            8      4                    (object header)
-  //            12     4   java.lang.Object ChainObject.refObj
-  //            16     4             long[] ChainObject.longArray
+  //            12     4   java.lang.Object ObjectChain.refObj
+  //            16     4             long[] ObjectChain.longArray
   //            20     4                    (loss due to the next object alignment)
   //    Instance size: 24 bytes
   //    Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 
-  public class ChainObject {
+  public class ObjectChain {
     Object refObj;
     long array[];
 
-    ChainObject(int arrayLength) {
+    ObjectChain(int arrayLength) {
       if (arrayLength > 0) this.array = new long[arrayLength];
     }
   }

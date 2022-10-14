@@ -24,7 +24,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * This pass transforms loops that contain branches on loop-invariant conditions to have multiple loops.
- * This can increase the size of the code exponentially (e.g. doubling it every time a loop is unswitched).
+ * This can increase the size of the code exponentially (e.g., doubling it every time a loop is unswitched).
  * This pass expects loopInvariantCodeMotionPredicate() to be run before it to hoist invariant conditions out of the loop, to make the unswitching opportunity obvious.
  */
 
@@ -69,10 +69,6 @@ public class LoopUnswitchBenchmark {
 
   private int[] A, B, C;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopUnswitchBenchmark.*"
-  // java -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler -jar
-  // benchmarks/target/benchmarks.jar ".*LoopUnswitchBenchmark.*"
-
   @Setup
   public void setup() {
     A = new int[size];
@@ -88,7 +84,7 @@ public class LoopUnswitchBenchmark {
   /*
    * Explicit broken loop vectorization (Read-after-write (RAW) - non vectorizable)
    *
-   * Read-after-write: the loop cannot be vectorized safely because if the first two iterations are executed simultaneously (e.g. A[1]=A[0]+1; A[2]=A[1]+1)
+   * Read-after-write: the loop cannot be vectorized safely because if the first two iterations are executed simultaneously (e.g., A[1]=A[0]+1; A[2]=A[1]+1)
    * by a SIMD instruction, the value of A[1] may be used by the second iteration before it has been calculated by the first iteration which could lead to incorrect results.
    */
   @Benchmark

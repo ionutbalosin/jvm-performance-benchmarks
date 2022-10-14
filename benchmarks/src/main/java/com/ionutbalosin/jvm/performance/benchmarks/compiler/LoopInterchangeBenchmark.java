@@ -54,16 +54,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class LoopInterchangeBenchmark {
 
-  @Param({"512"})
-  private int
-      size; // (size is very large, e.g. 2048 bytes, in comparison to the cache line size, e.g. 64
-  // bytes)
+  // a larger size, e.g., 2048 bytes, in comparison to the cache line size, e.g., 64 bytes
+  @Param({"2048"})
+  private int size;
 
   private int[][] A;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopInterchangeBenchmark.*"
-  // java -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCI -XX:+UseJVMCICompiler -jar
-  // benchmarks/target/benchmarks.jar ".*LoopInterchangeBenchmark.*"
 
   @Setup
   public void setup() {
