@@ -85,6 +85,9 @@ echo "JVM_OPTS=${JVM_OPTS}"
 echo "TEST_SUITE_NAME=${TEST_SUITE_NAME}"
 echo "TEST_SUITE_OUTPUT_FOLDER=${TEST_SUITE_OUTPUT_FOLDER}"
 echo ""
-echo "Java version:"
-java -version
-echo ""
+
+if ! java -version; then
+    echo ""
+    echo "ERROR: Java is not properly set, unable to continue!"
+    exit
+fi

@@ -20,51 +20,55 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
+/*
+ * Dead Store Elimination (DSE) intends to remove all the assignments of a variable that are not read by any subsequent instructions.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class DeadStoreEliminationBenchmark {
+public class DeadAllocationStoreEliminationBenchmark {
 
-  @Param({"128"})
+  @Param({"64"})
   private int size;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadStoreEliminationBenchmark.*"
+  // java -jar benchmarks/target/benchmarks.jar ".*DeadAllocationStoreEliminationBenchmark.*"
   // JMH Opts: -prof gc
 
+  // allocates 16 bytes
   @Benchmark
-  public Object obj_baseline() {
+  public Object obj_alloc_baseline() {
+    return new Object();
+  }
+
+  // DSE: optimized method should allocate 16 bytes per instance
+  @Benchmark
+  public Object obj_alloc_dse() {
     Object obj;
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
+    obj = new Object();
     obj = new Object();
     return obj;
   }
 
+  // DSE: optimized method should allocate 16 bytes per instance
   @Benchmark
-  public Object obj_x16() {
-    Object obj;
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    obj = new Object();
-    return obj;
-  }
-
-  @Benchmark
-  public Object obj_x16_inter_procedural() {
+  public Object obj_alloc_dse_inter_procedural() {
     Object obj;
     obj = new Object();
     sink();
@@ -100,70 +104,35 @@ public class DeadStoreEliminationBenchmark {
     return obj;
   }
 
+  // allocates 64 bytes
   @Benchmark
-  public Object arr_baseline() {
-    Object obj;
-    obj = new Object[size];
-    return obj;
+  public byte[] arr_alloc_baseline() {
+    return new byte[size];
   }
 
+  // DSE: optimized method should allocate 64 bytes per array
   @Benchmark
-  public Object arr_x16() {
-    Object obj;
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    obj = new Object[size];
-    return obj;
+  public byte[] arr_alloc_dse() {
+    byte[] array;
+    array = new byte[size];
+    array = new byte[size];
+    array = new byte[size];
+    array = new byte[size];
+    return array;
   }
 
+  // DSE: optimized method should allocate 64 bytes per array
   @Benchmark
-  public Object arr_x16_inter_procedural() {
-    Object obj;
-    obj = new Object[size];
+  public Object arr_alloc_dse_inter_procedural() {
+    byte[] array;
+    array = new byte[size];
     sink();
-    obj = new Object[size];
+    array = new byte[size];
     sink();
-    obj = new Object[size];
+    array = new byte[size];
     sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    sink();
-    obj = new Object[size];
-    return obj;
+    array = new byte[size];
+    return array;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)

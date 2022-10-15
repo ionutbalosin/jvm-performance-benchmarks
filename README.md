@@ -93,13 +93,15 @@ This will generate and print all the commands but without executing any real ben
 ### Normal run
 
 ```
-./run-benchmarks.sh
+sudo ./run-benchmarks.sh
 ```
+
+> sudo is needed to properly apply the OS configuration settings.
 
 You can also redirect the output to a file for later analysis:
 
 ```
-./run-benchmarks.sh | tee run-benchmarks.out
+sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
 Every benchmark does 5x10s warmups, 5x10s measurements, and 3 forks. These are reconsidered to allow longer in-JVM runs and produce better/ most accurate results. However, in some corner cases, it might still not be enough, but these are out of scope.

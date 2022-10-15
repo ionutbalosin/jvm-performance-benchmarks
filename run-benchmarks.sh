@@ -73,28 +73,28 @@ echo "##########################################################################
 echo ""
 
 echo ""
-echo "+=========================+"
-echo "| [1/5] JMH Configuration |"
-echo "+=========================+"
+echo "+========================+"
+echo "| [1/5] OS Configuration |"
+echo "+========================+"
 echo ""
-. ./configure_jvm.sh
+. ./configure_linux_os.sh $DRY_RUN
 
 echo ""
 echo "+=========================+"
 echo "| [2/5] JVM Configuration |"
 echo "+=========================+"
 echo ""
+. ./configure_jvm.sh
+
+echo ""
+echo "+=========================+"
+echo "| [3/5] JMH Configuration |"
+echo "+=========================+"
+echo ""
 . ./configure_jmh.sh
 
 echo ""
-echo "+========================+"
-echo "| [3/5] OS Configuration |"
-echo "+========================+"
-echo ""
-. ./configure_linux_os.sh $DRY_RUN
-
-echo ""
-read -r -p "IMPORTANT: if the selected configuration is correct, press ENTER to continue otherwise CRTL+C to abort! "
+read -r -p "IMPORTANT: if the above configuration is correct, press ENTER to continue otherwise CRTL+C to abort! "
 
 echo ""
 echo "+===========================+"

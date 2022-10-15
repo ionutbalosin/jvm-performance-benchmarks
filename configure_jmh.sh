@@ -7,8 +7,7 @@ export JMH_OUTPUT_FORMAT_TYPE="csv"
 # Element array format: "Test Name | JMH Options"
 # Note: these JMH options are test specific, in addition to global $JMH_OPTS defined above
 export -a JMH_TEST_SUITE=(
-    "DeadStoreEliminationBenchmark|-prof gc"
-    "VectorizationPatternsSingleIntArrayBenchmark|"
+    "DeadAllocationStoreEliminationBenchmark|-prof gc"
   )
 
 echo ""

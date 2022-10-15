@@ -82,8 +82,8 @@ public class LoopInvariantCodeMotionBenchmark {
     double v1, v2, sum = 0, finalResult = 0;
     double tan = Math.tan(value); // manual hoisting
     for (int i = 1; i < iterations; i++) {
-      double v =
-          Math.tan((i - 1) * value); // manual common subexpression elimination (loop dependent)
+      // manual common subexpression elimination (loop dependent)
+      double v = Math.tan((i - 1) * value);
       v1 = v + tan;
       v2 = 1 - v * tan;
       sum += v1 / v2;

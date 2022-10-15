@@ -4,12 +4,12 @@ DRY_RUN="$1"
 
 if [ "Linux" != "$(uname -s)" ]; then
   echo ""
-  echo "WARNING: Not a Linux OS. Unable to continue."
+  echo "WARNING: Not a Linux OS, unable to further apply any configuration."
   exit 1
 fi
 
 if [[ "$DRY_RUN" != "--dry-run" && $EUID != 0 ]]; then
-    read -r -p "WARNING: Sudo admin rights are needed! Press CRTL+C and run it again, otherwise the OS might not be properly configured."
+    read -r -p "WARNING: sudo admin rights are needed! Press CRTL+C and run it again (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
 fi
 
 echo ""
@@ -76,8 +76,13 @@ done
 
 echo ""
 echo "+------------------------+"
-echo "| TODO: Set cpu affinity |"
+echo "| TODO: Set CPU affinity |"
 echo "+------------------------+"
+cpus=$(grep -c processor /proc/cpuinfo)
+if [ "$cpus" -lt "4" ]; then
+  echo "ERROR: Not enough number of CPUs. Found $cpus, expected at least 4. Unable to continue."
+  exit
+fi
 
 echo ""
 echo "+----------------------------+"
