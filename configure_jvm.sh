@@ -4,7 +4,7 @@ configure_openjdk_hotspot()
 {
   export ARCH=$(uname -i)
   export JDK_VERSION="17"
-  export JAVA_HOME="/usr/lib/jvm/openjdk1-17.0.2"
+  export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.2"
   export PATH=$JAVA_HOME/bin:$PATH
   export JVM_OPTS=""
   export TEST_SUITE_NAME="OpenJDK HotSpot VM"

@@ -55,14 +55,16 @@ At the moment we leave it **out of scope** Eclipse OpenJ9 until we find a proper
 ## How to get consistent results
 
 When doing benchmarking it is recommended to disable potential sources of performance non-determinism, as follows:
+- disable address space randomization
 - disable turbo boost
-- disable hyper-threading
 - set `scaling_governor` to `performance`
+- disable hyper-threading
 - set cpu affinity
 - set process priority
 - _optionally_, disable Display Power Management system (DPMS)
 
 For further references please check:
+- [LLVM benchmarking tips](https://llvm.org/docs/Benchmarking.html#linux)
 - [How to get consistent results when benchmarking on Linux?](https://easyperf.net/blog/2019/08/02/Perf-measurement-environment-on-Linux) 
 - [benchmark_start.sh](https://github.com/simonis/zlib-bench/blob/master/benchmarks/bash/benchmark_start.sh)
 - [cpu_fixed.sh](https://github.com/bourgesl/nearly-optimal-mergesort-code/blob/master/cpu_fixed.sh)

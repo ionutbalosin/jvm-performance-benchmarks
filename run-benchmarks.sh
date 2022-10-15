@@ -18,7 +18,7 @@ create_folder()
   FOLDER="$1"
   if [ -d "$FOLDER" ]; then
     echo ""
-    echo "Warning: folder $FOLDER already exists. Existing output benchmarks might be overridden!"
+    echo "WARNING: folder $FOLDER already exists. Existing output benchmarks might be overridden!"
   else
     echo ""
     echo "Create $FOLDER folder"
@@ -42,12 +42,8 @@ run_test()
 
 run_test_suite()
 {
-
     echo ""
-    echo "+======================================+"
-    echo "| Running $TEST_SUITE_NAME Tests Suite |"
-    echo "+======================================+"
-    echo ""
+    echo "Running $TEST_SUITE_NAME Tests Suite"
 
     FOLDER="$JMH_OUTPUT_FOLDER/jdk-$JDK_VERSION/$ARCH/$TEST_SUITE_OUTPUT_FOLDER"
 
@@ -78,26 +74,39 @@ echo ""
 
 echo ""
 echo "+=========================+"
-echo "| [1/3] JMH Configuration |"
+echo "| [1/5] JMH Configuration |"
 echo "+=========================+"
 echo ""
 . ./configure_jvm.sh
 
 echo ""
 echo "+=========================+"
-echo "| [2/3] JVM Configuration |"
+echo "| [2/5] JVM Configuration |"
 echo "+=========================+"
 echo ""
 . ./configure_jmh.sh
 
 echo ""
 echo "+========================+"
-echo "| [3/3] OS Configuration |"
+echo "| [3/5] OS Configuration |"
 echo "+========================+"
 echo ""
-. ./configure_linux_os.sh
+. ./configure_linux_os.sh $DRY_RUN
 
 echo ""
 read -r -p "IMPORTANT: if the selected configuration is correct, press ENTER to continue otherwise CRTL+C to abort! "
+
+echo ""
+echo "+===========================+"
+echo "| [4/5] Compile and package |"
+echo "+===========================+"
+echo ""
+./mvnw spotless:apply package
+
+echo ""
+echo "+======================+"
+echo "| [5/5] Run benchmarks |"
+echo "+======================+"
+echo ""
 
 run_test_suite
