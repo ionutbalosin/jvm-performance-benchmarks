@@ -84,7 +84,8 @@ public class LoopFusionBenchmark {
   @Benchmark
   public void baseline() {
     for (int i = 1; i < size; i++) {
-      A[i] = A[i - 1] + B[i]; // Read-after-write (RAW)
+      // Read-after-write (RAW)
+      A[i] = A[i - 1] + B[i];
       B[i] = B[i - 1] + A[i];
     }
   }

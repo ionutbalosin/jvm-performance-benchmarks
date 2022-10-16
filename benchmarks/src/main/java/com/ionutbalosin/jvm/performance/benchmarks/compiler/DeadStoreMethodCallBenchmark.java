@@ -32,25 +32,26 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class DeadMethodStoreEliminationBenchmark {
+public class DeadStoreMethodCallBenchmark {
 
   @Param({"42"})
   public double circleRadius;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadMethodStoreEliminationBenchmark.*"
+  // java -jar benchmarks/target/benchmarks.jar ".*DeadStoreMethodCallBenchmark.*"
 
   @Benchmark
-  public double dead_method_calls() {
-    double useless1Pi = computePi();
-    double useless2Pi = computePi();
-    double useless3Pi = computePi();
-    double useless4Pi = computePi();
-    double pi = computePi();
+  public double method_call_dse() {
+    double pi;
+    pi = computePi();
+    pi = computePi();
+    pi = computePi();
+    pi = computePi();
+    pi = computePi();
     return circleRadius * circleRadius * pi;
   }
 
   @Benchmark
-  public double baseline() {
+  public double method_call_baseline() {
     double pi = computePi();
     return circleRadius * circleRadius * pi;
   }

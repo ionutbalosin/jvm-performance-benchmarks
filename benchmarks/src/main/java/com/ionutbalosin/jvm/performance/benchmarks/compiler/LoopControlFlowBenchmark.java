@@ -78,7 +78,7 @@ import org.openjdk.jmh.annotations.Warmup;
 //
 //    where thresholdLimit is either:
 //     - always smaller than arrays values - no null values in the array
-//     - or partially greater than some arrays values - some of the elements are null
+//     - or partially greater than some arrays values - some elements are null
 //
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)

@@ -29,12 +29,12 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class DeadAllocationStoreEliminationBenchmark {
+public class DeadStoreAllocationBenchmark {
 
   @Param({"64"})
   private int size;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadAllocationStoreEliminationBenchmark.*"
+  // java -jar benchmarks/target/benchmarks.jar ".*DeadStoreAllocationBenchmark.*"
   // JMH Opts: -prof gc
 
   // allocates 16 bytes

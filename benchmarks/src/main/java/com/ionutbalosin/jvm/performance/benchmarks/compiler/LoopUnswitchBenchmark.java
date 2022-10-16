@@ -91,7 +91,8 @@ public class LoopUnswitchBenchmark {
   public void loop_unswitch() {
     for (int i = 1; i < size; i++) {
       A[i] = A[i - 1] + 1;
-      if (licmPredicate_noInline()) { // potential auto-vectorization obstacle
+      // potential auto-vectorization obstacle
+      if (licmPredicate_noInline()) {
         B[i] = B[i - 1] + 1;
       }
       C[i] = C[i - 1] + 1;

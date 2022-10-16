@@ -147,8 +147,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   public int sum_of_all_array_elements_matching_a_predicate() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
-      if (P[i]) { // if conversion ("flatten" the IF statement in the code and generate a single
-        // stream of instructions)
+      if (P[i]) {
         sum += A[i];
       }
     }

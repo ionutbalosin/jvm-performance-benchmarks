@@ -80,7 +80,8 @@ public class LoopInvariantCodeMotionBenchmark {
   @Benchmark
   public double manual_hoisting_and_sinking() {
     double v1, v2, sum = 0, finalResult = 0;
-    double tan = Math.tan(value); // manual hoisting
+    // manual hoisting
+    double tan = Math.tan(value);
     for (int i = 1; i < iterations; i++) {
       // manual common subexpression elimination (loop dependent)
       double v = Math.tan((i - 1) * value);
@@ -88,7 +89,8 @@ public class LoopInvariantCodeMotionBenchmark {
       v2 = 1 - v * tan;
       sum += v1 / v2;
     }
-    finalResult = Math.tan(Math.atan(sum)); // manual sinking
+    // manual sinking
+    finalResult = Math.tan(Math.atan(sum));
     return finalResult;
   }
 }

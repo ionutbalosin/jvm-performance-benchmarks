@@ -209,7 +209,8 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
   @Benchmark
   public float[] multiply_2_arrays_elements_stride_x2() {
     for (int i = 1; i < size; i *= 2) {
-      C[i] = A[i] * B[i]; // Strided Access: vectorizable
+      // Strided Access: vectorizable
+      C[i] = A[i] * B[i];
     }
     return C;
   }
@@ -217,7 +218,8 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
   @Benchmark
   public float[] multiply_2_arrays_elements_stride_2() {
     for (int i = 0; i < size; i += 2) {
-      C[i] = A[i] * B[i]; // Strided Access: vectorizable
+      // Strided Access: vectorizable
+      C[i] = A[i] * B[i];
     }
     return C;
   }
@@ -225,7 +227,8 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
   @Benchmark
   public float[] add_2_arrays_elements_inc_index_access() {
     for (int i = 0; i < size - 1; i++) {
-      A[i] = A[i + 1] + B[i]; // Write after read (WAR): vectorizable
+      // Write after read (WAR): vectorizable
+      A[i] = A[i + 1] + B[i];
     }
     return A;
   }
@@ -233,7 +236,8 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
   @Benchmark
   public float[] add_2_arrays_elements_modulo_index_access() {
     for (int i = 0; i < size; i++) {
-      C[i] = A[i % 2] + B[i]; // Read after read (RAR): vectorizable
+      // Read after read (RAR): vectorizable
+      C[i] = A[i % 2] + B[i];
     }
     return C;
   }
