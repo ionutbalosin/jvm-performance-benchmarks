@@ -32,12 +32,12 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class DeadStoreMethodCallBenchmark {
+public class DeadMethodCallStoreBenchmark {
 
   @Param({"42"})
   public double circleRadius;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadStoreMethodCallBenchmark.*"
+  // java -jar benchmarks/target/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*"
 
   @Benchmark
   public double method_call_dse() {
