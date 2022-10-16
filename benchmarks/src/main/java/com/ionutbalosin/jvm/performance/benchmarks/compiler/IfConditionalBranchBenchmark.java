@@ -57,7 +57,8 @@ public class IfConditionalBranchBenchmark {
     final Random random = new Random(16384);
 
     for (int i = 0; i < SIZE; i++) {
-      array[i] = random.nextInt(thresholdLimit); // all values are within [0, thresholdLimit)
+      // all values are within [0, thresholdLimit)
+      array[i] = random.nextInt(thresholdLimit);
     }
   }
 
@@ -72,8 +73,9 @@ public class IfConditionalBranchBenchmark {
     return sum;
   }
 
+  // this must be equivalent or very close to baseline()
   @Benchmark
-  public int predictable_branch() { // this must be equivalent or very close to baseline()
+  public int predictable_branch() {
     int sum = 0;
 
     for (final int value : array) {
