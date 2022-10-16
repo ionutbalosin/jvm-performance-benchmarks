@@ -14,7 +14,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * (c) 2019 Ionut Balosin
+ * (c) 2022 Ionut Balosin
  * Website: www.ionutbalosin.com
  * Twitter: @ionutbalosin
  *
@@ -45,7 +45,7 @@ public class DeadStoreAllocationBenchmark {
 
   // DSE: optimized method should allocate 16 bytes per instance
   @Benchmark
-  public Object obj_alloc_dse() {
+  public Object obj_dse() {
     Object obj;
     obj = new Object();
     obj = new Object();
@@ -68,7 +68,7 @@ public class DeadStoreAllocationBenchmark {
 
   // DSE: optimized method should allocate 16 bytes per instance
   @Benchmark
-  public Object obj_alloc_dse_inter_procedural() {
+  public Object obj_dse_inter_procedural() {
     Object obj;
     obj = new Object();
     sink();
@@ -104,15 +104,35 @@ public class DeadStoreAllocationBenchmark {
     return obj;
   }
 
+  // allocates 16 bytes
+  @Benchmark
+  public Wrapper wrapper_obj_baseline() {
+    return new Wrapper();
+  }
+
+  // allocates 16 bytes
+  @Benchmark
+  public Wrapper wrapper_obj_dse_inter_procedural() {
+    Object obj1 = new Object();
+    Object obj2 = new Object();
+    Object obj3 = new Object();
+    Object obj4 = new Object();
+    Object obj5 = new Object();
+    Object obj6 = new Object();
+    Object obj7 = new Object();
+    Object obj8 = new Object();
+    return new Wrapper(obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
+  }
+
   // allocates 64 bytes
   @Benchmark
-  public byte[] arr_alloc_baseline() {
+  public byte[] array_baseline() {
     return new byte[size];
   }
 
   // DSE: optimized method should allocate 64 bytes per array
   @Benchmark
-  public byte[] arr_alloc_dse() {
+  public byte[] array_dse() {
     byte[] array;
     array = new byte[size];
     array = new byte[size];
@@ -123,7 +143,7 @@ public class DeadStoreAllocationBenchmark {
 
   // DSE: optimized method should allocate 64 bytes per array
   @Benchmark
-  public Object arr_alloc_dse_inter_procedural() {
+  public Object array_dse_inter_procedural() {
     byte[] array;
     array = new byte[size];
     sink();
@@ -138,5 +158,43 @@ public class DeadStoreAllocationBenchmark {
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public static void sink() {
     // Intentionally empty method
+  }
+
+  private static class Wrapper {
+    private Object obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8;
+
+    public Wrapper() {
+      this.obj1 = new Object();
+      this.obj2 = new Object();
+      this.obj3 = new Object();
+      this.obj4 = new Object();
+      this.obj5 = new Object();
+      this.obj6 = new Object();
+      this.obj7 = new Object();
+      this.obj8 = new Object();
+    }
+
+    public Wrapper(
+        Object obj1,
+        Object obj2,
+        Object obj3,
+        Object obj4,
+        Object obj5,
+        Object obj6,
+        Object obj7,
+        Object obj8) {
+
+      // inlining of the default constructor should enable the DSE
+      this();
+
+      this.obj1 = obj1;
+      this.obj2 = obj2;
+      this.obj3 = obj3;
+      this.obj4 = obj4;
+      this.obj5 = obj5;
+      this.obj6 = obj6;
+      this.obj7 = obj7;
+      this.obj8 = obj8;
+    }
   }
 }
