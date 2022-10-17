@@ -39,26 +39,36 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class MegamorphicVirtualCallBenchmark {
   private CMath[] instances;
+  private byte[] classIndex;
 
   @Param private Mode mode;
 
   @Param("120960")
   private int size;
 
+  public void setClassIndex(int offset, int step) {
+    for (int i = 0; i < step; i++) {
+      classIndex[offset + i] = (byte) (i);
+    }
+  }
+
   @Setup
   public void setup() {
     instances = new CMath[size];
+    classIndex = new byte[size];
 
     switch (mode) {
       case MONOMORPHIC:
         for (int i = 0; i < size; i++) {
           instances[i] = new Alg1();
+          setClassIndex(i, 1);
         }
         break;
       case BIMORPHIC:
         for (int i = 0; i < size; i += 2) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
+          setClassIndex(i, 2);
         }
         break;
       case MEGAMORPHIC_3:
@@ -66,6 +76,7 @@ public class MegamorphicVirtualCallBenchmark {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
+          setClassIndex(i, 3);
         }
         break;
       case MEGAMORPHIC_4:
@@ -74,6 +85,7 @@ public class MegamorphicVirtualCallBenchmark {
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
           instances[i + 3] = new Alg4();
+          setClassIndex(i, 4);
         }
         break;
       case MEGAMORPHIC_5:
@@ -83,6 +95,7 @@ public class MegamorphicVirtualCallBenchmark {
           instances[i + 2] = new Alg3();
           instances[i + 3] = new Alg4();
           instances[i + 4] = new Alg5();
+          setClassIndex(i, 5);
         }
         break;
       case MEGAMORPHIC_6:
@@ -93,6 +106,7 @@ public class MegamorphicVirtualCallBenchmark {
           instances[i + 3] = new Alg4();
           instances[i + 4] = new Alg5();
           instances[i + 5] = new Alg6();
+          setClassIndex(i, 6);
         }
         break;
       case MEGAMORPHIC_7:
@@ -104,6 +118,7 @@ public class MegamorphicVirtualCallBenchmark {
           instances[i + 4] = new Alg5();
           instances[i + 5] = new Alg6();
           instances[i + 6] = new Alg7();
+          setClassIndex(i, 7);
         }
         break;
       case MEGAMORPHIC_8:
@@ -116,6 +131,7 @@ public class MegamorphicVirtualCallBenchmark {
           instances[i + 5] = new Alg6();
           instances[i + 6] = new Alg7();
           instances[i + 7] = new Alg8();
+          setClassIndex(i, 8);
         }
         break;
       default:
@@ -123,11 +139,77 @@ public class MegamorphicVirtualCallBenchmark {
     }
   }
 
+    @Benchmark
+    @OperationsPerInvocation(144000)
+    public void test() {
+      for (CMath instance : instances) {
+        instance.compute();
+      }
+    }
+
+    @Benchmark
+    @OperationsPerInvocation(144000)
+    public void test_switch_monomorphic() {
+      byte[] classIndex = this.classIndex;
+      CMath[] instances = this.instances;
+      for (int i = 0; i < instances.length; i++) {
+        CMath instance = instances[i];
+        switch (classIndex[i]) {
+          case 0:
+            instance.compute();
+            break;
+          case 1:
+            instance.compute();
+            break;
+          case 2:
+            instance.compute();
+            break;
+          case 3:
+            instance.compute();
+            break;
+          case 4:
+            instance.compute();
+            break;
+          case 5:
+            instance.compute();
+            break;
+          case 6:
+            instance.compute();
+            break;
+          case 7:
+            instance.compute();
+            break;
+          default:
+            throw new RuntimeException("Should not reach here.");
+        }
+      }
+    }
+
   @Benchmark
   @OperationsPerInvocation(144000)
-  public void test() {
-    for (CMath instance : instances) {
-      instance.compute();
+  public void test_if_monomorphic() {
+    CMath[] instances = this.instances;
+    for (int i = 0; i < instances.length; i++) {
+      CMath instance = instances[i];
+      if (instance instanceof Alg1) {
+        instance.compute();
+      } else if (instance instanceof Alg2) {
+        instance.compute();
+      } else if (instance instanceof Alg3) {
+        instance.compute();
+      } else if (instance instanceof Alg4) {
+        instance.compute();
+      } else if (instance instanceof Alg5) {
+        instance.compute();
+      } else if (instance instanceof Alg6) {
+        instance.compute();
+      } else if (instance instanceof Alg7) {
+        instance.compute();
+      } else if (instance instanceof Alg8) {
+        instance.compute();
+      } else {
+        throw new RuntimeException("Should not reach here.");
+      }
     }
   }
 
@@ -143,6 +225,7 @@ public class MegamorphicVirtualCallBenchmark {
   }
 
   abstract static class CMath {
+    // All fields of this class should be on the same cache line.
     int c1, c2, c3, c4, c5, c6, c7, c8;
 
     @CompilerControl(CompilerControl.Mode.DONT_INLINE)
