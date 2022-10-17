@@ -38,7 +38,9 @@ For more details please check the [compiler hints](https://github.com/openjdk/jm
 
 > Using JMH Blackhole.consume() might dominate the costs, obscuring the results, in comparison to a normal Java-style source code.
 
-For that reason, to provide more tests fidelity we recommend (whenever it is possible) to avoid `Blackhole.consume()`
+Starting OpenJDK 17 the compiler supports blackholes [JDK-8259316](https://bugs.openjdk.org/browse/JDK-8259316) nevertheless this is a HotSpot-specific optimization.
+
+For that reason, to focus on broader reusability (i.e., other JDK versions and distributions) and increased test fidelity we recommend (whenever it is possible) avoiding `Blackhole.consume()`.
 
 ### Support for GraalVM 
 
