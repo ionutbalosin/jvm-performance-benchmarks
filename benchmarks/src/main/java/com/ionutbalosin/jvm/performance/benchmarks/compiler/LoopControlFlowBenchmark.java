@@ -88,7 +88,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class LoopControlFlowBenchmark {
 
-  public Wrapper[] array;
+  private Wrapper[] array;
 
   @Param({"262144"})
   private int size;
@@ -157,7 +157,7 @@ public class LoopControlFlowBenchmark {
   }
 
   private static class Wrapper {
-    public int x;
+    private int x;
 
     public Wrapper(int x) {
       this.x = x;

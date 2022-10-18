@@ -32,13 +32,13 @@ import org.openjdk.jmh.annotations.Warmup;
 public class BranchlessBenchmark {
 
   @Param({"42"})
-  public int param;
+  private int param;
 
   @Param({"98"})
-  public int A;
+  private int A;
 
   @Param({"99"})
-  public int B;
+  private int B;
 
   @Benchmark
   public int x_equals_y_return_a_else_b() {

@@ -38,6 +38,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(value = 5)
 @State(Scope.Benchmark)
 public class MegamorphicVirtualCallBenchmark {
+
   private CMath[] instances;
   private byte[] classIndex;
 
@@ -45,12 +46,6 @@ public class MegamorphicVirtualCallBenchmark {
 
   @Param("120960")
   private int size;
-
-  public void setClassIndex(int offset, int step) {
-    for (int i = 0; i < step; i++) {
-      classIndex[offset + i] = (byte) (i);
-    }
-  }
 
   @Setup
   public void setup() {
@@ -139,51 +134,51 @@ public class MegamorphicVirtualCallBenchmark {
     }
   }
 
-    @Benchmark
-    @OperationsPerInvocation(144000)
-    public void test() {
-      for (CMath instance : instances) {
-        instance.compute();
-      }
+  @Benchmark
+  @OperationsPerInvocation(144000)
+  public void test() {
+    for (CMath instance : instances) {
+      instance.compute();
     }
+  }
 
-    @Benchmark
-    @OperationsPerInvocation(144000)
-    public void test_switch_monomorphic() {
-      byte[] classIndex = this.classIndex;
-      CMath[] instances = this.instances;
-      for (int i = 0; i < instances.length; i++) {
-        CMath instance = instances[i];
-        switch (classIndex[i]) {
-          case 0:
-            instance.compute();
-            break;
-          case 1:
-            instance.compute();
-            break;
-          case 2:
-            instance.compute();
-            break;
-          case 3:
-            instance.compute();
-            break;
-          case 4:
-            instance.compute();
-            break;
-          case 5:
-            instance.compute();
-            break;
-          case 6:
-            instance.compute();
-            break;
-          case 7:
-            instance.compute();
-            break;
-          default:
-            throw new RuntimeException("Should not reach here.");
-        }
+  @Benchmark
+  @OperationsPerInvocation(144000)
+  public void test_switch_monomorphic() {
+    byte[] classIndex = this.classIndex;
+    CMath[] instances = this.instances;
+    for (int i = 0; i < instances.length; i++) {
+      CMath instance = instances[i];
+      switch (classIndex[i]) {
+        case 0:
+          instance.compute();
+          break;
+        case 1:
+          instance.compute();
+          break;
+        case 2:
+          instance.compute();
+          break;
+        case 3:
+          instance.compute();
+          break;
+        case 4:
+          instance.compute();
+          break;
+        case 5:
+          instance.compute();
+          break;
+        case 6:
+          instance.compute();
+          break;
+        case 7:
+          instance.compute();
+          break;
+        default:
+          throw new RuntimeException("Should not reach here.");
       }
     }
+  }
 
   @Benchmark
   @OperationsPerInvocation(144000)
@@ -210,6 +205,12 @@ public class MegamorphicVirtualCallBenchmark {
       } else {
         throw new RuntimeException("Should not reach here.");
       }
+    }
+  }
+
+  private void setClassIndex(int offset, int step) {
+    for (int i = 0; i < step; i++) {
+      classIndex[offset + i] = (byte) (i);
     }
   }
 

@@ -35,7 +35,7 @@ import org.openjdk.jmh.annotations.Warmup;
 public class DeadMethodCallStoreBenchmark {
 
   @Param({"42"})
-  public double circleRadius;
+  private double circleRadius;
 
   // java -jar benchmarks/target/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*"
 
