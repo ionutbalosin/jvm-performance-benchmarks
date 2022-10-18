@@ -78,10 +78,8 @@ It is necessary to have installed JDK 17 build (i.e., latest LTS), the preferabl
 ## Step 1 - Compile and package
 
 ```
-./mvnw spotless:apply package
+./mvnw package
 ```
-
-**Note** The argument `spotless:apply` is optional but nice to have it
 
 ## Step 2 - Run the microbenchmarks
 

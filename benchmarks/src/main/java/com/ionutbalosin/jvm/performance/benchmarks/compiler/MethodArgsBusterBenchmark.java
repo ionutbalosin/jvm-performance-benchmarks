@@ -1,3 +1,27 @@
+/**
+ *  JVM Performance Benchmarks
+ *
+ *  Copyright (C) 2019 - 2022 Ionut Balosin
+ *  Website: www.ionutbalosin.com
+ *  Twitter: @ionutbalosin
+ *
+ *  Co-author: Florin Blanaru
+ *  Twitter: @gigiblender
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
 import java.util.concurrent.TimeUnit;
@@ -12,14 +36,6 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * (c) 2019 Ionut Balosin
- * Website: www.ionutbalosin.com
- * Twitter: @ionutbalosin
- *
- * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
- */
-
-/*
  * Test how the Compiler could potentially optimize a method that takes a huge number of arguments (64 double arguments).
  * Usually, the register allocation (i.e., the array of register mask bits) should be large enough to cover all the machine registers and
  * all parameters that need to be passed on the stack all parameters that need to be passed on the stack (stack registers) up to some "interesting" limit.
@@ -28,7 +44,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://bugs.java.com/bugdatabase/view_bug.do?bug_id=5090493
  */
-
+//
 //  Pattern:
 //
 //    method(double d00, double d01, ... double d63) {

@@ -1,3 +1,27 @@
+/**
+ *  JVM Performance Benchmarks
+ *
+ *  Copyright (C) 2019 - 2022 Ionut Balosin
+ *  Website: www.ionutbalosin.com
+ *  Twitter: @ionutbalosin
+ *
+ *  Co-author: Florin Blanaru
+ *  Twitter: @gigiblender
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package com.ionutbalosin.jvm.performance.benchmarks.gc;
 
 import java.util.concurrent.TimeUnit;
@@ -15,14 +39,6 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jol.info.GraphLayout;
-
-/*
- * (c) 2020 Ionut Balosin
- * Website: www.ionutbalosin.com
- * Twitter: @ionutbalosin
- *
- * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
- */
 
 /*
  * This benchmark initially allocates (during setup) chunks of chained objects (i.e., ballast), until it fills up
