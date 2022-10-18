@@ -28,34 +28,34 @@ import org.openjdk.jmh.annotations.Warmup;
 public class VarArgsBenchmark {
 
   @Param({"3"})
-  int param1;
+  private int param1;
 
   @Param({"5"})
-  int param2;
+  private int param2;
 
   @Param({"7"})
-  int param3;
+  private int param3;
 
   @Param({"9"})
-  int param4;
+  private int param4;
 
   @Param({"11"})
-  int param5;
+  private int param5;
 
   @Param({"13"})
-  int param6;
+  private int param6;
 
   @Param({"15"})
-  int param7;
+  private int param7;
 
   @Param({"17"})
-  int param8;
+  private int param8;
 
   @Param({"19"})
-  int param9;
+  private int param9;
 
   @Param({"21"})
-  int param10;
+  private int param10;
 
   @Benchmark
   public int explicit_1_param() {

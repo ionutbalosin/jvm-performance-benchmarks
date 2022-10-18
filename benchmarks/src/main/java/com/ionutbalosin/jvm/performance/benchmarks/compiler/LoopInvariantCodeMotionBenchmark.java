@@ -60,10 +60,10 @@ import org.openjdk.jmh.annotations.Warmup;
 public class LoopInvariantCodeMotionBenchmark {
 
   @Param({"16384"})
-  public int iterations;
+  private int iterations;
 
   @Param({"42"})
-  public double value;
+  private double value;
 
   @Benchmark
   public double loop_with_invariant_code() {
