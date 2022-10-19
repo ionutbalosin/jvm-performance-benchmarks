@@ -1,3 +1,27 @@
+/**
+ *  JVM Performance Benchmarks
+ *
+ *  Copyright (C) 2019 - 2022 Ionut Balosin
+ *  Website: www.ionutbalosin.com
+ *  Twitter: @ionutbalosin
+ *
+ *  Co-author: Florin Blanaru
+ *  Twitter: @gigiblender
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
 import java.util.Arrays;
@@ -17,21 +41,13 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * (c) 2019 Ionut Balosin
- * Website: www.ionutbalosin.com
- * Twitter: @ionutbalosin
- *
- * For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
- */
-
-/*
  * Iterates through an array of custom object instances (containing null and not null values) and computes the sum of all elements using different comparison/filtering strategies:
  * - try { sum += array_element[i]; } catch(NullPointerException) {...};
  * - if (array_element[i] == null) continue; else sum += array_element[i];
  * - if (array_element[i] != null) sum += array_element[i];
  * - Arrays.stream(array).filter(array_element != null).map(...).reduce(0, Integer::sum);
  */
-
+//
 //  Pattern:
 //
 //    loop_try_catch() {
