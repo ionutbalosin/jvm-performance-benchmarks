@@ -82,7 +82,7 @@ public class LoopInvariantCodeMotionBenchmark {
   private double value;
 
   @Benchmark
-  public double loop_with_invariant_code() {
+  public double initial_loop() {
     double value1, value2, sum = 0, finalResult = 0;
     for (int i = 1; i < iterations; i++) {
       value1 = Math.tan((i - 1) * value) + Math.tan(value);
@@ -94,7 +94,7 @@ public class LoopInvariantCodeMotionBenchmark {
   }
 
   @Benchmark
-  public double manual_hoisting_and_sinking() {
+  public double manual_loop_hoisting_and_sinking() {
     double value1, value2, sum = 0, finalResult;
     // manual hoisting
     double tan = Math.tan(value);

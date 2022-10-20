@@ -44,22 +44,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://www.javatpoint.com/loop-optimization
  */
-//
-//  Pattern:
-//
-//    method(accumulator) {
-//        for (int i = 0; i < iterations; ++i) {
-//            accumulator++;
-//        }
-//        return accumulator;
-//    }
-//
-//    is equivalent to:
-//
-//    method(iterations, accumulator) {
-//        return accumulator + iterations;
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -74,8 +58,18 @@ public class LoopReductionBenchmark {
   @Param({"128"})
   private int offset;
 
+  @Benchmark
+  public void initial_loop() {
+    auto_reduction(iterations, offset);
+  }
+
+  @Benchmark
+  public void manual_loop_reduction() {
+    manual_reduction(iterations, offset);
+  }
+
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int doAuto(final int iterations, int accumulator) {
+  private int auto_reduction(final int iterations, int accumulator) {
     for (int i = 0; i < iterations; ++i) {
       accumulator++;
     }
@@ -83,21 +77,11 @@ public class LoopReductionBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int baseline(final int iterations, int accumulator) {
+  private int manual_reduction(final int iterations, int accumulator) {
     if (iterations > 0) {
       return accumulator + iterations;
     } else {
       return accumulator;
     }
-  }
-
-  @Benchmark
-  public void loop_reduction() {
-    doAuto(iterations, offset);
-  }
-
-  @Benchmark
-  public void baseline() {
-    baseline(iterations, offset);
   }
 }

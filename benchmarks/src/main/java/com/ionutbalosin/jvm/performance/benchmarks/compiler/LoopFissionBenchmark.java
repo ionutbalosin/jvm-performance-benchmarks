@@ -27,7 +27,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -39,25 +38,35 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This pass transforms loops that contain branches on loop-invariant conditions to have multiple loops.
- * The transformation is called loop unswitching, because there is a different loop version for each value of the loop-invariant condition.
- * Note: the size of the code can grow exponentially with the number of unswitched variables, therefore compilers might tend to omit it.
+ * Loop fission breaks a larger loop body into smaller loops.
+ * Benefits of loop fusion:
+ * - enable vectorization: if one loop is not vectorizable, splitting the loop into two loops, one of which is vectorizable and the other which is not can help the performance
+ * - avoid register spilling: in case of large loops with many variables, loop distribution can be used to avoid register spilling
+ * - better utilization of data locality (if by splitting one of the loops becomes also interchangeable)
+ * This optimization is most efficient in multicore processors that can split a task into multiple tasks for each processor.
+ *
+ * Note: loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads,
+ * it can be counter-productive to have unrelated operations jammed together into a single loop nest.
+ *
+ * References:
+ * - https://www.cs.cornell.edu/courses/cs6120/2019fa/blog/loops/
+ * - https://events.prace-ri.eu/event/223/contributions/80/attachments/199/355/24-Leutgeb-Introduction_to_Vectorization.pdf
+ * - https://johnysswlab.com/loop-optimizations-how-does-the-compiler-do-it
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Thread)
-public class LoopUnswitchBenchmark {
-
-  @Param({"64"})
-  private int magicNumber;
+public class LoopFissionBenchmark {
 
   @Param({"262144"})
   private int size;
 
   private int[] A, B, C;
+
+  // java -jar benchmarks/target/benchmarks.jar ".*LoopFissionBenchmark.*"
 
   @Setup
   public void setup() {
@@ -73,45 +82,27 @@ public class LoopUnswitchBenchmark {
 
   /*
    * Explicit broken loop vectorization (Read-after-write (RAW) - non vectorizable)
-   *
-   * Read-after-write: the loop cannot be vectorized safely because if the first two iterations are executed simultaneously (e.g., A[1]=A[0]+1; A[2]=A[1]+1)
-   * by a SIMD instruction, the value of A[1] may be used by the second iteration before it has been calculated by the first iteration which could lead to incorrect results.
    */
   @Benchmark
   public void initial_loop() {
     for (int i = 1; i < size; i++) {
-      A[i] = A[i - 1] + 1;
-      // potential auto-vectorization obstacle
-      if (licmPredicate()) {
-        B[i] = B[i - 1] + 1;
-      }
-      C[i] = C[i - 1] + 1;
+      A[i] = A[i - 1] + C[i];
+      B[i] = A[i] + C[i];
     }
   }
 
   /*
-   * Explicit broken loop vectorization (Read-after-write (RAW) - non vectorizable)
+   * First loop: explicit broken loop vectorization (Read-after-write (RAW) - non vectorizable)
+   * Second loop: enable vectorization since it does not have loop carried dependencies
    */
   @Benchmark
-  public void manual_loop_unswitch() {
-    if (licmPredicate()) {
-      for (int i = 1; i < size; i++) {
-        A[i] = A[i - 1] + 1;
-        B[i] = B[i - 1] + 1;
-        C[i] = C[i - 1] + 1;
-      }
-    } else {
-      for (int i = 1; i < size; i++) {
-        A[i] = A[i - 1] + 1;
-        C[i] = C[i - 1] + 1;
-      }
+  public void manual_loop_fission() {
+    for (int i = 1; i < size; i++) {
+      A[i] = A[i - 1] + C[i];
     }
-  }
 
-  // loop invariant code motion (licm) predicate that cannot be inlined
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private boolean licmPredicate() {
-    int result = magicNumber & 0x2;
-    return result == 0;
+    for (int i = 1; i < size; i++) {
+      B[i] = A[i] + C[i];
+    }
   }
 }
