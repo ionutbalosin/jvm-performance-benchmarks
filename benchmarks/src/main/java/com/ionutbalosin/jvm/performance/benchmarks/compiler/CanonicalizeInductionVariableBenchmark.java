@@ -27,7 +27,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -38,62 +37,48 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * This transformation analyzes and transforms the induction variables (and computations derived from them) into
- * simpler forms suitable for subsequent analysis and transformation.This optimization is a special case of strength reduction
- * where all loop iterations are strengthened to a mathematical formula.
+ * simpler forms suitable for subsequent analysis and transformation.
+ * This optimization is a special case of strength reduction where all loop iterations are strengthened
+ * to a mathematical formula.
  *
  * References:
  * - https://llvm.org/docs/Passes.html#indvars-canonicalize-induction-variables
  */
-//
-//  Pattern:
-//
-//    for (i = start; i*i < MAX; ++i) {
-//    }
-//
-//    is equivalent to:
-//
-//    for (i = 0; i != sqrt(MAX) - start; ++i) {
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Thread)
 public class CanonicalizeInductionVariableBenchmark {
 
-  // Make sure the multiplication uses longs but not ints!
-  private final long length = 4194304L * 4194304L;
-  private final long newLength = 4194285L;
+  // Make sure the multiplication uses longs but not ints
+  private final long length = 4202496L * 4202496L;
+  private final long reducedLength = 4194304L;
 
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public static void sink(final long l) {
-    // Intentionally empty method
-    // Note: it is very important to match the signature to avoid autoboxing
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private void doAuto(final long iterations) {
-    for (long l = 19; l * l < iterations; ++l) {
-      sink(l);
-    }
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private void baseline(final long iterations) {
-    for (long l = 0; l != iterations; ++l) {
-      sink(l);
-    }
-  }
+  // java -jar benchmarks/target/benchmarks.jar ".*CanonicalizeInductionVariableBenchmark.*"
 
   @Benchmark
-  public void canonicalize_induction_var() {
-    doAuto(length);
+  public void canonicalize() {
+    auto_canonicalize(length);
   }
 
   @Benchmark
   public void baseline() {
-    baseline(newLength);
+    baseline(reducedLength);
+  }
+
+  private long auto_canonicalize(final long iterations) {
+    long result = 0;
+    for (long l = 8192; l * l < iterations; ++l) {
+      result++;
+    }
+    return result;
+  }
+
+  private long baseline(final long iterations) {
+    long result;
+    for (result = 0; result != iterations; ++result) {}
+    return result;
   }
 }
