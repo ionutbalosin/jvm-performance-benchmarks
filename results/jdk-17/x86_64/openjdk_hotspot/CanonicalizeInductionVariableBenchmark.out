@@ -8,6 +8,6 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 
-Benchmark                                              Mode  Cnt        Score      Error  Units
-CanonicalizeInductionVariableBenchmark.baseline        avgt    5        0.397 ±    0.051  ns/op
-CanonicalizeInductionVariableBenchmark.canonicalize    avgt    5  2284123.075 ± 6345.816  ns/op
+Benchmark                                            Mode  Cnt        Score        Error  Units
+CanonicalizeInductionVariableBenchmark.baseline      avgt    5        0.509 ±      0.001  ns/op
+CanonicalizeInductionVariableBenchmark.canonicalize  avgt    5  2149295.644 ± 114246.222  ns/op

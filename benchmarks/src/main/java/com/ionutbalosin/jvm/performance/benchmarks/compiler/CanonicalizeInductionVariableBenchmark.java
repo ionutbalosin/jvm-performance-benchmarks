@@ -61,13 +61,13 @@ public class CanonicalizeInductionVariableBenchmark {
   // java -jar benchmarks/target/benchmarks.jar ".*CanonicalizeInductionVariableBenchmark.*"
 
   @Benchmark
-  public void canonicalize() {
-    auto_canonicalize(length);
+  public long canonicalize() {
+    return auto_canonicalize(length);
   }
 
   @Benchmark
-  public void baseline() {
-    baseline(reducedLength);
+  public long baseline() {
+    return baseline(reducedLength);
   }
 
   private long auto_canonicalize(final long iterations) {
