@@ -53,8 +53,10 @@ import org.openjdk.jmh.annotations.Warmup;
 public class CanonicalizeInductionVariableBenchmark {
 
   // Make sure the multiplication uses longs but not ints
+  // Formula: reducedLength = sqrt(length) - start
   private final long length = 4202496L * 4202496L;
   private final long reducedLength = 4194304L;
+  private final long start = 8192;
 
   // java -jar benchmarks/target/benchmarks.jar ".*CanonicalizeInductionVariableBenchmark.*"
 
@@ -70,7 +72,7 @@ public class CanonicalizeInductionVariableBenchmark {
 
   private long auto_canonicalize(final long iterations) {
     long result = 0;
-    for (long l = 8192; l * l < iterations; ++l) {
+    for (long l = start; l * l < iterations; ++l) {
       result++;
     }
     return result;
