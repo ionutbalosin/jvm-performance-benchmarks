@@ -63,6 +63,7 @@ public class SynchronizedBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*SynchronizedBenchmark.*"
   // JVM Opts: -XX:+UseBiasedLocking (disabled starting JDK 15)
+  // JMH Opts: -t1,2
 
   @Setup
   public void setup() {
