@@ -49,6 +49,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * References:
  * - https://github.com/openjdk/jdk/blob/master/src/hotspot/share/compiler/compiler_globals.hpp
+ * - JITWatch code examples by Chris Newland (Twitter: @chriswhocodes)
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)

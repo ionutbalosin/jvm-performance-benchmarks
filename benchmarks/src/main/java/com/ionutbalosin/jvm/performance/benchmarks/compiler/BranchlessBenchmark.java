@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * References:
- * - originally provided by Nathan Tippy (@NathanTippy)
+ * - code examples by Nathan Tippy (Twitter: @NathanTippy)
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
