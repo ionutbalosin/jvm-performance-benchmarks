@@ -39,15 +39,24 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-/* References:
+/*
+ * JVM collects receiver-type statistics per call site during the execution of profiled code (in the interpreter or C1 JIT).
+ * These statistics are further used in the optimizing compiler (e.g., C2 JIT).
+ *
+ * If, for example, one call site "class.method()" has received only Type1, and another call site "class.method()"
+ * has received only Type2, the compiler may benefit from splitting the code into multiple call sites.
+ * This will split the type profile, so that each call site can be optimized individually (as monomorphic calls).
+ *
+ * Note: HotSpot JVM can inline up to two different targets of a virtual call, for more targets there is a vtable/itable call.
+ *
+ * A side effect of testing monomorphic calls is testing the inliner as well, since methods can be "sharpened" after
+ * a speculative type check and then inlined. To keep the inliner out of equation, the target method should be
+ * large enough to avoid inlining and only adjust the time to measure the virtual call overhead.
+ *
+ * References:
+ * - https://shipilev.net/blog/2015/black-magic-method-dispatch
  * - https://shipilev.net/jvm/anatomy-quarks/16-megamorphic-virtual-calls
  */
-//
-// Note: A side effect of testing monomorphic calls is that you'll be testing inliner as well since
-// methods can be "sharpened" after a speculative type check and then inlined.
-// So if you want to keep inliner out of equation, make the target methods large and adjust
-// time accordingly to only measure virtual call overhead.
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -60,6 +69,8 @@ public class MegamorphicVirtualCallBenchmark {
   private byte[] classIndex;
 
   @Param private Mode mode;
+
+  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicVirtualCallBenchmark.*"
 
   @Param("120960")
   private int size;
@@ -151,17 +162,20 @@ public class MegamorphicVirtualCallBenchmark {
     }
   }
 
+  // Call site will receive all possible targets -> megamorphic
   @Benchmark
   @OperationsPerInvocation(144000)
-  public void test() {
+  public void virtual_call() {
     for (CMath instance : instances) {
       instance.compute();
     }
   }
 
+  // Manually split the call site to receive only one target -> monomorphic
+  // Note: this is a trick trying to bypass some specific JVM limitations
   @Benchmark
   @OperationsPerInvocation(144000)
-  public void test_switch_monomorphic() {
+  public void devirtualize_switch_monomorphic() {
     byte[] classIndex = this.classIndex;
     CMath[] instances = this.instances;
     for (int i = 0; i < instances.length; i++) {
@@ -197,9 +211,11 @@ public class MegamorphicVirtualCallBenchmark {
     }
   }
 
+  // Manually split the call site to receive only one target -> monomorphic
+  // Note: this is a trick trying to bypass some specific JVM limitations
   @Benchmark
   @OperationsPerInvocation(144000)
-  public void test_if_monomorphic() {
+  public void devirtualize_if_monomorphic() {
     CMath[] instances = this.instances;
     for (int i = 0; i < instances.length; i++) {
       CMath instance = instances[i];

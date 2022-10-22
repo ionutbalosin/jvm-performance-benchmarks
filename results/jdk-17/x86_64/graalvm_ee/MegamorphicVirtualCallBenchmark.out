@@ -1,0 +1,36 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.4.1, Java HotSpot(TM) 64-Bit Server VM, 17.0.4.1+1-LTS-jvmci-22.2-b08
+# VM invoker: /usr/lib/jvm/graalvm-ee-java17-22.2.0.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+
+Benchmark                                                          (mode)         (size)  Mode  Cnt  Score   Error  Units
+MegamorphicVirtualCallBenchmark.virtual_call                       MONOMORPHIC    120960  avgt    5  1.157 ± 0.011  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       BIMORPHIC      120960  avgt    5  1.302 ± 0.038  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_3  120960  avgt    5  1.329 ± 0.075  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_4  120960  avgt    5  1.687 ± 0.032  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_5  120960  avgt    5  2.099 ± 0.005  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_6  120960  avgt    5  2.147 ± 0.006  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_7  120960  avgt    5  2.253 ± 0.005  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_8  120960  avgt    5  2.204 ± 0.007  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MONOMORPHIC    120960  avgt    5  1.201 ± 0.003  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        BIMORPHIC      120960  avgt    5  1.325 ± 0.141  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_3  120960  avgt    5  1.261 ± 0.003  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_4  120960  avgt    5  1.353 ± 0.009  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_5  120960  avgt    5  1.393 ± 0.007  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_6  120960  avgt    5  1.466 ± 0.003  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_7  120960  avgt    5  1.618 ± 0.006  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_8  120960  avgt    5  1.596 ± 0.022  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MONOMORPHIC    120960  avgt    5  1.177 ± 0.007  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    BIMORPHIC      120960  avgt    5  1.426 ± 0.013  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_3  120960  avgt    5  1.475 ± 0.239  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_4  120960  avgt    5  1.513 ± 0.009  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_5  120960  avgt    5  1.758 ± 0.163  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_6  120960  avgt    5  1.866 ± 0.222  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_7  120960  avgt    5  2.050 ± 0.452  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_8  120960  avgt    5  2.011 ± 0.023  ns/op
