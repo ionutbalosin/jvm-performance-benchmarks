@@ -24,7 +24,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -43,37 +43,13 @@ import org.openjdk.jmh.annotations.Warmup;
  * As a side note, HotSpot has a HugeMethodLimit threshold which is set to 8,000 bytes, which means methods larger than this threshold are not implicitly compiled, unless JVM argument -XX:-DontCompileHugeMethods is enabled.
  *
  * java -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal -version | grep DontCompile
- * bool DontCompileHugeMethods             = true                                {product}
+ * bool DontCompileHugeMethods = true {product}
  * where:
  * - HugeMethodLimit,  8000 bytes
  *
  * References:
- * - http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/87ee5ee27509/src/share/vm/runtime/globals.hpp
+ * - https://github.com/openjdk/jdk/blob/master/src/hotspot/share/compiler/compiler_globals.hpp
  */
-//
-//  Pattern:
-//
-//    method() { // size = 40002 bytes
-//        int sum = 0;
-//        sum += t0(sum);
-//        sum += t1(sum);
-//        // ...
-//        sum += t4999(sum);
-//        return sum;
-//    }
-//
-//    int t0(int i) { // size = 8 bytes
-//        return i + t1(i);
-//    }
-//
-//    int t1(int i) { // size = 12 bytes
-//        return i + random.nextInt(10);
-//    }
-//    // ...
-//    int t4999(int i) { // size = 12 bytes
-//        return i + random.nextInt(10);
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -82,7 +58,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class CodeCacheBusterBenchmark {
 
-  private final Random random = new Random(16384);
+  private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
   @Benchmark
   public int code_cache_buster() {
