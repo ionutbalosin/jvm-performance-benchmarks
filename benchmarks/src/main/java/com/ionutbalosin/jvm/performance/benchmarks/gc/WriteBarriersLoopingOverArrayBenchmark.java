@@ -45,18 +45,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *
  */
-//
-//  Pattern:
-//
-//    @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-//    public void test(Object lObjRef) {
-//        int lSize = size;
-//
-//        for (int i = 0; i < lSize; i++) {
-//            array[i] = lObjRef;
-//        }
-//    }
-//
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

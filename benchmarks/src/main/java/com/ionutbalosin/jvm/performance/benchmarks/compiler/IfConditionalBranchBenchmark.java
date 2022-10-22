@@ -41,19 +41,6 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Tests the optimization of an if conditional branch within a loop based on a predictable or unpredictable branch pattern.
  */
-//
-//  Pattern:
-//
-//    for (int value : array) {
-//        if (value < thresholdLimit) {
-//            sum += value;
-//        }
-//    }
-//
-//    where thresholdLimit is either:
-//     - always greater then arrays values - predictable pattern
-//     - or partially greater than some arrays values - unpredictable pattern
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -66,20 +53,20 @@ public class IfConditionalBranchBenchmark {
   private int[] array = new int[SIZE];
 
   @Param({"4096"})
-  private int thresholdLimit;
+  private int threshold;
 
   @Setup
   public void setup() {
     final Random random = new Random(16384);
 
     for (int i = 0; i < SIZE; i++) {
-      // all values are within [0, thresholdLimit)
-      array[i] = random.nextInt(thresholdLimit);
+      // all values are within [0, threshold)
+      array[i] = random.nextInt(threshold);
     }
   }
 
   @Benchmark
-  public int branchless_baseline() {
+  public int baseline() {
     int sum = 0;
 
     for (final int value : array) {
@@ -95,7 +82,7 @@ public class IfConditionalBranchBenchmark {
     int sum = 0;
 
     for (final int value : array) {
-      if (value < thresholdLimit) {
+      if (value < threshold) {
         sum += value;
       }
     }
@@ -108,7 +95,7 @@ public class IfConditionalBranchBenchmark {
     int sum = 0;
 
     for (final int value : array) {
-      if (value <= (thresholdLimit / 2)) {
+      if (value <= (threshold / 2)) {
         sum += value;
       }
     }

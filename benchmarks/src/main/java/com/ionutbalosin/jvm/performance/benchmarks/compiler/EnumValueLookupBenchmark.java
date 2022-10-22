@@ -46,8 +46,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * This pattern is met in real business applications where, for example, the microservices RESTful APIs defined in OpenAPI/Swagger uses enums.
  * The input request parameters are deserialized and wrapped to enum values.
  *
- * Resources:
- * - see https://dzone.com/articles/memory-hogging-enumvalues-method
+ * References:
+ * - https://dzone.com/articles/memory-hogging-enumvalues-method
  *
  */
 @BenchmarkMode(Mode.AverageTime)

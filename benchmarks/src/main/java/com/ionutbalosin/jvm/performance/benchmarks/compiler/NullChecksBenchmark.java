@@ -45,30 +45,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * - all of them are null, hence all throw NPE
  * - only a part of them are null, hence only a part of them throw NPE
  */
-//
-//  Pattern:
-//    method() {
-//        for (Object object : elements) {
-//            try {
-//                // mode is {explicit, implicit}
-//                <mode>_null_check(object);
-//            } catch(NullPointerException e) {
-//                // swallow exception
-//            }
-//        }
-//    }
-//
-//    explicit_null_check(object) {
-//        if (object == null) {
-//            throw new NullPointerException("Oops!");
-//        }
-//        return object.field;
-//    }
-//
-//    implicit_null_check(object) {
-//        return object.field; // might throw NullPointerException
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -81,7 +57,7 @@ public class NullChecksBenchmark {
   private int size;
 
   @Param({"0.0", "0.5", "1.0"})
-  private double upperNullThreshold;
+  private double threshold;
 
   private Wrapper[] A;
 
@@ -90,7 +66,7 @@ public class NullChecksBenchmark {
     A = new Wrapper[size];
 
     for (int i = 0; i < size; i++) {
-      if (Math.random() < upperNullThreshold) {
+      if (Math.random() < threshold) {
         A[i] = null;
       } else {
         A[i] = new Wrapper();

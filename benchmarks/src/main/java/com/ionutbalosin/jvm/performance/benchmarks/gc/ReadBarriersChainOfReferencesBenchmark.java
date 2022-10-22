@@ -44,36 +44,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *
  */
-//
-//  Pattern:
-//
-//    Object test() {
-//        return
-//         baseRef.h2.h3.h4.h5.h6.h7.h8.h9.h10
-//         .h11.h12.h13.h14.h15.h16.h17.h18.h19
-//         .h20.h21.h22.h23.h24.h25.h26.h27.h28
-//         .h29.h30.h31.h32.aValue;
-//    }
-//
-//  Where
-//      class H1 {
-//          H2 h2;
-//
-//          H1(H2 h2) {
-//              this.h2 = h2;
-//          }
-//      }
-//
-//    // ....
-//
-//    class H32 {
-//        Object aValue;
-//
-//        public H32(Object aValue) {
-//            this.aValue = aValue;
-//        }
-//    }
-//
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

@@ -40,18 +40,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * A tail-recursive function is a function where the last operation before the function returns is an invocation to the function itself.
  * Tail-recursive optimization avoids allocating a new stack frame by re-writing the method into a completely iterative fashion.
  */
-//
-//  Pattern:
-//
-//    // Fibonacci example
-//    tail_recursive(int n, int a, int b) {
-//        if (n == 0)
-//            return a;
-//        else if (n == 1)
-//            return b;
-//        else return tail_recursive(n - 1, b, a + b);
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -66,12 +54,12 @@ public class TailRecursionBenchmark {
   private int param;
 
   @Benchmark
-  public int fibonacci_tail_recursive() {
+  public int tail_recursive() {
     return fibonacciRecursive(param, 0, 1);
   }
 
   @Benchmark
-  public int fibonacci_baseline() {
+  public int iterative() {
     return fibonacciIterative(param, 0, 1);
   }
 

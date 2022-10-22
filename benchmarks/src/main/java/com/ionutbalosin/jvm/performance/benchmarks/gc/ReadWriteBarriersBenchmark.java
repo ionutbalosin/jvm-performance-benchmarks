@@ -62,22 +62,6 @@ import org.openjdk.jmh.annotations.Warmup;
  *  - Epsilon GC does not use any barrier at all, it might be the baseline for all the others.
  *
  */
-//
-//  Pattern:
-//
-//    void test() {
-//        int lSize = size;
-//        int mask = lSize - 1;
-//
-//        for (int i = 0; i < lSize; i++) {
-//            Integer aux = array[i];
-//            array[i] = array[(i + index) & mask];
-//            array[(i + index) & mask] = aux;
-//        }
-//
-//        index++;
-//    }
-//
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

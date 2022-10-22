@@ -42,14 +42,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * Vector processors (and some SIMD units in CPUs) have hardware support for gather-scatter operations, providing instructions
  * such as Load Vector Indexed for gather and Store Vector Indexed for scatter.
  */
-//
-//  Pattern:
-//
-//    int[] A, B, C, R;
-//
-//    // scatter_gather
-//    R[i] = C[i] + A[B[i]];
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

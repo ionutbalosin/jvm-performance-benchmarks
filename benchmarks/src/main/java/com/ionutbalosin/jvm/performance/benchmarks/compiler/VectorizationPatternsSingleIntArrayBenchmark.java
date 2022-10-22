@@ -45,51 +45,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
  * - https://llvm.org/docs/Vectorizers.html#reductions
  */
-//
-//  Pattern:
-//
-//    int[] A;
-//
-//    // sum_of_all_array_elements
-//    sum += A[i];
-//
-//    // sum_of_all_array_elements_long_stride
-//    sum += A[l];
-//
-//    // sum_of_all_array_elements_by_adding_a_const
-//    sum += A[i] + CONST;
-//
-//    // sum_of_all_even_array_elements
-//    if ( (A[i] & 0x1) == 0 ) {
-//        sum += A[i];
-//    }
-//
-//    // sum_of_all_array_elements_matching_a_predicate
-//    if (P[i]) {
-//        sum += A[i];
-//    }
-//
-//    // sum_of_all_array_elements_by_shifting_and_masking
-//    sum += (A[i] >> SHIFT) & MASK;
-//
-//    // multiply_each_array_element_by_const
-//    A[i] = A[i] * CONST;
-//
-//    // add_const_to_each_array_element
-//    A[i] = A[i] + CONST;
-//
-//    // shl_each_array_element_by_const
-//    A[i] = A[i] << CONST;
-//
-//    // mod_each_array_element_by_const
-//    A[i] = A[i] % CONST;
-//
-//    // saves_induction_variable_to_each_array_element
-//    A[i] = i;
-//
-//    // increment_arrays_elements_backward_iterator (i=n-1...0)
-//    A[i] = i;
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

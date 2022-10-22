@@ -43,23 +43,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://llvm.org/devmtg/2009-10/ScalarEvolutionAndLoopOptimization.pdf
  */
-//
-//  Pattern:
-//
-//    method() {
-//        sum = 0;
-//        for (i = 0; i < size; i++) {
-//            sum += i;
-//        }
-//        return sum;
-//    }
-//
-//    is equivalent to:
-//
-//    method() {
-//        return [size * (size - 1)] / 2;
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

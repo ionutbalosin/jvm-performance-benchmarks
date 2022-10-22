@@ -44,13 +44,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://bugs.java.com/bugdatabase/view_bug.do?bug_id=5090493
  */
-//
-//  Pattern:
-//
-//    method(double d00, double d01, ... double d63) {
-//        return Math.round(d00) + Math.round(d01) + ... + Math.round(d63);
-//    }
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

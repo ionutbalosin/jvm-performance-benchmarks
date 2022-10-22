@@ -45,60 +45,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
  */
-//
-//  Pattern:
-//
-//    float[] A, B, R;
-//    short[] S;
-//
-//    // sum_all_product_pairs_of_2_arrays_elements
-//    sum += A[i] * B[i];
-//
-//    // add_2_arrays_elements
-//    R[i] = A[i] + B[i];
-//
-//    // extract_2_arrays_elements
-//    R[i] = A[i] - B[i];
-//
-//    // mod_2_arrays_elements
-//    R[i] = A[i] % B[i];
-//
-//    // multiply_2_arrays_elements
-//    R[i] = A[i] * B[i];
-//
-//    // multiply_2_arrays_elements_of_mixed_types
-//    R[i] = A[i] * S[i];  (A - float[] and S - short[])
-//
-//    // multiply_2_arrays_elements_backward_iterator
-//    C[i] = A[i] * B[i]; // i = n-1 ... 0
-//
-//    // multiply_2_arrays_elements_unknown_trip_count
-//    R[i] = A[i] * S[i]; // but the trip is not known
-//
-//    // divide_2_arrays_elements
-//    R[i] = A[i] / B[i];
-//
-//    // if_with_masking_conditional_flow
-//    if (A[i] >= 0.f)
-//        R[i] = CONST * A[i];
-//    else
-//        R[i] = A[i];
-//
-//    // multiply_2_arrays_elements_long_stride
-//    R[(int) l] = A[(int) l] * B[(int) l]
-//
-//    // multiply_2_arrays_elements_stride_x2
-//    R[2 * i] = A[2 * i] * B[2 * i];
-//
-//    // multiply_2_arrays_elements_stride_2
-//    R[i + 2] = A[i + 2] * B[i + 2];
-//
-//    // add_2_arrays_elements_inc_index_access
-//    A[i] = A[i + 1] + B[i];
-//
-//    // add_2_arrays_elements_modulo_index_access
-//    R[i] = A[i % 2] + B[i];
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

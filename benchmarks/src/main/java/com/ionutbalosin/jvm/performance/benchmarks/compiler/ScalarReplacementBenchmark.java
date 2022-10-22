@@ -50,52 +50,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
  */
-//
-//  Pattern:
-//
-//    no_escape_object() {
-//        SimpleObject object = new SimpleObject();
-//
-//        return object.field1 + object.field2;
-//    }
-//
-//    no_escape_object_containing_array() {
-//        ObjectWithArray object = new ObjectWithArray();
-//
-//        return object.field1 + object.field2 + object.array.length;
-//    }
-//
-//    partial_escape_object_containing_array() {
-//        ObjectWithArray object1 = new ObjectWithArray();
-//
-//        if (predicate) // always FALSE
-//            result = object;
-//        else
-//            result = otherGlobalObject;
-//
-//        return result;
-//    }
-//
-//    Where the predicate is always evaluated to FALSE, at runtime.
-//
-//    arg_escape_object_containing_array() {
-//        ObjectWithArray object1 = new ObjectWithArray();
-//        ObjectWithArray object2 = new ObjectWithArray();
-//
-//        if (object1.equals(object2))  // inlining candidate
-//            match = true;
-//        else
-//            match = false;
-//
-//        return match;
-//    }
-//
-//    Where:
-//    - object1 is NoEscape
-//    - object2 is:
-//        - NoEscape if inlining of equals() succeeds
-//        - ArgEscape if inlining fails or is disabled
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

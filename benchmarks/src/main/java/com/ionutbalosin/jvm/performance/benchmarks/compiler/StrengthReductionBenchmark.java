@@ -44,26 +44,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://en.wikipedia.org/wiki/Strength_reduction
  */
-//
-//  Pattern:
-//
-//    addition() {
-//        return
-//            predicate ? val + val + ... + val : val;
-//    }
-//
-//    multiplication() {
-//        return
-//            predicate ? val * 64 : val;
-//    }
-//
-//    shift() {
-//        return
-//            predicate ? val << 6 : val;
-//    }
-//
-//    where predicate is always evaluated to TRUE, at runtime.
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -80,28 +60,28 @@ public class StrengthReductionBenchmark {
   private long value;
 
   @Benchmark
-  public void shift() {
-    doShift();
+  public long shift() {
+    return doShift();
   }
 
   @Benchmark
-  public void addition() {
-    doAddition();
+  public long add() {
+    return doAdd();
   }
 
   @Benchmark
-  public void multiplication() {
-    doMultiplication();
+  public long multiply() {
+    return doMultiply();
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private long doMultiplication() {
+  private long doMultiply() {
     long val = this.value;
     return heavyComputation ? val * 64 : val;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private long doAddition() {
+  private long doAdd() {
     long val = this.value;
     return heavyComputation
         ? val + val + val + val + val + val + val + val + val + val + val + val + val + val + val
