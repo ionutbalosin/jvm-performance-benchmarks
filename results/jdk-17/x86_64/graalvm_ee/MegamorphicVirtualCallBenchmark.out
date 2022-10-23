@@ -9,28 +9,20 @@
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
 
-Benchmark                                                          (mode)         (size)  Mode  Cnt  Score   Error  Units
-MegamorphicVirtualCallBenchmark.virtual_call                       MONOMORPHIC    120960  avgt    5  1.157 ± 0.011  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       BIMORPHIC      120960  avgt    5  1.302 ± 0.038  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_3  120960  avgt    5  1.329 ± 0.075  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_4  120960  avgt    5  1.687 ± 0.032  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_5  120960  avgt    5  2.099 ± 0.005  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_6  120960  avgt    5  2.147 ± 0.006  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_7  120960  avgt    5  2.253 ± 0.005  ns/op
-MegamorphicVirtualCallBenchmark.virtual_call                       MEGAMORPHIC_8  120960  avgt    5  2.204 ± 0.007  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MONOMORPHIC    120960  avgt    5  1.201 ± 0.003  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        BIMORPHIC      120960  avgt    5  1.325 ± 0.141  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_3  120960  avgt    5  1.261 ± 0.003  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_4  120960  avgt    5  1.353 ± 0.009  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_5  120960  avgt    5  1.393 ± 0.007  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_6  120960  avgt    5  1.466 ± 0.003  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_7  120960  avgt    5  1.618 ± 0.006  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_if_monomorphic        MEGAMORPHIC_8  120960  avgt    5  1.596 ± 0.022  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MONOMORPHIC    120960  avgt    5  1.177 ± 0.007  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    BIMORPHIC      120960  avgt    5  1.426 ± 0.013  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_3  120960  avgt    5  1.475 ± 0.239  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_4  120960  avgt    5  1.513 ± 0.009  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_5  120960  avgt    5  1.758 ± 0.163  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_6  120960  avgt    5  1.866 ± 0.222  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_7  120960  avgt    5  2.050 ± 0.452  ns/op
-MegamorphicVirtualCallBenchmark.devirtualize_switch_monomorphic    MEGAMORPHIC_8  120960  avgt    5  2.011 ± 0.023  ns/op
+Benchmark                                                     (targetType)  Mode  Cnt  Score   Error  Units
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic    MONOMORPHIC  avgt    5  1.206 ± 0.002  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic      BIMORPHIC  avgt    5  1.396 ± 0.068  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_3  avgt    5  1.467 ± 0.002  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_4  avgt    5  1.726 ± 0.009  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_5  avgt    5  1.673 ± 0.025  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_6  avgt    5  1.866 ± 0.005  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_7  avgt    5  1.995 ± 0.092  ns/op
+MegamorphicVirtualCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_8  avgt    5  2.052 ± 0.005  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                   MONOMORPHIC  avgt    5  1.172 ± 0.002  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                     BIMORPHIC  avgt    5  1.228 ± 0.027  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                 MEGAMORPHIC_3  avgt    5  1.229 ± 0.013  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                 MEGAMORPHIC_4  avgt    5  1.649 ± 0.018  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                 MEGAMORPHIC_5  avgt    5  2.150 ± 0.002  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                 MEGAMORPHIC_6  avgt    5  2.224 ± 0.009  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                 MEGAMORPHIC_7  avgt    5  2.494 ± 0.010  ns/op
+MegamorphicVirtualCallBenchmark.virtual_call                 MEGAMORPHIC_8  avgt    5  2.371 ± 0.015  ns/op
