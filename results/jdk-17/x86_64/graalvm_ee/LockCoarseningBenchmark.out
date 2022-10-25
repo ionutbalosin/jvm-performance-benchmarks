@@ -1,0 +1,35 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.4.1, Java HotSpot(TM) 64-Bit Server VM, 17.0.4.1+1-LTS-jvmci-22.2-b08
+# VM invoker: /usr/lib/jvm/graalvm-ee-java17-22.2.0.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+
+Benchmark                                                Mode  Cnt   Score   Error  Units
+LockCoarseningBenchmark.baseline                         avgt    5  16.328 ± 0.032  ns/op
+LockCoarseningBenchmark.chain_method_calls               avgt    5  16.334 ± 0.047  ns/op
+LockCoarseningBenchmark.conditional_chain_method_calls   avgt    5  16.326 ± 0.015  ns/op
+LockCoarseningBenchmark.conditional_nested_method_calls  avgt    5  16.337 ± 0.027  ns/op
+LockCoarseningBenchmark.nested_synchronized              avgt    5  16.331 ± 0.035  ns/op
+LockCoarseningBenchmark.recursive_method_calls           avgt    5  16.317 ± 0.022  ns/op
+
+# JMH version: 1.35
+# VM version: JDK 17.0.4.1, Java HotSpot(TM) 64-Bit Server VM, 17.0.4.1+1-LTS-jvmci-22.2-b08
+# VM invoker: /usr/lib/jvm/graalvm-ee-java17-22.2.0.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 2 threads, will synchronize iterations
+
+Benchmark                                                Mode  Cnt   Score    Error  Units
+LockCoarseningBenchmark.baseline                         avgt    5  51.081 ±  4.215  ns/op
+LockCoarseningBenchmark.chain_method_calls               avgt    5  56.454 ± 10.551  ns/op
+LockCoarseningBenchmark.conditional_chain_method_calls   avgt    5  51.497 ±  5.747  ns/op
+LockCoarseningBenchmark.conditional_nested_method_calls  avgt    5  54.590 ±  0.223  ns/op
+LockCoarseningBenchmark.nested_synchronized              avgt    5  49.250 ±  1.717  ns/op
+LockCoarseningBenchmark.recursive_method_calls           avgt    5  48.459 ± 11.439  ns/op
