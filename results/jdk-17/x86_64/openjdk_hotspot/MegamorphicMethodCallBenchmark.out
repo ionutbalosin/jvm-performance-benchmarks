@@ -1,0 +1,28 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+
+Benchmark                                                    (targetType)  Mode  Cnt  Score   Error  Units
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic    MONOMORPHIC  avgt    5  1.213 ± 0.032  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic      BIMORPHIC  avgt    5  1.444 ± 0.042  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_3  avgt    5  1.462 ± 0.008  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_4  avgt    5  1.597 ± 0.048  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_5  avgt    5  1.691 ± 0.019  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_6  avgt    5  1.619 ± 0.010  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_7  avgt    5  1.642 ± 0.029  ns/op
+MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_8  avgt    5  1.690 ± 0.224  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                   MONOMORPHIC  avgt    5  1.170 ± 0.003  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                     BIMORPHIC  avgt    5  1.232 ± 0.012  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                 MEGAMORPHIC_3  avgt    5  2.575 ± 0.399  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                 MEGAMORPHIC_4  avgt    5  2.469 ± 0.046  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                 MEGAMORPHIC_5  avgt    5  2.586 ± 0.013  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                 MEGAMORPHIC_6  avgt    5  2.586 ± 0.098  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                 MEGAMORPHIC_7  avgt    5  2.533 ± 0.013  ns/op
+MegamorphicMethodCallBenchmark.virtual_call                 MEGAMORPHIC_8  avgt    5  2.520 ± 0.007  ns/op

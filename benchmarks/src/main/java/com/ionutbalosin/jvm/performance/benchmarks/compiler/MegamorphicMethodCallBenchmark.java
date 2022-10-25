@@ -27,7 +27,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -63,39 +62,37 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class MegamorphicVirtualCallBenchmark {
+public class MegamorphicMethodCallBenchmark {
 
+  private static final int SIZE = 40320;
   private CMath[] instances;
   private byte[] classIndex;
 
-  @Param private Mode mode;
+  @Param private TargetType targetType;
 
-  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicVirtualCallBenchmark.*"
-
-  @Param("120960")
-  private int size;
+  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicMethodCallBenchmark.*"
 
   @Setup
   public void setup() {
-    instances = new CMath[size];
-    classIndex = new byte[size];
+    instances = new CMath[SIZE];
+    classIndex = new byte[SIZE];
 
-    switch (mode) {
+    switch (targetType) {
       case MONOMORPHIC:
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < SIZE; i++) {
           instances[i] = new Alg1();
           setClassIndex(i, 1);
         }
         break;
       case BIMORPHIC:
-        for (int i = 0; i < size; i += 2) {
+        for (int i = 0; i < SIZE; i += 2) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           setClassIndex(i, 2);
         }
         break;
       case MEGAMORPHIC_3:
-        for (int i = 0; i < size; i += 3) {
+        for (int i = 0; i < SIZE; i += 3) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
@@ -103,7 +100,7 @@ public class MegamorphicVirtualCallBenchmark {
         }
         break;
       case MEGAMORPHIC_4:
-        for (int i = 0; i < size; i += 4) {
+        for (int i = 0; i < SIZE; i += 4) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
@@ -112,7 +109,7 @@ public class MegamorphicVirtualCallBenchmark {
         }
         break;
       case MEGAMORPHIC_5:
-        for (int i = 0; i < size; i += 5) {
+        for (int i = 0; i < SIZE; i += 5) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
@@ -122,7 +119,7 @@ public class MegamorphicVirtualCallBenchmark {
         }
         break;
       case MEGAMORPHIC_6:
-        for (int i = 0; i < size; i += 6) {
+        for (int i = 0; i < SIZE; i += 6) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
@@ -133,7 +130,7 @@ public class MegamorphicVirtualCallBenchmark {
         }
         break;
       case MEGAMORPHIC_7:
-        for (int i = 0; i < size; i += 7) {
+        for (int i = 0; i < SIZE; i += 7) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
@@ -145,7 +142,7 @@ public class MegamorphicVirtualCallBenchmark {
         }
         break;
       case MEGAMORPHIC_8:
-        for (int i = 0; i < size; i += 8) {
+        for (int i = 0; i < SIZE; i += 8) {
           instances[i] = new Alg1();
           instances[i + 1] = new Alg2();
           instances[i + 2] = new Alg3();
@@ -158,14 +155,15 @@ public class MegamorphicVirtualCallBenchmark {
         }
         break;
       default:
-        throw new UnsupportedOperationException("Unsupported mode type " + mode);
+        throw new UnsupportedOperationException("Unsupported mode type " + targetType);
     }
   }
 
   // Call site will receive all possible targets -> megamorphic
   @Benchmark
-  @OperationsPerInvocation(144000)
+  @OperationsPerInvocation(SIZE)
   public void virtual_call() {
+    CMath[] instances = this.instances;
     for (CMath instance : instances) {
       instance.compute();
     }
@@ -174,11 +172,11 @@ public class MegamorphicVirtualCallBenchmark {
   // Manually split the call site to receive only one target -> monomorphic
   // Note: this is a trick trying to bypass some specific JVM limitations
   @Benchmark
-  @OperationsPerInvocation(144000)
-  public void devirtualize_switch_monomorphic() {
+  @OperationsPerInvocation(SIZE)
+  public void devirtualize_to_monomorphic() {
     byte[] classIndex = this.classIndex;
     CMath[] instances = this.instances;
-    for (int i = 0; i < instances.length; i++) {
+    for (int i = 0; i < SIZE; i++) {
       CMath instance = instances[i];
       switch (classIndex[i]) {
         case 0:
@@ -213,11 +211,12 @@ public class MegamorphicVirtualCallBenchmark {
 
   // Manually split the call site to receive only one target -> monomorphic
   // Note: this is a trick trying to bypass some specific JVM limitations
-  @Benchmark
-  @OperationsPerInvocation(144000)
+  // Note: disabled since it is very similar to devirtualize_to_monomorphic()
+  // @Benchmark
+  // @OperationsPerInvocation(SIZE)
   public void devirtualize_if_monomorphic() {
     CMath[] instances = this.instances;
-    for (int i = 0; i < instances.length; i++) {
+    for (int i = 0; i < SIZE; i++) {
       CMath instance = instances[i];
       if (instance instanceof Alg1) {
         instance.compute();
@@ -247,7 +246,7 @@ public class MegamorphicVirtualCallBenchmark {
     }
   }
 
-  public enum Mode {
+  public enum TargetType {
     MONOMORPHIC,
     BIMORPHIC,
     MEGAMORPHIC_3,
@@ -258,57 +257,56 @@ public class MegamorphicVirtualCallBenchmark {
     MEGAMORPHIC_8
   }
 
-  abstract static class CMath {
+  private abstract static class CMath {
     // All fields of this class should be on the same cache line.
     int c1, c2, c3, c4, c5, c6, c7, c8;
 
-    @CompilerControl(CompilerControl.Mode.DONT_INLINE)
     public abstract int compute();
   }
 
-  static class Alg1 extends CMath {
+  private static class Alg1 extends CMath {
     public int compute() {
       return ++c1;
     }
   }
 
-  static class Alg2 extends CMath {
+  private static class Alg2 extends CMath {
     public int compute() {
       return ++c2;
     }
   }
 
-  static class Alg3 extends CMath {
+  private static class Alg3 extends CMath {
     public int compute() {
       return ++c3;
     }
   }
 
-  static class Alg4 extends CMath {
+  private static class Alg4 extends CMath {
     public int compute() {
       return ++c4;
     }
   }
 
-  static class Alg5 extends CMath {
+  private static class Alg5 extends CMath {
     public int compute() {
       return ++c5;
     }
   }
 
-  static class Alg6 extends CMath {
+  private static class Alg6 extends CMath {
     public int compute() {
       return ++c6;
     }
   }
 
-  static class Alg7 extends CMath {
+  private static class Alg7 extends CMath {
     public int compute() {
       return ++c7;
     }
   }
 
-  static class Alg8 extends CMath {
+  private static class Alg8 extends CMath {
     public int compute() {
       return ++c8;
     }

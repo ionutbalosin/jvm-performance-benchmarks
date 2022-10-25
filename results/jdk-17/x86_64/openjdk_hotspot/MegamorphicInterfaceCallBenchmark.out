@@ -1,0 +1,26 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+
+Benchmark                                                                       (targetType)  Mode  Cnt    Score   Error  Units
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                    MONOMORPHIC  avgt    5    0.951 ± 0.179  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                      BIMORPHIC  avgt    5    0.937 ± 0.086  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_3  avgt    5    1.361 ± 0.118  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_4  avgt    5    1.387 ± 0.009  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_5  avgt    5    1.414 ± 0.011  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_6  avgt    5    1.566 ± 0.064  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_6_DOMINANT_TARGET  avgt    5    1.379 ± 0.003  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                            MONOMORPHIC  avgt    5    0.564 ± 0.002  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                              BIMORPHIC  avgt    5    0.968 ± 0.006  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_3  avgt    5  147.763 ± 0.248  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_4  avgt    5  146.935 ± 0.529  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_5  avgt    5  147.285 ± 0.299  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_6  avgt    5  147.274 ± 2.847  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain          MEGAMORPHIC_6_DOMINANT_TARGET  avgt    5   13.805 ± 0.057  ns/op
