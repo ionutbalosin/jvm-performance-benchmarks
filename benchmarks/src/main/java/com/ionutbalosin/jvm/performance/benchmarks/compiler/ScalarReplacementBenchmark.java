@@ -81,18 +81,18 @@ public class ScalarReplacementBenchmark {
   }
 
   @Benchmark
-  public int no_escape_array_object() {
+  public int no_escape_array_obj() {
     HeavyWrapper w = new HeavyWrapper(param, size);
     return w.f1 + w.f2 + w.z.length;
   }
 
   // @Benchmark
-  public int no_escape_array_object_baseline() {
+  public int no_escape_array_obj_baseline() {
     return param + (param << 1) + size;
   }
 
   @Benchmark
-  public HeavyWrapper branch_escape_object() {
+  public HeavyWrapper branch_escape_obj() {
     HeavyWrapper wrapper = new HeavyWrapper(param, size);
     HeavyWrapper result;
 
@@ -107,7 +107,7 @@ public class ScalarReplacementBenchmark {
   }
 
   @Benchmark
-  public boolean arg_escape_object() {
+  public boolean arg_escape_obj() {
     HeavyWrapper wrapper1 = new HeavyWrapper(param, size);
     HeavyWrapper wrapper2 = new HeavyWrapper(param, size);
     boolean match = false;
@@ -121,7 +121,7 @@ public class ScalarReplacementBenchmark {
     return match;
   }
 
-  public static class HeavyWrapper {
+  private static class HeavyWrapper {
     public int f1;
     public int f2;
     public byte[] z;
@@ -139,7 +139,7 @@ public class ScalarReplacementBenchmark {
     }
   }
 
-  public static class LightWrapper {
+  private static class LightWrapper {
     public int f1;
     public int f2;
 

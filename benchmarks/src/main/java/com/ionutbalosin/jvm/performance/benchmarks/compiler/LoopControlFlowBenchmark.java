@@ -168,7 +168,7 @@ public class LoopControlFlowBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public static void sink(final NullPointerException exception) {
+  private void sink(final NullPointerException exception) {
     // Intentionally empty method
   }
 

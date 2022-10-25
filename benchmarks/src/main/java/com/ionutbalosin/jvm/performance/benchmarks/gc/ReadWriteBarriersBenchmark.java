@@ -126,7 +126,7 @@ public class ReadWriteBarriersBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public void test() {
+  private void test() {
     int lSize = size;
     int mask = lSize - 1;
 

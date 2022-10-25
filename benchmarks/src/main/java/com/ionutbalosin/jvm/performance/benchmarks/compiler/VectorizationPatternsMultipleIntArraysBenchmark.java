@@ -215,7 +215,7 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int[] multiply2ArraysWithUnknownTripCount(int[] a, int[] b, int[] c, int start, int end) {
+  private int[] multiply2ArraysWithUnknownTripCount(int[] a, int[] b, int[] c, int start, int end) {
     for (int i = start; i < end; i++) {
       c[i] = a[i] * b[i];
     }

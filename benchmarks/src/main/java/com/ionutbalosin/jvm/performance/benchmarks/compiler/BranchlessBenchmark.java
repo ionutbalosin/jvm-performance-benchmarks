@@ -80,7 +80,7 @@ public class BranchlessBenchmark {
 
   // return x == y ? a : b
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int xEqualsYReturnAElseB(int x, int y, int a, int b) {
+  private int xEqualsYReturnAElseB(int x, int y, int a, int b) {
     int tmp = ((x - y) - 1) >> 31;
 
     int mask = (((x - y) >> 31) ^ tmp) & tmp;
@@ -90,7 +90,7 @@ public class BranchlessBenchmark {
 
   // return x == y ? a : b
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int xEqualsYReturnAElseBBaseline(int x, int y, int a, int b) {
+  private int xEqualsYReturnAElseBBaseline(int x, int y, int a, int b) {
     if (x == y) {
       return a;
     } else {
@@ -100,7 +100,7 @@ public class BranchlessBenchmark {
 
   // return a < 0 ? b : a;
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int aLessThanZeroReturnBElseA(int a, int b) {
+  private int aLessThanZeroReturnBElseA(int a, int b) {
     int mask = a >> 31;
 
     return (b & mask) | ((~mask) & a);
@@ -108,7 +108,7 @@ public class BranchlessBenchmark {
 
   // return a < 0 ? b : a;
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int aLessThanZeroReturnBElseABaseline(int a, int b) {
+  private int aLessThanZeroReturnBElseABaseline(int a, int b) {
     if (a < 0) {
       return b;
     } else {

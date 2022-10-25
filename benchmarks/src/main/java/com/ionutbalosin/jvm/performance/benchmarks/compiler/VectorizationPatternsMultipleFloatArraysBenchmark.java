@@ -204,7 +204,7 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public float[] multiply2ArraysWithUnknownTripCount(
+  private float[] multiply2ArraysWithUnknownTripCount(
       float[] a, float[] b, float[] c, int start, int end) {
     for (int i = start; i < end; i++) {
       c[i] = a[i] * b[i];

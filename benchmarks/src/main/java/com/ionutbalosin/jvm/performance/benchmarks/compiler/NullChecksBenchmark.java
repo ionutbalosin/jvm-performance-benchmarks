@@ -78,7 +78,7 @@ public class NullChecksBenchmark {
   public void implicit_null_check() {
     for (Wrapper object : A) {
       try {
-        testImplicit(object);
+        implicitThrowNpe(object);
       } catch (NullPointerException e) {
         // swallow exception
       }
@@ -89,7 +89,7 @@ public class NullChecksBenchmark {
   public void explicit_null_check() {
     for (Wrapper o : A) {
       try {
-        testExplicit(o);
+        explicitThrowNpe(o);
       } catch (NullPointerException e) {
         // swallow exception
       }
@@ -97,7 +97,7 @@ public class NullChecksBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int testExplicit(Wrapper o) {
+  private int explicitThrowNpe(Wrapper o) {
     if (o == null) {
       throw new NullPointerException("Oops!");
     }
@@ -105,7 +105,7 @@ public class NullChecksBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int testImplicit(Wrapper o) {
+  private int implicitThrowNpe(Wrapper o) {
     return o.x;
   }
 

@@ -55,7 +55,7 @@ public class ScalarEvolutionAndLoopOptimizationBenchmark {
   private int size;
 
   @Benchmark
-  public int sum_from_0_to_N() {
+  public int scev_loop() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       sum += i;
@@ -63,9 +63,8 @@ public class ScalarEvolutionAndLoopOptimizationBenchmark {
     return sum;
   }
 
-  // Scalar Evolution and loop optimization based on induction variable
   @Benchmark
-  public int reduction_formula() {
+  public int baseline() {
     return ((size * (size + 1)) / 2);
   }
 }

@@ -107,7 +107,7 @@ public class ReadBarriersLoopingOverArrayBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public void test() {
+  private void test() {
     int lSize = size;
 
     for (int i = 0; i < lSize; i++) {

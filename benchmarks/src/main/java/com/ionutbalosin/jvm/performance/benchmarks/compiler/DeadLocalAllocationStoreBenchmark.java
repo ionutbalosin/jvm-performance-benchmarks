@@ -173,7 +173,7 @@ public class DeadLocalAllocationStoreBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public static void sink() {
+  private void sink() {
     // Intentionally empty method
   }
 

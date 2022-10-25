@@ -132,7 +132,7 @@ public class ReadBarriersChainOfReferencesBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public Object test() {
+  private Object test() {
     return baseRef
         .h2
         .h3

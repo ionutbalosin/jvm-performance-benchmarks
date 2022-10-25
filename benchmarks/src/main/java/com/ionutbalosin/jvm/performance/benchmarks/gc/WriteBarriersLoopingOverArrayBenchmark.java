@@ -104,7 +104,7 @@ public class WriteBarriersLoopingOverArrayBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public void test(Object lObjRef) {
+  private void test(Object lObjRef) {
     int lSize = size;
 
     for (int i = 0; i < lSize; i++) {
