@@ -47,55 +47,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * - if (array_element[i] != null) sum += array_element[i];
  * - Arrays.stream(array).filter(array_element != null).map(...).reduce(0, Integer::sum);
  */
-//
-//  Pattern:
-//
-//    loop_try_catch() {
-//        for (int i = 0; i < array_length; i++) {
-//            try {
-//                 sum += array[i].value;
-//             } catch (NullPointerException ignored) {
-//             }
-//        }
-//    }
-//
-//    loop_if_comparison() {
-//        for (int i = 0; i < array_length; i++) {
-//            if (array[i] != null)
-//                 sum += array[i].value;
-//        }
-//    }
-//
-//    loop_continue() {
-//        for (int i = 0; i < array_length; i++) {
-//            if (array[i] == null)
-//                continue;
-//            sum +=  array[i].value;
-//        }
-//    }
-//
-//    stream() {
-//        Arrays.stream(array)
-//             .filter(array_element -> array_element != null)
-//             .map(array_element::getValue)
-//             .reduce(0, Integer::sum)
-//    }
-//
-//    the array of elements if initialized as follows:
-//
-//    for (int i = 0; i < array_length; i++) {
-//        int value = random_value;
-//        if (value < thresholdLimit) {
-//            array[i] = null;
-//        } else {
-//            array[i] = new ...;
-//        }
-//    }
-//
-//    where thresholdLimit is either:
-//     - always smaller than arrays values - no null values in the array
-//     - or partially greater than some arrays values - some elements are null
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
