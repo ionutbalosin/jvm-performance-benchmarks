@@ -1,0 +1,13 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.4.1, Java HotSpot(TM) 64-Bit Server VM, 17.0.4.1+1-LTS-jvmci-22.2-b08
+# VM invoker: /usr/lib/jvm/graalvm-ee-java17-22.2.0.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+
+Benchmark                                            Mode  Cnt        Score      Error  Units
+CanonicalizeInductionVariableBenchmark.baseline      avgt    5        0.387 ±    0.026  ns/op
+CanonicalizeInductionVariableBenchmark.canonicalize  avgt    5  2136968.526 ± 5216.365  ns/op
