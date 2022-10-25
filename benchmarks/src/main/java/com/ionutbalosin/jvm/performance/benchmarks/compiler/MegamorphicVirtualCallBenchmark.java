@@ -163,6 +163,7 @@ public class MegamorphicVirtualCallBenchmark {
   @Benchmark
   @OperationsPerInvocation(SIZE)
   public void virtual_call() {
+    CMath[] instances = this.instances;
     for (CMath instance : instances) {
       instance.compute();
     }
@@ -256,56 +257,56 @@ public class MegamorphicVirtualCallBenchmark {
     MEGAMORPHIC_8
   }
 
-  abstract static class CMath {
+  private abstract static class CMath {
     // All fields of this class should be on the same cache line.
     int c1, c2, c3, c4, c5, c6, c7, c8;
 
     public abstract int compute();
   }
 
-  static class Alg1 extends CMath {
+  private static class Alg1 extends CMath {
     public int compute() {
       return ++c1;
     }
   }
 
-  static class Alg2 extends CMath {
+  private static class Alg2 extends CMath {
     public int compute() {
       return ++c2;
     }
   }
 
-  static class Alg3 extends CMath {
+  private static class Alg3 extends CMath {
     public int compute() {
       return ++c3;
     }
   }
 
-  static class Alg4 extends CMath {
+  private static class Alg4 extends CMath {
     public int compute() {
       return ++c4;
     }
   }
 
-  static class Alg5 extends CMath {
+  private static class Alg5 extends CMath {
     public int compute() {
       return ++c5;
     }
   }
 
-  static class Alg6 extends CMath {
+  private static class Alg6 extends CMath {
     public int compute() {
       return ++c6;
     }
   }
 
-  static class Alg7 extends CMath {
+  private static class Alg7 extends CMath {
     public int compute() {
       return ++c7;
     }
   }
 
-  static class Alg8 extends CMath {
+  private static class Alg8 extends CMath {
     public int compute() {
       return ++c8;
     }

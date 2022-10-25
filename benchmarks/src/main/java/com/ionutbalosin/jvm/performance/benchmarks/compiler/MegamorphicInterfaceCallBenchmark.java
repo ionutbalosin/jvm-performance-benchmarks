@@ -30,6 +30,7 @@ import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OperationsPerInvocation;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
@@ -50,6 +51,8 @@ public class MegamorphicInterfaceCallBenchmark {
   private byte[] instanceIndex;
 
   @Param private TargetType targetType;
+
+  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicInterfaceCallBenchmark.*"
 
   @Setup()
   public void setup() {
@@ -134,37 +137,45 @@ public class MegamorphicInterfaceCallBenchmark {
   // java -jar benchmarks/target/benchmarks.jar ".*InterfaceCallBenchmark.*"
 
   @Benchmark
-  public long virtual_calls_chain(IndexState state) {
-    return instances[state.getNextIndex()].foo();
+  @OperationsPerInvocation(SIZE)
+  public void virtual_calls_chain() {
+    I[] instances = this.instances;
+    for (I instance : instances) {
+      instance.foo();
+    }
   }
 
   // Manually split the call site to receive only one target -> monomorphic
   // Note: this is a trick trying to bypass some specific JVM limitations
   @Benchmark
-  public void devirtualize_to_monomorphic(IndexState state) {
-    int index = state.getNextIndex();
-    I instance = instances[index];
-    switch (instanceIndex[index]) {
-      case 0:
-        instance.foo();
-        break;
-      case 1:
-        instance.foo();
-        break;
-      case 2:
-        instance.foo();
-        break;
-      case 3:
-        instance.foo();
-        break;
-      case 4:
-        instance.foo();
-        break;
-      case 5:
-        instance.foo();
-        break;
-      default:
-        throw new RuntimeException("Should not reach here.");
+  @OperationsPerInvocation(SIZE)
+  public void devirtualize_to_monomorphic() {
+    byte[] instanceIndex = this.instanceIndex;
+    I[] instances = this.instances;
+    for (int i = 0; i < SIZE; i++) {
+      I instance = instances[i];
+      switch (instanceIndex[i]) {
+        case 0:
+          instance.foo();
+          break;
+        case 1:
+          instance.foo();
+          break;
+        case 2:
+          instance.foo();
+          break;
+        case 3:
+          instance.foo();
+          break;
+        case 4:
+          instance.foo();
+          break;
+        case 5:
+          instance.foo();
+          break;
+        default:
+          throw new RuntimeException("Should not reach here.");
+      }
     }
   }
 
@@ -184,89 +195,81 @@ public class MegamorphicInterfaceCallBenchmark {
     MEGAMORPHIC_6_DOMINANT_TARGET
   }
 
-  @State(Scope.Thread)
-  public static class IndexState {
-    private int index = 0;
-
-    // index must be in the range of [0 ... SIZE)
-    public int getNextIndex() {
-      index = -(~index);
-      if ((index ^ SIZE) == 0) {
-        index = 0;
-      }
-      return index;
-    }
+  private static class Wrapper {
+    public int x = 0;
   }
 
   interface I1 {
-    private long baz_1() {
-      return 0xCAFEBABE;
+    Wrapper wrapper = new Wrapper();
+
+    private void baz_1() {
+      wrapper.x++;
     }
 
-    default long foo_1() {
-      return baz_1();
+    default void foo_1() {
+      baz_1();
     }
   }
 
   interface I2 extends I1 {
-    private long baz_2() {
-      return foo_1();
+    private void baz_2() {
+      foo_1();
     }
 
-    default long foo_2() {
-      return baz_2();
+    default void foo_2() {
+      baz_2();
     }
   }
 
   interface I3 extends I2 {
-    private long baz_3() {
-      return foo_2();
+    private void baz_3() {
+      foo_2();
     }
 
-    default long foo_3() {
-      return baz_3();
+    default void foo_3() {
+      baz_3();
     }
   }
 
   interface I4 extends I3 {
-    private long baz_4() {
-      return foo_3();
+    private void baz_4() {
+      foo_3();
     }
 
-    default long foo_4() {
-      return baz_4();
+    default void foo_4() {
+      baz_4();
     }
   }
 
   interface I5 extends I4 {
-    private long baz_5() {
-      return foo_4();
+    private void baz_5() {
+      foo_4();
     }
 
-    default long foo_5() {
-      return baz_5();
+    default void foo_5() {
+      baz_5();
     }
   }
 
   interface I extends I5 {
-    private long baz() {
-      return foo_5();
+    private void baz() {
+      foo_5();
     }
 
-    default long foo() {
-      return baz();
+    default void foo() {
+      baz();
     }
   }
 
-  static class C1 implements I {}
+  private static class C1 implements I {}
 
-  static class C2 implements I {}
+  private static class C2 implements I {}
 
-  static class C3 implements I {}
+  private static class C3 implements I {}
 
-  static class C4 implements I {}
+  private static class C4 implements I {}
 
-  static class C5 implements I {}
+  private static class C5 implements I {}
 
-  static class C6 implements I {}
+  private static class C6 implements I {}
 }

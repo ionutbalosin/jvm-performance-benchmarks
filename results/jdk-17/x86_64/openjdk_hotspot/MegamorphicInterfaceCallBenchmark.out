@@ -9,18 +9,18 @@
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
 
-Benchmark                                                                       (targetType)  Mode  Cnt   Score   Error  Units
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                    MONOMORPHIC  avgt    5   2.010 ± 0.008  ns/op
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                      BIMORPHIC  avgt    5   2.420 ± 0.267  ns/op
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_3  avgt    5   2.123 ± 0.009  ns/op
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_4  avgt    5   2.239 ± 0.025  ns/op
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_5  avgt    5   2.143 ± 0.092  ns/op
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_6  avgt    5   2.443 ± 0.005  ns/op
-MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_6_DOMINANT_TARGET  avgt    5   2.101 ± 0.027  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain                            MONOMORPHIC  avgt    5   1.881 ± 0.141  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain                              BIMORPHIC  avgt    5   2.223 ± 0.017  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_3  avgt    5 149.914 ± 2.380  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_4  avgt    5 150.601 ± 3.947  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_5  avgt    5 149.917 ± 0.597  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_6  avgt    5 149.703 ± 0.597  ns/op
-MegamorphicInterfaceCallBenchmark.virtual_calls_chain          MEGAMORPHIC_6_DOMINANT_TARGET  avgt    5  14.730 ± 0.033  ns/op
+Benchmark                                                                       (targetType)  Mode  Cnt    Score   Error  Units
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                    MONOMORPHIC  avgt    5    0.951 ± 0.179  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                      BIMORPHIC  avgt    5    0.937 ± 0.086  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_3  avgt    5    1.361 ± 0.118  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_4  avgt    5    1.387 ± 0.009  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_5  avgt    5    1.414 ± 0.011  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic                  MEGAMORPHIC_6  avgt    5    1.566 ± 0.064  ns/op
+MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic  MEGAMORPHIC_6_DOMINANT_TARGET  avgt    5    1.379 ± 0.003  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                            MONOMORPHIC  avgt    5    0.564 ± 0.002  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                              BIMORPHIC  avgt    5    0.968 ± 0.006  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_3  avgt    5  147.763 ± 0.248  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_4  avgt    5  146.935 ± 0.529  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_5  avgt    5  147.285 ± 0.299  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain                          MEGAMORPHIC_6  avgt    5  147.274 ± 2.847  ns/op
+MegamorphicInterfaceCallBenchmark.virtual_calls_chain          MEGAMORPHIC_6_DOMINANT_TARGET  avgt    5   13.805 ± 0.057  ns/op
