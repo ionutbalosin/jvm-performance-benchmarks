@@ -55,6 +55,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class LoopControlFlowBenchmark {
 
+  private final Random random = new Random(16384);
+  private final int THRESHOLD = 32;
+
   private Wrapper[] array;
 
   @Param({"262144"})
@@ -66,10 +69,9 @@ public class LoopControlFlowBenchmark {
   @Setup
   public void setup() {
     array = new Wrapper[size];
-    final Random random = new Random(16384);
 
     for (int i = 0; i < size; i++) {
-      int value = random.nextInt(32) + 1;
+      int value = random.nextInt(THRESHOLD) + 1;
       if (value < upperNullThreshold) {
         array[i] = null;
       } else {

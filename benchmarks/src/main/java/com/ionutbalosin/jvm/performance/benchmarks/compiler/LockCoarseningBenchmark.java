@@ -60,6 +60,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class LockCoarseningBenchmark {
 
+  private final Random random = new Random(16384);
   private final int DEPTH = 8;
 
   private int defaultValue;
@@ -71,7 +72,6 @@ public class LockCoarseningBenchmark {
 
   @Setup
   public void setup() {
-    final Random random = new Random(16384);
     defaultValue = random.nextInt(32, 64);
     incrementValue = random.nextInt(32);
   }

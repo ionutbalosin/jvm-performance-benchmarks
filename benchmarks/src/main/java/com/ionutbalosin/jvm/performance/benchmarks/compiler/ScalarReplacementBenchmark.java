@@ -67,7 +67,7 @@ public class ScalarReplacementBenchmark {
   @Param(value = {"false"})
   private boolean objectEscapes;
 
-  private HeavyWrapper cachedWrapper = new HeavyWrapper(param, size);
+  private final HeavyWrapper CACHED_WRAPPER = new HeavyWrapper(param, size);
 
   @Benchmark
   public int no_escape() {
@@ -100,7 +100,7 @@ public class ScalarReplacementBenchmark {
     if (objectEscapes) {
       result = wrapper;
     } else {
-      result = cachedWrapper;
+      result = CACHED_WRAPPER;
     }
 
     return result;

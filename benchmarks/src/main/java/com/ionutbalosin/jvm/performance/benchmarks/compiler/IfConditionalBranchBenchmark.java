@@ -49,19 +49,20 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class IfConditionalBranchBenchmark {
 
-  private final int SIZE = 16384;
-  private int[] array = new int[SIZE];
+  private final Random random = new Random(16384);
+  private final int THRESHOLD = 4096;
 
-  @Param({"4096"})
-  private int threshold;
+  private int[] array;
+
+  @Param({"16384"})
+  private int size;
 
   @Setup
   public void setup() {
-    final Random random = new Random(16384);
-
-    for (int i = 0; i < SIZE; i++) {
+    array = new int[size];
+    for (int i = 0; i < size; i++) {
       // all values are within [0, threshold)
-      array[i] = random.nextInt(threshold);
+      array[i] = random.nextInt(THRESHOLD);
     }
   }
 
@@ -82,7 +83,7 @@ public class IfConditionalBranchBenchmark {
     int sum = 0;
 
     for (final int value : array) {
-      if (value < threshold) {
+      if (value < THRESHOLD) {
         sum += value;
       }
     }
@@ -95,7 +96,7 @@ public class IfConditionalBranchBenchmark {
     int sum = 0;
 
     for (final int value : array) {
-      if (value <= (threshold / 2)) {
+      if (value <= (THRESHOLD / 2)) {
         sum += value;
       }
     }

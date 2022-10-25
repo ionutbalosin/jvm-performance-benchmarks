@@ -73,14 +73,14 @@ public class ReadWriteBarriersBenchmark {
   @Param({"262144"})
   private int size;
 
+  private final Random random = new Random(16384);
+
   private Integer[] array;
   private int index;
 
   @Setup()
   public void setup() {
     array = new Integer[size];
-
-    final Random random = new Random(16384);
     for (int i = 0; i < size; i++) {
       array[i] = random.nextInt();
     }

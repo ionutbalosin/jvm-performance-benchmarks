@@ -24,6 +24,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -32,8 +33,8 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -49,33 +50,37 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class BranchlessBenchmark {
 
-  @Param({"42"})
-  private int param;
+  private final Random random = new Random(16384);
 
-  @Param({"98"})
-  private int A;
+  private int param, a, b;
 
-  @Param({"99"})
-  private int B;
+  @Setup
+  public void setup() {
+    param = random.nextInt(32);
+    a = param - 1;
+    b = param + 1;
+  }
 
   @Benchmark
   public int x_equals_y_return_a_else_b() {
-    return xEqualsYReturnAElseB(param, param, A, B);
+    int x = param, y = param;
+    return xEqualsYReturnAElseB(x, y, a, b);
   }
 
   @Benchmark
   public int x_equals_y_return_a_else_b_baseline() {
-    return xEqualsYReturnAElseBBaseline(param, param, A, B);
+    int x = param, y = param;
+    return xEqualsYReturnAElseBBaseline(x, y, a, b);
   }
 
   @Benchmark
   public int a_less_than_zero_return_b_else_a() {
-    return aLessThanZeroReturnBElseA(A, B);
+    return aLessThanZeroReturnBElseA(a, b);
   }
 
   @Benchmark
   public int a_less_than_zero_return_b_else_a_baseline() {
-    return aLessThanZeroReturnBElseABaseline(A, B);
+    return aLessThanZeroReturnBElseABaseline(a, b);
   }
 
   // return x == y ? a : b

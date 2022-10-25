@@ -55,17 +55,17 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class VectorizationPatternsMultipleIntArraysBenchmark {
 
+  private final Random random = new Random(16384);
   private final int CONST = 5;
-
-  @Param({"262144"})
-  private int size;
 
   private int[] A, B, C, D;
   private short[] S;
 
+  @Param({"262144"})
+  private int size;
+
   @Setup
   public void setup() {
-    final Random random = new Random(16384);
     A = new int[size];
     B = new int[size];
     C = new int[size];

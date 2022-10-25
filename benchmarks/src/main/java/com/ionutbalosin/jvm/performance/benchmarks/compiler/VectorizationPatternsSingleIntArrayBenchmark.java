@@ -53,19 +53,19 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class VectorizationPatternsSingleIntArrayBenchmark {
 
+  private final Random random = new Random(16384);
   private final int CONST = 5;
   private final int SHIFT = 3;
-  private final int MASK = 0x7f; // 127
-  boolean[] P;
+  private final int MASK = 0x7f;
+
+  private boolean[] P;
+  private int[] A;
 
   @Param({"262144"})
   private int size;
 
-  private int[] A;
-
   @Setup
   public void setup() {
-    final Random random = new Random(16384);
     A = new int[size];
     P = new boolean[size];
     for (int i = 0; i < size; i++) {

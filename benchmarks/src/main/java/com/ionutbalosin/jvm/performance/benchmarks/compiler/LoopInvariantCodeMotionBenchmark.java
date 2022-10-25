@@ -24,6 +24,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -33,6 +34,7 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -46,27 +48,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * - https://courses.cs.washington.edu/courses/cse501/03wi/slides/slides.01-30.pdf
  * - https://mathworld.wolfram.com/TrigonometricAdditionFormulas.html
  */
-//
-//    Sum of recurrent tan(nx) ;
-//        tan(ix) = [Math.tan((i - 1) * x) + Math.tan(x)] / [1 - Math.tan((i - 1) * x) *
-// Math.tan(x)]
-//    where:
-//         i = 1 ... n
-//         x = represents the angle and is constant
-//
-//    method() {
-//        for (int i = 1; i < iterations; i++) {
-//            v1 = Math.tan((i - 1) * x) + Math.tan(x);
-//            v2 = 1 - Math.tan((i - 1) * x) * Math.tan(x);
-//            sum += v1 / v2;
-//            result = Math.tan(Math.atan(sum));
-//        }
-//        return result;
-//    }
-//
-// Current benchmark also exploits common subexpression elimination since Math.tan((i - 1) * x) is
-// computed twice per loop cycle.
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -78,35 +59,50 @@ public class LoopInvariantCodeMotionBenchmark {
   @Param({"16384"})
   private int iterations;
 
-  @Param({"42"})
+  private final Random random = new Random(16384);
+
   private double value;
+
+  @Setup
+  public void setup() {
+    value = random.nextDouble(32);
+  }
 
   @Benchmark
   public double initial_loop() {
-    double value1, value2, sum = 0, finalResult = 0;
+    double aux1, aux2, sum = 0, result = 0;
+    double value = this.value;
+    int iterations = this.iterations;
+
     for (int i = 1; i < iterations; i++) {
-      value1 = Math.tan((i - 1) * value) + Math.tan(value);
-      value2 = 1 - Math.tan((i - 1) * value) * Math.tan(value);
-      sum += value1 / value2;
-      finalResult = Math.tan(Math.atan(sum));
+      aux1 = Math.tan((i - 1) * value) + Math.tan(value);
+      aux2 = 1 - Math.tan((i - 1) * value) * Math.tan(value);
+      sum += aux1 / aux2;
+      result = Math.tan(Math.atan(sum));
     }
-    return finalResult;
+
+    return result;
   }
 
   @Benchmark
   public double manual_loop_hoisting_and_sinking() {
-    double value1, value2, sum = 0, finalResult;
+    double aux1, aux2, sum = 0, result;
+    double value = this.value;
+    int iterations = this.iterations;
+
     // manual hoisting
     double tan = Math.tan(value);
     for (int i = 1; i < iterations; i++) {
       // manual common subexpression elimination (loop dependent)
       double v = Math.tan((i - 1) * value);
-      value1 = v + tan;
-      value2 = 1 - v * tan;
-      sum += value1 / value2;
+      aux1 = v + tan;
+      aux2 = 1 - v * tan;
+      sum += aux1 / aux2;
     }
+
     // manual sinking
-    finalResult = Math.tan(Math.atan(sum));
-    return finalResult;
+    result = Math.tan(Math.atan(sum));
+
+    return result;
   }
 }

@@ -58,8 +58,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class EnumValueLookupBenchmark {
 
+  private final Random random = new Random(16384);
+
   private Car[] enumValues = Car.cachedValues();
-  private Random random = new Random(16384);
   private String lookUpValue;
 
   @Setup

@@ -53,17 +53,17 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class VectorizationPatternsMultipleFloatArraysBenchmark {
 
+  private final Random random = new Random(16384);
   private final int CONST = 5;
-
-  @Param({"262144"})
-  private int size;
 
   private float[] A, B, C;
   private short[] S;
 
+  @Param({"262144"})
+  private int size;
+
   @Setup
   public void setup() {
-    final Random random = new Random(16384);
     A = new float[size];
     B = new float[size];
     C = new float[size];

@@ -68,21 +68,22 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class VarArgsBenchmark {
 
+  private final Random random = new Random(16384);
+
   private int param1, param2, param3, param4, param5, param6, param7, param8, param9, param10;
 
   @Setup
   public void setup() {
-    Random r = new Random();
-    param1 = r.nextInt();
-    param2 = r.nextInt();
-    param3 = r.nextInt();
-    param4 = r.nextInt();
-    param5 = r.nextInt();
-    param6 = r.nextInt();
-    param7 = r.nextInt();
-    param8 = r.nextInt();
-    param9 = r.nextInt();
-    param10 = r.nextInt();
+    param1 = random.nextInt();
+    param2 = random.nextInt();
+    param3 = random.nextInt();
+    param4 = random.nextInt();
+    param5 = random.nextInt();
+    param6 = random.nextInt();
+    param7 = random.nextInt();
+    param8 = random.nextInt();
+    param9 = random.nextInt();
+    param10 = random.nextInt();
   }
 
   @Benchmark
