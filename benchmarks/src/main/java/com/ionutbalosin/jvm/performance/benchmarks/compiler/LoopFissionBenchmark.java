@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * Loop fission breaks a larger loop body into smaller loops.
- * Benefits of loop fusion:
+ * Benefits of loop fission:
  * - enable vectorization: if one loop is not vectorizable, splitting the loop into two loops, one of which is vectorizable and the other which is not can help the performance
  * - avoid register spilling: in case of large loops with many variables, loop distribution can be used to avoid register spilling
  * - better utilization of data locality (if by splitting one of the loops becomes also interchangeable)
@@ -57,7 +57,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Fork(value = 5)
 @State(Scope.Thread)
 public class LoopFissionBenchmark {
 
