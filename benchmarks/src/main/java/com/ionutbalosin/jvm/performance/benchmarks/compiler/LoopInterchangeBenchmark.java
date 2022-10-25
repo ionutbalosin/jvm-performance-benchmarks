@@ -43,25 +43,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * that the elements of a multi-dimensional array are accessed in the order in which they are present in memory,
  * improving locality of reference.
  */
-//
-//  Pattern:
-//
-//    method() {
-//      for i from 0 to N-1
-//          for j from 0 to N-1
-//              a[i,j] = i * j
-//      }
-//
-//    is equivalent to:
-//
-//    method() {
-//      for j from 0 to N-1
-//          for i from 0 to N-1
-//              a[i,j] = i * j
-//      }
-//    }
-//
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -82,7 +63,7 @@ public class LoopInterchangeBenchmark {
   }
 
   @Benchmark
-  public int[][] loop() {
+  public int[][] initial_loop() {
     int[][] lA = A;
     int length = size;
     for (int i = 0; i < length; i++) {
@@ -94,7 +75,7 @@ public class LoopInterchangeBenchmark {
   }
 
   @Benchmark
-  public int[][] manual_interchange() {
+  public int[][] manual_loop_interchange() {
     int[][] lA = A;
     int length = size;
     for (int j = 0; j < length; j++) {

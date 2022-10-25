@@ -48,27 +48,8 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * References:
  *  - http://www.sridhargopinath.in/wp-content/uploads/2018/11/Loop-Fusion-in-LLVM-Compiler.pdf
+ *  - http://sridhargopinath.in/files/loop-fusion.pdf
  */
-//
-//  Pattern:
-//
-//    method() {
-//        for (i = 0; i < size; i++)
-//            A[i] = A[i - 1] + B[i];
-//        for (i = 0; i < size; i++)
-//            B[i] = B[i - 1] + A[i];
-//    }
-//
-//    is equivalent to:
-//
-//    method() {
-//        for (i = 0; i < size; i++) {
-//            A[i] = A[i - 1] + B[i];
-//            B[i] = B[i - 1] + A[i];
-//        }
-//    }
-//
-//
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -94,28 +75,26 @@ public class LoopFusionBenchmark {
 
   /*
    * Explicit broken loop vectorization (Read-after-write (RAW) - non vectorizable)
-   *
-   * Read-after-write: the loop cannot be vectorized safely because same variable is written to in more than 1 iteration.
    */
   @Benchmark
-  public void baseline() {
+  public void initial_loops() {
     for (int i = 1; i < size; i++) {
-      // Read-after-write (RAW)
       A[i] = A[i - 1] + B[i];
+    }
+
+    for (int i = 1; i < size; i++) {
       B[i] = B[i - 1] + A[i];
     }
   }
 
   /*
    * Explicit broken loop vectorization (Read-after-write (RAW) - non vectorizable)
+   * RAW: the loop cannot be vectorized safely because same variable is written to in more than 1 iteration.
    */
   @Benchmark
-  public void loop_fusion() {
+  public void manual_loops_fusion() {
     for (int i = 1; i < size; i++) {
       A[i] = A[i - 1] + B[i];
-    }
-
-    for (int i = 1; i < size; i++) {
       B[i] = B[i - 1] + A[i];
     }
   }
