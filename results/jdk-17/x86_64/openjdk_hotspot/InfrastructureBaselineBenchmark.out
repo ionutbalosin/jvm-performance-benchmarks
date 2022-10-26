@@ -1,0 +1,165 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+
+Benchmark                                                                    Mode  Cnt   Score   Error      Units
+InfrastructureBaselineBenchmark.method_baseline                              avgt    5   0.404 ± 0.051      ns/op
+InfrastructureBaselineBenchmark.method_baseline:CPI                          avgt        0.251          clks/insn
+InfrastructureBaselineBenchmark.method_baseline:IPC                          avgt        3.983          insns/clk
+InfrastructureBaselineBenchmark.method_baseline:L1-dcache-load-misses        avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_baseline:L1-dcache-loads              avgt        3.001               #/op
+InfrastructureBaselineBenchmark.method_baseline:L1-dcache-stores             avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_baseline:L1-icache-load-misses        avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_baseline:LLC-load-misses              avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:LLC-loads                    avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_baseline:LLC-store-misses             avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:LLC-stores                   avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:branch-misses                avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_baseline:branches                     avgt        1.000               #/op
+InfrastructureBaselineBenchmark.method_baseline:cycles                       avgt        1.506               #/op
+InfrastructureBaselineBenchmark.method_baseline:dTLB-load-misses             avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:dTLB-loads                   avgt        2.996               #/op
+InfrastructureBaselineBenchmark.method_baseline:dTLB-store-misses            avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:dTLB-stores                  avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_baseline:iTLB-load-misses             avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:iTLB-loads                   avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_baseline:instructions                 avgt        5.998               #/op
+
+InfrastructureBaselineBenchmark.method_blank                                 avgt    5   0.401 ± 0.060      ns/op
+InfrastructureBaselineBenchmark.method_blank:CPI                             avgt        0.251          clks/insn
+InfrastructureBaselineBenchmark.method_blank:IPC                             avgt        3.991          insns/clk
+InfrastructureBaselineBenchmark.method_blank:L1-dcache-load-misses           avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_blank:L1-dcache-loads                 avgt        3.004               #/op
+InfrastructureBaselineBenchmark.method_blank:L1-dcache-stores                avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_blank:L1-icache-load-misses           avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_blank:LLC-load-misses                 avgt       ≈ 10⁻⁷               #/op
+InfrastructureBaselineBenchmark.method_blank:LLC-loads                       avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_blank:LLC-store-misses                avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_blank:LLC-stores                      avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_blank:branch-misses                   avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_blank:branches                        avgt        1.002               #/op
+InfrastructureBaselineBenchmark.method_blank:cycles                          avgt        1.506               #/op
+InfrastructureBaselineBenchmark.method_blank:dTLB-load-misses                avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_blank:dTLB-loads                      avgt        3.002               #/op
+InfrastructureBaselineBenchmark.method_blank:dTLB-store-misses               avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_blank:dTLB-stores                     avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_blank:iTLB-load-misses                avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_blank:iTLB-loads                      avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_blank:instructions                    avgt        6.011               #/op
+
+InfrastructureBaselineBenchmark.method_dont_inline                           avgt    5   1.781 ± 0.219      ns/op
+InfrastructureBaselineBenchmark.method_dont_inline:CPI                       avgt        0.365          clks/insn
+InfrastructureBaselineBenchmark.method_dont_inline:IPC                       avgt        2.740          insns/clk
+InfrastructureBaselineBenchmark.method_dont_inline:L1-dcache-load-misses     avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:L1-dcache-loads           avgt        8.000               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:L1-dcache-stores          avgt        2.002               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:L1-icache-load-misses     avgt       ≈ 10⁻³               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:LLC-load-misses           avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:LLC-loads                 avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:LLC-store-misses          avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:LLC-stores                avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:branch-misses             avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:branches                  avgt        4.003               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:cycles                    avgt        6.213               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:dTLB-load-misses          avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:dTLB-loads                avgt        8.012               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:dTLB-store-misses         avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:dTLB-stores               avgt        2.004               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:iTLB-load-misses          avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:iTLB-loads                avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_dont_inline:instructions              avgt       17.023               #/op
+
+InfrastructureBaselineBenchmark.method_inline                                avgt    5   0.407 ± 0.005      ns/op
+InfrastructureBaselineBenchmark.method_inline:CPI                            avgt        0.251          clks/insn
+InfrastructureBaselineBenchmark.method_inline:IPC                            avgt        3.985          insns/clk
+InfrastructureBaselineBenchmark.method_inline:L1-dcache-load-misses          avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_inline:L1-dcache-loads                avgt        3.003               #/op
+InfrastructureBaselineBenchmark.method_inline:L1-dcache-stores               avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_inline:L1-icache-load-misses          avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_inline:LLC-load-misses                avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_inline:LLC-loads                      avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_inline:LLC-store-misses               avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_inline:LLC-stores                     avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_inline:branch-misses                  avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.method_inline:branches                       avgt        1.001               #/op
+InfrastructureBaselineBenchmark.method_inline:cycles                         avgt        1.507               #/op
+InfrastructureBaselineBenchmark.method_inline:dTLB-load-misses               avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_inline:dTLB-loads                     avgt        3.004               #/op
+InfrastructureBaselineBenchmark.method_inline:dTLB-store-misses              avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_inline:dTLB-stores                    avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.method_inline:iTLB-load-misses               avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_inline:iTLB-loads                     avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.method_inline:instructions                   avgt        6.005               #/op
+
+InfrastructureBaselineBenchmark.obj_blackhole_consume                        avgt    5   0.544 ± 0.001      ns/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:CPI                    avgt        0.251          clks/insn
+InfrastructureBaselineBenchmark.obj_blackhole_consume:IPC                    avgt        3.992          insns/clk
+InfrastructureBaselineBenchmark.obj_blackhole_consume:L1-dcache-load-misses  avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:L1-dcache-loads        avgt        4.005               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:L1-dcache-stores       avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:L1-icache-load-misses  avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:LLC-load-misses        avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:LLC-loads              avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:LLC-store-misses       avgt       ≈ 10⁻⁷               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:LLC-stores             avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:branch-misses          avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:branches               avgt        1.002               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:cycles                 avgt        2.007               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:dTLB-load-misses       avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:dTLB-loads             avgt        4.005               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:dTLB-store-misses      avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:dTLB-stores            avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:iTLB-load-misses       avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:iTLB-loads             avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_blackhole_consume:instructions           avgt        8.012               #/op
+
+InfrastructureBaselineBenchmark.obj_return                                   avgt    5   0.548 ± 0.059      ns/op
+InfrastructureBaselineBenchmark.obj_return:CPI                               avgt        0.251          clks/insn
+InfrastructureBaselineBenchmark.obj_return:IPC                               avgt        3.990          insns/clk
+InfrastructureBaselineBenchmark.obj_return:L1-dcache-load-misses             avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_return:L1-dcache-loads                   avgt        4.001               #/op
+InfrastructureBaselineBenchmark.obj_return:L1-dcache-stores                  avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_return:L1-icache-load-misses             avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_return:LLC-load-misses                   avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_return:LLC-loads                         avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_return:LLC-store-misses                  avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_return:LLC-stores                        avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_return:branch-misses                     avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_return:branches                          avgt        1.001               #/op
+InfrastructureBaselineBenchmark.obj_return:cycles                            avgt        2.007               #/op
+InfrastructureBaselineBenchmark.obj_return:dTLB-load-misses                  avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_return:dTLB-loads                        avgt        4.000               #/op
+InfrastructureBaselineBenchmark.obj_return:dTLB-store-misses                 avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_return:dTLB-stores                       avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_return:iTLB-load-misses                  avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_return:iTLB-loads                        avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_return:instructions                      avgt        8.008               #/op
+
+InfrastructureBaselineBenchmark.obj_sink                                     avgt    5   1.734 ± 0.029      ns/op
+InfrastructureBaselineBenchmark.obj_sink:CPI                                 avgt        0.294          clks/insn
+InfrastructureBaselineBenchmark.obj_sink:IPC                                 avgt        3.403          insns/clk
+InfrastructureBaselineBenchmark.obj_sink:L1-dcache-load-misses               avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_sink:L1-dcache-loads                     avgt       10.012               #/op
+InfrastructureBaselineBenchmark.obj_sink:L1-dcache-stores                    avgt        2.002               #/op
+InfrastructureBaselineBenchmark.obj_sink:L1-icache-load-misses               avgt       ≈ 10⁻³               #/op
+InfrastructureBaselineBenchmark.obj_sink:LLC-load-misses                     avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_sink:LLC-loads                           avgt       ≈ 10⁻⁴               #/op
+InfrastructureBaselineBenchmark.obj_sink:LLC-store-misses                    avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_sink:LLC-stores                          avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_sink:branch-misses                       avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_sink:branches                            avgt        4.005               #/op
+InfrastructureBaselineBenchmark.obj_sink:cycles                              avgt        6.176               #/op
+InfrastructureBaselineBenchmark.obj_sink:dTLB-load-misses                    avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_sink:dTLB-loads                          avgt       10.005               #/op
+InfrastructureBaselineBenchmark.obj_sink:dTLB-store-misses                   avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_sink:dTLB-stores                         avgt        2.003               #/op
+InfrastructureBaselineBenchmark.obj_sink:iTLB-load-misses                    avgt       ≈ 10⁻⁶               #/op
+InfrastructureBaselineBenchmark.obj_sink:iTLB-loads                          avgt       ≈ 10⁻⁵               #/op
+InfrastructureBaselineBenchmark.obj_sink:instructions                        avgt       21.020               #/op
