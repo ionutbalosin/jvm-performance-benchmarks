@@ -13,6 +13,14 @@
     <name>JVM Performance Benchmarks Suite</name>
     <artifactId>jvm-performance-benchmarks-suite</artifactId>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+
     <dependencies>
 
         <dependency>

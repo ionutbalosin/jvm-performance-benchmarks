@@ -1,0 +1,15 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+
+Benchmark                       Mode  Cnt  Score   Error  Units
+PalindromeBenchmark.iterative   avgt    5  1.292 ± 0.051  ms/op
+PalindromeBenchmark.recursive   avgt    5  1.439 ± 0.062  ms/op
+PalindromeBenchmark.trampoline  avgt    5  1.807 ± 0.062  ms/op

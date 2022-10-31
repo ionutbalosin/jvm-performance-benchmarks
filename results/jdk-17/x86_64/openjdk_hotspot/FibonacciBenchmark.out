@@ -1,0 +1,17 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: -Xss20M
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Parameters: (n = 1000)
+
+Benchmark                          (n)  Mode  Cnt      Score      Error  Units
+FibonacciBenchmark.binet_formula  1000  avgt    5  61223.758 ± 7532.665  us/op
+FibonacciBenchmark.dynamic        1000  avgt    5     29.138 ±    1.137  us/op
+FibonacciBenchmark.iterative      1000  avgt    5     27.269 ±    3.434  us/op
+FibonacciBenchmark.recursive      1000  avgt    5     31.790 ±    5.845  us/op
