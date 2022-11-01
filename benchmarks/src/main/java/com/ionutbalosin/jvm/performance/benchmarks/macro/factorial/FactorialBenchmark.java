@@ -66,7 +66,7 @@ public class FactorialBenchmark {
     arrayMultiply = new ArrayMultiply(n);
     bigIntegerFactorial = new BigIntegerMultiply();
 
-    // make sure test results are equivalent before any further benchmarking
+    // make sure the results are equivalent before any further benchmarking
     sanityCheck(arrayMultiply.factorial(), bigIntegerFactorial.factorial(n));
   }
 
@@ -81,7 +81,7 @@ public class FactorialBenchmark {
   }
 
   /**
-   * Sanity check for the results to avoid wrong comparisons
+   * Sanity check for the results to avoid wrong benchmarks comparisons
    *
    * @param val1 - first factorial number as an array of bytes in reverse order. Each byte
    *     represents a figure (from 0 to 9)
