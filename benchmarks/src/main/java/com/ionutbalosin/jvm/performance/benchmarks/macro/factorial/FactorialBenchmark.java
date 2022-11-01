@@ -83,7 +83,8 @@ public class FactorialBenchmark {
   /**
    * Sanity check for the results to avoid wrong comparisons
    *
-   * @param val1 - first factorial number as an array of bytes in reverse order
+   * @param val1 - first factorial number as an array of bytes in reverse order. Each byte
+   *     represents a figure (from 0 to 9)
    * @param val2 - second factorial number in BigInteger format
    * @throws AssertionError if the results are not the same
    */
