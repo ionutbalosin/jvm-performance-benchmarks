@@ -57,7 +57,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5, jvmArgsAppend = "-XX:-RestrictContended")
 @State(Scope.Benchmark)
-public class FalseSharing {
+public class FalseSharingBenchmark {
 
   @State(Scope.Group)
   public static class BaselineState {
