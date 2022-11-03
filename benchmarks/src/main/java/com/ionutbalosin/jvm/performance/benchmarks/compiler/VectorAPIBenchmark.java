@@ -39,7 +39,7 @@ import org.openjdk.jmh.infra.Blackhole;
  *  - https://www.intel.com/content/dam/develop/public/us/en/documents/vector-api-writing-own-vector-final-9-27-17.pdf
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5, jvmArgsAppend = "--add-modules=jdk.incubator.vector")
@@ -64,7 +64,7 @@ public class VectorAPIBenchmark {
   }
 
   @Benchmark
-  public int baselineSum() {
+  public int baseline_sum() {
     int[] intArr = this.intArr;
     int sum = 0;
     for (int i = 0; i < intArr.length; i++) {
@@ -74,7 +74,7 @@ public class VectorAPIBenchmark {
   }
 
   @Benchmark
-  public int vectorizedSum() {
+  public int vectorized_sum() {
     int[] intArr = this.intArr;
     int sum = 0, i = 0;
     for (; i < INT_VECTOR_SPECIES.loopBound(intArr.length); i += INT_VECTOR_SPECIES.length()) {
@@ -88,12 +88,12 @@ public class VectorAPIBenchmark {
   }
 
   @Benchmark
-  public void baselineFilter(Blackhole blackhole) {
+  public void baseline_filter(Blackhole blackhole) {
     int[] intArr = this.intArr;
     int[] filteredArr = this.resultArr;
     for (int i = 0; i < intArr.length; i++) {
       int value = intArr[i];
-      if (testValue(value)) {
+      if (test_value(value)) {
         filteredArr[i] = value;
       }
     }
@@ -101,18 +101,18 @@ public class VectorAPIBenchmark {
   }
 
   @Benchmark
-  public void vectorizedFilter(Blackhole blackhole) {
+  public void vectorized_filter(Blackhole blackhole) {
     int[] intArr = this.intArr;
     int[] filteredArr = this.resultArr;
     int i = 0;
     for (; i < INT_VECTOR_SPECIES.loopBound(intArr.length); i += INT_VECTOR_SPECIES.length()) {
       IntVector vector = IntVector.fromArray(INT_VECTOR_SPECIES, intArr, i);
-      VectorMask<Integer> mask = testValueVector(vector);
+      VectorMask<Integer> mask = test_value_vector(vector);
       vector.intoArray(filteredArr, i, mask);
     }
     for (; i < intArr.length; i++) {
       int value = intArr[i];
-      if (testValue(value)) {
+      if (test_value(value)) {
         filteredArr[i] = value;
       }
     }
@@ -120,7 +120,7 @@ public class VectorAPIBenchmark {
   }
 
   @Benchmark
-  public void baselineMatrixMul(Blackhole bh) {
+  public void baseline_matrix_mul(Blackhole bh) {
     int n = (int) Math.sqrt(size);
     int[] intArr = this.intArr;
     int[] resultArr = this.resultArr;
@@ -143,7 +143,7 @@ public class VectorAPIBenchmark {
   }
 
   @Benchmark
-  public void vectorMatrixMul(Blackhole bh) {
+  public void vectorized_matrix_mul(Blackhole bh) {
     int blockWidth = 512;
     int blockHeight = 8;
     int[] result = this.resultArr;
@@ -217,11 +217,11 @@ public class VectorAPIBenchmark {
     }
   }
 
-  public boolean testValue(int value) {
+  public boolean test_value(int value) {
     return value % 2 == 0;
   }
 
-  public VectorMask<Integer> testValueVector(IntVector values) {
+  public VectorMask<Integer> test_value_vector(IntVector values) {
     return values.and(0b1).compare(VectorOperators.EQ, 0b0);
   }
 }
