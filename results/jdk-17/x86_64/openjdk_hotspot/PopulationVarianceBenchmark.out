@@ -1,0 +1,14 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+
+Benchmark                               Mode  Cnt    Score   Error  Units
+PopulationVarianceBenchmark.fork_join   avgt    5   80.227 ± 0.549  ms/op
+PopulationVarianceBenchmark.imperative  avgt    5  322.943 ± 0.627  ms/op
+PopulationVarianceBenchmark.stream      avgt    5  203.799 ± 0.462  ms/op
