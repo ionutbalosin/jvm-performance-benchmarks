@@ -26,15 +26,15 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.prime.eratostene;
 
 import static java.lang.Math.sqrt;
 
+import java.util.Arrays;
+
 public class EratosthenesSieve {
 
   public static int primes(final int number) {
     int numberOfPrimes = 0;
     boolean[] primes = new boolean[number];
 
-    for (int i = 0; i < primes.length; i++) {
-      primes[i] = true;
-    }
+    Arrays.fill(primes, true);
 
     for (int i = 2; i < sqrt(number); i++) {
       if (primes[i] == true) {
