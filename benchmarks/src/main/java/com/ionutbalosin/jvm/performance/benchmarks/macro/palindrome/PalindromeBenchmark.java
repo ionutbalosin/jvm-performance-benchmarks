@@ -24,13 +24,15 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.iterative.IterativePredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.recursive.RecursivePredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline.TrampolinePredicate;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -73,8 +75,10 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class PalindromeBenchmark {
 
-  private final String FILE_NAME = "palindrome.list";
-  private final URL URL = getClass().getClassLoader().getResource(FILE_NAME);
+  private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
+  private static final String FILE_NAME =
+      CURRENT_DIR + "/benchmarks/src/main/resources/palindrome.list";
+
   private final TrampolinePredicate trampolinePredicate = new TrampolinePredicate();
   private final RecursivePredicate recursivePredicate = new RecursivePredicate();
   private final IterativePredicate iterativePredicate = new IterativePredicate();
@@ -107,7 +111,7 @@ public class PalindromeBenchmark {
 
   private long palindromes(Predicate<String> predicate) throws IOException {
     try (BufferedReader bufferedReader =
-        new BufferedReader(new InputStreamReader(URL.openStream()))) {
+        new BufferedReader(new InputStreamReader(new FileInputStream(FILE_NAME), UTF_8))) {
       return bufferedReader.lines().filter(predicate).count();
     }
   }
