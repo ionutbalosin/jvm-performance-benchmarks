@@ -25,7 +25,7 @@
 package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance;
 
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.forkjoin.ForkJoinVariance;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.imperative.ImperativeVariance;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.iterative.IterativeVariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.stream.StreamVariance;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -76,14 +76,14 @@ public class PopulationVarianceBenchmark {
 
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(
-        ImperativeVariance.variance(ages),
+        IterativeVariance.variance(ages),
         StreamVariance.variance(ages),
         ForkJoinVariance.variance(ages));
   }
 
   @Benchmark
-  public double imperative() {
-    return ImperativeVariance.variance(ages);
+  public double iterative() {
+    return IterativeVariance.variance(ages);
   }
 
   @Benchmark

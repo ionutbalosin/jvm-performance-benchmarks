@@ -22,9 +22,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.imperative;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.iterative;
 
-public class ImperativeVariance {
+public class IterativeVariance {
 
   public static double variance(double[] ages) {
     double total = 0;

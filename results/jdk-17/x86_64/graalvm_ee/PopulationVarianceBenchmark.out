@@ -10,5 +10,5 @@
 
 Benchmark                               Mode  Cnt    Score    Error  Units
 PopulationVarianceBenchmark.fork_join   avgt    5   81.575 ±  1.083  ms/op
-PopulationVarianceBenchmark.imperative  avgt    5  318.904 ±  1.310  ms/op
+PopulationVarianceBenchmark.iterative   avgt    5  318.904 ±  1.310  ms/op
 PopulationVarianceBenchmark.stream      avgt    5  197.750 ± 23.108  ms/op
