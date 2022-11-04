@@ -9,8 +9,10 @@
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
 
-Benchmark                                 (n)  Mode  Cnt      Score      Error  Units
-FactorialBenchmark.array_multiply        1000  avgt    5   2693.191 ±  382.043  us/op
-FactorialBenchmark.array_multiply        5000  avgt    5  86194.368 ± 7024.874  us/op
-FactorialBenchmark.big_integer_multiply  1000  avgt    5    120.298 ±    2.486  us/op
-FactorialBenchmark.big_integer_multiply  5000  avgt    5   3979.394 ±  766.908  us/op
+Benchmark                                 (n)  Mode  Cnt      Score     Error  Units
+FactorialBenchmark.array_multiply        1000  avgt    5   2614.221 ±   5.176  us/op
+FactorialBenchmark.array_multiply        5000  avgt    5  85084.528 ± 129.733  us/op
+FactorialBenchmark.big_integer_multiply  1000  avgt    5    119.049 ±   1.641  us/op
+FactorialBenchmark.big_integer_multiply  5000  avgt    5   3885.679 ±   8.471  us/op
+FactorialBenchmark.fork_join             1000  avgt    5    120.461 ±   4.520  us/op
+FactorialBenchmark.fork_join             5000  avgt    5    581.542 ±   4.660  us/op

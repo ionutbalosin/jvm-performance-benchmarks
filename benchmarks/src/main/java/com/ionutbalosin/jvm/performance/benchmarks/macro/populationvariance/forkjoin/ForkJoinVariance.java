@@ -58,6 +58,8 @@ public class ForkJoinVariance {
                   return partialVariance;
                 }));
 
+    forkJoinPool.shutdown();
+
     return variance / ages.length;
   }
 
@@ -67,12 +69,11 @@ public class ForkJoinVariance {
 
   public static class ForkJoinVarianceTask extends RecursiveTask<Double> {
 
-    public static final long SEQUENCIAL_THRESHOLD = 1_000_000;
+    public static final long SEQUENTIAL_THRESHOLD = 1_000_000;
 
     private final VarianceSequentialTask sequentialTask;
     private final double[] ages;
-    private final int start;
-    private final int end;
+    private final int start, end;
 
     public ForkJoinVarianceTask(double[] ages, VarianceSequentialTask sequentialTask) {
       this(ages, 0, ages.length, sequentialTask);
@@ -90,22 +91,18 @@ public class ForkJoinVariance {
     protected Double compute() {
       int length = end - start;
 
-      if (length <= SEQUENCIAL_THRESHOLD) {
+      if (length <= SEQUENTIAL_THRESHOLD) {
         return sequentialTask.compute(ages, start, end);
       }
 
-      ForkJoinVarianceTask leftTask =
+      final ForkJoinVarianceTask leftTask =
           new ForkJoinVarianceTask(ages, start, start + length / 2, sequentialTask);
       leftTask.fork();
 
-      ForkJoinVarianceTask rightTask =
+      final ForkJoinVarianceTask rightTask =
           new ForkJoinVarianceTask(ages, start + length / 2, end, sequentialTask);
 
-      Double rightResult = rightTask.compute();
-
-      Double leftResult = leftTask.join();
-
-      return leftResult + rightResult;
+      return rightTask.invoke() + leftTask.join();
     }
   }
 }

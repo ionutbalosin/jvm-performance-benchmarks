@@ -28,7 +28,7 @@ import java.math.BigInteger;
 
 public class BigIntegerMultiply {
 
-  public BigInteger factorial(int n) {
+  public static BigInteger factorial(int n) {
     BigInteger result = BigInteger.ONE;
 
     for (int i = 2; i <= n; i++) {

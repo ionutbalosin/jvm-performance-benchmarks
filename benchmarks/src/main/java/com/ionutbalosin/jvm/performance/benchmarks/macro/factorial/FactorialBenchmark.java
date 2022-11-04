@@ -26,6 +26,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial;
 
 import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.array.ArrayMultiply;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.biginteger.BigIntegerMultiply;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.forkjoin.ForkJoinFactorial;
 import java.math.BigInteger;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -54,7 +55,6 @@ import org.openjdk.jmh.annotations.Warmup;
 public class FactorialBenchmark {
 
   private ArrayMultiply arrayMultiply;
-  private BigIntegerMultiply bigIntegerFactorial;
 
   // java -jar benchmarks/target/benchmarks.jar ".*FactorialBenchmark.*"
 
@@ -64,10 +64,10 @@ public class FactorialBenchmark {
   @Setup()
   public void setup() {
     arrayMultiply = new ArrayMultiply(n);
-    bigIntegerFactorial = new BigIntegerMultiply();
 
     // make sure the results are equivalent before any further benchmarking
-    sanityCheck(arrayMultiply.factorial(), bigIntegerFactorial.factorial(n));
+    sanityCheck(
+        arrayMultiply.factorial(), BigIntegerMultiply.factorial(n), ForkJoinFactorial.factorial(n));
   }
 
   @Benchmark
@@ -77,7 +77,12 @@ public class FactorialBenchmark {
 
   @Benchmark
   public BigInteger big_integer_multiply() {
-    return bigIntegerFactorial.factorial(n);
+    return BigIntegerMultiply.factorial(n);
+  }
+
+  @Benchmark
+  public BigInteger fork_join() {
+    return ForkJoinFactorial.factorial(n);
   }
 
   /**
@@ -85,16 +90,21 @@ public class FactorialBenchmark {
    *
    * @param val1 - first factorial number as an array of bytes in reverse order. Each byte
    *     represents a figure (from 0 to 9)
-   * @param val2 - second factorial number in BigInteger format
+   * @param val2 - second factorial number
+   * @param val3 - third factorial number
    * @throws AssertionError if the results are not the same
    */
-  private void sanityCheck(byte[] val1, BigInteger val2) {
+  private void sanityCheck(byte[] val1, BigInteger val2, BigInteger val3) {
+    // compare val1 with val2
     int size1 = val1.length;
     char[] chars2 = val2.toString().toCharArray();
     for (char ch2 : chars2) {
       if (ch2 != '0' + val1[--size1]) {
         throw new AssertionError("Numbers are different.");
       }
+    }
+    if (val2.compareTo(val3) != 0) {
+      throw new AssertionError("Numbers are different.");
     }
   }
 }
