@@ -69,7 +69,7 @@ public class ForkJoinVariance {
 
   public static class ForkJoinVarianceTask extends RecursiveTask<Double> {
 
-    public static final long SEQUENTIAL_THRESHOLD = 1_000_000;
+    public static final long SEQUENTIAL_THRESHOLD = 1000;
 
     private final VarianceSequentialTask sequentialTask;
     private final double[] ages;
