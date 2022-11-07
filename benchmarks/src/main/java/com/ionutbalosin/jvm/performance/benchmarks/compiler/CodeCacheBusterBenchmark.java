@@ -39,17 +39,21 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Tests the compilation (i.e., the code cache) of a big method which calls in sequence a bunch of other small methods (~5000 small methods).
  * Every small method either returns the received argument incremented by a random value or dispatches it to another small method which returns another random value.
- * The big method counts around 40,002 bytes in total, where every small method has either 8 or 12 bytes.
+ * The big method counts around 40,004 bytes in total, where every small method has either 8 or 12 bytes.
  * As a side note, HotSpot has a HugeMethodLimit threshold which is set to 8,000 bytes, which means methods larger than this threshold are not implicitly compiled, unless JVM argument -XX:-DontCompileHugeMethods is enabled.
  *
- * java -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal -version | grep DontCompile
- * bool DontCompileHugeMethods = true {product}
- * where:
- * - HugeMethodLimit,  8000 bytes
+ * $ javap -v com.ionutbalosin.jvm.performance.benchmarks.compiler.CodeCacheBusterBenchmark
+ *   - check the bytecode sizes
+ *
+ * $ java -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal -version | grep DontCompileHugeMethods
+ *       bool DontCompileHugeMethods = true
+ *   - where:
+ *       HugeMethodLimit,  8000 bytes
  *
  * References:
  * - https://github.com/openjdk/jdk/blob/master/src/hotspot/share/compiler/compiler_globals.hpp
- * - JITWatch code examples by Chris Newland (Twitter: @chriswhocodes)
+ * - code examples by Chris Newland (Twitter: @chriswhocodes)
+ * - https://github.com/AdoptOpenJDK/jitwatch/blob/master/core/src/main/resources/examples/CodeCacheBuster.java
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -60,6 +64,8 @@ import org.openjdk.jmh.annotations.Warmup;
 public class CodeCacheBusterBenchmark {
 
   private final ThreadLocalRandom random = ThreadLocalRandom.current();
+
+  // java -jar benchmarks/target/benchmarks.jar ".*CodeCacheBusterBenchmark.*"
 
   @Benchmark
   public int code_cache_buster() {
