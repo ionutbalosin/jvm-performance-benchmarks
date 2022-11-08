@@ -24,6 +24,8 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
+import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -39,77 +41,100 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Test how the Compiler deals with implicit versus explicit null pointer exception while accessing the elements of an array list.
- * The values inside the array are generated, as follows:
- * - all are different than null, hence none throws NPE
- * - all of them are null, hence all throw NPE
- * - only a part of them are null, hence only a part of them throw NPE
+ * Iterates through an array of custom object instances (containing null and not null values) and computes the
+ * sum of all elements using different comparison/filtering strategies.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class NullChecksBenchmark {
+public class NpeControlFlowBenchmark {
 
-  @Param({"1024"})
+  private final Random random = new Random(16384);
+  private final int THRESHOLD = 32;
+
+  private Wrapper[] array;
+
+  @Param({"262144"})
   private int size;
 
-  @Param({"0.0", "0.5", "1.0"})
-  private double threshold;
-
-  private Wrapper[] A;
+  @Param({"0", "16"})
+  private int upperNullThreshold;
 
   @Setup
   public void setup() {
-    A = new Wrapper[size];
+    array = new Wrapper[size];
 
     for (int i = 0; i < size; i++) {
-      if (Math.random() < threshold) {
-        A[i] = null;
+      int value = random.nextInt(THRESHOLD) + 1;
+      if (value < upperNullThreshold) {
+        array[i] = null;
       } else {
-        A[i] = new Wrapper();
+        array[i] = new Wrapper(i);
       }
     }
   }
 
   @Benchmark
-  public void implicit_null_check() {
-    for (Wrapper object : A) {
+  public int try_npe_catch() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
       try {
-        implicitThrowNpe(object);
-      } catch (NullPointerException e) {
-        // swallow exception
+        sum += array[i].x;
+      } catch (NullPointerException ignored) {
+        sink(ignored);
       }
     }
+    return sum;
   }
 
   @Benchmark
-  public void explicit_null_check() {
-    for (Wrapper o : A) {
-      try {
-        explicitThrowNpe(o);
-      } catch (NullPointerException e) {
-        // swallow exception
+  public int if_not_npe_do_statement() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+      if (array[i] != null) {
+        sum += array[i].x;
       }
     }
+    return sum;
   }
 
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int explicitThrowNpe(Wrapper o) {
-    if (o == null) {
-      throw new NullPointerException("Oops!");
+  @Benchmark
+  public int if_npe_continue() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+      if (array[i] == null) {
+        continue;
+      }
+      sum += array[i].x;
     }
-    return o.x;
+    return sum;
+  }
+
+  @Benchmark
+  public long stream_filter_npe() {
+    return Arrays.stream(array)
+        .filter(wrapper -> wrapper != null)
+        .map(Wrapper::getX)
+        .reduce(0, Integer::sum);
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int implicitThrowNpe(Wrapper o) {
-    return o.x;
+  private void sink(final NullPointerException exception) {
+    // Intentionally empty method
   }
 
   private static class Wrapper {
-    public int x;
+    private int x;
+
+    public Wrapper(int x) {
+      this.x = x;
+    }
+
+    public int getX() {
+      return x;
+    }
   }
 }

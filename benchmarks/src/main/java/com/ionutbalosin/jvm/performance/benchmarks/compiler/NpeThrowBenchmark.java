@@ -24,8 +24,6 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
-import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -41,99 +39,77 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Iterates through an array of custom object instances (containing null and not null values) and computes the sum of all elements using different comparison/filtering strategies:
- * - try { sum += array_element[i]; } catch(NullPointerException) {...};
- * - if (array_element[i] == null) continue; else sum += array_element[i];
- * - if (array_element[i] != null) sum += array_element[i];
- * - Arrays.stream(array).filter(array_element != null).map(...).reduce(0, Integer::sum);
+ * Test how the Compiler deals with implicit versus explicit null pointer exception while accessing the elements of an array list.
+ * The values inside the array are generated, as follows:
+ * - all are different from null, hence none throws NPE
+ * - all of them are null, hence all throw NPE
+ * - only a part of them are null, hence only a part of them throw NPE
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class LoopControlFlowBenchmark {
+public class NpeThrowBenchmark {
 
-  private final Random random = new Random(16384);
-  private final int THRESHOLD = 32;
-
-  private Wrapper[] array;
-
-  @Param({"262144"})
+  @Param({"1024"})
   private int size;
 
-  @Param({"0", "16"})
-  private int upperNullThreshold;
+  @Param({"0.0", "0.5", "1.0"})
+  private double threshold;
+
+  private Wrapper[] A;
 
   @Setup
   public void setup() {
-    array = new Wrapper[size];
+    A = new Wrapper[size];
 
     for (int i = 0; i < size; i++) {
-      int value = random.nextInt(THRESHOLD) + 1;
-      if (value < upperNullThreshold) {
-        array[i] = null;
+      if (Math.random() < threshold) {
+        A[i] = null;
       } else {
-        array[i] = new Wrapper(i);
+        A[i] = new Wrapper();
       }
     }
   }
 
   @Benchmark
-  public int loop_try_catch() {
-    int dummy = 0;
-    for (int i = 0; i < size; i++) {
+  public void implicit_throw_npe() {
+    for (Wrapper object : A) {
       try {
-        dummy += array[i].x;
-      } catch (NullPointerException ignored) {
-        sink(ignored);
+        implicitThrowNpe(object);
+      } catch (NullPointerException e) {
+        // swallow exception
       }
     }
-    return dummy;
   }
 
   @Benchmark
-  public int loop_if_comparison() {
-    int dummy = 0;
-    for (int i = 0; i < size; i++) {
-      if (array[i] != null) dummy += array[i].x;
+  public void explicit_throw_npe() {
+    for (Wrapper o : A) {
+      try {
+        explicitThrowNpe(o);
+      } catch (NullPointerException e) {
+        // swallow exception
+      }
     }
-    return dummy;
-  }
-
-  @Benchmark
-  public int loop_continue() {
-    int dummy = 0;
-    for (int i = 0; i < size; i++) {
-      if (array[i] == null) continue;
-      dummy += array[i].x;
-    }
-    return dummy;
-  }
-
-  @Benchmark
-  public long stream() {
-    return Arrays.stream(array)
-        .filter(wrapper -> wrapper != null)
-        .map(Wrapper::getX)
-        .reduce(0, Integer::sum);
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private void sink(final NullPointerException exception) {
-    // Intentionally empty method
+  private int explicitThrowNpe(Wrapper o) {
+    if (o == null) {
+      throw new NullPointerException("Oops!");
+    }
+    return o.x;
+  }
+
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private int implicitThrowNpe(Wrapper o) {
+    return o.x;
   }
 
   private static class Wrapper {
-    private int x;
-
-    public Wrapper(int x) {
-      this.x = x;
-    }
-
-    public int getX() {
-      return x;
-    }
+    public int x;
   }
 }

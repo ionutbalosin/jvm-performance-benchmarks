@@ -67,7 +67,7 @@ public class IfConditionalBranchBenchmark {
   }
 
   @Benchmark
-  public int baseline() {
+  public int no_if_branch() {
     int sum = 0;
 
     for (final int value : array) {
@@ -79,7 +79,7 @@ public class IfConditionalBranchBenchmark {
 
   // this must be equivalent or very close to baseline()
   @Benchmark
-  public int predictable_branch() {
+  public int predictable_if_branch() {
     int sum = 0;
 
     for (final int value : array) {
@@ -92,7 +92,7 @@ public class IfConditionalBranchBenchmark {
   }
 
   @Benchmark
-  public int unpredictable_branch() {
+  public int unpredictable_if_branch() {
     int sum = 0;
 
     for (final int value : array) {
