@@ -8,5 +8,6 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 
-Benchmark                             Mode  Cnt  Score   Error  Units
-HuffmanCodingBenchmark.encode_decode  avgt    5  9.328 ± 0.445  ms/op
+Benchmark                              (codingType)  Mode  Cnt  Score   Error  Units
+HuffmanCodingBenchmark.encode_decode    ENCODE_ONLY  avgt    5  6.625 ± 0.386  ms/op
+HuffmanCodingBenchmark.encode_decode  ENCODE_DECODE  avgt    5  9.559 ± 0.361  ms/op

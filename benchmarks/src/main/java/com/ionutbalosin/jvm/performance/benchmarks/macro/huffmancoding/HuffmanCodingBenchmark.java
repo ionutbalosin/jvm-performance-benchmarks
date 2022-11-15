@@ -25,6 +25,7 @@
 package com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.CODING_TYPE.ENCODE_DECODE;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.CODING_TYPE.ENCODE_ONLY;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.charFrequency;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.encodeDecode;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.encodingTree;
@@ -48,6 +49,7 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -91,6 +93,8 @@ public class HuffmanCodingBenchmark {
   private File outputFile;
   private OutputStream outputStream;
 
+  @Param private CODING_TYPE codingType;
+
   // java -jar benchmarks/target/benchmarks.jar ".*HuffmanCodingBenchmark.*"
 
   @Setup(Level.Trial)
@@ -118,12 +122,12 @@ public class HuffmanCodingBenchmark {
     }
 
     // make sure the results are valid
-    sanityCheck(inputFileSize, outputFile.length());
+    sanityCheck(codingType, inputFileSize, outputFile.length());
   }
 
   @Benchmark
   public void encode_decode() throws IOException {
-    encode_decode(ENCODE_DECODE);
+    encode_decode(codingType);
   }
 
   private void encode_decode(CODING_TYPE type) throws IOException {
@@ -136,12 +140,17 @@ public class HuffmanCodingBenchmark {
   /**
    * Sanity check for the results to avoid wrong benchmarking behaviour
    *
-   * @param val1 - first file length in bytes
-   * @param val2 - second file length in bytes
+   * @param codingType - test case coding type
+   * @param val1 - input file length in bytes
+   * @param val2 - output (i.e., encoded/decoded) file length in bytes
    */
-  private void sanityCheck(long val1, long val2) {
-    if (val1 != val2) {
-      throw new AssertionError("Files length is different.");
+  private void sanityCheck(CODING_TYPE codingType, long val1, long val2) {
+    if (codingType == ENCODE_ONLY && val1 <= val2) {
+      throw new AssertionError("The encoded file should be smaller than the input file.");
+    }
+
+    if (codingType == ENCODE_DECODE && val1 != val2) {
+      throw new AssertionError("The decoded file should have the same length as the input file.");
     }
   }
 }

@@ -34,6 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.BitSet;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class HuffmanCoding {
 
   private static final int BUFFER_SIZE = 1024;
 
-  enum CODING_TYPE {
+  public enum CODING_TYPE {
     ENCODE_ONLY,
     ENCODE_DECODE
   }
@@ -123,12 +124,21 @@ public class HuffmanCoding {
       throws IOException {
 
     if (type == ENCODE_ONLY) {
-      fileOutputStream.write(encoded.getBytes(UTF_8));
+      final BitSet encodedBitSet = encodedBitSet(encoded);
+      fileOutputStream.write(encodedBitSet.toByteArray());
     }
 
     if (type == ENCODE_DECODE) {
       final StringBuilder decoded = getDecoded(root, encoded);
       fileOutputStream.write(decoded.toString().getBytes(UTF_8));
     }
+  }
+
+  private static BitSet encodedBitSet(String encoded) {
+    final BitSet bitSet = new BitSet(encoded.length());
+    for (int i = 0; i < encoded.length(); i++) {
+      if (encoded.charAt(i) == '1') bitSet.set(i);
+    }
+    return bitSet;
   }
 }
