@@ -1,0 +1,13 @@
+# JMH version: 1.35
+# VM version: JDK 17.0.2, OpenJDK 64-Bit Server VM, 17.0.2+8-86
+# VM invoker: /usr/lib/jvm/openjdk-17.0.2/bin/java
+# VM options: <none>
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+
+Benchmark                              (codingType)  Mode  Cnt   Score   Error  Units
+HuffmanCodingBenchmark.encode_decode    ENCODE_ONLY  avgt    5   7.535 ± 0.432  ms/op
+HuffmanCodingBenchmark.encode_decode  ENCODE_DECODE  avgt    5  11.999 ± 0.737  ms/op
