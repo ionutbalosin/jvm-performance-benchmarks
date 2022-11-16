@@ -44,6 +44,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
  * - https://llvm.org/docs/Vectorizers.html#reductions
+ * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst#reductions
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -69,13 +70,13 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
     A = new int[size];
     P = new boolean[size];
     for (int i = 0; i < size; i++) {
-      A[i] = i + random.nextInt(32);
+      A[i] = random.nextInt(32);
       P[i] = (i % 2 == 0);
     }
   }
 
   @Benchmark
-  public int sum_of_all_array_elements() {
+  public int sum_array_elements() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       sum += A[i];
@@ -84,7 +85,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int sum_of_all_array_elements_long_stride() {
+  public int sum_array_elements_long_stride() {
     int sum = 0;
     for (long i = 0; i < size; i++) {
       sum += A[(int) i];
@@ -92,9 +93,26 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
     return sum;
   }
 
-  // https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst#reductions
   @Benchmark
-  public int sum_of_all_array_elements_by_adding_a_const() {
+  public int sum_array_elements_stride_x2() {
+    int sum = 0;
+    for (int i = 1; i < size; i *= 2) {
+      sum += A[i];
+    }
+    return sum;
+  }
+
+  @Benchmark
+  public int sum_array_elements_stride_2() {
+    int sum = 0;
+    for (int i = 0; i < size; i += 2) {
+      sum += A[i];
+    }
+    return sum;
+  }
+
+  @Benchmark
+  public int sum_array_elements_by_const() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       sum += A[i] + CONST;
@@ -103,7 +121,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int sum_of_all_even_array_elements() {
+  public int sum_even_array_elements() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       if ((A[i] & 0x1) == 0) {
@@ -114,7 +132,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int sum_of_all_array_elements_matching_a_predicate() {
+  public int sum_array_elements_matching_a_predicate() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       if (P[i]) {
@@ -125,7 +143,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int sum_of_all_array_elements_by_shifting_and_masking() {
+  public int sum_array_elements_by_shifting_and_masking() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       sum += (A[i] >> SHIFT) & MASK;
@@ -134,15 +152,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int[] multiply_each_array_element_by_const() {
-    for (int i = 0; i < size; i++) {
-      A[i] = A[i] * CONST;
-    }
-    return A;
-  }
-
-  @Benchmark
-  public int[] add_const_to_each_array_element() {
+  public int[] add_array_elements_by_const() {
     for (int i = 0; i < size; i++) {
       A[i] = A[i] + CONST;
     }
@@ -150,15 +160,23 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int[] shl_each_array_element_by_const() {
+  public int[] sub_array_elements_by_const() {
     for (int i = 0; i < size; i++) {
-      A[i] = A[i] << CONST;
+      A[i] = A[i] - CONST;
     }
     return A;
   }
 
   @Benchmark
-  public int[] mod_each_array_element_by_const() {
+  public int[] mul_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      A[i] = A[i] * CONST;
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] mod_array_elements_by_const() {
     for (int i = 0; i < size; i++) {
       A[i] = A[i] % CONST;
     }
@@ -166,7 +184,47 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int[] saves_induction_variable_to_each_array_element() {
+  public int[] and_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      A[i] = A[i] & CONST;
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] or_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      A[i] = A[i] | CONST;
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] xor_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      A[i] = A[i] ^ CONST;
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] ashl_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      A[i] = A[i] << CONST;
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] lshr_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      A[i] = A[i] >>> CONST;
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] store_induction_variable_to_array_elements() {
     for (int i = 0; i < size; i++) {
       A[i] = i;
     }
@@ -174,10 +232,28 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
   }
 
   @Benchmark
-  public int[] increment_arrays_elements_backward_iterator() {
+  public int[] inc_array_elements_backward_iterator() {
     for (int i = size - 1; i >= 0; --i) {
       A[i] += 1;
     }
     return A;
+  }
+
+  @Benchmark
+  public boolean all_true_array_elements() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= P[i];
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean any_true_array_element() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res |= P[i];
+    }
+    return res;
   }
 }
