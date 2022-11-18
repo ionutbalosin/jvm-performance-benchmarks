@@ -45,7 +45,6 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * References:
  * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
- * - https://github.com/Microsoft/DirectXShaderCompiler/blob/master/docs/Vectorizers.rst
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -69,19 +68,17 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
     A = new int[size];
     B = new int[size];
     C = new int[size];
-    D = new int[size];
     S = new short[size];
     for (int i = 0; i < size; i++) {
-      A[i] = i + random.nextInt(32);
-      B[i] = i + random.nextInt(32);
-      C[i] = i + random.nextInt(32);
-      D[i] = i + random.nextInt(32);
+      A[i] = random.nextInt(32);
+      B[i] = random.nextInt(32);
+      C[i] = random.nextInt(32);
       S[i] = (short) (i % Short.MAX_VALUE);
     }
   }
 
   @Benchmark
-  public int sum_all_product_pairs_of_2_arrays_elements() {
+  public int sum_2_arrays_mul_pairs() {
     int sum = 0;
     for (int i = 0; i < size; i++) {
       sum += A[i] * B[i];
@@ -90,7 +87,7 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   }
 
   @Benchmark
-  public int[] add_2_arrays_elements() {
+  public int[] add_2_arrays() {
     for (int i = 0; i < size; i++) {
       C[i] = A[i] + B[i];
     }
@@ -98,7 +95,25 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   }
 
   @Benchmark
-  public int[] extract_2_arrays_elements() {
+  public int[] add_2_arrays_inc_index_access() {
+    for (int i = 0; i < size - 1; i++) {
+      // Write after read (WAR): vectorizable
+      A[i] = A[i + 1] + B[i];
+    }
+    return A;
+  }
+
+  @Benchmark
+  public int[] add_2_arrays_modulo_index_access() {
+    for (int i = 0; i < size; i++) {
+      // Read after read (RAR): vectorizable
+      C[i] = A[i % 2] + B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] sub_2_arrays() {
     for (int i = 0; i < size; i++) {
       C[i] = A[i] - B[i];
     }
@@ -106,31 +121,7 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   }
 
   @Benchmark
-  public int[] mod_2_arrays_elements() {
-    for (int i = 0; i < size; i++) {
-      C[i] = A[i] % B[i];
-    }
-    return C;
-  }
-
-  @Benchmark
-  public int[] xor_2_arrays_elements() {
-    for (int i = 0; i < size; i++) {
-      C[i] = A[i] ^ B[i];
-    }
-    return C;
-  }
-
-  @Benchmark
-  public int[] shl_2_arrays_elements() {
-    for (int i = 0; i < size; i++) {
-      B[i] = A[i] << CONST;
-    }
-    return B;
-  }
-
-  @Benchmark
-  public int[] multiply_2_arrays_elements() {
+  public int[] mul_2_arrays() {
     for (int i = 0; i < size; i++) {
       C[i] = A[i] * B[i];
     }
@@ -138,7 +129,7 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   }
 
   @Benchmark
-  public int[] multiply_2_arrays_elements_backward_iterator() {
+  public int[] mul_2_arrays_backward_iterator() {
     for (int i = size - 1; i >= 0; --i) {
       C[i] = A[i] * B[i];
     }
@@ -146,16 +137,179 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
   }
 
   @Benchmark
-  public int[] multiply_2_arrays_elements_unknown_trip_count() {
+  public int[] mul_2_arrays_unknown_trip_count() {
     return multiply2ArraysWithUnknownTripCount(A, B, C, 0, size);
   }
 
   @Benchmark
-  public int[] multiply_2_arrays_elements_of_mixed_types() {
+  public int[] mul_2_arrays_of_mixed_types() {
     for (int i = 0; i < size; i++) {
       B[i] = A[i] * S[i];
     }
     return B;
+  }
+
+  @Benchmark
+  public int[] mul_2_arrays_long_stride() {
+    for (long l = 0; l < size; l++) {
+      C[(int) l] = A[(int) l] * B[(int) l];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] mul_2_arrays_stride_x2() {
+    for (int i = 1; i < size; i *= 2) {
+      // Strided Access: vectorizable
+      C[i] = A[i] * B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] mul_2_arrays_stride_2() {
+    for (int i = 0; i < size; i += 2) {
+      // Strided Access: vectorizable
+      C[i] = A[i] * B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] mod_2_arrays() {
+    for (int i = 0; i < size; i++) {
+      C[i] = A[i] % B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] and_2_arrays() {
+    for (int i = 0; i < size; i++) {
+      C[i] = A[i] & B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] or_2_arrays() {
+    for (int i = 0; i < size; i++) {
+      C[i] = A[i] | B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] xor_2_arrays() {
+    for (int i = 0; i < size; i++) {
+      C[i] = A[i] ^ B[i];
+    }
+    return C;
+  }
+
+  @Benchmark
+  public int[] ashl_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      B[i] = A[i] << CONST;
+    }
+    return B;
+  }
+
+  @Benchmark
+  public int[] ashr_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      B[i] = A[i] >> CONST;
+    }
+    return B;
+  }
+
+  @Benchmark
+  public int[] lshr_array_elements_by_const() {
+    for (int i = 0; i < size; i++) {
+      B[i] = A[i] >>> CONST;
+    }
+    return B;
+  }
+
+  @Benchmark
+  public int[] non_zero_array_elements() {
+    for (int i = 0; i < size; i++) {
+      C[i] = A[i] != 0 ? A[i] : B[i];
+    }
+
+    return C;
+  }
+
+  @Benchmark
+  public int[] min_2_arrays() {
+    for (int i = 0; i < size; i++) {
+      C[i] = Math.min(A[i], B[i]);
+    }
+
+    return C;
+  }
+
+  @Benchmark
+  public int[] max_2_arrays() {
+    for (int i = 0; i < size; i++) {
+      C[i] = Math.max(A[i], B[i]);
+    }
+
+    return C;
+  }
+
+  @Benchmark
+  public boolean lt_2_arrays() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= A[i] < B[i];
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean gt_2_arrays() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= A[i] > B[i];
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean le_2_arrays() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= A[i] <= B[i];
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean ge_2_arrays() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= A[i] >= B[i];
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean ne_2_arrays() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= A[i] != B[i];
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean eq_2_arrays() {
+    boolean res = true;
+    for (int i = 0; i < size; i++) {
+      res &= A[i] == B[i];
+    }
+    return res;
   }
 
   @Benchmark
@@ -169,49 +323,6 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
       }
     }
     return B;
-  }
-
-  @Benchmark
-  public int[] multiply_2_arrays_elements_long_stride() {
-    for (long l = 0; l < size; l++) {
-      C[(int) l] = A[(int) l] * B[(int) l];
-    }
-    return C;
-  }
-
-  @Benchmark
-  public int[] multiply_2_arrays_elements_stride_x2() {
-    for (int i = 1; i < size; i *= 2) {
-      C[i] = A[i] * B[i]; // Strided Access: vectorizable
-    }
-    return C;
-  }
-
-  @Benchmark
-  public int[] multiply_2_arrays_elements_stride_2() {
-    for (int i = 0; i < size; i += 2) {
-      // Strided Access: vectorizable
-      C[i] = A[i] * B[i];
-    }
-    return C;
-  }
-
-  @Benchmark
-  public int[] add_2_arrays_elements_inc_index_access() {
-    for (int i = 0; i < size - 1; i++) {
-      // Write after read (WAR): vectorizable
-      A[i] = A[i + 1] + B[i];
-    }
-    return A;
-  }
-
-  @Benchmark
-  public int[] add_2_arrays_elements_modulo_index_access() {
-    for (int i = 0; i < size; i++) {
-      // Read after read (RAR): vectorizable
-      C[i] = A[i % 2] + B[i];
-    }
-    return C;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
