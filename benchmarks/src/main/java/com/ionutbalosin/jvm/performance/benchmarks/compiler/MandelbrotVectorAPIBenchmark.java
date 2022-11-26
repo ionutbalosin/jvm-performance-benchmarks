@@ -125,6 +125,9 @@ public class MandelbrotVectorAPIBenchmark {
           VectorMask<Double> comp_res =
               x_square.add(y_square).compare(VectorOperators.LE, threshold);
           iter_vector = iter_vector.add(ones, comp_res);
+          if (!comp_res.anyTrue()) {
+            break;
+          }
           iter++;
         }
         DoubleVector res_vector =
