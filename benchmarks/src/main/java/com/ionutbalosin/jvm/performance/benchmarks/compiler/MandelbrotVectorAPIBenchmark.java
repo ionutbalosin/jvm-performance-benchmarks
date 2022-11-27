@@ -66,7 +66,7 @@ public class MandelbrotVectorAPIBenchmark {
   }
 
   @Benchmark
-  public Object baseline_mandelbrot() {
+  public Object baseline() {
     double threshold = 4;
 
     for (int row = 0; row < size; row++) {
@@ -90,7 +90,7 @@ public class MandelbrotVectorAPIBenchmark {
   }
 
   @Benchmark
-  public Object vectorized_mandelbrot() {
+  public Object vectorized() {
     double threshold = 4;
 
     for (int row = 0;
@@ -141,9 +141,9 @@ public class MandelbrotVectorAPIBenchmark {
 
   @TearDown(Level.Trial)
   public void tearDownInvocation() {
-    double[] seq_res = (double[]) baseline_mandelbrot();
+    double[] seq_res = (double[]) baseline();
     seq_res = Arrays.copyOf(seq_res, seq_res.length);
-    double[] vectorized_res = (double[]) vectorized_mandelbrot();
+    double[] vectorized_res = (double[]) vectorized();
     vectorized_res = Arrays.copyOf(vectorized_res, vectorized_res.length);
 
     if (!Arrays.equals(seq_res, vectorized_res)) {
