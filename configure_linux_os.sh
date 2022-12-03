@@ -167,10 +167,23 @@ if [[ "$DRY_RUN" != "--dry-run" && $EUID != 0 ]]; then
 fi
 
 echo ""
-echo "+---------------------------+"
-echo "| Set CPU core(s) isolation |"
-echo "+---------------------------+"
+echo "+------------------------------------+"
+echo "| Set CPU(s) isolation with isolcpus |"
+echo "+------------------------------------+"
+# isolcpus - isolate a given set of CPUs from the kernel scheduler
+# Limitations:
+# - 1. the CPUs are isolated from the general SMP balancing and load scheduling algorithms. Since the tasks are not (implicitly) load-balanced on isolated CPUs, this might be a limitation/issue for the the multi-threaded applications
+# - 2. the list of isolated CPUs is static and only rebooting with a different isolcpus value changes it
+# When to use it:
+# - isolcpus should be used when the application cannot afford to be interrupted, not even by the kernel scheduler tick. Nevertheless, the tasks distribution among the isolated CPUs needs to be manually assigned with taskset command
+# In all the other situations it is recommended to use cpusets instead.
 configure_cpu_isolation
+
+echo ""
+echo "+-----------------------------------+"
+echo "| Set CPU(s) isolation with cpusets |"
+echo "+-----------------------------------+"
+# TODO
 
 echo ""
 echo "+---------------------------------------------------+"
