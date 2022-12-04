@@ -117,7 +117,7 @@ set_cgroups() {
   echo "$cgroup_cpus" > /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus
   echo "Assigned CPU(s) to the $cgroup cgroup: "$(cat /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus)
   echo ""
-  echo "Assign the current shell process to the $cgroup cgroup, so subsequent started processes will belong to the same cgroup."
+  echo "Assign the current shell process to the $cgroup cgroup, so all subsequent processes started from the same shell will belong to the same cgroup."
   echo $$ > /sys/fs/cgroup/$cgroup/tasks/cgroup.procs
   echo "Assigned cgroup PID(s) process(es): "$(cat /sys/fs/cgroup/$cgroup/tasks/cgroup.procs)
 }
