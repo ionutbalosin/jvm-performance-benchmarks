@@ -96,7 +96,7 @@ set_cgroups() {
   echo "Available cgroup controllers: "$(cat /sys/fs/cgroup/cgroup.controllers)
   cgroup2=$(mount -l | grep cgroup2)
   if [ "$cgroup2" == "" ]; then
-    echo "WARNING: cgroup v2 needs to be configured. This is available since Linux 4.5"
+    echo "ERROR: cgroup v2 needs to be configured. This is available since Linux 4.5"
     return 1
   fi
   sudo echo "+cpu" >> /sys/fs/cgroup/cgroup.subtree_control
