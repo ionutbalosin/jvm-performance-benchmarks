@@ -2,7 +2,7 @@
 
 DRY_RUN="$1"
 
-set_cpu_isolation() {
+set_isolcpus() {
   grub_file='/etc/default/grub'
   grub_file_backup='/etc/default/grub.backup'
   echo "Please specify which physical CPU core(s) you want to isolate, as a comma separated list without spaces (e.g., 1,2)"
@@ -30,16 +30,16 @@ set_cpu_isolation() {
   fi
 }
 
-rollback_cpu_isolation() {
+rollback_isolcpus() {
     grub_file='/etc/default/grub'
     grub_file_backup='/etc/default/grub.backup'
-    echo "Restore the GRUB configuration from the backup copy (e.g., $grub_file_backup)"
+    echo "Restoring the GRUB configuration from the backup copy (e.g., $grub_file_backup) ..."
     echo ""
     if [ "$DRY_RUN" != "--dry-run" ]; then
       cp $grub_file_backup $grub_file
       echo "New GRUB configuration: "$(cat $grub_file | grep GRUB_CMDLINE_LINUX_DEFAULT)
       echo ""
-      echo "Update the GRUB configuration ..."
+      echo "Updating the GRUB configuration ..."
       sudo update-grub
       echo ""
       read -r -p "WARNING: To apply these changes the system must be restarted! Press any key to continue ..."
@@ -49,16 +49,16 @@ rollback_cpu_isolation() {
     fi
 }
 
-configure_cpu_isolation() {
+configure_isolcpus() {
   isolated_cpus=$(cat /sys/devices/system/cpu/isolated)
   if [ "$isolated_cpus" == "" ]; then
     while :
     do
       echo "Number of available physical CPU core(s): "$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l)
-      read -p "Do you want to set the CPU core(s) isolation? (yes/no) " INPUT_KEY
+      read -p "Do you want to set the CPU core(s) isolation with isolcpus? (yes/no) " INPUT_KEY
       case $INPUT_KEY in
       yes)
-        set_cpu_isolation
+        set_isolcpus
         break
         ;;
       no)
@@ -70,17 +70,93 @@ configure_cpu_isolation() {
       esac
     done
   else
-    echo "WARNING: CPU(s) isolation is already set to physical core(s): "$isolated_cpus
+    echo "WARNING: CPU(s) isolation with isolcpus is already configured for the physical core(s): "$isolated_cpus
     while :
     do
       read -p "Do you want to reset it to the initial value? (yes/no) " INPUT_KEY
       case $INPUT_KEY in
       yes)
-        rollback_cpu_isolation
+        rollback_isolcpus
         break
         ;;
       no)
         echo "WARNING: Please use this value (e.g., $isolated_cpus) while configuring the CPU(s) affinity"
+        break
+        ;;
+      *)
+        echo "Sorry, I don't understand. Try again!"
+        ;;
+      esac
+    done
+  fi
+}
+
+set_cgroups() {
+  cgroup='jvm-performance-benchmarks'
+  echo "Available cgroup controllers: "$(cat /sys/fs/cgroup/cgroup.controllers)
+  cgroup2=$(mount -l | grep cgroup2)
+  if [ "$cgroup2" == "" ]; then
+    echo "WARNING: cgroup v2 needs to be configured. This is available since Linux 4.5"
+    return 1
+  fi
+  sudo echo "+cpu" >> /sys/fs/cgroup/cgroup.subtree_control
+  sudo echo "+cpuset" >> /sys/fs/cgroup/cgroup.subtree_control
+  echo "Assigned cgroup subtree control: "$(cat /sys/fs/cgroup/cgroup.subtree_control)
+  echo ""
+  echo "Creating cgroup $cgroup ..."
+  sudo mkdir /sys/fs/cgroup/$cgroup/
+  sudo echo "+cpu" >> /sys/fs/cgroup/$cgroup/cgroup.subtree_control
+  sudo echo "+cpuset" >> /sys/fs/cgroup/$cgroup/cgroup.subtree_control
+  echo "Assigned cgroup $cgroup subtree control: "$(cat /sys/fs/cgroup/$cgroup/cgroup.subtree_control)
+  echo ""
+  sudo mkdir /sys/fs/cgroup/$cgroup/tasks/
+  echo "Available CPU(s): "$(cat /sys/fs/cgroup/cpuset.cpus.effective)
+  echo "Please specify which CPU(s) you want to assign to the $cgroup cgroup, as a comma separated list without spaces (e.g., 1,2)"
+  read -p 'CPU(s): ' cgroup_cpus
+  echo "$cgroup_cpus" > /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus
+  echo "Assigned CPU(s) to the $cgroup cgroup: "$(cat /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus)
+  echo ""
+  echo "Assign the current shell process to the $cgroup cgroup, so subsequent started processes will belong to the same cgroup."
+  echo $$ > /sys/fs/cgroup/$cgroup/tasks/cgroup.procs
+  echo "Assigned cgroup PID(s) process(es): "$(cat /sys/fs/cgroup/$cgroup/tasks/cgroup.procs)
+}
+
+rollback_cgroups() {
+  cgroup='jvm-performance-benchmarks'
+  echo "Deleting the cgroup $cgroup ..."
+  sudo rm -rf /sys/fs/cgroup/$cgroup/
+}
+
+configure_cgroups() {
+  cgroup='jvm-performance-benchmarks'
+  if [ ! -d "/sys/fs/cgroup/$cgroup" ]; then
+    while :
+    do
+      read -p "Do you want to set the CPU core(s) isolation with cgroups? (yes/no) " INPUT_KEY
+      case $INPUT_KEY in
+      yes)
+        set_cgroups
+        break
+        ;;
+      no)
+        break
+        ;;
+      *)
+        echo "Sorry, I don't understand. Try again!"
+        ;;
+      esac
+    done
+  else
+    echo "WARNING: cgroup $cgroup already exists."
+    while :
+    do
+      read -p "Do you want to delete the cgroup $cgroup? (yes/no) " INPUT_KEY
+      case $INPUT_KEY in
+      yes)
+        rollback_cgroups
+        break
+        ;;
+      no)
         break
         ;;
       *)
@@ -170,20 +246,29 @@ echo ""
 echo "+------------------------------------+"
 echo "| Set CPU(s) isolation with isolcpus |"
 echo "+------------------------------------+"
-# isolcpus - isolate a given set of CPUs from the kernel scheduler
-# Limitations:
-# - 1. the CPUs are isolated from the general SMP balancing and load scheduling algorithms. Since the tasks are not (implicitly) load-balanced on isolated CPUs, this might be a limitation/issue for the the multi-threaded applications
-# - 2. the list of isolated CPUs is static and only rebooting with a different isolcpus value changes it
-# When to use it:
-# - isolcpus should be used when the application cannot afford to be interrupted, not even by the kernel scheduler tick. Nevertheless, the tasks distribution among the isolated CPUs needs to be manually assigned with taskset command
-# In all the other situations it is recommended to use cpusets instead.
-configure_cpu_isolation
+echo "isolcpus - isolates a given set of CPUs from the kernel scheduler"
+echo "Limitations:"
+echo " - 1. CPUs are isolated from the general SMP balancing and load scheduling algorithms. Since the tasks are not (implicitly) load-balanced on isolated CPUs, this might be a issue for the multi-threaded applications. In such a case the tasks distribution among the isolated CPUs should be manually assigned with taskset command"
+echo " - 2. the list of isolated CPUs is static and only restarting the system with a different isolcpus value changes it"
+echo "Recommendations:"
+echo " - 1. isolcpus should be used for latency critical applications when the application does not afford any latency jitter, not even by the kernel scheduler tick"
+echo " - 2. in addition, isolcpus combined with thread affinity (e.g., taskset command) might improve the memory locality, especially in cases when the accessed data fit, most of the time, in the CPU caches"
+echo "WARNING: if you do not have a real need to use isolcpus, we recommend setting the CPU(s) isolation with cgroups instead"
+echo ""
+configure_isolcpus
 
 echo ""
 echo "+-----------------------------------+"
-echo "| Set CPU(s) isolation with cpusets |"
+echo "| Set CPU(s) isolation with cgroups |"
 echo "+-----------------------------------+"
-# TODO
+echo "cgroups - isolates the resource usage for a collection of processes/applications. Using cgroups might improve the throughput and latency (in comparison to the raw benchmarks), even with non-isolated CPUs"
+echo "Recommendations:"
+echo " - 1. isolating or pinning processes/applications to a particular set of CPU(s) is appropriate when you have a very good understanding of the underlying hardware and the application threads"
+echo "For example, in the case of a multi-socket CPU architecture you can split the application across the sockets (i.e., one application instance per socket, where each socket might have multiple CPU cores)"
+echo " - 2. in addition, to make the latency jitter to completely to disappear, an extra configuration might be needed to ignore the interrupt requests on the non-isolated CPU(s) (e.g., irqbalance with the IRQBALANCE_BANNED_CPUS option)"
+echo "WARNING: we recommend setting the CPU(s) isolation with cgroups, unless you have a real need to use isolcpus instead"
+echo ""
+configure_cgroups
 
 echo ""
 echo "+---------------------------------------------------+"
