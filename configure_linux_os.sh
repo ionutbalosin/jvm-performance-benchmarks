@@ -5,7 +5,7 @@ DRY_RUN="$1"
 set_isolcpus() {
   grub_file='/etc/default/grub'
   grub_file_backup='/etc/default/grub.backup'
-  echo "Please specify which physical CPU core(s) you want to isolate, as a comma separated list without spaces (e.g., 1,2)"
+  echo "Please specify which CPU core(s) you want to isolate, as a comma separated list without spaces (e.g., 1,2)"
   read -p 'Physical CPU core(s) to isolate: ' isolated_cpus
   echo ""
   echo "Current GRUB configuration: "$(cat $grub_file | grep GRUB_CMDLINE_LINUX_DEFAULT)
@@ -70,7 +70,7 @@ configure_isolcpus() {
       esac
     done
   else
-    echo "WARNING: CPU(s) isolation with isolcpus is already configured for the physical core(s): "$isolated_cpus
+    echo "WARNING: CPU(s) isolation with isolcpus is already configured for the CPU core(s): "$isolated_cpus
     while :
     do
       read -p "Do you want to reset it to the initial value? (yes/no) " INPUT_KEY
@@ -110,8 +110,9 @@ set_cgroups() {
   echo "Assigned cgroup $cgroup subtree control: "$(cat /sys/fs/cgroup/$cgroup/cgroup.subtree_control)
   echo ""
   sudo mkdir /sys/fs/cgroup/$cgroup/tasks/
-  echo "Available CPU(s): "$(cat /sys/fs/cgroup/cpuset.cpus.effective)
-  echo "Please specify which CPU(s) you want to assign to the $cgroup cgroup, as a comma separated list without spaces (e.g., 1,2)"
+  echo "Number of available physical CPU core(s): "$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l)
+  echo "Number of available effective (i.e., physical and logical) CPU core(s): "$(cat /sys/fs/cgroup/cpuset.cpus.effective)
+  echo "Please specify which CPU core(s) you want to isolate, as a comma separated list without spaces (e.g., 1,2)"
   read -p 'CPU(s): ' cgroup_cpus
   echo "$cgroup_cpus" > /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus
   echo "Assigned CPU(s) to the $cgroup cgroup: "$(cat /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus)
