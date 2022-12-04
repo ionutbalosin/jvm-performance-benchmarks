@@ -94,8 +94,8 @@ configure_isolcpus() {
 set_cgroups() {
   cgroup='jvm-performance-benchmarks'
   echo "Available cgroup controllers: "$(cat /sys/fs/cgroup/cgroup.controllers)
-  cgroup2=$(mount -l | grep cgroup2)
-  if [ "$cgroup2" == "" ]; then
+  cgroupv2=$(mount -l | grep cgroup2)
+  if [ "$cgroupv2" == "" ]; then
     echo "ERROR: cgroup v2 needs to be configured. This is available since Linux 4.5"
     return 1
   fi
@@ -124,8 +124,13 @@ set_cgroups() {
 
 rollback_cgroups() {
   cgroup='jvm-performance-benchmarks'
+  if [ $(dpkg-query -W -f='${Status}' cgroup-tools 2>/dev/null | grep -c "ok installed") -eq 0 ];
+  then
+    echo "WARNING: cgroup-tools is not installed. Trying to install it ..."
+    apt-get install cgroup-tools
+  fi
   echo "Deleting the cgroup $cgroup ..."
-  sudo rm -rf /sys/fs/cgroup/$cgroup/
+  sudo cgdelete -r cpu,cpuset:/$cgroup
 }
 
 configure_cgroups() {
