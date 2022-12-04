@@ -183,6 +183,25 @@ disable_aslr() {
   echo "New ASLR configuration: "$(cat "$aslr")
 }
 
+configure_aslr() {
+  while :
+  do
+    read -p "Do you want to disable ASLR? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      disable_aslr
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
 disable_turbo_boost() {
   # Intel
   no_turbo="/sys/devices/system/cpu/intel_pstate/no_turbo"
@@ -206,6 +225,25 @@ disable_turbo_boost() {
   fi
 }
 
+configure_turbo_boost() {
+  while :
+  do
+    read -p "Do you want to disable turbo boost mode? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      disable_turbo_boost
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
 set_scaling_governor() {
   cat /sys/bus/cpu/drivers/processor/cpu*/cpufreq/affected_cpus | grep -v '^[[:space:]]*$' | while IFS= read -r cpu
   do
@@ -216,6 +254,25 @@ set_scaling_governor() {
     fi
     echo "New CPU$cpu governor configuration: "$(cat /sys/devices/system/cpu/cpu$cpu/cpufreq/scaling_governor)
     echo ""
+  done
+}
+
+configure_scaling_governor() {
+  while :
+  do
+    read -p "Do you want to set the CPU governor to performance? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      set_scaling_governor
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
   done
 }
 
@@ -236,6 +293,25 @@ disable_hyper_threading() {
       echo ""
     done
   fi
+}
+
+configure_hyper_threading() {
+  while :
+  do
+    read -p "Do you want to disable the CPU hyper-threading? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      disable_hyper_threading
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
 }
 
 if [ "Linux" != "$(uname -s)" ]; then
@@ -280,22 +356,35 @@ echo ""
 echo "+---------------------------------------------------+"
 echo "| Disable address space layout randomization (ASLR) |"
 echo "+---------------------------------------------------+"
-disable_aslr
+echo "ASLR - security technique involved in preventing exploitation of memory corruption vulnerabilities. It randomly arranges the address space positions of key data areas of a process, including the base of the executable and the positions of the stack, heap and libraries."
+echo "WARNING: Disabling ASLR is not mandatory but often preferable (only for local test environments). It might help in certain situations (e.g., debugging, mapping shared memory objects across processes) to receive more consistent measurements"
+echo ""
+configure_aslr
 
 echo ""
 echo "+--------------------------+"
 echo "| Disable turbo boost mode |"
 echo "+--------------------------+"
-disable_turbo_boost
+echo "Turbo Boost - raises CPU operating frequency when demanding tasks are running"
+echo "WARNING: we recommend disabling it to receive more consistent measurements"
+echo ""
+configure_turbo_boost
 
 echo ""
 echo "+---------------------------------+"
 echo "| Set CPU governor to performance |"
 echo "+---------------------------------+"
-set_scaling_governor
+echo "CPU governor to performance - avoids sub-nominal clocking. If the scaling governor policy is not set to performance, the kernel might decide to save power and throttle the frequency"
+echo "WARNING: we recommend setting the CPU governor to performance to receive more consistent measurements"
+echo ""
+configure_scaling_governor
 
 echo ""
 echo "+-----------------------------+"
 echo "| Disable CPU hyper-threading |"
 echo "+-----------------------------+"
-disable_hyper_threading
+echo "hyper-threading - improves parallelization of computations so that one physical core can have two simultaneous threads of execution"
+echo "In general, the CPU architectural state (e.g., registers) is replicated but not the execution resources (e.g., ALUs, caches, etc.)"
+echo "WARNING: we recommend disabling it to receive more consistent measurements"
+echo ""
+configure_hyper_threading
