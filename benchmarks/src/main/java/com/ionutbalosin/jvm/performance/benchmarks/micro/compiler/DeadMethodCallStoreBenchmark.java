@@ -59,7 +59,7 @@ public class DeadMethodCallStoreBenchmark {
 
   @Setup
   public void setup() {
-    circleRadius = random.nextDouble(32);
+    circleRadius = random.nextDouble();
   }
 
   @Benchmark

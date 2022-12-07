@@ -64,7 +64,7 @@ public class LockElisionBenchmark {
 
   @Setup
   public void setup() {
-    defaultValue = random.nextInt(32, 64);
+    defaultValue = 32 + random.nextInt(32);
     incrementValue = random.nextInt(32);
   }
 

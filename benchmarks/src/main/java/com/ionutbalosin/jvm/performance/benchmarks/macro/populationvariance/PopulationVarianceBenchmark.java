@@ -27,7 +27,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.forkjoin.ForkJoinVariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.iterative.IterativeVariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.stream.StreamVariance;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -63,7 +63,6 @@ public class PopulationVarianceBenchmark {
   private static final float OLDEST_MAN_AGE = 116.1479F;
   private static final int POPULATION_SIZE = Integer.MAX_VALUE >> 4;
 
-  private static final Random random = new Random(16384);
   private static double[] ages = new double[POPULATION_SIZE];
 
   // java -jar benchmarks/target/benchmarks.jar ".*PopulationVarianceBenchmark.*"
@@ -71,7 +70,7 @@ public class PopulationVarianceBenchmark {
   @Setup()
   public void setup() {
     for (int i = 0; i < POPULATION_SIZE; i++) {
-      ages[i] = random.nextDouble(OLDEST_MAN_AGE);
+      ages[i] = ThreadLocalRandom.current().nextDouble(OLDEST_MAN_AGE);
     }
 
     // make sure the results are equivalent before any further benchmarking

@@ -72,7 +72,7 @@ public class LockCoarseningBenchmark {
 
   @Setup
   public void setup() {
-    defaultValue = random.nextInt(32, 64);
+    defaultValue = 32 + random.nextInt(64);
     incrementValue = random.nextInt(32);
   }
 

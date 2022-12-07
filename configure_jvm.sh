@@ -1,54 +1,62 @@
 #!/bin/bash
 
-configure_openjdk_hotspot()
-{
-  export ARCH=$(uname -i)
-  export JDK_VERSION="17"
+configure_openjdk_hotspot_jdk11() {
+  export JAVA_HOME="/usr/lib/jvm/openjdk-11"
+  export JAVA_VM_NAME="OpenJDK HotSpot VM"
+  export JAVA_VM_IDENTIFIER="openjdk_hotspot"
+}
+
+configure_openjdk_hotspot_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.2"
-  export PATH=$JAVA_HOME/bin:$PATH
-  export JVM_OPTS=""
-  export TEST_SUITE_NAME="OpenJDK HotSpot VM"
-  export TEST_SUITE_OUTPUT_FOLDER="openjdk_hotspot"
+  export JAVA_VM_NAME="OpenJDK HotSpot VM"
+  export JAVA_VM_IDENTIFIER="openjdk_hotspot"
 }
 
-configure_graalvm_ce()
-{
-  export ARCH=$(uname -i)
-  export JDK_VERSION="17"
+configure_graalvm_ce_jdk11() {
+  export JAVA_HOME="/usr/lib/jvm/graalvm-ce-java11-22.2.0"
+  export JAVA_VM_NAME="GraalVM CE"
+  export JAVA_VM_IDENTIFIER="graalvm_ce"
+}
+
+configure_graalvm_ce_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/graalvm-ce-java17-22.2.0"
-  export PATH=$JAVA_HOME/bin:$PATH
-  export JVM_OPTS=""
-  export TEST_SUITE_NAME="GraalVM CE"
-  export TEST_SUITE_OUTPUT_FOLDER="graalvm_ce"
+  export JAVA_VM_NAME="GraalVM CE"
+  export JAVA_VM_IDENTIFIER="graalvm_ce"
 }
 
-configure_graalvm_ee()
-{
-  export ARCH=$(uname -i)
-  export JDK_VERSION="17"
+configure_graalvm_ee_jdk11() {
+  export JAVA_HOME="/usr/lib/jvm/graalvm-ee-java11-22.2.0.1"
+  export JAVA_VM_NAME="GraalVM EE"
+  export JAVA_VM_IDENTIFIER="graalvm_ee"
+}
+
+configure_graalvm_ee_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/graalvm-ee-java17-22.2.0.1"
-  export PATH=$JAVA_HOME/bin:$PATH
-  export JVM_OPTS=""
-  export TEST_SUITE_NAME="GraalVM EE"
-  export TEST_SUITE_OUTPUT_FOLDER="graalvm_ee"
+  export JAVA_VM_NAME="GraalVM EE"
+  export JAVA_VM_IDENTIFIER="graalvm_ee"
 }
 
-configure_eclipse_open_j9()
-{
-  export ARCH=$(uname -i)
-  export JDK_VERSION="17"
+configure_eclipse_open_j9_jdk11() {
+  export JAVA_HOME="/usr/lib/jvm/ibm-semeru-openj9-jdk-11.0.14.1+1"
+  export JAVA_VM_NAME="Eclipse OpenJ9 VM"
+  export JAVA_VM_IDENTIFIER="eclipse_openj9"
+}
+
+configure_eclipse_open_j9_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/ibm-semeru-openj9-jdk-17.0.2+8"
-  export PATH=$JAVA_HOME/bin:$PATH
-  export JVM_OPTS=""
-  export TEST_SUITE_NAME="Eclipse OpenJ9 VM"
-  export TEST_SUITE_OUTPUT_FOLDER="eclipse_openj9"
+  export JAVA_VM_NAME="Eclipse OpenJ9 VM"
+  export JAVA_VM_IDENTIFIER="eclipse_openj9"
 }
 
-echo "Select the JVM:"
-echo "    1) - OpenJDK HotSpot VM"
-echo "    2) - GraalVM CE"
-echo "    3) - GraalVM EE"
-echo "    4) - Eclipse OpenJ9"
+echo "Select the JDK/JVM:"
+echo "    1) - jdk_11 / OpenJDK HotSpot VM"
+echo "    2) - jdk_11 / GraalVM CE"
+echo "    3) - jdk_11 / GraalVM EE"
+echo "    4) - jdk_11 / Eclipse OpenJ9"
+echo "    5) - jdk_17 / OpenJDK HotSpot VM"
+echo "    6) - jdk_17 / GraalVM CE"
+echo "    7) - jdk_17 / GraalVM EE"
+echo "    8) - jdk_17 / Eclipse OpenJ9"
 echo ""
 
 while :
@@ -56,19 +64,35 @@ do
   read -r INPUT_KEY
   case $INPUT_KEY in
 	1)
-    configure_openjdk_hotspot
+    configure_openjdk_hotspot_jdk11
     break
 		;;
 	2)
-    configure_graalvm_ce
+    configure_graalvm_ce_jdk11
     break
 		;;
 	3)
-    configure_graalvm_ee
+    configure_graalvm_ee_jdk11
     break
 		;;
 	4)
-    configure_eclipse_open_j9
+    configure_eclipse_open_j9_jdk11
+    break
+		;;
+	5)
+    configure_openjdk_hotspot_jdk17
+    break
+		;;
+	6)
+    configure_graalvm_ce_jdk17
+    break
+		;;
+	7)
+    configure_graalvm_ee_jdk17
+    break
+		;;
+	8)
+    configure_eclipse_open_j9_jdk17
     break
 		;;
 	*)
@@ -77,17 +101,22 @@ do
 	esac
 done
 
+export ARCH=$(uname -i)
+export PATH=$JAVA_HOME/bin:$PATH
+export JAVA_VERSION=$(java -XshowSettings:properties 2>&1 >/dev/null | grep 'java.specification.version' | awk '{split($0, array, "="); print array[2]}' | xargs echo -n)
+
+if ! $JAVA_HOME/bin/java -version; then
+  echo ""
+  echo "ERROR: Java is not properly set, unable to continue!"
+  exit
+fi
+
 echo ""
-echo "ARCH=${ARCH}"
-echo "JDK_VERSION=${JDK_VERSION}"
-echo "JAVA_HOME=${JAVA_HOME}"
-echo "JVM_OPTS=${JVM_OPTS}"
-echo "TEST_SUITE_NAME=${TEST_SUITE_NAME}"
-echo "TEST_SUITE_OUTPUT_FOLDER=${TEST_SUITE_OUTPUT_FOLDER}"
+echo "ARCH: "$ARCH
+echo "JAVA_HOME: "$JAVA_HOME
+echo "JAVA_VERSION: "$JAVA_VERSION
+echo "JAVA_VM_NAME: "$JAVA_VM_NAME
+echo "JAVA_VM_IDENTIFIER: "$JAVA_VM_IDENTIFIER
 echo ""
 
-if ! java -version; then
-    echo ""
-    echo "ERROR: Java is not properly set, unable to continue!"
-    exit
-fi
+read -r -p "IMPORTANT: if the above configuration is correct, press ENTER to continue otherwise CRTL+C to abort!"

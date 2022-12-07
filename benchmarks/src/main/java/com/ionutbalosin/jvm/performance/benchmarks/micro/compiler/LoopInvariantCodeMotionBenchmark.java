@@ -24,7 +24,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -59,13 +59,11 @@ public class LoopInvariantCodeMotionBenchmark {
   @Param({"16384"})
   private int iterations;
 
-  private final Random random = new Random(16384);
-
   private double value;
 
   @Setup
   public void setup() {
-    value = random.nextDouble(32);
+    value = ThreadLocalRandom.current().nextDouble(32);
   }
 
   @Benchmark
