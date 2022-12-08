@@ -1,6 +1,6 @@
 #!/bin/bash
 
-secs_converter() {
+time_converter() {
     if [[ -z ${1} || ${1} -lt 60 ]] ;then
         min=0 ; secs="${1}"
     else
@@ -39,7 +39,7 @@ create_folder() {
   fi
 }
 
-run_test() {
+run_benchmark() {
   JVM_OPTS=$(remove_spaces "$1")
   TEST_NAME=$(remove_spaces "$2")
   JMH_OPTS=$(remove_spaces "$3")
@@ -79,7 +79,7 @@ run_benchmark_suite() {
       bench_jvm_args_append=$(default_if_empty "$bench_jvm_args_append" "")
       global_jmh_opts_upd="${global_jmh_opts/((outputFilePath))/${JMH_OUTPUT_FOLDER}}/${bench_output_file_name}"
 
-      run_test "$global_jvm_opts" "$bench_name" "$global_jmh_opts_upd $bench_jmh_opts" "$global_jvm_args_append $bench_jvm_args_append"
+      run_benchmark "$global_jvm_opts" "$bench_name" "$global_jmh_opts_upd $bench_jmh_opts" "$global_jvm_args_append $bench_jvm_args_append"
 
       ((counter++))
     done
@@ -87,7 +87,7 @@ run_benchmark_suite() {
     echo ""
     echo "Finished $JAVA_VM_NAME tests suite!"
 
-    secs_converter "$(($(date +%s) - test_suite_start))"
+    time_converter "$(($(date +%s) - test_suite_start))"
 }
 
 compile_benchmark_suite() {
