@@ -112,11 +112,11 @@ if ! $JAVA_HOME/bin/java -version; then
 fi
 
 echo ""
-echo "ARCH: "$ARCH
-echo "JAVA_HOME: "$JAVA_HOME
-echo "JAVA_VERSION: "$JAVA_VERSION
-echo "JAVA_VM_NAME: "$JAVA_VM_NAME
-echo "JAVA_VM_IDENTIFIER: "$JAVA_VM_IDENTIFIER
+echo "Arch: $ARCH"
+echo "Java home: $JAVA_HOME"
+echo "Java version: $JAVA_VERSION"
+echo "JVM name: $JAVA_VM_NAME"
+echo "JVM identifier: $JAVA_VM_IDENTIFIER"
 echo ""
 
 read -r -p "IMPORTANT: if the above configuration is correct, press ENTER to continue otherwise CRTL+C to abort!"
