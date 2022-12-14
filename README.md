@@ -73,15 +73,27 @@ For further references please check:
 
 ## Prerequisites
 
-It is necessary to have installed JDK 17 build (i.e., latest LTS), the preferable one which ships [Shenandoah GC](https://wiki.openjdk.org/display/shenandoah/Main) (otherwise, some benchmarks will fail).
+### Install JDK
 
-## Step 1 - Compile and package
+To run the benchmarks on different JKD versions / JVMs distributions, please install the corresponding build:
 
+No. | JVM distribution   | JDK version |  Build
+-------------- |--------------------|--------------------| -------------------------------
+01 | OpenJDK HotSpot VM | 11, 17             | [OpenJDK](https://jdk.java.net/archive/)
+02 | Graal VM CE        | 11, 17             | [GraalVM CE](https://www.graalvm.org/downloads/)
+03 | Graal VM EE        | 11, 17             | [GraalVM CE](https://www.graalvm.org/downloads/)
+04 | Eclipse OpenJ9 VM  | 11, 17             | [Eclipse OpenJ9](https://adoptium.net/temurin/releases/)
+
+>Note: we support only LTS versions. If there is a need for another JDK feature release, please configure it by yourself.
+
+### Configure the script
+
+Open the [configure_jvm.sh](./configure_jvm.sh) script file and update the corresponding below property (as per your system path):
 ```
-./mvnw package
+JAVA_HOME=<path_to_jvm>
 ```
 
-## Step 2 - Run the microbenchmarks
+## Run the microbenchmarks
 
 ### Dry run
 
@@ -103,7 +115,4 @@ You can also redirect the output to a file for later analysis:
 ```
 sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
-
-Every benchmark does 5x10s warmups, 5x10s measurements, and 3 forks. These are reconsidered to allow longer in-JVM runs and produce better/ most accurate results. However, in some corner cases, it might still not be enough, but these are out of scope.
-
-Each JMH test suite result is written to `results/$JDK_VERSION/$ARCH/$JVM/$BENCHMARK_NAME$.json`
+Each JMH test suite result is written to under `results/jdk-$VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME$.json`

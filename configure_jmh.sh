@@ -1,18 +1,13 @@
 #!/bin/bash
 
-export JMH_ARCHIVE="benchmarks/target/benchmarks.jar"
-export JMH_OPTS="-foe true -wi 5 -w 10 -i 5 -r 10 -f 3"
-export JMH_OUTPUT_FOLDER="results"
-export JMH_OUTPUT_FORMAT_TYPE="csv"
-# Element array format: "Test Name | JMH Options"
-# Note: these JMH options are test specific, in addition to global $JMH_OPTS defined above
-export -a JMH_TEST_SUITE=(
-    "DeadAllocationStoreEliminationBenchmark|-prof gc"
-  )
+export JMH_JAR="benchmarks/target/benchmarks.jar"
+export JMH_BENCHMARKS="jmh_suite_jdk${JAVA_VERSION}.json"
+export JMH_OUTPUT_FOLDER="results/jdk-$JAVA_VERSION/$ARCH/$JAVA_VM_IDENTIFIER"
 
 echo ""
-echo "JMH_ARCHIVE=${JMH_ARCHIVE}"
-echo "JMH_OUTPUT_FOLDER=${JMH_OUTPUT_FOLDER}"
-echo "JMH_OPTS=${JMH_OPTS}"
-echo "JMH_OUTPUT_FORMAT_TYPE=${JMH_OUTPUT_FORMAT_TYPE}"
+echo "JMH jar: $JMH_JAR"
+echo "JMH test suite file: $JMH_BENCHMARKS"
+echo "JMH output folder: $JMH_OUTPUT_FOLDER"
 echo ""
+
+read -r -p "IMPORTANT: if the above configuration is correct, press ENTER to continue otherwise CRTL+C to abort!"

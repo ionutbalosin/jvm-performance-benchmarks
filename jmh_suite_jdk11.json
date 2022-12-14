@@ -1,0 +1,41 @@
+{
+  "globals": {
+    "jvmOpts": "",
+    "jmhOpts": "-foe true -wi 5 -w 10 -i 5 -r 10 -f 3 -rf csv -rff ((outputFilePath)).csv",
+    "jvmArgsAppend": "--enable-preview -Xms4g -Xmx4g -XX:+AlwaysPreTouch"
+  },
+  "benchmarks": [
+    {
+      "name": "BranchlessBitwiseBenchmark"
+    },
+    {
+      "name": "VectorAPIBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_1thread_serialGC",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_1thread_serialGC",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_2threads_serialGC",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_1thread_parallelGC",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_2threads_parallelGC",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    }
+  ]
+}

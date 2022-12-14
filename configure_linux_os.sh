@@ -1,7 +1,5 @@
 #!/usr/bin/sudo bash
 
-DRY_RUN="$1"
-
 set_isolcpus() {
   grub_file='/etc/default/grub'
   grub_file_backup='/etc/default/grub.backup'
@@ -313,6 +311,8 @@ configure_hyper_threading() {
     esac
   done
 }
+
+DRY_RUN="$1"
 
 if [ "Linux" != "$(uname -s)" ]; then
   echo ""
