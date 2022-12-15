@@ -105,6 +105,16 @@ Mac OS:
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.0.2/Contents/Home"
 ```
 
+Windows OS:
+```
+export JAVA_HOME="/c/Program_Dev/Java/openjdk-17.0.2"
+```
+
+To properly execute bash scripts on Windows there are a few alternatives:
+- [GIT bash](https://git-scm.com/downloads)
+- [Cygwin](https://www.cygwin.com/)
+- Windows Subsystem for Linux (WSL)
+
 ## Compile and package the microbenchmarks
 
 ### JDK 11
