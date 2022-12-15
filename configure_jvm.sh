@@ -108,15 +108,15 @@ export JAVA_VERSION=$(java -XshowSettings:properties 2>&1 >/dev/null | grep 'jav
 if ! $JAVA_HOME/bin/java -version; then
   echo ""
   echo "ERROR: Java is not properly set, unable to continue!"
-  exit
+  exit 1
 fi
 
 echo ""
-echo "Arch: $ARCH"
+echo "Architecture: $ARCH"
 echo "Java home: $JAVA_HOME"
 echo "Java version: $JAVA_VERSION"
-echo "JVM name: $JAVA_VM_NAME"
-echo "JVM identifier: $JAVA_VM_IDENTIFIER"
+echo "JVM: $JAVA_VM_NAME"
+echo "JVM benchmarks identifier: $JAVA_VM_IDENTIFIER"
 echo ""
 
-read -r -p "IMPORTANT: if the above configuration is correct, press ENTER to continue otherwise CRTL+C to abort!"
+read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "

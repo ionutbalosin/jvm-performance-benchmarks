@@ -312,16 +312,45 @@ configure_hyper_threading() {
   done
 }
 
+configure_os() {
+  if [ "Linux" != "$(uname -s)" ]; then
+    echo ""
+    echo "ERROR: Not a Linux OS, unable to further apply any configuration."
+    return 1
+  fi
+
+  if [[ $EUID != 0 ]]; then
+    echo ""
+    echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
+    read -r -p "Press ENTER to continue or CRTL+C to abort ... "
+  fi
+
+  echo ""
+  while :
+  do
+    read -r -p "Do you want to proceed with the OS configuration settings? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      return 0
+      ;;
+    no)
+      return 1
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
 DRY_RUN="$1"
 
-if [ "Linux" != "$(uname -s)" ]; then
-  echo ""
-  echo "ERROR: Not a Linux OS, unable to further apply any configuration."
-  exit 1
-fi
-
-if [[ "$DRY_RUN" != "--dry-run" && $EUID != 0 ]]; then
-    read -r -p "WARNING: sudo admin rights are needed! Press CRTL+C and run it again (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
+echo "For benchmarking to reduce, as much as possible, the noise and to get more consistent measurements a proper OS configuration is very important. Nevertheless, how to do that is very OS dependent and it might not be sufficient since it does not exclude the measurement bias."
+echo "The current configuration relies and it was tested on a Debian-based Linux distro (e.g., Ubuntu)."
+configure_os
+if [ $? -ne 0 ]
+then
+  return 1
 fi
 
 echo ""

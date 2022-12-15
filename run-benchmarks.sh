@@ -48,13 +48,13 @@ run_benchmark() {
   echo ""
   echo "Running $TEST_NAME benchmark ..."
   echo "$CMD"
+  echo ""
   if [ "$DRY_RUN" != "--dry-run" ]; then
     eval "$CMD"
   fi
 }
 
 run_benchmark_suite() {
-    echo ""
     echo "Running $JAVA_VM_NAME tests suite ..."
 
     jq=jq/jq-linux64
@@ -77,7 +77,7 @@ run_benchmark_suite() {
       bench_jmh_opts=$(default_if_empty "$bench_jmh_opts" "")
       bench_jvm_args_append=$(./$jq --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jvmArgsAppend")
       bench_jvm_args_append=$(default_if_empty "$bench_jvm_args_append" "")
-      global_jmh_opts_upd="${global_jmh_opts/((outputFilePath))/${JMH_OUTPUT_FOLDER}}/${bench_output_file_name}"
+      global_jmh_opts_upd="${global_jmh_opts/((outputFilePath))/${JMH_OUTPUT_FOLDER}/${bench_output_file_name}}"
 
       run_benchmark "$global_jvm_opts" "$bench_name" "$global_jmh_opts_upd $bench_jmh_opts" "$global_jvm_args_append $bench_jvm_args_append"
 
@@ -93,6 +93,7 @@ run_benchmark_suite() {
 compile_benchmark_suite() {
   CMD="./mvnw -P jdk${JAVA_VERSION}_profile clean spotless:apply package"
   echo "$CMD"
+  echo ""
   if [ "$DRY_RUN" != "--dry-run" ]; then
     eval "$CMD"
   fi
@@ -104,39 +105,33 @@ echo ""
 echo "############################################################################"
 echo "#######       Welcome to JVM Performance Benchmarks Test Suite       #######"
 echo "############################################################################"
-echo ""
 
 echo ""
 echo "+========================+"
 echo "| [1/5] OS Configuration |"
 echo "+========================+"
-echo ""
 . ./configure_linux_os.sh $DRY_RUN
 
 echo ""
 echo "+=========================+"
 echo "| [2/5] JVM Configuration |"
 echo "+=========================+"
-echo ""
 . ./configure_jvm.sh
 
 echo ""
 echo "+=========================+"
 echo "| [3/5] JMH Configuration |"
 echo "+=========================+"
-echo ""
 . ./configure_jmh.sh
 
 echo ""
 echo "+===============================+"
 echo "| [4/5] Compile benchmark suite |"
 echo "+===============================+"
-echo ""
 compile_benchmark_suite
 
 echo ""
 echo "+===========================+"
 echo "| [5/5] Run benchmark suite |"
 echo "+===========================+"
-echo ""
 run_benchmark_suite
