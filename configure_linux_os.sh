@@ -1,5 +1,14 @@
 #!/usr/bin/sudo bash
 
+set_environment_variables() {
+  export ARCH="$(uname -i)"
+  export JQ="jq/jq-linux64"
+  echo "Architecture: $ARCH"
+  echo "JSON processor executable: $JQ"
+  echo ""
+  read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
+}
+
 set_isolcpus() {
   grub_file='/etc/default/grub'
   grub_file_backup='/etc/default/grub.backup'
@@ -312,13 +321,7 @@ configure_hyper_threading() {
   done
 }
 
-check_os_setup() {
-  if [ "Linux" != "$(uname -s)" ]; then
-    echo ""
-    echo "ERROR: Not a Linux OS, unable to further apply any configuration."
-    return 1
-  fi
-
+confirm_os_settings() {
   if [[ $EUID != 0 ]]; then
     echo ""
     echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
@@ -345,9 +348,15 @@ check_os_setup() {
 
 DRY_RUN="$1"
 
+echo ""
+echo "+---------------------------+"
+echo "| Set environment variables |"
+echo "+---------------------------+"
+set_environment_variables
+
 echo "For benchmarking to reduce, as much as possible, the noise and to get more consistent measurements a proper OS configuration is very important. Nevertheless, how to do that is very OS dependent and it might not be sufficient since it does not exclude the measurement bias."
 echo "The current configuration relies and it was tested on a Debian-based Linux distro (e.g., Ubuntu)."
-check_os_setup
+confirm_os_settings
 if [ $? -ne 0 ]
 then
   return 1

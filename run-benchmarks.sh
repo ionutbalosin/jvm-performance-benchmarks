@@ -57,11 +57,10 @@ run_benchmark() {
 run_benchmark_suite() {
     echo "Running $JAVA_VM_NAME tests suite ..."
 
-    jq=jq/jq-linux64
-    no_of_benchmarks=$(./$jq -r < "$JMH_BENCHMARKS" ".benchmarks | length")
-    global_jmh_opts=$(./$jq -r < "$JMH_BENCHMARKS" ".globals.jmhOpts")
-    global_jvm_opts=$(./$jq -r < "$JMH_BENCHMARKS" ".globals.jvmOpts")
-    global_jvm_args_append=$(./$jq -r < "$JMH_BENCHMARKS" ".globals.jvmArgsAppend")
+    no_of_benchmarks=$(./$JQ -r < "$JMH_BENCHMARKS" ".benchmarks | length")
+    global_jmh_opts=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jmhOpts")
+    global_jvm_opts=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jvmOpts")
+    global_jvm_args_append=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jvmArgsAppend")
 
     create_folder "$JMH_OUTPUT_FOLDER"
 
@@ -70,12 +69,12 @@ run_benchmark_suite() {
     counter=0
     until [ $counter -gt $((no_of_benchmarks - 1)) ]
     do
-      bench_name=$(./$jq --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].name")
-      bench_output_file_name=$(./$jq --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].outputFileName")
+      bench_name=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].name")
+      bench_output_file_name=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].outputFileName")
       bench_output_file_name=$(default_if_empty "$bench_output_file_name" "$bench_name")
-      bench_jmh_opts=$(./$jq --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jmhOpts")
+      bench_jmh_opts=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jmhOpts")
       bench_jmh_opts=$(default_if_empty "$bench_jmh_opts" "")
-      bench_jvm_args_append=$(./$jq --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jvmArgsAppend")
+      bench_jvm_args_append=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jvmArgsAppend")
       bench_jvm_args_append=$(default_if_empty "$bench_jvm_args_append" "")
       global_jmh_opts_upd="${global_jmh_opts/((outputFilePath))/${JMH_OUTPUT_FOLDER}/${bench_output_file_name}}"
 
@@ -99,6 +98,17 @@ compile_benchmark_suite() {
   fi
 }
 
+configure_os() {
+  if [ "$(uname -s)" == "Linux" ]; then
+      . ./configure_linux_os.sh "$DRY_RUN"
+  elif [ "$(uname -s)" == "Darwin" ]; then
+      . ./configure_mac_os.sh "$DRY_RUN"
+  else
+      echo "WARNING: No configurations are available for this OS. This is neither a Linux nor a Darwin OS."
+      exit 1
+  fi
+}
+
 DRY_RUN="$1"
 
 echo ""
@@ -110,7 +120,7 @@ echo ""
 echo "+========================+"
 echo "| [1/5] OS Configuration |"
 echo "+========================+"
-. ./configure_linux_os.sh $DRY_RUN
+configure_os
 
 echo ""
 echo "+=========================+"
