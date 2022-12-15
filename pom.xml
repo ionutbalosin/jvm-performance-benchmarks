@@ -90,6 +90,9 @@
 
         <profile>
             <id>jdk17_profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>

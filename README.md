@@ -54,7 +54,7 @@ For more details please check [JMH with OpenJ9](https://github.com/eclipse-openj
 
 At the moment we leave it **out of scope** Eclipse OpenJ9 until we find a proper alternative.
 
-## How to get consistent results
+## Linux: how to get consistent results
 
 When doing benchmarking it is recommended to disable potential sources of performance non-determinism, as follows:
 - disable address space randomization
@@ -73,7 +73,7 @@ For further references please check:
 
 ## Prerequisites
 
-### Install JDK
+### Install JDK/JVM
 
 To run the benchmarks on different JKD versions / JVMs distributions, please install the corresponding build:
 
@@ -86,14 +86,34 @@ No. | JVM distribution   | JDK version |  Build
 
 >Note: we support only LTS versions. If there is a need for another JDK feature release, please configure it by yourself.
 
-### Configure the script
+### Configure JDK/JVM
 
 Open the [configure_jvm.sh](./configure_jvm.sh) script file and update the corresponding below property (as per your system path):
 ```
 JAVA_HOME=<path_to_jvm>
 ```
 
-## Run the microbenchmarks
+## Compile and package the microbenchmarks
+
+### JDK 11
+
+To compile the microbenchmarks using JDK 11 please run the below command:
+```
+./mvnw -P jdk11_profile clean spotless:apply package
+```
+
+### JDK 17
+
+To compile and package the microbenchmarks using JDK 17 please run the below command:
+```
+./mvnw clean spotless:apply package
+```
+or
+```
+./mvnw -P jdk17_profile clean spotless:apply package
+```
+
+## Run the microbenchmarks (including the entire setup)
 
 ### Dry run
 
