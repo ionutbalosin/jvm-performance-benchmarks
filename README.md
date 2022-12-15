@@ -120,7 +120,7 @@ To compile and package the microbenchmarks using JDK 17 please run the below com
 ```
 ./mvnw clean spotless:apply package
 ```
-or
+or (using the default, explicit profile):
 ```
 ./mvnw -P jdk17_profile clean spotless:apply package
 ```
