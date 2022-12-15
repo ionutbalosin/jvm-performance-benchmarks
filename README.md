@@ -88,9 +88,21 @@ No. | JVM distribution   | JDK version |  Build
 
 ### Configure JDK/JVM
 
-Open the [configure_jvm.sh](./configure_jvm.sh) script file and update the corresponding below property (as per your system path):
+Open the [configure_jvm.sh](./configure_jvm.sh) script file and update the corresponding **JAVA_HOME** property (as per your system path):
 ```
-JAVA_HOME=<path_to_jvm>
+export JAVA_HOME="<path_to_jvm>"
+```
+
+#### A few examples
+
+Linux OS:
+```
+export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.2"
+```
+
+Mac OS:
+```
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.0.2/Contents/Home"
 ```
 
 ## Compile and package the microbenchmarks
