@@ -312,7 +312,7 @@ configure_hyper_threading() {
   done
 }
 
-configure_os() {
+check_os_setup() {
   if [ "Linux" != "$(uname -s)" ]; then
     echo ""
     echo "ERROR: Not a Linux OS, unable to further apply any configuration."
@@ -347,7 +347,7 @@ DRY_RUN="$1"
 
 echo "For benchmarking to reduce, as much as possible, the noise and to get more consistent measurements a proper OS configuration is very important. Nevertheless, how to do that is very OS dependent and it might not be sufficient since it does not exclude the measurement bias."
 echo "The current configuration relies and it was tested on a Debian-based Linux distro (e.g., Ubuntu)."
-configure_os
+check_os_setup
 if [ $? -ne 0 ]
 then
   return 1
