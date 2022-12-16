@@ -52,13 +52,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class CanonicalizeInductionVariableBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*CanonicalizeInductionVariableBenchmark.*"
+
   // Make sure the multiplication uses longs but not ints
   // Formula: reducedLength = sqrt(length) - start
   private final long length = 4202496L * 4202496L;
   private final long reducedLength = 4194304L;
   private final long start = 8192;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*CanonicalizeInductionVariableBenchmark.*"
 
   @Benchmark
   public long canonicalize() {

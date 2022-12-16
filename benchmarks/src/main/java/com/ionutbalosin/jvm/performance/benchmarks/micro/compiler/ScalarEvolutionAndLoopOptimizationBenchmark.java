@@ -51,6 +51,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class ScalarEvolutionAndLoopOptimizationBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*ScalarEvolutionAndLoopOptimizationBenchmark.*"
+
   @Param({"16384"})
   private int size;
 

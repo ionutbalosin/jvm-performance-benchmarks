@@ -40,6 +40,8 @@ import org.openjdk.jmh.annotations.*;
 @State(Scope.Benchmark)
 public class MandelbrotVectorAPIBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*MandelbrotVectorAPIBenchmark.*"
+
   private static final VectorSpecies<Double> DOUBLE_VECTOR_SPECIES = DoubleVector.SPECIES_PREFERRED;
 
   @Param({"256", "512"})

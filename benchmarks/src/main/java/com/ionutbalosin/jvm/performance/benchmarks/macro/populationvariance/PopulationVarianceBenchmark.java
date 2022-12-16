@@ -59,13 +59,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class PopulationVarianceBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*PopulationVarianceBenchmark.*"
+
   // The oldest person ever: 116 years 54 days
   private static final float OLDEST_MAN_AGE = 116.1479F;
   private static final int POPULATION_SIZE = Integer.MAX_VALUE >> 4;
 
   private static double[] ages = new double[POPULATION_SIZE];
-
-  // java -jar benchmarks/target/benchmarks.jar ".*PopulationVarianceBenchmark.*"
 
   @Setup()
   public void setup() {

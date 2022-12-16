@@ -49,9 +49,12 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class HeapMemoryBandwidthAllocatorBenchmark {
 
-  @Param private ObjectsSize objectsSize;
+  // $ java -jar */*/benchmarks.jar ".*HeapMemoryBandwidthAllocatorBenchmark.*"
+  // JMH opts: -t {1, 2} -prof gc
 
   private int sizeInBytes;
+
+  @Param private ObjectsSize objectsSize;
 
   @Setup()
   public void setup() {
@@ -69,8 +72,6 @@ public class HeapMemoryBandwidthAllocatorBenchmark {
         throw new UnsupportedOperationException("Unsupported object size " + objectsSize);
     }
   }
-
-  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xmx4g"})

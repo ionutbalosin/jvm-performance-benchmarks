@@ -58,6 +58,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class ScalarReplacementBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*ScalarReplacementBenchmark.*"
+
   @Param({"3"})
   private int param;
 

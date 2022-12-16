@@ -43,6 +43,8 @@ import org.openjdk.jmh.annotations.*;
 @State(Scope.Benchmark)
 public class SepiaVectorAPIBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*SepiaVectorAPIBenchmark.*"
+
   private static final VectorSpecies<Float> FLOAT_SPECIES = FloatVector.SPECIES_PREFERRED;
 
   @Param({"32768", "65536"})

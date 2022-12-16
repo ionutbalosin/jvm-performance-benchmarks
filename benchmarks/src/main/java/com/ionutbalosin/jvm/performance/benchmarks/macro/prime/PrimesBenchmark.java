@@ -57,10 +57,10 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class PrimesBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*PrimesBenchmark.*"
+
   @Param({"8388608"})
   private int n;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*PrimesBenchmark.*"
 
   @Setup()
   public void setup() {

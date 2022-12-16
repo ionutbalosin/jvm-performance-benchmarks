@@ -53,6 +53,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class WriteBarriersLoopingOverArrayBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*WriteBarriersLoopingOverArrayBenchmark.*"
+  // JMH opts: -prof gc
+
   @Param({"262144"})
   private int size;
 
@@ -64,8 +67,6 @@ public class WriteBarriersLoopingOverArrayBenchmark {
     objRef = new Object();
     array = new Object[size];
   }
-
-  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})

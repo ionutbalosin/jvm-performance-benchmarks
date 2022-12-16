@@ -54,9 +54,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class FactorialBenchmark {
 
-  private ArrayMultiply arrayMultiply;
+  // $ java -jar */*/benchmarks.jar ".*FactorialBenchmark.*"
 
-  // java -jar benchmarks/target/benchmarks.jar ".*FactorialBenchmark.*"
+  private ArrayMultiply arrayMultiply;
 
   @Param({"1000", "5000"})
   private int n;

@@ -70,13 +70,16 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class ReadWriteBarriersBenchmark {
 
-  @Param({"262144"})
-  private int size;
+  // $ java -jar */*/benchmarks.jar ".*ReadWriteBarriersBenchmark.*"
+  // JMH opts: -prof gc
 
   private final Random random = new Random(16384);
 
   private Integer[] array;
   private int index;
+
+  @Param({"262144"})
+  private int size;
 
   @Setup()
   public void setup() {
@@ -86,8 +89,6 @@ public class ReadWriteBarriersBenchmark {
     }
     index = 0;
   }
-
-  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})

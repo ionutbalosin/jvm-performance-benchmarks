@@ -75,6 +75,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class PalindromeBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*PalindromeBenchmark.*"
+
   private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
   private static final String FILE_NAME =
       CURRENT_DIR + "/benchmarks/src/main/resources/palindrome.list";
@@ -82,8 +84,6 @@ public class PalindromeBenchmark {
   private final TrampolinePredicate trampolinePredicate = new TrampolinePredicate();
   private final RecursivePredicate recursivePredicate = new RecursivePredicate();
   private final IterativePredicate iterativePredicate = new IterativePredicate();
-
-  // java -jar benchmarks/target/benchmarks.jar ".*PalindromeBenchmark.*"
 
   @Setup()
   public void setup() throws IOException {

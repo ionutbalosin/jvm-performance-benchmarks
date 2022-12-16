@@ -51,6 +51,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class LoopUnswitchBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LoopUnswitchBenchmark.*"
+
   @Param({"64"})
   private int magicNumber;
 

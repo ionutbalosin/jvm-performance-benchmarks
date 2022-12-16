@@ -70,7 +70,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class FibonacciBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*FibonacciBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*FibonacciBenchmark.*"
 
   @Param({"500", "3000"})
   private int n;

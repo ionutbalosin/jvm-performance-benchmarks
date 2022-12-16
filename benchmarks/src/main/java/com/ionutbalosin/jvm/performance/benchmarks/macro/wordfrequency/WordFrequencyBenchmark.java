@@ -58,11 +58,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class WordFrequencyBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*WordFrequencyBenchmark.*"
+
   private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
   private static final String FILE_NAME =
       CURRENT_DIR + "/benchmarks/src/main/resources/word_frequency.txt";
-
-  // java -jar benchmarks/target/benchmarks.jar ".*WordFrequencyBenchmark.*"
 
   @Setup()
   public void setup() throws IOException, URISyntaxException {

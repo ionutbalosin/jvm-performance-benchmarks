@@ -51,7 +51,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class RecursiveMethodCallBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*RecursiveMethodCallBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*RecursiveMethodCallBenchmark.*"
 
   private static final Object OBJECT = new Object();
 

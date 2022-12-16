@@ -52,6 +52,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class ReadBarriersChainOfReferencesBenchmark {
 
+  // $ java -jar **/benchmarks.jar ".*ReadBarriersChainOfReferencesBenchmark.*"
+  // JMH opts: -prof gc
+
   private H1 baseRef;
 
   @Setup()
@@ -92,8 +95,6 @@ public class ReadBarriersChainOfReferencesBenchmark {
                                                                                                                                     new H32(
                                                                                                                                         aValue))))))))))))))))))))))))))))))));
   }
-
-  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})

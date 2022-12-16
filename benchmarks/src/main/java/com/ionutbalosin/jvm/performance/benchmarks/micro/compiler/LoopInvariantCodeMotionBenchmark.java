@@ -56,6 +56,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class LoopInvariantCodeMotionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LoopInvariantCodeMotionBenchmark.*"
+
   @Param({"16384"})
   private int iterations;
 

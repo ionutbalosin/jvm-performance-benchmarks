@@ -64,13 +64,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class MegamorphicMethodCallBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*MegamorphicMethodCallBenchmark.*"
+
   private static final int SIZE = 40320;
   private CMath[] instances;
   private byte[] classIndex;
 
   @Param private TargetType targetType;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicMethodCallBenchmark.*"
 
   @Setup
   public void setup() {

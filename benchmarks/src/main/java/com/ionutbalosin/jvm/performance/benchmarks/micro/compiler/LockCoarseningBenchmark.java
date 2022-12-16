@@ -60,15 +60,15 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class LockCoarseningBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LockCoarseningBenchmark.*"
+  // JVM opts: {-XX:-UseBiasedLocking, -XX:+UseBiasedLocking}
+  // JMH opts: -t {1, 2}
+
   private final Random random = new Random(16384);
   private final int DEPTH = 8;
 
   private int defaultValue;
   private int incrementValue;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LockCoarseningBenchmark.*"
-  // JVM Opts: -XX:+UseBiasedLocking (disabled starting JDK 15)
-  // JMH Opts: -t1,2
 
   @Setup
   public void setup() {

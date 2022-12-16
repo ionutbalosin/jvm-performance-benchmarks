@@ -64,7 +64,8 @@ import org.openjdk.jol.info.GraphLayout;
 @State(Scope.Benchmark)
 public class HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark {
 
-  @Param private PercentageOfRetainedHeap percentageOfRetainedHeap;
+  // $ java -jar */*/benchmarks.jar ".*HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark.*"
+  // JMH opts: -t {1, 2} -prof gc
 
   private final long MAX_MEMORY = Runtime.getRuntime().maxMemory();
   private final int CHAIN_REFERENCE_DEPTH = 32;
@@ -74,6 +75,8 @@ public class HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark {
   private int retainedArraySize;
   private ObjectChain[] retainedArray;
   private AtomicInteger index;
+
+  @Param private PercentageOfRetainedHeap percentageOfRetainedHeap;
 
   @Setup()
   public void setup() {
@@ -101,8 +104,6 @@ public class HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark {
       retainedArray[i] = createChainedObjects();
     }
   }
-
-  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})

@@ -50,6 +50,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class TailRecursionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*TailRecursionBenchmark.*"
+
   @Param({"32768"})
   private int param;
 

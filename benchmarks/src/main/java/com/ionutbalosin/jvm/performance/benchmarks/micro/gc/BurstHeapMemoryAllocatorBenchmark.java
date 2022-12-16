@@ -54,12 +54,15 @@ import org.openjdk.jol.info.GraphLayout;
 @State(Scope.Benchmark)
 public class BurstHeapMemoryAllocatorBenchmark {
 
-  @Param private PercentageOfHeapToAllocate percentageOfHeapToAllocate;
+  // $ java -jar */*/benchmarks.jar ".*BurstHeapMemoryAllocatorBenchmark.*"
+  // JMH opts: -t {1, 2} -prof gc
 
   private final long MAX_MEMORY = Runtime.getRuntime().maxMemory();
 
   private int numberOfBenchThreads;
   private int numberOfObjectsPerThread;
+
+  @Param private PercentageOfHeapToAllocate percentageOfHeapToAllocate;
 
   @Setup()
   public void setup(BenchmarkParams params) {
@@ -82,8 +85,6 @@ public class BurstHeapMemoryAllocatorBenchmark {
             "Unsupported percentage of allocated instances " + percentageOfHeapToAllocate);
     }
   }
-
-  // JMH Opts: -t1,2 -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})

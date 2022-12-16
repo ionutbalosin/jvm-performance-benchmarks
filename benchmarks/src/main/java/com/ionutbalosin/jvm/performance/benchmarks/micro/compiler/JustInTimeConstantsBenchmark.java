@@ -47,12 +47,12 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class JustInTimeConstantsBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*JustInTimeConstantsBenchmark.*"
+
   private static final String staticFinalProperty = System.getProperty("java.home");
   private final String finalProperty = System.getProperty("java.home");
   private static String staticProperty = System.getProperty("java.home");
   private String property = System.getProperty("java.home");
-
-  // java -jar benchmarks/target/benchmarks.jar ".*JustInTimeConstantsBenchmark.*"
 
   @Benchmark
   public String static_final_property() {

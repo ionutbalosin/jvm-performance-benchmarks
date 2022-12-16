@@ -58,6 +58,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StackSpillingBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*StackSpillingBenchmark.*"
+
   int load0, load1, load2, load3, load4, load5, load6, load7, load8, load9;
   int load10, load11, load12, load13, load14, load15, load16, load17, load18, load19;
   int load20, load21, load22, load23, load24;

@@ -53,6 +53,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class VectorizationPatternsMultipleFloatArraysBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*VectorizationPatternsMultipleFloatArraysBenchmark.*"
+
   private final Random random = new Random(16384);
   private final int CONST = 5;
 

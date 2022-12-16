@@ -54,13 +54,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class LockElisionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LockElisionBenchmark.*"
+
   private final Random random = new Random(16384);
   private final int DEPTH = 8;
 
   private int defaultValue;
   private int incrementValue;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LockElisionBenchmark.*"
 
   @Setup
   public void setup() {

@@ -68,6 +68,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class VarArgsBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*VarArgsBenchmark.*"
+
   private final Random random = new Random(16384);
 
   private int param1, param2, param3, param4, param5, param6, param7, param8, param9, param10;

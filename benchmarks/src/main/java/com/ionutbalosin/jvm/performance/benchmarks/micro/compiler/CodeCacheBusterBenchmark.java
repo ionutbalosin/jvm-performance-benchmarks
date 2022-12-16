@@ -63,9 +63,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class CodeCacheBusterBenchmark {
 
-  private final ThreadLocalRandom random = ThreadLocalRandom.current();
+  // $ java -jar */*/benchmarks.jar ".*CodeCacheBusterBenchmark.*"
 
-  // java -jar benchmarks/target/benchmarks.jar ".*CodeCacheBusterBenchmark.*"
+  private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
   @Benchmark
   public int code_cache_buster() {

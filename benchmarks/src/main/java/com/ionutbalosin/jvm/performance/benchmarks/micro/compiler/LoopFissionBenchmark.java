@@ -61,12 +61,12 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class LoopFissionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LoopFissionBenchmark.*"
+
   @Param({"262144"})
   private int size;
 
   private int[] A, B, C;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*LoopFissionBenchmark.*"
 
   @Setup
   public void setup() {

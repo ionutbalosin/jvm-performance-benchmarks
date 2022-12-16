@@ -58,6 +58,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class LoopFusionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LoopFusionBenchmark.*"
+
   @Param({"262144"})
   private int size;
 

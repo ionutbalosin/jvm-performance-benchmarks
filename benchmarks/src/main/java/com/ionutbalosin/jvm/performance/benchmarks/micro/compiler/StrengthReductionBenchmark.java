@@ -52,6 +52,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StrengthReductionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*StrengthReductionBenchmark.*"
+
   @Param({"true"})
   private boolean heavyComputation;
 

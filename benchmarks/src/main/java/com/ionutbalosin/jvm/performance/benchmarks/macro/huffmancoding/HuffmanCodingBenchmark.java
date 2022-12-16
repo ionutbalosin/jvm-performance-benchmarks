@@ -85,6 +85,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class HuffmanCodingBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*HuffmanCodingBenchmark.*"
+
   private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
   private static final String FILE_NAME =
       CURRENT_DIR + "/benchmarks/src/main/resources/huffman_coding.txt";
@@ -94,8 +96,6 @@ public class HuffmanCodingBenchmark {
   private OutputStream outputStream;
 
   @Param private CODING_TYPE codingType;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*HuffmanCodingBenchmark.*"
 
   @Setup(Level.Trial)
   public void setupTrial() throws IOException {

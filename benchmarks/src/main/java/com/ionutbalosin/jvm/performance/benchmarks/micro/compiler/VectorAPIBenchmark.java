@@ -46,6 +46,8 @@ import org.openjdk.jmh.infra.Blackhole;
 @State(Scope.Benchmark)
 public class VectorAPIBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*VectorAPIBenchmark.*"
+
   @Param({"262144", "1048576"})
   private int size;
 

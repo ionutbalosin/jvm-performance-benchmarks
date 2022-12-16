@@ -50,7 +50,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * field load for the array object.
  *
  */
-
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -58,6 +57,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(value = 5, jvmArgsAppend = "-XX:-RestrictContended")
 @State(Scope.Benchmark)
 public class FalseSharingBenchmark {
+
+  // $ java -jar */*/benchmarks.jar ".*FalseSharingBenchmark.*"
 
   @State(Scope.Group)
   public static class BaselineState {

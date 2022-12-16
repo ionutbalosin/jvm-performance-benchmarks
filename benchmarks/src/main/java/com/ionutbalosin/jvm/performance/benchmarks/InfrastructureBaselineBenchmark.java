@@ -62,8 +62,8 @@ import org.openjdk.jmh.infra.Blackhole;
 @State(Scope.Benchmark)
 public class InfrastructureBaselineBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*InfrastructureBaselineBenchmark.*"
-  // JMH Opts: -prof perfnorm
+  // $ java -jar */*/benchmarks.jar ".*InfrastructureBaselineBenchmark.*"
+  // JMH opts: -prof perfnorm
 
   public Object object;
 

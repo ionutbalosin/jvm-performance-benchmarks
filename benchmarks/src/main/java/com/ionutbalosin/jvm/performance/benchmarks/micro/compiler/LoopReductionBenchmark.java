@@ -52,6 +52,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class LoopReductionBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*LoopReductionBenchmark.*"
+
   @Param({"1048576"})
   private int iterations;
 

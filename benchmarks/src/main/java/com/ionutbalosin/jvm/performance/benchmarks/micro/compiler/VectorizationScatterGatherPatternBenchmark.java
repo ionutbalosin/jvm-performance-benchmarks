@@ -50,6 +50,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class VectorizationScatterGatherPatternBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*VectorizationScatterGatherPatternBenchmark.*"
+
   @Param({"262144"})
   private int size;
 

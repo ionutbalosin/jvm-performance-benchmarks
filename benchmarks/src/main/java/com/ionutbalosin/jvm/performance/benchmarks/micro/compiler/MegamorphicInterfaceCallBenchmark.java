@@ -46,13 +46,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class MegamorphicInterfaceCallBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*MegamorphicInterfaceCallBenchmark.*"
+
   private static final int SIZE = 7200;
   private I[] instances;
   private byte[] instanceIndex;
 
   @Param private TargetType targetType;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*MegamorphicInterfaceCallBenchmark.*"
 
   @Setup()
   public void setup() {
@@ -134,7 +134,7 @@ public class MegamorphicInterfaceCallBenchmark {
         throw new UnsupportedOperationException("Unsupported type " + targetType);
     }
   }
-  // java -jar benchmarks/target/benchmarks.jar ".*InterfaceCallBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*InterfaceCallBenchmark.*"
 
   @Benchmark
   @OperationsPerInvocation(SIZE)

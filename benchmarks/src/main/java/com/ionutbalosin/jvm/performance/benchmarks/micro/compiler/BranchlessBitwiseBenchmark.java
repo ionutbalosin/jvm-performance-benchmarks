@@ -50,6 +50,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class BranchlessBitwiseBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*BranchlessBitwiseBenchmark.*"
+
   private final Random random = new Random(16384);
 
   private int param, a, b;

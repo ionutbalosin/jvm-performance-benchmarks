@@ -54,6 +54,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class ReadBarriersLoopingOverArrayBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*ReadBarriersLoopingOverArrayBenchmark.*"
+  // JMH opts: -prof gc
+
   @Param({"262144"})
   private int size;
 
@@ -67,8 +70,6 @@ public class ReadBarriersLoopingOverArrayBenchmark {
       array[i] = new Object();
     }
   }
-
-  // JMH Opts: -prof gc
 
   @Benchmark
   @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})

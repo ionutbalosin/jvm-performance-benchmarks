@@ -53,6 +53,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class NpeThrowBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*NpeThrowBenchmark.*"
+
   @Param({"1024"})
   private int size;
 

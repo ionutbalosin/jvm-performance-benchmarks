@@ -51,11 +51,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class DeadMethodCallStoreBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*"
+
   private final Random random = new Random(16384);
 
   private double circleRadius;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*"
 
   @Setup
   public void setup() {

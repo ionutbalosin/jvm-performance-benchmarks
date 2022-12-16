@@ -48,11 +48,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class DeadLocalAllocationStoreBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*DeadLocalAllocationStoreBenchmark.*"
+  // JMH opts: -prof gc
+
   @Param({"64"})
   private int size;
-
-  // java -jar benchmarks/target/benchmarks.jar ".*DeadLocalAllocationStoreBenchmark.*"
-  // JMH Opts: -prof gc
 
   // allocates 16 bytes
   @Benchmark

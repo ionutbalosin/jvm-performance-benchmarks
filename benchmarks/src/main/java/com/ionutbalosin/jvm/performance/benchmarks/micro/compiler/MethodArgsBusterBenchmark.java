@@ -52,6 +52,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class MethodArgsBusterBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*MethodArgsBusterBenchmark.*"
+
   @Benchmark
   public double method_args_buster() {
     // returns 204

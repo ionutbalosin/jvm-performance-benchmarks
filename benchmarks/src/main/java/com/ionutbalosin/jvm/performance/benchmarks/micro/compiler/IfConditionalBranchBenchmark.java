@@ -49,6 +49,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class IfConditionalBranchBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*IfConditionalBranchBenchmark.*"
+
   private final Random random = new Random(16384);
   private final int THRESHOLD = 4096;
 

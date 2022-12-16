@@ -52,6 +52,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class NpeControlFlowBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*NpeControlFlowBenchmark.*"
+
   private final Random random = new Random(16384);
   private final int THRESHOLD = 32;
 
