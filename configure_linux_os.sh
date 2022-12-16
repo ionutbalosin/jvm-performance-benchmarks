@@ -3,6 +3,7 @@
 set_environment_variables() {
   export ARCH="$(uname -i)"
   export JQ="jq/jq-linux64"
+  echo "Operating system: Linux"
   echo "Architecture: $ARCH"
   echo "JSON processor executable: $JQ"
   echo ""
@@ -322,18 +323,16 @@ configure_hyper_threading() {
 }
 
 confirm_os_settings() {
-  if [[ $EUID != 0 ]]; then
-    echo ""
-    echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
-    read -r -p "Press ENTER to continue or CRTL+C to abort ... "
-  fi
-
-  echo ""
   while :
   do
     read -r -p "Do you want to proceed with the OS configuration settings? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
+      if [[ $EUID != 0 ]]; then
+        echo ""
+        echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
+        read -r -p "Press ENTER to continue or CRTL+C to abort ... "
+      fi
       return 0
       ;;
     no)
@@ -349,13 +348,25 @@ confirm_os_settings() {
 DRY_RUN="$1"
 
 echo ""
-echo "+---------------------------+"
-echo "| Set environment variables |"
-echo "+---------------------------+"
+echo "+--------------------------+"
+echo "| OS environment variables |"
+echo "+--------------------------+"
 set_environment_variables
 
-echo "For benchmarking to reduce, as much as possible, the noise and to get more consistent measurements a proper OS configuration is very important. Nevertheless, how to do that is very OS dependent and it might not be sufficient since it does not exclude the measurement bias."
-echo "The current configuration relies and it was tested on a Debian-based Linux distro (e.g., Ubuntu)."
+echo ""
+echo "+-----------------------+"
+echo "| OS benchmark settings |"
+echo "+-----------------------+"
+echo "In summary:"
+echo " - for benchmarking to reduce, as much as possible, the noise and to get more consistent measurements a proper OS configuration is very important. Nevertheless, how to do that is very OS dependent and it might not be sufficient since it does not exclude the measurement bias."
+echo " - these settings includes:"
+echo "   - setting the CPU(s) isolation"
+echo "   - disabling the address space layout randomization"
+echo "   - disabling the turbo boost mode"
+echo "   - setting the CPU governor to performance"
+echo "   - disabling the CPU hyper-threading"
+echo "WARNING: the current configuration relies and it was tested on a Debian-based Linux distro (e.g., Ubuntu)."
+echo ""
 confirm_os_settings
 if [ $? -ne 0 ]
 then
