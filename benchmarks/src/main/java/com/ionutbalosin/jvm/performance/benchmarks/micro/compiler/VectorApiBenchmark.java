@@ -44,9 +44,9 @@ import org.openjdk.jmh.infra.Blackhole;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5, jvmArgsAppend = "--add-modules=jdk.incubator.vector")
 @State(Scope.Benchmark)
-public class VectorAPIBenchmark {
+public class VectorApiBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VectorAPIBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VectorApiBenchmark.*"
 
   @Param({"262144", "1048576"})
   private int size;

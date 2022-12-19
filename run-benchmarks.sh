@@ -93,9 +93,7 @@ compile_benchmark_suite() {
   CMD="./mvnw -P jdk${JAVA_VERSION}_profile clean spotless:apply package"
   echo "$CMD"
   echo ""
-  if [ "$DRY_RUN" != "--dry-run" ]; then
-    eval "$CMD"
-  fi
+  eval "$CMD"
 }
 
 configure_os() {

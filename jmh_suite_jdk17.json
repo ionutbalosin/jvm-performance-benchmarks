@@ -9,33 +9,526 @@
       "name": "BranchlessBitwiseBenchmark"
     },
     {
-      "name": "VectorAPIBenchmark",
-      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_1thread_serialGC",
-      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
-    },
-    {
       "name": "BurstHeapMemoryAllocatorBenchmark",
-      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_1thread_serialGC",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_serialGC_1thread",
       "jmhOpts": "-t 1 -prof gc",
       "jvmArgsAppend": "-XX:+UseSerialGC"
     },
     {
       "name": "BurstHeapMemoryAllocatorBenchmark",
-      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_2threads_serialGC",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_serialGC_2threads",
       "jmhOpts": "-t 2 -prof gc",
       "jvmArgsAppend": "-XX:+UseSerialGC"
     },
     {
       "name": "BurstHeapMemoryAllocatorBenchmark",
-      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_1thread_parallelGC",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_parallelGC_1thread",
       "jmhOpts": "-t 1 -prof gc",
       "jvmArgsAppend": "-XX:+UseParallelGC"
     },
     {
       "name": "BurstHeapMemoryAllocatorBenchmark",
-      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_2threads_parallelGC",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_parallelGC_2threads",
       "jmhOpts": "-t 2 -prof gc",
       "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_g1GC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_g1GC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_shenandoahGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_shenandoahGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_zGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "BurstHeapMemoryAllocatorBenchmark",
+      "outputFileName": "BurstHeapMemoryAllocatorBenchmark_zGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "CanonicalizeInductionVariableBenchmark"
+    },
+    {
+      "name": "CodeCacheBusterBenchmark"
+    },
+    {
+      "name": "DeadLocalAllocationStoreBenchmark",
+      "jmhOpts": "-prof gc"
+    },
+    {
+      "name": "DeadMethodCallStoreBenchmark"
+    },
+    {
+      "name": "EnumValueLookupBenchmark"
+    },
+    {
+      "name": "FactorialBenchmark"
+    },
+    {
+      "name": "FalseSharingBenchmark"
+    },
+    {
+      "name": "FibonacciBenchmark"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_serialGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_serialGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_parallelGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_parallelGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_g1GC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_g1GC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_shenandoahGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_shenandoahGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_zGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_zGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_serialGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_serialGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_parallelGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_parallelGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_g1GC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_g1GC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_shenandoahGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_shenandoahGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_zGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark",
+      "outputFileName": "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_zGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_serialGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_serialGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_parallelGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_parallelGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_g1GC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_g1GC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_shenandoahGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_shenandoahGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_zGC_1thread",
+      "jmhOpts": "-t 1 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "HeapMemoryBandwidthAllocatorBenchmark",
+      "outputFileName": "HeapMemoryBandwidthAllocatorBenchmark_zGC_2threads",
+      "jmhOpts": "-t 2 -prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "HuffmanCodingBenchmark"
+    },
+    {
+      "name": "IfConditionalBranchBenchmark"
+    },
+    {
+      "name": "InfrastructureBaselineBenchmark",
+      "jmhOpts": "-prof perfnorm"
+    },
+    {
+      "name": "JustInTimeConstantsBenchmark"
+    },
+    {
+      "name": "LockCoarseningBenchmark",
+      "outputFileName": "LockCoarseningBenchmark_withBiasedLocking",
+      "jvmArgsAppend": "-XX:+UseBiasedLocking"
+    },
+    {
+      "name": "LockCoarseningBenchmark",
+      "outputFileName": "LockCoarseningBenchmark_withoutBiasedLocking",
+      "jvmArgsAppend": "-XX:-UseBiasedLocking"
+    },
+    {
+      "name": "LockElisionBenchmark"
+    },
+    {
+      "name": "LoopFissionBenchmark"
+    },
+    {
+      "name": "LoopFusionBenchmark"
+    },
+    {
+      "name": "LoopInterchangeBenchmark"
+    },
+    {
+      "name": "LoopInvariantCodeMotionBenchmark"
+    },
+    {
+      "name": "LoopReductionBenchmark"
+    },
+    {
+      "name": "LoopUnswitchBenchmark"
+    },
+    {
+      "name": "MandelbrotVectorApiBenchmark"
+    },
+    {
+      "name": "MegamorphicInterfaceCallBenchmark"
+    },
+    {
+      "name": "MegamorphicMethodCallBenchmark"
+    },
+    {
+      "name": "MethodArgsBusterBenchmark"
+    },
+    {
+      "name": "NpeControlFlowBenchmark"
+    },
+    {
+      "name": "NpeThrowBenchmark"
+    },
+    {
+      "name": "PalindromeBenchmark"
+    },
+    {
+      "name": "PopulationVarianceBenchmark"
+    },
+    {
+      "name": "PrimesBenchmark"
+    },
+    {
+      "name": "ReadBarriersChainOfReferencesBenchmark",
+      "outputFileName": "ReadBarriersChainOfReferencesBenchmark_serialGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "ReadBarriersChainOfReferencesBenchmark",
+      "outputFileName": "ReadBarriersChainOfReferencesBenchmark_parallelGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "ReadBarriersChainOfReferencesBenchmark",
+      "outputFileName": "ReadBarriersChainOfReferencesBenchmark_g1GC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "ReadBarriersChainOfReferencesBenchmark",
+      "outputFileName": "ReadBarriersChainOfReferencesBenchmark_shenandoahGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "ReadBarriersChainOfReferencesBenchmark",
+      "outputFileName": "ReadBarriersChainOfReferencesBenchmark_zGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "ReadBarriersChainOfReferencesBenchmark",
+      "outputFileName": "ReadBarriersChainOfReferencesBenchmark_epsilonGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC"
+    },
+    {
+      "name": "ReadBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "ReadBarriersLoopingOverArrayBenchmark_serialGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "ReadBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "ReadBarriersLoopingOverArrayBenchmark_parallelGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "ReadBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "ReadBarriersLoopingOverArrayBenchmark_g1GC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "ReadBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "ReadBarriersLoopingOverArrayBenchmark_shenandoahGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "ReadBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "ReadBarriersLoopingOverArrayBenchmark_zGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "ReadBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "ReadBarriersLoopingOverArrayBenchmark_epsilonGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC"
+    },
+    {
+      "name": "ReadWriteBarriersBenchmark",
+      "outputFileName": "ReadWriteBarriersBenchmark_serialGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "ReadWriteBarriersBenchmark",
+      "outputFileName": "ReadWriteBarriersBenchmark_parallelGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "ReadWriteBarriersBenchmark",
+      "outputFileName": "ReadWriteBarriersBenchmark_g1GC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "ReadWriteBarriersBenchmark",
+      "outputFileName": "ReadWriteBarriersBenchmark_shenandoahGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "ReadWriteBarriersBenchmark",
+      "outputFileName": "ReadWriteBarriersBenchmark_zGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "ReadWriteBarriersBenchmark",
+      "outputFileName": "ReadWriteBarriersBenchmark_epsilonGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC"
+    },
+    {
+      "name": "RecursiveMethodCallBenchmark"
+    },
+    {
+      "name": "ScalarEvolutionAndLoopOptimizationBenchmark"
+    },
+    {
+      "name": "ScalarReplacementBenchmark"
+    },
+    {
+      "name": "SepiaVectorApiBenchmark"
+    },
+    {
+      "name": "StackSpillingBenchmark"
+    },
+    {
+      "name": "StrengthReductionBenchmark"
+    },
+    {
+      "name": "TailRecursionBenchmark"
+    },
+    {
+      "name": "VarArgsBenchmark"
+    },
+    {
+      "name": "VectorApiBenchmark"
+    },
+    {
+      "name": "VectorizationPatternsMultipleFloatArraysBenchmark"
+    },
+    {
+      "name": "VectorizationPatternsMultipleIntArraysBenchmark"
+    },
+    {
+      "name": "VectorizationPatternsSingleIntArrayBenchmark"
+    },
+    {
+      "name": "VectorizationScatterGatherPatternBenchmark"
+    },
+    {
+      "name": "WordFrequencyBenchmark"
+    },
+    {
+      "name": "WriteBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "WriteBarriersLoopingOverArrayBenchmark_serialGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseSerialGC"
+    },
+    {
+      "name": "WriteBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "WriteBarriersLoopingOverArrayBenchmark_parallelGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseParallelGC"
+    },
+    {
+      "name": "WriteBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "WriteBarriersLoopingOverArrayBenchmark_g1GC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseG1GC"
+    },
+    {
+      "name": "WriteBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "WriteBarriersLoopingOverArrayBenchmark_shenandoahGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseShenandoahGC"
+    },
+    {
+      "name": "WriteBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "WriteBarriersLoopingOverArrayBenchmark_zGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UseZGC"
+    },
+    {
+      "name": "WriteBarriersLoopingOverArrayBenchmark",
+      "outputFileName": "WriteBarriersLoopingOverArrayBenchmark_epsilonGC",
+      "jmhOpts": "-prof gc",
+      "jvmArgsAppend": "-XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC"
     }
   ]
 }

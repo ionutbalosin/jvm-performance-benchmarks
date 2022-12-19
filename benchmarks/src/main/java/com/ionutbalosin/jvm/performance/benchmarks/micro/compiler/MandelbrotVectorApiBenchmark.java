@@ -38,9 +38,9 @@ import org.openjdk.jmh.annotations.*;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5, jvmArgsAppend = "--add-modules=jdk.incubator.vector")
 @State(Scope.Benchmark)
-public class MandelbrotVectorAPIBenchmark {
+public class MandelbrotVectorApiBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*MandelbrotVectorAPIBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*MandelbrotVectorApiBenchmark.*"
 
   private static final VectorSpecies<Double> DOUBLE_VECTOR_SPECIES = DoubleVector.SPECIES_PREFERRED;
 
