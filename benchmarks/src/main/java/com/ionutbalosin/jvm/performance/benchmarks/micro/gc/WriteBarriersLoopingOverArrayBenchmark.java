@@ -54,7 +54,11 @@ import org.openjdk.jmh.annotations.Warmup;
 public class WriteBarriersLoopingOverArrayBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*WriteBarriersLoopingOverArrayBenchmark.*"
-  // JMH opts: -prof gc
+  // Recommended command line options:
+  // - JVM options:
+  //    {-XX:+UseSerialGC, -XX:+UseParallelGC, -XX:+UseG1GC, -XX:+UseShenandoahGC, -XX:+UseZGC
+  //     -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC}
+  // - JMH options: -prof gc
 
   @Param({"262144"})
   private int size;
@@ -69,38 +73,7 @@ public class WriteBarriersLoopingOverArrayBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})
-  public void serialGC() {
-    test(objRef);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseParallelGC"})
-  public void parallelGC() {
-    test(objRef);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseG1GC"})
-  public void g1GC() {
-    test(objRef);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseZGC"})
-  public void zGC() {
-    test(objRef);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC"})
-  public void shenandoahGC() {
-    test(objRef);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UnlockExperimentalVMOptions", "-XX:+UseEpsilonGC"})
-  public void epsilonGC() {
+  public void gc() {
     test(objRef);
   }
 

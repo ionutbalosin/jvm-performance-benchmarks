@@ -49,7 +49,8 @@ import org.openjdk.jmh.annotations.Warmup;
 public class DeadLocalAllocationStoreBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*DeadLocalAllocationStoreBenchmark.*"
-  // JMH opts: -prof gc
+  // Recommended command line options:
+  // - JMH options: -prof gc
 
   @Param({"64"})
   private int size;

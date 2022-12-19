@@ -63,9 +63,8 @@ import org.openjdk.jmh.infra.Blackhole;
 public class InfrastructureBaselineBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*InfrastructureBaselineBenchmark.*"
-  // JMH opts: -prof {Linux: perfnorm, Mac OS X: dtraceasm, Windows: xperfasm}
-
-  public Object object;
+  // Recommended command line options:
+  // - JMH options: -prof {Linux: perfnorm, Mac OS X: dtraceasm, Windows: xperfasm}
 
   /*
    * The performance of below methods should be the same:
@@ -75,6 +74,8 @@ public class InfrastructureBaselineBenchmark {
    *
    * The cost of method_dont_inline() is slightly higher.
    */
+
+  public Object object;
 
   @Benchmark
   public void method_baseline() {

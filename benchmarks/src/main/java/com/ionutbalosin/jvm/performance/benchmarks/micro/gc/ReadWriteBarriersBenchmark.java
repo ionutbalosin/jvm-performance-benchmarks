@@ -71,7 +71,11 @@ import org.openjdk.jmh.annotations.Warmup;
 public class ReadWriteBarriersBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*ReadWriteBarriersBenchmark.*"
-  // JMH opts: -prof gc
+  // Recommended command line options:
+  // - JVM options:
+  //   {-XX:+UseSerialGC, -XX:+UseParallelGC, -XX:+UseG1GC, -XX:+UseShenandoahGC, -XX:+UseZGC
+  //    -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC}
+  // - JMH options: -prof gc
 
   private final Random random = new Random(16384);
 
@@ -91,38 +95,7 @@ public class ReadWriteBarriersBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})
-  public void serialGC() {
-    test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseParallelGC"})
-  public void parallelGC() {
-    test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseG1GC"})
-  public void g1GC() {
-    test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseZGC"})
-  public void zGC() {
-    test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC"})
-  public void shenandoahGC() {
-    test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UnlockExperimentalVMOptions", "-XX:+UseEpsilonGC"})
-  public void epsilonGC() {
+  public void gc() {
     test();
   }
 

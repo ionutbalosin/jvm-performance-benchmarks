@@ -55,7 +55,10 @@ import org.openjdk.jol.info.GraphLayout;
 public class BurstHeapMemoryAllocatorBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*BurstHeapMemoryAllocatorBenchmark.*"
-  // JMH opts: -t {1, 2} -prof gc
+  // Recommended command line options:
+  // - JVM options:
+  //   {-XX:+UseSerialGC, -XX:+UseParallelGC, -XX:+UseG1GC, -XX:+UseShenandoahGC, -XX:+UseZGC}
+  // - JMH options: -t {1, 2} -prof gc
 
   private final long MAX_MEMORY = Runtime.getRuntime().maxMemory();
 
@@ -87,32 +90,7 @@ public class BurstHeapMemoryAllocatorBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public Object[] serialGC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseParallelGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public Object[] parallelGC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseG1GC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public Object[] g1GC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public Object[] shenandoahGC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseZGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public Object[] zGC() {
+  public Object[] gc() {
     return allocate();
   }
 

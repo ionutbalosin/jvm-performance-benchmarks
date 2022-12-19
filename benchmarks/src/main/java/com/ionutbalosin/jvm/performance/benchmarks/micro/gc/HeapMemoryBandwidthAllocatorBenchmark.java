@@ -50,7 +50,10 @@ import org.openjdk.jmh.annotations.Warmup;
 public class HeapMemoryBandwidthAllocatorBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*HeapMemoryBandwidthAllocatorBenchmark.*"
-  // JMH opts: -t {1, 2} -prof gc
+  // Recommended command line options:
+  // - JVM options:
+  //   {-XX:+UseSerialGC, -XX:+UseParallelGC, -XX:+UseG1GC, -XX:+UseShenandoahGC, -XX:+UseZGC}
+  // - JMH options: -t {1, 2} -prof gc
 
   private int sizeInBytes;
 
@@ -74,32 +77,7 @@ public class HeapMemoryBandwidthAllocatorBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xmx4g"})
-  public byte[] serialGC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseParallelGC", "-Xmx4g"})
-  public byte[] parallelGC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseG1GC", "-Xmx4g"})
-  public byte[] g1GC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC", "-Xmx4g"})
-  public byte[] shenandoahGC() {
-    return allocate();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseZGC", "-Xmx4g"})
-  public byte[] zGC() {
+  public byte[] gc() {
     return allocate();
   }
 

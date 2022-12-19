@@ -66,7 +66,10 @@ import org.openjdk.jol.info.GraphLayout;
 public class HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.*"
-  // JMH opts: -t {1, 2} -prof gc
+  // Recommended command line options:
+  // - JVM options:
+  //   {-XX:+UseSerialGC, -XX:+UseParallelGC, -XX:+UseG1GC, -XX:+UseShenandoahGC, -XX:+UseZGC}
+  // - JMH options: -t {1, 2} -prof gc
 
   private final long MAX_MEMORY = Runtime.getRuntime().maxMemory();
   private final int CHAIN_REFERENCE_DEPTH = 32;
@@ -108,32 +111,7 @@ public class HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseSerialGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjectChain[] serialGC() {
-    return allocate(numberOfObjectsPerThread);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseParallelGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjectChain[] parallelGC() {
-    return allocate(numberOfObjectsPerThread);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseG1GC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjectChain[] g1GC() {
-    return allocate(numberOfObjectsPerThread);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjectChain[] shenandoahGC() {
-    return allocate(numberOfObjectsPerThread);
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseZGC", "-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
-  public ObjectChain[] zGC() {
+  public ObjectChain[] gc() {
     return allocate(numberOfObjectsPerThread);
   }
 

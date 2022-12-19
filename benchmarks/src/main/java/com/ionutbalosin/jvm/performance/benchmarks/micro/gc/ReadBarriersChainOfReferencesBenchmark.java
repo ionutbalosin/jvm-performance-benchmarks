@@ -53,7 +53,11 @@ import org.openjdk.jmh.annotations.Warmup;
 public class ReadBarriersChainOfReferencesBenchmark {
 
   // $ java -jar **/benchmarks.jar ".*ReadBarriersChainOfReferencesBenchmark.*"
-  // JMH opts: -prof gc
+  // Recommended command line options:
+  // - JVM options:
+  //   {-XX:+UseSerialGC, -XX:+UseParallelGC, -XX:+UseG1GC, -XX:+UseShenandoahGC, -XX:+UseZGC
+  //    -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC}
+  // - JMH options: -prof gc
 
   private H1 baseRef;
 
@@ -97,38 +101,7 @@ public class ReadBarriersChainOfReferencesBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseSerialGC"})
-  public Object serialGC() {
-    return test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseParallelGC"})
-  public Object parallelGC() {
-    return test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseG1GC"})
-  public Object g1GC() {
-    return test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseZGC"})
-  public Object zGC() {
-    return test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UseShenandoahGC"})
-  public Object shenandoahGC() {
-    return test();
-  }
-
-  @Benchmark
-  @Fork(jvmArgsAppend = {"-XX:+UnlockExperimentalVMOptions", "-XX:+UseEpsilonGC"})
-  public Object epsilonGC() {
+  public Object gc() {
     return test();
   }
 
