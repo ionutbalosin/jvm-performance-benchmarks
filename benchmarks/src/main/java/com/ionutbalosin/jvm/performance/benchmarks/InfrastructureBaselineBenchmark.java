@@ -63,7 +63,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class InfrastructureBaselineBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*InfrastructureBaselineBenchmark.*"
-  // JMH opts: -prof perfnorm
+  // JMH opts: -prof {Linux: perfnorm, Mac OS X: dtraceasm, Windows: xperfasm}
 
   public Object object;
 

@@ -3,7 +3,7 @@
 set_environment_variables() {
   export ARCH="$(uname -m)"
   export JQ="jq/jq-osx-amd64"
-  echo "Operating system: Mac"
+  echo "Operating system: Mac OS X"
   echo "Architecture: $ARCH"
   echo "JSON processor executable: $JQ"
   echo ""
