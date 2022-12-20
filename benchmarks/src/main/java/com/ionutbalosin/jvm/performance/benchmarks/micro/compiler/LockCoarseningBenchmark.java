@@ -63,7 +63,6 @@ public class LockCoarseningBenchmark {
   // $ java -jar */*/benchmarks.jar ".*LockCoarseningBenchmark.*"
   // Recommended command line options:
   // - JVM options: {-XX:-UseBiasedLocking, -XX:+UseBiasedLocking}
-  // - JMH options: -t {1, 2}
 
   private final Random random = new Random(16384);
   private final int DEPTH = 8;

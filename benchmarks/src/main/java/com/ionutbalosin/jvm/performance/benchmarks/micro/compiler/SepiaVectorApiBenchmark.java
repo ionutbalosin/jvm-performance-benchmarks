@@ -41,9 +41,9 @@ import org.openjdk.jmh.annotations.*;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5, jvmArgsAppend = "--add-modules=jdk.incubator.vector")
 @State(Scope.Benchmark)
-public class SepiaVectorAPIBenchmark {
+public class SepiaVectorApiBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*SepiaVectorAPIBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*SepiaVectorApiBenchmark.*"
 
   private static final VectorSpecies<Float> FLOAT_SPECIES = FloatVector.SPECIES_PREFERRED;
 

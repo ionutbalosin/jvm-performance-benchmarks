@@ -7,7 +7,7 @@ configure_openjdk_hotspot_jdk11() {
 }
 
 configure_openjdk_hotspot_jdk17() {
-  export JAVA_HOME="/c/Program_Dev/Java/openjdk-17.0.2"
+  export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.2"
   export JAVA_VM_NAME="OpenJDK HotSpot VM"
   export JAVA_VM_IDENTIFIER="openjdk_hotspot"
 }

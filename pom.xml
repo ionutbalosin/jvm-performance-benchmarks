@@ -52,9 +52,9 @@
                             <source>${jdk11.version}</source>
                             <target>${jdk11.version}</target>
                             <excludes>
-                                <exclude>**/VectorAPIBenchmark.java</exclude>
-                                <exclude>**/MandelbrotVectorAPIBenchmark.java</exclude>
-                                <exclude>**/SepiaVectorAPIBenchmark.java</exclude>
+                                <exclude>**/VectorApiBenchmark.java</exclude>
+                                <exclude>**/MandelbrotVectorApiBenchmark.java</exclude>
+                                <exclude>**/SepiaVectorApiBenchmark.java</exclude>
                             </excludes>
                             <compilerArgs>
                                 <arg>--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED</arg>
