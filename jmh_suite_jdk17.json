@@ -465,6 +465,9 @@
       "name": "SepiaVectorApiBenchmark"
     },
     {
+      "name": "SortVectorApiBenchmark"
+    },
+    {
       "name": "StackSpillingBenchmark"
     },
     {
