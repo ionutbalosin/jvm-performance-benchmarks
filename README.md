@@ -68,11 +68,11 @@ For that reason, to focus on broader reusability (i.e., other JDK versions and d
 
 No. | JVM distribution   | JDK versions |  Supported
 -------------- |--------------------|--------------| -------------------------------
-1. | OpenJDK HotSpot VM | 11, 17       | [Yes](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
-2. | GraalVM CE        | 11, 17       | [Yes](https://www.graalvm.org/downloads/)
-3. | GraalVM EE        | 11, 17       | [Yes](https://www.graalvm.org/downloads/)
-4. | Eclipse OpenJ9 VM  | -            | No, see the resons below
-5. | Azul Prime (Zing)  | -            | No, see the resons below
+1 | OpenJDK HotSpot VM | 11, 17       | [Yes](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
+2 | GraalVM CE        | 11, 17       | [Yes](https://www.graalvm.org/downloads/)
+3 | GraalVM EE        | 11, 17       | [Yes](https://www.graalvm.org/downloads/)
+4 | Eclipse OpenJ9 VM  | -            | No, see the resons below
+5 | Azul Prime (Zing)  | -            | No, see the resons below
 
 ### Eclipse OpenJ9 VM
 
@@ -112,9 +112,9 @@ To run the benchmarks on different JVM distributions / JDK versions , please ins
 
 No. | JVM distribution   | JDK versions |  Build
 -------------- |--------------------|--------------| -------------------------------
-1. | OpenJDK HotSpot VM | 11, 17       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
-2. | GraalVM CE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
-3. | GraalVM EE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
+1 | OpenJDK HotSpot VM | 11, 17       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
+2 | GraalVM CE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
+3 | GraalVM EE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
 
 At the moment we support only JDK Long-Term Support (LTS) versions. If there is a need for a JDK feature release, please configure it by yourself.
 
