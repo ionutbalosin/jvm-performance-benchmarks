@@ -71,10 +71,10 @@ No. | JVM distribution   | JDK version |  Supported
 01 | OpenJDK HotSpot VM | 11, 17      | [Yes](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
 02 | GraalVM CE        | 11, 17      | [Yes](https://www.graalvm.org/downloads/)
 03 | GraalVM EE        | 11, 17      | [Yes](https://www.graalvm.org/downloads/)
-04 | Eclipse OpenJ9 VM  | N/A         | No
-05 | Azul Prime (Zing)  | N/A         | No
+04 | Eclipse OpenJ9 VM  | -           | No, see the resons below
+05 | Azul Prime (Zing)  | -           | No, see the resons below
 
-### Support for Eclipse OpenJ9
+### Eclipse OpenJ9 VM
 
 JMH may functionally work with [Eclipse OpenJ9](https://www.eclipse.org/openj9). However, all the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/CompilerControl.java) will not apply to Eclipse OpenJ9 and this might lead to different results (i.e., unfair advantage or disadvantage, depending on the test).
 
@@ -82,9 +82,9 @@ For more details please check [JMH with OpenJ9](https://github.com/eclipse-openj
 
 At the moment we leave it **out of scope** Eclipse OpenJ9 until we find a proper alternative.
 
-### Support for Azul Prime (Zing)
+### Azul Prime (Zing)
 
-Publishing benchmark results for Azul Prime (Zing) is prohibited by Azul's Evaluation Agreement. 
+Publishing benchmark results for Azul Prime (Zing) is prohibited by [Azul's Evaluation Agreement](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf). 
 It is only allowed to publish results for Azul Prime if prior consent is obtained from Azul.
 
 As of now, we decided to skip this JVM in order to avoid the additional overhead of obtaining such consent.
@@ -116,9 +116,9 @@ No. | JVM distribution   | JDK version |  Build
 02 | GraalVM CE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
 03 | GraalVM EE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
 
->Note: we support only LTS versions. If there is a need for another JDK feature release, please configure it by yourself.
+As of now, we support only JDK Long-Term Support (LTS) versions. If there is a need for a JDK feature release, please configure it by yourself.
 
-If you decide to install different OpenJDK build, we recommend to take one with Shenandoah GC available.
+Additionally, if you decide to install a different OpenJDK build, we recommend to take one with [Shenandoah GC](https://wiki.openjdk.org/display/shenandoah/Main) available.
 
 ### Configure JDK/JVM
 
