@@ -116,7 +116,7 @@ No. | JVM distribution   | JDK version |  Build
 02 | GraalVM CE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
 03 | GraalVM EE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
 
-As of now, we support only JDK Long-Term Support (LTS) versions. If there is a need for a JDK feature release, please configure it by yourself.
+At the moment we support only JDK Long-Term Support (LTS) versions. If there is a need for a JDK feature release, please configure it by yourself.
 
 Additionally, if you decide to install a different OpenJDK build, we recommend to take one with [Shenandoah GC](https://wiki.openjdk.org/display/shenandoah/Main) available.
 
