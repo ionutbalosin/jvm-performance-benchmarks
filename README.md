@@ -199,8 +199,6 @@ To generate all benchmark plots corresponding to one jdk-version and (optionally
 ```
 ./plot-benchmarks.sh <jdk-version> [<arch>]
 ```
-Each plot is generated under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`
+If the `<arch>` parameter is not specified, it is automatically detected based on the current target system architecture.
 
->Note: If not specified, the <arch> is automatically detected based on the current target system architecture.
-
-Plots generation relies on the [R/ggplot2](https://ggplot2.tidyverse.org/).
+Each plot is generated using [R/ggplot2](https://ggplot2.tidyverse.org/) under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`.
