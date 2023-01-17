@@ -6,7 +6,7 @@ set_environment_variables() {
 
   echo "Operating system: Mac OS X"
   echo "Architecture: $ARCH"
-  echo "JSON processor executable: $JQ"
+  echo "JSON processor: $JQ"
   echo ""
   read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
 }

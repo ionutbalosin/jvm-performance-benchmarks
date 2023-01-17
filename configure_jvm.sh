@@ -91,7 +91,7 @@ fi
 echo ""
 echo "Java home: $JAVA_HOME"
 echo "JDK version: $JDK_VERSION"
-echo "JVM: $JVM_NAME"
+echo "JVM name: $JVM_NAME"
 echo "JVM benchmarks identifier: $JVM_IDENTIFIER"
 echo ""
 

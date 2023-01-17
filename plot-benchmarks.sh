@@ -32,7 +32,7 @@ set_environment_variables() {
   export GRAAL_VM_CE_IDENTIFIER="graalvm_ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm_ee"
 
-  echo "JMH root output folder: $JMH_OUTPUT_FOLDER"
+  echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
