@@ -1,7 +1,7 @@
 #!/usr/bin/sudo bash
 
 set_environment_variables() {
-  export ARCH="$(uname -i)"
+  export ARCH="$(uname -m)"
   export JQ="jq/jq-linux64"
 
   echo "Operating system: Linux OS"

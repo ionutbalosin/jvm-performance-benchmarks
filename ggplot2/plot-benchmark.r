@@ -13,7 +13,7 @@ output_folder <- args[5]
 
 # read all CSV files and append an identifier column
 # Note: all CSV files must have the same structure (i.e., we rely on JMH for this)
-data1 <- readJmhCsvResults(openjdk_hotspot_vm_result, "OpenJDK HotSpot")
+data1 <- readJmhCsvResults(openjdk_hotspot_vm_result, "OpenJDK HotSpot VM")
 data2 <- readJmhCsvResults(graalvm_ce_result, "GraalVM CE")
 data3 <- readJmhCsvResults(graalvm_ee_result, "GraalVM EE")
 
@@ -24,7 +24,7 @@ data <- rbind(data, data3)
 data <- processJmhCsvResults(data)
 
 # define the color palette for the plot bars
-colorPalette <- c("OpenJDK HotSpot" = "#648FFF", "GraalVM CE" = "#FFB000", "GraalVM EE" = "#FE6100")
+colorPalette <- c("OpenJDK HotSpot VM" = "#648FFF", "GraalVM CE" = "#FFB000", "GraalVM EE" = "#FE6100")
 
 plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Method", "Plot", benchmark_basename, colorPalette)
 

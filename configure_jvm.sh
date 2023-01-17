@@ -1,15 +1,15 @@
 #!/bin/bash
 
-configure_openjdk_hotspot_jdk11() {
+configure_openjdk_hotspot_vm_jdk11() {
   export JAVA_HOME="/usr/lib/jvm/openjdk-11"
   export JAVA_VM_NAME="OpenJDK HotSpot VM"
-  export JAVA_VM_IDENTIFIER="openjdk_hotspot"
+  export JAVA_VM_IDENTIFIER="openjdk_hotspot_vm"
 }
 
-configure_openjdk_hotspot_jdk17() {
+configure_openjdk_hotspot_vm_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.2"
   export JAVA_VM_NAME="OpenJDK HotSpot VM"
-  export JAVA_VM_IDENTIFIER="openjdk_hotspot"
+  export JAVA_VM_IDENTIFIER="openjdk_hotspot_vm"
 }
 
 configure_graalvm_ce_jdk11() {
@@ -36,27 +36,13 @@ configure_graalvm_ee_jdk17() {
   export JAVA_VM_IDENTIFIER="graalvm_ee"
 }
 
-configure_eclipse_open_j9_jdk11() {
-  export JAVA_HOME="/usr/lib/jvm/ibm-semeru-openj9-jdk-11.0.14.1+1"
-  export JAVA_VM_NAME="Eclipse OpenJ9 VM"
-  export JAVA_VM_IDENTIFIER="eclipse_openj9"
-}
-
-configure_eclipse_open_j9_jdk17() {
-  export JAVA_HOME="/usr/lib/jvm/ibm-semeru-openj9-jdk-17.0.2+8"
-  export JAVA_VM_NAME="Eclipse OpenJ9 VM"
-  export JAVA_VM_IDENTIFIER="eclipse_openj9"
-}
-
 echo "Select the JDK/JVM:"
-echo "    1) - jdk_11 / OpenJDK HotSpot VM"
-echo "    2) - jdk_11 / GraalVM CE"
-echo "    3) - jdk_11 / GraalVM EE"
-echo "    4) - jdk_11 / Eclipse OpenJ9"
-echo "    5) - jdk_17 / OpenJDK HotSpot VM"
-echo "    6) - jdk_17 / GraalVM CE"
-echo "    7) - jdk_17 / GraalVM EE"
-echo "    8) - jdk_17 / Eclipse OpenJ9"
+echo "    1) - jdk-11 / OpenJDK HotSpot VM"
+echo "    2) - jdk-11 / GraalVM CE"
+echo "    3) - jdk-11 / GraalVM EE"
+echo "    4) - jdk-17 / OpenJDK HotSpot VM"
+echo "    5) - jdk-17 / GraalVM CE"
+echo "    6) - jdk-17 / GraalVM EE"
 echo ""
 
 while :
@@ -64,7 +50,7 @@ do
   read -r INPUT_KEY
   case $INPUT_KEY in
 	1)
-    configure_openjdk_hotspot_jdk11
+    configure_openjdk_hotspot_vm_jdk11
     break
 		;;
 	2)
@@ -76,23 +62,15 @@ do
     break
 		;;
 	4)
-    configure_eclipse_open_j9_jdk11
+    configure_openjdk_hotspot_vm_jdk17
     break
 		;;
 	5)
-    configure_openjdk_hotspot_jdk17
-    break
-		;;
-	6)
     configure_graalvm_ce_jdk17
     break
 		;;
-	7)
+	6)
     configure_graalvm_ee_jdk17
-    break
-		;;
-	8)
-    configure_eclipse_open_j9_jdk17
     break
 		;;
 	*)
