@@ -3,37 +3,37 @@
 configure_openjdk_hotspot_vm_jdk11() {
   export JAVA_HOME="/usr/lib/jvm/openjdk-11"
   export JVM_NAME="OpenJDK HotSpot VM"
-  export JVM_IDENTIFIER="openjdk_hotspot_vm"
+  export JVM_IDENTIFIER="openjdk-hotspot-vm"
 }
 
 configure_openjdk_hotspot_vm_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.2"
   export JVM_NAME="OpenJDK HotSpot VM"
-  export JVM_IDENTIFIER="openjdk_hotspot_vm"
+  export JVM_IDENTIFIER="openjdk-hotspot-vm"
 }
 
 configure_graalvm_ce_jdk11() {
   export JAVA_HOME="/usr/lib/jvm/graalvm-ce-java11-22.2.0"
   export JVM_NAME="GraalVM CE"
-  export JVM_IDENTIFIER="graalvm_ce"
+  export JVM_IDENTIFIER="graalvm-ce"
 }
 
 configure_graalvm_ce_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/graalvm-ce-java17-22.2.0"
   export JVM_NAME="GraalVM CE"
-  export JVM_IDENTIFIER="graalvm_ce"
+  export JVM_IDENTIFIER="graalvm-ce"
 }
 
 configure_graalvm_ee_jdk11() {
   export JAVA_HOME="/usr/lib/jvm/graalvm-ee-java11-22.2.0.1"
   export JVM_NAME="GraalVM EE"
-  export JVM_IDENTIFIER="graalvm_ee"
+  export JVM_IDENTIFIER="graalvm-ee"
 }
 
 configure_graalvm_ee_jdk17() {
   export JAVA_HOME="/usr/lib/jvm/graalvm-ee-java17-22.2.0.1"
   export JVM_NAME="GraalVM EE"
-  export JVM_IDENTIFIER="graalvm_ee"
+  export JVM_IDENTIFIER="graalvm-ee"
 }
 
 echo "Select the JDK/JVM:"

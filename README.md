@@ -26,7 +26,7 @@ We left **out of scope**, for now, any specific language feature and larger appl
 
 
 ## Infrastructure baseline
-We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), that can be used to assess the infrastructure overhead for the code to measure.
+We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), that can be used to assess the infrastructure overhead for the code to measure.
 
 It measures the performance of empty methods (w/ and w/o explicit inlining) but also the performance of returning an object versus consuming it via blackholes. All of these mechanisms are used inside the real suite of tests.
 
@@ -68,9 +68,9 @@ For that reason, to focus on broader reusability (i.e., other JDK versions and d
 
 No. | JVM distribution   | JDK version |  Supported
 -------------- |--------------------|-------------| -------------------------------
-01 | OpenJDK HotSpot VM | 11, 17      | [Yes](https://jdk.java.net/archive/)
-02 | Graal VM CE        | 11, 17      | [Yes](https://www.graalvm.org/downloads/)
-03 | Graal VM EE        | 11, 17      | [Yes](https://www.graalvm.org/downloads/)
+01 | OpenJDK HotSpot VM | 11, 17      | [Yes](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
+02 | GraalVM CE        | 11, 17      | [Yes](https://www.graalvm.org/downloads/)
+03 | GraalVM EE        | 11, 17      | [Yes](https://www.graalvm.org/downloads/)
 04 | Eclipse OpenJ9 VM  | N/A         | No
 05 | Azul Prime (Zing)  | N/A         | No
 
@@ -103,28 +103,28 @@ When doing benchmarking it is recommended to disable potential sources of perfor
 For further references please check:
 - [LLVM benchmarking tips](https://llvm.org/docs/Benchmarking.html#linux)
 - [How to get consistent results when benchmarking on Linux?](https://easyperf.net/blog/2019/08/02/Perf-measurement-environment-on-Linux) 
-- [benchmark_start.sh](https://github.com/simonis/zlib-bench/blob/master/benchmarks/bash/benchmark_start.sh)
-- [cpu_fixed.sh](https://github.com/bourgesl/nearly-optimal-mergesort-code/blob/master/cpu_fixed.sh)
 
 ## Prerequisites
 
 ### Install JDK/JVM
 
-To run the benchmarks on different JKD versions / JVMs distributions, please install the corresponding build:
+To run the benchmarks on different JDKs versions / JVMs distributions, please install the corresponding build:
 
 No. | JVM distribution   | JDK version |  Build
 -------------- |--------------------|--------------------| -------------------------------
-01 | OpenJDK HotSpot VM | 11, 17             | [download](https://jdk.java.net/archive/)
-02 | Graal VM CE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
-03 | Graal VM EE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
+01 | OpenJDK HotSpot VM | 11, 17             | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
+02 | GraalVM CE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
+03 | GraalVM EE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
 
 >Note: we support only LTS versions. If there is a need for another JDK feature release, please configure it by yourself.
 
+If you decide to install different OpenJDK build, we recommend to take one with Shenandoah GC available.
+
 ### Configure JDK/JVM
 
-Open the [configure_jvm.sh](./configure_jvm.sh) script file and update the corresponding **JAVA_HOME** property (as per your system path):
+Open the [configure-jvm.sh](./configure-jvm.sh) script file and update the corresponding **JAVA_HOME** property (as per your system path):
 ```
-export JAVA_HOME="<path_to_jvm>"
+export JAVA_HOME="<path_to_jdk>"
 ```
 
 #### A few examples
@@ -195,10 +195,12 @@ Each benchmark test suite result is written under `results/jdk-$JDK_VERSION/$ARC
 
 ## Generate the benchmarks results plot
 
-To generate the benchmarks plots for a specific jdk-version and a specific architecture, run the below command:
+To generate all benchmark plots corresponding to one jdk-version and (optionally,) a specific architecture, run the below command:
 ```
 ./plot-benchmarks.sh <jdk-version> [<arch>]
 ```
-Each benchmark plot is generated under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`
+Each plot is generated under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`
 
->Note: If not specified, the <arch> is automatically detected based on the current target architecture.
+>Note: If not specified, the <arch> is automatically detected based on the current target system architecture.
+
+Plots generation relies on the [R/ggplot2](https://ggplot2.tidyverse.org/).

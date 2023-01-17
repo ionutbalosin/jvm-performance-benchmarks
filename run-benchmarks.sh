@@ -98,11 +98,11 @@ compile_benchmark_suite() {
 
 configure_os() {
   if [ "$(uname -s)" == "Linux" ]; then
-    . ./configure_linux_os.sh "$DRY_RUN"
+    . ./configure-linux-os.sh "$DRY_RUN"
   elif [ "$(uname -s)" == "Darwin" ]; then
-    . ./configure_mac_os.sh "$DRY_RUN"
+    . ./configure-mac-os.sh "$DRY_RUN"
   elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ] || [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    . ./configure_win_os.sh "$DRY_RUN"
+    . ./configure-win-os.sh "$DRY_RUN"
   else
     echo "ERROR: No configuration is available for this OS. This is neither a Linux, Darwin nor a Windows OS."
     exit 1
@@ -125,13 +125,13 @@ echo ""
 echo "+=========================+"
 echo "| [2/5] JVM Configuration |"
 echo "+=========================+"
-. ./configure_jvm.sh
+. ./configure-jvm.sh
 
 echo ""
 echo "+=========================+"
 echo "| [3/5] JMH Configuration |"
 echo "+=========================+"
-. ./configure_jmh.sh
+. ./configure-jmh.sh
 
 echo ""
 echo "+===============================+"

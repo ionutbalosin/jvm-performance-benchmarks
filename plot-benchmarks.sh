@@ -28,9 +28,9 @@ check_command_line_options() {
 
 set_environment_variables() {
   export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH"
-  export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk_hotspot_vm"
-  export GRAAL_VM_CE_IDENTIFIER="graalvm_ce"
-  export GRAAL_VM_EE_IDENTIFIER="graalvm_ee"
+  export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
+  export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
+  export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
 
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"

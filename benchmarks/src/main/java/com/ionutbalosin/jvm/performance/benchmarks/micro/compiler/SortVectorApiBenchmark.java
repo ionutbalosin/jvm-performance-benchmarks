@@ -44,7 +44,7 @@ import org.openjdk.jmh.annotations.*;
 @Fork(
     value = 5,
     jvmArgsPrepend = {"--add-modules=jdk.incubator.vector"})
-public class SortVectorAPIBenchmark {
+public class SortVectorApiBenchmark {
 
   @Param({"64", "1024", "65536"})
   int size;
