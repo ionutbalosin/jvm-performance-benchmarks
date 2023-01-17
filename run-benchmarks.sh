@@ -55,7 +55,7 @@ run_benchmark() {
 }
 
 run_benchmark_suite() {
-    echo "Running $JAVA_VM_NAME tests suite ..."
+    echo "Running $JVM_NAME tests suite ..."
 
     no_of_benchmarks=$(./$JQ -r < "$JMH_BENCHMARKS" ".benchmarks | length")
     global_jmh_opts=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jmhOpts")
@@ -84,13 +84,13 @@ run_benchmark_suite() {
     done
 
     echo ""
-    echo "Finished $JAVA_VM_NAME tests suite!"
+    echo "Finished $JVM_NAME tests suite!"
 
     time_converter "$(($(date +%s) - test_suite_start))"
 }
 
 compile_benchmark_suite() {
-  CMD="./mvnw -P jdk${JAVA_VERSION}_profile clean spotless:apply package"
+  CMD="./mvnw -P jdk${JDK_VERSION}_profile clean spotless:apply package"
   echo "$CMD"
   echo ""
   eval "$CMD"

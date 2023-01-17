@@ -2,11 +2,11 @@
 
 check_command_line_options() {
   if [ $# -eq 0 ]; then
-    echo "Usage: ./plot-benchmarks <java-version> [<architecture>]"
+    echo "Usage: ./plot-benchmarks <jdk-version> [<arch>]"
     echo ""
     echo "Options:"
-    echo "  java-version   java version identifier for the generated results"
-    echo "  architecture   target architecture for the generated results. If missing, it is automatically detected"
+    echo "  jdk-version   java version identifier for the generated results"
+    echo "  arch          target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture"
     echo ""
     echo "Examples:"
     echo "  ./plot-benchmarks 17"
@@ -16,7 +16,7 @@ check_command_line_options() {
   fi
 
   if [ "$1" ];then
-    export JAVA_VERSION="$1"
+    export JDK_VERSION="$1"
   fi
 
   if [ "$2" ];then
@@ -27,7 +27,7 @@ check_command_line_options() {
 }
 
 set_environment_variables() {
-  export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JAVA_VERSION/$ARCH"
+  export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH"
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk_hotspot_vm"
   export GRAAL_VM_CE_IDENTIFIER="graalvm_ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm_ee"

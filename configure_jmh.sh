@@ -1,8 +1,8 @@
 #!/bin/bash
 
 export JMH_JAR="benchmarks/target/benchmarks.jar"
-export JMH_BENCHMARKS="jmh_suite_jdk${JAVA_VERSION}.json"
-export JMH_OUTPUT_FOLDER="results/jdk-$JAVA_VERSION/$ARCH/$JAVA_VM_IDENTIFIER"
+export JMH_BENCHMARKS="jmh_suite_jdk${JDK_VERSION}.json"
+export JMH_OUTPUT_FOLDER="results/jdk-$JDK_VERSION/$ARCH/$JVM_IDENTIFIER"
 
 echo "JMH jar: $JMH_JAR"
 echo "JMH test suite file: $JMH_BENCHMARKS"

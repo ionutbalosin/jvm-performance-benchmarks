@@ -1,8 +1,8 @@
-# Java Virtual Machine (JVM) Performance Microbenchmarks
+# Java Virtual Machine (JVM) Performance Benchmarks
 
-This repository contains different JVM microbenchmarks for the C2/Graal JIT Compilers and the Garbage Collectors.
+This repository contains different JVM benchmarks for the C2/Graal JIT Compilers and the Garbage Collectors.
 
-Each microbenchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the microbenchmarks results are not always a good predictor on a larger scale.
+Each microbenchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale.
 
 For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
 
@@ -18,9 +18,9 @@ The goal of the project is to assess:
 1. different Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
 2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects
 
-In this regard, all microbenchmarks are relatively simple but very focused on specific goals.
+In this regard, all benchmarks are relatively simple but very focused on specific goals.
 
-The microbenchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
+The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
 
 We left **out of scope**, for now, any specific language feature and larger applications (i.e., macro benchmarking).
 
@@ -51,7 +51,7 @@ For more details please check the [compiler hints](https://github.com/openjdk/jm
 Starting OpenJDK 17 the compiler supports blackholes [JDK-8259316](https://bugs.openjdk.org/browse/JDK-8259316). 
 This optimization is available in [HotSpot](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/opto/library_call.cpp#L7843) and the [Graal compiler](https://github.com/oracle/graal/blob/master/compiler/src/org.graalvm.compiler.nodes/src/org/graalvm/compiler/nodes/debug/BlackholeNode.java).
 
-In order to perform a fair comparison between OpenJDK 11 and OpenJDK 17, compiler blackholes should be manually disabled in the microbenchmarks. 
+In order to perform a fair comparison between OpenJDK 11 and OpenJDK 17, compiler blackholes should be manually disabled in the benchmarks. 
 
 The cost of `Blackhole.consume()` is zero (the compiler will not emit any instructions for the call) when compiler blackholes are enabled and supported by the top-tier JIT compiler of the underlying JVM. 
 
@@ -114,10 +114,9 @@ To run the benchmarks on different JKD versions / JVMs distributions, please ins
 
 No. | JVM distribution   | JDK version |  Build
 -------------- |--------------------|--------------------| -------------------------------
-01 | OpenJDK HotSpot VM | 11, 17             | [OpenJDK](https://jdk.java.net/archive/)
-02 | Graal VM CE        | 11, 17             | [GraalVM CE](https://www.graalvm.org/downloads/)
-03 | Graal VM EE        | 11, 17             | [GraalVM CE](https://www.graalvm.org/downloads/)
-04 | Eclipse OpenJ9 VM  | 11, 17             | [Eclipse OpenJ9](https://adoptium.net/temurin/releases/)
+01 | OpenJDK HotSpot VM | 11, 17             | [download](https://jdk.java.net/archive/)
+02 | Graal VM CE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
+03 | Graal VM EE        | 11, 17             | [download](https://www.graalvm.org/downloads/)
 
 >Note: we support only LTS versions. If there is a need for another JDK feature release, please configure it by yourself.
 
@@ -150,18 +149,18 @@ To properly execute bash scripts on Windows there are a few alternatives:
 - [Cygwin](https://www.cygwin.com/)
 - Windows Subsystem for Linux (WSL)
 
-## Compile and package the microbenchmarks
+## Compile and package the benchmarks
 
 ### JDK 11
 
-To compile the microbenchmarks using JDK 11 please run the below command:
+To compile the benchmarks using JDK 11 please run the below command:
 ```
 ./mvnw -P jdk11_profile clean spotless:apply package
 ```
 
 ### JDK 17
 
-To compile and package the microbenchmarks using JDK 17 please run the below command:
+To compile and package the benchmarks using JDK 17 please run the below command:
 ```
 ./mvnw clean spotless:apply package
 ```
@@ -170,19 +169,19 @@ or (using the default, explicit profile):
 ./mvnw -P jdk17_profile clean spotless:apply package
 ```
 
-## Run the microbenchmarks (including the entire setup)
+## Run the benchmarks (including the entire setup)
 
 ### Dry run
 
 This will generate and print all the commands but without executing any real benchmark. 
 ```
-./run-benchmarks.sh --dry-run
+./run-benchmarks.sh --dry-run | tee run-benchmarks.out
 ```
 
 ### Normal run
 
 ```
-sudo ./run-benchmarks.sh
+sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
 > sudo is needed to properly apply the OS configuration settings.
@@ -192,4 +191,14 @@ You can also redirect the output to a file for later analysis:
 ```
 sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
-Each JMH test suite result is written to under `results/jdk-$VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME$.json`
+Each benchmark test suite result is written under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
+
+## Generate the benchmarks results plot
+
+To generate the benchmarks plots for a specific jdk-version and a specific architecture, run the below command:
+```
+./plot-benchmarks.sh <jdk-version> [<arch>]
+```
+Each benchmark plot is generated under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`
+
+>Note: If not specified, the <arch> is automatically detected based on the current target architecture.
