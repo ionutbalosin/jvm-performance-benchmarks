@@ -108,7 +108,7 @@ For further references please check:
 
 ### Install JDK/JVM
 
-To run the benchmarks on different JVM distributions / JDK versions , please install the corresponding build:
+To run the benchmarks on different JVM distributions / JDK versions, please install the corresponding build:
 
 No. | JVM distribution   | JDK versions |  Build
 -------------- |--------------------|--------------| -------------------------------
