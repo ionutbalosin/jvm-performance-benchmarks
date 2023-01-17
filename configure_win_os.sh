@@ -3,6 +3,7 @@
 set_environment_variables() {
   export ARCH="$(uname -m)"
   export JQ="jq/jq-win64.exe"
+
   echo "Operating system: Windows OS"
   echo "Architecture: $ARCH"
   echo "JSON processor executable: $JQ"
