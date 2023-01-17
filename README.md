@@ -195,10 +195,10 @@ Each benchmark test suite result is written under `results/jdk-$JDK_VERSION/$ARC
 
 ## Generate the benchmarks results plot
 
-To generate all benchmark plots corresponding to one jdk-version and (optionally,) a specific architecture, run the below command:
+To generate all benchmark plots corresponding to one `<jdk-version>` and (optionally,) a specific `<arch>`, run the below command:
 ```
 ./plot-benchmarks.sh <jdk-version> [<arch>]
 ```
-If the `<arch>` parameter is not specified, it is automatically detected based on the current target system architecture.
+If the `<arch>` parameter is omitted, it is automatically detected based on the current target system architecture.
 
 Each plot is generated using [R/ggplot2](https://ggplot2.tidyverse.org/) under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`.
