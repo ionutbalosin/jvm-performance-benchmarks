@@ -71,8 +71,8 @@ No. | JVM distribution   | JDK versions |  Supported
 1 | OpenJDK HotSpot VM | 11, 17       | [Yes](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
 2 | GraalVM CE        | 11, 17       | [Yes](https://www.graalvm.org/downloads/)
 3 | GraalVM EE        | 11, 17       | [Yes](https://www.graalvm.org/downloads/)
-4 | Eclipse OpenJ9 VM  | -            | No, see the resons below
-5 | Azul Prime (Zing)  | -            | No, see the resons below
+4 | Eclipse OpenJ9 VM  | N/A         | No, see the resons below
+5 | Azul Prime (Zing)  | N/A         | No, see the resons below
 
 ### Eclipse OpenJ9 VM
 
