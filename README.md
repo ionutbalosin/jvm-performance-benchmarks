@@ -182,14 +182,14 @@ or (using the default, explicit profile):
 ./mvnw -P jdk17_profile clean spotless:apply package
 ```
 
-## Benchmarks tests suites configuration
+## Benchmarks suites configuration
 
-There are dedicated benchmarks tests suites (defined in JSON configuration files) for each supported JDK version:
+There are dedicated benchmarks suites (defined in JSON configuration files) for each supported JDK version:
 
-- [benchmarks-suite-jdk11.json](./jmh-tests-suite-jdk11.json)
-- [benchmarks-suite-jdk17.json](./jmh-tests-suite-jdk17.json)
+- [benchmarks-suite-jdk11.json](./benchmarks-suite-jdk11.json)
+- [benchmarks-suite-jdk17.json](./benchmarks-suite-jdk17.json)
 
-Running the benchmarks tests suite on a specific JDK version will pick up all only the tests defined in the configuration file.
+Running the benchmarks suite on a specific JDK version will pick up all only the tests defined in the configuration file.
 
 There are a few reasons why such a custom configuration is needed:
 
@@ -219,7 +219,7 @@ sudo ./run-benchmarks.sh | tee run-benchmarks.out
 
 > sudo is needed to properly apply the OS configuration settings.
 
-Each benchmark test suite result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
+Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 
 ## Benchmark plots
 
