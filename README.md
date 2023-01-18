@@ -18,9 +18,7 @@ The main goal of the project is to assess:
 1. different Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
 2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects 
 
-In this regard, all benchmarks are relatively simple but focused on specific goals.
- 
-In addition, there is a set of larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
+In addition, there is a set of benchmarks covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
 
 We left **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as large applications (e.g., web-based microservices, etc.).
 
