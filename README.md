@@ -68,6 +68,8 @@ For that reason, to focus on broader benchmarks reusability (i.e., across differ
 
 ## Supported JVMs
 
+The table below summarizes which of the major JVMs distributions are included in our benchmarking analysis.
+
 No. | JVM distribution   | JDK versions |  Supported
 -------------- |--------------------|--------------| -------------------------------
 1 | OpenJDK HotSpot VM | 11, 17       | [Yes](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
@@ -217,10 +219,12 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 
 ### Dry run
 
-Dry run mode goes through and simulates all the commands, but without causing any side effects, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
+Dry run mode goes through and simulates all the commands, but without changing any OS setting, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
 ```
-./run-benchmarks.sh --dry-run
+sudo ./run-benchmarks.sh --dry-run
 ```
+
+**Note:** `sudo` rights are needed for dry run mode to read some system configuration files, otherwise not accessible. Nevertheless, it has no side effect on the actual OS settings.
 
 ### Normal run
 
@@ -228,7 +232,7 @@ Dry run mode goes through and simulates all the commands, but without causing an
 sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
-**Note:** `sudo` rights are needed to properly apply the OS configuration settings. If they are skipped, during the benchmarks' configuration, no need to launch it with `sudo` anymore. 
+**Note:** `sudo` rights are needed to properly apply the OS configuration settings. If they are skipped, no OS configuration is further applied. 
 
 Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 
