@@ -198,7 +198,7 @@ There are a few reasons why such a custom configuration is needed:
 
 ## Run the benchmarks
 
-Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to execute any benchmark test, as follows:
+Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to execute any benchmark, as follows:
 - configure the OS
 - configure the JVM
 - configure the JMH
@@ -206,7 +206,7 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 
 ### Dry run
 
-This will generate and print all the commands but without executing any real benchmark. 
+This will generate and print all the commands but without executing any benchmark. 
 ```
 ./run-benchmarks.sh --dry-run
 ```
