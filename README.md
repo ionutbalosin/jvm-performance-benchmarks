@@ -2,7 +2,7 @@
 
 This repository contains different JVM benchmarks for the C2/Graal JIT Compilers and the Garbage Collectors.
 
-Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell enough if properly implemented.
+Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell enough if properly implemented and executed.
 
 For the full copyright and license information, please view the [LICENSE](LICENSE) file distributed with the source code.
 
@@ -13,12 +13,14 @@ For the full copyright and license information, please view the [LICENSE](LICENS
 
 ## Purpose
 
-The goal of the project is to assess:
+The main goal of the project is to assess:
 
 1. different Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
-2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects
+2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects 
 
 In this regard, all benchmarks are relatively simple but focused on specific goals.
+ 
+In addition, there is a set of smaller programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
 
 The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
 
