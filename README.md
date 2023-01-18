@@ -217,7 +217,7 @@ This will generate and print all the commands but without executing any benchmar
 sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
-> sudo is needed to properly apply the OS configuration settings.
+**Note:** `sudo` rights are needed to properly apply the OS configuration settings. If they are skipped, during the benchmarks' configuration, no need to launch it with `sudo` anymore. 
 
 Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 
