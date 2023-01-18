@@ -210,7 +210,7 @@ Each benchmark test suite result is saved under `results/jdk-$JDK_VERSION/$ARCH/
 
 ### Install R/ggplot2
 
-The benchmarks plot generation is based on [R/ggplot2](https://ggplot2.tidyverse.org/) that needs to be installed upfront.
+The benchmark plot generation is based on [R/ggplot2](https://ggplot2.tidyverse.org/) that needs to be installed upfront.
 
 ### Generate the benchmark plots
 
