@@ -4,7 +4,7 @@ This repository contains different JVM benchmarks for the C2/Graal JIT Compilers
 
 Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell enough if properly implemented.
 
-For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
+For the full copyright and license information, please view the [LICENSE](LICENSE) file distributed with the source code.
 
 ## Authors
 
@@ -22,7 +22,7 @@ In this regard, all benchmarks are relatively simple but focused on specific goa
 
 The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
 
-We left **out of scope** benchmarking any syntactic sugar language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as larger applications (e.g., web-based microservices, etc.).
+We left **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as larger applications (e.g., web-based microservices, etc.).
 
 ## Infrastructure baseline
 We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), that can be used to assess the infrastructure overhead for the code to measure.
@@ -101,7 +101,7 @@ The Linux OS tuning script [configure-linux-os.sh](./configure-linux-os.sh) enab
 - set CPU governor to performance
 - disable CPU hyper-threading
 
->Note: all tuning configurations were tested on Ubuntu (i.e., a Debian based) Linux distribution.
+>Note: all tuning configurations are tested on Ubuntu (i.e., a Debian based) Linux distribution.
 
 For further references please check:
 - [LLVM benchmarking tips](https://llvm.org/docs/Benchmarking.html#linux)
