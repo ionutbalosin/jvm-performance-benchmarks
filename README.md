@@ -206,7 +206,7 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 
 ### Dry run
 
-This will generate and print all the commands but without executing any benchmark. 
+Dry run mode goes through and simulates all the commands, but without causing any side effects, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
 ```
 ./run-benchmarks.sh --dry-run
 ```
