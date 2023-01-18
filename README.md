@@ -208,13 +208,13 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 
 This will generate and print all the commands but without executing any real benchmark. 
 ```
-./run-benchmarks.sh --dry-run | tee run-benchmarks.out
+./run-benchmarks.sh --dry-run
 ```
 
 ### Normal run
 
 ```
-sudo ./run-benchmarks.sh | tee run-benchmarks.out
+sudo ./run-benchmarks.sh
 ```
 
 > sudo is needed to properly apply the OS configuration settings.
