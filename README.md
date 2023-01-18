@@ -198,12 +198,11 @@ There are a few reasons why such a custom configuration is needed:
 
 ## Run the benchmarks
 
-Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to running any benchmark, as follows:
+Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to execute any benchmark test, as follows:
 - configure the OS
 - configure the JVM
 - configure the JMH
 - compile the benchmarks source code
-- and, at the end, run the benchmark test suite
 
 ### Dry run
 
