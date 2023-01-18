@@ -11,6 +11,18 @@ For the full copyright and license information, please view the [LICENSE](LICENS
 - [Ionut Balosin](https://www.ionutbalosin.com)
 - [Florin Blanaru](https://twitter.com/gigiblender)
 
+# Content
+
+- [Purpose](#purpose)
+- [JMH caveats](#jmh-caveats)
+- [Supported JVMs](#supported-jvms)
+- [OS tuning for consistent results](#os-tuning-for-consistent-results)
+- [JDK configurations](#jdk-configurations)
+- [Benchmarks configurations](#benchmarks-configurations)
+- [Infrastructure baseline benchmark](#infrastructure-baseline-benchmark)
+- [Running the benchmarks](#running-the-benchmarks)
+- [Benchmark plots generation](#benchmark-plots-generation)
+
 ## Purpose
 
 The main goal of the project is to assess:
@@ -23,15 +35,6 @@ In addition, there is a small set of benchmarks covering larger programs (e.g., 
 We leave **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as large applications (e.g., web-based microservices, etc.).
 
 The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
-
-## Infrastructure baseline
-We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), that can be used to assess the infrastructure overhead for the code to measure.
-
-It measures the performance of empty methods (w/ and w/o explicit inlining) but also the performance of returning an object versus consuming it via blackholes. All of these mechanisms are used inside the real suite of tests.
-
-This benchmark is particularly useful in case of a comparison between different JVMs and JDKs, and it should be run before any other real benchmark to check the default costs. 
-In that regard, if the results of the infrastructure baseline benchmark are not the same, it does not make sense to compare the results of the other benchmarks between different
-JVMs and JDKs.
 
 ## JMH caveats
 
@@ -88,7 +91,7 @@ It is only allowed to publish results for Azul Prime if prior consent is obtaine
 
 As of now, we decided to skip this JVM in order to avoid the additional overhead of obtaining such consent.
 
-## OS tuning: how to get consistent results
+## OS tuning for consistent results
 
 When doing benchmarking, it is recommended to disable potential sources of performance non-determinism.
 
@@ -117,11 +120,11 @@ Due to these reasons, the script [configure-mac-os.sh](./configure-mac-os.sh) do
 
 Windows is not our main focus therefore the script [configure-win-os.sh](./configure-win-os.sh) does not enable any specific Windows tuning configuration.
 
-## Prerequisites
+## JDK configurations
 
-### Install JDK/JVM
+### Install JDK
 
-To run the benchmarks on different JVM distributions / JDK versions, please install the corresponding build:
+To run the benchmarks on different JDK versions, please install the corresponding build:
 
 No. | JVM distribution   | JDK versions |  Build
 -------------- |--------------------|--------------| -------------------------------
@@ -133,7 +136,7 @@ At the moment we support only JDK Long-Term Support (LTS) versions. If there is 
 
 Additionally, if you decide to install a different OpenJDK build, we recommend to take one with [Shenandoah GC](https://wiki.openjdk.org/display/shenandoah/Main) available.
 
-### Configure JDK/JVM
+### Configure JDK
 
 Open the [configure-jvm.sh](./configure-jvm.sh) script file and update the corresponding **JAVA_HOME** property (as per your system path):
 ```
@@ -162,16 +165,14 @@ To properly execute bash scripts on Windows there are a few alternatives:
 - [Cygwin](https://www.cygwin.com/)
 - Windows Subsystem for Linux (WSL)
 
-## Compile and package the benchmarks
+### Compile and package with JDK 11
 
-### JDK 11
-
-To compile the benchmarks using JDK 11 please run the below command:
+To compile and package the benchmarks using JDK 11 please run the below command:
 ```
 ./mvnw -P jdk11_profile clean spotless:apply package
 ```
 
-### JDK 17
+### Compile and package with JDK 11
 
 To compile and package the benchmarks using JDK 17 please run the below command:
 ```
@@ -182,7 +183,7 @@ or (using the default, explicit profile):
 ./mvnw -P jdk17_profile clean spotless:apply package
 ```
 
-## Benchmarks suites configuration
+## Benchmarks configurations
 
 There are dedicated benchmarks suites (defined in JSON configuration files) for each supported JDK version:
 
@@ -196,7 +197,17 @@ There are a few reasons why such a custom configuration is needed:
 - selectively decide what benchmarks to include in one JDK version, since not all benchmarks make sense across all JDK versions (e.g., APIs not available for a previous JDK version)
 - selectively pass different JVM arguments but also JMH options to subsequent runs of the same benchmark (e.g., run the same benchmark twice, first time with one thread and second time with two threads)
 
-## Run the benchmarks
+## Infrastructure baseline benchmark
+
+We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), that can be used to assess the infrastructure overhead for the code to measure.
+
+It measures the performance of empty methods (w/ and w/o explicit inlining) but also the performance of returning an object versus consuming it via blackholes. All of these mechanisms are used inside the real suite of tests.
+
+This benchmark is particularly useful in case of a comparison between different JVMs and JDKs, and it should be run before any other real benchmark to check the default costs.
+In that regard, if the results of the infrastructure baseline benchmark are not the same, it does not make sense to compare the results of the other benchmarks between different
+JVMs and JDKs.
+
+## Running the benchmarks
 
 Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to execute any benchmark, as follows:
 - configure the OS
@@ -221,7 +232,7 @@ sudo ./run-benchmarks.sh | tee run-benchmarks.out
 
 Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 
-## Benchmark plots
+## Benchmark plots generation
 
 ### Install R/ggplot2
 
