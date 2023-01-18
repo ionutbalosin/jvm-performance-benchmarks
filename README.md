@@ -233,6 +233,6 @@ To generate all benchmark plots corresponding to one `<jdk-version>` and (option
 ```
 ./plot-benchmarks.sh <jdk-version> [<arch>]
 ```
-If the `<arch>` parameter is omitted, it is automatically detected based on the current target system architecture.
+If the `<arch>` parameter is omitted, it is automatically detected based on the current system architecture.
 
 Each benchmark plot is saved under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`.
