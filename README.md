@@ -22,7 +22,7 @@ In this regard, all benchmarks are relatively simple but focused on specific goa
  
 In addition, there is a set of larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
 
-We left **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as larger applications (e.g., web-based microservices, etc.).
+We left **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as large applications (e.g., web-based microservices, etc.).
 
 The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
 
