@@ -1,37 +1,37 @@
 #!/bin/bash
 
 configure_openjdk11_hotspot_vm() {
-  export JAVA_HOME="<path_to_jdk>"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
   export JVM_NAME="OpenJDK HotSpot VM"
   export JVM_IDENTIFIER="openjdk-hotspot-vm"
 }
 
 configure_openjdk17_hotspot_vm() {
-  export JAVA_HOME="<path_to_jdk>"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"
   export JVM_NAME="OpenJDK HotSpot VM"
   export JVM_IDENTIFIER="openjdk-hotspot-vm"
 }
 
 configure_graalvm_ce_jdk11() {
-  export JAVA_HOME="<path_to_jdk>"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-java11-22.3.0/Contents/Home"
   export JVM_NAME="GraalVM CE"
   export JVM_IDENTIFIER="graalvm-ce"
 }
 
 configure_graalvm_ce_jdk17() {
-  export JAVA_HOME="<path_to_jdk>"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.0/Contents/Home"
   export JVM_NAME="GraalVM CE"
   export JVM_IDENTIFIER="graalvm-ce"
 }
 
 configure_graalvm_ee_jdk11() {
-  export JAVA_HOME="<path_to_jdk>"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/graalvm-ee-java11-22.3.0/Contents/Home"
   export JVM_NAME="GraalVM EE"
   export JVM_IDENTIFIER="graalvm-ee"
 }
 
 configure_graalvm_ee_jdk17() {
-  export JAVA_HOME="<path_to_jdk>"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/graalvm-ee-java17-22.3.0/Contents/Home"
   export JVM_NAME="GraalVM EE"
   export JVM_IDENTIFIER="graalvm-ee"
 }

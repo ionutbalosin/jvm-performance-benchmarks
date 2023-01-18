@@ -206,13 +206,13 @@ sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 Each benchmark test suite result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 
-## Generate the benchmarks plots
+## Benchmark plots
 
 ### Install R/ggplot2
 
 The benchmarks plot generation is based on [R/ggplot2](https://ggplot2.tidyverse.org/) that needs to be installed upfront.
 
-### Generate the plots
+### Generate the benchmark plots
 
 To generate all benchmark plots corresponding to one `<jdk-version>` and (optionally,) a specific `<arch>`, run the below command:
 ```
