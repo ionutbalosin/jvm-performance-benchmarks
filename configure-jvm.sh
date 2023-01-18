@@ -79,7 +79,7 @@ do
 	esac
 done
 
-if [ ! -x "$JAVA_HOME"/bin/java ] ; then
+if [ ! -x "$JAVA_HOME"/bin/java ]; then
   echo ""
   echo "ERROR: Cannot properly execute '$JAVA_HOME/bin/java' command, unable to continue!"
   exit 1
