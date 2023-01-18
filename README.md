@@ -203,7 +203,7 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 - configure the JVM
 - configure the JMH
 - compile the benchmarks source code
-- run the benchmark test suite
+- and, at the end, run the benchmark test suite
 
 ### Dry run
 
