@@ -182,6 +182,20 @@ or (using the default, explicit profile):
 ./mvnw -P jdk17_profile clean spotless:apply package
 ```
 
+## Benchmarks tests suite
+
+There are dedicated benchmarks tests suites (defined in JSON configuration files) for each supported JDK version:
+
+- [benchmarks-suite-jdk11.json](./jmh-tests-suite-jdk11.json)
+- [benchmarks-suite-jdk17.json](./jmh-tests-suite-jdk17.json)
+
+Running the benchmarks tests suite on a specific JDK version will pick up all only the tests defined in the configuration file.
+
+There are a few reasons why such a custom configuration is needed:
+
+- selectively decide what benchmarks to include in one JDK version, since not all benchmarks make sense across all JDK versions (e.g., APIs not available for a previous JDK version)
+- selectively pass different JVM arguments but also JMH options to subsequent runs of the same benchmark (e.g., run first time one benchmark with 1 thread and then with 2 threads)
+
 ## Run the benchmarks (including the setup)
 
 ### Dry run
