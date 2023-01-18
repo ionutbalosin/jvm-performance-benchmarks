@@ -20,7 +20,7 @@ The main goal of the project is to assess:
 
 In this regard, all benchmarks are relatively simple but focused on specific goals.
  
-In addition, there is a set of smaller programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
+In addition, there is a set of larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
 
 The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
 
