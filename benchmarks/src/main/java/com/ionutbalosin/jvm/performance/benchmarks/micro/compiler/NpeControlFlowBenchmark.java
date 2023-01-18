@@ -63,7 +63,7 @@ public class NpeControlFlowBenchmark {
   private int size;
 
   @Param({"0", "16"})
-  private int upperNullThreshold;
+  private int nullThreshold;
 
   @Setup
   public void setup() {
@@ -71,7 +71,7 @@ public class NpeControlFlowBenchmark {
 
     for (int i = 0; i < size; i++) {
       int value = random.nextInt(THRESHOLD) + 1;
-      if (value < upperNullThreshold) {
+      if (value < nullThreshold) {
         array[i] = null;
       } else {
         array[i] = new Wrapper(i);

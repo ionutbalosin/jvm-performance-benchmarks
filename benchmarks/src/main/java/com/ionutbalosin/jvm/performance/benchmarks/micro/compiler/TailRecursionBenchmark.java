@@ -53,16 +53,16 @@ public class TailRecursionBenchmark {
   // $ java -jar */*/benchmarks.jar ".*TailRecursionBenchmark.*"
 
   @Param({"32768"})
-  private int param;
+  private int n;
 
   @Benchmark
   public int tail_recursive() {
-    return fibonacciRecursive(param, 0, 1);
+    return fibonacciRecursive(n, 0, 1);
   }
 
   @Benchmark
   public int iterative() {
-    return fibonacciIterative(param, 0, 1);
+    return fibonacciIterative(n, 0, 1);
   }
 
   private int fibonacciRecursive(int n, int a, int b) {

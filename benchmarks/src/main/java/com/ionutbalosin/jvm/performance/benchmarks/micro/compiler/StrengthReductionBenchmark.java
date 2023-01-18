@@ -55,7 +55,7 @@ public class StrengthReductionBenchmark {
   // $ java -jar */*/benchmarks.jar ".*StrengthReductionBenchmark.*"
 
   @Param({"true"})
-  private boolean heavyComputation;
+  private boolean isHeavy;
 
   // a big prime number
   @Param({"179426549"})
@@ -79,13 +79,13 @@ public class StrengthReductionBenchmark {
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private long doMultiply() {
     long val = this.value;
-    return heavyComputation ? val * 64 : val;
+    return isHeavy ? val * 64 : val;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private long doAdd() {
     long val = this.value;
-    return heavyComputation
+    return isHeavy
         ? val + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
@@ -97,6 +97,6 @@ public class StrengthReductionBenchmark {
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private long doShift() {
     long val = this.value;
-    return heavyComputation ? val << 6 : val;
+    return isHeavy ? val << 6 : val;
   }
 }

@@ -61,7 +61,7 @@ public class ScalarReplacementBenchmark {
   // $ java -jar */*/benchmarks.jar ".*ScalarReplacementBenchmark.*"
 
   @Param({"3"})
-  private int param;
+  private int value;
 
   @Param({"128"})
   private int size;
@@ -69,33 +69,33 @@ public class ScalarReplacementBenchmark {
   @Param(value = {"false"})
   private boolean objectEscapes;
 
-  private final HeavyWrapper CACHED_WRAPPER = new HeavyWrapper(param, size);
+  private final HeavyWrapper CACHED_WRAPPER = new HeavyWrapper(value, size);
 
   @Benchmark
   public int no_escape() {
-    LightWrapper w = new LightWrapper(param);
+    LightWrapper w = new LightWrapper(value);
     return w.f1 + w.f2;
   }
 
   // @Benchmark
   public int no_escape_baseline() {
-    return param + (param << 1);
+    return value + (value << 1);
   }
 
   @Benchmark
   public int no_escape_array_obj() {
-    HeavyWrapper w = new HeavyWrapper(param, size);
+    HeavyWrapper w = new HeavyWrapper(value, size);
     return w.f1 + w.f2 + w.z.length;
   }
 
   // @Benchmark
   public int no_escape_array_obj_baseline() {
-    return param + (param << 1) + size;
+    return value + (value << 1) + size;
   }
 
   @Benchmark
   public HeavyWrapper branch_escape_obj() {
-    HeavyWrapper wrapper = new HeavyWrapper(param, size);
+    HeavyWrapper wrapper = new HeavyWrapper(value, size);
     HeavyWrapper result;
 
     // wrapper is NoEscape, because "objectEscapes" is always false, hence branch is never executed
@@ -110,8 +110,8 @@ public class ScalarReplacementBenchmark {
 
   @Benchmark
   public boolean arg_escape_obj() {
-    HeavyWrapper wrapper1 = new HeavyWrapper(param, size);
-    HeavyWrapper wrapper2 = new HeavyWrapper(param, size);
+    HeavyWrapper wrapper1 = new HeavyWrapper(value, size);
+    HeavyWrapper wrapper2 = new HeavyWrapper(value, size);
     boolean match = false;
 
     // wrapper1 is NoEscape

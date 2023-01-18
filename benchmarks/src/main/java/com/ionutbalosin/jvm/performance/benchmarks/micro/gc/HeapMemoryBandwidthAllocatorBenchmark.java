@@ -57,11 +57,11 @@ public class HeapMemoryBandwidthAllocatorBenchmark {
 
   private int sizeInBytes;
 
-  @Param private ObjectsSize objectsSize;
+  @Param private ObjectsSize size;
 
   @Setup()
   public void setup() {
-    switch (objectsSize) {
+    switch (size) {
       case _32_B:
         sizeInBytes = 32;
         break;
@@ -72,7 +72,7 @@ public class HeapMemoryBandwidthAllocatorBenchmark {
         sizeInBytes = 8 * 1024 * 1024;
         break;
       default:
-        throw new UnsupportedOperationException("Unsupported object size " + objectsSize);
+        throw new UnsupportedOperationException("Unsupported object size " + size);
     }
   }
 

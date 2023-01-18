@@ -47,10 +47,10 @@ import org.openjdk.jmh.annotations.*;
 public class SortVectorApiBenchmark {
 
   @Param({"64", "1024", "65536"})
-  int size;
+  int arraySize;
 
   @Param({"64", "128", "256", "512"})
-  int vector_size;
+  int vectorSize;
 
   VectorSpecies<Integer> species;
 
@@ -58,14 +58,14 @@ public class SortVectorApiBenchmark {
 
   @Setup
   public void setup() {
-    species = VectorSpecies.of(int.class, VectorShape.forBitSize(vector_size));
+    species = VectorSpecies.of(int.class, VectorShape.forBitSize(vectorSize));
 
     Random random = new Random();
-    input = new int[size];
-    for (int i = 0; i < size; i++) {
+    input = new int[arraySize];
+    for (int i = 0; i < arraySize; i++) {
       input[i] = random.nextInt();
     }
-    result = new int[size];
+    result = new int[arraySize];
   }
 
   @Benchmark
