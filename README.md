@@ -214,16 +214,11 @@ This will generate and print all the commands but without executing any real ben
 ### Normal run
 
 ```
-sudo ./run-benchmarks.sh
+sudo ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
 > sudo is needed to properly apply the OS configuration settings.
 
-You can also redirect the output to a file for later analysis:
-
-```
-sudo ./run-benchmarks.sh | tee run-benchmarks.out
-```
 Each benchmark test suite result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 
 ## Benchmark plots
