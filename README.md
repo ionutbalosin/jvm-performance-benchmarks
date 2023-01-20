@@ -162,7 +162,7 @@ export JAVA_HOME="/c/Program_Dev/Java/openjdk-17.0.5"
 
 ## Benchmarks suites
 
-The benchmarks are organized in tests suites (i.e., benchmarks suites). To run a benchmark suite on a JDK version it needs a very specific configuration. There are predefined benchmarks suites (in JSON configuration files) for each supported JDK LTS version:
+The benchmarks are organized in suites (i.e., benchmarks suites). To run a benchmark suite on a JDK version it needs a very specific configuration. There are predefined benchmarks suites (in JSON configuration files) for each supported JDK LTS version:
 
 - [benchmarks-suite-jdk11.json](./benchmarks-suite-jdk11.json)
 - [benchmarks-suite-jdk17.json](./benchmarks-suite-jdk17.json)
@@ -173,7 +173,7 @@ There are a few reasons why such a custom configuration is needed:
 
 - selectively pass different JVM arguments to subsequent runs of the same benchmark  (e.g., first run with ZGC, second run with G1GC, etc.) 
 - selectively pass different JMH options to subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.)
-- selectively control what benchmarks(, JVM parameters and JMH options) to include in one JDK version (e.g., exclude from JDK 11 the ZGC benchmark since it was experimental at that moment, etc.)
+- selectively control what benchmarks(, JVM parameters and JMH options) to include/exclude in one JDK version (e.g., exclude from JDK 11 the ZGC benchmark since it was experimental at that moment, etc.)
 
 ## Infrastructure baseline benchmark
 
