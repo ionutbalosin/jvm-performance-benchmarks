@@ -30,7 +30,7 @@ The main goal of the project is to assess:
 1. different Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
 2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects 
 
-In addition, there is a small set of benchmarks covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some of the high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is complementary (i.e., nice to have) but not the main purpose of this work.
+In addition, there is a small set of benchmarks covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is not the main purpose of this work.
 
 We leave **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as large applications (e.g., web-based microservices, etc.).
 
@@ -42,7 +42,7 @@ The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://git
 
 > JMH uses HotSpot-specific compiler hints to control the Just-in-Time (JIT) compiler. 
 
-For that reason, at the moment, the fully supported JVMs are all the HotSpot-based VMs, including vanilla OpenJDK and Oracle JDK builds. 
+For that reason, the fully supported JVMs are all the HotSpot-based VMs, including vanilla OpenJDK and Oracle JDK builds. 
 GraalVM is also supported.
 For more details please check the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/CompilerHints.java#L37) and [supported VMs](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/format/SupportedVMs.java#L31).
 
@@ -68,18 +68,18 @@ For that reason, to focus on broader benchmarks reusability (i.e., across differ
 
 ## OS tuning
 
-When doing benchmarking, it is recommended to disable potential sources of performance non-determinism.
+When doing benchmarking, it is recommended to disable potential sources of performance non-determinism. Below are described the tuning configurations the benchmark provides for each specific OS.
 
 ### Linux
 
-The Linux OS tuning script [configure-linux-os.sh](./configure-linux-os.sh) enables all the configurations listed below:
+The Linux tuning script [configure-linux-os.sh](./configure-linux-os.sh) triggers all the following:
 - set CPU(s) isolation (with `isolcpus` or `cgroups`)
 - disable address space layout randomization (ASLR)
 - disable turbo boost mode
 - set CPU governor to performance
 - disable CPU hyper-threading
 
->Note: all tuning configurations are tested on Ubuntu (i.e., a Debian based) Linux distribution.
+>Note: these configurations are tested on Ubuntu 22.04 LTS (i.e., a Debian based) Linux distribution.
 
 For further references please check:
 - [LLVM benchmarking tips](https://llvm.org/docs/Benchmarking.html#linux)
@@ -87,7 +87,7 @@ For further references please check:
 
 ### macOS
 
-For macOS, some of the tunings described for Linux are not applicable. For example, the Apple M1/M2 chips (ARM-based) do not have hyper-threading, nor a turbo-boost mode (i.e., these are specific to the Intel chips). In addition,  [disabling ASLR](https://opensource.apple.com/source/lldb/lldb-76/tools/darwin-debug/darwin-debug.cpp) looks more cumbersome, etc.
+For macOS, the Linux tunings described above are not applicable. For example, the Apple M1/M2 (ARM-based) chips do not have hyper-threading, nor a turbo-boost mode (i.e., these are specific to the Intel chips). In addition,  [disabling ASLR](https://opensource.apple.com/source/lldb/lldb-76/tools/darwin-debug/darwin-debug.cpp) looks more cumbersome, etc.
 
 Due to these reasons, the script [configure-mac-os.sh](./configure-mac-os.sh) does not enable any specific macOS tuning configuration.
 
@@ -97,7 +97,7 @@ Windows is not our main focus therefore the script [configure-win-os.sh](./confi
 
 ## JVM coverage
 
-The table below summarizes the JVM distributions included in our benchmarking analysis. For transparency reasons, we provide a short explanation of why we did not consider the others.
+The table below summarizes the JVM distributions included in the benchmark. For transparency reasons, we provide a short explanation of why the others are not supported.
 
 No. | JVM distribution   | JDK versions |  Included
 -------------- |--------------------|--------------| ----------
@@ -124,7 +124,7 @@ As of now, we decided to skip this JVM in order to avoid the additional overhead
 
 ## JDK coverage
 
-At the moment we support only JDK Long-Term Support (LTS) versions.
+At the moment the benchmark is configured to work only with the JDK Long-Term Support (LTS) versions.
 
 No. | JVM distribution   | JDK versions |  Build
 -------------- |--------------------|--------------| -------------------------------
@@ -132,13 +132,13 @@ No. | JVM distribution   | JDK versions |  Build
 2 | GraalVM CE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
 3 | GraalVM EE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
 
-If there is a need for another JDK LTS version (or feature release), you have to install and configure it by yourself. 
+If there is a need for another JDK LTS version (or feature release), you have to configure it by yourself. 
 
 Additionally, if you decide to install a different OpenJDK build, we recommend to take one with [Shenandoah GC](https://wiki.openjdk.org/display/shenandoah/Main) available.
 
 ### Configure JDK
 
-After the JDK was installed, the JDK path needs to be configured in the benchmark configuration scripts.  To do so, open the [configure-jvm.sh](./configure-jvm.sh) script file and update the corresponding **JAVA_HOME** property:
+After the JDK was installed, the JDK path needs to be updated in the benchmark configuration scripts.  To do so, open the [configure-jvm.sh](./configure-jvm.sh) script file and update the corresponding **JAVA_HOME** property:
 ```
 export JAVA_HOME="<path_to_jdk>"
 ```
@@ -160,42 +160,20 @@ Windows OS:
 export JAVA_HOME="/c/Program_Dev/Java/openjdk-17.0.5"
 ```
 
-To properly execute bash scripts on Windows there are a few alternatives:
-- [GIT bash](https://git-scm.com/downloads)
-- [Cygwin](https://www.cygwin.com/)
-- Windows Subsystem for Linux (WSL)
-
-### Compile and package
-
-To compile and package the benchmarks using a specific JDK `<version>` please run the below command:
-```
-./mvnw -P jdk<version>_profile clean spotless:apply package
-```
-
-where the `<version>` is either 11 or 17.
-
-Examples:
-
-```
-./mvnw -P jdk11_profile clean spotless:apply package
-```
-```
-./mvnw -P jdk17_profile clean spotless:apply package
-```
-
 ## Benchmarks suites
 
-Running a benchmark suite on a JDK version needs a very specific configuration. There are dedicated benchmarks suites (defined in JSON configuration files) for each supported JDK version:
+The benchmarks are organized in tests suites (i.e., benchmarks suites). To run a benchmark suite on a JDK version it needs a very specific configuration. There are predefined benchmarks suites (in JSON configuration files) for each supported JDK LTS version:
 
 - [benchmarks-suite-jdk11.json](./benchmarks-suite-jdk11.json)
 - [benchmarks-suite-jdk17.json](./benchmarks-suite-jdk17.json)
 
-The benchmark will sequentially pick up and execute all the tests specified in the configuration file.
+The benchmark will sequentially pick up and execute all the tests from the configuration file.
 
 There are a few reasons why such a custom configuration is needed:
 
-- selectively pass different JVM arguments but also JMH options to subsequent runs of the same benchmark (e.g., run the same benchmark multiple times, first time with one thread, second time with two threads, etc.)
-- selectively decide what benchmarks to include in one JDK version, since not all available benchmarks might make sense across all JDK versions
+- selectively pass different JVM arguments to subsequent runs of the same benchmark  (e.g., first run with ZGC, second run with G1GC, etc.) 
+- selectively pass different JMH options to subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.)
+- selectively control what benchmarks(, JVM parameters and JMH options) to include in one JDK version (e.g., exclude from JDK 11 the ZGC benchmark since it was experimental at that moment, etc.)
 
 ## Infrastructure baseline benchmark
 
@@ -211,9 +189,9 @@ JVMs and JDKs.
 
 Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to execute any benchmark, as follows:
 - configure the OS
-- configure the JVM
-- configure the JMH
-- compile the benchmarks source code
+- configure the JVM (e.g., set JAVA_HOME, etc.)
+- configure the JMH (e.g., choose the benchmark suite for the specific JDK, define the results output folder, etc.)
+- compile the benchmarks source code (using a Maven profile for the specific JDK)
 
 ### Dry run
 
@@ -233,6 +211,13 @@ sudo ./run-benchmarks.sh | tee run-benchmarks.out
 **Note:** `sudo` rights are needed to properly apply the OS configuration settings. If they are skipped, no OS configuration is further applied. 
 
 Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
+
+### Bash scripts on Windows
+
+To properly execute bash scripts on Windows there are a few alternatives:
+- [GIT bash](https://git-scm.com/downloads)
+- [Cygwin](https://www.cygwin.com/)
+- Windows Subsystem for Linux (WSL)
 
 ## Benchmark plots
 
