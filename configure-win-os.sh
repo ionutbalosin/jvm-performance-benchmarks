@@ -1,4 +1,4 @@
-#!/usr/bin/sudo bash
+#!/bin/bash
 
 set_environment_variables() {
   export ARCH="$(uname -m)"

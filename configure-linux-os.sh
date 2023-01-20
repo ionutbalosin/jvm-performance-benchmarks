@@ -1,4 +1,4 @@
-#!/usr/bin/sudo bash
+#!/bin/bash
 
 set_environment_variables() {
   export ARCH="$(uname -m)"
@@ -331,7 +331,7 @@ confirm_os_settings() {
     yes)
       if [[ $EUID != 0 ]]; then
         echo ""
-        echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the OS might not be properly configured."
+        echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the configuration fails."
         read -r -p "Press ENTER to continue or CRTL+C to abort ... "
       fi
       return 0
