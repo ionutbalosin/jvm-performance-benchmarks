@@ -88,10 +88,12 @@
       "name": "FactorialBenchmark"
     },
     {
-      "name": "FalseSharingBenchmark"
+      "name": "FalseSharingBenchmark",
+      "jvmArgsAppend": "-XX:-RestrictContended"
     },
     {
-      "name": "FibonacciBenchmark"
+      "name": "FibonacciBenchmark",
+      "jvmArgsAppend": "-Xss20M"
     },
     {
       "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
@@ -318,7 +320,8 @@
       "name": "LoopUnswitchBenchmark"
     },
     {
-      "name": "MandelbrotVectorApiBenchmark"
+      "name": "MandelbrotVectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
     },
     {
       "name": "MegamorphicInterfaceCallBenchmark"
@@ -336,7 +339,8 @@
       "name": "NpeThrowBenchmark"
     },
     {
-      "name": "PalindromeBenchmark"
+      "name": "PalindromeBenchmark",
+      "jvmArgsAppend": "-Xss20M"
     },
     {
       "name": "PopulationVarianceBenchmark"
@@ -462,10 +466,12 @@
       "name": "ScalarReplacementBenchmark"
     },
     {
-      "name": "SepiaVectorApiBenchmark"
+      "name": "SepiaVectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
     },
     {
-      "name": "SortVectorApiBenchmark"
+      "name": "SortVectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
     },
     {
       "name": "StackSpillingBenchmark"
@@ -474,13 +480,15 @@
       "name": "StrengthReductionBenchmark"
     },
     {
-      "name": "TailRecursionBenchmark"
+      "name": "TailRecursionBenchmark",
+      "jvmArgsAppend": "-Xss20M"
     },
     {
       "name": "VarArgsBenchmark"
     },
     {
-      "name": "VectorApiBenchmark"
+      "name": "VectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
     },
     {
       "name": "VectorizationPatternsMultipleFloatArraysBenchmark"

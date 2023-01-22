@@ -43,7 +43,7 @@ import org.openjdk.jmh.annotations.*;
 @State(Scope.Benchmark)
 @Fork(
     value = 5,
-    jvmArgsPrepend = {"--add-modules=jdk.incubator.vector"})
+    jvmArgsAppend = {"--add-modules=jdk.incubator.vector"})
 public class SortVectorApiBenchmark {
 
   @Param({"64", "1024", "65536"})

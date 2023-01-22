@@ -76,10 +76,12 @@
       "name": "FactorialBenchmark"
     },
     {
-      "name": "FalseSharingBenchmark"
+      "name": "FalseSharingBenchmark",
+      "jvmArgsAppend": "-XX:-RestrictContended"
     },
     {
-      "name": "FibonacciBenchmark"
+      "name": "FibonacciBenchmark",
+      "jvmArgsAppend": "-Xss20M"
     },
     {
       "name": "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark",
@@ -285,7 +287,8 @@
       "name": "NpeThrowBenchmark"
     },
     {
-      "name": "PalindromeBenchmark"
+      "name": "PalindromeBenchmark",
+      "jvmArgsAppend": "-Xss20M"
     },
     {
       "name": "PopulationVarianceBenchmark"
@@ -399,7 +402,8 @@
       "name": "StrengthReductionBenchmark"
     },
     {
-      "name": "TailRecursionBenchmark"
+      "name": "TailRecursionBenchmark",
+      "jvmArgsAppend": "-Xss20M"
     },
     {
       "name": "VarArgsBenchmark"
