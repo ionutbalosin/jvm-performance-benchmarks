@@ -42,14 +42,14 @@ import org.openjdk.jol.info.GraphLayout;
 
 /*
  * This benchmark initially allocates (during setup) chunks of chained objects (i.e., ballast), until it fills up
- * a certain percent of Heap (e.g., 0%, 25%, 50%) and keeps strong references to them from an array.
+ * a certain percent of Heap (e.g., 30%, 60%) and keeps strong references to them from an array.
  * Such a chain looks like Object 1 -> Object 2 -> … -> Object 32 where an object consist of pointer to the next object
  * and an array of longs.
  * Note: the chaining might have an impact on the GC roots traversal (for example during the “parallel” marking phase),
  * since the degree of pointer indirection (i.e., reference processing) is not negligible, while traversing the object graph dependencies.
  *
- * Then, in the benchmark test() method, similar object chains are concurrently allocated (by multiple threads) and immediately released,
- * so they become eligible for Garbage Collector.
+ * Then, in the benchmark test() method, similar object chains are concurrently allocated (by multiple threads) until they fill up
+ * 80% of the entire heap and then immediately released, so they become eligible for Garbage Collector.
  *
  * Note: During the lifecycle of the benchmark the amount of retained memory by strong references is fixed (i.e., the objects initialized
  * in the setup phase are kept alive during the benchmark test() method)
@@ -90,17 +90,13 @@ public class HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark {
     numberOfBenchThreads = params.getThreads();
 
     switch (percentageOfRetainedHeap) {
-      case P_0:
-        retainedArraySize = 0;
-        numberOfObjectsPerThread = (int) (maxNumberOfObjects / numberOfBenchThreads);
-        break;
-      case P_25:
-        retainedArraySize = (int) (maxNumberOfObjects * 0.25);
-        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.75) / numberOfBenchThreads);
-        break;
-      case P_50:
-        retainedArraySize = (int) (maxNumberOfObjects * 0.50);
+      case P_30:
+        retainedArraySize = (int) (maxNumberOfObjects * 0.30);
         numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.50) / numberOfBenchThreads);
+        break;
+      case P_60:
+        retainedArraySize = (int) (maxNumberOfObjects * 0.60);
+        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.20) / numberOfBenchThreads);
         break;
       default:
         throw new UnsupportedOperationException(
@@ -144,9 +140,8 @@ public class HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark {
   }
 
   public enum PercentageOfRetainedHeap {
-    P_0,
-    P_25,
-    P_50
+    P_30,
+    P_60
   }
 
   //   ObjectChain internals:
