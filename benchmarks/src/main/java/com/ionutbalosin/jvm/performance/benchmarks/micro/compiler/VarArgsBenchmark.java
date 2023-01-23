@@ -90,33 +90,14 @@ public class VarArgsBenchmark {
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int explicit_1_param() {
-    return explicit_1_param_accumulator(param1);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int explicit_2_params() {
     return explicit_2_params_accumulator(param1, param2);
   }
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int explicit_4_params() {
-    return explicit_4_params_accumulator(param1, param2, param3, param4);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int explicit_6_params() {
     return explicit_6_params_accumulator(param1, param2, param3, param4, param5, param6);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int explicit_8_params() {
-    return explicit_8_params_accumulator(
-        param1, param2, param3, param4, param5, param6, param7, param8);
   }
 
   @Benchmark
@@ -128,33 +109,14 @@ public class VarArgsBenchmark {
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int no_inline_explicit_1_param() {
-    return no_inline_explicit_1_param_accumulator(param1);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int no_inline_explicit_2_params() {
     return no_inline_explicit_2_params_accumulator(param1, param2);
   }
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int no_inline_explicit_4_params() {
-    return no_inline_explicit_4_params_accumulator(param1, param2, param3, param4);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int no_inline_explicit_6_params() {
     return no_inline_explicit_6_params_accumulator(param1, param2, param3, param4, param5, param6);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int no_inline_explicit_8_params() {
-    return no_inline_explicit_8_params_accumulator(
-        param1, param2, param3, param4, param5, param6, param7, param8);
   }
 
   @Benchmark
@@ -166,32 +128,14 @@ public class VarArgsBenchmark {
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int var_args_1_param() {
-    return var_args(param1);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int var_args_2_params() {
     return var_args(param1, param2);
   }
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int var_args_4_params() {
-    return var_args(param1, param2, param3, param4);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int var_args_6_params() {
     return var_args(param1, param2, param3, param4, param5, param6);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int var_args_8_params() {
-    return var_args(param1, param2, param3, param4, param5, param6, param7, param8);
   }
 
   @Benchmark
@@ -203,20 +147,8 @@ public class VarArgsBenchmark {
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int no_inline_var_args_1_param() {
-    return no_inline_var_args(param1);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int no_inline_var_args_2_params() {
     return no_inline_var_args(param1, param2);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int no_inline_var_args_4_params() {
-    return no_inline_var_args(param1, param2, param3, param4);
   }
 
   @Benchmark
@@ -227,36 +159,17 @@ public class VarArgsBenchmark {
 
   @Benchmark
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public int no_inline_var_args_8_params() {
-    return no_inline_var_args(param1, param2, param3, param4, param5, param6, param7, param8);
-  }
-
-  @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public int no_inline_var_args_10_params() {
     return no_inline_var_args(
         param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
-  }
-
-  private int explicit_1_param_accumulator(int p1) {
-    return p1;
   }
 
   private int explicit_2_params_accumulator(int p1, int p2) {
     return p1 + p2;
   }
 
-  private int explicit_4_params_accumulator(int p1, int p2, int p3, int p4) {
-    return p1 + p2 + p3 + p4;
-  }
-
   private int explicit_6_params_accumulator(int p1, int p2, int p3, int p4, int p5, int p6) {
     return p1 + p2 + p3 + p4 + p5 + p6;
-  }
-
-  private int explicit_8_params_accumulator(
-      int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8) {
-    return p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8;
   }
 
   private int explicit_10_params_accumulator(
@@ -271,30 +184,14 @@ public class VarArgsBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int no_inline_explicit_1_param_accumulator(int p1) {
-    return p1;
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private int no_inline_explicit_2_params_accumulator(int p1, int p2) {
     return p1 + p2;
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int no_inline_explicit_4_params_accumulator(int p1, int p2, int p3, int p4) {
-    return p1 + p2 + p3 + p4;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   private int no_inline_explicit_6_params_accumulator(
       int p1, int p2, int p3, int p4, int p5, int p6) {
     return p1 + p2 + p3 + p4 + p5 + p6;
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private int no_inline_explicit_8_params_accumulator(
-      int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8) {
-    return p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
