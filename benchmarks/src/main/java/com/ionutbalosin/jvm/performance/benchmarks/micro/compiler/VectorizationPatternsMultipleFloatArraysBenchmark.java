@@ -72,10 +72,10 @@ public class VectorizationPatternsMultipleFloatArraysBenchmark {
     D = new float[size];
     S = new short[size];
     for (int i = 0; i < size; i++) {
-      A[i] = random.nextFloat();
-      B[i] = random.nextFloat();
-      C[i] = random.nextFloat();
-      D[i] = random.nextFloat();
+      A[i] = 1 + random.nextFloat();
+      B[i] = 1 + random.nextFloat();
+      C[i] = 1 + random.nextFloat();
+      D[i] = 1 + random.nextFloat();
       S[i] = (short) (i % Short.MAX_VALUE);
     }
   }

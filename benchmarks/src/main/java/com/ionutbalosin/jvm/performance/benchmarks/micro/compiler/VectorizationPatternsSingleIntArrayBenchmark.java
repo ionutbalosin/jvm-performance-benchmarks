@@ -72,7 +72,7 @@ public class VectorizationPatternsSingleIntArrayBenchmark {
     A = new int[size];
     P = new boolean[size];
     for (int i = 0; i < size; i++) {
-      A[i] = random.nextInt(32);
+      A[i] = 1 + random.nextInt(32);
       P[i] = (i % 2 == 0);
     }
   }

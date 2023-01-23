@@ -72,9 +72,9 @@ public class VectorizationPatternsMultipleIntArraysBenchmark {
     C = new int[size];
     S = new short[size];
     for (int i = 0; i < size; i++) {
-      A[i] = random.nextInt(32);
-      B[i] = random.nextInt(32);
-      C[i] = random.nextInt(32);
+      A[i] = 1 + random.nextInt(32);
+      B[i] = 1 + random.nextInt(32);
+      C[i] = 1 + random.nextInt(32);
       S[i] = (short) (i % Short.MAX_VALUE);
     }
   }
