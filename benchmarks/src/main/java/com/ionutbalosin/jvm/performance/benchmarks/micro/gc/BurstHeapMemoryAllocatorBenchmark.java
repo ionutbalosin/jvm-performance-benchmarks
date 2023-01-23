@@ -41,7 +41,7 @@ import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jol.info.GraphLayout;
 
 /*
- * This benchmark allocates arrays of temporary objects until they fill up a certain percent of Heap (e.g., 25%, 50%, 75%)
+ * This benchmark allocates arrays of temporary objects until they fill up a certain percent of Heap (e.g., 30%, 60%)
  * and then releases them all, so they become eligible for Garbage Collector.
  *
  * Note: the benchmark could be run using multiple concurrent threads.
@@ -74,14 +74,11 @@ public class BurstHeapMemoryAllocatorBenchmark {
     numberOfBenchThreads = params.getThreads();
 
     switch (percentageOfHeapToAllocate) {
-      case P_25:
-        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.25) / numberOfBenchThreads);
+      case P_30:
+        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.30) / numberOfBenchThreads);
         break;
-      case P_50:
-        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.50) / numberOfBenchThreads);
-        break;
-      case P_75:
-        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.75) / numberOfBenchThreads);
+      case P_60:
+        numberOfObjectsPerThread = (int) ((maxNumberOfObjects * 0.60) / numberOfBenchThreads);
         break;
       default:
         throw new UnsupportedOperationException(
@@ -111,8 +108,7 @@ public class BurstHeapMemoryAllocatorBenchmark {
   }
 
   public enum PercentageOfHeapToAllocate {
-    P_25,
-    P_50,
-    P_75
+    P_30,
+    P_60
   }
 }
