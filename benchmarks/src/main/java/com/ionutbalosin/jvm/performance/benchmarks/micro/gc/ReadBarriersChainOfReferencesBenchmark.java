@@ -101,12 +101,12 @@ public class ReadBarriersChainOfReferencesBenchmark {
   }
 
   @Benchmark
-  public Object gc() {
+  public int gc() {
     return test();
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private Object test() {
+  private int test() {
     return baseRef
         .h2
         .h3
