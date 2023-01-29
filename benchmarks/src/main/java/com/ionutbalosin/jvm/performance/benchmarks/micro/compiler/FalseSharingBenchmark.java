@@ -50,7 +50,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * field load for the array object.
  *
  */
-@BenchmarkMode(Mode.Throughput)
+@BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
