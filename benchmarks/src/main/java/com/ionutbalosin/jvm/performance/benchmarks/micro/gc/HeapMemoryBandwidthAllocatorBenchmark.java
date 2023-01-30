@@ -42,7 +42,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * This benchmark tests the allocation rate for chunks of byte arrays having different sizes.
  */
 @BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
