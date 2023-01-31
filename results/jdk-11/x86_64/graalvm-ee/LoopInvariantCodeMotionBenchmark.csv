@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: iterations"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.initial_loop","avgt",1,25,971.763977,28.251193,"us/op",16384
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking","avgt",1,25,544.870513,24.422839,"us/op",16384

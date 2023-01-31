@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInterchangeBenchmark.initial_loop","avgt",1,25,8637.900630,1861.225985,"us/op",2048
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInterchangeBenchmark.manual_loop_interchange","avgt",1,25,259.601272,5.514346,"us/op",2048
