@@ -234,8 +234,7 @@
       "name": "IfConditionalBranchBenchmark"
     },
     {
-      "name": "InfrastructureBaselineBenchmark",
-      "jmhOpts": "-prof perfnorm"
+      "name": "InfrastructureBaselineBenchmark"
     },
     {
       "name": "JustInTimeConstantsBenchmark"
