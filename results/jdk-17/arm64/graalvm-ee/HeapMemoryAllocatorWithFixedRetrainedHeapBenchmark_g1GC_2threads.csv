@@ -1,0 +1,11 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: percentageOfRetainedHeap"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc","thrpt",2,25,"7,108740","0,168451","ops/s",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.alloc.rate","thrpt",2,25,"6989,962809","159,465401","MB/sec",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.alloc.rate.norm","thrpt",2,25,"1036171742,381243","45,392011","B/op",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.count","thrpt",2,25,"16808,000000",NaN,"counts",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.time","thrpt",2,25,"203760,000000",NaN,"ms",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc","thrpt",2,25,"15,221836","1,036060","ops/s",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.alloc.rate","thrpt",2,25,"6008,935629","402,549286","MB/sec",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.alloc.rate.norm","thrpt",2,25,"414468708,372114","21,311929","B/op",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.count","thrpt",2,25,"18389,000000",NaN,"counts",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.gc:·gc.time","thrpt",2,25,"209117,000000",NaN,"ms",P_60
