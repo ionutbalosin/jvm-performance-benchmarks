@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.PopulationVarianceBenchmark.fork_join","avgt",1,25,57.434779,0.522344,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.PopulationVarianceBenchmark.iterative","avgt",1,25,246.820349,0.262321,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.PopulationVarianceBenchmark.stream","avgt",1,25,91.601449,6.873413,"ms/op"
