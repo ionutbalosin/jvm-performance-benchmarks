@@ -1,0 +1,11 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: percentageOfHeapToAllocate"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc","thrpt",1,25,4.073585,0.520909,"ops/s",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.alloc.rate","thrpt",1,25,7508.216615,960.114400,"MB/sec",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,1932735294.222465,1.905295,"B/op",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.count","thrpt",1,25,5790.000000,NaN,"counts",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.time","thrpt",1,25,183582.000000,NaN,"ms",P_30
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc","thrpt",1,25,1.481224,0.217557,"ops/s",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.alloc.rate","thrpt",1,25,5460.198575,801.976780,"MB/sec",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,3865470605.663048,4.783478,"B/op",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.count","thrpt",1,25,5077.000000,NaN,"counts",P_60
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.BurstHeapMemoryAllocatorBenchmark.gc:·gc.time","thrpt",1,25,203684.000000,NaN,"ms",P_60

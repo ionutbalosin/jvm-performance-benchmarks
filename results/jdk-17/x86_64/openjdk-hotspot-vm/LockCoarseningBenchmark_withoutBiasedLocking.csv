@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.baseline","avgt",1,25,5.759875,0.008487,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.chain_method_calls","avgt",1,25,5.757932,0.007503,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_chain_method_calls","avgt",1,25,46.598255,0.010605,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_nested_method_calls","avgt",1,25,46.606019,0.007721,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.nested_synchronized","avgt",1,25,255.619042,7.011592,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.recursive_method_calls","avgt",1,25,22.573145,0.013072,"ns/op"

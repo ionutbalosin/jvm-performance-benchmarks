@@ -1,0 +1,16 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc","thrpt",2,25,380607.114400,3612.270778,"ops/ms",_32_B
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.alloc.rate","thrpt",2,25,17422.093976,165.415387,"MB/sec",_32_B
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.alloc.rate.norm","thrpt",2,25,48.000001,0.000001,"B/op",_32_B
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.count","thrpt",2,25,5000.000000,NaN,"counts",_32_B
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.time","thrpt",2,25,11205.000000,NaN,"ms",_32_B
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc","thrpt",2,25,1199.909186,5.912525,"ops/ms",_16_KB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.alloc.rate","thrpt",2,25,18765.911877,92.387530,"MB/sec",_16_KB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.alloc.rate.norm","thrpt",2,25,16400.000302,0.000300,"B/op",_16_KB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.count","thrpt",2,25,10000.000000,NaN,"counts",_16_KB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.time","thrpt",2,25,25126.000000,NaN,"ms",_16_KB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc","thrpt",2,25,2.365934,0.004776,"ops/ms",_8_MB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.alloc.rate","thrpt",2,25,18926.468445,38.226646,"MB/sec",_8_MB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.alloc.rate.norm","thrpt",2,25,8388624.154591,0.152260,"B/op",_8_MB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.count","thrpt",2,25,10000.000000,NaN,"counts",_8_MB
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.HeapMemoryBandwidthAllocatorBenchmark.gc:·gc.time","thrpt",2,25,24329.000000,NaN,"ms",_8_MB
