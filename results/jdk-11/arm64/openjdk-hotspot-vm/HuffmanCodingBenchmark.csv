@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: codingType"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCodingBenchmark.encode_decode","avgt",1,25,"5,156612","0,006529","ms/op",ENCODE_ONLY
+"com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCodingBenchmark.encode_decode","avgt",1,25,"8,561331","0,090719","ms/op",ENCODE_DECODE
