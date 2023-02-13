@@ -23,6 +23,9 @@ data <- rbind(data, data3)
 
 data <- processJmhCsvResults(data)
 
+# trim the benchmark scores to 2 decimal places
+data$Score <- round(data$Score, 2)
+
 # define the color palette for the plot bars
 colorPalette <- c("OpenJDK HotSpot VM" = "#648FFF", "GraalVM CE" = "#FFB000", "GraalVM EE" = "#FE6100")
 
