@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopFissionBenchmark.initial_loop","avgt",1,25,424.007485,10.899810,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopFissionBenchmark.manual_loop_fission","avgt",1,25,220.779034,1.554365,"us/op",262144
