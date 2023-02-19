@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.WriteBarriersLoopingOverArrayBenchmark.gc","thrpt",1,25,"12194,928984","2,795607","ops/s",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.WriteBarriersLoopingOverArrayBenchmark.gc:·gc.alloc.rate","thrpt",1,25,"0,000189","0,000230","MB/sec",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.WriteBarriersLoopingOverArrayBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,"0,016287","0,019774","B/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.WriteBarriersLoopingOverArrayBenchmark.gc:·gc.count","thrpt",1,25,"0,000000",NaN,"counts",262144
