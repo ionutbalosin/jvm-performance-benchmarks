@@ -31,7 +31,7 @@ configure_graalvm_ee_jdk11() {
 }
 
 configure_graalvm_ee_jdk17() {
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/graalvm-ee-java17-22.3.0/Contents/Home"
+  export JAVA_HOME="<path_to_jdk>"
   export JVM_NAME="GraalVM EE"
   export JVM_IDENTIFIER="graalvm-ee"
 }
