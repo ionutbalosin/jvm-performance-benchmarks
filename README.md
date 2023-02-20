@@ -193,11 +193,9 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 - configure the JMH (e.g., choose the benchmark suite for the specific JDK, define the results output folder, etc.)
 - compile the benchmarks source code (using a Maven profile for the specific JDK)
 
-## Elapsed amount of time for each suite
+## Elapsed amount of time for each benchmark suite
 
-Each benchmarks suite take a significant amount of time to run. 
-
-For example:
+Each benchmarks suite take a significant amount of time to fully run. For example:
 
  Benchmark suite |  Elapsed time
 --------------| ----------
