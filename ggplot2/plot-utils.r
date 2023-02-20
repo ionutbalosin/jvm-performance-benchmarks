@@ -76,7 +76,7 @@ concatJmhCsvParamCols <- function(data) {
 
 # Apply further column transformations on the JMH data results
 processJmhCsvResults <- function(data) {
-  # delete the benchmark package name and keep only the basename (it just pollutes the generated plot)
+  # delete the benchmark package name and keep only the benchmark name (it just pollutes the generated plot)
   data$Benchmark <- sub("^.+\\.", "", data$Benchmark)
 
   # rename Error column
@@ -85,8 +85,33 @@ processJmhCsvResults <- function(data) {
   # replace the Benchmark column with the concatenated Param names:values
   data$Benchmark <- concatJmhCsvParamCols(data)
 
-  # keep only these columns (i.e., the really necessary ones)
+  # keep only the necessary columns for plotting
   data <- data[, grep("^(Benchmark|Score|Error|Unit|JvmIdentifier)$", colnames(data))]
+
+  # replace commas with dots for Score and Error columns
+  # Note: this is needed for consistency across different platforms output formats (e.g., Linux, macOS)
+  data$Score <- as.numeric(gsub(",", ".", gsub("\\.", "", data$Score)))
+  data$Error <- as.numeric(gsub(",", ".", gsub("\\.", "", data$Error)))
+
+  # trim the Score column to 2 decimal places (i.e., nicer view in the final plot)
+  data$Score <- round(data$Score, 2)
+
+  # extract in a Parameters column the substring from data$Benchmark between the first "(" and the last ")"
+  # extract in a BenchmarkName column the actual benchmark name
+  # Note: this is necessary to sort the benchmarks by parameters and then by benchmark name
+  data$Parameters <- gsub(".*\\((.*)\\).*", "\\1", data$Benchmark)
+  data$BenchmarkName <- gsub("\\(.*\\)", "", data$Benchmark)
+
+  # sort the data frame by Parameters and then by BenchmarkName columns
+  data <- data[order(rev(data$Parameters), data$BenchmarkName), ]
+
+  # insert a new line after the benchmark name and before the parameters
+  # Note: this is necessary to avoid the parameters to be displayed on the same line as the benchmark name
+  data$Benchmark <- gsub("\\(", "\n\\(", data$Benchmark)
+
+  # set the Benchmark column as the data frame factor in order to keep the order of the benchmarks
+  # Note: this is necessary because the default order of the factor is alphabetical
+  data$Benchmark <- factor(data$Benchmark, levels = unique(data$Benchmark))
 
   data
 }

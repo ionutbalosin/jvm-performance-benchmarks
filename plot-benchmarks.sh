@@ -66,6 +66,13 @@ plot_benchmark_suite() {
       echo ""
       echo "Plotting $benchmark_basename benchmark ..."
       R < ./ggplot2/plot-benchmark.r --save --args  $benchmark_basename $openjdk_hotspot_vm_result $graalvm_ce_result $graalvm_ee_result $JMH_OUTPUT_FOLDER
+      if [ $? -ne 0 ]
+      then
+        echo ""
+        echo "ERROR: Error encountered while plotting data from $benchmark_result, unable to continue!"
+        return 1
+      fi
+
   done
 }
 

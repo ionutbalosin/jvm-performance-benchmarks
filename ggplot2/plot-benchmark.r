@@ -21,27 +21,8 @@ data3 <- readJmhCsvResults(graalvm_ee_result, "GraalVM EE")
 data <- rbind(data1, data2)
 data <- rbind(data, data3)
 
+# process data frame (e.g., rename, merge, append and sort columns, etc.)
 data <- processJmhCsvResults(data)
-
-# trim the benchmark scores to 2 decimal places
-data$Score <- round(data$Score, 2)
-
-# Extract in a parameters column the substring from data$Benchmark between the first "(" and the last ")"
-# Extract in a benchmark name column the actual benchmark name
-# Note: This is necessary to sort the benchmarks by parameters and then by benchmark name
-data$Parameters <- gsub(".*\\((.*)\\).*", "\\1", data$Benchmark)
-data$BenchmarkName <- gsub("\\(.*\\)", "", data$Benchmark)
-
-# sort the data frame by parameters and then by benchmark name
-data <- data[order(rev(data$Parameters), data$BenchmarkName), ]
-
-# Insert a new line after the benchmark name and before the parameters
-# This is necessary to avoid the parameters to be displayed on the same line as the benchmark name
-data$Benchmark <- gsub("\\(", "\n\\(", data$Benchmark)
-
-# Set the Benchmark as the data frame factor in order to keep the order of the benchmarks
-# This is necessary because the default order of the factor is alphabetical
-data$Benchmark <- factor(data$Benchmark, levels = unique(data$Benchmark))
 
 # define the color palette for the plot bars
 colorPalette <- c("OpenJDK HotSpot VM" = "#648FFF", "GraalVM CE" = "#FFB000", "GraalVM EE" = "#FE6100")
