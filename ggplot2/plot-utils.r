@@ -76,6 +76,9 @@ concatJmhCsvParamCols <- function(data) {
 
 # Apply further column transformations on the JMH data results
 processJmhCsvResults <- function(data) {
+  # delete all rows containing any profile stats, except the benchmark name
+  data <- data[!grepl(":.", data$Benchmark), ]
+
   # delete the benchmark package name and keep only the benchmark name (it just pollutes the generated plot)
   data$Benchmark <- sub("^.+\\.", "", data$Benchmark)
 
