@@ -193,6 +193,17 @@ Running the benchmarks triggers the full setup (in a very interactive way, so th
 - configure the JMH (e.g., choose the benchmark suite for the specific JDK, define the results output folder, etc.)
 - compile the benchmarks source code (using a Maven profile for the specific JDK)
 
+## Elapsed amount of time for each suite
+
+Each benchmarks suite take a significant amount of time to run. 
+
+For example:
+
+ Benchmark suite |  Elapsed time
+--------------| ----------
+benchmarks-suite-jdk11.json       | ~ 65 hours
+benchmarks-suite-jdk17.json       | ~ 80 hours
+
 ### Dry run
 
 Dry run mode goes through and simulates all the commands, but without changing any OS setting, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
