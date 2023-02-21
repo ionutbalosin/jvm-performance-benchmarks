@@ -127,7 +127,7 @@ processJmhCsvResults <- function(data) {
 generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, colorPalette) {
   plot <- ggplot(data, aes(x = Benchmark, y = Score, fill = data[, fill], ymin = Score - Error, ymax = Score + Error))
   plot <- plot + geom_bar(stat = "identity", color = NA, position = "dodge", width = .7)
-  plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = 0, position = position_dodge(.7), size = 4)
+  plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = 0.5, position = position_dodge(.7), size = 4)
   plot <- plot + geom_errorbar(width = .2, linewidth = .4, alpha = .5, position = position_dodge(.7))
   plot <- plot + labs(x = xLabel, y = yLabel, fill = fillLabel, title = title, caption = "")
   plot <- plot + geom_hline(yintercept = 0)
