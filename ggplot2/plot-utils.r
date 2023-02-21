@@ -32,7 +32,7 @@ concatJmhCsvParamCols <- function(data) {
   result <- c()
 
   # extract Param columns
-  params <- data[, grep("^(Param)", colnames(data))]
+  params <- data[, grep("^(Param)", colnames(data)), drop = FALSE]
 
   # extract Param column names (and delete the Param prefix)
   paramNames <- colnames(params)
