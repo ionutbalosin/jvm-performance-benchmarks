@@ -29,12 +29,13 @@ colorPalette <- c("OpenJDK HotSpot VM" = "#648FFF", "GraalVM CE" = "#FFB000", "G
 
 plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Method", "Plot", benchmark_basename, colorPalette)
 
-# TODO: find a better height scale
-height <- nrow(data) * 2
+# set the height proportional to the number of rows plus 4 cm (as a minimum)
+# TODO: may be this could be replaced by another formula
+height <- nrow(data) * 2 + 4
 ggsave(
   file = paste(output_folder, paste(benchmark_basename, "svg", sep = "."), sep = "/"),
   plot = plot,
-  width = 48,
+  width = 50.8, # 1920 pixels
   height = height,
   dpi = 320,
   units = "cm",
