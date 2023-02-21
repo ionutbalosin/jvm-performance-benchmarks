@@ -9,8 +9,12 @@ check_command_line_options() {
     echo "  arch          target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture"
     echo ""
     echo "Examples:"
+    echo "  ./plot-benchmarks 11"
+    echo "  ./plot-benchmarks 11 x86_64"
+    echo "  ./plot-benchmarks 11 arm64"
     echo "  ./plot-benchmarks 17"
     echo "  ./plot-benchmarks 17 x86_64"
+    echo "  ./plot-benchmarks 17 arm64"
     echo ""
     return 1
   fi
