@@ -15,34 +15,45 @@ loadLibrary("styler")
 # Read the CSV results. Optionally, append an extra column as a JVM identifier with the same value for all the rows
 # Note: the JVM identifier column is necessary to group the benchmarks in the final generated plot
 readJmhCsvResults <- function(path, identifier = NULL) {
-  result <- read.csv(path, sep = ",", header = TRUE)
+  result <- data.frame()
 
-  # append the identifier column if specified
-  if (!is.null(identifier)) {
-    result <- cbind(result, "JvmIdentifier" = identifier)
-  }
+  tryCatch(
+    {
+      result <- read.csv(path, sep = ",", header = TRUE)
+      # append the identifier column if specified
+      if (!is.null(identifier)) {
+        result <- cbind(result, "JvmIdentifier" = identifier)
+      }
+    },
+    warning = function(w) {
+      print("Warning while reading the file")
+      print(w)
+    },
+    error = function(e) {
+      print("Error while reading the file")
+      print(e)
+    }
+  )
 
   result
 }
 
-# Concatenates all Param columns (names:values) and prepend the Benchmark name
-# Note: this is necessary to group the benchmarks methods in the generated plot
-# TODO: refactor this method to rely more on the "R" approach
+# Concatenates all benchmark Param columns by prepending the name to each value
+# Output format: [param1:value1, param2:value2 ...]
+# example: [iterations:16384, size:32, threads:2 ...]
 concatJmhCsvParamCols <- function(data) {
   result <- c()
 
-  # extract Param columns
+  # extract all Param columns in a data frame
   params <- data[, grep("^(Param)", colnames(data)), drop = FALSE]
 
   # extract Param column names (and delete the Param prefix)
   paramNames <- colnames(params)
   paramNames <- gsub("Param..", "", paramNames)
 
+  # concatenate all Param names:values (in a row-column fashion)
   row <- 1
   while (row <= nrow(params)) {
-    # concatenate all Param names:values
-    # format: paramName1:paramValue1, paramName2:paramValue2 ...
-    # example: iterations:16384, size:32, threads:2
     concatParams <- NULL
     col <- 1
     while (col <= ncol(params)) {
@@ -59,14 +70,6 @@ concatJmhCsvParamCols <- function(data) {
       col <- col + 1
     }
 
-    # wrap the concatenated Param names:values in brackets ()
-    if (!is.null(concatParams)) {
-      concatParams <- paste("(", concatParams, ")", sep = "")
-    }
-
-    # prepend the benchmark name
-    concatParams <- paste(data$Benchmark[row], concatParams, sep = "")
-
     result <- append(result, concatParams)
     row <- row + 1
   }
@@ -76,41 +79,42 @@ concatJmhCsvParamCols <- function(data) {
 
 # Apply further column transformations on the JMH data results
 processJmhCsvResults <- function(data) {
-  # delete all rows containing any profile stats, except the benchmark name
+  # delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
   data <- data[!grepl(":.", data$Benchmark), ]
 
-  # delete the benchmark package name and keep only the benchmark name (it just pollutes the generated plot)
+  # delete the package name from the Benchmark name (it just pollutes the generated plot)
   data$Benchmark <- sub("^.+\\.", "", data$Benchmark)
 
   # rename Error column
   colnames(data)[colnames(data) == "Score.Error..99.9.."] <- "Error"
 
-  # replace the Benchmark column with the concatenated Param names:values
-  data$Benchmark <- concatJmhCsvParamCols(data)
-
-  # keep only the necessary columns for plotting
-  data <- data[, grep("^(Benchmark|Score|Error|Unit|JvmIdentifier)$", colnames(data))]
-
   # replace commas with dots for Score and Error columns
-  # Note: this is needed for consistency across different platforms output formats (e.g., Linux, macOS)
+  # Note: this is needed for consistency across different platforms (e.g., Linux, macOS, etc.)
+  # Example: on Linux the decimal separator could be "," but on macOS is ".", hence we need to make it consistent
   data$Score <- as.numeric(gsub(",", ".", gsub("\\.", "", data$Score)))
   data$Error <- as.numeric(gsub(",", ".", gsub("\\.", "", data$Error)))
 
-  # trim the Score column to 2 decimal places (i.e., nicer view in the final plot)
+  # trim the Score column to 2 decimal places (i.e., for a nicer view in the generated plot)
   data$Score <- round(data$Score, 2)
 
-  # extract in a Parameters column the substring from data$Benchmark between the first "(" and the last ")"
-  # extract in a BenchmarkName column the actual benchmark name
-  # Note: this is necessary to sort the benchmarks by parameters and then by benchmark name
-  data$Parameters <- gsub(".*\\((.*)\\).*", "\\1", data$Benchmark)
-  data$BenchmarkName <- gsub("\\(.*\\)", "", data$Benchmark)
+  # add a new Parameters column with the concatenated Param names:values
+  # Note: this is necessary to group the Benchmark methods in the generated plot
+  data$Parameters <- concatJmhCsvParamCols(data)
 
-  # sort the data frame by Parameters and then by BenchmarkName columns
-  data <- data[order(rev(data$Parameters), data$BenchmarkName), ]
+  # keep only the necessary data frame columns for plotting
+  data <- data[, grep("^(Benchmark|Score|Error|Unit|JvmIdentifier|Parameters)$", colnames(data))]
 
-  # insert a new line after the benchmark name and before the parameters
-  # Note: this is necessary to avoid the parameters to be displayed on the same line as the benchmark name
-  data$Benchmark <- gsub("\\(", "\n\\(", data$Benchmark)
+  # if Parameters column exist, sort the data frame by Parameters and then by Benchmark columns
+  # Note: this sorting order is important for the generated plot
+  if (!is.null(data$Parameters)) {
+    data <- data[order(rev(data$Parameters), data$Benchmark), ]
+  }
+
+  # if Parameters column exist, concat the Benchmark and Parameters columns. In addition, insert a new line
+  # in between to avoid the parameters to be displayed on the same line as the benchmark name in the the generated plot
+  if (!is.null(data$Parameters)) {
+    data$Benchmark <- paste(data$Benchmark, "\n", "(", data$Parameters, ")", sep = "")
+  }
 
   # set the Benchmark column as the data frame factor in order to keep the order of the benchmarks
   # Note: this is necessary because the default order of the factor is alphabetical
