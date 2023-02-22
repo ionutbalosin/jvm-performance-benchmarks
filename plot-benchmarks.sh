@@ -55,10 +55,12 @@ check_folder_exists() {
 
 plot_benchmark_suite() {
   # Note: the corresponding benchmark file results must have the same names and reside under the same folder structure:
-  # e.g. <jmh_output_folder>
-  #      +--> /openjdk_hotspot_vm/BenchmarkName.csv
-  #      +--> /graalvm_ce/BenchmarkName.csv
-  #      +--> /graalvm_ee/BenchmarkName.csv
+  # e.g.,
+  #   <jdk-version>
+  #     +--> <arch>
+  #           +--> /openjdk-hotspot-vm/BenchmarkResult.csv
+  #           +--> /graalvm-ce/BenchmarkResult.csv
+  #           +--> /graalvm-ee/BenchmarkResult.csv
   benchmarks_results=$(find $JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/*.csv -maxdepth 1 -type f | xargs -n 1 basename)
   for benchmark_result in $benchmarks_results
   do
