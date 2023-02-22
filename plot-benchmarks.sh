@@ -53,6 +53,33 @@ check_folder_exists() {
   fi
 }
 
+merge_benchmark_suite() {
+  R < ./ggplot2/merge-benchmark.r --save --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+}
+
+configure_benchmark_suite() {
+  echo "Before plotting it is recommended to merge the individual benchmark results."
+  echo "For example, during benchmarking a few results were spread across multiple output files, one file corresponding to a specific Garbage Collector. Merging these files into a single one will improve readability in the final plot."
+  echo "WARNING: Please skip this step if merging was already triggered during a previous execution."
+  echo ""
+  while :
+  do
+    read -p "Do you want to merge the individual benchmark results? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      merge_benchmark_suite
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
 plot_benchmark_suite() {
   # Note: the corresponding benchmark file results must have the same names and reside under the same folder structure:
   # e.g.,
@@ -106,7 +133,13 @@ if [ $? -ne 0 ]; then
 fi
 
 echo ""
-echo "+--------------+"
-echo "| Plot results |"
-echo "+--------------+"
+echo "+-------------------------+"
+echo "| Merge benchmark results |"
+echo "+-------------------------+"
+configure_benchmark_suite
+
+echo ""
+echo "+------------------------+"
+echo "| Plot benchmark results |"
+echo "+------------------------+"
 plot_benchmark_suite

@@ -11,31 +11,51 @@ loadLibrary <- function(name) {
 loadLibrary("ggplot2")
 loadLibrary("svglite")
 loadLibrary("styler")
+loadLibrary("plyr")
 
-# Read the CSV results. Optionally, append an extra column as a JVM identifier with the same value for all the rows
-# Note: the JVM identifier column is necessary to group the benchmarks in the final generated plot
-readJmhCsvResults <- function(path, identifier = NULL) {
+# Read the CSV results from file
+readJmhCsvResults <- function(path) {
   result <- data.frame()
 
   tryCatch(
     {
       result <- read.csv(path, sep = ",", header = TRUE)
-      # append the identifier column if specified
-      if (!is.null(identifier)) {
-        result <- cbind(result, "JvmIdentifier" = identifier)
-      }
     },
     warning = function(w) {
-      print("Warning while reading the file")
-      print(w)
+      print(paste("Warning while reading from", path, sep = " "))
     },
     error = function(e) {
-      print("Error while reading the file")
-      print(e)
+      print(paste("Error while reading from", path, sep = " "))
     }
   )
 
   result
+}
+
+# Write the CSV results to file
+writeJmhCsvResults <- function(path, file, data) {
+  tryCatch(
+    {
+      write.table(data, paste(path, file, sep = "/"), sep = ",")
+    },
+    warning = function(w) {
+      print(paste("Warning while writing to", path, sep = " "))
+    },
+    error = function(e) {
+      print(paste("Error while writing from", path, sep = " "))
+    }
+  )
+}
+
+# Append an extra column as a JVM identifier with the same value for all the rows
+# Note: the JVM identifier column is necessary to group the benchmarks in the final generated plot
+appendJvmIdentifierCol <- function(data, identifier) {
+  # check if data frame is not empty
+  if (!empty(data)) {
+    data <- cbind(data, "JvmIdentifier" = identifier)
+  }
+
+  data
 }
 
 # Concatenates all benchmark Param columns by prepending the name to each value

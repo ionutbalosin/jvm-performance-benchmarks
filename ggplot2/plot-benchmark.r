@@ -13,9 +13,14 @@ output_folder <- args[5]
 
 # read all CSV files and append an identifier column
 # Note: all CSV files must have the same structure (i.e., we rely on JMH for this)
-data1 <- readJmhCsvResults(openjdk_hotspot_vm_result, "OpenJDK HotSpot VM")
-data2 <- readJmhCsvResults(graalvm_ce_result, "GraalVM CE")
-data3 <- readJmhCsvResults(graalvm_ee_result, "GraalVM EE")
+data1 <- readJmhCsvResults(openjdk_hotspot_vm_result)
+data1 <- appendJvmIdentifierCol(data1, "OpenJDK HotSpot VM")
+
+data2 <- readJmhCsvResults(graalvm_ce_result)
+data2 <- appendJvmIdentifierCol(data2, "GraalVM CE")
+
+data3 <- readJmhCsvResults(graalvm_ee_result)
+data3 <- appendJvmIdentifierCol(data3, "GraalVM EE")
 
 # append all CSV rows to one data frame
 data <- rbind(data1, data2)
