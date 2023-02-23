@@ -1,4 +1,4 @@
-source("./ggplot2/plot-utils.r")
+source("./ggplot2/utils.r")
 
 # apply styles to all R and/or Rmd files in the directory
 style_dir()

@@ -1,4 +1,4 @@
-source("./ggplot2/plot-utils.r")
+source("./ggplot2/utils.r")
 
 # apply styles to all R and/or Rmd files in the directory
 style_dir()
@@ -20,11 +20,9 @@ mergeJmhGcResults <- function(path, file) {
   for (gc in gc_list) {
     benchmark_result_file <- gsub("\\(\\(gc\\)\\)", gc, file)
     data <- readJmhCsvResults(paste(path, benchmark_result_file, sep = "/"))
-    if (ncol(data) != 0) {
+    if (!empty(data)) {
       data <- cbind(data, "Param..gc" = gc)
       result <- rbind(result, data)
-    } else {
-      print(paste("Skipping empty file", benchmark_result_file, sep = " "))
     }
   }
 
