@@ -1,16 +1,40 @@
 #!/bin/bash
+#
+#  JVM Performance Benchmarks
+#
+#  Copyright (C) 2019 - 2022 Ionut Balosin
+#  Website: www.ionutbalosin.com
+#  Twitter: @ionutbalosin
+#
+#  Co-author: Florin Blanaru
+#  Twitter: @gigiblender
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 time_converter() {
-    if [[ -z ${1} || ${1} -lt 60 ]] ;then
-        min=0 ; secs="${1}"
-    else
-        time_min=$(echo "scale=2; ${1}/60" | bc)
-        min=$(echo "${time_min}" | cut -d'.' -f1)
-        secs="0.$(echo "${time_min}" | cut -d'.' -f2)"
-        secs=$(echo "${secs} * 60" | bc | awk '{print int($1+0.5)}')
-    fi
-    echo ""
-    echo "Elapsed: ${min} minutes and ${secs} seconds."
+  if [[ -z ${1} || ${1} -lt 60 ]]; then
+    min=0
+    secs="${1}"
+  else
+    time_min=$(echo "scale=2; ${1}/60" | bc)
+    min=$(echo "${time_min}" | cut -d'.' -f1)
+    secs="0.$(echo "${time_min}" | cut -d'.' -f2)"
+    secs=$(echo "${secs} * 60" | bc | awk '{print int($1+0.5)}')
+  fi
+  echo ""
+  echo "Elapsed: ${min} minutes and ${secs} seconds."
 }
 
 default_if_empty() {
@@ -55,38 +79,37 @@ run_benchmark() {
 }
 
 run_benchmark_suite() {
-    echo "Running $JVM_NAME tests suite ..."
+  echo "Running $JVM_NAME tests suite ..."
 
-    no_of_benchmarks=$(./$JQ -r < "$JMH_BENCHMARKS" ".benchmarks | length")
-    global_jmh_opts=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jmhOpts")
-    global_jvm_opts=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jvmOpts")
-    global_jvm_args_append=$(./$JQ -r < "$JMH_BENCHMARKS" ".globals.jvmArgsAppend")
+  no_of_benchmarks=$(./$JQ -r ".benchmarks | length" <"$JMH_BENCHMARKS")
+  global_jmh_opts=$(./$JQ -r ".globals.jmhOpts" <"$JMH_BENCHMARKS")
+  global_jvm_opts=$(./$JQ -r ".globals.jvmOpts" <"$JMH_BENCHMARKS")
+  global_jvm_args_append=$(./$JQ -r ".globals.jvmArgsAppend" <"$JMH_BENCHMARKS")
 
-    create_folder "$JMH_OUTPUT_FOLDER"
+  create_folder "$JMH_OUTPUT_FOLDER"
 
-    test_suite_start=$(date +%s)
+  test_suite_start=$(date +%s)
 
-    counter=0
-    until [ $counter -gt $((no_of_benchmarks - 1)) ]
-    do
-      bench_name=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].name")
-      bench_output_file_name=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].outputFileName")
-      bench_output_file_name=$(default_if_empty "$bench_output_file_name" "$bench_name")
-      bench_jmh_opts=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jmhOpts")
-      bench_jmh_opts=$(default_if_empty "$bench_jmh_opts" "")
-      bench_jvm_args_append=$(./$JQ --argjson counter "$counter" -r < "$JMH_BENCHMARKS" ".benchmarks[$counter].jvmArgsAppend")
-      bench_jvm_args_append=$(default_if_empty "$bench_jvm_args_append" "")
-      global_jmh_opts_upd="${global_jmh_opts/((outputFilePath))/${JMH_OUTPUT_FOLDER}/${bench_output_file_name}}"
+  counter=0
+  until [ $counter -gt $((no_of_benchmarks - 1)) ]; do
+    bench_name=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].name" <"$JMH_BENCHMARKS")
+    bench_output_file_name=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].outputFileName" <"$JMH_BENCHMARKS")
+    bench_output_file_name=$(default_if_empty "$bench_output_file_name" "$bench_name")
+    bench_jmh_opts=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].jmhOpts" <"$JMH_BENCHMARKS")
+    bench_jmh_opts=$(default_if_empty "$bench_jmh_opts" "")
+    bench_jvm_args_append=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].jvmArgsAppend" <"$JMH_BENCHMARKS")
+    bench_jvm_args_append=$(default_if_empty "$bench_jvm_args_append" "")
+    global_jmh_opts_upd="${global_jmh_opts/((outputFilePath))/${JMH_OUTPUT_FOLDER}/${bench_output_file_name}}"
 
-      run_benchmark "$global_jvm_opts" "$bench_name" "$global_jmh_opts_upd $bench_jmh_opts" "$global_jvm_args_append $bench_jvm_args_append"
+    run_benchmark "$global_jvm_opts" "$bench_name" "$global_jmh_opts_upd $bench_jmh_opts" "$global_jvm_args_append $bench_jvm_args_append"
 
-      ((counter++))
-    done
+    ((counter++))
+  done
 
-    echo ""
-    echo "Finished $JVM_NAME tests suite!"
+  echo ""
+  echo "Finished $JVM_NAME tests suite!"
 
-    time_converter "$(($(date +%s) - test_suite_start))"
+  time_converter "$(($(date +%s) - test_suite_start))"
 }
 
 compile_benchmark_suite() {

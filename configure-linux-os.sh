@@ -1,4 +1,27 @@
 #!/bin/bash
+#
+#  JVM Performance Benchmarks
+#
+#  Copyright (C) 2019 - 2022 Ionut Balosin
+#  Website: www.ionutbalosin.com
+#  Twitter: @ionutbalosin
+#
+#  Co-author: Florin Blanaru
+#  Twitter: @gigiblender
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 set_environment_variables() {
   export ARCH="$(uname -m)"
@@ -41,29 +64,28 @@ set_isolcpus() {
 }
 
 rollback_isolcpus() {
-    grub_file='/etc/default/grub'
-    grub_file_backup='/etc/default/grub.backup'
-    echo "Restoring the GRUB configuration from the backup copy (e.g., $grub_file_backup) ..."
+  grub_file='/etc/default/grub'
+  grub_file_backup='/etc/default/grub.backup'
+  echo "Restoring the GRUB configuration from the backup copy (e.g., $grub_file_backup) ..."
+  echo ""
+  if [ "$DRY_RUN" != "--dry-run" ]; then
+    cp $grub_file_backup $grub_file
+    echo "New GRUB configuration: "$(cat $grub_file | grep GRUB_CMDLINE_LINUX_DEFAULT)
     echo ""
-    if [ "$DRY_RUN" != "--dry-run" ]; then
-      cp $grub_file_backup $grub_file
-      echo "New GRUB configuration: "$(cat $grub_file | grep GRUB_CMDLINE_LINUX_DEFAULT)
-      echo ""
-      echo "Updating the GRUB configuration ..."
-      sudo update-grub
-      echo ""
-      read -r -p "WARNING: To apply these changes the system must be restarted! Press any key to continue ..."
-      shutdown -r now
-    else
-      echo "New GRUB configuration: "$(cat $grub_file_backup | grep GRUB_CMDLINE_LINUX_DEFAULT)
-    fi
+    echo "Updating the GRUB configuration ..."
+    sudo update-grub
+    echo ""
+    read -r -p "WARNING: To apply these changes the system must be restarted! Press any key to continue ..."
+    shutdown -r now
+  else
+    echo "New GRUB configuration: "$(cat $grub_file_backup | grep GRUB_CMDLINE_LINUX_DEFAULT)
+  fi
 }
 
 configure_isolcpus() {
   isolated_cpus=$(cat /sys/devices/system/cpu/isolated)
   if [ "$isolated_cpus" == "" ]; then
-    while :
-    do
+    while :; do
       read -p "Do you want to set the CPU core(s) isolation with isolcpus? (yes/no) " INPUT_KEY
       case $INPUT_KEY in
       yes)
@@ -80,8 +102,7 @@ configure_isolcpus() {
     done
   else
     echo "WARNING: CPU(s) isolation with isolcpus is already configured for the CPU core(s): "$isolated_cpus
-    while :
-    do
+    while :; do
       read -p "Do you want to reset it to the initial value? (yes/no) " INPUT_KEY
       case $INPUT_KEY in
       yes)
@@ -108,14 +129,14 @@ set_cgroups() {
     echo "ERROR: cgroup v2 needs to be configured. This is available since Linux 4.5"
     return 1
   fi
-  sudo echo "+cpu" >> /sys/fs/cgroup/cgroup.subtree_control
-  sudo echo "+cpuset" >> /sys/fs/cgroup/cgroup.subtree_control
+  sudo echo "+cpu" >>/sys/fs/cgroup/cgroup.subtree_control
+  sudo echo "+cpuset" >>/sys/fs/cgroup/cgroup.subtree_control
   echo "Assigned cgroup subtree control: "$(cat /sys/fs/cgroup/cgroup.subtree_control)
   echo ""
   echo "Creating cgroup $cgroup ..."
   sudo mkdir /sys/fs/cgroup/$cgroup/
-  sudo echo "+cpu" >> /sys/fs/cgroup/$cgroup/cgroup.subtree_control
-  sudo echo "+cpuset" >> /sys/fs/cgroup/$cgroup/cgroup.subtree_control
+  sudo echo "+cpu" >>/sys/fs/cgroup/$cgroup/cgroup.subtree_control
+  sudo echo "+cpuset" >>/sys/fs/cgroup/$cgroup/cgroup.subtree_control
   echo "Assigned cgroup $cgroup subtree control: "$(cat /sys/fs/cgroup/$cgroup/cgroup.subtree_control)
   echo ""
   sudo mkdir /sys/fs/cgroup/$cgroup/tasks/
@@ -123,18 +144,17 @@ set_cgroups() {
   echo "Number of available effective (i.e., physical and logical) CPU core(s): "$(cat /sys/fs/cgroup/cpuset.cpus.effective)
   echo "Please specify which CPU core(s) you want to isolate, as a comma separated list without spaces (e.g., 1,2)"
   read -p 'CPU core(s) to isolate: ' cgroup_cpus
-  echo "$cgroup_cpus" > /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus
+  echo "$cgroup_cpus" >/sys/fs/cgroup/$cgroup/tasks/cpuset.cpus
   echo "Assigned CPU(s) to the $cgroup cgroup: "$(cat /sys/fs/cgroup/$cgroup/tasks/cpuset.cpus)
   echo ""
   echo "Assign the current shell process to the $cgroup cgroup, so all subsequent processes started from the same shell will belong to the same cgroup."
-  echo $$ > /sys/fs/cgroup/$cgroup/tasks/cgroup.procs
+  echo $$ >/sys/fs/cgroup/$cgroup/tasks/cgroup.procs
   echo "Assigned cgroup PID(s) process(es): "$(cat /sys/fs/cgroup/$cgroup/tasks/cgroup.procs)
 }
 
 rollback_cgroups() {
   cgroup='jvm-performance-benchmarks'
-  if [ $(dpkg-query -W -f='${Status}' cgroup-tools 2>/dev/null | grep -c "ok installed") -eq 0 ];
-  then
+  if [ $(dpkg-query -W -f='${Status}' cgroup-tools 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
     echo "WARNING: cgroup-tools is not installed. Trying to install it ..."
     apt-get install cgroup-tools
   fi
@@ -145,8 +165,7 @@ rollback_cgroups() {
 configure_cgroups() {
   cgroup='jvm-performance-benchmarks'
   if [ ! -d "/sys/fs/cgroup/$cgroup" ]; then
-    while :
-    do
+    while :; do
       read -p "Do you want to set the CPU core(s) isolation with cgroups? (yes/no) " INPUT_KEY
       case $INPUT_KEY in
       yes)
@@ -163,8 +182,7 @@ configure_cgroups() {
     done
   else
     echo "WARNING: cgroup $cgroup already exists."
-    while :
-    do
+    while :; do
       read -p "Do you want to delete the cgroup $cgroup? (yes/no) " INPUT_KEY
       case $INPUT_KEY in
       yes)
@@ -187,14 +205,13 @@ disable_aslr() {
   echo "Current ASLR configuration: "$(cat "$aslr")
   if [ "$DRY_RUN" != "--dry-run" ]; then
     echo "Disabling ASLR ..."
-    echo 0 > $aslr
+    echo 0 >$aslr
   fi
   echo "New ASLR configuration: "$(cat "$aslr")
 }
 
 configure_aslr() {
-  while :
-  do
+  while :; do
     read -p "Do you want to disable ASLR? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
@@ -218,7 +235,7 @@ disable_turbo_boost() {
     echo "Current turbo boost configuration for Intel: "$(cat "$no_turbo")
     if [ "$DRY_RUN" != "--dry-run" ]; then
       echo "Enabling turbo boost ..."
-      echo 1 > $no_turbo
+      echo 1 >$no_turbo
     fi
     echo "New turbo boost configuration: "$(cat "$no_turbo")
   fi
@@ -228,15 +245,14 @@ disable_turbo_boost() {
     echo "Current turbo boost configuration for AMD: "$(cat "$no_turbo")
     if [ "$DRY_RUN" != "--dry-run" ]; then
       echo "Disabling turbo boost ..."
-      echo 0 > $boost
+      echo 0 >$boost
     fi
     echo "New turbo boost configuration: "$(cat "$boost")
   fi
 }
 
 configure_turbo_boost() {
-  while :
-  do
+  while :; do
     read -p "Do you want to disable turbo boost mode? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
@@ -254,12 +270,11 @@ configure_turbo_boost() {
 }
 
 set_scaling_governor() {
-  cat /sys/bus/cpu/drivers/processor/cpu*/cpufreq/affected_cpus | grep -v '^[[:space:]]*$' | while IFS= read -r cpu
-  do
+  cat /sys/bus/cpu/drivers/processor/cpu*/cpufreq/affected_cpus | grep -v '^[[:space:]]*$' | while IFS= read -r cpu; do
     echo "Available CPU$cpu governors: "$(cat /sys/bus/cpu/drivers/processor/cpu$cpu/cpufreq/scaling_available_governors)
     if [ "$DRY_RUN" != "--dry-run" ]; then
       echo "Setting CPU$cpu governor to performance ..."
-      echo "performance" > /sys/devices/system/cpu/cpu$cpu/cpufreq/scaling_governor
+      echo "performance" >/sys/devices/system/cpu/cpu$cpu/cpufreq/scaling_governor
     fi
     echo "New CPU$cpu governor configuration: "$(cat /sys/devices/system/cpu/cpu$cpu/cpufreq/scaling_governor)
     echo ""
@@ -267,8 +282,7 @@ set_scaling_governor() {
 }
 
 configure_scaling_governor() {
-  while :
-  do
+  while :; do
     read -p "Do you want to set the CPU governor to performance? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
@@ -290,13 +304,12 @@ disable_hyper_threading() {
   if [ "$siblings" == "" ]; then
     echo "WARNING: no logical CPU(s) siblings found. Hyper-threading was probably disabled."
   else
-    for sibling in $siblings
-    do
+    for sibling in $siblings; do
       cpu="/sys/devices/system/cpu/cpu$sibling/online"
       echo "Current logical CPU$sibling hyper-threading configuration: "$(cat "$cpu")
       if [ "$DRY_RUN" != "--dry-run" ]; then
         echo "Disabling logical CPU$sibling hyper-threading configuration ..."
-        echo 0 > $cpu
+        echo 0 >$cpu
       fi
       echo "New logical CPU$sibling hyper-threading configuration: "$(cat "$cpu")
       echo ""
@@ -305,8 +318,7 @@ disable_hyper_threading() {
 }
 
 configure_hyper_threading() {
-  while :
-  do
+  while :; do
     read -p "Do you want to disable the CPU hyper-threading? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
@@ -324,8 +336,7 @@ configure_hyper_threading() {
 }
 
 confirm_os_settings() {
-  while :
-  do
+  while :; do
     read -r -p "Do you want to proceed with the OS configuration settings? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
@@ -369,8 +380,7 @@ echo "   - disabling the CPU hyper-threading"
 echo "WARNING: the current configuration relies and it was tested on a Debian-based Linux distro (e.g., Ubuntu)."
 echo ""
 confirm_os_settings
-if [ $? -ne 0 ]
-then
+if [ $? -ne 0 ]; then
   return 1
 fi
 

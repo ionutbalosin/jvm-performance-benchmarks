@@ -206,18 +206,18 @@ benchmarks-suite-jdk17.json       | ~ 80 hours
 
 Dry run mode goes through and simulates all the commands, but without changing any OS setting, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
 ```
-sudo ./run-benchmarks.sh --dry-run
+./run-benchmarks.sh --dry-run
 ```
 
-**Note:** `sudo` rights are needed for dry run mode to read some system configuration files, otherwise not accessible. Nevertheless, it has no side effect on the actual OS settings.
+**Note:** Launch this command with `sudo` to simulate the OS configuration settings. This is needed, even in dry run mode, to read some system configuration files, otherwise not accessible. Nevertheless, it has no side effect on the actual OS settings.
 
 ### Normal run
 
 ```
-sudo ./run-benchmarks.sh | tee run-benchmarks.out
+./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
-**Note:** `sudo` rights are needed to properly apply the OS configuration settings. If they are skipped, no OS configuration is further applied. 
+**Note:** Launch this command with `sudo` to apply the OS configuration settings.
 
 Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
 

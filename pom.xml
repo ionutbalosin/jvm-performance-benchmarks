@@ -194,7 +194,7 @@
                         </googleJavaFormat>
                         <removeUnusedImports />
                         <licenseHeader>
-                            <file>${maven.multiModuleProjectDirectory}/LICENSE-HEADER.txt</file>
+                            <file>${maven.multiModuleProjectDirectory}/LICENSE-HEADER-JAVA</file>
                         </licenseHeader>
                     </java>
                 </configuration>

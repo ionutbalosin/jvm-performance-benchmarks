@@ -1,4 +1,27 @@
 #!/bin/bash
+#
+#  JVM Performance Benchmarks
+#
+#  Copyright (C) 2019 - 2022 Ionut Balosin
+#  Website: www.ionutbalosin.com
+#  Twitter: @ionutbalosin
+#
+#  Co-author: Florin Blanaru
+#  Twitter: @gigiblender
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 check_command_line_options() {
   if [ $# -eq 0 ]; then
@@ -19,14 +42,14 @@ check_command_line_options() {
     return 1
   fi
 
-  if [ "$1" ];then
+  if [ "$1" ]; then
     export JDK_VERSION="$1"
   fi
 
-  if [ "$2" ];then
-      export ARCH="$2"
-    else
-      export ARCH=$(uname -m)
+  if [ "$2" ]; then
+    export ARCH="$2"
+  else
+    export ARCH=$(uname -m)
   fi
 }
 
@@ -54,7 +77,7 @@ check_folder_exists() {
 }
 
 merge_benchmark_suite() {
-  R < ./ggplot2/merge-benchmark.r --save --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+  R <./ggplot2/merge-benchmark.r --save --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
 }
 
 configure_benchmark_suite() {
@@ -62,8 +85,7 @@ configure_benchmark_suite() {
   echo "For example, during benchmarking a few results were spread across multiple output files, one file corresponding to a specific Garbage Collector. Merging these files into a single one will improve readability in the final plot."
   echo "WARNING: You might skip this step if merging was already triggered during a previous execution."
   echo ""
-  while :
-  do
+  while :; do
     read -p "Do you want to merge the individual benchmark results? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
@@ -89,22 +111,20 @@ plot_benchmark_suite() {
   #           +--> /graalvm-ce/BenchmarkResult.csv
   #           +--> /graalvm-ee/BenchmarkResult.csv
   benchmarks_results=$(find $JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/*.csv -maxdepth 1 -type f | xargs -n 1 basename)
-  for benchmark_result in $benchmarks_results
-  do
-      benchmark_basename=$(basename $benchmark_result .csv)
-      openjdk_hotspot_vm_result=$JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/$benchmark_result
-      graalvm_ce_result=$JMH_OUTPUT_FOLDER/$GRAAL_VM_CE_IDENTIFIER/$benchmark_result
-      graalvm_ee_result=$JMH_OUTPUT_FOLDER/$GRAAL_VM_EE_IDENTIFIER/$benchmark_result
+  for benchmark_result in $benchmarks_results; do
+    benchmark_basename=$(basename $benchmark_result .csv)
+    openjdk_hotspot_vm_result=$JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/$benchmark_result
+    graalvm_ce_result=$JMH_OUTPUT_FOLDER/$GRAAL_VM_CE_IDENTIFIER/$benchmark_result
+    graalvm_ee_result=$JMH_OUTPUT_FOLDER/$GRAAL_VM_EE_IDENTIFIER/$benchmark_result
 
+    echo ""
+    echo "Plotting $benchmark_basename benchmark ..."
+    R <./ggplot2/plot-benchmark.r --save --args $benchmark_basename $openjdk_hotspot_vm_result $graalvm_ce_result $graalvm_ee_result $JMH_OUTPUT_FOLDER
+    if [ $? -ne 0 ]; then
       echo ""
-      echo "Plotting $benchmark_basename benchmark ..."
-      R < ./ggplot2/plot-benchmark.r --save --args  $benchmark_basename $openjdk_hotspot_vm_result $graalvm_ce_result $graalvm_ee_result $JMH_OUTPUT_FOLDER
-      if [ $? -ne 0 ];
-      then
-        echo ""
-        echo "ERROR: Error encountered while plotting data from $benchmark_result, unable to continue!"
-        return 1
-      fi
+      echo "ERROR: Error encountered while plotting data from $benchmark_result, unable to continue!"
+      return 1
+    fi
 
   done
 

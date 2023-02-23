@@ -1,4 +1,27 @@
 #!/bin/bash
+#
+#  JVM Performance Benchmarks
+#
+#  Copyright (C) 2019 - 2022 Ionut Balosin
+#  Website: www.ionutbalosin.com
+#  Twitter: @ionutbalosin
+#
+#  Co-author: Florin Blanaru
+#  Twitter: @gigiblender
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 configure_openjdk11_hotspot_vm() {
   export JAVA_HOME="<path_to_jdk>"
@@ -45,38 +68,37 @@ echo "    5) - jdk-17 / GraalVM CE"
 echo "    6) - jdk-17 / GraalVM EE"
 echo ""
 
-while :
-do
+while :; do
   read -r INPUT_KEY
   case $INPUT_KEY in
-	1)
+  1)
     configure_openjdk11_hotspot_vm
     break
-		;;
-	2)
+    ;;
+  2)
     configure_graalvm_ce_jdk11
     break
-		;;
-	3)
+    ;;
+  3)
     configure_graalvm_ee_jdk11
     break
-		;;
-	4)
+    ;;
+  4)
     configure_openjdk17_hotspot_vm
     break
-		;;
-	5)
+    ;;
+  5)
     configure_graalvm_ce_jdk17
     break
-		;;
-	6)
+    ;;
+  6)
     configure_graalvm_ee_jdk17
     break
-		;;
-	*)
-		echo "Sorry, I don't understand. Try again!"
-		;;
-	esac
+    ;;
+  *)
+    echo "Sorry, I don't understand. Try again!"
+    ;;
+  esac
 done
 
 if [ ! -x "$JAVA_HOME"/bin/java ]; then
