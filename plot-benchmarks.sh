@@ -58,9 +58,9 @@ merge_benchmark_suite() {
 }
 
 configure_benchmark_suite() {
-  echo "Before plotting it is recommended to merge the individual benchmark results."
+  echo "Before plotting it is recommended to merge the individual Garbage Collector benchmark results."
   echo "For example, during benchmarking a few results were spread across multiple output files, one file corresponding to a specific Garbage Collector. Merging these files into a single one will improve readability in the final plot."
-  echo "WARNING: Please skip this step if merging was already triggered during a previous execution."
+  echo "WARNING: You might skip this step if merging was already triggered during a previous execution."
   echo ""
   while :
   do
