@@ -22,10 +22,7 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-source("./ggplot2/utils.r")
-
-# apply styles to all R and/or Rmd files in the directory
-style_dir()
+source("./ggplot2/plot-utils.r")
 
 # retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
