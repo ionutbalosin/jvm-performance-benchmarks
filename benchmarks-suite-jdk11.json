@@ -402,7 +402,7 @@
     },
     {
       "name": "TailRecursionBenchmark",
-      "jvmArgsAppend": "-Xss20M"
+      "jvmArgsAppend": "-Xss64M"
     },
     {
       "name": "VarArgsBenchmark"

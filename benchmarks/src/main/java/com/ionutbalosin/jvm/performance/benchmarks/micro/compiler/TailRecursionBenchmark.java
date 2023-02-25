@@ -33,6 +33,7 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
@@ -46,53 +47,53 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(
     value = 5,
-    jvmArgsAppend = {"-Xss20M"})
+    jvmArgsAppend = {"-Xss64M"})
 @State(Scope.Benchmark)
 public class TailRecursionBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*TailRecursionBenchmark.*"
 
-  @Param({"32768"})
-  private int n;
+  @Param({"262144"})
+  int n;
 
-  @Benchmark
-  public int tail_recursive() {
-    return fibonacciRecursive(n, 0, 1);
-  }
+  private final int size = 1024;
 
-  @Benchmark
-  public int iterative() {
-    return fibonacciIterative(n, 0, 1);
-  }
+  private int[] A;
 
-  private int fibonacciRecursive(int n, int a, int b) {
-    if (n == 0) return a;
-    else if (n == 1) {
-      return b;
-    } else {
-      return fibonacciRecursive(n - 1, b, a + b);
+  @Setup
+  public void setup() {
+    A = new int[size];
+    for (int i = 0; i < size; i++) {
+      A[i] = i;
     }
   }
 
-  private int fibonacciIterative(int n, int a, int b) {
+  @Benchmark
+  public long tail_recursive() {
+    return recursive(n, 0);
+  }
+
+  @Benchmark
+  public long iterative() {
+    return iterative(n, 0);
+  }
+
+  private long recursive(int n, long sum) {
+    if (n == 0) {
+      return sum;
+    } else {
+      return recursive(n - 1, sum + A[n % size]);
+    }
+  }
+
+  private long iterative(int n, long sum) {
     while (true) {
-      int result;
       if (n == 0) {
-        result = a;
+        return sum;
       } else {
-        if (n != 1) {
-          result = n - 1;
-          int aux = b;
-          b += a;
-          a = aux;
-          n = result;
-          continue;
-        }
-
-        result = b;
+        sum += A[n % size];
+        n--;
       }
-
-      return result;
     }
   }
 }
