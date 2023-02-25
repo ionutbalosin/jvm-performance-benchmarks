@@ -70,6 +70,11 @@ public class CanonicalizeInductionVariableBenchmark {
     return baseline(reducedLength);
   }
 
+  @Benchmark
+  public long manual_canonicalize() {
+    return (long) Math.sqrt(length) - start;
+  }
+
   private long auto_canonicalize(final long iterations) {
     long result = 0;
     for (long l = start; l * l < iterations; ++l) {
