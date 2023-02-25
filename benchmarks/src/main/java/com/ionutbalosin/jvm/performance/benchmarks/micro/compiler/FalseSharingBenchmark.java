@@ -41,11 +41,12 @@ import org.openjdk.jmh.annotations.Warmup;
  * This benchmark tests the performance loss when two threads are writing to the same cache line. It also shows ways
  * to circumvent this.
  *
- * In the baseline the two fields l1 and l2 live on the same cache line. The two write methods will use the same
- * cache line and therefore create a ping-pong effect where the line is continuously invalidated. The following
+ * In the baseline the two fields l1 and l2 live on the same cache line. The two methods will use the same
+ * cache line and therefore create a ping-pong effect where the line is continuously invalidated by the writer. The following
  * benchmarks show three ways to circumvent this and measure performance:
  *    - Using the @Contended annotation that adds the required padding between fields.
- *    - Using manual padding by adding additional fields to the class that are unused.
+ *    - Using manual padding by adding additional fields to the class that are unused. This approach uses
+ *      a subclassing trick to ensure the order of the fields.
  *    - Using an array and only writing at certain offsets into it. Note that this benchmark performs and additional
  * field load for the array object.
  *
@@ -69,13 +70,13 @@ public class FalseSharingBenchmark {
 
   @Benchmark
   @Group("baseline")
-  public long writer1(BaselineState baseline) {
-    return baseline.l1++;
+  public long reader(BaselineState baseline) {
+    return baseline.l1;
   }
 
   @Benchmark
   @Group("baseline")
-  public long writer2(BaselineState baseline) {
+  public long writer(BaselineState baseline) {
     return baseline.l2++;
   }
 
@@ -88,40 +89,46 @@ public class FalseSharingBenchmark {
 
   @Benchmark
   @Group("contended")
-  public long writer1(ContendedState contendedState) {
-    return contendedState.l1++;
+  public long reader(ContendedState contendedState) {
+    return contendedState.l1;
   }
 
   @Benchmark
   @Group("contended")
-  public long writer2(ContendedState contendedState) {
+  public long writer(ContendedState contendedState) {
     return contendedState.l2++;
   }
 
-  @State(Scope.Group)
-  public static class ManualPaddingState {
-    /*
-     * 12 bytes object header
-     * 4 bytes alignment
-     * l1 at 16 bytes offset
-     * l3-l7 fill the current cache line
-     * l2 at 64 bytes offset --> on the next cache line assuming a 64 byte line size.
-     */
+  public static class ManualPaddingState0 {
     long l1;
-    long l3, l4, l5, l6, l7;
+  }
+
+  public static class ManualPaddingState1 extends ManualPaddingState0 {
+    long l3, l4, l5, l6;
+    long l31, l41, l51, l61;
+  }
+
+  public static class ManualPaddingState2 extends ManualPaddingState1 {
     long l2;
-    long l8, l9, l10, l11, l12, l13, l14;
+  }
+
+  public static class ManualPaddingState3 extends ManualPaddingState2 {
+    long l7, l8, l9, l10;
+    long l71, l81, l91, l101;
+  }
+
+  @State(Scope.Group)
+  public static class ManualPaddingState extends ManualPaddingState3 {}
+
+  @Benchmark
+  @Group("manual_pad")
+  public long reader(ManualPaddingState manualPaddingState) {
+    return manualPaddingState.l1;
   }
 
   @Benchmark
   @Group("manual_pad")
-  public long writer1(ManualPaddingState manualPaddingState) {
-    return manualPaddingState.l1++;
-  }
-
-  @Benchmark
-  @Group("manual_pad")
-  public long writer2(ManualPaddingState manualPaddingState) {
+  public long writer(ManualPaddingState manualPaddingState) {
     return manualPaddingState.l2++;
   }
 
@@ -131,18 +138,18 @@ public class FalseSharingBenchmark {
     // The 8th element will land on the next line.
     // This benchmark will be slower than the others since it requires an extra load for the array
     // field.
-    long[] arr = new long[8];
+    long[] arr = new long[16];
   }
 
   @Benchmark
   @Group("array_pad")
-  public long writer1(ArrayState arrayState) {
+  public long reader(ArrayState arrayState) {
     return arrayState.arr[0];
   }
 
   @Benchmark
   @Group("array_pad")
-  public long writer2(ArrayState arrayState) {
+  public long writer(ArrayState arrayState) {
     return arrayState.arr[7]++;
   }
 }
