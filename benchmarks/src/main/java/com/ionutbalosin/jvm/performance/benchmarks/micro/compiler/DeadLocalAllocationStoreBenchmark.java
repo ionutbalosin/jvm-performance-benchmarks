@@ -41,7 +41,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Dead Store Elimination (DSE) intends to remove all the assignments of a variable that are not read by any subsequent instructions.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)

@@ -47,8 +47,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * 1. Write Barriers:
  *  - one write barrier (to track the references from Tenured Generation to Young Generation – e.g., card table) for:
  *      - SerialGC
- *      - ParallelGC (note that ParallelGC in the same as ParallelGC)
- *      - ConcMarkSweepGC
+ *      - ParallelGC
  *  - one write barrier (in case of concurrent marking – e.g., Snapshot-At-The-Beginning (SATB)) for:
  *      - Shenandoah
  *  - two write barriers: first (i.e., PreWrite barrier) in case of concurrent marking (e.g., SATB), and second (i.e., PostWrite barrier) to tracking the references across regions for:
@@ -56,7 +55,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * 2. Read Barriers
  *  - Shenandoah (when accessing fields of an object through a reference for <= OpenJDK 12, when references are loaded from the heap for >= OpenJDK 13)
- *  - ZGC  (when references are loaded from the Heap)
+ *  - ZGC (when references are loaded from the Heap)
  *
  * 3. No Barriers:
  *  - Epsilon GC does not use any barrier at all, it might be the baseline for all the others.

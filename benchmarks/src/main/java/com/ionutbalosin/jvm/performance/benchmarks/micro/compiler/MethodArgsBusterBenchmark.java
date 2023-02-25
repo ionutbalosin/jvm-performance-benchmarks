@@ -55,7 +55,7 @@ public class MethodArgsBusterBenchmark {
   // $ java -jar */*/benchmarks.jar ".*MethodArgsBusterBenchmark.*"
 
   @Benchmark
-  public double method_args_buster() {
+  public long method_args_buster() {
     // returns 204
     return tooManyArgsMethod(
         0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7,
@@ -64,7 +64,7 @@ public class MethodArgsBusterBenchmark {
         5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3);
   }
 
-  private double tooManyArgsMethod(
+  private long tooManyArgsMethod(
       double d00,
       double d01,
       double d02,
