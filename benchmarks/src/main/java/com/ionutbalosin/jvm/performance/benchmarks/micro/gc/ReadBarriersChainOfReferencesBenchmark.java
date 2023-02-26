@@ -32,6 +32,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -59,7 +60,9 @@ public class ReadBarriersChainOfReferencesBenchmark {
   //    -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC}
   // - JMH options: -prof gc
 
-  private final int CHAIN_REFERENCE_DEPTH = 1024;
+  @Param({"1024"})
+  private int chain;
+
   private ObjectChain baseRef;
 
   @Setup()
@@ -68,7 +71,7 @@ public class ReadBarriersChainOfReferencesBenchmark {
     baseRef = new ObjectChain(i);
 
     ObjectChain cursor = baseRef;
-    for (; i < CHAIN_REFERENCE_DEPTH; i++) {
+    for (; i < chain; i++) {
 
       ObjectChain nextObj = new ObjectChain(i);
       cursor.refObj = nextObj;
