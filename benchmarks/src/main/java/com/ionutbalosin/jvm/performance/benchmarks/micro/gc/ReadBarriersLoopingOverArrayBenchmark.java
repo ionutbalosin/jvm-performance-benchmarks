@@ -47,7 +47,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  */
 @BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
@@ -61,17 +61,17 @@ public class ReadBarriersLoopingOverArrayBenchmark {
   //    -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC}
   // - JMH options: -prof gc
 
-  @Param({"262144"})
+  @Param({"1024"})
   private int size;
 
-  private Object[] array;
+  private Wrapper[] array;
 
   @Setup()
   public void setup() {
-    array = new Object[size];
+    array = new Wrapper[size];
 
     for (int i = 0; i < size; i++) {
-      array[i] = new Object();
+      array[i] = new Wrapper(i);
     }
   }
 
@@ -81,16 +81,22 @@ public class ReadBarriersLoopingOverArrayBenchmark {
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private void test() {
-    int lSize = size;
+  public int test() {
+    int sum = 0;
 
+    int lSize = size;
     for (int i = 0; i < lSize; i++) {
-      sink(array[i]);
+      sum += array[i].aValue;
     }
+
+    return sum;
   }
 
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private void sink(Object object) {
-    // Intentionally empty method
+  public class Wrapper {
+    int aValue;
+
+    public Wrapper(int aValue) {
+      this.aValue = aValue;
+    }
   }
 }

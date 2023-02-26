@@ -87,9 +87,9 @@ processJmhCsvResults <- function(data) {
 
   # replace commas with dots for Score and Error columns
   # Note: this is needed for consistency across different platforms (e.g., Linux, macOS, etc.)
-  # Example: on Linux the decimal separator could be "," but on macOS is ".", hence we need to make it consistent
-  data$Score <- as.numeric(gsub(",", ".", gsub("\\.", "", data$Score)))
-  data$Error <- as.numeric(gsub(",", ".", gsub("\\.", "", data$Error)))
+  # Example: on Linux the decimal separator could be "." but on macOS is ",", hence we need to make it consistent
+  data$Score <- as.numeric(gsub(",", ".", data$Score))
+  data$Error <- as.numeric(gsub(",", ".", data$Error))
 
   # trim the Score column to 2 decimal places (i.e., for a nicer view in the generated plot)
   data$Score <- round(data$Score, 2)
