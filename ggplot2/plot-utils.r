@@ -124,20 +124,21 @@ processJmhCsvResults <- function(data) {
 generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, colorPalette) {
   plot <- ggplot(data, aes(x = Benchmark, y = Score, fill = data[, fill], ymin = Score - Error, ymax = Score + Error))
   plot <- plot + geom_bar(stat = "identity", color = NA, position = "dodge", width = .7)
-  plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = 0, vjust = -.6, position = position_dodge(.7), size = 4)
-  plot <- plot + geom_errorbar(width = .15, linewidth = .6, alpha = .7, position = position_dodge(.7))
+  plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = -0.05, vjust = -.75, position = position_dodge(.7), size = 4)
+  plot <- plot + geom_errorbar(width = .175, linewidth = .6, alpha = .7, position = position_dodge(.7))
   plot <- plot + labs(x = xLabel, y = yLabel, fill = fillLabel, title = title)
   plot <- plot + geom_hline(yintercept = 0)
   plot <- plot + coord_flip(clip = "off")
   plot <- plot + theme(
+    text = element_text(size = 18),
     panel.background = element_rect(fill = NA, colour = NA, linewidth = 0.5, linetype = "solid"),
     panel.grid.major = element_line(linewidth = 0.5, linetype = "solid", colour = "grey95"),
     panel.grid.minor = element_line(linewidth = 0.25, linetype = "solid", colour = "grey95"),
     legend.spacing.y = unit(0.3, "cm"),
     legend.position = "bottom",
+    plot.title = element_text(size = 18),
     plot.caption.position = "plot",
     plot.caption = element_text(hjust = 1),
-    text = element_text(size = 16),
     plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")
   )
   plot <- plot + guides(fill = guide_legend(byrow = TRUE))
