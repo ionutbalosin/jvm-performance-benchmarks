@@ -53,7 +53,10 @@ data <- processJmhCsvResults(data)
 # define the color palette for the plot bars
 colorPalette <- c("OpenJDK HotSpot VM" = "#648FFF", "GraalVM CE" = "#FFB000", "GraalVM EE" = "#FE6100")
 
-plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Method", "Plot", benchmark_basename, colorPalette)
+# extract the unit from the data frame
+unit <- data$Unit[1]
+
+plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", unit, benchmark_basename, colorPalette)
 
 # set the height proportional to the number of rows plus 4 cm (as a minimum)
 # TODO: may be this could be replaced by another formula
