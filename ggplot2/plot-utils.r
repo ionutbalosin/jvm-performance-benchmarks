@@ -128,7 +128,7 @@ generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, col
   plot <- plot + geom_errorbar(width = .15, linewidth = .6, alpha = .7, position = position_dodge(.7))
   plot <- plot + labs(x = xLabel, y = yLabel, fill = fillLabel, title = title)
   plot <- plot + geom_hline(yintercept = 0)
-  plot <- plot + coord_flip()
+  plot <- plot + coord_flip(clip = "off")
   plot <- plot + theme(
     panel.background = element_rect(fill = NA, colour = NA, linewidth = 0.5, linetype = "solid"),
     panel.grid.major = element_line(linewidth = 0.5, linetype = "solid", colour = "grey95"),
