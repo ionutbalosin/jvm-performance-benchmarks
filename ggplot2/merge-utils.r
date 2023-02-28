@@ -26,11 +26,7 @@ source("./ggplot2/utils.r")
 
 # Merge all benchmark results for different Garbage Collector types into a single data frame
 # and append a new column "Param..gc":"<gc_list>" as a differentiator
-mergeJmhGcResults <- function(path, file) {
-  # define the full list of available Garbage Collectors
-  # Note: if some of the Garbage Collectors is not available, the merging logic already handles this case
-  gc_list <- list("serialGC", "parallelGC", "g1GC", "zGC", "shenandoahGC", "epsilonGC")
-
+mergeJmhGcResults <- function(path, file, gc_list) {
   result <- data.frame()
 
   for (gc in gc_list) {
@@ -47,8 +43,7 @@ mergeJmhGcResults <- function(path, file) {
 
 # Merge and write to a single output file multiple benchmark results for different Garbage Collector types, corresponding to a single JVM
 # Note: this relies on the fact that the benchmark result filenames are generated, by convention, as "*Benchmark_((gc))_*.csv"
-# where the gc is {"serialGC", "parallelGC", "g1GC", "zGC", "shenandoahGC", "epsilonGC"}
-processJmhGcResults <- function(jmh_output_folder, jvm_identifier, file) {
+processJmhGcResults <- function(jmh_output_folder, jvm_identifier, file, gc_list) {
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
   data <- mergeJmhGcResults(benchmark_base_path, file)
 

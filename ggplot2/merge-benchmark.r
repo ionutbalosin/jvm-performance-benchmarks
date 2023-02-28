@@ -31,64 +31,36 @@ openjdk_hotspot_vm_identifier <- args[2]
 graalvm_ce_identifier <- args[3]
 graalvm_ee_identifier <- args[4]
 
-# Merge BurstHeapMemoryAllocatorBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "BurstHeapMemoryAllocatorBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "BurstHeapMemoryAllocatorBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "BurstHeapMemoryAllocatorBenchmark_((gc))_1thread.csv")
+# Merge multiple Garbage Collector benchmark results. Each result file must follow a specific naming convention.
+# During merging, the "*Benchmark_((gc))_*.csv" is substituted with the values from a predefined Garbage Collectors list
+# Note: if, during substitution, any benchmark result file is not available it is skipped. This is why the list
+# contains the list of all possible Garbage Collectors and not JVM/JDK specific
+gc_list <- list("serialGC", "parallelGC", "g1GC", "zGC", "shenandoahGC", "epsilonGC")
+benchmark_list <- list(
+  "BurstHeapMemoryAllocatorBenchmark_((gc))_1thread",
+  "BurstHeapMemoryAllocatorBenchmark_((gc))_2threads.csv",
+  "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_1thread.csv",
+  "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_2threads.csv"
+  "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_1thread.csv",
+  "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_2threads.csv",
+  "HeapMemoryBandwidthAllocatorBenchmark_((gc))_1thread.csv",
+  "HeapMemoryBandwidthAllocatorBenchmark_((gc))_2threads.csv",
+  "ReadBarriersChainOfReferencesBenchmark_((gc)).csv",
+  "ReadBarriersLoopingOverArrayBenchmark_((gc)).csv",
+  "ReadWriteBarriersBenchmark_((gc)).csv",
+  "WriteBarriersLoopingOverArrayBenchmark_((gc)).csv")
+for (benchmark_result_file in benchmark_list) {
+  processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_result_file, gc_list)
+  processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, benchmark_result_file, gc_list)
+  processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, benchmark_result_file, gc_list)
+}
 
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "BurstHeapMemoryAllocatorBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "BurstHeapMemoryAllocatorBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "BurstHeapMemoryAllocatorBenchmark_((gc))_2threads.csv")
-
-# Merge HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_1thread.csv")
-
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_((gc))_2threads.csv")
-
-# Merge HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_1thread.csv")
-
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_((gc))_2threads.csv")
-
-# Merge HeapMemoryBandwidthAllocatorBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "HeapMemoryBandwidthAllocatorBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "HeapMemoryBandwidthAllocatorBenchmark_((gc))_1thread.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "HeapMemoryBandwidthAllocatorBenchmark_((gc))_1thread.csv")
-
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "HeapMemoryBandwidthAllocatorBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "HeapMemoryBandwidthAllocatorBenchmark_((gc))_2threads.csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "HeapMemoryBandwidthAllocatorBenchmark_((gc))_2threads.csv")
-
-# Merge ReadBarriersChainOfReferencesBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "ReadBarriersChainOfReferencesBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "ReadBarriersChainOfReferencesBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "ReadBarriersChainOfReferencesBenchmark_((gc)).csv")
-
-# Merge ReadBarriersLoopingOverArrayBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "ReadBarriersLoopingOverArrayBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "ReadBarriersLoopingOverArrayBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "ReadBarriersLoopingOverArrayBenchmark_((gc)).csv")
-
-# Merge ReadWriteBarriersBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "ReadWriteBarriersBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "ReadWriteBarriersBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "ReadWriteBarriersBenchmark_((gc)).csv")
-
-# Merge WriteBarriersLoopingOverArrayBenchmark Garbage Collector results for each JVM into separate files
-processJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, "WriteBarriersLoopingOverArrayBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ce_identifier, "WriteBarriersLoopingOverArrayBenchmark_((gc)).csv")
-processJmhGcResults(jmh_output_folder, graalvm_ee_identifier, "WriteBarriersLoopingOverArrayBenchmark_((gc)).csv")
-
-# Merge LockCoarseningBenchmark results for each JVM into separate files
-benchmark_list <- list("LockCoarseningBenchmark_withBiasedLocking.csv", "LockCoarseningBenchmark_withoutBiasedLocking.csv")
+# Merge multiple benchmark results from different files and extends the data frame by adding
+# a new column identifier to each (e.g., "Param..<param_name>" with the values from "<param_values>")
+# Note: the lists benchmark_list and param_values must have the same length
+benchmark_list <- list(
+  "LockCoarseningBenchmark_withBiasedLocking.csv",
+  "LockCoarseningBenchmark_withoutBiasedLocking.csv")
 param_name <- "biasedLocking"
 param_values <- list("enabled", "disabled")
 output_file <- "LockCoarseningBenchmark.csv"
