@@ -1,5 +1,5 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc","thrpt",1,25,"57,173334","0,024221","ops/us"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc:·gc.alloc.rate","thrpt",1,25,"0,000159","0,000195","MB/sec"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,"0,000003","0,000004","B/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc:·gc.count","thrpt",1,25,"0,000000",NaN,"counts"
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: chain"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc","thrpt",1,25,"622,016295","1,192180","ops/ms",1024
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc:·gc.alloc.rate","thrpt",1,25,"0,000188","0,000228","MB/sec",1024
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,"0,000317","0,000384","B/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersChainOfReferencesBenchmark.gc:·gc.count","thrpt",1,25,"0,000000",NaN,"counts",1024
