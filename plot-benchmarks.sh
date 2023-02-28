@@ -90,7 +90,7 @@ merge_benchmark_result_files() {
   echo "Benchmark result files successfully merged."
 }
 
-configure_benchmark_result_files() {
+prepare_benchmark_result_files() {
   echo "Before plotting it is recommended to merge the individual benchmark result files."
   echo "For example, during benchmarking a few results were spread across multiple output files, one file corresponding to a Garbage Collector (or other specific JVM flags). Merging these results will lead to one single (instead of multiple) generated plot, hence improving the overall readability."
   echo "WARNING: You might skip this step if merging was already triggered during a previous execution."
@@ -166,7 +166,7 @@ echo ""
 echo "+-------------------------+"
 echo "| Merge benchmark results |"
 echo "+-------------------------+"
-configure_benchmark_result_files
+prepare_benchmark_result_files
 
 echo ""
 echo "+------------------------+"
