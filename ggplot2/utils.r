@@ -42,18 +42,18 @@ style_dir()
 options(scipen = 999)
 
 # Read the CSV results from file
-readJmhCsvResults <- function(path) {
+readJmhCsvResults <- function(file_path) {
   result <- data.frame()
 
   tryCatch(
     {
-      result <- read.csv(path, sep = ",", header = TRUE)
+      result <- read.csv(file_path, sep = ",", header = TRUE)
     },
     warning = function(w) {
-      print(paste("Warning while reading from", path, sep = " "))
+      print(paste("Warning while reading from", file_path, sep = " "))
     },
     error = function(e) {
-      print(paste("Error while reading from", path, sep = " "))
+      print(paste("Error while reading from", file_path, sep = " "))
     }
   )
 

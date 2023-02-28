@@ -76,20 +76,30 @@ check_folder_exists() {
   fi
 }
 
-merge_benchmark_suite() {
-  R <./ggplot2/merge-benchmark.r --save --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+merge_benchmark_result_files() {
+  R <./ggplot2/merge-benchmark.r --save \
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "ERROR: Error encountered while merging benchmark result files, unable to continue!"
+    return 1
+  fi
+
+  echo ""
+  echo "Benchmark result files successfully merged."
 }
 
-configure_benchmark_suite() {
-  echo "Before plotting it is recommended to merge the individual benchmark results."
+configure_benchmark_result_files() {
+  echo "Before plotting it is recommended to merge the individual benchmark result files."
   echo "For example, during benchmarking a few results were spread across multiple output files, one file corresponding to a Garbage Collector (or other specific JVM flags). Merging these results will lead to one single (instead of multiple) generated plot, hence improving the overall readability."
   echo "WARNING: You might skip this step if merging was already triggered during a previous execution."
   echo ""
   while :; do
-    read -p "Do you want to merge the individual benchmark results? (yes/no) " INPUT_KEY
+    read -p "Do you want to merge the individual benchmark result files? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
-      merge_benchmark_suite
+      merge_benchmark_result_files
       break
       ;;
     no)
@@ -110,19 +120,19 @@ plot_benchmark_suite() {
   #           +--> /openjdk-hotspot-vm/BenchmarkResult.csv
   #           +--> /graalvm-ce/BenchmarkResult.csv
   #           +--> /graalvm-ee/BenchmarkResult.csv
-  benchmarks_results=$(find $JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/*.csv -maxdepth 1 -type f | xargs -n 1 basename)
-  for benchmark_result in $benchmarks_results; do
-    benchmark_basename=$(basename $benchmark_result .csv)
-    openjdk_hotspot_vm_result=$JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/$benchmark_result
-    graalvm_ce_result=$JMH_OUTPUT_FOLDER/$GRAAL_VM_CE_IDENTIFIER/$benchmark_result
-    graalvm_ee_result=$JMH_OUTPUT_FOLDER/$GRAAL_VM_EE_IDENTIFIER/$benchmark_result
+  benchmark_files=$(find $JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/*.csv -maxdepth 1 -type f | xargs -n 1 basename)
+  for benchmark_file in $benchmark_files; do
+    benchmark_file_basename=$(basename $benchmark_file .csv)
 
     echo ""
-    echo "Plotting $benchmark_basename benchmark ..."
-    R <./ggplot2/plot-benchmark.r --save --args $benchmark_basename $openjdk_hotspot_vm_result $graalvm_ce_result $graalvm_ee_result $JMH_OUTPUT_FOLDER
+    echo "Plotting $benchmark_file_basename benchmark ..."
+    R <./ggplot2/plot-benchmark.r --save \
+      --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER \
+      $benchmark_file $benchmark_file_basename
+
     if [ $? -ne 0 ]; then
       echo ""
-      echo "ERROR: Error encountered while plotting data from $benchmark_result, unable to continue!"
+      echo "ERROR: Error encountered while plotting data from $benchmark_file, unable to continue!"
       return 1
     fi
 
@@ -156,7 +166,7 @@ echo ""
 echo "+-------------------------+"
 echo "| Merge benchmark results |"
 echo "+-------------------------+"
-configure_benchmark_suite
+configure_benchmark_result_files
 
 echo ""
 echo "+------------------------+"
