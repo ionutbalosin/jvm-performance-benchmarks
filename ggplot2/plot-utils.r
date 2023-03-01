@@ -24,15 +24,28 @@
 
 source("./ggplot2/utils.r")
 
-# Append an extra column as a JVM identifier with the same value for all the rows
-# Note: the JVM identifier column is necessary to group the benchmarks in the final generated plot
-appendJvmIdentifierCol <- function(data, identifier) {
-  # check if data frame is not empty
-  if (!empty(data)) {
-    data <- cbind(data, "JvmIdentifier" = identifier)
+isFilenamePatternMatching <- function(list, filename) {
+  result <- FALSE
+
+  for (file_list in list) {
+    if (grepl(file_list, filename, fixed = FALSE)) {
+      result <- TRUE
+      break
+    }
   }
 
-  data
+  result
+}
+
+# Read the CSV file containing the benchmark results and append a JVM column identifier to the data frame
+readAndAppendJvmIdentifierToJmhCsvResults <- function(benchmark_file_path, identifier) {
+  result <- readJmhCsvResults(benchmark_file_path)
+
+  if (!empty(result)) {
+    result <- cbind(result, "JvmIdentifier" = identifier)
+  }
+
+  result
 }
 
 # Concatenates all benchmark Param columns by prepending the name to each value
@@ -74,7 +87,7 @@ concatJmhCsvParamCols <- function(data) {
   result
 }
 
-# Apply further column transformations on the JMH data results
+# Apply further column transformations on the data frame (i.e., JMH results)
 processJmhCsvResults <- function(data) {
   # delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
   data <- data[!grepl(":.", data$Benchmark), ]
@@ -120,8 +133,8 @@ processJmhCsvResults <- function(data) {
   data
 }
 
-# Generate the plot (i.e., bar chart)
-generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, colorPalette) {
+# Generate the plot (i.e., bar chart plot)
+generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, color_palette) {
   plot <- ggplot(data, aes(x = Benchmark, y = Score, fill = data[, fill], ymin = Score - Error, ymax = Score + Error))
   plot <- plot + geom_bar(stat = "identity", color = NA, position = "dodge", width = .7)
   plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = -0.05, vjust = -.75, position = position_dodge(.7), size = 4)
@@ -142,7 +155,26 @@ generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, col
     plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")
   )
   plot <- plot + guides(fill = guide_legend(byrow = TRUE))
-  plot <- plot + scale_fill_manual(fillLabel, values = colorPalette)
+  plot <- plot + scale_fill_manual(fillLabel, values = color_palette)
 
   plot
+}
+
+# Generate and save the plot to a SVG output file
+saveJmhBarPlot <- function(data, plot, jmh_output_folder, benchmark_file_basename) {
+  # set the height proportional to the number of rows plus 4 cm (as a minimum)
+  # TODO: may be this could be replaced by another formula
+  height <- nrow(data) * 2 + 4
+
+  # save the plot
+  ggsave(
+    file = paste(jmh_output_folder, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
+    plot = plot,
+    width = 50.8, # 1920 pixels
+    height = height,
+    dpi = 320,
+    units = "cm",
+    limitsize = FALSE,
+    scale = 1
+  )
 }

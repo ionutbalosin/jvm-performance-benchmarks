@@ -30,50 +30,65 @@ jmh_output_folder <- args[1]
 openjdk_hotspot_vm_identifier <- args[2]
 graalvm_ce_identifier <- args[3]
 graalvm_ee_identifier <- args[4]
-benchmark_file_basename <- args[5]
 benchmark_file <- args[5]
+benchmark_file_basename <- args[6]
 
-# generate the full benchmark result file paths
+# Generate the full benchmark result file paths
 openjdk_hotspot_vm_benchmark_file <- paste(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, sep = "/")
 graalvm_ce_benchmark_file <- paste(jmh_output_folder, graalvm_ce_identifier, benchmark_file, sep = "/")
 graalvm_ee_benchmark_file <- paste(jmh_output_folder, graalvm_ee_identifier, benchmark_file, sep = "/")
 
-# read all CSV files and append an identifier column
-# Note: all CSV files must have the same structure (i.e., we rely on JMH for this)
-data1 <- readJmhCsvResults(openjdk_hotspot_vm_benchmark_file)
-data1 <- appendJvmIdentifierCol(data1, "OpenJDK HotSpot VM")
+# Define the color palette (corresponding to each JVM) used in the final generated plot
+openjdk_hotspot_vm_color_palette <- c("OpenJDK HotSpot VM" = "#648FFF")
+graalvm_ce_color_palette <- c("GraalVM CE" = "#FFB000")
+graalvm_ee_color_palette <- c("GraalVM EE" = "#FE6100")
+full_color_palette <- append(append(openjdk_hotspot_vm_color_palette, graalvm_ce_color_palette), graalvm_ee_color_palette)
 
-data2 <- readJmhCsvResults(graalvm_ce_benchmark_file)
-data2 <- appendJvmIdentifierCol(data2, "GraalVM CE")
-
-data3 <- readJmhCsvResults(graalvm_ee_benchmark_file)
-data3 <- appendJvmIdentifierCol(data3, "GraalVM EE")
-
-# append all CSV rows to one data frame
-data <- rbind(data1, data2)
-data <- rbind(data, data3)
-
-# process data frame (e.g., rename, merge, append and sort columns, etc.)
-data <- processJmhCsvResults(data)
-
-# define the color palette for the plot bars
-colorPalette <- c("OpenJDK HotSpot VM" = "#648FFF", "GraalVM CE" = "#FFB000", "GraalVM EE" = "#FE6100")
-
-# extract the unit from the data frame
-unit <- data$Unit[1]
-
-plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", unit, benchmark_file_basename, colorPalette)
-
-# set the height proportional to the number of rows plus 4 cm (as a minimum)
-# TODO: may be this could be replaced by another formula
-height <- nrow(data) * 2 + 4
-ggsave(
-  file = paste(jmh_output_folder, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
-  plot = plot,
-  width = 50.8, # 1920 pixels
-  height = height,
-  dpi = 320,
-  units = "cm",
-  limitsize = FALSE,
-  scale = 1
+# Define the Garbage Collector benchmark result list that will not be merged across multiple JVMs in the final generated plot
+# Note: The regex must match all of the generated benchmark result list
+gc_benchmark_files <- list(
+  "^(BurstHeapMemoryAllocatorBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(HeapMemoryBandwidthAllocatorBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(ReadBarriersChainOfReferencesBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(ReadBarriersLoopingOverArrayBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(ReadWriteBarriersBenchmark)[_a-zA-Z0-9]*.csv",
+  "^(WriteBarriersLoopingOverArrayBenchmark)[_a-zA-Z0-9]*.csv"
 )
+
+# Use a filename pattern matching approach to exclude the Garbage Collector benchmark results from being merged across multiple JVMs in the final generated plot
+if (isFilenamePatternMatching(gc_benchmark_files, benchmark_file)) {
+  # Garbage Collector benchmark results are plotted in separate (one per every JVM) SVG files
+  # OpenJDK HotSpot VM
+  data <- readAndAppendJvmIdentifierToJmhCsvResults(openjdk_hotspot_vm_benchmark_file, "OpenJDK HotSpot VM")
+  data <- processJmhCsvResults(data)
+  plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, openjdk_hotspot_vm_color_palette)
+  saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "openjdk-hotspot-vm", sep = "_"))
+
+  # GraalVM CE
+  data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ce_benchmark_file, "GraalVM CE")
+  data <- processJmhCsvResults(data)
+  plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, graalvm_ce_color_palette)
+  saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "graalvm-ce", sep = "_"))
+
+  # GraalVM EE
+  data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ee_benchmark_file, "GraalVM EE")
+  data <- processJmhCsvResults(data)
+  plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, graalvm_ee_color_palette)
+  saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "graalvm-ee", sep = "_"))
+} else {
+  # any other benchmark results (e.g., JIT, macro, etc.) are merged (across JVMs) and plotted in the same SVG file
+  openjdk_hotspot_vm_data <- readAndAppendJvmIdentifierToJmhCsvResults(openjdk_hotspot_vm_benchmark_file, "OpenJDK HotSpot VM")
+  graalvm_ce_data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ce_benchmark_file, "GraalVM CE")
+  graalvm_ee_data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ee_benchmark_file, "GraalVM EE")
+
+  # append all CSV rows to one data frame
+  data <- rbind(openjdk_hotspot_vm_data, graalvm_ce_data)
+  data <- rbind(data, graalvm_ee_data)
+
+  data <- processJmhCsvResults(data)
+
+  plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, full_color_palette)
+  saveJmhBarPlot(data, plot, jmh_output_folder, benchmark_file_basename)
+}

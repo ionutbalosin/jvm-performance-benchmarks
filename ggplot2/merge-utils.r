@@ -45,7 +45,7 @@ mergeJmhGcResults <- function(path, file, gc_list) {
 # Note: this relies on the fact that the benchmark result filenames are generated, by convention, as "*Benchmark_((gc))_*.csv"
 processJmhGcResults <- function(jmh_output_folder, jvm_identifier, file, gc_list) {
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
-  data <- mergeJmhGcResults(benchmark_base_path, file)
+  data <- mergeJmhGcResults(benchmark_base_path, file, gc_list)
 
   output_file <- gsub("_\\(\\(gc\\)\\)", "", file)
   writeJmhCsvResults(benchmark_base_path, output_file, data)
