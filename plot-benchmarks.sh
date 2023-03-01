@@ -100,6 +100,7 @@ prepare_benchmark_result_files() {
     case $INPUT_KEY in
     yes)
       merge_benchmark_result_files
+      return $?
       break
       ;;
     no)
@@ -167,6 +168,9 @@ echo "+-------------------------+"
 echo "| Merge benchmark results |"
 echo "+-------------------------+"
 prepare_benchmark_result_files
+if [ $? -ne 0 ]; then
+  exit 1
+fi
 
 echo ""
 echo "+------------------------+"
