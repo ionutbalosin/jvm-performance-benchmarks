@@ -63,7 +63,7 @@ benchmark_files <- list(
   "LockCoarseningBenchmark_withBiasedLocking.csv",
   "LockCoarseningBenchmark_withoutBiasedLocking.csv"
 )
-param_name <- "biasedLocking"
+param_name <- "Param..biasedLocking"
 param_values <- list("enabled", "disabled")
 output_file <- "LockCoarseningBenchmark.csv"
 processJmhJitResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_files, param_name, param_values, output_file)

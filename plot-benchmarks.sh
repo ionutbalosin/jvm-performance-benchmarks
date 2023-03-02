@@ -76,30 +76,39 @@ check_folder_exists() {
   fi
 }
 
-merge_benchmark_result_files() {
+merge_split_benchmark_result_files() {
   R <./ggplot2/merge-benchmark.r --save \
     --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
-
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while merging benchmark result files, unable to continue!"
     return 1
   fi
 
+  R <./ggplot2/split-benchmark.r --save \
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "ERROR: Error encountered while splitting benchmark result files, unable to continue!"
+    return 1
+  fi
+
   echo ""
-  echo "Benchmark result files successfully merged."
+  echo "Benchmark result files successfully pre-processed."
 }
 
-prepare_benchmark_result_files() {
-  echo "Before plotting it is recommended to merge the individual benchmark result files."
-  echo "For example, during benchmarking a few results were spread across multiple output files, one file corresponding to a Garbage Collector (or other specific JVM flags). Merging these results will lead to one single (instead of multiple) generated plot, hence improving the overall readability."
-  echo "WARNING: You might skip this step if merging was already triggered during a previous execution."
+preprocess_benchmark_result_files() {
+  echo "Before plotting it is recommended to pre-process (e.g., merge, split) some of the benchmark result files."
+  echo "For example"
+  echo " - some benchmarks contain related results that are spread across multiple output files, one file corresponding to a Garbage Collector (or other interconnected JVM flags). Merging these results will lead to one single (instead of multiple) generated plot(s), hence improving the overall readability."
+  echo " - other benchmarks contain results that are orders of magnitude different between iterations, making the plotting scale too big. Splitting these results into separated files will lead multiple (instead of a single) generated plots, each having a proper scale, hence improving the overall readability."
+  echo "WARNING: You might skip this step if pre-processing was already triggered during a previous execution."
   echo ""
   while :; do
-    read -p "Do you want to merge the individual benchmark result files? (yes/no) " INPUT_KEY
+    read -p "Do you want to pre-process (e.g., merge, split) some of the benchmark result files? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
-      merge_benchmark_result_files
+      merge_split_benchmark_result_files
       return $?
       break
       ;;
@@ -164,10 +173,10 @@ if [ $? -ne 0 ]; then
 fi
 
 echo ""
-echo "+-------------------------+"
-echo "| Merge benchmark results |"
-echo "+-------------------------+"
-prepare_benchmark_result_files
+echo "+-------------------------------+"
+echo "| Pre-process benchmark results |"
+echo "+-------------------------------+"
+preprocess_benchmark_result_files
 if [ $? -ne 0 ]; then
   exit 1
 fi

@@ -64,7 +64,7 @@ readJmhCsvResults <- function(file_path) {
 writeJmhCsvResults <- function(path, file, data) {
   tryCatch(
     {
-      write.table(data, paste(path, file, sep = "/"), sep = ",")
+      write.table(data, paste(path, file, sep = "/"), sep = ",", row.names = FALSE)
     },
     warning = function(w) {
       print(paste("Warning while writing to", path, sep = " "))

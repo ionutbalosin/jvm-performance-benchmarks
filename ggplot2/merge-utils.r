@@ -61,7 +61,7 @@ mergeJmhJitResults <- function(path, benchmark_list, param_name, param_values) {
     index <- index + 1
     data <- readJmhCsvResults(paste(path, benchmark_list[index], sep = "/"))
     if (!empty(data)) {
-      data[, paste("Param", param_name, sep = "..")] <- param_values[index]
+      data[, param_name] <- param_values[index]
       result <- rbind(result, data)
     }
   }
