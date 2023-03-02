@@ -50,7 +50,7 @@ gc_benchmark_files <- list(
   "^(WriteBarriersLoopingOverArrayBenchmark)[_a-zA-Z0-9]*.csv"
 )
 
-# Plot the benchmark results in separate (one per every JVM) SVG files
+# Plot the benchmark results in separate SVG files (one for every JVM)
 plotJvmSplitBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_benchmark_file, graalvm_ce_benchmark_file, graalvm_ee_benchmark_file, benchmark_file, benchmark_file_basename) {
   # OpenJDK HotSpot VM
   data <- readAndAppendJvmIdentifierToJmhCsvResults(openjdk_hotspot_vm_benchmark_file, "OpenJDK HotSpot VM")
@@ -71,7 +71,7 @@ plotJvmSplitBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_benchma
   saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "graalvm_ee", sep = "_"))
 }
 
-# Plot the benchmark results in the same SVG file
+# Plot the benchmark results in the same SVG file (one for all JVMs)
 plotJvmAggregatedBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_benchmark_file, graalvm_ce_benchmark_file, graalvm_ee_benchmark_file, benchmark_file, benchmark_file_basename) {
   openjdk_hotspot_vm_data <- readAndAppendJvmIdentifierToJmhCsvResults(openjdk_hotspot_vm_benchmark_file, "OpenJDK HotSpot VM")
   graalvm_ce_data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ce_benchmark_file, "GraalVM CE")
