@@ -34,6 +34,7 @@ loadLibrary("ggplot2")
 loadLibrary("svglite")
 loadLibrary("styler")
 loadLibrary("plyr")
+library("tools")
 
 # apply styles to all R and/or Rmd files in the directory
 style_dir()

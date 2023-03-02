@@ -77,7 +77,7 @@ check_folder_exists() {
 }
 
 merge_split_benchmark_result_files() {
-  R <./ggplot2/merge-benchmark.r --save \
+  R <./ggplot2/merge-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
@@ -85,7 +85,7 @@ merge_split_benchmark_result_files() {
     return 1
   fi
 
-  R <./ggplot2/split-benchmark.r --save \
+  R <./ggplot2/split-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
@@ -123,30 +123,13 @@ preprocess_benchmark_result_files() {
 }
 
 plot_benchmark_suite() {
-  # Note: the corresponding benchmark file results must have the same names and reside under the same folder structure:
-  # e.g.,
-  #   <jdk-version>
-  #     +--> <arch>
-  #           +--> /openjdk-hotspot-vm/BenchmarkResult.csv
-  #           +--> /graalvm-ce/BenchmarkResult.csv
-  #           +--> /graalvm-ee/BenchmarkResult.csv
-  benchmark_files=$(find $JMH_OUTPUT_FOLDER/$OPENJDK_HOTSPOT_VM_IDENTIFIER/*.csv -maxdepth 1 -type f | xargs -n 1 basename)
-  for benchmark_file in $benchmark_files; do
-    benchmark_file_basename=$(basename $benchmark_file .csv)
-
+  R <./ggplot2/plot-benchmark.r --no-save \
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+  if [ $? -ne 0 ]; then
     echo ""
-    echo "Plotting $benchmark_file_basename benchmark ..."
-    R <./ggplot2/plot-benchmark.r --save \
-      --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER \
-      $benchmark_file $benchmark_file_basename
-
-    if [ $? -ne 0 ]; then
-      echo ""
-      echo "ERROR: Error encountered while plotting data from $benchmark_file, unable to continue!"
-      return 1
-    fi
-
-  done
+    echo "ERROR: Error encountered while plotting benchmarks results, unable to continue!"
+    return 1
+  fi
 
   echo ""
   echo "Benchmark plots successfully generated."
