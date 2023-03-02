@@ -25,22 +25,22 @@
 source("./ggplot2/utils.r")
 
 # Split the benchmark results from a single data frame based on
-# column "Param..<param_name>":"<param_values>" as a criteria differentiator
-splitJmhCsvResults <- function(path, benchmark_file, param_name, param_values) {
+# column "<column_name>":"<column_values>" as a criteria differentiator
+splitJmhCsvResults <- function(path, benchmark_file, column_name, column_values) {
   result <- data.frame()
 
   data <- readJmhCsvResults(paste(path, benchmark_file, sep = "/"))
   if (!empty(data)) {
-    result <- data[data[[param_name]] %in% param_values, ]
+    result <- data[data[[column_name]] %in% column_values, ]
   }
 
   result
 }
 
 # Split and write the benchmark results to an output file
-processJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_file, param_name, param_values, output_file) {
+processJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_file, column_name, column_values, output_file) {
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
-  data <- splitJmhCsvResults(benchmark_base_path, benchmark_file, param_name, param_values)
+  data <- splitJmhCsvResults(benchmark_base_path, benchmark_file, column_name, column_values)
 
   writeJmhCsvResults(benchmark_base_path, output_file, data)
 }

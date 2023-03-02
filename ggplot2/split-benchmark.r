@@ -35,51 +35,51 @@ graalvm_ee_identifier <- args[4]
 
 # Split FactorialBenchmark
 benchmark_file <- "FactorialBenchmark.csv"
-param_name <- "Param..n"
-param_values <- list("1000")
+column_name <- "Param..n"
+column_values <- list("1000")
 output_file <- "FactorialBenchmark_param_n_1000.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, param_name, param_values, output_file)
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
 
 benchmark_file <- "FactorialBenchmark.csv"
-param_name <- "Param..n"
-param_values <- list("5000")
+column_name <- "Param..n"
+column_values <- list("5000")
 output_file <- "FactorialBenchmark_param_n_5000.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, param_name, param_values, output_file)
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
 
 # Split FibonacciBenchmark
 benchmark_file <- "FibonacciBenchmark.csv"
-param_name <- "Param..n"
-param_values <- list("500")
+column_name <- "Param..n"
+column_values <- list("500")
 output_file <- "FibonacciBenchmark_param_n_500.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, param_name, param_values, output_file)
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
 
 benchmark_file <- "FibonacciBenchmark.csv"
-param_name <- "Param..n"
-param_values <- list("3000")
+column_name <- "Param..n"
+column_values <- list("3000")
 output_file <- "FibonacciBenchmark_param_n_3000.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, param_name, param_values, output_file)
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
 
 # Split NpeControlFlowBenchmark
 benchmark_file <- "NpeControlFlowBenchmark.csv"
-param_name <- "Param..nullThreshold"
-param_values <- list("0")
+column_name <- "Param..nullThreshold"
+column_values <- list("0")
 output_file <- "NpeControlFlowBenchmark_param_nullThreshold_0.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, param_name, param_values, output_file)
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
 
 benchmark_file <- "NpeControlFlowBenchmark.csv"
-param_name <- "Param..nullThreshold"
-param_values <- list("16")
+column_name <- "Param..nullThreshold"
+column_values <- list("16")
 output_file <- "NpeControlFlowBenchmark_param_nullThreshold_16.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, param_name, param_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, param_name, param_values, output_file)
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)

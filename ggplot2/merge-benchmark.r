@@ -57,15 +57,15 @@ for (benchmark_file in benchmark_files) {
 }
 
 # Merge multiple benchmark result files and extends the data frame by adding a new column identifier
-# to each (e.g., column "Param..<param_name>" with values from "<param_values>")
-# Note: the lists benchmark_files and param_values must have the same length
+# to each (e.g., column "<column_name>" with values from "<column_values>")
+# Note: the lists benchmark_files and column_values must have the same length
 benchmark_files <- list(
   "LockCoarseningBenchmark_withBiasedLocking.csv",
   "LockCoarseningBenchmark_withoutBiasedLocking.csv"
 )
-param_name <- "Param..biasedLocking"
-param_values <- list("enabled", "disabled")
+column_name <- "Param..biasedLocking"
+column_values <- list("enabled", "disabled")
 output_file <- "LockCoarseningBenchmark.csv"
-processJmhJitResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_files, param_name, param_values, output_file)
-processJmhJitResults(jmh_output_folder, graalvm_ce_identifier, benchmark_files, param_name, param_values, output_file)
-processJmhJitResults(jmh_output_folder, graalvm_ee_identifier, benchmark_files, param_name, param_values, output_file)
+processJmhJitResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_files, column_name, column_values, output_file)
+processJmhJitResults(jmh_output_folder, graalvm_ce_identifier, benchmark_files, column_name, column_values, output_file)
+processJmhJitResults(jmh_output_folder, graalvm_ee_identifier, benchmark_files, column_name, column_values, output_file)

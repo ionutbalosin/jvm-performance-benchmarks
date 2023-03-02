@@ -52,8 +52,8 @@ processJmhGcResults <- function(jmh_output_folder, jvm_identifier, file, gc_list
 }
 
 # Merge all benchmark results for different JIT results into a single data frame
-# and append a new column "Param..<param_name>":"<param_values>" as a differentiator
-mergeJmhJitResults <- function(path, benchmark_list, param_name, param_values) {
+# and append a new column "<column_name>":"<column_values>" as a differentiator
+mergeJmhJitResults <- function(path, benchmark_list, column_name, column_values) {
   result <- data.frame()
 
   index <- 0
@@ -61,7 +61,7 @@ mergeJmhJitResults <- function(path, benchmark_list, param_name, param_values) {
     index <- index + 1
     data <- readJmhCsvResults(paste(path, benchmark_list[index], sep = "/"))
     if (!empty(data)) {
-      data[, param_name] <- param_values[index]
+      data[, column_name] <- column_values[index]
       result <- rbind(result, data)
     }
   }
@@ -71,13 +71,13 @@ mergeJmhJitResults <- function(path, benchmark_list, param_name, param_values) {
 
 # Merge and write to a single output file multiple benchmark results for different JIT results, corresponding to a single JVM
 # Note: the benchmark result filenames could have a different names, not necessarily following a specific pattern
-processJmhJitResults <- function(jmh_output_folder, jvm_identifier, benchmark_list, param_name, param_values, output_file) {
-  if (length(benchmark_list) != length(param_values)) {
-    print(paste("Error: the number of files must be equal to the number of parameters", length(benchmark_list), length(param_values), sep = " "))
+processJmhJitResults <- function(jmh_output_folder, jvm_identifier, benchmark_list, column_name, column_values, output_file) {
+  if (length(benchmark_list) != length(column_values)) {
+    print(paste("Error: the number of files must be equal to the number of columns", length(benchmark_list), length(column_values), sep = " "))
   }
 
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
-  data <- mergeJmhJitResults(benchmark_base_path, benchmark_list, param_name, param_values)
+  data <- mergeJmhJitResults(benchmark_base_path, benchmark_list, column_name, column_values)
 
   writeJmhCsvResults(benchmark_base_path, output_file, data)
 }
