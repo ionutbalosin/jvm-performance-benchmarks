@@ -34,7 +34,8 @@ loadLibrary("ggplot2")
 loadLibrary("svglite")
 loadLibrary("styler")
 loadLibrary("plyr")
-library("tools")
+loadLibrary("psych")
+loadLibrary("tools")
 
 # apply styles to all R and/or Rmd files in the directory
 style_dir()
@@ -51,10 +52,10 @@ readJmhCsvResults <- function(file_path) {
       result <- read.csv(file_path, sep = ",", header = TRUE)
     },
     warning = function(w) {
-      print(paste("Warning while reading from", file_path, sep = " "))
+      print(paste("Cannot read from", file_path, "File skipped.", sep = " "))
     },
     error = function(e) {
-      print(paste("Error while reading from", file_path, sep = " "))
+      print(paste("Cannot read from", file_path, "File skipped.", sep = " "))
     }
   )
 
@@ -68,10 +69,10 @@ writeJmhCsvResults <- function(path, file, data) {
       write.table(data, paste(path, file, sep = "/"), sep = ",", row.names = FALSE)
     },
     warning = function(w) {
-      print(paste("Warning while writing to", path, sep = " "))
+      print(paste("Cannot write to", file_path, "File skipped.", sep = " "))
     },
     error = function(e) {
-      print(paste("Error while writing from", path, sep = " "))
+      print(paste("Cannot write to", file_path, "File skipped.", sep = " "))
     }
   )
 }

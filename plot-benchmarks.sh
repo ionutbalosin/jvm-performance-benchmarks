@@ -76,7 +76,7 @@ check_folder_exists() {
   fi
 }
 
-merge_split_benchmark_result_files() {
+merge_split_benchmark_results() {
   R <./ggplot2/merge-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
@@ -97,9 +97,9 @@ merge_split_benchmark_result_files() {
   echo "Benchmark result files successfully pre-processed."
 }
 
-preprocess_benchmark_result_files() {
+preprocess_benchmark_results() {
   echo "Before plotting it is recommended to pre-process (e.g., merge, split) some of the benchmark result files."
-  echo "For example"
+  echo "For example:"
   echo " - some benchmarks contain related results that are spread across multiple output files, one file corresponding to a Garbage Collector (or other interconnected JVM flags). Merging these results will lead to one single (instead of multiple) generated plot(s), hence improving the overall readability."
   echo " - other benchmarks contain results that are orders of magnitude different between iterations, making the plotting scale too big. Splitting these results into separated files will lead multiple (instead of a single) generated plots, each having a proper scale, hence improving the overall readability."
   echo "WARNING: You might skip this step if pre-processing was already triggered during a previous execution."
@@ -108,7 +108,7 @@ preprocess_benchmark_result_files() {
     read -p "Do you want to pre-process (e.g., merge, split) some of the benchmark result files? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
-      merge_split_benchmark_result_files
+      merge_split_benchmark_results
       return $?
       break
       ;;
@@ -122,7 +122,46 @@ preprocess_benchmark_result_files() {
   done
 }
 
-plot_benchmark_suite() {
+benchmarks_geometric_mean() {
+  R <./ggplot2/geomean-benchmark.r --no-save \
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "ERROR: Error encountered while calculating the benchmarks geometric mean, unable to continue!"
+    return 1
+  fi
+
+  echo ""
+  echo "Benchmarks geometric mean successfully calculated."
+}
+
+calculate_benchmarks_geometric_mean() {
+  echo "This will calculate the geometric mean (per category) for a specific set of benchmarks."
+  echo "For example:"
+  echo " - Compiler benchmarks geometric mean"
+  echo " - Garbage Collector benchmarks geometric mean"
+  echo " - Macro benchmarks geometric mean"
+  echo "WARNING: You might skip this step if geometric mean was already calculated during a previous execution."
+  echo ""
+  while :; do
+    read -p "Do you want to calculate the benchmarks geometric mean? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      benchmarks_geometric_mean
+      return $?
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
+plot_benchmarks() {
   R <./ggplot2/plot-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
@@ -133,6 +172,28 @@ plot_benchmark_suite() {
 
   echo ""
   echo "Benchmark plots successfully generated."
+}
+
+plot_benchmark_results() {
+  echo "This will generate the benchmark plots (i.e., SVG files) based on the benchmark result files."
+  echo "WARNING: You might skip this step if plotting of the benchmarks was already triggered during a previous execution."
+  echo ""
+  while :; do
+    read -p "Do you want to plot the benchmarks results? (yes/no) " INPUT_KEY
+    case $INPUT_KEY in
+    yes)
+      plot_benchmarks
+      return $?
+      break
+      ;;
+    no)
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
 }
 
 echo ""
@@ -159,7 +220,16 @@ echo ""
 echo "+-------------------------------+"
 echo "| Pre-process benchmark results |"
 echo "+-------------------------------+"
-preprocess_benchmark_result_files
+preprocess_benchmark_results
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+echo ""
+echo "+-------------------------------------+"
+echo "| Calculate benchmarks geometric mean |"
+echo "+-------------------------------------+"
+calculate_benchmarks_geometric_mean
 if [ $? -ne 0 ]; then
   exit 1
 fi
@@ -168,4 +238,4 @@ echo ""
 echo "+------------------------+"
 echo "| Plot benchmark results |"
 echo "+------------------------+"
-plot_benchmark_suite
+plot_benchmark_results
