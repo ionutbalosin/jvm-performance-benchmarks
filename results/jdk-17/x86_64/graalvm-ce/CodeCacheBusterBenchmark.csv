@@ -1,2 +1,2 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CodeCacheBusterBenchmark.code_cache_buster","avgt",1,25,123.399011,2.016068,"us/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CodeCacheBusterBenchmark.code_cache_buster","avgt",1,25,685.734536,179.245501,"us/op"

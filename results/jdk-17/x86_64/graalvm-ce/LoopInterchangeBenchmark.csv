@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInterchangeBenchmark.initial_loop","avgt",1,25,10334.170778,76.696379,"us/op",2048
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInterchangeBenchmark.manual_loop_interchange","avgt",1,25,1257.284157,1.494640,"us/op",2048
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInterchangeBenchmark.initial_loop","avgt",1,25,42529.779527,130.721795,"us/op",2048
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInterchangeBenchmark.manual_loop_interchange","avgt",1,25,1976.514655,0.655911,"us/op",2048
