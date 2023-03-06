@@ -41,8 +41,8 @@ import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jol.info.GraphLayout;
 
 /*
- * This benchmark allocates arrays of temporary objects until they fill up a certain percent of Heap (e.g., 30%, 60%)
- * and then releases them all, so they become eligible for Garbage Collector.
+ * This benchmark allocates arrays of temporary objects until it fills up a certain percent of Heap (e.g., 30%, 60%)
+ * and then releases them so that they become eligible for Garbage Collector.
  *
  * Note: the benchmark could be run using multiple concurrent threads.
  */
