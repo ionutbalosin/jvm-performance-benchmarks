@@ -29,7 +29,9 @@ source("./ggplot2/utils.r")
 splitJmhCsvResults <- function(path, benchmark_file, column_name, column_values) {
   result <- data.frame()
 
-  data <- readJmhCsvResults(paste(path, benchmark_file, sep = "/"))
+  benchmark_file_path <- paste(path, benchmark_file, sep = "/")
+  print(paste("Splitting", benchmark_file_path, "benchmark ...", sep = " "))
+  data <- readJmhCsvResults(benchmark_file_path)
   if (!empty(data)) {
     result <- data[data[[column_name]] %in% column_values, ]
   }

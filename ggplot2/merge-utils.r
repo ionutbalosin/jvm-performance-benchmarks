@@ -31,7 +31,9 @@ mergeJmhGcResults <- function(path, file, gc_list) {
 
   for (gc in gc_list) {
     benchmark_result_file <- gsub("\\(\\(gc\\)\\)", gc, file)
-    data <- readJmhCsvResults(paste(path, benchmark_result_file, sep = "/"))
+    benchmark_file_path <- paste(path, benchmark_result_file, sep = "/")
+    print(paste("Merging", benchmark_file_path, "benchmark ...", sep = " "))
+    data <- readJmhCsvResults(benchmark_file_path)
     if (!empty(data)) {
       data <- cbind(data, "Param..gc" = gc)
       result <- rbind(result, data)
@@ -59,7 +61,9 @@ mergeJmhJitResults <- function(path, benchmark_list, column_name, column_values)
   index <- 0
   for (i in benchmark_list) {
     index <- index + 1
-    data <- readJmhCsvResults(paste(path, benchmark_list[index], sep = "/"))
+    benchmark_file_path <- paste(path, benchmark_list[index], sep = "/")
+    print(paste("Merging", benchmark_file_path, "benchmark ...", sep = " "))
+    data <- readJmhCsvResults(benchmark_file_path)
     if (!empty(data)) {
       data[, column_name] <- column_values[index]
       result <- rbind(result, data)
