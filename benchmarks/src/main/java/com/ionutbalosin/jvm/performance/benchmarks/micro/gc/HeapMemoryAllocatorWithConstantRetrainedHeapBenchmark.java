@@ -42,7 +42,7 @@ import org.openjdk.jol.info.GraphLayout;
 
 /*
  * This benchmark initially allocates (during setup) lists of chained objects (e.g., Object 1 -> Object 2 -> … ),
- * until it fills up a certain percent of Heap (e.g., 25%, 50%, 75%). Each object list (i.e., the list header) is stored
+ * until it fills up a certain percent of the heap (e.g., 25%, 50%, 75%). Each object list (i.e., the list header) is stored
  * in an array-based structure that keeps strong references to each chain.
  * Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and,
  * in addition, an array of allocated longs.
