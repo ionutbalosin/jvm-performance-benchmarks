@@ -40,6 +40,10 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * This benchmark tests the allocation rate for chunks of byte arrays having different sizes.
+ *
+ * In comparison to the previous benchmarks (e.g., HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark, HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark),
+ * it just allocates the byte arrays and immediately releases them, without keeping any strong references.
+ *
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)

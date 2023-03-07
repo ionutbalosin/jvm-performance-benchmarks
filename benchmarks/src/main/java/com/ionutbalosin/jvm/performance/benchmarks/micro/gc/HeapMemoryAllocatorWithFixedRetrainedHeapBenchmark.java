@@ -41,21 +41,21 @@ import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jol.info.GraphLayout;
 
 /*
- * This benchmark initially allocates (during setup) chunks of chained objects (i.e., ballast), until it fills up
- * a certain percent of Heap (e.g., 30%, 60%) and keeps strong references to them from an array.
- * Such a chain looks like Object 1 -> Object 2 -> … -> Object 32 where an object consist of pointer to the next object
- * and an array of longs.
- * Note: the chaining might have an impact on the GC roots traversal (for example during the “parallel” marking phase),
- * since the degree of pointer indirection (i.e., reference processing) is not negligible, while traversing the object graph dependencies.
+ * This benchmark initially allocates (during setup) lists of chained objects (e.g., Object 1 -> Object 2 -> … ),
+ * until it fills up a certain percent of the heap (e.g., 30%, 60%). Each object list (i.e., the list header) is stored
+ * in an array-based structure that keeps strong references to each chain.
+ * Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and,
+ * in addition, an array of allocated longs.
+ * Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation,
+ * residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
  *
- * Then, in the benchmark test() method, similar object chains are concurrently allocated (by multiple threads) until they fill up
- * 80% of the entire heap and then immediately released, so they become eligible for Garbage Collector.
+ * Note: The chaining might have an impact on the GC roots traversal, since the degree of pointer indirection (i.e., reference processing)
+ * is not negligible, while traversing the object graph dependencies.
  *
- * Note: During the lifecycle of the benchmark the amount of retained memory by strong references is fixed (i.e., the objects initialized
- * in the setup phase are kept alive during the benchmark test() method)
+ * Then, in the benchmark method, similar object chains are allocated until they fill up 80% of the entire heap and then immediately released, so they become eligible for Garbage Collector.
  *
- * Note: some objects within the chain are potentially considered big, so they would normally follow the slow path allocation,
- * residing directly in the Tenured Generation (in case of generational collectors), increasing the likelihood of full GCs.
+ * Note: During the lifecycle of the benchmark, the amount of retained memory by strong references is fixed
+ * (i.e., the objects allocated in the benchmark setup phase are kept alive during the benchmark method)
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)

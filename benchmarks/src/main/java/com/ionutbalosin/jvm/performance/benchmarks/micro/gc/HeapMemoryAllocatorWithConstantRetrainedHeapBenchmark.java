@@ -46,16 +46,17 @@ import org.openjdk.jol.info.GraphLayout;
  * in an array-based structure that keeps strong references to each chain.
  * Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and,
  * in addition, an array of allocated longs.
+ * Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation,
+ * residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
+ *
  * Note: The chaining might have an impact on the GC roots traversal, since the degree of pointer indirection (i.e., reference processing)
  * is not negligible, while traversing the object graph dependencies.
  *
  * Then, in the benchmark method, similar object chains are allocated, and they replace, one by one (i.e., incrementally),
  * the ones from the initial array so that the former ones become eligible for garbage collection.
  *
- * Note: During the lifecycle of the benchmark, the amount of retained memory is (trying to be) kept constant.
+ * Note: During the lifecycle of the benchmark, the footprint of live memory is (trying to be) kept constant.
  *
- * Note: Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation,
- * residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
