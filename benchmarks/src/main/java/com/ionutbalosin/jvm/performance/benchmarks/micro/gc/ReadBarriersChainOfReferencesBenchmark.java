@@ -39,10 +39,8 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Test the overhead of read barriers while iterating through a chain of pre-allocated classes (e.g., class1 -> class2 -> ... -> class1024) and returns
- * the sum of all their fields properties (e.g., class1.field + class2.field + class1024.field)
- *
- * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
+ * Test the overhead of read barriers while iterating through a chain of pre-allocated objects (e.g., Object 1 -> Object 2 -> ...)
+ * and returns the sum of their field properties (e.g., Object1.field + Object2.field + ...)
  *
  */
 @BenchmarkMode(Mode.Throughput)

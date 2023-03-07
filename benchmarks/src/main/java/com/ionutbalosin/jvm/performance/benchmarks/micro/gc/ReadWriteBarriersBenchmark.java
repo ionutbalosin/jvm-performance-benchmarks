@@ -43,23 +43,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * Test the overhead of read/write barriers while iterating through an array of Integers and
  * exchanging the values between two array entries (i.e., array[i] <-> array[j]).
  *
- * Read/Write barriers in the existing HotSpot Garbage Collectors. Special thanks to Jean-Philippe Bempel (Twitter: @jpbempel) for updating below description.
- * 1. Write Barriers:
- *  - one write barrier (to track the references from Tenured Generation to Young Generation – e.g., card table) for:
- *      - SerialGC
- *      - ParallelGC
- *  - one write barrier (in case of concurrent marking – e.g., Snapshot-At-The-Beginning (SATB)) for:
- *      - Shenandoah
- *  - two write barriers: first (i.e., PreWrite barrier) in case of concurrent marking (e.g., SATB), and second (i.e., PostWrite barrier) to tracking the references across regions for:
- *      - G1GC
- *
- * 2. Read Barriers
- *  - Shenandoah (when accessing fields of an object through a reference for <= OpenJDK 12, when references are loaded from the heap for >= OpenJDK 13)
- *  - ZGC (when references are loaded from the Heap)
- *
- * 3. No Barriers:
- *  - Epsilon GC does not use any barrier at all, it might be the baseline for all the others.
- *
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)

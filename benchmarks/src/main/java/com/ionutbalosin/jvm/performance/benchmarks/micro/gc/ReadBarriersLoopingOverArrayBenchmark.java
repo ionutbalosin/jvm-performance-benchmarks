@@ -39,11 +39,9 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Test the overhead of read barriers while iterating through the elements of an array of Objects and reading every element of it.
+ * Test the overhead of read barriers while iterating through an array of pre-allocated objects and reading each object field.
  *
  * Note: looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
- *
- * Note: @see ReadWriteBarriersBenchmark.java for further explanations about read/write barriers in current GCs
  *
  */
 @BenchmarkMode(Mode.Throughput)
