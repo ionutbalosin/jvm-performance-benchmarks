@@ -162,19 +162,21 @@ generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, col
 
 # Generate and save the plot to a SVG output file
 saveJmhBarPlot <- function(data, plot, jmh_output_folder, benchmark_file_basename) {
-  # set the height proportional to the number of rows plus 4 cm (as a minimum)
-  # TODO: may be this could be replaced by another formula
-  height <- nrow(data) * 2 + 4
+  if (!empty(data)) {
+    # set the height proportional to the number of rows plus 4 cm (as a minimum)
+    # TODO: may be this could be replaced by another formula
+    height <- nrow(data) * 2 + 4
 
-  # save the plot
-  ggsave(
-    file = paste(jmh_output_folder, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
-    plot = plot,
-    width = 50.8, # 1920 pixels
-    height = height,
-    dpi = 320,
-    units = "cm",
-    limitsize = FALSE,
-    scale = 1
-  )
+    # save the plot
+    ggsave(
+      file = paste(jmh_output_folder, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
+      plot = plot,
+      width = 50.8, # 1920 pixels
+      height = height,
+      dpi = 320,
+      units = "cm",
+      limitsize = FALSE,
+      scale = 1
+    )
+  }
 }
