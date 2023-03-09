@@ -1,0 +1,219 @@
+## Garbage Collectors
+
+### Benchmarks Description
+
+The Garbage Collectors included in the benchmarks are:
+- Serial GC
+- Parallel GC
+- Garbage First (G1) GC (default)
+- Shenandoah GC
+- ZGC
+- Epsilon GC (experimental, included just to have a baseline in a few cases)
+
+The current GC benchmarks focus on below metrics:
+- the efficiency of a GC objects allocation/reclamation with
+  - different allocation rates
+  - different object sizes
+  - different pre-allocated objects on the heap
+  - different number of allocator threads (e.g., 1 or 2)
+- the impact of the barriers (e.g., read, write barriers) while traversing and/or updating heap data structures, trying to avoid any explicit allocation, in the benchmark method, unless it is induced by the underlying ecosystem.
+
+### GCs Overview
+
+#### Serial GC
+- generational collector, stop-the-world (STW) pauses
+- it has the smallest footprint and is desired especially for resource-constrained environments where latency is not an issue
+
+#### Parallel GC
+- generational collector, stop-the-world (STW) pauses
+- also called a throughput collector, it is desired for applications where throughput is more important than latency
+
+#### G1 GC
+- generational collector, region based, stop-the-world (STW) pauses, concurrent phases
+- strives for a balance between latency and throughput (with a desired maximum pause time of 200 ms)
+
+#### Shenandoah GC
+- uni-generational, region based (like G1 GC), fully concurrent
+- target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times
+
+#### ZGC
+- uni-generational, mostly concurrent phases, but there are some STW pauses
+- target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times (similar to Shenandoah GC)
+
+>Note: In general, running single-threaded workloads against concurrent GCs could result in better throughput (or lower pause times) than in the case of the STW collectors, because the concurrent collectors are able to offload the GC work on otherwise idle cores.
+
+### GC Barriers
+
+Most GCs require different barriers that need to be implemented in the runtime, interpreter, C1 and C2. Such barriers affect application performance even when no actual GC work is happening. Below is a summary of such barriers mostly specific to each GC from JDK 17.
+
+#### Epsilon GC
+- does not add any barrier on top of the default/shared barriers (e.g., C1 or C2 compiler barriers). It might be the baseline (since it has the smallest overhead) in comparison to all the others, nevertheless it is still experimental at the moment.
+
+#### Serial GC
+- a card-table write barrier (to track the references from Tenured Generation to Young Generation). In this technique, the heap is partitioned into equal-sized cards, and a card table array is allocated, with an entry for each card of the heap. Card table entries are initially clean; the mutator write barrier marks the card containing the updated field (or the head of the object containing the field, in a variant) dirty. The collector must scan the card table to find dirty entries, and then scan the corresponding dirty cards to find the cross-generational pointers, if any, created by the writes.
+
+#### Parallel GC
+- a card-table write barrier (similar to Serial GC)
+
+#### G1 GC
+- a pre-write barrier is required in case of concurrent marking by Snapshot-At-The-Beginning (SATB) to make sure all objects live at the start of the marking are kept alive, all the reference updates need to any previous reference stored before writing
+- a post-write barrier to track object references between different regions to enable the evacuation of old regions, which is done as part of mixed collections. References are tracked in remembered sets and are continuously updated with the help of the post-barrier
+- a read barrier is added when a read access is performed to the referent field of a java.lang.ref.Reference. This will result in the referent being marked live
+- two arraycopy barriers (e.g., pre-write and post-write barriers)
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+
+#### Shenandoah GC
+- load-reference barrier employed after a load from a reference field or array element and before the loaded object is given to the rest of the application code
+- Snapshot-At-The-Beginning (SATB) write barrier employed before reference writes and used in case of concurrent marking. This is very similar to G1's SATB barrier, it intercepts writes and marks through "previous" objects
+- an arraycopy barrier to deal with array copies (a better arraycopy-barrier-scheme in comparison to, for example, the G1's arraycopy barriers implemented in the C1/C2 or GraalVM JIT)
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+- a keep-alive barrier for java.lang.ref.Reference to handle the cases when the referent field of a java.lang.ref.Reference object is read
+- nmethod-barriers (i.e., a mechanism to arm nmethods) for concurrent unloading. For example, code cache unloading needs to know about on-stack nmethods. Arming the nmethods enables GC callbacks when they are called.
+- stack-watermark barrier for concurrent thread-scanning
+
+> Note: depending on the shenandoah mode, some of these barriers might be disabled!
+
+#### ZGC
+- load-reference barrier employed when references are loaded from the Heap. It ensures that
+  references pointing into a relocated memory area will be caught and handled (i.e., the load barrier performs further actions to remap pointers that actually point into the relocated memory area, without the need to read that memory)
+  references pointing into the newly allocated memory will pass through the barrier without further actions
+- weak load barrier may be provided for loading a pointer “weakly” (i.e., load the pointer without keeping its target object alive in the context of garbage collection). Examples where a weak load barrier may be useful include reading a StringTable object in the JVM
+- arraycopy barriers to deal with array copies
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+- a keep-alive barrier used during the concurrent marking phase
+- a mark barrier used during the concurrent marking phase
+- nmethod-barriers and stack-watermark barriers (similar to Shenandoah GC)
+
+> Note: At the moment GraalVM CE/EE (i.e., HotSpot based mode) does not support neither ZGC nor Shenandoah GC. For example, the Graal compiler does not implement any specific Shenandoah/ZGC barrier. This is the primary reason why it makes no sense to compare these GCs across different JVMs (OpenJDK HotSpot vs. GraalVM CE/EE).
+
+### BurstHeapMemoryAllocatorBenchmark
+
+This benchmark allocates arrays of temporary objects until it fills up a certain percent of the heap (e.g., 30%, 60%) and then releases them so that they all become eligible for Garbage Collector.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: BurstHeapMemoryAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- ZGC performs significantly better than all the other collectors (around 3x times faster than G1 GC), followed by G1 GC, ShenandoahGC, and Serial GC (for both 30% but also 60% allocated heap)
+- Parallel GC offers the worst throughput
+
+<<IMG: BurstHeapMemoryAllocatorBenchmark_2threads_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- Increasing the number of allocator threads minimizes the gap between the ZGC and G1 GC, the latter one performing even better in case of the 60% allocated heap
+- Parallel GC offers (again, for this benchmark) the worst throughput, about ~10x slower than the best throughput
+
+In general, under heavy burst allocations (e.g., 60% of the heap), the generational collectors (e.g., Serial GC, Parallel GC) fall into premature full GCs syndrome causing longer STW pauses in comparison to concurrent, single-generational, collectors.
+
+### HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark
+
+This benchmark initially allocates (during setup) lists of chained objects (e.g., Object 1 -> Object 2 -> … ), until it fills up a certain percent of the heap (e.g., 25%, 50%, 75%). Each object list (i.e., the list header) is stored in an array-based structure that keeps strong references to each chain.
+Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and,in addition, an array of allocated longs. Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation, residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
+The chaining might have an impact on the GC roots traversal, since the degree of pointer indirection (i.e., reference processing) is not negligible, while traversing the object graph dependencies.
+Then, in the benchmark method, similar object chains are allocated, and they replace, one by one (i.e., incrementally),the ones from the initial array so that the former ones become eligible for garbage collection.
+During the lifecycle of the benchmark, the footprint of live memory is (trying to be) kept constant.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg>>
+
+<<IMG: HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_2thread2_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- ZGC offers the highest throughput when the percentage of the heap is up to 50%
+- when the retained heap (i.e., ballast) is 70%, G1 GC followed by the Parallel GC offers a better throughput
+- Serial GC has the lowers throughput in all the cases
+
+The cost of marking the entire heap to reclaim the garbage is not neglectable for the non-generational, concurrent, collectors (ZGC and Shenandoah GC) in cases where the ballast takes a significant part of the heap (e.g., 70% of the heap), otherwise easy to remove (young) garbage by the generational GCs (e.g., G1 GC, Parallel GC). This might be partially mitigated by increasing the number of concurrent GC threads using -XX:ConcGCThreads=<n>.
+
+### HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark
+
+This benchmark initially allocates (during setup) lists of chained objects (e.g., Object 1 -> Object 2 -> … ), until it fills up a certain percent of the heap (e.g., 30%, 60%). Each object list (i.e., the list header) is stored in an array-based structure that keeps strong references to each chain.
+Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and, in addition, an array of allocated longs. Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation, residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
+
+The chaining might have an impact on the GC roots traversal, since the degree of pointer indirection (i.e., reference processing)  is not negligible, while traversing the object graph dependencies.
+Then, in the benchmark method, similar object chains are allocated until they fill up 80% of the entire heap and then immediately released, so they become eligible for Garbage Collector.
+During the lifecycle of the benchmark, the amount of retained memory by strong references is fixed (i.e., the objects allocated in the benchmark setup phase are kept alive during the benchmark method)
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg>>
+
+<<IMG: HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_2threads_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- G1 GC and/or Parallel GC offers (in general) the highest throughput in both benchmarks
+
+The cost of marking the entire heap to reclaim the garbage strikes even worse (in this benchmark) the non-generational, concurrent, collectors (ZGC and Shenandoah GC).
+One additional remark: since ZGC has Compressed OOPs disabled by design, within the same amount of memory, ZGC will allocate less number of objects (hence less objects to collect), in comparison to the other collectors that have Compressed OOPs enabled by default (in the case of Heap sizes up to 32 GB and on 64-bit platforms). Or, the other way around: trying to allocate the same number of objects (as the other collectors)  ZGC would need more memory for such allocations.
+
+### HeapMemoryBandwidthAllocatorBenchmark
+
+This benchmark tests the allocation rate for chunks of byte arrays having different sizes. In comparison to the previous benchmarks (e.g., HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark, HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark), it just allocates the byte arrays and immediately releases them, without keeping any strong references.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: HeapMemoryBandwidthAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg>>
+
+<<IMG: HeapMemoryBandwidthAllocatorBenchmark_2threads_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- for array chunks of 32 B and 8 MB Parallel GC and Serial GC seem to offer a tinny higher throughput, but not by a relevant difference
+- for array chunks of 16 KB Serial GC and ZGC looks slightly better, but not by a relevant difference
+
+###  ReadBarriersChainOfReferencesBenchmark
+
+Test the overhead of read barriers while iterating through a chain of pre-allocated objects (e.g., Object 1 -> Object 2 -> ...) and returns the sum of their field properties (e.g., Object1.field + Object2.field + ...)
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: ReadBarriersChainOfReferencesBenchmark_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+
+- ZGC offers the best throughput, around 1.5x times better than the others
+- Surprisingly, Epsilon GC since it does not have any barrier in the GC set, is not the leader position here
+
+###  ReadBarriersLoopingOverArrayBenchmark
+
+Test the overhead of read barriers while iterating through an array of pre-allocated objects and reading each object field.
+Note: looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: ReadBarriersLoopingOverArrayBenchmark_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- ZGC offers the lowest throughput (~ 1.5x times slower than the highest throughput). It could be explained by the absence of Compressed OOPs. The array the benchmark walks, and the accessed objects are larger and have less chances to be cached in same-sized CPU caches (i.e., more CPU cache misses) in comparison to the other collectors using Compressed OOPs.
+
+### ReadWriteBarriersBenchmark
+
+Test the overhead of read/write barriers while iterating through an array of Integers and exchanging the values between two array entries (i.e., array[i] <-> array[j]).
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: ReadWriteBarriersBenchmark_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- Epsilon GC, since it does not use any GC barrier, offers the best throughput. It was included to have a baseline in comparison to other collectors
+- ZGC seems to perform better than any other collector
+- G1 GC offers the worst throughput, more than  ~10x-14x slower than the rest. In such a case, the post-write barriers (i.e., remembered sets management across G1 regions) might be the reason behind.
+
+###  WriteBarriersLoopingOverArrayBenchmark
+
+Test the overhead of write barriers while iterating through the elements of an array of objects and updating every element (i.e., reference).
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: WriteBarriersLoopingOverArrayBenchmark_openjdk_hotspot_vm.svg>>
+
+#### Conclusions
+- Epsilon GC, since it does not use any GC barrier, offers the best throughput. It was included to have a baseline in comparison to other collectors
+- Shenandoah GC seems to perform better than any other collector, but with a marginal difference in comparison to ZGC
+- G1 GC offers the worst throughput, about ~10x-20x slower than the rest. Most probably it has the same root cause as in the previous benchmark (i.e. post-write barriers overhead)
+
+## Garbage Collectors
