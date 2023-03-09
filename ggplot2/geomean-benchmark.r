@@ -110,7 +110,7 @@ jit_geomean <- c(
   "GraalVM EE" = graalvm_ee_geomean,
   "Unit" = "ns/op"
 )
-writeJmhCsvResults(jmh_output_folder, "Geomean_jit.csv", data.frame(t(sapply(jit_geomean, c))))
+writeJmhCsvResults(jmh_output_folder, "geomean_jit.csv", data.frame(t(sapply(jit_geomean, c))))
 
 # Macro benchmarks geometric mean
 
@@ -123,15 +123,15 @@ macro_geomean <- c(
   "GraalVM EE" = graalvm_ee_geomean,
   "Unit" = "ns/op"
 )
-writeJmhCsvResults(jmh_output_folder, "Geomean_macro.csv", data.frame(t(sapply(macro_geomean, c))))
+writeJmhCsvResults(jmh_output_folder, "geomean_macro.csv", data.frame(t(sapply(macro_geomean, c))))
 
 # Garbage Collector benchmarks geometric mean
 
 openjdk_hotspot_vm_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files)
-writeJmhCsvResults(jmh_output_folder, "Geomean_gc_openjdk_hotspot_vm.csv", openjdk_hotspot_vm_gc_geomean)
+writeJmhCsvResults(jmh_output_folder, "geomean_gc_openjdk_hotspot_vm.csv", openjdk_hotspot_vm_gc_geomean)
 
 graalvm_ce_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files)
-writeJmhCsvResults(jmh_output_folder, "Geomean_gc_graalvm_ce.csv", graalvm_ce_gc_geomean)
+writeJmhCsvResults(jmh_output_folder, "geomean_gc_graalvm_ce.csv", graalvm_ce_gc_geomean)
 
 graalvm_ee_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files)
-writeJmhCsvResults(jmh_output_folder, "Geomean_gc_graalvm_ee.csv", graalvm_ee_gc_geomean)
+writeJmhCsvResults(jmh_output_folder, "geomean_gc_graalvm_ee.csv", graalvm_ee_gc_geomean)
