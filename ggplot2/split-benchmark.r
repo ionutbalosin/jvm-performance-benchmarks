@@ -133,3 +133,45 @@ output_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads_param_size_8_MB.c
 processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
 processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
 processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
+
+# Split SortVectorApiBenchmark
+benchmark_file <- "SortVectorApiBenchmark.csv"
+column_name <- "Param..arraySize"
+column_values <- list("64")
+output_file <- "SortVectorApiBenchmark_param_arraySize_64.csv"
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
+
+benchmark_file <- "SortVectorApiBenchmark.csv"
+column_name <- "Param..arraySize"
+column_values <- list("1024")
+output_file <- "SortVectorApiBenchmark_param_arraySize_1024.csv"
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
+
+benchmark_file <- "SortVectorApiBenchmark.csv"
+column_name <- "Param..arraySize"
+column_values <- list("65536")
+output_file <- "SortVectorApiBenchmark_param_arraySize_65536.csv"
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
+
+# Split VectorApiBenchmark
+benchmark_file <- "VectorApiBenchmark.csv"
+column_name <- "Param..size"
+column_values <- list("262144")
+output_file <- "VectorApiBenchmark_param_size_262144.csv"
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
+
+benchmark_file <- "VectorApiBenchmark.csv"
+column_name <- "Param..size"
+column_values <- list("1048576")
+output_file <- "VectorApiBenchmark_param_size_1048576.csv"
+processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
+processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
