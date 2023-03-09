@@ -62,11 +62,11 @@ import org.openjdk.jmh.annotations.Warmup;
  * are still used today in computer networks, fax machines, modems, HDTV, and other areas.
  *
  * The steps involved in Huffman encoding a given text source file into a destination compressed file are:
- * a) - count frequencies: examine a source file's contents and count the number of occurrences of each character
- * b) - build encoding tree: build a binary tree with a particular structure, where each node represents a character
+ * - count frequencies: examine a source file's contents and count the number of occurrences of each character
+ * - build encoding tree: build a binary tree with a particular structure, where each node represents a character
  * and its count of occurrences in the file. A priority queue is used to help build the tree along the way.
- * c) - build encoding map: traverse the binary tree to discover the binary encodings of each character
- * d) - encode data: re-examine the source file's contents, and for each character, output the encoded binary version of
+ * - build encoding map: traverse the binary tree to discover the binary encodings of each character
+ * - encode data: re-examine the source file's contents, and for each character, output the encoded binary version of
  * that character to the destination file.
  *
  * Note: the benchmark adds one more final step: it decodes the previously encoded data (and does a basic sanity check)

@@ -216,4 +216,64 @@ Source code: <<link to GitHub benchmark>>
 - Shenandoah GC seems to perform better than any other collector, but with a marginal difference in comparison to ZGC
 - G1 GC offers the worst throughput, about ~10x-20x slower than the rest. Most probably it has the same root cause as in the previous benchmark (i.e. post-write barriers overhead)
 
-## Garbage Collectors
+## Macro
+
+This is a smaller set of benchmarks (called macro) dedicated to larger programs using high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
+
+### HuffmanCodingBenchmark
+
+Huffman encoding is an algorithm devised by David A. Huffman of MIT in 1952 for compressing text data to make a file occupy a smaller number of bytes. This relatively simple compression algorithm is powerful enough that variations of it are still used today in computer networks, fax machines, modems, HDTV, and other areas.
+
+The steps involved in Huffman encoding a given text source file into a destination compressed file are:
+- count frequencies: examine a source file's contents and count the number of occurrences of each character
+- build encoding tree: build a binary tree with a particular structure, where each node represents a character and its count of occurrences in the file. A priority queue is used to help build the tree along the way.
+- build encoding map: traverse the binary tree to discover the binary encodings of each character
+- encode data: re-examine the source file's contents, and for each character, output the encoded binary version of that character to the destination file.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: HuffmanCodingBenchmark.svg>>
+
+### PalindromeBenchmark
+
+Iterates through a list of Strings read from a file and checks, for each String, if it is a palindrome.
+The benchmark uses a few alternative approaches:
+- trampolines
+- recursive
+- iterative
+
+The trampoline pattern is used for implementing algorithms recursively but without blowing the stack (as an alternative to recursive functions). A trampoline is an iteration applying a list of functions, where each function returns the next function to be called.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: PalindromeBenchmark.svg>>
+
+### PopulationVarianceBenchmark
+
+This benchmark generates a population of different ages and then calculates the age variation.
+Population variance is the average of the distances from each data point in a particular population to the mean squared. It indicates how data points spread out in the population. Population variance is an important measure of dispersion used in statistics.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: PopulationVarianceBenchmark.svg>>
+
+### PrimesBenchmark
+
+Computes the number of prime numbers until a threshold (e.g., N) number. The benchmark uses a few alternative approaches:
+- sieve of Eratosthenes
+- a stream of prime numbers
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: PrimesBenchmark.svg>>
+
+### WordFrequencyBenchmark
+
+Computes the word frequencies/occurrences from a text file. The benchmark uses a few alternative approaches:
+- iterative
+- parallel streams
+- pattern streams
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: WordFrequencyBenchmark.svg>>
