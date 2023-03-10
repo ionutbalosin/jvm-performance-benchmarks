@@ -216,14 +216,42 @@ Source code: <<link to GitHub benchmark>>
 - Shenandoah GC seems to perform better than any other collector, but with a marginal difference in comparison to ZGC
 - G1 GC offers the worst throughput, about ~10x-20x slower than the rest. Most probably it has the same root cause as in the previous benchmark (i.e. post-write barriers overhead)
 
+### Geometric Mean
+
+The Geometric Mean (GM) for the Garbage Collector benchmarks on each architecture is described below.
+
+### OpenJDK HotSpot VM on x86_64 
+
+No. | JVM distribution | Arcitecture | Geometric Mean | Unit
+----|------------------|-------------|----------------|--------
+1   | ZGC              | x86_64      | 43,267.97      | ops/ms
+2   | G1 GC            | x86_64      | 29,158.73      | ops/ms
+3   | Parallel GC      | x86_64      | 24,303.27      | ops/ms
+4   | Shenandoah GC    | x86_64      | 23,475.71      | ops/ms
+5   | Serial GC        | x86_64      | 17,129.77      | ops/ms
+
+**Note:** The first in the row is the fastest, and the last in the row is the slowest GC
+
+### OpenJDK HotSpot VM on arm64
+
+No. | JVM distribution | Arcitecture | Geometric Mean | Unit
+----|------------------|-------------|----------------|--------
+1   | ZGC              | arm64       | 1,22,010.74    | ops/ms
+2   | Shenandoah GC    | arm64       | 79,957.41      | ops/ms
+3   | G1 GC            | arm64       | 79,251.23      | ops/ms
+4   | Parallel GC      | arm64       | 62,358.15      | ops/ms
+5   | Serial GC        | arm64       | 43,756.39      | ops/ms
+
+**Note:** The first in the row is the fastest, and the last in the row is the slowest GC
+
+To summarize, on both architectures:
+
+1. ZGC offers the highest throughput
+2. Shenandoah GC has a fluctuant position: it is better on arm64 and slower on x86_64
+
 ## Macro
 
 This set of benchmarks (that we call it macro) is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
-
-This section describes some of the results obtained from running the benchmarks with three different JDKs on x86_64 architecture:
-- OpenJDK 17.0.6 
-- GraalVM Community edition (CE) 22.3.0
-- GraalVM Enterprise edition (EE) 22.3.0
 
 Note: we did similar tests on arm64 architecture, but for this we only show the geometrical mean.
 
@@ -287,18 +315,29 @@ Source code: <<link to GitHub benchmark>>
 
 ### Geometric Mean
 
-The Geometric Mean (GM) for the macro benchmarks category is:
+The Geometric Mean (GM) for the macro benchmarks category on each architecture is described below.
+
+### x86_64
 
 No. | JVM distribution   | Arcitecture | Geometric Mean | Unit
 ----|--------------------|-------------|----------------|--------
-1   | OpenJDK HotSpot VM | x86_64      | 4,638,065.96   | ns/op
-2   | GraalVM CE         | x86_64      | 5,028,870.69   | ns/op
-3   | GraalVM EE         | x86_64      | 4,224,822.25   | ns/op
-4   | OpenJDK HotSpot VM | arm64       | 2,614,295.98   | ns/op
-5   | GraalVM CE         | arm64       | 2,899,319.25   | ns/op
-6   | GraalVM EE         | arm64       | 2,425,617.28   | ns/op
+1   | GraalVM EE         | x86_64      | 4,224,822.25   | ns/op
+2   | OpenJDK HotSpot VM | x86_64      | 4,638,065.96   | ns/op
+3   | GraalVM CE         | x86_64      | 5,028,870.69   | ns/op
 
-To summarize, on both architectures:
+**Note:** The first in the row is the fastest, and the last in the row is the slowest GC
+
+### arm64
+
+No. | JVM distribution   | Arcitecture | Geometric Mean | Unit
+----|--------------------|-------------|----------------|--------
+1   | GraalVM EE         | arm64       | 2,425,617.28   | ns/op
+2   | OpenJDK HotSpot VM | arm64       | 2,614,295.98   | ns/op
+3   | GraalVM CE         | arm64       | 2,899,319.25   | ns/op
+
+**Note:** The first in the row is the fastest, and the last in the row is the slowest GC
+
+To summarize, on both architectures the geometric mean is consistent:
 
 1. GraalVM EE JIT is the fastest
 2. OpenJDK HotSpot VM C2 was in the middle
