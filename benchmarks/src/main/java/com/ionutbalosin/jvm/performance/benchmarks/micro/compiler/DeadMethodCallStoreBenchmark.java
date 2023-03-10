@@ -28,6 +28,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -38,7 +39,9 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Dead Store Elimination (DSE) intends to remove all the assignments of a variable that are not read by any subsequent instructions.
+ * Dead-Code Elimination (DCE) is a compiler optimization to remove code which does not affect the program results.
+ *
+ * The benchmark assesses how the compiler could remove code (i.e., a dead method call store) that does not affect the program results.
  *
  * References:
  * - https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80
@@ -47,11 +50,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class DeadMethodCallStoreBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*" -prof perfasm
 
   private final Random random = new Random(16384);
 
@@ -63,6 +66,7 @@ public class DeadMethodCallStoreBenchmark {
   }
 
   @Benchmark
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public double method_call_dse() {
     double pi;
     pi = computePi();
@@ -74,6 +78,7 @@ public class DeadMethodCallStoreBenchmark {
   }
 
   @Benchmark
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public double method_call_baseline() {
     double pi = computePi();
     return circleRadius * circleRadius * pi;
