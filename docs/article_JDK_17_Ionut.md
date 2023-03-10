@@ -218,7 +218,14 @@ Source code: <<link to GitHub benchmark>>
 
 ## Macro
 
-This is a smaller set of benchmarks (called macro) dedicated to larger programs using high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
+This set of benchmarks (that we call it macro) is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
+
+This section describes some of the results obtained from running the benchmarks with three different JDKs on x86_64 architecture:
+- OpenJDK 17.0.6 
+- GraalVM Community edition (CE) 22.3.0
+- GraalVM Enterprise edition (EE) 22.3.0
+
+Note: we did similar tests on arm64 architecture, but for this we only show the geometrical mean.
 
 ### HuffmanCodingBenchmark
 
@@ -277,3 +284,22 @@ Computes the word frequencies/occurrences from a text file. The benchmark uses a
 Source code: <<link to GitHub benchmark>>
 
 <<IMG: WordFrequencyBenchmark.svg>>
+
+### Geometric Mean
+
+The Geometric Mean (GM) for the macro benchmarks category is:
+
+No. | JVM distribution   | Arcitecture | Geometric Mean | Unit
+----|--------------------|-------------|----------------|--------
+1   | OpenJDK HotSpot VM | x86_64      | 4,638,065.96   | ns/op
+2   | GraalVM CE         | x86_64      | 5,028,870.69   | ns/op
+3   | GraalVM EE         | x86_64      | 4,224,822.25   | ns/op
+4   | OpenJDK HotSpot VM | arm64       | 2,614,295.98   | ns/op
+5   | GraalVM CE         | arm64       | 2,899,319.25   | ns/op
+6   | GraalVM EE         | arm64       | 2,425,617.28   | ns/op
+
+To summarize, on both architectures:
+
+1. GraalVM EE JIT is the fastest
+2. OpenJDK HotSpot VM C2 was in the middle
+3. and GraalVM CE JIT is the slowest
