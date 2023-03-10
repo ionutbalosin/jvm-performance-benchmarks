@@ -1,7 +1,7 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.array_multiply","avgt",1,25,2621.746695,0.033308,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.array_multiply","avgt",1,25,84907.925026,119.450946,"us/op",5000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.big_integer_multiply","avgt",1,25,153.454246,0.375471,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.big_integer_multiply","avgt",1,25,4318.029288,6.242864,"us/op",5000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.fork_join","avgt",1,25,154.343296,0.327952,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.fork_join","avgt",1,25,435.562721,1.286182,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.array_multiply","avgt",1,25,3819.897287,1.427648,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.array_multiply","avgt",1,25,123402.055256,26.904609,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.big_integer_multiply","avgt",1,25,205.480076,0.711392,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.big_integer_multiply","avgt",1,25,5526.209856,14.905781,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.fork_join","avgt",1,25,210.506118,3.958375,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.fork_join","avgt",1,25,753.742401,2.166217,"us/op",5000
