@@ -23,7 +23,7 @@ For example, the below snapshot appears 4 times in the caller method, which corr
 ```
 Then, the main loop (that one that matters for the result) it is unrolled by a factor of 16.
 
-- GraalVM CE JIT has a similar behaviour as OpenJdk HotSpot C2 JIT, nevertheless, there is an important difference: it does not do any loop unrolling, this is why it is the slowest
+- GraalVM CE JIT has a similar behaviour as OpenJdk HotSpot C2 JIT, nevertheless, there is one more important difference: it does not do any loop unrolling, this is why it is the slowest
 ```
 0x00007fffdef45310:   cmp    $0x3e8,%r10d
 0x00007fffdef45317:   jge    0x00007fffdef4534c ;*if_icmpge
@@ -31,13 +31,6 @@ Then, the main loop (that one that matters for the result) it is unrolled by a f
 0x00007fffdef4532d:   lea    0x2(%r10),%r10d    ;*iinc
 ...
 0x00007fffdef4534a:   jmp    0x00007fffdef45310
-```
-
-For example, the below snapshot appears 4 times in the caller method, which correspond to the number of dead loops after inlining:
-```
-0x00007fffdef46320:   lea    0x2(%r10),%r10d    ;*iinc
-0x00007fffdef46324:   cmp    $0x3e8,%r10d
-0x00007fffdef4632b:   jl     0x00007fffdef46320 ;*if_icmpge
 ```
 
 - GraalVM EE JIT complently removes the dead code and the main loop is unrolled by a factor of 8.
