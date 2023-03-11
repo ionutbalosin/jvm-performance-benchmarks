@@ -219,3 +219,85 @@ generated is similar to the following:
 0x8ebe0:   mov    0x3c(%rsp),%r10d  --> load value from stack
 0x8ebe5:   mov    %r10d,0xa4(%rbx)  --> store to field storeXX
 ```
+
+### MegamorphicMethodCallBenchmark
+
+This benchmark tests the performance of virtual calls with a different number of targets. The JVM is expected to 
+optimize virtual calls that have up to a certain number of targets. It also tests the performance of manually splitting
+the call site into multiple monomorphic call sites.
+
+In general, the runtime collects receiver-type statistics per call site during the execution of profiled code 
+(in the interpreter or the C1 JIT). These statistics are further used in the optimizing compiler (e.g., C2 JIT).
+If, for example, one call site `class.method()` has received only `Type1` even though there exists a `Type2` in the 
+type hierarchy, the compiler can add a guard that checks the receiver type is `Type1` and then call the `Type1` method
+directly. This is called a `monomorphic call site`:
+
+```
+// High-level pseudo-code of the monomorphic call site optimization
+if (receiver instanceof Type1) {
+    // fast path
+    Type1.method();
+} else {
+    // slow path. Will deoptimize and rerun in the interpreter
+    deoptimize();
+}
+```
+
+A `bimorphic call site` is a call site that can check for two receivers types:
+```
+// High-level pseudo-code of the bimorphic call site optimization
+if (receiver instanceof Type1) {
+    // fast path
+    Type1.method();
+} else if (receiver instanceof Type2) {
+    // fast path
+    Type2.method();
+} else {
+    // slow path. Will deoptimize and rerun in the interpreter. Next time it JITs, it will use a virtual call.
+    deoptimize();
+}
+```
+Once a call site becomes static, the compiler will be able to inline the target method and perform further 
+optimizations. OpenJDK (using the C2 compiler) can devirtualize up to two different targets of a virtual call, for more targets a vtable/itable call is used.
+
+Source code: <<link to GitHub benchmark>>
+
+The `virtual_call` benchmark measures the performance of virtual calls with a different number of targets. The
+`devirtualize_to_monomorphic` benchmark tries to manually devirtualize call sites to be monomorphic.
+
+<<IMG: MegamorphicMethodCallBenchmark.svg>>
+
+#### Conclusions:
+
+Looking at the figure above and the assembly generated for the `virtual_call` benchmark we conclude the following:
+- OpenJDK is able to devirtualize (and inline) call sites that use up to two different targets. For more targets,
+it will always use a virtual call.
+- GraalVM CE is able to devirtualize (and inline) call sites regardless of the number of targets (up to eight 
+in the benchmark). <br> **Note**: When generating the assembly, we forced the compiler not to inline the benchmark 
+method into the JMH stub. In this case, the `virtual_call[MEGAMORPHIC_8]` performed similar to the other benchmarks. 
+Therefore, the number of targets is limited by other factors, such as inlining.
+- GraalVM EE is able to devirtualize (and inline) up to three different targets per call site. If the number of targets
+is higher, then it will use a virtual call for the remaining targets: <br>
+```
+// High level pseudo-code of the GraalVM EE devirtualization of call sites with more than three targets.
+if (receiver instanceof Type1) {
+    // fast path
+    Type1.method();
+} else if (receiver instanceof Type2) {
+    // fast path
+    Type2.method();
+} else if (receiver instanceof Type3) {
+    // fast path
+    Type3.method();
+} else {
+    // slow path. Will not deoptimize, but rather use a virtual call for the remaining targets.
+    receiver.method();
+}
+```
+
+Next, we look at the `devirtualize_to_monomorphic` benchmark. Overall, all JVMs perform the same and are able to 
+devirtualize and inline at the call sites. The only exception in regard to the performance of the benchmark is
+with OpenJDK in `devirtualize_to_monomorphic[MEGAMORPHIC_8]`. In this case, the C2 compiler switches from 
+using a `lookupswitch` to a `tableswitch` due to the large number of cases in the switch statement, which
+also results in a performance degradation. However, it remains faster than the `virtual_call[MEGAMORPHIC_8]` benchmark.
+
