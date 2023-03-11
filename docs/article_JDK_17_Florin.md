@@ -20,7 +20,7 @@ This transformation analyzes loops and tries to transform the induction variable
 depend on it into a simpler form. In some cases, the loop can be removed and replaced with a 
 constant value.
 
-```aidl
+```
 for (i = start; i*i < MAX; ++i) {
 }
 
@@ -41,7 +41,7 @@ Neither are able to remove the loop completely and return a constant.
 Regarding the `baseline`, OpenJDK and GraalVM EE have identical performance. Upon checking the assembly generated, 
 both JVMs are able to remove the loop completely and directly return the result.
 
-```aidl
+```
   0x85320:   sub	$0x18,%rsp
   0x85327:   mov	%rbp,0x10(%rsp)
   0x8532c:   mov	$0x400000,%eax    <--- return constant; no loop is generated
@@ -56,7 +56,7 @@ both JVMs are able to remove the loop completely and directly return the result.
 GraalVM CE also returns a constant but fails to remove the loop. The resulting loop is 
 empty bodied. This might be a bug in the version of GraalVM CE used in this benchmark.
 
-```aidl
+```
   0x6f3a0:   nopl   0x0(%rax,%rax,1)
   0x6f3a5:   mov	$0x1,%rax
   0x6f3ac:   jmp	0x6f3c3
@@ -78,7 +78,7 @@ This benchmark is used to test how the JIT compiler handles methods that take a 
 Normally, the JIT compiler should be able to inline the method and return a constant value. However,
 if a method takes a large number of arguments, the JIT may bail out when trying to compile the method.
 
-```aidl
+```
 benchMethod() {
   return method(1.0, 2.0, ... 64.0);
 }
@@ -100,7 +100,7 @@ Source code:<<link to GitHub benchmark>>
 We can see that both GraalVM CE and EE offer the same performance. They are able to inline the method and return a constant value. 
 This is confirmed by the generated assembly.
 
-```aidl
+```
   0x71ba0:   nopl   0x0(%rax,%rax,1)
   0x71ba5:   mov	$0xcc,%rax       <--- Return constant; no method call is generated
   0x71bac:   mov	0x348(%r15),%rcx	 
@@ -111,7 +111,7 @@ This is confirmed by the generated assembly.
 OpenJDK fails to compile with C2 and uses a C1 compiled method instead. C1 does not inline the method
 and passes the call arguments on the stack.
 
-```aidl
+```
  ...
   0x855b0:   mov	%r10,0x1b0(%rsp) 
   0x855b8:   movabs $0x4019333333333333,%r10 
@@ -127,7 +127,7 @@ This benchmark tests how the JIT compiler handles dead local allocations. A dead
 an allocation that is not used by subsequent instructions. The JIT compiler should be able to remove
 dead allocations even across function boundaries, provided the functions are inlined.
 
-```aidl
+```
 field = new Object();
 
 benchMethod() {
@@ -147,11 +147,38 @@ Source code:<<link to GitHub benchmark>>
 
 #### Conclusions:
 We can see that in general GraalVM CE, EE and OpenJDK have similar performance. However, there are some outliers:
- - For `wrapper_obj_baseline` GraalVM EE performs 1.8x faster than OpenJDK and GraalVM CE.
- - For `wrapper_obj_dse_inter_procedural` GraalVM EE performs around 3.4x faster than OpenJDK and GraalVM CE.
+ - For `wrapper_obj_baseline` GraalVM EE performs 1.8x faster than OpenJDK and GraalVM CE. The reason behind is
+that GraalVM EE groups the assembly instructions needed to perform object allocation together. This allows the compiler
+to generate more compact code and make use of better instruction prefetching and pipelining.
+    ```
+    ...
+    0x1c428:   lea    0x60(%rax),%r8     <--- Load (from the TLAB) the address where the nth object will be allocated.
+    0x1c42c:   lea    0x70(%rax),%r9     ^ Same as above but for nth + 1 object.
+    0x1c430:   lea    0x80(%rax),%rcx    ^ Same as above but for nth + 2 object    
+    ...
+    0x1c46a:   shr    $0x3,%r8           <--- Compressed oops: shift the address of the nth object by 3 bits
+    0x1c46e:   mov    %r8d,0x18(%rax)    <--- Store the address of the nth object as a field in the Wrapper.
+    0x1c472:   shr    $0x3,%r9           ^ Same as above but for nth + 1 object
+    0x1c476:   mov    %r9d,0x1c(%rax)    ^ Same as above but for nth + 1 object
+    0x1c47a:   shr    $0x3,%rcx          ^ Same as above but for nth + 2 object
+    0x1c47e:   mov    %ecx,0x20(%rax)    ^ Same as above but for nth + 2 object
+    ...
+    0x1c4bc:   movq   $0x1,0x60(%rax)    <--- Finish object initialization for the nth object. Set the mark word bit.
+    0x1c4c4:   movl   $0xd68,0x68(%rax)  <--- Set the klass word for the nth object to java/lang/Object.
+    0x1c4cb:   movq   $0x1,0x70(%rax)    ^ Same as above but for nth + 1 object
+    0x1c4d3:   movl   $0xd68,0x78(%rax)  ^ Same as above but for nth + 1 object
+    0x1c4da:   movq   $0x1,0x80(%rax)    ^ Same as above but for nth + 2 object
+    0x1c4e5:   movl   $0xd68,0x88(%rax)  ^ Same as above but for nth + 2 object
+    ```
+    
+    On the other hand, both OpenJDK and GraalVM CE do not group together the object allocation instructions 
+    and the subsequently generate a larger amount of code. This results in a performance penalty.
 
-By checking the assembly generated for the benchmark methods between the three JVMs we can see that the reason
-GraalVM EE performs better is that it is able to inline the `Wrapper` constructor and remove the dead allocations.
+
+- For `wrapper_obj_dse_inter_procedural` GraalVM EE performs around 3.4x faster than OpenJDK and GraalVM CE. The reason
+behind is that GraalVM EE is able to inline the `Wrapper` constructor, remove dead allocations and perform the same 
+set of optimizations as in the `wrapper_obj_baseline` case. OpenJDK and GraalVM CE do not inline the `Wrapper` 
+constructor and therefore are not able to remove the dead allocations.
 
 ### StackSpillingBenchmark
 
@@ -165,7 +192,7 @@ the reads to be grouped before all the writes, the `load_store_spill*` benchmark
 after the loads and before the stores.
 
 Additionally, the register allocator in C2 is able to [use FPU registers](https://shipilev.net/jvm/anatomy-quarks/20-fpu-spills/) 
-to store intermediate values before spilling on the stack. GraalVM CE and EE do not have this optimization. 
+to store intermediate values before starting to spill on the stack. GraalVM CE and EE do not have this optimization. 
 
 Source code: <<link to GitHub benchmark>>
 
@@ -175,7 +202,7 @@ Source code: <<link to GitHub benchmark>>
  
 The assembly generated for the `load_store_no_spill` benchmark has the following pattern where the 
 loads and stores are grouped together and the stack is not used:
-```aidl
+```
 ...
 0x8e4f1:   mov    0x64(%rbx),%r10d  --> load from field loadXX
 0x8e4f5:   mov    %r10d,0xc8(%rbx)  --> store to field storeXX
@@ -184,7 +211,7 @@ loads and stores are grouped together and the stack is not used:
 
 For the `load_store_spill*` benchmarks, the stack is used to spill intermediate values. The assembly
 generated is similar to the following:
-```aidl
+```
 0x8eb69:   mov    0x40(%rbx),%r10d  --> load field loadXX
 0x8eb6d:   mov    %r10d,0x3c(%rsp)  --> store field on the stack
 ...
