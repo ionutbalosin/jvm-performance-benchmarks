@@ -39,7 +39,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Tests the optimization of an if conditional branch within a loop based on a predictable or unpredictable branch pattern.
+ * Tests the conditional branch optimizations within a loop using:
+ * - a predictable branch pattern
+ * - an unpredictable branch pattern
+ * - no branch at all
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
