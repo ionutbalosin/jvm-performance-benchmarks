@@ -75,7 +75,7 @@ Source code: <<link to GitHub benchmark>>
 OpenJdk HotSpot C2 JIT
 
 - for the simplest case (e.g., `no_if_branch`) the C2 JIT unrolls the loop by a factor of 8 and sums the elements array
-```aidl
+```
   0x7fa610ef2140:   add    0x10(%r9,%rcx,4),%eax
   0x7fa610ef2145:   add    0x14(%r9,%rcx,4),%eax
   0x7fa610ef214a:   add    0x18(%r9,%rcx,4),%eax
@@ -93,7 +93,7 @@ OpenJdk HotSpot C2 JIT
 
 This is an example using _cmovle_ instruction from the `unpredictable_if_branch` that adds one element array to the sum
 
-```aidl
+```
   0x7f5ebcef3471:   lea    (%r12,%rbp,8),%r14        ;*getfield array
   ...
   0x7f5ebcef34e0:   mov    0x10(%r14,%rbp,4),%r10d
@@ -109,7 +109,7 @@ GraalVM EE JIT
 
 This is an example using vectorized instructions from the `unpredictable_if_branch`:
 
-```aidl
+```
   0x7f860699030b:   mov    $0x0,%r8
   0x7f8606990312:   data16 nopw 0x0(%rax,%rax,1)
   0x7f860699031c:   data16 data16 xchg %ax,%ax
