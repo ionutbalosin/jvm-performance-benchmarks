@@ -38,12 +38,11 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Test how compiler can elide/remove several adjacent locking blocks on non-shared objects, thus reducing the locking overhead.
+ * Test how the compiler can elide/remove several adjacent locking blocks on non-shared objects, thus reducing the locking overhead.
  * Synchronization on non-shared objects is pointless, and runtime does not have to do anything there.
  *
- * Escape analysis is used to determine if references to an object are limited to local scope only and none of those references
- * "escape" to a broader scope.
- * If escape analysis figures out the objects are non-escaping, compiler is free to eliminate the synchronizations.
+ * Escape analysis is used to determine if references to an object are limited to a local scope only and none of those references
+ * "escape" to a broader scope. If escape analysis figures out the objects are non-escaping, the compiler is free to eliminate the synchronizations.
  *
  */
 @BenchmarkMode(Mode.AverageTime)
