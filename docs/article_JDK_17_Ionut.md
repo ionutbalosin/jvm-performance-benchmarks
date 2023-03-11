@@ -118,8 +118,8 @@ This is an example using vectorized instructions from the `unpredictable_if_bran
   0x7f860699032a:   vpcmpgtd %ymm2,%ymm1,%ymm2
   0x7f860699032e:   vpblendvb %ymm2,%ymm3,%ymm0,%ymm0
   0x7f8606990334:   lea    0x8(%r8),%r8
-  0x7f8606990338:   cmp    %r11,%r8
-  0x7f860699033b:   jle    0x7f8606990320              ;compare against array length
+  0x7f8606990338:   cmp    %r11,%r8                    ;compare against array length
+  0x7f860699033b:   jle    0x7f8606990320
 ```
 
 GraalVM CE JIT
@@ -190,7 +190,7 @@ The `nested_synchronized` from OpenJDK HotSpot is (again) much slower than Graal
 By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main diffrerence is that now, since the biased locking is disabled, a compare-and-swap atomic instruction guards that section
 
 ```
-0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   ;locking
+0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   ;coarsed locking
 0x7f3926b18d95:   jne    0x7f3926b18e6b      ;*monitorexit 
 0x7f3926b18d9b:   add    %r8d,%r9d           ;*iadd 
 0x7f3926b18d9e:   add    %r8d,%r9d           ;*iadd 
