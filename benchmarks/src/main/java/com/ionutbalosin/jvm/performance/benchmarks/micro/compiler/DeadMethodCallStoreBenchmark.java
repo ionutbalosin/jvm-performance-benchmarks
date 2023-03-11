@@ -50,11 +50,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class DeadMethodCallStoreBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*" -prof perfasm
+  // $ java -jar */*/benchmarks.jar ".*DeadMethodCallStoreBenchmark.*"
 
   private final Random random = new Random(16384);
 
@@ -66,7 +66,6 @@ public class DeadMethodCallStoreBenchmark {
   }
 
   @Benchmark
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public double method_call_dse() {
     double pi;
     pi = computePi();

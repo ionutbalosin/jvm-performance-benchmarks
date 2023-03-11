@@ -39,11 +39,11 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  *
- * This benchmark iterates through the enum values list and returns the enum constant corresponding to a (e.g., a String) value.
- * It emphasizes the cost of calling values() method on an Enum versus caching the values and using the cached version.
+ * This benchmark iterates through the enum values list and returns the enum constant corresponding to an (e.g., a String) value.
+ * It emphasizes the cost of calling the values() method on an Enum versus caching the values and using the cached version.
  * Note: the enum's method values() returns a new copy of an array representing its values every time it is called.
  *
- * This pattern is met in real business applications where, for example, the microservices RESTful APIs defined in OpenAPI/Swagger uses enums.
+ * This pattern is often seen in real business applications where, for example, the microservices RESTful APIs defined in OpenAPI/Swagger use enums.
  * The input request parameters are deserialized and wrapped to enum values.
  *
  * References:
