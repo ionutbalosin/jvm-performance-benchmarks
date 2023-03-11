@@ -38,16 +38,17 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Test how compiler can effectively coarsen/merge several adjacent synchronized blocks into one synchronized block,
+ * Test how the compiler can effectively coarsen/merge several adjacent synchronized blocks into one synchronized block,
  * thus reducing the locking overhead. This optimization can be applied if the same lock object is used by all methods.
+ * Compilers can help to coarsen/merge the locks, but that is not guaranteed!
  *
- * Note: Compilers can help to coarsen/merge the locks, but that is not guaranteed!
+ * OpenJDK HotSpot VM specifics:
+ * - prior JDK 15: with biased locking enabled, compare-and-swap atomic operation are basically no-ops when acquiring a monitor, in case of uncontended locking.
+ * It assumes that a monitor remains owned by a given thread until a different thread tries to acquire it
+ * - starting JDK 15: without biased locking (or some improved version of non-biased locking), certain synchronized scenarios
+ * might become much slower (i.e., since synchronized calls comes now with atomic compare-and-swap on lock)
  *
- * HotSpot specifics:
- * - prior JDK 15: with biased locking enabled, acquire and release operations are basically no-ops and C2 compiler could,
- * for example, perform better optimizations.
- * - starting JDK 15: without biased locking (or some improved version of non-biased locking) certain synchronized scenarios
- * might become much slower (i.e., since synchronized calls comes now with atomic CAS on lock).
+ * ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), hence avoiding stop-the-world pauses.
  *
  * References:
  * - https://openjdk.org/jeps/374
