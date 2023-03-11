@@ -163,7 +163,7 @@ What is of a particular interest is the `nested_synchronized` benchmark that is 
   1.13%         interpreter  method entry point (kind = zerolocals)
 ```
 
-By contrast, GraalVM EE JIT is able to coarse all the nested locks in one block and perform all the operations inside. Nevertheless, since biased locking is enabled and there is no contention this is basically a no-op when acquiring a monitor, hence no `lock cmpxchg` instruction is emitted.
+By contrast, GraalVM EE JIT can coarse all the nested locks in one block and perform all the operations inside. Nevertheless, since biased locking is enabled and there is no contention this is a no-op when acquiring a monitor, hence no `lock cmpxchg` instruction is emitted.
 
 ```
   0x7fbfd6b19a90:   jne    0x7fbfd6b19acb  ;*monitorenter
@@ -183,11 +183,11 @@ By contrast, GraalVM EE JIT is able to coarse all the nested locks in one block 
 
 #### Conclusions:
 
-- Similar trends as before, GraalVM EE JIT does a better job then GraalVM CE JIT and OpenJDK HotSpot C2 JIT
+- Similar trends as before, GraalVM EE JIT does a better job than GraalVM CE JIT and OpenJDK HotSpot C2 JIT
 
-The `nested_synchronized` from OpenJDK HotSpot is (again) much slower than GraalVM EE/CE. The reason is the same, it does not get compiled by C1 nor C2, but Template Interpreter is used to generate the assembly code snippets.
+The `nested_synchronized` from OpenJDK HotSpot is (again) much slower than GraalVM EE/CE. The reason is the same, it does not get compiled by C1 nor C2, but Template Interpreter is used to generating the assembly code snippets for each bytecode.
 
-By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main diffrerence is that now, since the biased locking is disabled, a compare-and-swap atomic instruction guards that section
+By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main difference is that now since the biased locking is disabled, a compare-and-swap atomic instruction guard that section.
 
 ```
 0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   ;coarsed locking
@@ -203,7 +203,65 @@ By contrast, GraalVM EE JIT merges all the nested locks in one synchronized bloc
 0x7f3926b18db3:   mov    %r9d,%eax           ;*ireturn
 ```
 
-Overall, runnning non-contented code with biased locking disabled adds an ovearhead (e.g., compare-and-swap atomic operation) in comparisson to the biased locking scheme, nevertheless, this is comes by design.
+Overall, running non-contented code with biased locking disabled adds the overhead of the compare-and-swap atomic operation, in comparison to the biased locking scheme, nevertheless, this comes by design.
+
+### LockElisionBenchmark
+
+Test how the compiler can elide/remove several adjacent locking blocks on non-shared objects, thus reducing the locking overhead.
+Synchronization on non-shared objects is pointless, and runtime does not have to do anything there.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: LockElisionBenchmark.svg>>
+
+#### Conclusions:
+
+Except for `nested_synchronized` and `recursive_method_calls` benchmarks all three compilers behave similarly.
+
+The `nested_synchronized` from OpenJDK HotSpot does not get compiled by C1 nor C2, but Template Interpreter is used to generating the assembly code snippets for each bytecode. This is similar to the LockCoarseningBenchmark.
+
+The `recursive_method_calls` is explained in details for every compiler, as per below:
+- GraalVM EE JIT inlines all the recursive calls so there is no virtual method call involved anymore
+- GraalVM CE JIT can remove the recursive calls, nevertheless, there is still a virtual method call involved.
+
+The `recursive_method_calls` benchmark has only one virtual call to the recursive method `recursiveSum`
+```
+  0x7fed52ffc750:   mov    0x10(%rsi),%edx          ;*getfield defaultValue 
+  0x7fed52ffc753:   mov    0x14(%rsi),%r10d         ;*getfield incrementValue 
+  0x7fed52ffc757:   shl    %edx                     ;*ishl 
+  0x7fed52ffc759:   mov    $0x2,%ecx 
+  0x7fed52ffc75e:   mov    %r10d,0x4(%rsp)
+  0x7fed52ffc763:   call   0x7fed52ffc240           ;*invokevirtual recursiveSum
+  ...
+  0x7fed52ffc793:   ret
+```
+
+and the `recursiveSum` (i.e., the recursive callee method) has no any virtual method call involved, everything get's inlined:
+
+```
+  0x7fed52ffc2b5:   add    0x4(%rsp),%eax               ;*iadd 
+  0x7fed52ffc2b9:   add    0x4(%rsp),%eax               ;*iadd 
+  0x7fed52ffc2bd:   add    0x4(%rsp),%eax               ;*iadd 
+  0x7fed52ffc2c1:   mov    0x4(%rsp),%r10d
+  0x7fed52ffc2c6:   add    %r10d,%eax                   ;*iadd 
+  ...
+  0x7fed52ffc2f0:   ret                                 ;*ireturn 
+```
+
+- OpenJDK HotSpot C2 JIT is not able to get rid of the recursive method calls, this is why it is the slowest
+
+For example, the `recursiveSum` (i.e., the recursive method called from `recursive_method_calls` benchmark) has a call to itself:
+
+```
+  0x7f18dcf646d0:   mov    0x14(%rsi),%ebp      ;*getfield incrementValue 
+  0x7f18dcf646d3:   cmp    $0x1,%ecx
+  0x7f18dcf646d6:   je     0x7f18dcf646fb       ;*ifne 
+  0x7f18dcf646d8:   add    $0xfffffffe,%ecx
+  0x7f18dcf646db:   call   0x7f18dcf646c0       ;*invokevirtual recursiveSum 
+  0x7f18dcf646e0:   add    %ebp,%eax            ;*invokevirtual recursiveSum 
+  ...
+  0x7f18dcf646f6:   ret
+```
 
 ## Garbage Collectors
 
