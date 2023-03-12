@@ -144,7 +144,15 @@ Source code: <<link to GitHub benchmark>>
 
 - Overall GraalVM EE JIT does a better job then GraalVM CE JIT and OpenJDK HotSpot C2 JIT
 
-What is of a particular interest is the `nested_synchronized` benchmark that is almost 3 orders of magnitude slower than GraalVM CE/EE. The reason for that is the fact it succeeds to be compiled by neither C1 nor C2 but it relies on the Template interpreter to generate optimized code for each bytecode. This is probably an interesting scenario.
+What is of a particular interest is the `nested_synchronized` benchmark that is almost 3 orders of magnitude slower than GraalVM CE/EE. 
+The reason for that is the fact the compiler fails to reduce the deoptimization rate (i.e., hits a recompilation limit) and the method is abandoned to the Template Interpreter, as described by the compilation logs:
+
+```
+<make_not_compilable osr='0' level='3' reason='MethodCompilable_not_at_tier' method='LockCoarseningBenchmark nested_synchronized ()I'/>
+<make_not_compilable osr='0' level='4' reason='MethodCompilable_not_at_tier' method='LockCoarseningBenchmark nested_synchronized ()I'/>
+```
+
+The hottest regions in the histogram emphasizes this:
 
 ```
   ....[Hottest Regions]...............................................
@@ -218,7 +226,7 @@ Source code: <<link to GitHub benchmark>>
 
 Except for `nested_synchronized` and `recursive_method_calls` benchmarks all three compilers behave similarly.
 
-The `nested_synchronized` from OpenJDK HotSpot does not get compiled by C1 nor C2, but Template Interpreter is used to generating the assembly code snippets for each bytecode. This is similar to the LockCoarseningBenchmark.
+The `nested_synchronized` from OpenJDK HotSpot does not get compiled by C1 nor C2, but Template Interpreter is used to generating the assembly code snippets for each bytecode. This is similar to the LockCoarseningBenchmark (e.g., _make_not_compilable_).
 
 The `recursive_method_calls` is explained in details for every compiler, as per below:
 - GraalVM EE JIT inlines all the recursive calls so there is no virtual method call involved anymore
