@@ -263,6 +263,64 @@ For example, the `recursiveSum` (i.e., the recursive method called from `recursi
   0x7f18dcf646f6:   ret
 ```
 
+### LoopFusionBenchmark
+
+The benchmark assesses if the compiler triggers loop fusion, an optimization aimed to merge the adjacent loops into one loop to reduce the loop overhead and improve run-time performance.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: LoopFusionBenchmark.svg>>
+
+#### Conclusions:
+
+None of the compilers has implemented this optimization.
+
+Even though, an interesting case is why OpenJDK HotSpot VM runs faster than GraalVM EE/CE the `initial_loops` benchmark.
+```
+  public void initial_loops() {
+    for (int i = 1; i < size; i++) {
+      A[i] = A[i - 1] + B[i];
+    }
+
+    for (int i = 1; i < size; i++) {
+      B[i] = B[i - 1] + A[i];
+    }
+  }
+```
+
+The OpenJDK HotSpot C2 JIT unrolls each of these loops by a factor of 8. For example, the code from below pertains to the first loop:
+
+For example, the code snapshot from below pertains to the first loop:
+```
+  0x7f880cf64940:   mov    0x10(%rsi,%r10,4),%edx       ;*iaload B[i]
+  0x7f880cf64945:   add    0xc(%rax,%r10,4),%edx        ;*iadd B[i] + A[i-1]
+  0x7f880cf6494a:   mov    %edx,0x10(%rax,%r10,4)       ;*iastore A[i] = B[i] + A[i-1]
+  0x7f880cf6494f:   add    0xc(%rsi,%r10,4),%edx        ;*iadd A[i] + B[i+1]
+  0x7f880cf64954:   mov    %edx,0x10(%rsi,%r10,4)       ;*iastore A[i+1] = A[i] + B[i+1]
+  ...
+  0x7f880cf64a08:   add    $0x8,%r10d                   ;*iinc (loop is unroled by a factor of 8)
+  0x7f880cf64a0c:   cmp    %ecx,%r10d
+  0x7f880cf64a0f:   jl     0x7f880cf64940               ;*goto
+```
+
+GraalVM EE JIT emits the same instructions, nevertheless, the loop unrolling factor is 4 (as opposed to 8).
+
+GraalVM CE JIT emits less optimal code instruction (i.e., more stores), even though the unrolling factor is 8 (similar to OpenJDK HotSpot C2 JIT).
+
+```
+  0x7f1d9affc620:   mov    0x10(%r9,%r11,4),%r8d      ;*iaload B[i]
+  0x7f1d9affc628:   add    0xc(%rcx,%rdi,4),%r8d      ;*iadd B[i] + A[i-1]
+  0x7f1d9affc62d:   mov    %r8d,0x10(%rcx,%r11,4)     ;*iastore A[i] = B[i] + A[i-1]
+  0x7f1d9affc632:   mov    0x14(%r9,%rdi,4),%r8d      ;*iaload B[i+1]
+  0x7f1d9affc637:   add    0x10(%rcx,%r11,4),%r8d     ;*iadd A[i] + B[i+1]
+  0x7f1d9affc63c:   mov    %r8d,0x14(%rcx,%rdi,4)     ;*iastore A[i+1] = A[i] + B[i+1]
+  ...
+  0x7f1d9affc69b:   lea    0x8(%r11),%r11d            ;*iinc (loop is unroled by a factor of 8)
+  0x7f1d9affc6a0:   cmp    %r11d,%ebx
+  0x7f1d9affc6a3:   jg     0x00007f1d9affc620
+```
+
+
 ## Garbage Collectors
 
 ### Benchmarks Description
