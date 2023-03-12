@@ -379,7 +379,7 @@ GraalVM CE JIT emits less optimal code instruction (i.e., more stores), even tho
   ...
   0x7f1d9affc69b:   lea    0x8(%r11),%r11d            ;*iinc (loop is unroled by a factor of 8)
   0x7f1d9affc6a0:   cmp    %r11d,%ebx
-  0x7f1d9affc6a3:   jg     0x00007f1d9affc620
+  0x7f1d9affc6a3:   jg     0x7f1d9affc620
 ```
 
 ### LoopInvariantCodeMotionBenchmark
@@ -431,6 +431,59 @@ GraalVM EE hottest methods report:
 ```
 
 A small remark, in the case of GraalVM CE/EE it would be better to have, instead of the `<unknown>` block, the exact dynamic shared object.  
+
+### LoopReductionBenchmark
+
+Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by the number of additions within that loop.
+This optimization is based on the induction variable to strength the additions.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: LoopReductionBenchmark.svg>>
+
+#### Conclusions:
+
+GraalVM EE JIT implements the reduction using a `cmovl` instruction, as below: 
+
+```
+  0x7f40c2b1a3a5:   test   %edx,%edx
+  0x7f40c2b1a3a7:   mov    $0x0,%eax
+  0x7f40c2b1a3ac:   cmovl  %eax,%edx
+  0x7f40c2b1a3af:   add    %edx,%ecx
+  0x7f40c2b1a3b1:   mov    %ecx,%eax
+```
+
+OpenJDK HotSpot VM C2 JIT uses the same optimization but conditional jump instructions  are emitted (e.g., `cmp` and `jmp`).
+
+The generated code by GraalVM EE JIT is abysmal:
+
+```
+                                                   ;loop 1
+  0x7f4d56ffaf3b:   mov    $0x1,%r10d
+  0x7f4d56ffaf41:   jmp    0x7f4d56ffaf65          ;*iload_3
+  0x7f4d56ffaf60:   inc    %ecx                    ;*iinc
+  0x7f4d56ffaf62:   inc    %r10d                   ;*iinc
+  0x7f4d56ffaf65:   cmp    %r10d,%eax
+  0x7f4d56ffaf68:   jg     0x7f4d56ffaf60
+          
+  0x7f4d56ffaf6a:   lea    -0x10(%rdx),%eax
+  0x7f4d56ffaf6d:   mov    %r10d,%r11d
+  0x7f4d56ffaf70:   mov    %ecx,%r10d
+                                                   ;loop 2
+  0x7f4d56ffaf73:   jmp    0x7f4d56ffaf88
+  0x7f4d56ffaf80:   lea    0x10(%r11),%r11d        ;*iinc
+  0x7f4d56ffaf84:   lea    0x10(%r10),%r10d        ;*iinc
+  0x7f4d56ffaf88:   cmp    %r11d,%eax
+  0x7f4d56ffaf8b:   jg     0x7f4d56ffaf80
+  0x7f4d56ffaf8d:   jmp    0x7f4d56ffafb0
+                                                   ;loop 3
+  0x7f4d56ffafa0:   inc    %r11d                   ;*iinc
+  0x7f4d56ffafa3:   inc    %r10d                   ;*iinc
+  0x7f4d56ffafb0:   cmp    %r11d,%edx
+  0x7f4d56ffafb3:   jg     0x7f4d56ffafa0          ;*if_icmpge
+  0x7f4d56ffafb5:   mov    %r10d,%eax              ;*ireturn
+  0x7f4d56ffafc1:   ret
+```
 
 ## Garbage Collectors
 
