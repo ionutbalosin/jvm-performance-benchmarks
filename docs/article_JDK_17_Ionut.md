@@ -443,7 +443,7 @@ Source code: <<link to GitHub benchmark>>
 
 #### Conclusions:
 
-GraalVM EE JIT implements the reduction using a `cmovl` instruction, as below: 
+GraalVM EE JIT implements the reduction using a conditional move instruction (e.g., `cmovl`), as below: 
 
 ```
   0x7f40c2b1a3a5:   test   %edx,%edx
@@ -484,6 +484,75 @@ The generated code by GraalVM EE JIT is abysmal:
   0x7f4d56ffafb5:   mov    %r10d,%eax              ;*ireturn
   0x7f4d56ffafc1:   ret
 ```
+
+### NpeControlFlowBenchmark
+
+Iterates through an array of objects (containing either null and not null values) and compute the sum of all elements using different comparison/filtering strategies.
+Since the array elements might be null, some tests explicitly check for null others just uses the objects as is but guard the code by try {} catch blocks (letting NullPointerException be thrown and catch).
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: NpeControlFlowBenchmark.svg>>
+
+#### Conclusions:
+
+OpenJDK HotSpot C2 JIT behaves better than GraalVM CE/EE JIT 
+
+In particalar, the `try_npe_catch` benchmark is orders of magnitude slower with GraalVM CE/EE JIT:
+```
+  public int try_npe_catch() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+      try {
+        sum += array[i].x;
+      } catch (NullPointerException ignored) {
+        sink(ignored);
+      }
+    }
+    return sum;
+  }
+```
+
+GraalVM EE JIT unrolls the main loop by a factor of 8 but there is no explicit null check while accessing array elements: 
+
+```
+                                                        ;<--- Loop Begin
+  0x7f6a6ab1ac80:   mov    0x10(%rax,%r9,4),%ecx        ;*aaload 
+  0x7f6a6ab1ac85:   mov    %r8d,%ebx                    ;*iload_2
+  0x7f6a6ab1ac88:   add    0xc(,%rcx,8),%ebx            ;implicit exception: dispatches to 0x7f6a6ab1adab
+  0x7f6a6ab1ac8f:   mov    0x14(%rax,%r9,4),%ecx        ;*iload_2
+  0x7f6a6ab1ac94:   mov    0xc(,%rcx,8),%ecx            ;implicit exception: dispatches to 0x7f6a6ab1adc7
+  0x7f6a6ab1ac9b:   mov    0x18(%rax,%r9,4),%edi        ;*iload_2
+  0x7f6a6ab1aca0:   mov    0xc(,%rdi,8),%edi            ;implicit exception: dispatches to 0x7f6a6ab1ade6
+  ...  
+  0x7f6a6ab1ace8:   add    %ecx,%ebx
+  0x7f6a6ab1acea:   add    %edi,%ebx
+  ...  
+  0x7f6a6ab1acfd:   lea    0x8(%r9),%r9d                ;*iinc
+  0x7f6a6ab1ad01:   mov    %ebx,%r8d                    ;*iload_2
+  0x7f6a6ab1ad04:   cmp    %r9d,%r11d
+  0x7f6a6ab1ad07:   jg     0x7f6a6ab1ac80               ;<--- Loop Begin
+```
+
+Instead of checking for null, it just lets SIGSEGV happen and (in case there are nulls) dispatches the execution to a specific handler. If there are a lot of null values the cost of this mechanism is not neglectable.
+
+GraalVM CE JIT does not do any loop unrolling but relies on the same optimistic approach (nulls are likely to happen) that takes a toll.
+
+By contrast, OpenJDK HotSpot C2 JIT the null checks in the final optimized code version (within the unrolled loop instructions).
+
+```
+  0x7fae4cf666d0:   mov    0x14(%rdi,%r11,4),%r10d      ;*aaload
+  0x7fae4cf666d5:   test   %r10d,%r10d                  ;null check
+  0x7fae4cf666d8:   je     0x7fae4cf66751               ;*getfield x
+  0x7fae4cf666de:   add    0xc(%r12,%r10,8),%ebx        ;*iadd
+  ...
+  0x7fae4cf666e3:   mov    0x18(%rdi,%r11,4),%edx       ;*aaload
+  0x7fae4cf666e8:   test   %edx,%edx                    ;null check 
+  0x7fae4cf666ea:   je     0x7fae4cf66756               ;*getfield x
+  0x7fae4cf666f0:   add    0xc(%r12,%rdx,8),%ebx        ;*iadd
+```
+
+On modern hardware testing for null is probably cheap and it could bring a significant improvement for datasets where nulls are dominating (versus handling them in the SIGSEGV routines).
 
 ## Garbage Collectors
 
