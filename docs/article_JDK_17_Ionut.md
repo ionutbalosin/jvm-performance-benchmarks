@@ -144,7 +144,24 @@ Source code: <<link to GitHub benchmark>>
 
 - Overall GraalVM EE JIT does a better job then GraalVM CE JIT and OpenJDK HotSpot C2 JIT
 
-What is of a particular interest is the `nested_synchronized` benchmark that is almost 3 orders of magnitude slower than GraalVM CE/EE. 
+What is of a particular interest is the `nested_synchronized` benchmark that is almost 3 orders of magnitude slower than GraalVM CE/EE.
+
+```
+  public int nested_synchronized() {
+  int result = defaultValue << 1;
+
+      synchronized (this) {
+        result += incrementValue;
+        synchronized (this) {
+          result += incrementValue;
+          ...
+        }
+      }
+
+      return result;
+}
+```
+
 The reason for that is the fact the compiler fails to reduce the deoptimization rate (i.e., hits a recompilation limit) and the method is abandoned to the Template Interpreter, as described by the compilation logs:
 
 ```
@@ -198,7 +215,7 @@ The `nested_synchronized` from OpenJDK HotSpot is (again) much slower than Graal
 By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main difference is that now since the biased locking is disabled, a compare-and-swap atomic instruction guard that section.
 
 ```
-0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   ;coarsed locking
+0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   ;coarsed locking section
 0x7f3926b18d95:   jne    0x7f3926b18e6b      ;*monitorexit 
 0x7f3926b18d9b:   add    %r8d,%r9d           ;*iadd 
 0x7f3926b18d9e:   add    %r8d,%r9d           ;*iadd 
@@ -228,7 +245,44 @@ Except for `nested_synchronized` and `recursive_method_calls` benchmarks all thr
 
 The `nested_synchronized` from OpenJDK HotSpot does not get compiled by C1 nor C2, but Template Interpreter is used to generating the assembly code snippets for each bytecode. This is similar to the LockCoarseningBenchmark (e.g., _make_not_compilable_).
 
+```
+  public int nested_synchronized() {
+  int result = defaultValue << 1;
+
+      Object lock = new Object();
+
+      synchronized (lock) {
+        result += incrementValue;
+        synchronized (lock) {
+          result += incrementValue;
+          ...
+        }
+      }
+
+      return result;
+  }
+```
+
 The `recursive_method_calls` is explained in details for every compiler, as per below:
+
+```
+  public int recursive_method_calls() {
+    int result = defaultValue << 1;
+    result = recursiveSum(result, DEPTH);
+    return result;
+  }
+
+  public int recursiveSum(int aValue, int depth) {
+    Object lock = new Object();
+    synchronized (lock) {
+      if (depth == 0) {
+        return aValue;
+      }
+      return incrementValue + recursiveSum(aValue, depth - 1);
+    }
+  }
+```
+
 - GraalVM EE JIT inlines all the recursive calls so there is no virtual method call involved anymore
 - GraalVM CE JIT can remove the recursive calls, nevertheless, there is still a virtual method call involved.
 
@@ -300,11 +354,11 @@ The OpenJDK HotSpot C2 JIT unrolls each of these loops by a factor of 8. For exa
 
 For example, the code snapshot from below pertains to the first loop:
 ```
-  0x7f880cf64940:   mov    0x10(%rsi,%r10,4),%edx       ;*iaload B[i]
-  0x7f880cf64945:   add    0xc(%rax,%r10,4),%edx        ;*iadd B[i] + A[i-1]
-  0x7f880cf6494a:   mov    %edx,0x10(%rax,%r10,4)       ;*iastore A[i] = B[i] + A[i-1]
-  0x7f880cf6494f:   add    0xc(%rsi,%r10,4),%edx        ;*iadd A[i] + B[i+1]
-  0x7f880cf64954:   mov    %edx,0x10(%rsi,%r10,4)       ;*iastore A[i+1] = A[i] + B[i+1]
+  0x7f880cf64940:   mov    0x10(%rsi,%r10,4),%edx       ;*iaload
+  0x7f880cf64945:   add    0xc(%rax,%r10,4),%edx        ;*iadd
+  0x7f880cf6494a:   mov    %edx,0x10(%rax,%r10,4)       ;*iastore
+  0x7f880cf6494f:   add    0xc(%rsi,%r10,4),%edx        ;*iadd
+  0x7f880cf64954:   mov    %edx,0x10(%rsi,%r10,4)       ;*iastore
   ...
   0x7f880cf64a08:   add    $0x8,%r10d                   ;*iinc (loop is unroled by a factor of 8)
   0x7f880cf64a0c:   cmp    %ecx,%r10d
@@ -316,12 +370,12 @@ GraalVM EE JIT emits the same instructions, nevertheless, the loop unrolling fac
 GraalVM CE JIT emits less optimal code instruction (i.e., more stores), even though the unrolling factor is 8 (similar to OpenJDK HotSpot C2 JIT).
 
 ```
-  0x7f1d9affc620:   mov    0x10(%r9,%r11,4),%r8d      ;*iaload B[i]
-  0x7f1d9affc628:   add    0xc(%rcx,%rdi,4),%r8d      ;*iadd B[i] + A[i-1]
-  0x7f1d9affc62d:   mov    %r8d,0x10(%rcx,%r11,4)     ;*iastore A[i] = B[i] + A[i-1]
-  0x7f1d9affc632:   mov    0x14(%r9,%rdi,4),%r8d      ;*iaload B[i+1]
-  0x7f1d9affc637:   add    0x10(%rcx,%r11,4),%r8d     ;*iadd A[i] + B[i+1]
-  0x7f1d9affc63c:   mov    %r8d,0x14(%rcx,%rdi,4)     ;*iastore A[i+1] = A[i] + B[i+1]
+  0x7f1d9affc620:   mov    0x10(%r9,%r11,4),%r8d      ;*iaload
+  0x7f1d9affc628:   add    0xc(%rcx,%rdi,4),%r8d      ;*iadd
+  0x7f1d9affc62d:   mov    %r8d,0x10(%rcx,%r11,4)     ;*iastore
+  0x7f1d9affc632:   mov    0x14(%r9,%rdi,4),%r8d      ;*iaload
+  0x7f1d9affc637:   add    0x10(%rcx,%r11,4),%r8d     ;*iadd
+  0x7f1d9affc63c:   mov    %r8d,0x14(%rcx,%rdi,4)     ;*iastore
   ...
   0x7f1d9affc69b:   lea    0x8(%r11),%r11d            ;*iinc (loop is unroled by a factor of 8)
   0x7f1d9affc6a0:   cmp    %r11d,%ebx
