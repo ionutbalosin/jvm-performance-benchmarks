@@ -41,8 +41,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Iterates through an array of custom object instances (containing null and not null values) and computes the
+ * Iterates through an array of objects (containing either null and not null values) and compute the
  * sum of all elements using different comparison/filtering strategies.
+ * Since the array elements might be null, some tests explicitly check for null others just uses the objects as is
+ * but guard the code by try {} catch blocks (letting NullPointerException be thrown and catch).
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
