@@ -301,3 +301,84 @@ with OpenJDK in `devirtualize_to_monomorphic[MEGAMORPHIC_8]`. In this case, the 
 using a `lookupswitch` to a `tableswitch` due to the large number of cases in the switch statement, which
 also results in a performance degradation. However, it remains faster than the `virtual_call[MEGAMORPHIC_8]` benchmark.
 
+### MegamorphicInterfaceCallBenchmark
+
+This benchmark tests the performance of interface calls with a different number of targets. The JVM is expected to
+optimize interface calls similarly to how it optimizes virtual calls. It also tests the performance of manually
+splitting the call site into multiple monomorphic call sites.
+
+The class hierarchy used in the benchmark is the following:
+```
+private static class C{1,..,6} implements I {}
+interface I extends I5 {
+    private void baz() { foot_5(); }
+    default void foo() { baz(); }
+}
+
+interface I5 extends I4 {
+    private void baz_5() { foot_4(); }
+    default void foo_5() { baz_5(); }
+}
+...
+interface I1 {
+    static Wrapper wrapper = new Wrapper();
+    default void baz_1() { wrapper.x++; }
+    private void foo_1() { baz_1(); }
+```
+
+Source code: <<link to GitHub benchmark>>
+
+The `virtual_calls_chain` benchmark measures the performance of interface calls with a different number of targets. 
+The `devirtualize_to_monomorphic` benchmark tries to manually devirtualize call sites to be monomorphic.
+
+<<IMG: MegamorphicInterfaceCallBenchmark.svg>>
+
+#### Conclusions:
+
+Looking at the figure above and the assembly generated for the `virtual_calls_chain` benchmark we conclude the following:
+- OpenJDK is able to devirtualize (and inline) through the class hierarchy call sites that use up to two different targets.
+In these cases, it also does loop unrolling by a factor of four. <br>
+Starting from three targets or more that are evenly distributed in the benchmark, it always uses a series of interface calls
+to reach the target method. <br> If a dominant target is present (`virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`),
+then C2 will add a guard, devirtualize and inline the call to the dominant target:
+```
+// High-level pseudo-code of the optmization for a dominant target
+if (receiver instanceof DominantTarget) {
+    // fast path. 
+    DominantTarget.method(); // inlined
+} else {
+    // slow path. Use an interface call to reach the target method.
+    receiver.method();
+}
+```
+- GraalVM CE is able to devirtualize (and inline) through the class hierarchy regardless of the number of call sites. It does
+not perform loop unrolling but uses a series of compare and jumps to check if the receiver is an instance of expected target types. 
+Since in our benchmark all interface calls finally resolve to the same method, GraalVM CE is able to inline only once the
+target method.
+- GraalVM EE is able to devirtualize (and inline) up to three different targets per call site. If the number of targets
+is higher, then it uses an interface call for the remaining targets (similar to how it does for virtual calls).
+
+Next, we look at the `devirtualize_to_monomorphic` benchmark. When there is a uniform distribution, both 
+GraalVM CE and OpenJDK devirtualize and inline the call sites. 
+
+For GraalVM EE, if more than four targets are present, it is able to fully devirtualize and inline only for some call sites 
+in the benchmark. For the remaining call sites, it manages to devirtualize only up to a certain depth in the class hierarchy
+In the example below it is shown how GraalVM EE generates a virtual call to `foo_4`: 
+```
+0x91157:   movabs $0x26408,%rdi     ;   {metadata('com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C6')}
+0x91161:   cmp    %rcx,%rdi
+0x91164:   jne    0x915b7
+0x9116a:   mov    0x18(%rsp),%r10
+0x9116f:   call   0x8f140           ; ImmutableOopMap {[8]=Oop [16]=Oop [24]=Oop [32]=NarrowOop }
+                                    ;*invokeinterface foo_4 {reexecute=0 rethrow=0 return_oop=0}
+                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 237)
+                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 241)
+                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 247)
+                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 251)
+                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@116 (line 165)
+                                    ;   {optimized virtual_call}
+                                    ^^ Directly calls foo_4
+```
+
+In the case of a dominant target (`devirtualize_to_monomorphic[MEGAMORPHIC_6_DOMINANT_TARGET]`), OpenJDK and GraalVM CE are able to devirtualize and inline the call sites. 
+GraalVM EE is able to devirtualize only up to a certain depth in the class hierarchy. 
