@@ -38,7 +38,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Loop fusion merges adjacent loops into one loop to reduce the loop overhead and improve run-time performance.
+ * The benchmark assesses if the compiler triggers loop fusion, an optimization aimed to merge the adjacent loops into one loop to reduce the loop overhead and improve run-time performance.
  * Benefits of loop fusion:
  * - reduce loop overhead
  * - improve locality by combining loops that reference the same array
