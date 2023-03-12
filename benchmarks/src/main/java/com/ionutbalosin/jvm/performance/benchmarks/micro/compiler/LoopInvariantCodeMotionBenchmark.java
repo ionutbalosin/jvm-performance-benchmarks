@@ -39,10 +39,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Test how Compiler deals with loop invariant code motion, in essence how it is able to move the invariant code before and after a loop.
+ * Test how the compiler deals with loop invariant code motion, in essence how it is able to move the invariant code before and after a loop.
  * Hoisting and sinking are terms that Compiler refers to moving operations outside loops:
- *      - hoisting a load means to move the load so that it occurs before the loop
- *      - sinking a store means to move a store to occur after a loop
+ * - hoisting a load means to move the load so that it occurs before the loop
+ * - sinking a store means to move a store to occur after a loop
  *
  * References:
  * - https://courses.cs.washington.edu/courses/cse501/03wi/slides/slides.01-30.pdf
