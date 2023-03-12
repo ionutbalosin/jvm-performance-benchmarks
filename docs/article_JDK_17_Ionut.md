@@ -169,7 +169,7 @@ The reason for that is the fact the compiler fails to reduce the deoptimization 
 <make_not_compilable osr='0' level='4' reason='MethodCompilable_not_at_tier' method='LockCoarseningBenchmark nested_synchronized ()I'/>
 ```
 
-The hottest regions in the histogram emphasizes this:
+The hottest regions in the report emphasizes this:
 
 ```
   ....[Hottest Regions]...............................................
@@ -382,6 +382,55 @@ GraalVM CE JIT emits less optimal code instruction (i.e., more stores), even tho
   0x7f1d9affc6a3:   jg     0x00007f1d9affc620
 ```
 
+### LoopInvariantCodeMotionBenchmark
+
+Test how the compiler deals with loop invariant code motion, in essence how it is able to move the invariant code before and after a loop.
+Hoisting and sinking are terms that Compiler refers to moving operations outside loops:
+- hoisting a load means to move the load so that it occurs before the loop
+- sinking a store means to move a store to occur after a loop
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: LoopInvariantCodeMotionBenchmark.svg>>
+
+#### Conclusions:
+
+GraalVM EE JIT looks better overall, nevertheless, a case where there is a noticeable difference is for the `initial_loop` benchmark.
+
+The hot methods reported by the `-prof perfasm` belongs to the runtime-generated stub, so it makes it more difficult to grasp the optimizations from the benchmark method. Nevertheless, at first glance, based on the reported hottest methods, it looks like OpenJDK HotSpot JIT C2 spends the majority of time in the `StubRoutines::libmTan`, much more than GraalVM CE/EE JIT, which is probably an indication of fewer optimizations.
+
+OpenJDK HotSpot VM hottest methods report:
+
+```
+  ....[Hottest Methods (after inlining)]..............................
+  71.71%        runtime stub  StubRoutines::libmTan
+  12.97%          libjava.so  jatan
+  6.09%         c2, level 4  LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 479
+  4.79%    Unknown, level 0  java.lang.StrictMath::atan, version 1, compile id 474
+  2.61%          libjava.so  jfabs
+```
+
+GraalVM CE hottest methods report:
+```
+  ....[Hottest Methods (after inlining)]..............................
+  45.01%                       <unknown>
+  27.19%           libjava.so  jatan
+  10.66%       jvmci, level 4  LoopInvariantCodeMotionBenchmark::initial_loop, version 3, compile id 729
+  8.53%     Unknown, level 0  java.lang.StrictMath::atan, version 1, compile id 725
+  5.57%           libjava.so  jfabs
+```
+
+GraalVM EE hottest methods report:
+```
+  ....[Hottest Methods (after inlining)]..............................
+  37.50%                       <unknown>
+  31.58%           libjava.so  jatan
+  11.73%     Unknown, level 0  java.lang.StrictMath::atan, version 1, compile id 727
+  9.98%       jvmci, level 4  LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 732
+  6.57%           libjava.so  jfabs
+```
+
+A small remark, in the case of GraalVM CE/EE it would be better to have, instead of the `<unknown>` block, the exact dynamic shared object.  
 
 ## Garbage Collectors
 
