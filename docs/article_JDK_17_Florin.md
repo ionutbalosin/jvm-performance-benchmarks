@@ -459,3 +459,45 @@ OpenJDK, on the other hand, does not allocate a new `NullPointerException` objec
 the stack trace and directly calls into the exception handler (`OptoRuntime::handle_exception_C`). This optimization can
 be disabled by setting the `-XX:-OmitStackTraceInFastThrow` flag.
 
+### RecursiveMethodCallBenchmark
+
+The benchmark tests the performance of recursive method calls in classes, interfaces and lambda functions. 
+Additionally, it tests the performance of static vs non-static recursive calls. 
+
+In this benchmark, the ability to inline recursive calls plays an important role in the performance. 
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: RecursiveMethodCallBenchmark.svg>>
+
+#### Conclusions:
+
+For lambda recursive calls, all three JVMs are able to fully inline and remove the recursive calls.
+
+For class and interface recursive calls (static and non-static), OpenJDK always generates a recursive call (static or virtual). 
+GraalVM CE is able to partially inline up to a depth of 6 while GraalVM EE will go up to a depth of 8.
+
+```
+0xfcd23:   je     0xfcda2           ;*ifne {reexecute=0 rethrow=0 return_oop=0} <-- jump to return statement
+                                    ; - cls_non_static@1 (line 108)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+0xfcd29:   lea    -0x6(%rdx),%edx   ;*isub {reexecute=0 rethrow=0 return_oop=0} <-- subtract 0x6 from the counter
+                                    ; - cls_non_static@11 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+0xfcd2c:   data16 xchg %ax,%ax                                                  <-- nops
+0xfcd2f:   call   0xfccc0           ; ImmutableOopMap {}                        <-- call to cls_non_static six layers deep
+                                    ;*invokevirtual cls_non_static {reexecute=0 rethrow=0 return_oop=1}
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ; - cls_non_static@12 (line 111)
+                                    ;   {optimized virtual_call}
+```
+
