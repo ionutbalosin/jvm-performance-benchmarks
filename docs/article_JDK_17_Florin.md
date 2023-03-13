@@ -21,12 +21,27 @@ depend on it into a simpler form. In some cases, the loop can be removed and rep
 constant value.
 
 ```
-for (i = start; i*i < MAX; ++i) {
+// Formula: reducedLength = sqrt(length) - start
+final long length = 4202496L * 4202496L;
+final long reducedLength = 4194304L;
+final long start = 8192;
+
+// Baseline. Empty loop. Should be easily removed by the JIT.
+@Benchmark 
+public long baseline() {
+  long result;
+  for (result = 0; result != reducedLength; ++result) {}
+  return result;
 }
 
-// is equivalent to:
-
-for (i = 0; i != sqrt(MAX) - start; ++i) {
+// Canonicalize. Loop should be computed and replaced with a constant.
+@Benchmark
+public long canonicalize() {
+  long result = 0;
+  for (long l = start; l * l < reducedLength; ++l) {
+    result++;
+  }
+  return result;
 }
 ```
 
@@ -79,11 +94,12 @@ Normally, the JIT compiler should be able to inline the method and return a cons
 if a method takes a large number of arguments, the JIT may bail out when trying to compile the method.
 
 ```
-benchMethod() {
-  return method(1.0, 2.0, ... 64.0);
+@Benchmark
+public long method_args_buster() {
+  return tooManyArgsMethod(1.0, 2.0, ..., 64.0);
 }
 
-method(double d00, double d01, ... double d63) {
+long tooManyArgsMethod(double d00, double d01, ... double d63) {
   return Math.round(d00) +
     Math.round(d01) +
     ... +
@@ -128,16 +144,17 @@ an allocation that is not used by subsequent instructions. The JIT compiler shou
 dead allocations even across function boundaries, provided the functions are inlined.
 
 ```
-field = new Object();
+Object object;
 
-benchMethod() {
-    field = new Object();  // dead allocation. Should be removed if allocateMethod() is inlined.
+@Benchmark
+public Object obj_dse() {
+    object = new Object();  // dead allocation. Should be removed if allocateMethod is inlined.
     allocateMethod();
-    return field;
+    return object;
 }
 
-allocateMethod() {
-    field = new Object();
+private void allocate() {
+    object = new Object();
 }
 ```
 
