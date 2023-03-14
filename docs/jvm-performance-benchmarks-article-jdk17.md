@@ -25,6 +25,8 @@ Florin Blanaru
   - [Benchmarks](#macro-benchmarks)
   - [Geometric Mean](#macro-geometric-mean)
 - [Final Thoughts](#final-thoughts)
+- [References](#references)
+
 
 # Context
 
@@ -1778,3 +1780,12 @@ To summarize, on both architectures the geometric mean is consistent:
 # Final Thoughts
 
 **TODO: Florin/Ionut**
+
+# References
+- [OpenJDK sources](https://github.com/openjdk/jdk)
+- [GraalVM sources](https://github.com/oracle/graal)
+- [ZGC Wiki](https://wiki.openjdk.org/display/zgc/Main)
+- [Shenandoah GC Wiki](https://wiki.openjdk.org/display/shenandoah/Main)
+- [Efficient reference classification and quick memory reuse in a system that supports concurrent garbage collection](https://patents.google.com/patent/US9921959B2/en) - Per A. Liden, Stefan Mats Rikard Karlsson
+- [Concurrent Remembered Set Refinement in Generational Garbage Collection](https://www.researchgate.net/publication/220817732_Concurrent_Remembered_Set_Refinement_in_Generational_Garbage_Collection) - David Detlefs, Ross Knippel, William D. Clinger, Matthias Jacob
+- [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
