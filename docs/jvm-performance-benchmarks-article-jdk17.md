@@ -1,4 +1,6 @@
-# Authors
+# JVM Performance Comparison for JDK 17
+
+## Authors 
 
 Ionut Balosin
 - Website: www.ionutbalosin.com
@@ -70,7 +72,7 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
 - Java Microbenchmark Harness (JMH) v1.36
 - each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also (in a few cases) multi-threaded workloads
 - the benchmarks were run on the below machines:
-  1. MacBook Pro, M1 Chip 10-Core, 16-Core Neutral Engine, 32GB RAM, iOS ???
+  1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Monterey 12.6.1
   2. **TODO: Florin - add config**
 - to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine: 
   1. disabled the turbo-boost mode
@@ -1418,7 +1420,7 @@ generated is similar to the following:
 
 ## JIT Geometric Mean
 
-The Geometric Mean (GM) for the JIT benchmarks on each architecture is described below.
+This section describes the GM for the entire JIT related benchmark category.
 
 This is purely informative to have a high-level understanding on the overall benchmark scores.
 
@@ -1672,7 +1674,7 @@ Source code: [WriteBarriersLoopingOverArrayBenchmark.java](https://github.com/io
 
 ## GC Geometric Mean
 
-The Geometric Mean (GM) for the Garbage Collector benchmarks on each architecture is described below.
+This section describes the GM for the entire GC related benchmark category.
 
 This is purely informative to have a high-level understanding on the overall benchmark scores.
 
@@ -1771,7 +1773,7 @@ Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-p
 
 ## Macro Geometric Mean
 
-The Geometric Mean (GM) for the macro benchmarks category on each architecture is described below.
+This section describes the GM for the entire macro benchmarks category.
 
 This is purely informative to have a high-level understanding on the overall benchmark scores.
 
