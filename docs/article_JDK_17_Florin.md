@@ -501,3 +501,79 @@ GraalVM CE is able to partially inline up to a depth of 6 while GraalVM EE will 
                                     ;   {optimized virtual_call}
 ```
 
+### MandelbrotVectorApiBenchmark
+
+This benchmark tests the performance of Project Panama's Vector API when used to compute the Mandelbrot set. 
+As of the time of writing, the Vector API is still an incubator module in OpenJDK and the API and the implementation
+are subject to change between releases.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: MandelbrotVectorApiBenchmark.svg>>
+
+#### Conclusions:
+
+In the `baseline` benchmark the Mandelbrot set is computed using non-vectorized instructions. In this case, all three JVMs 
+perform equally regardless of the data size and the number of iterations. 
+
+In the `vectorized` benchmark the Mandelbrot set is computed using the Vector API. In this case, OpenJDK performs better than
+both GraalVM CE and EE. This is because C2 contains all the compiler intrinsics for the Vector API, while GraalVM CE and 
+EE do not. This can be seen from the generated assembly code and by looking at the hottest regions of code in the
+`perf` output:
+
+```
+OpenJDK vectorized hottest region
+....[Hottest Methods (after inlining)]....
+98.25%  c2, level 4  MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 884
+... 
+```
+
+```
+GraalVM CE vectorized hottest region
+....[Hottest Methods (after inlining)]....
+59.51%  jvmci, level 4  MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+15.11%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1016 
+11.80%  jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1008 
+10.23%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
+```
+
+```
+GraalVM EE vectorized hottest region
+....[Hottest Methods (after inlining)]....
+74.23%  jvmci, level 4  MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1038 
+22.04%  jvmci, level 4  jdk.incubator.vector.Double256Vector::bOp, version 2, compile id 1040 
+```
+
+### SepiaVectorApiBenchmark
+
+This benchmark is similar to the `MandelbrotVectorApiBenchmark` in that it tests the performance of Project Panama's
+Vector API. However, in this benchmark the Vector API is used to apply a sepia filter to an input image.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: SepiaVectorApiBenchmark.svg>>
+
+#### Conclusions:
+
+Once again, in the `baseline` benchmark the Sepia filter is applied using non-vectorized instructions. In this case, all three JVMs
+perform equally regardless of the input image size.
+
+In the `vectorized` benchmark the Sepia filter is applied using the Vector API. OpenJDK performs better than
+both GraalVM CE and EE. This is because C2 contains all the compiler intrinsics for the Vector API, while GraalVM CE and
+EE do not.
+
+```
+OpenJDK vectorized hottest region
+....[Hottest Regions]....
+98.47%  c2, level 4  SepiaVectorApiBenchmark::vectorized, version 3, compile id 988
+... 
+```
+
+```
+GraalVM CE vectorized hottest region
+....[Hottest Methods (after inlining)]....
+40.03%  jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SepiaVectorApiBenchmark::vectorized, version 4, compile id 1010 
+39.78%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 959 
+ 9.34%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 997 
+ 7.90%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::compare, version 2, compile id 990 
+```
