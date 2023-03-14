@@ -1,3 +1,12 @@
+# Authors
+
+Ionut Balosin 
+  - website: www.ionutbalosin.com
+  - email: ionut.balosin@gmail.com
+
+Florin Blanaru
+  - email: florin.blanaru96@gmail.com
+
 # Context
 
 The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting for both the Just-In-Time (JIT) Compiler and the Garbage Collectors (GC) to assess:
@@ -7,7 +16,7 @@ The current article describes a series of Java Virtual Machine (JVM) benchmarks 
 
 In addition, there is a small set of benchmarks (i.e., a macro category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is only complementary but not the main purpose of this work.
 
-For a few benchmarks (i.e., the most representative, in our opinion) we provide an in-depth analysis (i.e., optimized generated assembly code, flame graphs, etc.), as well as the geometrical mean.
+For a few benchmarks (i.e., the most representative, in our opinion) we provide an in-depth analysis (i.e., optimized generated assembly code, flame graphs, etc.), as well as the geometric mean.
 
 The list of included GCs is:
 - Serial GC
@@ -30,7 +39,7 @@ The list of included architectures is:
 - x86_64
 - arm64
 
-> The reference architecture for this article is the x86_64 architecture, and arm64 is only included in the geometrical mean section for comparison.
+> The reference architecture (and, subsequently, the benchmarks analysis) for this article is x86_64, and arm64 is only included in the geometric mean score section for comparison.
  
 # SetUp
 
@@ -50,7 +59,7 @@ The list of included architectures is:
 
 This section describes the results obtained from running the JIT benchmarks. The current benchmarks focus on various optimizations that are generally available in compilers, such as inlining, loop unrolling, escape analysis, devirtualization, null-check, and range-check elimination, dead code elimination, etc.
 
-The list of JIT compilers (including the JVMs and the architectures) is:
+The list of JIT compilers (including the JVM and the architecture) is:
 
 No. | JIT       | JVM                | Arcitecture 
 ----|-----------|--------------------|----------------
@@ -60,8 +69,6 @@ No. | JIT       | JVM                | Arcitecture
 
 The difference between GraalVM CE and EE is that EE has additional built-in optimizations, such as
 better vectorization, intrinsics, register allocation, etc.
-
-The below (in-depth) analysis pertains to the x86_64 architecture.
 
 ## CanonicalizeInductionVariableBenchmark
 
@@ -1407,8 +1414,6 @@ _Note:_ depending on the mode, some of these barriers might be disabled.
 - a keep-alive barrier used during the concurrent marking phase
 - a mark barrier used during the concurrent marking phase
 - nmethod-barriers and stack-watermark barriers (similar to Shenandoah GC)
-
-The below (in-depth) analysis pertains to the x86_64 architecture.
 
 ## BurstHeapMemoryAllocatorBenchmark
 
