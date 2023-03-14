@@ -40,7 +40,9 @@ The list of included architectures is:
 - arm64
 
 > The reference architecture (and, subsequently, the benchmarks analysis) for this article is x86_64, and arm64 is only included in the geometric mean score section for comparison.
- 
+
+This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) repository. For further details (e.g., benchmarks source code, results, etc.,) please check out the sources.
+
 # SetUp
 
 - Java Development Kit (JDK) 17

@@ -1,3 +1,20 @@
+# Contributing to JVM Performance Benchmarks
+
+If you would like to contribute code you can do so through GitHub by sending a pull request or raising an issue with an attached patch.
+
+When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible.
+
+## License
+
+By contributing your code, you agree to license your contribution under the terms of the APLv2:
+
+https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/LICENSE
+
+All files are made available under the Apache 2.0 license.
+
+If you are adding a new file it should have the following header:
+
+```
 /*
  * JVM Performance Benchmarks
  *
@@ -28,35 +45,4 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding;
-
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.TreeNode.isLeaf;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class HuffmanEncoder {
-
-  /**
-   * Read the root node of a Huffman tree and use it to create a Huffman encoding map based on the
-   * tree's structure
-   */
-  public static Map<Character, String> encodingMap(TreeNode root) {
-    final Map<Character, String> huffmanCodes = new HashMap<>();
-    encodingMap(root, "", huffmanCodes);
-    return huffmanCodes;
-  }
-
-  private static void encodingMap(TreeNode root, String str, Map<Character, String> huffmanCode) {
-    if (root == null) {
-      return;
-    }
-
-    if (isLeaf(root)) {
-      huffmanCode.put(root.ch, str.length() > 0 ? str : "1");
-    }
-
-    encodingMap(root.left, str + '0', huffmanCode);
-    encodingMap(root.right, str + '1', huffmanCode);
-  }
-}
+ ```
