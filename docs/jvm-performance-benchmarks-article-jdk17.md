@@ -123,7 +123,7 @@ constant value.
 
 Source code: [CanonicalizeInductionVariableBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/CanonicalizeInductionVariableBenchmark.java) 
 
-<<IMG: CanonicalizeInductionVariableBenchmark.svg>>
+<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/CanonicalizeInductionVariableBenchmark.svg">
 
 ### Conclusions:
 We can see that OpenJDK and GraalVM (CE or EE) perform the same in the `canonicalize` benchmark method.
