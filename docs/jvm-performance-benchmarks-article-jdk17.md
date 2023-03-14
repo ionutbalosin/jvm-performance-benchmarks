@@ -18,7 +18,7 @@ Florin Blanaru
   - [Geometric Mean](#jit-geometric-mean)
 - [Garbage Collectors](#garbage-collectors)
   - [Overview](#gc-overview)
-  - [Barriers](#gc-garriers)
+  - [Barriers](#gc-barriers)
   - [Benchmarks](#gc-benchmarks)
   - [Geometric Mean](#gc-geometric-mean)
 - [Macro](#macro)
