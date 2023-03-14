@@ -119,7 +119,7 @@ constant value.
   }
 ```
 
-Source code:<<link to GitHub benchmark>>
+Source code: [CanonicalizeInductionVariableBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/CanonicalizeInductionVariableBenchmark.java) 
 
 <<IMG: CanonicalizeInductionVariableBenchmark.svg>>
 
@@ -183,7 +183,7 @@ dead allocations even across function boundaries, provided the functions are inl
   }  
 ```
 
-Source code:<<link to GitHub benchmark>>
+Source code: [DeadLocalAllocationStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark.java)
 
 <<IMG: DeadLocalAllocationStoreBenchmark.svg>>
 
@@ -243,7 +243,7 @@ The benchmark assesses how the compiler could remove code (i.e., a dead method c
   }  
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [DeadMethodCallStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadMethodCallStoreBenchmark.java)
 
 <<IMG: DeadMethodCallStoreBenchmark.svg>>
 
@@ -303,7 +303,7 @@ This benchmark iterates through the enum values list and returns the enum consta
 This pattern is often seen in real business applications where, for example, the microservices RESTful APIs defined in OpenAPI/Swagger use enums.
 The input request parameters are deserialized and wrapped to enum values.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [EnumValueLookupBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark.java)
 
 <<IMG: EnumValueLookupBenchmark.svg>>
 
@@ -346,7 +346,7 @@ Tests the conditional branch optimizations within a loop using:
   }  
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [IfConditionalBranchBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/IfConditionalBranchBenchmark.java)
 
 <<IMG: IfConditionalBranchBenchmark.svg>>
 
@@ -442,7 +442,7 @@ OpenJDK specifics:
 }
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [LockCoarseningBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark.java)
 
 <<IMG: LockCoarseningBenchmark_withBiasedLocking.svg>>
 
@@ -561,7 +561,7 @@ Synchronization on non-shared objects is pointless, and runtime does not have to
   }  
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [LockElisionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark.java)
 
 <<IMG: LockElisionBenchmark.svg>>
 
@@ -634,7 +634,7 @@ The benchmark assesses if the compiler triggers loop fusion, an optimization aim
   }
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [LoopFusionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopFusionBenchmark.java)
 
 <<IMG: LoopFusionBenchmark.svg>>
 
@@ -685,7 +685,7 @@ Hoisting and sinking are terms that Compiler refers to moving operations outside
 - hoisting a load means to move the load so that it occurs before the loop
 - sinking a store means to move a store to occur after a loop
 
-Source code: <<link to GitHub benchmark>>
+Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopInvariantCodeMotionBenchmark.java)
 
 <<IMG: LoopInvariantCodeMotionBenchmark.svg>>
 
@@ -746,7 +746,7 @@ This optimization is based on the induction variable to strength the additions.
   }
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [LoopReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopReductionBenchmark.java)
 
 <<IMG: LoopReductionBenchmark.svg>>
 
@@ -799,7 +799,7 @@ This benchmark tests the performance of Project Panama's Vector API when used to
 As of the time of writing, the Vector API is still an incubator module in OpenJDK and the API and the implementation
 are subject to change between releases.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [MandelbrotVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MandelbrotVectorApiBenchmark.java)
 
 <<IMG: MandelbrotVectorApiBenchmark.svg>>
 
@@ -835,7 +835,6 @@ GraalVM EE vectorized hottest region
 74.23%  jvmci, level 4  MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1038 
 22.04%  jvmci, level 4  jdk.incubator.vector.Double256Vector::bOp, version 2, compile id 1040 
 ```
-
 
 ## MegamorphicMethodCallBenchmark
 
@@ -874,10 +873,11 @@ if (receiver instanceof Type1) {
     deoptimize();
 }
 ```
+
 Once a call site becomes static, the compiler will be able to inline the target method and perform further
 optimizations. OpenJDK (using the C2 JIT) can devirtualize up to two different targets of a virtual call, for more targets a vtable/itable call is used.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [MegamorphicMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark.java)
 
 The `virtual_call` benchmark measures the performance of virtual calls with a different number of targets. The
 `devirtualize_to_monomorphic` benchmark tries to manually devirtualize call sites to be monomorphic.
@@ -944,7 +944,7 @@ The class hierarchy used in the benchmark is the following:
   }
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [MegamorphicInterfaceCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark.java)
 
 The `virtual_calls_chain` benchmark measures the performance of interface calls with a different number of targets.
 The `devirtualize_to_monomorphic` benchmark tries to manually devirtualize call sites to be monomorphic.
@@ -1020,7 +1020,7 @@ if a method takes a large number of arguments, the JIT may bail out when trying 
   }
 ```
 
-Source code:<<link to GitHub benchmark>>
+Source code: [MethodArgsBusterBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MethodArgsBusterBenchmark.java)
 
 <<IMG: MethodArgsBusterBenchmark.svg>>
 
@@ -1070,7 +1070,7 @@ Since the array elements might be null, some tests explicitly check for null oth
   }
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [NpeControlFlowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark.java)
 
 <<IMG: NpeControlFlowBenchmark.svg>>
 
@@ -1154,7 +1154,7 @@ The caller method contains a loop that catches the `NullPointerException` thrown
 For `threshold = 0`, the benchmark does not throw any `NullPointerException`. For `threshold = 1`, the
 benchmark always throws `NullPointerException`.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [NpeThrowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeThrowBenchmark.java)
 
 <<IMG: NpeThrowBenchmark.svg>>
 
@@ -1187,7 +1187,7 @@ Additionally, it tests the performance of static vs non-static recursive calls.
 
 In this benchmark, the ability to inline recursive calls plays an important role in the performance.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [RecursiveMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/RecursiveMethodCallBenchmark.java)
 
 <<IMG: RecursiveMethodCallBenchmark.svg>>
 
@@ -1236,7 +1236,6 @@ There are few escape states:
 - GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
   For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
 
-
 ```
   @Benchmark
   public HeavyWrapper branch_escape_obj() {
@@ -1265,7 +1264,7 @@ There are few escape states:
   }
 ```
 
-Source code: <<link to GitHub benchmark>>
+Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark.java)
 
 <<IMG: ScalarReplacementBenchmark.svg>>
 
@@ -1321,7 +1320,7 @@ In the case of `arg_escape_obj` benchmark, the C2 JIT is (again) one order of ma
 This benchmark is similar to the `MandelbrotVectorApiBenchmark` in that it tests the performance of Project Panama's
 Vector API. However, in this benchmark the Vector API is used to apply a sepia filter to an input image.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/SepiaVectorApiBenchmark.java)
 
 <<IMG: SepiaVectorApiBenchmark.svg>>
 
@@ -1366,7 +1365,7 @@ after the loads and before the stores.
 Additionally, the register allocator in C2 JIT is able to [use FPU registers](https://shipilev.net/jvm/anatomy-quarks/20-fpu-spills/)
 to store intermediate values before starting to spill on the stack. GraalVM CE and EE do not have this optimization.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [StackSpillingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/StackSpillingBenchmark.java)
 
 <<IMG: StackSpillingBenchmark.svg>>
 
@@ -1522,7 +1521,7 @@ _Note:_ depending on the mode, some of these barriers might be disabled.
 
 This benchmark allocates arrays of temporary objects until it fills up a certain percent of the heap (e.g., 30%, 60%) and then releases them so that they all become eligible for Garbage Collector.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [BurstHeapMemoryAllocatorBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/BurstHeapMemoryAllocatorBenchmark.java)
 
 <<IMG: BurstHeapMemoryAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg>>
 
@@ -1546,7 +1545,7 @@ The chaining might have an impact on the GC roots traversal, since the degree of
 Then, in the benchmark method, similar object chains are allocated, and they replace, one by one (i.e., incrementally),the ones from the initial array so that the former ones become eligible for garbage collection.
 During the lifecycle of the benchmark, the footprint of live memory is (trying to be) kept constant.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark.java)
 
 <<IMG: HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg>>
 
@@ -1568,7 +1567,7 @@ The chaining might have an impact on the GC roots traversal, since the degree of
 Then, in the benchmark method, similar object chains are allocated until they fill up 80% of the entire heap and then immediately released, so they become eligible for Garbage Collector.
 During the lifecycle of the benchmark, the amount of retained memory by strong references is fixed (i.e., the objects allocated in the benchmark setup phase are kept alive during the benchmark method)
 
-Source code: <<link to GitHub benchmark>>
+Source code: [HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.java)
 
 <<IMG: HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg>>
 
@@ -1584,7 +1583,7 @@ One additional remark: since ZGC has Compressed OOPs disabled by design, within 
 
 This benchmark tests the allocation rate for chunks of byte arrays having different sizes. In comparison to the previous benchmarks (e.g., HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark, HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark), it just allocates the byte arrays and immediately releases them, without keeping any strong references.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [HeapMemoryBandwidthAllocatorBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/HeapMemoryBandwidthAllocatorBenchmark.java)
 
 <<IMG: HeapMemoryBandwidthAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg>>
 
@@ -1598,7 +1597,7 @@ Source code: <<link to GitHub benchmark>>
 
 Test the overhead of read barriers while iterating through a chain of pre-allocated objects (e.g., Object 1 -> Object 2 -> ...) and returns the sum of their field properties (e.g., Object1.field + Object2.field + ...)
 
-Source code: <<link to GitHub benchmark>>
+Source code: [ReadBarriersChainOfReferencesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadBarriersChainOfReferencesBenchmark.java)
 
 <<IMG: ReadBarriersChainOfReferencesBenchmark_openjdk_hotspot_vm.svg>>
 
@@ -1612,7 +1611,7 @@ Source code: <<link to GitHub benchmark>>
 Test the overhead of read barriers while iterating through an array of pre-allocated objects and reading each object field.
 Note: looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [ReadBarriersLoopingOverArrayBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadBarriersLoopingOverArrayBenchmark.java)
 
 <<IMG: ReadBarriersLoopingOverArrayBenchmark_openjdk_hotspot_vm.svg>>
 
@@ -1623,7 +1622,7 @@ Source code: <<link to GitHub benchmark>>
 
 Test the overhead of read/write barriers while iterating through an array of Integers and exchanging the values between two array entries (i.e., array[i] <-> array[j]).
 
-Source code: <<link to GitHub benchmark>>
+Source code: [ReadWriteBarriersBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadWriteBarriersBenchmark.java)
 
 <<IMG: ReadWriteBarriersBenchmark_openjdk_hotspot_vm.svg>>
 
@@ -1636,7 +1635,7 @@ Source code: <<link to GitHub benchmark>>
 
 Test the overhead of write barriers while iterating through the elements of an array of objects and updating every element (i.e., reference).
 
-Source code: <<link to GitHub benchmark>>
+Source code: [WriteBarriersLoopingOverArrayBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/WriteBarriersLoopingOverArrayBenchmark.java)
 
 <<IMG: WriteBarriersLoopingOverArrayBenchmark_openjdk_hotspot_vm.svg>>
 
@@ -1696,7 +1695,7 @@ The steps involved in Huffman encoding a given text source file into a destinati
 - build encoding map: traverse the binary tree to discover the binary encodings of each character
 - encode data: re-examine the source file's contents, and for each character, output the encoded binary version of that character to the destination file.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [HuffmanCodingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/huffmancoding/HuffmanCodingBenchmark.java)
 
 <<IMG: HuffmanCodingBenchmark.svg>>
 
@@ -1710,7 +1709,7 @@ The benchmark uses a few alternative approaches:
 
 The trampoline pattern is used for implementing algorithms recursively but without blowing the stack (as an alternative to recursive functions). A trampoline is an iteration applying a list of functions, where each function returns the next function to be called.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [PalindromeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/palindrome/PalindromeBenchmark.java)
 
 <<IMG: PalindromeBenchmark.svg>>
 
@@ -1719,7 +1718,7 @@ Source code: <<link to GitHub benchmark>>
 This benchmark generates a population of different ages and then calculates the age variation.
 Population variance is the average of the distances from each data point in a particular population to the mean squared. It indicates how data points spread out in the population. Population variance is an important measure of dispersion used in statistics.
 
-Source code: <<link to GitHub benchmark>>
+Source code: [PopulationVarianceBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/populationvariance/PopulationVarianceBenchmark.java)
 
 <<IMG: PopulationVarianceBenchmark.svg>>
 
@@ -1729,7 +1728,7 @@ Computes the number of prime numbers until a threshold (e.g., N) number. The ben
 - sieve of Eratosthenes
 - a stream of prime numbers
 
-Source code: <<link to GitHub benchmark>>
+Source code: [PrimesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/prime/PrimesBenchmark.java)
 
 <<IMG: PrimesBenchmark.svg>>
 
@@ -1740,7 +1739,7 @@ Computes the word frequencies/occurrences from a text file. The benchmark uses a
 - parallel streams
 - pattern streams
 
-Source code: <<link to GitHub benchmark>>
+Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/wordfrequency/WordFrequencyBenchmark.java)
 
 <<IMG: WordFrequencyBenchmark.svg>>
 
