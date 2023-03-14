@@ -55,6 +55,7 @@ check_command_line_options() {
 
 set_environment_variables() {
   export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH"
+  export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
   export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
@@ -124,7 +125,7 @@ preprocess_benchmark_results() {
 
 benchmarks_geometric_mean() {
   R <./ggplot2/geomean-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while calculating the benchmarks geometric mean, unable to continue!"

@@ -107,11 +107,11 @@ geometricMeanForThroughputJmhGcResults <- function(jmh_output_folder, jvm_identi
   shenandoah_gc_geomean <- geometric.mean(data[data$Param..gc == "shenandoahGC", ]$Score)
 
   gc_geomean <- c(
-    "serialGC" = round(serial_gc_geomean, 2),
-    "parallelGC" = round(parallel_gc_geomean, 2),
-    "g1GC" = round(g1_gc_geomean, 2),
-    "zGC" = round(z_gc_geomean, 2),
-    "shenandoahGC" = round(shenandoah_gc_geomean, 2),
+    "Serial GC" = round(serial_gc_geomean, 2),
+    "Parallel GC" = round(parallel_gc_geomean, 2),
+    "G1 GC" = round(g1_gc_geomean, 2),
+    "ZGC" = round(z_gc_geomean, 2),
+    "Shenandoah GC" = round(shenandoah_gc_geomean, 2),
     "Unit" = "ops/ms"
   )
 

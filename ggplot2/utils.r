@@ -66,6 +66,9 @@ readJmhCsvResults <- function(file_path) {
 writeJmhCsvResults <- function(path, file, data) {
   tryCatch(
     {
+      if (!dir.exists(path)) {
+        dir.create(path)
+      }
       write.table(data, paste(path, file, sep = "/"), sep = ",", row.names = FALSE)
     },
     warning = function(w) {
