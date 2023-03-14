@@ -1553,7 +1553,7 @@ Source code: [HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark.java](https:
 
 <img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg">
 
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_2thread2_openjdk_hotspot_vm.svg">
+<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_2threads_openjdk_hotspot_vm.svg">
 
 ### Conclusions:
 - ZGC offers the highest throughput when the percentage of the heap is up to 50%
