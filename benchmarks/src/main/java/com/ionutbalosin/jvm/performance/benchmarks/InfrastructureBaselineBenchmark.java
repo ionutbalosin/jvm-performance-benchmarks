@@ -47,9 +47,9 @@ import org.openjdk.jmh.infra.Blackhole;
  * This benchmark is used as a baseline (i.e., a preliminary check) to assess the infrastructure overhead for the code to measure.
  * Since no magical infrastructures are incurring no overhead, it is essential to know what default overheads might occur in our setup.
  * It measures the calls performance of empty methods (w/ and w/o explicit inlining) but also the performance of
- * returning an object versus consuming it via black holes. All of these mechanisms are used inside the real suite of tests.
+ * returning an object versus consuming it via black holes. All of these mechanisms are used by the benchmark suite.
  *
- * This benchmark is particularly useful in case of a comparison between different types of JVMs, and it should be run
+ * This is particularly useful in case of a comparison between different types of JVMs, and it should be run
  * before any other real benchmark to check the default costs.
  *
  * Note: A comparison between different JVMs might not be further relevant unless, at least, the baseline is the same.
