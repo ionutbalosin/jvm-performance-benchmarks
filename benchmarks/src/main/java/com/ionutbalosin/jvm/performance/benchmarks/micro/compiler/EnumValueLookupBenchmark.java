@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  *
- * This benchmark iterates through the enum values list and returns the enum constant corresponding to an (e.g., a String) value.
+ * This benchmark iterates through the enum values list and returns the enum constant matching a lookup value.
  * It emphasizes the cost of calling the values() method on an Enum versus caching the values and using the cached version.
  * Note: the enum's method values() returns a new copy of an array representing its values every time it is called.
  *

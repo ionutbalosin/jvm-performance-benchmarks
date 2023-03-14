@@ -45,10 +45,10 @@ import org.openjdk.jmh.annotations.Warmup;
  * OpenJDK HotSpot VM specifics:
  * - prior JDK 15: with biased locking enabled, compare-and-swap atomic operation are basically no-ops when acquiring a monitor, in case of uncontended locking.
  * It assumes that a monitor remains owned by a given thread until a different thread tries to acquire it
- * - starting JDK 15: without biased locking (or some improved version of non-biased locking), certain synchronized scenarios
- * might become much slower (i.e., since synchronized calls comes now with atomic compare-and-swap on lock)
+ * - starting JDK 15: without biased locking (or some improved version of non-biased locking), in case of uncontended locking,
+ * certain synchronized scenarios might become slightly slower (i.e., since synchronized calls come now with atomic compare-and-swap on lock)
  *
- * ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), hence avoiding stop-the-world pauses.
+ * ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), avoiding stop-the-world pauses.
  *
  * References:
  * - https://openjdk.org/jeps/374
