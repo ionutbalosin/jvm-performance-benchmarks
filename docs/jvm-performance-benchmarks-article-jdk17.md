@@ -95,6 +95,27 @@ better vectorization, intrinsics, register allocation, etc.
 
 ## JIT Benchmarks
 
+## InfrastructureBaselineBenchmark
+
+This benchmark is used as a baseline (i.e., a preliminary check) to assess the infrastructure overhead for the code to measure.
+Since no magical infrastructures are incurring no overhead, it is essential to know what default overheads might occur in our setup.
+
+It measures the calls performance of empty methods (w/ and w/o explicit inlining) but also the performance of returning an object versus consuming it via black holes. All of these mechanisms are used by the benchmark suite.
+
+This is particularly useful in case of a comparison between different types of JVMs, and it should be run before any other real benchmark to check the default costs.
+
+> A comparison between different JVMs might not be further relevant unless, at least, the baseline is the same.
+
+Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/InfrastructureBaselineBenchmark.java)
+
+<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/InfrastructureBaselineBenchmark.svg">
+
+### Conclusions:
+
+The results are identical (except for a minor variation of _± 0.4 np/ops_ in the case of the `obj_sink` benchmark).
+
+This increases the confidence in the benchmarks results, across multiple JVMs.
+
 ## CanonicalizeInductionVariableBenchmark
 
 This transformation analyzes loops and tries to transform the induction variable and computations that
@@ -425,7 +446,7 @@ OpenJDK specifics:
 - prior JDK 15: with biased locking enabled, compare-and-swap atomic operation are basically no-ops when acquiring a monitor, in case of uncontended locking. It assumes that a monitor remains owned by a given thread until a different thread tries to acquire it
 - starting JDK 15: without biased locking (or some improved version of non-biased locking), in case of uncontended locking, certain synchronized scenarios might become slightly slower (i.e., since synchronized calls come now with atomic compare-and-swap on lock)
 
-*Note:* ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), avoiding stop-the-world pauses.
+**Note:** ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), avoiding stop-the-world pauses.
 
 ```
   @Benchmark
@@ -892,7 +913,9 @@ Looking at the figure above and the assembly generated for the `virtual_call` be
 - OpenJDK is able to devirtualize (and inline) call sites that use up to two different targets. For more targets,
   it will always use a virtual call.
 - GraalVM CE is able to devirtualize (and inline) call sites regardless of the number of targets (up to eight
-  in the benchmark). <br> **Note**: When generating the assembly, we forced the compiler not to inline the benchmark
+  in the benchmark).
+
+  **Note:** When generating the assembly, we forced the compiler not to inline the benchmark
   method into the JMH stub. In this case, the `virtual_call[MEGAMORPHIC_8]` performed similar to the other benchmarks.
   Therefore, the number of targets is limited by other factors, such as inlining.
 - GraalVM EE is able to devirtualize (and inline) up to three different targets per call site. If the number of targets
@@ -1503,7 +1526,7 @@ Most GCs require different barriers that need to be implemented in the runtime, 
 - nmethod-barriers (i.e., a mechanism to arm nmethods) for concurrent unloading. For example, code cache unloading needs to know about on-stack nmethods. Arming the nmethods enables GC callbacks when they are called.
 - stack-watermark barrier for concurrent thread-scanning
 
-_Note:_ depending on the mode, some of these barriers might be disabled.
+**Note:** depending on the mode, some of these barriers might be disabled.
 
 ### ZGC
 - load-reference barrier employed when references are loaded from the Heap. It ensures that
@@ -1611,7 +1634,8 @@ Source code: [ReadBarriersChainOfReferencesBenchmark.java](https://github.com/io
 ##  ReadBarriersLoopingOverArrayBenchmark
 
 Test the overhead of read barriers while iterating through an array of pre-allocated objects and reading each object field.
-Note: looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
+
+**Note:** looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
 
 Source code: [ReadBarriersLoopingOverArrayBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadBarriersLoopingOverArrayBenchmark.java)
 
