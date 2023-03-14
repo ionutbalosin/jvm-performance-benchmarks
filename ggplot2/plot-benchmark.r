@@ -27,9 +27,10 @@ source("./ggplot2/plot-utils.r")
 # retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
 jmh_output_folder <- args[1]
-openjdk_hotspot_vm_identifier <- args[2]
-graalvm_ce_identifier <- args[3]
-graalvm_ee_identifier <- args[4]
+plot_output_folder <- args[2]
+openjdk_hotspot_vm_identifier <- args[3]
+graalvm_ce_identifier <- args[4]
+graalvm_ee_identifier <- args[5]
 
 # Define the color palette (corresponding to each JVM) used in the final generated plot
 openjdk_hotspot_vm_color_palette <- c("OpenJDK HotSpot VM" = "#648FFF")
@@ -56,19 +57,19 @@ plotJvmSplitBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_benchma
   data <- readAndAppendJvmIdentifierToJmhCsvResults(openjdk_hotspot_vm_benchmark_file, "OpenJDK HotSpot VM")
   data <- processJmhCsvResults(data)
   plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, openjdk_hotspot_vm_color_palette)
-  saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "openjdk_hotspot_vm", sep = "_"))
+  saveJmhBarPlot(data, plot, plot_output_folder, paste(benchmark_file_basename, "openjdk_hotspot_vm", sep = "_"))
 
   # GraalVM CE
   data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ce_benchmark_file, "GraalVM CE")
   data <- processJmhCsvResults(data)
   plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, graalvm_ce_color_palette)
-  saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "graalvm_ce", sep = "_"))
+  saveJmhBarPlot(data, plot, plot_output_folder, paste(benchmark_file_basename, "graalvm_ce", sep = "_"))
 
   # GraalVM EE
   data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ee_benchmark_file, "GraalVM EE")
   data <- processJmhCsvResults(data)
   plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, graalvm_ee_color_palette)
-  saveJmhBarPlot(data, plot, jmh_output_folder, paste(benchmark_file_basename, "graalvm_ee", sep = "_"))
+  saveJmhBarPlot(data, plot, plot_output_folder, paste(benchmark_file_basename, "graalvm_ee", sep = "_"))
 }
 
 # Plot the benchmark results in the same SVG file (one for all JVMs)
@@ -84,7 +85,7 @@ plotJvmAggregatedBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_be
   data <- processJmhCsvResults(data)
 
   plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, full_color_palette)
-  saveJmhBarPlot(data, plot, jmh_output_folder, benchmark_file_basename)
+  saveJmhBarPlot(data, plot, plot_output_folder, benchmark_file_basename)
 }
 
 # Note: the corresponding benchmark file results must have the same names and reside under the same folder structure:

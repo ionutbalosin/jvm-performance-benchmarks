@@ -56,11 +56,14 @@ check_command_line_options() {
 set_environment_variables() {
   export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH"
   export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
+  export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
   export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
 
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
+  echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
+  echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
@@ -164,7 +167,7 @@ calculate_benchmarks_geometric_mean() {
 
 plot_benchmarks() {
   R <./ggplot2/plot-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while plotting benchmarks results, unable to continue!"
