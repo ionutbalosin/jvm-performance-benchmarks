@@ -1,11 +1,13 @@
 # Authors
 
-Ionut Balosin 
-  - website: www.ionutbalosin.com
-  - email: ionut.balosin@gmail.com
+Ionut Balosin
+- Website: www.ionutbalosin.com
+- Twitter: @ionutbalosin
+- Mastodon: ionutbalosin@mastodon.social
 
 Florin Blanaru
-  - email: florin.blanaru96@gmail.com
+- Twitter: @gigiblender
+- Mastodon: gigiblender@mastodon.online
 
 # Context
 
@@ -674,10 +676,9 @@ GraalVM EE JIT looks better overall, nevertheless, a case where there is a notic
 
 The hot methods reported by the `-prof perfasm` belongs to the runtime-generated stub, so it makes it difficult to grasp the optimizations from the benchmark method. Nevertheless, at first glance, based on the hottest methods, it looks like C2 JIT spends the majority of time in the `StubRoutines::libmTan`, much more than GraalVM CE/EE JIT.
 
-OpenJDK hottest methods report:
-
 ```
-  ....[Hottest Methods (after inlining)]..............................
+  OpenJDK hottest region
+  ....[Hottest Methods (after inlining)]....
   71.71%        runtime stub  StubRoutines::libmTan
   12.97%          libjava.so  jatan
   6.09%         c2, level 4  LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 479
@@ -685,9 +686,9 @@ OpenJDK hottest methods report:
   2.61%          libjava.so  jfabs
 ```
 
-GraalVM CE hottest methods report:
 ```
-  ....[Hottest Methods (after inlining)]..............................
+  GraalVM CE hottest region
+  ....[Hottest Methods (after inlining)]....
   45.01%                       <unknown>
   27.19%           libjava.so  jatan
   10.66%       jvmci, level 4  LoopInvariantCodeMotionBenchmark::initial_loop, version 3, compile id 729
@@ -695,9 +696,9 @@ GraalVM CE hottest methods report:
   5.57%           libjava.so  jfabs
 ```
 
-GraalVM EE hottest methods report:
 ```
-  ....[Hottest Methods (after inlining)]..............................
+  GraalVM EE hottest region
+  ....[Hottest Methods (after inlining)]....
   37.50%                       <unknown>
   31.58%           libjava.so  jatan
   11.73%     Unknown, level 0  java.lang.StrictMath::atan, version 1, compile id 727
@@ -772,6 +773,50 @@ The generated code by GraalVM EE JIT is abysmal:
   0x7f4d56ffafb5:   mov    %r10d,%eax         <--- return
   0x7f4d56ffafc1:   ret
 ```
+
+## MandelbrotVectorApiBenchmark
+
+This benchmark tests the performance of Project Panama's Vector API when used to compute the Mandelbrot set.
+As of the time of writing, the Vector API is still an incubator module in OpenJDK and the API and the implementation
+are subject to change between releases.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: MandelbrotVectorApiBenchmark.svg>>
+
+### Conclusions:
+
+In the `baseline` benchmark the Mandelbrot set is computed using non-vectorized instructions. In this case, all three JVMs
+perform equally regardless of the data size and the number of iterations.
+
+In the `vectorized` benchmark the Mandelbrot set is computed using the Vector API. In this case, OpenJDK performs better than
+both GraalVM CE and EE. This is because C2 contains all the compiler intrinsics for the Vector API, while GraalVM CE and
+EE do not. This can be seen from the generated assembly code and by looking at the hottest regions of code in the
+`perf` output:
+
+```
+OpenJDK vectorized hottest region
+....[Hottest Methods (after inlining)]....
+98.25%  c2, level 4  MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 884
+... 
+```
+
+```
+GraalVM CE vectorized hottest region
+....[Hottest Methods (after inlining)]....
+59.51%  jvmci, level 4  MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+15.11%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1016 
+11.80%  jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1008 
+10.23%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
+```
+
+```
+GraalVM EE vectorized hottest region
+....[Hottest Methods (after inlining)]....
+74.23%  jvmci, level 4  MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1038 
+22.04%  jvmci, level 4  jdk.incubator.vector.Double256Vector::bOp, version 2, compile id 1040 
+```
+
 
 ## MegamorphicMethodCallBenchmark
 
@@ -862,21 +907,22 @@ splitting the call site into multiple monomorphic call sites.
 
 The class hierarchy used in the benchmark is the following:
 ```
-private static class C{1,..,6} implements I {}
-interface I extends I5 {
+  private static class C{1,..,6} implements I {}
+  interface I extends I5 {
     private void baz() { foot_5(); }
     default void foo() { baz(); }
-}
+  }
 
-interface I5 extends I4 {
+  interface I5 extends I4 {
     private void baz_5() { foot_4(); }
     default void foo_5() { baz_5(); }
-}
+  }
 ...
-interface I1 {
+  interface I1 {
     static Wrapper wrapper = new Wrapper();
     default void baz_1() { wrapper.x++; }
-    private void foo_1() { baz_1(); }
+    private void foo_1() { baz_1(); 
+  }
 ```
 
 Source code: <<link to GitHub benchmark>>
@@ -895,14 +941,14 @@ Looking at the figure above and the assembly generated for the `virtual_calls_ch
   to reach the target method. <br> If a dominant target is present (`virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`),
   then C2 JIT will add a guard, devirtualize and inline the call to the dominant target:
 ```
-// High-level pseudo-code of the optmization for a dominant target
-if (receiver instanceof DominantTarget) {
+  // High-level pseudo-code of the optmization for a dominant target
+  if (receiver instanceof DominantTarget) {
     // fast path. 
     DominantTarget.method(); // inlined
-} else {
+  } else {
     // slow path. Use an interface call to reach the target method.
     receiver.method();
-}
+  }
 ```
 - GraalVM CE is able to devirtualize (and inline) through the class hierarchy regardless of the number of call sites. It does
   not perform loop unrolling but uses a series of compare and jumps to check if the receiver is an instance of expected target types.
@@ -918,11 +964,11 @@ For GraalVM EE, if more than four targets are present, it is able to fully devir
 in the benchmark. For the remaining call sites, it manages to devirtualize only up to a certain depth in the class hierarchy
 In the example below it is shown how GraalVM EE generates a virtual call to `foo_4`:
 ```
-0x91157:   movabs $0x26408,%rdi     ; {metadata('MegamorphicInterfaceCallBenchmark$C6')}
-0x91161:   cmp    %rcx,%rdi
-0x91164:   jne    0x915b7
-0x9116a:   mov    0x18(%rsp),%r10
-0x9116f:   call   0x8f140           ;*invokeinterface foo_4()
+  0x91157:   movabs $0x26408,%rdi   ; {metadata('MegamorphicInterfaceCallBenchmark$C6')}
+  0x91161:   cmp    %rcx,%rdi
+  0x91164:   jne    0x915b7
+  0x9116a:   mov    0x18(%rsp),%r10
+  0x9116f:   call   0x8f140         ;*invokeinterface foo_4()
                                     ; - MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 237)
                                     ; - MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 241)
                                     ; - MegamorphicInterfaceCallBenchmark$I::baz@1 (line 247)
@@ -942,17 +988,17 @@ Normally, the JIT compiler should be able to inline the method and return a cons
 if a method takes a large number of arguments, the JIT may bail out when trying to compile the method.
 
 ```
-@Benchmark
-public long method_args_buster() {
-  return tooManyArgsMethod(1.0, 2.0, ..., 64.0);
-}
+  @Benchmark
+  public long method_args_buster() {
+    return tooManyArgsMethod(1.0, 2.0, ..., 64.0);
+  }
 
-long tooManyArgsMethod(double d00, double d01, ... double d63) {
-  return Math.round(d00) +
-    Math.round(d01) +
-    ... +
-    Math.round(d63);
-}
+  long tooManyArgsMethod(double d00, double d01, ... double d63) {
+    return Math.round(d00) +
+      Math.round(d01) +
+      ... +
+      Math.round(d63);
+  }
 ```
 
 Source code:<<link to GitHub benchmark>>
@@ -1062,28 +1108,28 @@ This benchmark tests the implicit vs explicit throw and catch of `NullPointerExc
 The caller method contains a loop that catches the `NullPointerException` thrown by the callee. The callee is never inlined:
 
 ```
-@Benchmark
-public void throw_npe() {
-  for (Wrapper object : A) {
-    try {
-      {implicit, explicit}ThrowNpe(object);
-    } catch (NullPointerException e) {
-      // swallow exception
+  @Benchmark
+  public void throw_npe() {
+    for (Wrapper object : A) {
+      try {
+        {implicit, explicit}ThrowNpe(object);
+      } catch (NullPointerException e) {
+        // swallow exception
+      }
   }
-}
 
-@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-private int explicitThrowNpe(Wrapper o) {
-  if (o == null) {
-    throw new NullPointerException("Oops!");
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private int explicitThrowNpe(Wrapper o) {
+    if (o == null) {
+      throw new NullPointerException("Oops!");
+    }
+    return o.x;
   }
-  return o.x;
-}
 
-@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-private int implicitThrowNpe(Wrapper o) {
-  return o.x;
-}
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private int implicitThrowNpe(Wrapper o) {
+    return o.x;
+  }
 ```
 
 For `threshold = 0`, the benchmark does not throw any `NullPointerException`. For `threshold = 1`, the
@@ -1100,10 +1146,10 @@ For implicit throws however, OpenJDK is around 35x faster than both GraalVM CE a
 we look at the flamegraphs generated by JMH (and [async-profiler](https://github.com/async-profiler/async-profiler))
 for the `implicit_throw_npe` benchmark.
 
-<<IMG: jvm-performance-benchmarks/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.cpu.html>>
+<<IMG: jvm-performance-benchmarks/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.cpu.html>>
 <br> The flame graph generated by OpenJDK for the `implicit_throw_npe` benchmark.
 
-<<IMG: jvm-performance-benchmarks/results/jdk-17/x86_64/flamegraph/graalvm-ce/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.cpu.html>>
+<<IMG: jvm-performance-benchmarks/results/jdk-17/x86_64/flamegraph/graalvm-ce/NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.cpu.html>>
 <br> The flame graph generated by GraalVM CE for the `implicit_throw_npe` benchmark. GraalVM EE generates a similar flame graph.
 
 Looking at the flame graph for GraalVM CE (and EE), we can see that a call to
@@ -1137,27 +1183,27 @@ For class and interface recursive calls (static and non-static):
 
 For example, the below code instructions pertains to GraalVM CE:
 ```
-0xfcd23:   je     0xfcda2           <--- jump to return statement
-                                    ; - cls_non_static@1 (line 108)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-0xfcd29:   lea    -0x6(%rdx),%edx   <--- subtract 0x6 from the counter
-                                    ; - cls_non_static@11 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-0xfcd2c:   data16 xchg %ax,%ax      <--- nops
-0xfcd2f:   call   0xfccc0           <--- call to cls_non_static six layers deep
-                                    ;*invokevirtual cls_non_static
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ; - cls_non_static@12 (line 111)
-                                    ;   {optimized virtual_call}
+  0xfcd23:   je     0xfcda2           <--- jump to return statement
+                                      ; - cls_non_static@1 (line 108)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+  0xfcd29:   lea    -0x6(%rdx),%edx   <--- subtract 0x6 from the counter
+                                      ; - cls_non_static@11 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+  0xfcd2c:   data16 xchg %ax,%ax      <--- nops
+  0xfcd2f:   call   0xfccc0           <--- call to cls_non_static six layers deep
+                                      ;*invokevirtual cls_non_static
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ; - cls_non_static@12 (line 111)
+                                      ;   {optimized virtual_call}
 ```
 
 ## ScalarReplacementBenchmark
@@ -1251,6 +1297,42 @@ In the case of `arg_escape_obj` benchmark, the C2 JIT is (again) one order of ma
   0x7f662eb1d051:   ret
 ```
 
+## SepiaVectorApiBenchmark
+
+This benchmark is similar to the `MandelbrotVectorApiBenchmark` in that it tests the performance of Project Panama's
+Vector API. However, in this benchmark the Vector API is used to apply a sepia filter to an input image.
+
+Source code: <<link to GitHub benchmark>>
+
+<<IMG: SepiaVectorApiBenchmark.svg>>
+
+### Conclusions:
+
+Once again, in the `baseline` benchmark the Sepia filter is applied using non-vectorized instructions. In this case, all three JVMs
+perform equally regardless of the input image size.
+
+In the `vectorized` benchmark the Sepia filter is applied using the Vector API. OpenJDK performs better than
+both GraalVM CE and EE. This is because C2 contains all the compiler intrinsics for the Vector API, while GraalVM CE and
+EE do not.
+
+```
+  OpenJDK vectorized hottest region
+  ....[Hottest Regions]....
+  98.47%  c2, level 4  SepiaVectorApiBenchmark::vectorized, version 3, compile id 988
+  ... 
+```
+
+```
+  GraalVM CE vectorized hottest region
+  ....[Hottest Methods (after inlining)]....
+  40.03%  jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1010 
+  39.78%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 959 
+   9.34%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 997 
+   7.90%  jvmci, level 4  jdk.internal.vm.vector.VectorSupport::compare, version 2, compile id 990
+   ... 
+```
+
+
 ## StackSpillingBenchmark
 
 This benchmark measures the cost of stack spilling. Stack spilling occurs when the register allocator
@@ -1274,21 +1356,21 @@ Source code: <<link to GitHub benchmark>>
 The assembly generated for the `load_store_no_spill` benchmark has the following pattern where the
 loads and stores are grouped together and the stack is not used:
 ```
-...
-0x8e4f1:   mov    0x64(%rbx),%r10d  --> load from field loadXX
-0x8e4f5:   mov    %r10d,0xc8(%rbx)  --> store to field storeXX
-...
+  ...
+  0x8e4f1:   mov    0x64(%rbx),%r10d  --> load from field loadXX
+  0x8e4f5:   mov    %r10d,0xc8(%rbx)  --> store to field storeXX
+  ...
 ```
 
 For the `load_store_spill*` benchmarks, the stack is used to spill intermediate values. The assembly
 generated is similar to the following:
 ```
-0x8eb69:   mov    0x40(%rbx),%r10d  --> load field loadXX
-0x8eb6d:   mov    %r10d,0x3c(%rsp)  --> store field on the stack
-...
-...
-0x8ebe0:   mov    0x3c(%rsp),%r10d  --> load value from stack
-0x8ebe5:   mov    %r10d,0xa4(%rbx)  --> store to field storeXX
+  0x8eb69:   mov    0x40(%rbx),%r10d  --> load field loadXX
+  0x8eb6d:   mov    %r10d,0x3c(%rsp)  --> store field on the stack
+  ...
+  ...
+  0x8ebe0:   mov    0x3c(%rsp),%r10d  --> load value from stack
+  0x8ebe5:   mov    %r10d,0xa4(%rbx)  --> store to field storeXX
 ```
 
 ## Geometric Mean
