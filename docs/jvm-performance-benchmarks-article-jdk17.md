@@ -73,12 +73,11 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
 - each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also (in a few cases) multi-threaded workloads
 - the benchmarks were run on the below machines:
   1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Monterey 12.6.1
-  2. **TODO: Florin - add config**
+  2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
 - to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine: 
   1. disabled the turbo-boost mode
   2. set CPU governor to _performance_
   3. disabled CPU hyper-threading
-  4. **TODO: Florin - sth else?**
 
 # JIT Compilers
 
@@ -1805,7 +1804,23 @@ To summarize, on both architectures the geometric mean is consistent:
 
 # Final Thoughts
 
-**TODO: Florin/Ionut**
+In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 
+and arm64. We used a set of JMH micro-benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set
+of optimizations. We have also used a set of micro-benchmarks to assess the performance of the Garbage Collectors (even
+though the results are not fully conclusive due to the lack of real-world scenarios).
+
+This report should not be considered as a final verdict on which JVM distribution is the best. As it can be seen in 
+the results, there are cases where one distribution is faster than the other and vice-versa, depending on the benchmark.
+
+Of course, the geometric mean could be used as an indicator of the overall performance -- but what if the benchmark set is not fully representative?
+Additionally, micro-benchmarking is often not the best indicator of how good a system will be in a production environment.
+
+Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks. It might
+also be useful to developers who want to have a better understanding of the class of optimizations available in a given
+JVM distribution.
+
+In case you want to contribute to this project, feel free to reach out or open a pull request on
+[GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks/).
 
 # References
 - [OpenJDK sources](https://github.com/openjdk/jdk)
