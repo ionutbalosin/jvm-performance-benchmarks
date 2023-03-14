@@ -1295,7 +1295,7 @@ The Geometric Mean (GM) for the JIT benchmarks on each architecture is described
 
 This is purely informative to have a high-level understanding on the overall benchmark scores.
 
-## OpenJDK on x86_64
+## x86_64
 
 No. | JIT            | Arcitecture | Geometric Mean | Unit
 ----|----------------|-------------|----------------|--------
@@ -1305,7 +1305,7 @@ No. | JIT            | Arcitecture | Geometric Mean | Unit
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
-## OpenJDK on arm64
+## arm64
 
 No. | JIT            | Arcitecture | Geometric Mean | Unit
 ----|----------------|-------------|----------------|--------
