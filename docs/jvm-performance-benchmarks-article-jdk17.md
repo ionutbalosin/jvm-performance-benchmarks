@@ -114,7 +114,7 @@ Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalo
 
 The results are identical (except for a minor variation of _± 0.4 np/ops_ in the case of the `obj_sink` benchmark).
 
-This increases the confidence in the benchmarks results, across multiple JVMs.
+This increases the confidence in the benchmark results, across the selected JVMs.
 
 ## CanonicalizeInductionVariableBenchmark
 
