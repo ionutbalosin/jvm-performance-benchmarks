@@ -1792,3 +1792,4 @@ To summarize, on both architectures the geometric mean is consistent:
 - [Concurrent Remembered Set Refinement in Generational Garbage Collection](https://www.researchgate.net/publication/220817732_Concurrent_Remembered_Set_Refinement_in_Generational_Garbage_Collection) - David Detlefs, Ross Knippel, William D. Clinger, Matthias Jacob
 - [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [Renaissance: Benchmarking Suite for Parallel Applications on the JVM](https://renaissance.dev/resources/docs/renaissance-suite.pdf)
+**TODO: Florin - sth else?**
