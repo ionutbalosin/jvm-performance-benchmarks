@@ -9,6 +9,23 @@ Florin Blanaru
 - Twitter: @gigiblender
 - Mastodon: gigiblender@mastodon.online
 
+# Content
+
+- [Context](#context)
+- [SetUp](#setup)
+- [JIT Compilers](#jit-compilers)
+  - [Benchmarks](#jit-benchmarks)
+  - [Geometric Mean](#jit-geometric-mean)
+- [Garbage Collectors](#garbage-collectors)
+  - [Overview](#gc-overview)
+  - [Barriers](#gc-garriers)
+  - [Benchmarks](#gc-benchmarks)
+  - [Geometric Mean](#gc-geometric-mean)
+- [Macro](#macro)
+  - [Benchmarks](#macro-benchmarks)
+  - [Geometric Mean](#macro-geometric-mean)
+- [Final Thoughts](#final-thoughts)
+
 # Context
 
 The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting for both the Just-In-Time (JIT) Compiler and the Garbage Collectors (GC) to assess:
@@ -73,6 +90,8 @@ No. | JIT       | JVM                | Arcitecture
 
 The difference between GraalVM CE and EE is that EE has additional built-in optimizations, such as
 better vectorization, intrinsics, register allocation, etc.
+
+## JIT Benchmarks
 
 ## CanonicalizeInductionVariableBenchmark
 
@@ -1373,7 +1392,7 @@ generated is similar to the following:
   0x8ebe5:   mov    %r10d,0xa4(%rbx)  --> store to field storeXX
 ```
 
-## Geometric Mean
+## JIT Geometric Mean
 
 The Geometric Mean (GM) for the JIT benchmarks on each architecture is described below.
 
@@ -1406,8 +1425,6 @@ To summarize, on both architectures the geometric mean is consistent:
 3. GraalVM CE JIT is the slowest
 
 # Garbage Collectors
-
-## Benchmarks Description
 
 This section describes the results obtained from running the GC benchmarks. The current benchmarks focus on various metrics:
 - the efficiency of a GC objects allocation/reclamation with
@@ -1498,6 +1515,8 @@ _Note:_ depending on the mode, some of these barriers might be disabled.
 - a keep-alive barrier used during the concurrent marking phase
 - a mark barrier used during the concurrent marking phase
 - nmethod-barriers and stack-watermark barriers (similar to Shenandoah GC)
+
+## GC Benchmarks
 
 ## BurstHeapMemoryAllocatorBenchmark
 
@@ -1626,7 +1645,7 @@ Source code: <<link to GitHub benchmark>>
 - Shenandoah GC seems to perform better than any other collector, but with a marginal difference in comparison to ZGC
 - G1 GC offers the worst throughput, about ~10x-20x slower than the rest. Most probably it has the same root cause as in the previous benchmark (i.e. post-write barriers overhead)
 
-## Geometric Mean
+## GC Geometric Mean
 
 The Geometric Mean (GM) for the Garbage Collector benchmarks on each architecture is described below.
 
@@ -1664,6 +1683,8 @@ To summarize, on both architectures:
 # Macro
 
 This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
+
+## Macro Benchmarks
 
 ## HuffmanCodingBenchmark
 
@@ -1723,7 +1744,7 @@ Source code: <<link to GitHub benchmark>>
 
 <<IMG: WordFrequencyBenchmark.svg>>
 
-## Geometric Mean
+## Macro Geometric Mean
 
 The Geometric Mean (GM) for the macro benchmarks category on each architecture is described below.
 
