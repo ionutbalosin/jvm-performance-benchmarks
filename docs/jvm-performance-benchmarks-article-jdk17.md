@@ -1515,18 +1515,6 @@ Most GCs require different barriers that need to be implemented in the runtime, 
 - CAS object barrier that handles atomic compare and swap related methods
 - an object clone barrier to deal with cloning objects on the heap
 
-### Shenandoah GC
-- load-reference barrier employed after a load from a reference field or array element and before the loaded object is given to the rest of the application code
-- Snapshot-At-The-Beginning (SATB) write barrier employed before reference writes and used in case of concurrent marking. This is very similar to G1's SATB barrier, it intercepts writes and marks through "previous" objects
-- an arraycopy barrier to deal with array copies (a better arraycopy-barrier-scheme in comparison to, for example, the G1's arraycopy barriers implemented in the C1/C2 JIT or Graal JIT)
-- CAS object barrier that handles atomic compare and swap related methods
-- an object clone barrier to deal with cloning objects on the heap
-- a keep-alive barrier for java.lang.ref.Reference to handle the cases when the referent field of a java.lang.ref.Reference object is read
-- nmethod-barriers (i.e., a mechanism to arm nmethods) for concurrent unloading. For example, code cache unloading needs to know about on-stack nmethods. Arming the nmethods enables GC callbacks when they are called.
-- stack-watermark barrier for concurrent thread-scanning
-
-**Note:** depending on the mode, some of these barriers might be disabled.
-
 ### ZGC
 - load-reference barrier employed when references are loaded from the Heap. It ensures that
   references pointing into a relocated memory area will be caught and handled (i.e., the load barrier performs further actions to remap pointers that actually point into the relocated memory area, without the need to read that memory)
@@ -1537,7 +1525,20 @@ Most GCs require different barriers that need to be implemented in the runtime, 
 - an object clone barrier to deal with cloning objects on the heap
 - a keep-alive barrier used during the concurrent marking phase
 - a mark barrier used during the concurrent marking phase
-- nmethod-barriers and stack-watermark barriers (similar to Shenandoah GC)
+- nmethod-barriers (i.e., a mechanism to arm nmethods) for concurrent unloading. For example, code cache unloading needs to know about on-stack nmethods. Arming the nmethods enables GC callbacks when they are called.
+- stack-watermark barrier for concurrent thread-scanning
+
+### Shenandoah GC
+- load-reference barrier employed after a load from a reference field or array element and before the loaded object is given to the rest of the application code
+- Snapshot-At-The-Beginning (SATB) write barrier employed before reference writes and used in case of concurrent marking. This is very similar to G1's SATB barrier, it intercepts writes and marks through "previous" objects
+- an arraycopy barrier to deal with array copies (a better arraycopy-barrier-scheme in comparison to, for example, the G1's arraycopy barriers implemented in the C1/C2 JIT or Graal JIT)
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+- a keep-alive barrier for java.lang.ref.Reference to handle the cases when the referent field of a java.lang.ref.Reference object is read
+- nmethod-barriers and stack-watermark barriers (similar to what ZGC had initially introduced)
+
+**Note:** depending on the mode, some of these barriers might be disabled.
+
 
 ## GC Benchmarks
 
