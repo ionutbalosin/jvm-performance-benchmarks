@@ -1552,7 +1552,7 @@ Source code: [BurstHeapMemoryAllocatorBenchmark.java](https://github.com/ionutba
 <img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/BurstHeapMemoryAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg">
 
 ### Conclusions:
-- ZGC performs significantly better than all the other collectors (around 3x times faster than G1 GC), followed by G1 GC, ShenandoahGC, and Serial GC (for both 30% but also 60% allocated heap)
+- ZGC performs significantly better than all the other collectors (around 3x times faster than G1 GC), followed by G1 GC, Shenandoah GC, and Serial GC (for both 30% but also 60% allocated heap)
 - Parallel GC offers the worst throughput
 
 <img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/BurstHeapMemoryAllocatorBenchmark_2threads_openjdk_hotspot_vm.svg">
@@ -1819,6 +1819,12 @@ Of course, the geometric mean could be used as an indicator of the overall perfo
 Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks. It might
 also be useful to developers who want to have a better understanding of the class of optimizations available in a given
 JVM distribution.
+
+In general, we can conclude that the GraalVM EE JIT compiler outperforms OpenJDK C2 JIT. In particular, optimizations like partial escape analysis, and better inlining (including polymorphic inlining) make a difference. GraalVM CE JIT has a reduced set of optimizations in comparison to C2 JIT. Nevertheless, the lack of support for ZGC and Shenandoah GC is a drawback (at the moment) for GraalVM.
+
+OpenJDK offers a good mixture between C2 JIT with an extended set of intrinsics and rich vectorization support, as well as the full set of Garbage Collectors (including ZGC and Shenandoah GC). Even though maybe, in terms of JIT C2 is not on the same parity as Graal JIT from the EE, it does a good job overall.
+
+In regards to the available Garbage Collectors from OpenJDK, there are specific workloads that make for example a generational collector better than non-generational collectors like ZGC and Shenandoah GC. Adding generational support to ZGC and Shenandoah GC would be something very useful, in our opinion.
 
 In case you want to contribute to this project, feel free to reach out or open a pull request on
 [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks/).
