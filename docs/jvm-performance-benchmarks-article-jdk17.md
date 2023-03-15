@@ -32,7 +32,7 @@ Florin Blanaru
 
 # Context
 
-The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting for both the Just-In-Time (JIT) Compiler and the Garbage Collectors (GC) to assess:
+The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting for both the Just-In-Time (JIT) Compilers and the Garbage Collectors (GC) to assess:
 
 - different JIT Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
 - different Garbage Collectors' efficiency in both allocating but also reclaiming objects
@@ -1804,16 +1804,17 @@ To summarize, on both architectures the geometric mean is consistent:
 
 # Final Thoughts
 
-In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 
-and arm64. We used a set of JMH micro-benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set
+In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64
+and arm64. We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set
 of optimizations. We have also used a set of micro-benchmarks to assess the performance of the Garbage Collectors (even
 though the results are not fully conclusive due to the lack of real-world scenarios).
 
 This report should not be considered as a final verdict on which JVM distribution is the best. As it can be seen in 
 the results, there are cases where one distribution is faster than the other and vice-versa, depending on the benchmark.
 
-Of course, the geometric mean could be used as an indicator of the overall performance -- but what if the benchmark set is not fully representative?
-Additionally, micro-benchmarking is often not the best indicator of how good a system will be in a production environment.
+Micro-benchmarking is often not the best indicator of how good a system will be in a production environment.
+Even though the artificial benchmarks might not reveal the entire truth, they tell enough if properly implemented.
+Of course, the geometric mean could be used as an indicator of the overall performance, but what if the benchmark set is not fully representative?
 
 Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks. It might
 also be useful to developers who want to have a better understanding of the class of optimizations available in a given
@@ -1833,4 +1834,3 @@ In case you want to contribute to this project, feel free to reach out or open a
 - [Concurrent Remembered Set Refinement in Generational Garbage Collection](https://www.researchgate.net/publication/220817732_Concurrent_Remembered_Set_Refinement_in_Generational_Garbage_Collection) - David Detlefs, Ross Knippel, William D. Clinger, Matthias Jacob
 - [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [Renaissance: Benchmarking Suite for Parallel Applications on the JVM](https://renaissance.dev/resources/docs/renaissance-suite.pdf)
-- **TODO: Florin - sth else?**
