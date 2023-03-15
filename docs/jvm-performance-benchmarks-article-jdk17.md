@@ -107,7 +107,7 @@ This is particularly useful in case of a comparison between different types of J
 
 > A comparison between different JVMs might not be further relevant unless, at least, the baseline is the same.
 
-Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/InfrastructureBaselineBenchmark.java)
+Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java)
 
 <img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/InfrastructureBaselineBenchmark.svg">
 
@@ -474,7 +474,7 @@ Source code: [LockCoarseningBenchmark.java](https://github.com/ionutbalosin/jvm-
 
 - Overall GraalVM EE JIT does a better job then GraalVM CE JIT and C2 JIT
 
-What is of a particular interest is the `nested_synchronized` benchmark that is almost 3 orders of magnitude slower than GraalVM CE/EE.
+What is of a particular interest is the `nested_synchronized` benchmark where OpenJDK is almost 3 orders of magnitude slower than GraalVM CE/EE.
 
 The reason for that is the fact the OpenJDK fails to reduce the deoptimization rate (and hits a recompilation limit), therefore the method is abandoned to the Template Interpreter:
 
@@ -524,9 +524,9 @@ By contrast, GraalVM EE JIT can coarse all the nested locks in one block and per
 
 - Similar trends as before, GraalVM EE JIT does a better job than GraalVM CE JIT and C2 JIT
 
-The `nested_synchronized` from OpenJDK HotSpot VM is (again) much slower than GraalVM EE/CE. The reason is the same, it does not get compiled by C1 JIT nor C2 JIT, but Template Interpreter is used to generating the assembly code snippets for each bytecode.
+The `nested_synchronized` from OpenJDK HotSpot VM is (again) much slower than GraalVM EE/CE. The reason is the same, it does not get compiled by C1 nor C2. Instead, the Template Interpreter is used to generate the assembly code snippets for each bytecode.
 
-By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main difference is that now since the biased locking is disabled, a compare-and-swap atomic instruction guard that section.
+By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main difference is that now since the biased locking is disabled, a compare-and-swap atomic instruction guards that section.
 
 ```
 0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   <--- coarsed section (i.e., CAS)
@@ -542,7 +542,7 @@ By contrast, GraalVM EE JIT merges all the nested locks in one synchronized bloc
 0x7f3926b18db3:   mov    %r9d,%eax           <--- ireturn
 ```
 
-In summary, running non-contented code with biased locking disabled adds the overhead of the compare-and-swap atomic operation, in comparison to the biased locking scheme, nevertheless, this is probably not very often in the modern applications.
+In summary, running non-contented code with biased locking disabled adds the overhead of the compare-and-swap atomic operation, in comparison to the biased locking scheme. Nevertheless, this is probably not occurring very often in the modern applications.
 
 ## LockElisionBenchmark
 
@@ -593,12 +593,12 @@ Source code: [LockElisionBenchmark.java](https://github.com/ionutbalosin/jvm-per
 
 Except for `nested_synchronized` and `recursive_method_calls` benchmarks all three compilers behave similarly.
 
-The `nested_synchronized` from OpenJDK HotSpot VM does not get compiled by C1 JIT nor C2 JIT, but Template Interpreter is used to generating the assembly code snippets for each bytecode. There is the same limitation as in the case of LockCoarseningBenchmark.
+The `nested_synchronized` from OpenJDK HotSpot VM does not get compiled by C1 nor C2. Instead, the Template Interpreter is used to generate the assembly code snippets for each bytecode. This is the same limitation as in the case of `LockCoarseningBenchmark`.
 
 The `recursive_method_calls` is explained in details for every compiler, as per below:
 
-- GraalVM EE JIT inlines all the recursive calls so there is no virtual method call involved anymore
-- GraalVM CE JIT can remove the recursive calls, nevertheless, there is still a virtual method call involved.
+- GraalVM EE JIT inlines all the recursive calls so there is no virtual method call involved anymore.
+- GraalVM CE JIT can remove the recursive calls. Nevertheless, there is still a virtual method call involved.
 
   The `recursive_method_calls` benchmark has only one virtual call to the recursive method `recursiveSum`:
 ```
@@ -612,7 +612,7 @@ The `recursive_method_calls` is explained in details for every compiler, as per 
   0x7fed52ffc793:   ret
 ```
 
-and the `recursiveSum` (i.e., the recursive callee method) has no any virtual method call involved, everything get's inlined:
+and the `recursiveSum` (i.e., the recursive callee method) has no virtual method call involved. Instead, everything is inlined:
 
 ```
   0x7fed52ffc2b5:   add    0x4(%rsp),%eax       <--- iadd 
@@ -668,9 +668,7 @@ None of the compilers has implemented this optimization.
 
 Even though, an interesting case is why OpenJDK runs faster than GraalVM EE/CE the `initial_loops` benchmark.
 
-The C2 JIT unrolls each of these loops by a factor of 8. For example, the code from below pertains to the first loop:
-
-For example, the code snapshot from below pertains to the first loop:
+The C2 JIT unrolls each of these loops by a factor of 8. For example, the code snapshot below pertains to the first loop:
 ```
                                                      <--- loop begin
   0x7f880cf64940:   mov    0x10(%rsi,%r10,4),%edx    <--- load
@@ -686,7 +684,7 @@ For example, the code snapshot from below pertains to the first loop:
 
 GraalVM EE JIT emits the same instructions, nevertheless, the loop unrolling factor is 4 (as opposed to 8).
 
-GraalVM CE JIT emits less optimal code instruction (i.e., additional loads), even though the unrolling factor is 8 (similar to C2 JIT).
+GraalVM CE JIT emits less optimal code instruction (i.e., additional loads), even though the unrolling factor is 8 (similar to the C2 JIT).
 
 ```
                                                       <--- loop begin
@@ -1296,7 +1294,7 @@ Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/j
 
 ### Conclusions:
 
-Both GraalVM CE/EE JIT performs better than C2 JIT.
+Both GraalVM CE/EE JIT perform better than the C2 JIT.
 
 A matter of particular interest is, for example, the `branch_escape_obj` benchmark where C2 JIT is one order of magnitude slower.
 
@@ -1451,11 +1449,11 @@ To summarize, on both architectures the geometric mean is consistent:
 
 # Garbage Collectors
 
-This section describes the results obtained from running the GC benchmarks. The current benchmarks focus on various metrics:
-- the efficiency of a GC objects allocation/reclamation with
+This section describes the results obtained from running the GC benchmarks. The GC benchmarks focus on various metrics:
+- the efficiency of GC object allocation/reclamation with
     - different allocation rates
     - different object sizes
-    - different pre-allocated objects on the heap
+    - different occupancy rates of the heap (e.g., 30% or 60%)
     - different number of allocator threads (e.g., 1 or 2)
 - the impact of the barriers (e.g., read, write barriers) while traversing and/or updating heap data structures, trying to avoid any explicit allocation, in the benchmark method, unless it is induced by the underlying ecosystem.
 
@@ -1812,7 +1810,7 @@ In general, we can conclude that the GraalVM EE JIT compiler outperforms C2 JIT.
 
 OpenJDK still offers a good mixture between C2 JIT with an extended set of intrinsics and rich vectorization support, as well as the full set of Garbage Collectors (including ZGC and Shenandoah GC). Even though maybe, in terms of JIT C2 is not on the same parity as Graal JIT from the EE, the JVM does a good job overall.
 
-In regards to the available Garbage Collectors from OpenJDK, there are specific workloads that make, for example, a generational collector better than non-generational collectors like ZGC and Shenandoah GC. Adding generational support to ZGC and Shenandoah GC would be something very useful.
+In regard to the available Garbage Collectors from OpenJDK, there are specific workloads that make, for example, a generational collector better than non-generational collectors like ZGC and Shenandoah GC. Adding generational support to ZGC and Shenandoah GC is currently work in progress.
 
 This report should not be considered as a final verdict on which JVM distribution is the best. 
 As it can be seen in the results, there are cases where one distribution is faster than the other and vice-versa, depending on the benchmark.
