@@ -240,9 +240,51 @@ We can see that in general GraalVM CE, EE and OpenJDK have similar performance. 
   On the other hand, both OpenJDK and GraalVM CE do not group the object allocation instructions, and they subsequently generate a larger amount of code. This results in a performance penalty.
 
 - For `wrapper_obj_dse_inter_procedural` GraalVM EE performs around 3.4x faster than OpenJDK and GraalVM CE. The reason
-  behind is that GraalVM EE is able to inline the `Wrapper` constructor, remove dead allocations and perform the same
-  set of optimizations as in the `wrapper_obj_baseline` case. OpenJDK and GraalVM CE do not inline the `Wrapper`
-  constructor and therefore are not able to remove the dead allocations.
+  behind is that GraalVM EE is able to remove redundant allocations after inlining the `Wrapper` constructor. It then performs the same
+  set of optimizations as in the `wrapper_obj_baseline` case. OpenJDK and GraalVM CE also inline the `Wrapper`
+  constructor but are not able to remove the redundant allocations.
+
+One interesting optimization GraalVM EE performs is to check if a sequence of allocations all fit in the same TLAB. If this is the case,
+then it is able to take a fast path for allocations where the TLAB bound check is removed. This optimization allows for the 
+compiler to move instructions together as shown above. OpenJDK and GraalVM CE do not perform this optimization.
+```
+// High level pseudo-code showcasing the allocation optimization performed by GraalVM EE. 
+// The code does not fully resemble the actual assembly code. 
+
+void allocateObjects() {
+  if (TLAB_SIZE > CURRENT_TLAB + sizeof(Object) * 3) {
+      // fast path
+      CURRENT_TLAB += sizeof(Object) * 3;
+      obj1 = new Object();
+      obj2 = new Object();
+      obj3 = new Object();
+  } else {
+    // slow path
+    // 1st object allocation
+    if (TLAB_SIZE <= CURRENT_TLAB + sizeof(Object)) {
+      // allocate a new TLAB
+      CURRENT_TLAB = allocateNewTLAB();
+    }
+    obj1 = new Object();
+    CURRENT_TLAB += sizeof(Object);
+    
+    // 2nd object allocation
+    if (TLAB_SIZE <= CURRENT_TLAB + sizeof(Object)) {
+        // allocate a new TLAB
+        CURRENT_TLAB = allocateNewTLAB();
+    }
+    obj2 = new Object();
+    CURRENT_TLAB += sizeof(Object);
+    
+    // 3rd object allocation
+    if (TLAB_SIZE <= CURRENT_TLAB + sizeof(Object)) {
+        // allocate a new TLAB
+        CURRENT_TLAB = allocateNewTLAB();
+    }
+    obj3 = new Object();
+    CURRENT_TLAB += sizeof(Object);
+}
+```
 
 ## DeadMethodCallStoreBenchmark
 
