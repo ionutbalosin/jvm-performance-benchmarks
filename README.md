@@ -4,13 +4,6 @@ This repository contains different JVM benchmarks for the C2/Graal JIT Compilers
 
 Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell enough if properly implemented and executed.
 
-For the full copyright and license information, please view the [LICENSE](LICENSE) file distributed with the source code.
-
-## Authors
-
-- [Ionut Balosin](https://www.ionutbalosin.com)
-- [Florin Blanaru](https://twitter.com/gigiblender)
-
 ## Content
 
 - [Purpose](#purpose)
@@ -22,6 +15,8 @@ For the full copyright and license information, please view the [LICENSE](LICENS
 - [Infrastructure baseline benchmark](#infrastructure-baseline-benchmark)
 - [Run the benchmarks](#run-the-benchmarks)
 - [Benchmark plots](#benchmark-plots)
+- [License](#license)
+
 
 ## Purpose
 
@@ -243,3 +238,35 @@ To generate all benchmark plots corresponding to one `<jdk-version>` and (option
 If the `<arch>` parameter is omitted, it is automatically detected based on the current system architecture.
 
 Each benchmark plot is saved under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`.
+
+# License 
+
+Please see the [LICENSE](LICENSE) file for full license.
+
+```
+Copyright (C) 2019 - 2023 Ionut Balosin
+ 
+Author: Ionut Balosin
+Website: www.ionutbalosin.com
+Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
+
+Co-author: Florin Blanaru
+Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
+
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+   
+http://www.apache.org/licenses/LICENSE-2.0
+ 
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+```

@@ -1,26 +1,33 @@
 #!/bin/bash
 #
-#  JVM Performance Benchmarks
+# JVM Performance Benchmarks
 #
-#  Copyright (C) 2019 - 2022 Ionut Balosin
-#  Website: www.ionutbalosin.com
-#  Twitter: @ionutbalosin
+# Copyright (C) 2019 - 2023 Ionut Balosin
 #
-#  Co-author: Florin Blanaru
-#  Twitter: @gigiblender
+# Author: Ionut Balosin
+# Website: www.ionutbalosin.com
+# Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
 #
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
+# Co-author: Florin Blanaru
+# Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
 #
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
 #
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
 #
 
 check_command_line_options() {
@@ -55,11 +62,15 @@ check_command_line_options() {
 
 set_environment_variables() {
   export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH"
+  export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
+  export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
   export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
 
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
+  echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
+  echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
@@ -124,7 +135,7 @@ preprocess_benchmark_results() {
 
 benchmarks_geometric_mean() {
   R <./ggplot2/geomean-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while calculating the benchmarks geometric mean, unable to continue!"
@@ -163,7 +174,7 @@ calculate_benchmarks_geometric_mean() {
 
 plot_benchmarks() {
   R <./ggplot2/plot-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while plotting benchmarks results, unable to continue!"

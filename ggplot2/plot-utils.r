@@ -1,25 +1,32 @@
 #
-#  JVM Performance Benchmarks
+# JVM Performance Benchmarks
 #
-#  Copyright (C) 2019 - 2022 Ionut Balosin
-#  Website: www.ionutbalosin.com
-#  Twitter: @ionutbalosin
+# Copyright (C) 2019 - 2023 Ionut Balosin
 #
-#  Co-author: Florin Blanaru
-#  Twitter: @gigiblender
+# Author: Ionut Balosin
+# Website: www.ionutbalosin.com
+# Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
 #
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
+# Co-author: Florin Blanaru
+# Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
 #
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
 #
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
 #
 
 source("./ggplot2/utils.r")
@@ -161,15 +168,20 @@ generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, col
 }
 
 # Generate and save the plot to a SVG output file
-saveJmhBarPlot <- function(data, plot, jmh_output_folder, benchmark_file_basename) {
+saveJmhBarPlot <- function(data, plot, path, benchmark_file_basename) {
   if (!empty(data)) {
     # set the height proportional to the number of rows plus 4 cm (as a minimum)
     # TODO: may be this could be replaced by another formula
     height <- nrow(data) * 2 + 4
 
+    # create the path if does not exist
+    if (!dir.exists(path)) {
+      dir.create(path)
+    }
+
     # save the plot
     ggsave(
-      file = paste(jmh_output_folder, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
+      file = paste(path, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
       plot = plot,
       width = 50.8, # 1920 pixels
       height = height,

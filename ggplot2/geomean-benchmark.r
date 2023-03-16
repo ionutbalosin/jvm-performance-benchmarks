@@ -1,25 +1,32 @@
 #
-#  JVM Performance Benchmarks
+# JVM Performance Benchmarks
 #
-#  Copyright (C) 2019 - 2022 Ionut Balosin
-#  Website: www.ionutbalosin.com
-#  Twitter: @ionutbalosin
+# Copyright (C) 2019 - 2023 Ionut Balosin
 #
-#  Co-author: Florin Blanaru
-#  Twitter: @gigiblender
+# Author: Ionut Balosin
+# Website: www.ionutbalosin.com
+# Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
 #
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
+# Co-author: Florin Blanaru
+# Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
 #
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
 #
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
 #
 
 source("./ggplot2/geomean-utils.r")
@@ -27,9 +34,10 @@ source("./ggplot2/geomean-utils.r")
 # retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
 jmh_output_folder <- args[1]
-openjdk_hotspot_vm_identifier <- args[2]
-graalvm_ce_identifier <- args[3]
-graalvm_ee_identifier <- args[4]
+geometric_mean_output_folder <- args[2]
+openjdk_hotspot_vm_identifier <- args[3]
+graalvm_ce_identifier <- args[4]
+graalvm_ee_identifier <- args[5]
 
 # Define the Compiler benchmark results for that we will compute the geometric mean (i.e., geomean) as a separate category
 jit_benchmark_files <- list(
@@ -99,20 +107,20 @@ gc_benchmark_files <- list(
   "WriteBarriersLoopingOverArrayBenchmark.csv"
 )
 
-# Compiler benchmarks geometric mean
+# JIT geometric mean
 
 openjdk_hotspot_vm_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, jit_benchmark_files)
 graalvm_ce_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, jit_benchmark_files)
 graalvm_ee_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, jit_benchmark_files)
 jit_geomean <- c(
-  "OpenJDK HotSpot VM" = openjdk_hotspot_vm_geomean,
-  "GraalVM CE" = graalvm_ce_geomean,
-  "GraalVM EE" = graalvm_ee_geomean,
+  "C2 JIT" = openjdk_hotspot_vm_geomean,
+  "GraalVM CE JIT" = graalvm_ce_geomean,
+  "GraalVM EE JIT" = graalvm_ee_geomean,
   "Unit" = "ns/op"
 )
-writeJmhCsvResults(jmh_output_folder, "geomean_jit.csv", data.frame(t(sapply(jit_geomean, c))))
+writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", data.frame(t(sapply(jit_geomean, c))))
 
-# Macro benchmarks geometric mean
+# Macro geometric mean
 
 openjdk_hotspot_vm_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, macro_benchmark_files)
 graalvm_ce_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
@@ -123,15 +131,15 @@ macro_geomean <- c(
   "GraalVM EE" = graalvm_ee_geomean,
   "Unit" = "ns/op"
 )
-writeJmhCsvResults(jmh_output_folder, "geomean_macro.csv", data.frame(t(sapply(macro_geomean, c))))
+writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", data.frame(t(sapply(macro_geomean, c))))
 
-# Garbage Collector benchmarks geometric mean
+# GCs geometric mean
 
 openjdk_hotspot_vm_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files)
-writeJmhCsvResults(jmh_output_folder, "geomean_gc_openjdk_hotspot_vm.csv", openjdk_hotspot_vm_gc_geomean)
+writeJmhCsvResults(geometric_mean_output_folder, "gc_openjdk_hotspot_vm.csv", openjdk_hotspot_vm_gc_geomean)
 
 graalvm_ce_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files)
-writeJmhCsvResults(jmh_output_folder, "geomean_gc_graalvm_ce.csv", graalvm_ce_gc_geomean)
+writeJmhCsvResults(geometric_mean_output_folder, "gc_graalvm_ce.csv", graalvm_ce_gc_geomean)
 
 graalvm_ee_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files)
-writeJmhCsvResults(jmh_output_folder, "geomean_gc_graalvm_ee.csv", graalvm_ee_gc_geomean)
+writeJmhCsvResults(geometric_mean_output_folder, "gc_graalvm_ee.csv", graalvm_ee_gc_geomean)

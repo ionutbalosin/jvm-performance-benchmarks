@@ -1,26 +1,32 @@
-/**
- *  JVM Performance Benchmarks
+/*
+ * JVM Performance Benchmarks
  *
- *  Copyright (C) 2019 - 2022 Ionut Balosin
- *  Website: www.ionutbalosin.com
- *  Twitter: @ionutbalosin
+ * Copyright (C) 2019 - 2023 Ionut Balosin
  *
- *  Co-author: Florin Blanaru
- *  Twitter: @gigiblender
+ * Author: Ionut Balosin
+ * Website: www.ionutbalosin.com
+ * Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
+ * Co-author: Florin Blanaru
+ * Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 
@@ -45,10 +51,10 @@ import org.openjdk.jmh.annotations.Warmup;
  * OpenJDK HotSpot VM specifics:
  * - prior JDK 15: with biased locking enabled, compare-and-swap atomic operation are basically no-ops when acquiring a monitor, in case of uncontended locking.
  * It assumes that a monitor remains owned by a given thread until a different thread tries to acquire it
- * - starting JDK 15: without biased locking (or some improved version of non-biased locking), certain synchronized scenarios
- * might become much slower (i.e., since synchronized calls comes now with atomic compare-and-swap on lock)
+ * - starting JDK 15: without biased locking (or some improved version of non-biased locking), in case of uncontended locking,
+ * certain synchronized scenarios might become slightly slower (i.e., since synchronized calls come now with atomic compare-and-swap on lock)
  *
- * ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), hence avoiding stop-the-world pauses.
+ * ZGC and Shenandoah GC have biased locking disabled to prevent safepoint operations (e.g., biased locking revocation), avoiding stop-the-world pauses.
  *
  * References:
  * - https://openjdk.org/jeps/374
