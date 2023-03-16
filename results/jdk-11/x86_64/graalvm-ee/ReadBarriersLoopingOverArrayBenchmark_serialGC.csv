@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc","thrpt",1,25,2353.546013,1.274640,"ops/s",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc:·gc.alloc.rate","thrpt",1,25,0.000182,0.000218,"MB/sec",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,0.080971,0.097096,"B/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc:·gc.count","thrpt",1,25,0.000000,NaN,"counts",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc","thrpt",1,25,2344.586696,27.019044,"ops/ms",1024
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc:·gc.alloc.rate","thrpt",1,25,0.000184,0.000222,"MB/sec",1024
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,0.000082,0.000099,"B/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadBarriersLoopingOverArrayBenchmark.gc:·gc.count","thrpt",1,25,0.000000,NaN,"counts",1024
