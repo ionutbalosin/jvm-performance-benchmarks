@@ -369,15 +369,50 @@ This benchmark iterates through the enum values list and returns the enum consta
 This pattern is often seen in real business applications where, for example, the microservices RESTful APIs defined in OpenAPI/Swagger use enums.
 The input request parameters are deserialized and wrapped to enum values.
 
+In order to match the input parameter to the enum value, `String.equals()` comparison is used.
+
+```
+private static final Car[] cachedCars = Car.values();
+public static Car[] cachedValues() {
+  return cachedCars;
+}
+
+public static Car fromValues(String value) {
+  for (Car b : Car.values()) {
+    if (b.value.equals(value)) {
+      return b;
+    }
+  }
+  throw new IllegalArgumentException("Unexpected value '" + value + "'");
+}
+
+public static Car fromCachedValues(String value) {
+  for (Car b : Car.cachedValues()) {
+    if (b.value.equals(value)) {
+      return b;
+    }
+  }
+  throw new IllegalArgumentException("Unexpected value '" + value + "'");
+}
+```
+
 Source code: [EnumValueLookupBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark.java)
 
 <img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/EnumValueLookupBenchmark.svg">
 
 ### Conclusions:
 
-The `enum_values` benchmark is impacted by the object allocations triggered by the `enum::values()` call that is an invoke virtual to `clone()` method.
+The `enum_values` benchmark is impacted by the object allocations triggered by the `enum::values()` call that is an invoke virtual the to `clone()` method.
 
 Caching these values and using the cached structure instead of calling `enum::values()` reduces the number of allocations.
+
+Looking at the `cached_enum_values` benchmark, it can be seen that OpenJDK is faster than both GraalVM CE and EE. The reason behind 
+is that OpenJDK uses a different intrinsic for string comparison. GraalVM CE and EE will call into a stub method 
+that performs byte-wise comparison.
+
+```
+0x19dcf:   call   0x7b900   ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
+```
 
 ## IfConditionalBranchBenchmark
 
