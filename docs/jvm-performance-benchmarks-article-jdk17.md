@@ -96,6 +96,8 @@ better vectorization, intrinsics, register allocation, etc.
 
 ## JIT Benchmarks
 
+The JIT benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
+
 ## InfrastructureBaselineBenchmark
 
 This benchmark is used as a baseline (i.e., a preliminary check) to assess the infrastructure overhead for the code to measure.
@@ -1634,6 +1636,8 @@ Most GCs require different barriers that need to be implemented in the runtime, 
 
 ## GC Benchmarks
 
+The GC benchmarks are measured in [operations per unit of time](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L42), which is the throughput score reported by the JMH.
+
 ## BurstHeapMemoryAllocatorBenchmark
 
 This benchmark allocates arrays of temporary objects until it fills up a certain percent of the heap (e.g., 30%, 60%) and then releases them so that they all become eligible for Garbage Collector.
@@ -1802,6 +1806,8 @@ To summarize, on both architectures:
 This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
 
 ## Macro Benchmarks
+
+The macro benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
 
 ## HuffmanCodingBenchmark
 
