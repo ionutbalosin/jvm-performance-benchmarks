@@ -422,12 +422,27 @@ Tests the conditional branch optimizations within a loop using:
 - no branch at all
 
 ```
+  // All array[] values are randomly generated within [0, THRESHOLD)
+
   @Benchmark
   public int no_if_branch() {
     int sum = 0;
 
     for (final int value : array) {
       sum += value;
+    }
+
+    return sum;
+  }
+  
+  @Benchmark
+  public int predictable_if_branch() {
+    int sum = 0;
+
+    for (final int value : array) {
+      if (value < THRESHOLD) {
+        sum += value;
+      }
     }
 
     return sum;
