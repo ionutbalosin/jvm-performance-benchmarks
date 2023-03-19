@@ -29,7 +29,6 @@ Florin Blanaru
 - [Final Thoughts](#final-thoughts)
 - [References](#references)
 
-
 # Context
 
 The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting for both the Just-In-Time (JIT) Compilers and the Garbage Collectors (GC) to assess:
@@ -65,6 +64,8 @@ The list of included architectures is:
 > The reference architecture (and, subsequently, the benchmarks analysis) for this article is x86_64, and arm64 is only included in the geometric mean score section for comparison.
 
 This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) project. For any further information (not explicitly mentioned here) including the OS tuning settings, the deliberate decision on choosing these JVMs and/or specific JDKs, etc., please check out the repository.
+
+We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), and others for their reviews, and helpful suggestions.
 
 # SetUp
 
@@ -1551,27 +1552,30 @@ generated is similar to the following:
 
 ## JIT Geometric Mean
 
-This section describes the GM for the entire JIT related benchmark category.
-
+This section describes the normalized GM for the entire JIT related benchmark category.
 This is purely informative to have a high-level understanding on the overall benchmark scores.
+
+The process of generating the normalized geometric mean is:
+- all benchmark scores are converted to the same unit (e.g., "ns/op")
+- the geometric mean is calculated and normalized to C2 JIT
 
 ## x86_64
 
-No. | JIT            | Arcitecture | Geometric Mean | Unit
-----|----------------|-------------|----------------|--------
-1   | GraalVM EE JIT | x86_64      | 4643.97        | ns/op
-2   | C2 JIT         | x86_64      | 6453.77        | ns/op
-3   | GraalVM CE JIT | x86_64      | 8248.09        | ns/op
+No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
+----|----------------|-------------|---------------------------|--------
+1   | GraalVM EE JIT | x86_64      | 0.72                      | ns/op
+2   | C2 JIT         | x86_64      | 1                         | ns/op
+3   | GraalVM CE JIT | x86_64      | 1.28                      | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
 ## arm64
 
-No. | JIT            | Arcitecture | Geometric Mean | Unit
-----|----------------|-------------|----------------|--------
-1   | GraalVM EE JIT | arm64       | 2328.49        | ns/op
-2   | C2 JIT         | arm64       | 2819.29        | ns/op
-3   | GraalVM CE JIT | arm64       | 4419.11        | ns/op
+No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
+----|----------------|-------------|---------------------------|--------
+1   | GraalVM EE JIT | arm64       | 0.83                      | ns/op
+2   | C2 JIT         | arm64       | 1                         | ns/op
+3   | GraalVM CE JIT | arm64       | 1.57                      | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
@@ -1909,27 +1913,30 @@ Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-p
 
 ## Macro Geometric Mean
 
-This section describes the GM for the entire macro benchmarks category.
-
+This section describes the normalized GM for the entire macro benchmarks category.
 This is purely informative to have a high-level understanding on the overall benchmark scores.
+
+The process of generating the normalized geometric mean is:
+- all benchmark scores are converted to the same unit (e.g., "ns/op")
+- the geometric mean is calculated and normalized to OpenJDK
 
 ## x86_64
 
-No. | JVM distribution | Arcitecture | Geometric Mean | Unit
-----|------------------|-------------|----------------|--------
-1   | GraalVM EE       | x86_64      | 4,224,822.25   | ns/op
-2   | OpenJDK          | x86_64      | 4,638,065.96   | ns/op
-3   | GraalVM CE       | x86_64      | 5,028,870.69   | ns/op
+No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Unit
+----|------------------|-------------|---------------------------|--------
+1   | GraalVM EE       | x86_64      | 0.91                      | ns/op
+2   | OpenJDK          | x86_64      | 1                         | ns/op
+3   | GraalVM CE       | x86_64      | 1.08                      | ns/op
 
 **Note:** The first in the row is the fastest, and the last in the row is the slowest
 
 ## arm64
 
-No. | JVM distribution | Arcitecture | Geometric Mean | Unit
-----|------------------|-------------|----------------|--------
-1   | GraalVM EE       | arm64       | 2,425,617.28   | ns/op
-2   | OpenJDK          | arm64       | 2,614,295.98   | ns/op
-3   | GraalVM CE       | arm64       | 2,899,319.25   | ns/op
+No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Unit
+----|------------------|-------------|---------------------------|--------
+1   | GraalVM EE       | arm64       | 0.93                      | ns/op
+2   | OpenJDK          | arm64       | 1                         | ns/op
+3   | GraalVM CE       | arm64       | 1.11                      | ns/op
 
 **Note:** The first in the row is the fastest, and the last in the row is the slowest
 
@@ -1971,3 +1978,4 @@ In case you want to contribute to this project, feel free to reach out or open a
 - [Concurrent Remembered Set Refinement in Generational Garbage Collection](https://www.researchgate.net/publication/220817732_Concurrent_Remembered_Set_Refinement_in_Generational_Garbage_Collection) - David Detlefs, Ross Knippel, William D. Clinger, Matthias Jacob
 - [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [Renaissance: Benchmarking Suite for Parallel Applications on the JVM](https://renaissance.dev/resources/docs/renaissance-suite.pdf)
+- [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
