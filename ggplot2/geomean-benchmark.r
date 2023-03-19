@@ -107,39 +107,84 @@ gc_benchmark_files <- list(
   "WriteBarriersLoopingOverArrayBenchmark.csv"
 )
 
-# JIT geometric mean
+#--------------------#
+# JIT geometric mean #
+#--------------------#
 
-openjdk_hotspot_vm_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, jit_benchmark_files)
-graalvm_ce_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, jit_benchmark_files)
-graalvm_ee_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, jit_benchmark_files)
+openjdk_hotspot_vm_jit_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, jit_benchmark_files)
+graalvm_ce_jit_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, jit_benchmark_files)
+graalvm_ee_jit_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, jit_benchmark_files)
 jit_geomean <- c(
-  "C2 JIT" = openjdk_hotspot_vm_geomean,
-  "GraalVM CE JIT" = graalvm_ce_geomean,
-  "GraalVM EE JIT" = graalvm_ee_geomean,
+  "C2 JIT" = openjdk_hotspot_vm_jit_geomean,
+  "GraalVM CE JIT" = graalvm_ce_jit_geomean,
+  "GraalVM EE JIT" = graalvm_ee_jit_geomean,
   "Unit" = "ns/op"
 )
 writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", data.frame(t(sapply(jit_geomean, c))))
 
-# Macro geometric mean
+#----------------------#
+# Macro geometric mean #
+#----------------------#
 
-openjdk_hotspot_vm_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, macro_benchmark_files)
-graalvm_ce_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
-graalvm_ee_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, macro_benchmark_files)
+openjdk_hotspot_vm_macro_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, macro_benchmark_files)
+graalvm_ce_macro_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
+graalvm_ee_macro_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, macro_benchmark_files)
 macro_geomean <- c(
-  "OpenJDK HotSpot VM" = openjdk_hotspot_vm_geomean,
-  "GraalVM CE" = graalvm_ce_geomean,
-  "GraalVM EE" = graalvm_ee_geomean,
+  "OpenJDK HotSpot VM" = openjdk_hotspot_vm_macro_geomean,
+  "GraalVM CE" = graalvm_ce_macro_geomean,
+  "GraalVM EE" = graalvm_ee_macro_geomean,
   "Unit" = "ns/op"
 )
 writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", data.frame(t(sapply(macro_geomean, c))))
 
-# GCs geometric mean
+#--------------------#
+# GCs geometric mean #
+#--------------------#
 
-openjdk_hotspot_vm_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files)
-writeJmhCsvResults(geometric_mean_output_folder, "gc_openjdk_hotspot_vm.csv", openjdk_hotspot_vm_gc_geomean)
+# OpenJDK GC geometric mean
+openjdk_hotspot_vm_serial_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files, "serialGC")
+openjdk_hotspot_vm_parallel_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files, "parallelGC")
+openjdk_hotspot_vm_g1_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files, "g1GC")
+openjdk_hotspot_vm_z_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files, "zGC")
+openjdk_hotspot_vm_shenandoah_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, openjdk_hotspot_vm_identifier, gc_benchmark_files, "shenandoahGC")
+openjdk_hotspot_vm_gc_geomean <- c(
+  "Serial GC" = openjdk_hotspot_vm_serial_gc_geomean,
+  "Parallel GC" = openjdk_hotspot_vm_parallel_gc_geomean,
+  "G1 GC" = openjdk_hotspot_vm_g1_gc_geomean,
+  "ZGC" = openjdk_hotspot_vm_z_gc_geomean,
+  "Shenandoah GC" = openjdk_hotspot_vm_shenandoah_gc_geomean,
+  "Unit" = "ops/ms"
+)
+writeJmhCsvResults(geometric_mean_output_folder, "gc_openjdk_hotspot_vm.csv", data.frame(t(sapply(openjdk_hotspot_vm_gc_geomean, c))))
 
-graalvm_ce_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files)
-writeJmhCsvResults(geometric_mean_output_folder, "gc_graalvm_ce.csv", graalvm_ce_gc_geomean)
+# GraalVM CE GC geometric mean
+graalvm_ce_serial_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files, "serialGC")
+graalvm_ce_parallel_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files, "parallelGC")
+graalvm_ce_g1_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files, "g1GC")
+graalvm_ce_z_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files, "zGC")
+graalvm_ce_shenandoah_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ce_identifier, gc_benchmark_files, "shenandoahGC")
+graalvm_ce_gc_geomean <- c(
+  "Serial GC" = graalvm_ce_serial_gc_geomean,
+  "Parallel GC" = graalvm_ce_parallel_gc_geomean,
+  "G1 GC" = graalvm_ce_g1_gc_geomean,
+  "ZGC" = graalvm_ce_z_gc_geomean,
+  "Shenandoah GC" = graalvm_ce_shenandoah_gc_geomean,
+  "Unit" = "ops/ms"
+)
+writeJmhCsvResults(geometric_mean_output_folder, "gc_graalvm_ce.csv", data.frame(t(sapply(graalvm_ce_gc_geomean, c))))
 
-graalvm_ee_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files)
-writeJmhCsvResults(geometric_mean_output_folder, "gc_graalvm_ee.csv", graalvm_ee_gc_geomean)
+# GraalVM EE GC geometric mean
+graalvm_ee_serial_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files, "serialGC")
+graalvm_ee_parallel_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files, "parallelGC")
+graalvm_ee_g1_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files, "g1GC")
+graalvm_ee_z_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files, "zGC")
+graalvm_ee_shenandoah_gc_geomean <- geometricMeanForThroughputJmhGcResults(jmh_output_folder, graalvm_ee_identifier, gc_benchmark_files, "shenandoahGC")
+graalvm_ee_gc_geomean <- c(
+  "Serial GC" = graalvm_ee_serial_gc_geomean,
+  "Parallel GC" = graalvm_ee_parallel_gc_geomean,
+  "G1 GC" = graalvm_ee_g1_gc_geomean,
+  "ZGC" = graalvm_ee_z_gc_geomean,
+  "Shenandoah GC" = graalvm_ee_shenandoah_gc_geomean,
+  "Unit" = "ops/ms"
+)
+writeJmhCsvResults(geometric_mean_output_folder, "gc_graalvm_ee.csv", data.frame(t(sapply(graalvm_ee_gc_geomean, c))))

@@ -103,24 +103,10 @@ geometricMeanForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identif
 }
 
 # Calculate the geometric mean for Garbage Collector throughput scores within a data frame
-geometricMeanForThroughputJmhGcResults <- function(jmh_output_folder, jvm_identifier, benchmark_files) {
+geometricMeanForThroughputJmhGcResults <- function(jmh_output_folder, jvm_identifier, benchmark_files, gc) {
   data <- mergeJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_files)
   data <- convertThroughputInMs(data)
+  geomean <- geometric.mean(data[data$Param..gc == gc, ]$Score)
 
-  serial_gc_geomean <- geometric.mean(data[data$Param..gc == "serialGC", ]$Score)
-  parallel_gc_geomean <- geometric.mean(data[data$Param..gc == "parallelGC", ]$Score)
-  g1_gc_geomean <- geometric.mean(data[data$Param..gc == "g1GC", ]$Score)
-  z_gc_geomean <- geometric.mean(data[data$Param..gc == "zGC", ]$Score)
-  shenandoah_gc_geomean <- geometric.mean(data[data$Param..gc == "shenandoahGC", ]$Score)
-
-  gc_geomean <- c(
-    "Serial GC" = round(serial_gc_geomean, 2),
-    "Parallel GC" = round(parallel_gc_geomean, 2),
-    "G1 GC" = round(g1_gc_geomean, 2),
-    "ZGC" = round(z_gc_geomean, 2),
-    "Shenandoah GC" = round(shenandoah_gc_geomean, 2),
-    "Unit" = "ops/ms"
-  )
-
-  data.frame(t(sapply(gc_geomean, c)))
+  round(geomean, 2)
 }
