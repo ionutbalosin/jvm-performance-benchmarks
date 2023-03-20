@@ -1675,6 +1675,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 # Garbage Collectors
 
 This section is purely informative, it does not contain any benchmark. It as a high-level overview of the available Garbage Collectors (and their main characteristics) from the OpenJDK.
+
 Based on the feedback we received and further considerations, we decided that using micro-benchmarks to gauge the performance of the Garbage Collectors might result in very misleading conclusions.
 
 ## GC Overview
