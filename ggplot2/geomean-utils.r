@@ -97,8 +97,9 @@ mergeJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_file
 geometricMeanForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identifier, benchmark_files) {
   data <- mergeJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_files)
   data <- convertAverageTimeInNs(data)
-  geomean <- geometric.mean(data$Score)
+  print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
 
+  geomean <- geometric.mean(data$Score)
   round(geomean, 2)
 }
 
@@ -106,7 +107,8 @@ geometricMeanForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identif
 geometricMeanForThroughputJmhGcResults <- function(jmh_output_folder, jvm_identifier, benchmark_files, gc) {
   data <- mergeJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_files)
   data <- convertThroughputInMs(data)
-  geomean <- geometric.mean(data[data$Param..gc == gc, ]$Score)
+  print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
 
+  geomean <- geometric.mean(data[data$Param..gc == gc, ]$Score)
   round(geomean, 2)
 }
