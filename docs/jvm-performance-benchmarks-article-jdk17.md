@@ -1674,7 +1674,8 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 # Garbage Collectors
 
-This section is purely informative, it does not contain any benchmark. We decided to include it as a high-level overview of the Garbage Collectors (and their main characteristics) from the OpenJDK. Based on the feedback we received and further considerations, we concluded that using micro-benchmarks to gauge the performance of the Garbage Collectors might result in very misleading conclusions.
+This section is purely informative, it does not contain any benchmark. It as a high-level overview of the available Garbage Collectors (and their main characteristics) from the OpenJDK.
+Based on the feedback we received and further considerations, we decided that using micro-benchmarks to gauge the performance of the Garbage Collectors might result in very misleading conclusions.
 
 ## GC Overview
 
@@ -1698,7 +1699,7 @@ This section is purely informative, it does not contain any benchmark. We decide
 - uni-generational, mostly concurrent phases, but there are some STW pauses
 - target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times (similar to Shenandoah GC)
 
-> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this will change in the upcoming releases (e.g., v23 has ZGC support).
+> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this changes in the upcoming releases (e.g., v23 has ZGC support).
 
 ## GC Barriers
 
