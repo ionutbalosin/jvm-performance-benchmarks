@@ -1676,7 +1676,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 This section is purely informative, it does not contain any benchmark. It as a high-level overview of the available Garbage Collectors (and their main characteristics) from the OpenJDK.
 
-Based on the feedback we received and further considerations, we decided that using micro-benchmarks to gauge the performance of the Garbage Collectors might result in very misleading conclusions.
+> Based on the feedback we received and further considerations, we decided that using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions. We might be looking for proper alternatives in the upcoming report releases.
 
 ## GC Overview
 
@@ -1699,8 +1699,6 @@ Based on the feedback we received and further considerations, we decided that us
 ### ZGC
 - uni-generational, mostly concurrent phases, but there are some STW pauses
 - target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times (similar to Shenandoah GC)
-
-> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this changes in the upcoming releases (e.g., v23 has ZGC support).
 
 ## GC Barriers
 
@@ -1745,7 +1743,11 @@ Most GCs require different barriers that need to be implemented in the runtime, 
 - a keep-alive barrier for java.lang.ref.Reference to handle the cases when the referent field of a java.lang.ref.Reference object is read
 - nmethod-barriers and stack-watermark barriers (similar to what ZGC had initially introduced)
 
-**Note:** depending on the mode, some of these barriers are disabled.
+Depending on the mode, Shenandoah GC disables some of these barriers.
+
+**Note:** Some GCs turn off their barriers (either completely or partially) while there is no GC activity. When, for example, concurrent marking phase starts they turn on the barriers with a quite significant performance hit.
+
+> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this changes in the upcoming releases (e.g., v23 has ZGC support).
 
 # Final Thoughts
 
