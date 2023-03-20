@@ -18,35 +18,22 @@ Florin Blanaru
 - [JIT Compilers](#jit-compilers)
   - [Benchmarks](#jit-benchmarks)
   - [Geometric Mean](#jit-geometric-mean)
-- [Garbage Collectors](#garbage-collectors)
-  - [Overview](#gc-overview)
-  - [Barriers](#gc-barriers)
-  - [Benchmarks](#gc-benchmarks)
-  - [Geometric Mean](#gc-geometric-mean)
 - [Macro](#macro)
   - [Benchmarks](#macro-benchmarks)
   - [Geometric Mean](#macro-geometric-mean)
+- [Garbage Collectors](#garbage-collectors)
+  - [Overview](#gc-overview)
+  - [Barriers](#gc-barriers)
 - [Final Thoughts](#final-thoughts)
 - [References](#references)
 
 # Context
 
-The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting for both the Just-In-Time (JIT) Compilers and the Garbage Collectors (GC) to assess:
-
-- different JIT Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
-- different Garbage Collectors' efficiency in both allocating but also reclaiming objects
+The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting the Just-In-Time (JIT) Compilers to assess different JIT Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations).
 
 In addition, there is a small set of benchmarks (i.e., a macro category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is only complementary but not the main purpose of this work.
 
-For a few benchmarks (i.e., the most representative, in our opinion) we provide an in-depth analysis (i.e., optimized generated assembly code, flame graphs, etc.), as well as the geometric mean.
-
-The list of included GCs is:
-- Serial GC
-- Parallel GC
-- Garbage First (G1) GC (default)
-- Shenandoah GC
-- ZGC
-- Epsilon GC (experimental, used only in a small set of the benchmarks as a baseline)
+For a few benchmarks (i.e., the most representative, in our opinion) we provide an in-depth analysis (i.e., optimized generated assembly code, flame graphs, etc.), as well as the normalized geometric mean.
 
 The list of included JIT compilers is:
 - C2 (Server) JIT
@@ -65,7 +52,7 @@ The list of included architectures is:
 
 This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) project. For any further information (not explicitly mentioned here) including the OS tuning settings, the deliberate decision on choosing these JVMs and/or specific JDKs, etc., please check out the repository.
 
-We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), and others for their reviews, and helpful suggestions.
+We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), [Stefan Karlsson](https://twitter.com/stekarmatrik), [Thomas Würthinger](https://thomaswue.dev/) for their reviews, and helpful suggestions.
 
 # SetUp
 
@@ -1508,7 +1495,6 @@ EE do not.
    ... 
 ```
 
-
 ## StackSpillingBenchmark
 
 This benchmark measures the cost of stack spilling. Stack spilling occurs when the register allocator
@@ -1584,266 +1570,6 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 1. GraalVM EE JIT is the fastest
 2. C2 JIT is in the middle
 3. GraalVM CE JIT is the slowest
-
-# Garbage Collectors
-
-This section describes the results obtained from running the GC benchmarks. The GC benchmarks focus on various metrics:
-- the efficiency of GC object allocation/reclamation with
-    - different allocation rates
-    - different object sizes
-    - different occupancy rates of the heap (e.g., 30% or 60%)
-    - different number of allocator threads (e.g., 1 or 2)
-- the impact of the barriers (e.g., read, write barriers) while traversing and/or updating heap data structures, trying to avoid any explicit allocation, in the benchmark method, unless it is induced by the underlying ecosystem.
-
-In general, running single-threaded workloads against concurrent GCs could result in better throughput (or lower pause times) than in the case of the STW collectors, because the concurrent collectors are able to offload the GC work on otherwise idle cores.
-
-The list of GC (including the JVM(s) and the architectures) is:
-
-No. | GC         | JVM              | Arcitecture 
-----|------------|------------------|----------------
-1   | Serial     | OpenJDK 17.0.6   | x86_64, arm64         
-2   | Parallel   | OpenJDK 17.0.6   | x86_64, arm64      
-3   | G1         | OpenJDK 17.0.6   | x86_64, arm64   
-3   | ZGC        | OpenJDK 17.0.6   | x86_64, arm64   
-3   | Shenandoah | OpenJDK 17.0.6   | x86_64, arm64   
-3   | Epsilon    | OpenJDK 17.0.6   | x86_64, arm64   
-
-> At the moment, GraalVM CE/EE (i.e., HotSpot-based mode) does not properly support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier, therefore it makes no sense to compare these GCs across an extended list of JVMs (OpenJDK vs. GraalVM CE/EE).
-
-## GC Overview
-
-### Serial GC
-- generational collector, stop-the-world (STW) pauses
-- it has the smallest footprint and is desired especially for resource-constrained environments where latency is not an issue
-
-### Parallel GC
-- generational collector, stop-the-world (STW) pauses
-- also called a throughput collector, it is desired for applications where throughput is more important than latency
-
-### G1 GC
-- generational collector, region based, stop-the-world (STW) pauses, concurrent phases
-- strives for a balance between latency and throughput (with a desired maximum pause time of 200 ms)
-
-### Shenandoah GC
-- uni-generational, region based (like G1 GC), fully concurrent
-- target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times
-
-### ZGC
-- uni-generational, mostly concurrent phases, but there are some STW pauses
-- target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times (similar to Shenandoah GC)
-
-## GC Barriers
-
-Most GCs require different barriers that need to be implemented in the runtime, interpreter, C1 JIT and C2 JIT. Such barriers affect application performance even when no actual GC work is happening. Below is a summary of such barriers mostly specific to each GC from JDK 17.
-
-### Epsilon GC
-- does not add any barrier on top of the default/shared barriers (e.g., C1 or C2 compiler barriers). It might be the baseline (since it has the smallest overhead) in comparison to all the others, nevertheless it is still experimental at the moment.
-
-### Serial GC
-- a card-table write barrier (to track the references from Tenured Generation to Young Generation). In this technique, the heap is partitioned into equal-sized cards, and a card table array is allocated, with an entry for each card of the heap. Card table entries are initially clean; the mutator write barrier marks the card containing the updated field (or the head of the object containing the field, in a variant) dirty. The collector must scan the card table to find dirty entries, and then scan the corresponding dirty cards to find the cross-generational pointers, if any, created by the writes.
-
-### Parallel GC
-- a card-table write barrier (similar to Serial GC)
-
-### G1 GC
-- a pre-write barrier is required in case of concurrent marking by Snapshot-At-The-Beginning (SATB) to make sure all objects live at the start of the marking are kept alive, all the reference updates need to any previous reference stored before writing
-- a post-write barrier to track object references between different regions to enable the evacuation of old regions, which is done as part of mixed collections. References are tracked in remembered sets and are continuously updated with the help of the post-barrier
-- a read barrier is added when a read access is performed to the referent field of a java.lang.ref.Reference. This will result in the referent being marked live
-- two arraycopy barriers (e.g., pre-write and post-write barriers)
-- CAS object barrier that handles atomic compare and swap related methods
-- an object clone barrier to deal with cloning objects on the heap
-
-### ZGC
-- load-reference barrier employed when references are loaded from the Heap. It ensures that
-  references pointing into a relocated memory area will be caught and handled (i.e., the load barrier performs further actions to remap pointers that actually point into the relocated memory area, without the need to read that memory)
-  references pointing into the newly allocated memory will pass through the barrier without further actions
-- weak load barrier may be provided for loading a pointer “weakly” (i.e., load the pointer without keeping its target object alive in the context of garbage collection). Examples where a weak load barrier may be useful include reading a StringTable object in the JVM
-- arraycopy barriers to deal with array copies
-- CAS object barrier that handles atomic compare and swap related methods
-- an object clone barrier to deal with cloning objects on the heap
-- a keep-alive barrier used during the concurrent marking phase
-- a mark barrier used during the concurrent marking phase
-- nmethod-barriers (i.e., a mechanism to arm nmethods) for concurrent unloading. For example, code cache unloading needs to know about on-stack nmethods. Arming the nmethods enables GC callbacks when they are called.
-- stack-watermark barrier for concurrent thread-scanning
-
-### Shenandoah GC
-- load-reference barrier employed after a load from a reference field or array element and before the loaded object is given to the rest of the application code
-- Snapshot-At-The-Beginning (SATB) write barrier employed before reference writes and used in case of concurrent marking. This is very similar to G1's SATB barrier, it intercepts writes and marks through "previous" objects
-- an arraycopy barrier to deal with array copies (a better arraycopy-barrier-scheme in comparison to, for example, the G1's arraycopy barriers implemented in the C1/C2 JIT or Graal JIT)
-- CAS object barrier that handles atomic compare and swap related methods
-- an object clone barrier to deal with cloning objects on the heap
-- a keep-alive barrier for java.lang.ref.Reference to handle the cases when the referent field of a java.lang.ref.Reference object is read
-- nmethod-barriers and stack-watermark barriers (similar to what ZGC had initially introduced)
-
-**Note:** depending on the mode, some of these barriers might be disabled.
-
-
-## GC Benchmarks
-
-The GC benchmarks are measured in [operations per unit of time](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L42), which is the throughput score reported by the JMH.
-
-## BurstHeapMemoryAllocatorBenchmark
-
-This benchmark allocates arrays of temporary objects until it fills up a certain percent of the heap (e.g., 30%, 60%) and then releases them so that they all become eligible for Garbage Collector.
-
-Source code: [BurstHeapMemoryAllocatorBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/BurstHeapMemoryAllocatorBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/BurstHeapMemoryAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- ZGC performs significantly better than all the other collectors (around 3x times faster than G1 GC), followed by G1 GC, Shenandoah GC, and Serial GC (for both 30% but also 60% allocated heap)
-- Parallel GC offers the worst throughput
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/BurstHeapMemoryAllocatorBenchmark_2threads_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- Increasing the number of allocator threads minimizes the gap between the ZGC and G1 GC, the latter one performing even better in case of the 60% allocated heap
-- Parallel GC offers (again, for this benchmark) the worst throughput, about ~10x slower than the best throughput
-
-In general, under heavy burst allocations (e.g., 60% of the heap), the generational collectors (e.g., Serial GC, Parallel GC) fall into premature full GCs syndrome causing longer STW pauses in comparison to concurrent, single-generational, collectors.
-
-## HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark
-
-This benchmark initially allocates (during setup) lists of chained objects (e.g., Object 1 -> Object 2 -> … ), until it fills up a certain percent of the heap (e.g., 25%, 50%, 75%). Each object list (i.e., the list header) is stored in an array-based structure that keeps strong references to each chain.
-Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and,in addition, an array of allocated longs. Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation, residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
-The chaining might have an impact on the GC roots traversal, since the degree of pointer indirection (i.e., reference processing) is not negligible, while traversing the object graph dependencies.
-Then, in the benchmark method, similar object chains are allocated, and they replace, one by one (i.e., incrementally),the ones from the initial array so that the former ones become eligible for garbage collection.
-During the lifecycle of the benchmark, the footprint of live memory is (trying to be) kept constant.
-
-Source code: [HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg">
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark_2threads_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- ZGC offers the highest throughput when the percentage of the heap is up to 50%
-- when the retained heap (i.e., the ballast) is 70%, G1 GC followed by the Parallel GC offers a better throughput
-- Serial GC has the lowers throughput in all the cases
-
-The cost of marking the entire heap to reclaim the garbage is not neglectable for the non-generational, concurrent, collectors (e.g., ZGC, and Shenandoah GC) in cases where the ballast takes a significant part of the heap (e.g., 70% of the heap), otherwise easy to remove (young) garbage by the generational GCs (e.g., G1 GC, and Parallel GC). This might be partially mitigated by increasing the number of concurrent GC threads using `-XX:ConcGCThreads=<n>`.
-
-## HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark
-
-This benchmark initially allocates (during setup) lists of chained objects (e.g., Object 1 -> Object 2 -> … ), until it fills up a certain percent of the heap (e.g., 30%, 60%). Each object list (i.e., the list header) is stored in an array-based structure that keeps strong references to each chain.
-Such a chain looks like (head) Object 1 -> Object 2 -> … -> Object 32 where every object consists of a pointer to the next object and, in addition, an array of allocated longs. Some objects within the chain are potentially considered big, so they would normally follow the slow path allocation, residing directly in the Tenured Generation (in the case of generational collectors), increasing the likelihood of full GCs.
-
-The chaining might have an impact on the GC roots traversal, since the degree of pointer indirection (i.e., reference processing)  is not negligible, while traversing the object graph dependencies.
-Then, in the benchmark method, similar object chains are allocated until they fill up 80% of the entire heap and then immediately released, so they become eligible for Garbage Collector.
-During the lifecycle of the benchmark, the amount of retained memory by strong references is fixed (i.e., the objects allocated in the benchmark setup phase are kept alive during the benchmark method)
-
-Source code: [HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_1thread_openjdk_hotspot_vm.svg">
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark_2threads_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- G1 GC and/or Parallel GC offers (in general) the highest throughput in both benchmarks
-
-The cost of marking the entire heap to reclaim the garbage strikes even worse (in this benchmark) the non-generational, concurrent, collectors (ZGC and Shenandoah GC).
-One additional remark: since ZGC has Compressed OOPs disabled by design, within the same amount of memory, ZGC will allocate less number of objects (hence less objects to collect), in comparison to the other collectors that have Compressed OOPs enabled by default (in the case of Heap sizes up to 32 GB and on 64-bit platforms). Or, the other way around: trying to allocate the same number of objects (as the other collectors)  ZGC would need more memory for such allocations. For example, for this benchmark, increasing the amount of memory to allocate from 80% to 90% will make ZGC fail with OOME.
-
-## HeapMemoryBandwidthAllocatorBenchmark
-
-This benchmark tests the allocation rate for chunks of byte arrays having different sizes. In comparison to the previous benchmarks (e.g., HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark, HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark), it just allocates the byte arrays and immediately releases them, without keeping any strong references.
-
-Source code: [HeapMemoryBandwidthAllocatorBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/HeapMemoryBandwidthAllocatorBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryBandwidthAllocatorBenchmark_1thread_openjdk_hotspot_vm.svg">
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HeapMemoryBandwidthAllocatorBenchmark_2threads_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- for array chunks of 32 B and 8 MB Parallel GC and Serial GC seem to offer a tinny higher throughput, but not by a relevant difference
-- for array chunks of 16 KB Serial GC and ZGC looks slightly better, but not by a relevant difference
-
-##  ReadBarriersChainOfReferencesBenchmark
-
-Test the overhead of read barriers while iterating through a chain of pre-allocated objects (e.g., Object 1 -> Object 2 -> ...) and returns the sum of their field properties (e.g., Object1.field + Object2.field + ...)
-
-Source code: [ReadBarriersChainOfReferencesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadBarriersChainOfReferencesBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/ReadBarriersChainOfReferencesBenchmark_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-
-- ZGC offers the best throughput, around 1.5x times better than the others
-- Surprisingly, Epsilon GC since it does not have any barrier in the GC set, is not the leader
-
-##  ReadBarriersLoopingOverArrayBenchmark
-
-Test the overhead of read barriers while iterating through an array of pre-allocated objects and reading each object field.
-
-**Note:** looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
-
-Source code: [ReadBarriersLoopingOverArrayBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadBarriersLoopingOverArrayBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/ReadBarriersLoopingOverArrayBenchmark_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- ZGC offers the lowest throughput (~ 1.5x times slower than the highest throughput). It could be explained by the absence of Compressed OOPs. The array the benchmark walks, and the accessed objects are larger and have less chances to be cached in same-sized CPU caches (i.e., more CPU cache misses) in comparison to the other collectors using Compressed OOPs.
-
-## ReadWriteBarriersBenchmark
-
-Test the overhead of read/write barriers while iterating through an array of Integers and exchanging the values between two array entries (i.e., array[i] <-> array[j]).
-
-Source code: [ReadWriteBarriersBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/ReadWriteBarriersBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/ReadWriteBarriersBenchmark_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- Epsilon GC, since it does not use any GC barrier, offers the best throughput. It was included to have a baseline in comparison to other collectors
-- ZGC seems to perform better than any other collector
-- G1 GC offers the worst throughput, more than  ~10x-14x slower than the rest. In such a case, the post-write barriers (i.e., remembered sets management across G1 regions) might be the reason behind
-
-##  WriteBarriersLoopingOverArrayBenchmark
-
-Test the overhead of write barriers while iterating through the elements of an array of objects and updating every element (i.e., reference).
-
-Source code: [WriteBarriersLoopingOverArrayBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/gc/WriteBarriersLoopingOverArrayBenchmark.java)
-
-<img src="https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/WriteBarriersLoopingOverArrayBenchmark_openjdk_hotspot_vm.svg">
-
-### Conclusions:
-- Epsilon GC, since it does not use any GC barrier, offers the best throughput. It was included to have a baseline in comparison to other collectors
-- Shenandoah GC seems to perform better than any other collector, but with a marginal difference in comparison to ZGC
-- G1 GC offers the worst throughput, about ~10x-20x slower than the rest. Most probably it has the same root cause as in the previous benchmark (i.e. post-write barriers overhead)
-
-## GC Geometric Mean
-
-This section describes the GM for the entire GC related benchmark category.
-
-This is purely informative to have a high-level understanding on the overall benchmark scores.
-
-## OpenJDK on x86_64
-
-No. | JVM distribution | Arcitecture | Geometric Mean | Unit
-----|------------------|-------------|----------------|--------
-1   | ZGC              | x86_64      | 43,267.97      | ops/ms
-2   | G1 GC            | x86_64      | 29,158.73      | ops/ms
-3   | Parallel GC      | x86_64      | 24,303.27      | ops/ms
-4   | Shenandoah GC    | x86_64      | 23,475.71      | ops/ms
-5   | Serial GC        | x86_64      | 17,129.77      | ops/ms
-
-**Note:** The first in the row is the fastest GC, and the last in the row is the slowest GC
-
-## OpenJDK on arm64
-
-No. | JVM distribution | Arcitecture | Geometric Mean | Unit
-----|------------------|-------------|----------------|--------
-1   | ZGC              | arm64       | 1,22,010.74    | ops/ms
-2   | Shenandoah GC    | arm64       | 79,957.41      | ops/ms
-3   | G1 GC            | arm64       | 79,251.23      | ops/ms
-4   | Parallel GC      | arm64       | 62,358.15      | ops/ms
-5   | Serial GC        | arm64       | 43,756.39      | ops/ms
-
-**Note:** The first in the row is the fastest GC, and the last in the row is the slowest GC
-
-To summarize, on both architectures:
-
-1. ZGC offers the highest throughput
-2. Shenandoah GC has a fluctuant position: it is better on arm64 and slower on x86_64
 
 # Macro
 
@@ -1946,17 +1672,87 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 2. OpenJDK is in the middle
 3. GraalVM CE is the slowest
 
+# Garbage Collectors
+
+This section is purely informative, it does not contain any benchmark. We decided to include it as a high-level overview of the Garbage Collectors (and their main characteristics) from the OpenJDK. Based on the feedback we received and further considerations, we concluded that using micro-benchmarks to gauge the performance of the Garbage Collectors might result in very misleading conclusions.
+
+## GC Overview
+
+### Serial GC
+- generational collector, stop-the-world (STW) pauses
+- it has the smallest footprint and is desired especially for resource-constrained environments where latency is not an issue
+
+### Parallel GC
+- generational collector, stop-the-world (STW) pauses
+- also called a throughput collector, it is desired for applications where throughput is more important than latency
+
+### G1 GC
+- generational collector, region based, stop-the-world (STW) pauses, concurrent phases
+- strives for a balance between latency and throughput (with a desired maximum pause time of 200 ms)
+
+### Shenandoah GC
+- uni-generational, region based (like G1 GC), fully concurrent
+- target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times
+
+### ZGC
+- uni-generational, mostly concurrent phases, but there are some STW pauses
+- target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times (similar to Shenandoah GC)
+
+## GC Barriers
+
+Most GCs require different barriers that need to be implemented in the runtime, interpreter, C1 JIT and C2 JIT. Such barriers affect application performance even when no actual GC work is happening. Below is a summary of such barriers mostly specific to each GC from JDK 17.
+
+### Epsilon GC
+- does not add any barrier on top of the default/shared barriers (e.g., C1 or C2 compiler barriers). It might be the baseline (since it has the smallest overhead) in comparison to all the others, nevertheless it is still experimental at the moment.
+
+### Serial GC
+- a card-table write barrier (to track the references from Tenured Generation to Young Generation). In this technique, the heap is partitioned into equal-sized cards, and a card table array is allocated, with an entry for each card of the heap. Card table entries are initially clean; the mutator write barrier marks the card containing the updated field (or the head of the object containing the field, in a variant) dirty. The collector must scan the card table to find dirty entries, and then scan the corresponding dirty cards to find the cross-generational pointers, if any, created by the writes.
+
+### Parallel GC
+- a card-table write barrier (similar to Serial GC)
+
+### G1 GC
+- a pre-write barrier is required in case of concurrent marking by Snapshot-At-The-Beginning (SATB) to make sure all objects live at the start of the marking are kept alive, all the reference updates need to any previous reference stored before writing
+- a post-write barrier to track object references between different regions to enable the evacuation of old regions, which is done as part of mixed collections. References are tracked in remembered sets and are continuously updated with the help of the post-barrier
+- a read barrier is added when a read access is performed to the referent field of a java.lang.ref.Reference. This will result in the referent being marked live
+- two arraycopy barriers (e.g., pre-write and post-write barriers)
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+
+### ZGC
+- load-reference barrier employed when references are loaded from the Heap. It ensures that
+  references pointing into a relocated memory area will be caught and handled (i.e., the load barrier performs further actions to remap pointers that actually point into the relocated memory area, without the need to read that memory)
+  references pointing into the newly allocated memory will pass through the barrier without further actions
+- weak load barrier may be provided for loading a pointer “weakly” (i.e., load the pointer without keeping its target object alive in the context of garbage collection). Examples where a weak load barrier may be useful include reading a StringTable object in the JVM
+- arraycopy barriers to deal with array copies
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+- a keep-alive barrier used during the concurrent marking phase
+- a mark barrier used during the concurrent marking phase
+- nmethod-barriers (i.e., a mechanism to arm nmethods) for concurrent unloading. For example, code cache unloading needs to know about on-stack nmethods. Arming the nmethods enables GC callbacks when they are called.
+- stack-watermark barrier for concurrent thread-scanning
+
+### Shenandoah GC
+- load-reference barrier employed after a load from a reference field or array element and before the loaded object is given to the rest of the application code
+- Snapshot-At-The-Beginning (SATB) write barrier employed before reference writes and used in case of concurrent marking. This is very similar to G1's SATB barrier, it intercepts writes and marks through "previous" objects
+- an arraycopy barrier to deal with array copies (a better arraycopy-barrier-scheme in comparison to, for example, the G1's arraycopy barriers implemented in the C1/C2 JIT or Graal JIT)
+- CAS object barrier that handles atomic compare and swap related methods
+- an object clone barrier to deal with cloning objects on the heap
+- a keep-alive barrier for java.lang.ref.Reference to handle the cases when the referent field of a java.lang.ref.Reference object is read
+- nmethod-barriers and stack-watermark barriers (similar to what ZGC had initially introduced)
+
+**Note:** depending on the mode, some of these barriers are disabled.
+
+> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this will change in the upcoming releases (e.g., v23 has ZGC support).
+
 # Final Thoughts
 
 In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 and arm64. 
 We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations. 
-We have also used a set of micro-benchmarks to assess the performance of the Garbage Collectors (even though the results are not fully conclusive due to the lack of real-world scenarios).
 
-In general, we can conclude that the GraalVM EE JIT compiler outperforms C2 JIT. In particular, optimizations like partial escape analysis, and better inlining (including polymorphic inlining) make a difference. GraalVM CE JIT, instead, has a reduced set of optimizations in comparison to C2 JIT, that makes it slower. Nevertheless, the lack of support for ZGC and Shenandoah GC is a drawback (at the moment) for GraalVM.
+In general, we can conclude that the GraalVM EE JIT compiler outperforms C2 JIT. In particular, optimizations like partial escape analysis, and better inlining (including polymorphic inlining) make a difference. GraalVM CE JIT, instead, has a reduced set of optimizations in comparison to C2 JIT, that makes it slower.
 
 OpenJDK still offers a good mixture between C2 JIT with an extended set of intrinsics and rich vectorization support, as well as the full set of Garbage Collectors (including ZGC and Shenandoah GC). Even though maybe, in terms of JIT C2 is not on the same parity as Graal JIT from the EE, the JVM does a good job overall.
-
-In regard to the available Garbage Collectors from OpenJDK, there are specific workloads that make, for example, a generational collector better than non-generational collectors like ZGC and Shenandoah GC. Adding generational support to ZGC and Shenandoah GC is currently work in progress.
 
 This report should not be considered as a final verdict on which JVM distribution is the best. 
 As it can be seen in the results, there are cases where one distribution is faster than the other and vice-versa, depending on the benchmark.
@@ -1974,8 +1770,8 @@ In case you want to contribute to this project, feel free to reach out or open a
 - [ZGC Wiki](https://wiki.openjdk.org/display/zgc/Main)
 - [Shenandoah GC Wiki](https://wiki.openjdk.org/display/shenandoah/Main)
 - [async-profiler](https://github.com/async-profiler/async-profiler)
+- [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
+- [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [Efficient reference classification and quick memory reuse in a system that supports concurrent garbage collection](https://patents.google.com/patent/US9921959B2/en) - Per A. Liden, Stefan Mats Rikard Karlsson
 - [Concurrent Remembered Set Refinement in Generational Garbage Collection](https://www.researchgate.net/publication/220817732_Concurrent_Remembered_Set_Refinement_in_Generational_Garbage_Collection) - David Detlefs, Ross Knippel, William D. Clinger, Matthias Jacob
-- [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [Renaissance: Benchmarking Suite for Parallel Applications on the JVM](https://renaissance.dev/resources/docs/renaissance-suite.pdf)
-- [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
