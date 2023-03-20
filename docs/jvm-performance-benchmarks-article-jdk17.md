@@ -1573,7 +1573,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 # Macro
 
-This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and GC benchmarks with another class of benchmarks.
+This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and Garbage Collector (GC) benchmarks with another class of benchmarks.
 
 ## Macro Benchmarks
 
@@ -1698,6 +1698,8 @@ This section is purely informative, it does not contain any benchmark. We decide
 - uni-generational, mostly concurrent phases, but there are some STW pauses
 - target low-latency applications (for both large-heaps but also resource-constrained environments) with a few ms target pause times (similar to Shenandoah GC)
 
+> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this will change in the upcoming releases (e.g., v23 has ZGC support).
+
 ## GC Barriers
 
 Most GCs require different barriers that need to be implemented in the runtime, interpreter, C1 JIT and C2 JIT. Such barriers affect application performance even when no actual GC work is happening. Below is a summary of such barriers mostly specific to each GC from JDK 17.
@@ -1742,8 +1744,6 @@ Most GCs require different barriers that need to be implemented in the runtime, 
 - nmethod-barriers and stack-watermark barriers (similar to what ZGC had initially introduced)
 
 **Note:** depending on the mode, some of these barriers are disabled.
-
-> GraalVM CE/EE (i.e., HotSpot-based mode) up to version v22 does not support either ZGC or Shenandoah GC. The Graal compiler has not implemented any specific Shenandoah/ZGC barrier. Nevertheless, this will change in the upcoming releases (e.g., v23 has ZGC support).
 
 # Final Thoughts
 
