@@ -1573,7 +1573,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 # Macro
 
-This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT and Garbage Collector (GC) benchmarks with another class of benchmarks.
+This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT benchmarks with another class of benchmarks.
 
 ## Macro Benchmarks
 
