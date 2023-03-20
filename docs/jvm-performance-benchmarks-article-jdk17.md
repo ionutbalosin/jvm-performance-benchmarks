@@ -1552,12 +1552,12 @@ generated is similar to the following:
 
 ## JIT Geometric Mean
 
-This section describes the normalized GM for the entire JIT related benchmark category.
-This is purely informative to have a high-level understanding on the overall benchmark scores.
+This section describes the normalized GM for the entire JIT-related benchmark category, having in total 273 benchmarks. 
+This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
 - all benchmark scores are converted to the same unit (e.g., "ns/op")
-- the geometric mean is calculated and normalized to C2 JIT
+- the resulting geometric mean is normalized to C2 JIT
 
 ## x86_64
 
@@ -1579,7 +1579,7 @@ No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
-To summarize, on both architectures the geometric mean is consistent:
+To summarize, on both architectures the normalized geometric mean is consistent:
 
 1. GraalVM EE JIT is the fastest
 2. C2 JIT is in the middle
@@ -1913,12 +1913,12 @@ Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-p
 
 ## Macro Geometric Mean
 
-This section describes the normalized GM for the entire macro benchmarks category.
-This is purely informative to have a high-level understanding on the overall benchmark scores.
+This section describes the normalized GM for the entire macro benchmarks category, having in total 27 benchmarks. 
+This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
 - all benchmark scores are converted to the same unit (e.g., "ns/op")
-- the geometric mean is calculated and normalized to OpenJDK
+- the resulting geometric mean is normalized to OpenJDK
 
 ## x86_64
 
@@ -1940,7 +1940,7 @@ No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Unit
 
 **Note:** The first in the row is the fastest, and the last in the row is the slowest
 
-To summarize, on both architectures the geometric mean is consistent:
+To summarize, on both architectures the normalized geometric mean is consistent:
 
 1. GraalVM EE is the fastest
 2. OpenJDK is in the middle
