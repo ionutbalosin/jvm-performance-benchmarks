@@ -164,13 +164,13 @@ empty bodied. This might be a bug in the version of GraalVM CE used in this benc
   0x6f3a5:   mov	$0x1,%rax
   0x6f3ac:   jmp	0x6f3c3
   0x6f3b1:   data16 data16 nopw 0x0(%rax,%rax,1)
-  0x6f3bc:   data16 data16 xchg %ax,%ax <--- nops
-  0x6f3c0:   inc	%rax                <--- loop begin
+  0x6f3bc:   data16 data16 xchg %ax,%ax          <--- nops
+  0x6f3c0:   inc	%rax                         <--- loop begin
   0x6f3c3:   cmp	$0x400000,%rax
-  0x6f3ca:   jne	0x6f3c0             <--- loop end
-  0x6f3cc:   mov	$0x400000,%rax      <--- move the loop computation to a reg as a constant. 
+  0x6f3ca:   jne	0x6f3c0                      <--- loop end
+  0x6f3cc:   mov	$0x400000,%rax               <--- move the loop computation to a reg as a constant. 
   0x6f3d3:   mov	0x348(%r15),%rcx
-  0x6f3da:   test   %eax,(%rcx)         ;{poll_return}
+  0x6f3da:   test   %eax,(%rcx)                  ;{poll_return}
   0x6f3dc:   ret
 ```
 
@@ -186,8 +186,8 @@ dead allocations even across function boundaries, provided the functions are inl
     Object obj1 = new Object();
     ...
     Object obj8 = new Object();
-    // inlining of the default constructor should enable the DSE
-    // see the Wrapper() constructor
+    // the explicit Wrapper(obj1, ...) constructor calls the default Wrapper() constructor that triggers other allocations
+    // inlining of the default Wrapper() constructor should enable the DSE and eliminate redundant allocations
     return new Wrapper(obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
   }  
 
@@ -528,7 +528,7 @@ GraalVM CE JIT
 
 ## LockCoarseningBenchmark
 
-Test how the compiler can effectively coarsen/merge several adjacent synchronized blocks into one synchronized block, thus reducing the locking overhead. This optimization can be applied if the same lock object is used by all methods. Compilers can help to coarsen/merge the locks, but that is not guaranteed!
+Test how the compiler can effectively coarsen/merge several adjacent synchronized blocks into one synchronized block, thus reducing the locking overhead. This optimization can be applied if the same lock object is used by all methods. Compilers can help to coarsen/merge the locks, but that is not guaranteed.
 
 OpenJDK specifics:
 - prior JDK 15: with biased locking enabled, compare-and-swap atomic operation are basically no-ops when acquiring a monitor, in case of uncontended locking. It assumes that a monitor remains owned by a given thread until a different thread tries to acquire it
@@ -589,10 +589,11 @@ The hottest regions in the report emphasizes this:
   1.13%         interpreter  method entry point (kind = zerolocals)
 ```
 
-By contrast, GraalVM EE JIT can coarse all the nested locks in one block and perform all the operations inside. Nevertheless, since biased locking is enabled and there is no contention this is a no-op when acquiring a monitor, hence no `lock cmpxchg` instruction is emitted.
+By contrast, GraalVM EE JIT can coarse all the nested locks in one block and perform all the operations inside. Nevertheless, since biased locking is enabled and there is no contention, no `lock cmpxchg` instruction is emitted.
 
 ```
-  0x7fbfd6b19a90:   jne    0x7fbfd6b19acb  <--- coarsed section (i.e., no lock)
+                                              <--- coarsed section (i.e., no lock)
+  0x7fbfd6b19a90:   jne    0x7fbfd6b19acb     <--- jump if comparation fails
   0x7fbfd6b19a96:   mov    0x14(%r11),%eax
   0x7fbfd6b19a9a:   add    %eax,%r9d
   0x7fbfd6b19a9d:   add    %eax,%r9d
@@ -602,7 +603,7 @@ By contrast, GraalVM EE JIT can coarse all the nested locks in one block and per
   0x7fbfd6b19aa9:   add    %eax,%r9d
   0x7fbfd6b19aac:   add    %eax,%r9d
   0x7fbfd6b19aaf:   add    %eax,%r9d
-  0x7fbfd6b19ab2:   mov    %r9d,%eax       <--- ireturn
+  0x7fbfd6b19ab2:   mov    %r9d,%eax          <--- ireturn
 ```
 
 [![LockCoarseningBenchmark_withoutBiasedLocking.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withoutBiasedLocking.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withoutBiasedLocking.svg?raw=true)
@@ -613,7 +614,7 @@ By contrast, GraalVM EE JIT can coarse all the nested locks in one block and per
 
 The `nested_synchronized` from OpenJDK HotSpot VM is (again) much slower than GraalVM EE/CE. The reason is the same, it does not get compiled by C1 nor C2. Instead, the Template Interpreter is used to generate the assembly code snippets for each bytecode.
 
-By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main difference is that now since the biased locking is disabled, a compare-and-swap atomic instruction guards that section.
+By contrast, GraalVM EE JIT merges all the nested locks in one synchronized block and performs all the additions inside that synchronized block. The main difference is that now, since the biased locking is disabled, a compare-and-swap atomic instruction guards that section.
 
 ```
 0x7f3926b18d90:   lock cmpxchg %rsi,(%r11)   <--- coarsed section (i.e., CAS)
@@ -1033,7 +1034,7 @@ Looking at the figure above and the assembly generated for the `virtual_call` be
   method into the JMH stub. In this case, the `virtual_call[MEGAMORPHIC_8]` performed similar to the other benchmarks.
   Therefore, the number of targets is limited by other factors, such as inlining.
 - GraalVM EE is able to devirtualize (and inline) up to three different targets per call site. If the number of targets
-  is higher, then it will use a virtual call for the remaining targets: <br>
+  is higher, then it will use a virtual call for the remaining targets:
 
 ```
 // High level pseudo-code of the GraalVM EE devirtualization of call sites with more than three targets.
@@ -1096,9 +1097,12 @@ The `devirtualize_to_monomorphic` benchmark tries to manually devirtualize call 
 
 Looking at the figure above and the assembly generated for the `virtual_calls_chain` benchmark we conclude the following:
 - OpenJDK is able to devirtualize (and inline) through the class hierarchy call sites that use up to two different targets.
-  In these cases, it also does loop unrolling by a factor of four. <br>
+  In these cases, it also does loop unrolling by a factor of four.
+
   Starting from three targets or more that are evenly distributed in the benchmark, it always uses a series of interface calls
-  to reach the target method. <br> If a dominant target is present (`virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`),
+  to reach the target method.
+  
+  If a dominant target is present (`virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`),
   then C2 JIT will add a guard, devirtualize and inline the call to the dominant target:
 
 ```
@@ -1249,7 +1253,7 @@ Instead of explicit guarding for null, it just lets SIGSEGV happen and (in case 
 
 GraalVM CE JIT does not do any loop unrolling but relies on the same optimistic approach (nulls are likely to happen) that takes a toll.
 
-By contrast, C2 JIT the null checks in the final optimized code version (within the unrolled loop instructions).
+By contrast, C2 JIT adds the null checks in the final optimized code version (within the unrolled loop instructions).
 
 ```
   0x7fae4cf666d0:   mov    0x14(%rdi,%r11,4),%r10d
@@ -1304,16 +1308,17 @@ Source code: [NpeThrowBenchmark.java](https://github.com/ionutbalosin/jvm-perfor
 
 ### Conclusions:
 
-For explicit throws, OpenJDK, GraalVM CE and GraalVM EE are very close in performance. <br>
+For explicit throws, OpenJDK, GraalVM CE and GraalVM EE are very close in performance.
+
 For implicit throws however, OpenJDK is around 35x faster than both GraalVM CE and EE. In order to understand why,
 we look at the flamegraphs generated by JMH (and [async-profiler](https://github.com/async-profiler/async-profiler))
 for the `implicit_throw_npe` benchmark.
 
 [![openjdk-hotspot-vm-flame-cpu-forward](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)
-<br> The flame graph generated by OpenJDK for the `implicit_throw_npe` benchmark.
+The flame graph generated by OpenJDK for the `implicit_throw_npe` benchmark.
 
 [![graalvm-ce-flame-cpu-forward](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)
-<br> The flame graph generated by GraalVM CE for the `implicit_throw_npe` benchmark. GraalVM EE generates a similar flame graph.
+The flame graph generated by GraalVM CE for the `implicit_throw_npe` benchmark. GraalVM EE generates a similar flame graph.
 
 Looking at the flame graph for GraalVM CE (and EE), we can see that a call to
 `JVMCIRuntime::throw_and_post_jvmti_exception` is made. One of the things this method does is to allocate a new
@@ -1375,11 +1380,12 @@ For example, the below code instructions pertains to GraalVM CE:
 Compiler analyses the scope of a new object and decides whether it might be allocated or not on the heap.
 The method is called Escape Analysis (EA), which identifies if the newly created object is escaping or not into the heap.
 To not be confused, EA is not an optimization but rather an analysis phase for the optimizer.
-There are few escape states:
+There are a few escape states:
 - NoEscape - the object cannot be visible outside the current method and thread.
 - ArgEscape - the object is passed as an argument to a method but cannot otherwise be visible outside the method or by other threads.
 - GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
-  For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+  
+For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
 
 ```
   @Benchmark
@@ -1705,7 +1711,9 @@ This section is purely informative, it does not contain any benchmark. It as a h
 Most GCs require different barriers that need to be implemented in the runtime, interpreter, C1 JIT and C2 JIT. Such barriers affect application performance even when no actual GC work is happening. Below is a summary of such barriers mostly specific to each GC from JDK 17.
 
 ### Epsilon GC
-- does not add any barrier on top of the default/shared barriers (e.g., C1 or C2 compiler barriers). It might be the baseline (since it has the smallest overhead) in comparison to all the others, nevertheless it is still experimental at the moment.
+- is not a fully featured GC since it handles only memory allocations but does not implement any memory reclamation mechanism
+- it could be used in specific benchmarks for baseline measurements (since it has the smallest overhead)
+- it does not add any GC barrier on top of the default/shared barriers (e.g., C1 or C2 compiler barriers) and it is experimental at the moment
 
 ### Serial GC
 - a card-table write barrier (to track the references from Tenured Generation to Young Generation). In this technique, the heap is partitioned into equal-sized cards, and a card table array is allocated, with an entry for each card of the heap. Card table entries are initially clean; the mutator write barrier marks the card containing the updated field (or the head of the object containing the field, in a variant) dirty. The collector must scan the card table to find dirty entries, and then scan the corresponding dirty cards to find the cross-generational pointers, if any, created by the writes.

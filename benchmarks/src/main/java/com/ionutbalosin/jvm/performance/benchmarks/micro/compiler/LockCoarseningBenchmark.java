@@ -46,7 +46,7 @@ import org.openjdk.jmh.annotations.Warmup;
 /*
  * Test how the compiler can effectively coarsen/merge several adjacent synchronized blocks into one synchronized block,
  * thus reducing the locking overhead. This optimization can be applied if the same lock object is used by all methods.
- * Compilers can help to coarsen/merge the locks, but that is not guaranteed!
+ * Compilers can help to coarsen/merge the locks, but that is not guaranteed.
  *
  * OpenJDK HotSpot VM specifics:
  * - prior JDK 15: with biased locking enabled, compare-and-swap atomic operation are basically no-ops when acquiring a monitor, in case of uncontended locking.
