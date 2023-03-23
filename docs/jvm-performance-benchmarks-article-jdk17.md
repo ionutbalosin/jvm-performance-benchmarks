@@ -52,7 +52,7 @@ The list of included architectures is:
 
 This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) project. For any further information (not explicitly mentioned here) including the OS tuning settings, the deliberate decision on choosing these JVMs and/or specific JDKs, etc., please check out the repository.
 
-We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), [Stefan Karlsson](https://twitter.com/stekarmatrik), [Thomas Würthinger](https://thomaswue.dev/) for their reviews, and helpful suggestions.
+We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), [Stefan Karlsson](https://twitter.com/stekarmatrik), [Thomas Würthinger](https://thomaswue.dev/) and others for their reviews, and helpful suggestions.
 
 # SetUp
 
