@@ -37,17 +37,14 @@ graalvm_ce_color_palette <- c("GraalVM CE" = "#FFB000")
 graalvm_ee_color_palette <- c("GraalVM EE" = "#FE6100")
 full_color_palette <- append(append(openjdk_hotspot_vm_color_palette, graalvm_ce_color_palette), graalvm_ee_color_palette)
 
-# Define the Garbage Collector benchmark result list that will not be merged across multiple JVMs in the final generated plot
-# Note: The regex must match all of the generated benchmark result list
-gc_benchmark_files <- list(
-  "^(BurstHeapMemoryAllocatorBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(HeapMemoryAllocatorWithConstantRetrainedHeapBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(HeapMemoryAllocatorWithFixedRetrainedHeapBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(HeapMemoryBandwidthAllocatorBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(ReadBarriersChainOfReferencesBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(ReadBarriersLoopingOverArrayBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(ReadWriteBarriersBenchmark)[_a-zA-Z0-9]*.csv",
-  "^(WriteBarriersLoopingOverArrayBenchmark)[_a-zA-Z0-9]*.csv"
+# Define the benchmark result list that will not be merged across multiple JVMs in the final generated plot
+# The regex must match all of the generated benchmark result list
+# Note: at the moment this list is empty, but kept as functionality for future use cases
+jvm_split_benchmark_files <- list(
+  # "^(FirstBenchmark)[_a-zA-Z0-9]*.csv",
+  # "^(SecondBenchmark)[_a-zA-Z0-9]*.csv",
+  # "^(ThirdBenchmark)[_a-zA-Z0-9]*.csv",
+  # ...
 )
 
 # Plot the benchmark results in separate SVG files (one for every JVM)
@@ -105,9 +102,9 @@ for (benchmark_file in benchmark_files) {
   graalvm_ce_benchmark_file <- paste(jmh_output_folder, graalvm_ce_identifier, benchmark_file, sep = "/")
   graalvm_ee_benchmark_file <- paste(jmh_output_folder, graalvm_ee_identifier, benchmark_file, sep = "/")
 
-  # Use a filename pattern matching approach to exclude the Garbage Collector benchmark results from being merged across multiple JVMs in the final generated plot
-  if (isFilenamePatternMatching(gc_benchmark_files, benchmark_file)) {
-    # Garbage Collector benchmark results are plotted in separate (one per every JVM) SVG files
+  # Use a filename pattern matching approach to exclude the benchmark results from the slit list from being merged across multiple JVMs in the final generated plot
+  if (isFilenamePatternMatching(jvm_split_benchmark_files, benchmark_file)) {
+    # The benchmark results from the slit list are plotted in separate (one per every JVM) SVG files
     plotJvmSplitBenchmarks(jmh_output_folder, openjdk_hotspot_vm_benchmark_file, graalvm_ce_benchmark_file, graalvm_ee_benchmark_file, benchmark_file, benchmark_file_basename)
   } else {
     # any other benchmark results (e.g., JIT, macro, etc.) are merged (across JVMs) and plotted in the same SVG file
