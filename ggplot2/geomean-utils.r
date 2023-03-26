@@ -37,20 +37,6 @@ convertAverageTimeInNs <- function(data) {
   data
 }
 
-# Convert all throughput scores to "ops/ms" (for consistency across all benchmark results)
-convertThroughputInMs <- function(data) {
-  data$Score[data$Unit == "ops/s"] <- as.numeric(data$Score[data$Unit == "ops/s"]) * 1000
-  data$Unit[data$Unit == "ops/s"] <- "ops/ms"
-
-  data$Score[data$Unit == "ops/us"] <- as.numeric(data$Score[data$Unit == "ops/us"]) / 1000
-  data$Unit[data$Unit == "ops/us"] <- "ops/ms"
-
-  data$Score[data$Unit == "ops/ns"] <- as.numeric(data$Score[data$Unit == "ops/ns"]) / (1000 * 1000)
-  data$Unit[data$Unit == "ops/ns"] <- "ops/ms"
-
-  data
-}
-
 # Apply column sanitizations on the data frame
 sanitizeJmhCsvResults <- function(data) {
   # delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
@@ -62,7 +48,7 @@ sanitizeJmhCsvResults <- function(data) {
   data$Score <- as.numeric(gsub(",", ".", data$Score))
 
   # keep only the necessary data frame columns for plotting
-  data <- data[, grep("^(Benchmark|Score|Unit|Param..gc)$", colnames(data))]
+  data <- data[, grep("^(Benchmark|Score|Unit)$", colnames(data))]
 
   data
 }
@@ -92,15 +78,5 @@ geometricMeanForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identif
   print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
 
   geomean <- geometric.mean(data$Score)
-  round(geomean, 2)
-}
-
-# Calculate the geometric mean for Garbage Collector throughput scores within a data frame
-geometricMeanForThroughputJmhGcResults <- function(jmh_output_folder, jvm_identifier, benchmark_files, gc) {
-  data <- mergeJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_files)
-  data <- convertThroughputInMs(data)
-  print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
-
-  geomean <- geometric.mean(data[data$Param..gc == gc, ]$Score)
   round(geomean, 2)
 }

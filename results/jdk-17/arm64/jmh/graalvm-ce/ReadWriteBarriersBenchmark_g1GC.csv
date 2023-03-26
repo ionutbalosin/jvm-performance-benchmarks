@@ -1,5 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: size"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadWriteBarriersBenchmark.gc","thrpt",1,25,"2030,677920","2,372777","ops/s",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadWriteBarriersBenchmark.gc:·gc.alloc.rate","thrpt",1,25,"0,000146","0,000166","MB/sec",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadWriteBarriersBenchmark.gc:·gc.alloc.rate.norm","thrpt",1,25,"0,075300","0,085925","B/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.gc.ReadWriteBarriersBenchmark.gc:·gc.count","thrpt",1,25,"0,000000",NaN,"counts",262144

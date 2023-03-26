@@ -41,7 +41,9 @@ import org.openjdk.jmh.annotations.Warmup;
  * Test the overhead of read/write barriers while iterating through an array of Integers and
  * exchanging the values between two array entries (i.e., array[i] <-> array[j]).
  *
+ * Deprecated: using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions.
  */
+@Deprecated
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

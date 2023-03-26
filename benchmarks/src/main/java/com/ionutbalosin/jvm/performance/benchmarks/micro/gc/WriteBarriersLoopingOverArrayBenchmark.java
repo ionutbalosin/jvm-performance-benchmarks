@@ -40,7 +40,9 @@ import org.openjdk.jmh.annotations.Warmup;
  * Test the overhead of write barriers while iterating through the elements of an array of objects and updating every element (i.e., reference).
  * The number of allocations in the benchmark test method is kept to zero.
  *
+ * Deprecated: using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions.
  */
+@Deprecated
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

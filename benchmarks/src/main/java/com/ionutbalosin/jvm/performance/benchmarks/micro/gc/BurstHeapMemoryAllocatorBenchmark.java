@@ -43,7 +43,10 @@ import org.openjdk.jol.info.GraphLayout;
  *  and then releases them so that they all become eligible for Garbage Collector.
  *
  * Note: the benchmark could be run using multiple concurrent threads.
+ *
+ * Deprecated: using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions.
  */
+@Deprecated
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
