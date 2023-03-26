@@ -138,24 +138,24 @@ benchmarks_geometric_mean() {
     --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
-    echo "ERROR: Error encountered while calculating the benchmarks geometric mean, unable to continue!"
+    echo "ERROR: Error encountered while calculating the benchmarks normalized geometric mean, unable to continue!"
     return 1
   fi
 
   echo ""
-  echo "Benchmarks geometric mean successfully calculated."
+  echo "Benchmarks normalized geometric mean successfully calculated."
 }
 
 calculate_benchmarks_geometric_mean() {
-  echo "This will calculate the geometric mean (per category) for a specific set of benchmarks."
+  echo "This will calculate the normalized geometric mean (per category) for a specific set of benchmarks."
   echo "For example:"
-  echo " - Compiler benchmarks geometric mean"
-  echo " - Garbage Collector benchmarks geometric mean"
-  echo " - Macro benchmarks geometric mean"
-  echo "WARNING: You might skip this step if geometric mean was already calculated during a previous execution."
+  echo " - Compiler benchmarks normalized geometric mean"
+  echo " - Garbage Collector benchmarks normalized geometric mean"
+  echo " - Macro benchmarks normalized geometric mean"
+  echo "WARNING: You might skip this step if normalized geometric mean was already calculated during a previous execution."
   echo ""
   while :; do
-    read -p "Do you want to calculate the benchmarks geometric mean? (yes/no) " INPUT_KEY
+    read -p "Do you want to calculate the benchmarks normalized geometric mean? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
       benchmarks_geometric_mean
@@ -237,9 +237,9 @@ if [ $? -ne 0 ]; then
 fi
 
 echo ""
-echo "+-------------------------------------+"
-echo "| Calculate benchmarks geometric mean |"
-echo "+-------------------------------------+"
+echo "+------------------------------------------------+"
+echo "| Calculate benchmarks normalized geometric mean |"
+echo "+------------------------------------------------+"
 calculate_benchmarks_geometric_mean
 if [ $? -ne 0 ]; then
   exit 1

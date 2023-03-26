@@ -1,11 +1,14 @@
 # Java Virtual Machine (JVM) Performance Benchmarks
 
-This repository contains different JVM benchmarks for the C2/Graal JIT Compilers and the Garbage Collectors.
+This repository contains different Java Virtual Machine (JVM) micro-benchmarks for the C2/Graal Just-In-Time (JIT) Compilers.
 
-Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell enough if properly implemented and executed.
+In addition, there is a small set of benchmarks (i.e., a macro category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is only complementary but not the main purpose of this work.
+
+The micro-benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh).
 
 ## Content
 
+- [Authors](#authors)
 - [Purpose](#purpose)
 - [JMH caveats](#jmh-caveats)
 - [OS tuning](#os-tuning)
@@ -15,21 +18,32 @@ Each benchmark focuses on a specific execution pattern that is (potentially full
 - [Infrastructure baseline benchmark](#infrastructure-baseline-benchmark)
 - [Run the benchmarks](#run-the-benchmarks)
 - [Benchmark plots](#benchmark-plots)
+- [Contribute](#contribute)
 - [License](#license)
 
+## Authors
+
+Ionut Balosin
+- Website: www.ionutbalosin.com
+- Twitter: @ionutbalosin
+- Mastodon: ionutbalosin@mastodon.social
+
+Florin Blanaru
+- Twitter: @gigiblender
+- Mastodon: gigiblender@mastodon.online
 
 ## Purpose
 
-The main goal of the project is to assess:
+The main goal of the project is to assess different JIT Compiler optimizations that are generally available in compilers, such as inlining, loop unrolling, escape analysis, devirtualization, null-check, range-check elimination, dead code elimination, etc. 
 
-1. different Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations)
-2. different Garbage Collectors' efficiency in both allocating but also reclaiming objects 
+Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell just enought if properly implemented.
 
-In addition, there is a small set of benchmarks (i.e., a macro category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is not the main purpose of this work.
-
-We leave **out of scope** benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, pattern matching for the switch, local-variable type inference, etc.) as well as large applications (e.g., web-based microservices, etc.).
-
-The benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) which is an excellent tool for measuring the throughput and sampling latencies end to end.
+**Out of scope**:
+- micro-benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, local-variable type inference, etc.) 
+- micro-benchmarking any Garbage Collector
+- benchmarking large applications (e.g., web-based microservices, etc.)
+ 
+> Using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions
 
 ## JMH caveats
 
@@ -129,8 +143,6 @@ No. | JVM distribution   | JDK versions |  Build
 
 If there is a need for another JDK LTS version (or feature release), you have to configure it by yourself. 
 
-Additionally, if you decide to install a different OpenJDK build, we recommend to take one with [Shenandoah GC](https://wiki.openjdk.org/display/shenandoah/Main) available.
-
 ### Configure JDK
 
 After the JDK was installed, the JDK path needs to be updated in the benchmark configuration scripts.  To do so, open the [configure-jvm.sh](./configure-jvm.sh) script file and update the corresponding **JAVA_HOME** property:
@@ -166,9 +178,9 @@ The benchmark will sequentially pick up and execute all the tests from the confi
 
 There are a few reasons why such a custom configuration is needed:
 
-- selectively pass different JVM arguments to subsequent runs of the same benchmark  (e.g., first run with ZGC, second run with G1GC, etc.) 
+- selectively pass different JVM arguments to subsequent runs of the same benchmark  (e.g., first run with biased locking enabled, second run with biased locking disabled, etc.) 
 - selectively pass different JMH options to subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.)
-- selectively control what benchmarks(, JVM parameters and JMH options) to include/exclude in one JDK version (e.g., exclude from JDK 11 the ZGC benchmark since it was experimental at that moment, etc.)
+- selectively control what benchmarks to include/exclude to/from one JDK version
 
 ## Infrastructure baseline benchmark
 
@@ -194,8 +206,8 @@ Each benchmarks suite take a significant amount of time to fully run. For exampl
 
  Benchmark suite |  Elapsed time
 --------------| ----------
-benchmarks-suite-jdk11.json       | ~ 65 hours
-benchmarks-suite-jdk17.json       | ~ 80 hours
+benchmarks-suite-jdk11.json       | ~ 45 hours
+benchmarks-suite-jdk17.json       | ~ 60 hours
 
 ### Dry run
 
@@ -214,7 +226,7 @@ Dry run mode goes through and simulates all the commands, but without changing a
 
 **Note:** Launch this command with `sudo` to apply the OS configuration settings.
 
-Each benchmark result is saved under `results/jdk-$JDK_VERSION/$ARCH/$JVM_NAME/$BENCHMARK_NAME.json`
+The benchmark results are saved under `results/jdk-$JDK_VERSION/$ARCH/jmh/$JVM_IDENTIFIER` directory.
 
 ### Bash scripts on Windows
 
@@ -237,7 +249,15 @@ To generate all benchmark plots corresponding to one `<jdk-version>` and (option
 ```
 If the `<arch>` parameter is omitted, it is automatically detected based on the current system architecture.
 
-Each benchmark plot is saved under `results/jdk-$JDK_VERSION/$ARCH/$BENCHMARK_NAME.svg`.
+Before plotting the benchmarks, the script triggers, in addition, a few steps:
+- pre-process (e.g., merge, split) some benchmark result files. This is needed to avoid either too fragmented or too sparse generated benchmark plots
+- calculate the normalized geometric mean for each benchmark category (e.g., jit, macro). The normalized geometric mean results are saved under `results/jdk-$JDK_VERSION/$ARCH/geomean` directory.
+
+The benchmark plots are saved under `results/jdk-$JDK_VERSION/$ARCH/plot` directory.
+
+# Contribute
+
+If you would like to contribute code (or any other type of support, **including sponsorship**) you can do so through GitHub by sending a pull request, raising an issue with an attached patch, or directly contacting us.
 
 # License 
 
