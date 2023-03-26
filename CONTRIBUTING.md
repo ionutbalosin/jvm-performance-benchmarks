@@ -20,14 +20,6 @@ If you are adding a new file it should have the following header:
  *
  * Copyright (C) 2019 - 2023 Ionut Balosin
  *
- * Author: Ionut Balosin
- * Website: www.ionutbalosin.com
- * Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
- *
- * Co-author: Florin Blanaru
- * Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
- *
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information

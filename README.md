@@ -16,7 +16,7 @@ The micro-benchmarks are written using [Java Microbenchmark Harness (JMH)](https
 - [JDK coverage](#jdk-coverage)
 - [Benchmarks suites](#benchmarks-suites)
 - [Infrastructure baseline benchmark](#infrastructure-baseline-benchmark)
-- [Run the benchmarks](#run-the-benchmarks)
+- [Run the benchmarks suite](#run-the-benchmarks-suite)
 - [Benchmark plots](#benchmark-plots)
 - [Contribute](#contribute)
 - [License](#license)
@@ -192,13 +192,30 @@ This benchmark is particularly useful in case of a comparison between different 
 In that regard, if the results of the infrastructure baseline benchmark are not the same, it does not make sense to compare the results of the other benchmarks between different
 JVMs and JDKs.
 
-## Run the benchmarks
+## Run the benchmarks suite
 
-Running the benchmarks triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), prior to execute any benchmark, as follows:
+Running one benchmark suite triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), as follows:
 - configure the OS
 - configure the JVM (e.g., set JAVA_HOME, etc.)
-- configure the JMH (e.g., choose the benchmark suite for the specific JDK, define the results output folder, etc.)
-- compile the benchmarks source code (using a Maven profile for the specific JDK)
+- configure the JMH (e.g., choose the benchmark suite for the specific JDK, etc.)
+- compile the benchmarks (using a JDK Maven profile)
+
+**Note**: Only for benchmarks compilation please run the below command:
+```
+./mvnw -P jdk$<jdk-version>_profile clean package
+```
+where `<jdk-version>` is {11, 17}. If the profile is omitted, JDK profile 17 is implicitly selected.  
+
+Examples:
+```
+./mvnw clean package
+```
+```
+./mvnw -P jdk17_profile clean package
+```
+```
+./mvnw -P jdk11_profile clean package
+```
 
 ## Elapsed amount of time for each benchmark suite
 
@@ -264,14 +281,9 @@ If you would like to contribute code (or any other type of support, **including 
 Please see the [LICENSE](LICENSE) file for full license.
 
 ```
-Copyright (C) 2019 - 2023 Ionut Balosin
- 
-Author: Ionut Balosin
-Website: www.ionutbalosin.com
-Twitter: @ionutbalosin / Mastodon: ionutbalosin@mastodon.social
+JVM Performance Benchmarks
 
-Co-author: Florin Blanaru
-Twitter: @gigiblender / Mastodon: gigiblender@mastodon.online
+Copyright (C) 2019 - 2023 Ionut Balosin
 
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
