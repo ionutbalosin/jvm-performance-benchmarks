@@ -54,7 +54,10 @@ import org.openjdk.jol.info.GraphLayout;
  *
  * Note: During the lifecycle of the benchmark, the amount of retained memory by strong references is fixed
  * (i.e., the objects allocated in the benchmark setup phase are kept alive during the benchmark method)
+ *
+ * Deprecated: using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions.
  */
+@Deprecated
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

@@ -23,35 +23,6 @@
 
 source("./ggplot2/utils.r")
 
-# Merge all benchmark results for different Garbage Collector types into a single data frame
-# and append a new column "Param..gc":"<gc_list>" as a differentiator
-mergeJmhGcResults <- function(path, file, gc_list) {
-  result <- data.frame()
-
-  for (gc in gc_list) {
-    benchmark_result_file <- gsub("\\(\\(gc\\)\\)", gc, file)
-    benchmark_file_path <- paste(path, benchmark_result_file, sep = "/")
-    print(paste("Merging", benchmark_file_path, "benchmark ...", sep = " "))
-    data <- readJmhCsvResults(benchmark_file_path)
-    if (!empty(data)) {
-      data <- cbind(data, "Param..gc" = gc)
-      result <- rbind(result, data)
-    }
-  }
-
-  result
-}
-
-# Merge and write to a single output file multiple benchmark results for different Garbage Collector types, corresponding to a single JVM
-# Note: this relies on the fact that the benchmark result filenames are generated, by convention, as "*Benchmark_((gc))_*.csv"
-processJmhGcResults <- function(jmh_output_folder, jvm_identifier, file, gc_list) {
-  benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
-  data <- mergeJmhGcResults(benchmark_base_path, file, gc_list)
-
-  output_file <- gsub("_\\(\\(gc\\)\\)", "", file)
-  writeJmhCsvResults(benchmark_base_path, output_file, data)
-}
-
 # Merge all benchmark results for different JIT results into a single data frame
 # and append a new column "<column_name>":"<column_values>" as a differentiator
 mergeJmhJitResults <- function(path, benchmark_list, column_name, column_values) {
@@ -82,5 +53,7 @@ processJmhJitResults <- function(jmh_output_folder, jvm_identifier, benchmark_li
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
   data <- mergeJmhJitResults(benchmark_base_path, benchmark_list, column_name, column_values)
 
-  writeJmhCsvResults(benchmark_base_path, output_file, data)
+  if (!empty(data)) {
+    writeJmhCsvResults(benchmark_base_path, output_file, data)
+  }
 }

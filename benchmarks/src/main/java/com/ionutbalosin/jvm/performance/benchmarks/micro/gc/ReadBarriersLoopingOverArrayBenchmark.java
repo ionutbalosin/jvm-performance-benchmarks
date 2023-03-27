@@ -41,7 +41,9 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * Note: looping over an array favors algorithms that can hoist the barrier without accounting really on the cost of the barrier itself.
  *
+ * Deprecated: using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions.
  */
+@Deprecated
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

@@ -83,56 +83,6 @@ processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark
 processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
 processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
 
-# Split HeapMemoryBandwidthAllocatorBenchmark - 1 thread
-benchmark_file <- "HeapMemoryBandwidthAllocatorBenchmark_1thread.csv"
-column_name <- "Param..size"
-column_values <- list("_32_B")
-output_file <- "HeapMemoryBandwidthAllocatorBenchmark_1thread_param_size_32_B.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
-
-benchmark_file <- "HeapMemoryBandwidthAllocatorBenchmark_1thread.csv"
-column_name <- "Param..size"
-column_values <- list("_16_KB")
-output_file <- "HeapMemoryBandwidthAllocatorBenchmark_1thread_param_size_16_KB.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
-
-benchmark_file <- "HeapMemoryBandwidthAllocatorBenchmark_1thread.csv"
-column_name <- "Param..size"
-column_values <- list("_8_MB")
-output_file <- "HeapMemoryBandwidthAllocatorBenchmark_1thread_param_size_8_MB.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
-
-# Split HeapMemoryBandwidthAllocatorBenchmark - 2 threads
-benchmark_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads.csv"
-column_name <- "Param..size"
-column_values <- list("_32_B")
-output_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads_param_size_32_B.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
-
-benchmark_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads.csv"
-column_name <- "Param..size"
-column_values <- list("_16_KB")
-output_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads_param_size_16_KB.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
-
-benchmark_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads.csv"
-column_name <- "Param..size"
-column_values <- list("_8_MB")
-output_file <- "HeapMemoryBandwidthAllocatorBenchmark_2threads_param_size_8_MB.csv"
-processJmhCsvResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ce_identifier, benchmark_file, column_name, column_values, output_file)
-processJmhCsvResults(jmh_output_folder, graalvm_ee_identifier, benchmark_file, column_name, column_values, output_file)
-
 # Split SortVectorApiBenchmark
 benchmark_file <- "SortVectorApiBenchmark.csv"
 column_name <- "Param..arraySize"

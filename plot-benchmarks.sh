@@ -103,7 +103,7 @@ merge_split_benchmark_results() {
 preprocess_benchmark_results() {
   echo "Before plotting it is recommended to pre-process (e.g., merge, split) some of the benchmark result files."
   echo "For example:"
-  echo " - some benchmarks contain related results that are spread across multiple output files, one file corresponding to a Garbage Collector (or other interconnected JVM flags). Merging these results will lead to one single (instead of multiple) generated plot(s), hence improving the overall readability."
+  echo " - some benchmarks contain inter-connected results that are spread across multiple files, each file corresponding to specific JVM flags. Merging these results will lead to one single (instead of multiple) generated plot(s), hence improving the overall readability."
   echo " - other benchmarks contain results that are orders of magnitude different between iterations, making the plotting scale too big. Splitting these results into separated files will lead multiple (instead of a single) generated plots, each having a proper scale, hence improving the overall readability."
   echo "WARNING: You might skip this step if pre-processing was already triggered during a previous execution."
   echo ""
@@ -141,8 +141,7 @@ benchmarks_geometric_mean() {
 calculate_benchmarks_geometric_mean() {
   echo "This will calculate the normalized geometric mean (per category) for a specific set of benchmarks."
   echo "For example:"
-  echo " - Compiler benchmarks normalized geometric mean"
-  echo " - Garbage Collector benchmarks normalized geometric mean"
+  echo " - JIT compiler benchmarks normalized geometric mean"
   echo " - Macro benchmarks normalized geometric mean"
   echo "WARNING: You might skip this step if normalized geometric mean was already calculated during a previous execution."
   echo ""
