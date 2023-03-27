@@ -53,5 +53,7 @@ processJmhJitResults <- function(jmh_output_folder, jvm_identifier, benchmark_li
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
   data <- mergeJmhJitResults(benchmark_base_path, benchmark_list, column_name, column_values)
 
-  writeJmhCsvResults(benchmark_base_path, output_file, data)
+  if (!empty(data)) {
+    writeJmhCsvResults(benchmark_base_path, output_file, data)
+  }
 }

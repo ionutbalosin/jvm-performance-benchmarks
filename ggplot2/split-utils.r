@@ -43,5 +43,7 @@ processJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_fi
   benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
   data <- splitJmhCsvResults(benchmark_base_path, benchmark_file, column_name, column_values)
 
-  writeJmhCsvResults(benchmark_base_path, output_file, data)
+  if (!empty(data)) {
+    writeJmhCsvResults(benchmark_base_path, output_file, data)
+  }
 }
