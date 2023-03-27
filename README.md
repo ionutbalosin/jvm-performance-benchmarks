@@ -221,10 +221,10 @@ Examples:
 
 Each benchmarks suite take a significant amount of time to fully run. For example:
 
- Benchmark suite |  Elapsed time
---------------| ----------
-benchmarks-suite-jdk11.json       | ~ 45 hours
-benchmarks-suite-jdk17.json       | ~ 60 hours
+ Benchmark suite            |  Elapsed time
+----------------------------|--------------
+benchmarks-suite-jdk11.json | ~ 38 hours
+benchmarks-suite-jdk17.json | ~ 42 hours
 
 ### Dry run
 
