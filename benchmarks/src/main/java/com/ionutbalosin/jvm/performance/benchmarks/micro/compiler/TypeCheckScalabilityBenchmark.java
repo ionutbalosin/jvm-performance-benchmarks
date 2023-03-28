@@ -68,6 +68,8 @@ import org.openjdk.jmh.infra.Blackhole;
 @State(Scope.Thread)
 public class TypeCheckScalabilityBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*TypeCheckScalabilityBenchmark.*"
+
   private Context msg;
 
   @Param({"false", "true"})

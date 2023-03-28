@@ -135,6 +135,12 @@
       "jvmArgsAppend": "-Xss64M"
     },
     {
+      "name": "TypeCheckScalabilityBenchmark"
+    },
+    {
+      "name": "TypeCheckSlowPathBenchmark"
+    },
+    {
       "name": "VarArgsBenchmark"
     },
     {

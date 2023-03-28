@@ -49,6 +49,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class TypeCheckSlowPathBenchmark {
 
+  // $ java -jar */*/benchmarks.jar ".*TypeCheckSlowPathBenchmark.*"
+
   private Object obj;
 
   @Setup
