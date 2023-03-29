@@ -46,8 +46,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the performance between Pattern.matcher() and String.matches() while iterating through a list of Strings
- * and counts how many them have exactly 3 vowels
+ * Measures the performance of sequentially counting how many Strings have exactly 3 vowels while iterating through a list of words using:
+ * - Pattern.matcher().find()
+ * - Pattern.matcher().matches()
+ * - String.matches()
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -86,8 +88,17 @@ public class StringPatternMatcherBenchmark {
   }
 
   @Benchmark
-  public boolean pattern_matcher() {
-    boolean res = true;
+  public boolean pattern_find() {
+    boolean res = false;
+    for (String word : words) {
+      res |= pattern.matcher(word).find();
+    }
+    return res;
+  }
+
+  @Benchmark
+  public boolean pattern_matches() {
+    boolean res = false;
     for (String word : words) {
       res |= pattern.matcher(word).matches();
     }
@@ -96,7 +107,7 @@ public class StringPatternMatcherBenchmark {
 
   @Benchmark
   public boolean string_matches() {
-    boolean res = true;
+    boolean res = false;
     for (String word : words) {
       res |= word.matches(regexp);
     }

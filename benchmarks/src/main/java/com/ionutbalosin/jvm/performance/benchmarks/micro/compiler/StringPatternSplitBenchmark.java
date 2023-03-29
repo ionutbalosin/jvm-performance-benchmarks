@@ -44,11 +44,15 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the performance between Pattern.split() and String.split() for 1, 2 and 3 characters for a very long String
- * - string_split has a fast-path for :
+ * Measures the performance of splitting a very long String by 1 and 2 characters using:
+ * - Pattern.split()
+ * - String.split()
+ *
+ * Note:
+ * - String.split() has a fast-path for:
  *    - one-char String and this character is not one of the RegEx's meta characters ".$|()[{^?*+\\", or
  *    - two-char String and the first char is the backslash and the second is not the ascii digit or ascii letter.
- * - pattern_split reuses the pattern: it saves a few cycles in comparison to a normal string_split
+ * - Pattern.split() reuses the pattern: it saves a few cycles in comparison to a normal String.split()
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)

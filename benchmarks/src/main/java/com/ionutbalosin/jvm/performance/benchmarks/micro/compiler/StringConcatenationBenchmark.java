@@ -36,6 +36,14 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Measures the performance of concatenating different types (e.g., String, int, float, long, double, boolean, Object) into a String object using:
+ * - StringBuilder
+ * - StringBuffer
+ * - String.format()
+ * - plus operator
+ * The input String to be concatenated with the other types has either LATIN1 or UTF16 characters.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -54,6 +62,7 @@ public class StringConcatenationBenchmark {
   private long aLong;
   private double aDouble;
   private boolean aBool;
+  private Object anObject;
 
   @Param({"128"})
   private int capacity;
@@ -62,13 +71,13 @@ public class StringConcatenationBenchmark {
 
   @Setup
   public void setup() {
-    final char charValue;
+    final char aChar;
     switch (coder) {
       case LATIN1:
-        charValue = 'a';
+        aChar = 'a';
         break;
       case UTF16:
-        charValue = 'ʬ';
+        aChar = 'ʬ';
         break;
       default:
         throw new UnsupportedOperationException("Unsupported coder type " + coder);
@@ -76,7 +85,7 @@ public class StringConcatenationBenchmark {
 
     final StringBuilder sb = new StringBuilder(capacity);
     for (int i = 0; i < capacity; i++) {
-      sb.append((char) (charValue + random.nextInt(26)));
+      sb.append((char) (aChar + random.nextInt(26)));
     }
     aString = sb.toString();
     anInt = random.nextInt();
@@ -84,12 +93,12 @@ public class StringConcatenationBenchmark {
     aLong = random.nextLong();
     aDouble = random.nextDouble();
     aBool = random.nextBoolean();
+    anObject = random.nextLong();
   }
 
   @Benchmark
   public String string_builder() {
-    // explicitly do not set a StringBuilder capacity (i.e., the cost is impacted by the byte array
-    // resizing)
+    // explicitly do not set a capacity (i.e., the cost is impacted by the byte array resizing)
     return new StringBuilder()
         .append(aString)
         .append(anInt)
@@ -97,13 +106,13 @@ public class StringConcatenationBenchmark {
         .append(aLong)
         .append(aDouble)
         .append(aBool)
+        .append(anObject)
         .toString();
   }
 
   @Benchmark
   public String string_buffer() {
-    // explicitly do not set a StringBuffer capacity (i.e., the cost is impacted by the byte array
-    // resizing)
+    // explicitly do not set a capacity (i.e., the cost is impacted by the byte array resizing)
     return new StringBuffer()
         .append(aString)
         .append(anInt)
@@ -111,17 +120,18 @@ public class StringConcatenationBenchmark {
         .append(aLong)
         .append(aDouble)
         .append(aBool)
+        .append(anObject)
         .toString();
   }
 
   @Benchmark
   public String string_format() {
-    return String.format("%s%s%s%s%s%s", aString, anInt, aFloat, aLong, aDouble, aBool);
+    return String.format("%s%s%s%s%s%s%s", aString, anInt, aFloat, aLong, aDouble, aBool, anObject);
   }
 
   @Benchmark
   public String plus_operator() {
-    return aString + anInt + aFloat + aLong + aDouble + aBool;
+    return aString + anInt + aFloat + aLong + aDouble + aBool + anObject;
   }
 
   public enum CODER {
