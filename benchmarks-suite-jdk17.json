@@ -131,6 +131,17 @@
       "name": "StrengthReductionBenchmark"
     },
     {
+      "name": "StringConcatenationBenchmark",
+      "jmhOpts": "-prof gc"
+    },
+    {
+      "name": "StringPatternMatcherBenchmark"
+    },
+    {
+      "name": "StringPatternSplitBenchmark",
+      "jmhOpts": "-prof gc"
+    },
+    {
       "name": "TailRecursionBenchmark",
       "jvmArgsAppend": "-Xss64M"
     },
