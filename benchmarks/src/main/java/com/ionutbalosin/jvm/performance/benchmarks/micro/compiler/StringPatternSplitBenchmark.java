@@ -44,7 +44,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the performance of splitting a very long String by 1 and 2 characters using:
+ * Measures the performance of splitting a very long text by 1 and 2 characters using:
  * - Pattern.split()
  * - String.split()
  *
@@ -53,6 +53,9 @@ import org.openjdk.jmh.annotations.Warmup;
  *    - one-char String and this character is not one of the RegEx's meta characters ".$|()[{^?*+\\", or
  *    - two-char String and the first char is the backslash and the second is not the ascii digit or ascii letter.
  * - Pattern.split() reuses the pattern: it saves a few cycles in comparison to a normal String.split()
+ *
+ * Note: The number of allocations during benchmarking is not neglectable, and it influences the overall results.
+ * It could be partially mitigated by using a smaller text.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)

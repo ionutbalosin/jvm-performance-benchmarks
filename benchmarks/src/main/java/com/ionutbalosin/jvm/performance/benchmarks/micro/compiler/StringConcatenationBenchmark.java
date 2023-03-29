@@ -43,6 +43,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * - String.format()
  * - plus operator
  * The input String to be concatenated with the other types has either LATIN1 or UTF16 characters.
+ *
+ * Note: The number of allocations during benchmarking slightly influences the overall results but not fundamentally.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
