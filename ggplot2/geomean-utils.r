@@ -71,12 +71,12 @@ mergeJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_file
   result
 }
 
-# Calculate the geometric mean for average time scores within a data frame
-geometricMeanForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identifier, benchmark_files) {
+# Calculate the geometric mean summary (e.g., the geomean score and the total number of benchmarks) for average time scores
+geometricMeanSummaryForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identifier, benchmark_files) {
   data <- mergeJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_files)
   data <- convertAverageTimeInNs(data)
   print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
 
   geomean <- geometric.mean(data$Score)
-  round(geomean, 2)
+  list("geomean" = geomean, "benchmarks" = nrow(data))
 }
