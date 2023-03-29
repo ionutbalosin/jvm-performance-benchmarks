@@ -61,7 +61,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * - https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/klass.hpp#L138
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
