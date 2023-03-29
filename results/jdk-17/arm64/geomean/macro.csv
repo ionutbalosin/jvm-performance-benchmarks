@@ -1,2 +1,2 @@
-"OpenJDK.HotSpot.VM","GraalVM.CE","GraalVM.EE","Unit"
-"1","1.11","0.93","ns/op"
+"OpenJDK.HotSpot.VM","GraalVM.CE","GraalVM.EE","Nr.of.Benchmarks","Benchmarks.Unit"
+"1","1.11","0.93","27","ns/op"

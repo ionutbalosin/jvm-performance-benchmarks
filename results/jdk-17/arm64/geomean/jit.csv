@@ -1,2 +1,2 @@
-"C2.JIT","GraalVM.CE.JIT","GraalVM.EE.JIT","Unit"
-"1","1.57","0.83","ns/op"
+"C2.JIT","GraalVM.CE.JIT","GraalVM.EE.JIT","Nr.of.Benchmarks","Benchmarks.Unit"
+"1","1.57","0.83","273","ns/op"

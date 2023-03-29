@@ -87,32 +87,34 @@ macro_benchmark_files <- list(
 # JIT Compiler geometric mean #
 #-----------------------------#
 
-openjdk_hotspot_vm_jit_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, jit_benchmark_files)
-graalvm_ce_jit_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, jit_benchmark_files)
-graalvm_ee_jit_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, jit_benchmark_files)
+openjdk_hotspot_vm_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, jit_benchmark_files)
+graalvm_ce_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, jit_benchmark_files)
+graalvm_ee_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, jit_benchmark_files)
 # normalize the resulting geometric mean to C2 JIT
 # Note: the geometric mean can be used even if the numbers are not normalized but the resulting means can then be normalized
-jit_geomean <- c(
+jit_summary <- c(
   "C2 JIT" = 1,
-  "GraalVM CE JIT" = round(graalvm_ce_jit_geomean / openjdk_hotspot_vm_jit_geomean, 2),
-  "GraalVM EE JIT" = round(graalvm_ee_jit_geomean / openjdk_hotspot_vm_jit_geomean, 2),
-  "Unit" = "ns/op"
+  "GraalVM CE JIT" = round(graalvm_ce_jit_summary$geomean / openjdk_hotspot_vm_jit_summary$geomean, 2),
+  "GraalVM EE JIT" = round(graalvm_ee_jit_summary$geomean / openjdk_hotspot_vm_jit_summary$geomean, 2),
+  "Nr of Benchmarks" = openjdk_hotspot_vm_jit_summary$benchmarks,
+  "Benchmarks Unit" = "ns/op"
 )
-writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", data.frame(t(sapply(jit_geomean, c))))
+writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", data.frame(t(sapply(jit_summary, c))))
 
 #----------------------#
 # Macro geometric mean #
 #----------------------#
 
-openjdk_hotspot_vm_macro_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, macro_benchmark_files)
-graalvm_ce_macro_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
-graalvm_ee_macro_geomean <- geometricMeanForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, macro_benchmark_files)
+openjdk_hotspot_vm_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, macro_benchmark_files)
+graalvm_ce_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
+graalvm_ee_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, macro_benchmark_files)
 # normalize the resulting geometric mean to OpenJDK
 # Note: the geometric mean can be used even if the numbers are not normalized but the resulting means can then be normalized
-macro_geomean <- c(
+macro_summary <- c(
   "OpenJDK HotSpot VM" = 1,
-  "GraalVM CE" = round(graalvm_ce_macro_geomean / openjdk_hotspot_vm_macro_geomean, 2),
-  "GraalVM EE" = round(graalvm_ee_macro_geomean / openjdk_hotspot_vm_macro_geomean, 2),
-  "Unit" = "ns/op"
+  "GraalVM CE" = round(graalvm_ce_macro_summary$geomean / openjdk_hotspot_vm_macro_summary$geomean, 2),
+  "GraalVM EE" = round(graalvm_ee_macro_summary$geomean / openjdk_hotspot_vm_macro_summary$geomean, 2),
+  "Nr of Benchmarks" = openjdk_hotspot_vm_macro_summary$benchmarks,
+  "Benchmarks Unit" = "ns/op"
 )
-writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", data.frame(t(sapply(macro_geomean, c))))
+writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", data.frame(t(sapply(macro_summary, c))))
