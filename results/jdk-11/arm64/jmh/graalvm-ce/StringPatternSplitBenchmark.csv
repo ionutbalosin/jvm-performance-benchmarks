@@ -1,0 +1,21 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: regexp"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split","avgt",1,25,"69,832869","0,845530","us/op",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.alloc.rate","avgt",1,25,"1954,419200","23,320241","MB/sec",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.alloc.rate.norm","avgt",1,25,"143080,002911","0,000087","B/op",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.count","avgt",1,25,"200,000000",NaN,"counts",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.time","avgt",1,25,"307,000000",NaN,"ms",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split","avgt",1,25,"73,481108","3,992435","us/op",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.alloc.rate","avgt",1,25,"1865,441890","91,612357","MB/sec",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.alloc.rate.norm","avgt",1,25,"143080,005292","0,008361","B/op",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.count","avgt",1,25,"189,000000",NaN,"counts",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·gc.time","avgt",1,25,"298,000000",NaN,"ms",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split","avgt",1,25,"34,297250","0,288839","us/op",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.alloc.rate","avgt",1,25,"3973,364428","33,201010","MB/sec",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.alloc.rate.norm","avgt",1,25,"142880,002513","0,004054","B/op",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.count","avgt",1,25,"406,000000",NaN,"counts",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.time","avgt",1,25,"520,000000",NaN,"ms",_
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split","avgt",1,25,"71,100573","0,218264","us/op",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.alloc.rate","avgt",1,25,"1925,781981","5,933911","MB/sec",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.alloc.rate.norm","avgt",1,25,"143576,002964","0,000076","B/op",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.count","avgt",1,25,"196,000000",NaN,"counts",__
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·gc.time","avgt",1,25,"307,000000",NaN,"ms",__
