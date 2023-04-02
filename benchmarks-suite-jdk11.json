@@ -137,6 +137,9 @@
       "name": "TypeCheckScalabilityBenchmark"
     },
     {
+      "name": "TypeCheckBenchmark"
+    },
+    {
       "name": "TypeCheckSlowPathBenchmark"
     },
     {
