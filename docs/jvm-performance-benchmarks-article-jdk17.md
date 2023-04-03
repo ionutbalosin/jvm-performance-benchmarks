@@ -1542,6 +1542,128 @@ generated is similar to the following:
   0x8ebe5:   mov    %r10d,0xa4(%rbx)  --> store to field storeXX
 ```
 
+## TypeCheckScalabilityBenchmark
+
+This benchmark addresses the scalability issue happening while performing type checks (`instanceof`, `checkcast`, and similar) 
+against interfaces (so-called secondary super types).
+This scalability issue is triggered by massive concurrent updates to `Klass::_secondary_super_cache` from 
+multiple threads, which in turn causes false sharing with its surrounding fields e.g., `Klass::_secondary_supers`.
+
+The JDK 17 snippet below shows both fields and what they are used for:
+```
+class Klass : public Metadata {
+    // ...
+    // Cache of last observed secondary supertype
+    Klass* _secondary_super_cache;
+    // Array of all secondary supertypes
+    Array<Klass*>* _secondary_supers;
+    // ...
+}
+```
+ 
+Each time a type check is performed, the `Klass::_secondary_super_cache` is checked first. If the cache does not 
+contain the type being checked, then the `Klass::_secondary_supers` array is searched for the type. If the type is
+found in the array, then the cache is updated with the type.
+
+This issue is further discussed in [Francesco Nigro's post](https://redhatperf.github.io/post/type-check-scalability-issue/)
+and has been reported in [JDK-8180450](https://bugs.openjdk.org/browse/JDK-8180450).
+
+Source code: [TypeCheckScalabilityBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark.java)
+
+[![TypeCheckScalabilitybenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)
+
+### Conclusions:
+
+In this benchmark, the number at the end of the method name indicates the number of threads used to run the benchmark.
+For example, `is_duplicated_3` means that the benchmark is run with 3 threads.
+
+When `typePollution` is false, the benchmark uses a single type `DuplicatedContext` and the compilers are able to optimize and avoid
+checking the cache and the secondary supertypes array. In this case, a guard is used that checks if the
+receiver type is `DuplicatedContext` and then returns `true`.
+
+When `typePollution` is true, the benchmark uses multiple types and the compiler is not able to optimize as above.
+In this case, each benchmark iteration will check the cache field, and if a miss occurs, it will iterate through the secondary supertypes array.
+In a multithreaded context, the same cache line is read and written by multiple threads, which causes false sharing.
+
+This behaviour is best observed by looking at the number of L1 data cache misses. When `typePollution` is false, 
+the number of reported L1 data cache misses is very low. When `typePollution` is true, the number of reported L1 data cache misses
+is around 1 per benchmark iteration across all JITs.
+
+```
+"TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
+  1.002 #/op
+"TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-loads":
+  10.085 #/op
+```
+
+Overall, all JITs perform similarly when `typePollution` is false. The same applies when `typePollution` is true. However, the error margin is 
+higher in this case and the results are not as consistent due to false sharing.
+
+One interesting observation is that C2 is slower than Graal JITs when `typePollution` is true and
+the benchmark runs with a single thread (no false sharing occuring). That is, C2 is slower at checking the secondary super types array. The reason
+behind this is explained further below in the `TypeCheckSlowPathBenchmark`.
+
+## TypeCheckSlowPathBenchmark
+
+This benchmark checks the slow path of `instanceof` type check using multiple secondary super types (i.e., interfaces) 
+and always takes the slow path e.g., by iterating over the secondary super types array.
+
+Compared to the `TypeCheckScalabilityBenchmark`, this benchmark does not cause false sharing. 
+It only compares the performance of the slow path of type checking across the different JITs.
+
+Source code: [TypeCheckSlowPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckSlowPathBenchmark.java)
+
+[![TypeCheckSlowPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)
+
+### Conclusions:
+
+For a low number of secondary super types (`16`, `32`, `64`), both Graal JITs perform similarly and are faster than C2.
+The performance gap between the Graal JITs and C2 decreases however as the number of secondary super types increases.
+In order to understand why this happens, we need to look at the generated assembly code.
+
+Both Graal JIT compilers iterate over the secondary super types array using a loop:
+```
+   ↗    23a00:   mov    %ebp,%r13d
+   │    23a03:   shl    $0x3,%r13d
+   │    23a07:   lea    0x8(%r13),%r13d
+   │    23a0b:   movslq %r13d,%r13
+   │    23a0e:   mov    (%rbx,%r13,1),%r13
+   │    23a12:   cmp    %r13,%r10
+   │    23a15:   je     23c65           <--- if found, jump, set the cache field and then continue execution
+   │    23a1b:   inc    %ebp            <--- increment the loop counter
+   │    23a1d:   data16 xchg %ax,%ax
+   │    23a20:   cmp    %ebp,%eax
+   ╰    23a22:   jg     23a00           <--- jump to the beginning of the loop if not found yet
+        23a24:   jmp    23be5           <--- jump to the false branch of the type check
+   ...
+        23c65:   mov    %r10,0x20(%rdi) <--- set the cache field
+        23c69:   jmp    23714           <--- continue execution on the true branch of the type check 
+```
+
+C2, instead, loops using a `repnz` [operation prefix](https://www.felixcloutier.com/x86/rep:repe:repz:repne:repnz#description).
+
+```
+   6cd25:   mov    0x28(%rsi),%rdi         <--- load the secondary supertypes array
+   6cd29:   mov    (%rdi),%ecx             <--- load the length of the array
+   6cd2b:   add    $0x8,%rdi               <--- Skip the length field
+   6cd2f:   test   %rax,%rax
+   6cd32:   repnz scas %es:(%rdi),%rax     <--- loop over the array. This is roughly equivalent to the Graal JIT loop above.
+                                           ^ This is where the execution spends most of the time. 
+   6cd35:   jne    6cd3f                   <--- if not found, avoid setting the cache field
+   6cd3b:   mov    %rax,0x20(%rsi)         <--- set the cache field
+   6cd3f:   nop
+   6cd40:   je     6ccd0                   <--- jump to the true branch of the type check if found
+   6cd42:   xor    %r11d,%r11d
+   6cd45:   jmp    6cce3                   <--- jump to the false branch of the type check
+```
+
+In modern CPUs, the `repnz scas` class of instructions can have a large setup overhead and therefore be slower than a loop for a small number of elements. 
+The performance of this class of instructions very much depends on the vendor and CPU microarchitecture. 
+In fact, the [AMD optimization guide](https://www.amd.com/system/files/TechDocs/24594.pdf) recommends using a loop instead in certain cases.
+
+This issue is also mentioned in the JDK mailing list [here](https://mail.openjdk.org/pipermail/hotspot-runtime-dev/2020-August/041056.html)
+and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
+
 ## JIT Geometric Mean
 
 This section describes the normalized GM for the entire JIT-related benchmark category, having in total 273 benchmarks. 
