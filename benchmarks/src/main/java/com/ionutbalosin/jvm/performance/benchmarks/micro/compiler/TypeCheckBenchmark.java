@@ -83,23 +83,23 @@ public class TypeCheckBenchmark {
     }
   }
 
-  public interface A {}
+  public interface I1 {}
 
-  public interface B {}
+  public interface I2 {}
 
-  public interface C {}
+  public interface I3 {}
 
-  public interface D {}
+  public interface I4 {}
 
-  public interface E {}
+  public interface I5 {}
 
-  public interface F {}
+  public interface I6 {}
 
-  public interface G {}
+  public interface I7 {}
 
-  public interface H {}
+  public interface I8 {}
 
-  private enum ManySecondarySuperTypes implements A, B, C, D, E, F, G, H {
+  private enum ManySecondarySuperTypes implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 }
