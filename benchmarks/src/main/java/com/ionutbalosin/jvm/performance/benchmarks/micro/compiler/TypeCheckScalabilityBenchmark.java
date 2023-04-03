@@ -111,18 +111,6 @@ public class TypeCheckScalabilityBenchmark {
     return isDuplicated(msg);
   }
 
-  @Benchmark
-  @Threads(5)
-  public boolean is_duplicated_5() {
-    return isDuplicated(msg);
-  }
-
-  @Benchmark
-  @Threads(6)
-  public boolean is_duplicated_6() {
-    return isDuplicated(msg);
-  }
-
   // How to fix it? Replace it with:
   // return Objects.requireNonNull((InternalContext) message).isDuplicated();
   private static boolean isDuplicated(Context message) {
