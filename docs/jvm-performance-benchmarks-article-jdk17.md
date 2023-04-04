@@ -1430,7 +1430,7 @@ Nevertheless, since the comparison always evaluates to false, the previously all
 
 ```
                     ...
-                    <--- allocates the HeavyWrapper object -->
+                    <--- allocates the HeavyWrapper object --->
                     ... 
   0x7ffb58f6315a:   mov    0x10(%rsp),%r10
   0x7ffb58f6315f:   movzbl 0x14(%r10),%ebp     <--- get objectEscapes
@@ -1541,6 +1541,31 @@ generated is similar to the following:
   0x8ebe0:   mov    0x3c(%rsp),%r10d  --> load value from stack
   0x8ebe5:   mov    %r10d,0xa4(%rbx)  --> store to field storeXX
 ```
+
+## StringPatternSplitBenchmark
+
+Measures the performance of splitting a very long text (i.e., a sequence of words separated by empty spaces) by either one or two characters, using the below methods:
+- `Pattern.split()`
+- `String.split()`
+
+The number of allocations during this benchmark is not neglectable, and it influences the overall results. It could be partially mitigated by using a shorter text.
+
+**Note:**
+
+- `String.split()` (as described per [String.java](https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/lang/String.java#L3224)) uses a fast-path for:
+  1. one-char String and this character is not one of the RegEx's metacharacters `.$|()[{^?*+\\`
+  2. two-char String and the first char is the backslash and the second is not the ascii digit or ascii letter
+- `Pattern.split()` reuses the pattern, it saves a few cycles in comparison to `String.split()`
+
+Source code: [StringPatternSplitBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/StringPatternSplitBenchmark.java)
+
+[![StringPatternSplitBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)
+
+### Conclusions:
+
+Using `string_split()` by one character is quite fast, even faster in comparison to `pattern_split()`. This is a take-away we should remind when writing code for business applications. 
+
+In general, for this benchmark, the emitted assembly code is quite verbose but, as a high-level observation, GraalVM EE JIT does a better job of inlining and devirtualizing the virtual calls in comparison to C2 JIT, which also explains the difference in performance.
 
 ## TypeCheckScalabilityBenchmark
 
@@ -1663,6 +1688,81 @@ In fact, the [AMD optimization guide](https://www.amd.com/system/files/TechDocs/
 
 This issue is also mentioned in the JDK mailing list [here](https://mail.openjdk.org/pipermail/hotspot-runtime-dev/2020-August/041056.html)
 and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
+
+## TypeCheckBenchmark
+
+This benchmark checks the performance of `instanceof` type check using multiple secondary super types (i.e., interfaces), none being an AutoCloseable type.
+
+```
+  // Object obj = ManySecondarySuperTypes.Instance
+
+  @Benchmark
+  public boolean instanceof_type_check() {
+    return closeNotAutoCloseable(obj);
+  }
+
+  public static boolean closeNotAutoCloseable(Object o) {
+    if (o instanceof AutoCloseable) {
+      try {
+        ((AutoCloseable) o).close();
+        return true;
+      } catch (Exception ignore) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+```
+
+Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckBenchmark.java)
+
+[![TypeCheckBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckBenchmark.svg?raw=true)
+
+### Conclusions:
+
+The Graal compiler is really fast in comparison to the C2 compiler. This is because the Graal compiler inverts the loop condition and take the fast path. It only compares against the `ManySecondarySuperTypes` type.
+
+```
+     0x7f60c6b1a130:   mov    0xc(%rsi),%eax            <-- getfield obj 
+     0x7f60c6b1a140:   cmpl   $0xc26dc0,0x8(,%rax,8)    ; implicit exception: dispatches to 0x7f60c6b1a186
+                                                        ; {metadata(&apos;TypeCheckSlowPathBenchmark$ManySecondarySuperTypes&apos;)}
+  ╭  0x7f60c6b1a14b:   jne    0x7f60c6b1a169            <-- triggers instanceof check if the obj has a different type
+  │  0x7f60c6b1a151:   mov    $0x0,%eax                 <-- return false
+  │  0x7f60c6b1a156:   mov    0x10(%rsp),%rbp
+  │  0x7f60c6b1a15b:   add    $0x18,%rsp
+  │  0x7f60c6b1a15f:   mov    0x348(%r15),%rcx
+  │  0x7f60c6b1a166:   test   %eax,(%rcx)               ; {poll_return}
+  │  0x7f60c6b1a168:   ret
+  ↘  0x7f60c6b1a169:   movl   $0xffffffcd,0x370(%r15)
+     0x7f60c6b1a174:   movq   $0x10,0x378(%r15)         <-- instanceof
+     0x7f60c6b1a180:   call   0x7f60bf02427a            ; ImmutableOopMap {rsi=Oop }
+                                                        ;*aload_0
+                                                        ; - (reexecute) TypeCheckSlowPathBenchmark::instanceof_type_check@0 (line 65)
+```
+
+The C2 compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns the boolean.
+
+```
+  0x00007f73b0f3b2cc:   mov    0xc(%rsi),%r10d         <-- getfield obj
+                                                       ; - TypeCheckBenchmark::instanceof_type_check@1 (line 65)
+  0x00007f73b0f3b2d0:   mov    0x8(%r12,%r10,8),%r8d   ; implicit exception: dispatches to 0x00007f73b0f3b334
+  0x00007f73b0f3b2d5:   movabs $0x800015658,%rax       ; {metadata(&apos;java/lang/AutoCloseable&apos;)}
+  0x00007f73b0f3b2df:   movabs $0x800000000,%rsi
+  0x00007f73b0f3b2e9:   add    %r8,%rsi
+  0x00007f73b0f3b2ec:   mov    0x20(%rsi),%r11
+  0x00007f73b0f3b2f0:   cmp    %rax,%r11
+  0x00007f73b0f3b2f3:   je     0x00007f73b0f3b326      <-- jump if an AutoCloseable type
+                                                       ^ not the case since the actual type is TypeCheckSlowPathBenchmark$ManySecondarySuperTypes
+  ...
+  <-- load the secondary supertypes array and loop through it for a type match -->
+  ...
+  0x00007f73b0f3b311:   xor    %eax,%eax               <-- return false
+  0x00007f73b0f3b313:   add    $0x10,%rsp
+  0x00007f73b0f3b317:   pop    %rbp               
+  0x00007f73b0f3b318:   cmp    0x340(%r15),%rsp        ;{poll_return}
+  0x00007f73b0f3b325:   ret
+```
 
 ## JIT Geometric Mean
 
