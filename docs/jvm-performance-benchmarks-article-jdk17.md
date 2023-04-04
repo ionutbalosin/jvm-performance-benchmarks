@@ -151,7 +151,7 @@ both JVMs are able to remove the loop completely and directly return the result.
   0x85331:   add	$0x10,%rsp
   0x85335:   pop	%rbp
   0x85336:   cmp	0x340(%r15),%rsp      ;{poll_return}
-  0x08533d:   ja 	0x00007f18ed085344
+  0x08533d:   ja 	0x7f18ed085344
   0x85343:   ret
 
 ```
@@ -1691,7 +1691,7 @@ and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
 
 ## TypeCheckBenchmark
 
-This benchmark checks the performance of `instanceof` type check using multiple secondary super types (i.e., interfaces), none being an AutoCloseable type.
+This benchmark checks the performance of `instanceof` type check using multiple secondary super types (i.e., interfaces), none being of an `AutoCloseable` type.
 
 ```
   // Object obj = ManySecondarySuperTypes.Instance
@@ -1721,18 +1721,18 @@ Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-perfo
 
 ### Conclusions:
 
-The Graal compiler is really fast in comparison to the C2 compiler. This is because the Graal compiler inverts the loop condition and take the fast path. It only compares against the `ManySecondarySuperTypes` type.
+The Graal compiler is really fast as opposed to the C2 compiler. This is because the Graal compiler inverts the condition comparison and take the fast path. It only compares against the `ManySecondarySuperTypes` type.
 
 ```
      0x7f60c6b1a130:   mov    0xc(%rsi),%eax            <-- getfield obj 
      0x7f60c6b1a140:   cmpl   $0xc26dc0,0x8(,%rax,8)    ; implicit exception: dispatches to 0x7f60c6b1a186
                                                         ; {metadata(&apos;TypeCheckSlowPathBenchmark$ManySecondarySuperTypes&apos;)}
-  ╭  0x7f60c6b1a14b:   jne    0x7f60c6b1a169            <-- triggers instanceof check if the obj has a different type
+  ╭  0x7f60c6b1a14b:   jne    0x7f60c6b1a169            <-- instanceof check if obj type is different
   │  0x7f60c6b1a151:   mov    $0x0,%eax                 <-- return false
   │  0x7f60c6b1a156:   mov    0x10(%rsp),%rbp
   │  0x7f60c6b1a15b:   add    $0x18,%rsp
   │  0x7f60c6b1a15f:   mov    0x348(%r15),%rcx
-  │  0x7f60c6b1a166:   test   %eax,(%rcx)               ; {poll_return}
+  │  0x7f60c6b1a166:   test   %eax,(%rcx)               ;{poll_return}
   │  0x7f60c6b1a168:   ret
   ↘  0x7f60c6b1a169:   movl   $0xffffffcd,0x370(%r15)
      0x7f60c6b1a174:   movq   $0x10,0x378(%r15)         <-- instanceof
@@ -1744,24 +1744,24 @@ The Graal compiler is really fast in comparison to the C2 compiler. This is beca
 The C2 compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns the boolean.
 
 ```
-  0x00007f73b0f3b2cc:   mov    0xc(%rsi),%r10d         <-- getfield obj
-                                                       ; - TypeCheckBenchmark::instanceof_type_check@1 (line 65)
-  0x00007f73b0f3b2d0:   mov    0x8(%r12,%r10,8),%r8d   ; implicit exception: dispatches to 0x00007f73b0f3b334
-  0x00007f73b0f3b2d5:   movabs $0x800015658,%rax       ; {metadata(&apos;java/lang/AutoCloseable&apos;)}
-  0x00007f73b0f3b2df:   movabs $0x800000000,%rsi
-  0x00007f73b0f3b2e9:   add    %r8,%rsi
-  0x00007f73b0f3b2ec:   mov    0x20(%rsi),%r11
-  0x00007f73b0f3b2f0:   cmp    %rax,%r11
-  0x00007f73b0f3b2f3:   je     0x00007f73b0f3b326      <-- jump if an AutoCloseable type
-                                                       ^ not the case since the actual type is TypeCheckSlowPathBenchmark$ManySecondarySuperTypes
+  0x7f73b0f3b2cc:   mov    0xc(%rsi),%r10d         <-- getfield obj
+                                                   ; - TypeCheckBenchmark::instanceof_type_check@1 (line 65)
+  0x7f73b0f3b2d0:   mov    0x8(%r12,%r10,8),%r8d   ; implicit exception: dispatches to 0x7f73b0f3b334
+  0x7f73b0f3b2d5:   movabs $0x800015658,%rax       ; {metadata(&apos;java/lang/AutoCloseable&apos;)}
+  0x7f73b0f3b2df:   movabs $0x800000000,%rsi
+  0x7f73b0f3b2e9:   add    %r8,%rsi
+  0x7f73b0f3b2ec:   mov    0x20(%rsi),%r11
+  0x7f73b0f3b2f0:   cmp    %rax,%r11
+  0x7f73b0f3b2f3:   je     0x7f73b0f3b326          <-- jump if an AutoCloseable type
+                                                   ^ not the case since the type is TypeCheckSlowPathBenchmark$ManySecondarySuperTypes
   ...
   <-- load the secondary supertypes array and loop through it for a type match -->
   ...
-  0x00007f73b0f3b311:   xor    %eax,%eax               <-- return false
-  0x00007f73b0f3b313:   add    $0x10,%rsp
-  0x00007f73b0f3b317:   pop    %rbp               
-  0x00007f73b0f3b318:   cmp    0x340(%r15),%rsp        ;{poll_return}
-  0x00007f73b0f3b325:   ret
+  0x7f73b0f3b311:   xor    %eax,%eax               <-- return false
+  0x7f73b0f3b313:   add    $0x10,%rsp
+  0x7f73b0f3b317:   pop    %rbp               
+  0x7f73b0f3b318:   cmp    0x340(%r15),%rsp        ;{poll_return}
+  0x7f73b0f3b325:   ret
 ```
 
 ## JIT Geometric Mean
