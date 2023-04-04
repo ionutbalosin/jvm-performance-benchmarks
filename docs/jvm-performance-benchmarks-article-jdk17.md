@@ -1610,9 +1610,18 @@ When `typePollution` is true, the benchmark uses multiple types and the compiler
 In this case, each benchmark iteration will check the cache field, and if a miss occurs, it will iterate through the secondary supertypes array.
 In a multithreaded context, the same cache line is read and written by multiple threads, which causes false sharing.
 
-This behaviour is best observed by looking at the number of L1 data cache misses. When `typePollution` is false, 
-the number of reported L1 data cache misses is very low. When `typePollution` is true, the number of reported L1 data cache misses
-is around 1 per benchmark iteration across all JITs.
+This behaviour is best observed by looking at the number of L1 data cache misses.
+
+When `typePollution` is false, the number of reported L1 data cache misses is very low. 
+
+```
+"TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
+  ≈ 10⁻⁴ #/op
+"TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-loads":
+  5.037 #/op
+```
+
+When `typePollution` is true, the number of reported L1 data cache misses is around 1 per benchmark iteration across all JITs.
 
 ```
 "TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
@@ -1721,7 +1730,7 @@ Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-perfo
 
 ### Conclusions:
 
-The Graal compiler is really fast as opposed to the C2 compiler. This is because the Graal compiler inverts the if condition comparison and takes the fast path. It only checks against the `ManySecondarySuperTypes` type.
+Both Graal compilers are faster as opposed to the C2 compiler. This is because the Graal compilers invert the if condition comparison and take the fast path. They only check against the `ManySecondarySuperTypes` type.
 
 ```
      0x7f60c6b1a130:   mov    0xc(%rsi),%eax            <-- getfield obj 
