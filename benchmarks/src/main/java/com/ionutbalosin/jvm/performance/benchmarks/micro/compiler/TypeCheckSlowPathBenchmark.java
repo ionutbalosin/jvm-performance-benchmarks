@@ -40,7 +40,7 @@ import org.openjdk.jmh.infra.Blackhole;
  * This benchmark checks the slow path of instanceof type check using multiple secondary super types (i.e., interfaces) and always takes the slow path.
  *
  * Compared to the TypeCheckBenchmark, this benchmark will cause a deoptimization in the setup and therefore force both C2 and
- * Graal to take the slow path.
+ * Graal compilers to take the slow path in the benchmark method.
  *
  * References:
  * - code examples by Francesco Nigro (Twitter: @forked_franz)

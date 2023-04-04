@@ -35,7 +35,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark checks the performance of instanceof type check using multiple secondary super types (i.e., interfaces).
+ * This benchmark checks the performance of instanceof type check using multiple secondary super types (i.e., interfaces), none being an AutoCloseable type.
  *
  * The C2 compiler will always take the slow path and search through the secondary supers (i.e., an array of objects) for a type match.
  * The Graal compiler will invert the loop condition and take the fast path. It will then only check for a type check
