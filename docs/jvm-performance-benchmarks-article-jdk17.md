@@ -1721,7 +1721,7 @@ Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-perfo
 
 ### Conclusions:
 
-The Graal compiler is really fast as opposed to the C2 compiler. This is because the Graal compiler inverts the condition comparison and take the fast path. It only compares against the `ManySecondarySuperTypes` type.
+The Graal compiler is really fast as opposed to the C2 compiler. This is because the Graal compiler inverts the if condition comparison and takes the fast path. It only checks against the `ManySecondarySuperTypes` type.
 
 ```
      0x7f60c6b1a130:   mov    0xc(%rsi),%eax            <-- getfield obj 
