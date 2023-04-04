@@ -14,145 +14,194 @@
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 0.977 ns/op
-# Warmup Iteration   2: 0.971 ns/op
-# Warmup Iteration   3: 1.201 ns/op
-# Warmup Iteration   4: 1.164 ns/op
-# Warmup Iteration   5: 1.162 ns/op
-Iteration   1: 1.161 ns/op
-Iteration   2: 1.161 ns/op
-Iteration   3: 1.161 ns/op
-Iteration   4: 1.163 ns/op
-Iteration   5: 1.166 ns/op
+# Warmup Iteration   1: 7.161 ns/op
+# Warmup Iteration   2: 6.982 ns/op
+# Warmup Iteration   3: 7.016 ns/op
+# Warmup Iteration   4: 6.963 ns/op
+# Warmup Iteration   5: 6.963 ns/op
+Iteration   1: 6.963 ns/op
+Iteration   2: 6.963 ns/op
+Iteration   3: 6.962 ns/op
+Iteration   4: 6.962 ns/op
+Iteration   5: 6.961 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark.instanceof_type_check":
-  1.162 ±(99.9%) 0.009 ns/op [Average]
-  (min, avg, max) = (1.161, 1.162, 1.166), stdev = 0.002
-  CI (99.9%): [1.153, 1.171] (assumes normal distribution)
+  6.962 ±(99.9%) 0.004 ns/op [Average]
+  (min, avg, max) = (6.961, 6.962, 6.963), stdev = 0.001
+  CI (99.9%): [6.959, 6.966] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark.instanceof_type_check:·asm":
-PrintAssembly processed: 190327 total address lines.
-Perf output processed (skipped 58.677 seconds):
- Column 1: cycles (50862 events)
+PrintAssembly processed: 189206 total address lines.
+Perf output processed (skipped 58.591 seconds):
+ Column 1: cycles (50695 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub, version 6, compile id 766 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check, version 2, compile id 721 
 
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@10 (line 230)
-               0x00007f84bab1d9e7:   mov    $0x0,%r11
-               0x00007f84bab1d9ee:   mov    0x10(%rsp),%r10
-               0x00007f84bab1d9f3:   mov    (%rsp),%rsi
-          ╭    0x00007f84bab1d9f7:   jmp    0x00007f84bab1da1a           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@13 (line 232)
-          │    0x00007f84bab1d9fc:   nopl   0x0(%rax)                    ;*instanceof {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::closeNotAutoCloseable@1 (line 73)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@4 (line 67)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@17 (line 232)
-  25.92%  │ ↗  0x00007f84bab1da00:   inc    %r11                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@26 (line 233)
-   0.00%  │ │  0x00007f84bab1da03:   cmpb   $0x0,0x94(%rsi)
-   0.73%  │╭│  0x00007f84bab1da0a:   jne    0x00007f84bab1da33           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@33 (line 234)
-   6.19%  │││  0x00007f84bab1da10:   mov    0x348(%r15),%r8              ; ImmutableOopMap {rdx=Oop rsi=Oop r10=Oop [8]=Oop [24]=Oop }
-          │││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@33 (line 234)
-  25.87%  │││  0x00007f84bab1da17:   test   %eax,(%r8)                   ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@13 (line 232)
-          │││                                                            ;   {poll}
-   6.01%  ↘││  0x00007f84bab1da1a:   mov    0xc(%r10),%r8d               ;*getfield obj {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@1 (line 67)
-           ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@17 (line 232)
-   0.76%   ││  0x00007f84bab1da1e:   xchg   %ax,%ax                      ; ImmutableOopMap {rdx=Oop rsi=Oop r10=Oop [8]=Oop [24]=Oop }
-           ││                                                            ;*aload {reexecute=1 rethrow=0 return_oop=0}
-           ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@13 (line 232)
-   5.97%   ││  0x00007f84bab1da20:   cmpl   $0xc26dc0,0x8(,%r8,8)        ; implicit exception: dispatches to 0x00007f84bab1db06
-           ││                                                            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckBenchmark$ManySecondarySuperTypes&apos;)}
-  26.28%   │╰  0x00007f84bab1da2c:   je     0x00007f84bab1da00
-           │   0x00007f84bab1da2e:   jmp    0x00007f84bab1da6e           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@13 (line 232)
-           ↘   0x00007f84bab1da33:   mov    %r11,0x20(%rsp)
-               0x00007f84bab1da38:   call   0x00007f84d186d4f0           ;   {runtime_call os::javaTimeNanos()}
-               0x00007f84bab1da3d:   nop
-               0x00007f84bab1da3e:   mov    0x18(%rsp),%rdx
-               0x00007f84bab1da43:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@40 (line 235)
-               0x00007f84bab1da47:   mov    %r12,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
+             #           [sp+0x20]  (sp of caller)
+             0x00007f60c6b1a100:   mov    0x8(%rsi),%r10d
+             0x00007f60c6b1a104:   movabs $0x800000000,%r12
+             0x00007f60c6b1a10e:   add    %r12,%r10
+             0x00007f60c6b1a111:   xor    %r12,%r12
+             0x00007f60c6b1a114:   cmp    %r10,%rax
+             0x00007f60c6b1a117:   jne    0x00007f60bf01e780           ;   {runtime_call ic_miss_stub}
+             0x00007f60c6b1a11d:   nop
+             0x00007f60c6b1a11e:   xchg   %ax,%ax
+           [Verified Entry Point]
+   0.02%     0x00007f60c6b1a120:   mov    %eax,-0x14000(%rsp)
+   6.12%     0x00007f60c6b1a127:   sub    $0x18,%rsp
+   0.02%     0x00007f60c6b1a12b:   mov    %rbp,0x10(%rsp)
+   2.56%     0x00007f60c6b1a130:   mov    0xc(%rsi),%eax               ;*getfield obj {reexecute=0 rethrow=0 return_oop=0}
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@1 (line 65)
+   2.13%     0x00007f60c6b1a133:   nopw   0x0(%rax,%rax,1)
+   0.91%     0x00007f60c6b1a13c:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
+                                                                       ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@0 (line 65)
+   0.02%     0x00007f60c6b1a140:   cmpl   $0xc26dc0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f60c6b1a186
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckBenchmark$ManySecondarySuperTypes&apos;)}
+  26.40%  ╭  0x00007f60c6b1a14b:   jne    0x00007f60c6b1a169           ;*instanceof {reexecute=0 rethrow=0 return_oop=0}
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::closeNotAutoCloseable@1 (line 71)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@4 (line 65)
+   5.37%  │  0x00007f60c6b1a151:   mov    $0x0,%eax
+          │  0x00007f60c6b1a156:   mov    0x10(%rsp),%rbp
+          │  0x00007f60c6b1a15b:   add    $0x18,%rsp
+          │  0x00007f60c6b1a15f:   mov    0x348(%r15),%rcx
+   5.62%  │  0x00007f60c6b1a166:   test   %eax,(%rcx)                  ;   {poll_return}
+          │  0x00007f60c6b1a168:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@7 (line 65)
+          ↘  0x00007f60c6b1a169:   movl   $0xffffffcd,0x370(%r15)
+             0x00007f60c6b1a174:   movq   $0x10,0x378(%r15)            ;*instanceof {reexecute=0 rethrow=0 return_oop=0}
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::closeNotAutoCloseable@1 (line 71)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@4 (line 65)
+             0x00007f60c6b1a17f:   nop
+             0x00007f60c6b1a180:   call   0x00007f60bf02427a           ; ImmutableOopMap {rsi=Oop }
+                                                                       ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check@0 (line 65)
 ....................................................................................................
-  97.72%  <total for region 1>
+  49.16%  <total for region 1>
+
+....[Hottest Region 2]..............................................................................
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub, version 6, compile id 749 
+
+              0x00007f60c6b1cbd8:   call   0x00007f60e0d624f0           ;   {runtime_call os::javaTimeNanos()}
+              0x00007f60c6b1cbdd:   nop
+              0x00007f60c6b1cbde:   mov    0x10(%rsp),%rdx
+              0x00007f60c6b1cbe3:   mov    %rax,0x28(%rdx)              ;*putfield startTime {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@10 (line 230)
+              0x00007f60c6b1cbe7:   movq   $0x0,0x20(%rsp)
+          ╭   0x00007f60c6b1cbf0:   jmp    0x00007f60c6b1cc0f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@13 (line 232)
+          │   0x00007f60c6b1cbf5:   data16 data16 nopw 0x0(%rax,%rax,1) ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@33 (line 234)
+   5.46%  │↗  0x00007f60c6b1cc00:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
+          ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@33 (line 234)
+          ││  0x00007f60c6b1cc07:   test   %eax,(%r11)                  ;   {poll}
+   0.02%  ││  0x00007f60c6b1cc0a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@13 (line 232)
+          ↘│  0x00007f60c6b1cc0f:   mov    0x8(%rsp),%r10
+   5.44%   │  0x00007f60c6b1cc14:   mov    %r10,%rsi
+           │  0x00007f60c6b1cc17:   call   0x00007f60bf01ea80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
+           │                                                            ;*invokevirtual instanceof_type_check {reexecute=0 rethrow=0 return_oop=0}
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@17 (line 232)
+           │                                                            ;   {optimized virtual_call}
+   9.87%   │  0x00007f60c6b1cc1c:   nop                                 ;* unwind (locked if synchronized)
+           │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@20 (line 232)
+           │  0x00007f60c6b1cc1d:   mov    0x20(%rsp),%r10
+   4.71%   │  0x00007f60c6b1cc22:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@26 (line 233)
+   5.37%   │  0x00007f60c6b1cc25:   mov    0x18(%rsp),%rsi
+           │  0x00007f60c6b1cc2a:   cmpb   $0x0,0x94(%rsi)
+  18.05%   ╰  0x00007f60c6b1cc31:   je     0x00007f60c6b1cc00           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@33 (line 234)
+              0x00007f60c6b1cc33:   mov    %r10,0x20(%rsp)
+              0x00007f60c6b1cc38:   call   0x00007f60e0d624f0           ;   {runtime_call os::javaTimeNanos()}
+              0x00007f60c6b1cc3d:   nop
+              0x00007f60c6b1cc3e:   mov    0x10(%rsp),%rdx
+              0x00007f60c6b1cc43:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@40 (line 235)
+              0x00007f60c6b1cc47:   mov    %r12,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub@46 (line 236)
+              0x00007f60c6b1cc4b:   vxorpd %xmm0,%xmm0,%xmm0
+....................................................................................................
+  48.91%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  97.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub, version 6, compile id 766 
-   0.94%               kernel  [unknown] 
+  49.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check, version 2, compile id 721 
+  48.91%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub, version 6, compile id 749 
+   0.73%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
+   0.08%               kernel  [unknown] 
+   0.07%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
-   0.06%               kernel  [unknown] 
-   0.05%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
-   0.03%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
-   0.02%                       <unknown> 
    0.02%               kernel  [unknown] 
+   0.02%               kernel  [unknown] 
+   0.02%               kernel  [unknown] 
+   0.02%               kernel  [unknown] 
+   0.01%            libjvm.so  ElfSymbolTable::lookup 
+   0.01%            libjvm.so  fileStream::write 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%           ld-2.31.so  __tls_get_addr 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%               kernel  [unknown] 
-   0.01%               kernel  [unknown] 
-   0.01%            libjvm.so  RelocIterator::initialize 
-   0.85%  <...other 310 warm regions...>
+   0.70%  <...other 261 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub, version 6, compile id 766 
-   1.93%               kernel  [unknown] 
-   0.05%                       <unknown> 
-   0.01%         libc-2.31.so  _IO_default_xsputn 
-   0.01%   libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
-   0.01%           ld-2.31.so  __tls_get_addr 
-   0.01%         libc-2.31.so  clock_gettime@GLIBC_2.2.5 
-   0.01%            libjvm.so  RelocIterator::initialize 
-   0.01%   libpthread-2.31.so  __pthread_disable_asynccancel 
-   0.01%         libc-2.31.so  __strchr_avx2 
-   0.01%         libc-2.31.so  _IO_fwrite 
-   0.01%            libjvm.so  defaultStream::hold 
-   0.01%         libc-2.31.so  __vfprintf_internal 
-   0.01%            libjvm.so  Mutex::lock_without_safepoint_check 
+  49.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckBenchmark::instanceof_type_check, version 2, compile id 721 
+  48.91%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckBenchmark_instanceof_type_check_jmhTest::instanceof_type_check_avgt_jmhStub, version 6, compile id 749 
+   1.60%               kernel  [unknown] 
+   0.04%                       <unknown> 
+   0.02%         libc-2.31.so  [unknown] 
+   0.02%            libjvm.so  fileStream::write 
+   0.02%         libc-2.31.so  __strncat_ssse3 
    0.01%            libjvm.so  ElfSymbolTable::lookup 
+   0.01%         libc-2.31.so  __strchr_sse2 
    0.01%       hsdis-amd64.so  print_insn 
-   0.01%               [vdso]  __vdso_clock_gettime 
-   0.01%            libjvm.so  defaultStream::write 
-   0.01%            libjvm.so  xmlStream::write_text 
-   0.00%            libjvm.so  os::elapsed_counter 
-   0.17%  <...other 69 warm methods...>
+   0.01%         libc-2.31.so  tcache_init.part.0 
+   0.01%         libc-2.31.so  __strxfrm_l 
+   0.01%         libc-2.31.so  re_search_stub 
+   0.01%   libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
+   0.01%         libc-2.31.so  ptmalloc_init.part.0 
+   0.01%           ld-2.31.so  _dl_tunable_set_hwcaps 
+   0.00%            libjvm.so  os::javaTimeNanos 
+   0.00%         libc-2.31.so  getifaddrs_internal 
+   0.00%         libc-2.31.so  __GI___strcasecmp_l_sse2 
+   0.00%          interpreter  ifnull  198 ifnull  
+   0.15%  <...other 69 warm methods...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Distribution by Source]........................................................................
-  97.72%       jvmci, level 4
-   1.93%               kernel
-   0.15%            libjvm.so
-   0.07%         libc-2.31.so
-   0.05%                     
-   0.03%   libpthread-2.31.so
+  98.07%       jvmci, level 4
+   1.60%               kernel
+   0.13%            libjvm.so
+   0.09%         libc-2.31.so
+   0.04%                     
+   0.02%   libpthread-2.31.so
    0.01%       hsdis-amd64.so
    0.01%          interpreter
+   0.01%  libjvmcicompiler.so
    0.01%           ld-2.31.so
-   0.01%               [vdso]
-   0.00%  libjvmcicompiler.so
+   0.00%               [vdso]
+   0.00%          c1, level 3
+   0.00%      perf-118586.map
 ....................................................................................................
  100.00%  <totals>
 
 
 
-# Run complete. Total time: 00:01:52
+# Run complete. Total time: 00:01:51
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -166,6 +215,6 @@ works, and factor in a small probability of new VM bugs. Additionally, while com
 different JVMs are already problematic, the performance difference caused by different Blackhole
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
-Benchmark                                      Mode  Cnt  Score   Error  Units
-TypeCheckBenchmark.instanceof_type_check       avgt    5  1.162 ± 0.009  ns/op
+Benchmark                                              Mode  Cnt  Score   Error  Units
+TypeCheckBenchmark.instanceof_type_check       avgt    5  6.962 ± 0.004  ns/op
 TypeCheckBenchmark.instanceof_type_check:·asm  avgt         NaN            ---
