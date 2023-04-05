@@ -52,7 +52,7 @@ The list of included architectures is:
 
 This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) project. For any further information (not explicitly mentioned here) including the OS tuning settings, the deliberate decision on choosing these JVMs and/or specific JDKs, etc., please check out the repository.
 
-We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), [Stefan Karlsson](https://twitter.com/stekarmatrik), [Thomas Würthinger](https://thomaswue.dev/) and others for their reviews, and helpful suggestions.
+We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [Gergö Barany](https://mastodon.social/@gergo@mamot.fr), [Stefan Karlsson](https://twitter.com/stekarmatrik), [Thomas Würthinger](https://thomaswue.dev), [Francesco Nigro](https://twitter.com/forked_franz) and others for their reviews, and helpful suggestions.
 
 # SetUp
 
@@ -1590,8 +1590,7 @@ Each time a type check is performed, the `Klass::_secondary_super_cache` is chec
 contain the type being checked, then the `Klass::_secondary_supers` array is searched for the type. If the type is
 found in the array, then the cache is updated with the type.
 
-This issue is further discussed in [Francesco Nigro's post](https://redhatperf.github.io/post/type-check-scalability-issue/)
-and has been reported in [JDK-8180450](https://bugs.openjdk.org/browse/JDK-8180450).
+This issue is further discussed in [Francesco Nigro's post](https://redhatperf.github.io/post/type-check-scalability-issue/) and [Netflix blog post](https://netflixtechblog.com/seeing-through-hardware-counters-a-journey-to-threefold-performance-increase-2721924a2822) and has been reported in [JDK-8180450](https://bugs.openjdk.org/browse/JDK-8180450).
 
 Source code: [TypeCheckScalabilityBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark.java)
 
@@ -1703,7 +1702,7 @@ and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
 This benchmark checks the performance of `instanceof` type check using multiple secondary super types (i.e., interfaces), none being of an `AutoCloseable` type.
 
 ```
-  // Object obj = ManySecondarySuperTypes.Instance
+  // Object obj = ManySecondarySuperTypes.Instance;
 
   @Benchmark
   public boolean instanceof_type_check() {
@@ -1775,7 +1774,7 @@ The C2 compiler takes the slow path and searches through the secondary supers (i
 
 ## JIT Geometric Mean
 
-This section describes the normalized GM for the entire JIT-related benchmark category, having in total 273 benchmarks. 
+This section describes the normalized GM for the entire JIT-related benchmark category, having in total 301 benchmarks. 
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -1788,7 +1787,7 @@ No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 ----|----------------|-------------|---------------------------|--------
 1   | GraalVM EE JIT | x86_64      | 0.72                      | ns/op
 2   | C2 JIT         | x86_64      | 1                         | ns/op
-3   | GraalVM CE JIT | x86_64      | 1.28                      | ns/op
+3   | GraalVM CE JIT | x86_64      | 1.23                      | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
@@ -1796,9 +1795,9 @@ No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 
 No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 ----|----------------|-------------|---------------------------|--------
-1   | GraalVM EE JIT | arm64       | 0.83                      | ns/op
+1   | GraalVM EE JIT | arm64       | 0.85                      | ns/op
 2   | C2 JIT         | arm64       | 1                         | ns/op
-3   | GraalVM CE JIT | arm64       | 1.57                      | ns/op
+3   | GraalVM CE JIT | arm64       | 1.54                      | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
