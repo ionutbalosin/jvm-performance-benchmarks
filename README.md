@@ -108,13 +108,17 @@ Windows is not our main focus therefore the script [configure-win-os.sh](./confi
 
 The table below summarizes the JVM distributions included in the benchmark. For transparency reasons, we provide a short explanation of why the others are not supported.
 
-No. | JVM distribution   | JDK versions |  Included
--------------- |--------------------|--------------| ----------
-1 | OpenJDK HotSpot VM | 11, 17       | Yes
-2 | GraalVM CE        | 11, 17       | Yes
-3 | GraalVM EE        | 11, 17       | Yes
-4 | Eclipse OpenJ9 VM  | N/A         | No, see the resons below
-5 | Azul Prime (Zing)  | N/A         | No, see the resons below
+No. | JVM distribution       | JDK versions  |  Included
+----|------------------------|---------------|-----------
+1   | OpenJDK HotSpot VM     | 11, 17        | Yes
+2   | GraalVM CE             | 11, 17        | Yes
+3   | GraalVM EE             | 11, 17        | Yes
+4   | Azul Prime             | 11, 17        | Yes, but read the details below
+5   | Eclipse OpenJ9 VM      | N/A           | No, see the resons below
+
+### Azul Prime
+
+**Note**: As stated in the license, any benchmark result for Azul Prime (formerly Zing) is confidential and proprietary to Azul. If you do it on your own, try to get consent from Azul before publishing it.
 
 ### Eclipse OpenJ9 VM
 
@@ -122,14 +126,7 @@ JMH may functionally work with [Eclipse OpenJ9](https://www.eclipse.org/openj9).
 
 For more details please check [JMH with OpenJ9](https://github.com/eclipse-openj9/openj9/issues/4649) and [Mark Stoodley on Twitter](https://twitter.com/mstoodle/status/1532344345524936704)
 
-At the moment we leave it **out of scope** Eclipse OpenJ9 until we find a proper alternative.
-
-### Azul Prime (Zing)
-
-Publishing benchmark results for Azul Prime (Zing) is prohibited by [Azul's Evaluation Agreement](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf). 
-It is only allowed to publish results for Azul Prime if prior consent is obtained from Azul.
-
-As of now, we decided to skip this JVM in order to avoid the additional overhead of obtaining such consent.
+At the moment we leave it **out of scope** Eclipse OpenJ9 until (maybe) we find a proper alternative.
 
 ## JDK coverage
 
@@ -140,6 +137,7 @@ No. | JVM distribution   | JDK versions |  Build
 1 | OpenJDK HotSpot VM | 11, 17       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
 2 | GraalVM CE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
 3 | GraalVM EE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
+5 | Azul Prime        | 11, 17       | [download](https://www.azul.com/downloads/)
 
 If there is a need for another JDK LTS version (or feature release), you have to configure it by yourself. 
 
