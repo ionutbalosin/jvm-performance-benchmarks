@@ -118,7 +118,7 @@ No. | JVM distribution       | JDK versions  |  Included
 
 ### Azul Prime
 
-**Note**: As stated in the license, any benchmark result for Azul Prime (formerly Zing) is confidential and proprietary to Azul. If you do it on your own, try to get consent from Azul before publishing it.
+As stated in the license, any benchmark result for Azul Prime (formerly Zing) is confidential and proprietary to Azul. If you do it on your own, try to get consent from Azul before publishing it.
 
 ### Eclipse OpenJ9 VM
 
