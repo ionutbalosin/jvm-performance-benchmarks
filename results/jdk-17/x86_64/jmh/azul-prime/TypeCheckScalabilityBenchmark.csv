@@ -1,0 +1,9 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: typePollution"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1","avgt",1,25,0.868416,0.000296,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1","avgt",1,25,0.868198,0.000014,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2","avgt",2,25,0.868190,0.000041,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2","avgt",2,25,0.868229,0.000049,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3","avgt",3,25,0.868197,0.000028,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3","avgt",3,25,0.868211,0.000044,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4","avgt",4,25,0.868491,0.000522,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4","avgt",4,25,0.868405,0.000469,"ns/op",true

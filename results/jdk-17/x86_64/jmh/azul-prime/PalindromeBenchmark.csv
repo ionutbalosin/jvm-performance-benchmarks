@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.iterative","avgt",1,25,1.177893,0.038600,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.recursive","avgt",1,25,1.879237,0.045247,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.trampoline","avgt",1,25,1.602509,0.079414,"ms/op"

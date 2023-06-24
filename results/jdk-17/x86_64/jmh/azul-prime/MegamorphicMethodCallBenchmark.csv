@@ -1,0 +1,17 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: targetType"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.986497,0.041945,"ns/op",MONOMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,9.928796,0.045856,"ns/op",BIMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,11.246843,0.006318,"ns/op",MEGAMORPHIC_3
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,11.494341,0.005755,"ns/op",MEGAMORPHIC_4
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,12.390549,0.039886,"ns/op",MEGAMORPHIC_5
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,12.604941,0.043401,"ns/op",MEGAMORPHIC_6
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,12.930070,0.025187,"ns/op",MEGAMORPHIC_7
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,13.142435,0.027251,"ns/op",MEGAMORPHIC_8
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,1.739859,0.025274,"ns/op",MONOMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,6.965358,0.034274,"ns/op",BIMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,2.019484,0.029667,"ns/op",MEGAMORPHIC_3
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,13.750868,0.045201,"ns/op",MEGAMORPHIC_4
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,14.402813,0.014141,"ns/op",MEGAMORPHIC_5
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,14.736937,0.022625,"ns/op",MEGAMORPHIC_6
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,17.764336,0.204144,"ns/op",MEGAMORPHIC_7
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call","avgt",1,25,16.941225,0.108882,"ns/op",MEGAMORPHIC_8

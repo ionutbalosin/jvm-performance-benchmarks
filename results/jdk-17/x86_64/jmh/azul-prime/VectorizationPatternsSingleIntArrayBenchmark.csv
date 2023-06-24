@@ -1,0 +1,22 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.add_array_elements_by_const","avgt",1,25,38.465411,0.598977,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.all_true_array_elements","avgt",1,25,13.764461,0.093059,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.and_array_elements_by_const","avgt",1,25,37.921438,0.424527,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.any_true_array_element","avgt",1,25,13.795443,0.092543,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.ashl_array_elements_by_const","avgt",1,25,38.330376,0.577388,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.inc_array_elements_backward_iterator","avgt",1,25,38.293831,0.539860,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.lshr_array_elements_by_const","avgt",1,25,38.307064,0.573100,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.mod_array_elements_by_const","avgt",1,25,73.969929,0.160719,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.mul_array_elements_by_const","avgt",1,25,38.533895,0.251867,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.or_array_elements_by_const","avgt",1,25,38.326491,0.673262,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.store_induction_variable_to_array_elements","avgt",1,25,39.387483,0.761206,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sub_array_elements_by_const","avgt",1,25,37.778413,0.181563,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements","avgt",1,25,25.107622,0.660968,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements_by_const","avgt",1,25,31.431300,2.436217,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements_by_shifting_and_masking","avgt",1,25,31.802589,2.982394,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements_long_stride","avgt",1,25,131.181499,0.406935,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements_matching_a_predicate","avgt",1,25,39.111737,1.283888,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements_stride_2","avgt",1,25,24.718495,0.348328,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_array_elements_stride_x2","avgt",1,25,0.013955,0.000001,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.sum_even_array_elements","avgt",1,25,34.493178,2.380438,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorizationPatternsSingleIntArrayBenchmark.xor_array_elements_by_const","avgt",1,25,37.764211,0.448042,"us/op",262144
