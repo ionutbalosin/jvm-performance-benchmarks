@@ -1,2 +1,5 @@
-"C2.JIT","GraalVM.CE.JIT","GraalVM.EE.JIT","Nr.of.Benchmarks","Benchmarks.Unit"
-"1","1.23","0.72","301","ns/op"
+"JIT","Normalized.Geometric.Mean","Nr.of.Benchmarks","Benchmarks.Unit"
+"C2 JIT",1,301,"ns/op"
+"GraalVM CE JIT",1.23,301,"ns/op"
+"GraalVM EE JIT",0.72,301,"ns/op"
+"Azul Prime JIT",NA,0,"ns/op"

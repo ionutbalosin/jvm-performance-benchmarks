@@ -1,2 +1,5 @@
-"OpenJDK.HotSpot.VM","GraalVM.CE","GraalVM.EE","Nr.of.Benchmarks","Benchmarks.Unit"
-"1","0.84","0.77","27","ns/op"
+"VM","Normalized.Geometric.Mean","Nr.of.Benchmarks","Benchmarks.Unit"
+"OpenJDK HotSpot VM",1,27,"ns/op"
+"GraalVM CE",0.84,27,"ns/op"
+"GraalVM EE",0.77,27,"ns/op"
+"Azul Prime",NA,0,"ns/op"

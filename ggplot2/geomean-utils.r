@@ -77,6 +77,11 @@ geometricMeanSummaryForAverageTimeJmhResults <- function(jmh_output_folder, jvm_
   data <- convertAverageTimeInNs(data)
   print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
 
-  geomean <- geometric.mean(data$Score)
+  if (!empty(data)) {
+    geomean <- geometric.mean(data$Score)
+  } else {
+    geomean <- NA
+  }
+
   list("geomean" = geomean, "benchmarks" = nrow(data))
 }

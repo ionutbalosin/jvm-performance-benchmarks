@@ -59,6 +59,7 @@ set_environment_variables() {
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
   export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
+  export AZUL_PRIME_VM_IDENTIFIER="azul-prime"
 
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
@@ -66,6 +67,7 @@ set_environment_variables() {
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
+  echo "Azul Prime identifier: $AZUL_PRIME_VM_IDENTIFIER"
   echo ""
   read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
 }
@@ -81,7 +83,7 @@ check_folder_exists() {
 
 merge_split_benchmark_results() {
   R <./ggplot2/merge-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while merging benchmark result files, unable to continue!"
@@ -89,7 +91,7 @@ merge_split_benchmark_results() {
   fi
 
   R <./ggplot2/split-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while splitting benchmark result files, unable to continue!"
@@ -127,7 +129,7 @@ preprocess_benchmark_results() {
 
 benchmarks_geometric_mean() {
   R <./ggplot2/geomean-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while calculating the benchmarks normalized geometric mean, unable to continue!"
@@ -165,7 +167,7 @@ calculate_benchmarks_geometric_mean() {
 
 plot_benchmarks() {
   R <./ggplot2/plot-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER
+    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
   if [ $? -ne 0 ]; then
     echo ""
     echo "ERROR: Error encountered while plotting benchmarks results, unable to continue!"
