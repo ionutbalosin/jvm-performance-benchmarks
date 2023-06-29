@@ -113,12 +113,12 @@ No. | JVM distribution       | JDK versions  |  Included
 1   | OpenJDK HotSpot VM     | 11, 17        | Yes
 2   | GraalVM CE             | 11, 17        | Yes
 3   | GraalVM EE             | 11, 17        | Yes
-4   | Azul Prime             | 11, 17        | Yes, but read the details below
+4   | Azul Prime             | 11, 17        | Yes (license restrictions might apply)
 5   | Eclipse OpenJ9 VM      | N/A           | No, see the resons below
 
 ### Azul Prime
 
-As stated in the license, any benchmark result for Azul Prime (formerly Zing) is confidential and proprietary to Azul. If you do it on your own, try to get consent from Azul before publishing it.
+In the case of Azul Prime, please make sure you have read and understood the [license](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf) before publishing any benchmark results.
 
 ### Eclipse OpenJ9 VM
 

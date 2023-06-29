@@ -29,6 +29,7 @@ jmh_output_folder <- args[1]
 openjdk_hotspot_vm_identifier <- args[2]
 graalvm_ce_identifier <- args[3]
 graalvm_ee_identifier <- args[4]
+azul_prime_vm_identifier <- args[5]
 
 # Merge multiple benchmark result files and extends the data frame by adding a new column identifier
 # to each (e.g., column "<column_name>" with values from "<column_values>")
@@ -43,3 +44,4 @@ output_file <- "LockCoarseningBenchmark.csv"
 processJmhJitResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_files, column_name, column_values, output_file)
 processJmhJitResults(jmh_output_folder, graalvm_ce_identifier, benchmark_files, column_name, column_values, output_file)
 processJmhJitResults(jmh_output_folder, graalvm_ee_identifier, benchmark_files, column_name, column_values, output_file)
+processJmhJitResults(jmh_output_folder, azul_prime_vm_identifier, benchmark_files, column_name, column_values, output_file)
