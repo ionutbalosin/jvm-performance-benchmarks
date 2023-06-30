@@ -60,8 +60,8 @@ configure_graalvm_ee_jdk17() {
 
 configure_azul_prime_jdk17() {
   export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="Azul Prime"
-  export JVM_IDENTIFIER="azul-prime"
+  export JVM_NAME="Azul Prime VM"
+  export JVM_IDENTIFIER="azul-prime-vm"
 }
 
 echo "Select the JDK/JVM:"
@@ -71,7 +71,7 @@ echo "    3) - jdk-11 / GraalVM EE"
 echo "    4) - jdk-17 / OpenJDK HotSpot VM"
 echo "    5) - jdk-17 / GraalVM CE"
 echo "    6) - jdk-17 / GraalVM EE"
-echo "    7) - jdk-17 / Azul Prime"
+echo "    7) - jdk-17 / Azul Prime VM"
 echo ""
 
 while :; do

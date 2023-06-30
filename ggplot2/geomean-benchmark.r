@@ -125,10 +125,10 @@ openjdk_hotspot_vm_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults
 graalvm_ce_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
 graalvm_ee_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, macro_benchmark_files)
 azul_prime_vm_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, azul_prime_vm_identifier, macro_benchmark_files)
-# normalize the resulting geometric mean to OpenJDK
+# normalize the resulting geometric mean to OpenJDK HotSpot VM
 # Note: the geometric mean can be used even if the numbers are not normalized but the resulting means can then be normalized
 macro_summary <- data.frame(
-  "VM" = c("OpenJDK HotSpot VM", "GraalVM CE", "GraalVM EE", "Azul Prime"),
+  "VM" = c("OpenJDK HotSpot VM", "GraalVM CE", "GraalVM EE", "Azul Prime VM"),
   "Normalized Geometric Mean" = c(
     1,
     round(graalvm_ce_macro_summary$geomean / openjdk_hotspot_vm_macro_summary$geomean, 2),

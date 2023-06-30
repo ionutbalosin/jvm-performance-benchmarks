@@ -37,7 +37,7 @@ azul_prime_vm_identifier <- args[6]
 openjdk_hotspot_vm_color_palette <- c("OpenJDK HotSpot VM" = "#648FFF")
 graalvm_ce_color_palette <- c("GraalVM CE" = "#FFB000")
 graalvm_ee_color_palette <- c("GraalVM EE" = "#FE6100")
-azul_prime_vm_color_palette <- c("Azul Prime" = "#785EF0")
+azul_prime_vm_color_palette <- c("Azul Prime VM" = "#785EF0")
 full_color_palette <- append(append(append(openjdk_hotspot_vm_color_palette, graalvm_ce_color_palette), graalvm_ee_color_palette), azul_prime_vm_color_palette)
 
 # Define the benchmark result list that will not be merged across multiple JVMs in the final generated plot
@@ -70,11 +70,11 @@ plotJvmSplitBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_benchma
   plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, graalvm_ee_color_palette)
   saveJmhBarPlot(data, plot, plot_output_folder, paste(benchmark_file_basename, "graalvm_ee", sep = "_"))
 
-  # Azul Prime
-  data <- readAndAppendJvmIdentifierToJmhCsvResults(azul_prime_vm_benchmark_file, "Azul Prime")
+  # Azul Prime VM
+  data <- readAndAppendJvmIdentifierToJmhCsvResults(azul_prime_vm_benchmark_file, "Azul Prime VM")
   data <- processJmhCsvResults(data)
   plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, azul_prime_vm_color_palette)
-  saveJmhBarPlot(data, plot, plot_output_folder, paste(benchmark_file_basename, "azul_prime", sep = "_"))
+  saveJmhBarPlot(data, plot, plot_output_folder, paste(benchmark_file_basename, "azul_prime_vm", sep = "_"))
 }
 
 # Plot the benchmark results in the same SVG file (one for all JVMs)
@@ -82,7 +82,7 @@ plotJvmAggregatedBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_be
   openjdk_hotspot_vm_data <- readAndAppendJvmIdentifierToJmhCsvResults(openjdk_hotspot_vm_benchmark_file, "OpenJDK HotSpot VM")
   graalvm_ce_data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ce_benchmark_file, "GraalVM CE")
   graalvm_ee_data <- readAndAppendJvmIdentifierToJmhCsvResults(graalvm_ee_benchmark_file, "GraalVM EE")
-  azul_prime_vm_data <- readAndAppendJvmIdentifierToJmhCsvResults(azul_prime_vm_benchmark_file, "Azul Prime")
+  azul_prime_vm_data <- readAndAppendJvmIdentifierToJmhCsvResults(azul_prime_vm_benchmark_file, "Azul Prime VM")
 
   # append all CSV rows to one data frame
   data <- rbind(openjdk_hotspot_vm_data, graalvm_ce_data)
@@ -102,7 +102,7 @@ plotJvmAggregatedBenchmarks <- function(jmh_output_folder, openjdk_hotspot_vm_be
 #           +--> /openjdk-hotspot-vm/BenchmarkResult.csv
 #           +--> /graalvm-ce/BenchmarkResult.csv
 #           +--> /graalvm-ee/BenchmarkResult.csv
-#           +--> /azul-prime/BenchmarkResult.csv
+#           +--> /azul-prime-vm/BenchmarkResult.csv
 openjdk_hotspot_vm_file_path <- paste(jmh_output_folder, openjdk_hotspot_vm_identifier, sep = "/")
 benchmark_files <- list.files(path = openjdk_hotspot_vm_file_path, full.names = FALSE)
 for (benchmark_file in benchmark_files) {
