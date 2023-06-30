@@ -113,16 +113,16 @@ No. | JVM distribution       | JDK versions  |  Included
 1   | OpenJDK HotSpot VM     | 11, 17        | Yes
 2   | GraalVM CE             | 11, 17        | Yes
 3   | GraalVM EE             | 11, 17        | Yes
-4   | Azul Prime             | 11, 17        | Yes (license restrictions might apply)
+4   | Azul Prime VM          | 11, 17        | Yes (license restrictions might apply)
 5   | Eclipse OpenJ9 VM      | N/A           | No, see the resons below
 
-### Azul Prime
+### Azul Prime VM
 
-In the case of Azul Prime, please make sure you have read and understood the [license](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf) before publishing any benchmark results.
+In the case of Azul Prime VM, please make sure you have read and understood the [license](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf) before publishing any benchmark results.
 
 ### Eclipse OpenJ9 VM
 
-JMH may functionally work with [Eclipse OpenJ9](https://www.eclipse.org/openj9). However, all the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/CompilerControl.java) will not apply to Eclipse OpenJ9 and this might lead to different results (i.e., unfair advantage or disadvantage, depending on the test).
+JMH may functionally work with [Eclipse OpenJ9 VM](https://www.eclipse.org/openj9). However, all the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/CompilerControl.java) will not apply to Eclipse OpenJ9 and this might lead to different results (i.e., unfair advantage or disadvantage, depending on the test).
 
 For more details please check [JMH with OpenJ9](https://github.com/eclipse-openj9/openj9/issues/4649) and [Mark Stoodley on Twitter](https://twitter.com/mstoodle/status/1532344345524936704)
 
@@ -135,9 +135,9 @@ At the moment the benchmark is configured to work only with the JDK Long-Term Su
 No. | JVM distribution   | JDK versions |  Build
 -------------- |--------------------|--------------| -------------------------------
 1 | OpenJDK HotSpot VM | 11, 17       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
-2 | GraalVM CE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
-3 | GraalVM EE        | 11, 17       | [download](https://www.graalvm.org/downloads/)
-5 | Azul Prime        | 11, 17       | [download](https://www.azul.com/downloads/)
+2 | GraalVM CE         | 11, 17       | [download](https://www.graalvm.org/downloads/)
+3 | GraalVM EE         | 11, 17       | [download](https://www.graalvm.org/downloads/)
+5 | Azul Prime VM      | 11, 17       | [download](https://www.azul.com/downloads/)
 
 If there is a need for another JDK LTS version (or feature release), you have to configure it by yourself. 
 

@@ -59,7 +59,7 @@ set_environment_variables() {
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
   export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
   export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
-  export AZUL_PRIME_VM_IDENTIFIER="azul-prime"
+  export AZUL_PRIME_VM_IDENTIFIER="azul-prime-vm"
 
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
@@ -67,7 +67,7 @@ set_environment_variables() {
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
-  echo "Azul Prime identifier: $AZUL_PRIME_VM_IDENTIFIER"
+  echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
   echo ""
   read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
 }

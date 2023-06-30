@@ -2,4 +2,4 @@
 "OpenJDK HotSpot VM",1,27,"ns/op"
 "GraalVM CE",0.84,27,"ns/op"
 "GraalVM EE",0.77,27,"ns/op"
-"Azul Prime",NA,0,"ns/op"
+"Azul Prime VM",NA,0,"ns/op"
