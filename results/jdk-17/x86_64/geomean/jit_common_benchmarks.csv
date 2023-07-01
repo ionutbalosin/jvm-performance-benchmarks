@@ -1,0 +1,5 @@
+"JIT","Normalized.Geometric.Mean","Nr.of.Benchmarks","Benchmarks.Unit"
+"C2 JIT",1,265,"ns/op"
+"GraalVM CE JIT",1.08,265,"ns/op"
+"GraalVM EE JIT",0.69,265,"ns/op"
+"Azul Prime JIT",0.63,265,"ns/op"
