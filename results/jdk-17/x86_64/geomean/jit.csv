@@ -2,4 +2,3 @@
 "C2 JIT",1,301,"ns/op"
 "GraalVM CE JIT",1.23,301,"ns/op"
 "GraalVM EE JIT",0.72,301,"ns/op"
-"Azul Prime JIT",0.3,265,"ns/op"
