@@ -24,23 +24,22 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class DijkstraAdjacencyListBinaryHeap {
 
   private ArrayList<Node>[] graph;
   private int[] distances;
-  private PriorityQueue<Node> pQueue;
-  // A pool of pre-allocated objects is create to minimize allocations during the benchmark method
-  private NodeObjectPool nodeObjPool;
+  private PriorityQueue<Node> queue;
+  // A pool of (reusable) objects is used to minimize allocations during the benchmark method
+  private NodeObjectPool objectPool;
 
   public DijkstraAdjacencyListBinaryHeap(int nodes, int maxDistance) {
     this.distances = new int[nodes];
-    this.pQueue = new PriorityQueue<>(nodes);
-    this.nodeObjPool = new NodeObjectPool(nodes);
+    this.queue = new PriorityQueue<>(nodes);
+    this.objectPool = new NodeObjectPool();
     initGraph(nodes, maxDistance);
   }
 
@@ -64,16 +63,16 @@ public class DijkstraAdjacencyListBinaryHeap {
     distances[source] = 0;
 
     // get the object from pool to avoid creating it during the benchmark method
-    Node sourceNode = nodeObjPool.getFromPool(source, 0);
-    pQueue.offer(sourceNode);
+    Node sourceNode = objectPool.get(source, 0);
+    queue.offer(sourceNode);
 
-    while (!pQueue.isEmpty()) {
-      final Node current = pQueue.poll();
+    while (!queue.isEmpty()) {
+      final Node current = queue.poll();
       final int dist = current.distance;
       final int nodeId = current.id;
 
       // add object back to the pool
-      nodeObjPool.addToPool(current);
+      objectPool.add(current);
 
       if (dist > distances[nodeId]) {
         // Skip if the node is already processed with a shorter distance.
@@ -85,8 +84,8 @@ public class DijkstraAdjacencyListBinaryHeap {
         if (newDistance < distances[neighbor.id]) {
           distances[neighbor.id] = newDistance;
           // get the object from pool to avoid creating it during the benchmark method
-          Node neighborNode = nodeObjPool.getFromPool(neighbor.id, newDistance);
-          pQueue.offer(neighborNode);
+          Node neighborNode = objectPool.get(neighbor.id, newDistance);
+          queue.offer(neighborNode);
         }
       }
     }
@@ -98,30 +97,27 @@ public class DijkstraAdjacencyListBinaryHeap {
 // Note: this object pool is not intentionally created to be thread safe.
 class NodeObjectPool {
 
-  private final Queue<Node> pool;
+  private final ConcurrentLinkedQueue<Node> pool;
 
-  public NodeObjectPool(int size) {
-    this.pool = new LinkedList<>();
-    for (int i = 0; i < size; i++) {
-      pool.offer(createObject());
-    }
+  public NodeObjectPool() {
+    this.pool = new ConcurrentLinkedQueue<>();
   }
 
-  public void addToPool(Node obj) {
+  public void add(Node obj) {
     pool.offer(obj);
   }
 
-  public Node getFromPool(int id, int distance) {
+  public Node get(int id, int distance) {
     Node obj = pool.poll();
     if (obj == null) {
-      obj = createObject();
+      return createObject(id, distance);
+    } else {
+      return obj.set(id, distance);
     }
-
-    return obj.setId(id).setDistance(distance);
   }
 
-  private Node createObject() {
-    return new Node();
+  private Node createObject(int id, int distance) {
+    return new Node(id, distance);
   }
 }
 
@@ -129,25 +125,19 @@ class Node implements Comparable<Node> {
   int id;
   int distance;
 
-  public Node() {}
-
   public Node(int id, int distance) {
     this.id = id;
     this.distance = distance;
   }
 
+  public Node set(int id, int distance) {
+    this.id = id;
+    this.distance = distance;
+    return this;
+  }
+
   @Override
   public int compareTo(Node other) {
     return Integer.compare(this.distance, other.distance);
-  }
-
-  public Node setId(int id) {
-    this.id = id;
-    return this;
-  }
-
-  public Node setDistance(int distance) {
-    this.distance = distance;
-    return this;
   }
 }
