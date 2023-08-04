@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.shortestpath;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +40,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * The benchmark uses three alternative approaches, each using different data structures to represent the graph, as follows:
  * - Adjacency Matrix
  * - Adjacency List with Min Heap (Binary Heap)
- * - Bucket Queue
  *
  * Adjacency Matrix: This implementation uses an adjacency matrix representation of the graph combined with a standard priority queue (binary heap).
  * The adjacency matrix represents the graph as a 2D array, where the value in the matrix indicates the weight of the edge between two nodes.
@@ -49,13 +48,8 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * Adjacency List with Min Heap (Binary Heap): This implementation uses a standard binary heap (min heap) combined with an adjacency list representation of the graph.
  * The binary heap is implemented manually using a list of queues (buckets). The binary heap version is similar to the standard priority queue implementation but
- * uses an explicit bucket structure. Like the bucket queue implementation, it can offer better performance than binary heaps for dense graphs with small and
- * non-negative edge weights. Its time complexity is O((V + E) log V).
- *
- * Bucket Queue: This implementation uses a bucket queue (a variation of the priority queue) combined with an adjacency list representation of the graph.
- * A bucket queue groups nodes with the same distance into "buckets" based on their distances. Each bucket contains nodes with a specific range of distances.
- * The bucket queue can achieve better time complexity than binary heaps for dense graphs with small and non-negative edge weights.
- * Its time complexity is O((V + E) + K), where V is the number of nodes, E is the number of edges, and K is the number of different distances.
+ * uses an explicit bucket structure. It can offer better performance than binary heaps for dense graphs with small and non-negative edge weights.
+ * Its time complexity is O((V + E) log V).
  *
  * Note: these alternative implementations offer different trade-offs in terms of time complexity, space efficiency, and performance characteristics. The best choice of implementation depends on the specific graph structure, the distribution of edge weights, and the performance requirements of the particular use case.
  */
@@ -67,9 +61,12 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class DijkstraShortestPathBenchmark {
 
-  // $ java -Xms4g -Xmx4g -jar */*/benchmarks.jar ".*DijkstraShortestPathBenchmark.*"
+  // $ java  -jar */*/benchmarks.jar ".*DijkstraShortestPathBenchmark.*"
+  // Recommended command line options:
+  // - JMH options: -prof gc
+  // - JVM options: -Xms4g -Xmx4g
 
-  private final int NODES = 8192;
+  private final int NODES = 8_192;
   private final int MAX_DISTANCE = 64;
   private final Random random = new Random(16384);
 
@@ -77,8 +74,6 @@ public class DijkstraShortestPathBenchmark {
       new DijkstraAdjacencyMatrix(NODES, MAX_DISTANCE);
   private final DijkstraAdjacencyListBinaryHeap dijkstraAdjacencyListBinaryHeap =
       new DijkstraAdjacencyListBinaryHeap(NODES, MAX_DISTANCE);
-  private final DijkstraBucketQueue dijkstraBucketQueue =
-      new DijkstraBucketQueue(NODES, MAX_DISTANCE);
 
   private int sourceNode = 0;
 
@@ -89,8 +84,7 @@ public class DijkstraShortestPathBenchmark {
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(
         dijkstraAdjacencyMatrix.dijkstra(sourceNode),
-        dijkstraAdjacencyListBinaryHeap.dijkstra(sourceNode),
-        dijkstraBucketQueue.dijkstra(sourceNode));
+        dijkstraAdjacencyListBinaryHeap.dijkstra(sourceNode));
   }
 
   @Benchmark
@@ -103,18 +97,13 @@ public class DijkstraShortestPathBenchmark {
     return dijkstraAdjacencyListBinaryHeap.dijkstra(sourceNode);
   }
 
-  @Benchmark
-  public int[] bucket_queue() {
-    return dijkstraBucketQueue.dijkstra(sourceNode);
-  }
-
-  private static void sanityCheck(int[] distance1, int[] distance2, int[] distance3) {
-    if (distance1.length != distance2.length || distance2.length != distance3.length) {
+  private static void sanityCheck(int[] distance1, int[] distance2) {
+    if (distance1.length != distance2.length) {
       throw new AssertionError("Array distances have different length.");
     }
 
     for (int i = 0; i < distance1.length; i++) {
-      if (distance1[i] != distance2[i] || distance2[i] != distance3[i]) {
+      if (distance1[i] != distance2[i]) {
         throw new AssertionError("Distance values are different.");
       }
     }

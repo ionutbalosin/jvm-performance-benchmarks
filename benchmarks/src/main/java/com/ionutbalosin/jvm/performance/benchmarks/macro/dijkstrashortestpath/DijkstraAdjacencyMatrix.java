@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.shortestpath;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -30,16 +30,18 @@ public class DijkstraAdjacencyMatrix {
   private int nodes;
   private int[][] graph;
   private int[] distances;
+  private boolean[] visited;
 
   public DijkstraAdjacencyMatrix(int nodes, int maxDistance) {
     this.nodes = nodes;
     this.distances = new int[nodes];
-    initGraph(maxDistance);
+    this.visited = new boolean[nodes];
+    initGraph(nodes, maxDistance);
   }
 
-  private void initGraph(int maxDistance) {
+  private void initGraph(int nodes, int maxDistance) {
     graph = new int[nodes][nodes];
-    Random random = new Random(16384);
+    final Random random = new Random(16384);
 
     for (int i = 0; i < nodes; i++) {
       for (int j = 0; j < nodes; j++) {
@@ -51,10 +53,10 @@ public class DijkstraAdjacencyMatrix {
   }
 
   public int[] dijkstra(int source) {
+    Arrays.fill(visited, false);
     Arrays.fill(distances, Integer.MAX_VALUE);
     distances[source] = 0;
 
-    final boolean[] visited = new boolean[nodes];
     for (int i = 0; i < nodes - 1; i++) {
       final int minDistNode = findMinDistanceNode(distances, visited);
       visited[minDistNode] = true;
