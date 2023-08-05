@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath.adjacencymatrix;
 
 import java.util.Arrays;
 import java.util.Random;

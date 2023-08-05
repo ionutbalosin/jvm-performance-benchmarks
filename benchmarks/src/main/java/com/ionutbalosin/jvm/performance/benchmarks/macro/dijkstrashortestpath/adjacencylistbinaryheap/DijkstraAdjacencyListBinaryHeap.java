@@ -20,13 +20,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath.adjacencylistbinaryheap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Random;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class DijkstraAdjacencyListBinaryHeap {
 
@@ -91,53 +90,5 @@ public class DijkstraAdjacencyListBinaryHeap {
     }
 
     return distances;
-  }
-}
-
-// Note: this object pool is not intentionally created to be thread safe.
-class NodeObjectPool {
-
-  private final ConcurrentLinkedQueue<Node> pool;
-
-  public NodeObjectPool() {
-    this.pool = new ConcurrentLinkedQueue<>();
-  }
-
-  public void add(Node obj) {
-    pool.offer(obj);
-  }
-
-  public Node get(int id, int distance) {
-    Node obj = pool.poll();
-    if (obj == null) {
-      return createObject(id, distance);
-    } else {
-      return obj.set(id, distance);
-    }
-  }
-
-  private Node createObject(int id, int distance) {
-    return new Node(id, distance);
-  }
-}
-
-class Node implements Comparable<Node> {
-  int id;
-  int distance;
-
-  public Node(int id, int distance) {
-    this.id = id;
-    this.distance = distance;
-  }
-
-  public Node set(int id, int distance) {
-    this.id = id;
-    this.distance = distance;
-    return this;
-  }
-
-  @Override
-  public int compareTo(Node other) {
-    return Integer.compare(this.distance, other.distance);
   }
 }

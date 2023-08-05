@@ -22,6 +22,8 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
 
+import com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath.adjacencylistbinaryheap.DijkstraAdjacencyListBinaryHeap;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath.adjacencymatrix.DijkstraAdjacencyMatrix;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -30,6 +32,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -66,20 +69,21 @@ public class DijkstraShortestPathBenchmark {
   // Recommended command line options:
   // - JVM options: -Xms4g -Xmx4g
 
-  private final int NODES = 8_192;
+  @Param({"8192"})
+  private int nodes;
+
   private final int MAX_DISTANCE = 64;
   private final Random random = new Random(16384);
 
-  private final DijkstraAdjacencyMatrix dijkstraAdjacencyMatrix =
-      new DijkstraAdjacencyMatrix(NODES, MAX_DISTANCE);
-  private final DijkstraAdjacencyListBinaryHeap dijkstraAdjacencyListBinaryHeap =
-      new DijkstraAdjacencyListBinaryHeap(NODES, MAX_DISTANCE);
-
-  private int sourceNode = 0;
+  private int sourceNode;
+  private DijkstraAdjacencyMatrix dijkstraAdjacencyMatrix;
+  private DijkstraAdjacencyListBinaryHeap dijkstraAdjacencyListBinaryHeap;
 
   @Setup()
   public void setup() {
-    sourceNode = random.nextInt(NODES);
+    sourceNode = random.nextInt(nodes);
+    dijkstraAdjacencyMatrix = new DijkstraAdjacencyMatrix(nodes, MAX_DISTANCE);
+    dijkstraAdjacencyListBinaryHeap = new DijkstraAdjacencyListBinaryHeap(nodes, MAX_DISTANCE);
 
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(
