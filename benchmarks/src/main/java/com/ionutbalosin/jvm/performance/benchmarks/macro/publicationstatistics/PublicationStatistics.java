@@ -34,8 +34,6 @@ import static java.util.stream.Collectors.collectingAndThen;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.model.Author;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.model.Publication;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.util.CustomCollectors;
-import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
@@ -249,29 +247,5 @@ public class PublicationStatistics {
                     removeEmptyStreams()));
 
     return result;
-  }
-
-  // Returns a co-author network
-  public static Map<Author, List<Author>> coAuthorNetwork(Set<Publication> publications) {
-    return publications.stream()
-        .flatMap(
-            publication ->
-                publication.getAuthors().stream()
-                    .map(
-                        author ->
-                            new AbstractMap.SimpleEntry<>(
-                                author,
-                                publication.getAuthors().stream()
-                                    .filter(source -> !source.equals(author))
-                                    .collect(Collectors.toList()))))
-        .collect(
-            Collectors.toMap(
-                Map.Entry::getKey,
-                Map.Entry::getValue,
-                (coAuthors1, coAuthors2) -> {
-                  List<Author> combined = new ArrayList<>(coAuthors1);
-                  combined.addAll(coAuthors2);
-                  return combined;
-                }));
   }
 }

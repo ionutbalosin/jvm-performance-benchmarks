@@ -24,9 +24,10 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.authorWithTheMostPublications;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.authorsWithNoDuplicateCollaborations;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.coAuthorNetwork;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.firstPublicationYear;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.lastPublicationYear;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.mostProlificPairOfAuthors;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.mostProlificPairOfAuthorsPerYear;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.numberOfPublicationsPerAuthor;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.numberOfPublicationsPerYear;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.publicationWithTheMostAuthors;
@@ -137,7 +138,13 @@ public class PublicationStatisticsBenchmark {
   }
 
   @Benchmark
-  public Map<Author, List<Author>> co_author_network() {
-    return coAuthorNetwork(publications);
+  public Map.Entry<Map.Entry<Author, Author>, Long> most_prolific_pair_of_authors() {
+    return mostProlificPairOfAuthors(publications);
+  }
+
+  @Benchmark
+  public Map<Integer, Map.Entry<Map.Entry<Author, Author>, Long>>
+      most_prolific_pair_of_authors_per_year() {
+    return mostProlificPairOfAuthorsPerYear(publications);
   }
 }
