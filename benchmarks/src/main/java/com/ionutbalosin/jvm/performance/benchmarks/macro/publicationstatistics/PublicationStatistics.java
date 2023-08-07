@@ -100,7 +100,7 @@ public class PublicationStatistics {
     return result;
   }
 
-  // Returns the author that published the most publications
+  // Returns the author who published the most articles
   public static Map.Entry<Author, Long> authorWithTheMostPublications(
       Set<Publication> publications) {
     final Map.Entry<Author, Long> result =
@@ -111,7 +111,7 @@ public class PublicationStatistics {
     return result;
   }
 
-  // Returns the authors who never collaborated with the same author twice
+  // Returns the authors who have never collaborated with the same publication twice
   public static Set<Author> authorsWithNoDuplicateCollaborations(Set<Publication> publications) {
     return publications.stream()
         .flatMap(publication -> publication.getAuthors().stream())
@@ -126,8 +126,8 @@ public class PublicationStatistics {
         .collect(Collectors.toSet());
   }
 
-  // Returns the first publication year
-  public static int firstPublicationYear(Set<Publication> publications) {
+  // Returns the year of the first publication
+  public static int yearOfTheFirstPublication(Set<Publication> publications) {
     final int result =
         publications.stream()
             .filter(publication -> publication.getYear() >= FIRST_YEAR)
@@ -138,8 +138,8 @@ public class PublicationStatistics {
     return result;
   }
 
-  // Returns the last publication year
-  public static int lastPublicationYear(Set<Publication> publications) {
+  // Returns the year of the last publication
+  public static int yearOfTheLastPublication(Set<Publication> publications) {
     final int result =
         publications.stream()
             .filter(publication -> publication.getYear() >= FIRST_YEAR)
@@ -215,7 +215,7 @@ public class PublicationStatistics {
     return result;
   }
 
-  // Returns the pair of authors that published the most publications together
+  // Returns the pair of authors who published the most publications together
   public static Map.Entry<Map.Entry<Author, Author>, Long> mostProlificPairOfAuthors(
       Set<Publication> publications) {
     final Function<Stream<Author>, Stream<Map.Entry<Author, Author>>> function =
@@ -232,7 +232,7 @@ public class PublicationStatistics {
     return result;
   }
 
-  // Returns the pair of authors that published the most publications together for each year
+  // Returns the pair of authors who published the most publications together for each year
   public static Map<Integer, Map.Entry<Map.Entry<Author, Author>, Long>>
       mostProlificPairOfAuthorsPerYear(Set<Publication> publications) {
     final Map<Integer, Map.Entry<Map.Entry<Author, Author>, Long>> result =

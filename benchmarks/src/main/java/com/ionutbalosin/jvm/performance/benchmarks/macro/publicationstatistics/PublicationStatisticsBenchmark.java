@@ -24,8 +24,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.authorWithTheMostPublications;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.authorsWithNoDuplicateCollaborations;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.firstPublicationYear;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.lastPublicationYear;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.mostProlificPairOfAuthors;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.mostProlificPairOfAuthorsPerYear;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.numberOfPublicationsPerAuthor;
@@ -34,6 +32,8 @@ import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstati
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.publicationsPerAuthor;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.publicationsWithTheMostAuthorsPerYear;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.publicationsYearsStatistics;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.yearOfTheFirstPublication;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.yearOfTheLastPublication;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.yearWithTheMostPublications;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.publicationstatistics.PublicationStatistics.yearsWithTheMostPublications;
 
@@ -56,6 +56,22 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
+ * This benchmark extensively uses the Collectors/Streams API to perform a bunch of operations on a list of publications and their authors
+ * producing different final results (i.e., statistics), including:
+ * - the year(s) with the most publications
+ * - the number of publications for each author
+ * - the author who published the most articles
+ * - the authors who have never collaborated with the same publication twice
+ * - the year of the first publication
+ * - the year of the last publication
+ * - the publication with the most authors (for each year).
+ * - the pair of authors who published the most publications together (for each year).
+ *
+ * The list of publications is randomly generated at the beginning of the benchmark and consists of 100,000 items,
+ * with each publication having a maximum of 9 authors. All of these publications are generated between the years 1900 and 2000,
+ * and in total, they have around 100 distinct types.
+ * The total number of authors is 1,000 (which means, on average, every author could potentially write around 100 articles).
+ *
  * References:
  * - code examples by Jose Paumard (Twitter: @JosePaumard)
  * - https://github.com/JosePaumard/devoxx-be-2017
@@ -89,12 +105,12 @@ public class PublicationStatisticsBenchmark {
 
   @Benchmark
   public int first_publication_year() {
-    return firstPublicationYear(publications);
+    return yearOfTheFirstPublication(publications);
   }
 
   @Benchmark
   public int last_publication_year() {
-    return lastPublicationYear(publications);
+    return yearOfTheLastPublication(publications);
   }
 
   @Benchmark
