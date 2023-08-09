@@ -85,7 +85,7 @@ public class URLClassLoaderBenchmark {
           try {
             final Class<?> aClass = Class.forName(className, true, urlClassLoader);
             if (aClass.getClassLoader() == urlClassLoader) {
-              // keep only classes loaded by the URLClassLoader
+              // keep only the classes that can be loaded by the URLClassLoader
               classesToLoad.add(className);
             }
           } catch (Throwable e) {
