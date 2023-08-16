@@ -23,7 +23,8 @@
 package com.ionutbalosin.jvm.performance.benchmarks.macro.prime;
 
 import com.ionutbalosin.jvm.performance.benchmarks.macro.prime.eratostene.EratosthenesSieve;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.prime.stream.SqrtStreamFilter;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.prime.millerrabin.MillerRabin;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.prime.trialdivision.StreamBasedTrialDivision;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -38,13 +39,13 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Computes the number of prime numbers until a threshold (e.g., N) number.
- * The benchmark uses a few alternative approaches:
- * - sieve of Eratosthenes
- * - a stream of prime numbers
+ * Calculates the count of prime numbers up to a specified threshold (e.g., N).
+ * The benchmark employs several alternative methods:
+ * - Sieve of Eratosthenes
+ * - Trial division (i.e., checking if a number is prime by dividing it by all possible divisors up to the square root of the number.)
+ * - Miller-Rabin primality test
  *
- * The result (i.e., number of prime numbers) is compared against the Prime number theorem
- * to be sure the computation is not wrong.
+ * The resulting count of prime numbers is compared against the Prime Number Theorem to ensure the accuracy of the computation.
  *
  */
 @BenchmarkMode(Mode.AverageTime)
@@ -63,12 +64,13 @@ public class PrimesBenchmark {
   @Setup()
   public void setup() {
     // make sure the results are equivalent before any further benchmarking
-    sanityCheck(SqrtStreamFilter.primes(n), EratosthenesSieve.primes(n));
+    sanityCheck(
+        StreamBasedTrialDivision.primes(n), EratosthenesSieve.primes(n), MillerRabin.primes(n));
   }
 
   @Benchmark
-  public long sqrt_stream() {
-    return SqrtStreamFilter.primes(n);
+  public long trial_division() {
+    return StreamBasedTrialDivision.primes(n);
   }
 
   @Benchmark
@@ -76,21 +78,31 @@ public class PrimesBenchmark {
     return EratosthenesSieve.primes(n);
   }
 
+  @Benchmark
+  public long miller_rabin() {
+    return MillerRabin.primes(n);
+  }
+
   /**
    * Sanity check for the results to avoid wrong benchmarks comparisons
    *
    * @param val1 - first number of prime numbers
    * @param val2 - second number of prime numbers
+   * @param val3 - third number of prime numbers
    */
-  private void sanityCheck(long val1, long val2) {
-    if (val1 != val2) {
+  private void sanityCheck(long val1, long val2, long val3) {
+    if (val1 != val2 || val2 != val3) {
       throw new AssertionError("Numbers are different.");
     }
 
-    // Prime number theorem: number of primes less than N or equal to N is at least N/ln(N)
-    final double minPrimes = n / Math.log(n);
-    if (val1 < minPrimes || val2 < minPrimes) {
+    final double minPrimes = getMinPrimes(n);
+    if (val1 < minPrimes || val2 < minPrimes || val3 < minPrimes) {
       throw new AssertionError("Less than minimum expected prime numbers.");
     }
+  }
+
+  // Prime Number Theorem (PNT): number of primes less than N or equal to N is at least N/ln(N)
+  private double getMinPrimes(int n) {
+    return n / Math.log(n);
   }
 }
