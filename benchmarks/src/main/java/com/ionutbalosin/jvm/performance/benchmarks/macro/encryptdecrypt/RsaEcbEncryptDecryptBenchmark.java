@@ -22,6 +22,18 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.encryptdecrypt;
 
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -34,39 +46,40 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
+/*
+ * A few important RSA considerations:
+ * - The size of the message that can be encrypted using RSA depends on the size of the RSA key modulus and the padding scheme used.
+ * - The formula for calculating the maximum data size that can be encrypted is: Maximum Data Size = RSA Key Size (in bytes) - Overhead.
+ * - The Overhead includes the padding and any additional information introduced by the encryption process.
+ *
+ * The 'RSA/ECB/PKCS1Padding' mode:
+ * - A common overhead value for the 'RSA/ECB/PKCS1Padding' mode is at least 11 bytes (16 bytes in this benchmark).
+ * - The padding scheme for this mode helps to ensure data alignment and security.
+ *
+ * The 'RSA/ECB/NoPadding' mode:
+ * - In 'RSA/ECB/NoPadding' mode, there's no built-in padding, so the programmer must ensure that the data size matches the key modulus size exactly.
+ * - Therefore, manual padding and un-pading are necessary when using 'RSA/ECB/NoPadding' mode.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class RsaEcbEncryptDecryptBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*AesEcbEncryptDecryptBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*RsaEcbEncryptDecryptBenchmark.*"
 
+  private final int ENCRYPTION_OVERHEAD = 16;
   private final Random random = new Random(16384);
   private byte[] data, dataEncrypted, dataDecrypted;
   private Cipher encryptCipher, decryptCipher;
-
-  @Param({"16384"})
   private int dataSize;
 
-  @Param({"128", "192", "256"})
+  @Param({"1024", "2048", "3072", "4096"})
   private int keySize;
 
-  @Param({"AES/ECB/NoPadding", "AES/ECB/PKCS5Padding"})
+  @Param({"RSA/ECB/NoPadding", "RSA/ECB/PKCS1Padding"})
   private String transformation;
 
   @Setup()
@@ -74,18 +87,20 @@ public class RsaEcbEncryptDecryptBenchmark {
       throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException,
           IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
     // initialize data
+    // Note: data size should be less than key size to accommodate the potential overhead
+    dataSize = (keySize / 8) - ENCRYPTION_OVERHEAD;
     data = new byte[dataSize];
     random.nextBytes(data);
 
     // initialize ciphers
-    // Note: AES/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode)
-    final SecretKey secretKey = getKey("AES", keySize);
-    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
-    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);
+    // Note: RSA/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode)
+    final KeyPair keyPair = getKey("RSA", keySize);
+    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, keyPair.getPublic());
+    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, keyPair.getPrivate());
 
     // encrypt/decrypt data
     dataEncrypted = encryptCipher.doFinal(data);
-    dataDecrypted = decryptCipher.doFinal(dataEncrypted);
+    dataDecrypted = removeLeadingPadding(decryptCipher.doFinal(dataEncrypted));
 
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(data, dataDecrypted);
@@ -101,16 +116,16 @@ public class RsaEcbEncryptDecryptBenchmark {
     return decryptCipher.doFinal(dataEncrypted);
   }
 
-  public SecretKey getKey(String algorithm, int keySize) throws NoSuchAlgorithmException {
-    final KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm);
-    keyGenerator.init(keySize);
-    return keyGenerator.generateKey();
+  public KeyPair getKey(String algorithm, int keySize) throws NoSuchAlgorithmException {
+    final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(algorithm);
+    keyPairGenerator.initialize(keySize);
+    return keyPairGenerator.generateKeyPair();
   }
 
-  public Cipher getCipher(String transformation, int opMode, SecretKey secretKey)
+  public Cipher getCipher(String transformation, int opMode, Key key)
       throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-    Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, secretKey);
+    final Cipher cipher = Cipher.getInstance(transformation);
+    cipher.init(opMode, key);
     return cipher;
   }
 
@@ -130,5 +145,16 @@ public class RsaEcbEncryptDecryptBenchmark {
         throw new AssertionError("Array values are different.");
       }
     }
+  }
+
+  private byte[] removeLeadingPadding(byte[] data) {
+    int nonNullIndex = 0;
+    while (nonNullIndex < data.length && data[nonNullIndex] == 0) {
+      nonNullIndex++;
+    }
+
+    final byte[] unPadded = new byte[data.length - nonNullIndex];
+    System.arraycopy(data, nonNullIndex, unPadded, 0, unPadded.length);
+    return unPadded;
   }
 }

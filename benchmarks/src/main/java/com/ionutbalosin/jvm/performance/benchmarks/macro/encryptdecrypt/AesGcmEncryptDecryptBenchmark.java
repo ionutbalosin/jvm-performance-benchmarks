@@ -24,6 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.encryptdecrypt;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidParameterSpecException;
@@ -134,12 +135,11 @@ public class AesGcmEncryptDecryptBenchmark {
     return new GCMParameterSpec(128, ivBytes);
   }
 
-  public Cipher getCipher(
-      String transformation, int opMode, SecretKey secretKey, GCMParameterSpec paramsSpec)
+  public Cipher getCipher(String transformation, int opMode, Key key, GCMParameterSpec paramsSpec)
       throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
           InvalidKeyException {
-    Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, secretKey, paramsSpec);
+    final Cipher cipher = Cipher.getInstance(transformation);
+    cipher.init(opMode, key, paramsSpec);
     return cipher;
   }
 
