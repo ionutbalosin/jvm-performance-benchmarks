@@ -48,6 +48,11 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Cipher Block Chaining (CBC) mode
+ * with both padding and no padding options. The process involves various key sizes and the utilization of
+ * an initialization vector (IV). AES/CBC mode requires an initialization vector (IV) to enhance security and provide effective encryption.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -81,7 +86,6 @@ public class AesCbcEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    // Note: AES/CBC mode needs an initialization vector (IV)
     final SecretKey secretKey = getKey("AES", keySize);
     final IvParameterSpec ivSpec = getIvParameter();
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, ivSpec);

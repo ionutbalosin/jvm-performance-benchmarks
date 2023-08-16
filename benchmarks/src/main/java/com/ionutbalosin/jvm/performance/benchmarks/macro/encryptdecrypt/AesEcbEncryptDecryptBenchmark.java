@@ -46,6 +46,11 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Electronic Codebook (ECB) mode
+ * with both padding and no padding options. The process involves various key sizes. It's important to note that
+ * AES/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode), unlike some other encryption modes.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -78,7 +83,6 @@ public class AesEcbEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    // Note: AES/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode)
     final SecretKey secretKey = getKey("AES", keySize);
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
     decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);

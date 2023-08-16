@@ -46,6 +46,12 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Encrypts and decrypts data using the Triple DES (3DES) algorithm with various key sizes. The encryption process involves both
+ * padding and no padding options. While Electronic Codebook (ECB) mode is mentioned, it's important to note that ECB mode
+ * is not commonly used with Triple DES due to its security limitations. Unlike symmetric ciphers, Triple DES encryption in ECB mode
+ * does not require initialization vectors (IVs) or GCM (Galois/Counter Mode), as it's a block cipher operating in a straightforward manner.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -78,8 +84,6 @@ public class DesEcbEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    // Note: DESede/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter
-    // Mode)
     final SecretKey secretKey = getKey("DESede", keySize);
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
     decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);

@@ -47,6 +47,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
+ * Encrypts and decrypts data using the RSA algorithm with various key sizes. The encryption process involves both padding and no padding options.
+ * While Electronic Codebook (ECB) mode is mentioned, it's important to note that ECB mode is not commonly used with RSA due to its security limitations.
+ * Unlike symmetric ciphers, RSA encryption does not involve initialization vectors (IVs) or GCM (Galois/Counter Mode), as it's an asymmetric encryption algorithm.
+ *
  * A few important RSA considerations:
  * - The size of the message that can be encrypted using RSA depends on the size of the RSA key modulus and the padding scheme used.
  * - The formula for calculating the maximum data size that can be encrypted is: Maximum Data Size = RSA Key Size (in bytes) - Overhead.
@@ -87,13 +91,11 @@ public class RsaEcbEncryptDecryptBenchmark {
       throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException,
           IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
     // initialize data
-    // Note: data size should be less than key size to accommodate the potential overhead
     dataSize = (keySize / 8) - ENCRYPTION_OVERHEAD;
     data = new byte[dataSize];
     random.nextBytes(data);
 
     // initialize ciphers
-    // Note: RSA/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode)
     final KeyPair keyPair = getKey("RSA", keySize);
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, keyPair.getPublic());
     decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, keyPair.getPrivate());

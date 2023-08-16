@@ -49,6 +49,12 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Galois/Counter Mode (GCM) with no padding.
+ * The process involves various key sizes and the utilization of an initialization vector (IV).
+ * AES/GCM mode requires an initialization vector (IV) and operates using the GCM (Galois/Counter Mode) encryption mode
+ * for enhanced security and data authenticity.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -83,7 +89,6 @@ public class AesGcmEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    // Note: AES/GCM mode needs an initialization vector (IV) and uses GCM (Galois/Counter Mode)
     secretKey = getKey("AES", keySize);
     final GCMParameterSpec paramsSpec = getGCMParameterSpec();
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, paramsSpec);
