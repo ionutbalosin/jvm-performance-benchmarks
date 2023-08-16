@@ -57,7 +57,7 @@ public class MessageDigestBenchmark {
 
   private final Random random = new Random(16384);
 
-  @Param({"64", "16384"})
+  @Param({"16384"})
   private int length;
 
   @Param({
