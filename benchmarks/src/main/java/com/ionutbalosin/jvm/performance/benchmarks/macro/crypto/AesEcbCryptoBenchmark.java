@@ -20,14 +20,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.encryptdecrypt;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.crypto;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidParameterSpecException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.BadPaddingException;
@@ -36,7 +34,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.GCMParameterSpec;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -50,10 +47,9 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Galois/Counter Mode (GCM) with no padding.
- * The process involves various key sizes and the utilization of an initialization vector (IV).
- * AES/GCM mode requires an initialization vector (IV) and operates using the GCM (Galois/Counter Mode) encryption mode
- * for enhanced security and data authenticity.
+ * Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Electronic Codebook (ECB) mode
+ * with both padding and no padding options. The process involves various key sizes. It's important to note that
+ * AES/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode), unlike some other encryption modes.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -61,15 +57,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class AesGcmEncryptDecryptBenchmark {
+public class AesEcbEncryptDecryptBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*AesGcmEncryptDecryptBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*AesEcbEncryptDecryptBenchmark.*"
 
   private final Random random = new Random(16384);
-  private final SecureRandom secureRandom = new SecureRandom(new byte[] {0x1, 0x2, 0x3, 0x4});
   private byte[] data, dataEncrypted, dataDecrypted;
   private Cipher encryptCipher, decryptCipher;
-  private SecretKey secretKey;
 
   @Param({"16384"})
   private int dataSize;
@@ -77,7 +71,7 @@ public class AesGcmEncryptDecryptBenchmark {
   @Param({"128", "192", "256"})
   private int keySize;
 
-  @Param({"AES/GCM/NoPadding"})
+  @Param({"AES/ECB/NoPadding", "AES/ECB/PKCS5Padding"})
   private String transformation;
 
   @Setup()
@@ -89,10 +83,9 @@ public class AesGcmEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    secretKey = getKey("AES", keySize);
-    final GCMParameterSpec paramsSpec = getGCMParameterSpec();
-    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, paramsSpec);
-    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey, paramsSpec);
+    final SecretKey secretKey = getKey("AES", keySize);
+    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
+    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);
 
     // encrypt/decrypt data
     dataEncrypted = encryptCipher.doFinal(data);
@@ -103,26 +96,12 @@ public class AesGcmEncryptDecryptBenchmark {
   }
 
   @Benchmark
-  public byte[] encrypt()
-      throws IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException,
-          NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-    // re-initialize cipher (i.e., a new unique IV must be generated for each encryption)
-    final GCMParameterSpec paramsSpec = getGCMParameterSpec();
-    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, paramsSpec);
-
+  public byte[] encrypt() throws IllegalBlockSizeException, BadPaddingException {
     return encryptCipher.doFinal(data);
   }
 
   @Benchmark
-  public byte[] decrypt()
-      throws IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException,
-          NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException,
-          InvalidParameterSpecException {
-    // re-initialize cipher
-    final GCMParameterSpec paramsSpec =
-        encryptCipher.getParameters().getParameterSpec(GCMParameterSpec.class);
-    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey, paramsSpec);
-
+  public byte[] decrypt() throws IllegalBlockSizeException, BadPaddingException {
     return decryptCipher.doFinal(dataEncrypted);
   }
 
@@ -132,19 +111,10 @@ public class AesGcmEncryptDecryptBenchmark {
     return keyGenerator.generateKey();
   }
 
-  public GCMParameterSpec getGCMParameterSpec() {
-    // initialize the IV (Initialization Vector) size to 96 bits (12 bytes)
-    // Note: A 96-bit IV provides 2^96 unique combinations, which is sufficient for the most cases
-    byte[] ivBytes = new byte[12];
-    secureRandom.nextBytes(ivBytes);
-    return new GCMParameterSpec(128, ivBytes);
-  }
-
-  public Cipher getCipher(String transformation, int opMode, Key key, GCMParameterSpec paramsSpec)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
-          InvalidKeyException {
+  public Cipher getCipher(String transformation, int opMode, Key key)
+      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
     final Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, key, paramsSpec);
+    cipher.init(opMode, key);
     return cipher;
   }
 

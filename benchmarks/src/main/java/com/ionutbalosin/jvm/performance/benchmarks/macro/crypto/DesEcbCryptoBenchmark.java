@@ -20,13 +20,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.encryptdecrypt;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.crypto;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.BadPaddingException;
@@ -35,7 +34,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -49,9 +47,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Encrypts and decrypts data using the Triple DES (3DES) algorithm in Cipher Block Chaining (CBC) mode
- * with both padding and no padding options. The process involves various key sizes and the utilization of an initialization vector (IV).
- * It's important to note that DESede/CBC mode requires an initialization vector (IV) to enhance security and provide effective encryption.
+ * Encrypts and decrypts data using the Triple DES (3DES) algorithm with various key sizes. The encryption process involves both
+ * padding and no padding options. While Electronic Codebook (ECB) mode is mentioned, it's important to note that ECB mode
+ * is not commonly used with Triple DES due to its security limitations. Unlike symmetric ciphers, Triple DES encryption in ECB mode
+ * does not require initialization vectors (IVs) or GCM (Galois/Counter Mode), as it's a block cipher operating in a straightforward manner.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -59,12 +58,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class DesCbcEncryptDecryptBenchmark {
+public class DesEcbEncryptDecryptBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*DesCbcEncryptDecryptBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*DesEcbEncryptDecryptBenchmark.*"
 
   private final Random random = new Random(16384);
-  private final SecureRandom secureRandom = new SecureRandom(new byte[] {0x1, 0x2, 0x3, 0x4});
   private byte[] data, dataEncrypted, dataDecrypted;
   private Cipher encryptCipher, decryptCipher;
 
@@ -74,7 +72,7 @@ public class DesCbcEncryptDecryptBenchmark {
   @Param({"168"})
   private int keySize;
 
-  @Param({"DESede/CBC/NoPadding", "DESede/CBC/PKCS5Padding"})
+  @Param({"DESede/ECB/NoPadding", "DESede/ECB/PKCS5Padding"})
   private String transformation;
 
   @Setup()
@@ -87,9 +85,8 @@ public class DesCbcEncryptDecryptBenchmark {
 
     // initialize ciphers
     final SecretKey secretKey = getKey("DESede", keySize);
-    final IvParameterSpec ivSpec = getIvParameter();
-    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, ivSpec);
-    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey, ivSpec);
+    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
+    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);
 
     // encrypt/decrypt data
     dataEncrypted = encryptCipher.doFinal(data);
@@ -115,19 +112,10 @@ public class DesCbcEncryptDecryptBenchmark {
     return keyGenerator.generateKey();
   }
 
-  public IvParameterSpec getIvParameter() {
-    // initialize the IV (Initialization Vector) size to 64 bits (8 bytes)
-    // Note: A 64-bit IV provides 2^64 unique combinations, which is sufficient for the most cases
-    byte[] ivBytes = new byte[8];
-    secureRandom.nextBytes(ivBytes);
-    return new IvParameterSpec(ivBytes);
-  }
-
-  public Cipher getCipher(String transformation, int opMode, Key key, IvParameterSpec ivSpec)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
-          InvalidKeyException {
+  public Cipher getCipher(String transformation, int opMode, Key key)
+      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
     final Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, key, ivSpec);
+    cipher.init(opMode, key);
     return cipher;
   }
 

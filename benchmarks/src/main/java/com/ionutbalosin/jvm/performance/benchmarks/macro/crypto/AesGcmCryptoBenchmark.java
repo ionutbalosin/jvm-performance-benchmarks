@@ -20,12 +20,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.encryptdecrypt;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.crypto;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidParameterSpecException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.BadPaddingException;
@@ -34,6 +36,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.GCMParameterSpec;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -47,32 +50,34 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Encrypts and decrypts data using the Triple DES (3DES) algorithm with various key sizes. The encryption process involves both
- * padding and no padding options. While Electronic Codebook (ECB) mode is mentioned, it's important to note that ECB mode
- * is not commonly used with Triple DES due to its security limitations. Unlike symmetric ciphers, Triple DES encryption in ECB mode
- * does not require initialization vectors (IVs) or GCM (Galois/Counter Mode), as it's a block cipher operating in a straightforward manner.
+ * Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Galois/Counter Mode (GCM) with no padding.
+ * The process involves various key sizes and the utilization of an initialization vector (IV).
+ * AES/GCM mode requires an initialization vector (IV) and operates using the GCM (Galois/Counter Mode) encryption mode
+ * for enhanced security and data authenticity.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class DesEcbEncryptDecryptBenchmark {
+public class AesGcmEncryptDecryptBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*DesEcbEncryptDecryptBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*AesGcmEncryptDecryptBenchmark.*"
 
   private final Random random = new Random(16384);
+  private final SecureRandom secureRandom = new SecureRandom(new byte[] {0x1, 0x2, 0x3, 0x4});
   private byte[] data, dataEncrypted, dataDecrypted;
   private Cipher encryptCipher, decryptCipher;
+  private SecretKey secretKey;
 
   @Param({"16384"})
   private int dataSize;
 
-  @Param({"168"})
+  @Param({"128", "192", "256"})
   private int keySize;
 
-  @Param({"DESede/ECB/NoPadding", "DESede/ECB/PKCS5Padding"})
+  @Param({"AES/GCM/NoPadding"})
   private String transformation;
 
   @Setup()
@@ -84,9 +89,10 @@ public class DesEcbEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    final SecretKey secretKey = getKey("DESede", keySize);
-    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
-    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);
+    secretKey = getKey("AES", keySize);
+    final GCMParameterSpec paramsSpec = getGCMParameterSpec();
+    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, paramsSpec);
+    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey, paramsSpec);
 
     // encrypt/decrypt data
     dataEncrypted = encryptCipher.doFinal(data);
@@ -97,12 +103,26 @@ public class DesEcbEncryptDecryptBenchmark {
   }
 
   @Benchmark
-  public byte[] encrypt() throws IllegalBlockSizeException, BadPaddingException {
+  public byte[] encrypt()
+      throws IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException,
+          NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+    // re-initialize cipher (i.e., a new unique IV must be generated for each encryption)
+    final GCMParameterSpec paramsSpec = getGCMParameterSpec();
+    encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, paramsSpec);
+
     return encryptCipher.doFinal(data);
   }
 
   @Benchmark
-  public byte[] decrypt() throws IllegalBlockSizeException, BadPaddingException {
+  public byte[] decrypt()
+      throws IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException,
+          NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException,
+          InvalidParameterSpecException {
+    // re-initialize cipher
+    final GCMParameterSpec paramsSpec =
+        encryptCipher.getParameters().getParameterSpec(GCMParameterSpec.class);
+    decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey, paramsSpec);
+
     return decryptCipher.doFinal(dataEncrypted);
   }
 
@@ -112,10 +132,19 @@ public class DesEcbEncryptDecryptBenchmark {
     return keyGenerator.generateKey();
   }
 
-  public Cipher getCipher(String transformation, int opMode, Key key)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+  public GCMParameterSpec getGCMParameterSpec() {
+    // initialize the IV (Initialization Vector) size to 96 bits (12 bytes)
+    // Note: A 96-bit IV provides 2^96 unique combinations, which is sufficient for the most cases
+    byte[] ivBytes = new byte[12];
+    secureRandom.nextBytes(ivBytes);
+    return new GCMParameterSpec(128, ivBytes);
+  }
+
+  public Cipher getCipher(String transformation, int opMode, Key key, GCMParameterSpec paramsSpec)
+      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
+          InvalidKeyException {
     final Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, key);
+    cipher.init(opMode, key, paramsSpec);
     return cipher;
   }
 
