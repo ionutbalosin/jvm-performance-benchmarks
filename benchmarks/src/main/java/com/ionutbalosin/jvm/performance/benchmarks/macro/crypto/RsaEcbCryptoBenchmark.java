@@ -22,11 +22,12 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.crypto;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.util.CryptoUtils.getCipher;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.util.CryptoUtils.getKeyPair;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +58,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - The Overhead includes the padding and any additional information introduced by the encryption process.
  *
  * The 'RSA/ECB/PKCS1Padding' mode:
- * - A common overhead value for the 'RSA/ECB/PKCS1Padding' mode is at least 11 bytes (16 bytes in this benchmark).
+ * - A common overhead value for the 'RSA/ECB/PKCS1Padding' mode is at least 11 bytes (or 16 bytes in this benchmark).
  * - The padding scheme for this mode helps to ensure data alignment and security.
  *
  * The 'RSA/ECB/NoPadding' mode:
@@ -70,10 +71,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class RsaEcbEncryptDecryptBenchmark {
+public class RsaEcbCryptoBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*RsaEcbEncryptDecryptBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*RsaEcbCryptoBenchmark.*"
 
+  private final int BITS = 8;
   private final int ENCRYPTION_OVERHEAD = 16;
   private final Random random = new Random(16384);
   private byte[] data, dataEncrypted, dataDecrypted;
@@ -91,12 +93,12 @@ public class RsaEcbEncryptDecryptBenchmark {
       throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException,
           IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
     // initialize data
-    dataSize = (keySize / 8) - ENCRYPTION_OVERHEAD;
+    dataSize = (keySize / BITS) - ENCRYPTION_OVERHEAD;
     data = new byte[dataSize];
     random.nextBytes(data);
 
     // initialize ciphers
-    final KeyPair keyPair = getKey("RSA", keySize);
+    final KeyPair keyPair = getKeyPair("RSA", keySize);
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, keyPair.getPublic());
     decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, keyPair.getPrivate());
 
@@ -118,23 +120,10 @@ public class RsaEcbEncryptDecryptBenchmark {
     return decryptCipher.doFinal(dataEncrypted);
   }
 
-  public KeyPair getKey(String algorithm, int keySize) throws NoSuchAlgorithmException {
-    final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(algorithm);
-    keyPairGenerator.initialize(keySize);
-    return keyPairGenerator.generateKeyPair();
-  }
-
-  public Cipher getCipher(String transformation, int opMode, Key key)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-    final Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, key);
-    return cipher;
-  }
-
   /**
    * Sanity check for the results to avoid wrong benchmarks comparisons
    *
-   * @param input - initial byte array to encode
+   * @param input - source byte array to encode
    * @param output - output byte array after decoding
    */
   private void sanityCheck(byte[] input, byte[] output) {

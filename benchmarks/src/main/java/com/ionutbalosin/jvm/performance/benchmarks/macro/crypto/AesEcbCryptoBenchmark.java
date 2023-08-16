@@ -22,16 +22,17 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.crypto;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.util.CryptoUtils.getCipher;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.util.CryptoUtils.getSecretKey;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -53,13 +54,13 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
-public class AesEcbEncryptDecryptBenchmark {
+public class AesEcbCryptoBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*AesEcbEncryptDecryptBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*AesEcbCryptoBenchmark.*"
 
   private final Random random = new Random(16384);
   private byte[] data, dataEncrypted, dataDecrypted;
@@ -83,7 +84,7 @@ public class AesEcbEncryptDecryptBenchmark {
     random.nextBytes(data);
 
     // initialize ciphers
-    final SecretKey secretKey = getKey("AES", keySize);
+    final SecretKey secretKey = getSecretKey("AES", keySize);
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey);
     decryptCipher = getCipher(transformation, Cipher.DECRYPT_MODE, secretKey);
 
@@ -105,23 +106,10 @@ public class AesEcbEncryptDecryptBenchmark {
     return decryptCipher.doFinal(dataEncrypted);
   }
 
-  public SecretKey getKey(String algorithm, int keySize) throws NoSuchAlgorithmException {
-    final KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm);
-    keyGenerator.init(keySize);
-    return keyGenerator.generateKey();
-  }
-
-  public Cipher getCipher(String transformation, int opMode, Key key)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-    final Cipher cipher = Cipher.getInstance(transformation);
-    cipher.init(opMode, key);
-    return cipher;
-  }
-
   /**
    * Sanity check for the results to avoid wrong benchmarks comparisons
    *
-   * @param input - initial byte array to encode
+   * @param input - source byte array to encode
    * @param output - output byte array after decoding
    */
   private void sanityCheck(byte[] input, byte[] output) {
