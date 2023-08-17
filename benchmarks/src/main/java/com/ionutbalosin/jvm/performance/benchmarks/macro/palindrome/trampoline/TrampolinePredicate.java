@@ -22,8 +22,8 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline.TrampolineUtil.done;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline.TrampolineUtil.next;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline.TrampolineUtils.done;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline.TrampolineUtils.next;
 import static java.lang.Character.isLetterOrDigit;
 import static java.lang.Character.toLowerCase;
 

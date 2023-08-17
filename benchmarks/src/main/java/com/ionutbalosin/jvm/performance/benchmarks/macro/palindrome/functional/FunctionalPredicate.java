@@ -20,30 +20,27 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.functional;
 
-public class TrampolineUtil {
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
-  public static <T> ATrampoline<T> next(final ATrampoline<T> nextCall) {
-    return nextCall;
+public class FunctionalPredicate implements Predicate<String> {
+
+  @Override
+  public boolean test(String str) {
+    return isPalindrome(str);
   }
 
-  public static <T> ATrampoline<T> done(final T value) {
-    return new ATrampoline<T>() {
-      @Override
-      public boolean isComplete() {
-        return true;
-      }
+  private boolean isPalindrome(String str) {
+    String cleanedStr =
+        str.chars()
+            .mapToObj(Character::toLowerCase)
+            .filter(Character::isLetterOrDigit)
+            .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+            .toString();
 
-      @Override
-      public T result() {
-        return value;
-      }
-
-      @Override
-      public ATrampoline<T> jump() {
-        throw new UnsupportedOperationException();
-      }
-    };
+    return IntStream.range(0, cleanedStr.length() / 2)
+        .noneMatch(i -> cleanedStr.charAt(i) != cleanedStr.charAt(cleanedStr.length() - 1 - i));
   }
 }

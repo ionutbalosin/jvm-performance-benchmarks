@@ -24,6 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.functional.FunctionalPredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.iterative.IterativePredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.recursive.RecursivePredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.trampoline.TrampolinePredicate;
@@ -82,6 +83,7 @@ public class PalindromeBenchmark {
   private final TrampolinePredicate trampolinePredicate = new TrampolinePredicate();
   private final RecursivePredicate recursivePredicate = new RecursivePredicate();
   private final IterativePredicate iterativePredicate = new IterativePredicate();
+  private final FunctionalPredicate functionalPredicate = new FunctionalPredicate();
 
   @Setup()
   public void setup() throws IOException {
@@ -89,7 +91,8 @@ public class PalindromeBenchmark {
     sanityCheck(
         palindromes(trampolinePredicate),
         palindromes(recursivePredicate),
-        palindromes(iterativePredicate));
+        palindromes(iterativePredicate),
+        palindromes(functionalPredicate));
   }
 
   @Benchmark
@@ -107,6 +110,11 @@ public class PalindromeBenchmark {
     return palindromes(iterativePredicate);
   }
 
+  @Benchmark
+  public long functional() throws IOException {
+    return palindromes(functionalPredicate);
+  }
+
   private long palindromes(Predicate<String> predicate) throws IOException {
     try (BufferedReader bufferedReader =
         new BufferedReader(new InputStreamReader(new FileInputStream(FILE_NAME), UTF_8))) {
@@ -119,12 +127,13 @@ public class PalindromeBenchmark {
    *
    * @param val1 - first number of palindromes
    * @param val2 - second number of palindromes
-   * @param val3 - second number of palindromes
+   * @param val3 - third number of palindromes
+   * @param val3 - fourth number of palindromes
    */
-  private void sanityCheck(long val1, long val2, long val3) {
+  private void sanityCheck(long val1, long val2, long val3, long val4) {
     // It is known in advance the file "palindrome.list" contains 29 palindromes
     final int PALINDROMES = 29;
-    if (val1 != PALINDROMES || val2 != PALINDROMES || val3 != PALINDROMES) {
+    if (val1 != PALINDROMES || val2 != PALINDROMES || val3 != PALINDROMES || val4 != PALINDROMES) {
       throw new AssertionError("Different number of palindromes.");
     }
   }
