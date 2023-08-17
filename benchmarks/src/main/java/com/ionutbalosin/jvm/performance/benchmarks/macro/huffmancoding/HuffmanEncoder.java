@@ -22,33 +22,52 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.TreeNode.isLeaf;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class HuffmanEncoder {
 
-  /**
-   * Read the root node of a Huffman tree and use it to create a Huffman encoding map based on the
-   * tree's structure
+  /*
+   * This method is responsible for creating and returning an encoding map that associates characters with their Huffman encodings.
+   * The encoding map is a java.util.Map where keys are characters and values are the
+   * corresponding Huffman encodings represented as strings of '0's and '1's.
    */
-  public static Map<Character, String> encodingMap(TreeNode root) {
+  public static Map<Character, String> encodingMap(HuffmanNode root) {
     final Map<Character, String> huffmanCodes = new HashMap<>();
     encodingMap(root, "", huffmanCodes);
     return huffmanCodes;
   }
 
-  private static void encodingMap(TreeNode root, String str, Map<Character, String> huffmanCode) {
-    if (root == null) {
+  private static void encodingMap(
+      HuffmanNode node, String code, Map<Character, String> encodingMap) {
+    if (node == null) {
       return;
     }
 
-    if (isLeaf(root)) {
-      huffmanCode.put(root.ch, str.length() > 0 ? str : "1");
+    if (node.ch != '\0') {
+      encodingMap.put(node.ch, code);
     }
 
-    encodingMap(root.left, str + '0', huffmanCode);
-    encodingMap(root.right, str + '1', huffmanCode);
+    encodingMap(node.left, code + "0", encodingMap);
+    encodingMap(node.right, code + "1", encodingMap);
+  }
+
+  public static char[] encodeData(char[] data, Map<Character, String> encodingMap) {
+    int totalEncodedLength = 0;
+    for (char ch : data) {
+      totalEncodedLength += encodingMap.get(ch).length();
+    }
+
+    char[] encoded = new char[totalEncodedLength];
+    int encodedIndex = 0;
+
+    for (char ch : data) {
+      final String encodedChar = encodingMap.get(ch);
+      for (char encodedBit : encodedChar.toCharArray()) {
+        encoded[encodedIndex++] = encodedBit;
+      }
+    }
+
+    return encoded;
   }
 }

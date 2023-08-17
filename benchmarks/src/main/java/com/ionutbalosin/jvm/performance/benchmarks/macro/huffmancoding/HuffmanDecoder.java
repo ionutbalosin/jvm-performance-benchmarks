@@ -22,43 +22,28 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.TreeNode.isLeaf;
-
 public class HuffmanDecoder {
 
-  public static StringBuilder getDecoded(TreeNode root, String encoded) {
-    final StringBuilder decoded = new StringBuilder();
+  public static char[] decodeData(char[] encoded, HuffmanNode root) {
+    char[] decoded = new char[encoded.length];
+    int decodedIndex = 0;
+    HuffmanNode current = root;
 
-    // Special case, only one character (e.g., a, aa, aaa, etc.)
-    if (isLeaf(root)) {
-      while (root.freq-- > 0) {
-        decoded.append(root.ch);
+    for (char ch : encoded) {
+      if (ch == '0' && current != null) {
+        current = current.left;
+      } else if (ch == '1' && current != null) {
+        current = current.right;
       }
-      return decoded;
+
+      if (current != null && current.ch != '\0') {
+        decoded[decodedIndex++] = current.ch;
+        current = root;
+      }
     }
 
-    int index = -1;
-    while (index < encoded.length() - 1) {
-      index = decode(root, index, encoded, decoded);
-    }
-
-    return decoded;
-  }
-
-  private static int decode(TreeNode root, int index, String encoded, StringBuilder decoded) {
-    if (root == null) {
-      return index;
-    }
-
-    if (isLeaf(root)) {
-      decoded.append(root.ch);
-      return index;
-    }
-
-    index++;
-    root = (encoded.charAt(index) == '0') ? root.left : root.right;
-    index = decode(root, index, encoded, decoded);
-
-    return index;
+    final char[] trimmedDecoded = new char[decodedIndex];
+    System.arraycopy(decoded, 0, trimmedDecoded, 0, decodedIndex);
+    return trimmedDecoded;
   }
 }

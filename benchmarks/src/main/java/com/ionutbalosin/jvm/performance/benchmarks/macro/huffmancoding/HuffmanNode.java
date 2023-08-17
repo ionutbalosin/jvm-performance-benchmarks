@@ -22,24 +22,24 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding;
 
-public class TreeNode {
-  protected Character ch;
-  protected Integer freq;
-  protected TreeNode left = null, right = null;
+public class HuffmanNode {
+  protected char ch;
+  protected int freq;
+  protected HuffmanNode left = null, right = null;
 
-  TreeNode(Character ch, Integer freq) {
+  HuffmanNode(char ch, int freq) {
     this.ch = ch;
     this.freq = freq;
   }
 
-  public TreeNode(Character ch, Integer freq, TreeNode left, TreeNode right) {
+  public HuffmanNode(char ch, int freq, HuffmanNode left, HuffmanNode right) {
     this.ch = ch;
     this.freq = freq;
     this.left = left;
     this.right = right;
   }
 
-  public static boolean isLeaf(TreeNode root) {
+  public static boolean isLeaf(HuffmanNode root) {
     return root.left == null && root.right == null;
   }
 }
