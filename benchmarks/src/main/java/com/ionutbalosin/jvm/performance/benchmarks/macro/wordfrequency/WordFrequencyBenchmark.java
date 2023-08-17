@@ -22,9 +22,9 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency;
 
+import com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.functional.ParallelStreamWordFrequency;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.functional.PatternStreamWordFrequency;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.iterative.IterativeWordFrequency;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.parallelstream.ParallelStreamWordFrequency;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.patternstream.PatternStreamWordFrequency;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;

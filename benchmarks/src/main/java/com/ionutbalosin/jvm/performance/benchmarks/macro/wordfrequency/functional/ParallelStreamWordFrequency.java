@@ -20,34 +20,37 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.patternstream;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.wordfrequency.functional;
 
-import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.util.function.Function.identity;
+import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.groupingByConcurrent;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.channels.FileChannel;
+import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class PatternStreamWordFrequency {
+public class ParallelStreamWordFrequency {
 
   private static final Pattern PATTERN = Pattern.compile("[\\W]+");
 
   public static Map<String, Long> frequencies(String fileName) throws IOException {
     final Map<String, Long> wordFrequencies;
 
-    try (FileChannel channel = new RandomAccessFile(fileName, "r").getChannel()) {
-      final ByteBuffer byteBuffer = channel.map(READ_ONLY, 0L, channel.size());
-      final CharBuffer charBuffer = ISO_8859_1.newDecoder().decode(byteBuffer);
+    try (BufferedReader reader =
+        new BufferedReader(new InputStreamReader(new FileInputStream(fileName), ISO_8859_1))) {
       wordFrequencies =
-          PATTERN.splitAsStream(charBuffer).collect(groupingBy(identity(), counting()));
+          reader
+              .lines()
+              .parallel()
+              .flatMap(PATTERN::splitAsStream)
+              .filter(not(String::isBlank))
+              .collect(groupingByConcurrent(identity(), counting()));
     }
 
     return wordFrequencies;
