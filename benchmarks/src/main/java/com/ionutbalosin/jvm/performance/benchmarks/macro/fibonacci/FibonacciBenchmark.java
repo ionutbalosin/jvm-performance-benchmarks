@@ -27,6 +27,7 @@ import static java.math.BigInteger.ZERO;
 
 import com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.binet.BinetFormula;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.dynamic.DynamicFormula;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.functional.FunctionalFormula;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.iterative.IterativeFormula;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.recursive.RecursiveFormula;
 import java.math.BigInteger;
@@ -47,6 +48,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Computes the nth Fibonacci number. The benchmark uses a few alternative approaches:
  * - (tail-)recursive
  * - iterative
+ * - functional
  * - dynamic
  * - Binet's formula
  *
@@ -80,6 +82,7 @@ public class FibonacciBenchmark {
         RecursiveFormula.fibonacci(n, ZERO, ONE),
         IterativeFormula.fibonacci(n, ZERO, ONE),
         DynamicFormula.fibonacci(n, ZERO, ONE),
+        FunctionalFormula.fibonacci(n, ZERO, ONE),
         BinetFormula.fibonacci(n));
   }
 
@@ -91,6 +94,11 @@ public class FibonacciBenchmark {
   @Benchmark
   public BigInteger iterative() {
     return IterativeFormula.fibonacci(n, ZERO, ONE);
+  }
+
+  @Benchmark
+  public BigInteger functional() {
+    return FunctionalFormula.fibonacci(n, ZERO, ONE);
   }
 
   @Benchmark
@@ -110,9 +118,14 @@ public class FibonacciBenchmark {
    * @param val2 - second Fibonacci number
    * @param val3 - third Fibonacci number
    * @param val4 - fourth Fibonacci number
+   * @param val5 - fifth Fibonacci number
    */
-  private void sanityCheck(BigInteger val1, BigInteger val2, BigInteger val3, BigInteger val4) {
-    if (val1.compareTo(val2) != 0 || val2.compareTo(val3) != 0 || val3.compareTo(val4) != 0) {
+  private void sanityCheck(
+      BigInteger val1, BigInteger val2, BigInteger val3, BigInteger val4, BigInteger val5) {
+    if (val1.compareTo(val2) != 0
+        || val2.compareTo(val3) != 0
+        || val3.compareTo(val4) != 0
+        || val4.compareTo(val5) != 0) {
       throw new AssertionError("Numbers are different.");
     }
   }
