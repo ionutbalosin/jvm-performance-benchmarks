@@ -20,13 +20,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.forkjoin;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.divideandconquermultiply;
 
 import java.math.BigInteger;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
-public class ForkJoinFactorial {
+public class DivideAndConquerMultiply {
 
   public static BigInteger factorial(int n) {
     final FactorialRecursiveTask task =

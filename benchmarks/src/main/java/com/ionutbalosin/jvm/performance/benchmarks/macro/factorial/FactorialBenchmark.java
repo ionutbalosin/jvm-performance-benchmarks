@@ -22,9 +22,9 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.array.ArrayMultiply;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.biginteger.BigIntegerMultiply;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.forkjoin.ForkJoinFactorial;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.arraymultiply.ArrayMultiply;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.bigintegermultiply.BigIntegerMultiply;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.divideandconquermultiply.DivideAndConquerMultiply;
 import java.math.BigInteger;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -40,9 +40,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Calculates the factorial of a number. The benchmark uses a few alternative approaches:
- * - BigInteger multiply
- * - an array of bytes (i.e., by manually crafting the multiplication)
+ * Calculates the factorial of a number using a few alternative approaches:
+ * - array-based multiplication approach
+ * - BigInteger multiplication approach
+ * - divide-and-conquer multiplication approach using a fork-join pool
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -65,7 +66,9 @@ public class FactorialBenchmark {
 
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(
-        arrayMultiply.factorial(), BigIntegerMultiply.factorial(n), ForkJoinFactorial.factorial(n));
+        arrayMultiply.factorial(),
+        BigIntegerMultiply.factorial(n),
+        DivideAndConquerMultiply.factorial(n));
   }
 
   @Benchmark
@@ -79,8 +82,8 @@ public class FactorialBenchmark {
   }
 
   @Benchmark
-  public BigInteger fork_join() {
-    return ForkJoinFactorial.factorial(n);
+  public BigInteger divide_and_conquer() {
+    return DivideAndConquerMultiply.factorial(n);
   }
 
   /**

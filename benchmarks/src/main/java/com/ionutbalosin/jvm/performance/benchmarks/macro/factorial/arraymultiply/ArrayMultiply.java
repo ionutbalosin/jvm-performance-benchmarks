@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.array;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.arraymultiply;
 
 /*
  * References:

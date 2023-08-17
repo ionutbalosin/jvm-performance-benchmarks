@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.biginteger;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.bigintegermultiply;
 
 import java.math.BigInteger;
 
