@@ -22,9 +22,9 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.forkjoin.ForkJoinVariance;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.divideandconquer.DivideAndConquerVariance;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.functional.FunctionalVariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.iterative.IterativeVariance;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.stream.StreamVariance;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -74,8 +74,8 @@ public class PopulationVarianceBenchmark {
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(
         IterativeVariance.variance(ages),
-        StreamVariance.variance(ages),
-        ForkJoinVariance.variance(ages));
+        FunctionalVariance.variance(ages),
+        DivideAndConquerVariance.variance(ages));
   }
 
   @Benchmark
@@ -84,13 +84,13 @@ public class PopulationVarianceBenchmark {
   }
 
   @Benchmark
-  public double stream() {
-    return StreamVariance.variance(ages);
+  public double functional() {
+    return FunctionalVariance.variance(ages);
   }
 
   @Benchmark
-  public double fork_join() {
-    return ForkJoinVariance.variance(ages);
+  public double divide_and_conquer() {
+    return DivideAndConquerVariance.variance(ages);
   }
 
   /**

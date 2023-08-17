@@ -20,12 +20,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.forkjoin;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.divideandconquer;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
-public class ForkJoinVariance {
+public class DivideAndConquerVariance {
 
   public static double variance(double[] ages) {
     final ForkJoinPool forkJoinPool = new ForkJoinPool();

@@ -20,11 +20,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.stream;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.functional;
 
 import static java.util.stream.DoubleStream.of;
 
-public class StreamVariance {
+public class FunctionalVariance {
 
   public static double variance(double[] ages) {
     final double average = of(ages).parallel().average().orElse(0.0);
