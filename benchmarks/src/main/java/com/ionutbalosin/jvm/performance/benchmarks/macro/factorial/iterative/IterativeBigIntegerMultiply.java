@@ -20,11 +20,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.bigintegermultiply;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.iterative;
 
 import java.math.BigInteger;
 
-public class BigIntegerMultiply {
+public class IterativeBigIntegerMultiply {
 
   public static BigInteger factorial(int n) {
     BigInteger result = BigInteger.ONE;

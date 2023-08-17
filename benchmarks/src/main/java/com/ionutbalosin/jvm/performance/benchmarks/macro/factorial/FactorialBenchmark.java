@@ -22,9 +22,9 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.arraymultiply.ArrayMultiply;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.bigintegermultiply.BigIntegerMultiply;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.divideandconquermultiply.DivideAndConquerMultiply;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.divideandconquer.DivideAndConquerBigIntegerMultiply;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.iterative.IterativeArrayMultiply;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.iterative.IterativeBigIntegerMultiply;
 import java.math.BigInteger;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -55,35 +55,35 @@ public class FactorialBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*FactorialBenchmark.*"
 
-  private ArrayMultiply arrayMultiply;
+  private IterativeArrayMultiply iterativeArrayMultiply;
 
   @Param({"1000", "5000"})
   private int n;
 
   @Setup()
   public void setup() {
-    arrayMultiply = new ArrayMultiply(n);
+    iterativeArrayMultiply = new IterativeArrayMultiply(n);
 
     // make sure the results are equivalent before any further benchmarking
     sanityCheck(
-        arrayMultiply.factorial(),
-        BigIntegerMultiply.factorial(n),
-        DivideAndConquerMultiply.factorial(n));
+        iterativeArrayMultiply.factorial(),
+        IterativeBigIntegerMultiply.factorial(n),
+        DivideAndConquerBigIntegerMultiply.factorial(n));
   }
 
   @Benchmark
-  public byte[] array_multiply() {
-    return arrayMultiply.factorial();
+  public byte[] iterative_array_multiply() {
+    return iterativeArrayMultiply.factorial();
   }
 
   @Benchmark
-  public BigInteger big_integer_multiply() {
-    return BigIntegerMultiply.factorial(n);
+  public BigInteger iterative_big_integer_multiply() {
+    return IterativeBigIntegerMultiply.factorial(n);
   }
 
   @Benchmark
-  public BigInteger divide_and_conquer() {
-    return DivideAndConquerMultiply.factorial(n);
+  public BigInteger divide_and_conquer_big_integer_multiply() {
+    return DivideAndConquerBigIntegerMultiply.factorial(n);
   }
 
   /**

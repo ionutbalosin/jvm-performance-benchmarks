@@ -20,19 +20,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.arraymultiply;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.iterative;
 
 /*
  * References:
  * - https://www.geeksforgeeks.org/count-digits-factorial-set-1
  * - https://www.geeksforgeeks.org/factorial-large-number
  */
-public class ArrayMultiply {
+public class IterativeArrayMultiply {
 
   private final int n;
   private final int digits;
 
-  public ArrayMultiply(int n) {
+  public IterativeArrayMultiply(int n) {
     this.n = n;
     // get the exact number of factorial digits to avoid unnecessary allocations
     this.digits = digits(n);
