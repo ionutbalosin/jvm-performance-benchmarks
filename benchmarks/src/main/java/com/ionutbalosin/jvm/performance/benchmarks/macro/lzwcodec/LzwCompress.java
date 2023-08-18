@@ -22,14 +22,13 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.lzwcodec;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.lzwcodec.LzwCodec.ISO_8859_1;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.lzwcodec.LzwCodec.resizeArray;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LzwCompress {
-
-  private static final int ISO_8859_1 = 0xFF;
 
   /**
    * Compresses the input character array using the LZW compression algorithm.
