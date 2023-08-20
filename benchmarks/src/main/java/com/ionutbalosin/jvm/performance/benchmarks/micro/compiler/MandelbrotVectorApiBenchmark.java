@@ -51,18 +51,22 @@ public class MandelbrotVectorApiBenchmark {
   private double[] result;
 
   // Vector containing 1 2 3 ... SPECIES_LENGTH
-  private DoubleVector increments;
-  private DoubleVector ones;
+  private static final DoubleVector increments;
+
+  static {
+    double[] increments_arr = new double[DOUBLE_VECTOR_SPECIES.length()];
+    for (int i = 0; i < increments_arr.length; i++) {
+      increments_arr[i] = i;
+    }
+    increments = DoubleVector.fromArray(DOUBLE_VECTOR_SPECIES, increments_arr, 0);
+  }
+
+  private static final DoubleVector ones =
+      DoubleVector.broadcast(DOUBLE_VECTOR_SPECIES, (double) 1);
 
   @Setup
   public void setup() {
     result = new double[size * size];
-    double[] increments = new double[DOUBLE_VECTOR_SPECIES.length()];
-    for (int i = 0; i < increments.length; i++) {
-      increments[i] = i;
-    }
-    this.increments = DoubleVector.fromArray(DOUBLE_VECTOR_SPECIES, increments, 0);
-    this.ones = DoubleVector.broadcast(DOUBLE_VECTOR_SPECIES, (double) 1);
   }
 
   @Benchmark
