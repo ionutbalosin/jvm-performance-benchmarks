@@ -20,15 +20,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.prime.stream;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.prime.trialdivision;
 
 import static java.lang.Math.sqrt;
 import static java.util.stream.IntStream.range;
 
-public class SqrtStreamFilter {
+public class StreamBasedTrialDivision {
 
   public static long primes(final int n) {
-    return range(2, n).filter(SqrtStreamFilter::isPrime).count();
+    return range(2, n).filter(StreamBasedTrialDivision::isPrime).count();
   }
 
   private static boolean isPrime(final int n) {
