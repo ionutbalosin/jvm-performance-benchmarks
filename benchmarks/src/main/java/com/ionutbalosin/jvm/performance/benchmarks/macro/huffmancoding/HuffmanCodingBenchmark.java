@@ -22,28 +22,19 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.CODING_TYPE.ENCODE_DECODE;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.CODING_TYPE.ENCODE_ONLY;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.charFrequency;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.encodeDecode;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.encodingTree;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.codingTree;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanDecoder.decodeData;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanEncoder.encodeData;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanEncoder.encodingMap;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCoding.CODING_TYPE;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -51,7 +42,6 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
@@ -85,70 +75,89 @@ public class HuffmanCodingBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*HuffmanCodingBenchmark.*"
 
-  private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private static final String FILE_NAME =
-      CURRENT_DIR + "/benchmarks/src/main/resources/huffman_coding.txt";
+  private final int MAX_UTF_16_VALUE = 0xFFFF;
+  private final Random random = new Random(16384);
 
-  private long inputFileSize;
-  private File outputFile;
-  private OutputStream outputStream;
+  private Map<Character, Integer> charFrequency;
+  private HuffmanNode huffmanTree;
+  private Map<Character, String> huffmanCodes;
+  private char[] data, dataEncoded, dataDecoded;
 
-  @Param private CODING_TYPE codingType;
+  @Param({"262144"})
+  private int dataSize;
 
-  @Setup(Level.Trial)
-  public void setupTrial() throws IOException {
-    inputFileSize = Files.size(Paths.get(FILE_NAME));
-    outputFile = File.createTempFile("huffman_coding", ".tmp");
-  }
+  @Setup()
+  public void setup() throws IOException {
+    // initialize data
+    data = charArray(dataSize, MAX_UTF_16_VALUE);
+    charFrequency = charFrequency(data);
+    huffmanTree = codingTree(charFrequency);
+    huffmanCodes = encodingMap(huffmanTree);
 
-  @TearDown(Level.Trial)
-  public void tearDownTrial() {
-    if (outputFile != null) {
-      outputFile.delete();
-    }
-  }
+    // encode/decode data
+    dataEncoded = encodeData(data, huffmanCodes);
+    dataDecoded = decodeData(dataEncoded, huffmanTree);
 
-  @Setup(Level.Invocation)
-  public void setupInvocation() throws FileNotFoundException {
-    outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
-  }
-
-  @TearDown(Level.Invocation)
-  public void tearDownInvocation() throws IOException {
-    if (outputStream != null) {
-      outputStream.close();
-    }
-
-    // make sure the results are valid
-    sanityCheck(codingType, inputFileSize, outputFile.length());
+    // make sure the results are equivalent before any further benchmarking
+    sanityCheck(data, huffmanCodes);
+    sanityCheck(data, dataDecoded);
   }
 
   @Benchmark
-  public void encode_decode() throws IOException {
-    encode_decode(codingType);
+  public char[] encode() {
+    return encodeData(data, huffmanCodes);
   }
 
-  private void encode_decode(CODING_TYPE type) throws IOException {
-    final Map<Character, Integer> frequency = charFrequency(FILE_NAME);
-    final TreeNode root = encodingTree(frequency);
-    final Map<Character, String> huffmanCodes = encodingMap(root);
-    encodeDecode(FILE_NAME, root, huffmanCodes, outputStream, type);
+  @Benchmark
+  public char[] decode() {
+    return decodeData(dataEncoded, huffmanTree);
+  }
+
+  private char[] charArray(int length, int maxValue) {
+    final char[] charArray = new char[length];
+
+    for (int i = 0; i < length; i++) {
+      final int codeUnit = random.nextInt(1, maxValue + 0x1);
+      if (Character.isValidCodePoint(codeUnit)) {
+        charArray[i] = (char) codeUnit;
+      } else {
+        i--;
+      }
+    }
+
+    return charArray;
   }
 
   /**
-   * Sanity check for the results to avoid wrong benchmarking behaviour
+   * Sanity check for the results to avoid wrong benchmarks comparisons
    *
-   * @param codingType - test case coding type
-   * @param val1 - input file length in bytes
-   * @param val2 - output (i.e., encoded/decoded) file length in bytes
+   * @param input - source char array to encode
+   * @param output - output char array after decoding
    */
-  private void sanityCheck(CODING_TYPE codingType, long val1, long val2) {
-    if (codingType == ENCODE_ONLY && val1 <= val2) {
-      throw new AssertionError("The encoded file should be smaller than the input file.");
+  private void sanityCheck(char[] input, char[] output) {
+    if (input.length != output.length) {
+      throw new AssertionError("Arrays have different length.");
     }
 
-    if (codingType == ENCODE_DECODE && val1 != val2) {
-      throw new AssertionError("The decoded file should have the same length as the input file.");
+    for (int i = 0; i < input.length; i++) {
+      if (input[i] != output[i]) {
+        throw new AssertionError("Array values are different.");
+      }
+    }
+  }
+
+  /**
+   * Check if all characters present in the data array have valid encodings
+   *
+   * @param input - source char array to encode
+   * @param encodingMap - encoding map containing the huffman codes
+   */
+  private void sanityCheck(char[] input, Map<Character, String> encodingMap) {
+    for (char ch : input) {
+      final String encoding = encodingMap.get(ch);
+      if (encoding == null || encoding.isEmpty()) {
+        throw new AssertionError("Invalid or missing encoding for character: " + ch);
+      }
     }
   }
 }
