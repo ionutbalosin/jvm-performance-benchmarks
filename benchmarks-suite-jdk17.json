@@ -22,7 +22,7 @@
       "name": "DeadMethodCallStoreBenchmark"
     },
     {
-      "name": "EnumValueLookupBenchmark"
+      "name": "EnumValuesLookupBenchmark"
     },
     {
       "name": "FactorialBenchmark"
