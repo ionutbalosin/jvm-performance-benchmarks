@@ -54,9 +54,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class EnumValueLookupBenchmark {
+public class EnumValuesLookupBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*EnumValueLookupBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*EnumValuesLookupBenchmark.*"
 
   private final Random random = new Random(16384);
 

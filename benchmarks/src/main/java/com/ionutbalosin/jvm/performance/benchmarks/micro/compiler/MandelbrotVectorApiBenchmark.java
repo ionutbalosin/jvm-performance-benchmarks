@@ -52,8 +52,9 @@ public class MandelbrotVectorApiBenchmark {
 
   // Vector containing 1 2 3 ... SPECIES_LENGTH
   private static final DoubleVector increments;
-  // Javadoc of the Vector API suggests to store all instances of Vector in static final fields whenever possible. This
-  // can aid the optimizer and avoid performance penalties.
+
+  // Javadoc of the Vector API suggests to store all instances of Vector in static final fields
+  // whenever possible. This can aid the optimizer and avoid performance penalties.
   static {
     double[] increments_arr = new double[DOUBLE_VECTOR_SPECIES.length()];
     for (int i = 0; i < increments_arr.length; i++) {
