@@ -108,13 +108,13 @@ Windows is not our main focus therefore the script [configure-win-os.sh](./confi
 
 The table below summarizes the JVM distributions included in the benchmark. For transparency reasons, we provide a short explanation of why the others are not supported.
 
-No. | JVM distribution       | JDK versions  |  Included
-----|------------------------|---------------|-----------
-1   | OpenJDK HotSpot VM     | 11, 17        | Yes
-2   | GraalVM CE             | 11, 17        | Yes
-3   | GraalVM EE             | 11, 17        | Yes
-4   | Azul Prime VM          | 11, 17        | Yes (license restrictions might apply)
-5   | Eclipse OpenJ9 VM      | N/A           | No, see the resons below
+No. | JVM distribution       | JDK versions |  Included
+----|------------------------|--------------|-----------
+1   | OpenJDK HotSpot VM     | 11, 17, 21   | Yes
+2   | GraalVM CE             | 11, 17, 21   | Yes
+3   | GraalVM EE             | 11, 17, 21   | Yes
+4   | Azul Prime VM          | 11, 17, 21   | Yes (license restrictions might apply)
+5   | Eclipse OpenJ9 VM      | N/A          | No, see the resons below
 
 ### Azul Prime VM
 
@@ -134,10 +134,10 @@ At the moment the benchmark is configured to work only with the JDK Long-Term Su
 
 No. | JVM distribution   | JDK versions |  Build
 -------------- |--------------------|--------------| -------------------------------
-1 | OpenJDK HotSpot VM | 11, 17       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
-2 | GraalVM CE         | 11, 17       | [download](https://www.graalvm.org/downloads/)
-3 | GraalVM EE         | 11, 17       | [download](https://www.graalvm.org/downloads/)
-5 | Azul Prime VM      | 11, 17       | [download](https://www.azul.com/downloads/)
+1 | OpenJDK HotSpot VM | 11, 17, 21       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
+2 | GraalVM CE         | 11, 17, 21       | [download](https://www.graalvm.org/downloads/)
+3 | GraalVM EE         | 11, 17, 21       | [download](https://www.graalvm.org/downloads/)
+5 | Azul Prime VM      | 11, 17, 21       | [download](https://www.azul.com/downloads/)
 
 If there is a need for another JDK LTS version (or feature release), you have to configure it by yourself. 
 
@@ -171,6 +171,7 @@ The benchmarks are organized in suites (i.e., benchmarks suites). To run a bench
 
 - [benchmarks-suite-jdk11.json](./benchmarks-suite-jdk11.json)
 - [benchmarks-suite-jdk17.json](./benchmarks-suite-jdk17.json)
+- [benchmarks-suite-jdk21.json](./benchmarks-suite-jdk21.json)
 
 The benchmark will sequentially pick up and execute all the tests from the configuration file.
 
@@ -202,19 +203,21 @@ Running one benchmark suite triggers the full setup (in a very interactive way, 
 ```
 ./mvnw -P jdk$<jdk-version>_profile clean package
 ```
-where `<jdk-version>` is {11, 17}. If the profile is omitted, JDK profile 17 is implicitly selected.  
+where `<jdk-version>` is {11, 17, 21}. If the profile is omitted, JDK profile 17 is implicitly selected.  
 
 Examples:
 ```
 ./mvnw clean package
 ```
 ```
+./mvnw -P jdk11_profile clean package
+```
+```
 ./mvnw -P jdk17_profile clean package
 ```
 ```
-./mvnw -P jdk11_profile clean package
+./mvnw -P jdk21_profile clean package
 ```
-
 ## Elapsed amount of time for each benchmark suite
 
 Each benchmarks suite take a significant amount of time to fully run. For example:
@@ -223,6 +226,7 @@ Each benchmarks suite take a significant amount of time to fully run. For exampl
 ----------------------------|--------------
 benchmarks-suite-jdk11.json | ~ 38 hours
 benchmarks-suite-jdk17.json | ~ 42 hours
+benchmarks-suite-jdk21.json | N/A
 
 ### Dry run
 

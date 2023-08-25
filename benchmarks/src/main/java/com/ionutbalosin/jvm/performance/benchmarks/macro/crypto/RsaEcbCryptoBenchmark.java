@@ -90,8 +90,12 @@ public class RsaEcbCryptoBenchmark {
 
   @Setup()
   public void setup()
-      throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException,
-          IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+      throws NoSuchAlgorithmException,
+          InvalidAlgorithmParameterException,
+          NoSuchPaddingException,
+          IllegalBlockSizeException,
+          BadPaddingException,
+          InvalidKeyException {
     // initialize data
     dataSize = (keySize / BITS) - ENCRYPTION_OVERHEAD;
     data = new byte[dataSize];

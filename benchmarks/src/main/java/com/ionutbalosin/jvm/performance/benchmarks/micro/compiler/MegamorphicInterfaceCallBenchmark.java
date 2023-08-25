@@ -132,7 +132,6 @@ public class MegamorphicInterfaceCallBenchmark {
         throw new UnsupportedOperationException("Unsupported type " + targetType);
     }
   }
-  // $ java -jar */*/benchmarks.jar ".*InterfaceCallBenchmark.*"
 
   @Benchmark
   @OperationsPerInvocation(SIZE)

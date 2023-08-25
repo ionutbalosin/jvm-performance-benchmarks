@@ -1,0 +1,240 @@
+{
+  "globals": {
+    "jvmOpts": "",
+    "jmhOpts": "-foe true -wi 5 -w 10 -i 5 -r 10 -f 5 -rf csv -rff ((outputFilePath)).csv",
+    "jvmArgsAppend": "-Xms4g -Xmx4g -XX:+AlwaysPreTouch"
+  },
+  "benchmarks": [
+    {
+      "name": "AesCbcCryptoBenchmark"
+    },
+    {
+      "name": "AesCtrCryptoBenchmark"
+    },
+    {
+      "name": "AesEcbCryptoBenchmark"
+    },
+    {
+      "name": "AesGcmCryptoBenchmark"
+    },
+    {
+      "name": "BlowfishCbcCryptoBenchmark"
+    },
+    {
+      "name": "BranchlessBitwiseBenchmark"
+    },
+    {
+      "name": "CanonicalizeInductionVariableBenchmark"
+    },
+    {
+      "name": "CodeCacheBusterBenchmark"
+    },
+    {
+      "name": "DeadLocalAllocationStoreBenchmark",
+      "jmhOpts": "-prof gc"
+    },
+    {
+      "name": "DeadMethodCallStoreBenchmark"
+    },
+    {
+      "name": "DesCbcCryptoBenchmark"
+    },
+    {
+      "name": "DesEcbCryptoBenchmark"
+    },
+    {
+      "name": "DijkstraShortestPathBenchmark"
+    },
+    {
+      "name": "EnumSwitchBenchmark"
+    },
+    {
+      "name": "EnumValuesLookupBenchmark"
+    },
+    {
+      "name": "FactorialBenchmark"
+    },
+    {
+      "name": "FalseSharingBenchmark",
+      "jvmArgsAppend": "-XX:-RestrictContended"
+    },
+    {
+      "name": "FibonacciBenchmark",
+      "jvmArgsAppend": "-Xss20M"
+    },
+    {
+      "name": "GameOfLifeBenchmark"
+    },
+    {
+      "name": "HmacCryptoBenchmark"
+    },
+    {
+      "name": "HuffmanCodingBenchmark"
+    },
+    {
+      "name": "IfConditionalBranchBenchmark"
+    },
+    {
+      "name": "ImageRotateBenchmark"
+    },
+    {
+      "name": "InfrastructureBaselineBenchmark"
+    },
+    {
+      "name": "JustInTimeConstantsBenchmark"
+    },
+    {
+      "name": "KnapsackBenchmark"
+    },
+    {
+      "name": "LockCoarseningBenchmark",
+      "outputFileName": "LockCoarseningBenchmark_withBiasedLocking",
+      "jvmArgsAppend": "-XX:+UseBiasedLocking"
+    },
+    {
+      "name": "LockCoarseningBenchmark",
+      "outputFileName": "LockCoarseningBenchmark_withoutBiasedLocking",
+      "jvmArgsAppend": "-XX:-UseBiasedLocking"
+    },
+    {
+      "name": "LockElisionBenchmark"
+    },
+    {
+      "name": "LoopFissionBenchmark"
+    },
+    {
+      "name": "LoopFusionBenchmark"
+    },
+    {
+      "name": "LoopInterchangeBenchmark"
+    },
+    {
+      "name": "LoopInvariantCodeMotionBenchmark"
+    },
+    {
+      "name": "LoopReductionBenchmark"
+    },
+    {
+      "name": "LoopUnswitchBenchmark"
+    },
+    {
+      "name": "LzwCodecBenchmark"
+    },
+    {
+      "name": "MandelbrotVectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+    },
+    {
+      "name": "MegamorphicInterfaceCallBenchmark"
+    },
+    {
+      "name": "MegamorphicMethodCallBenchmark"
+    },
+    {
+      "name": "MessageDigestBenchmark"
+    },
+    {
+      "name": "MethodArgsBusterBenchmark"
+    },
+    {
+      "name": "NpeControlFlowBenchmark"
+    },
+    {
+      "name": "NpeThrowBenchmark"
+    },
+    {
+      "name": "NQueensBenchmark"
+    },
+    {
+      "name": "PalindromeBenchmark",
+      "jvmArgsAppend": "-Xss20M"
+    },
+    {
+      "name": "PopulationVarianceBenchmark"
+    },
+    {
+      "name": "PrimesBenchmark"
+    },
+    {
+      "name": "PublicationStatisticsBenchmark"
+    },
+    {
+      "name": "RecursiveMethodCallBenchmark"
+    },
+    {
+      "name": "RsaEcbCryptoBenchmark"
+    },
+    {
+      "name": "ScalarEvolutionAndLoopOptimizationBenchmark"
+    },
+    {
+      "name": "ScalarReplacementBenchmark"
+    },
+    {
+      "name": "SepiaVectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+    },
+    {
+      "name": "SortVectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+    },
+    {
+      "name": "StackSpillingBenchmark"
+    },
+    {
+      "name": "StrengthReductionBenchmark"
+    },
+    {
+      "name": "StringConcatenationBenchmark",
+      "jmhOpts": "-prof gc"
+    },
+    {
+      "name": "StringPatternMatcherBenchmark"
+    },
+    {
+      "name": "StringPatternSplitBenchmark",
+      "jmhOpts": "-prof gc"
+    },
+    {
+      "name": "StringSwitchBenchmark"
+    },
+    {
+      "name": "TailRecursionBenchmark",
+      "jvmArgsAppend": "-Xss64M"
+    },
+    {
+      "name": "TypeCheckBenchmark"
+    },
+    {
+      "name": "TypeCheckScalabilityBenchmark"
+    },
+    {
+      "name": "TypeCheckSlowPathBenchmark"
+    },
+    {
+      "name": "URLClassLoaderBenchmark"
+    },
+    {
+      "name": "VarArgsBenchmark"
+    },
+    {
+      "name": "VectorApiBenchmark",
+      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+    },
+    {
+      "name": "VectorizationPatternsMultipleFloatArraysBenchmark"
+    },
+    {
+      "name": "VectorizationPatternsMultipleIntArraysBenchmark"
+    },
+    {
+      "name": "VectorizationPatternsSingleIntArrayBenchmark"
+    },
+    {
+      "name": "VectorizationScatterGatherPatternBenchmark"
+    },
+    {
+      "name": "WordFrequencyBenchmark"
+    }
+  ]
+}

@@ -84,8 +84,12 @@ public class AesGcmCryptoBenchmark {
 
   @Setup()
   public void setup()
-      throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException,
-          IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+      throws NoSuchAlgorithmException,
+          InvalidAlgorithmParameterException,
+          NoSuchPaddingException,
+          IllegalBlockSizeException,
+          BadPaddingException,
+          InvalidKeyException {
     // initialize data
     data = new byte[dataSize];
     random.nextBytes(data);
@@ -106,8 +110,12 @@ public class AesGcmCryptoBenchmark {
 
   @Benchmark
   public byte[] encrypt()
-      throws IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException,
-          NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+      throws IllegalBlockSizeException,
+          BadPaddingException,
+          InvalidAlgorithmParameterException,
+          NoSuchPaddingException,
+          NoSuchAlgorithmException,
+          InvalidKeyException {
     // re-initialize cipher (i.e., a new unique IV must be generated for each encryption)
     final GCMParameterSpec paramsSpec = getGCMParameterSpec(12, 128);
     encryptCipher = getCipher(transformation, Cipher.ENCRYPT_MODE, secretKey, paramsSpec);
@@ -117,8 +125,12 @@ public class AesGcmCryptoBenchmark {
 
   @Benchmark
   public byte[] decrypt()
-      throws IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException,
-          NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException,
+      throws IllegalBlockSizeException,
+          BadPaddingException,
+          InvalidAlgorithmParameterException,
+          NoSuchPaddingException,
+          NoSuchAlgorithmException,
+          InvalidKeyException,
           InvalidParameterSpecException {
     // re-initialize cipher
     final GCMParameterSpec paramsSpec =

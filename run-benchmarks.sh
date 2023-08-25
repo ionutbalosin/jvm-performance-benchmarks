@@ -147,13 +147,13 @@ echo ""
 echo "+=========================+"
 echo "| [2/5] JVM Configuration |"
 echo "+=========================+"
-. ./configure-jvm.sh
+. ./configure-jvm.sh || exit 1
 
 echo ""
 echo "+=========================+"
 echo "| [3/5] JMH Configuration |"
 echo "+=========================+"
-. ./configure-jmh.sh
+. ./configure-jmh.sh || exit 1
 
 echo ""
 echo "+===============================+"

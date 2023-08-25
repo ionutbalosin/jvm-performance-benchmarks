@@ -54,7 +54,8 @@ public class Publication {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Publication article)) return false;
+    if (o == null || getClass() != o.getClass()) return false;
+    Publication article = (Publication) o;
     return year == article.year
         && Objects.equals(title, article.title)
         && Objects.equals(type, article.type);

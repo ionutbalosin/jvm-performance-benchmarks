@@ -79,7 +79,9 @@ public class CryptoUtils {
   }
 
   public static Cipher getCipher(String transformation, int opMode, Key key, IvParameterSpec ivSpec)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
+      throws NoSuchPaddingException,
+          NoSuchAlgorithmException,
+          InvalidAlgorithmParameterException,
           InvalidKeyException {
     final Cipher cipher = Cipher.getInstance(transformation);
     cipher.init(opMode, key, ivSpec);
@@ -88,7 +90,9 @@ public class CryptoUtils {
 
   public static Cipher getCipher(
       String transformation, int opMode, Key key, GCMParameterSpec paramsSpec)
-      throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException,
+      throws NoSuchPaddingException,
+          NoSuchAlgorithmException,
+          InvalidAlgorithmParameterException,
           InvalidKeyException {
     final Cipher cipher = Cipher.getInstance(transformation);
     cipher.init(opMode, key, paramsSpec);

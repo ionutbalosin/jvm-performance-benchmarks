@@ -12,12 +12,13 @@
     <packaging>pom</packaging>
 
     <properties>
-        <jdk17.version>17</jdk17.version>
-        <jdk11.version>11</jdk11.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jmh.version>1.36</jmh.version>
         <uberjar.name>benchmarks</uberjar.name>
-        <maven.compiler.plugin>3.10.1</maven.compiler.plugin>
+        <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
+        <maven.shade.plugin>3.5.0</maven.shade.plugin>
+        <org.openjdk.jmh>1.37</org.openjdk.jmh>
+        <spotless.maven.plugin>2.38.0</spotless.maven.plugin>
+        <google.java.format>1.17.0</google.java.format>
     </properties>
 
     <modules>
@@ -35,58 +36,18 @@
 
         <profile>
             <id>jdk11_profile</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven.compiler.plugin}</version>
-                        <configuration>
-                            <annotationProcessorPaths>
-                                <path>
-                                    <groupId>org.openjdk.jmh</groupId>
-                                    <artifactId>jmh-generator-annprocess</artifactId>
-                                    <version>${jmh.version}</version>
-                                </path>
-                            </annotationProcessorPaths>
-                            <source>${jdk11.version}</source>
-                            <target>${jdk11.version}</target>
-                            <excludes>
-                                <exclude>**/VectorApiBenchmark.java</exclude>
-                                <exclude>**/MandelbrotVectorApiBenchmark.java</exclude>
-                                <exclude>**/SepiaVectorApiBenchmark.java</exclude>
-                                <exclude>**/SortVectorApiBenchmark.java</exclude>
-                            </excludes>
-                            <compilerArgs>
-                                <arg>--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED</arg>
-                                <arg>--add-exports=java.management/sun.management=ALL-UNNAMED</arg>
-                                <arg>--enable-preview</arg>
-                            </compilerArgs>
-                            <jdkToolchain>
-                                <version>${jdk11.version}</version>
-                            </jdkToolchain>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.openjdk.jmh</groupId>
-                                <artifactId>jmh-generator-annprocess</artifactId>
-                                <version>${jmh.version}</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <id>default-compile</id>
-                                <configuration>
-                                    <jdkToolchain>
-                                        <version>${jdk11.version}</version>
-                                    </jdkToolchain>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
+            <properties>
+                <jdk.version>11</jdk.version>
+                <spotlessExcludedFiles>
+                    **/EnumSwitchBenchmark.java,**/StringSwitchBenchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/EnumSwitchBenchmark.java,**/MandelbrotVectorApiBenchmark.java,**/SepiaVectorApiBenchmark.java,**/SortVectorApiBenchmark.java,**/StringSwitchBenchmark.java,**/VectorApiBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                </compilerArgs>
+            </properties>
         </profile>
 
         <profile>
@@ -94,52 +55,22 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven.compiler.plugin}</version>
-                        <configuration>
-                            <annotationProcessorPaths>
-                                <path>
-                                    <groupId>org.openjdk.jmh</groupId>
-                                    <artifactId>jmh-generator-annprocess</artifactId>
-                                    <version>${jmh.version}</version>
-                                </path>
-                            </annotationProcessorPaths>
-                            <source>${jdk17.version}</source>
-                            <target>${jdk17.version}</target>
-                            <compilerArgs>
-                                <arg>--add-modules=jdk.incubator.vector</arg>
-                                <arg>--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED</arg>
-                                <arg>--add-exports=java.management/sun.management=ALL-UNNAMED</arg>
-                                <arg>--enable-preview</arg>
-                            </compilerArgs>
-                            <jdkToolchain>
-                                <version>${jdk17.version}</version>
-                            </jdkToolchain>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.openjdk.jmh</groupId>
-                                <artifactId>jmh-generator-annprocess</artifactId>
-                                <version>${jmh.version}</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <id>default-compile</id>
-                                <configuration>
-                                    <jdkToolchain>
-                                        <version>${jdk17.version}</version>
-                                    </jdkToolchain>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <jdk.version>17</jdk.version>
+                <compilerArgs>
+                    --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk21_profile</id>
+            <properties>
+                <jdk.version>21</jdk.version>
+                <compilerArgs>
+                    --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                </compilerArgs>
+            </properties>
         </profile>
 
     </profiles>
@@ -159,8 +90,51 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin}</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${org.openjdk.jmh}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <excludes>
+                        ${compilerExcludedFiles}
+                    </excludes>
+                    <compilerArgs>
+                        ${compilerArgs}
+                    </compilerArgs>
+                    <jdkToolchain>
+                        <version>${jdk.version}</version>
+                    </jdkToolchain>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.openjdk.jmh</groupId>
+                        <artifactId>jmh-generator-annprocess</artifactId>
+                        <version>${org.openjdk.jmh}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <jdkToolchain>
+                                <version>${jdk.version}</version>
+                            </jdkToolchain>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${maven.shade.plugin}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -183,16 +157,19 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.25.0</version>
+                <version>${spotless.maven.plugin}</version>
                 <configuration>
                     <java>
+                        <excludes>
+                            ${spotlessExcludedFiles}
+                        </excludes>
                         <googleJavaFormat>
-                            <version>1.15.0</version>
+                            <version>${google.java.format}</version>
                             <style>GOOGLE</style>
                             <reflowLongStrings>true</reflowLongStrings>
                             <groupArtifact>com.google.googlejavaformat:google-java-format</groupArtifact>
                         </googleJavaFormat>
-                        <removeUnusedImports />
+                        <removeUnusedImports/>
                         <licenseHeader>
                             <file>${maven.multiModuleProjectDirectory}/LICENSE-HEADER-JAVA</file>
                         </licenseHeader>
@@ -209,7 +186,6 @@
             </plugin>
 
         </plugins>
-
     </build>
 
     <dependencyManagement>
@@ -218,13 +194,13 @@
             <dependency>
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-core</artifactId>
-                <version>${jmh.version}</version>
+                <version>${org.openjdk.jmh}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-generator-annprocess</artifactId>
-                <version>${jmh.version}</version>
+                <version>${org.openjdk.jmh}</version>
                 <scope>provided</scope>
             </dependency>
 

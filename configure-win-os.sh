@@ -30,7 +30,7 @@ set_environment_variables() {
   echo "Architecture: $ARCH"
   echo "JSON processor: $JQ"
   echo ""
-  read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
+  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
 }
 
 echo ""

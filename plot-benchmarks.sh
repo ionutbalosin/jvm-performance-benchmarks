@@ -69,7 +69,7 @@ set_environment_variables() {
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
   echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
   echo ""
-  read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
+  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
 }
 
 check_folder_exists() {

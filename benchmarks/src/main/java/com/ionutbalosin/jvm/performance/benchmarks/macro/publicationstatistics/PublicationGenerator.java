@@ -45,7 +45,7 @@ public class PublicationGenerator {
     final Set<Publication> publication = new HashSet<>(PUBLICATIONS);
 
     for (int i = 1; i <= PUBLICATIONS; i++) {
-      int year = random.nextInt(FIRST_YEAR, LAST_YEAR + 1);
+      int year = FIRST_YEAR + random.nextInt(LAST_YEAR - FIRST_YEAR + 1);
       String title = "Title_" + i;
       String type = "Type_" + random.nextInt(PUBLICATION_TYPES);
       List<Author> authors = generateAuthors();

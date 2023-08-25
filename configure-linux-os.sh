@@ -30,7 +30,7 @@ set_environment_variables() {
   echo "Architecture: $ARCH"
   echo "JSON processor: $JQ"
   echo ""
-  read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
+  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
 }
 
 set_isolcpus() {
@@ -342,7 +342,7 @@ confirm_os_settings() {
       if [[ $EUID != 0 ]]; then
         echo ""
         echo "WARNING: OS configuration requires sudo admin rights (e.g., $ sudo ./run-benchmarks.sh), otherwise the configuration fails."
-        read -r -p "Press ENTER to continue or CRTL+C to abort ... "
+        read -r -p "Press ENTER to continue or CTRL+C to abort ... "
       fi
       return 0
       ;;

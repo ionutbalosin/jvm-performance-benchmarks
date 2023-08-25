@@ -22,109 +22,104 @@
 # under the License.
 #
 
-configure_openjdk11_hotspot_vm() {
+configure_openjdk_hotspot_vm() {
   export JAVA_HOME="<path_to_jdk>"
   export JVM_NAME="OpenJDK HotSpot VM"
   export JVM_IDENTIFIER="openjdk-hotspot-vm"
 }
 
-configure_openjdk17_hotspot_vm() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="OpenJDK HotSpot VM"
-  export JVM_IDENTIFIER="openjdk-hotspot-vm"
-}
-
-configure_graalvm_ce_jdk11() {
+configure_graalvm_ce() {
   export JAVA_HOME="<path_to_jdk>"
   export JVM_NAME="GraalVM CE"
   export JVM_IDENTIFIER="graalvm-ce"
 }
 
-configure_graalvm_ce_jdk17() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="GraalVM CE"
-  export JVM_IDENTIFIER="graalvm-ce"
-}
-
-configure_graalvm_ee_jdk11() {
+configure_graalvm_ee() {
   export JAVA_HOME="<path_to_jdk>"
   export JVM_NAME="GraalVM EE"
   export JVM_IDENTIFIER="graalvm-ee"
 }
 
-configure_graalvm_ee_jdk17() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="GraalVM EE"
-  export JVM_IDENTIFIER="graalvm-ee"
-}
-
-configure_azul_prime_jdk17() {
+configure_azul_prime_vm() {
   export JAVA_HOME="<path_to_jdk>"
   export JVM_NAME="Azul Prime VM"
   export JVM_IDENTIFIER="azul-prime-vm"
 }
 
-echo "Select the JDK/JVM:"
-echo "    1) - jdk-11 / OpenJDK HotSpot VM"
-echo "    2) - jdk-11 / GraalVM CE"
-echo "    3) - jdk-11 / GraalVM EE"
-echo "    4) - jdk-17 / OpenJDK HotSpot VM"
-echo "    5) - jdk-17 / GraalVM CE"
-echo "    6) - jdk-17 / GraalVM EE"
-echo "    7) - jdk-17 / Azul Prime VM"
-echo ""
-
-while :; do
-  read -r INPUT_KEY
-  case $INPUT_KEY in
-  1)
-    configure_openjdk11_hotspot_vm
-    break
-    ;;
-  2)
-    configure_graalvm_ce_jdk11
-    break
-    ;;
-  3)
-    configure_graalvm_ee_jdk11
-    break
-    ;;
-  4)
-    configure_openjdk17_hotspot_vm
-    break
-    ;;
-  5)
-    configure_graalvm_ce_jdk17
-    break
-    ;;
-  6)
-    configure_graalvm_ee_jdk17
-    break
-    ;;
-  7)
-    configure_azul_prime_jdk17
-    break
-    ;;
-  *)
-    echo "Sorry, I don't understand. Try again!"
-    ;;
-  esac
-done
-
-if [ ! -x "$JAVA_HOME"/bin/java ]; then
+configure_jvm() {
   echo ""
-  echo "ERROR: Cannot properly execute '$JAVA_HOME/bin/java' command, unable to continue!"
+  echo "Select the JVM:"
+  echo "  1) OpenJDK HotSpot VM"
+  echo "  2) GraalVM CE"
+  echo "  3) Oracle GraalVM (former GraalVM EE)"
+  echo "  4) Azul Prime VM (former Azul Zing VM)"
+  echo ""
+
+  while :; do
+    read -r INPUT_KEY
+    case $INPUT_KEY in
+    1)
+      configure_openjdk_hotspot_vm
+      break
+      ;;
+    2)
+      configure_graalvm_ce
+      break
+      ;;
+    3)
+      configure_graalvm_ee
+      break
+      ;;
+    4)
+      configure_azul_prime_vm
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
+set_environment_variables() {
+  if [ ! -x "$JAVA_HOME"/bin/java ]; then
+    echo ""
+    echo "ERROR: Cannot execute '$JAVA_HOME/bin/java' command, unable to continue!"
+    return 1
+  fi
+  export PATH=$JAVA_HOME/bin:$PATH
+
+  supported_jdk_versions=("11" "17" "21")
+  JDK_VERSION=$(java -XshowSettings:properties 2>&1 >/dev/null | grep 'java.specification.version' | awk '{split($0, array, "="); print array[2]}' | xargs)
+  if [[ " ${supported_jdk_versions[*]} " != *" ${JDK_VERSION} "* ]]; then
+    echo ""
+    echo "ERROR: Unsupported JDK version ${JDK_VERSION}, unable to continue! Currently, the allowed JDK versions are ${supported_jdk_versions[*]}."
+    return 1
+  fi
+  export JDK_VERSION
+
+  echo ""
+  echo "Java home: $JAVA_HOME"
+  echo "JDK version: $JDK_VERSION"
+  echo "JVM name: $JVM_NAME"
+  echo "JVM benchmarks identifier: $JVM_IDENTIFIER"
+  echo ""
+
+  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
+}
+
+echo ""
+echo "+---------------+"
+echo "| Configure JVM |"
+echo "+---------------+"
+echo "The JDK version is automatically detected based on the JDK distribution found at the preconfigured 'JAVA_HOME' path."
+echo "This implies that the 'JAVA_HOME' variable has already been specified in the benchmark configuration scripts (i.e., the ./configure-jvm file), otherwise, the subsequent execution will fail."
+configure_jvm
+
+echo ""
+echo "+---------------------------+"
+echo "| JVM environment variables |"
+echo "+---------------------------+"
+if ! set_environment_variables; then
   exit 1
 fi
-
-export PATH=$JAVA_HOME/bin:$PATH
-export JDK_VERSION=$(java -XshowSettings:properties 2>&1 >/dev/null | grep 'java.specification.version' | awk '{split($0, array, "="); print array[2]}' | xargs echo -n)
-
-echo ""
-echo "Java home: $JAVA_HOME"
-echo "JDK version: $JDK_VERSION"
-echo "JVM name: $JVM_NAME"
-echo "JVM benchmarks identifier: $JVM_IDENTIFIER"
-echo ""
-
-read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "

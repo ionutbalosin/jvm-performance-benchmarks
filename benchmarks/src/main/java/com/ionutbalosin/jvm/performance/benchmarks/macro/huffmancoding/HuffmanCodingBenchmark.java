@@ -75,7 +75,7 @@ public class HuffmanCodingBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*HuffmanCodingBenchmark.*"
 
-  private final int MAX_UTF_16_VALUE = 0xFFFF;
+  private final int UTF_16 = 0xFFFF;
   private final Random random = new Random(16384);
 
   private Map<Character, Integer> charFrequency;
@@ -89,7 +89,7 @@ public class HuffmanCodingBenchmark {
   @Setup()
   public void setup() throws IOException {
     // initialize data
-    data = charArray(dataSize, MAX_UTF_16_VALUE);
+    data = charArray(dataSize, UTF_16);
     charFrequency = charFrequency(data);
     huffmanTree = codingTree(charFrequency);
     huffmanCodes = encodingMap(huffmanTree);
@@ -117,7 +117,7 @@ public class HuffmanCodingBenchmark {
     final char[] charArray = new char[length];
 
     for (int i = 0; i < length; i++) {
-      final int codeUnit = random.nextInt(1, maxValue + 0x1);
+      final int codeUnit = 1 + random.nextInt(maxValue);
       if (Character.isValidCodePoint(codeUnit)) {
         charArray[i] = (char) codeUnit;
       } else {

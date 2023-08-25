@@ -31,4 +31,4 @@ echo "JMH benchmarks suite configuration file: $JMH_BENCHMARKS"
 echo "JMH output folder: $JMH_OUTPUT_FOLDER"
 echo ""
 
-read -r -p "If the above configuration is correct, press ENTER to continue or CRTL+C to abort ... "
+read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "

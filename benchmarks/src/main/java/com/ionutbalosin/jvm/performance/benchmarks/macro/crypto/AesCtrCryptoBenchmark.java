@@ -79,8 +79,12 @@ public class AesCtrCryptoBenchmark {
 
   @Setup()
   public void setup()
-      throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchPaddingException,
-          IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+      throws NoSuchAlgorithmException,
+          InvalidAlgorithmParameterException,
+          NoSuchPaddingException,
+          IllegalBlockSizeException,
+          BadPaddingException,
+          InvalidKeyException {
     // initialize data
     data = new byte[dataSize];
     random.nextBytes(data);
