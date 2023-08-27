@@ -53,15 +53,15 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class RsaSignatureBenchmark {
 
-  private static Signature signer;
+  private Signature signer;
 
   @Param({"64", "512", "2048", "16384"})
-  private static int messageLength;
+  private int messageLength;
 
   @Param({"SHA256withRSA", "SHA384withRSA", "SHA512withRSA"})
   private String algorithm;
 
-  private static byte[] message;
+  private byte[] message;
 
   @Setup
   public void setup() throws Exception {
