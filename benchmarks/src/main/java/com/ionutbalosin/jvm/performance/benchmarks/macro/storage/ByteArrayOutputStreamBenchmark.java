@@ -20,17 +20,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.signature;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.Signature;
-import java.security.SignatureException;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileSize;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -38,55 +39,57 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the performance of RSA using different message lengths,
- * key lengths and hash sizes.
+ * Measures the time it takes to write byte array chunks using a ByteArrayOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
-public class RsaSignatureBenchmark {
+public class ByteArrayOutputStreamBenchmark {
 
-  private Signature signer;
+  // $ java -jar */*/benchmarks.jar ".*ByteArrayOutputStreamBenchmark.*"
 
-  @Param({"64", "512", "2048", "16384"})
-  private int messageLength;
+  private final Random random = new Random(16384);
 
-  @Param({"SHA256withRSA", "SHA384withRSA", "SHA512withRSA"})
-  private String algorithm;
+  @Param private ChunkSize chunkSize;
+  @Param private FileSize fileSize;
 
-  private byte[] message;
+  private ByteArrayOutputStream baos;
+  private byte[] data;
+  private int bytesWritten;
 
-  @Setup
-  public void setup() throws Exception {
-    message = new byte[messageLength];
-    Random random = new Random(16384);
-    random.nextBytes(message);
+  @Setup()
+  public void setup() throws IOException {
+    data = new byte[chunkSize.get()];
+    random.nextBytes(data);
+  }
 
-    int keyLength =
-        switch (algorithm) {
-          case "SHA256withRSA" -> 2048;
-          case "SHA384withRSA" -> 3072;
-          case "SHA512withRSA" -> 4096;
-          default -> throw new RuntimeException();
-        };
+  @Setup(Level.Iteration)
+  public void beforeIteration() {
+    bytesWritten = 0;
+    baos = new ByteArrayOutputStream(fileSize.get());
+  }
 
-    KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-    kpg.initialize(keyLength);
-    KeyPair kp = kpg.generateKeyPair();
-
-    signer = Signature.getInstance(algorithm);
-    signer.initSign(kp.getPrivate());
+  @TearDown(Level.Iteration)
+  public void afterIteration() throws IOException {
+    baos.close();
   }
 
   @Benchmark
-  public byte[] sign() throws SignatureException {
-    signer.update(message);
-    return signer.sign();
+  public void write() throws IOException {
+    if (bytesWritten + data.length > fileSize.get()) {
+      bytesWritten = 0;
+      baos.reset();
+    }
+
+    baos.write(data);
+    baos.flush();
+    bytesWritten += data.length;
   }
 }

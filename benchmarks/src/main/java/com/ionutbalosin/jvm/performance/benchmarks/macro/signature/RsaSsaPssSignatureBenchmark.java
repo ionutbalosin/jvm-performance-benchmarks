@@ -30,7 +30,6 @@ import java.security.spec.MGF1ParameterSpec;
 import java.security.spec.PSSParameterSpec;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -42,7 +41,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-
 
 /*
  * This benchmark measures the performance of RSA with the SSA and PSS schemes using different message lengths,
