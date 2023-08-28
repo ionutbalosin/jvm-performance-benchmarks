@@ -24,7 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.CharUtils.charArray;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
 import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
@@ -49,9 +49,9 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class PipedReaderBenchmark {
 

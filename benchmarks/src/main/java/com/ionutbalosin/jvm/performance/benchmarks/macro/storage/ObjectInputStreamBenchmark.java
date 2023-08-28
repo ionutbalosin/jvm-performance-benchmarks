@@ -29,7 +29,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -49,15 +48,14 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class ObjectInputStreamBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*ObjectInputStreamBenchmark.*"
 
-  private final Random random = new Random(16384);
   private final int OBJECTS = 16_384;
 
   private File file;
@@ -66,7 +64,7 @@ public class ObjectInputStreamBenchmark {
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    final DataObject dataObject = new DataObject(random);
+    final DataObject dataObject = new DataObject();
 
     file = File.createTempFile("ObjectInputStream", ".tmp");
     try (ObjectOutputStream fos = new ObjectOutputStream(new FileOutputStream(file))) {

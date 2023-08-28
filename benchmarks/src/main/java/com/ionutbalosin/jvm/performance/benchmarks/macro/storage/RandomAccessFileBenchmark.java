@@ -22,10 +22,11 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileSize;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.writeToFile;
+
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Random;
@@ -49,9 +50,9 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class RandomAccessFileBenchmark {
 
@@ -83,12 +84,7 @@ public class RandomAccessFileBenchmark {
     random.nextBytes(buffer);
 
     file = File.createTempFile("RandomAccessFile", ".tmp");
-    try (FileOutputStream fos = new FileOutputStream(file)) {
-      for (int i = 0; i < fileSize.get(); i += chunkSize.get()) {
-        int bytesRemaining = Math.min(fileSize.get() - i, chunkSize.get());
-        fos.write(buffer, 0, bytesRemaining);
-      }
-    }
+    writeToFile(file, fileSize, chunkSize, buffer);
   }
 
   @TearDown(Level.Trial)

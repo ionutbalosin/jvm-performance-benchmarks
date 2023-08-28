@@ -22,8 +22,8 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Random;
@@ -46,10 +46,10 @@ import org.openjdk.jmh.annotations.Warmup;
  * Measures the time it takes to write byte array chunks using a ByteArrayOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class ByteArrayOutputStreamBenchmark {
 

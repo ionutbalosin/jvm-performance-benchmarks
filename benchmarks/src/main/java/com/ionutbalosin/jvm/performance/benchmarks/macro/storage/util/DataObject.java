@@ -26,6 +26,9 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class DataObject implements Serializable {
+
+  private static final Random random = new Random(16384);
+
   private final byte byteValue;
   private final short shortValue;
   private final int intValue;
@@ -43,7 +46,7 @@ public class DataObject implements Serializable {
   private final Character charWrapper;
   private final Boolean booleanWrapper;
 
-  public DataObject(Random random) {
+  public DataObject() {
     this.byteValue = (byte) random.nextInt(Byte.MAX_VALUE + 1);
     this.shortValue = (short) random.nextInt(Short.MAX_VALUE + 1);
     this.intValue = random.nextInt();
