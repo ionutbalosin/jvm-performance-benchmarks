@@ -22,8 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.DataObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,7 +36,6 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -45,7 +43,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write byte array chunks using an ObjectOutputStream.
+ * Measures the time it takes to deserialize a custom object using an ObjectOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -58,21 +56,18 @@ public class ObjectOutputStreamBenchmark {
   // $ java -jar */*/benchmarks.jar ".*ObjectOutputStreamBenchmark.*"
 
   private final Random random = new Random(16384);
-
-  @Param private ChunkSize chunkSize;
-  @Param private FileSize fileSize;
+  private final int OBJECTS = 16_384;
 
   private File file;
   private ObjectOutputStream oos;
-  private byte[] data;
-  private int bytesWritten;
+  private DataObject dataObject;
+  private int objectsWritten;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    data = new byte[chunkSize.get()];
-    random.nextBytes(data);
+    dataObject = new DataObject(random);
 
-    file = File.createTempFile("FilterOutputStream", ".tmp");
+    file = File.createTempFile("ObjectOutputStream", ".tmp");
   }
 
   @TearDown(Level.Trial)
@@ -82,7 +77,7 @@ public class ObjectOutputStreamBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    bytesWritten = 0;
+    objectsWritten = 0;
     oos = new ObjectOutputStream(new FileOutputStream(file));
   }
 
@@ -93,13 +88,13 @@ public class ObjectOutputStreamBenchmark {
 
   @Benchmark
   public void write() throws IOException {
-    if (bytesWritten + data.length > fileSize.get()) {
+    if (objectsWritten + 1 > OBJECTS) {
       oos.close();
       beforeIteration();
     }
 
-    oos.write(data);
+    oos.writeObject(dataObject);
     oos.flush();
-    bytesWritten += data.length;
+    objectsWritten++;
   }
 }

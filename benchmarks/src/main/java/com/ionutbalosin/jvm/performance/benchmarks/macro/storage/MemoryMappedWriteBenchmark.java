@@ -49,7 +49,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Measures the time it takes to write byte array chunks using a MappedByteBuffer.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)

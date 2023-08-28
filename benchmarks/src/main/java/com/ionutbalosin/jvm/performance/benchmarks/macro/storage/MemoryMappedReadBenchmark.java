@@ -52,7 +52,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * Measures the time it takes to read byte array chunks using a MappedByteBuffer and includes a sanity check to verify the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
@@ -76,7 +76,7 @@ public class MemoryMappedReadBenchmark {
     byte[] buffer = new byte[chunkSize.get()];
     random.nextBytes(buffer);
 
-    file = File.createTempFile("MemoryMapped", ".tmp");
+    file = File.createTempFile("MemoryMappedRead", ".tmp");
     try (FileOutputStream fos = new FileOutputStream(file)) {
       for (int i = 0; i < fileSize.get(); i += chunkSize.get()) {
         int bytesRemaining = Math.min(fileSize.get() - i, chunkSize.get());
@@ -105,17 +105,16 @@ public class MemoryMappedReadBenchmark {
 
   @Benchmark
   public void read() throws IOException {
-    if (bytesRead + chunkSize.get() > fileSize.get()) {
+    if (bytesRead + chunkSize.get() >= fileSize.get()) {
       bytesRead = 0;
       mappedByteBuffer.position(0);
     }
 
-    int remainingBytes = Math.min(chunkSize.get(), fileSize.get() - bytesRead);
-    byte[] buffer = new byte[remainingBytes];
+    byte[] buffer = new byte[chunkSize.get()];
     mappedByteBuffer.get(buffer);
-    bytesRead += remainingBytes;
+    bytesRead += chunkSize.get();
 
-    sanityCheck(buffer.length, remainingBytes);
+    sanityCheck(buffer.length, chunkSize.get());
   }
 
   private void sanityCheck(int actualBytes, int expectedBytes) {

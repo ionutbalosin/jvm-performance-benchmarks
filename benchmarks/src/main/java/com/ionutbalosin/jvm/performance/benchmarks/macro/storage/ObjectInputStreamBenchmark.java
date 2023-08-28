@@ -22,8 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.DataObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,7 +38,6 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -47,7 +45,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read byte array chunks using an ObjectInputStream and includes a sanity check to verify the number of bytes read.
+ * Measures the time it takes to serialize a custom object using an ObjectInputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -60,22 +58,20 @@ public class ObjectInputStreamBenchmark {
   // $ java -jar */*/benchmarks.jar ".*ObjectInputStreamBenchmark.*"
 
   private final Random random = new Random(16384);
-
-  @Param private ChunkSize chunkSize;
-  @Param private FileSize fileSize;
+  private final int OBJECTS = 16_384;
 
   private File file;
   private ObjectInputStream ois;
+  private int objectsRead;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    byte[] buffer = new byte[chunkSize.get()];
-    random.nextBytes(buffer);
+    final DataObject dataObject = new DataObject(random);
 
     file = File.createTempFile("ObjectInputStream", ".tmp");
     try (ObjectOutputStream fos = new ObjectOutputStream(new FileOutputStream(file))) {
-      for (int i = 0; i < fileSize.get(); i += chunkSize.get()) {
-        fos.writeObject(buffer);
+      for (int i = 0; i < OBJECTS; i++) {
+        fos.writeObject(dataObject);
       }
     }
   }
@@ -87,6 +83,7 @@ public class ObjectInputStreamBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
+    objectsRead = 0;
     ois = new ObjectInputStream(new FileInputStream(file));
   }
 
@@ -96,24 +93,15 @@ public class ObjectInputStreamBenchmark {
   }
 
   @Benchmark
-  public byte[] read() throws IOException {
-    final byte[] buffer = new byte[chunkSize.get()];
-    int bytesRead = ois.read(buffer, 0, chunkSize.get());
-
-    if (bytesRead == -1) {
+  public DataObject read() throws IOException, ClassNotFoundException {
+    if (objectsRead + 1 >= OBJECTS) {
       afterIteration();
       beforeIteration();
-    } else {
-      sanityCheck(bytesRead, chunkSize.get());
     }
 
-    return buffer;
-  }
+    final DataObject dataObject = (DataObject) ois.readObject();
+    objectsRead++;
 
-  private void sanityCheck(int actualBytes, int expectedBytes) {
-    if (actualBytes != expectedBytes) {
-      throw new AssertionError(
-          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
-    }
+    return dataObject;
   }
 }

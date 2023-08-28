@@ -76,7 +76,7 @@ public class WriterBenchmark {
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
     data = charArray(chunkSize.get(), ISO_8859_1);
-    file = File.createTempFile("FilterOutputStream", ".tmp");
+    file = File.createTempFile("Writer", ".tmp");
   }
 
   @TearDown(Level.Trial)
