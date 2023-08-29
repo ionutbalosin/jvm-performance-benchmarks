@@ -67,7 +67,7 @@ public class RandomAccessFileBenchmark {
   private RandomAccessFile raf;
   private byte[] data;
   private int[] offsets;
-  private int offsetIdx = 0;
+  private int offsetIdx;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
