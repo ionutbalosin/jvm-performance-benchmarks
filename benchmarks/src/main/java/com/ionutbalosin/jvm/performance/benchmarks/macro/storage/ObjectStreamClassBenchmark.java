@@ -72,7 +72,7 @@ public class ObjectStreamClassBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*ObjectStreamClassBenchmark.*"
 
-  private final Class<?>[] serializableClasses =
+  private final Class<?>[] SERIALIZABLE_CLASSES =
       new Class<?>[] {
         Boolean.class,
         Byte.class,
@@ -108,20 +108,20 @@ public class ObjectStreamClassBenchmark {
         LinkedBlockingDeque.class
       };
 
-  private int offsetIdx;
+  private int classIndex;
 
   @Setup(Level.Iteration)
   public void setupIteration() {
-    offsetIdx = 0;
+    classIndex = 0;
   }
 
   @Benchmark
   public ObjectStreamClass lookup() {
-    if (++offsetIdx >= serializableClasses.length) {
-      offsetIdx = 0;
+    if (++classIndex >= SERIALIZABLE_CLASSES.length) {
+      classIndex = 0;
     }
 
-    final Class<?> clazz = serializableClasses[offsetIdx];
+    final Class<?> clazz = SERIALIZABLE_CLASSES[classIndex];
     final ObjectStreamClass osc = ObjectStreamClass.lookup(clazz);
     sanityCheck(osc, clazz);
 
