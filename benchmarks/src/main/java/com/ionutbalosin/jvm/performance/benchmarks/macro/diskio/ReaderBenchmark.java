@@ -20,19 +20,21 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.writeToFile;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FilterInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.Reader;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -49,7 +51,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read byte array chunks using various types of FilterInputStreams and includes a sanity check to confirm the number of bytes read.
+ * Measures the time it takes to read character array chunks using various types of Reader and includes a sanity check to confirm the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -57,26 +59,30 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class FilterInputStreamBenchmark {
+public class ReaderBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*FilterInputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*ReaderBenchmark.*"
 
-  private final Random random = new Random(16384);
+  private final int ISO_8859_1 = 0xFF;
 
-  @Param private InputStreamType streamType;
+  @Param private ReaderType readerType;
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
   private File file;
-  private FilterInputStream fis;
+  private Reader reader;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    byte[] buffer = new byte[chunkSize.get()];
-    random.nextBytes(buffer);
+    char[] buffer = charArray(chunkSize.get(), ISO_8859_1);
 
-    file = File.createTempFile("FilterInputStream", ".tmp");
-    writeToFile(file, fileSize, chunkSize, buffer);
+    file = File.createTempFile("Reader", ".tmp");
+    try (FileWriter fw = new FileWriter(file)) {
+      for (int i = 0; i < fileSize.get(); i += chunkSize.get()) {
+        int charsRemaining = Math.min(fileSize.get() - i, chunkSize.get());
+        fw.write(buffer, 0, charsRemaining);
+      }
+    }
   }
 
   @TearDown(Level.Trial)
@@ -86,47 +92,55 @@ public class FilterInputStreamBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    switch (streamType) {
-      case BUFFERED_IN_STREAM:
-        fis = new BufferedInputStream(new FileInputStream(file));
+    switch (readerType) {
+      case FILE_READER:
+        reader = new FileReader(file);
         break;
-      case DATA_IN_STREAM:
-        fis = new DataInputStream(new FileInputStream(file));
+      case INPUT_STREAM_READER:
+        reader = new InputStreamReader(new FileInputStream(file));
+        break;
+      case BUFFERED_READER:
+        reader = new BufferedReader(new FileReader(file));
+        break;
+      case LINE_NUMBER_READER:
+        reader = new LineNumberReader(new FileReader(file));
         break;
       default:
-        throw new UnsupportedOperationException("Unsupported stream type " + streamType);
+        throw new UnsupportedOperationException("Unsupported reader type " + readerType);
     }
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    fis.close();
+    reader.close();
   }
 
   @Benchmark
-  public byte[] read() throws IOException {
-    final byte[] buffer = new byte[chunkSize.get()];
-    int bytesRead = fis.read(buffer);
+  public char[] read() throws IOException {
+    final char[] buffer = new char[chunkSize.get()];
+    int charsRead = reader.read(buffer);
 
-    if (bytesRead == -1) {
+    if (charsRead == -1) {
       afterIteration();
       beforeIteration();
     } else {
-      sanityCheck(bytesRead, chunkSize.get());
+      sanityCheck(charsRead, chunkSize.get());
     }
 
     return buffer;
   }
 
-  public enum InputStreamType {
-    BUFFERED_IN_STREAM,
-    DATA_IN_STREAM
+  public enum ReaderType {
+    FILE_READER,
+    INPUT_STREAM_READER,
+    BUFFERED_READER,
+    LINE_NUMBER_READER
   }
 
-  private void sanityCheck(int actualBytes, int expectedBytes) {
-    if (actualBytes != expectedBytes) {
+  private void sanityCheck(int actualChars, int expectedChars) {
+    if (actualChars != expectedChars) {
       throw new AssertionError(
-          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
+          "Number of chars mismatch. Actual: " + actualChars + ", expected: " + expectedChars);
     }
   }
 }

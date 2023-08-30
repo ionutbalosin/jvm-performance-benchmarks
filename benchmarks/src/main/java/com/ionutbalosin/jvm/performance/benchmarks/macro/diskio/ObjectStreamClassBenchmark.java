@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
 import java.io.ObjectStreamClass;
 import java.util.ArrayDeque;

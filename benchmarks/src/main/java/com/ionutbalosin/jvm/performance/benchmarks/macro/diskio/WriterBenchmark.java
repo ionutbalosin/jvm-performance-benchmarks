@@ -20,17 +20,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
+
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FilterOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -47,7 +50,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write byte array chunks using various types of FileOutputStream.
+ * Measures the time it takes to write character array chunks using various types of Writer.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -55,27 +58,25 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class FilterOutputStreamBenchmark {
+public class WriterBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*FilterOutputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*WriterBenchmark.*"
 
-  private final Random random = new Random(16384);
+  private final int ISO_8859_1 = 0xFF;
 
-  @Param private OutputStreamType streamType;
+  @Param private WriterType writerType;
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
   private File file;
-  private FilterOutputStream fos;
-  private byte[] data;
-  private int bytesWritten;
+  private Writer writer;
+  private char[] data;
+  private int charsWritten;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    data = new byte[chunkSize.get()];
-    random.nextBytes(data);
-
-    file = File.createTempFile("FilterOutputStream", ".tmp");
+    data = charArray(chunkSize.get(), ISO_8859_1);
+    file = File.createTempFile("Writer", ".tmp");
   }
 
   @TearDown(Level.Trial)
@@ -85,38 +86,46 @@ public class FilterOutputStreamBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    bytesWritten = 0;
-    switch (streamType) {
-      case BUFFERED_OUT_STREAM:
-        fos = new BufferedOutputStream(new FileOutputStream(file));
+    charsWritten = 0;
+    switch (writerType) {
+      case FILE_WRITER:
+        writer = new FileWriter(file);
         break;
-      case DATA_OUT_STREAM:
-        fos = new DataOutputStream(new FileOutputStream(file));
+      case PRINT_WRITER:
+        writer = new PrintWriter(file);
+        break;
+      case BUFFERED_WRITER:
+        writer = new BufferedWriter(new FileWriter(file));
+        break;
+      case OUTPUT_STREAM_WRITER:
+        writer = new OutputStreamWriter(new FileOutputStream(file));
         break;
       default:
-        throw new UnsupportedOperationException("Unsupported stream type " + streamType);
+        throw new UnsupportedOperationException("Unsupported writer type " + writerType);
     }
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    fos.close();
+    writer.close();
   }
 
   @Benchmark
   public void write() throws IOException {
-    if (bytesWritten + data.length > fileSize.get()) {
-      fos.close();
+    if (charsWritten + data.length > fileSize.get()) {
+      writer.close();
       beforeIteration();
     }
 
-    fos.write(data);
-    fos.flush();
-    bytesWritten += data.length;
+    writer.write(data);
+    writer.flush();
+    charsWritten += data.length;
   }
 
-  public enum OutputStreamType {
-    BUFFERED_OUT_STREAM,
-    DATA_OUT_STREAM
+  public enum WriterType {
+    FILE_WRITER,
+    PRINT_WRITER,
+    BUFFERED_WRITER,
+    OUTPUT_STREAM_WRITER
   }
 }

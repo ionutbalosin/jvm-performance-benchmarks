@@ -20,12 +20,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.DataObject;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.DataObject;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -42,7 +44,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to deserialize a custom object using an ObjectOutputStream.
+ * Measures the time it takes to serialize a custom object using an ObjectInputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -50,22 +52,26 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class ObjectOutputStreamBenchmark {
+public class ObjectInputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*ObjectOutputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*ObjectInputStreamBenchmark.*"
 
   private final int OBJECTS = 16_384;
 
   private File file;
-  private ObjectOutputStream oos;
-  private DataObject dataObject;
-  private int objectsWritten;
+  private ObjectInputStream ois;
+  private int objectsRead;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    dataObject = new DataObject();
+    final DataObject dataObject = new DataObject();
 
-    file = File.createTempFile("ObjectOutputStream", ".tmp");
+    file = File.createTempFile("ObjectInputStream", ".tmp");
+    try (ObjectOutputStream fos = new ObjectOutputStream(new FileOutputStream(file))) {
+      for (int i = 0; i < OBJECTS; i++) {
+        fos.writeObject(dataObject);
+      }
+    }
   }
 
   @TearDown(Level.Trial)
@@ -75,24 +81,25 @@ public class ObjectOutputStreamBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    objectsWritten = 0;
-    oos = new ObjectOutputStream(new FileOutputStream(file));
+    objectsRead = 0;
+    ois = new ObjectInputStream(new FileInputStream(file));
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    oos.close();
+    ois.close();
   }
 
   @Benchmark
-  public void write() throws IOException {
-    if (objectsWritten + 1 > OBJECTS) {
-      oos.close();
+  public DataObject read() throws IOException, ClassNotFoundException {
+    if (objectsRead + 1 >= OBJECTS) {
+      afterIteration();
       beforeIteration();
     }
 
-    oos.writeObject(dataObject);
-    oos.flush();
-    objectsWritten++;
+    final DataObject dataObject = (DataObject) ois.readObject();
+    objectsRead++;
+
+    return dataObject;
   }
 }

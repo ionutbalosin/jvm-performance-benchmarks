@@ -20,18 +20,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.writeToFile;
-
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.DataObject;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.file.StandardOpenOption;
-import java.util.Random;
+import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -40,7 +35,6 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -48,7 +42,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read byte array chunks using a FileChannel and includes a sanity check to verify the number of bytes read.
+ * Measures the time it takes to deserialize a custom object using an ObjectOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -56,28 +50,22 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class FileChannelReadBenchmark {
+public class ObjectOutputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*FileChannelReadBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*ObjectOutputStreamBenchmark.*"
 
-  private final Random random = new Random(16384);
-
-  @Param private ChunkSize chunkSize;
-  @Param private FileSize fileSize;
+  private final int OBJECTS = 16_384;
 
   private File file;
-  private FileChannel readChannel;
-  private ByteBuffer readBuffer;
+  private ObjectOutputStream oos;
+  private DataObject dataObject;
+  private int objectsWritten;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    byte[] buffer = new byte[chunkSize.get()];
-    random.nextBytes(buffer);
+    dataObject = new DataObject();
 
-    file = File.createTempFile("FileChannelRead", ".tmp");
-    writeToFile(file, fileSize, chunkSize, buffer);
-
-    readBuffer = ByteBuffer.allocate(chunkSize.get());
+    file = File.createTempFile("ObjectOutputStream", ".tmp");
   }
 
   @TearDown(Level.Trial)
@@ -87,32 +75,24 @@ public class FileChannelReadBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    readChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ);
+    objectsWritten = 0;
+    oos = new ObjectOutputStream(new FileOutputStream(file));
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    readChannel.close();
+    oos.close();
   }
 
   @Benchmark
-  public int read() throws IOException {
-    readBuffer.clear();
-    int bytesRead = readChannel.read(readBuffer);
-
-    if (bytesRead == -1) {
-      readChannel.position(0);
-    } else {
-      sanityCheck(bytesRead, readBuffer.capacity());
+  public void write() throws IOException {
+    if (objectsWritten + 1 > OBJECTS) {
+      oos.close();
+      beforeIteration();
     }
 
-    return bytesRead;
-  }
-
-  private void sanityCheck(int actualBytes, int expectedBytes) {
-    if (actualBytes != expectedBytes) {
-      throw new AssertionError(
-          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
-    }
+    oos.writeObject(dataObject);
+    oos.flush();
+    objectsWritten++;
   }
 }

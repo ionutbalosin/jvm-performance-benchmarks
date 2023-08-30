@@ -20,17 +20,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.writeToFile;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.File;
-import java.io.FileInputStream;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
 import java.io.IOException;
-import java.util.Random;
+import java.io.PipedReader;
+import java.io.PipedWriter;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -46,7 +46,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read byte array chunks using a FileInputStream and includes a sanity check to verify the number of bytes read.
+ * Measures the time it takes to read character array chunks using a PipedReader and includes a sanity check to verify the number of characters read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -54,52 +54,70 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class FileInputStreamBenchmark {
+public class PipedReaderBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*FileInputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*PipedReaderBenchmark.*"
 
-  private final Random random = new Random(16384);
+  private final int ISO_8859_1 = 0xFF;
 
   @Param private ChunkSize chunkSize;
-  @Param private FileSize fileSize;
 
-  private File file;
-  private FileInputStream fis;
+  private PipedReader pr;
+  private PipedWriter pw;
+  private char[] data;
+  private Thread writerThread;
+  private CountDownLatch writerLatch;
+  private AtomicBoolean isWriterRunning;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    byte[] buffer = new byte[chunkSize.get()];
-    random.nextBytes(buffer);
-
-    file = File.createTempFile("FileInputStream", ".tmp");
-    writeToFile(file, fileSize, chunkSize, buffer);
-  }
-
-  @TearDown(Level.Trial)
-  public void afterTrial() {
-    file.delete();
+    data = charArray(chunkSize.get(), ISO_8859_1);
   }
 
   @Setup(Level.Iteration)
-  public void beforeIteration() throws IOException {
-    fis = new FileInputStream(file);
+  public void beforeIteration() throws IOException, InterruptedException {
+    pr = new PipedReader(chunkSize.get());
+    pw = new PipedWriter(pr);
+
+    isWriterRunning = new AtomicBoolean(true);
+    writerLatch = new CountDownLatch(1);
+    writerThread =
+        new Thread(
+            () -> {
+              writerLatch.countDown();
+              while (isWriterRunning.get()) {
+                try {
+                  pw.write(data);
+                  pw.flush();
+                } catch (IOException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            });
+
+    writerThread.start();
+    // ensure that the writer thread has started before the benchmark iterations
+    writerLatch.await();
   }
 
   @TearDown(Level.Iteration)
-  public void afterIteration() throws IOException {
-    fis.close();
+  public void afterIteration() throws IOException, InterruptedException {
+    isWriterRunning.set(false);
+    writerThread.join();
+    pr.close();
+    pw.close();
   }
 
   @Benchmark
-  public byte[] read() throws IOException {
-    final byte[] buffer = new byte[chunkSize.get()];
-    int bytesRead = fis.read(buffer);
+  public char[] read() throws IOException, InterruptedException {
+    final char[] buffer = new char[chunkSize.get()];
+    int charsRead = pr.read(buffer, 0, chunkSize.get());
 
-    if (bytesRead == -1) {
+    if (charsRead == -1) {
       afterIteration();
       beforeIteration();
     } else {
-      sanityCheck(bytesRead, chunkSize.get());
+      sanityCheck(charsRead, chunkSize.get());
     }
 
     return buffer;

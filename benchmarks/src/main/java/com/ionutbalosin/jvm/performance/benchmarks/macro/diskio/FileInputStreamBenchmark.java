@@ -20,15 +20,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.DataObject;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.writeToFile;
+
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -37,6 +38,7 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -44,7 +46,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to serialize a custom object using an ObjectInputStream.
+ * Measures the time it takes to read byte array chunks using a FileInputStream and includes a sanity check to verify the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -52,26 +54,25 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class ObjectInputStreamBenchmark {
+public class FileInputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*ObjectInputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*FileInputStreamBenchmark.*"
 
-  private final int OBJECTS = 16_384;
+  private final Random random = new Random(16384);
+
+  @Param private ChunkSize chunkSize;
+  @Param private FileSize fileSize;
 
   private File file;
-  private ObjectInputStream ois;
-  private int objectsRead;
+  private FileInputStream fis;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    final DataObject dataObject = new DataObject();
+    byte[] buffer = new byte[chunkSize.get()];
+    random.nextBytes(buffer);
 
-    file = File.createTempFile("ObjectInputStream", ".tmp");
-    try (ObjectOutputStream fos = new ObjectOutputStream(new FileOutputStream(file))) {
-      for (int i = 0; i < OBJECTS; i++) {
-        fos.writeObject(dataObject);
-      }
-    }
+    file = File.createTempFile("FileInputStream", ".tmp");
+    writeToFile(file, fileSize, chunkSize, buffer);
   }
 
   @TearDown(Level.Trial)
@@ -81,25 +82,33 @@ public class ObjectInputStreamBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    objectsRead = 0;
-    ois = new ObjectInputStream(new FileInputStream(file));
+    fis = new FileInputStream(file);
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    ois.close();
+    fis.close();
   }
 
   @Benchmark
-  public DataObject read() throws IOException, ClassNotFoundException {
-    if (objectsRead + 1 >= OBJECTS) {
+  public byte[] read() throws IOException {
+    final byte[] buffer = new byte[chunkSize.get()];
+    int bytesRead = fis.read(buffer);
+
+    if (bytesRead == -1) {
       afterIteration();
       beforeIteration();
+    } else {
+      sanityCheck(bytesRead, chunkSize.get());
     }
 
-    final DataObject dataObject = (DataObject) ois.readObject();
-    objectsRead++;
+    return buffer;
+  }
 
-    return dataObject;
+  private void sanityCheck(int actualBytes, int expectedBytes) {
+    if (actualBytes != expectedBytes) {
+      throw new AssertionError(
+          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
+    }
   }
 }

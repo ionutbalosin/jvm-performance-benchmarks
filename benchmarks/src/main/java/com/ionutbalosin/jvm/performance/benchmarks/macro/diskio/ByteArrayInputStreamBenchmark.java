@@ -20,10 +20,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Random;

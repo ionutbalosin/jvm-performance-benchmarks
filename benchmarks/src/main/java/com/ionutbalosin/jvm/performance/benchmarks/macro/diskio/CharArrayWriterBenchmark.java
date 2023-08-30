@@ -20,13 +20,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.ByteArrayOutputStream;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
+
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.CharArrayWriter;
 import java.io.IOException;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -43,53 +44,52 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write byte array chunks using a ByteArrayOutputStream.
+ * Measures the time it takes to write character array chunks using a CharArrayWriter.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class ByteArrayOutputStreamBenchmark {
+public class CharArrayWriterBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*ByteArrayOutputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*CharArrayWriterBenchmark.*"
 
-  private final Random random = new Random(16384);
+  private final int ISO_8859_1 = 0xFF;
 
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
-  private ByteArrayOutputStream baos;
-  private byte[] data;
-  private int bytesWritten;
+  private CharArrayWriter caw;
+  private char[] data;
+  private int charsWritten;
 
   @Setup()
   public void setup() throws IOException {
-    data = new byte[chunkSize.get()];
-    random.nextBytes(data);
+    data = charArray(fileSize.get(), ISO_8859_1);
   }
 
   @Setup(Level.Iteration)
   public void beforeIteration() {
-    bytesWritten = 0;
-    baos = new ByteArrayOutputStream(fileSize.get());
+    charsWritten = 0;
+    caw = new CharArrayWriter(fileSize.get());
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    baos.close();
+    caw.close();
   }
 
   @Benchmark
   public void write() throws IOException {
-    if (bytesWritten + data.length > fileSize.get()) {
-      bytesWritten = 0;
-      baos.reset();
+    if (charsWritten + data.length > fileSize.get()) {
+      charsWritten = 0;
+      caw.reset();
     }
 
-    baos.write(data);
-    baos.flush();
-    bytesWritten += data.length;
+    caw.write(data);
+    caw.flush();
+    charsWritten += data.length;
   }
 }

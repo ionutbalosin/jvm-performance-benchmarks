@@ -20,14 +20,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.CharUtils.charArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.writeToFile;
+import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.CharArrayReader;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.File;
 import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.StandardOpenOption;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -44,7 +49,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read character array chunks using a CharArrayReader and includes a sanity check to verify the number of characters read.
+ * Measures the time it takes to read byte array chunks using a MappedByteBuffer and includes a sanity check to verify the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -52,52 +57,65 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class CharArrayReaderBenchmark {
+public class MemoryMappedReadBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*CharArrayReaderBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*MemoryMappedReadBenchmark.*"
 
-  private final int ISO_8859_1 = 0xFF;
+  private final Random random = new Random(16384);
 
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
-  private CharArrayReader car;
-  private char[] data;
+  private File file;
+  private FileChannel readChannel;
+  private MappedByteBuffer mappedByteBuffer;
+  private int bytesRead;
 
-  @Setup
-  public void setup() throws IOException {
-    data = charArray(fileSize.get(), ISO_8859_1);
+  @Setup(Level.Trial)
+  public void beforeTrial() throws IOException {
+    byte[] buffer = new byte[chunkSize.get()];
+    random.nextBytes(buffer);
+
+    file = File.createTempFile("MemoryMappedRead", ".tmp");
+    writeToFile(file, fileSize, chunkSize, buffer);
+  }
+
+  @TearDown(Level.Trial)
+  public void afterTrial() {
+    file.delete();
   }
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    car = new CharArrayReader(data);
-    car.mark(fileSize.get());
+    bytesRead = 0;
+    readChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ);
+    mappedByteBuffer = readChannel.map(READ_ONLY, 0L, fileSize.get());
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    car.close();
+    mappedByteBuffer.clear();
+    readChannel.close();
   }
 
   @Benchmark
-  public char[] read() throws IOException {
-    final char[] buffer = new char[chunkSize.get()];
-    int charsRead = car.read(buffer);
-
-    if (charsRead == -1) {
-      car.reset();
-    } else {
-      sanityCheck(charsRead, chunkSize.get());
+  public void read() throws IOException {
+    if (bytesRead + chunkSize.get() >= fileSize.get()) {
+      bytesRead = 0;
+      mappedByteBuffer.position(0);
     }
 
-    return buffer;
+    byte[] buffer = new byte[chunkSize.get()];
+    mappedByteBuffer.get(buffer);
+    bytesRead += chunkSize.get();
+
+    sanityCheck(buffer.length, chunkSize.get());
   }
 
-  private void sanityCheck(int actualChars, int expectedChars) {
-    if (actualChars != expectedChars) {
+  private void sanityCheck(int actualBytes, int expectedBytes) {
+    if (actualBytes != expectedBytes) {
       throw new AssertionError(
-          "Number of chars mismatch. Actual: " + actualChars + ", expected: " + expectedChars);
+          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
     }
   }
 }

@@ -20,15 +20,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.CharUtils.charArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.writeToFile;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.File;
 import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
-import java.util.concurrent.CountDownLatch;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.StandardOpenOption;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -45,7 +48,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read character array chunks using a PipedReader and includes a sanity check to verify the number of characters read.
+ * Measures the time it takes to read byte array chunks using a FileChannel and includes a sanity check to verify the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -53,73 +56,57 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class PipedReaderBenchmark {
+public class FileChannelReadBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*PipedReaderBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*FileChannelReadBenchmark.*"
 
-  private final int ISO_8859_1 = 0xFF;
+  private final Random random = new Random(16384);
 
   @Param private ChunkSize chunkSize;
+  @Param private FileSize fileSize;
 
-  private PipedReader pr;
-  private PipedWriter pw;
-  private char[] data;
-  private Thread writerThread;
-  private CountDownLatch writerLatch;
-  private volatile boolean isWriterRunning;
+  private File file;
+  private FileChannel readChannel;
+  private ByteBuffer readBuffer;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    data = charArray(chunkSize.get(), ISO_8859_1);
+    byte[] buffer = new byte[chunkSize.get()];
+    random.nextBytes(buffer);
+
+    file = File.createTempFile("FileChannelRead", ".tmp");
+    writeToFile(file, fileSize, chunkSize, buffer);
+
+    readBuffer = ByteBuffer.allocate(chunkSize.get());
+  }
+
+  @TearDown(Level.Trial)
+  public void afterTrial() {
+    file.delete();
   }
 
   @Setup(Level.Iteration)
-  public void beforeIteration() throws IOException, InterruptedException {
-    pr = new PipedReader(chunkSize.get());
-    pw = new PipedWriter(pr);
-
-    isWriterRunning = true;
-    writerLatch = new CountDownLatch(1);
-    writerThread =
-        new Thread(
-            () -> {
-              writerLatch.countDown();
-              while (isWriterRunning) {
-                try {
-                  pw.write(data);
-                  pw.flush();
-                } catch (IOException e) {
-                  throw new RuntimeException(e);
-                }
-              }
-            });
-
-    writerThread.start();
-    // ensure that the writer thread has started before the benchmark iterations
-    writerLatch.await();
+  public void beforeIteration() throws IOException {
+    readChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ);
   }
 
   @TearDown(Level.Iteration)
-  public void afterIteration() throws IOException, InterruptedException {
-    isWriterRunning = false;
-    writerThread.join();
-    pr.close();
-    pw.close();
+  public void afterIteration() throws IOException {
+    readChannel.close();
   }
 
   @Benchmark
-  public char[] read() throws IOException, InterruptedException {
-    final char[] buffer = new char[chunkSize.get()];
-    int charsRead = pr.read(buffer, 0, chunkSize.get());
+  public int read() throws IOException {
+    readBuffer.clear();
+    int bytesRead = readChannel.read(readBuffer);
 
-    if (charsRead == -1) {
-      afterIteration();
-      beforeIteration();
+    if (bytesRead == -1) {
+      readChannel.position(0);
     } else {
-      sanityCheck(charsRead, chunkSize.get());
+      sanityCheck(bytesRead, readBuffer.capacity());
     }
 
-    return buffer;
+    return bytesRead;
   }
 
   private void sanityCheck(int actualBytes, int expectedBytes) {

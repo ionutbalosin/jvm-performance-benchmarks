@@ -20,20 +20,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.CharUtils.charArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.writeToFile;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.BufferedWriter;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Writer;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -50,7 +49,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write character array chunks using various types of Writer.
+ * Measures the time it takes to read byte array chunks using various types of FilterInputStreams and includes a sanity check to confirm the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -58,25 +57,26 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class WriterBenchmark {
+public class FilterInputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*WriterBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*FilterInputStreamBenchmark.*"
 
-  private final int ISO_8859_1 = 0xFF;
+  private final Random random = new Random(16384);
 
-  @Param private WriterType writerType;
+  @Param private InputStreamType streamType;
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
   private File file;
-  private Writer writer;
-  private char[] data;
-  private int charsWritten;
+  private FilterInputStream fis;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    data = charArray(chunkSize.get(), ISO_8859_1);
-    file = File.createTempFile("Writer", ".tmp");
+    byte[] buffer = new byte[chunkSize.get()];
+    random.nextBytes(buffer);
+
+    file = File.createTempFile("FilterInputStream", ".tmp");
+    writeToFile(file, fileSize, chunkSize, buffer);
   }
 
   @TearDown(Level.Trial)
@@ -86,46 +86,47 @@ public class WriterBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    charsWritten = 0;
-    switch (writerType) {
-      case FILE_WRITER:
-        writer = new FileWriter(file);
+    switch (streamType) {
+      case BUFFERED_IN_STREAM:
+        fis = new BufferedInputStream(new FileInputStream(file));
         break;
-      case PRINT_WRITER:
-        writer = new PrintWriter(file);
-        break;
-      case BUFFERED_WRITER:
-        writer = new BufferedWriter(new FileWriter(file));
-        break;
-      case OUTPUT_STREAM_WRITER:
-        writer = new OutputStreamWriter(new FileOutputStream(file));
+      case DATA_IN_STREAM:
+        fis = new DataInputStream(new FileInputStream(file));
         break;
       default:
-        throw new UnsupportedOperationException("Unsupported writer type " + writerType);
+        throw new UnsupportedOperationException("Unsupported stream type " + streamType);
     }
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    writer.close();
+    fis.close();
   }
 
   @Benchmark
-  public void write() throws IOException {
-    if (charsWritten + data.length > fileSize.get()) {
-      writer.close();
+  public byte[] read() throws IOException {
+    final byte[] buffer = new byte[chunkSize.get()];
+    int bytesRead = fis.read(buffer);
+
+    if (bytesRead == -1) {
+      afterIteration();
       beforeIteration();
+    } else {
+      sanityCheck(bytesRead, chunkSize.get());
     }
 
-    writer.write(data);
-    writer.flush();
-    charsWritten += data.length;
+    return buffer;
   }
 
-  public enum WriterType {
-    FILE_WRITER,
-    PRINT_WRITER,
-    BUFFERED_WRITER,
-    OUTPUT_STREAM_WRITER
+  public enum InputStreamType {
+    BUFFERED_IN_STREAM,
+    DATA_IN_STREAM
+  }
+
+  private void sanityCheck(int actualBytes, int expectedBytes) {
+    if (actualBytes != expectedBytes) {
+      throw new AssertionError(
+          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
+    }
   }
 }

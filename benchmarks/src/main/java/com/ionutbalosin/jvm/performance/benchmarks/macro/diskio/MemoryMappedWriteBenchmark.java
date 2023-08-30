@@ -20,13 +20,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.writeToFile;
-import static java.nio.channels.FileChannel.MapMode.READ_ONLY;
-
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
 import java.io.File;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
@@ -49,7 +46,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read byte array chunks using a MappedByteBuffer and includes a sanity check to verify the number of bytes read.
+ * Measures the time it takes to write byte array chunks using a MappedByteBuffer.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -57,9 +54,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class MemoryMappedReadBenchmark {
+public class MemoryMappedWriteBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*MemoryMappedReadBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*MemoryMappedWriteBenchmark.*"
 
   private final Random random = new Random(16384);
 
@@ -67,55 +64,46 @@ public class MemoryMappedReadBenchmark {
   @Param private FileSize fileSize;
 
   private File file;
-  private FileChannel readChannel;
+  private FileChannel writeChannel;
   private MappedByteBuffer mappedByteBuffer;
-  private int bytesRead;
+  private byte[] data;
+  private int bytesWritten;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    byte[] buffer = new byte[chunkSize.get()];
-    random.nextBytes(buffer);
+    data = new byte[chunkSize.get()];
+    random.nextBytes(data);
 
-    file = File.createTempFile("MemoryMappedRead", ".tmp");
-    writeToFile(file, fileSize, chunkSize, buffer);
+    file = File.createTempFile("MemoryMappedWrite", ".tmp");
   }
 
   @TearDown(Level.Trial)
-  public void afterTrial() {
+  public void afterTrial() throws IOException {
     file.delete();
   }
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    bytesRead = 0;
-    readChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ);
-    mappedByteBuffer = readChannel.map(READ_ONLY, 0L, fileSize.get());
+    bytesWritten = 0;
+    writeChannel =
+        FileChannel.open(file.toPath(), StandardOpenOption.READ, StandardOpenOption.WRITE);
+    mappedByteBuffer = writeChannel.map(FileChannel.MapMode.READ_WRITE, 0, fileSize.get());
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
     mappedByteBuffer.clear();
-    readChannel.close();
+    writeChannel.close();
   }
 
   @Benchmark
-  public void read() throws IOException {
-    if (bytesRead + chunkSize.get() >= fileSize.get()) {
-      bytesRead = 0;
+  public void write() {
+    if (bytesWritten + data.length > fileSize.get()) {
+      bytesWritten = 0;
       mappedByteBuffer.position(0);
     }
 
-    byte[] buffer = new byte[chunkSize.get()];
-    mappedByteBuffer.get(buffer);
-    bytesRead += chunkSize.get();
-
-    sanityCheck(buffer.length, chunkSize.get());
-  }
-
-  private void sanityCheck(int actualBytes, int expectedBytes) {
-    if (actualBytes != expectedBytes) {
-      throw new AssertionError(
-          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
-    }
+    mappedByteBuffer.put(data);
+    bytesWritten += data.length;
   }
 }

@@ -20,15 +20,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -44,7 +45,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write byte array chunks using an PipedOutputStream.
+ * Measures the time it takes to read byte array chunks using an PipedInputStream and includes a sanity check to verify the number of bytes read.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -52,9 +53,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class PipedOutputStreamBenchmark {
+public class PipedInputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*PipedOutputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*PipedInputStreamBenchmark.*"
 
   private final Random random = new Random(16384);
 
@@ -63,8 +64,9 @@ public class PipedOutputStreamBenchmark {
   private PipedInputStream pis;
   private PipedOutputStream pos;
   private byte[] data;
-  private Thread readerThread;
-  private CountDownLatch readerLatch;
+  private Thread writerThread;
+  private CountDownLatch writerLatch;
+  private AtomicBoolean isWriterRunning;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
@@ -77,39 +79,54 @@ public class PipedOutputStreamBenchmark {
     pis = new PipedInputStream(chunkSize.get());
     pos = new PipedOutputStream(pis);
 
-    readerLatch = new CountDownLatch(1);
-    readerThread =
+    isWriterRunning = new AtomicBoolean(true);
+    writerLatch = new CountDownLatch(1);
+    writerThread =
         new Thread(
             () -> {
-              readerLatch.countDown();
-              final byte[] buffer = new byte[chunkSize.get()];
-              while (true) {
+              writerLatch.countDown();
+              while (isWriterRunning.get()) {
                 try {
-                  int bytesRead = pis.read(buffer, 0, chunkSize.get());
-                  if (bytesRead == -1) {
-                    break;
-                  }
+                  pos.write(data);
+                  pos.flush();
                 } catch (IOException e) {
                   throw new RuntimeException(e);
                 }
               }
             });
 
-    readerThread.start();
-    // ensure that the reader thread has started before the benchmark iterations
-    readerLatch.await();
+    writerThread.start();
+    // ensure that the writer thread has started before the benchmark iterations
+    writerLatch.await();
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException, InterruptedException {
+    isWriterRunning.set(false);
+    writerThread.join();
     pis.close();
     pos.close();
-    readerThread.join();
   }
 
   @Benchmark
-  public void write() throws IOException, InterruptedException {
-    pos.write(data, 0, chunkSize.get());
-    pos.flush();
+  public byte[] read() throws IOException, InterruptedException {
+    final byte[] buffer = new byte[chunkSize.get()];
+    int bytesRead = pis.read(buffer, 0, chunkSize.get());
+
+    if (bytesRead == -1) {
+      afterIteration();
+      beforeIteration();
+    } else {
+      sanityCheck(bytesRead, chunkSize.get());
+    }
+
+    return buffer;
+  }
+
+  private void sanityCheck(int actualBytes, int expectedBytes) {
+    if (actualBytes != expectedBytes) {
+      throw new AssertionError(
+          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
+    }
   }
 }

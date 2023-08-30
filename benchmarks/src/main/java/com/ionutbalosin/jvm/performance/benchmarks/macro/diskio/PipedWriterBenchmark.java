@@ -20,14 +20,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.File;
-import java.io.FileOutputStream;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
+
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
 import java.io.IOException;
-import java.util.Random;
+import java.io.PipedReader;
+import java.io.PipedWriter;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -44,7 +45,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write byte array chunks using a FileOutputStream.
+ * Measures the time it takes to write character array chunks using a PipedWriter.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -52,53 +53,63 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class FileOutputStreamBenchmark {
+public class PipedWriterBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*FileOutputStreamBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*PipedWriterBenchmark.*"
 
-  private final Random random = new Random(16384);
+  private final int ISO_8859_1 = 0xFF;
 
   @Param private ChunkSize chunkSize;
-  @Param private FileSize fileSize;
 
-  private File file;
-  private FileOutputStream fos;
-  private byte[] data;
-  private int bytesWritten;
+  private PipedReader pr;
+  private PipedWriter pw;
+  private char[] data;
+  private Thread readerThread;
+  private CountDownLatch readerLatch;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    data = new byte[chunkSize.get()];
-    random.nextBytes(data);
-
-    file = File.createTempFile("FileOutputStream", ".tmp");
-  }
-
-  @TearDown(Level.Trial)
-  public void afterTrial() {
-    file.delete();
+    data = charArray(chunkSize.get(), ISO_8859_1);
   }
 
   @Setup(Level.Iteration)
-  public void beforeIteration() throws IOException {
-    bytesWritten = 0;
-    fos = new FileOutputStream(file);
+  public void beforeIteration() throws IOException, InterruptedException {
+    pr = new PipedReader(chunkSize.get());
+    pw = new PipedWriter(pr);
+
+    readerLatch = new CountDownLatch(1);
+    readerThread =
+        new Thread(
+            () -> {
+              readerLatch.countDown();
+              final char[] buffer = new char[chunkSize.get()];
+              while (true) {
+                try {
+                  int charsRead = pr.read(buffer, 0, chunkSize.get());
+                  if (charsRead == -1) {
+                    break;
+                  }
+                } catch (IOException e) {
+                  throw new RuntimeException(e);
+                }
+              }
+            });
+
+    readerThread.start();
+    // ensure that the reader thread has started before the benchmark iterations
+    readerLatch.await();
   }
 
   @TearDown(Level.Iteration)
-  public void afterIteration() throws IOException {
-    fos.close();
+  public void afterIteration() throws IOException, InterruptedException {
+    pr.close();
+    pw.close();
+    readerThread.join();
   }
 
   @Benchmark
-  public void write() throws IOException {
-    if (bytesWritten + data.length > fileSize.get()) {
-      fos.close();
-      beforeIteration();
-    }
-
-    fos.write(data);
-    fos.flush();
-    bytesWritten += data.length;
+  public void write() throws IOException, InterruptedException {
+    pw.write(data, 0, chunkSize.get());
+    pw.flush();
   }
 }

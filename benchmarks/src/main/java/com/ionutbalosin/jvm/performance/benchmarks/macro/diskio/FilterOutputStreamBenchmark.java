@@ -20,15 +20,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.writeToFile;
-
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -46,7 +47,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read/write byte array chunks using a RandomAccessFile and includes a sanity check to confirm the number of bytes read.
+ * Measures the time it takes to write byte array chunks using various types of FileOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -54,37 +55,27 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class RandomAccessFileBenchmark {
+public class FilterOutputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*RandomAccessFileBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*FilterOutputStreamBenchmark.*"
 
   private final Random random = new Random(16384);
 
+  @Param private OutputStreamType streamType;
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
   private File file;
-  private RandomAccessFile raf;
+  private FilterOutputStream fos;
   private byte[] data;
-  private int[] offsets;
-  private int offsetIdx;
+  private int bytesWritten;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
     data = new byte[chunkSize.get()];
     random.nextBytes(data);
 
-    final int chunks = fileSize.get() / chunkSize.get();
-    offsets = new int[chunks];
-    for (int i = 0; i < offsets.length; i++) {
-      offsets[i] = random.nextInt(chunks);
-    }
-
-    byte[] buffer = new byte[chunkSize.get()];
-    random.nextBytes(buffer);
-
-    file = File.createTempFile("RandomAccessFile", ".tmp");
-    writeToFile(file, fileSize, chunkSize, buffer);
+    file = File.createTempFile("FilterOutputStream", ".tmp");
   }
 
   @TearDown(Level.Trial)
@@ -94,47 +85,38 @@ public class RandomAccessFileBenchmark {
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    offsetIdx = 0;
-    raf = new RandomAccessFile(file, "rw");
+    bytesWritten = 0;
+    switch (streamType) {
+      case BUFFERED_OUT_STREAM:
+        fos = new BufferedOutputStream(new FileOutputStream(file));
+        break;
+      case DATA_OUT_STREAM:
+        fos = new DataOutputStream(new FileOutputStream(file));
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported stream type " + streamType);
+    }
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    raf.close();
-  }
-
-  @Benchmark
-  public byte[] read() throws IOException {
-    final long position = nextPosition();
-    raf.seek(position);
-
-    final byte[] buffer = new byte[chunkSize.get()];
-    int bytesRead = raf.read(buffer);
-    sanityCheck(bytesRead, chunkSize.get());
-
-    return buffer;
+    fos.close();
   }
 
   @Benchmark
   public void write() throws IOException {
-    final long position = nextPosition();
-    raf.seek(position);
-
-    raf.write(data);
-  }
-
-  private long nextPosition() {
-    if (++offsetIdx >= offsets.length) {
-      offsetIdx = 0;
+    if (bytesWritten + data.length > fileSize.get()) {
+      fos.close();
+      beforeIteration();
     }
 
-    return offsets[offsetIdx] * chunkSize.get();
+    fos.write(data);
+    fos.flush();
+    bytesWritten += data.length;
   }
 
-  private void sanityCheck(int actualBytes, int expectedBytes) {
-    if (actualBytes != expectedBytes) {
-      throw new AssertionError(
-          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
-    }
+  public enum OutputStreamType {
+    BUFFERED_OUT_STREAM,
+    DATA_OUT_STREAM
   }
 }

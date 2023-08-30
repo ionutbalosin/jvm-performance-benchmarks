@@ -20,21 +20,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.CharUtils.charArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.FileSize;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.CharArrayReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-import java.io.Reader;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -51,90 +44,54 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to read character array chunks using various types of Reader and includes a sanity check to confirm the number of bytes read.
+ * Measures the time it takes to read character array chunks using a CharArrayReader and includes a sanity check to verify the number of characters read.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class ReaderBenchmark {
+public class CharArrayReaderBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*ReaderBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*CharArrayReaderBenchmark.*"
 
   private final int ISO_8859_1 = 0xFF;
 
-  @Param private ReaderType readerType;
   @Param private ChunkSize chunkSize;
   @Param private FileSize fileSize;
 
-  private File file;
-  private Reader reader;
+  private CharArrayReader car;
+  private char[] data;
 
-  @Setup(Level.Trial)
-  public void beforeTrial() throws IOException {
-    char[] buffer = charArray(chunkSize.get(), ISO_8859_1);
-
-    file = File.createTempFile("Reader", ".tmp");
-    try (FileWriter fw = new FileWriter(file)) {
-      for (int i = 0; i < fileSize.get(); i += chunkSize.get()) {
-        int charsRemaining = Math.min(fileSize.get() - i, chunkSize.get());
-        fw.write(buffer, 0, charsRemaining);
-      }
-    }
-  }
-
-  @TearDown(Level.Trial)
-  public void afterTrial() {
-    file.delete();
+  @Setup
+  public void setup() throws IOException {
+    data = charArray(fileSize.get(), ISO_8859_1);
   }
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException {
-    switch (readerType) {
-      case FILE_READER:
-        reader = new FileReader(file);
-        break;
-      case INPUT_STREAM_READER:
-        reader = new InputStreamReader(new FileInputStream(file));
-        break;
-      case BUFFERED_READER:
-        reader = new BufferedReader(new FileReader(file));
-        break;
-      case LINE_NUMBER_READER:
-        reader = new LineNumberReader(new FileReader(file));
-        break;
-      default:
-        throw new UnsupportedOperationException("Unsupported reader type " + readerType);
-    }
+    car = new CharArrayReader(data);
+    car.mark(fileSize.get());
   }
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException {
-    reader.close();
+    car.close();
   }
 
   @Benchmark
   public char[] read() throws IOException {
     final char[] buffer = new char[chunkSize.get()];
-    int charsRead = reader.read(buffer);
+    int charsRead = car.read(buffer);
 
     if (charsRead == -1) {
-      afterIteration();
-      beforeIteration();
+      car.reset();
     } else {
       sanityCheck(charsRead, chunkSize.get());
     }
 
     return buffer;
-  }
-
-  public enum ReaderType {
-    FILE_READER,
-    INPUT_STREAM_READER,
-    BUFFERED_READER,
-    LINE_NUMBER_READER
   }
 
   private void sanityCheck(int actualChars, int expectedChars) {

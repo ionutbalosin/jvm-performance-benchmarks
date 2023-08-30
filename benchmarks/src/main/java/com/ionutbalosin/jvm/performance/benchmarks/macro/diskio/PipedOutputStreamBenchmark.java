@@ -20,14 +20,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.CharUtils.charArray;
-
-import com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
 import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -45,7 +44,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the time it takes to write character array chunks using a PipedWriter.
+ * Measures the time it takes to write byte array chunks using an PipedOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -53,40 +52,41 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class PipedWriterBenchmark {
+public class PipedOutputStreamBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*PipedWriterBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*PipedOutputStreamBenchmark.*"
 
-  private final int ISO_8859_1 = 0xFF;
+  private final Random random = new Random(16384);
 
   @Param private ChunkSize chunkSize;
 
-  private PipedReader pr;
-  private PipedWriter pw;
-  private char[] data;
+  private PipedInputStream pis;
+  private PipedOutputStream pos;
+  private byte[] data;
   private Thread readerThread;
   private CountDownLatch readerLatch;
 
   @Setup(Level.Trial)
   public void beforeTrial() throws IOException {
-    data = charArray(chunkSize.get(), ISO_8859_1);
+    data = new byte[chunkSize.get()];
+    random.nextBytes(data);
   }
 
   @Setup(Level.Iteration)
   public void beforeIteration() throws IOException, InterruptedException {
-    pr = new PipedReader(chunkSize.get());
-    pw = new PipedWriter(pr);
+    pis = new PipedInputStream(chunkSize.get());
+    pos = new PipedOutputStream(pis);
 
     readerLatch = new CountDownLatch(1);
     readerThread =
         new Thread(
             () -> {
               readerLatch.countDown();
-              final char[] buffer = new char[chunkSize.get()];
+              final byte[] buffer = new byte[chunkSize.get()];
               while (true) {
                 try {
-                  int charsRead = pr.read(buffer, 0, chunkSize.get());
-                  if (charsRead == -1) {
+                  int bytesRead = pis.read(buffer, 0, chunkSize.get());
+                  if (bytesRead == -1) {
                     break;
                   }
                 } catch (IOException e) {
@@ -102,14 +102,14 @@ public class PipedWriterBenchmark {
 
   @TearDown(Level.Iteration)
   public void afterIteration() throws IOException, InterruptedException {
-    pr.close();
-    pw.close();
+    pis.close();
+    pos.close();
     readerThread.join();
   }
 
   @Benchmark
   public void write() throws IOException, InterruptedException {
-    pw.write(data, 0, chunkSize.get());
-    pw.flush();
+    pos.write(data, 0, chunkSize.get());
+    pos.flush();
   }
 }

@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.storage.util;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
