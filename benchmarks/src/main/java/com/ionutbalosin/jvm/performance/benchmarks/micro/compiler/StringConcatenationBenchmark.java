@@ -22,6 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 
+import java.text.MessageFormat;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -41,6 +42,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - StringBuilder
  * - StringBuffer
  * - String.format()
+ * - MessageFormat
  * - plus operator
  * The input String to be concatenated with the other types has either LATIN1 or UTF16 characters.
  *
@@ -128,7 +130,16 @@ public class StringConcatenationBenchmark {
 
   @Benchmark
   public String string_format() {
-    return String.format("%s%s%s%s%s%s%s", aString, anInt, aFloat, aLong, aDouble, aBool, anObject);
+    return String.format(
+        "%s%d%.8f%d%.17f%b%s", aString, anInt, aFloat, aLong, aDouble, aBool, anObject);
+  }
+
+  @Benchmark
+  public String message_format() {
+    final MessageFormat mf =
+        new MessageFormat(
+            "{0}{1,number,#}{2,number,#.########}{3,number,#}{4,number,#.#################}{5}{6,number,#.##########}");
+    return mf.format(new Object[] {aString, anInt, aFloat, aLong, aDouble, aBool, anObject});
   }
 
   @Benchmark
