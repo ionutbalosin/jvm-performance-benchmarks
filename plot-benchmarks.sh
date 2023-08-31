@@ -27,8 +27,8 @@ check_command_line_options() {
     echo "Usage: ./plot-benchmarks <jdk-version> [<arch>]"
     echo ""
     echo "Options:"
-    echo "  jdk-version   java version identifier for the generated results. The supported values are {11, 17}"
-    echo "  arch          target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture. The supported values are {x86_64, arm64}"
+    echo "  jdk-version   Java version identifier for the generated results. Supported values are {11, 17}."
+    echo "  arch          Target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture. Supported values are {x86_64, arm64}."
     echo ""
     echo "Examples:"
     echo "  ./plot-benchmarks 11"
@@ -41,15 +41,8 @@ check_command_line_options() {
     return 1
   fi
 
-  if [ "$1" ]; then
-    export JDK_VERSION="$1"
-  fi
-
-  if [ "$2" ]; then
-    export ARCH="$2"
-  else
-    export ARCH=$(uname -m)
-  fi
+  JDK_VERSION="${1:-$JDK_VERSION}"
+  ARCH="${2:-$(uname -m)}"
 }
 
 set_environment_variables() {
@@ -69,53 +62,46 @@ set_environment_variables() {
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
   echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
   echo ""
-  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
+  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 }
 
 check_folder_exists() {
   folder="$1"
   if [ ! -d "$folder" ]; then
     echo ""
-    echo "ERROR: Folder $folder do not exist, unable to continue!"
+    echo "ERROR: Folder '$folder' does not exist. Unable to continue!"
     return 1
   fi
 }
 
 merge_split_benchmark_results() {
-  R <./ggplot2/merge-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
-  if [ $? -ne 0 ]; then
+  if R <./ggplot2/merge-benchmark.r --no-save \
+    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
+    R <./ggplot2/split-benchmark.r --no-save \
+      --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
     echo ""
-    echo "ERROR: Error encountered while merging benchmark result files, unable to continue!"
+    echo "Benchmark result files successfully pre-processed."
+  else
+    echo ""
+    echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
     return 1
   fi
-
-  R <./ggplot2/split-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
-  if [ $? -ne 0 ]; then
-    echo ""
-    echo "ERROR: Error encountered while splitting benchmark result files, unable to continue!"
-    return 1
-  fi
-
-  echo ""
-  echo "Benchmark result files successfully pre-processed."
 }
 
 preprocess_benchmark_results() {
-  echo "Before plotting it is recommended to pre-process (e.g., merge, split) some of the benchmark result files."
+  echo "Before plotting, it is recommended to pre-process (e.g., merge, split) some of the benchmark result files."
   echo "For example:"
-  echo " - some benchmarks contain inter-connected results that are spread across multiple files, each file corresponding to specific JVM flags. Merging these results will lead to one single (instead of multiple) generated plot(s), hence improving the overall readability."
-  echo " - other benchmarks contain results that are orders of magnitude different between iterations, making the plotting scale too big. Splitting these results into separated files will lead multiple (instead of a single) generated plots, each having a proper scale, hence improving the overall readability."
-  echo "WARNING: You might skip this step if pre-processing was already triggered during a previous execution."
+  echo " - Some benchmarks contain inter-connected results spread across multiple files, each corresponding to specific JVM flags. Merging these results will lead to a single (instead of multiple) generated plot(s), improving overall readability."
+  echo " - Other benchmarks have results that differ significantly between iterations, making the plotting scale too large. Splitting these results into separate files will result in multiple (instead of a single) generated plots, each with an appropriate scale, improving the overall readability."
+  echo "WARNING: You can skip this step if pre-processing was already triggered in a previous execution."
   echo ""
-  while :; do
+
+  while true; do
     read -p "Do you want to pre-process (e.g., merge, split) some of the benchmark result files? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
       merge_split_benchmark_results
       return $?
-      break
       ;;
     no)
       break
@@ -128,27 +114,27 @@ preprocess_benchmark_results() {
 }
 
 benchmarks_geometric_mean() {
-  R <./ggplot2/geomean-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
-  if [ $? -ne 0 ]; then
+  if R <./ggplot2/geomean-benchmark.r --no-save \
+    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
     echo ""
-    echo "ERROR: Error encountered while calculating the benchmarks normalized geometric mean, unable to continue!"
+    echo "Benchmarks' normalized geometric mean successfully calculated."
+  else
+    echo ""
+    echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
     return 1
   fi
-
-  echo ""
-  echo "Benchmarks normalized geometric mean successfully calculated."
 }
 
 calculate_benchmarks_geometric_mean() {
   echo "This will calculate the normalized geometric mean (per category) for a specific set of benchmarks."
   echo "For example:"
-  echo " - JIT compiler benchmarks normalized geometric mean"
-  echo " - Macro benchmarks normalized geometric mean"
-  echo "WARNING: You might skip this step if normalized geometric mean was already calculated during a previous execution."
+  echo " - JIT compiler benchmarks' normalized geometric mean"
+  echo " - Macro benchmarks' normalized geometric mean"
+  echo "WARNING: You might skip this step if the normalized geometric mean was already calculated during a previous execution."
   echo ""
+
   while :; do
-    read -p "Do you want to calculate the benchmarks normalized geometric mean? (yes/no) " INPUT_KEY
+    read -p "Do you want to calculate the benchmarks' normalized geometric mean? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
       benchmarks_geometric_mean
@@ -166,29 +152,28 @@ calculate_benchmarks_geometric_mean() {
 }
 
 plot_benchmarks() {
-  R <./ggplot2/plot-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER
-  if [ $? -ne 0 ]; then
+  if R <./ggplot2/plot-benchmark.r --no-save \
+    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
     echo ""
-    echo "ERROR: Error encountered while plotting benchmarks results, unable to continue!"
+    echo "Benchmark plots successfully generated."
+  else
+    echo ""
+    echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
     return 1
   fi
-
-  echo ""
-  echo "Benchmark plots successfully generated."
 }
 
 plot_benchmark_results() {
-  echo "This will generate the benchmark plots (i.e., SVG files) based on the benchmark result files."
+  echo "This will generate benchmark plots (i.e., SVG files) based on the benchmark result files."
   echo "WARNING: You might skip this step if plotting of the benchmarks was already triggered during a previous execution."
   echo ""
-  while :; do
-    read -p "Do you want to plot the benchmarks results? (yes/no) " INPUT_KEY
+
+  while true; do
+    read -p "Do you want to plot the benchmark results? (yes/no) " INPUT_KEY
     case $INPUT_KEY in
     yes)
       plot_benchmarks
       return $?
-      break
       ;;
     no)
       break
@@ -204,42 +189,38 @@ echo ""
 echo "#############################################################"
 echo "#######       Benchmarks Results Plot Generator       #######"
 echo "#############################################################"
-check_command_line_options "$@"
-if [ $? -ne 0 ]; then
+if ! check_command_line_options "$@"; then
   exit 1
 fi
 
 echo ""
 echo "+-----------------------+"
-echo "| Environment variables |"
+echo "| Environment Variables |"
 echo "+-----------------------+"
 set_environment_variables
 
-check_folder_exists "$JMH_OUTPUT_FOLDER"
-if [ $? -ne 0 ]; then
+if ! check_folder_exists "$JMH_OUTPUT_FOLDER"; then
   exit 1
 fi
 
 echo ""
 echo "+-------------------------------+"
-echo "| Pre-process benchmark results |"
+echo "| Pre-process Benchmark Results |"
 echo "+-------------------------------+"
-preprocess_benchmark_results
-if [ $? -ne 0 ]; then
+if ! preprocess_benchmark_results; then
   exit 1
 fi
 
 echo ""
-echo "+------------------------------------------------+"
-echo "| Calculate benchmarks normalized geometric mean |"
-echo "+------------------------------------------------+"
-calculate_benchmarks_geometric_mean
-if [ $? -ne 0 ]; then
+echo "+-------------------------------------------------+"
+echo "| Calculate Benchmarks' Normalized Geometric Mean |"
+echo "+-------------------------------------------------+"
+if ! calculate_benchmarks_geometric_mean; then
   exit 1
 fi
 
 echo ""
 echo "+------------------------+"
-echo "| Plot benchmark results |"
+echo "| Plot Benchmark Results |"
 echo "+------------------------+"
 plot_benchmark_results

@@ -26,15 +26,15 @@ set_environment_variables() {
   export ARCH="$(uname -m)"
   export JQ="jq/jq-osx-amd64"
 
-  echo "Operating system: Mac OS X"
+  echo "Operating system: macOS"
   echo "Architecture: $ARCH"
   echo "JSON processor: $JQ"
   echo ""
-  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
+  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 }
 
 echo ""
 echo "+--------------------------+"
-echo "| OS environment variables |"
+echo "| OS Environment Variables |"
 echo "+--------------------------+"
 set_environment_variables

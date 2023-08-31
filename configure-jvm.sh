@@ -48,11 +48,11 @@ configure_azul_prime_vm() {
 
 configure_jvm() {
   echo ""
-  echo "Select the JVM:"
+  echo "Select a JVM:"
   echo "  1) OpenJDK HotSpot VM"
   echo "  2) GraalVM CE"
-  echo "  3) Oracle GraalVM (former GraalVM EE)"
-  echo "  4) Azul Prime VM (former Azul Zing VM)"
+  echo "  3) Oracle GraalVM (formerly GraalVM EE)"
+  echo "  4) Azul Prime VM (formerly Azul Zing VM)"
   echo ""
 
   while :; do
@@ -75,7 +75,7 @@ configure_jvm() {
       break
       ;;
     *)
-      echo "Sorry, I don't understand. Try again!"
+      echo "Sorry, I don't understand. Please try again!"
       ;;
     esac
   done
@@ -84,7 +84,7 @@ configure_jvm() {
 set_environment_variables() {
   if [ ! -x "$JAVA_HOME"/bin/java ]; then
     echo ""
-    echo "ERROR: Cannot execute '$JAVA_HOME/bin/java' command, unable to continue!"
+    echo "ERROR: Unable to execute the '$JAVA_HOME/bin/java' command. Cannot proceed!"
     return 1
   fi
   export PATH=$JAVA_HOME/bin:$PATH
@@ -93,7 +93,7 @@ set_environment_variables() {
   JDK_VERSION=$(java -XshowSettings:properties 2>&1 >/dev/null | grep 'java.specification.version' | awk '{split($0, array, "="); print array[2]}' | xargs)
   if [[ " ${supported_jdk_versions[*]} " != *" ${JDK_VERSION} "* ]]; then
     echo ""
-    echo "ERROR: Unsupported JDK version ${JDK_VERSION}, unable to continue! Currently, the allowed JDK versions are ${supported_jdk_versions[*]}."
+    echo "ERROR: Unsupported JDK version ${JDK_VERSION}. Cannot proceed! Currently, only the following JDK versions are allowed: ${supported_jdk_versions[*]}."
     return 1
   fi
   export JDK_VERSION
@@ -105,7 +105,7 @@ set_environment_variables() {
   echo "JVM benchmarks identifier: $JVM_IDENTIFIER"
   echo ""
 
-  read -r -p "If the above configuration is correct, press ENTER to continue or CTRL+C to abort ... "
+  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 }
 
 echo ""
@@ -113,12 +113,12 @@ echo "+---------------+"
 echo "| Configure JVM |"
 echo "+---------------+"
 echo "The JDK version is automatically detected based on the JDK distribution found at the preconfigured 'JAVA_HOME' path."
-echo "This implies that the 'JAVA_HOME' variable has already been specified in the benchmark configuration scripts (i.e., the ./configure-jvm file), otherwise, the subsequent execution will fail."
+echo "This assumes that the 'JAVA_HOME' variable has already been specified in the benchmark configuration scripts (i.e., the ./configure-jvm file). Otherwise, the subsequent execution will fail."
 configure_jvm
 
 echo ""
 echo "+---------------------------+"
-echo "| JVM environment variables |"
+echo "| JVM Environment Variables |"
 echo "+---------------------------+"
 if ! set_environment_variables; then
   exit 1

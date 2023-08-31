@@ -23,15 +23,15 @@
 #
 
 time_converter() {
-  if [[ -z ${1} || ${1} -lt 60 ]]; then
+  if [[ -z $1 || $1 -lt 60 ]]; then
     min=0
-    secs="${1}"
+    secs="$1"
   else
-    time_min=$(echo "scale=2; ${1}/60" | bc)
-    min=$(echo "${time_min}" | cut -d'.' -f1)
-    secs="0.$(echo "${time_min}" | cut -d'.' -f2)"
-    secs=$(echo "${secs} * 60" | bc | awk '{print int($1+0.5)}')
+    time_min=$(bc <<<"scale=2; $1/60")
+    min=${time_min%.*}
+    secs=$(bc <<<"scale=2; ($time_min - $min) * 60" | awk '{print int($1+0.5)}')
   fi
+
   echo ""
   echo "Elapsed: ${min} minutes and ${secs} seconds."
 }
@@ -39,6 +39,7 @@ time_converter() {
 default_if_empty() {
   value="$1"
   default_value="$2"
+
   if [[ -z "$value" || "$value" == "null" ]]; then
     echo "$default_value"
   else
@@ -52,12 +53,11 @@ remove_spaces() {
 
 create_folder() {
   folder="$1"
+
   if [ -d "$folder" ]; then
-    echo ""
-    echo "WARNING: Folder $folder already exists. Existing output benchmarks might be overridden."
+    echo "WARNING: Folder '$folder' already exists. Existing output benchmarks might be overwritten."
   else
-    echo ""
-    echo "Creating $folder folder ..."
+    echo "Creating folder: '$folder' ..."
     mkdir -p "$folder"
   fi
 }
@@ -67,18 +67,20 @@ run_benchmark() {
   TEST_NAME=$(remove_spaces "$2")
   JMH_OPTS=$(remove_spaces "$3")
   JVM_ARGS_APPEND=$(remove_spaces "$4")
-  CMD="java $JVM_OPTS -jar $JMH_JAR "\"\\\.$TEST_NAME\\\.\"" $JMH_OPTS -jvmArgsAppend \"$JVM_ARGS_APPEND\""
+  CMD="java $JVM_OPTS -jar \"$JMH_JAR\" \"\\\\.$TEST_NAME\\\\.\" $JMH_OPTS -jvmArgsAppend \"$JVM_ARGS_APPEND\""
+
   echo ""
   echo "Running $TEST_NAME benchmark ..."
   echo "$CMD"
   echo ""
+
   if [ "$DRY_RUN" != "--dry-run" ]; then
     eval "$CMD"
   fi
 }
 
 run_benchmark_suite() {
-  echo "Running $JVM_NAME tests suite ..."
+  echo "Running $JVM_NAME test suite ..."
 
   no_of_benchmarks=$(./$JQ -r ".benchmarks | length" <"$JMH_BENCHMARKS")
   global_jmh_opts=$(./$JQ -r ".globals.jmhOpts" <"$JMH_BENCHMARKS")
@@ -90,7 +92,7 @@ run_benchmark_suite() {
   test_suite_start=$(date +%s)
 
   counter=0
-  until [ $counter -gt $((no_of_benchmarks - 1)) ]; do
+  while [ $counter -lt $no_of_benchmarks ]; do
     bench_name=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].name" <"$JMH_BENCHMARKS")
     bench_output_file_name=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].outputFileName" <"$JMH_BENCHMARKS")
     bench_output_file_name=$(default_if_empty "$bench_output_file_name" "$bench_name")
@@ -106,35 +108,49 @@ run_benchmark_suite() {
   done
 
   echo ""
-  echo "Finished $JVM_NAME tests suite!"
+  echo "Finished $JVM_NAME test suite!"
 
-  time_converter "$(($(date +%s) - test_suite_start))"
+  elapsed_time_seconds=$(($(date +%s) - test_suite_start))
+  time_converter "$elapsed_time_seconds"
 }
 
 compile_benchmark_suite() {
   CMD="./mvnw -P jdk${JDK_VERSION}_profile clean package"
+
+  echo "Compiling benchmark suite..."
   echo "$CMD"
   echo ""
-  eval "$CMD"
-}
 
-configure_os() {
-  if [ "$(uname -s)" == "Linux" ]; then
-    . ./configure-linux-os.sh "$DRY_RUN"
-  elif [ "$(uname -s)" == "Darwin" ]; then
-    . ./configure-mac-os.sh "$DRY_RUN"
-  elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ] || [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
-    . ./configure-win-os.sh "$DRY_RUN"
+  if eval "$CMD"; then
+    echo "Compilation completed successfully."
   else
-    echo "ERROR: No configuration is available for this OS. This is neither a Linux, Darwin nor a Windows OS."
-    exit 1
+    echo "ERROR: Compilation failed. Unable to continue!"
+    return 1
   fi
 }
 
+configure_os() {
+  case $(uname -s) in
+  Linux)
+    . ./configure-linux-os.sh "$DRY_RUN"
+    ;;
+  Darwin)
+    . ./configure-mac-os.sh "$DRY_RUN"
+    ;;
+  CYGWIN* | MINGW*)
+    . ./configure-win-os.sh "$DRY_RUN"
+    ;;
+  *)
+    echo "ERROR: No configuration is available for this OS. This is neither a Linux, Darwin, nor a Windows OS."
+    exit 1
+    ;;
+  esac
+}
+
 echo ""
-echo "#############################################################################"
-echo "#######       Welcome to JVM Performance Benchmarks Tests Suite       #######"
-echo "#############################################################################"
+echo "############################################################################"
+echo "#######       Welcome to JVM Performance Benchmarks Test Suite       #######"
+echo "############################################################################"
 DRY_RUN="$1"
 
 echo ""
@@ -159,7 +175,9 @@ echo ""
 echo "+===============================+"
 echo "| [4/5] Compile benchmark suite |"
 echo "+===============================+"
-compile_benchmark_suite
+if ! compile_benchmark_suite; then
+  exit 1
+fi
 
 echo ""
 echo "+===========================+"
