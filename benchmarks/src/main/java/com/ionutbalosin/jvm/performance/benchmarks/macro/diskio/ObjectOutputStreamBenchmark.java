@@ -20,29 +20,29 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.signature;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.Signature;
-import java.security.SignatureException;
-import java.util.Random;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.DataObject;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the performance of RSA using different message lengths,
- * key lengths and hash sizes.
+ * Measures the time it takes to deserialize a custom object using an ObjectOutputStream.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -50,43 +50,49 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class RsaSignatureBenchmark {
+public class ObjectOutputStreamBenchmark {
 
-  private Signature signer;
+  // $ java -jar */*/benchmarks.jar ".*ObjectOutputStreamBenchmark.*"
 
-  @Param({"64", "512", "2048", "16384"})
-  private int messageLength;
+  private final int OBJECTS = 16_384;
 
-  @Param({"SHA256withRSA", "SHA384withRSA", "SHA512withRSA"})
-  private String algorithm;
+  private File file;
+  private ObjectOutputStream oos;
+  private DataObject dataObject;
+  private int objectsWritten;
 
-  private byte[] message;
+  @Setup(Level.Trial)
+  public void beforeTrial() throws IOException {
+    dataObject = new DataObject();
 
-  @Setup
-  public void setup() throws Exception {
-    message = new byte[messageLength];
-    Random random = new Random(16384);
-    random.nextBytes(message);
+    file = File.createTempFile("ObjectOutputStream", ".tmp");
+  }
 
-    int keyLength =
-        switch (algorithm) {
-          case "SHA256withRSA" -> 2048;
-          case "SHA384withRSA" -> 3072;
-          case "SHA512withRSA" -> 4096;
-          default -> throw new RuntimeException();
-        };
+  @TearDown(Level.Trial)
+  public void afterTrial() {
+    file.delete();
+  }
 
-    KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-    kpg.initialize(keyLength);
-    KeyPair kp = kpg.generateKeyPair();
+  @Setup(Level.Iteration)
+  public void beforeIteration() throws IOException {
+    objectsWritten = 0;
+    oos = new ObjectOutputStream(new FileOutputStream(file));
+  }
 
-    signer = Signature.getInstance(algorithm);
-    signer.initSign(kp.getPrivate());
+  @TearDown(Level.Iteration)
+  public void afterIteration() throws IOException {
+    oos.close();
   }
 
   @Benchmark
-  public byte[] sign() throws SignatureException {
-    signer.update(message);
-    return signer.sign();
+  public void write() throws IOException {
+    if (objectsWritten + 1 > OBJECTS) {
+      oos.close();
+      beforeIteration();
+    }
+
+    oos.writeObject(dataObject);
+    oos.flush();
+    objectsWritten++;
   }
 }

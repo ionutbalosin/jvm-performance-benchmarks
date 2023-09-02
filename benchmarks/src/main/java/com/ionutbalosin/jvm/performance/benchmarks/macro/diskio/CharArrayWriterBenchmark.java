@@ -20,17 +20,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.signature;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.diskio;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.Signature;
-import java.security.SignatureException;
-import java.util.Random;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.CharUtils.charArray;
+
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.ChunkSize;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.util.FileUtil.FileSize;
+import java.io.CharArrayWriter;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -38,55 +40,56 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the performance of RSA using different message lengths,
- * key lengths and hash sizes.
+ * Measures the time it takes to write character array chunks using a CharArrayWriter.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class RsaSignatureBenchmark {
+public class CharArrayWriterBenchmark {
 
-  private Signature signer;
+  // $ java -jar */*/benchmarks.jar ".*CharArrayWriterBenchmark.*"
 
-  @Param({"64", "512", "2048", "16384"})
-  private int messageLength;
+  private final int ISO_8859_1 = 0xFF;
 
-  @Param({"SHA256withRSA", "SHA384withRSA", "SHA512withRSA"})
-  private String algorithm;
+  @Param private ChunkSize chunkSize;
+  @Param private FileSize fileSize;
 
-  private byte[] message;
+  private CharArrayWriter caw;
+  private char[] data;
+  private int charsWritten;
 
-  @Setup
-  public void setup() throws Exception {
-    message = new byte[messageLength];
-    Random random = new Random(16384);
-    random.nextBytes(message);
+  @Setup()
+  public void setup() throws IOException {
+    data = charArray(fileSize.get(), ISO_8859_1);
+  }
 
-    int keyLength =
-        switch (algorithm) {
-          case "SHA256withRSA" -> 2048;
-          case "SHA384withRSA" -> 3072;
-          case "SHA512withRSA" -> 4096;
-          default -> throw new RuntimeException();
-        };
+  @Setup(Level.Iteration)
+  public void beforeIteration() {
+    charsWritten = 0;
+    caw = new CharArrayWriter(fileSize.get());
+  }
 
-    KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-    kpg.initialize(keyLength);
-    KeyPair kp = kpg.generateKeyPair();
-
-    signer = Signature.getInstance(algorithm);
-    signer.initSign(kp.getPrivate());
+  @TearDown(Level.Iteration)
+  public void afterIteration() throws IOException {
+    caw.close();
   }
 
   @Benchmark
-  public byte[] sign() throws SignatureException {
-    signer.update(message);
-    return signer.sign();
+  public void write() throws IOException {
+    if (charsWritten + data.length > fileSize.get()) {
+      charsWritten = 0;
+      caw.reset();
+    }
+
+    caw.write(data);
+    caw.flush();
+    charsWritten += data.length;
   }
 }
