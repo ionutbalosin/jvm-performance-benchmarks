@@ -21,39 +21,40 @@
 # under the License.
 #
 
+# Load the necessary utilities
 source("./ggplot2/utils.r")
 
 # Merge all benchmark results for different JIT results into a single data frame
 # and append a new column "<column_name>":"<column_values>" as a differentiator
-mergeJmhJitResults <- function(path, benchmark_list, column_name, column_values) {
+mergeJmhJitResults <- function(path, benchmark_file_paths, column_name, column_values) {
   result <- data.frame()
 
-  index <- 0
-  for (i in benchmark_list) {
-    index <- index + 1
-    benchmark_file_path <- paste(path, benchmark_list[index], sep = "/")
-    print(paste("Merging", benchmark_file_path, "benchmark ...", sep = " "))
+  for (i in seq_along(benchmark_file_paths)) {
+    benchmark_file_path <- file.path(path, benchmark_file_paths[i])
+    cat("Merging", benchmark_file_path, "benchmark ...\n")
+
     data <- readJmhCsvResults(benchmark_file_path)
-    if (!empty(data)) {
-      data[, column_name] <- column_values[index]
+
+    if (nrow(data) > 0) {
+      data[, column_name] <- column_values[i]
       result <- rbind(result, data)
     }
   }
 
-  result
+  return(result)
 }
 
 # Merge and write to a single output file multiple benchmark results for different JIT results, corresponding to a single JVM
-# Note: the benchmark result filenames could have a different names, not necessarily following a specific pattern
-processJmhJitResults <- function(jmh_output_folder, jvm_identifier, benchmark_list, column_name, column_values, output_file) {
-  if (length(benchmark_list) != length(column_values)) {
-    print(paste("Error: the number of files must be equal to the number of columns", length(benchmark_list), length(column_values), sep = " "))
+processJmhJitResults <- function(jmh_output_folder, jvm_identifier, benchmark_file_paths, column_name, column_values, output_file) {
+  if (length(benchmark_file_paths) != length(column_values)) {
+    cat("Error: the number of files must be equal to the number of columns\n")
+    return(NULL)
   }
 
-  benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
-  data <- mergeJmhJitResults(benchmark_base_path, benchmark_list, column_name, column_values)
+  benchmark_base_path <- file.path(jmh_output_folder, jvm_identifier)
+  data <- mergeJmhJitResults(benchmark_base_path, benchmark_file_paths, column_name, column_values)
 
-  if (!empty(data)) {
+  if (nrow(data) > 0) {
     writeJmhCsvResults(benchmark_base_path, output_file, data)
   }
 }

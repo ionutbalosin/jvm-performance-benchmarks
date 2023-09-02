@@ -21,29 +21,32 @@
 # under the License.
 #
 
+# Load the necessary utilities
 source("./ggplot2/utils.r")
 
-# Split the benchmark results from a single data frame based on
-# column "<column_name>":"<column_values>" as a criteria differentiator
+# Function to split benchmark results from a single data frame based on a specified column and values
 splitJmhCsvResults <- function(path, benchmark_file, column_name, column_values) {
   result <- data.frame()
 
-  benchmark_file_path <- paste(path, benchmark_file, sep = "/")
+  benchmark_file_path <- file.path(path, benchmark_file)
   print(paste("Splitting", benchmark_file_path, "benchmark ...", sep = " "))
   data <- readJmhCsvResults(benchmark_file_path)
-  if (!empty(data)) {
+
+  # Check if the specified column exists in the data frame
+  if (column_name %in% colnames(data)) {
     result <- data[data[[column_name]] %in% column_values, ]
   }
 
-  result
+  return(result)
 }
 
-# Split and write the benchmark results to an output file
+# Function to split and write benchmark results to an output file
 processJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_file, column_name, column_values, output_file) {
-  benchmark_base_path <- paste(jmh_output_folder, jvm_identifier, sep = "/")
+  benchmark_base_path <- file.path(jmh_output_folder, jvm_identifier)
   data <- splitJmhCsvResults(benchmark_base_path, benchmark_file, column_name, column_values)
 
-  if (!empty(data)) {
+  if (nrow(data) > 0) {
+    output_path <- file.path(benchmark_base_path, output_file)
     writeJmhCsvResults(benchmark_base_path, output_file, data)
   }
 }

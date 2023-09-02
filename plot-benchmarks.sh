@@ -49,18 +49,51 @@ set_environment_variables() {
   export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/jmh"
   export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
   export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
+
   export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
+  export OPENJDK_HOTSPOT_VM_NAME="OpenJDK HotSpot VM"
+  export OPENJDK_HOTSPOT_VM_JIT="C2 JIT"
+  export OPENJDK_HOTSPOT_VM_COLOR_PALETTE="#648FFF"
+
   export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
+  export GRAAL_VM_CE_NAME="GraalVM CE"
+  export GRAAL_VM_CE_JIT="GraalVM CE JIT"
+  export GRAAL_VM_CE_COLOR_PALETTE="#FFB000"
+
   export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
+  export GRAAL_VM_EE_NAME="GraalVM EE"
+  export GRAAL_VM_EE_JIT="GraalVM EE JIT"
+  export GRAAL_VM_EE_COLOR_PALETTE="#FE6100"
+
   export AZUL_PRIME_VM_IDENTIFIER="azul-prime-vm"
+  export AZUL_PRIME_VM_NAME="Azul Prime VM"
+  export AZUL_PRIME_VM_JIT="Azul Prime JIT"
+  export AZUL_PRIME_VM_COLOR_PALETTE="#785EF0"
 
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
   echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
+
   echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
+  echo "OpenJDK HotSpot VM name: $OPENJDK_HOTSPOT_VM_NAME"
+  echo "OpenJDK HotSpot JIT: $OPENJDK_HOTSPOT_VM_JIT"
+  echo "OpenJDK HotSpot VM Palette Color: $OPENJDK_HOTSPOT_VM_COLOR_PALETTE"
+
   echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
+  echo "GraalVM CE name: $GRAAL_VM_CE_NAME"
+  echo "GraalVM CE JIT: $GRAAL_VM_CE_JIT"
+  echo "GraalVM CE Palette Color: $GRAAL_VM_CE_COLOR_PALETTE"
+
   echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
+  echo "GraalVM EE name: $GRAAL_VM_EE_NAME"
+  echo "GraalVM EE JIT: $GRAAL_VM_EE_JIT"
+  echo "GraalVM EE Palette Color: $GRAAL_VM_EE_COLOR_PALETTE"
+
   echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
+  echo "Azul Prime VM name: $AZUL_PRIME_VM_NAME"
+  echo "Azul Prime JIT: $AZUL_PRIME_VM_JIT"
+  echo "Azul Prime VM Palette Color: $AZUL_PRIME_VM_COLOR_PALETTE"
+
   echo ""
   read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 }
@@ -115,7 +148,10 @@ preprocess_benchmark_results() {
 
 benchmarks_geometric_mean() {
   if R <./ggplot2/geomean-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
+    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER \
+    $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER \
+    "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
+    "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT"; then
     echo ""
     echo "Benchmarks' normalized geometric mean successfully calculated."
   else
@@ -153,7 +189,10 @@ calculate_benchmarks_geometric_mean() {
 
 plot_benchmarks() {
   if R <./ggplot2/plot-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
+    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER \
+    $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER \
+    "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
+    "$OPENJDK_HOTSPOT_VM_COLOR_PALETTE" "$GRAAL_VM_CE_COLOR_PALETTE" "$GRAAL_VM_EE_COLOR_PALETTE" "$AZUL_PRIME_VM_COLOR_PALETTE"; then
     echo ""
     echo "Benchmark plots successfully generated."
   else

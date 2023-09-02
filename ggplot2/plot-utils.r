@@ -21,46 +21,32 @@
 # under the License.
 #
 
+# Load the necessary utilities
 source("./ggplot2/utils.r")
 
-isFilenamePatternMatching <- function(list, filename) {
-  result <- FALSE
-
-  for (file_list in list) {
-    if (grepl(file_list, filename, fixed = FALSE)) {
-      result <- TRUE
-      break
-    }
-  }
-
-  result
-}
-
-# Read the CSV file containing the benchmark results and append a JVM column identifier to the data frame
+# Function to read a CSV file and append a JVM column identifier
 readAndAppendJvmIdentifierToJmhCsvResults <- function(benchmark_file_path, identifier) {
   result <- readJmhCsvResults(benchmark_file_path)
 
-  if (!empty(result)) {
+  if (nrow(result) > 0) {
     result <- cbind(result, "JvmIdentifier" = identifier)
   }
 
   result
 }
 
-# Concatenates all benchmark Param columns by prepending the name to each value
-# Output format: [param1:value1, param2:value2 ...]
-# example: [iterations:16384, size:32, threads:2 ...]
+# Function to concatenate all benchmark Param columns
 concatJmhCsvParamCols <- function(data) {
   result <- c()
 
-  # extract all Param columns in a data frame
+  # Extract all Param columns in a data frame
   params <- data[, grep("^(Param)", colnames(data)), drop = FALSE]
 
-  # extract Param column names (and delete the Param prefix)
+  # Extract Param column names (and delete the Param prefix)
   paramNames <- colnames(params)
   paramNames <- gsub("Param..", "", paramNames)
 
-  # concatenate all Param names:values (in a row-column fashion)
+  # Concatenate all Param names:values (in a row-column fashion)
   row <- 1
   while (row <= nrow(params)) {
     concatParams <- NULL
@@ -86,53 +72,47 @@ concatJmhCsvParamCols <- function(data) {
   result
 }
 
-# Apply further column transformations on the data frame (i.e., JMH results)
+# Function to process JMH CSV results
 processJmhCsvResults <- function(data) {
-  # delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
+  # Delete rows containing profile stats in the Benchmark name
   data <- data[!grepl(":.", data$Benchmark), ]
 
-  # delete the package name from the Benchmark name (it just pollutes the generated plot)
+  # Remove the package name from the Benchmark name
   data$Benchmark <- sub("^.+\\.", "", data$Benchmark)
 
-  # rename Error column
+  # Rename Error column
   colnames(data)[colnames(data) == "Score.Error..99.9.."] <- "Error"
 
-  # replace commas with dots for Score and Error columns
-  # Note: this is needed for consistency across different platforms (e.g., Linux, macOS, etc.)
-  # Example: on Linux the decimal separator could be "." but on macOS is ",", hence we need to make it consistent
+  # Replace commas with dots for Score and Error columns
   data$Score <- as.numeric(gsub(",", ".", data$Score))
   data$Error <- as.numeric(gsub(",", ".", data$Error))
 
-  # trim the Score column to 2 decimal places (i.e., for a nicer view in the generated plot)
+  # Trim the Score column to 2 decimal places
   data$Score <- round(data$Score, 2)
 
-  # add a new Parameters column with the concatenated Param names:values
-  # Note: this is necessary to group the Benchmark methods in the generated plot
+  # Add a new Parameters column with concatenated Param names:values
   data$Parameters <- concatJmhCsvParamCols(data)
 
-  # keep only the necessary data frame columns for plotting
+  # Keep only necessary columns for plotting
   data <- data[, grep("^(Benchmark|Score|Error|Unit|JvmIdentifier|Parameters)$", colnames(data))]
 
-  # if Parameters column exist, sort the data frame by Parameters and then by Benchmark columns
-  # Note: this sorting order is important for the generated plot
+  # Sort by Parameters and then by Benchmark columns
   if (!is.null(data$Parameters)) {
     data <- data[order(rev(data$Parameters), data$Benchmark), ]
   }
 
-  # if Parameters column exist, concat the Benchmark and Parameters columns. In addition, insert a new line
-  # in between to avoid the parameters to be displayed on the same line as the benchmark name in the the generated plot
+  # Concatenate Benchmark and Parameters columns with a line break
   if (!is.null(data$Parameters)) {
     data$Benchmark <- paste(data$Benchmark, "\n", "(", data$Parameters, ")", sep = "")
   }
 
-  # set the Benchmark column as the data frame factor in order to keep the order of the benchmarks
-  # Note: this is necessary because the default order of the factor is alphabetical
+  # Set the Benchmark column as a factor to maintain order
   data$Benchmark <- factor(data$Benchmark, levels = unique(data$Benchmark))
 
-  data
+  return(data)
 }
 
-# Generate the plot (i.e., bar chart plot)
+# Function to generate a bar chart plot
 generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, color_palette) {
   plot <- ggplot(data, aes(x = Benchmark, y = Score, fill = data[, fill], ymin = Score - Error, ymax = Score + Error))
   plot <- plot + geom_bar(stat = "identity", color = NA, position = "dodge", width = .7)
@@ -156,24 +136,24 @@ generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, col
   plot <- plot + guides(fill = guide_legend(byrow = TRUE))
   plot <- plot + scale_fill_manual(fillLabel, values = color_palette)
 
-  plot
+  return(plot)
 }
 
-# Generate and save the plot to a SVG output file
+# Function to save the plot to an SVG output file
 saveJmhBarPlot <- function(data, plot, path, benchmark_file_basename) {
-  if (!empty(data)) {
-    # set the height proportional to the number of rows plus 4 cm (as a minimum)
+  if (nrow(data) > 0) {
+    # Set the height proportional to the number of rows plus 4 cm (as a minimum)
     # TODO: may be this could be replaced by another formula
     height <- nrow(data) * 2 + 4
 
-    # create the path if does not exist
+    # Create the path if it does not exist
     if (!dir.exists(path)) {
       dir.create(path)
     }
 
-    # save the plot
+    # Save the plot
     ggsave(
-      file = paste(path, paste(benchmark_file_basename, "svg", sep = "."), sep = "/"),
+      file = file.path(path, paste(benchmark_file_basename, "svg", sep = ".")),
       plot = plot,
       width = 50.8, # 1920 pixels
       height = height,

@@ -21,19 +21,29 @@
 # under the License.
 #
 
+# Load the necessary utilities
 source("./ggplot2/geomean-utils.r")
 
-# retrieve command line arguments in a very specific order
+# Retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
+if (length(args) != 14) {
+  stop("Usage: Rscript script.R <jmh_output_folder> <geometric_mean_output_folder>
+        <openjdk_hotspot_vm_identifier> <graalvm_ce_identifier> <graalvm_ee_identifier> <azul_prime_vm_identifier>
+        <openjdk_hotspot_vm_name> <graalvm_ce_name> <graalvm_ee_name> <azul_prime_vm_name>
+        <openjdk_hotspot_vm_jit> <graalvm_ce_jit> <graalvm_ee_jit> <azul_prime_vm_jit>")
+}
 jmh_output_folder <- args[1]
 geometric_mean_output_folder <- args[2]
-openjdk_hotspot_vm_identifier <- args[3]
-graalvm_ce_identifier <- args[4]
-graalvm_ee_identifier <- args[5]
-azul_prime_vm_identifier <- args[6]
+jvm_identifiers <- args[3:6]
+jvm_names <- args[7:10]
+jit_names <- args[11:14]
+
+# Creates maps with labels as values for the identifiers
+jvm_names_map <- setNames(as.list(jvm_names), jvm_identifiers)
+jit_names_map <- setNames(as.list(jit_names), jvm_identifiers)
 
 # Define the JIT Compiler benchmark results for that we will compute the geometric mean (i.e., geomean) as a separate category
-jit_benchmark_files <- list(
+jit_benchmark_files <- c(
   "BranchlessBitwiseBenchmark.csv",
   "CanonicalizeInductionVariableBenchmark.csv",
   "CodeCacheBusterBenchmark.csv",
@@ -79,7 +89,7 @@ jit_benchmark_files <- list(
 )
 
 # Define the macro benchmark results for that we will compute the geometric mean (i.e., geomean) as a separate category
-macro_benchmark_files <- list(
+macro_benchmark_files <- c(
   "FactorialBenchmark.csv",
   "FibonacciBenchmark.csv",
   "HuffmanCodingBenchmark.csv",
@@ -89,58 +99,28 @@ macro_benchmark_files <- list(
   "WordFrequencyBenchmark.csv"
 )
 
-#-----------------------------#
-# JIT Compiler geometric mean #
-#-----------------------------#
+# Function to calculate and normalize geometric mean
+calculateNormalizedGeomean <- function(jvm_identifier, map, benchmark_files, reference_geomean, column_name) {
+  summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, jvm_identifier, benchmark_files)
+  normalized_geomean <- summary$geomean / reference_geomean
+  result_df <- data.frame(
+    Identifier = map[[jvm_identifier]],
+    "Normalized Geometric Mean" = round(normalized_geomean, 2),
+    "Nr of Benchmarks" = summary$benchmarks,
+    "Benchmarks Unit" = "ns/op"
+  )
+  # Rename the first column to the specified name
+  colnames(result_df)[1] <- column_name
 
-openjdk_hotspot_vm_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, jit_benchmark_files)
-graalvm_ce_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, jit_benchmark_files)
-graalvm_ee_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, jit_benchmark_files)
-azul_prime_vm_jit_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, azul_prime_vm_identifier, jit_benchmark_files)
-# normalize the resulting geometric mean to C2 JIT
-# Note: the geometric mean can be used even if the numbers are not normalized but the resulting means can then be normalized
-jit_summary <- data.frame(
-  "JIT" = c("C2 JIT", "GraalVM CE JIT", "GraalVM EE JIT", "Azul Prime JIT"),
-  "Normalized Geometric Mean" = c(
-    1,
-    round(graalvm_ce_jit_summary$geomean / openjdk_hotspot_vm_jit_summary$geomean, 2),
-    round(graalvm_ee_jit_summary$geomean / openjdk_hotspot_vm_jit_summary$geomean, 2),
-    round(azul_prime_vm_jit_summary$geomean / openjdk_hotspot_vm_jit_summary$geomean, 2)
-  ),
-  "Nr of Benchmarks" = c(
-    openjdk_hotspot_vm_jit_summary$benchmarks,
-    graalvm_ce_jit_summary$benchmarks,
-    graalvm_ee_jit_summary$benchmarks,
-    azul_prime_vm_jit_summary$benchmarks
-  ),
-  "Benchmarks Unit" = c("ns/op", "ns/op", "ns/op", "ns/op")
-)
-writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", jit_summary)
+  return(result_df)
+}
 
-#----------------------#
-# Macro geometric mean #
-#----------------------#
+# Calculate JIT compiler geometric mean
+reference_geomean <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, args[3], jit_benchmark_files)$geomean
+jit_summaries <- lapply(jvm_identifiers, calculateNormalizedGeomean, map = jit_names_map, benchmark_files = jit_benchmark_files, reference_geomean = reference_geomean, column_name = "JIT")
+writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", do.call(rbind, jit_summaries))
 
-openjdk_hotspot_vm_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, openjdk_hotspot_vm_identifier, macro_benchmark_files)
-graalvm_ce_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ce_identifier, macro_benchmark_files)
-graalvm_ee_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, graalvm_ee_identifier, macro_benchmark_files)
-azul_prime_vm_macro_summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, azul_prime_vm_identifier, macro_benchmark_files)
-# normalize the resulting geometric mean to OpenJDK HotSpot VM
-# Note: the geometric mean can be used even if the numbers are not normalized but the resulting means can then be normalized
-macro_summary <- data.frame(
-  "VM" = c("OpenJDK HotSpot VM", "GraalVM CE", "GraalVM EE", "Azul Prime VM"),
-  "Normalized Geometric Mean" = c(
-    1,
-    round(graalvm_ce_macro_summary$geomean / openjdk_hotspot_vm_macro_summary$geomean, 2),
-    round(graalvm_ee_macro_summary$geomean / openjdk_hotspot_vm_macro_summary$geomean, 2),
-    round(azul_prime_vm_macro_summary$geomean / openjdk_hotspot_vm_macro_summary$geomean, 2)
-  ),
-  "Nr of Benchmarks" = c(
-    openjdk_hotspot_vm_macro_summary$benchmarks,
-    graalvm_ce_macro_summary$benchmarks,
-    graalvm_ee_macro_summary$benchmarks,
-    azul_prime_vm_macro_summary$benchmarks
-  ),
-  "Benchmarks Unit" = c("ns/op", "ns/op", "ns/op", "ns/op")
-)
-writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", macro_summary)
+# Calculate Macro benchmark geometric mean
+reference_geomean <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, args[3], macro_benchmark_files)$geomean
+macro_summaries <- lapply(jvm_identifiers, calculateNormalizedGeomean, map = jvm_names_map, benchmark_files = macro_benchmark_files, reference_geomean = reference_geomean, column_name = "VM")
+writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", do.call(rbind, macro_summaries))

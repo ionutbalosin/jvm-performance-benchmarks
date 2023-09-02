@@ -21,67 +21,74 @@
 # under the License.
 #
 
+# Load the necessary utilities
 source("./ggplot2/utils.r")
 
 # Convert all average time scores to "ns/op" (for consistency across all benchmark results)
 convertAverageTimeInNs <- function(data) {
-  data$Score[data$Unit == "sec/op"] <- as.numeric(data$Score[data$Unit == "sec/op"]) * 1000 * 1000 * 1000
+  # Define conversion factors
+  sec_to_ns <- 1e9
+  ms_to_ns <- 1e6
+  us_to_ns <- 1e3
+
+  # Convert "sec/op" to "ns/op"
+  data$Score[data$Unit == "sec/op"] <- as.numeric(data$Score[data$Unit == "sec/op"]) * sec_to_ns
   data$Unit[data$Unit == "sec/op"] <- "ns/op"
 
-  data$Score[data$Unit == "ms/op"] <- as.numeric(data$Score[data$Unit == "ms/op"]) * 1000 * 1000
+  # Convert "ms/op" to "ns/op"
+  data$Score[data$Unit == "ms/op"] <- as.numeric(data$Score[data$Unit == "ms/op"]) * ms_to_ns
   data$Unit[data$Unit == "ms/op"] <- "ns/op"
 
-  data$Score[data$Unit == "us/op"] <- as.numeric(data$Score[data$Unit == "us/op"]) * 1000
+  # Convert "us/op" to "ns/op"
+  data$Score[data$Unit == "us/op"] <- as.numeric(data$Score[data$Unit == "us/op"]) * us_to_ns
   data$Unit[data$Unit == "us/op"] <- "ns/op"
 
-  data
+  return(data)
 }
 
 # Apply column sanitizations on the data frame
 sanitizeJmhCsvResults <- function(data) {
-  # delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
+  # Delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
   data <- data[!grepl(":.", data$Benchmark), ]
 
-  # replace commas with dots for Score and Error columns
-  # Note: this is needed for consistency across different platforms (e.g., Linux, macOS, etc.)
-  # Example: on Linux the decimal separator could be "." but on macOS is ",", hence we need to make it consistent
+  # Replace commas with dots for Score and Error columns for consistency
   data$Score <- as.numeric(gsub(",", ".", data$Score))
 
-  # keep only the necessary data frame columns for plotting
+  # Keep only the necessary data frame columns for plotting
   data <- data[, grep("^(Benchmark|Score|Unit)$", colnames(data))]
 
-  data
+  return(data)
 }
 
-# Merge and sanitize all benchmark results for different benchmark results into a single data frame
+# Merge and sanitize all benchmark results for different benchmark files into a single data frame
 mergeJmhCsvResults <- function(jmh_output_folder, jvm_identifier, benchmark_files) {
   result <- data.frame()
 
   for (benchmark_file in benchmark_files) {
-    benchmark_file_basename <- file_path_sans_ext(benchmark_file)
+    benchmark_file_basename <- tools::file_path_sans_ext(benchmark_file)
 
-    benchmark_file_path <- paste(jmh_output_folder, jvm_identifier, benchmark_file, sep = "/")
+    benchmark_file_path <- file.path(jmh_output_folder, jvm_identifier, benchmark_file)
     data <- readJmhCsvResults(benchmark_file_path)
-    if (!empty(data)) {
+    if (!is.null(data)) {
       data <- sanitizeJmhCsvResults(data)
       result <- rbind(result, data)
     }
   }
 
-  result
+  return(result)
 }
 
 # Calculate the geometric mean summary (e.g., the geomean score and the total number of benchmarks) for average time scores
 geometricMeanSummaryForAverageTimeJmhResults <- function(jmh_output_folder, jvm_identifier, benchmark_files) {
   data <- mergeJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_files)
   data <- convertAverageTimeInNs(data)
-  print(paste("The", jvm_identifier, "category contains", nrow(data), "benchmarks", sep = " "))
+  cat("The", jvm_identifier, "category contains", nrow(data), "benchmarks\n")
 
-  if (!empty(data)) {
+  if (nrow(data) > 0) {
     geomean <- geometric.mean(data$Score)
   } else {
     geomean <- NA
   }
 
-  list("geomean" = geomean, "benchmarks" = nrow(data))
+  return(list("geomean" = geomean, "benchmarks" = nrow(data)))
 }

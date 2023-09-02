@@ -21,19 +21,19 @@
 # under the License.
 #
 
+# Load the necessary utilities
 source("./ggplot2/merge-utils.r")
 
-# retrieve command line arguments in a very specific order
+# Retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
+if (length(args) != 5) {
+  stop("Usage: Rscript script.R <jmh_output_folder>
+        <openjdk_hotspot_vm_identifier> <graalvm_ce_identifier> <graalvm_ee_identifier> <azul_prime_vm_identifier>")
+}
 jmh_output_folder <- args[1]
-openjdk_hotspot_vm_identifier <- args[2]
-graalvm_ce_identifier <- args[3]
-graalvm_ee_identifier <- args[4]
-azul_prime_vm_identifier <- args[5]
+jvm_identifiers <- args[2:5]
 
-# Merge multiple benchmark result files and extends the data frame by adding a new column identifier
-# to each (e.g., column "<column_name>" with values from "<column_values>")
-# Note: the lists benchmark_files and column_values must have the same length
+# Define the benchmark files and column values
 benchmark_files <- list(
   "LockCoarseningBenchmark_withBiasedLocking.csv",
   "LockCoarseningBenchmark_withoutBiasedLocking.csv"
@@ -41,7 +41,8 @@ benchmark_files <- list(
 column_name <- "Param..biasedLocking"
 column_values <- list("enabled", "disabled")
 output_file <- "LockCoarseningBenchmark.csv"
-processJmhJitResults(jmh_output_folder, openjdk_hotspot_vm_identifier, benchmark_files, column_name, column_values, output_file)
-processJmhJitResults(jmh_output_folder, graalvm_ce_identifier, benchmark_files, column_name, column_values, output_file)
-processJmhJitResults(jmh_output_folder, graalvm_ee_identifier, benchmark_files, column_name, column_values, output_file)
-processJmhJitResults(jmh_output_folder, azul_prime_vm_identifier, benchmark_files, column_name, column_values, output_file)
+
+# Process JMH JIT results for each JVM identifier
+for (jvm_identifier in jvm_identifiers) {
+  processJmhJitResults(jmh_output_folder, jvm_identifier, benchmark_files, column_name, column_values, output_file)
+}

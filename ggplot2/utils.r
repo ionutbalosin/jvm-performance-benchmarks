@@ -21,9 +21,10 @@
 # under the License.
 #
 
+# Function to load a library and install if not available
 loadLibrary <- function(name) {
   if (!require(name, character.only = TRUE)) {
-    install.packages(name)
+    install.packages(name, repos = "http://cran.us.r-project.org")
     library(name, character.only = TRUE)
   }
 }
@@ -36,10 +37,10 @@ loadLibrary("plyr")
 loadLibrary("psych")
 loadLibrary("tools")
 
-# apply styles to all R and/or Rmd files in the directory
+# Apply styles to all R and/or Rmd files in the directory
 style_dir()
 
-# use a large positive value like 999 to prevent the scientific notation
+# Use a large positive value like 999 to prevent scientific notation
 options(scipen = 999)
 
 # Read the CSV results from file
@@ -58,7 +59,7 @@ readJmhCsvResults <- function(file_path) {
     }
   )
 
-  result
+  return(result)
 }
 
 # Write the CSV results to file
@@ -68,13 +69,13 @@ writeJmhCsvResults <- function(path, file, data) {
       if (!dir.exists(path)) {
         dir.create(path)
       }
-      write.table(data, paste(path, file, sep = "/"), sep = ",", row.names = FALSE)
+      write.table(data, file.path(path, file), sep = ",", row.names = FALSE)
     },
     warning = function(w) {
-      print(paste("Cannot write to", file_path, "File skipped.", sep = " "))
+      print(paste("Cannot write to", file.path(path, file), "File skipped.", sep = " "))
     },
     error = function(e) {
-      print(paste("Cannot write to", file_path, "File skipped.", sep = " "))
+      print(paste("Cannot write to", file.path(path, file), "File skipped.", sep = " "))
     }
   )
 }
