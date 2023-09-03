@@ -142,9 +142,19 @@ configure_os() {
     ;;
   *)
     echo "ERROR: No configuration is available for this OS. This is neither a Linux, Darwin, nor a Windows OS."
-    exit 1
+    return 1
     ;;
   esac
+}
+
+load_config_properties() {
+  if [ -f config.properties ]; then
+    source config.properties
+    echo "Configuration properties have been successfully loaded from the 'config.properties' file."
+  else
+    echo "ERROR: File 'config.properties' not found. Unable to continue!"
+    return 1
+  fi
 }
 
 echo ""
@@ -154,26 +164,34 @@ echo "##########################################################################
 DRY_RUN="$1"
 
 echo ""
+echo "+================================+"
+echo "| [1/6] Configuration Properties |"
+echo "+================================+"
+if ! load_config_properties; then
+  exit 1
+fi
+
+echo ""
 echo "+========================+"
-echo "| [1/5] OS Configuration |"
+echo "| [2/6] OS Configuration |"
 echo "+========================+"
 configure_os
 
 echo ""
 echo "+=========================+"
-echo "| [2/5] JVM Configuration |"
+echo "| [3/6] JVM Configuration |"
 echo "+=========================+"
 . ./configure-jvm.sh || exit 1
 
 echo ""
 echo "+=========================+"
-echo "| [3/5] JMH Configuration |"
+echo "| [4/6] JMH Configuration |"
 echo "+=========================+"
 . ./configure-jmh.sh || exit 1
 
 echo ""
 echo "+===============================+"
-echo "| [4/5] Compile benchmark suite |"
+echo "| [5/6] Compile benchmark suite |"
 echo "+===============================+"
 if ! compile_benchmark_suite; then
   exit 1
@@ -181,6 +199,6 @@ fi
 
 echo ""
 echo "+===========================+"
-echo "| [5/5] Run benchmark suite |"
+echo "| [6/6] Run benchmark suite |"
 echo "+===========================+"
 run_benchmark_suite

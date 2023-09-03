@@ -143,26 +143,37 @@ If there is a need for another JDK LTS version (or feature release), you have to
 
 ### Configure JDK
 
-After the JDK was installed, the JDK path needs to be updated in the benchmark configuration scripts.  To do so, open the [configure-jvm.sh](./configure-jvm.sh) script file and update the corresponding **JAVA_HOME** property:
-```
-export JAVA_HOME="<path_to_jdk>"
-```
+After installing the JDK, you need to update the JDK path in the configuration properties. To do this, follow these steps:
+
+1. Open the [config.properties](./config.properties) file.
+
+2. Update the specific **VM_HOME** property for the JDK you want to use. You don't need to update all of them, only the one you intend to use for compiling and running the benchmarks. For example:
+
+    ```properties
+    OPENJDK_HOTSPOT_VM_HOME="<path_to_jdk>"
+    GRAAL_VM_CE_HOME="<path_to_jdk>"
+    GRAAL_VM_EE_HOME="<path_to_jdk>"
+    AZUL_PRIME_VM_HOME="<path_to_jdk>"
+    ```
 
 #### A few examples
 
 Linux OS:
-```
-export JAVA_HOME="/usr/lib/jvm/openjdk-17.0.5"
+
+```properties
+OPENJDK_HOTSPOT_VM_HOME="/usr/lib/jvm/openjdk-17.0.5"
 ```
 
 Mac OS:
-```
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.0.5/Contents/Home"
+
+```properties
+OPENJDK_HOTSPOT_VM_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.0.5/Contents/Home"
 ```
 
 Windows OS:
-```
-export JAVA_HOME="/c/Program_Dev/Java/openjdk-17.0.5"
+
+```properties
+OPENJDK_HOTSPOT_VM_HOME="/c/Program_Dev/Java/openjdk-17.0.5"
 ```
 
 ## Benchmarks suites

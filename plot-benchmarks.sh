@@ -45,52 +45,46 @@ check_command_line_options() {
   ARCH="${2:-$(uname -m)}"
 }
 
+load_config_properties() {
+  if [ -f config.properties ]; then
+    source config.properties
+    echo "Configuration properties have been successfully loaded from the 'config.properties' file."
+  else
+    echo "ERROR: File 'config.properties' not found. Unable to continue!"
+    return 1
+  fi
+}
+
 set_environment_variables() {
   export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/jmh"
   export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
   export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
 
-  export OPENJDK_HOTSPOT_VM_IDENTIFIER="openjdk-hotspot-vm"
-  export OPENJDK_HOTSPOT_VM_NAME="OpenJDK HotSpot VM"
-  export OPENJDK_HOTSPOT_VM_JIT="C2 JIT"
-  export OPENJDK_HOTSPOT_VM_COLOR_PALETTE="#648FFF"
-
-  export GRAAL_VM_CE_IDENTIFIER="graalvm-ce"
-  export GRAAL_VM_CE_NAME="GraalVM CE"
-  export GRAAL_VM_CE_JIT="GraalVM CE JIT"
-  export GRAAL_VM_CE_COLOR_PALETTE="#FFB000"
-
-  export GRAAL_VM_EE_IDENTIFIER="graalvm-ee"
-  export GRAAL_VM_EE_NAME="GraalVM EE"
-  export GRAAL_VM_EE_JIT="GraalVM EE JIT"
-  export GRAAL_VM_EE_COLOR_PALETTE="#FE6100"
-
-  export AZUL_PRIME_VM_IDENTIFIER="azul-prime-vm"
-  export AZUL_PRIME_VM_NAME="Azul Prime VM"
-  export AZUL_PRIME_VM_JIT="Azul Prime JIT"
-  export AZUL_PRIME_VM_COLOR_PALETTE="#785EF0"
-
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
   echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
+  echo ""
 
-  echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "OpenJDK HotSpot VM name: $OPENJDK_HOTSPOT_VM_NAME"
+  echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
   echo "OpenJDK HotSpot JIT: $OPENJDK_HOTSPOT_VM_JIT"
   echo "OpenJDK HotSpot VM Palette Color: $OPENJDK_HOTSPOT_VM_COLOR_PALETTE"
+  echo ""
 
-  echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM CE name: $GRAAL_VM_CE_NAME"
+  echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
   echo "GraalVM CE JIT: $GRAAL_VM_CE_JIT"
   echo "GraalVM CE Palette Color: $GRAAL_VM_CE_COLOR_PALETTE"
+  echo ""
 
-  echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
   echo "GraalVM EE name: $GRAAL_VM_EE_NAME"
+  echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
   echo "GraalVM EE JIT: $GRAAL_VM_EE_JIT"
   echo "GraalVM EE Palette Color: $GRAAL_VM_EE_COLOR_PALETTE"
+  echo ""
 
-  echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
   echo "Azul Prime VM name: $AZUL_PRIME_VM_NAME"
+  echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
   echo "Azul Prime JIT: $AZUL_PRIME_VM_JIT"
   echo "Azul Prime VM Palette Color: $AZUL_PRIME_VM_COLOR_PALETTE"
 
@@ -229,6 +223,14 @@ echo "#############################################################"
 echo "#######       Benchmarks Results Plot Generator       #######"
 echo "#############################################################"
 if ! check_command_line_options "$@"; then
+  exit 1
+fi
+
+echo ""
+echo "+--------------------------+"
+echo "| Configuration Properties |"
+echo "+--------------------------+"
+if ! load_config_properties; then
   exit 1
 fi
 

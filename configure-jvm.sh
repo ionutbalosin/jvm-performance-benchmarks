@@ -22,31 +22,13 @@
 # under the License.
 #
 
-configure_openjdk_hotspot_vm() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="OpenJDK HotSpot VM"
-  export JVM_IDENTIFIER="openjdk-hotspot-vm"
-}
-
-configure_graalvm_ce() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="GraalVM CE"
-  export JVM_IDENTIFIER="graalvm-ce"
-}
-
-configure_graalvm_ee() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="GraalVM EE"
-  export JVM_IDENTIFIER="graalvm-ee"
-}
-
-configure_azul_prime_vm() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="Azul Prime VM"
-  export JVM_IDENTIFIER="azul-prime-vm"
-}
-
 configure_jvm() {
+  export JAVA_HOME="$1"
+  export JVM_NAME="$2"
+  export JVM_IDENTIFIER="$3"
+}
+
+select_jvm() {
   echo ""
   echo "Select a JVM:"
   echo "  1) OpenJDK HotSpot VM"
@@ -59,19 +41,19 @@ configure_jvm() {
     read -r INPUT_KEY
     case $INPUT_KEY in
     1)
-      configure_openjdk_hotspot_vm
+      configure_jvm "$OPENJDK_HOTSPOT_VM_HOME" "$OPENJDK_HOTSPOT_VM_NAME" "$OPENJDK_HOTSPOT_VM_IDENTIFIER"
       break
       ;;
     2)
-      configure_graalvm_ce
+      configure_jvm "$GRAAL_VM_CE_HOME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_CE_IDENTIFIER"
       break
       ;;
     3)
-      configure_graalvm_ee
+      configure_jvm "$GRAAL_VM_EE_HOME" "$GRAAL_VM_EE_NAME" "$GRAAL_VM_EE_IDENTIFIER"
       break
       ;;
     4)
-      configure_azul_prime_vm
+      configure_jvm "$AZUL_PRIME_VM_HOME" "$AZUL_PRIME_VM_NAME" "$AZUL_PRIME_VM_IDENTIFIER"
       break
       ;;
     *)
@@ -102,19 +84,19 @@ set_environment_variables() {
   echo "Java home: $JAVA_HOME"
   echo "JDK version: $JDK_VERSION"
   echo "JVM name: $JVM_NAME"
-  echo "JVM benchmarks identifier: $JVM_IDENTIFIER"
+  echo "JVM identifier: $JVM_IDENTIFIER"
   echo ""
 
   read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 }
 
 echo ""
-echo "+---------------+"
-echo "| Configure JVM |"
-echo "+---------------+"
+echo "+------------+"
+echo "| Select JVM |"
+echo "+------------+"
 echo "The JDK version is automatically detected based on the JDK distribution found at the preconfigured 'JAVA_HOME' path."
 echo "This assumes that the 'JAVA_HOME' variable has already been specified in the benchmark configuration scripts (i.e., the ./configure-jvm file). Otherwise, the subsequent execution will fail."
-configure_jvm
+select_jvm
 
 echo ""
 echo "+---------------------------+"
