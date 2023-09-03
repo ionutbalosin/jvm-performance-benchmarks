@@ -147,7 +147,7 @@ After installing the JDK, you need to update the JDK path in the configuration p
 
 1. Open the [config.properties](./config.properties) file.
 
-2. Update the specific **VM_HOME** property for the JDK you want to use. You don't need to update all of them, only the one you intend to use for compiling and running the benchmarks. For example:
+2. Update the specific **VM_HOME** property for the JDK you want to use. You don't need to update all of them, only the one you intend to use for compiling and running the benchmarks.
 
     ```properties
     OPENJDK_HOTSPOT_VM_HOME="<path_to_jdk>"
@@ -211,22 +211,22 @@ Running one benchmark suite triggers the full setup (in a very interactive way, 
 - compile the benchmarks (using a JDK Maven profile)
 
 **Note**: Only for benchmarks compilation please run the below command:
-```
+```bash
 ./mvnw -P jdk$<jdk-version>_profile clean package
 ```
 where `<jdk-version>` is {11, 17, 21}. If the profile is omitted, JDK profile 17 is implicitly selected.  
 
 Examples:
-```
+```bash
 ./mvnw clean package
 ```
-```
+```bash
 ./mvnw -P jdk11_profile clean package
 ```
-```
+```bash
 ./mvnw -P jdk17_profile clean package
 ```
-```
+```bash
 ./mvnw -P jdk21_profile clean package
 ```
 ## Elapsed amount of time for each benchmark suite
@@ -242,7 +242,7 @@ benchmarks-suite-jdk21.json | N/A
 ### Dry run
 
 Dry run mode goes through and simulates all the commands, but without changing any OS setting, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
-```
+```bash
 ./run-benchmarks.sh --dry-run
 ```
 
@@ -250,7 +250,7 @@ Dry run mode goes through and simulates all the commands, but without changing a
 
 ### Normal run
 
-```
+```bash
 ./run-benchmarks.sh | tee run-benchmarks.out
 ```
 
@@ -274,7 +274,7 @@ The benchmark plot generation is based on [R/ggplot2](https://ggplot2.tidyverse.
 ### Generate the benchmark plots
 
 To generate all benchmark plots corresponding to one `<jdk-version>` and (optionally,) a specific `<arch>`, run the below command:
-```
+```bash
 ./plot-benchmarks.sh <jdk-version> [<arch>]
 ```
 If the `<arch>` parameter is omitted, it is automatically detected based on the current system architecture.
