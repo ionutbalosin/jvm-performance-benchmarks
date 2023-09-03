@@ -25,16 +25,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 
 
 /*
@@ -52,6 +43,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(value = 5)
 @State(Scope.Benchmark)
 public class SwitchBenchmark {
+
+  private final int SIZE = 100_000;
   private I[] interfaceArray;
   private AsIs[] asIsArray;
 
@@ -166,10 +159,10 @@ public class SwitchBenchmark {
 
   @Setup
   public void init() {
-    interfaceArray = new I[100_000];
-    asIsArray = new AsIs[100_000];
+    interfaceArray = new I[SIZE];
+    asIsArray = new AsIs[SIZE];
     Random random = new Random(16384);
-    for (int i = 0; i < 100_000; i++) {
+    for (int i = 0; i < SIZE; i++) {
       interfaceArray[i] = switch (random.nextInt(0, Integer.MAX_VALUE) % 8) {
         case 0 -> new AsIs(i);
         case 1 -> new LongToInt(i);
@@ -187,6 +180,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int if_instanceof_interface_array() {
     var sum = 0;
     for (var element : interfaceArray) {
@@ -196,6 +190,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int if_instanceof_concrete_array() {
     var sum = 0;
     for (var element : asIsArray) {
@@ -205,6 +200,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int switch_interface_array() {
     var sum = 0;
     for (var element : interfaceArray) {
@@ -214,6 +210,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int switch_concrete_array() {
     var sum = 0;
     for (var element : asIsArray) {
@@ -223,6 +220,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int switch_if_interface_array() {
     var sum = 0;
     for (var element : interfaceArray) {
@@ -232,6 +230,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int switch_when_interface_array() {
     var sum = 0;
     for (var element : interfaceArray) {
@@ -241,6 +240,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int switch_if_concrete_array() {
     var sum = 0;
     for (var element : asIsArray) {
@@ -250,6 +250,7 @@ public class SwitchBenchmark {
   }
 
   @Benchmark
+  @OperationsPerInvocation(SIZE)
   public int switch_when_concrete_array() {
     var sum = 0;
     for (var element : asIsArray) {
