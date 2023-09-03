@@ -44,7 +44,7 @@ style_dir()
 options(scipen = 999)
 
 # Read the CSV results from file
-readJmhCsvResults <- function(file_path) {
+readCsvResultsFromFile <- function(file_path) {
   result <- data.frame()
 
   tryCatch(
@@ -63,7 +63,7 @@ readJmhCsvResults <- function(file_path) {
 }
 
 # Write the CSV results to file
-writeJmhCsvResults <- function(path, file, data) {
+writeDataToCsvFile <- function(path, file, data) {
   tryCatch(
     {
       if (!dir.exists(path)) {

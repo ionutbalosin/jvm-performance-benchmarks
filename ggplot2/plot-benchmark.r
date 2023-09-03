@@ -41,15 +41,18 @@ jvm_color_palettes <- args[11:14]
 jvm_names_map <- setNames(as.list(jvm_names), jvm_identifiers)
 jvm_color_palettes_map <- setNames(as.list(jvm_color_palettes), jvm_names)
 
-# Note: the corresponding benchmark file results must have the same names and reside under the same folder structure:
+# The corresponding benchmark files should have matching names and be located in the same folder structure:
 # e.g.,
 #   <jdk-version>
 #     +--> <arch>
-#           +--> /openjdk-hotspot-vm/BenchmarkResult.csv
-#           +--> /graalvm-ce/BenchmarkResult.csv
-#           +--> /graalvm-ee/BenchmarkResult.csv
-#           +--> /azul-prime-vm/BenchmarkResult.csv
-reference_path <- paste(jmh_output_folder, args[3], sep = "/")
+#       +--> /openjdk-hotspot-vm/BenchmarkResult.csv
+#       +--> /graalvm-ce/BenchmarkResult.csv
+#       +--> /graalvm-ee/BenchmarkResult.csv
+#       +--> /azul-prime-vm/BenchmarkResult.csv
+# Use "openjdk-hotspot-vm" as the reference, which is conventionally passed as the 3rd argument.
+openjdk_hotspot_vm <- args[3]
+reference_path <- paste(jmh_output_folder, openjdk_hotspot_vm, sep = "/")
+
 benchmark_files <- list.files(path = reference_path, full.names = FALSE)
 for (benchmark_file in benchmark_files) {
   benchmark_file_basename <- tools::file_path_sans_ext(benchmark_file)
@@ -58,10 +61,10 @@ for (benchmark_file in benchmark_files) {
   data <- NULL
   for (jvm_identifier in jvm_identifiers) {
     benchmark_file_path <- paste(jmh_output_folder, jvm_identifier, benchmark_file, sep = "/")
-    data <- rbind(data, readAndAppendJvmIdentifierToJmhCsvResults(benchmark_file_path, jvm_names_map[[jvm_identifier]]))
+    data <- rbind(data, readBenchmarkResultsWithJvmIdentifier(benchmark_file_path, jvm_names_map[[jvm_identifier]]))
   }
 
-  data <- processJmhCsvResults(data)
-  plot <- generateJmhBarPlot(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, jvm_color_palettes_map)
-  saveJmhBarPlot(data, plot, plot_output_folder, benchmark_file_basename)
+  data <- cleanAndPrepareBenchmarkData(data)
+  plot <- createBenchmarkBarChart(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, jvm_color_palettes_map)
+  saveBenchmarkBarChartToSVG(data, plot, plot_output_folder, benchmark_file_basename)
 }

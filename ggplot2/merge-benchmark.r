@@ -44,5 +44,5 @@ output_file <- "LockCoarseningBenchmark.csv"
 
 # Process JMH JIT results for each JVM identifier
 for (jvm_identifier in jvm_identifiers) {
-  processJmhJitResults(jmh_output_folder, jvm_identifier, benchmark_files, column_name, column_values, output_file)
+  mergeAndWriteBenchmarkResultsToFile(jmh_output_folder, jvm_identifier, benchmark_files, column_name, column_values, output_file)
 }

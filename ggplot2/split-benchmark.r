@@ -46,7 +46,7 @@ splitAndProcessBenchmark <- function(benchmark_file, param_name, column_values) 
       sep = "_"
     )
     output_file <- paste(output_file, ".csv", sep = "")
-    processJmhCsvResults(jmh_output_folder, jvm_identifier, benchmark_file, column_name, column_values, output_file)
+    splitAndWriteBenchmarkResultsToFile(jmh_output_folder, jvm_identifier, benchmark_file, column_name, column_values, output_file)
   }
 }
 

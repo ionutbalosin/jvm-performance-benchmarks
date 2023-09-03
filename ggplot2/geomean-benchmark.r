@@ -100,13 +100,13 @@ macro_benchmark_files <- c(
 )
 
 # Function to calculate and normalize geometric mean
-calculateNormalizedGeomean <- function(jvm_identifier, map, benchmark_files, reference_geomean, column_name) {
-  summary <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, jvm_identifier, benchmark_files)
-  normalized_geomean <- summary$geomean / reference_geomean
+calculateNormalizedGeometricMean <- function(jvm_identifier, map, benchmark_files, reference_geomean, column_name) {
+  report_geomean <- calculateGeometricMeanReport(jmh_output_folder, jvm_identifier, benchmark_files)
+  normalized_geomean <- report_geomean$geomean / reference_geomean
   result_df <- data.frame(
     Identifier = map[[jvm_identifier]],
     "Normalized Geometric Mean" = round(normalized_geomean, 2),
-    "Nr of Benchmarks" = summary$benchmarks,
+    "Nr of Benchmarks" = report_geomean$benchmarks,
     "Benchmarks Unit" = "ns/op"
   )
   # Rename the first column to the specified name
@@ -115,12 +115,16 @@ calculateNormalizedGeomean <- function(jvm_identifier, map, benchmark_files, ref
   return(result_df)
 }
 
-# Calculate JIT compiler geometric mean
-reference_geomean <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, args[3], jit_benchmark_files)$geomean
-jit_summaries <- lapply(jvm_identifiers, calculateNormalizedGeomean, map = jit_names_map, benchmark_files = jit_benchmark_files, reference_geomean = reference_geomean, column_name = "JIT")
-writeJmhCsvResults(geometric_mean_output_folder, "jit.csv", do.call(rbind, jit_summaries))
+# Calculate the geometric mean of JIT compiler
+# Note: Use "openjdk-hotspot-vm" as the reference, which is conventionally passed in the 3rd argument
+openjdk_hotspot_vm <- args[3]
+reference_geomean <- calculateGeometricMeanReport(jmh_output_folder, openjdk_hotspot_vm, jit_benchmark_files)$geomean
+jit_summaries <- lapply(jvm_identifiers, calculateNormalizedGeometricMean, map = jit_names_map, benchmark_files = jit_benchmark_files, reference_geomean = reference_geomean, column_name = "JIT")
+writeDataToCsvFile(geometric_mean_output_folder, "jit.csv", do.call(rbind, jit_summaries))
 
-# Calculate Macro benchmark geometric mean
-reference_geomean <- geometricMeanSummaryForAverageTimeJmhResults(jmh_output_folder, args[3], macro_benchmark_files)$geomean
-macro_summaries <- lapply(jvm_identifiers, calculateNormalizedGeomean, map = jvm_names_map, benchmark_files = macro_benchmark_files, reference_geomean = reference_geomean, column_name = "VM")
-writeJmhCsvResults(geometric_mean_output_folder, "macro.csv", do.call(rbind, macro_summaries))
+# Calculate the geometric mean of macro benchmarks
+# Note: Use "openjdk-hotspot-vm" as the reference, which is conventionally passed in the 3rd argument
+openjdk_hotspot_vm <- args[3]
+reference_geomean <- calculateGeometricMeanReport(jmh_output_folder, openjdk_hotspot_vm, macro_benchmark_files)$geomean
+macro_summaries <- lapply(jvm_identifiers, calculateNormalizedGeometricMean, map = jvm_names_map, benchmark_files = macro_benchmark_files, reference_geomean = reference_geomean, column_name = "VM")
+writeDataToCsvFile(geometric_mean_output_folder, "macro.csv", do.call(rbind, macro_summaries))

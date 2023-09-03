@@ -24,9 +24,9 @@
 # Load the necessary utilities
 source("./ggplot2/utils.r")
 
-# Function to read a CSV file and append a JVM column identifier
-readAndAppendJvmIdentifierToJmhCsvResults <- function(benchmark_file_path, identifier) {
-  result <- readJmhCsvResults(benchmark_file_path)
+# Function to read the benchmark results from a CSV file and append a JVM column identifier
+readBenchmarkResultsWithJvmIdentifier <- function(benchmark_file_path, identifier) {
+  result <- readCsvResultsFromFile(benchmark_file_path)
 
   if (nrow(result) > 0) {
     result <- cbind(result, "JvmIdentifier" = identifier)
@@ -36,7 +36,7 @@ readAndAppendJvmIdentifierToJmhCsvResults <- function(benchmark_file_path, ident
 }
 
 # Function to concatenate all benchmark Param columns
-concatJmhCsvParamCols <- function(data) {
+concatenateBenchmarkParamColumns <- function(data) {
   result <- c()
 
   # Extract all Param columns in a data frame
@@ -72,8 +72,8 @@ concatJmhCsvParamCols <- function(data) {
   result
 }
 
-# Function to process JMH CSV results
-processJmhCsvResults <- function(data) {
+# Function to process the benchmark results
+cleanAndPrepareBenchmarkData <- function(data) {
   # Delete rows containing profile stats in the Benchmark name
   data <- data[!grepl(":.", data$Benchmark), ]
 
@@ -91,7 +91,7 @@ processJmhCsvResults <- function(data) {
   data$Score <- round(data$Score, 2)
 
   # Add a new Parameters column with concatenated Param names:values
-  data$Parameters <- concatJmhCsvParamCols(data)
+  data$Parameters <- concatenateBenchmarkParamColumns(data)
 
   # Keep only necessary columns for plotting
   data <- data[, grep("^(Benchmark|Score|Error|Unit|JvmIdentifier|Parameters)$", colnames(data))]
@@ -113,7 +113,7 @@ processJmhCsvResults <- function(data) {
 }
 
 # Function to generate a bar chart plot
-generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, color_palette) {
+createBenchmarkBarChart <- function(data, fill, fillLabel, xLabel, yLabel, title, color_palette) {
   plot <- ggplot(data, aes(x = Benchmark, y = Score, fill = data[, fill], ymin = Score - Error, ymax = Score + Error))
   plot <- plot + geom_bar(stat = "identity", color = NA, position = "dodge", width = .7)
   plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = -0.05, vjust = -.75, position = position_dodge(.7), size = 4)
@@ -140,7 +140,7 @@ generateJmhBarPlot <- function(data, fill, fillLabel, xLabel, yLabel, title, col
 }
 
 # Function to save the plot to an SVG output file
-saveJmhBarPlot <- function(data, plot, path, benchmark_file_basename) {
+saveBenchmarkBarChartToSVG <- function(data, plot, path, benchmark_file_basename) {
   if (nrow(data) > 0) {
     # Set the height proportional to the number of rows plus 4 cm (as a minimum)
     # TODO: may be this could be replaced by another formula
