@@ -103,7 +103,8 @@ public class SequentialCollectionReadAccessBenchmark {
       for (int i = 0; i < 5; i++) {
         // Important considerations:
         // - There is no guarantee that the GC will be actually invoked.
-        // - Even if the GC is triggered, there is no assurance that the data will be rearranged (i.e., compacted). The outcome depends on the specific behavior of the Collector itself.
+        // - Even if the GC is triggered, there is no assurance that the data will be rearranged
+        // (i.e., compacted). The outcome depends on the specific behavior of the Collector itself.
         System.gc();
         TimeUnit.SECONDS.sleep(1);
       }

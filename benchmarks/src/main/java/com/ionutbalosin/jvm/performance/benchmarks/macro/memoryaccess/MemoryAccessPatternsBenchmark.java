@@ -60,7 +60,8 @@ public class MemoryAccessPatternsBenchmark {
   // $ java -jar */*/benchmarks.jar ".*MemoryAccessPatternsBenchmark.*"
 
   private static final int LONG_SIZE = 8; // 8 bytes
-  private static final int PAGE_SIZE = 1024 * 1024; // 1 MB
+  // Note: With Transparent Huge Pages enabled, this needs to be set to 2 MB
+  private static final int PAGE_SIZE = 4 * 1024; // 4 KB
   private static final long MEMORY_SIZE = 1024 * 1024 * 1024; // 1 GB
   private static final int PRIME_INC = 514_229;
 
