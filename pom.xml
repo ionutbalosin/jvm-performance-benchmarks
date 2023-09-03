@@ -17,7 +17,7 @@
         <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
         <maven.shade.plugin>3.5.0</maven.shade.plugin>
         <org.openjdk.jmh>1.37</org.openjdk.jmh>
-        <spotless.maven.plugin>2.38.0</spotless.maven.plugin>
+        <spotless.maven.plugin>2.39.0</spotless.maven.plugin>
         <google.java.format>1.17.0</google.java.format>
     </properties>
 
@@ -39,10 +39,10 @@
             <properties>
                 <jdk.version>11</jdk.version>
                 <spotlessExcludedFiles>
-                    **/EnumSwitchBenchmark.java,**/StringSwitchBenchmark.java
+                    **/EnumSwitchBenchmark.java,**/StringSwitchBenchmark.java,**/SwitchBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/EnumSwitchBenchmark.java,**/MandelbrotVectorApiBenchmark.java,**/SepiaVectorApiBenchmark.java,**/SortVectorApiBenchmark.java,**/StringSwitchBenchmark.java,**/VectorApiBenchmark.java
+                    **/EnumSwitchBenchmark.java,**/MandelbrotVectorApiBenchmark.java,**/SepiaVectorApiBenchmark.java,**/SortVectorApiBenchmark.java,**/StringSwitchBenchmark.java,**/VectorApiBenchmark.java,**/SwitchBenchmark.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
@@ -57,6 +57,12 @@
             </activation>
             <properties>
                 <jdk.version>17</jdk.version>
+                <spotlessExcludedFiles>
+                    **/SwitchBenchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/SwitchBenchmark.java
+                </compilerExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
                 </compilerArgs>
@@ -67,6 +73,9 @@
             <id>jdk21_profile</id>
             <properties>
                 <jdk.version>21</jdk.version>
+                <spotlessExcludedFiles>
+                    **/SwitchBenchmark.java
+                </spotlessExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
                 </compilerArgs>
