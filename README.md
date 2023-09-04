@@ -1,15 +1,14 @@
 # Java Virtual Machine (JVM) Performance Benchmarks
 
-This repository contains various Java Virtual Machine (JVM) micro-benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
+This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
-The repository's benchmarks cover two main areas:
-1. The first area directly targets JIT Compiler optimizations by following specific handwritten code patterns.
-2. The second area, categorized as *macros*, covers a broader spectrum of programs and has multiple focuses:
-
+The repository's benchmarks encompass several main areas.
+The first area, referred to as *micro compiler*, is dedicated to directly targeting JIT Compiler optimizations by following specific handwritten code patterns. 
+Complementary, the second area, referred to as *macro*, covers a broader spectrum of programs and has multiple focuses:
    - Implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, game of life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional) and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
-   - Benchmarks focused on the JDK API (e.g., `java.io`, `java.nio`, `java.security`, `java.util.random`, etc.).
+   - Benchmarks that specifically target the JDK API (e.g., `java.io`, `java.nio`, `java.security`, `java.util.random`, etc.).
 
-The micro-benchmarks are implemented using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh).
+The benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
 
 ## Contents
 
