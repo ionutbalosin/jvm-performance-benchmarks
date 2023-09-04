@@ -33,8 +33,9 @@ import org.openjdk.jmh.annotations.*;
  * - instanceof checks
  * - switch expressions using when, yield and lambda syntax.
  *
- * Inspired from Remi Forax
- * https://github.com/forax/switch-perf/blob/master/src/main/java/com/github/forax/switchperf/Bench.java
+ * References:
+ * - code examples by Remi Forax
+ * - https://github.com/forax/switch-perf/blob/master/src/main/java/com/github/forax/switchperf/Bench.java
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -42,7 +43,7 @@ import org.openjdk.jmh.annotations.*;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class SwitchBenchmark {
+public class TypeSwitchBenchmark {
 
   private final int SIZE = 100_000;
   private I[] interfaceArray;

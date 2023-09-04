@@ -68,13 +68,20 @@ public class RsaSignatureBenchmark {
     Random random = new Random(16384);
     random.nextBytes(message);
 
-    int keyLength =
-        switch (algorithm) {
-          case "SHA256withRSA" -> 2048;
-          case "SHA384withRSA" -> 3072;
-          case "SHA512withRSA" -> 4096;
-          default -> throw new RuntimeException();
-        };
+    int keyLength;
+    switch (algorithm) {
+      case "SHA256withRSA":
+        keyLength = 2048;
+        break;
+      case "SHA384withRSA":
+        keyLength = 3072;
+        break;
+      case "SHA512withRSA":
+        keyLength = 4096;
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported algorithm " + algorithm);
+    }
 
     KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
     kpg.initialize(keyLength);

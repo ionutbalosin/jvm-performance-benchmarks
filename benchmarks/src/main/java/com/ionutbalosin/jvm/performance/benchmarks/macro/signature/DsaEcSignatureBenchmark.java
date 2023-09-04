@@ -70,13 +70,20 @@ public class DsaEcSignatureBenchmark {
     Random random = new Random(16384);
     random.nextBytes(message);
 
-    String signName =
-        switch (algorithm) {
-          case "secp256r1" -> "SHA256withECDSA";
-          case "secp384r1" -> "SHA384withECDSA";
-          case "secp521r1" -> "SHA512withECDSA";
-          default -> throw new RuntimeException();
-        };
+    String signName;
+    switch (algorithm) {
+      case "secp256r1":
+        signName = "SHA256withECDSA";
+        break;
+      case "secp384r1":
+        signName = "SHA384withECDSA";
+        break;
+      case "secp521r1":
+        signName = "SHA512withECDSA";
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported algorithm " + algorithm);
+    }
 
     AlgorithmParameters params = AlgorithmParameters.getInstance("EC", "SunEC");
     params.init(new ECGenParameterSpec(algorithm));

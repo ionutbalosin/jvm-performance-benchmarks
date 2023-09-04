@@ -39,10 +39,10 @@
             <properties>
                 <jdk.version>11</jdk.version>
                 <spotlessExcludedFiles>
-                    **/EnumSwitchBenchmark.java,**/StringSwitchBenchmark.java,**/SwitchBenchmark.java
+                    **/*SwitchBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/EnumSwitchBenchmark.java,**/MandelbrotVectorApiBenchmark.java,**/SepiaVectorApiBenchmark.java,**/SortVectorApiBenchmark.java,**/StringSwitchBenchmark.java,**/VectorApiBenchmark.java,**/SwitchBenchmark.java
+                    **/*SwitchBenchmark.java,**/*VectorApiBenchmark.java,**/RandomGeneratorBenchmark.java,**/ThreadLocalRandomBenchmark.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
@@ -58,10 +58,10 @@
             <properties>
                 <jdk.version>17</jdk.version>
                 <spotlessExcludedFiles>
-                    **/SwitchBenchmark.java
+                    **/TypeSwitchBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/SwitchBenchmark.java
+                    **/TypeSwitchBenchmark.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
@@ -74,7 +74,7 @@
             <properties>
                 <jdk.version>21</jdk.version>
                 <spotlessExcludedFiles>
-                    **/SwitchBenchmark.java
+                    **/TypeSwitchBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview

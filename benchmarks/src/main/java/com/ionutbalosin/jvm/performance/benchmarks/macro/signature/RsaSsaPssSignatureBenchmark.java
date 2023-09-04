@@ -70,24 +70,41 @@ public class RsaSsaPssSignatureBenchmark {
     Random random = new Random(16384);
     random.nextBytes(message);
 
-    int keyLength =
-        switch (algorithm) {
-          case "SHA256" -> 2048;
-          case "SHA384" -> 3072;
-          case "SHA512" -> 4096;
-          default -> throw new RuntimeException();
-        };
+    int keyLength;
+    switch (algorithm) {
+      case "SHA256":
+        keyLength = 2048;
+        break;
+      case "SHA384":
+        keyLength = 3072;
+        break;
+      case "SHA512":
+        keyLength = 4096;
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported algorithm " + algorithm);
+    }
 
-    PSSParameterSpec spec =
-        switch (algorithm) {
-          case "SHA256" -> new PSSParameterSpec(
-              "SHA-256", "MGF1", MGF1ParameterSpec.SHA256, 32, PSSParameterSpec.TRAILER_FIELD_BC);
-          case "SHA384" -> new PSSParameterSpec(
-              "SHA-384", "MGF1", MGF1ParameterSpec.SHA384, 48, PSSParameterSpec.TRAILER_FIELD_BC);
-          case "SHA512" -> new PSSParameterSpec(
-              "SHA-512", "MGF1", MGF1ParameterSpec.SHA512, 64, PSSParameterSpec.TRAILER_FIELD_BC);
-          default -> throw new RuntimeException();
-        };
+    PSSParameterSpec spec;
+    switch (algorithm) {
+      case "SHA256":
+        spec =
+            new PSSParameterSpec(
+                "SHA-256", "MGF1", MGF1ParameterSpec.SHA256, 32, PSSParameterSpec.TRAILER_FIELD_BC);
+        break;
+      case "SHA384":
+        spec =
+            new PSSParameterSpec(
+                "SHA-384", "MGF1", MGF1ParameterSpec.SHA384, 48, PSSParameterSpec.TRAILER_FIELD_BC);
+        break;
+      case "SHA512":
+        spec =
+            new PSSParameterSpec(
+                "SHA-512", "MGF1", MGF1ParameterSpec.SHA512, 64, PSSParameterSpec.TRAILER_FIELD_BC);
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported algorithm " + algorithm);
+    }
 
     KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSASSA-PSS");
     kpg.initialize(keyLength);

@@ -68,13 +68,18 @@ public class DsaSignatureBenchmark {
     Random random = new Random(16384);
     random.nextBytes(message);
 
-    int keyLength =
-        switch (algorithm) {
-          case "SHA256withDSA" -> 2048;
-          case "SHA384withDSA" -> 3072;
-          case "SHA512withDSA" -> 3072;
-          default -> throw new RuntimeException();
-        };
+    int keyLength;
+    switch (algorithm) {
+      case "SHA256withDSA":
+        keyLength = 2048;
+        break;
+      case "SHA384withDSA":
+      case "SHA512withDSA":
+        keyLength = 3072;
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported algorithm " + algorithm);
+    }
 
     KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
     kpg.initialize(keyLength);
