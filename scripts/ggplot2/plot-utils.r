@@ -22,7 +22,7 @@
 #
 
 # Load the necessary utilities
-source("./ggplot2/utils.r")
+source("./scripts/ggplot2/utils.r")
 
 # Function to read the benchmark results from a CSV file and append a JVM column identifier
 readBenchmarkResultsWithJvmIdentifier <- function(benchmark_file_path, identifier) {

@@ -52,10 +52,10 @@ readCsvResultsFromFile <- function(file_path) {
       result <- read.csv(file_path, sep = ",", header = TRUE)
     },
     warning = function(w) {
-      print(paste("Cannot read from", file_path, "File skipped.", sep = " "))
+      # cat("Cannot read from", file_path, "File skipped.\n")
     },
     error = function(e) {
-      print(paste("Cannot read from", file_path, "File skipped.", sep = " "))
+      # cat("Cannot read from", file_path, "File skipped.\n")
     }
   )
 
@@ -72,10 +72,10 @@ writeDataToCsvFile <- function(path, file, data) {
       write.table(data, file.path(path, file), sep = ",", row.names = FALSE)
     },
     warning = function(w) {
-      print(paste("Cannot write to", file.path(path, file), "File skipped.", sep = " "))
+      cat("Cannot write to", file.path(path, file), "File skipped.\n")
     },
     error = function(e) {
-      print(paste("Cannot write to", file.path(path, file), "File skipped.", sep = " "))
+      cat("Cannot write to", file.path(path, file), "File skipped.\n")
     }
   )
 }

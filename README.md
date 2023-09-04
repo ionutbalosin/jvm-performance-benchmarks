@@ -81,7 +81,7 @@ When conducting benchmarking, it is advisable to disable potential sources of pe
 
 ### Linux
 
-The Linux tuning script [configure-linux-os.sh](./configure-linux-os.sh) performs the following actions:
+The Linux tuning script [configure-linux-os.sh](./scripts/shell/configure-linux-os.sh) performs the following actions:
 - Sets CPU(s) isolation (with `isolcpus` or `cgroups`)
 - Disables address space layout randomization (ASLR)
 - Disables turbo boost mode
@@ -98,11 +98,11 @@ For further references, please check:
 
 For macOS, the Linux tuning settings described above do not apply. For instance, Apple M1/M2 (ARM-based) chips do not have hyper-threading or turbo-boost mode, and disabling ASLR is more complex.
 
-Due to these differences, the script [configure-mac-os.sh](./configure-mac-os.sh) does not enable any specific macOS tuning configurations.
+Due to these differences, the script [configure-mac-os.sh](./scripts/shell/configure-mac-os.sh) does not enable any specific macOS tuning configurations.
 
 ### Windows
 
-Windows is not the primary focus of this benchmark, so the script [configure-win-os.sh](./configure-win-os.sh) does not enable any specific Windows tuning configurations.
+Windows is not the primary focus of this benchmark, so the script [configure-win-os.sh](./scripts/shell/configure-win-os.sh) does not enable any specific Windows tuning configurations.
 
 ## JVM Coverage
 
@@ -145,7 +145,7 @@ If you need another JDK LTS version (or a feature release), you will need to con
 
 After installing the JDK, you must update the JDK path in the configuration properties. Follow these steps:
 
-1. Open the [config.properties](./config.properties) file.
+1. Open the [config.properties](./settings/config.properties) file.
 
 2. Update the specific **VM_HOME** property for the JDK you intend to use. You don't need to update all of them, only the one you plan to use for compiling and running the benchmarks.
 
@@ -191,9 +191,9 @@ Azul Prime VM      | Falcon JIT
 
 The benchmarks are organized into suites (i.e., benchmark suites). To run a benchmark suite on a specific JDK version, it requires a highly specific configuration. There are predefined benchmark suites provided in JSON configuration files for each supported JDK LTS version:
 
-- [benchmarks-suite-jdk11.json](./benchmarks-suite-jdk11.json)
-- [benchmarks-suite-jdk17.json](./benchmarks-suite-jdk17.json)
-- [benchmarks-suite-jdk21.json](./benchmarks-suite-jdk21.json)
+- [benchmarks-suite-jdk11.json](./settings/benchmarks-suite-jdk11.json)
+- [benchmarks-suite-jdk17.json](./settings/benchmarks-suite-jdk17.json)
+- [benchmarks-suite-jdk21.json](./settings/benchmarks-suite-jdk21.json)
 
 The benchmark suite will sequentially execute all the tests defined in the configuration file.
 

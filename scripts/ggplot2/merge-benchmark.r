@@ -22,7 +22,7 @@
 #
 
 # Load the necessary utilities
-source("./ggplot2/merge-utils.r")
+source("./scripts/ggplot2/merge-utils.r")
 
 # Retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)

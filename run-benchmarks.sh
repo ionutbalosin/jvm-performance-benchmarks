@@ -132,13 +132,13 @@ compile_benchmark_suite() {
 configure_os() {
   case $(uname -s) in
   Linux)
-    . ./configure-linux-os.sh "$DRY_RUN"
+    . ./scripts/shell/configure-linux-os.sh "$DRY_RUN"
     ;;
   Darwin)
-    . ./configure-mac-os.sh "$DRY_RUN"
+    . ./scripts/shell/configure-mac-os.sh "$DRY_RUN"
     ;;
   CYGWIN* | MINGW*)
-    . ./configure-win-os.sh "$DRY_RUN"
+    . ./scripts/shell/configure-win-os.sh "$DRY_RUN"
     ;;
   *)
     echo "ERROR: No configuration is available for this OS. This is neither a Linux, Darwin, nor a Windows OS."
@@ -148,11 +148,11 @@ configure_os() {
 }
 
 load_config_properties() {
-  if [ -f config.properties ]; then
-    source config.properties
-    echo "Configuration properties have been successfully loaded from the 'config.properties' file."
+  if [ -f ./settings/config.properties ]; then
+    source ./settings/config.properties
+    echo "Configuration properties have been successfully loaded from the './settings/config.properties' file."
   else
-    echo "ERROR: File 'config.properties' not found. Unable to continue!"
+    echo "ERROR: File './settings/config.properties' not found. Unable to continue!"
     return 1
   fi
 }
@@ -181,13 +181,13 @@ echo ""
 echo "+=========================+"
 echo "| [3/6] JVM Configuration |"
 echo "+=========================+"
-. ./configure-jvm.sh || exit 1
+. ./scripts/shell/configure-jvm.sh || exit 1
 
 echo ""
 echo "+=========================+"
 echo "| [4/6] JMH Configuration |"
 echo "+=========================+"
-. ./configure-jmh.sh || exit 1
+. ./scripts/shell/configure-jmh.sh || exit 1
 
 echo ""
 echo "+===============================+"

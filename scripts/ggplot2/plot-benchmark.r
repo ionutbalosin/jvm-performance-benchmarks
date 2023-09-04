@@ -21,7 +21,7 @@
 # under the License.
 #
 
-source("./ggplot2/plot-utils.r")
+source("./scripts/ggplot2/plot-utils.r")
 
 # Retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
@@ -56,15 +56,28 @@ reference_path <- paste(jmh_output_folder, openjdk_hotspot_vm, sep = "/")
 benchmark_files <- list.files(path = reference_path, full.names = FALSE)
 for (benchmark_file in benchmark_files) {
   benchmark_file_basename <- tools::file_path_sans_ext(benchmark_file)
-  print(paste("Plotting", benchmark_file_basename, "benchmark ...", sep = " "))
+
+  cat("Plotting", benchmark_file_basename, "benchmark ...\n")
 
   data <- NULL
+  summary <- character(0)
   for (jvm_identifier in jvm_identifiers) {
     benchmark_file_path <- paste(jmh_output_folder, jvm_identifier, benchmark_file, sep = "/")
-    data <- rbind(data, readBenchmarkResultsWithJvmIdentifier(benchmark_file_path, jvm_names_map[[jvm_identifier]]))
+    benchmark_data <- readBenchmarkResultsWithJvmIdentifier(benchmark_file_path, jvm_names_map[[jvm_identifier]])
+
+    if (nrow(benchmark_data) > 0) {
+      status <- "✓"
+    } else {
+      status <- "✗"
+    }
+
+    summary <- paste(summary, paste(jvm_identifier, status, sep = ":"), sep = " ")
+    data <- rbind(data, benchmark_data)
   }
 
   data <- cleanAndPrepareBenchmarkData(data)
   plot <- createBenchmarkBarChart(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, jvm_color_palettes_map)
   saveBenchmarkBarChartToSVG(data, plot, plot_output_folder, benchmark_file_basename)
+
+  cat("Summary:", trimws(summary, "both"), "\n")
 }

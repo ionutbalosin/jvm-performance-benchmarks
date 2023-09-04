@@ -46,11 +46,11 @@ check_command_line_options() {
 }
 
 load_config_properties() {
-  if [ -f config.properties ]; then
-    source config.properties
-    echo "Configuration properties have been successfully loaded from the 'config.properties' file."
+  if [ -f ./settings/config.properties ]; then
+    source ./settings/config.properties
+    echo "Configuration properties have been successfully loaded from the './settings/config.properties' file."
   else
-    echo "ERROR: File 'config.properties' not found. Unable to continue!"
+    echo "ERROR: File './settings/config.properties' not found. Unable to continue!"
     return 1
   fi
 }
@@ -102,9 +102,9 @@ check_folder_exists() {
 }
 
 merge_split_benchmark_results() {
-  if R <./ggplot2/merge-benchmark.r --no-save \
+  if R <./scripts/ggplot2/merge-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
-    R <./ggplot2/split-benchmark.r --no-save \
+    R <./scripts/ggplot2/split-benchmark.r --no-save \
       --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
     echo ""
     echo "Benchmark result files successfully pre-processed."
@@ -141,7 +141,7 @@ preprocess_benchmark_results() {
 }
 
 benchmarks_geometric_mean() {
-  if R <./ggplot2/geomean-benchmark.r --no-save \
+  if R <./scripts/ggplot2/geomean-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER \
     $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER \
     "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
@@ -182,7 +182,7 @@ calculate_benchmarks_geometric_mean() {
 }
 
 plot_benchmarks() {
-  if R <./ggplot2/plot-benchmark.r --no-save \
+  if R <./scripts/ggplot2/plot-benchmark.r --no-save \
     --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER \
     $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER \
     "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \

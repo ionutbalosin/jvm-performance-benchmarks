@@ -24,7 +24,7 @@
 
 set_environment_variables() {
   export ARCH="$(uname -m)"
-  export JQ="jq/jq-linux64"
+  export JQ="scripts/jq/jq-linux64"
 
   echo "Operating system: Linux OS"
   echo "Architecture: $ARCH"

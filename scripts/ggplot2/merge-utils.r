@@ -22,7 +22,7 @@
 #
 
 # Load the necessary utilities
-source("./ggplot2/utils.r")
+source("./scripts/ggplot2/utils.r")
 
 # Merge all benchmark results for different JIT results into a single data frame
 # and append a new column "<column_name>":"<column_values>" as a differentiator

@@ -22,19 +22,13 @@
 # under the License.
 #
 
-set_environment_variables() {
-  export ARCH="$(uname -m)"
-  export JQ="jq/jq-osx-amd64"
+export JMH_JAR="benchmarks/target/benchmarks.jar"
+export JMH_BENCHMARKS="settings/benchmarks-suite-jdk${JDK_VERSION}.json"
+export JMH_OUTPUT_FOLDER="results/jdk-$JDK_VERSION/$ARCH/jmh/$JVM_IDENTIFIER"
 
-  echo "Operating system: macOS"
-  echo "Architecture: $ARCH"
-  echo "JSON processor: $JQ"
-  echo ""
-  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
-}
-
+echo "JMH JAR: $JMH_JAR"
+echo "JMH benchmarks suite configuration file: $JMH_BENCHMARKS"
+echo "JMH output folder: $JMH_OUTPUT_FOLDER"
 echo ""
-echo "+--------------------------+"
-echo "| OS Environment Variables |"
-echo "+--------------------------+"
-set_environment_variables
+
+read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "

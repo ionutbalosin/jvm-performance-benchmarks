@@ -22,14 +22,14 @@
 #
 
 # Load the necessary utilities
-source("./ggplot2/utils.r")
+source("./scripts/ggplot2/utils.r")
 
 # Function to split benchmark results from a single data frame based on a specified column and values
 splitBenchmarkResults <- function(path, benchmark_file, column_name, column_values) {
   result <- data.frame()
 
   benchmark_file_path <- file.path(path, benchmark_file)
-  print(paste("Splitting", benchmark_file_path, "benchmark ...", sep = " "))
+  cat("Splitting", benchmark_file_path, "benchmark ...\n")
   data <- readCsvResultsFromFile(benchmark_file_path)
 
   # Check if the specified column exists in the data frame

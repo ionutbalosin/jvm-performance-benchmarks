@@ -22,7 +22,7 @@
 #
 
 # Load the necessary utilities
-source("./ggplot2/utils.r")
+source("./scripts/ggplot2/utils.r")
 
 # Apply column sanitizations on the data frame
 sanitizeBenchmarkData <- function(data) {
