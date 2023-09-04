@@ -1,153 +1,154 @@
 # Java Virtual Machine (JVM) Performance Benchmarks
 
-This repository contains different Java Virtual Machine (JVM) micro-benchmarks for the C2/Graal Just-In-Time (JIT) Compilers.
+This repository contains various Java Virtual Machine (JVM) micro-benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
-In addition, there is a small set of benchmarks (i.e., a macro category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is only complementary but not the main purpose of this work.
+The repository's benchmarks cover two main areas:
+1. The first area directly targets JIT Compiler optimizations by following specific handwritten code patterns.
+2. The second area, categorized as *macros*, covers a broader spectrum of programs and has multiple focuses:
 
-The micro-benchmarks are written using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh).
+   - Implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, game of life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional) and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
+   - Benchmarks focused on the JDK API (e.g., `java.io`, `java.nio`, `java.security`, `java.util.random`, etc.).
 
-## Content
+The micro-benchmarks are implemented using [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh).
+
+## Contents
 
 - [Authors](#authors)
 - [Purpose](#purpose)
-- [JMH caveats](#jmh-caveats)
-- [OS tuning](#os-tuning)
-- [JVM coverage](#jvm-coverage)
-- [JDK coverage](#jdk-coverage)
-- [Benchmarks suites](#benchmarks-suites)
-- [Infrastructure baseline benchmark](#infrastructure-baseline-benchmark)
-- [Run the benchmarks suite](#run-the-benchmarks-suite)
-- [Benchmark plots](#benchmark-plots)
+- [JMH Caveats](#jmh-caveats)
+- [OS Tuning](#os-tuning)
+- [JVM Coverage](#jvm-coverage)
+- [JDK Coverage](#jdk-coverage)
+- [JIT Coverage](#jit-coverage)
+- [Benchmarks Suites](#benchmarks-suites)
+- [Infrastructure Baseline Benchmark](#infrastructure-baseline-benchmark)
+- [Run the Benchmarks Suite](#run-the-benchmarks-suite)
+- [Benchmark Plots](#benchmark-plots)
 - [Contribute](#contribute)
 - [License](#license)
 
 ## Authors
 
 Ionut Balosin
-- Website: www.ionutbalosin.com
-- Twitter: @ionutbalosin
-- Mastodon: ionutbalosin@mastodon.social
+- Website: [www.ionutbalosin.com](www.ionutbalosin.com)
+- Twitter: [@ionutbalosin](https://twitter.com/ionutbalosin)
+- Mastodon: [@ionutbalosin@mastodon.social](https://mastodon.social/@ionutbalosin)
 
 Florin Blanaru
-- Twitter: @gigiblender
-- Mastodon: gigiblender@mastodon.online
+- Twitter: [@gigiblender](https://twitter.com/gigiblender)
+- Mastodon: [@gigiblender@mastodon.online](https://mastodon.online/@gigiblender)
 
 ## Purpose
 
-The main goal of the project is to assess different JIT Compiler optimizations that are generally available in compilers, such as inlining, loop unrolling, escape analysis, devirtualization, null-check, range-check elimination, dead code elimination, etc. 
+The main objectives of this project are:
+1. To evaluate various JIT Compiler optimizations commonly found in compilers, such as inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
+2. To assess the behavior of each JIT Compiler across a broader range of programs.
 
-Each benchmark focuses on a specific execution pattern that is (potentially fully) optimized under ideal conditions (i.e., clean profiles). Even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations). Such conditions might differ in real-life applications, so the benchmarks results are not always a good predictor on a larger scale. Even though the artificial benchmarks might not reveal the entire truth, they tell just enought if properly implemented.
+Each benchmark focuses on a specific execution pattern or task that could be fully optimized under ideal conditions (i.e., clean profiles). While some of these patterns might rarely appear directly in user programs, they can emerge after several optimizations, such as inlining high-level operations. Real-life applications can have varying conditions, making benchmarks not always a reliable predictor on a larger scale. Nonetheless, even though artificial benchmarks may not capture the complete truth, they can still offer valuable insights when properly implemented.
 
-**Out of scope**:
-- micro-benchmarking any "syntactic sugar" language feature (e.g., records, sealed classes, local-variable type inference, etc.) 
-- micro-benchmarking any Garbage Collector
-- benchmarking large applications (e.g., web-based microservices, etc.)
- 
-> Using micro-benchmarks to gauge the performance of the Garbage Collectors might result in misleading conclusions
+**Out of Scope**:
+- Micro-benchmarking of any "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
+- Micro-benchmarking of any Garbage Collector (*)
+- Benchmarking of large applications (e.g., web-based microservices, etc.)
 
-## JMH caveats
+> (*) Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
 
-### HotSpot-specific compiler hints
+## JMH Caveats
 
-> JMH uses HotSpot-specific compiler hints to control the Just-in-Time (JIT) compiler. 
+### HotSpot-Specific Compiler Hints
 
-For that reason, the fully supported JVMs are all the HotSpot-based VMs, including vanilla OpenJDK and Oracle JDK builds. 
-GraalVM is also supported.
-For more details please check the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/CompilerHints.java#L37) and [supported VMs](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/format/SupportedVMs.java#L31).
+> JMH uses HotSpot-specific compiler hints to control the Just-in-Time (JIT) compiler.
+
+For this reason, the fully supported JVMs are all HotSpot-based VMs, including vanilla OpenJDK and Oracle JDK builds. GraalVM is also supported. For more details, please refer to the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/CompilerHints.java#L37) and [supported VMs](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/runner/format/SupportedVMs.java#L31).
 
 ### Blackholes
 
-> Using JMH Blackhole.consume() might dominate the costs, obscuring the results, in comparison to a normal Java-style source code.
+> Using JMH Blackhole.consume() may dominate the costs, obscuring the results, in comparison to normal Java-style source code.
 
-Starting OpenJDK 17 the compiler supports blackholes [JDK-8259316](https://bugs.openjdk.org/browse/JDK-8259316). 
-This optimization is available in [HotSpot](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/opto/library_call.cpp#L7843) and the [Graal compiler](https://github.com/oracle/graal/blob/master/compiler/src/org.graalvm.compiler.nodes/src/org/graalvm/compiler/nodes/debug/BlackholeNode.java).
+Starting with OpenJDK 17, the compiler supports blackholes ([JDK-8259316](https://bugs.openjdk.org/browse/JDK-8259316)). This optimization is available in [HotSpot](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/opto/library_call.cpp#L7843) and the [Graal compiler](https://github.com/oracle/graal/blob/master/compiler/src/org.graalvm.compiler.nodes/src/org/graalvm/compiler/nodes/debug/BlackholeNode.java).
 
-In order to perform a fair comparison between OpenJDK 11 and OpenJDK 17, compiler blackholes should be manually disabled in the benchmarks. 
+To ensure a fair comparison between OpenJDK 11 and OpenJDK 17, compiler blackholes should be manually disabled in the benchmarks. 
 
-The cost of `Blackhole.consume()` is zero (the compiler will not emit any instructions for the call) when compiler blackholes are enabled and supported by the top-tier JIT compiler of the underlying JVM. 
+The cost of `Blackhole.consume()` is zero (the compiler will not emit any instructions for the call) when compiler blackholes are enabled and supported by the top-tier JIT compiler of the underlying JVM.
 
-In case a benchmark annotated method returns a value instead of consuming it via `Blackhole.consume()` 
-(e.g., the case of non-void benchmark methods), JMH will wrap the return value of the benchmark 
-method in a blackhole, in order to avoid dead code elimination. 
-In this case, blackholes are generated by the test infrastructure even though there is no explicit use of them in the benchmarks.  
+In the case where a benchmark-annotated method returns a value instead of consuming it via `Blackhole.consume()` (e.g., in the case of non-void benchmark methods), JMH will wrap the return value of the benchmark method in a blackhole to prevent dead code elimination. 
+In this scenario, blackholes are generated by the test infrastructure even though there is no explicit use of them in the benchmarks.
 
 > Explicitly using `Blackhole.consume()` (in hot loops) can result in misleading benchmark results, especially when compiler blackholes are disabled.
 
-For that reason, to focus on broader benchmarks reusability (i.e., across different JDK versions and distributions) and increased test fidelity we recommend avoiding (whenever it is possible) the explicit usage of `Blackhole.consume()`.
+## OS Tuning
 
-## OS tuning
-
-When doing benchmarking, it is recommended to disable potential sources of performance non-determinism. Below are described the tuning configurations the benchmark provides for each specific OS.
+When conducting benchmarking, it is advisable to disable potential sources of performance non-determinism. Below are the tuning configurations provided by the benchmark for specific operating systems.
 
 ### Linux
 
-The Linux tuning script [configure-linux-os.sh](./configure-linux-os.sh) triggers all the following:
-- set CPU(s) isolation (with `isolcpus` or `cgroups`)
-- disable address space layout randomization (ASLR)
-- disable turbo boost mode
-- set CPU governor to performance
-- disable CPU hyper-threading
+The Linux tuning script [configure-linux-os.sh](./configure-linux-os.sh) performs the following actions:
+- Sets CPU(s) isolation (with `isolcpus` or `cgroups`)
+- Disables address space layout randomization (ASLR)
+- Disables turbo boost mode
+- Sets CPU governor to performance
+- Disables CPU hyper-threading
 
->Note: these configurations are tested on Ubuntu 22.04 LTS (i.e., a Debian based) Linux distribution.
+> Note: These configurations are tested on Ubuntu 22.04 LTS (a Debian-based Linux distribution).
 
-For further references please check:
+For further references, please check:
 - [LLVM benchmarking tips](https://llvm.org/docs/Benchmarking.html#linux)
 - [How to get consistent results when benchmarking on Linux?](https://easyperf.net/blog/2019/08/02/Perf-measurement-environment-on-Linux)
 
 ### macOS
 
-For macOS, the Linux tunings described above are not applicable. For example, the Apple M1/M2 (ARM-based) chips do not have hyper-threading, nor a turbo-boost mode (i.e., these are specific to the Intel chips). In addition,  [disabling ASLR](https://opensource.apple.com/source/lldb/lldb-76/tools/darwin-debug/darwin-debug.cpp) looks more cumbersome, etc.
+For macOS, the Linux tuning settings described above do not apply. For instance, Apple M1/M2 (ARM-based) chips do not have hyper-threading or turbo-boost mode, and disabling ASLR is more complex.
 
-Due to these reasons, the script [configure-mac-os.sh](./configure-mac-os.sh) does not enable any specific macOS tuning configuration.
+Due to these differences, the script [configure-mac-os.sh](./configure-mac-os.sh) does not enable any specific macOS tuning configurations.
 
 ### Windows
 
-Windows is not our main focus therefore the script [configure-win-os.sh](./configure-win-os.sh) does not enable any specific Windows tuning configuration.
+Windows is not the primary focus of this benchmark, so the script [configure-win-os.sh](./configure-win-os.sh) does not enable any specific Windows tuning configurations.
 
-## JVM coverage
+## JVM Coverage
 
-The table below summarizes the JVM distributions included in the benchmark. For transparency reasons, we provide a short explanation of why the others are not supported.
+The table below summarizes the JVM distributions included in the benchmark. For transparency, we provide a brief explanation of why others are not supported.
 
-No. | JVM distribution       | JDK versions |  Included
-----|------------------------|--------------|-----------
-1   | OpenJDK HotSpot VM     | 11, 17, 21   | Yes
-2   | GraalVM CE             | 11, 17, 21   | Yes
-3   | GraalVM EE             | 11, 17, 21   | Yes
-4   | Azul Prime VM          | 11, 17, 21   | Yes (license restrictions might apply)
-5   | Eclipse OpenJ9 VM      | N/A          | No, see the resons below
+JVM Distribution     | Included
+-------------------- | ---------
+OpenJDK HotSpot VM   | Yes                                     
+GraalVM CE           | Yes                                    
+GraalVM EE           | Yes                                    
+Azul Prime VM        | Yes (license restrictions might apply) 
+Eclipse OpenJ9 VM    | No, see the reasons below              
 
 ### Azul Prime VM
 
-In the case of Azul Prime VM, please make sure you have read and understood the [license](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf) before publishing any benchmark results.
+In the case of Azul Prime VM, please ensure that you have read and understood the [license](https://www.azul.com/wp-content/uploads/Azul-Platform-Prime-Evaluation-Agreement.pdf) before publishing any benchmark results.
 
 ### Eclipse OpenJ9 VM
 
-JMH may functionally work with [Eclipse OpenJ9 VM](https://www.eclipse.org/openj9). However, all the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/CompilerControl.java) will not apply to Eclipse OpenJ9 and this might lead to different results (i.e., unfair advantage or disadvantage, depending on the test).
+JMH may functionally work with the [Eclipse OpenJ9 VM](https://www.eclipse.org/openj9). However, none of the [compiler hints](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/CompilerControl.java) will apply to Eclipse OpenJ9, potentially leading to different results (i.e., unfair advantage or disadvantage, depending on the test).
 
-For more details please check [JMH with OpenJ9](https://github.com/eclipse-openj9/openj9/issues/4649) and [Mark Stoodley on Twitter](https://twitter.com/mstoodle/status/1532344345524936704)
+For more details, please refer to [JMH with OpenJ9](https://github.com/eclipse-openj9/openj9/issues/4649) and [Mark Stoodley on Twitter](https://twitter.com/mstoodle/status/1532344345524936704).
 
-At the moment we leave it **out of scope** Eclipse OpenJ9 until (maybe) we find a proper alternative.
+Currently, Eclipse OpenJ9 is **out of scope** until a suitable alternative is identified.
 
-## JDK coverage
+## JDK Coverage
 
-At the moment the benchmark is configured to work only with the JDK Long-Term Support (LTS) versions.
+At present, the benchmark is configured to work only with the JDK Long-Term Support (LTS) versions.
 
-No. | JVM distribution   | JDK versions |  Build
--------------- |--------------------|--------------| -------------------------------
-1 | OpenJDK HotSpot VM | 11, 17, 21       | [download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
-2 | GraalVM CE         | 11, 17, 21       | [download](https://www.graalvm.org/downloads/)
-3 | GraalVM EE         | 11, 17, 21       | [download](https://www.graalvm.org/downloads/)
-5 | Azul Prime VM      | 11, 17, 21       | [download](https://www.azul.com/downloads/)
+JVM Distribution   | JDK Versions | Build
+------------------ | ------------ | -------------------------------------------------------
+OpenJDK HotSpot VM | 11, 17, 21   | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
+GraalVM CE         | 11, 17, 21   | [Download](https://www.graalvm.org/downloads/)
+GraalVM EE         | 11, 17, 21   | [Download](https://www.graalvm.org/downloads/)
+Azul Prime VM      | 11, 17, 21   | [Download](https://www.azul.com/downloads/)
 
-If there is a need for another JDK LTS version (or feature release), you have to configure it by yourself. 
+If you need another JDK LTS version (or a feature release), you will need to configure it manually.
 
 ### Configure JDK
 
-After installing the JDK, you need to update the JDK path in the configuration properties. To do this, follow these steps:
+After installing the JDK, you must update the JDK path in the configuration properties. Follow these steps:
 
 1. Open the [config.properties](./config.properties) file.
 
-2. Update the specific **VM_HOME** property for the JDK you want to use. You don't need to update all of them, only the one you intend to use for compiling and running the benchmarks.
+2. Update the specific **VM_HOME** property for the JDK you intend to use. You don't need to update all of them, only the one you plan to use for compiling and running the benchmarks.
 
     ```properties
     OPENJDK_HOTSPOT_VM_HOME="<path_to_jdk>"
@@ -156,7 +157,7 @@ After installing the JDK, you need to update the JDK path in the configuration p
     AZUL_PRIME_VM_HOME="<path_to_jdk>"
     ```
 
-#### A few examples
+#### Examples
 
 Linux OS:
 
@@ -176,45 +177,54 @@ Windows OS:
 OPENJDK_HOTSPOT_VM_HOME="/c/Program_Dev/Java/openjdk-17.0.5"
 ```
 
+## JIT Coverage
+
+The table below summarizes the top-tier JIT compilers targeted by these benchmarks.
+
+JVM Distribution   | Top-tier JIT Compiler
+------------------ |--------------
+OpenJDK HotSpot VM | C2 JIT
+GraalVM CE         | Graal JIT
+GraalVM EE         | Graal JIT   
+Azul Prime VM      | Falcon JIT   
+
 ## Benchmarks suites
 
-The benchmarks are organized in suites (i.e., benchmarks suites). To run a benchmark suite on a JDK version it needs a very specific configuration. There are predefined benchmarks suites (in JSON configuration files) for each supported JDK LTS version:
+The benchmarks are organized into suites (i.e., benchmark suites). To run a benchmark suite on a specific JDK version, it requires a highly specific configuration. There are predefined benchmark suites provided in JSON configuration files for each supported JDK LTS version:
 
 - [benchmarks-suite-jdk11.json](./benchmarks-suite-jdk11.json)
 - [benchmarks-suite-jdk17.json](./benchmarks-suite-jdk17.json)
 - [benchmarks-suite-jdk21.json](./benchmarks-suite-jdk21.json)
 
-The benchmark will sequentially pick up and execute all the tests from the configuration file.
+The benchmark suite will sequentially execute all the tests defined in the configuration file.
 
-There are a few reasons why such a custom configuration is needed:
+There are several reasons why such a custom configuration is necessary:
 
-- selectively pass different JVM arguments to subsequent runs of the same benchmark  (e.g., first run with biased locking enabled, second run with biased locking disabled, etc.) 
-- selectively pass different JMH options to subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.)
-- selectively control what benchmarks to include/exclude to/from one JDK version
+- To selectively pass different JVM arguments for subsequent runs of the same benchmark (e.g., first run with biased locking enabled, second run with biased locking disabled, etc.).
+- To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
+- To selectively control which benchmarks to include/exclude for a specific JDK version.
 
 ## Infrastructure baseline benchmark
 
-We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), that can be used to assess the infrastructure overhead for the code to measure.
+We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), which can be used to assess the infrastructure overhead for the code being measured.
 
-It measures the performance of empty methods (w/ and w/o explicit inlining) but also the performance of returning an object versus consuming it via blackholes. All of these mechanisms are used inside the real suite of tests.
+This benchmark evaluates the performance of empty methods both with and without explicit inlining. Additionally, it assesses the performance difference between returning an object and consuming it via blackholes. All of these mechanisms are utilized within the real suite of tests.
 
-This benchmark is particularly useful in case of a comparison between different JVMs and JDKs, and it should be run before any other real benchmark to check the default costs.
-In that regard, if the results of the infrastructure baseline benchmark are not the same, it does not make sense to compare the results of the other benchmarks between different
-JVMs and JDKs.
+This benchmark is particularly valuable when comparing different JVMs and JDKs. It is recommended to run it before any other real benchmark to establish baseline performance metrics. If the results of the infrastructure baseline benchmark differ, it may not be meaningful to compare the results of other benchmarks across different JVMs and JDKs.
 
 ## Run the benchmarks suite
 
-Running one benchmark suite triggers the full setup (in a very interactive way, so that the user can choose what steps to skip), as follows:
-- configure the OS
-- configure the JVM (e.g., set JAVA_HOME, etc.)
-- configure the JMH (e.g., choose the benchmark suite for the specific JDK, etc.)
-- compile the benchmarks (using a JDK Maven profile)
+Running a benchmark suite triggers the complete setup process in a highly interactive manner, allowing the user to choose which steps to skip. The process includes the following:
+- Configure the operating system.
+- Configure the JVM (e.g., setting JAVA_HOME, etc.).
+- Configure JMH (e.g., selecting the benchmark suite for the specific JDK, etc.).
+- Compile the benchmarks using a JDK Maven profile.
 
-**Note**: Only for benchmarks compilation please run the below command:
+**Note**: For benchmark compilation, please run the following command:
 ```bash
 ./mvnw -P jdk$<jdk-version>_profile clean package
 ```
-where `<jdk-version>` is {11, 17, 21}. If the profile is omitted, JDK profile 17 is implicitly selected.  
+Replace `<jdk-version>` with either 11, 17, or 21. If you omit specifying the profile, JDK profile 17 will be selected by default.
 
 Examples:
 ```bash
@@ -241,12 +251,12 @@ benchmarks-suite-jdk21.json | N/A
 
 ### Dry run
 
-Dry run mode goes through and simulates all the commands, but without changing any OS setting, or executing any benchmark. We recommend this as a preliminary check before running the benchmarks.
+The *dry run* mode simulates all the commands without altering any OS settings or executing benchmarks. We recommend using this as a preliminary check before running the benchmarks.
 ```bash
 ./run-benchmarks.sh --dry-run
 ```
 
-**Note:** Launch this command with `sudo` to simulate the OS configuration settings. This is needed, even in dry run mode, to read some system configuration files, otherwise not accessible. Nevertheless, it has no side effect on the actual OS settings.
+**Note:** You should execute this command with `sudo` to simulate the OS configuration settings. This is necessary, even in *dry run* mode, to access certain system configuration files that would otherwise be inaccessible. However, please note that it will not have any impact on the actual OS settings.
 
 ### Normal run
 
@@ -256,7 +266,7 @@ Dry run mode goes through and simulates all the commands, but without changing a
 
 **Note:** Launch this command with `sudo` to apply the OS configuration settings.
 
-The benchmark results are saved under `results/jdk-$JDK_VERSION/$ARCH/jmh/$JVM_IDENTIFIER` directory.
+The benchmark results are saved under the `results/jdk-$JDK_VERSION/$ARCH/jmh/$JVM_IDENTIFIER` directory.
 
 ### Bash scripts on Windows
 
@@ -279,15 +289,15 @@ To generate all benchmark plots corresponding to one `<jdk-version>` and (option
 ```
 If the `<arch>` parameter is omitted, it is automatically detected based on the current system architecture.
 
-Before plotting the benchmarks, the script triggers, in addition, a few steps:
-- pre-process (e.g., merge, split) some benchmark result files. This is needed to avoid either too fragmented or too sparse generated benchmark plots
-- calculate the normalized geometric mean for each benchmark category (e.g., jit, macro). The normalized geometric mean results are saved under `results/jdk-$JDK_VERSION/$ARCH/geomean` directory.
+Before generating the benchmarks, the script triggers a few additional steps:
+- Pre-process (e.g., merge, split) some benchmark result files. This is necessary to avoid either too fragmented or too sparse generated benchmark plots.
+- Calculate the normalized geometric mean for each benchmark category (e.g., jit, macro). The results of the normalized geometric mean are saved under the `results/jdk-$JDK_VERSION/$ARCH/geomean` directory.
 
-The benchmark plots are saved under `results/jdk-$JDK_VERSION/$ARCH/plot` directory.
+The benchmark plots are saved under the `results/jdk-$JDK_VERSION/$ARCH/plot` directory.
 
 # Contribute
 
-If you would like to contribute code (or any other type of support, **including sponsorship**) you can do so through GitHub by sending a pull request, raising an issue with an attached patch, or directly contacting us.
+If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so through GitHub. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
 
 # License 
 
