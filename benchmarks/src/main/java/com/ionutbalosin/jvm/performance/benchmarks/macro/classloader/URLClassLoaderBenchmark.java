@@ -59,7 +59,9 @@ public class URLClassLoaderBenchmark {
   private final String CURRENT_DIR = System.getProperty("user.dir", ".");
   private final String FILE_NAME =
       CURRENT_DIR + "/benchmarks/src/main/resources/org_springframework_spring-core-6.0.9.jar";
-  private final int CLASSES_TO_LOAD_THRESHOLD = 1_000;
+  // Define the expected number of classes in the "org_springframework_spring-core-6.0.9.jar"
+  private final int EXPECTED_CLASSES_COUNT = 1_000;
+  // Define the accepted error threshold for classes that cannot be loaded
   private final float CLASSES_CANNOT_BE_LOADED_THRESHOLD = 0.05f;
 
   private List<String> classesToLoad;
@@ -95,7 +97,7 @@ public class URLClassLoaderBenchmark {
       }
     }
 
-    // make sure the results are valid
+    // make sure the results are equivalent before any further benchmarking
     sanityCheck(jarClasses, classesToLoad, noOfClassesWithErrors);
   }
 
@@ -110,19 +112,22 @@ public class URLClassLoaderBenchmark {
     return loadedClasses;
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param jarClasses - total number of classes found in the jar
-   * @param classesToLoad - list of available classes to be loaded
-   * @param noOfClassesWithErrors - number of classes that cannot be loaded
-   */
-  private void sanityCheck(int jarClasses, List<String> classesToLoad, int noOfClassesWithErrors) {
-    if (classesToLoad.size() < CLASSES_TO_LOAD_THRESHOLD) {
-      throw new AssertionError("There are no classes to load.");
+  private void sanityCheck(int totalJarClasses, List<String> classesToLoad, int errorClassesCount) {
+    if (classesToLoad.size() < EXPECTED_CLASSES_COUNT) {
+      throw new AssertionError(
+          "There are too few classes to load. Actual: "
+              + classesToLoad.size()
+              + ", expected at least: "
+              + EXPECTED_CLASSES_COUNT);
     }
-    if (noOfClassesWithErrors > (jarClasses * CLASSES_CANNOT_BE_LOADED_THRESHOLD)) {
-      throw new AssertionError("Number of classes with errors is higher than expected.");
+
+    int errorClassesThreshold = (int) (totalJarClasses * CLASSES_CANNOT_BE_LOADED_THRESHOLD);
+    if (errorClassesCount > errorClassesThreshold) {
+      throw new AssertionError(
+          "The number of classes with errors is higher than expected. Actual: "
+              + errorClassesCount
+              + ", expected at most: "
+              + errorClassesThreshold);
     }
   }
 }

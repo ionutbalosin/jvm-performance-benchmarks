@@ -107,7 +107,7 @@ public class ImageRotateBenchmark {
       ImageIO.write(outputBufferedImage, FILE_TYPE, outputStream);
     }
 
-    // make sure the results are valid
+    // make sure the results are equivalent before any further benchmarking
     sanityCheck(inputBufferedImage, outputBufferedImage);
   }
 
@@ -117,7 +117,7 @@ public class ImageRotateBenchmark {
   }
 
   /**
-   * Sanity check for the results to avoid wrong benchmarking behaviour
+   * Sanity check for the image rotation results to ensure correctness.
    *
    * @param sourceImage - original image
    * @param destImage - rotated image
@@ -132,11 +132,11 @@ public class ImageRotateBenchmark {
     if (quadrant == 1 || quadrant == 3) {
       if (sourceImage.getHeight() != destImage.getWidth()) {
         throw new AssertionError(
-            "The image rotated in quadrant " + quadrant + "has a different width.");
+            "The image rotated in quadrant " + quadrant + " has a different width.");
       }
       if (sourceImage.getWidth() != destImage.getHeight()) {
         throw new AssertionError(
-            "The image rotated in quadrant " + quadrant + "has a different height.");
+            "The image rotated in quadrant " + quadrant + " has a different height.");
       }
     }
 
@@ -144,11 +144,11 @@ public class ImageRotateBenchmark {
     if (quadrant == 2 || quadrant == 4) {
       if (sourceImage.getHeight() != destImage.getHeight()) {
         throw new AssertionError(
-            "The image rotated in quadrant " + quadrant + "has a different height.");
+            "The image rotated in quadrant " + quadrant + " has a different height.");
       }
       if (sourceImage.getWidth() != destImage.getWidth()) {
         throw new AssertionError(
-            "The image rotated in quadrant " + quadrant + "has a different width.");
+            "The image rotated in quadrant " + quadrant + " has a different width.");
       }
     }
   }

@@ -29,6 +29,7 @@ import static com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.util.Cryp
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.BadPaddingException;
@@ -113,21 +114,9 @@ public class AesCbcCryptoBenchmark {
     return decryptCipher.doFinal(dataEncrypted);
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param input - source byte array to encode
-   * @param output - output byte array after decoding
-   */
-  private void sanityCheck(byte[] input, byte[] output) {
-    if (input.length != output.length) {
-      throw new AssertionError("Arrays have different length.");
-    }
-
-    for (int i = 0; i < input.length; i++) {
-      if (input[i] != output[i]) {
-        throw new AssertionError("Array values are different.");
-      }
+  private void sanityCheck(byte[] source, byte[] decrypted) {
+    if (!Arrays.equals(source, decrypted)) {
+      throw new AssertionError("The byte arrays have different content.");
     }
   }
 }

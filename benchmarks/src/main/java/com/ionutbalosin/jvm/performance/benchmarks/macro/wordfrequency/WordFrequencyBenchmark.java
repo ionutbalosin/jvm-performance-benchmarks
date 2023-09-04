@@ -86,20 +86,13 @@ public class WordFrequencyBenchmark {
     return PatternStreamWordFrequency.frequencies(FILE_NAME);
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param val1 - first word frequencies
-   * @param val2 - second word frequencies
-   * @param val3 - third word frequencies
-   */
   private void sanityCheck(Map<String, Long> val1, Map<String, Long> val2, Map<String, Long> val3) {
     if (val1.isEmpty()
         || val2.isEmpty()
         || val3.isEmpty()
         || !val1.equals(val2)
         || !val2.equals(val3)) {
-      throw new AssertionError("Word frequencies are not as expected.");
+      throw new AssertionError("Word frequencies do not match as expected.");
     }
   }
 }

@@ -111,22 +111,13 @@ public class FibonacciBenchmark {
     return BinetFormula.fibonacci(n);
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param val1 - first Fibonacci number
-   * @param val2 - second Fibonacci number
-   * @param val3 - third Fibonacci number
-   * @param val4 - fourth Fibonacci number
-   * @param val5 - fifth Fibonacci number
-   */
   private void sanityCheck(
       BigInteger val1, BigInteger val2, BigInteger val3, BigInteger val4, BigInteger val5) {
     if (val1.compareTo(val2) != 0
         || val2.compareTo(val3) != 0
         || val3.compareTo(val4) != 0
         || val4.compareTo(val5) != 0) {
-      throw new AssertionError("Numbers are different.");
+      throw new AssertionError("The Fibonacci numbers are different.");
     }
   }
 }

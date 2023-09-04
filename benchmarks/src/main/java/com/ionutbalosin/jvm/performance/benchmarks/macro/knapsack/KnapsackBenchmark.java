@@ -114,15 +114,15 @@ public class KnapsackBenchmark {
    */
   private void sanityCheck(List<Item> val1, List<Item> val2, List<Item> val3) {
     if (val1.isEmpty() || !isValid(val1)) {
-      throw new AssertionError("The generated solution is not valid.");
+      throw new AssertionError("The generated Knapsack solution is not valid.");
     }
 
     if (val2.isEmpty() || !isValid(val2)) {
-      throw new AssertionError("The generated solution is not valid.");
+      throw new AssertionError("The generated Knapsack solution is not valid.");
     }
 
     if (val3.isEmpty() || !isValid(val3)) {
-      throw new AssertionError("The generated solution is not valid.");
+      throw new AssertionError("The generated Knapsack solution is not valid.");
     }
   }
 

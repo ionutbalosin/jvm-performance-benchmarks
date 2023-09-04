@@ -83,25 +83,22 @@ public class PrimesBenchmark {
     return MillerRabin.primes(n);
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param val1 - first number of prime numbers
-   * @param val2 - second number of prime numbers
-   * @param val3 - third number of prime numbers
-   */
   private void sanityCheck(long val1, long val2, long val3) {
     if (val1 != val2 || val2 != val3) {
-      throw new AssertionError("Numbers are different.");
+      throw new AssertionError("The counts of prime numbers are different.");
     }
 
     final double minPrimes = getMinPrimes(n);
     if (val1 < minPrimes || val2 < minPrimes || val3 < minPrimes) {
-      throw new AssertionError("Less than minimum expected prime numbers.");
+      throw new AssertionError("Less than the minimum expected prime numbers.");
     }
   }
 
-  // Prime Number Theorem (PNT): number of primes less than N or equal to N is at least N/ln(N)
+  /**
+   * Calculate the minimum number of prime numbers expected based on the Prime Number Theorem (PNT).
+   *
+   * @param n - the upper limit
+   */
   private double getMinPrimes(int n) {
     return n / Math.log(n);
   }

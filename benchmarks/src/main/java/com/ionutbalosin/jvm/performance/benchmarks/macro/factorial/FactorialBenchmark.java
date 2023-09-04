@@ -87,13 +87,12 @@ public class FactorialBenchmark {
   }
 
   /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
+   * Sanity check for the results to avoid wrong benchmarks comparisons.
    *
    * @param val1 - first factorial number as an array of bytes in reverse order. Each byte
    *     represents a figure (from 0 to 9)
    * @param val2 - second factorial number
    * @param val3 - third factorial number
-   * @throws AssertionError if the results are not the same
    */
   private void sanityCheck(byte[] val1, BigInteger val2, BigInteger val3) {
     // compare val1 with val2
@@ -101,11 +100,13 @@ public class FactorialBenchmark {
     char[] chars2 = val2.toString().toCharArray();
     for (char ch2 : chars2) {
       if (ch2 != '0' + val1[--size1]) {
-        throw new AssertionError("Numbers are different.");
+        throw new AssertionError("The factorial numbers are different.");
       }
     }
+
+    // compare val2 with val3
     if (val2.compareTo(val3) != 0) {
-      throw new AssertionError("Numbers are different.");
+      throw new AssertionError("The factorial numbers are different.");
     }
   }
 }

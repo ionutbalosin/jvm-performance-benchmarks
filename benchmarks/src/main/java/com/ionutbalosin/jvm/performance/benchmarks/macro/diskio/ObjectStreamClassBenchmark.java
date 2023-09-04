@@ -131,7 +131,7 @@ public class ObjectStreamClassBenchmark {
   private void sanityCheck(ObjectStreamClass streamClass, Class<?> clazz) {
     if (streamClass == null) {
       throw new AssertionError(
-          "Expected a non-null (i.e., serializable) class but found " + clazz.getName());
+          "Expected a non-null (i.e., serializable) class but found: " + clazz.getName());
     }
   }
 }

@@ -24,6 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath;
 
 import com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath.adjacencylistbinaryheap.DijkstraAdjacencyListBinaryHeap;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.dijkstrashortestpath.adjacencymatrix.DijkstraAdjacencyMatrix;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -101,15 +102,9 @@ public class DijkstraShortestPathBenchmark {
     return dijkstraAdjacencyListBinaryHeap.dijkstra(sourceNode);
   }
 
-  private static void sanityCheck(int[] distance1, int[] distance2) {
-    if (distance1.length != distance2.length) {
-      throw new AssertionError("Array distances have different length.");
-    }
-
-    for (int i = 0; i < distance1.length; i++) {
-      if (distance1[i] != distance2[i]) {
-        throw new AssertionError("Distance values are different.");
-      }
+  private static void sanityCheck(int[] distances1, int[] distances2) {
+    if (!Arrays.equals(distances1, distances2)) {
+      throw new AssertionError("The arrays of distances have different values.");
     }
   }
 }

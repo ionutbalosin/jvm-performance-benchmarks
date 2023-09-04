@@ -101,7 +101,7 @@ public class NQueensBenchmark {
   }
 
   /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
+   * Sanity check for the chess board results to ensure the correct placement of N Queens.
    *
    * @param board - chess board representing the N Queens properly positioned
    */
@@ -116,7 +116,11 @@ public class NQueensBenchmark {
     }
 
     if (nQueens != n) {
-      throw new AssertionError("The number of placed queens is different from the expected value.");
+      throw new AssertionError(
+          "The number of placed queens differs from the expected value. Actual: "
+              + nQueens
+              + ", expected: "
+              + n);
     }
   }
 }

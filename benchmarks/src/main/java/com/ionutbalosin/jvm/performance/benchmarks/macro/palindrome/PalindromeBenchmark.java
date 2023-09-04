@@ -76,9 +76,10 @@ public class PalindromeBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*PalindromeBenchmark.*"
 
-  private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private static final String FILE_NAME =
-      CURRENT_DIR + "/benchmarks/src/main/resources/palindrome.list";
+  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
+  private final String FILE_NAME = CURRENT_DIR + "/benchmarks/src/main/resources/palindrome.list";
+  // Expected number of palindromes in the file "palindrome.list" is known to be 29
+  private final int EXPECTED_PALINDROME_COUNT = 29;
 
   private final TrampolinePredicate trampolinePredicate = new TrampolinePredicate();
   private final RecursivePredicate recursivePredicate = new RecursivePredicate();
@@ -122,18 +123,11 @@ public class PalindromeBenchmark {
     }
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param val1 - first number of palindromes
-   * @param val2 - second number of palindromes
-   * @param val3 - third number of palindromes
-   * @param val3 - fourth number of palindromes
-   */
   private void sanityCheck(long val1, long val2, long val3, long val4) {
-    // It is known in advance the file "palindrome.list" contains 29 palindromes
-    final int PALINDROMES = 29;
-    if (val1 != PALINDROMES || val2 != PALINDROMES || val3 != PALINDROMES || val4 != PALINDROMES) {
+    if (val1 != EXPECTED_PALINDROME_COUNT
+        || val2 != EXPECTED_PALINDROME_COUNT
+        || val3 != EXPECTED_PALINDROME_COUNT
+        || val4 != EXPECTED_PALINDROME_COUNT) {
       throw new AssertionError("Different number of palindromes.");
     }
   }

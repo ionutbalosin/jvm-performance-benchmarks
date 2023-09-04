@@ -29,6 +29,7 @@ import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.Hu
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanEncoder.encodingMap;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -128,32 +129,20 @@ public class HuffmanCodingBenchmark {
     return charArray;
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param input - source char array to encode
-   * @param output - output char array after decoding
-   */
-  private void sanityCheck(char[] input, char[] output) {
-    if (input.length != output.length) {
-      throw new AssertionError("Arrays have different length.");
-    }
-
-    for (int i = 0; i < input.length; i++) {
-      if (input[i] != output[i]) {
-        throw new AssertionError("Array values are different.");
-      }
+  private void sanityCheck(char[] source, char[] decoded) {
+    if (!Arrays.equals(source, decoded)) {
+      throw new AssertionError("The character arrays have different content.");
     }
   }
 
   /**
    * Check if all characters present in the data array have valid encodings
    *
-   * @param input - source char array to encode
+   * @param chars - source char array to encode
    * @param encodingMap - encoding map containing the huffman codes
    */
-  private void sanityCheck(char[] input, Map<Character, String> encodingMap) {
-    for (char ch : input) {
+  private void sanityCheck(char[] chars, Map<Character, String> encodingMap) {
+    for (char ch : chars) {
       final String encoding = encodingMap.get(ch);
       if (encoding == null || encoding.isEmpty()) {
         throw new AssertionError("Invalid or missing encoding for character: " + ch);

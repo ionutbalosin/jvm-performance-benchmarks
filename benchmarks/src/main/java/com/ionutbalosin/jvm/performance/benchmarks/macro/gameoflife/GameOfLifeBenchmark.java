@@ -80,7 +80,7 @@ public class GameOfLifeBenchmark {
       }
     }
 
-    // make sure the results are valid
+    // make sure the results are equivalent before any further benchmarking
     sanityCheck(
         FunctionalGameOfLife.evolve(grid, GENERATIONS),
         IterativeGameOfLife.evolve(grid, GENERATIONS));
@@ -96,17 +96,18 @@ public class GameOfLifeBenchmark {
     return IterativeGameOfLife.evolve(grid, GENERATIONS);
   }
 
-  /**
-   * Sanity check for the results to avoid wrong benchmarks comparisons
-   *
-   * @param val1 - first evolved population
-   * @param val2 - second evolved population
-   */
-  private void sanityCheck(byte[][] val1, byte[][] val2) {
+  private void sanityCheck(byte[][] grid1, byte[][] grid2) {
+    if (grid1.length != ROWS
+        || grid2.length != ROWS
+        || grid1[0].length != COLS
+        || grid2[0].length != COLS) {
+      throw new AssertionError("Invalid array dimensions for population grids.");
+    }
+
     for (int i = 0; i < ROWS; i++) {
       for (int j = 0; j < COLS; j++) {
-        if (val1[i][j] != val2[i][j]) {
-          throw new AssertionError("Generated population contains different values.");
+        if (grid1[i][j] != grid2[i][j]) {
+          throw new AssertionError("Generated populations contain different values.");
         }
       }
     }
