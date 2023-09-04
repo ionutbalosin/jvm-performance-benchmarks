@@ -24,7 +24,19 @@
       "name": "BranchlessBitwiseBenchmark"
     },
     {
+      "name": "ByteArrayInputStreamBenchmark"
+    },
+    {
+      "name": "ByteArrayOutputStreamBenchmark"
+    },
+    {
       "name": "CanonicalizeInductionVariableBenchmark"
+    },
+    {
+      "name": "CharArrayReaderBenchmark"
+    },
+    {
+      "name": "CharArrayWriterBenchmark"
     },
     {
       "name": "CodeCacheBusterBenchmark"
@@ -46,6 +58,15 @@
       "name": "DijkstraShortestPathBenchmark"
     },
     {
+      "name": "DsaEcSignatureBenchmark"
+    },
+    {
+      "name": "DsaEdSignatureBenchmark"
+    },
+    {
+      "name": "DsaSignatureBenchmark"
+    },
+    {
       "name": "EnumSwitchBenchmark"
     },
     {
@@ -61,6 +82,24 @@
     {
       "name": "FibonacciBenchmark",
       "jvmArgsAppend": "-Xss20M"
+    },
+    {
+      "name": "FileChannelReadBenchmark"
+    },
+    {
+      "name": "FileChannelWriteBenchmark"
+    },
+    {
+      "name": "FileInputStreamBenchmark"
+    },
+    {
+      "name": "FileOutputStreamBenchmark"
+    },
+    {
+      "name": "FilterInputStreamBenchmark"
+    },
+    {
+      "name": "FilterOutputStreamBenchmark"
     },
     {
       "name": "GameOfLifeBenchmark"
@@ -131,10 +170,28 @@
       "name": "MegamorphicMethodCallBenchmark"
     },
     {
+      "name": "MemoryAccessPatternsBenchmark"
+    },
+    {
+      "name": "MemoryMappedReadBenchmark"
+    },
+    {
+      "name": "MemoryMappedWriteBenchmark"
+    },
+    {
       "name": "MessageDigestBenchmark"
     },
     {
       "name": "MethodArgsBusterBenchmark"
+    },
+    {
+      "name": "NioBlockingRoundtripLatencyBenchmark"
+    },
+    {
+      "name": "NioNonBlockingRoundtripLatencyBenchmark"
+    },
+    {
+      "name": "NioSelectorRoundtripLatencyBenchmark"
     },
     {
       "name": "NpeControlFlowBenchmark"
@@ -146,8 +203,29 @@
       "name": "NQueensBenchmark"
     },
     {
+      "name": "ObjectInputStreamBenchmark"
+    },
+    {
+      "name": "ObjectOutputStreamBenchmark"
+    },
+    {
+      "name": "ObjectStreamClassBenchmark"
+    },
+    {
       "name": "PalindromeBenchmark",
       "jvmArgsAppend": "-Xss20M"
+    },
+    {
+      "name": "PipedInputStreamBenchmark"
+    },
+    {
+      "name": "PipedOutputStreamBenchmark"
+    },
+    {
+      "name": "PipedReaderBenchmark"
+    },
+    {
+      "name": "PipedWriterBenchmark"
     },
     {
       "name": "PopulationVarianceBenchmark"
@@ -159,10 +237,25 @@
       "name": "PublicationStatisticsBenchmark"
     },
     {
+      "name": "RandomAccessFileBenchmark"
+    },
+    {
+      "name": "RandomGeneratorBenchmark"
+    },
+    {
+      "name": "ReaderBenchmark"
+    },
+    {
       "name": "RecursiveMethodCallBenchmark"
     },
     {
       "name": "RsaEcbCryptoBenchmark"
+    },
+    {
+      "name": "RsaSignatureBenchmark"
+    },
+    {
+      "name": "RsaSsaPssSignatureBenchmark"
     },
     {
       "name": "ScalarEvolutionAndLoopOptimizationBenchmark"
@@ -175,11 +268,17 @@
       "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
     },
     {
+      "name": "SequentialCollectionReadAccessBenchmark"
+    },
+    {
       "name": "SortVectorApiBenchmark",
       "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
     },
     {
       "name": "StackSpillingBenchmark"
+    },
+    {
+      "name": "StackTraceBenchmark"
     },
     {
       "name": "StrengthReductionBenchmark"
@@ -203,6 +302,9 @@
       "jvmArgsAppend": "-Xss64M"
     },
     {
+      "name": "ThreadLocalRandomBenchmark"
+    },
+    {
       "name": "TypeCheckBenchmark"
     },
     {
@@ -210,6 +312,9 @@
     },
     {
       "name": "TypeCheckSlowPathBenchmark"
+    },
+    {
+      "name": "TypeSwitchBenchmark"
     },
     {
       "name": "URLClassLoaderBenchmark"
@@ -235,6 +340,9 @@
     },
     {
       "name": "WordFrequencyBenchmark"
+    },
+    {
+      "name": "WriterBenchmark"
     }
   ]
 }
