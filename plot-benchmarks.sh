@@ -219,9 +219,9 @@ plot_benchmark_results() {
 }
 
 echo ""
-echo "#############################################################"
-echo "#######       Benchmarks Results Plot Generator       #######"
-echo "#############################################################"
+echo "#############################################################################"
+echo "#######       JVM Performance Benchmarks Results Plot Generator       #######"
+echo "#############################################################################"
 if ! check_command_line_options "$@"; then
   exit 1
 fi
