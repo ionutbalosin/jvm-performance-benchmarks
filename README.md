@@ -108,13 +108,13 @@ Windows is not the primary focus of this benchmark, so the script [configure-win
 
 The table below summarizes the JVM distributions included in the benchmark. For transparency, we provide a brief explanation of why others are not supported.
 
-JVM Distribution     | Included
--------------------- | ---------
-OpenJDK HotSpot VM   | Yes                                     
-GraalVM CE           | Yes                                    
-GraalVM EE           | Yes                                    
-Azul Prime VM        | Yes (license restrictions might apply) 
-Eclipse OpenJ9 VM    | No, see the reasons below              
+JVM Distribution     | Included                                | Build
+-------------------- |-----------------------------------------| -------------------------------------------------------
+OpenJDK HotSpot VM   | Yes                                     | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)                        
+GraalVM CE           | Yes                                     | [Download](https://www.graalvm.org/downloads/)                       
+GraalVM EE           | Yes                                     | [Download](https://www.graalvm.org/downloads/)                      
+Azul Prime VM        | Yes (license restrictions might apply)  | [Download](https://www.azul.com/downloads/)
+Eclipse OpenJ9 VM    | No, see the reasons below               | NA
 
 ### Azul Prime VM
 
@@ -132,12 +132,11 @@ Currently, Eclipse OpenJ9 is **out of scope** until a suitable alternative is id
 
 At present, the benchmark is configured to work only with the JDK Long-Term Support (LTS) versions.
 
-JVM Distribution   | JDK Versions | Build
------------------- | ------------ | -------------------------------------------------------
-OpenJDK HotSpot VM | 11, 17, 21   | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)
-GraalVM CE         | 11, 17, 21   | [Download](https://www.graalvm.org/downloads/)
-GraalVM EE         | 11, 17, 21   | [Download](https://www.graalvm.org/downloads/)
-Azul Prime VM      | 11, 17, 21   | [Download](https://www.azul.com/downloads/)
+ JDK Versions |
+--------------|
+ 11           |
+ 17           |
+ 21           |
 
 If you need another JDK LTS version (or a feature release), you will need to configure it manually.
 

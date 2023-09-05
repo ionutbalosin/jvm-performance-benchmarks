@@ -27,7 +27,7 @@ check_command_line_options() {
     echo "Usage: ./plot-benchmarks <jdk-version> [<arch>]"
     echo ""
     echo "Options:"
-    echo "  jdk-version   Java version identifier for the generated results. Supported values are {11, 17}."
+    echo "  jdk-version   Java version identifier for the generated results. Supported values are {11, 17, 21}."
     echo "  arch          Target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture. Supported values are {x86_64, arm64}."
     echo ""
     echo "Examples:"
@@ -37,6 +37,9 @@ check_command_line_options() {
     echo "  ./plot-benchmarks 17"
     echo "  ./plot-benchmarks 17 x86_64"
     echo "  ./plot-benchmarks 17 arm64"
+    echo "  ./plot-benchmarks 21"
+    echo "  ./plot-benchmarks 21 x86_64"
+    echo "  ./plot-benchmarks 21 arm64"
     echo ""
     return 1
   fi
