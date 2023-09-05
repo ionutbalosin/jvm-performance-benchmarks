@@ -25,7 +25,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.divideandconquer.DivideAndConquerVariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.functional.FunctionalVariance;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.iterative.IterativeVariance;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -59,16 +59,18 @@ public class PopulationVarianceBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*PopulationVarianceBenchmark.*"
 
+  private final Random random = new Random(16384);
   // The oldest person ever: 116 years 54 days
-  private static final float OLDEST_MAN_AGE = 116.1479F;
-  private static final int POPULATION_SIZE = Integer.MAX_VALUE >> 4;
+  private final float OLDEST_MAN_AGE = 116.1479F;
+  private final int POPULATION_SIZE = Integer.MAX_VALUE >> 4;
 
-  private static double[] ages = new double[POPULATION_SIZE];
+  private double[] ages;
 
   @Setup()
   public void setup() {
+    ages = new double[POPULATION_SIZE];
     for (int i = 0; i < POPULATION_SIZE; i++) {
-      ages[i] = ThreadLocalRandom.current().nextDouble(OLDEST_MAN_AGE);
+      ages[i] = random.nextDouble(OLDEST_MAN_AGE);
     }
 
     // make sure the results are equivalent before any further benchmarking

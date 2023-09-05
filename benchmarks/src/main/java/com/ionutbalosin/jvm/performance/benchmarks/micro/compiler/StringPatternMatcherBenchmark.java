@@ -61,10 +61,9 @@ public class StringPatternMatcherBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringPatternMatcherBenchmark.*"
 
-  private static final String SPACE = "\\s+";
-  private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private static final String FILE_NAME =
-      CURRENT_DIR + "/benchmarks/src/main/resources/lorem_ipsum.txt";
+  private final String SPACE = "\\s+";
+  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
+  private final String FILE_NAME = CURRENT_DIR + "/benchmarks/src/main/resources/lorem_ipsum.txt";
 
   @Param({"^(.*[aeuio].*){3,}$"})
   private String regexp;

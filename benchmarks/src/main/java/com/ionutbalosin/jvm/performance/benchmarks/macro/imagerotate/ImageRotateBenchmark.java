@@ -66,10 +66,9 @@ public class ImageRotateBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*ImageRotateBenchmark.*"
 
-  private static final String FILE_TYPE = "jpeg";
-  private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private static final String FILE_NAME =
-      CURRENT_DIR + "/benchmarks/src/main/resources/food_banquet.jpg";
+  private final String FILE_TYPE = "jpeg";
+  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
+  private final String FILE_NAME = CURRENT_DIR + "/benchmarks/src/main/resources/food_banquet.jpg";
 
   // Each quadrant number corresponds to clockwise degrees, as follows:
   // 1 - rotate 90 degrees clockwise

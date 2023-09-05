@@ -46,7 +46,7 @@ public class MegamorphicInterfaceCallBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*MegamorphicInterfaceCallBenchmark.*"
 
-  private static final int SIZE = 7200;
+  private final int SIZE = 7200;
   private I[] instances;
   private byte[] instanceIndex;
 

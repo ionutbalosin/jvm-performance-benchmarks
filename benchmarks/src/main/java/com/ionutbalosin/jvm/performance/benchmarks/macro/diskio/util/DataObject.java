@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class DataObject implements Serializable {
 
-  private static final Random random = new Random(16384);
+  private final Random random = new Random(16384);
 
   private final byte byteValue;
   private final short shortValue;

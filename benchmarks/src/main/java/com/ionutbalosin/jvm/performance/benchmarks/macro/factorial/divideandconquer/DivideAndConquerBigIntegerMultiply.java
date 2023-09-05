@@ -50,7 +50,7 @@ public class DivideAndConquerBigIntegerMultiply {
 
   private static class FactorialRecursiveTask extends RecursiveTask<BigInteger> {
 
-    private static final int SEQUENTIAL_THRESHOLD = 1000;
+    private final int SEQUENTIAL_THRESHOLD = 1000;
 
     private final FactorialSequentialTask sequentialTask;
     private final int start, end;

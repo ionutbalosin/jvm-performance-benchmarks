@@ -64,7 +64,7 @@ public class MegamorphicMethodCallBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*MegamorphicMethodCallBenchmark.*"
 
-  private static final int SIZE = 40320;
+  private final int SIZE = 40320;
   private CMath[] instances;
   private byte[] classIndex;
 

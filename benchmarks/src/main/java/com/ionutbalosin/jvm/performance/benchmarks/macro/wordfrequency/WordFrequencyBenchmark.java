@@ -58,8 +58,8 @@ public class WordFrequencyBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*WordFrequencyBenchmark.*"
 
-  private static final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private static final String FILE_NAME =
+  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
+  private final String FILE_NAME =
       CURRENT_DIR + "/benchmarks/src/main/resources/word_frequency.txt";
 
   @Setup()
