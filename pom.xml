@@ -180,7 +180,7 @@
                         </googleJavaFormat>
                         <removeUnusedImports/>
                         <licenseHeader>
-                            <file>${maven.multiModuleProjectDirectory}/LICENSE-HEADER-JAVA</file>
+                            <file>${maven.multiModuleProjectDirectory}/license/LICENSE-HEADER-JAVA</file>
                         </licenseHeader>
                     </java>
                 </configuration>

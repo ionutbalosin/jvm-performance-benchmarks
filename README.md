@@ -300,7 +300,7 @@ If you are interested in contributing code or providing any form of support, **i
 
 # License 
 
-Please see the [LICENSE](LICENSE) file for full license.
+Please see the [LICENSE](./license/LICENSE) file for full license.
 
 ```
 JVM Performance Benchmarks
