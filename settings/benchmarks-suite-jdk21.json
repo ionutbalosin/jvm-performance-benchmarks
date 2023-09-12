@@ -320,6 +320,9 @@
       "name": "URLClassLoaderBenchmark"
     },
     {
+      "name": "UUIDBenchmark"
+    },
+    {
       "name": "VarArgsBenchmark"
     },
     {
