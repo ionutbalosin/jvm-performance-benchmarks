@@ -52,9 +52,6 @@
 
         <profile>
             <id>jdk17_profile</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <jdk.version>17</jdk.version>
                 <spotlessExcludedFiles>
@@ -71,6 +68,9 @@
 
         <profile>
             <id>jdk21_profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <jdk.version>21</jdk.version>
                 <spotlessExcludedFiles>

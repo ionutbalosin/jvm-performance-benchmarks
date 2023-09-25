@@ -48,7 +48,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class NioBlockingRoundtripLatencyBenchmark {
 

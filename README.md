@@ -226,7 +226,7 @@ Running a benchmark suite triggers the complete setup process in a highly intera
 ```bash
 ./mvnw -P jdk$<jdk-version>_profile clean package
 ```
-Replace `<jdk-version>` with either 11, 17, or 21. If you omit specifying the profile, JDK profile 17 will be selected by default.
+Replace `<jdk-version>` with either 11, 17, or 21. If you omit specifying the profile, JDK profile 21 will be selected by default.
 
 Examples:
 ```bash
