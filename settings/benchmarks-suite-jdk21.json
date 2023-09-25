@@ -126,14 +126,7 @@
       "name": "KnapsackBenchmark"
     },
     {
-      "name": "LockCoarseningBenchmark",
-      "outputFileName": "LockCoarseningBenchmark_withBiasedLocking",
-      "jvmArgsAppend": "-XX:+UseBiasedLocking"
-    },
-    {
-      "name": "LockCoarseningBenchmark",
-      "outputFileName": "LockCoarseningBenchmark_withoutBiasedLocking",
-      "jvmArgsAppend": "-XX:-UseBiasedLocking"
+      "name": "LockCoarseningBenchmark"
     },
     {
       "name": "LockElisionBenchmark"

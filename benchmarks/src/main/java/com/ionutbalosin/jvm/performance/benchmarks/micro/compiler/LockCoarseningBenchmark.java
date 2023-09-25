@@ -60,7 +60,7 @@ import org.openjdk.jmh.annotations.Warmup;
 public class LockCoarseningBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*LockCoarseningBenchmark.*"
-  // Recommended command line options:
+  // Recommended command line options only for JDK 17:
   // - JVM options: {-XX:-UseBiasedLocking, -XX:+UseBiasedLocking}
 
   private final Random random = new Random(16384);
