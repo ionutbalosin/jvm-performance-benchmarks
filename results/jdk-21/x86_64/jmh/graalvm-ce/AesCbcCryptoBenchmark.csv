@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,4.864128,0.008853,"us/op",16384,128,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,12.786764,0.039242,"us/op",16384,128,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,5.647743,0.008126,"us/op",16384,192,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,13.500711,0.032016,"us/op",16384,192,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,6.436434,0.006437,"us/op",16384,256,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,14.308142,0.042928,"us/op",16384,256,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,18.113989,0.009996,"us/op",16384,128,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,26.081025,0.022757,"us/op",16384,128,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,21.056471,0.007722,"us/op",16384,192,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,29.098030,0.059279,"us/op",16384,192,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,24.329127,0.007188,"us/op",16384,256,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,32.379845,0.025918,"us/op",16384,256,AES/CBC/PKCS5Padding

@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.backtracking","avgt",1,25,0.012569,0.000024,"ms/op",16
+"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.backtracking","avgt",1,25,267.889003,0.763923,"ms/op",64
+"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.simulated_annealing","avgt",1,25,2.994064,0.023680,"ms/op",16
+"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.simulated_annealing","avgt",1,25,29.035077,0.013023,"ms/op",64

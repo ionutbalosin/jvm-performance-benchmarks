@@ -1,0 +1,2 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.CharArrayReaderBenchmark.read","avgt",1,25,338.108679,1.906427,"ns/op",_1_KB,_64_MB
