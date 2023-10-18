@@ -1,0 +1,17 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,275.628643,1.353046,"us/op",1024,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,280.185577,1.412291,"us/op",1024,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,1558.219638,2.591344,"us/op",2048,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,1560.725905,2.436719,"us/op",2048,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,4695.083776,7.617783,"us/op",3072,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,4697.621097,14.357257,"us/op",3072,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,10137.741240,5.480798,"us/op",4096,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,10153.789232,7.805334,"us/op",4096,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,16.317885,0.044756,"us/op",1024,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,17.664394,0.040604,"us/op",1024,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,58.935430,0.092827,"us/op",2048,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,60.813217,0.063428,"us/op",2048,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,110.726283,0.204671,"us/op",3072,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,112.637740,0.097432,"us/op",3072,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,193.347289,0.205280,"us/op",4096,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,195.897972,0.488102,"us/op",4096,RSA/ECB/PKCS1Padding
