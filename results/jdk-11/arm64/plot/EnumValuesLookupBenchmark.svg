@@ -92,6 +92,6 @@
 <text x='664.25' y='430.50' style='font-size: 14.40px; font-family: "Liberation Sans";' textLength='84.69px' lengthAdjust='spacingAndGlyphs'>GraalVM CE</text>
 <text x='784.15' y='430.50' style='font-size: 14.40px; font-family: "Liberation Sans";' textLength='83.73px' lengthAdjust='spacingAndGlyphs'>GraalVM EE</text>
 <text x='903.09' y='430.50' style='font-size: 14.40px; font-family: "Liberation Sans";' textLength='152.61px' lengthAdjust='spacingAndGlyphs'>OpenJDK HotSpot VM</text>
-<text x='192.80' y='27.30' style='font-size: 18.00px; font-family: "Liberation Sans";' textLength='268.11px' lengthAdjust='spacingAndGlyphs'>EnumValueLookupBenchmark</text>
+<text x='192.80' y='27.30' style='font-size: 18.00px; font-family: "Liberation Sans";' textLength='268.11px' lengthAdjust='spacingAndGlyphs'>EnumValuesLookupBenchmark</text>
 </g>
 </svg>

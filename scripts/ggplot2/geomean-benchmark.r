@@ -49,7 +49,7 @@ jit_benchmark_files <- c(
   "CodeCacheBusterBenchmark.csv",
   "DeadLocalAllocationStoreBenchmark.csv",
   "DeadMethodCallStoreBenchmark.csv",
-  "EnumValueLookupBenchmark.csv",
+  "EnumValuesLookupBenchmark.csv",
   "FalseSharingBenchmark.csv",
   "IfConditionalBranchBenchmark.csv",
   "JustInTimeConstantsBenchmark.csv",

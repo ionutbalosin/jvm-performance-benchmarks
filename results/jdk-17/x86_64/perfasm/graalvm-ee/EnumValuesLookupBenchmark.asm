@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark.cached_enum_values
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.cached_enum_values
 
 # Run progress: 0.00% complete, ETA 00:03:20
 # Fork: 1 of 1
@@ -27,12 +27,12 @@ Iteration   5: 51.934 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark.cached_enum_values":
+Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.cached_enum_values":
   52.007 ±(99.9%) 0.283 ns/op [Average]
   (min, avg, max) = (51.934, 52.007, 52.106), stdev = 0.074
   CI (99.9%): [51.724, 52.291] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark.cached_enum_values:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.cached_enum_values:·asm":
 PrintAssembly processed: 185725 total address lines.
 Perf output processed (skipped 58.398 seconds):
  Column 1: cycles (50477 events)
@@ -41,7 +41,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values, version 2, compile id 725 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values, version 2, compile id 725 
 
                      #           [sp+0x30]  (sp of caller)
                      0x00007f0e86b19cc0:   mov    0x8(%rsi),%r10d
@@ -59,53 +59,53 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
    0.84%             0x00007f0e86b19cf0:   mov    0x14(%rsi),%r11d
    0.10%             0x00007f0e86b19cf4:   mov    %r11d,%ebx
    0.22%             0x00007f0e86b19cf7:   shl    $0x3,%rbx                    ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@1 (line 77)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@1 (line 77)
    0.06%             0x00007f0e86b19cfb:   mov    %rbx,0x10(%rsp)
-   0.60%             0x00007f0e86b19d00:   movabs $0x7fee2aff0,%rbp            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;[41] {0x00000007fee2aff0})}
+   0.60%             0x00007f0e86b19d00:   movabs $0x7fee2aff0,%rbp            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;[41] {0x00000007fee2aff0})}
    0.10%             0x00007f0e86b19d0a:   test   %r11d,%r11d
           ╭          0x00007f0e86b19d0d:   je     0x00007f0e86b19e22           ;* unwind (locked if synchronized)
           │                                                                    ; - java.lang.String::equals@-3
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@25 (line 152)
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 152)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
    0.14%  │          0x00007f0e86b19d13:   mov    0x14(,%r11,8),%edx           ; ImmutableOopMap {rdx=NarrowOop rbp=Oop rsi=Oop r11=NarrowOop [16]=Oop }
           │                                                                    ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-          │                                                                    ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@0 (line 77)
+          │                                                                    ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@0 (line 77)
    0.44%  │          0x00007f0e86b19d1b:   mov    0xc(,%rdx,8),%r13d           ; implicit exception: dispatches to 0x00007f0e86b1a046
    3.37%  │          0x00007f0e86b19d23:   movsbl 0x10(,%r11,8),%r14d
           │          0x00007f0e86b19d2c:   test   %r13d,%r13d
           │          0x00007f0e86b19d2f:   je     0x00007f0e86b19f20
    0.76%  │          0x00007f0e86b19d35:   shl    $0x3,%rdx                    ;* unwind (locked if synchronized)
           │                                                                    ; - java.lang.String::equals@-3
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@25 (line 152)
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 152)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
           │          0x00007f0e86b19d39:   mov    %rdx,0x8(%rsp)
           │          0x00007f0e86b19d3e:   mov    $0x0,%r10d
           │          0x00007f0e86b19d44:   nopl   0x0(%rax,%rax,1)
    0.75%  │          0x00007f0e86b19d4c:   data16 data16 xchg %ax,%ax
   14.34%  │    ↗↗↗   0x00007f0e86b19d50:   cmp    $0x29,%r10d
           │    │││   0x00007f0e86b19d54:   jae    0x00007f0e86b19fa5           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@11 (line 151)
-          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@11 (line 151)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
    0.08%  │    │││   0x00007f0e86b19d5a:   mov    0x10(%rbp,%r10,4),%edi       ; ImmutableOopMap {rdx=Oop rbp=Oop rdi=NarrowOop r11=NarrowOop [8]=Oop [16]=Oop }
           │    │││                                                             ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-          │    │││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@9 (line 151)
-          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          │    │││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@9 (line 151)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
    0.69%  │    │││   0x00007f0e86b19d5f:   mov    0x14(,%rdi,8),%esi           ; implicit exception: dispatches to 0x00007f0e86b1a066
           │    │││                                                             ; ImmutableOopMap {rdx=Oop rbp=Oop rsi=NarrowOop rdi=NarrowOop r11=NarrowOop [8]=Oop [16]=Oop }
           │    │││                                                             ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-          │    │││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@9 (line 151)
-          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          │    │││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@9 (line 151)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
    1.48%  │    │││   0x00007f0e86b19d66:   movsbl 0x10(,%rsi,8),%ecx           ; implicit exception: dispatches to 0x00007f0e86b1a086
   18.43%  │    │││   0x00007f0e86b19d6e:   mov    0x14(,%rsi,8),%r8d
           │    │││   0x00007f0e86b19d76:   cmp    %r11d,%esi
           │╭   │││   0x00007f0e86b19d79:   je     0x00007f0e86b19e1b           ;* unwind (locked if synchronized)
           ││   │││                                                             ; - java.lang.String::equals@-3
-          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@25 (line 152)
-          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 152)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
    0.01%  ││   │││   0x00007f0e86b19d7f:   mov    %r10d,%eax
    0.45%  ││   │││   0x00007f0e86b19d82:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@34 (line 151)
-          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@34 (line 151)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
   14.88%  ││   │││   0x00007f0e86b19d84:   cmp    %r14b,%cl
           ││╭  │││   0x00007f0e86b19d87:   jne    0x00007f0e86b19dea
    0.05%  │││  │││   0x00007f0e86b19d8d:   test   %r8d,%r8d
@@ -121,8 +121,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
           ││││ │││   0x00007f0e86b19dc3:   mov    $0x10,%r8
           ││││ │││   0x00007f0e86b19dca:   mov    %r13d,%r9d                   ;* unwind (locked if synchronized)
           ││││ │││                                                             ; - java.lang.String::equals@-3
-          ││││ │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@25 (line 152)
-          ││││ │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          ││││ │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 152)
+          ││││ │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
    0.07%  ││││ │││   0x00007f0e86b19dcd:   mov    %eax,%ebx
    0.63%  ││││ │││   0x00007f0e86b19dcf:   call   0x00007f0e7f17b900           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
           ││││ │││   0x00007f0e86b19dd4:   nop
@@ -136,13 +136,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
   18.41%  ││ ↘│  │   0x00007f0e86b19df2:   mov    %eax,%r10d
           ││  │  ╰   0x00007f0e86b19df5:   jmp    0x00007f0e86b19d50
           ││  ↘   ↗  0x00007f0e86b19dfa:   mov    0x4(%rsp),%edi               ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@28 (line 152)
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@28 (line 152)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
           ││      │  0x00007f0e86b19dfe:   shl    $0x3,%rdi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@16 (line 151)
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@16 (line 151)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
           ││      │  0x00007f0e86b19e02:   mov    %rdi,%rax                    ;*areturn {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@7 (line 77)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@7 (line 77)
    0.75%  ││      │  0x00007f0e86b19e05:   mov    0x20(%rsp),%rbp
           ││      │  0x00007f0e86b19e0a:   add    $0x28,%rsp
           ││      │  0x00007f0e86b19e0e:   mov    0x348(%r15),%rcx
@@ -153,21 +153,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
           │       │  0x00007f0e86b19e1f:   nop
    0.74%  │       ╰  0x00007f0e86b19e20:   jmp    0x00007f0e86b19dfa           ;* unwind (locked if synchronized)
           │                                                                    ; - java.lang.String::equals@-3
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromCachedValues@25 (line 152)
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@4 (line 77)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 152)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@4 (line 77)
           ↘          0x00007f0e86b19e22:   mov    0x10(%rbp),%r10d             ; ImmutableOopMap {rbp=Oop rsi=Oop [16]=Oop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@0 (line 77)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@0 (line 77)
                      0x00007f0e86b19e26:   mov    0x14(,%r10,8),%r10d          ; implicit exception: dispatches to 0x00007f0e86b1a0a6
                                                                                ; ImmutableOopMap {rbp=Oop rsi=Oop [16]=Oop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values@0 (line 77)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values@0 (line 77)
 ....................................................................................................
   86.33%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  86.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values, version 2, compile id 725 
-   7.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValueLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 747 
+  86.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values, version 2, compile id 725 
+   7.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 747 
    2.27%                       <unknown> 
    1.53%                       <unknown> 
    0.80%                       <unknown> 
@@ -191,8 +191,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  86.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::cached_enum_values, version 2, compile id 725 
-   7.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValueLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 747 
+  86.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::cached_enum_values, version 2, compile id 725 
+   7.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 747 
    4.64%                       <unknown> 
    1.16%               kernel  [unknown] 
    0.02%         libc-2.31.so  [unknown] 
@@ -242,7 +242,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark.enum_values
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.enum_values
 
 # Run progress: 50.00% complete, ETA 00:01:51
 # Fork: 1 of 1
@@ -261,12 +261,12 @@ Iteration   5: 87.025 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark.enum_values":
+Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.enum_values":
   87.029 ±(99.9%) 0.148 ns/op [Average]
   (min, avg, max) = (86.987, 87.029, 87.092), stdev = 0.039
   CI (99.9%): [86.881, 87.178] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark.enum_values:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.enum_values:·asm":
 PrintAssembly processed: 190950 total address lines.
 Perf output processed (skipped 58.652 seconds):
  Column 1: cycles (50659 events)
@@ -275,7 +275,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values, version 2, compile id 727 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values, version 2, compile id 727 
 
                   #           [sp+0x30]  (sp of caller)
                   0x00007f99a6b1d840:   mov    0x8(%rsi),%r10d
@@ -293,11 +293,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
    0.62%          0x00007f99a6b1d870:   mov    %rsi,%r10
    0.15%          0x00007f99a6b1d873:   mov    0x14(%r10),%r11d             ; ImmutableOopMap {r10=Oop r11=NarrowOop }
                                                                             ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@0 (line 83)
+                                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@0 (line 83)
    0.05%          0x00007f99a6b1d877:   mov    0x14(,%r11,8),%r8d           ; implicit exception: dispatches to 0x00007f99a6b1dc4f
    0.84%          0x00007f99a6b1d87f:   movsbl 0x10(,%r11,8),%ebx           ; ImmutableOopMap {r8=NarrowOop r10=Oop r11=NarrowOop }
                                                                             ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@0 (line 83)
+                                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@0 (line 83)
    0.02%          0x00007f99a6b1d888:   mov    0xc(,%r8,8),%ebp             ; implicit exception: dispatches to 0x00007f99a6b1dc6b
    2.14%          0x00007f99a6b1d890:   mov    0x108(%r15),%rsi
    0.00%          0x00007f99a6b1d897:   lea    0xb8(%rsi),%rdx
@@ -310,96 +310,96 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
    0.17%          0x00007f99a6b1d8c2:   prefetchw 0x1f8(%rsi)
    0.65%          0x00007f99a6b1d8c9:   prefetchw 0x238(%rsi)
    0.16%          0x00007f99a6b1d8d0:   movq   $0x1,(%rsi)
-   0.01%          0x00007f99a6b1d8d7:   movl   $0xc26020,0x8(%rsi)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;[])}
+   0.01%          0x00007f99a6b1d8d7:   movl   $0xc26020,0x8(%rsi)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;[])}
    0.01%          0x00007f99a6b1d8de:   movl   $0x29,0xc(%rsi)              ;*getstatic $VALUES {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::values@0 (line 86)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@0 (line 142)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::values@0 (line 86)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@0 (line 142)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.43%          0x00007f99a6b1d8e5:   mov    %rsi,%r13
-   0.02%          0x00007f99a6b1d8e8:   movl   $0xffdc5362,0x10(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29b10})}
-   0.00%          0x00007f99a6b1d8f0:   movl   $0xffdc5371,0x14(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29b88})}
-   0.44%          0x00007f99a6b1d8f8:   movl   $0xffdc5382,0x18(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29c10})}
-   0.46%          0x00007f99a6b1d900:   movl   $0xffdc5393,0x1c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29c98})}
-   1.08%          0x00007f99a6b1d908:   movl   $0xffdc53a2,0x20(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29d10})}
-   0.16%          0x00007f99a6b1d910:   movl   $0xffdc53b1,0x24(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29d88})}
-   0.22%          0x00007f99a6b1d918:   movl   $0xffdc53ba,0x28(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29dd0})}
-   0.11%          0x00007f99a6b1d920:   movl   $0xffdc53c9,0x2c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29e48})}
-   0.31%          0x00007f99a6b1d928:   movl   $0xffdc53d8,0x30(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29ec0})}
-   0.23%          0x00007f99a6b1d930:   movl   $0xffdc53e9,0x34(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29f48})}
-   0.03%          0x00007f99a6b1d938:   movl   $0xffdc53f8,0x38(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee29fc0})}
-   0.23%          0x00007f99a6b1d940:   movl   $0xffdc5407,0x3c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a038})}
-   0.32%          0x00007f99a6b1d948:   movl   $0xffdc5416,0x40(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a0b0})}
-   0.41%          0x00007f99a6b1d950:   movl   $0xffdc5425,0x44(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a128})}
-   0.29%          0x00007f99a6b1d958:   movl   $0xffdc5434,0x48(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a1a0})}
-   0.40%          0x00007f99a6b1d960:   movl   $0xffdc5443,0x4c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a218})}
-   0.41%          0x00007f99a6b1d968:   movl   $0xffdc5452,0x50(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a290})}
-   0.45%          0x00007f99a6b1d970:   movl   $0xffdc5461,0x54(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a308})}
-   0.39%          0x00007f99a6b1d978:   movl   $0xffdc5470,0x58(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a380})}
-   0.42%          0x00007f99a6b1d980:   movl   $0xffdc547f,0x5c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a3f8})}
-   0.45%          0x00007f99a6b1d988:   movl   $0xffdc548e,0x60(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a470})}
-   0.39%          0x00007f99a6b1d990:   movl   $0xffdc549d,0x64(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a4e8})}
-   0.42%          0x00007f99a6b1d998:   movl   $0xffdc54ae,0x68(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a570})}
-   0.45%          0x00007f99a6b1d9a0:   movl   $0xffdc54bf,0x6c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a5f8})}
-   0.42%          0x00007f99a6b1d9a8:   movl   $0xffdc54d0,0x70(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a680})}
-   0.45%          0x00007f99a6b1d9b0:   movl   $0xffdc54df,0x74(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a6f8})}
-   0.43%          0x00007f99a6b1d9b8:   movl   $0xffdc54ee,0x78(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a770})}
-   0.40%          0x00007f99a6b1d9c0:   movl   $0xffdc54fd,0x7c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a7e8})}
-   0.40%          0x00007f99a6b1d9c8:   movl   $0xffdc550e,0x80(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a870})}
-   0.40%          0x00007f99a6b1d9d3:   movl   $0xffdc551f,0x84(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a8f8})}
-   0.47%          0x00007f99a6b1d9de:   movl   $0xffdc552e,0x88(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a970})}
-   0.44%          0x00007f99a6b1d9e9:   movl   $0xffdc553d,0x8c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2a9e8})}
-   0.47%          0x00007f99a6b1d9f4:   movl   $0xffdc554c,0x90(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2aa60})}
-   0.46%          0x00007f99a6b1d9ff:   movl   $0xffdc555b,0x94(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2aad8})}
-   0.42%          0x00007f99a6b1da0a:   movl   $0xffdc556a,0x98(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2ab50})}
-   0.45%          0x00007f99a6b1da15:   movl   $0xffdc5579,0x9c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2abc8})}
-   0.47%          0x00007f99a6b1da20:   movl   $0xffdc5588,0xa0(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2ac40})}
-   0.46%          0x00007f99a6b1da2b:   movl   $0xffdc5599,0xa4(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2acc8})}
-   0.41%          0x00007f99a6b1da36:   movl   $0xffdc55aa,0xa8(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2ad50})}
-   0.45%          0x00007f99a6b1da41:   movl   $0xffdc55b9,0xac(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2adc8})}
-   0.44%          0x00007f99a6b1da4c:   movl   $0xffdc55ca,0xb0(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark$Car&apos;{0x00000007fee2ae50})}
+   0.02%          0x00007f99a6b1d8e8:   movl   $0xffdc5362,0x10(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29b10})}
+   0.00%          0x00007f99a6b1d8f0:   movl   $0xffdc5371,0x14(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29b88})}
+   0.44%          0x00007f99a6b1d8f8:   movl   $0xffdc5382,0x18(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29c10})}
+   0.46%          0x00007f99a6b1d900:   movl   $0xffdc5393,0x1c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29c98})}
+   1.08%          0x00007f99a6b1d908:   movl   $0xffdc53a2,0x20(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29d10})}
+   0.16%          0x00007f99a6b1d910:   movl   $0xffdc53b1,0x24(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29d88})}
+   0.22%          0x00007f99a6b1d918:   movl   $0xffdc53ba,0x28(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29dd0})}
+   0.11%          0x00007f99a6b1d920:   movl   $0xffdc53c9,0x2c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29e48})}
+   0.31%          0x00007f99a6b1d928:   movl   $0xffdc53d8,0x30(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29ec0})}
+   0.23%          0x00007f99a6b1d930:   movl   $0xffdc53e9,0x34(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29f48})}
+   0.03%          0x00007f99a6b1d938:   movl   $0xffdc53f8,0x38(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee29fc0})}
+   0.23%          0x00007f99a6b1d940:   movl   $0xffdc5407,0x3c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a038})}
+   0.32%          0x00007f99a6b1d948:   movl   $0xffdc5416,0x40(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a0b0})}
+   0.41%          0x00007f99a6b1d950:   movl   $0xffdc5425,0x44(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a128})}
+   0.29%          0x00007f99a6b1d958:   movl   $0xffdc5434,0x48(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a1a0})}
+   0.40%          0x00007f99a6b1d960:   movl   $0xffdc5443,0x4c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a218})}
+   0.41%          0x00007f99a6b1d968:   movl   $0xffdc5452,0x50(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a290})}
+   0.45%          0x00007f99a6b1d970:   movl   $0xffdc5461,0x54(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a308})}
+   0.39%          0x00007f99a6b1d978:   movl   $0xffdc5470,0x58(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a380})}
+   0.42%          0x00007f99a6b1d980:   movl   $0xffdc547f,0x5c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a3f8})}
+   0.45%          0x00007f99a6b1d988:   movl   $0xffdc548e,0x60(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a470})}
+   0.39%          0x00007f99a6b1d990:   movl   $0xffdc549d,0x64(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a4e8})}
+   0.42%          0x00007f99a6b1d998:   movl   $0xffdc54ae,0x68(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a570})}
+   0.45%          0x00007f99a6b1d9a0:   movl   $0xffdc54bf,0x6c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a5f8})}
+   0.42%          0x00007f99a6b1d9a8:   movl   $0xffdc54d0,0x70(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a680})}
+   0.45%          0x00007f99a6b1d9b0:   movl   $0xffdc54df,0x74(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a6f8})}
+   0.43%          0x00007f99a6b1d9b8:   movl   $0xffdc54ee,0x78(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a770})}
+   0.40%          0x00007f99a6b1d9c0:   movl   $0xffdc54fd,0x7c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a7e8})}
+   0.40%          0x00007f99a6b1d9c8:   movl   $0xffdc550e,0x80(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a870})}
+   0.40%          0x00007f99a6b1d9d3:   movl   $0xffdc551f,0x84(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a8f8})}
+   0.47%          0x00007f99a6b1d9de:   movl   $0xffdc552e,0x88(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a970})}
+   0.44%          0x00007f99a6b1d9e9:   movl   $0xffdc553d,0x8c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2a9e8})}
+   0.47%          0x00007f99a6b1d9f4:   movl   $0xffdc554c,0x90(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2aa60})}
+   0.46%          0x00007f99a6b1d9ff:   movl   $0xffdc555b,0x94(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2aad8})}
+   0.42%          0x00007f99a6b1da0a:   movl   $0xffdc556a,0x98(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2ab50})}
+   0.45%          0x00007f99a6b1da15:   movl   $0xffdc5579,0x9c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2abc8})}
+   0.47%          0x00007f99a6b1da20:   movl   $0xffdc5588,0xa0(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2ac40})}
+   0.46%          0x00007f99a6b1da2b:   movl   $0xffdc5599,0xa4(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2acc8})}
+   0.41%          0x00007f99a6b1da36:   movl   $0xffdc55aa,0xa8(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2ad50})}
+   0.45%          0x00007f99a6b1da41:   movl   $0xffdc55b9,0xac(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2adc8})}
+   0.44%          0x00007f99a6b1da4c:   movl   $0xffdc55ca,0xb0(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValuesLookupBenchmark$Car&apos;{0x00000007fee2ae50})}
    0.39%          0x00007f99a6b1da57:   mov    %r11d,%r14d
    0.00%          0x00007f99a6b1da5a:   shl    $0x3,%r14                    ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@1 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@1 (line 83)
                   0x00007f99a6b1da5e:   mov    %r14,0x10(%rsp)
    0.49%          0x00007f99a6b1da63:   test   %ebp,%ebp
                   0x00007f99a6b1da65:   je     0x00007f99a6b1db58
                   0x00007f99a6b1da6b:   shl    $0x3,%r8                     ;* unwind (locked if synchronized)
                                                                             ; - java.lang.String::equals@-3
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@25 (line 143)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@25 (line 143)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
                   0x00007f99a6b1da6f:   mov    %r8,0x8(%rsp)
    0.47%          0x00007f99a6b1da74:   mov    $0x0,%r10d
    0.00%          0x00007f99a6b1da7a:   nopw   0x0(%rax,%rax,1)
    8.06%     ↗↗↗  0x00007f99a6b1da80:   cmp    $0x29,%r10d
              │││  0x00007f99a6b1da84:   jae    0x00007f99a6b1dbfe           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@11 (line 142)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@11 (line 142)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.01%     │││  0x00007f99a6b1da8a:   mov    0x10(%r13,%r10,4),%esi       ; ImmutableOopMap {rsi=NarrowOop r8=Oop r11=NarrowOop r13=Oop [8]=Oop [16]=Oop }
              │││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-             │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@9 (line 142)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@9 (line 142)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.88%     │││  0x00007f99a6b1da8f:   mov    0x14(,%rsi,8),%edx           ; implicit exception: dispatches to 0x00007f99a6b1dc87
              │││                                                            ; ImmutableOopMap {rdx=NarrowOop rsi=NarrowOop r8=Oop r11=NarrowOop r13=Oop [8]=Oop [16]=Oop }
              │││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-             │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@9 (line 142)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@9 (line 142)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.53%     │││  0x00007f99a6b1da96:   movsbl 0x10(,%rdx,8),%ecx           ; implicit exception: dispatches to 0x00007f99a6b1dca6
   10.40%     │││  0x00007f99a6b1da9e:   mov    0x14(,%rdx,8),%r9d           ;* unwind (locked if synchronized)
              │││                                                            ; - java.lang.String::equals@-3
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@25 (line 143)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@25 (line 143)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.02%     │││  0x00007f99a6b1daa6:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@16 (line 142)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@16 (line 142)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.41%     │││  0x00007f99a6b1daaa:   cmp    %r11d,%edx
              │││  0x00007f99a6b1daad:   je     0x00007f99a6b1db3f           ;* unwind (locked if synchronized)
              │││                                                            ; - java.lang.String::equals@-3
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@25 (line 143)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@25 (line 143)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.43%     │││  0x00007f99a6b1dab3:   mov    %r10d,%edi
    8.22%     │││  0x00007f99a6b1dab6:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@34 (line 142)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@34 (line 142)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.01%     │││  0x00007f99a6b1dab8:   cmp    %bl,%cl
           ╭  │││  0x00007f99a6b1daba:   jne    0x00007f99a6b1db15
    0.94%  │  │││  0x00007f99a6b1dac0:   test   %r9d,%r9d
@@ -414,16 +414,16 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
    0.00%  ││ │││  0x00007f99a6b1daec:   mov    $0x10,%r8
    0.40%  ││ │││  0x00007f99a6b1daf3:   mov    %ebp,%r9d                    ;* unwind (locked if synchronized)
           ││ │││                                                            ; - java.lang.String::equals@-3
-          ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@25 (line 143)
-          ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+          ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@25 (line 143)
+          ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.02%  ││ │││  0x00007f99a6b1daf6:   mov    %edi,%r14d
    0.01%  ││ │││  0x00007f99a6b1daf9:   call   0x00007f999f17b880           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
    0.38%  ││ │││  0x00007f99a6b1dafe:   nop
           ││ │││  0x00007f99a6b1daff:   nop
    0.02%  ││ │││  0x00007f99a6b1db00:   test   %eax,%eax
           ││╭│││  0x00007f99a6b1db02:   jne    0x00007f99a6b1db25           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@28 (line 143)
-          ││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+          ││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@28 (line 143)
+          ││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
    0.01%  ││││││  0x00007f99a6b1db08:   mov    %r14d,%r10d
    0.43%  ││││││  0x00007f99a6b1db0b:   mov    0x8(%rsp),%r8
           │││╰││  0x00007f99a6b1db10:   jmp    0x00007f99a6b1da80
@@ -432,22 +432,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
   32.75%   ↘│  │  0x00007f99a6b1db1d:   mov    %edi,%r10d
    0.43%    │  ╰  0x00007f99a6b1db20:   jmp    0x00007f99a6b1da80
             ↘     0x00007f99a6b1db25:   mov    (%rsp),%rax                  ;*areturn {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@7 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@7 (line 83)
                   0x00007f99a6b1db29:   mov    0x20(%rsp),%rbp
                   0x00007f99a6b1db2e:   add    $0x28,%rsp
                   0x00007f99a6b1db32:   mov    0x348(%r15),%rcx
                   0x00007f99a6b1db39:   test   %eax,(%rcx)                  ;   {poll_return}
                   0x00007f99a6b1db3b:   vzeroupper 
                   0x00007f99a6b1db3e:   ret                                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark$Car::fromValues@11 (line 142)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values@4 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark$Car::fromValues@11 (line 142)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values@4 (line 83)
 ....................................................................................................
   89.15%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  89.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values, version 2, compile id 727 
-   4.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValueLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 6, compile id 752 
-   1.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values, version 2, compile id 727 
+  89.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values, version 2, compile id 727 
+   4.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 6, compile id 752 
+   1.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values, version 2, compile id 727 
    1.28%                       <unknown> 
    0.86%                       <unknown> 
    0.46%                       <unknown> 
@@ -470,8 +470,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumV
   99.99%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  90.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValueLookupBenchmark::enum_values, version 2, compile id 727 
-   4.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValueLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 6, compile id 752 
+  90.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark::enum_values, version 2, compile id 727 
+   4.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 6, compile id 752 
    2.67%                       <unknown> 
    1.76%               kernel  [unknown] 
    0.10%         libc-2.31.so  [unknown] 
@@ -527,7 +527,7 @@ different JVMs are already problematic, the performance difference caused by dif
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
 Benchmark                                         Mode  Cnt   Score   Error  Units
-EnumValueLookupBenchmark.cached_enum_values       avgt    5  52.007 ± 0.283  ns/op
-EnumValueLookupBenchmark.cached_enum_values:·asm  avgt          NaN            ---
-EnumValueLookupBenchmark.enum_values              avgt    5  87.029 ± 0.148  ns/op
-EnumValueLookupBenchmark.enum_values:·asm         avgt          NaN            ---
+EnumValuesLookupBenchmark.cached_enum_values       avgt    5  52.007 ± 0.283  ns/op
+EnumValuesLookupBenchmark.cached_enum_values:·asm  avgt          NaN            ---
+EnumValuesLookupBenchmark.enum_values              avgt    5  87.029 ± 0.148  ns/op
+EnumValuesLookupBenchmark.enum_values:·asm         avgt          NaN            ---
