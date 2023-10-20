@@ -1,0 +1,6 @@
+"Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..n"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,86522.145936,120.442324,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,11.556462,0.021087,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.functional","avgt",1,25,12.655577,0.274113,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,10.491778,0.05873,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,12.99349,0.047953,"us/op",500
