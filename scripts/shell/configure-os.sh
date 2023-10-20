@@ -27,7 +27,7 @@ Linux)
   export OS="linux"
   ;;
 Darwin)
-  export OS="macos"
+  export OS="mac"
   ;;
 CYGWIN* | MINGW*)
   export OS="win"

@@ -164,7 +164,7 @@ echo "+========================+"
 echo "| [3/8] OS Configuration |"
 echo "+========================+"
 . ./scripts/shell/configure-os.sh || exit 1
-. ./scripts/shell/configure-$OS-os.sh "$DRY_RUN"
+. ./scripts/shell/configure-os-$OS.sh "$DRY_RUN"
 
 echo ""
 echo "+========================+"
