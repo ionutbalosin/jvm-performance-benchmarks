@@ -22,17 +22,6 @@
 # under the License.
 #
 
-set_environment_variables() {
-  export ARCH="$(uname -m)"
-  export JQ="scripts/jq/jq-linux64"
-
-  echo "Operating system: Linux OS"
-  echo "Architecture: $ARCH"
-  echo "JSON processor: $JQ"
-  echo ""
-  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
-}
-
 set_isolcpus() {
   grub_file='/etc/default/grub'
   grub_file_backup='/etc/default/grub.backup'
@@ -362,15 +351,9 @@ confirm_os_settings() {
 DRY_RUN="$1"
 
 echo ""
-echo "+--------------------------+"
-echo "| OS Environment Variables |"
-echo "+--------------------------+"
-set_environment_variables
-
-echo ""
-echo "+-----------------------+"
-echo "| OS Benchmark Settings |"
-echo "+-----------------------+"
+echo "+-------------------+"
+echo "| Linux OS Settings |"
+echo "+-------------------+"
 echo "Summary:"
 echo " - For reliable benchmarking and consistent measurements, a proper OS configuration is crucial. However, the effectiveness can vary across different operating systems."
 echo " - This includes:"

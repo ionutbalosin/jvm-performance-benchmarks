@@ -22,19 +22,8 @@
 # under the License.
 #
 
-set_environment_variables() {
-  export ARCH="$(uname -m)"
-  export JQ="scripts/jq/jq-win64.exe"
-
-  echo "Operating system: Windows"
-  echo "Architecture: $ARCH"
-  echo "JSON processor: $JQ"
-  echo ""
-  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
-}
-
 echo ""
-echo "+--------------------------+"
-echo "| OS Environment Variables |"
-echo "+--------------------------+"
-set_environment_variables
+echo "+------------------+"
+echo "| Windows Settings |"
+echo "+------------------+"
+echo "No specific settings are defined for this OS."

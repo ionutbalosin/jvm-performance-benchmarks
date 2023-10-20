@@ -80,14 +80,10 @@ set_environment_variables() {
   fi
   export JDK_VERSION
 
-  echo ""
   echo "Java home: $JAVA_HOME"
   echo "JDK version: $JDK_VERSION"
   echo "JVM name: $JVM_NAME"
   echo "JVM identifier: $JVM_IDENTIFIER"
-  echo ""
-
-  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 }
 
 echo ""

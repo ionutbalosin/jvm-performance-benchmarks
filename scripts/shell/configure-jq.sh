@@ -22,8 +22,23 @@
 # under the License.
 #
 
-echo ""
-echo "+----------------+"
-echo "| macOS Settings |"
-echo "+----------------+"
-echo "No specific settings are defined for this OS."
+check_file_exists() {
+  file="$1"
+  if [ ! -f "$file" ]; then
+    echo ""
+    echo "ERROR: File '$file' does not exist. Unable to continue!"
+    return 1
+  fi
+}
+
+if [ "$OS" == "win" ]; then
+  export JQ="scripts/jq/jq-$OS-$ARCH.exe"
+else
+  export JQ="scripts/jq/jq-$OS-$ARCH"
+fi
+
+if ! check_file_exists "$JQ"; then
+  exit 1
+fi
+
+echo "JSON processor: $JQ"

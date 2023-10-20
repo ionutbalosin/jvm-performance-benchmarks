@@ -129,24 +129,6 @@ compile_benchmark_suite() {
   fi
 }
 
-configure_os() {
-  case $(uname -s) in
-  Linux)
-    . ./scripts/shell/configure-linux-os.sh "$DRY_RUN"
-    ;;
-  Darwin)
-    . ./scripts/shell/configure-mac-os.sh "$DRY_RUN"
-    ;;
-  CYGWIN* | MINGW*)
-    . ./scripts/shell/configure-win-os.sh "$DRY_RUN"
-    ;;
-  *)
-    echo "ERROR: No configuration is available for this OS. This is neither a Linux, Darwin, nor a Windows OS."
-    return 1
-    ;;
-  esac
-}
-
 load_config_properties() {
   if [ -f ./settings/config.properties ]; then
     source ./settings/config.properties
@@ -165,33 +147,46 @@ DRY_RUN="$1"
 
 echo ""
 echo "+================================+"
-echo "| [1/6] Configuration Properties |"
+echo "| [1/8] Configuration Properties |"
 echo "+================================+"
 if ! load_config_properties; then
   exit 1
 fi
 
 echo ""
+echo "+=============================+"
+echo "| [2/8] Hardware Architecture |"
+echo "+=============================+"
+. ./scripts/shell/configure-arch.sh
+
+echo ""
 echo "+========================+"
-echo "| [2/6] OS Configuration |"
+echo "| [3/8] OS Configuration |"
 echo "+========================+"
-configure_os
+. ./scripts/shell/configure-os.sh || exit 1
+. ./scripts/shell/configure-$OS-os.sh "$DRY_RUN"
+
+echo ""
+echo "+========================+"
+echo "| [4/8] JQ Configuration |"
+echo "+========================+"
+. ./scripts/shell/configure-jq.sh || exit 1
 
 echo ""
 echo "+=========================+"
-echo "| [3/6] JVM Configuration |"
+echo "| [5/8] JVM Configuration |"
 echo "+=========================+"
 . ./scripts/shell/configure-jvm.sh || exit 1
 
 echo ""
 echo "+=========================+"
-echo "| [4/6] JMH Configuration |"
+echo "| [6/8] JMH Configuration |"
 echo "+=========================+"
 . ./scripts/shell/configure-jmh.sh || exit 1
 
 echo ""
 echo "+===============================+"
-echo "| [5/6] Compile benchmark suite |"
+echo "| [7/8] Compile benchmark suite |"
 echo "+===============================+"
 if ! compile_benchmark_suite; then
   exit 1
@@ -199,6 +194,6 @@ fi
 
 echo ""
 echo "+===========================+"
-echo "| [6/6] Run benchmark suite |"
+echo "| [8/8] Run benchmark suite |"
 echo "+===========================+"
 run_benchmark_suite

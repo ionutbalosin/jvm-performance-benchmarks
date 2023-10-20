@@ -58,43 +58,6 @@ load_config_properties() {
   fi
 }
 
-set_environment_variables() {
-  export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/jmh"
-  export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
-  export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
-
-  echo "JMH output folder: $JMH_OUTPUT_FOLDER"
-  echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
-  echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
-  echo ""
-
-  echo "OpenJDK HotSpot VM name: $OPENJDK_HOTSPOT_VM_NAME"
-  echo "OpenJDK HotSpot VM identifier: $OPENJDK_HOTSPOT_VM_IDENTIFIER"
-  echo "OpenJDK HotSpot JIT: $OPENJDK_HOTSPOT_VM_JIT"
-  echo "OpenJDK HotSpot VM Palette Color: $OPENJDK_HOTSPOT_VM_COLOR_PALETTE"
-  echo ""
-
-  echo "GraalVM CE name: $GRAAL_VM_CE_NAME"
-  echo "GraalVM CE identifier: $GRAAL_VM_CE_IDENTIFIER"
-  echo "GraalVM CE JIT: $GRAAL_VM_CE_JIT"
-  echo "GraalVM CE Palette Color: $GRAAL_VM_CE_COLOR_PALETTE"
-  echo ""
-
-  echo "GraalVM EE name: $GRAAL_VM_EE_NAME"
-  echo "GraalVM EE identifier: $GRAAL_VM_EE_IDENTIFIER"
-  echo "GraalVM EE JIT: $GRAAL_VM_EE_JIT"
-  echo "GraalVM EE Palette Color: $GRAAL_VM_EE_COLOR_PALETTE"
-  echo ""
-
-  echo "Azul Prime VM name: $AZUL_PRIME_VM_NAME"
-  echo "Azul Prime VM identifier: $AZUL_PRIME_VM_IDENTIFIER"
-  echo "Azul Prime JIT: $AZUL_PRIME_VM_JIT"
-  echo "Azul Prime VM Palette Color: $AZUL_PRIME_VM_COLOR_PALETTE"
-
-  echo ""
-  read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
-}
-
 check_folder_exists() {
   folder="$1"
   if [ ! -d "$folder" ]; then
@@ -102,6 +65,22 @@ check_folder_exists() {
     echo "ERROR: Folder '$folder' does not exist. Unable to continue!"
     return 1
   fi
+}
+
+set_environment_variables() {
+  export JMH_BENCHMARKS="settings/benchmarks-suite-jdk${JDK_VERSION}.json"
+  export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/jmh"
+  export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
+  export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
+
+  if ! check_folder_exists "$JMH_OUTPUT_FOLDER"; then
+    return 1
+  fi
+
+  echo "JMH benchmarks suite configuration file: $JMH_BENCHMARKS"
+  echo "JMH output folder: $JMH_OUTPUT_FOLDER"
+  echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
+  echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
 }
 
 merge_split_benchmark_results() {
@@ -143,12 +122,36 @@ preprocess_benchmark_results() {
   done
 }
 
+extract_benchmark_files() {
+  benchmark_type="$1"
+  no_of_benchmarks=$(./$JQ -r ".benchmarks | length" <"$JMH_BENCHMARKS")
+  benchmark_source_path="$(pwd)/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/$benchmark_type"
+  benchmark_files=()
+
+  for ((counter = 0; counter < no_of_benchmarks; counter++)); do
+    bench_name=$(./$JQ --argjson counter "$counter" -r ".benchmarks[$counter].name" <"$JMH_BENCHMARKS")
+
+    if [[ -n $(find "$benchmark_source_path" -type f -name "$bench_name.java") ]]; then
+      benchmark_files+=("$bench_name.csv")
+    fi
+  done
+
+  echo "${benchmark_files[@]}"
+}
+
 benchmarks_geometric_mean() {
+  jit_benchmark_files=($(extract_benchmark_files "micro/compiler"))
+  echo "Identified ${#jit_benchmark_files[@]} 'jit' benchmarks (possibly including duplicates)."
+
+  macro_benchmark_files=($(extract_benchmark_files "macro"))
+  echo "Identified ${#macro_benchmark_files[@]} 'macro' benchmarks (possibly including duplicates)."
+
   if R <./scripts/ggplot2/geomean-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $GEOMETRIC_MEAN_OUTPUT_FOLDER \
-    $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER \
+    --args "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
+    "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
     "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
-    "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT"; then
+    "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT" \
+    "${#jit_benchmark_files[@]}" "${#macro_benchmark_files[@]}" "${jit_benchmark_files[@]}" "${macro_benchmark_files[@]}"; then
     echo ""
     echo "Benchmarks' normalized geometric mean successfully calculated."
   else
@@ -186,8 +189,8 @@ calculate_benchmarks_geometric_mean() {
 
 plot_benchmarks() {
   if R <./scripts/ggplot2/plot-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $PLOT_OUTPUT_FOLDER \
-    $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER \
+    --args "$JMH_OUTPUT_FOLDER" "$PLOT_OUTPUT_FOLDER" \
+    "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
     "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
     "$OPENJDK_HOTSPOT_VM_COLOR_PALETTE" "$GRAAL_VM_CE_COLOR_PALETTE" "$GRAAL_VM_EE_COLOR_PALETTE" "$AZUL_PRIME_VM_COLOR_PALETTE"; then
     echo ""
@@ -230,41 +233,58 @@ if ! check_command_line_options "$@"; then
 fi
 
 echo ""
-echo "+--------------------------+"
-echo "| Configuration Properties |"
-echo "+--------------------------+"
+echo "+================================+"
+echo "| [1/8] Configuration Properties |"
+echo "+================================+"
 if ! load_config_properties; then
   exit 1
 fi
 
 echo ""
-echo "+-----------------------+"
-echo "| Environment Variables |"
-echo "+-----------------------+"
-set_environment_variables
-
-if ! check_folder_exists "$JMH_OUTPUT_FOLDER"; then
-  exit 1
-fi
+echo "+=============================+"
+echo "| [2/8] Hardware Architecture |"
+echo "+=============================+"
+. ./scripts/shell/configure-arch.sh
 
 echo ""
-echo "+-------------------------------+"
-echo "| Pre-process Benchmark Results |"
-echo "+-------------------------------+"
+echo "+========================+"
+echo "| [3/8] OS Configuration |"
+echo "+========================+"
+. ./scripts/shell/configure-os.sh || exit 1
+
+echo ""
+echo "+========================+"
+echo "| [4/8] JQ Configuration |"
+echo "+========================+"
+. ./scripts/shell/configure-jq.sh || exit 1
+
+echo ""
+echo "+=============================+"
+echo "| [5/8] Environment Variables |"
+echo "+=============================+"
+set_environment_variables || exit 1
+
+echo ""
+read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
+
+echo ""
+echo "+=====================================+"
+echo "| [6/8] Pre-process Benchmark Results |"
+echo "+=====================================+"
 if ! preprocess_benchmark_results; then
   exit 1
 fi
 
 echo ""
-echo "+-------------------------------------------------+"
-echo "| Calculate Benchmarks' Normalized Geometric Mean |"
-echo "+-------------------------------------------------+"
+echo "+=======================================================+"
+echo "| [7/8] Calculate Benchmarks' Normalized Geometric Mean |"
+echo "+=======================================================+"
 if ! calculate_benchmarks_geometric_mean; then
   exit 1
 fi
 
 echo ""
-echo "+------------------------+"
-echo "| Plot Benchmark Results |"
-echo "+------------------------+"
-plot_benchmark_results
+echo "+======================+"
+echo "| [8/8] Plot Benchmark |"
+echo "+======================+"
+plot_benchmarks

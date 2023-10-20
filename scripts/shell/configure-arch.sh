@@ -22,8 +22,6 @@
 # under the License.
 #
 
-echo ""
-echo "+----------------+"
-echo "| macOS Settings |"
-echo "+----------------+"
-echo "No specific settings are defined for this OS."
+export ARCH="$(uname -m)"
+
+echo "Hardware Architecture: $ARCH"

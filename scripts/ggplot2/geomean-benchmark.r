@@ -26,78 +26,46 @@ source("./scripts/ggplot2/geomean-utils.r")
 
 # Retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
-if (length(args) != 14) {
+print(length(args))
+
+if (length(args) < 18) {
   stop("Usage: Rscript script.R <jmh_output_folder> <geometric_mean_output_folder>
         <openjdk_hotspot_vm_identifier> <graalvm_ce_identifier> <graalvm_ee_identifier> <azul_prime_vm_identifier>
         <openjdk_hotspot_vm_name> <graalvm_ce_name> <graalvm_ee_name> <azul_prime_vm_name>
-        <openjdk_hotspot_vm_jit> <graalvm_ce_jit> <graalvm_ee_jit> <azul_prime_vm_jit>")
+        <openjdk_hotspot_vm_jit> <graalvm_ce_jit> <graalvm_ee_jit> <azul_prime_vm_jit>
+        <jit_benchmark_files_length> <macro_benchmark_files_length> <jit_benchmark_files> <macro_benchmark_files>")
 }
+
 jmh_output_folder <- args[1]
 geometric_mean_output_folder <- args[2]
 jvm_identifiers <- args[3:6]
 jvm_names <- args[7:10]
 jit_names <- args[11:14]
+jit_benchmark_files_length <- as.integer(args[15])
+macro_benchmark_files_length <- as.integer(args[16])
+jit_benchmark_files <- args[17:(16 + jit_benchmark_files_length)]
+macro_benchmark_files <- args[(17 + jit_benchmark_files_length):(16 + jit_benchmark_files_length + macro_benchmark_files_length)]
 
 # Creates maps with labels as values for the identifiers
 jvm_names_map <- setNames(as.list(jvm_names), jvm_identifiers)
 jit_names_map <- setNames(as.list(jit_names), jvm_identifiers)
 
-# Define the JIT Compiler benchmark results for that we will compute the geometric mean (i.e., geomean) as a separate category
-jit_benchmark_files <- c(
-  "BranchlessBitwiseBenchmark.csv",
-  "CanonicalizeInductionVariableBenchmark.csv",
-  "CodeCacheBusterBenchmark.csv",
-  "DeadLocalAllocationStoreBenchmark.csv",
-  "DeadMethodCallStoreBenchmark.csv",
-  "EnumValuesLookupBenchmark.csv",
-  "FalseSharingBenchmark.csv",
-  "IfConditionalBranchBenchmark.csv",
-  "JustInTimeConstantsBenchmark.csv",
-  "LockCoarseningBenchmark.csv",
-  "LockElisionBenchmark.csv",
-  "LoopFissionBenchmark.csv",
-  "LoopFusionBenchmark.csv",
-  "LoopInterchangeBenchmark.csv",
-  "LoopInvariantCodeMotionBenchmark.csv",
-  "LoopReductionBenchmark.csv",
-  "LoopUnswitchBenchmark.csv",
-  "MandelbrotVectorApiBenchmark.csv",
-  "MegamorphicInterfaceCallBenchmark.csv",
-  "MegamorphicMethodCallBenchmark.csv",
-  "MethodArgsBusterBenchmark.csv",
-  "NpeControlFlowBenchmark.csv",
-  "NpeThrowBenchmark.csv",
-  "RecursiveMethodCallBenchmark.csv",
-  "ScalarEvolutionAndLoopOptimizationBenchmark.csv",
-  "ScalarReplacementBenchmark.csv",
-  "SepiaVectorApiBenchmark.csv",
-  "SortVectorApiBenchmark.csv",
-  "StackSpillingBenchmark.csv",
-  "StrengthReductionBenchmark.csv",
-  "StringConcatenationBenchmark.csv",
-  "StringPatternMatcherBenchmark.csv",
-  "StringPatternSplitBenchmark.csv",
-  "TailRecursionBenchmark.csv",
-  "TypeCheckScalabilityBenchmark.csv",
-  "TypeCheckSlowPathBenchmark.csv",
-  "VarArgsBenchmark.csv",
-  "VectorApiBenchmark.csv",
-  "VectorizationPatternsMultipleFloatArraysBenchmark.csv",
-  "VectorizationPatternsMultipleIntArraysBenchmark.csv",
-  "VectorizationPatternsSingleIntArrayBenchmark.csv",
-  "VectorizationScatterGatherPatternBenchmark.csv"
+# Define the list of benchmarks to be excluded from the geometric mean calculation
+excluded_benchmark_files <- c(
+  "InfrastructureBaselineBenchmark.csv",
+  "TypeCheckBenchmark.csv"
 )
 
-# Define the macro benchmark results for that we will compute the geometric mean (i.e., geomean) as a separate category
-macro_benchmark_files <- c(
-  "FactorialBenchmark.csv",
-  "FibonacciBenchmark.csv",
-  "HuffmanCodingBenchmark.csv",
-  "PalindromeBenchmark.csv",
-  "PopulationVarianceBenchmark.csv",
-  "PrimesBenchmark.csv",
-  "WordFrequencyBenchmark.csv"
-)
+# Remove duplicate elements to ensure the benchmark list has unique entries
+jit_benchmark_files <- unique(jit_benchmark_files)
+macro_benchmark_files <- unique(macro_benchmark_files)
+
+# Remove elements that are present in the exclusion list
+jit_benchmark_files <- jit_benchmark_files[!(unlist(jit_benchmark_files) %in% unlist(excluded_benchmark_files))]
+macro_benchmark_files <- macro_benchmark_files[!(unlist(macro_benchmark_files) %in% unlist(excluded_benchmark_files))]
+
+cat("Extracted", length(jit_benchmark_files), "'jit' benchmarks (post-filtering).\n")
+cat("Extracted", length(macro_benchmark_files), "'macro' benchmarks (post-filtering).\n")
 
 # Function to calculate and normalize geometric mean
 calculateNormalizedGeometricMean <- function(jvm_identifier, map, benchmark_files, reference_geomean, column_name) {

@@ -22,8 +22,20 @@
 # under the License.
 #
 
-echo ""
-echo "+----------------+"
-echo "| macOS Settings |"
-echo "+----------------+"
-echo "No specific settings are defined for this OS."
+case $(uname -s) in
+Linux)
+  export OS="linux"
+  ;;
+Darwin)
+  export OS="macos"
+  ;;
+CYGWIN* | MINGW*)
+  export OS="win"
+  ;;
+*)
+  echo "ERROR: Unable to detect this OS. This is neither a Linux, Darwin, nor a Windows OS."
+  return 1
+  ;;
+esac
+
+echo "Operating system: $OS"
