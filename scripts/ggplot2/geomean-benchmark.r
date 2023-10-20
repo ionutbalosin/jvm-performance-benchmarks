@@ -52,8 +52,7 @@ jit_names_map <- setNames(as.list(jit_names), jvm_identifiers)
 
 # Define the list of benchmarks to be excluded from the geometric mean calculation
 excluded_benchmark_files <- c(
-  "InfrastructureBaselineBenchmark.csv",
-  "TypeCheckBenchmark.csv"
+  "InfrastructureBaselineBenchmark.csv"
 )
 
 # Remove duplicate elements to ensure the benchmark list has unique entries

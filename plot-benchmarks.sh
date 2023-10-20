@@ -23,7 +23,7 @@
 #
 
 check_command_line_options() {
-  if [ $# -eq 0 ]; then
+  if [ ! $# -eq 1 ] && [ ! $# -eq 2 ]; then
     echo "Usage: ./plot-benchmarks <jdk-version> [<arch>]"
     echo ""
     echo "Options:"
@@ -43,9 +43,6 @@ check_command_line_options() {
     echo ""
     return 1
   fi
-
-  JDK_VERSION="${1:-$JDK_VERSION}"
-  ARCH="${2:-$(uname -m)}"
 }
 
 load_config_properties() {
@@ -68,15 +65,19 @@ check_folder_exists() {
 }
 
 set_environment_variables() {
+  export JDK_VERSION="${1:-$JDK_VERSION}"
+  export BENCHMARKS_ARCH="${2:-$ARCH}"
   export JMH_BENCHMARKS="settings/benchmarks-suite-jdk${JDK_VERSION}.json"
-  export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/jmh"
-  export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/geomean"
-  export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$ARCH/plot"
+  export JMH_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$BENCHMARKS_ARCH/jmh"
+  export GEOMETRIC_MEAN_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$BENCHMARKS_ARCH/geomean"
+  export PLOT_OUTPUT_FOLDER="$(pwd)/results/jdk-$JDK_VERSION/$BENCHMARKS_ARCH/plot"
 
   if ! check_folder_exists "$JMH_OUTPUT_FOLDER"; then
     return 1
   fi
 
+  echo "JDK version: $JDK_VERSION"
+  echo "JMH benchmarks architecture: $BENCHMARKS_ARCH"
   echo "JMH benchmarks suite configuration file: $JMH_BENCHMARKS"
   echo "JMH output folder: $JMH_OUTPUT_FOLDER"
   echo "Geometric mean output folder: $GEOMETRIC_MEAN_OUTPUT_FOLDER"
@@ -262,7 +263,7 @@ echo ""
 echo "+=============================+"
 echo "| [5/8] Environment Variables |"
 echo "+=============================+"
-set_environment_variables || exit 1
+set_environment_variables "$@" || exit 1
 
 echo ""
 read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
