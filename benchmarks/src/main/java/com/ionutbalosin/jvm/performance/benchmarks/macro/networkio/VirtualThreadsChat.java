@@ -58,7 +58,7 @@ public class VirtualThreadsChat {
 
   // $ java -jar */*/benchmarks.jar ".*VirtualThreadsChat.*"
 
-  public static long number_of_messages = 100_000;
+  public static final long TOTAL_MESSAGES = 1_000_000L;
   EchoServer server;
   EchoClient client;
   Args args;
@@ -76,9 +76,16 @@ public class VirtualThreadsChat {
     server.stop();
   }
 
-  @Setup(Level.Iteration)
-  public void setupIteration() {
+  @Setup(Level.Invocation)
+  public void setupInvocation() {
     client = new EchoClient(args);
+  }
+
+  @TearDown(Level.Invocation)
+  public void tearDownInvocation() {
+    if (client.messages.longValue() != TOTAL_MESSAGES) {
+      throw new AssertionError("The byte arrays have different content.");
+    }
   }
 
   @Benchmark
@@ -180,7 +187,9 @@ public class VirtualThreadsChat {
         int port = args.port + i;
         for (int j = 0; j < args.numConnections; j++) {
           int id = i * args.numConnections + j;
-          threads[id] = Thread.startVirtualThread(() -> connect(id, port));
+          threads[id] =
+              Thread.startVirtualThread(
+                  () -> connect(id, port, (int) TOTAL_MESSAGES / threads.length));
         }
       }
 
@@ -190,15 +199,9 @@ public class VirtualThreadsChat {
         } catch (Exception ignore) {
         }
       }
-
-      if (error.get() != null) {
-        throw new RuntimeException(error.get());
-      }
-
-      System.out.println("[EchoClient] messages = " + messages.longValue());
     }
 
-    void connect(int id, int port) {
+    void connect(int id, int port, int messages) {
       try (Socket s = new Socket()) {
         s.connect(new InetSocketAddress(args.host, port), args.socketTimeout);
         s.setSoTimeout(args.socketTimeout);
@@ -209,7 +212,9 @@ public class VirtualThreadsChat {
         byte[] readBuffer = new byte[4];
         InputStream in = s.getInputStream();
         OutputStream out = s.getOutputStream();
-        while (error.get() == null && messages.longValue() < number_of_messages) {
+        int sentMessages = 0;
+
+        while (error.get() == null && sentMessages < messages) {
           out.write(writeBuffer);
           int offset = 0;
           while (offset < readBuffer.length) {
@@ -222,7 +227,8 @@ public class VirtualThreadsChat {
           if (!Arrays.equals(writeBuffer, readBuffer)) {
             throw new AssertionError("The byte arrays have different content.");
           }
-          messages.increment();
+          sentMessages++;
+          this.messages.increment();
         }
       } catch (Exception e) {
         error.set(e);
