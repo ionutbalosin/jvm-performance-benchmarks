@@ -31,13 +31,13 @@ import java.net.Socket;
 import java.net.StandardSocketOptions;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.LongAdder;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Group;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -45,10 +45,11 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
@@ -60,23 +61,28 @@ public class VirtualThreadsChat {
   public static long number_of_messages = 100_000;
   EchoServer server;
   EchoClient client;
+  Args args;
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
-    Args args = new Args("localhost", 9999, 50, 1000, 10_000, 1_000, 50, 4, 100_000);
+    args = new Args("localhost", 9999, 50, 1000, 32_000, 16, 16_192);
+
     server = new EchoServer(args);
+    server.run();
+  }
+
+  @TearDown(Level.Trial)
+  public void tearDownTrial() throws Exception {
+    server.stop();
+  }
+
+  @Setup(Level.Iteration)
+  public void setupIteration() {
     client = new EchoClient(args);
   }
 
   @Benchmark
-  @Group("vthreadchat")
-  public void server() throws InterruptedException {
-    server.run();
-  }
-
-  @Benchmark
-  @Group("vthreadchat")
-  public void client() throws InterruptedException {
+  public void send_receive() {
     client.run();
   }
 
@@ -86,24 +92,26 @@ public class VirtualThreadsChat {
     final LongAdder connections;
     final LongAdder messages;
     final AtomicReference<Exception> error;
+    final Thread[] threads;
+    final CountDownLatch serverLatch;
 
     EchoServer(Args args) {
       this.args = args;
       this.connections = new LongAdder();
       this.messages = new LongAdder();
       this.error = new AtomicReference<>();
+      this.threads = new Thread[args.portCount];
+      this.serverLatch = new CountDownLatch(args.portCount);
     }
 
     void run() throws InterruptedException {
       for (int i = 0; i < args.portCount; i++) {
         int port = args.port + i;
-        Thread.startVirtualThread(() -> serve(port));
+        threads[i] = Thread.startVirtualThread(() -> serve(port));
       }
-      while (true) {
-        System.out.printf(
-            "[EchoServer] connections=%d, messages=%d\n", connections.sum(), messages.sum());
-        Thread.sleep(1_000);
-      }
+
+      // ensure that the server thread has started before the benchmark iterations
+      serverLatch.await();
     }
 
     void serve(int port) {
@@ -111,13 +119,16 @@ public class VirtualThreadsChat {
           new ServerSocket(port, args.backlog, InetAddress.getByName(args.host))) {
         serverSocket.setOption(StandardSocketOptions.SO_REUSEADDR, true);
         serverSocket.setOption(StandardSocketOptions.SO_REUSEPORT, true);
+
+        serverLatch.countDown();
+
         while (true) {
           Socket socket = serverSocket.accept();
           connections.increment();
           Thread.startVirtualThread(() -> handle(socket));
         }
-      } catch (Exception e) {
-        e.printStackTrace();
+      } catch (Exception ignore) {
+        // auto-close
       }
     }
 
@@ -140,6 +151,12 @@ public class VirtualThreadsChat {
         connections.decrement();
       }
     }
+
+    void stop() {
+      for (int i = 0; i < threads.length; i++) {
+        threads[i].interrupt();
+      }
+    }
   }
 
   public static class EchoClient {
@@ -148,33 +165,41 @@ public class VirtualThreadsChat {
     final LongAdder connections;
     final LongAdder messages;
     final AtomicReference<Exception> error;
+    final Thread[] threads;
 
     EchoClient(Args args) {
       this.args = args;
       this.connections = new LongAdder();
       this.messages = new LongAdder();
       this.error = new AtomicReference<>();
+      this.threads = new Thread[args.portCount * args.numConnections];
     }
 
-    void run() throws InterruptedException {
+    void run() {
       for (int i = 0; i < args.portCount; i++) {
         int port = args.port + i;
         for (int j = 0; j < args.numConnections; j++) {
-          int id = i * args.portCount + j;
-          Thread.startVirtualThread(() -> connect(id, port));
+          int id = i * args.numConnections + j;
+          threads[id] = Thread.startVirtualThread(() -> connect(id, port));
         }
       }
-      while (error.get() == null) {
-        System.out.printf(
-            "[EchoClient] connections=%d, messages=%d\n", connections.sum(), messages.sum());
-        Thread.sleep(1_000);
+
+      for (int i = 0; i < threads.length; i++) {
+        try {
+          threads[i].join();
+        } catch (Exception ignore) {
+        }
       }
-      error.get().printStackTrace();
+
+      if (error.get() != null) {
+        throw new RuntimeException(error.get());
+      }
+
+      System.out.println("[EchoClient] messages = " + messages.longValue());
     }
 
     void connect(int id, int port) {
       try (Socket s = new Socket()) {
-        Thread.sleep((int) (Math.random() * args.warmUp));
         s.connect(new InetSocketAddress(args.host, port), args.socketTimeout);
         s.setSoTimeout(args.socketTimeout);
         connections.increment();
@@ -213,8 +238,6 @@ public class VirtualThreadsChat {
     int portCount;
     int numConnections;
     int socketTimeout;
-    int warmUp;
-    int sleep;
     int bufferSize;
     int backlog;
 
@@ -224,8 +247,6 @@ public class VirtualThreadsChat {
         int portCount,
         int numConnections,
         int socketTimeout,
-        int warmUp,
-        int sleep,
         int bufferSize,
         int backlog) {
       this.host = host;
@@ -233,8 +254,6 @@ public class VirtualThreadsChat {
       this.portCount = portCount;
       this.numConnections = numConnections;
       this.socketTimeout = socketTimeout;
-      this.warmUp = warmUp;
-      this.sleep = sleep;
       this.bufferSize = bufferSize;
       this.backlog = backlog;
     }
