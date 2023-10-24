@@ -22,6 +22,8 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio;
 
+import static java.lang.Thread.startVirtualThread;
+
 import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.utils.NetworkUtils;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,12 +32,10 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.StandardSocketOptions;
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.LongAdder;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -57,15 +57,14 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class IoBlockingEchoClientServerBenchmark {
+public class IoBlockingClientServerBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*IoBlockingEchoClientServerBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*IoBlockingClientServerBenchmark.*"
 
-  private static final long TOTAL_MESSAGES = 500_000L;
+  private final long TOTAL_MESSAGES = 500_000L;
   private final Random random = new Random(16384);
 
-  @Param
-  private NetworkUtils.BufferSize bufferSize;
+  @Param private static NetworkUtils.BufferSize bufferSize;
 
   private EchoServer server;
   private EchoClient client;
@@ -76,7 +75,7 @@ public class IoBlockingEchoClientServerBenchmark {
   public void setupTrial() throws Exception {
     data = new byte[bufferSize.get()];
     random.nextBytes(data);
-    args = new Args(NetworkUtils.HOST, NetworkUtils.PORT, 50, 1000, 32_000, 16, 16_192);
+    args = new Args(NetworkUtils.HOST, NetworkUtils.PORT, 50, 1000, 32_000, 16_192);
 
     server = new EchoServer(args);
     server.run();
@@ -95,7 +94,11 @@ public class IoBlockingEchoClientServerBenchmark {
   @TearDown(Level.Invocation)
   public void tearDownInvocation() {
     if (client.messages.longValue() != TOTAL_MESSAGES) {
-      throw new AssertionError("The byte arrays have different content.");
+      throw new AssertionError(
+          "The number of messages differs from the expected value. Actual: "
+              + client.messages.longValue()
+              + ", expected: "
+              + TOTAL_MESSAGES);
     }
   }
 
@@ -104,7 +107,7 @@ public class IoBlockingEchoClientServerBenchmark {
     client.run();
   }
 
-  public static class EchoServer {
+  public class EchoServer {
 
     final Args args;
     final Thread[] threads;
@@ -119,7 +122,7 @@ public class IoBlockingEchoClientServerBenchmark {
     void run() throws InterruptedException {
       for (int i = 0; i < args.numOfPorts; i++) {
         int port = args.port + i;
-        threads[i] = Thread.startVirtualThread(() -> serve(port));
+        threads[i] = startVirtualThread(() -> serve(port));
       }
 
       // ensure that the server thread has started before the benchmark iterations
@@ -136,7 +139,7 @@ public class IoBlockingEchoClientServerBenchmark {
 
         while (true) {
           Socket socket = serverSocket.accept();
-          Thread.startVirtualThread(() -> handle(socket));
+          startVirtualThread(() -> handle(socket));
         }
       } catch (Exception ignore) {
       }
@@ -144,16 +147,25 @@ public class IoBlockingEchoClientServerBenchmark {
 
     void handle(Socket socket) {
       try (Socket s = socket) {
-        byte[] buffer = new byte[args.bufferSize];
         InputStream in = s.getInputStream();
         OutputStream out = s.getOutputStream();
+        byte[] readBuffer = new byte[bufferSize.get()];
+
         while (true) {
-          int numBytes = in.read(buffer);
-          if (numBytes < 0) {
-            break;
+          int offset = 0;
+          while (offset < readBuffer.length) {
+            int bytesRead = in.read(readBuffer, offset, readBuffer.length - offset);
+            if (-1 == bytesRead) {
+              break;
+            }
+            offset += bytesRead;
           }
-          out.write(buffer, 0, numBytes);
+          if (!Arrays.equals(data, readBuffer)) {
+            throw new AssertionError("The byte arrays have different content.");
+          }
+          out.write(readBuffer);
         }
+
       } catch (Exception ignore) {
       }
     }
@@ -165,17 +177,15 @@ public class IoBlockingEchoClientServerBenchmark {
     }
   }
 
-  public static class EchoClient {
+  public class EchoClient {
 
     final Args args;
     final LongAdder messages;
-    final AtomicReference<Exception> error;
     final Thread[] threads;
 
     EchoClient(Args args) {
       this.args = args;
       this.messages = new LongAdder();
-      this.error = new AtomicReference<>();
       this.threads = new Thread[args.numOfPorts * args.numOfConnectionsPerPort];
     }
 
@@ -185,8 +195,7 @@ public class IoBlockingEchoClientServerBenchmark {
         for (int j = 0; j < args.numOfConnectionsPerPort; j++) {
           int id = i * args.numOfConnectionsPerPort + j;
           threads[id] =
-              Thread.startVirtualThread(
-                  () -> connect(id, port, (int) TOTAL_MESSAGES / threads.length));
+              startVirtualThread(() -> connect(port, (int) TOTAL_MESSAGES / threads.length));
         }
       }
 
@@ -198,36 +207,33 @@ public class IoBlockingEchoClientServerBenchmark {
       }
     }
 
-    void connect(int id, int port, int messages) {
+    void connect(int port, int messages) {
       try (Socket s = new Socket()) {
         s.connect(new InetSocketAddress(args.host, port), args.socketTimeout);
         s.setSoTimeout(args.socketTimeout);
-        ByteBuffer buffer = ByteBuffer.allocate(4);
-        buffer.putInt(id);
-        byte[] writeBuffer = buffer.array();
-        byte[] readBuffer = new byte[4];
+        byte[] readBuffer = new byte[bufferSize.get()];
         InputStream in = s.getInputStream();
         OutputStream out = s.getOutputStream();
         int sentMessages = 0;
 
-        while (error.get() == null && sentMessages < messages) {
-          out.write(writeBuffer);
+        while (sentMessages < messages) {
+          out.write(data);
           int offset = 0;
           while (offset < readBuffer.length) {
             int numBytes = in.read(readBuffer, offset, readBuffer.length - offset);
-            if (numBytes < 0) {
+            if (-1 == numBytes) {
               break;
             }
             offset += numBytes;
           }
-          if (!Arrays.equals(writeBuffer, readBuffer)) {
+          if (!Arrays.equals(data, readBuffer)) {
             throw new AssertionError("The byte arrays have different content.");
           }
           sentMessages++;
           this.messages.increment();
         }
-      } catch (Exception e) {
-        error.set(e);
+
+      } catch (Exception ignore) {
       }
     }
   }
@@ -238,7 +244,6 @@ public class IoBlockingEchoClientServerBenchmark {
     int numOfPorts;
     int numOfConnectionsPerPort;
     int socketTimeout;
-    int bufferSize;
     int maxIncomingConnections;
 
     public Args(
@@ -247,14 +252,12 @@ public class IoBlockingEchoClientServerBenchmark {
         int numOfPorts,
         int numOfConnectionsPerPort,
         int socketTimeout,
-        int bufferSize,
         int maxIncomingConnections) {
       this.host = host;
       this.port = port;
       this.numOfPorts = numOfPorts;
       this.numOfConnectionsPerPort = numOfConnectionsPerPort;
       this.socketTimeout = socketTimeout;
-      this.bufferSize = bufferSize;
       this.maxIncomingConnections = maxIncomingConnections;
     }
   }
