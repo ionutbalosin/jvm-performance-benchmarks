@@ -64,9 +64,9 @@ import static java.lang.Thread.ofVirtual;
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class VirtualThreadMountUnmountBenchmark {
+public class VirtualThreadBlockingApiBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadMountUnmountBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VirtualThreadBlockingApiBenchmark.*"
 
   private final Random random = new Random(16384);
   private final int BYTES = 64;
