@@ -22,6 +22,9 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 
+import static java.lang.Thread.ofPlatform;
+import static java.lang.Thread.ofVirtual;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
@@ -45,9 +48,6 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
-import static java.lang.Thread.ofPlatform;
-import static java.lang.Thread.ofVirtual;
-
 /*
  * This benchmark tries to measure the efficiency of mounting and unmounting virtual threads in Java
  * when they interact with blocking APIs at varying thread stack depths. It also serves as a
@@ -64,16 +64,16 @@ import static java.lang.Thread.ofVirtual;
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class VirtualThreadBlockingApiBenchmark {
+public class VirtualThreadBlockingCallBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadBlockingApiBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VirtualThreadBlockingCallBenchmark.*"
 
   private final Random random = new Random(16384);
   private final int BYTES = 64;
 
   private Thread producerThread;
   private Thread consumerThread;
-  private FutureTask<byte[]> consumerFuture;
+  private FutureTask<Wrapper> consumerFuture;
   private BlockingQueue<byte[]> queue;
   private byte[] data;
 
@@ -126,13 +126,13 @@ public class VirtualThreadBlockingApiBenchmark {
 
   @TearDown(Level.Invocation)
   public void tearDownInvocation() throws IOException, ExecutionException, InterruptedException {
-    if (!Arrays.equals(data, consumerFuture.get())) {
+    if (!Arrays.equals(data, consumerFuture.get().value)) {
       throw new AssertionError("The byte arrays have different content.");
     }
   }
 
   @Benchmark
-  public byte[] take() throws InterruptedException, ExecutionException {
+  public Wrapper take() throws InterruptedException, ExecutionException {
     consumerThread.start();
     return consumerFuture.get();
   }
@@ -142,34 +142,45 @@ public class VirtualThreadBlockingApiBenchmark {
     PLATFORM;
   }
 
-  /**
-   * A recursive task that may unmount (in the case of virtual threads) when it reaches a certain
-   * stack depth.
-   */
-  static class RecursiveTask implements Callable<byte[]> {
+  private static class RecursiveTask implements Callable<Wrapper> {
     private final BlockingQueue<byte[]> queue;
     private final int depth;
+    private final Wrapper wrapper;
 
     public RecursiveTask(BlockingQueue<byte[]> queue, int depth) {
       this.queue = queue;
       this.depth = depth;
+      this.wrapper = new Wrapper();
     }
 
     @Override
-    public byte[] call() throws Exception {
-      return recursive_run(depth);
+    public Wrapper call() {
+      return recursive_run(depth, wrapper);
     }
 
-    public byte[] recursive_run(int depth) {
+    private Wrapper recursive_run(int depth, Wrapper wrapper) {
+      final byte[] result = take();
+      wrapper.value = result;
+
       if (depth == 0) {
-        try {
-          return queue.take();
-        } catch (InterruptedException ignore) {
-          return null;
-        }
+        return wrapper;
       } else {
-        return recursive_run(depth - 1);
+        return recursive_run(depth - 1, wrapper);
       }
     }
+
+    private byte[] take() {
+      try {
+        // may unmount (in the case of virtual threads) the carrier thread when it calls the
+        // blocking API
+        return queue.take();
+      } catch (InterruptedException ignore) {
+        return null;
+      }
+    }
+  }
+
+  private static class Wrapper {
+    public byte[] value;
   }
 }
