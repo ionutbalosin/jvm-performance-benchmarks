@@ -101,12 +101,12 @@ public class IoVirtualChatBenchmark {
     vClient.awaitTermination();
   }
 
-  public enum Connections {
-    _50_K(50_000);
+  public enum Ports {
+    _100(100);
 
     private int value;
 
-    Connections(int value) {
+    Ports(int value) {
       this.value = value;
     }
 
@@ -115,12 +115,12 @@ public class IoVirtualChatBenchmark {
     }
   }
 
-  public enum Ports {
-    _50(50);
+  public enum Connections {
+    _50_K(50_000);
 
     private int value;
 
-    Ports(int value) {
+    Connections(int value) {
       this.value = value;
     }
 
