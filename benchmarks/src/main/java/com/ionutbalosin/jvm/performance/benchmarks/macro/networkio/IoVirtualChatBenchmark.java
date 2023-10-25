@@ -44,11 +44,26 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * This benchmark measures the average time it takes to send and receive a large number of messages between a Client and a Server.
+ * Both the Client and Server employ virtual threads to manage connections between them.
+ *
+ * The Server listens on a specific range of ports for incoming client connections, with each connection being handled by a virtual thread.
+ * When a connection request is accepted from the Client, a new virtual thread is spawned to manage the specific communication
+ * with that Client (i.e., listen to the Client message and echo back the same content).
+ *
+ * The Client initiates multiple connections to each of the Server's ports within the specified range, simulating multiple
+ * clients interacting with the Server on the same port. In each connection, handled within a virtual thread,
+ * the Client sends a byte array to the Server and awaits the same message to be echoed back.
+ *
+ * References:
+ * - https://github.com/ebarlas/project-loom-c5m
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.SECONDS)
-@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 3)
 @State(Scope.Benchmark)
 public class IoVirtualChatBenchmark {
 
