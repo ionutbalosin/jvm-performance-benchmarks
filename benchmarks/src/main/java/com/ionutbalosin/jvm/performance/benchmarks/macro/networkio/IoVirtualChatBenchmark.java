@@ -97,6 +97,7 @@ public class IoVirtualChatBenchmark {
   @Setup(Level.Invocation)
   public void setupInvocation() {
     vClient = new VirtualClient(HOST, PORT, ports.get(), connections.get(), data, messages.get());
+    vClient.init();
   }
 
   @TearDown(Level.Invocation)

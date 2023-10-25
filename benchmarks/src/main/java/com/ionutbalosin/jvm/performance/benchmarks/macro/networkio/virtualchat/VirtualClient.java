@@ -22,7 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.virtualchat;
 
-import static java.lang.Thread.startVirtualThread;
+import static java.lang.Thread.ofVirtual;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -61,14 +61,20 @@ public class VirtualClient {
     this.messages = new LongAdder();
   }
 
-  public void start() {
+  public void init() {
     for (int i = 0; i < numberOfPorts; i++) {
       final int newPort = port + i;
       for (int j = 0; j < numberOfClientsPerPort; j++) {
         int id = i * numberOfClientsPerPort + j;
         threads[id] =
-            startVirtualThread(() -> connect(newPort, (int) totalMessages / threads.length));
+            ofVirtual().unstarted(() -> connect(newPort, (int) totalMessages / threads.length));
       }
+    }
+  }
+
+  public void start() {
+    for (int i = 0; i < threads.length; i++) {
+      threads[i].start();
     }
   }
 
