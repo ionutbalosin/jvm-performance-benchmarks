@@ -78,7 +78,7 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
     }
   }
 
-  public ExecutorService getExecutorService() {
+  private ExecutorService getExecutorService() {
     return switch (threadType) {
       case VIRTUAL -> newVirtualThreadPerTaskExecutor();
       case PLATFORM -> newCachedThreadPool();
