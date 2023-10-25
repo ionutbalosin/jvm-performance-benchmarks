@@ -101,12 +101,6 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
       case PARK:
         LockSupport.parkNanos(1L);
         break;
-      case SLEEP:
-        try {
-          Thread.sleep(1L);
-        } catch (InterruptedException ignore) {
-        }
-        break;
       default:
         throw new UnsupportedOperationException("Unsupported backoff type " + backoffType);
     }
