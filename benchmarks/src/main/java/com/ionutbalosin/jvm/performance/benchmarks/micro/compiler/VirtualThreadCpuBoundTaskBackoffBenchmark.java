@@ -66,22 +66,23 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VirtualThreadCpuBoundTaskBackoffBenchmark.*"
 
+  @Param private static THREAD_TYPE threadType;
   @Param private static TASKS tasks;
   @Param private static BACKOFF_TYPE backoffType;
   @Param private static CPU_TOKENS cpuTokens;
 
   @Benchmark
-  public void virtual_thread_per_task_executor() {
-    try (ExecutorService executor = newVirtualThreadPerTaskExecutor()) {
+  public void cpu_bound_tasks() {
+    try (ExecutorService executor = getExecutorService()) {
       IntStream.range(0, tasks.get()).forEach(i -> executor.submit(() -> heavyWork()));
     }
   }
 
-  @Benchmark
-  public void cached_thread_pool() {
-    try (ExecutorService executor = newCachedThreadPool()) {
-      IntStream.range(0, tasks.get()).forEach(i -> executor.submit(() -> heavyWork()));
-    }
+  public ExecutorService getExecutorService() {
+    return switch (threadType) {
+      case VIRTUAL -> newVirtualThreadPerTaskExecutor();
+      case PLATFORM -> newCachedThreadPool();
+    };
   }
 
   private void heavyWork() {
@@ -109,6 +110,11 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
       default:
         throw new UnsupportedOperationException("Unsupported backoff type " + backoffType);
     }
+  }
+
+  public enum THREAD_TYPE {
+    VIRTUAL,
+    PLATFORM;
   }
 
   public enum TASKS {

@@ -94,7 +94,8 @@ public class VirtualThreadBlockingCallBenchmark {
               boolean interrupted = false;
               while (!interrupted) {
                 try {
-                  // Note: If necessary, a backoff strategy can be employed to lower the producer rate
+                  // Note: If necessary, a backoff strategy can be employed to lower the producer
+                  // rate
                   queue.put(data);
                 } catch (InterruptedException ignore) {
                   interrupted = true;
@@ -127,13 +128,13 @@ public class VirtualThreadBlockingCallBenchmark {
 
   @TearDown(Level.Invocation)
   public void tearDownInvocation() throws IOException, ExecutionException, InterruptedException {
-    if (!Arrays.equals(data, consumerFuture.get().value)) {
+    if (!Arrays.equals(data, consumerFuture.get().array)) {
       throw new AssertionError("The byte arrays have different content.");
     }
   }
 
   @Benchmark
-  public Wrapper take() throws InterruptedException, ExecutionException {
+  public Wrapper recursive_blocking_calls() throws InterruptedException, ExecutionException {
     consumerThread.start();
     return consumerFuture.get();
   }
@@ -161,7 +162,7 @@ public class VirtualThreadBlockingCallBenchmark {
 
     private Wrapper recursive_run(int depth, Wrapper wrapper) {
       final byte[] result = take();
-      wrapper.value = result;
+      wrapper.array = result;
 
       if (depth == 0) {
         return wrapper;
@@ -182,6 +183,6 @@ public class VirtualThreadBlockingCallBenchmark {
   }
 
   private static class Wrapper {
-    public byte[] value;
+    public byte[] array;
   }
 }
