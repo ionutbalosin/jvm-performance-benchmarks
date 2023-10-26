@@ -71,10 +71,10 @@ public class IoVirtualChatBenchmark {
 
   private final Random random = new Random(16384);
 
-  @Param private static Ports ports;
-  @Param private static Connections connections;
-  @Param private static Messages messages;
-  @Param private static NetworkUtils.BufferSize bufferSize;
+  @Param private Ports ports;
+  @Param private Connections connections;
+  @Param private Messages messages;
+  @Param private NetworkUtils.BufferSize bufferSize;
 
   private VirtualServer vServer;
   private VirtualClient vClient;

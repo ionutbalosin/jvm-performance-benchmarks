@@ -48,8 +48,8 @@ import org.openjdk.jmh.infra.Blackhole;
  * When a virtual thread executes CPU-bound code without involving any blocking I/O
  * or other blocking JDK methods, the virtual thread cannot be unmounted.
  * Consequently, it will not yield and may continue to occupy its carrier thread until it completes its computation.
- * To address this, the CPU-bound tasks include various backoff strategies (such as yielding, parking, or sleeping)
- * in an attempt to deschedule a thread and permit other threads to execute on the CPU, thereby facilitating
+ * To address this, the CPU-bound tasks include various backoff strategies (such as yielding, or parking)
+ * in an attempt to de-schedule the running thread and permit other threads to execute on the CPU, thereby facilitating
  * the unmounting of the virtual thread from its carrier.
  *
  * Note: When the workload is CPU-bound, virtual threads may not offer a substantial improvement
@@ -66,15 +66,21 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VirtualThreadCpuBoundTaskBackoffBenchmark.*"
 
-  @Param private static THREAD_TYPE threadType;
-  @Param private static TASKS tasks;
-  @Param private static BACKOFF_TYPE backoffType;
-  @Param private static CPU_TOKENS cpuTokens;
+  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+
+  private volatile boolean preventUnrolling = true;
+
+  @Param private static CPU_LOAD_FACTOR cpuLoadFactor;
+  @Param private THREAD_TYPE threadType;
+  @Param private BACKOFF_TYPE backoffType;
+  @Param private CPU_TOKENS cpuTokens;
 
   @Benchmark
   public void cpu_bound_tasks() {
+    // Set the number of total tasks based on the number of CPUs (scaled by a CPU load factor)
+    final int tasks = CPUs * cpuLoadFactor.get();
     try (ExecutorService executor = getExecutorService()) {
-      IntStream.range(0, tasks.get()).forEach(i -> executor.submit(() -> heavyWork()));
+      IntStream.range(0, tasks).forEach(i -> executor.submit(() -> heavyWork()));
     }
   }
 
@@ -86,9 +92,12 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
   }
 
   private void heavyWork() {
-    Blackhole.consumeCPU(cpuTokens.get() / 2);
-    backoff();
-    Blackhole.consumeCPU(cpuTokens.get() / 2);
+    // Process each chunk of tokens sequentially with potential back-off in between each chunk
+    Blackhole.consumeCPU(cpuTokens.getTokens());
+    for (int chunks = 1; chunks < cpuTokens.getChunks() && preventUnrolling; chunks++) {
+      backoff();
+      Blackhole.consumeCPU(cpuTokens.getTokens());
+    }
   }
 
   private void backoff() {
@@ -111,12 +120,12 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
     PLATFORM;
   }
 
-  public enum TASKS {
-    _50_K(50_000);
+  public enum CPU_LOAD_FACTOR {
+    _16(16);
 
     private int value;
 
-    TASKS(int value) {
+    CPU_LOAD_FACTOR(int value) {
       this.value = value;
     }
 
@@ -128,22 +137,26 @@ public class VirtualThreadCpuBoundTaskBackoffBenchmark {
   public enum BACKOFF_TYPE {
     NONE,
     YIELD,
-    PARK,
-    SLEEP;
+    PARK;
   }
 
   public enum CPU_TOKENS {
-    _1_K(1_000),
-    _100_K(100_000);
+    _1_M(1_000_000, 100);
 
-    private int value;
+    private long tokens;
+    private int chunks;
 
-    CPU_TOKENS(int value) {
-      this.value = value;
+    CPU_TOKENS(int tokens, int chunks) {
+      this.tokens = tokens;
+      this.chunks = chunks;
     }
 
-    public int get() {
-      return value;
+    public long getTokens() {
+      return tokens;
+    }
+
+    public int getChunks() {
+      return chunks;
     }
   }
 }

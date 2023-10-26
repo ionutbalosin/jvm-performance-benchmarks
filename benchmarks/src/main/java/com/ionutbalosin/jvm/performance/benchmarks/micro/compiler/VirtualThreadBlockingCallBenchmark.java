@@ -77,7 +77,7 @@ public class VirtualThreadBlockingCallBenchmark {
   private BlockingQueue<byte[]> queue;
   private byte[] data;
 
-  @Param private static THREAD_TYPE threadType;
+  @Param private THREAD_TYPE threadType;
 
   @Param({"1", "10", "100", "1000"})
   int stackDepth;
@@ -173,8 +173,7 @@ public class VirtualThreadBlockingCallBenchmark {
 
     private byte[] take() {
       try {
-        // may unmount (in the case of virtual threads) the carrier thread when it calls the
-        // blocking API
+        // The blocking API may unmount (in the case of virtual threads) the carrier thread
         return queue.take();
       } catch (InterruptedException ignore) {
         return null;
