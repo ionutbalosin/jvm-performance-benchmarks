@@ -120,6 +120,9 @@
       "name": "InfrastructureBaselineBenchmark"
     },
     {
+      "name": "IoVirtualChatBenchmark"
+    },
+    {
       "name": "JustInTimeConstantsBenchmark"
     },
     {
@@ -333,6 +336,12 @@
     },
     {
       "name": "VectorizationScatterGatherPatternBenchmark"
+    },
+    {
+      "name": "VirtualThreadBlockingApiCallBenchmark"
+    },
+    {
+      "name": "VirtualThreadCpuBoundTaskBenchmark"
     },
     {
       "name": "WordFrequencyBenchmark"
