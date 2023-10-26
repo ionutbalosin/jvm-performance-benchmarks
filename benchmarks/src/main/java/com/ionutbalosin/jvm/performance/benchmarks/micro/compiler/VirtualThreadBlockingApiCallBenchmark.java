@@ -49,14 +49,13 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark tries to measure the efficiency of mounting and unmounting virtual threads in Java
- * when they interact with blocking APIs at varying thread stack depths. It also serves as a
- * reference by comparing the behavior of virtual threads with that of platform threads (OS-level threads).
+ * This benchmark aims to measure the efficiency of mounting and unmounting virtual threads
+ * by comparing this behavior with that of platform threads (OS-level threads)
+ * when they interact with blocking APIs at varying thread stack depths.
  *
  * Note: in typical scenarios, a virtual thread unmounts when it blocks on I/O or other blocking
  * operations in the JDK, such as BlockingQueue.take(). When the blocking operation is ready to
- * complete (e.g., bytes have been received on a socket), the virtual thread is resubmitted to the
- * scheduler, which mounts it on a carrier for execution.
+ * complete, the virtual thread is resubmitted to the scheduler, which mounts it on a carrier for execution.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -64,9 +63,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class VirtualThreadBlockingCallBenchmark {
+public class VirtualThreadBlockingApiCallBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadBlockingCallBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VirtualThreadBlockingApiCallBenchmark.*"
 
   private final Random random = new Random(16384);
   private final int BYTES = 64;

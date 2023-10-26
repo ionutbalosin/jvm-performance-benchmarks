@@ -62,9 +62,9 @@ import org.openjdk.jmh.infra.Blackhole;
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class VirtualThreadCpuBoundTaskBackoffBenchmark {
+public class VirtualThreadCpuBoundTaskBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadCpuBoundTaskBackoffBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VirtualThreadCpuBoundTaskBenchmark.*"
 
   private static final int CPUs = Runtime.getRuntime().availableProcessors();
 
