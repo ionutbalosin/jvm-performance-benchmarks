@@ -1,0 +1,9 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: stackDepth","Param: threadType"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,20.950270,0.057957,"us/op",1,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,103.227163,0.736243,"us/op",1,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,34.181361,1.116640,"us/op",10,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,170.907382,0.644845,"us/op",10,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,116.824350,2.487196,"us/op",100,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,782.628515,10.276720,"us/op",100,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,1003.021996,29.596957,"us/op",1000,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VirtualThreadBlockingApiCallBenchmark.recursive_blocking_calls","avgt",1,25,4967.673432,26.960783,"us/op",1000,PLATFORM
