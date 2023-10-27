@@ -1,0 +1,15 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: targetType"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,0.701232,0.001040,"ns/op",MONOMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.087861,0.001106,"ns/op",BIMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.655787,0.000601,"ns/op",MEGAMORPHIC_3
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.739436,0.071184,"ns/op",MEGAMORPHIC_4
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.938345,0.018726,"ns/op",MEGAMORPHIC_5
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.863513,0.002347,"ns/op",MEGAMORPHIC_6
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic","avgt",1,25,1.566037,0.012862,"ns/op",MEGAMORPHIC_6_DOMINANT_TARGET
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,0.639659,0.000374,"ns/op",MONOMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,2.489846,0.004391,"ns/op",BIMORPHIC
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,4.078393,0.237066,"ns/op",MEGAMORPHIC_3
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,5.465374,0.045394,"ns/op",MEGAMORPHIC_4
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,6.196571,0.082103,"ns/op",MEGAMORPHIC_5
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,7.276678,0.114746,"ns/op",MEGAMORPHIC_6
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain","avgt",1,25,2.691324,0.005549,"ns/op",MEGAMORPHIC_6_DOMINANT_TARGET

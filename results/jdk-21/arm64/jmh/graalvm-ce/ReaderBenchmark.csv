@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize","Param: readerType"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,1.830578,0.014330,"us/op",_1_KB,_64_MB,FILE_READER
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,1.830326,0.011040,"us/op",_1_KB,_64_MB,INPUT_STREAM_READER
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,1.878110,0.001504,"us/op",_1_KB,_64_MB,BUFFERED_READER
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,2.585847,0.007145,"us/op",_1_KB,_64_MB,LINE_NUMBER_READER

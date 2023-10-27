@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize","Param: writerType"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.WriterBenchmark.write","avgt",1,25,3.164390,0.013566,"us/op",_1_KB,_64_MB,FILE_WRITER
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.WriterBenchmark.write","avgt",1,25,3.274296,0.032228,"us/op",_1_KB,_64_MB,PRINT_WRITER
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.WriterBenchmark.write","avgt",1,25,3.240098,0.017865,"us/op",_1_KB,_64_MB,BUFFERED_WRITER
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.WriterBenchmark.write","avgt",1,25,3.188549,0.040895,"us/op",_1_KB,_64_MB,OUTPUT_STREAM_WRITER

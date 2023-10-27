@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.functional","avgt",1,25,1.520837,0.006247,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.iterative","avgt",1,25,0.574819,0.026422,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.recursive","avgt",1,25,1.104401,0.024510,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.palindrome.PalindromeBenchmark.trampoline","avgt",1,25,0.841191,0.109499,"ms/op"

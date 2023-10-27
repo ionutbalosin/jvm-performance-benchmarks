@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CanonicalizeInductionVariableBenchmark.baseline","avgt",1,25,0.563851,0.013203,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CanonicalizeInductionVariableBenchmark.canonicalize","avgt",1,25,1920460.421895,7079.220502,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CanonicalizeInductionVariableBenchmark.manual_canonicalize","avgt",1,25,0.574809,0.029563,"ns/op"

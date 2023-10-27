@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,1.911500,0.034040,"us/op",16384,128,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,2.883928,0.005434,"us/op",16384,128,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,2.318715,0.019362,"us/op",16384,192,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,3.131743,0.005256,"us/op",16384,192,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,2.727322,0.020036,"us/op",16384,256,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,3.480532,0.003577,"us/op",16384,256,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,12.659192,0.067824,"us/op",16384,128,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,13.912993,0.031255,"us/op",16384,128,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,13.969412,0.020247,"us/op",16384,192,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,15.204905,0.025332,"us/op",16384,192,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,16.079050,0.019023,"us/op",16384,256,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,17.319226,0.017371,"us/op",16384,256,AES/CBC/PKCS5Padding

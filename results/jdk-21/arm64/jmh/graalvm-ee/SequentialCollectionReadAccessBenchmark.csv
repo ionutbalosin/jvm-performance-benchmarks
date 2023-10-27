@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: gc","Param: shuffle"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,1.914649,0.002445,"ns/op",false,false
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,1.967615,0.003919,"ns/op",false,true
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,1.910241,0.004329,"ns/op",true,false
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,1.982352,0.012469,"ns/op",true,true
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,0.830745,0.013577,"ns/op",false,false
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,1.108686,0.032997,"ns/op",false,true
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,0.867622,0.028456,"ns/op",true,false
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,1.077906,0.063436,"ns/op",true,true
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,2.101420,0.029174,"ns/op",false,false
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,2.306457,0.018769,"ns/op",false,true
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,2.138710,0.036272,"ns/op",true,false
+"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,2.291869,0.018200,"ns/op",true,true

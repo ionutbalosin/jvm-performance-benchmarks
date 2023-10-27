@@ -1,0 +1,11 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.decrypt","avgt",1,25,120.914762,0.655933,"us/op",16384,32,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.decrypt","avgt",1,25,120.890495,0.643854,"us/op",16384,64,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.decrypt","avgt",1,25,121.311876,0.045929,"us/op",16384,128,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.decrypt","avgt",1,25,120.505930,0.826474,"us/op",16384,256,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.decrypt","avgt",1,25,120.925774,0.636000,"us/op",16384,448,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.encrypt","avgt",1,25,172.004450,1.741513,"us/op",16384,32,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.encrypt","avgt",1,25,171.471126,0.460115,"us/op",16384,64,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.encrypt","avgt",1,25,171.506399,0.452250,"us/op",16384,128,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.encrypt","avgt",1,25,171.472704,0.411611,"us/op",16384,256,Blowfish/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.BlowfishCbcCryptoBenchmark.encrypt","avgt",1,25,171.167199,0.525276,"us/op",16384,448,Blowfish/CBC/NoPadding

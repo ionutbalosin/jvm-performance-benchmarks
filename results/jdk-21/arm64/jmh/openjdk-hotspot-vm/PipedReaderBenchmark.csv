@@ -1,0 +1,2 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.PipedReaderBenchmark.read","avgt",1,25,7.183726,0.105153,"us/op",_1_KB
