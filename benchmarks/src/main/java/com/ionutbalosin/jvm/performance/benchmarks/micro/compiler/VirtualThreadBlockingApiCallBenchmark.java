@@ -56,12 +56,15 @@ import org.openjdk.jmh.annotations.Warmup;
  * Note: in typical scenarios, a virtual thread unmounts when it blocks on I/O or other blocking
  * operations in the JDK, such as BlockingQueue.take(). When the blocking operation is ready to
  * complete, the virtual thread is resubmitted to the scheduler, which mounts it on a carrier for execution.
+ *
+ * It is less expensive to block a virtual thread than a platform thread, since the latter will involve context switching.
+ * Using virtual threads in the context of blocking API calls provides a noticeable benefit over traditional platform threads.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class VirtualThreadBlockingApiCallBenchmark {
 

@@ -48,19 +48,20 @@ import org.openjdk.jmh.infra.Blackhole;
  * When a virtual thread executes CPU-bound code without involving any blocking I/O
  * or other blocking JDK methods, the virtual thread cannot be unmounted.
  * Consequently, it will not yield and may continue to occupy its carrier thread until it completes its computation.
- * To address this, the CPU-bound tasks include various backoff strategies (such as yielding, or parking)
+ * To address this, the CPU-bound tasks include explicit various backoff strategies (such as yielding, or parking)
  * in an attempt to de-schedule the running thread and permit other threads to execute on the CPU, thereby facilitating
  * the unmounting of the virtual thread from its carrier.
  *
  * Note: When the workload is CPU-bound, virtual threads may not offer a substantial improvement
  * in application throughput compared to traditional platform threads.
+ * Additionally, using virtual threads just for in-memory processing is not their intended use case.
  */
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.SECONDS)
-@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class VirtualThreadCpuBoundTaskBenchmark {
 
