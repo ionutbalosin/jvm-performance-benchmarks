@@ -67,11 +67,11 @@ public class VirtualThreadCpuBoundTaskBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VirtualThreadCpuBoundTaskBenchmark.*"
 
-  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+  private final int CPUs = Runtime.getRuntime().availableProcessors();
 
   private volatile boolean preventUnrolling = true;
 
-  @Param private static CPU_LOAD_FACTOR cpuLoadFactor;
+  @Param private CPU_LOAD_FACTOR cpuLoadFactor;
   @Param private THREAD_TYPE threadType;
   @Param private BACKOFF_TYPE backoffType;
   @Param private CPU_TOKENS cpuTokens;
