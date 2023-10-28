@@ -108,6 +108,9 @@
       "name": "HmacCryptoBenchmark"
     },
     {
+      "name": "HolidayPlannerBenchmark"
+    },
+    {
       "name": "HuffmanCodingBenchmark"
     },
     {
