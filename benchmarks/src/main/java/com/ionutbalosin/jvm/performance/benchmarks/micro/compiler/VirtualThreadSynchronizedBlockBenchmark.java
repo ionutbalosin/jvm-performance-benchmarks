@@ -25,63 +25,82 @@ package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 import static java.util.concurrent.Executors.newCachedThreadPool;
 import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
 
 /*
- * This benchmark evaluates the performance of running CPU-bound (or CPU-intensive) tasks, which are submitted
- * to either a virtual thread executor service or a cached thread pool.
+ * This benchmark assesses the performance of synchronized block operations in the context of
+ * virtual threads, comparing them with platform threads. The synchronization mechanism is
+ * implemented using lock objects, reentrant locks, and no locks at all. In each case within the
+ * execution block, an atomic counter variable is incremented to simulate work.
  *
- * When a virtual thread executes CPU-bound code without involving any blocking I/O
- * or other blocking JDK methods, the virtual thread cannot be unmounted.
- * Consequently, it will not yield and may continue to occupy its carrier thread until it completes its computation.
- * To address this, the CPU-bound tasks include explicit various backoff strategies (such as yielding, or parking)
- * in an attempt to de-schedule the running thread and permit other threads to execute on the CPU, thereby facilitating
- * the unmounting of the virtual thread from its carrier.
- *
- * Note: When the workload is CPU-bound, virtual threads may not offer a substantial improvement
- * in application throughput compared to traditional platform threads.
- * Additionally, using virtual threads just for in-memory processing is not their intended use case.
+ * A virtual thread cannot be unmounted during blocking operations because it is
+ * pinned to its carrier, which occurs in the following scenarios:
+ * - when it executes code inside a synchronized block or method
+ * - when it executes a native method
  */
-
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class VirtualThreadCpuBoundTaskBenchmark {
+public class VirtualThreadSynchronizedBlockBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadCpuBoundTaskBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VirtualThreadSynchronizedBlockBenchmark.*"
 
   private final int CPUs = Runtime.getRuntime().availableProcessors();
 
-  private volatile boolean preventUnrolling = true;
+  private final Object objectLock = new Object();
+  private final ReentrantLock reentrantLock = new ReentrantLock();
+  private final AtomicInteger counter = new AtomicInteger();
 
   @Param private CPU_LOAD_FACTOR cpuLoadFactor;
   @Param private THREAD_TYPE threadType;
-  @Param private BACKOFF_TYPE backoffType;
-  @Param private CPU_TOKENS cpuTokens;
+  @Param private LOCK_TYPE lockType;
+
+  private int tasks;
+
+  @Setup()
+  public void setup() {
+    // Set the number of total tasks based on the number of CPUs (scaled by a CPU load factor)
+    tasks = CPUs * cpuLoadFactor.get();
+  }
+
+  @Setup(Level.Invocation)
+  public void setupInvocation() {
+    counter.set(0);
+  }
+
+  @TearDown(Level.Invocation)
+  public void tearDownInvocation() throws IOException, ExecutionException, InterruptedException {
+    if (counter.get() != tasks) {
+      throw new AssertionError("Unexpected count. Expected " + tasks + ", actual " + counter.get());
+    }
+  }
 
   @Benchmark
-  public void cpu_bound_tasks() {
-    // Set the number of total tasks based on the number of CPUs (scaled by a CPU load factor)
-    final int tasks = CPUs * cpuLoadFactor.get();
+  public void synchronized_method_calls() {
     try (ExecutorService executor = getExecutorService()) {
-      IntStream.range(0, tasks).forEach(i -> executor.submit(() -> heavyWork()));
+      IntStream.range(0, tasks).forEach(i -> executor.submit(getRunnable()));
     }
   }
 
@@ -92,28 +111,23 @@ public class VirtualThreadCpuBoundTaskBenchmark {
     };
   }
 
-  private void heavyWork() {
-    // Process each chunk of tokens sequentially with potential back-off in between each chunk
-    Blackhole.consumeCPU(cpuTokens.getTokens());
-    for (int chunks = 1; chunks < cpuTokens.getChunks() && preventUnrolling; chunks++) {
-      backoff();
-      Blackhole.consumeCPU(cpuTokens.getTokens());
-    }
-  }
-
-  private void backoff() {
-    switch (backoffType) {
-      case NONE:
-        break;
-      case YIELD:
-        Thread.yield();
-        break;
-      case PARK:
-        LockSupport.parkNanos(1L);
-        break;
-      default:
-        throw new UnsupportedOperationException("Unsupported backoff type " + backoffType);
-    }
+  private Runnable getRunnable() {
+    return switch (lockType) {
+      case OBJECT_LOCK -> () -> {
+        synchronized (objectLock) {
+          counter.incrementAndGet();
+        }
+      };
+      case REENTRANT_LOCK -> () -> {
+        try {
+          reentrantLock.lock();
+          counter.incrementAndGet();
+        } finally {
+          reentrantLock.unlock();
+        }
+      };
+      case NO_LOCK -> () -> counter.incrementAndGet();
+    };
   }
 
   public enum THREAD_TYPE {
@@ -121,8 +135,14 @@ public class VirtualThreadCpuBoundTaskBenchmark {
     PLATFORM;
   }
 
+  public enum LOCK_TYPE {
+    OBJECT_LOCK,
+    REENTRANT_LOCK,
+    NO_LOCK;
+  }
+
   public enum CPU_LOAD_FACTOR {
-    _16(16);
+    _4(4);
 
     private int value;
 
@@ -132,32 +152,6 @@ public class VirtualThreadCpuBoundTaskBenchmark {
 
     public int get() {
       return value;
-    }
-  }
-
-  public enum BACKOFF_TYPE {
-    NONE,
-    YIELD,
-    PARK;
-  }
-
-  public enum CPU_TOKENS {
-    _1_M(1_000_000, 100);
-
-    private long tokens;
-    private int chunks;
-
-    CPU_TOKENS(int tokens, int chunks) {
-      this.tokens = tokens;
-      this.chunks = chunks;
-    }
-
-    public long getTokens() {
-      return tokens;
-    }
-
-    public int getChunks() {
-      return chunks;
     }
   }
 }
