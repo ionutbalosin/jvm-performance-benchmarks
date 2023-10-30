@@ -71,15 +71,17 @@ public class VirtualThreadCpuBoundTaskBenchmark {
 
   private volatile boolean preventUnrolling = true;
 
-  @Param private CPU_LOAD_FACTOR cpuLoadFactor;
-  @Param private THREAD_TYPE threadType;
-  @Param private BACKOFF_TYPE backoffType;
-  @Param private CPU_TOKENS cpuTokens;
+  @Param({"16"})
+  private int cpuLoadFactor;
+
+  @Param private ThreadType threadType;
+  @Param private BackoffType backoffType;
+  @Param private CpuTokens cpuTokens;
 
   @Benchmark
   public void cpu_bound_tasks() {
     // Set the number of total tasks based on the number of CPUs (scaled by a CPU load factor)
-    final int tasks = CPUs * cpuLoadFactor.get();
+    final int tasks = CPUs * cpuLoadFactor;
     try (ExecutorService executor = getExecutorService()) {
       IntStream.range(0, tasks).forEach(i -> executor.submit(() -> heavyWork()));
     }
@@ -116,38 +118,24 @@ public class VirtualThreadCpuBoundTaskBenchmark {
     }
   }
 
-  public enum THREAD_TYPE {
+  public enum ThreadType {
     VIRTUAL,
     PLATFORM;
   }
 
-  public enum CPU_LOAD_FACTOR {
-    _16(16);
-
-    private int value;
-
-    CPU_LOAD_FACTOR(int value) {
-      this.value = value;
-    }
-
-    public int get() {
-      return value;
-    }
-  }
-
-  public enum BACKOFF_TYPE {
+  public enum BackoffType {
     NONE,
     YIELD,
     PARK;
   }
 
-  public enum CPU_TOKENS {
+  public enum CpuTokens {
     _1_M(1_000_000, 100);
 
     private long tokens;
     private int chunks;
 
-    CPU_TOKENS(int tokens, int chunks) {
+    CpuTokens(int tokens, int chunks) {
       this.tokens = tokens;
       this.chunks = chunks;
     }

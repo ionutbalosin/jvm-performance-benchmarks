@@ -24,7 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.setupThreadFactory;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.THREAD_TYPE;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.ThreadType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,7 +67,7 @@ public record TouristAttraction(String source, String name, float rating) {
           "Surfing Adventure");
 
   public static List<TouristAttraction> getTopTouristAttractions(
-      THREAD_TYPE threadType, int attractionSources, int topAttractions)
+      ThreadType threadType, int attractionSources, int topAttractions)
       throws InterruptedException {
     final List<Callable<TouristAttraction>> tasks = new ArrayList<>();
     for (int i = 0; i < attractionSources; i++) {

@@ -79,10 +79,10 @@ public class VirtualThreadBlockingApiCallBenchmark {
   private BlockingQueue<byte[]> queue;
   private byte[] data;
 
-  @Param private THREAD_TYPE threadType;
+  @Param private ThreadType threadType;
 
   @Param({"1", "10", "100", "1000"})
-  int stackDepth;
+  private int stackDepth;
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
@@ -141,7 +141,7 @@ public class VirtualThreadBlockingApiCallBenchmark {
     return consumerFuture.get();
   }
 
-  public enum THREAD_TYPE {
+  public enum ThreadType {
     VIRTUAL,
     PLATFORM;
   }

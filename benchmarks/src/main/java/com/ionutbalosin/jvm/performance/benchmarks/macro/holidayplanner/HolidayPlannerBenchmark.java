@@ -71,8 +71,10 @@ public class HolidayPlannerBenchmark {
   private static final int CPUs = Runtime.getRuntime().availableProcessors();
   private static final Random random = new Random(16384);
 
-  @Param private THREAD_TYPE threadType;
-  @Param private CPU_LOAD_FACTOR cpuLoadFactor;
+  @Param({"256"})
+  private int cpuLoadFactor;
+
+  @Param private ThreadType threadType;
 
   private int tasks;
   int tripDuration;
@@ -80,7 +82,7 @@ public class HolidayPlannerBenchmark {
 
   @Setup()
   public void setup() {
-    tasks = CPUs * cpuLoadFactor.get();
+    tasks = CPUs * cpuLoadFactor;
     tripDuration = random.nextInt(MAX_TRIP_DURATION_DAYS);
     numberOfTravelers = random.nextInt(MAX_TRAVELERS);
 
@@ -96,28 +98,14 @@ public class HolidayPlannerBenchmark {
         threadType, tasks, tripDuration, numberOfTravelers, TOP_TEN_ATTRACTIONS);
   }
 
-  public static ThreadFactory setupThreadFactory(HolidayPlannerBenchmark.THREAD_TYPE threadType) {
+  public static ThreadFactory setupThreadFactory(ThreadType threadType) {
     return switch (threadType) {
       case VIRTUAL -> Thread.ofVirtual().factory();
       case PLATFORM -> Thread.ofPlatform().factory();
     };
   }
 
-  public enum CPU_LOAD_FACTOR {
-    _256(256);
-
-    private int value;
-
-    CPU_LOAD_FACTOR(int value) {
-      this.value = value;
-    }
-
-    public int get() {
-      return value;
-    }
-  }
-
-  public enum THREAD_TYPE {
+  public enum ThreadType {
     VIRTUAL,
     PLATFORM;
   }

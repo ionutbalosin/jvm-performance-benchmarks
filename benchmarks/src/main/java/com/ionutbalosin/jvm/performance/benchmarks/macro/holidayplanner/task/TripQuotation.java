@@ -24,7 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.setupThreadFactory;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.THREAD_TYPE;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.ThreadType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -68,7 +68,7 @@ public record TripQuotation(String source, Status status, double price) {
   }
 
   public static TripQuotation getQuotation(
-      THREAD_TYPE threadType, int quotationSources, int tripDuration, int numberOfTravelers) {
+      ThreadType threadType, int quotationSources, int tripDuration, int numberOfTravelers) {
     final List<Callable<TripQuotation>> tasks = new ArrayList<>();
     for (int i = 0; i < quotationSources; i++) {
       final String sourceId = "Trip Quotation Source " + i;

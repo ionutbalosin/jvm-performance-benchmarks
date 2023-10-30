@@ -71,7 +71,7 @@ public class StringConcatenationBenchmark {
   @Param({"128"})
   private int capacity;
 
-  @Param private CODER coder;
+  @Param private Coder coder;
 
   @Setup
   public void setup() {
@@ -147,7 +147,7 @@ public class StringConcatenationBenchmark {
     return aString + anInt + aFloat + aLong + aDouble + aBool + anObject;
   }
 
-  public enum CODER {
+  public enum Coder {
     LATIN1,
     UTF16;
   }

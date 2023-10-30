@@ -26,7 +26,7 @@ import static com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.t
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task.TripQuotation.getQuotation;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task.Weather.getWeather;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.THREAD_TYPE;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.ThreadType;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task.TouristAttraction;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task.TripQuotation;
 import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task.Weather;
@@ -75,7 +75,7 @@ public record HolidayPlanner(
   }
 
   public static HolidayPlanner readHolidayPlanner(
-      THREAD_TYPE threadType,
+      ThreadType threadType,
       int tasks,
       int tripDuration,
       int numberOfTravelers,

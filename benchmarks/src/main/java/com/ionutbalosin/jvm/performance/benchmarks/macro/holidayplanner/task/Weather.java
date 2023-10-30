@@ -24,7 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.task;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.setupThreadFactory;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark.THREAD_TYPE;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.holidayplanner.HolidayPlannerBenchmark;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,7 +62,7 @@ public record Weather(
 
   // Iterate through the list of weather sources and return only the one that has returned success.
   // In case there is none, the weather will be marked as unavailable
-  public static Weather getWeather(THREAD_TYPE threadType) {
+  public static Weather getWeather(HolidayPlannerBenchmark.ThreadType threadType) {
     final List<Callable<Weather>> tasks = new ArrayList<>();
     tasks.add(() -> getWeatherFromResilientSource());
     tasks.add(() -> getWeatherFromNonResilientSource());
