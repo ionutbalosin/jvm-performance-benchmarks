@@ -22,14 +22,17 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.iovirtualchat.VirtualClient.connect;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.utils.NetworkUtils.HOST;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.utils.NetworkUtils.PORT;
+import static java.util.concurrent.Executors.newCachedThreadPool;
+import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.utils.NetworkUtils;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.virtualchat.VirtualClient;
-import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.virtualchat.VirtualServer;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.iovirtualchat.VirtualServer;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -45,98 +48,87 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the average time it takes to send and receive a large number of messages between a Client and a Server.
- * Both the Client and Server employ virtual threads to manage connections between them.
+ * This benchmark measures the latency of blocking TCP calls for sending and receiving multiple
+ * messages using blocking I/O (input/output). It simulates interactions from multiple clients to a server
+ * over TCP connections.
  *
- * The Server listens on a specific range of ports for incoming client connections, with each connection being handled by a virtual thread.
- * When a connection request is accepted from the Client, a new virtual thread is spawned to manage the specific communication
- * with that Client (i.e., listen to the Client message and echo back the same content).
+ * Each Client-to-Server interaction is handled either within a virtual thread or a platform thread.
  *
- * The Client initiates multiple connections to each of the Server's ports within the specified range, simulating multiple
- * clients interacting with the Server on the same port. In each connection, handled within a virtual thread,
- * the Client sends a byte array to the Server and awaits the same message to be echoed back.
+ * The `send_receive()` method sequentially sends multiple byte arrays (i.e., messages) from each client
+ * to the server and waits until the server echoes each of them back. The time taken for these combined
+ * send-receive interactions is measured to assess the overall latency of the communication.
  *
  * References:
  * - https://github.com/ebarlas/project-loom-c5m
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.SECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class IoVirtualChatBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*IoVirtualChatBenchmark.*"
 
+  // Note: Setting these buffers too high might cause ENOBUFS on some systems (e.g., FreeBSD).
+  // In case of issues, please check the maximum socket send/receive buffer size for your system.
+  public static final int SEND_BUFFER_LENGTH = 4_096;
+  public static final int RECEIVE_BUFFER_LENGTH = 4_096;
+  public static final int CLIENT_SOCKET_TIMEOUT = 12_000;
+  public static final int MAX_INCOMING_CONNECTIONS = 1024;
+
+  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+
   private final Random random = new Random(16384);
 
-  @Param private Ports ports;
-  @Param private Connections connections;
-  @Param private Messages messages;
-  @Param private NetworkUtils.BufferSize bufferSize;
+  @Param({"8"})
+  private int cpuLoadFactor;
+
+  @Param({"4"})
+  private int bufferSize;
+
+  @Param private ThreadType threadType;
+  @Param private MessagesPerClient messagesPerClient;
 
   private VirtualServer vServer;
-  private VirtualClient vClient;
   private byte[] data;
+  private int tasks;
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
-    data = new byte[bufferSize.get()];
+    data = new byte[bufferSize];
     random.nextBytes(data);
+    tasks = CPUs * cpuLoadFactor;
 
-    vServer = new VirtualServer(HOST, PORT, ports.get(), data);
+    vServer = new VirtualServer(HOST, PORT, threadType, data);
     vServer.start();
   }
 
   @TearDown(Level.Trial)
-  public void tearDownTrial() throws Exception {
+  public void tearDownTrial() {
     vServer.awaitTermination();
-  }
-
-  @Setup(Level.Invocation)
-  public void setupInvocation() {
-    vClient = new VirtualClient(HOST, PORT, ports.get(), connections.get(), data, messages.get());
-    vClient.init();
-  }
-
-  @TearDown(Level.Invocation)
-  public void tearDownInvocation() {
-    if (vClient.messages.longValue() != messages.get()) {
-      throw new AssertionError(
-          "The number of messages differs from the expected value. Actual: "
-              + vClient.messages.longValue()
-              + ", expected: "
-              + messages.get());
-    }
   }
 
   @Benchmark
   public void send_receive() {
-    vClient.start();
-    vClient.awaitTermination();
-  }
-
-  public enum Ports {
-    _100(100);
-
-    private int value;
-
-    Ports(int value) {
-      this.value = value;
-    }
-
-    public int get() {
-      return value;
+    try (ExecutorService executor = getExecutorService()) {
+      IntStream.range(0, tasks)
+          .forEach(i -> executor.submit(() -> connect(HOST, PORT, data, messagesPerClient.get())));
     }
   }
 
-  public enum Connections {
+  public enum ThreadType {
+    VIRTUAL,
+    PLATFORM
+  }
+
+  public enum MessagesPerClient {
     _50_K(50_000);
 
     private int value;
 
-    Connections(int value) {
+    MessagesPerClient(int value) {
       this.value = value;
     }
 
@@ -145,17 +137,10 @@ public class IoVirtualChatBenchmark {
     }
   }
 
-  public enum Messages {
-    _500_K(500_000);
-
-    private int value;
-
-    Messages(int value) {
-      this.value = value;
-    }
-
-    public int get() {
-      return value;
-    }
+  private ExecutorService getExecutorService() {
+    return switch (threadType) {
+      case VIRTUAL -> newVirtualThreadPerTaskExecutor();
+      case PLATFORM -> newCachedThreadPool();
+    };
   }
 }
