@@ -22,13 +22,13 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.iovirtualchat.VirtualClient.connect;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.ioblocking.IoBlockingClient.sendReceiveChunks;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.utils.NetworkUtils.HOST;
 import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.utils.NetworkUtils.PORT;
 import static java.util.concurrent.Executors.newCachedThreadPool;
 import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.iovirtualchat.VirtualServer;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.ioblocking.IoBlockingServer;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -49,14 +49,14 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * This benchmark measures the latency of blocking TCP calls for sending and receiving multiple
- * messages using blocking I/O (input/output). It simulates interactions from multiple clients to a server
- * over TCP connections.
+ * chunks of messages using the blocking I/O (input/output) API. It involves communication between
+ * multiple Clients and a Server. Each Client-to-Server interaction is handled within a virtual
+ * thread or a platform thread.
  *
- * Each Client-to-Server interaction is handled either within a virtual thread or a platform thread.
- *
- * The `send_receive()` method sequentially sends multiple byte arrays (i.e., messages) from each client
- * to the server and waits until the server echoes each of them back. The time taken for these combined
- * send-receive interactions is measured to assess the overall latency of the communication.
+ * The `send_receive()` method initiates multiple Clients, each of which connects to the Server.
+ * Within each Client, multiple byte arrays (i.e., chunks of messages) are sequentially sent to the
+ * Server, and the Client waits for the Server to echo each of them back. The time taken for these
+ * combined send-receive Clients-to-Server interactions is measured to assess the overall latency.
  *
  * References:
  * - https://github.com/ebarlas/project-loom-c5m
@@ -67,16 +67,14 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class IoVirtualChatBenchmark {
+public class IoBlockingRoundtripChunksLatencyBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*IoVirtualChatBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*IoBlockingRoundtripChunksLatencyBenchmark.*"
 
   // Note: Setting these buffers too high might cause ENOBUFS on some systems (e.g., FreeBSD).
   // In case of issues, please check the maximum socket send/receive buffer size for your system.
   public static final int SEND_BUFFER_LENGTH = 4_096;
   public static final int RECEIVE_BUFFER_LENGTH = 4_096;
-  public static final int CLIENT_SOCKET_TIMEOUT = 12_000;
-  public static final int MAX_INCOMING_CONNECTIONS = 1024;
 
   private static final int CPUs = Runtime.getRuntime().availableProcessors();
 
@@ -91,7 +89,7 @@ public class IoVirtualChatBenchmark {
   @Param private ThreadType threadType;
   @Param private MessagesPerClient messagesPerClient;
 
-  private VirtualServer vServer;
+  private IoBlockingServer server;
   private byte[] data;
   private int tasks;
 
@@ -101,20 +99,23 @@ public class IoVirtualChatBenchmark {
     random.nextBytes(data);
     tasks = CPUs * cpuLoadFactor;
 
-    vServer = new VirtualServer(HOST, PORT, threadType, data);
-    vServer.start();
+    server = new IoBlockingServer(HOST, PORT, threadType, data);
+    server.start();
   }
 
   @TearDown(Level.Trial)
   public void tearDownTrial() {
-    vServer.awaitTermination();
+    server.awaitTermination();
   }
 
   @Benchmark
   public void send_receive() {
-    try (ExecutorService executor = getExecutorService()) {
+    try (final ExecutorService executor = getExecutorService()) {
       IntStream.range(0, tasks)
-          .forEach(i -> executor.submit(() -> connect(HOST, PORT, data, messagesPerClient.get())));
+          .forEach(
+              i ->
+                  executor.submit(
+                      () -> sendReceiveChunks(HOST, PORT, data, messagesPerClient.get())));
     }
   }
 

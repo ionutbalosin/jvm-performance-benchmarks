@@ -43,17 +43,14 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-/*
- * This benchmark assesses the performance of accessing synchronized blocks in the context of
- * virtual threads, comparing them with platform threads. The synchronization mechanism is
- * implemented using lock objects, reentrant locks, and no locks at all. Within the synchronized
- * execution block, different backoff strategies (such as thread parking, sleeping, or nothing) are
- * triggered.
+/**
+ * This benchmark assesses the performance of synchronized blocks in the context of virtual threads,
+ * comparing them with platform threads. The synchronization mechanism is implemented using lock
+ * objects, reentrant locks, and no locks at all. Within the synchronized execution block, different
+ * backoff strategies (such as thread parking, sleeping, or none) are triggered.
  *
- * A virtual thread cannot be preempted during blocking operations because it is pinned to its
- * carrier, which occurs in the following scenarios:
- * - when it executes code inside a synchronized block or method
- * - when it executes a native method
+ * <p>Note: A virtual thread cannot be preempted during a synchronized block because it is pinned to
+ * its carrier.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -61,9 +58,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class VirtualThreadSynchronizedBlockBenchmark {
+public class VPThreadSynchronizationBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadSynchronizedBlockBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VPThreadSynchronizationBenchmark.*"
 
   private final int CPUs = Runtime.getRuntime().availableProcessors();
   private final Object objectLock = new Object();
@@ -84,9 +81,8 @@ public class VirtualThreadSynchronizedBlockBenchmark {
   }
 
   @Benchmark
-  public void synchronized_method_calls() {
-    tasks = CPUs * cpuLoadFactor;
-    try (ExecutorService executor = getExecutorService()) {
+  public void synchronized_calls() {
+    try (final ExecutorService executor = getExecutorService()) {
       IntStream.range(0, tasks).forEach(i -> executor.submit(synchronizedWork()));
     }
   }

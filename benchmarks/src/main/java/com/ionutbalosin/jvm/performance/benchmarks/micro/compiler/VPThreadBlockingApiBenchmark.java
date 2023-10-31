@@ -66,9 +66,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class VirtualThreadBlockingApiCallBenchmark {
+public class VPThreadBlockingApiBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VirtualThreadBlockingApiCallBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VPThreadBlockingApiBenchmark.*"
 
   private final Random random = new Random(16384);
   private final int BYTES = 64;
@@ -135,7 +135,7 @@ public class VirtualThreadBlockingApiCallBenchmark {
   }
 
   @Benchmark
-  public Wrapper recursive_blocking_calls() throws InterruptedException, ExecutionException {
+  public Wrapper blocking_calls() throws InterruptedException, ExecutionException {
     consumerThread.start();
     return consumerFuture.get();
   }

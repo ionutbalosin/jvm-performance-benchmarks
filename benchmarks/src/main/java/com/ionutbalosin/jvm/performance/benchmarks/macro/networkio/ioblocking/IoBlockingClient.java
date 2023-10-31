@@ -20,11 +20,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.iovirtualchat;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.ioblocking;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.CLIENT_SOCKET_TIMEOUT;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.RECEIVE_BUFFER_LENGTH;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.SEND_BUFFER_LENGTH;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoBlockingRoundtripChunksLatencyBenchmark.RECEIVE_BUFFER_LENGTH;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoBlockingRoundtripChunksLatencyBenchmark.SEND_BUFFER_LENGTH;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -32,9 +31,11 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class VirtualClient {
+public class IoBlockingClient {
 
-  public static void connect(String host, int port, byte[] data, int messages) {
+  private static final int CLIENT_SOCKET_TIMEOUT = 12_000;
+
+  public static void sendReceiveChunks(String host, int port, byte[] data, int messages) {
     try (Socket socket = new Socket()) {
       socket.setSoTimeout(CLIENT_SOCKET_TIMEOUT);
       socket.setSendBufferSize(SEND_BUFFER_LENGTH);

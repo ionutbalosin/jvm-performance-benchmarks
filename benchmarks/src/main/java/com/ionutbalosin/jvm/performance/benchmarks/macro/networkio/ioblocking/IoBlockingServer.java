@@ -20,16 +20,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.iovirtualchat;
+package com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.ioblocking;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.MAX_INCOMING_CONNECTIONS;
-import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.RECEIVE_BUFFER_LENGTH;
+import static com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoBlockingRoundtripChunksLatencyBenchmark.RECEIVE_BUFFER_LENGTH;
 import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;
 import static java.util.concurrent.Executors.newCachedThreadPool;
 import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
-import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.ThreadType;
+import com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoBlockingRoundtripChunksLatencyBenchmark.ThreadType;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -40,7 +39,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class VirtualServer {
+public class IoBlockingServer {
+
+  private static final int MAX_INCOMING_CONNECTIONS = 10_000;
 
   private final String host;
   private final ThreadType threadType;
@@ -49,7 +50,7 @@ public class VirtualServer {
   private final ExecutorService executor;
   private final CountDownLatch serverLatch;
 
-  public VirtualServer(String host, int port, ThreadType threadType, byte[] data) {
+  public IoBlockingServer(String host, int port, ThreadType threadType, byte[] data) {
     this.host = host;
     this.threadType = threadType;
     this.data = data;
@@ -61,6 +62,7 @@ public class VirtualServer {
 
   public void start() throws InterruptedException {
     serverThread.start();
+    // ensure that the server thread has started before the benchmark iterations
     serverLatch.await();
   }
 
@@ -95,7 +97,7 @@ public class VirtualServer {
         out.write(readBuffer, 0, bytesRead);
       }
     } catch (Exception ignore) {
-      // auto-close
+      // auto-close the socket
     }
   }
 
@@ -105,7 +107,7 @@ public class VirtualServer {
       if (!executor.awaitTermination(12, TimeUnit.SECONDS)) {
         executor.shutdownNow();
         if (!executor.awaitTermination(12, TimeUnit.SECONDS)) {
-          System.out.println("Server executor pool did not terminate.");
+          System.err.println("Server executor service pool did not terminate.");
         }
       }
     } catch (InterruptedException e) {
