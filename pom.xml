@@ -17,8 +17,8 @@
         <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
         <maven.shade.plugin>3.5.0</maven.shade.plugin>
         <org.openjdk.jmh>1.37</org.openjdk.jmh>
-        <spotless.maven.plugin>2.39.0</spotless.maven.plugin>
-        <google.java.format>1.17.0</google.java.format>
+        <spotless.maven.plugin>2.40.0</spotless.maven.plugin>
+        <google.java.format>1.18.1</google.java.format>
     </properties>
 
     <modules>
@@ -39,10 +39,10 @@
             <properties>
                 <jdk.version>11</jdk.version>
                 <spotlessExcludedFiles>
-                    **/*SwitchBenchmark.java
+                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/*SwitchBenchmark.java,**/*VectorApiBenchmark.java,**/RandomGeneratorBenchmark.java,**/ThreadLocalRandomBenchmark.java
+                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java,**/*VectorApiBenchmark.java,**/RandomGeneratorBenchmark.java,**/ThreadLocalRandomBenchmark.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
@@ -58,7 +58,7 @@
                     **/TypeSwitchBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/TypeSwitchBenchmark.java
+                    **/TypeSwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview

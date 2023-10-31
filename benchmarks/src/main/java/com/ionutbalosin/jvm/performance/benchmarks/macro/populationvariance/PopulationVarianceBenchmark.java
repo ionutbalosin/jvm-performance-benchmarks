@@ -61,7 +61,7 @@ public class PopulationVarianceBenchmark {
 
   private final Random random = new Random(16384);
   // The oldest person ever: 116 years 54 days
-  private final float OLDEST_MAN_AGE = 116.1479F;
+  private final double OLDEST_MAN_AGE = 116.1479D;
   private final int POPULATION_SIZE = Integer.MAX_VALUE >> 4;
 
   private double[] ages;
@@ -70,7 +70,7 @@ public class PopulationVarianceBenchmark {
   public void setup() {
     ages = new double[POPULATION_SIZE];
     for (int i = 0; i < POPULATION_SIZE; i++) {
-      ages[i] = random.nextDouble(OLDEST_MAN_AGE);
+      ages[i] = random.nextDouble() * OLDEST_MAN_AGE;
     }
 
     // make sure the results are equivalent before any further benchmarking
