@@ -206,6 +206,8 @@ There are several reasons why such a custom configuration is necessary:
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
+**Note**: For historical reasons, a newer suite (e.g., a suite for JDK 21) may contain benchmarks that are compatible with an older JDK version (e.g., JDK 17). However, we do not plan to include a newly created benchmark in an older suite that has already been run and published. We are following a forward-only approach.
+
 ## Infrastructure baseline benchmark
 
 We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), which can be used to assess the infrastructure overhead for the code being measured.
@@ -222,7 +224,10 @@ Running a benchmark suite triggers the complete setup process in a highly intera
 - Configure JMH (e.g., selecting the benchmark suite for the specific JDK, etc.).
 - Compile the benchmarks using a JDK Maven profile.
 
+Depending on the coverage, each benchmark suite takes a significant amount of time to run, generally on the order of days.
+
 **Note**: For benchmark compilation, please run the following command:
+
 ```bash
 ./mvnw -P jdk$<jdk-version>_profile clean package
 ```
@@ -241,15 +246,6 @@ Examples:
 ```bash
 ./mvnw -P jdk21_profile clean package
 ```
-## Elapsed amount of time for each benchmark suite
-
-Each benchmarks suite take a significant amount of time to fully run. For example:
-
- Benchmark suite            |  Elapsed time
-----------------------------|--------------
-benchmarks-suite-jdk11.json | ~ 38 hours
-benchmarks-suite-jdk17.json | ~ 42 hours
-benchmarks-suite-jdk21.json | N/A
 
 ### Dry run
 
