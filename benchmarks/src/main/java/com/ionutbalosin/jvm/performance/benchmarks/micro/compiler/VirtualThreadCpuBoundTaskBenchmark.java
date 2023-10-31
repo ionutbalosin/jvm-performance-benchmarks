@@ -22,8 +22,9 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.micro.compiler;
 
-import static java.util.concurrent.Executors.newCachedThreadPool;
-import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
+import static java.lang.Thread.ofPlatform;
+import static java.lang.Thread.ofVirtual;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -80,21 +81,20 @@ public class VirtualThreadCpuBoundTaskBenchmark {
 
   @Benchmark
   public void cpu_bound_tasks() {
-    // Set the number of total tasks based on the number of CPUs (scaled by a CPU load factor)
     final int tasks = CPUs * cpuLoadFactor;
     try (ExecutorService executor = getExecutorService()) {
-      IntStream.range(0, tasks).forEach(i -> executor.submit(() -> heavyWork()));
+      IntStream.range(0, tasks).forEach(i -> executor.submit(() -> cpuBoundWork()));
     }
   }
 
   private ExecutorService getExecutorService() {
     return switch (threadType) {
-      case VIRTUAL -> newVirtualThreadPerTaskExecutor();
-      case PLATFORM -> newCachedThreadPool();
+      case VIRTUAL -> newFixedThreadPool(CPUs, ofVirtual().factory());
+      case PLATFORM -> newFixedThreadPool(CPUs, ofPlatform().factory());
     };
   }
 
-  private void heavyWork() {
+  private void cpuBoundWork() {
     // Process each chunk of tokens sequentially with potential back-off in between each chunk
     Blackhole.consumeCPU(cpuTokens.getTokens());
     for (int chunks = 1; chunks < cpuTokens.getChunks() && preventUnrolling; chunks++) {

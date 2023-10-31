@@ -96,8 +96,7 @@ public class VirtualThreadBlockingApiCallBenchmark {
               boolean interrupted = false;
               while (!interrupted) {
                 try {
-                  // Note: If necessary, a backoff strategy can be employed to lower the producer
-                  // rate
+                  // If necessary, a backoff strategy can be employed to lower the producer rate
                   queue.put(data);
                 } catch (InterruptedException ignore) {
                   interrupted = true;

@@ -69,7 +69,6 @@ public class VirtualServer {
       serverSocket.setOption(StandardSocketOptions.SO_REUSEADDR, true);
       serverSocket.setOption(StandardSocketOptions.SO_REUSEPORT, true);
       serverSocket.setOption(StandardSocketOptions.SO_RCVBUF, RECEIVE_BUFFER_LENGTH);
-      // serverSocket.setOption(StandardSocketOptions.SO_SNDBUF, SEND_BUFFER_LENGTH);
       serverSocket.bind(new InetSocketAddress(host, port), MAX_INCOMING_CONNECTIONS);
 
       serverLatch.countDown();
@@ -117,17 +116,17 @@ public class VirtualServer {
     serverThread.interrupt();
   }
 
+  private Thread getThread(Runnable runnable) {
+    return switch (threadType) {
+      case VIRTUAL -> ofVirtual().unstarted(runnable);
+      case PLATFORM -> ofPlatform().unstarted(runnable);
+    };
+  }
+
   private ExecutorService getExecutorService() {
     return switch (threadType) {
       case VIRTUAL -> newVirtualThreadPerTaskExecutor();
       case PLATFORM -> newCachedThreadPool();
-    };
-  }
-
-  public Thread getThread(Runnable runnable) {
-    return switch (threadType) {
-      case VIRTUAL -> ofVirtual().unstarted(runnable);
-      case PLATFORM -> ofPlatform().unstarted(runnable);
     };
   }
 }
