@@ -46,6 +46,9 @@
       "jmhOpts": "-prof gc"
     },
     {
+      "name": "DeadLoopEliminationBenchmark"
+    },
+    {
       "name": "DeadMethodCallStoreBenchmark"
     },
     {
