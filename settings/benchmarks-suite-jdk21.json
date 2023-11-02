@@ -108,7 +108,8 @@
       "name": "HmacCryptoBenchmark"
     },
     {
-      "name": "HolidayPlannerBenchmark"
+      "name": "HolidayPlannerBenchmark",
+      "jvmArgsAppend": "--enable-preview"
     },
     {
       "name": "HuffmanCodingBenchmark"
