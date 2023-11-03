@@ -1,2 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: bufferSize","Param: connections","Param: messages","Param: ports"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoVirtualChatBenchmark.send_receive","avgt",1,25,8.383190,0.161427,"s/op",_1_KB,_50_K,_500_K,_100
