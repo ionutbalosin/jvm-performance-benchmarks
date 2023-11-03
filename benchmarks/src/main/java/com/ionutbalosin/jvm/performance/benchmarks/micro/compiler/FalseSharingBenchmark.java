@@ -98,21 +98,23 @@ public class FalseSharingBenchmark {
   }
 
   public static class ManualPaddingState0 {
+    // Superclass fields are typically laid out first.
     long l1;
   }
 
   public static class ManualPaddingState1 extends ManualPaddingState0 {
-    long l3, l4, l5, l6;
-    long l31, l41, l51, l61;
+    long p01, p02, p03, p04;
+    long p11, p12, p13, p14;
   }
 
   public static class ManualPaddingState2 extends ManualPaddingState1 {
+    // Subclass fields are typically  laid out last.
     long l2;
   }
 
   public static class ManualPaddingState3 extends ManualPaddingState2 {
-    long l7, l8, l9, l10;
-    long l71, l81, l91, l101;
+    long q01, q02, q03, q04;
+    long q11, q12, q13, q14;
   }
 
   @State(Scope.Group)
@@ -132,11 +134,14 @@ public class FalseSharingBenchmark {
 
   @State(Scope.Group)
   public static class ArrayState {
-    // The first 7 elements of the array will live on the same cache line.
-    // The 8th element will land on the next line.
-    // This benchmark will be slower than the others since it requires an extra load for the array
-    // field.
-    long[] arr = new long[16];
+    // In general, the cache line size is 64 bytes, but on some architectures
+    // (e.g., z/Architecture), it is significantly larger (e.g., 256 bytes).
+    // To account for these scenarios, we include a padding of 256 bytes between the first and
+    // second fields, which is considered sufficient.
+    //
+    // Note: this benchmark may be slower than others due to the additional load required for the
+    // array field.
+    long[] arr = new long[64];
   }
 
   @Benchmark
@@ -148,6 +153,6 @@ public class FalseSharingBenchmark {
   @Benchmark
   @Group("array_pad")
   public long writer(ArrayState arrayState) {
-    return arrayState.arr[7]++;
+    return arrayState.arr[32]++;
   }
 }
