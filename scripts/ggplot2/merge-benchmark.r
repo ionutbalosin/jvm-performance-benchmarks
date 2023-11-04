@@ -46,3 +46,6 @@ output_file <- "LockCoarseningBenchmark.csv"
 for (jvm_identifier in jvm_identifiers) {
   mergeAndWriteBenchmarkResultsToFile(jmh_output_folder, jvm_identifier, benchmark_files, column_name, column_values, output_file)
 }
+
+# To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
+closeAllConnections()

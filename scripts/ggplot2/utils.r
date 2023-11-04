@@ -49,13 +49,19 @@ readCsvResultsFromFile <- function(file_path) {
 
   tryCatch(
     {
-      result <- read.csv(file_path, sep = ",", header = TRUE)
+      csv_file <- file(file_path, "r")
+      result <- read.csv(csv_file, sep = ",", header = TRUE)
     },
     warning = function(w) {
       # cat("Cannot read from", file_path, "File skipped.\n")
     },
     error = function(e) {
       # cat("Cannot read from", file_path, "File skipped.\n")
+    },
+    finally = {
+      if (exists("csv_file")) {
+        close(csv_file)
+      }
     }
   )
 
@@ -69,13 +75,19 @@ writeDataToCsvFile <- function(path, file, data) {
       if (!dir.exists(path)) {
         dir.create(path)
       }
-      write.table(data, file.path(path, file), sep = ",", row.names = FALSE)
+      csv_file <- file(file.path(path, file), "w")
+      write.table(data, csv_file, sep = ",", row.names = FALSE)
     },
     warning = function(w) {
       cat("Cannot write to", file.path(path, file), "File skipped.\n")
     },
     error = function(e) {
       cat("Cannot write to", file.path(path, file), "File skipped.\n")
+    },
+    finally = {
+      if (exists("csv_file")) {
+        close(csv_file)
+      }
     }
   )
 }

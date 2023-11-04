@@ -80,4 +80,7 @@ for (benchmark_file in benchmark_files) {
   saveBenchmarkBarChartToSVG(data, plot, plot_output_folder, benchmark_file_basename)
 
   cat("Summary:", trimws(summary, "both"), "\n")
+
+  # To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
+  closeAllConnections()
 }

@@ -70,3 +70,6 @@ splitAndProcessBenchmark("SortVectorApiBenchmark.csv", "arraySize", list("65536"
 # Split and process VectorApiBenchmark
 splitAndProcessBenchmark("VectorApiBenchmark.csv", "size", list("262144"))
 splitAndProcessBenchmark("VectorApiBenchmark.csv", "size", list("1048576"))
+
+# To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
+closeAllConnections()

@@ -141,6 +141,8 @@ extract_benchmark_files() {
 }
 
 benchmarks_geometric_mean() {
+  echo "Extracting benchmark categories (may take a few seconds) ..."
+
   jit_benchmark_files=($(extract_benchmark_files "micro/compiler"))
   echo "Identified ${#jit_benchmark_files[@]} 'jit' benchmarks (possibly including duplicates)."
 

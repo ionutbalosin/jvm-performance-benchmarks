@@ -95,3 +95,6 @@ openjdk_hotspot_vm <- args[3]
 reference_geomean <- calculateGeometricMeanReport(jmh_output_folder, openjdk_hotspot_vm, macro_benchmark_files)$geomean
 macro_summaries <- lapply(jvm_identifiers, calculateNormalizedGeometricMean, map = jvm_names_map, benchmark_files = macro_benchmark_files, reference_geomean = reference_geomean, column_name = "VM")
 writeDataToCsvFile(geometric_mean_output_folder, "macro.csv", do.call(rbind, macro_summaries))
+
+# To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
+closeAllConnections()
