@@ -71,5 +71,31 @@ splitAndProcessBenchmark("SortVectorApiBenchmark.csv", "arraySize", list("65536"
 splitAndProcessBenchmark("VectorApiBenchmark.csv", "size", list("262144"))
 splitAndProcessBenchmark("VectorApiBenchmark.csv", "size", list("1048576"))
 
+# Split and process StackTraceBenchmark
+splitAndProcessBenchmark("StackTraceBenchmark.csv", "stackDepth", list("1"))
+splitAndProcessBenchmark("StackTraceBenchmark.csv", "stackDepth", list("10"))
+splitAndProcessBenchmark("StackTraceBenchmark.csv", "stackDepth", list("100"))
+splitAndProcessBenchmark("StackTraceBenchmark.csv", "stackDepth", list("1000"))
+
+# Split and process RandomGeneratorBenchmark
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L128X1024MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L128X128MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L128X256MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L32X64MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L64X1024MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L64X128MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L64X128StarStarRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("L64X256MixRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("Random"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("SecureRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("SplittableRandom"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("Xoroshiro128PlusPlus"))
+splitAndProcessBenchmark("RandomGeneratorBenchmark.csv", "generatorName", list("Xoshiro256PlusPlus"))
+
+# Split and process VPThreadSynchronizationBenchmark
+splitAndProcessBenchmark("VPThreadSynchronizationBenchmark.csv", "backoffType", list("NONE"))
+splitAndProcessBenchmark("VPThreadSynchronizationBenchmark.csv", "backoffType", list("SLEEP"))
+splitAndProcessBenchmark("VPThreadSynchronizationBenchmark.csv", "backoffType", list("PARK"))
+
 # To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
 closeAllConnections()
