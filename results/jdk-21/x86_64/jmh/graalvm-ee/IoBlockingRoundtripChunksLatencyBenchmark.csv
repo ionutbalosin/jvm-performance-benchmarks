@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: bufferSize","Param: cpuLoadFactor","Param: messagesPerClient","Param: threadType"
+"com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoBlockingRoundtripChunksLatencyBenchmark.send_receive","avgt",1,25,16.492730,0.257353,"s/op",4,8,_50_K,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.IoBlockingRoundtripChunksLatencyBenchmark.send_receive","avgt",1,25,8.467014,0.018139,"s/op",4,8,_50_K,PLATFORM
