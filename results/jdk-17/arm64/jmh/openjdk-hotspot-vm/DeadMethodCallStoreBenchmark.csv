@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark.method_call_baseline","avgt",1,25,"396,545505","0,390778","ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark.method_call_dse","avgt",1,25,"491,452532","0,392243","ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark.method_call_baseline","avgt",1,25,"396,545505","0,390778","ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark.method_call_dse","avgt",1,25,"491,452532","0,392243","ns/op"

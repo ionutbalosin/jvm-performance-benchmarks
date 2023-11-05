@@ -1,7 +1,7 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: depth"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_non_static_method","avgt",1,25,320.289320,0.526494,"ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_static_method","avgt",1,25,320.906260,0.242154,"ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_non_static_method","avgt",1,25,276.768811,0.095625,"ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_static_method","avgt",1,25,320.797914,0.328761,"ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_non_static","avgt",1,25,8.869827,0.004767,"ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_static","avgt",1,25,8.315778,0.045921,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_non_static_method","avgt",1,25,320.289320,0.526494,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_static_method","avgt",1,25,320.906260,0.242154,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_non_static_method","avgt",1,25,276.768811,0.095625,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_static_method","avgt",1,25,320.797914,0.328761,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_non_static","avgt",1,25,8.869827,0.004767,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_static","avgt",1,25,8.315778,0.045921,"ns/op",256

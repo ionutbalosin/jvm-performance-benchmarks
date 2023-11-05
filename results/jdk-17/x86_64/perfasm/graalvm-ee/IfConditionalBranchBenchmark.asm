@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.no_if_branch
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.no_if_branch
 # Parameters: (size = 16384)
 
 # Run progress: 0.00% complete, ETA 00:05:00
@@ -28,12 +28,12 @@ Iteration   5: 1599.823 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.no_if_branch":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.no_if_branch":
   1599.825 ±(99.9%) 0.152 ns/op [Average]
   (min, avg, max) = (1599.766, 1599.825, 1599.871), stdev = 0.040
   CI (99.9%): [1599.673, 1599.978] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.no_if_branch:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.no_if_branch:·asm":
 PrintAssembly processed: 186869 total address lines.
 Perf output processed (skipped 58.485 seconds):
  Column 1: cycles (50863 events)
@@ -42,7 +42,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
 
                #           [sp+0x20]  (sp of caller)
                0x00007f7116b19a00:   mov    0x8(%rsi),%r10d
@@ -59,13 +59,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
    0.01%       0x00007f7116b19a2b:   mov    %rbp,0x10(%rsp)
                0x00007f7116b19a30:   mov    0x18(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                          ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch@0 (line 75)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch@0 (line 75)
    0.01%       0x00007f7116b19a33:   mov    0xc(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007f7116b19af6
    0.21%       0x00007f7116b19a3b:   nopl   0x0(%rax,%rax,1)
                0x00007f7116b19a40:   test   %r10,%r10
                0x00007f7116b19a43:   je     0x00007f7116b19aee
    0.03%       0x00007f7116b19a49:   shl    $0x3,%rax                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch@3 (line 77)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch@3 (line 77)
                0x00007f7116b19a4d:   lea    0x10(%rax),%rax
                0x00007f7116b19a51:   vpxor  %xmm0,%xmm0,%xmm0
                0x00007f7116b19a55:   cmp    $0x8,%r10
@@ -92,7 +92,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
            │   0x00007f7116b19ab9:   data16 data16 xchg %ax,%ax
            │   0x00007f7116b19abd:   data16 xchg %ax,%ax
            │↗  0x00007f7116b19ac0:   add    (%rax,%r8,4),%r11d           ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch@28 (line 78)
+           ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch@28 (line 78)
            ││  0x00007f7116b19ac4:   inc    %r8
            ↘│  0x00007f7116b19ac7:   cmp    %r10,%r8
             ╰  0x00007f7116b19aca:   jle    0x00007f7116b19ac0
@@ -101,11 +101,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
   97.18%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.18%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
+  97.18%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
    0.61%               kernel  [unknown] 
-   0.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
+   0.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
    0.11%               kernel  [unknown] 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.IfConditionalBranchBenchmark_no_if_branch_jmhTest::no_if_branch_avgt_jmhStub, version 5, compile id 744 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.IfConditionalBranchBenchmark_no_if_branch_jmhTest::no_if_branch_avgt_jmhStub, version 5, compile id 744 
    0.08%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -126,9 +126,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
+  97.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::no_if_branch, version 4, compile id 728 
    1.76%               kernel  [unknown] 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.IfConditionalBranchBenchmark_no_if_branch_jmhTest::no_if_branch_avgt_jmhStub, version 5, compile id 744 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.IfConditionalBranchBenchmark_no_if_branch_jmhTest::no_if_branch_avgt_jmhStub, version 5, compile id 744 
    0.03%                       <unknown> 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 
    0.02%            libjvm.so  ElfSymbolTable::lookup 
@@ -177,7 +177,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.predictable_if_branch
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.predictable_if_branch
 # Parameters: (size = 16384)
 
 # Run progress: 33.33% complete, ETA 00:03:43
@@ -197,12 +197,12 @@ Iteration   5: 3292.773 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.predictable_if_branch":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.predictable_if_branch":
   3292.306 ±(99.9%) 4.043 ns/op [Average]
   (min, avg, max) = (3291.029, 3292.306, 3293.823), stdev = 1.050
   CI (99.9%): [3288.263, 3296.349] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.predictable_if_branch:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.predictable_if_branch:·asm":
 PrintAssembly processed: 190880 total address lines.
 Perf output processed (skipped 58.683 seconds):
  Column 1: cycles (50874 events)
@@ -211,7 +211,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
 
                0x00007fe1a6b1c024:   jb     0x00007fe1a6b1c0f4
                0x00007fe1a6b1c02a:   lea    -0x8(%r8),%r9
@@ -233,7 +233,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
    5.71%   ││  0x00007fe1a6b1c07f:   vptest %ymm4,%ymm4
   17.08%   │╰  0x00007fe1a6b1c084:   je     0x00007fe1a6b1c060
            │   0x00007fe1a6b1c086:   jmp    0x00007fe1a6b1c121           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch@13 (line 90)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch@13 (line 90)
    0.00%   ↘   0x00007fe1a6b1c08b:   vextracti128 $0x1,%ymm0,%xmm1
    0.01%       0x00007fe1a6b1c091:   vpaddd %xmm1,%xmm0,%xmm0
    0.01%       0x00007fe1a6b1c095:   vpshufd $0xe,%xmm0,%xmm1
@@ -241,7 +241,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
    0.02%       0x00007fe1a6b1c09e:   vmovd  %xmm0,%r9d
                0x00007fe1a6b1c0a3:   vpextrd $0x1,%xmm0,%ebx
    0.00%       0x00007fe1a6b1c0a9:   add    %ebx,%r9d                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch@36 (line 92)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch@36 (line 92)
    0.01%       0x00007fe1a6b1c0ac:   dec    %r8
                0x00007fe1a6b1c0af:   jmp    0x00007fe1a6b1c0d6
                0x00007fe1a6b1c0b4:   nopl   0x0(%rax,%rax,1)
@@ -249,19 +249,19 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
                0x00007fe1a6b1c0c0:   mov    (%r11,%rcx,4),%ebx
                0x00007fe1a6b1c0c4:   cmp    $0x1000,%ebx
                0x00007fe1a6b1c0ca:   jge    0x00007fe1a6b1c105           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch@13 (line 90)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch@13 (line 90)
                0x00007fe1a6b1c0d0:   add    %ebx,%r9d                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch@36 (line 92)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch@36 (line 92)
 ....................................................................................................
   97.38%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
+  97.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
    1.06%               kernel  [unknown] 
-   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
-   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
+   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
+   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
    0.10%               kernel  [unknown] 
-   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.IfConditionalBranchBenchmark_predictable_if_branch_jmhTest::predictable_if_branch_avgt_jmhStub, version 5, compile id 748 
+   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.IfConditionalBranchBenchmark_predictable_if_branch_jmhTest::predictable_if_branch_avgt_jmhStub, version 5, compile id 748 
    0.06%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
@@ -281,9 +281,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
+  97.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::predictable_if_branch, version 4, compile id 730 
    1.89%               kernel  [unknown] 
-   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.IfConditionalBranchBenchmark_predictable_if_branch_jmhTest::predictable_if_branch_avgt_jmhStub, version 5, compile id 748 
+   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.IfConditionalBranchBenchmark_predictable_if_branch_jmhTest::predictable_if_branch_avgt_jmhStub, version 5, compile id 748 
    0.03%                       <unknown> 
    0.02%         libc-2.31.so  __strncat_ssse3 
    0.02%         libc-2.31.so  [unknown] 
@@ -331,7 +331,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch
 # Parameters: (size = 16384)
 
 # Run progress: 66.67% complete, ETA 00:01:52
@@ -351,12 +351,12 @@ Iteration   5: 2398.137 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch":
   2398.014 ±(99.9%) 0.510 ns/op [Average]
   (min, avg, max) = (2397.806, 2398.014, 2398.137), stdev = 0.133
   CI (99.9%): [2397.503, 2398.524] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch:·asm":
 PrintAssembly processed: 190795 total address lines.
 Perf output processed (skipped 58.678 seconds):
  Column 1: cycles (50519 events)
@@ -365,7 +365,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
 
              #           [sp+0x20]  (sp of caller)
              0x00007f2ad6b1b2a0:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
@@ -382,13 +382,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
              0x00007f2ad6b1b2cb:   mov    %rbp,0x10(%rsp)
              0x00007f2ad6b1b2d0:   mov    0x18(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                        ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch@0 (line 102)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch@0 (line 102)
    0.01%     0x00007f2ad6b1b2d3:   mov    0xc(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007f2ad6b1b3cd
    0.13%     0x00007f2ad6b1b2db:   nopl   0x0(%rax,%rax,1)
              0x00007f2ad6b1b2e0:   test   %r10,%r10
              0x00007f2ad6b1b2e3:   je     0x00007f2ad6b1b3c5
    0.01%     0x00007f2ad6b1b2e9:   shl    $0x3,%rax                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch@3 (line 104)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch@3 (line 104)
              0x00007f2ad6b1b2ed:   lea    0x10(%rax),%rax
              0x00007f2ad6b1b2f1:   vpxor  %xmm0,%xmm0,%xmm0
              0x00007f2ad6b1b2f5:   cmp    $0x8,%r10
@@ -421,21 +421,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
              0x00007f2ad6b1b380:   mov    (%rax,%r8,4),%r9d
              0x00007f2ad6b1b384:   mov    %r11d,%ecx
              0x00007f2ad6b1b387:   add    %r9d,%ecx                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch@36 (line 106)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch@36 (line 106)
              0x00007f2ad6b1b38a:   cmp    $0x801,%r9d
              0x00007f2ad6b1b391:   cmovl  %ecx,%r11d                   ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   98.21%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
+  98.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
    0.29%               kernel  [unknown] 
-   0.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
+   0.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
    0.11%               kernel  [unknown] 
    0.11%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
-   0.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.IfConditionalBranchBenchmark_unpredictable_if_branch_jmhTest::unpredictable_if_branch_avgt_jmhStub, version 5, compile id 751 
+   0.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.IfConditionalBranchBenchmark_unpredictable_if_branch_jmhTest::unpredictable_if_branch_avgt_jmhStub, version 5, compile id 751 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
@@ -453,9 +453,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfCon
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
+  98.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark::unpredictable_if_branch, version 4, compile id 734 
    1.21%               kernel  [unknown] 
-   0.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.IfConditionalBranchBenchmark_unpredictable_if_branch_jmhTest::unpredictable_if_branch_avgt_jmhStub, version 5, compile id 751 
+   0.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.IfConditionalBranchBenchmark_unpredictable_if_branch_jmhTest::unpredictable_if_branch_avgt_jmhStub, version 5, compile id 751 
    0.03%         libc-2.31.so  [unknown] 
    0.03%                       <unknown> 
    0.01%         libc-2.31.so  __strxfrm_l 

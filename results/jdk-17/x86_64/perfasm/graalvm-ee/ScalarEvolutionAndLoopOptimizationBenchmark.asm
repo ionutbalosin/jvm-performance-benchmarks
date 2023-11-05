@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.baseline
 # Parameters: (size = 16384)
 
 # Run progress: 0.00% complete, ETA 00:03:20
@@ -28,12 +28,12 @@ Iteration   5: 6.574 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.baseline":
   6.574 ±(99.9%) 0.001 ns/op [Average]
   (min, avg, max) = (6.574, 6.574, 6.574), stdev = 0.001
   CI (99.9%): [6.573, 6.575] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.baseline:·asm":
 PrintAssembly processed: 189512 total address lines.
 Perf output processed (skipped 58.460 seconds):
  Column 1: cycles (50613 events)
@@ -42,54 +42,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 751 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 751 
 
               0x00007fa102b1c0d8:   call   0x00007fa11c68b4f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fa102b1c0dd:   nop
               0x00007fa102b1c0de:   mov    0x10(%rsp),%rdx
               0x00007fa102b1c0e3:   mov    %rax,0x28(%rdx)              ;*putfield startTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@10 (line 184)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@10 (line 184)
               0x00007fa102b1c0e7:   movq   $0x0,0x20(%rsp)
           ╭   0x00007fa102b1c0f0:   jmp    0x00007fa102b1c10f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@13 (line 186)
           │   0x00007fa102b1c0f5:   data16 data16 nopw 0x0(%rax,%rax,1) ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 188)
    5.75%  │↗  0x00007fa102b1c100:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 188)
           ││  0x00007fa102b1c107:   test   %eax,(%r11)                  ;   {poll}
    5.67%  ││  0x00007fa102b1c10a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@13 (line 186)
           ↘│  0x00007fa102b1c10f:   mov    0x8(%rsp),%r10
            │  0x00007fa102b1c114:   mov    %r10,%rsi
            │  0x00007fa102b1c117:   call   0x00007fa0fb01ea80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual baseline {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
            │  0x00007fa102b1c11c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@20 (line 186)
            │  0x00007fa102b1c11d:   mov    0x20(%rsp),%r10
   11.49%   │  0x00007fa102b1c122:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@26 (line 187)
    5.67%   │  0x00007fa102b1c125:   mov    0x18(%rsp),%rsi
            │  0x00007fa102b1c12a:   cmpb   $0x0,0x94(%rsi)
   22.99%   ╰  0x00007fa102b1c131:   je     0x00007fa102b1c100           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 188)
               0x00007fa102b1c133:   mov    %r10,0x20(%rsp)
               0x00007fa102b1c138:   call   0x00007fa11c68b4f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fa102b1c13d:   nop
               0x00007fa102b1c13e:   mov    0x10(%rsp),%rdx
               0x00007fa102b1c143:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@40 (line 189)
               0x00007fa102b1c147:   mov    %r12,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@46 (line 190)
               0x00007fa102b1c14b:   vxorpd %xmm0,%xmm0,%xmm0
 ....................................................................................................
   51.58%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline, version 2, compile id 727 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline, version 2, compile id 727 
 
             #           [sp+0x10]  (sp of caller)
             0x00007fa102b18780:   mov    0x8(%rsi),%r10d
@@ -103,17 +103,17 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Scala
           [Verified Entry Point]
    5.91%    0x00007fa102b187a0:   nopl   0x0(%rax,%rax,1)
             0x00007fa102b187a5:   mov    0xc(%rsi),%eax               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@1 (line 73)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@1 (line 73)
             0x00007fa102b187a8:   mov    %eax,%r10d
    5.86%    0x00007fa102b187ab:   inc    %r10d                        ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@9 (line 73)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@9 (line 73)
             0x00007fa102b187ae:   imul   %eax,%r10d                   ;*imul {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@10 (line 73)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@10 (line 73)
   23.16%    0x00007fa102b187b2:   mov    %r10d,%eax
             0x00007fa102b187b5:   shr    $0x1f,%eax
             0x00007fa102b187b8:   add    %r10d,%eax
             0x00007fa102b187bb:   sar    %eax                         ;*idiv {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@12 (line 73)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline@12 (line 73)
    5.79%    0x00007fa102b187bd:   mov    0x348(%r15),%rcx
             0x00007fa102b187c4:   test   %eax,(%rcx)                  ;   {poll_return}
    5.98%    0x00007fa102b187c6:   ret    
@@ -131,8 +131,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Scala
   46.69%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  51.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 751 
-  46.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline, version 2, compile id 727 
+  51.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 751 
+  46.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline, version 2, compile id 727 
    0.51%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -156,8 +156,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Scala
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  51.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 751 
-  46.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline, version 2, compile id 727 
+  51.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 751 
+  46.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::baseline, version 2, compile id 727 
    1.43%               kernel  [unknown] 
    0.03%         libc-2.31.so  [unknown] 
    0.03%                       <unknown> 
@@ -209,7 +209,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Scala
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.scev_loop
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.scev_loop
 # Parameters: (size = 16384)
 
 # Run progress: 50.00% complete, ETA 00:01:51
@@ -229,12 +229,12 @@ Iteration   5: 1040.884 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.scev_loop":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.scev_loop":
   1040.527 ±(99.9%) 0.783 ns/op [Average]
   (min, avg, max) = (1040.376, 1040.527, 1040.884), stdev = 0.203
   CI (99.9%): [1039.744, 1041.310] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.scev_loop:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark.scev_loop:·asm":
 PrintAssembly processed: 190936 total address lines.
 Perf output processed (skipped 58.658 seconds):
  Column 1: cycles (50723 events)
@@ -243,7 +243,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
 
               0x00007f3ed6b1c960:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
               0x00007f3ed6b1c964:   movabs $0x800000000,%r12
@@ -305,15 +305,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Scala
               0x00007f3ed6b1ca60:   mov    %r10d,%r9d
               0x00007f3ed6b1ca63:   inc    %r9d
               0x00007f3ed6b1ca66:   add    %r10d,%r8d                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop@14 (line 65)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop@14 (line 65)
 ....................................................................................................
   97.41%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
+  97.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
    0.59%               kernel  [unknown] 
-   0.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_scev_loop_jmhTest::scev_loop_avgt_jmhStub, version 5, compile id 739 
-   0.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
+   0.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_scev_loop_jmhTest::scev_loop_avgt_jmhStub, version 5, compile id 739 
+   0.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
    0.09%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
@@ -335,9 +335,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Scala
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
+  97.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarEvolutionAndLoopOptimizationBenchmark::scev_loop, version 3, compile id 721 
    1.59%               kernel  [unknown] 
-   0.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_scev_loop_jmhTest::scev_loop_avgt_jmhStub, version 5, compile id 739 
+   0.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarEvolutionAndLoopOptimizationBenchmark_scev_loop_jmhTest::scev_loop_avgt_jmhStub, version 5, compile id 739 
    0.03%                       <unknown> 
    0.02%         libc-2.31.so  [unknown] 
    0.01%         libc-2.31.so  __strncat_ssse3 

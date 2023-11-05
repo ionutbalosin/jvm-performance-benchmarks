@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..nullThreshold","Param..size"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement","avgt",1,25,1202.731715,0.315876,"us/op",16,262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue","avgt",1,25,1202.795885,0.412123,"us/op",16,262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe","avgt",1,25,1722.498813,640.24464,"us/op",16,262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch","avgt",1,25,1873788.510707,3093.510399,"us/op",16,262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement","avgt",1,25,1202.731715,0.315876,"us/op",16,262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue","avgt",1,25,1202.795885,0.412123,"us/op",16,262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe","avgt",1,25,1722.498813,640.24464,"us/op",16,262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch","avgt",1,25,1873788.510707,3093.510399,"us/op",16,262144

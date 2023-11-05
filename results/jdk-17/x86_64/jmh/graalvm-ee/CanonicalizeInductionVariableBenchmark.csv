@@ -1,4 +1,4 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CanonicalizeInductionVariableBenchmark.baseline","avgt",1,25,0.578650,0.000015,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CanonicalizeInductionVariableBenchmark.canonicalize","avgt",1,25,3236660.012856,364.474559,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.CanonicalizeInductionVariableBenchmark.manual_canonicalize","avgt",1,25,0.578683,0.000009,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.CanonicalizeInductionVariableBenchmark.baseline","avgt",1,25,0.578650,0.000015,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.CanonicalizeInductionVariableBenchmark.canonicalize","avgt",1,25,3236660.012856,364.474559,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.CanonicalizeInductionVariableBenchmark.manual_canonicalize","avgt",1,25,0.578683,0.000009,"ns/op"

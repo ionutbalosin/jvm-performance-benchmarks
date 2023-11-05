@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize","Param: readerType"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,1.803352,0.004276,"us/op",_1_KB,_64_MB,FILE_READER
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,1.810934,0.008731,"us/op",_1_KB,_64_MB,INPUT_STREAM_READER
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,1.857361,0.004980,"us/op",_1_KB,_64_MB,BUFFERED_READER
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ReaderBenchmark.read","avgt",1,25,2.567804,0.007985,"us/op",_1_KB,_64_MB,LINE_NUMBER_READER
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ReaderBenchmark.read","avgt",1,25,1.803352,0.004276,"us/op",_1_KB,_64_MB,FILE_READER
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ReaderBenchmark.read","avgt",1,25,1.810934,0.008731,"us/op",_1_KB,_64_MB,INPUT_STREAM_READER
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ReaderBenchmark.read","avgt",1,25,1.857361,0.004980,"us/op",_1_KB,_64_MB,BUFFERED_READER
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ReaderBenchmark.read","avgt",1,25,2.567804,0.007985,"us/op",_1_KB,_64_MB,LINE_NUMBER_READER

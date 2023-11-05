@@ -1,7 +1,7 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,121.716920,0.186667,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,324.769811,1.371906,"us/op",5000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,3865.276544,4.571095,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,125699.371563,166.255831,"us/op",5000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,121.987750,0.343339,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,3653.274528,2.539484,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,121.716920,0.186667,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,324.769811,1.371906,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,3865.276544,4.571095,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,125699.371563,166.255831,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,121.987750,0.343339,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,3653.274528,2.539484,"us/op",5000

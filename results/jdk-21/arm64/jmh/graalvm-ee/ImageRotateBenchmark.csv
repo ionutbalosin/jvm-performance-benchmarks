@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: quadrant"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,239.114200,0.428032,"ms/op",1
-"com.ionutbalosin.jvm.performance.benchmarks.macro.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,114.326460,0.146956,"ms/op",2
-"com.ionutbalosin.jvm.performance.benchmarks.macro.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,301.600522,0.589285,"ms/op",3
-"com.ionutbalosin.jvm.performance.benchmarks.macro.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,114.581847,0.199756,"ms/op",4
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,239.114200,0.428032,"ms/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,114.326460,0.146956,"ms/op",2
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,301.600522,0.589285,"ms/op",3
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.imagerotate.ImageRotateBenchmark.rotate","avgt",1,25,114.581847,0.199756,"ms/op",4

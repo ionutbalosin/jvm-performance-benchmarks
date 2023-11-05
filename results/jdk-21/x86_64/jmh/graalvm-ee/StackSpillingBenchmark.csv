@@ -1,4 +1,4 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackSpillingBenchmark.load_store_no_spill","avgt",1,25,10.030848,0.000087,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackSpillingBenchmark.load_store_spill_no_fpu","avgt",1,25,15.817882,0.000097,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackSpillingBenchmark.load_store_spill_use_fpu","avgt",1,25,15.818394,0.001368,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackSpillingBenchmark.load_store_no_spill","avgt",1,25,10.030848,0.000087,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackSpillingBenchmark.load_store_spill_no_fpu","avgt",1,25,15.817882,0.000097,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackSpillingBenchmark.load_store_spill_use_fpu","avgt",1,25,15.818394,0.001368,"ns/op"

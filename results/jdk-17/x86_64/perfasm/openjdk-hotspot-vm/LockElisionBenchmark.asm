@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.baseline
 
 # Run progress: 0.00% complete, ETA 00:10:00
 # Fork: 1 of 1
@@ -27,12 +27,12 @@ Iteration   5: 7.085 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.baseline":
   7.074 ±(99.9%) 0.042 ns/op [Average]
   (min, avg, max) = (7.060, 7.074, 7.085), stdev = 0.011
   CI (99.9%): [7.032, 7.116] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.baseline:·asm":
 PrintAssembly processed: 113530 total address lines.
 Perf output processed (skipped 55.626 seconds):
  Column 1: cycles (50784 events)
@@ -41,9 +41,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::baseline, version 2, compile id 473 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::baseline, version 2, compile id 473 
 
-             # {method} {0x00007fbe39c743b0} &apos;baseline&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark&apos;
+             # {method} {0x00007fbe39c743b0} &apos;baseline&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockElisionBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007fbe58f62a00:   mov    0x8(%rsi),%r10d
              0x00007fbe58f62a04:   movabs $0x800000000,%r11
@@ -55,9 +55,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
            [Verified Entry Point]
    5.34%     0x00007fbe58f62a20:   sub    $0x18,%rsp
              0x00007fbe58f62a27:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::baseline@-1 (line 203)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::baseline@-1 (line 203)
    0.00%     0x00007fbe58f62a2c:   mov    0x14(%rsi),%r11d             ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::baseline@9 (line 205)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::baseline@9 (line 205)
    5.35%     0x00007fbe58f62a30:   mov    0x10(%rsi),%eax
              0x00007fbe58f62a33:   shl    %eax
              0x00007fbe58f62a35:   add    %r11d,%eax
@@ -68,7 +68,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
              0x00007fbe58f62a44:   add    %r11d,%eax
              0x00007fbe58f62a47:   add    %r11d,%eax
    5.57%     0x00007fbe58f62a4a:   add    %r11d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::baseline@61 (line 212)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::baseline@61 (line 212)
    5.58%     0x00007fbe58f62a4d:   add    $0x10,%rsp
              0x00007fbe58f62a51:   pop    %rbp
              0x00007fbe58f62a52:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -88,43 +88,43 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
   53.87%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 5, compile id 505 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 5, compile id 505 
 
               0x00007fbe58f65c26:   mov    0x38(%rsp),%r10
               0x00007fbe58f65c2b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007fbe58f65cdc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@30 (line 234)
               0x00007fbe58f65c33:   mov    $0x1,%ebp
               0x00007fbe58f65c38:   test   %r11d,%r11d
           ╭   0x00007fbe58f65c3b:   jne    0x00007fbe58f65c6c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
           │   0x00007fbe58f65c3d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
    5.34%  │↗  0x00007fbe58f65c40:   mov    0x40(%rsp),%rsi
           ││  0x00007fbe58f65c45:   xchg   %ax,%ax
           ││  0x00007fbe58f65c47:   call   0x00007fbe589fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual baseline {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
           ││  0x00007fbe58f65c4c:   mov    0x38(%rsp),%r10
   17.11%  ││  0x00007fbe58f65c51:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
   21.67%  ││  0x00007fbe58f65c59:   mov    0x348(%r15),%r11
           ││  0x00007fbe58f65c60:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
           ││  0x00007fbe58f65c64:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007fbe58f65c67:   test   %r10d,%r10d
           │╰  0x00007fbe58f65c6a:   je     0x00007fbe58f65c40           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
           ↘   0x00007fbe58f65c6c:   movabs $0x7fbe6f395d10,%r10
               0x00007fbe58f65c76:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   44.11%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  53.87%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::baseline, version 2, compile id 473 
-  44.11%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 5, compile id 505 
+  53.87%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::baseline, version 2, compile id 473 
+  44.11%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 5, compile id 505 
    1.22%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
@@ -148,8 +148,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  53.87%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::baseline, version 2, compile id 473 
-  44.11%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 5, compile id 505 
+  53.87%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::baseline, version 2, compile id 473 
+  44.11%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 5, compile id 505 
    1.82%              kernel  [unknown] 
    0.02%        libc-2.31.so  [unknown] 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
@@ -199,7 +199,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.chain_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.chain_method_calls
 
 # Run progress: 16.67% complete, ETA 00:09:05
 # Fork: 1 of 1
@@ -218,12 +218,12 @@ Iteration   5: 7.096 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.chain_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.chain_method_calls":
   7.109 ±(99.9%) 0.041 ns/op [Average]
   (min, avg, max) = (7.096, 7.109, 7.118), stdev = 0.011
   CI (99.9%): [7.068, 7.151] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.chain_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.chain_method_calls:·asm":
 PrintAssembly processed: 118119 total address lines.
 Perf output processed (skipped 55.759 seconds):
  Column 1: cycles (51000 events)
@@ -232,9 +232,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::chain_method_calls, version 2, compile id 488 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::chain_method_calls, version 2, compile id 488 
 
-             # {method} {0x00007f97a9073fe0} &apos;chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark&apos;
+             # {method} {0x00007f97a9073fe0} &apos;chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockElisionBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f97b8f65980:   mov    0x8(%rsi),%r10d
              0x00007f97b8f65984:   movabs $0x800000000,%r11
@@ -246,10 +246,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
            [Verified Entry Point]
    5.39%     0x00007f97b8f659a0:   sub    $0x18,%rsp
              0x00007f97b8f659a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::chain_method_calls@-1 (line 118)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::chain_method_calls@-1 (line 118)
    0.00%     0x00007f97b8f659ac:   mov    0x14(%rsi),%r11d             ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@14 (line 220)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::chain_method_calls@21 (line 122)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@14 (line 220)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::chain_method_calls@21 (line 122)
    5.19%     0x00007f97b8f659b0:   mov    0x10(%rsi),%eax
              0x00007f97b8f659b3:   shl    %eax
              0x00007f97b8f659b5:   add    %r11d,%eax
@@ -260,8 +260,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
              0x00007f97b8f659c4:   add    %r11d,%eax
              0x00007f97b8f659c7:   add    %r11d,%eax
    5.45%     0x00007f97b8f659ca:   add    %r11d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::chain_method_calls@51 (line 127)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::chain_method_calls@51 (line 127)
    5.44%     0x00007f97b8f659cd:   add    $0x10,%rsp
              0x00007f97b8f659d1:   pop    %rbp
              0x00007f97b8f659d2:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -281,43 +281,43 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
   53.26%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 524 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 524 
 
               0x00007f97b8f68826:   mov    0x38(%rsp),%r10
               0x00007f97b8f6882b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f97b8f688dc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@30 (line 234)
               0x00007f97b8f68833:   mov    $0x1,%ebp
               0x00007f97b8f68838:   test   %r11d,%r11d
           ╭   0x00007f97b8f6883b:   jne    0x00007f97b8f6886c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007f97b8f6883d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
    5.21%  │↗  0x00007f97b8f68840:   mov    0x40(%rsp),%rsi
           ││  0x00007f97b8f68845:   xchg   %ax,%ax
           ││  0x00007f97b8f68847:   call   0x00007f97b89fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual chain_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
           ││  0x00007f97b8f6884c:   mov    0x38(%rsp),%r10
   18.04%  ││  0x00007f97b8f68851:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
   21.05%  ││  0x00007f97b8f68859:   mov    0x348(%r15),%r11
           ││  0x00007f97b8f68860:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007f97b8f68864:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007f97b8f68867:   test   %r10d,%r10d
           │╰  0x00007f97b8f6886a:   je     0x00007f97b8f68840           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007f97b8f6886c:   movabs $0x7f97d0be5d10,%r10
               0x00007f97b8f68876:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   44.31%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  53.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::chain_method_calls, version 2, compile id 488 
-  44.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 524 
+  53.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::chain_method_calls, version 2, compile id 488 
+  44.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 524 
    1.59%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -341,8 +341,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  53.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::chain_method_calls, version 2, compile id 488 
-  44.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 524 
+  53.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::chain_method_calls, version 2, compile id 488 
+  44.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 524 
    2.24%              kernel  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%                      <unknown> 
@@ -391,7 +391,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.conditional_chain_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.conditional_chain_method_calls
 
 # Run progress: 33.33% complete, ETA 00:07:16
 # Fork: 1 of 1
@@ -410,12 +410,12 @@ Iteration   5: 8.127 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.conditional_chain_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.conditional_chain_method_calls":
   8.347 ±(99.9%) 1.010 ns/op [Average]
   (min, avg, max) = (8.127, 8.347, 8.743), stdev = 0.262
   CI (99.9%): [7.336, 9.357] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.conditional_chain_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.conditional_chain_method_calls:·asm":
 PrintAssembly processed: 113813 total address lines.
 Perf output processed (skipped 55.645 seconds):
  Column 1: cycles (50548 events)
@@ -424,9 +424,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls, version 2, compile id 477 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls, version 2, compile id 477 
 
-              # {method} {0x00007f78f547ee58} &apos;conditional_chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark&apos;
+              # {method} {0x00007f78f547ee58} &apos;conditional_chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockElisionBenchmark&apos;
               #           [sp+0x30]  (sp of caller)
               0x00007f7914f63a20:   mov    0x8(%rsi),%r10d
               0x00007f7914f63a24:   movabs $0x800000000,%r11
@@ -439,64 +439,64 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
    4.35%      0x00007f7914f63a40:   mov    %eax,-0x14000(%rsp)
   10.43%      0x00007f7914f63a47:   push   %rbp
               0x00007f7914f63a48:   sub    $0x20,%rsp                   ;*synchronization entry
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@-1 (line 135)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@-1 (line 135)
    1.14%      0x00007f7914f63a4c:   mov    %rsi,%r11
    3.56%      0x00007f7914f63a4f:   mov    0x10(%rsi),%eax
               0x00007f7914f63a52:   shl    %eax                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@5 (line 135)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@5 (line 135)
    0.82%      0x00007f7914f63a54:   cmp    $0x20,%eax
           ╭   0x00007f7914f63a57:   jle    0x00007f7914f63ad4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@10 (line 138)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@10 (line 138)
    0.26%  │   0x00007f7914f63a5d:   mov    0x14(%rsi),%r10d             ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@14 (line 220)
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@63 (line 151)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@14 (line 220)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@63 (line 151)
    3.35%  │   0x00007f7914f63a61:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@15 (line 139)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@15 (line 139)
    0.00%  │   0x00007f7914f63a64:   cmp    $0x20,%eax
           │╭  0x00007f7914f63a67:   jle    0x00007f7914f63ae8           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@22 (line 141)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@22 (line 141)
    1.26%  ││  0x00007f7914f63a6d:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@27 (line 142)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@27 (line 142)
    0.26%  ││  0x00007f7914f63a70:   cmp    $0x20,%eax
           ││  0x00007f7914f63a73:   jle    0x00007f7914f63afc           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@34 (line 144)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@34 (line 144)
    4.52%  ││  0x00007f7914f63a79:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@39 (line 145)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@39 (line 145)
           ││  0x00007f7914f63a7c:   nopl   0x0(%rax)
    1.04%  ││  0x00007f7914f63a80:   cmp    $0x20,%eax
           ││  0x00007f7914f63a83:   jle    0x00007f7914f63b10           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@46 (line 147)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@46 (line 147)
    0.26%  ││  0x00007f7914f63a89:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@51 (line 148)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@51 (line 148)
    4.84%  ││  0x00007f7914f63a8c:   cmp    $0x20,%eax
           ││  0x00007f7914f63a8f:   jle    0x00007f7914f63b24           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@58 (line 150)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@58 (line 150)
           ││  0x00007f7914f63a95:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@63 (line 151)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@63 (line 151)
    0.97%  ││  0x00007f7914f63a98:   cmp    $0x20,%eax
    0.31%  ││  0x00007f7914f63a9b:   nopl   0x0(%rax,%rax,1)
    6.74%  ││  0x00007f7914f63aa0:   jle    0x00007f7914f63b38           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@70 (line 153)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@70 (line 153)
           ││  0x00007f7914f63aa6:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@75 (line 154)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@75 (line 154)
    0.85%  ││  0x00007f7914f63aa9:   cmp    $0x20,%eax
           ││  0x00007f7914f63aac:   jle    0x00007f7914f63b4c           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@82 (line 156)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@82 (line 156)
    0.35%  ││  0x00007f7914f63ab2:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@87 (line 157)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@87 (line 157)
    3.77%  ││  0x00007f7914f63ab5:   cmp    $0x20,%eax
           ││  0x00007f7914f63ab8:   jle    0x00007f7914f63b60           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@94 (line 159)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@94 (line 159)
    0.75%  ││  0x00007f7914f63abe:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@99 (line 160)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@99 (line 160)
    0.66%  ││  0x00007f7914f63ac1:   add    $0x20,%rsp
    0.23%  ││  0x00007f7914f63ac5:   pop    %rbp
    5.64%  ││  0x00007f7914f63ac6:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -508,7 +508,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
            │  0x00007f7914f63ae0:   data16 xchg %ax,%ax
            │  0x00007f7914f63ae3:   call   0x00007f7914a01600           ; ImmutableOopMap {rbp=Oop }
            │                                                            ;*if_icmple {reexecute=1 rethrow=0 return_oop=0}
-           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls@10 (line 138)
+           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls@10 (line 138)
            │                                                            ;   {runtime_call UncommonTrapBlob}
            ↘  0x00007f7914f63ae8:   mov    $0xffffff45,%esi
               0x00007f7914f63aed:   mov    %r11,%rbp
@@ -516,45 +516,45 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
   57.76%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 514 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 514 
 
               0x00007f7914f66c26:   mov    0x38(%rsp),%r10
               0x00007f7914f66c2b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f7914f66cdc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@30 (line 234)
               0x00007f7914f66c33:   mov    $0x1,%ebp
               0x00007f7914f66c38:   test   %r11d,%r11d
           ╭   0x00007f7914f66c3b:   jne    0x00007f7914f66c6c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007f7914f66c3d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
    4.37%  │↗  0x00007f7914f66c40:   mov    0x40(%rsp),%rsi
    0.32%  ││  0x00007f7914f66c45:   xchg   %ax,%ax
           ││  0x00007f7914f66c47:   call   0x00007f79149fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual conditional_chain_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
   14.73%  ││  0x00007f7914f66c4c:   mov    0x38(%rsp),%r10
    4.55%  ││  0x00007f7914f66c51:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
   16.20%  ││  0x00007f7914f66c59:   mov    0x348(%r15),%r11
    0.33%  ││  0x00007f7914f66c60:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007f7914f66c64:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007f7914f66c67:   test   %r10d,%r10d
           │╰  0x00007f7914f66c6a:   je     0x00007f7914f66c40           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007f7914f66c6c:   movabs $0x7f792aae9d10,%r10
               0x00007f7914f66c76:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@37 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@37 (line 235)
               0x00007f7914f66c79:   mov    0x30(%rsp),%r10
 ....................................................................................................
   40.49%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  57.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls, version 2, compile id 477 
-  40.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 514 
+  57.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls, version 2, compile id 477 
+  40.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 514 
    0.59%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
@@ -578,8 +578,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  57.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_chain_method_calls, version 2, compile id 477 
-  40.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 514 
+  57.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_chain_method_calls, version 2, compile id 477 
+  40.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 514 
    1.51%              kernel  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%        libc-2.31.so  [unknown] 
@@ -627,7 +627,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.conditional_nested_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.conditional_nested_method_calls
 
 # Run progress: 50.00% complete, ETA 00:05:25
 # Fork: 1 of 1
@@ -646,12 +646,12 @@ Iteration   5: 8.383 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.conditional_nested_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.conditional_nested_method_calls":
   8.548 ±(99.9%) 1.061 ns/op [Average]
   (min, avg, max) = (8.177, 8.548, 8.824), stdev = 0.275
   CI (99.9%): [7.487, 9.608] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.conditional_nested_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.conditional_nested_method_calls:·asm":
 PrintAssembly processed: 115997 total address lines.
 Perf output processed (skipped 55.726 seconds):
  Column 1: cycles (51161 events)
@@ -660,9 +660,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls, version 2, compile id 486 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls, version 2, compile id 486 
 
-              # {method} {0x00007fb05907efb8} &apos;conditional_nested_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark&apos;
+              # {method} {0x00007fb05907efb8} &apos;conditional_nested_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockElisionBenchmark&apos;
               #           [sp+0x30]  (sp of caller)
               0x00007fb068f659a0:   mov    0x8(%rsi),%r10d
               0x00007fb068f659a4:   movabs $0x800000000,%r11
@@ -675,64 +675,64 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
    4.15%      0x00007fb068f659c0:   mov    %eax,-0x14000(%rsp)
   11.02%      0x00007fb068f659c7:   push   %rbp
               0x00007fb068f659c8:   sub    $0x20,%rsp                   ;*synchronization entry
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@-1 (line 169)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@-1 (line 169)
    0.75%      0x00007fb068f659cc:   mov    %rsi,%r11
    3.62%      0x00007fb068f659cf:   mov    0x10(%rsi),%eax
               0x00007fb068f659d2:   shl    %eax                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@5 (line 169)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@5 (line 169)
    0.58%      0x00007fb068f659d4:   cmp    $0x20,%eax
           ╭   0x00007fb068f659d7:   jle    0x00007fb068f65a54           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@10 (line 172)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@10 (line 172)
    0.13%  │   0x00007fb068f659dd:   mov    0x14(%rsi),%r10d             ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@14 (line 220)
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@63 (line 181)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@14 (line 220)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@63 (line 181)
    3.57%  │   0x00007fb068f659e1:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@15 (line 173)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@15 (line 173)
    0.00%  │   0x00007fb068f659e4:   cmp    $0x20,%eax
           │╭  0x00007fb068f659e7:   jle    0x00007fb068f65a68           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@22 (line 174)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@22 (line 174)
    0.89%  ││  0x00007fb068f659ed:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@27 (line 175)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@27 (line 175)
    0.09%  ││  0x00007fb068f659f0:   cmp    $0x20,%eax
           ││  0x00007fb068f659f3:   jle    0x00007fb068f65a7c           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@34 (line 176)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@34 (line 176)
    4.44%  ││  0x00007fb068f659f9:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@39 (line 177)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@39 (line 177)
           ││  0x00007fb068f659fc:   nopl   0x0(%rax)
    0.83%  ││  0x00007fb068f65a00:   cmp    $0x20,%eax
           ││  0x00007fb068f65a03:   jle    0x00007fb068f65a90           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@46 (line 178)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@46 (line 178)
    0.13%  ││  0x00007fb068f65a09:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@51 (line 179)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@51 (line 179)
    4.90%  ││  0x00007fb068f65a0c:   cmp    $0x20,%eax
           ││  0x00007fb068f65a0f:   jle    0x00007fb068f65aa4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@58 (line 180)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@58 (line 180)
           ││  0x00007fb068f65a15:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@63 (line 181)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@63 (line 181)
    0.75%  ││  0x00007fb068f65a18:   cmp    $0x20,%eax
    0.14%  ││  0x00007fb068f65a1b:   nopl   0x0(%rax,%rax,1)
    7.59%  ││  0x00007fb068f65a20:   jle    0x00007fb068f65ab8           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@70 (line 182)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@70 (line 182)
           ││  0x00007fb068f65a26:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@75 (line 183)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@75 (line 183)
    0.69%  ││  0x00007fb068f65a29:   cmp    $0x20,%eax
           ││  0x00007fb068f65a2c:   jle    0x00007fb068f65acc           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@82 (line 184)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@82 (line 184)
    0.16%  ││  0x00007fb068f65a32:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@87 (line 185)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@87 (line 185)
    3.97%  ││  0x00007fb068f65a35:   cmp    $0x20,%eax
           ││  0x00007fb068f65a38:   jle    0x00007fb068f65ae0           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@94 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@94 (line 186)
    0.75%  ││  0x00007fb068f65a3e:   add    %r10d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::sum@17 (line 220)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@99 (line 187)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::sum@17 (line 220)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@99 (line 187)
    0.50%  ││  0x00007fb068f65a41:   add    $0x20,%rsp
    0.13%  ││  0x00007fb068f65a45:   pop    %rbp
    6.11%  ││  0x00007fb068f65a46:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -744,7 +744,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
            │  0x00007fb068f65a60:   data16 xchg %ax,%ax
            │  0x00007fb068f65a63:   call   0x00007fb068a01600           ; ImmutableOopMap {rbp=Oop }
            │                                                            ;*if_icmple {reexecute=1 rethrow=0 return_oop=0}
-           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls@10 (line 172)
+           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls@10 (line 172)
            │                                                            ;   {runtime_call UncommonTrapBlob}
            ↘  0x00007fb068f65a68:   mov    $0xffffff45,%esi
               0x00007fb068f65a6d:   mov    %r11,%rbp
@@ -752,45 +752,45 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
   57.07%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 519 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 519 
 
               0x00007fb068f68ba6:   mov    0x38(%rsp),%r10
               0x00007fb068f68bab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007fb068f68c5c
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@30 (line 234)
               0x00007fb068f68bb3:   mov    $0x1,%ebp
               0x00007fb068f68bb8:   test   %r11d,%r11d
           ╭   0x00007fb068f68bbb:   jne    0x00007fb068f68bec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007fb068f68bbd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
    4.21%  │↗  0x00007fb068f68bc0:   mov    0x40(%rsp),%rsi
    0.16%  ││  0x00007fb068f68bc5:   xchg   %ax,%ax
           ││  0x00007fb068f68bc7:   call   0x00007fb0689fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual conditional_nested_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
   13.04%  ││  0x00007fb068f68bcc:   mov    0x38(%rsp),%r10
    6.07%  ││  0x00007fb068f68bd1:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
   16.53%  ││  0x00007fb068f68bd9:   mov    0x348(%r15),%r11
    0.18%  ││  0x00007fb068f68be0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007fb068f68be4:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007fb068f68be7:   test   %r10d,%r10d
           │╰  0x00007fb068f68bea:   je     0x00007fb068f68bc0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007fb068f68bec:   movabs $0x7fb080c0dd10,%r10
               0x00007fb068f68bf6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@37 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@37 (line 235)
               0x00007fb068f68bf9:   mov    0x30(%rsp),%r10
 ....................................................................................................
   40.20%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  57.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls, version 2, compile id 486 
-  40.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 519 
+  57.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls, version 2, compile id 486 
+  40.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 519 
    1.93%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
@@ -814,8 +814,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  57.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::conditional_nested_method_calls, version 2, compile id 486 
-  40.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 519 
+  57.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::conditional_nested_method_calls, version 2, compile id 486 
+  40.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 519 
    2.56%              kernel  [unknown] 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.02%                      <unknown> 
@@ -863,7 +863,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.nested_synchronized
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.nested_synchronized
 
 # Run progress: 66.67% complete, ETA 00:03:36
 # Fork: 1 of 1
@@ -882,12 +882,12 @@ Iteration   5: 1454.302 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.nested_synchronized":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.nested_synchronized":
   1454.818 ±(99.9%) 3.557 ns/op [Average]
   (min, avg, max) = (1453.649, 1454.818, 1456.067), stdev = 0.924
   CI (99.9%): [1451.261, 1458.375] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.nested_synchronized:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.nested_synchronized:·asm":
 PrintAssembly processed: 113710 total address lines.
 Perf output processed (skipped 55.583 seconds):
  Column 1: cycles (50502 events)
@@ -1070,7 +1070,7 @@ interpreter, fast_iaccess_0  221 fast_iaccess_0
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.recursive_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.recursive_method_calls
 
 # Run progress: 83.33% complete, ETA 00:01:48
 # Fork: 1 of 1
@@ -1089,12 +1089,12 @@ Iteration   5: 25.639 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.recursive_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.recursive_method_calls":
   25.594 ±(99.9%) 0.133 ns/op [Average]
   (min, avg, max) = (25.559, 25.594, 25.639), stdev = 0.035
   CI (99.9%): [25.461, 25.728] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark.recursive_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark.recursive_method_calls:·asm":
 PrintAssembly processed: 113129 total address lines.
 Perf output processed (skipped 55.617 seconds):
  Column 1: cycles (50462 events)
@@ -1103,7 +1103,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum, version 2, compile id 479 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum, version 2, compile id 479 
 
                   # parm1:    rcx       = int
                   #           [sp+0x30]  (sp of caller)
@@ -1118,25 +1118,25 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
    4.20%    ↗     0x00007f18dcf646c0:   mov    %eax,-0x14000(%rsp)
    4.12%    │     0x00007f18dcf646c7:   push   %rbp
    5.68%    │     0x00007f18dcf646c8:   sub    $0x20,%rsp                   ;*synchronization entry
-            │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@-1 (line 225)
+            │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@-1 (line 225)
    1.01%    │     0x00007f18dcf646cc:   test   %ecx,%ecx
           ╭ │     0x00007f18dcf646ce:   je     0x00007f18dcf646f7           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@14 (line 227)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@14 (line 227)
    1.02%  │ │     0x00007f18dcf646d0:   mov    0x14(%rsi),%ebp              ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@23 (line 230)
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@23 (line 230)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
    2.26%  │ │     0x00007f18dcf646d3:   cmp    $0x1,%ecx
           │╭│     0x00007f18dcf646d6:   je     0x00007f18dcf646fb           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@14 (line 227)
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@14 (line 227)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
    0.47%  │││     0x00007f18dcf646d8:   add    $0xfffffffe,%ecx
    0.54%  ││╰     0x00007f18dcf646db:   call   0x00007f18dcf646c0           ; ImmutableOopMap {}
           ││                                                                ;*invokevirtual recursiveSum {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
           ││                                                                ;   {optimized virtual_call}
   19.36%  ││      0x00007f18dcf646e0:   add    %ebp,%eax                    ;*invokevirtual recursiveSum {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
    0.42%  ││   ↗  0x00007f18dcf646e2:   add    %ebp,%eax
    2.60%  ││  ↗│  0x00007f18dcf646e4:   add    $0x20,%rsp
    3.07%  ││  ││  0x00007f18dcf646e8:   pop    %rbp
@@ -1147,8 +1147,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
    0.54%   │ │╰│  0x00007f18dcf646f9:   jmp    0x00007f18dcf646e4
            ↘ │ │  0x00007f18dcf646fb:   mov    %edx,%eax
              │ ╰  0x00007f18dcf646fd:   jmp    0x00007f18dcf646e2           ;*invokevirtual recursiveSum {reexecute=0 rethrow=0 return_oop=0}
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
              │    0x00007f18dcf646ff:   mov    %rax,%rsi
              │    0x00007f18dcf64702:   add    $0x20,%rsp
              │    0x00007f18dcf64706:   pop    %rbp
@@ -1159,44 +1159,44 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
   54.90%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 515 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 515 
 
               0x00007f18dcf67a26:   mov    0x38(%rsp),%r10
               0x00007f18dcf67a2b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f18dcf67adc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@30 (line 234)
               0x00007f18dcf67a33:   mov    $0x1,%ebp
               0x00007f18dcf67a38:   test   %r11d,%r11d
           ╭   0x00007f18dcf67a3b:   jne    0x00007f18dcf67a6c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007f18dcf67a3d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@36 (line 235)
    1.54%  │↗  0x00007f18dcf67a40:   mov    0x40(%rsp),%rsi
           ││  0x00007f18dcf67a45:   xchg   %ax,%ax
           ││  0x00007f18dcf67a47:   call   0x00007f18dc9fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual recursive_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
    2.98%  ││  0x00007f18dcf67a4c:   mov    0x38(%rsp),%r10
   11.54%  ││  0x00007f18dcf67a51:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@33 (line 234)
    6.03%  ││  0x00007f18dcf67a59:   mov    0x348(%r15),%r11
           ││  0x00007f18dcf67a60:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007f18dcf67a64:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007f18dcf67a67:   test   %r10d,%r10d
           │╰  0x00007f18dcf67a6a:   je     0x00007f18dcf67a40           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007f18dcf67a6c:   movabs $0x7f18f4e1bd10,%r10
               0x00007f18dcf67a76:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   22.09%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls, version 2, compile id 480 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls, version 2, compile id 480 
 
-             # {method} {0x00007f18cd07e610} &apos;recursive_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark&apos;
+             # {method} {0x00007f18cd07e610} &apos;recursive_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockElisionBenchmark&apos;
              #           [sp+0x40]  (sp of caller)
              0x00007f18dcf64aa0:   mov    0x8(%rsi),%r10d
              0x00007f18dcf64aa4:   movabs $0x800000000,%r11
@@ -1209,31 +1209,31 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
    1.58%     0x00007f18dcf64ac0:   mov    %eax,-0x14000(%rsp)
    1.62%     0x00007f18dcf64ac7:   push   %rbp
              0x00007f18dcf64ac8:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls@-1 (line 110)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls@-1 (line 110)
    0.91%     0x00007f18dcf64acc:   mov    0x14(%rsi),%ebp              ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@23 (line 230)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls@11 (line 111)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@23 (line 230)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls@11 (line 111)
    0.63%     0x00007f18dcf64acf:   mov    0x10(%rsi),%edx
              0x00007f18dcf64ad2:   shl    %edx                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls@5 (line 110)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls@5 (line 110)
    0.87%     0x00007f18dcf64ad4:   mov    $0x6,%ecx
              0x00007f18dcf64ad9:   xchg   %ax,%ax
    0.66%     0x00007f18dcf64adb:   call   0x00007f18dcf646c0           ; ImmutableOopMap {}
                                                                        ;*invokevirtual recursiveSum {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls@11 (line 111)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@31 (line 230)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls@11 (line 111)
                                                                        ;   {optimized virtual_call}
    3.00%     0x00007f18dcf64ae0:   add    %ebp,%eax
    2.98%     0x00007f18dcf64ae2:   add    %ebp,%eax                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum@34 (line 230)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls@11 (line 111)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum@34 (line 230)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls@11 (line 111)
    3.07%     0x00007f18dcf64ae4:   add    $0x30,%rsp
              0x00007f18dcf64ae8:   pop    %rbp
    4.54%     0x00007f18dcf64ae9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
           ╭  0x00007f18dcf64af0:   ja     0x00007f18dcf64b04
    1.57%  │  0x00007f18dcf64af6:   ret                                 ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls@-1 (line 110)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls@-1 (line 110)
           │  0x00007f18dcf64af7:   mov    %rax,%rsi
           │  0x00007f18dcf64afa:   add    $0x30,%rsp
           │  0x00007f18dcf64afe:   pop    %rbp
@@ -1247,9 +1247,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
   21.43%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  54.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum, version 2, compile id 479 
-  22.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 515 
-  21.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls, version 2, compile id 480 
+  54.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum, version 2, compile id 479 
+  22.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 515 
+  21.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls, version 2, compile id 480 
    0.47%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
@@ -1272,9 +1272,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElis
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  54.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursiveSum, version 2, compile id 479 
-  22.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 515 
-  21.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockElisionBenchmark::recursive_method_calls, version 2, compile id 480 
+  54.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursiveSum, version 2, compile id 479 
+  22.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockElisionBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 515 
+  21.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockElisionBenchmark::recursive_method_calls, version 2, compile id 480 
    1.32%              kernel  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.03%                      <unknown> 

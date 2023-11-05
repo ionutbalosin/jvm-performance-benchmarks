@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..arraySize","Param..vectorSize"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector","avgt",1,25,46.766593,3.172943,"us/op",1024,64
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector","avgt",1,25,32.47281,0.159447,"us/op",1024,128
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector","avgt",1,25,255.117703,4.9573,"us/op",1024,256
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector","avgt",1,25,249.799455,1.581121,"us/op",1024,512
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,46.766593,3.172943,"us/op",1024,64
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,32.47281,0.159447,"us/op",1024,128
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,255.117703,4.9573,"us/op",1024,256
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,249.799455,1.581121,"us/op",1024,512

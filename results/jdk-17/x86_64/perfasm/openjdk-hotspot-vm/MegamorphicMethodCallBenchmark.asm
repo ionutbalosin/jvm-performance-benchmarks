@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MONOMORPHIC)
 
 # Run progress: 0.00% complete, ETA 00:26:40
@@ -28,12 +28,12 @@ Iteration   5: 1.929 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   1.928 ±(99.9%) 0.002 ns/op [Average]
   (min, avg, max) = (1.928, 1.928, 1.929), stdev = 0.001
   CI (99.9%): [1.926, 1.930] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 117623 total address lines.
 Perf output processed (skipped 55.625 seconds):
  Column 1: cycles (50775 events)
@@ -42,82 +42,82 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
 
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    0.03%            0x00007f2df0f64fae:   lea    (%r12,%rbp,8),%r8            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                     0x00007f2df0f64fb2:   lea    (%r12,%r9,8),%rsi            ;*goto {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
                     0x00007f2df0f64fb6:   mov    $0xfa0,%edx
                     0x00007f2df0f64fbb:   mov    $0x1,%ecx
           ╭         0x00007f2df0f64fc0:   jmp    0x00007f2df0f6506c
           │         0x00007f2df0f64fc5:   data16 data16 nopw 0x0(%rax,%rax,1)
    0.77%  │    ↗    0x00007f2df0f64fd0:   mov    %r10d,%ecx                   ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    2.13%  │    │↗   0x00007f2df0f64fd3:   movslq %ecx,%r10
    1.13%  │    ││   0x00007f2df0f64fd6:   movsbl 0x10(%rsi,%r10,1),%r11d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+          │    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    1.00%  │    ││   0x00007f2df0f64fdc:   mov    0x10(%r8,%r10,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+          │    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    0.82%  │    ││   0x00007f2df0f64fe1:   test   %r11d,%r11d
           │╭   ││   0x00007f2df0f64fe4:   jne    0x00007f2df0f65096           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    2.09%  ││   ││   0x00007f2df0f64fea:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f2df0f6511f
           ││   ││                                                             ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
   17.72%  ││   ││   0x00007f2df0f64fef:   movsbl 0x11(%rsi,%r10,1),%r11d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    1.36%  ││   ││   0x00007f2df0f64ff5:   mov    0x14(%r8,%r10,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+          ││   ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    1.02%  ││   ││   0x00007f2df0f64ffa:   nopw   0x0(%rax,%rax,1)
    0.77%  ││   ││   0x00007f2df0f65000:   test   %r11d,%r11d
           ││╭  ││   0x00007f2df0f65003:   jne    0x00007f2df0f6508f           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    1.76%  │││  ││   0x00007f2df0f65009:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f2df0f6511f
           │││  ││                                                             ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
   17.30%  │││  ││   0x00007f2df0f6500e:   movsbl 0x12(%rsi,%r10,1),%r11d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    1.43%  │││  ││   0x00007f2df0f65014:   mov    0x18(%r8,%r10,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+          │││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    1.24%  │││  ││   0x00007f2df0f65019:   test   %r11d,%r11d
    0.81%  │││  ││   0x00007f2df0f6501c:   nopl   0x0(%rax)
    1.62%  │││╭ ││   0x00007f2df0f65020:   jne    0x00007f2df0f65093           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    1.30%  ││││ ││   0x00007f2df0f65026:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f2df0f6511f
           ││││ ││                                                             ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    8.16%  ││││ ││   0x00007f2df0f6502b:   movsbl 0x13(%rsi,%r10,1),%r11d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    1.57%  ││││ ││   0x00007f2df0f65031:   mov    0x1c(%r8,%r10,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+          ││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    2.14%  ││││ ││   0x00007f2df0f65036:   test   %r11d,%r11d
           ││││╭││   0x00007f2df0f65039:   jne    0x00007f2df0f6508c           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.77%  │││││││   0x00007f2df0f6503f:   nop
    1.88%  │││││││   0x00007f2df0f65040:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f2df0f6511f
           │││││││                                                             ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
   26.78%  │││││││   0x00007f2df0f65045:   mov    %ecx,%r10d
    1.21%  │││││││   0x00007f2df0f65048:   add    $0x4,%r10d                   ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+          │││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
    0.84%  │││││││   0x00007f2df0f6504c:   cmp    %eax,%r10d
           │││││╰│   0x00007f2df0f6504f:   jl     0x00007f2df0f64fd0           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.00%  │││││ │   0x00007f2df0f65055:   mov    0x348(%r15),%r11             ; ImmutableOopMap {r8=Oop r9=NarrowOop rsi=Oop rbp=NarrowOop }
           │││││ │                                                             ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │││││ │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │││││ │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │││││ │   0x00007f2df0f6505c:   test   %eax,(%r11)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │││││ │                                                             ;   {poll}
    0.20%  │││││ │   0x00007f2df0f6505f:   nop
           │││││ │   0x00007f2df0f65060:   cmp    $0x9d7d,%r10d
           │││││ │   0x00007f2df0f65067:   jge    0x00007f2df0f650b4
           │││││ │   0x00007f2df0f65069:   mov    %r10d,%ecx                   ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘││││ │   0x00007f2df0f6506c:   mov    $0x9d7d,%eax
    0.00%   ││││ │   0x00007f2df0f65071:   sub    %ecx,%eax
            ││││ │   0x00007f2df0f65073:   cmp    $0x9d7d,%ecx
@@ -130,7 +130,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            │↘│      0x00007f2df0f6508f:   inc    %ecx
            │ │   ╭  0x00007f2df0f65091:   jmp    0x00007f2df0f65096
            │ ↘   │  0x00007f2df0f65093:   add    $0x2,%ecx                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
            ↘     ↘  0x00007f2df0f65096:   mov    $0xffffff45,%esi
                     0x00007f2df0f6509b:   mov    %ecx,(%rsp)
                     0x00007f2df0f6509e:   mov    %edi,0x4(%rsp)
@@ -139,17 +139,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   97.82%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.82%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
+  97.82%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
    0.83%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
-   0.06%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
+   0.06%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
    0.05%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 502 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 502 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
@@ -164,9 +164,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.93%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
+  97.93%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 476 
    1.73%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 502 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 502 
    0.03%                      <unknown> 
    0.02%        libc-2.31.so  [unknown] 
    0.01%           libjvm.so  ElfSymbolTable::lookup 
@@ -214,7 +214,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = BIMORPHIC)
 
 # Run progress: 6.25% complete, ETA 00:27:00
@@ -234,12 +234,12 @@ Iteration   5: 2.154 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   2.153 ±(99.9%) 0.003 ns/op [Average]
   (min, avg, max) = (2.152, 2.153, 2.154), stdev = 0.001
   CI (99.9%): [2.150, 2.156] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 117750 total address lines.
 Perf output processed (skipped 55.565 seconds):
  Column 1: cycles (50740 events)
@@ -248,27 +248,27 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
 
                   0x00007f42fcf64986:   cmp    $0x9d7f,%r10d
                   0x00007f42fcf6498d:   jbe    0x00007f42fcf64a8f
                   0x00007f42fcf64993:   lea    (%r12,%rbp,8),%rdi           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                   0x00007f42fcf64997:   lea    (%r12,%r9,8),%rsi            ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
                   0x00007f42fcf6499b:   mov    $0x3e8,%ecx
                   0x00007f42fcf649a0:   xor    %ebx,%ebx
           ╭       0x00007f42fcf649a2:   jmp    0x00007f42fcf649ba           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.02%  │ ↗     0x00007f42fcf649a4:   mov    0x348(%r15),%r10             ; ImmutableOopMap {r9=NarrowOop rdi=Oop rsi=Oop rbp=NarrowOop }
           │ │                                                               ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.02%  │ │     0x00007f42fcf649ab:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ │                                                               ;   {poll}
    0.12%  │ │     0x00007f42fcf649ae:   cmp    $0x9d80,%ebx
           │ │     0x00007f42fcf649b4:   jge    0x00007f42fcf64a7c           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘ │     0x00007f42fcf649ba:   mov    $0x9d80,%edx
    0.00%    │     0x00007f42fcf649bf:   sub    %ebx,%edx
             │     0x00007f42fcf649c1:   cmp    $0x3e8,%edx
@@ -277,37 +277,37 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            ╭│     0x00007f42fcf649cc:   jmp    0x00007f42fcf649e2
            ││     0x00007f42fcf649ce:   xchg   %ax,%ax
    8.78%   ││  ↗  0x00007f42fcf649d0:   lea    (%r12,%r8,8),%r10            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+           ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
            ││  │  0x00007f42fcf649d4:   incl   0x10(%r10)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
   14.89%   ││ ↗│  0x00007f42fcf649d8:   inc    %ebx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
    0.08%   ││ ││  0x00007f42fcf649da:   cmp    %edx,%ebx
    7.76%   ││ ││  0x00007f42fcf649dc:   nopl   0x0(%rax)
    1.02%   │╰ ││  0x00007f42fcf649e0:   jge    0x00007f42fcf649a4           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    8.69%   ↘  ││  0x00007f42fcf649e2:   movslq %ebx,%r10
    0.14%      ││  0x00007f42fcf649e5:   mov    0x10(%rdi,%r10,4),%r8d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    9.47%      ││  0x00007f42fcf649ea:   movsbl 0x10(%rsi,%r10,1),%r11d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    1.58%      ││  0x00007f42fcf649f0:   cmp    $0x1,%r11d
              ╭││  0x00007f42fcf649f4:   je     0x00007f42fcf64a22
    8.67%     │││  0x00007f42fcf649f6:   cmp    $0x1,%r11d
    0.00%     │││  0x00007f42fcf649fa:   nopw   0x0(%rax,%rax,1)
    0.08%     │││  0x00007f42fcf64a00:   ja     0x00007f42fcf64a48           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.12%     │││  0x00007f42fcf64a06:   mov    0x8(%r12,%r8,8),%r10d        ; implicit exception: dispatches to 0x00007f42fcf64aac
-  14.37%     │││  0x00007f42fcf64a0b:   cmp    $0xc27428,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+  14.37%     │││  0x00007f42fcf64a0b:   cmp    $0xc27428,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
              │││  0x00007f42fcf64a12:   jne    0x00007f42fcf64a64
    0.63%     │││  0x00007f42fcf64a18:   lea    (%r12,%r8,8),%r10            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    0.00%     │││  0x00007f42fcf64a1c:   incl   0xc(%r10)                    ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
   10.82%     │╰│  0x00007f42fcf64a20:   jmp    0x00007f42fcf649d8
    0.01%     ↘ │  0x00007f42fcf64a22:   mov    0x8(%r12,%r8,8),%r10d        ; implicit exception: dispatches to 0x00007f42fcf64aa0
-  10.68%       │  0x00007f42fcf64a27:   cmp    $0xc27638,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+  10.68%       │  0x00007f42fcf64a27:   cmp    $0xc27638,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
                ╰  0x00007f42fcf64a2e:   je     0x00007f42fcf649d0
                   0x00007f42fcf64a30:   mov    $0xffffffde,%esi
                   0x00007f42fcf64a35:   mov    %ebx,(%rsp)
@@ -316,23 +316,23 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                   0x00007f42fcf64a42:   nop
                   0x00007f42fcf64a43:   call   0x00007f42fca01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
                                                                             ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   97.99%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.99%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
+  97.99%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
    0.65%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.03%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 490 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 490 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
@@ -340,19 +340,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.01%           libjvm.so  xmlStream::write_text 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
    0.01%              kernel  [unknown] 
    0.75%  <...other 265 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
+  98.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 464 
    1.57%              kernel  [unknown] 
    0.03%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.03%        libc-2.31.so  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 490 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 490 
    0.02%        libc-2.31.so  __strncat_ssse3 
    0.02%           libjvm.so  xmlStream::write_text 
    0.02%        libc-2.31.so  __GI___strcasecmp_l_sse2 
@@ -398,7 +398,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_3)
 
 # Run progress: 12.50% complete, ETA 00:25:11
@@ -418,12 +418,12 @@ Iteration   5: 2.234 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   2.313 ±(99.9%) 0.171 ns/op [Average]
   (min, avg, max) = (2.234, 2.313, 2.334), stdev = 0.044
   CI (99.9%): [2.142, 2.484] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 117599 total address lines.
 Perf output processed (skipped 55.576 seconds):
  Column 1: cycles (50762 events)
@@ -432,27 +432,27 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
 
                     0x00007f6948f66506:   cmp    $0x9d7f,%r10d
                     0x00007f6948f6650d:   jbe    0x00007f6948f66687
                     0x00007f6948f66513:   lea    (%r12,%rbp,8),%rbx           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                     0x00007f6948f66517:   lea    (%r12,%rcx,8),%rdx           ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
                     0x00007f6948f6651b:   mov    $0x3e8,%r9d
                     0x00007f6948f66521:   xor    %r11d,%r11d
           ╭         0x00007f6948f66524:   jmp    0x00007f6948f6653d           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │ ↗       0x00007f6948f66526:   mov    0x348(%r15),%r10             ; ImmutableOopMap {rcx=NarrowOop rbx=Oop rdx=Oop rbp=NarrowOop }
           │ │                                                                 ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                                 ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                 ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │ │       0x00007f6948f6652d:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ │                                                                 ;   {poll}
    0.12%  │ │       0x00007f6948f66530:   cmp    $0x9d80,%r11d
           │ │       0x00007f6948f66537:   jge    0x00007f6948f66674           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │ │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘ │       0x00007f6948f6653d:   mov    $0x9d80,%edi
    0.00%    │       0x00007f6948f66542:   sub    %r11d,%edi
             │       0x00007f6948f66545:   cmp    $0x3e8,%edi
@@ -462,53 +462,53 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            ││       0x00007f6948f66554:   nopl   0x0(%rax,%rax,1)
            ││       0x00007f6948f6655c:   data16 data16 xchg %ax,%ax
    5.29%   ││    ↗  0x00007f6948f66560:   lea    (%r12,%r8,8),%r10            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    0.00%   ││    │  0x00007f6948f66564:   incl   0x14(%r10)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
    9.33%   ││ ↗ ↗│  0x00007f6948f66568:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
    4.25%   ││ │ ││  0x00007f6948f6656b:   cmp    %edi,%r11d
            │╰ │ ││  0x00007f6948f6656e:   jge    0x00007f6948f66526           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │  │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │  │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    0.03%   ↘  │ ││  0x00007f6948f66570:   movslq %r11d,%r10
    6.39%      │ ││  0x00007f6948f66573:   mov    0x10(%rbx,%r10,4),%r8d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+              │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    6.54%      │ ││  0x00007f6948f66578:   movsbl 0x10(%rdx,%r10,1),%r10d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
-              │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+              │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    4.91%      │ ││  0x00007f6948f6657e:   xchg   %ax,%ax
    0.03%      │ ││  0x00007f6948f66580:   cmp    $0x1,%r10d
              ╭│ ││  0x00007f6948f66584:   jne    0x00007f6948f665a2           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    5.36%     ││ ││  0x00007f6948f66586:   mov    0x8(%r12,%r8,8),%r10d        ; implicit exception: dispatches to 0x00007f6948f666a0
-   7.95%     ││ ││  0x00007f6948f6658b:   cmp    $0xc27638,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   7.95%     ││ ││  0x00007f6948f6658b:   cmp    $0xc27638,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
              ││ ││  0x00007f6948f66592:   jne    0x00007f6948f66628
    0.70%     ││ ││  0x00007f6948f66598:   lea    (%r12,%r8,8),%r10            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
              ││ ││  0x00007f6948f6659c:   incl   0x10(%r10)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+             ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
   10.14%     │╰ ││  0x00007f6948f665a0:   jmp    0x00007f6948f66568
    1.09%     ↘  ││  0x00007f6948f665a2:   cmp    $0x1,%r10d
                ╭││  0x00007f6948f665a6:   jge    0x00007f6948f665d7
    5.58%       │││  0x00007f6948f665a8:   test   %r10d,%r10d
                │││  0x00007f6948f665ab:   jne    0x00007f6948f66640           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.00%       │││  0x00007f6948f665b1:   mov    0x8(%r12,%r8,8),%r10d        ; implicit exception: dispatches to 0x00007f6948f666ac
    6.19%       │││  0x00007f6948f665b6:   data16 nopw 0x0(%rax,%rax,1)
-               │││  0x00007f6948f665c0:   cmp    $0xc27428,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+               │││  0x00007f6948f665c0:   cmp    $0xc27428,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
                │││  0x00007f6948f665c7:   jne    0x00007f6948f6665c
    5.57%       │││  0x00007f6948f665cd:   lea    (%r12,%r8,8),%r10            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    0.01%       │││  0x00007f6948f665d1:   incl   0xc(%r10)                    ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+               │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    7.00%       │╰│  0x00007f6948f665d5:   jmp    0x00007f6948f66568
    5.43%       ↘ │  0x00007f6948f665d7:   cmp    $0x2,%r10d
                  │  0x00007f6948f665db:   jne    0x00007f6948f6660c           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                 │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                 │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                  │  0x00007f6948f665dd:   data16 xchg %ax,%ax
                  │  0x00007f6948f665e0:   mov    0x8(%r12,%r8,8),%r10d        ; implicit exception: dispatches to 0x00007f6948f66694
-   5.99%         │  0x00007f6948f665e5:   cmp    $0xc27848,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
+   5.99%         │  0x00007f6948f665e5:   cmp    $0xc27848,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
                  ╰  0x00007f6948f665ec:   je     0x00007f6948f66560
                     0x00007f6948f665f2:   mov    $0xffffffde,%esi
                     0x00007f6948f665f7:   mov    %r11d,(%rsp)
@@ -517,25 +517,25 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                     0x00007f6948f66604:   data16 xchg %ax,%ax
                     0x00007f6948f66607:   call   0x00007f6948a01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                               ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
                                                                               ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   97.94%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
+  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
    0.74%              kernel  [unknown] 
    0.12%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
    0.04%              kernel  [unknown] 
    0.03%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 510 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 510 
    0.02%              kernel  [unknown] 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
    0.02%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -548,10 +548,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.00%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
+  98.00%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 487 
    1.65%              kernel  [unknown] 
    0.05%                      <unknown> 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 510 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 510 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.02%        libc-2.31.so  __strncat_ssse3 
    0.01%           libjvm.so  RelocIterator::initialize 
@@ -598,7 +598,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_4)
 
 # Run progress: 18.75% complete, ETA 00:23:20
@@ -618,12 +618,12 @@ Iteration   5: 2.312 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   2.353 ±(99.9%) 0.088 ns/op [Average]
   (min, avg, max) = (2.312, 2.353, 2.363), stdev = 0.023
   CI (99.9%): [2.265, 2.441] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 116865 total address lines.
 Perf output processed (skipped 55.668 seconds):
  Column 1: cycles (50787 events)
@@ -632,31 +632,31 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
 
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
                       0x00007f9168f64518:   test   %r8d,%r8d
                       0x00007f9168f6451b:   nopl   0x0(%rax,%rax,1)
                       0x00007f9168f64520:   jbe    0x00007f9168f646e3
                       0x00007f9168f64526:   cmp    $0x9d7f,%r8d
                       0x00007f9168f6452d:   jbe    0x00007f9168f646e3
                       0x00007f9168f64533:   lea    (%r12,%rbp,8),%rdx           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                       0x00007f9168f64537:   lea    (%r12,%r11,8),%rsi           ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
    0.00%              0x00007f9168f6453b:   mov    $0x3e8,%edi
                       0x00007f9168f64540:   xor    %ecx,%ecx
           ╭           0x00007f9168f64542:   jmp    0x00007f9168f6455a           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │ ↗         0x00007f9168f64544:   mov    0x348(%r15),%r10             ; ImmutableOopMap {r11=NarrowOop rdx=Oop rsi=Oop rbp=NarrowOop }
           │ │                                                                   ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                                   ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                   ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.02%  │ │         0x00007f9168f6454b:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ │                                                                   ;   {poll}
    0.11%  │ │         0x00007f9168f6454e:   cmp    $0x9d80,%ecx
           │ │         0x00007f9168f64554:   jge    0x00007f9168f646d0           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │ │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘ │         0x00007f9168f6455a:   mov    $0x9d80,%ebx
    0.01%    │         0x00007f9168f6455f:   sub    %ecx,%ebx
             │         0x00007f9168f64561:   cmp    $0x3e8,%ebx
@@ -665,33 +665,33 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            ╭│         0x00007f9168f6456c:   jmp    0x00007f9168f64582
            ││         0x00007f9168f6456e:   xchg   %ax,%ax
    4.01%   ││      ↗  0x00007f9168f64570:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+           ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
            ││      │  0x00007f9168f64574:   incl   0x18(%r10)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
   14.64%   ││ ↗  ↗↗│  0x00007f9168f64578:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
            ││ │  │││  0x00007f9168f6457a:   cmp    %ebx,%ecx
    0.01%   ││ │  │││  0x00007f9168f6457c:   nopl   0x0(%rax)
    2.25%   │╰ │  │││  0x00007f9168f64580:   jge    0x00007f9168f64544           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │  │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │  │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
   13.71%   ↘  │  │││  0x00007f9168f64582:   movslq %ecx,%r10                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+              │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
               │  │││  0x00007f9168f64585:   movsbl 0x10(%rsi,%r10,1),%r8d       ;*baload {reexecute=0 rethrow=0 return_oop=0}
-              │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+              │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    0.32%      │  │││  0x00007f9168f6458b:   mov    0x10(%rdx,%r10,4),%r10d      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+              │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    3.02%      │  │││  0x00007f9168f64590:   cmp    $0x2,%r8d
              ╭│  │││  0x00007f9168f64594:   jne    0x00007f9168f645bc           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    3.43%     ││  │││  0x00007f9168f64596:   data16 nopw 0x0(%rax,%rax,1)
              ││  │││  0x00007f9168f645a0:   mov    0x8(%r12,%r10,8),%r8d        ; implicit exception: dispatches to 0x00007f9168f64700
-   2.20%     ││  │││  0x00007f9168f645a5:   cmp    $0xc27848,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
+   2.20%     ││  │││  0x00007f9168f645a5:   cmp    $0xc27848,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
              ││  │││  0x00007f9168f645ac:   jne    0x00007f9168f6466c
    0.83%     ││  │││  0x00007f9168f645b2:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    3.24%     ││  │││  0x00007f9168f645b6:   incl   0x14(%r10)                   ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
-             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+             ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    5.32%     │╰  │││  0x00007f9168f645ba:   jmp    0x00007f9168f64578
   10.45%     ↘   │││  0x00007f9168f645bc:   nopl   0x0(%rax)
                  │││  0x00007f9168f645c0:   cmp    $0x2,%r8d
@@ -700,33 +700,33 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                │╭│││  0x00007f9168f645ce:   je     0x00007f9168f645ff
    0.06%       │││││  0x00007f9168f645d0:   test   %r8d,%r8d
                │││││  0x00007f9168f645d3:   jne    0x00007f9168f6469c           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    4.30%       │││││  0x00007f9168f645d9:   nopl   0x0(%rax)
                │││││  0x00007f9168f645e0:   mov    0x8(%r12,%r10,8),%r9d        ; implicit exception: dispatches to 0x00007f9168f64718
-   2.95%       │││││  0x00007f9168f645e5:   cmp    $0xc27428,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+   2.95%       │││││  0x00007f9168f645e5:   cmp    $0xc27428,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
                │││││  0x00007f9168f645ec:   jne    0x00007f9168f646b8
    0.30%       │││││  0x00007f9168f645f2:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    3.56%       │││││  0x00007f9168f645f6:   incl   0xc(%r10)                    ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+               │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    2.10%       ││╰││  0x00007f9168f645fa:   jmp    0x00007f9168f64578
    4.48%       │↘ ││  0x00007f9168f645ff:   nop
                │  ││  0x00007f9168f64600:   mov    0x8(%r12,%r10,8),%r8d        ; implicit exception: dispatches to 0x00007f9168f6470c
-   3.96%       │  ││  0x00007f9168f64605:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   3.96%       │  ││  0x00007f9168f64605:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
                │  ││  0x00007f9168f6460c:   jne    0x00007f9168f64684
    0.43%       │  ││  0x00007f9168f64612:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    3.63%       │  ││  0x00007f9168f64616:   incl   0x10(%r10)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    2.48%       │  ╰│  0x00007f9168f6461a:   jmp    0x00007f9168f64578
    4.25%       ↘   │  0x00007f9168f6461f:   nop
                    │  0x00007f9168f64620:   cmp    $0x3,%r8d
                    │  0x00007f9168f64624:   jne    0x00007f9168f64650           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.00%           │  0x00007f9168f64626:   mov    0x8(%r12,%r10,8),%r9d        ; implicit exception: dispatches to 0x00007f9168f646f4
-   1.80%           │  0x00007f9168f6462b:   cmp    $0xc27a58,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
+   1.80%           │  0x00007f9168f6462b:   cmp    $0xc27a58,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
                    ╰  0x00007f9168f64632:   je     0x00007f9168f64570
                       0x00007f9168f64638:   mov    $0xffffffde,%esi
                       0x00007f9168f6463d:   mov    %ecx,(%rsp)
@@ -735,23 +735,23 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                       0x00007f9168f6464a:   nop
                       0x00007f9168f6464b:   call   0x00007f9168a01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                                 ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
                                                                                 ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   97.91%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
+  97.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
    0.92%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 523 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 523 
    0.04%              kernel  [unknown] 
    0.03%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -766,9 +766,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.96%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
+  97.96%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 499 
    1.70%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 523 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 523 
    0.03%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%        libc-2.31.so  [unknown] 
@@ -815,7 +815,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_5)
 
 # Run progress: 25.00% complete, ETA 00:21:34
@@ -835,12 +835,12 @@ Iteration   5: 2.308 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   2.310 ±(99.9%) 0.005 ns/op [Average]
   (min, avg, max) = (2.308, 2.310, 2.312), stdev = 0.001
   CI (99.9%): [2.305, 2.315] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 117262 total address lines.
 Perf output processed (skipped 55.617 seconds):
  Column 1: cycles (50805 events)
@@ -849,24 +849,24 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
 
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                         0x00007f82a4f66db7:   lea    (%r12,%r8,8),%rdx            ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
                         0x00007f82a4f66dbb:   mov    $0x3e8,%r9d
                         0x00007f82a4f66dc1:   xor    %r11d,%r11d
           ╭             0x00007f82a4f66dc4:   jmp    0x00007f82a4f66ddd           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ ↗           0x00007f82a4f66dc6:   mov    0x348(%r15),%r10             ; ImmutableOopMap {r8=NarrowOop rbx=Oop rdx=Oop rbp=NarrowOop }
           │ │                                                                     ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                                     ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                     ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │ │           0x00007f82a4f66dcd:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ │                                                                     ;   {poll}
    0.12%  │ │           0x00007f82a4f66dd0:   cmp    $0x9d80,%r11d
           │ │           0x00007f82a4f66dd7:   jge    0x00007f82a4f66f8c           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘ │           0x00007f82a4f66ddd:   mov    $0x9d80,%edi
             │           0x00007f82a4f66de2:   sub    %r11d,%edi
             │           0x00007f82a4f66de5:   cmp    $0x3e8,%edi
@@ -876,80 +876,80 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            ││           0x00007f82a4f66df4:   nopl   0x0(%rax,%rax,1)
            ││           0x00007f82a4f66dfc:   data16 data16 xchg %ax,%ax
    3.39%   ││        ↗  0x00007f82a4f66e00:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
            ││        │  0x00007f82a4f66e04:   incl   0x1c(%r10)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
    4.93%   ││ ↗ ↗  ↗↗│  0x00007f82a4f66e08:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           ││ │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           ││ │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
    5.78%   ││ │ │  │││  0x00007f82a4f66e0b:   cmp    %edi,%r11d
            │╰ │ │  │││  0x00007f82a4f66e0e:   jge    0x00007f82a4f66dc6           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │  │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │  │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    6.13%   ↘  │ │  │││  0x00007f82a4f66e10:   movslq %r11d,%r10                   ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+              │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    1.10%      │ │  │││  0x00007f82a4f66e13:   movsbl 0x10(%rdx,%r10,1),%ecx       ;*baload {reexecute=0 rethrow=0 return_oop=0}
-              │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+              │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    3.67%      │ │  │││  0x00007f82a4f66e19:   mov    0x10(%rbx,%r10,4),%r10d      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+              │ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    6.95%      │ │  │││  0x00007f82a4f66e1e:   xchg   %ax,%ax
    6.20%      │ │  │││  0x00007f82a4f66e20:   test   %ecx,%ecx
              ╭│ │  │││  0x00007f82a4f66e22:   jne    0x00007f82a4f66e42           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.00%     ││ │  │││  0x00007f82a4f66e24:   mov    0x8(%r12,%r10,8),%ecx        ; implicit exception: dispatches to 0x00007f82a4f66fbc
-   4.96%     ││ │  │││  0x00007f82a4f66e29:   cmp    $0xc27428,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+   4.96%     ││ │  │││  0x00007f82a4f66e29:   cmp    $0xc27428,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
              ││ │  │││  0x00007f82a4f66e2f:   jne    0x00007f82a4f66f10
    0.24%     ││ │  │││  0x00007f82a4f66e35:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    0.02%     ││ │  │││  0x00007f82a4f66e39:   incl   0xc(%r10)                    ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+             ││ │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    4.11%     ││ │  │││  0x00007f82a4f66e3d:   data16 xchg %ax,%ax
    0.01%     │╰ │  │││  0x00007f82a4f66e40:   jmp    0x00007f82a4f66e08
    1.16%     ↘  │  │││  0x00007f82a4f66e42:   cmp    $0x3,%ecx
                ╭│  │││  0x00007f82a4f66e45:   jne    0x00007f82a4f66e62           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                ││  │││  0x00007f82a4f66e47:   mov    0x8(%r12,%r10,8),%esi        ; implicit exception: dispatches to 0x00007f82a4f66fc8
-   4.65%       ││  │││  0x00007f82a4f66e4c:   cmp    $0xc27a58,%esi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
+   4.65%       ││  │││  0x00007f82a4f66e4c:   cmp    $0xc27a58,%esi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
                ││  │││  0x00007f82a4f66e52:   jne    0x00007f82a4f66f28
    0.44%       ││  │││  0x00007f82a4f66e58:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
    0.00%       ││  │││  0x00007f82a4f66e5c:   incl   0x18(%r10)                   ;*putfield c4 {reexecute=0 rethrow=0 return_oop=0}
-               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
-               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
+               ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
    5.67%       │╰  │││  0x00007f82a4f66e60:   jmp    0x00007f82a4f66e08
    9.94%       ↘   │││  0x00007f82a4f66e62:   cmp    $0x3,%ecx
                  ╭ │││  0x00007f82a4f66e65:   jge    0x00007f82a4f66ec5
    0.00%         │ │││  0x00007f82a4f66e6b:   cmp    $0x1,%ecx
                  │╭│││  0x00007f82a4f66e6e:   jne    0x00007f82a4f66e99           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.00%         │││││  0x00007f82a4f66e70:   mov    0x8(%r12,%r10,8),%ecx        ; implicit exception: dispatches to 0x00007f82a4f66fd4
    2.37%         │││││  0x00007f82a4f66e75:   data16 data16 nopw 0x0(%rax,%rax,1)
-   3.11%         │││││  0x00007f82a4f66e80:   cmp    $0xc27638,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   3.11%         │││││  0x00007f82a4f66e80:   cmp    $0xc27638,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
                  │││││  0x00007f82a4f66e86:   jne    0x00007f82a4f66f5c
    0.24%         │││││  0x00007f82a4f66e8c:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    0.00%         │││││  0x00007f82a4f66e90:   incl   0x10(%r10)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+                 │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    5.01%         ││╰││  0x00007f82a4f66e94:   jmp    0x00007f82a4f66e08
    3.25%         │↘ ││  0x00007f82a4f66e99:   cmp    $0x1,%ecx
    0.00%         │  ││  0x00007f82a4f66e9c:   nopl   0x0(%rax)
                  │  ││  0x00007f82a4f66ea0:   jl     0x00007f82a4f66f40           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                  │  ││  0x00007f82a4f66ea6:   mov    0x8(%r12,%r10,8),%ecx        ; implicit exception: dispatches to 0x00007f82a4f66fe0
-   4.74%         │  ││  0x00007f82a4f66eab:   cmp    $0xc27848,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
+   4.74%         │  ││  0x00007f82a4f66eab:   cmp    $0xc27848,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
                  │  ││  0x00007f82a4f66eb1:   jne    0x00007f82a4f66f74
    0.13%         │  ││  0x00007f82a4f66eb7:   shl    $0x3,%r10                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
                  │  ││  0x00007f82a4f66ebb:   incl   0x14(%r10)                   ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
-                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+                 │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    4.80%         │  ││  0x00007f82a4f66ebf:   nop
                  │  ╰│  0x00007f82a4f66ec0:   jmp    0x00007f82a4f66e08
    3.34%         ↘   │  0x00007f82a4f66ec5:   cmp    $0x4,%ecx
                      │  0x00007f82a4f66ec8:   jne    0x00007f82a4f66ef4           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                      │  0x00007f82a4f66eca:   mov    0x8(%r12,%r10,8),%ecx        ; implicit exception: dispatches to 0x00007f82a4f66fb0
-   1.39%             │  0x00007f82a4f66ecf:   cmp    $0xc27c68,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
+   1.39%             │  0x00007f82a4f66ecf:   cmp    $0xc27c68,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
                      ╰  0x00007f82a4f66ed5:   je     0x00007f82a4f66e00
                         0x00007f82a4f66edb:   mov    $0xffffffde,%esi
                         0x00007f82a4f66ee0:   mov    %r11d,(%rsp)
@@ -958,13 +958,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                         0x00007f82a4f66eee:   nop
                         0x00007f82a4f66eef:   call   0x00007f82a4a01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                                   ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
                                                                                   ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   97.89%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.89%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
+  97.89%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
    0.90%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -972,9 +972,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.05%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 507 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 507 
    0.02%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -989,11 +989,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
+  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 488 
    1.74%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 507 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 507 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
    0.01%           libjvm.so  xmlStream::write_text 
    0.01%              [vdso]  __vdso_clock_gettime 
@@ -1040,7 +1040,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_6)
 
 # Run progress: 31.25% complete, ETA 00:19:45
@@ -1060,12 +1060,12 @@ Iteration   5: 2.465 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   2.519 ±(99.9%) 0.191 ns/op [Average]
   (min, avg, max) = (2.464, 2.519, 2.557), stdev = 0.050
   CI (99.9%): [2.328, 2.711] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 118801 total address lines.
 Perf output processed (skipped 55.730 seconds):
  Column 1: cycles (50591 events)
@@ -1074,27 +1074,27 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
 
                         0x00007fc610f654a6:   cmp    $0x9d7f,%r11d
                         0x00007fc610f654ad:   jbe    0x00007fc610f656df
                         0x00007fc610f654b3:   lea    (%r12,%rbp,8),%rdx           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                         0x00007fc610f654b7:   lea    (%r12,%r10,8),%rsi           ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
                         0x00007fc610f654bb:   mov    $0x3e8,%edi
                         0x00007fc610f654c0:   xor    %r11d,%r11d
           ╭             0x00007fc610f654c3:   jmp    0x00007fc610f654dc           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │ ↗           0x00007fc610f654c5:   mov    0x348(%r15),%r8              ; ImmutableOopMap {r10=NarrowOop rdx=Oop rsi=Oop rbp=NarrowOop }
           │ │                                                                     ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                                     ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                     ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.06%  │ │           0x00007fc610f654cc:   test   %eax,(%r8)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ │                                                                     ;   {poll}
    0.10%  │ │           0x00007fc610f654cf:   cmp    $0x9d80,%r11d
           │ │           0x00007fc610f654d6:   jge    0x00007fc610f656cc           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │ │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘ │           0x00007fc610f654dc:   mov    $0x9d80,%ebx
    0.00%    │           0x00007fc610f654e1:   sub    %r11d,%ebx
             │           0x00007fc610f654e4:   cmp    $0x3e8,%ebx
@@ -1102,21 +1102,21 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.00%    │           0x00007fc610f654ed:   add    %r11d,%ebx
            ╭│           0x00007fc610f654f0:   jmp    0x00007fc610f65505
    2.53%   ││        ↗  0x00007fc610f654f2:   lea    (%r12,%r9,8),%r8             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
            ││        │  0x00007fc610f654f6:   incl   0x1c(%r8)                    ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
    7.40%   ││  ↗ ↗↗ ↗│  0x00007fc610f654fa:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           ││  │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           ││  │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
    5.58%   ││  │ ││ ││  0x00007fc610f654fd:   data16 xchg %ax,%ax
    0.49%   ││  │ ││ ││  0x00007fc610f65500:   cmp    %ebx,%r11d
            │╰  │ ││ ││  0x00007fc610f65503:   jge    0x00007fc610f654c5           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │   │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │   │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    2.58%   ↘   │ ││ ││  0x00007fc610f65505:   movslq %r11d,%r8                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-               │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+               │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    6.40%       │ ││ ││  0x00007fc610f65508:   movsbl 0x10(%rsi,%r8,1),%ecx        ;*baload {reexecute=0 rethrow=0 return_oop=0}
-               │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+               │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    5.87%       │ ││ ││  0x00007fc610f6550e:   mov    0x10(%rdx,%r8,4),%r9d        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-               │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+               │ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    1.51%       │ ││ ││  0x00007fc610f65513:   cmp    $0x3,%ecx
                │ ││ ││  0x00007fc610f65516:   je     0x00007fc610f655f8
    2.18%       │ ││ ││  0x00007fc610f6551c:   nopl   0x0(%rax)
@@ -1124,58 +1124,58 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
              ╭ │ ││ ││  0x00007fc610f65523:   jge    0x00007fc610f6559f
    3.88%     │ │ ││ ││  0x00007fc610f65529:   cmp    $0x1,%ecx
              │╭│ ││ ││  0x00007fc610f6552c:   jne    0x00007fc610f65549           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.00%     │││ ││ ││  0x00007fc610f6552e:   mov    0x8(%r12,%r9,8),%ecx         ; implicit exception: dispatches to 0x00007fc610f65720
-   2.59%     │││ ││ ││  0x00007fc610f65533:   cmp    $0xc27638,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   2.59%     │││ ││ ││  0x00007fc610f65533:   cmp    $0xc27638,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
              │││ ││ ││  0x00007fc610f65539:   jne    0x00007fc610f65680
    0.19%     │││ ││ ││  0x00007fc610f6553f:   lea    (%r12,%r9,8),%r8             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    1.69%     │││ ││ ││  0x00007fc610f65543:   incl   0x10(%r8)                    ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+             │││ ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    4.20%     ││╰ ││ ││  0x00007fc610f65547:   jmp    0x00007fc610f654fa
    0.57%     │↘  ││ ││  0x00007fc610f65549:   cmp    $0x1,%ecx
              │  ╭││ ││  0x00007fc610f6554c:   jge    0x00007fc610f6557f
    0.46%     │  │││ ││  0x00007fc610f6554e:   test   %ecx,%ecx
              │  │││ ││  0x00007fc610f65550:   jne    0x00007fc610f65698           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.00%     │  │││ ││  0x00007fc610f65556:   data16 nopw 0x0(%rax,%rax,1)
    1.96%     │  │││ ││  0x00007fc610f65560:   mov    0x8(%r12,%r9,8),%r8d         ; implicit exception: dispatches to 0x00007fc610f6572c
-   2.36%     │  │││ ││  0x00007fc610f65565:   cmp    $0xc27428,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+   2.36%     │  │││ ││  0x00007fc610f65565:   cmp    $0xc27428,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
              │  │││ ││  0x00007fc610f6556c:   jne    0x00007fc610f656b4
    0.57%     │  │││ ││  0x00007fc610f65572:   lea    (%r12,%r9,8),%r8             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    0.00%     │  │││ ││  0x00007fc610f65576:   incl   0xc(%r8)                     ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+             │  │││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    3.62%     │  │╰│ ││  0x00007fc610f6557a:   jmp    0x00007fc610f654fa
    2.75%     │  ↘ │ ││  0x00007fc610f6557f:   nop
              │    │ ││  0x00007fc610f65580:   mov    0x8(%r12,%r9,8),%r8d         ; implicit exception: dispatches to 0x00007fc610f65708
-   2.30%     │    │ ││  0x00007fc610f65585:   cmp    $0xc27848,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
+   2.30%     │    │ ││  0x00007fc610f65585:   cmp    $0xc27848,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
              │    │ ││  0x00007fc610f6558c:   jne    0x00007fc610f65650
    0.30%     │    │ ││  0x00007fc610f65592:   lea    (%r12,%r9,8),%r8             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+             │    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    2.40%     │    │ ││  0x00007fc610f65596:   incl   0x14(%r8)                    ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-             │    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
-             │    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+             │    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+             │    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    1.50%     │    ╰ ││  0x00007fc610f6559a:   jmp    0x00007fc610f654fa
    1.73%     ↘      ││  0x00007fc610f6559f:   nop
    0.01%            ││  0x00007fc610f655a0:   cmp    $0x4,%ecx
                    ╭││  0x00007fc610f655a3:   je     0x00007fc610f655cc
                    │││  0x00007fc610f655a5:   cmp    $0x5,%ecx
                    │││  0x00007fc610f655a8:   jne    0x00007fc610f6561b           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    2.55%           │││  0x00007fc610f655ae:   mov    0x8(%r12,%r9,8),%ecx         ; implicit exception: dispatches to 0x00007fc610f656fc
-   1.69%           │││  0x00007fc610f655b3:   cmp    $0xc2c000,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg6&apos;)}
+   1.69%           │││  0x00007fc610f655b3:   cmp    $0xc2c000,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg6&apos;)}
                    │││  0x00007fc610f655b9:   jne    0x00007fc610f65638
    0.17%           │││  0x00007fc610f655bf:   lea    (%r12,%r9,8),%r8             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
+                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
                    │││  0x00007fc610f655c3:   incl   0x20(%r8)                    ;*putfield c6 {reexecute=0 rethrow=0 return_oop=0}
-                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute@8 (line 303)
-                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
+                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute@8 (line 303)
+                   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
    5.65%           │╰│  0x00007fc610f655c7:   jmp    0x00007fc610f654fa
    2.53%           ↘ │  0x00007fc610f655cc:   mov    0x8(%r12,%r9,8),%r8d         ; implicit exception: dispatches to 0x00007fc610f656f0
-   2.36%             │  0x00007fc610f655d1:   cmp    $0xc27c68,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
+   2.36%             │  0x00007fc610f655d1:   cmp    $0xc27c68,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
                      ╰  0x00007fc610f655d8:   je     0x00007fc610f654f2
                         0x00007fc610f655de:   mov    $0xffffffde,%esi
                         0x00007fc610f655e3:   mov    %r11d,(%rsp)
@@ -1184,13 +1184,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                         0x00007fc610f655f1:   xchg   %ax,%ax
                         0x00007fc610f655f3:   call   0x00007fc610a01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                                   ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
                                                                                   ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   86.98%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
 
             0x00007fc610f655d8:   je     0x00007fc610f654f2
             0x00007fc610f655de:   mov    $0xffffffde,%esi
@@ -1200,17 +1200,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
             0x00007fc610f655f1:   xchg   %ax,%ax
             0x00007fc610f655f3:   call   0x00007fc610a01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                       ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
                                                                       ;   {runtime_call UncommonTrapBlob}
    0.43%    0x00007fc610f655f8:   nopl   0x0(%rax,%rax,1)
    2.08%    0x00007fc610f65600:   mov    0x8(%r12,%r9,8),%r8d         ; implicit exception: dispatches to 0x00007fc610f65714
-   1.99%    0x00007fc610f65605:   cmp    $0xc27a58,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
+   1.99%    0x00007fc610f65605:   cmp    $0xc27a58,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
             0x00007fc610f6560c:   jne    0x00007fc610f65668
    0.21%    0x00007fc610f6560e:   lea    (%r12,%r9,8),%r8             ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
    0.43%    0x00007fc610f65612:   incl   0x18(%r8)                    ;*putfield c4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
    5.93%    0x00007fc610f65616:   jmp    0x00007fc610f654fa
             0x00007fc610f6561b:   mov    $0xffffff45,%esi
             0x00007fc610f65620:   mov    %r11d,(%rsp)
@@ -1224,20 +1224,20 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   11.07%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  86.98%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
-  11.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+  86.98%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+  11.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
    0.42%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
-   0.05%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 517 
+   0.05%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 517 
    0.04%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.03%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
@@ -1249,10 +1249,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
+  98.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 494 
    1.56%              kernel  [unknown] 
    0.06%                      <unknown> 
-   0.05%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 517 
+   0.05%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 517 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.01%           libjvm.so  xmlStream::write_text 
    0.01%        libc-2.31.so  __strncat_ssse3 
@@ -1298,7 +1298,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_7)
 
 # Run progress: 37.50% complete, ETA 00:17:58
@@ -1318,12 +1318,12 @@ Iteration   5: 2.562 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   2.521 ±(99.9%) 0.202 ns/op [Average]
   (min, avg, max) = (2.462, 2.521, 2.562), stdev = 0.053
   CI (99.9%): [2.319, 2.724] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 116924 total address lines.
 Perf output processed (skipped 55.665 seconds):
  Column 1: cycles (50612 events)
@@ -1332,27 +1332,27 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
 
                           0x00007f69fcf66da6:   cmp    $0x9d7f,%r11d
                           0x00007f69fcf66dad:   jbe    0x00007f69fcf67037
                           0x00007f69fcf66db3:   lea    (%r12,%rbp,8),%rdx           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                           0x00007f69fcf66db7:   lea    (%r12,%r10,8),%rsi           ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
                           0x00007f69fcf66dbb:   mov    $0x3e8,%edi
                           0x00007f69fcf66dc0:   xor    %r9d,%r9d
           ╭               0x00007f69fcf66dc3:   jmp    0x00007f69fcf66ddc           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.01%  │ ↗             0x00007f69fcf66dc5:   mov    0x348(%r15),%r11             ; ImmutableOopMap {r10=NarrowOop rdx=Oop rsi=Oop rbp=NarrowOop }
           │ │                                                                       ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.07%  │ │             0x00007f69fcf66dcc:   test   %eax,(%r11)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │ │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │ │                                                                       ;   {poll}
    0.15%  │ │             0x00007f69fcf66dcf:   cmp    $0x9d80,%r9d
           │ │             0x00007f69fcf66dd6:   jge    0x00007f69fcf67024           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │ │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    0.00%  ↘ │             0x00007f69fcf66ddc:   mov    $0x9d80,%ebx
    0.00%    │             0x00007f69fcf66de1:   sub    %r9d,%ebx
             │             0x00007f69fcf66de4:   cmp    $0x3e8,%ebx
@@ -1360,21 +1360,21 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.00%    │             0x00007f69fcf66ded:   add    %r9d,%ebx
            ╭│             0x00007f69fcf66df0:   jmp    0x00007f69fcf66e05
    2.16%   ││          ↗  0x00007f69fcf66df2:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
+           ││          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
            ││          │  0x00007f69fcf66df6:   incl   0x24(%r11)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           ││          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           ││          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
    6.25%   ││  ↗ ↗↗ ↗ ↗│  0x00007f69fcf66dfa:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           ││  │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           ││  │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
    1.95%   ││  │ ││ │ ││  0x00007f69fcf66dfd:   data16 xchg %ax,%ax
    4.58%   ││  │ ││ │ ││  0x00007f69fcf66e00:   cmp    %ebx,%r9d
            │╰  │ ││ │ ││  0x00007f69fcf66e03:   jge    0x00007f69fcf66dc5           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │   │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │   │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    4.14%   ↘   │ ││ │ ││  0x00007f69fcf66e05:   movslq %r9d,%r11                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-               │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+               │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    4.01%       │ ││ │ ││  0x00007f69fcf66e08:   movsbl 0x10(%rsi,%r11,1),%r8d       ;*baload {reexecute=0 rethrow=0 return_oop=0}
-               │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+               │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    2.54%       │ ││ │ ││  0x00007f69fcf66e0e:   mov    0x10(%rdx,%r11,4),%r11d      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-               │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+               │ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    5.54%       │ ││ │ ││  0x00007f69fcf66e13:   cmp    $0x3,%r8d
                │ ││ │ ││  0x00007f69fcf66e17:   je     0x00007f69fcf66f34
    3.90%       │ ││ │ ││  0x00007f69fcf66e1d:   data16 xchg %ax,%ax
@@ -1382,72 +1382,72 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
              ╭ │ ││ │ ││  0x00007f69fcf66e24:   jge    0x00007f69fcf66ea5
    0.17%     │ │ ││ │ ││  0x00007f69fcf66e2a:   cmp    $0x1,%r8d
              │╭│ ││ │ ││  0x00007f69fcf66e2e:   jne    0x00007f69fcf66e57           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.01%     │││ ││ │ ││  0x00007f69fcf66e30:   mov    0x8(%r12,%r11,8),%r8d        ; implicit exception: dispatches to 0x00007f69fcf67078
    2.95%     │││ ││ │ ││  0x00007f69fcf66e35:   data16 data16 nopw 0x0(%rax,%rax,1)
-   1.63%     │││ ││ │ ││  0x00007f69fcf66e40:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   1.63%     │││ ││ │ ││  0x00007f69fcf66e40:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
              │││ ││ │ ││  0x00007f69fcf66e47:   jne    0x00007f69fcf66fbc
    0.25%     │││ ││ │ ││  0x00007f69fcf66e4d:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    0.01%     │││ ││ │ ││  0x00007f69fcf66e51:   incl   0x10(%r11)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+             │││ ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    4.33%     ││╰ ││ │ ││  0x00007f69fcf66e55:   jmp    0x00007f69fcf66dfa
    1.54%     │↘  ││ │ ││  0x00007f69fcf66e57:   cmp    $0x1,%r8d
              │  ╭││ │ ││  0x00007f69fcf66e5b:   jge    0x00007f69fcf66e87
    0.01%     │  │││ │ ││  0x00007f69fcf66e5d:   data16 xchg %ax,%ax
    2.16%     │  │││ │ ││  0x00007f69fcf66e60:   test   %r8d,%r8d
              │  │││ │ ││  0x00007f69fcf66e63:   jne    0x00007f69fcf66fec           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
              │  │││ │ ││  0x00007f69fcf66e69:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f69fcf67090
-   1.00%     │  │││ │ ││  0x00007f69fcf66e6e:   cmp    $0xc27428,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+   1.00%     │  │││ │ ││  0x00007f69fcf66e6e:   cmp    $0xc27428,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
              │  │││ │ ││  0x00007f69fcf66e74:   jne    0x00007f69fcf6700c
    0.12%     │  │││ │ ││  0x00007f69fcf66e7a:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    1.93%     │  │││ │ ││  0x00007f69fcf66e7e:   incl   0xc(%r11)                    ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+             │  │││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
    0.83%     │  │╰│ │ ││  0x00007f69fcf66e82:   jmp    0x00007f69fcf66dfa
    2.21%     │  ↘ │ │ ││  0x00007f69fcf66e87:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f69fcf67054
-   1.77%     │    │ │ ││  0x00007f69fcf66e8c:   cmp    $0xc27848,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
+   1.77%     │    │ │ ││  0x00007f69fcf66e8c:   cmp    $0xc27848,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
              │    │ │ ││  0x00007f69fcf66e92:   jne    0x00007f69fcf66f74
    0.17%     │    │ │ ││  0x00007f69fcf66e98:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-             │    │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+             │    │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
              │    │ │ ││  0x00007f69fcf66e9c:   incl   0x14(%r11)                   ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-             │    │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
-             │    │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+             │    │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+             │    │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    3.63%     │    ╰ │ ││  0x00007f69fcf66ea0:   jmp    0x00007f69fcf66dfa
    0.01%     ↘      │ ││  0x00007f69fcf66ea5:   cmp    $0x5,%r8d
                    ╭│ ││  0x00007f69fcf66ea9:   jne    0x00007f69fcf66eca           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
    0.02%           ││ ││  0x00007f69fcf66eab:   mov    0x8(%r12,%r11,8),%r8d        ; implicit exception: dispatches to 0x00007f69fcf67060
-   4.06%           ││ ││  0x00007f69fcf66eb0:   cmp    $0xc2c000,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg6&apos;)}
+   4.06%           ││ ││  0x00007f69fcf66eb0:   cmp    $0xc2c000,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg6&apos;)}
                    ││ ││  0x00007f69fcf66eb7:   jne    0x00007f69fcf66f8c
    0.20%           ││ ││  0x00007f69fcf66ebd:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
+                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
                    ││ ││  0x00007f69fcf66ec1:   incl   0x20(%r11)                   ;*putfield c6 {reexecute=0 rethrow=0 return_oop=0}
-                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute@8 (line 303)
-                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
+                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute@8 (line 303)
+                   ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
    4.73%           │╰ ││  0x00007f69fcf66ec5:   jmp    0x00007f69fcf66dfa
    4.27%           ↘  ││  0x00007f69fcf66eca:   cmp    $0x5,%r8d
                      ╭││  0x00007f69fcf66ece:   jge    0x00007f69fcf66efa           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                      │││  0x00007f69fcf66ed0:   mov    0x8(%r12,%r11,8),%r8d        ; implicit exception: dispatches to 0x00007f69fcf67084
    1.77%             │││  0x00007f69fcf66ed5:   data16 data16 nopw 0x0(%rax,%rax,1)
-                     │││  0x00007f69fcf66ee0:   cmp    $0xc27c68,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
+                     │││  0x00007f69fcf66ee0:   cmp    $0xc27c68,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
                      │││  0x00007f69fcf66ee7:   jne    0x00007f69fcf66fd4
    2.08%             │││  0x00007f69fcf66eed:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
                      │││  0x00007f69fcf66ef1:   incl   0x1c(%r11)                   ;*putfield c5 {reexecute=0 rethrow=0 return_oop=0}
-                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@8 (line 297)
-                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@8 (line 297)
+                     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
    4.29%             │╰│  0x00007f69fcf66ef5:   jmp    0x00007f69fcf66dfa
    2.21%             ↘ │  0x00007f69fcf66efa:   nopw   0x0(%rax,%rax,1)
                        │  0x00007f69fcf66f00:   cmp    $0x6,%r8d
                        │  0x00007f69fcf66f04:   jne    0x00007f69fcf66f55           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                        │  0x00007f69fcf66f0a:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f69fcf67048
-   0.87%               │  0x00007f69fcf66f0f:   cmp    $0xc2c210,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg7&apos;)}
+   0.87%               │  0x00007f69fcf66f0f:   cmp    $0xc2c210,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg7&apos;)}
                        ╰  0x00007f69fcf66f15:   je     0x00007f69fcf66df2
                           0x00007f69fcf66f1b:   mov    $0xffffffde,%esi
                           0x00007f69fcf66f20:   mov    %r9d,(%rsp)
@@ -1456,26 +1456,26 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                           0x00007f69fcf66f2e:   nop
                           0x00007f69fcf66f2f:   call   0x00007f69fca01600           ; ImmutableOopMap {rbp=NarrowOop [4]=NarrowOop [8]=NarrowOop }
                                                                                     ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
+                                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
                                                                                     ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   88.84%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  88.84%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
-   9.18%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
+  88.84%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
+   9.18%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
    0.62%              kernel  [unknown] 
    0.12%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 524 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 524 
    0.03%              kernel  [unknown] 
    0.03%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -1487,10 +1487,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
+  98.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 497 
    1.64%              kernel  [unknown] 
    0.03%                      <unknown> 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 524 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 524 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.02%        libc-2.31.so  [unknown] 
    0.01%        libc-2.31.so  __strxfrm_l 
@@ -1537,7 +1537,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_8)
 
 # Run progress: 43.75% complete, ETA 00:16:11
@@ -1557,12 +1557,12 @@ Iteration   5: 15.490 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic":
   15.488 ±(99.9%) 0.018 ns/op [Average]
   (min, avg, max) = (15.484, 15.488, 15.495), stdev = 0.005
   CI (99.9%): [15.470, 15.506] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 116918 total address lines.
 Perf output processed (skipped 55.591 seconds):
  Column 1: cycles (51211 events)
@@ -1571,27 +1571,27 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 494 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 494 
 
                        0x00007f94dcf65986:   cmp    $0x9d7f,%r11d
                        0x00007f94dcf6598d:   jbe    0x00007f94dcf65c03
                        0x00007f94dcf65993:   lea    (%r12,%rbp,8),%rdx           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@6 (line 181)
                        0x00007f94dcf65997:   lea    (%r12,%r10,8),%rax           ;*getfield classIndex {reexecute=0 rethrow=0 return_oop=0}
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@1 (line 180)
                        0x00007f94dcf6599b:   mov    $0x3e8,%edi
                        0x00007f94dcf659a0:   xor    %r8d,%r8d
           ╭            0x00007f94dcf659a3:   jmp    0x00007f94dcf659bc           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.00%  │        ↗   0x00007f94dcf659a5:   mov    0x348(%r15),%r11             ; ImmutableOopMap {r10=NarrowOop rdx=Oop rax=Oop rbp=NarrowOop }
           │        │                                                             ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │        │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │        │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
    0.05%  │        │   0x00007f94dcf659ac:   test   %eax,(%r11)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │        │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
+          │        │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@157 (line 182)
           │        │                                                             ;   {poll}
    0.03%  │        │   0x00007f94dcf659af:   cmp    $0x9d80,%r8d
           │        │   0x00007f94dcf659b6:   jge    0x00007f94dcf65bf0           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │        │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+          │        │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
           ↘        │   0x00007f94dcf659bc:   mov    $0x9d80,%esi
                    │   0x00007f94dcf659c1:   sub    %r8d,%esi
                    │   0x00007f94dcf659c4:   cmp    $0x3e8,%esi
@@ -1600,100 +1600,100 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            ╭       │   0x00007f94dcf659d0:   jmp    0x00007f94dcf65ae9
    3.69%   │       │   0x00007f94dcf659d5:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f94dcf65c68
    4.10%   │       │   0x00007f94dcf659da:   nopw   0x0(%rax,%rax,1)
-           │       │   0x00007f94dcf659e0:   cmp    $0xc27848,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
+           │       │   0x00007f94dcf659e0:   cmp    $0xc27848,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;)}
            │       │   0x00007f94dcf659e6:   jne    0x00007f94dcf65bd8
    0.32%   │       │   0x00007f94dcf659ec:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
            │       │   0x00007f94dcf659f0:   incl   0x14(%r11)                   ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
-           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
+           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@92 (line 192)
    2.38%   │╭      │   0x00007f94dcf659f4:   jmp    0x00007f94dcf65ada
    4.68%   ││      │   0x00007f94dcf659f9:   nopl   0x0(%rax)
    1.14%   ││      │   0x00007f94dcf65a00:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f94dcf65c5c
-   5.22%   ││      │   0x00007f94dcf65a05:   cmp    $0xc27638,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   5.22%   ││      │   0x00007f94dcf65a05:   cmp    $0xc27638,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
            ││      │   0x00007f94dcf65a0b:   jne    0x00007f94dcf65b30
    0.28%   ││      │   0x00007f94dcf65a11:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+           ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    0.00%   ││      │   0x00007f94dcf65a15:   incl   0x10(%r11)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-           ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-           ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
+           ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+           ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@83 (line 189)
    2.25%   ││╭     │   0x00007f94dcf65a19:   jmp    0x00007f94dcf65ada
    3.76%   │││     │   0x00007f94dcf65a1e:   xchg   %ax,%ax
    0.25%   │││     │   0x00007f94dcf65a20:   mov    0x8(%r12,%r11,8),%r9d        ; implicit exception: dispatches to 0x00007f94dcf65c50
-   3.15%   │││     │   0x00007f94dcf65a25:   cmp    $0xc27a58,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
+   3.15%   │││     │   0x00007f94dcf65a25:   cmp    $0xc27a58,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;)}
            │││     │   0x00007f94dcf65a2c:   jne    0x00007f94dcf65bc0
    0.29%   │││     │   0x00007f94dcf65a32:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           │││     │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+           │││     │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
    0.00%   │││     │   0x00007f94dcf65a36:   incl   0x18(%r11)                   ;*putfield c4 {reexecute=0 rethrow=0 return_oop=0}
-           │││     │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
-           │││     │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
+           │││     │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
+           │││     │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@101 (line 195)
    3.42%   │││╭    │   0x00007f94dcf65a3a:   jmp    0x00007f94dcf65ada
    3.54%   ││││    │   0x00007f94dcf65a3f:   nop
    1.18%   ││││    │   0x00007f94dcf65a40:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f94dcf65c44
-   4.02%   ││││    │   0x00007f94dcf65a45:   cmp    $0xc27c68,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
+   4.02%   ││││    │   0x00007f94dcf65a45:   cmp    $0xc27c68,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;)}
            ││││    │   0x00007f94dcf65a4b:   jne    0x00007f94dcf65ba8
    0.28%   ││││    │   0x00007f94dcf65a51:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││││    │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+           ││││    │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
            ││││    │   0x00007f94dcf65a55:   incl   0x1c(%r11)                   ;*putfield c5 {reexecute=0 rethrow=0 return_oop=0}
-           ││││    │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@8 (line 297)
-           ││││    │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
+           ││││    │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@8 (line 297)
+           ││││    │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@110 (line 198)
    1.89%   ││││╭   │   0x00007f94dcf65a59:   jmp    0x00007f94dcf65ada
    5.02%   │││││   │   0x00007f94dcf65a5e:   xchg   %ax,%ax
    0.37%   │││││   │   0x00007f94dcf65a60:   mov    0x8(%r12,%r11,8),%r9d        ; implicit exception: dispatches to 0x00007f94dcf65c38
-   5.09%   │││││   │   0x00007f94dcf65a65:   cmp    $0xc2c000,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg6&apos;)}
+   5.09%   │││││   │   0x00007f94dcf65a65:   cmp    $0xc2c000,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg6&apos;)}
            │││││   │   0x00007f94dcf65a6c:   jne    0x00007f94dcf65b90
    0.32%   │││││   │   0x00007f94dcf65a72:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           │││││   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
+           │││││   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
            │││││   │   0x00007f94dcf65a76:   incl   0x20(%r11)                   ;*putfield c6 {reexecute=0 rethrow=0 return_oop=0}
-           │││││   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute@8 (line 303)
-           │││││   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
+           │││││   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute@8 (line 303)
+           │││││   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@119 (line 201)
    2.13%   │││││╭  │   0x00007f94dcf65a7a:   jmp    0x00007f94dcf65ada
    2.85%   ││││││  │   0x00007f94dcf65a7f:   nop
    1.15%   ││││││  │   0x00007f94dcf65a80:   mov    0x8(%r12,%r11,8),%ecx        ; implicit exception: dispatches to 0x00007f94dcf65c2c
-   4.31%   ││││││  │   0x00007f94dcf65a85:   cmp    $0xc2c210,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg7&apos;)}
+   4.31%   ││││││  │   0x00007f94dcf65a85:   cmp    $0xc2c210,%ecx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg7&apos;)}
            ││││││  │   0x00007f94dcf65a8b:   jne    0x00007f94dcf65b78
    0.31%   ││││││  │   0x00007f94dcf65a91:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           ││││││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
+           ││││││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
            ││││││  │   0x00007f94dcf65a95:   incl   0x24(%r11)                   ;*putfield c7 {reexecute=0 rethrow=0 return_oop=0}
-           ││││││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg7::compute@8 (line 309)
-           ││││││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
+           ││││││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg7::compute@8 (line 309)
+           ││││││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@128 (line 204)
    2.93%   ││││││╭ │   0x00007f94dcf65a99:   jmp    0x00007f94dcf65ada
    3.47%   │││││││ │   0x00007f94dcf65a9e:   xchg   %ax,%ax
    0.31%   │││││││ │   0x00007f94dcf65aa0:   mov    0x8(%r12,%r11,8),%r9d        ; implicit exception: dispatches to 0x00007f94dcf65c20
-   2.97%   │││││││ │   0x00007f94dcf65aa5:   cmp    $0xc2c420,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg8&apos;)}
+   2.97%   │││││││ │   0x00007f94dcf65aa5:   cmp    $0xc2c420,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg8&apos;)}
            │││││││ │   0x00007f94dcf65aac:   jne    0x00007f94dcf65b60
    0.31%   │││││││ │   0x00007f94dcf65ab2:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           │││││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@137 (line 207)
+           │││││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@137 (line 207)
            │││││││ │   0x00007f94dcf65ab6:   incl   0x28(%r11)                   ;*putfield c8 {reexecute=0 rethrow=0 return_oop=0}
-           │││││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg8::compute@8 (line 315)
-           │││││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@137 (line 207)
+           │││││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg8::compute@8 (line 315)
+           │││││││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@137 (line 207)
    3.94%   │││││││╭│   0x00007f94dcf65aba:   jmp    0x00007f94dcf65ada
    3.37%   │││││││││   0x00007f94dcf65abc:   nopl   0x0(%rax)
    1.01%   │││││││││   0x00007f94dcf65ac0:   mov    0x8(%r12,%r11,8),%r9d        ; implicit exception: dispatches to 0x00007f94dcf65c14
-   3.17%   │││││││││   0x00007f94dcf65ac5:   cmp    $0xc27428,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+   3.17%   │││││││││   0x00007f94dcf65ac5:   cmp    $0xc27428,%r9d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
            │││││││││   0x00007f94dcf65acc:   jne    0x00007f94dcf65b48
    0.31%   │││││││││   0x00007f94dcf65ad2:   shl    $0x3,%r11                    ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-           │││││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
+           │││││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@74 (line 186)
            │││││││││   0x00007f94dcf65ad6:   incl   0xc(%r11)                    ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           │││││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
+           │││││││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@78 (line 187)
    1.83%   │↘↘↘↘↘↘↘│   0x00007f94dcf65ada:   inc    %r8d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
+           │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@154 (line 182)
            │       │   0x00007f94dcf65add:   data16 xchg %ax,%ax
            │       │   0x00007f94dcf65ae0:   cmp    %esi,%r8d
            │       ╰   0x00007f94dcf65ae3:   jge    0x00007f94dcf659a5           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
+           │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@18 (line 183)
    2.07%   ↘           0x00007f94dcf65ae9:   movslq %r8d,%r9
    0.29%               0x00007f94dcf65aec:   mov    0x10(%rdx,%r9,4),%r11d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@20 (line 183)
    0.35%               0x00007f94dcf65af1:   movsbl 0x10(%rax,%r9,1),%ecx        ;*baload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@25 (line 184)
    0.13%               0x00007f94dcf65af7:   cmp    $0x8,%ecx
                     ╭  0x00007f94dcf65afa:   jae    0x00007f94dcf65b11
    2.12%            │  0x00007f94dcf65afc:   movslq %ecx,%r9
    0.12%            │  0x00007f94dcf65aff:   shl    $0x3,%r9
    0.45%            │  0x00007f94dcf65b03:   movabs $0x7f94dcf658e0,%rbx         ;   {section_word}
                     │  0x00007f94dcf65b0d:   jmp    *(%rbx,%r9,1)                ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
+                    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic@26 (line 184)
                     ↘  0x00007f94dcf65b11:   mov    $0xffffff45,%esi
                        0x00007f94dcf65b16:   mov    %r8d,(%rsp)
                        0x00007f94dcf65b1a:   mov    %r11d,0x4(%rsp)
@@ -1706,7 +1706,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   96.63%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  96.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 494 
+  96.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 494 
    1.72%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -1731,17 +1731,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  96.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 494 
+  96.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::devirtualize_to_monomorphic, version 3, compile id 494 
    3.08%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%           libjvm.so  xmlStream::write_text 
    0.01%        libc-2.31.so  __strncat_ssse3 
    0.01%           libjvm.so  ElfSymbolTable::lookup 
    0.01%           libjvm.so  stringStream::write 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 538 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 538 
    0.01%        libc-2.31.so  getifaddrs_internal 
    0.01%        libc-2.31.so  __strxfrm_l 
-   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 2, compile id 526 
+   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 2, compile id 526 
    0.01%        libc-2.31.so  __strchr_sse2 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
    0.01%         interpreter  return entry points  
@@ -1782,7 +1782,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MONOMORPHIC)
 
 # Run progress: 50.00% complete, ETA 00:14:22
@@ -1802,12 +1802,12 @@ Iteration   5: 1.815 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   1.815 ±(99.9%) 0.001 ns/op [Average]
   (min, avg, max) = (1.815, 1.815, 1.815), stdev = 0.001
   CI (99.9%): [1.815, 1.815] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 117025 total address lines.
 Perf output processed (skipped 55.700 seconds):
  Column 1: cycles (51058 events)
@@ -1816,7 +1816,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
 
                  0x00007f0d18f64187:   mov    $0x80000000,%r8d
                  0x00007f0d18f6418d:   cmp    %r10d,%r9d
@@ -1824,7 +1824,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                  0x00007f0d18f64194:   cmp    $0x1,%r10d
           ╭      0x00007f0d18f64198:   jle    0x00007f0d18f64205
           │      0x00007f0d18f6419e:   xor    %r9d,%r9d                    ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
           │      0x00007f0d18f641a1:   mov    $0xfa0,%r8d
           │ ↗    0x00007f0d18f641a7:   mov    %r10d,%ecx
           │ │    0x00007f0d18f641aa:   sub    %r11d,%ecx
@@ -1833,40 +1833,40 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
           │ │    0x00007f0d18f641b4:   cmp    $0xfa0,%ecx
           │ │    0x00007f0d18f641ba:   cmova  %r8d,%ecx
    0.01%  │ │    0x00007f0d18f641be:   add    %r11d,%ecx                   ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    1.18%  │↗│    0x00007f0d18f641c1:   mov    0x10(%rbx,%r11,4),%edi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    0.07%  │││    0x00007f0d18f641c6:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f0d18f64240
           │││                                                              ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
   27.32%  │││    0x00007f0d18f641cb:   mov    0x14(%rbx,%r11,4),%edi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
           │││    0x00007f0d18f641d0:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f0d18f64240
           │││                                                              ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
   23.22%  │││    0x00007f0d18f641d5:   mov    0x18(%rbx,%r11,4),%edi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    0.13%  │││    0x00007f0d18f641da:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f0d18f64240
           │││                                                              ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
   12.70%  │││    0x00007f0d18f641df:   mov    0x1c(%rbx,%r11,4),%edi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    0.24%  │││    0x00007f0d18f641e4:   incl   0xc(%r12,%rdi,8)             ; implicit exception: dispatches to 0x00007f0d18f64240
           │││                                                              ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
   31.93%  │││    0x00007f0d18f641e9:   add    $0x4,%r11d                   ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
           │││    0x00007f0d18f641ed:   cmp    %ecx,%r11d
           │╰│    0x00007f0d18f641f0:   jl     0x00007f0d18f641c1           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
    0.00%  │ │    0x00007f0d18f641f2:   mov    0x348(%r15),%rcx             ; ImmutableOopMap {rbx=Oop }
           │ │                                                              ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+          │ │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
    0.01%  │ │    0x00007f0d18f641f9:   test   %eax,(%rcx)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
           │ │                                                              ;   {poll}
    0.18%  │ │    0x00007f0d18f641fb:   nopl   0x0(%rax,%rax,1)
           │ │    0x00007f0d18f64200:   cmp    %r10d,%r11d
@@ -1874,18 +1874,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
           ↘      0x00007f0d18f64205:   cmp    %ebp,%r11d
              ╭   0x00007f0d18f64208:   jge    0x00007f0d18f6421e
              │   0x00007f0d18f6420a:   xchg   %ax,%ax                      ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
              │↗  0x00007f0d18f6420c:   mov    0x10(%rbx,%r11,4),%r10d      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
              ││  0x00007f0d18f64211:   incl   0xc(%r12,%r10,8)             ; implicit exception: dispatches to 0x00007f0d18f64240
              ││                                                            ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
-             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
    0.00%     ││  0x00007f0d18f64216:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
              ││  0x00007f0d18f64219:   cmp    %ebp,%r11d
              │╰  0x00007f0d18f6421c:   jl     0x00007f0d18f6420c           ;*synchronization entry
-             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@-1 (line 168)
+             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@-1 (line 168)
              ↘   0x00007f0d18f6421e:   add    $0x20,%rsp
                  0x00007f0d18f64222:   pop    %rbp
    0.00%         0x00007f0d18f64223:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1896,24 +1896,24 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                  0x00007f0d18f6423a:   nop
                  0x00007f0d18f6423b:   call   0x00007f0d18a01600           ; ImmutableOopMap {[0]=NarrowOop }
                                                                            ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
                                                                            ;   {runtime_call UncommonTrapBlob}
                  0x00007f0d18f64240:   mov    $0xfffffff6,%esi
 ....................................................................................................
   97.01%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
+  97.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
    1.40%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 505 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 505 
    0.04%              kernel  [unknown] 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
    0.04%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
@@ -1928,10 +1928,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
+  97.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 480 
    2.60%              kernel  [unknown] 
    0.06%                      <unknown> 
-   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 505 
+   0.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 505 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.02%        libc-2.31.so  __strncat_ssse3 
    0.01%        libc-2.31.so  __strxfrm_l 
@@ -1980,7 +1980,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = BIMORPHIC)
 
 # Run progress: 56.25% complete, ETA 00:12:35
@@ -2000,12 +2000,12 @@ Iteration   5: 1.944 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   1.929 ±(99.9%) 0.079 ns/op [Average]
   (min, avg, max) = (1.906, 1.929, 1.944), stdev = 0.020
   CI (99.9%): [1.850, 2.008] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 118999 total address lines.
 Perf output processed (skipped 55.690 seconds):
  Column 1: cycles (51179 events)
@@ -2014,35 +2014,35 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
 
-                   0x00007f8a44f632a9:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+                   0x00007f8a44f632a9:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
                    0x00007f8a44f632b0:   jne    0x00007f8a44f63404           ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
                    0x00007f8a44f632b6:   incl   0x10(%r11)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           ╭        0x00007f8a44f632ba:   jmp    0x00007f8a44f632c0           ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │        0x00007f8a44f632bc:   incl   0xc(%r11)                    ;*synchronization entry
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@-1 (line 168)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@-1 (line 168)
    0.00%  ↘        0x00007f8a44f632c0:   lea    (%r12,%rcx,8),%rsi           ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
                    0x00007f8a44f632c4:   mov    $0x1,%eax
                    0x00007f8a44f632c9:   cmp    $0x1,%ebx
                    0x00007f8a44f632cc:   jle    0x00007f8a44f633a8
                    0x00007f8a44f632d2:   mov    $0x7d0,%r9d
            ╭       0x00007f8a44f632d8:   jmp    0x00007f8a44f632ec           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+           │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
    0.01%   │ ↗     0x00007f8a44f632da:   mov    0x348(%r15),%r10             ; ImmutableOopMap {rcx=NarrowOop rsi=Oop }
            │ │                                                               ;*goto {reexecute=1 rethrow=0 return_oop=0}
-           │ │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+           │ │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
    0.01%   │ │     0x00007f8a44f632e1:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
+           │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@34 (line 169)
            │ │                                                               ;   {poll}
    0.09%   │ │     0x00007f8a44f632e4:   cmp    %ebx,%eax
            │ │     0x00007f8a44f632e6:   jge    0x00007f8a44f633a8           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+           │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
            ↘ │     0x00007f8a44f632ec:   mov    %ebp,%edx
              │     0x00007f8a44f632ee:   sub    %eax,%edx
    0.00%     │     0x00007f8a44f632f0:   dec    %edx
@@ -2053,66 +2053,66 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.00%     │     0x00007f8a44f63301:   add    %eax,%edx
             ╭│     0x00007f8a44f63303:   jmp    0x00007f8a44f6331b
             ││     0x00007f8a44f63305:   data16 data16 nopw 0x0(%rax,%rax,1) ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-            ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+            ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
    2.78%    ││  ↗  0x00007f8a44f63310:   incl   0xc(%r11)                    ;*synchronization entry
-            ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@-1 (line 168)
+            ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@-1 (line 168)
   11.77%    ││  │  0x00007f8a44f63314:   add    $0x2,%eax                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-            ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+            ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.95%    ││  │  0x00007f8a44f63317:   cmp    %edx,%eax
             │╰  │  0x00007f8a44f63319:   jge    0x00007f8a44f632da           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-            │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+            │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    2.08%    ↘   │  0x00007f8a44f6331b:   mov    0x10(%rsi,%rax,4),%r11d      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    3.08%        │  0x00007f8a44f63320:   mov    0x8(%r12,%r11,8),%r10d       ; implicit exception: dispatches to 0x00007f8a44f63408
                 │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
   22.21%        │  0x00007f8a44f63325:   shl    $0x3,%r11                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
-   1.51%        │  0x00007f8a44f63329:   cmp    $0xc27428,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+   1.51%        │  0x00007f8a44f63329:   cmp    $0xc27428,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
               ╭ │  0x00007f8a44f63330:   je     0x00007f8a44f63353
    3.40%      │ │  0x00007f8a44f63332:   data16 nopw 0x0(%rax,%rax,1)
    2.49%      │ │  0x00007f8a44f6333c:   data16 data16 xchg %ax,%ax
-   2.26%      │ │  0x00007f8a44f63340:   cmp    $0xc27638,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+   2.26%      │ │  0x00007f8a44f63340:   cmp    $0xc27638,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
               │ │  0x00007f8a44f63347:   jne    0x00007f8a44f63391           ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-              │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+              │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
    2.98%      │ │  0x00007f8a44f6334d:   incl   0x10(%r11)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-              │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-              │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+              │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+              │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
   16.61%      │╭│  0x00007f8a44f63351:   jmp    0x00007f8a44f63357           ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
               ↘││  0x00007f8a44f63353:   incl   0xc(%r11)                    ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    1.98%       ↘│  0x00007f8a44f63357:   mov    0x14(%rsi,%rax,4),%r10d      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    2.83%        │  0x00007f8a44f6335c:   nopl   0x0(%rax)
    2.19%        │  0x00007f8a44f63360:   mov    0x8(%r12,%r10,8),%r8d        ; implicit exception: dispatches to 0x00007f8a44f63408
                 │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
   14.84%        │  0x00007f8a44f63365:   lea    (%r12,%r10,8),%r11           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
-   1.65%        │  0x00007f8a44f63369:   cmp    $0xc27428,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+   1.65%        │  0x00007f8a44f63369:   cmp    $0xc27428,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;)}
                 ╰  0x00007f8a44f63370:   je     0x00007f8a44f63310
                    0x00007f8a44f63372:   data16 nopw 0x0(%rax,%rax,1)
                    0x00007f8a44f6337c:   data16 data16 xchg %ax,%ax
-                   0x00007f8a44f63380:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
+                   0x00007f8a44f63380:   cmp    $0xc27638,%r8d               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;)}
                    0x00007f8a44f63387:   jne    0x00007f8a44f6338f           ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
                    0x00007f8a44f63389:   incl   0x10(%r11)                   ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
 ....................................................................................................
   96.74%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  96.74%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
+  96.74%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
    1.35%              kernel  [unknown] 
    0.15%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
-   0.06%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
+   0.06%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
    0.04%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 511 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 511 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
@@ -2122,18 +2122,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
    0.01%              kernel  [unknown] 
    1.18%  <...other 390 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  96.82%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
+  96.82%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 485 
    2.76%              kernel  [unknown] 
    0.04%                      <unknown> 
    0.03%        libc-2.31.so  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 511 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 5, compile id 511 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%  libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
    0.02%        libc-2.31.so  __strxfrm_l 
@@ -2181,7 +2181,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MEGAMORPHIC_3)
 
 # Run progress: 62.50% complete, ETA 00:10:47
@@ -2201,12 +2201,12 @@ Iteration   5: 25.250 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   25.253 ±(99.9%) 0.047 ns/op [Average]
   (min, avg, max) = (25.245, 25.253, 25.274), stdev = 0.012
   CI (99.9%): [25.206, 25.299] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 116049 total address lines.
 Perf output processed (skipped 55.569 seconds):
  Column 1: cycles (50758 events)
@@ -2228,21 +2228,21 @@ Hottest code regions (>10.00% "cycles" events):
    7.45%    0x00007f4934abdfe7:   jmp    *0x40(%rbx)
             0x00007f4934abdfea:   .byte 0x0
           --------------------------------------------------------------------------------
-          <task_queued compile_id='488' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='69074' iicount='2' level='3' stamp='5.213' comment='tiered' hot_count='2'/>
-          <nmethod compile_id='488' compiler='c1' level='3' entry='0x00007f492d5080c0' size='1568' address='0x00007f492d507f10' relocation_offset='352' insts_offset='432' stub_offset='1040' scopes_data_offset='1120' scopes_pcs_offset='1264' dependencies_offset='1536' nul_chk_table_offset='1544' oops_offset='1104' metadata_offset='1112' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='3' backedge_count='80861' iicount='3' stamp='5.213'/>
+          <task_queued compile_id='488' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='69074' iicount='2' level='3' stamp='5.213' comment='tiered' hot_count='2'/>
+          <nmethod compile_id='488' compiler='c1' level='3' entry='0x00007f492d5080c0' size='1568' address='0x00007f492d507f10' relocation_offset='352' insts_offset='432' stub_offset='1040' scopes_data_offset='1120' scopes_pcs_offset='1264' dependencies_offset='1536' nul_chk_table_offset='1544' oops_offset='1104' metadata_offset='1112' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='3' backedge_count='80861' iicount='3' stamp='5.213'/>
           <print_nmethod compile_id='488' compiler='c1' level='3' stamp='5.213'>
           ============================= C1-compiled nmethod ==============================
           ----------------------------------- Assembly -----------------------------------
-          Compiled method (c1)    5213  488       3       com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call (38 bytes)
+          Compiled method (c1)    5213  488       3       com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call (38 bytes)
            total in heap  [0x00007f492d507f10,0x00007f492d508530] = 1568
            relocation     [0x00007f492d508070,0x00007f492d5080c0] = 80
 ....................................................................................................
   24.57%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 486 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 486 
 
-             # {method} {0x00007f49158d7e20} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;
+             # {method} {0x00007f49158d7e20} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f4934f65b00:   mov    0x8(%rsi),%r10d
              0x00007f4934f65b04:   movabs $0x800000000,%r11
@@ -2254,12 +2254,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    9.76%     0x00007f4934f65b20:   sub    $0x18,%rsp
    4.08%     0x00007f4934f65b27:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@-1 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@-1 (line 285)
    3.03%     0x00007f4934f65b2c:   mov    0x14(%rsi),%eax
    0.38%     0x00007f4934f65b2f:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@6 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@6 (line 285)
    0.08%     0x00007f4934f65b31:   mov    %eax,0x14(%rsi)              ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
    0.13%     0x00007f4934f65b34:   add    $0x10,%rsp
    0.39%     0x00007f4934f65b38:   pop    %rbp
    1.70%     0x00007f4934f65b39:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2279,9 +2279,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   19.66%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 485 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 485 
 
-             # {method} {0x00007f49158d7a80} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;
+             # {method} {0x00007f49158d7a80} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f4934f65800:   mov    0x8(%rsi),%r10d
              0x00007f4934f65804:   movabs $0x800000000,%r11
@@ -2293,12 +2293,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    9.45%     0x00007f4934f65820:   sub    $0x18,%rsp
    4.01%     0x00007f4934f65827:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@-1 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@-1 (line 279)
    3.01%     0x00007f4934f6582c:   mov    0x10(%rsi),%eax
    0.38%     0x00007f4934f6582f:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@6 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@6 (line 279)
    0.08%     0x00007f4934f65831:   mov    %eax,0x10(%rsi)              ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
    0.18%     0x00007f4934f65834:   add    $0x10,%rsp
    0.42%     0x00007f4934f65838:   pop    %rbp
    1.77%     0x00007f4934f65839:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2317,9 +2317,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   19.38%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 484 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 484 
 
-             # {method} {0x00007f49158d7660} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;
+             # {method} {0x00007f49158d7660} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f4934f65500:   mov    0x8(%rsi),%r10d
              0x00007f4934f65504:   movabs $0x800000000,%r11
@@ -2331,12 +2331,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    9.52%     0x00007f4934f65520:   sub    $0x18,%rsp
    3.99%     0x00007f4934f65527:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@-1 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@-1 (line 273)
    3.02%     0x00007f4934f6552c:   mov    0xc(%rsi),%eax
    0.00%     0x00007f4934f6552f:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@6 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@6 (line 273)
    0.00%     0x00007f4934f65531:   mov    %eax,0xc(%rsi)               ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
    0.00%     0x00007f4934f65534:   add    $0x10,%rsp
    0.47%     0x00007f4934f65538:   pop    %rbp
    1.89%     0x00007f4934f65539:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2356,36 +2356,36 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   18.91%  <total for region 4>
 
 ....[Hottest Region 5]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 490 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 490 
 
                0x00007f4934f662de:   mov    %r10d,%r11d
                0x00007f4934f662e1:   dec    %r11d
                0x00007f4934f662e4:   cmp    %r10d,%r11d
           ╭    0x00007f4934f662e7:   jae    0x00007f4934f6633f
           │    0x00007f4934f662ed:   lea    (%r12,%r9,8),%r11            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
           │    0x00007f4934f662f1:   xor    %ebp,%ebp
           │    0x00007f4934f662f3:   mov    %r10d,0x8(%rsp)
           │╭   0x00007f4934f662f8:   jmp    0x00007f4934f66304
           ││   0x00007f4934f662fa:   nopw   0x0(%rax,%rax,1)
    4.63%  ││↗  0x00007f4934f66300:   mov    (%rsp),%r11                  ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    0.02%  │↘│  0x00007f4934f66304:   mov    0x10(%r11,%rbp,4),%r10d
    6.78%  │ │  0x00007f4934f66309:   mov    %r11,(%rsp)
    0.00%  │ │  0x00007f4934f6630d:   mov    %r10,%rsi
    0.00%  │ │  0x00007f4934f66310:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    1.46%  │ │  0x00007f4934f66314:   nop
           │ │  0x00007f4934f66315:   movabs $0x800c27428,%rax
    0.01%  │ │  0x00007f4934f6631f:   call   0x00007f49349f8ae0           ; ImmutableOopMap {[0]=Oop }
           │ │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │ │                                                            ;   {virtual_call}
    1.38%  │ │  0x00007f4934f66324:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.24%  │ │  0x00007f4934f66326:   cmp    0x8(%rsp),%ebp
           │ ╰  0x00007f4934f6632a:   jl     0x00007f4934f66300           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
           │    0x00007f4934f6632c:   add    $0x20,%rsp
           │    0x00007f4934f66330:   pop    %rbp
           │    0x00007f4934f66331:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2398,10 +2398,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Regions]...............................................................................
   24.57%                      <unknown> 
-  19.66%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 486 
-  19.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 485 
-  18.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 484 
-  15.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 490 
+  19.66%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 486 
+  19.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 485 
+  18.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 484 
+  15.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 490 
    0.64%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
@@ -2423,10 +2423,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Methods (after inlining)]..............................................................
   24.64%                      <unknown> 
-  19.66%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 486 
-  19.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 485 
-  18.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 484 
-  15.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 490 
+  19.66%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 486 
+  19.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 485 
+  18.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 484 
+  15.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 490 
    1.54%              kernel  [unknown] 
    0.05%           libjvm.so  ElfSymbolTable::lookup 
    0.02%          ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -2437,7 +2437,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.01%        libc-2.31.so  __strncat_ssse3 
    0.01%        libc-2.31.so  __GI___strcasecmp_l_sse2 
    0.01%      hsdis-amd64.so  print_insn 
-   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 533 
+   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 533 
    0.01%        libc-2.31.so  getifaddrs_internal 
    0.01%           libjvm.so  xmlTextStream::write 
    0.01%  libpthread-2.31.so  __libc_write 
@@ -2474,7 +2474,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MEGAMORPHIC_4)
 
 # Run progress: 68.75% complete, ETA 00:08:59
@@ -2494,12 +2494,12 @@ Iteration   5: 25.275 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   25.225 ±(99.9%) 0.110 ns/op [Average]
   (min, avg, max) = (25.203, 25.225, 25.275), stdev = 0.029
   CI (99.9%): [25.115, 25.336] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 117282 total address lines.
 Perf output processed (skipped 55.632 seconds):
  Column 1: cycles (50766 events)
@@ -2521,48 +2521,48 @@ Hottest code regions (>10.00% "cycles" events):
    7.53%    0x00007f5bd4abc0b7:   jmp    *0x40(%rbx)
             0x00007f5bd4abc0ba:   .byte 0x0
           --------------------------------------------------------------------------------
-          <task_queued compile_id='494' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='68885' iicount='2' level='3' stamp='5.248' comment='tiered' hot_count='2'/>
-          <nmethod compile_id='494' compiler='c1' level='3' entry='0x00007f5bcd50b1c0' size='1568' address='0x00007f5bcd50b010' relocation_offset='352' insts_offset='432' stub_offset='1040' scopes_data_offset='1120' scopes_pcs_offset='1264' dependencies_offset='1536' nul_chk_table_offset='1544' oops_offset='1104' metadata_offset='1112' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='79711' iicount='2' stamp='5.248'/>
+          <task_queued compile_id='494' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='68885' iicount='2' level='3' stamp='5.248' comment='tiered' hot_count='2'/>
+          <nmethod compile_id='494' compiler='c1' level='3' entry='0x00007f5bcd50b1c0' size='1568' address='0x00007f5bcd50b010' relocation_offset='352' insts_offset='432' stub_offset='1040' scopes_data_offset='1120' scopes_pcs_offset='1264' dependencies_offset='1536' nul_chk_table_offset='1544' oops_offset='1104' metadata_offset='1112' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='79711' iicount='2' stamp='5.248'/>
           <print_nmethod compile_id='494' compiler='c1' level='3' stamp='5.248'>
           ============================= C1-compiled nmethod ==============================
           ----------------------------------- Assembly -----------------------------------
-          Compiled method (c1)    5248  494       3       com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call (38 bytes)
+          Compiled method (c1)    5248  494       3       com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call (38 bytes)
            total in heap  [0x00007f5bcd50b010,0x00007f5bcd50b630] = 1568
            relocation     [0x00007f5bcd50b170,0x00007f5bcd50b1c0] = 80
 ....................................................................................................
   24.17%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 496 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 496 
 
                0x00007f5bd4f6695e:   mov    %r10d,%r11d
                0x00007f5bd4f66961:   dec    %r11d
                0x00007f5bd4f66964:   cmp    %r10d,%r11d
           ╭    0x00007f5bd4f66967:   jae    0x00007f5bd4f669bf
           │    0x00007f5bd4f6696d:   lea    (%r12,%r9,8),%r11            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
           │    0x00007f5bd4f66971:   xor    %ebp,%ebp
           │    0x00007f5bd4f66973:   mov    %r10d,0x8(%rsp)
           │╭   0x00007f5bd4f66978:   jmp    0x00007f5bd4f66984
           ││   0x00007f5bd4f6697a:   nopw   0x0(%rax,%rax,1)
    4.43%  ││↗  0x00007f5bd4f66980:   mov    (%rsp),%r11                  ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    0.01%  │↘│  0x00007f5bd4f66984:   mov    0x10(%r11,%rbp,4),%r10d
    6.77%  │ │  0x00007f5bd4f66989:   mov    %r11,(%rsp)
    0.01%  │ │  0x00007f5bd4f6698d:   mov    %r10,%rsi
           │ │  0x00007f5bd4f66990:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    1.52%  │ │  0x00007f5bd4f66994:   nop
           │ │  0x00007f5bd4f66995:   movabs $0x800c27428,%rax
    0.01%  │ │  0x00007f5bd4f6699f:   call   0x00007f5bd49f8b60           ; ImmutableOopMap {[0]=Oop }
           │ │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │ │                                                            ;   {virtual_call}
    1.29%  │ │  0x00007f5bd4f669a4:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.33%  │ │  0x00007f5bd4f669a6:   cmp    0x8(%rsp),%ebp
           │ ╰  0x00007f5bd4f669aa:   jl     0x00007f5bd4f66980           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
           │    0x00007f5bd4f669ac:   add    $0x20,%rsp
           │    0x00007f5bd4f669b0:   pop    %rbp
    0.00%  │    0x00007f5bd4f669b1:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2574,15 +2574,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                0x00007f5bd4f669cd:   xchg   %ax,%ax
                0x00007f5bd4f669cf:   call   0x00007f5bd4a01600           ; ImmutableOopMap {[4]=NarrowOop }
                                                                          ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
                                                                          ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   15.38%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 491 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 491 
 
-             # {method} {0x00007f5bb54d7e20} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;
+             # {method} {0x00007f5bb54d7e20} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f5bd4f65e80:   mov    0x8(%rsi),%r10d
              0x00007f5bd4f65e84:   movabs $0x800000000,%r11
@@ -2594,12 +2594,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    7.20%     0x00007f5bd4f65ea0:   sub    $0x18,%rsp
    3.16%     0x00007f5bd4f65ea7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@-1 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@-1 (line 285)
    2.26%     0x00007f5bd4f65eac:   mov    0x14(%rsi),%eax
    0.90%     0x00007f5bd4f65eaf:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@6 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@6 (line 285)
    0.21%     0x00007f5bd4f65eb1:   mov    %eax,0x14(%rsi)              ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
    0.40%     0x00007f5bd4f65eb4:   add    $0x10,%rsp
    0.18%     0x00007f5bd4f65eb8:   pop    %rbp
    0.74%     0x00007f5bd4f65eb9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2619,9 +2619,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   15.24%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 492 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 492 
 
-             # {method} {0x00007f5bb54d21d0} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;
+             # {method} {0x00007f5bb54d21d0} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f5bd4f66180:   mov    0x8(%rsi),%r10d
              0x00007f5bd4f66184:   movabs $0x800000000,%r11
@@ -2633,12 +2633,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    7.40%     0x00007f5bd4f661a0:   sub    $0x18,%rsp
    2.92%     0x00007f5bd4f661a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@-1 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@-1 (line 291)
    2.26%     0x00007f5bd4f661ac:   mov    0x18(%rsi),%eax
              0x00007f5bd4f661af:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@6 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@6 (line 291)
              0x00007f5bd4f661b1:   mov    %eax,0x18(%rsi)              ;*putfield c4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
              0x00007f5bd4f661b4:   add    $0x10,%rsp
    0.36%     0x00007f5bd4f661b8:   pop    %rbp
    1.53%     0x00007f5bd4f661b9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2656,9 +2656,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   14.48%  <total for region 4>
 
 ....[Hottest Region 5]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 490 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 490 
 
-             # {method} {0x00007f5bb54d7a80} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;
+             # {method} {0x00007f5bb54d7a80} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f5bd4f65b80:   mov    0x8(%rsi),%r10d
              0x00007f5bd4f65b84:   movabs $0x800000000,%r11
@@ -2670,12 +2670,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    7.27%     0x00007f5bd4f65ba0:   sub    $0x18,%rsp
    3.07%     0x00007f5bd4f65ba7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@-1 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@-1 (line 279)
    2.21%     0x00007f5bd4f65bac:   mov    0x10(%rsi),%eax
              0x00007f5bd4f65baf:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@6 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@6 (line 279)
    0.00%     0x00007f5bd4f65bb1:   mov    %eax,0x10(%rsi)              ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
              0x00007f5bd4f65bb4:   add    $0x10,%rsp
    0.36%     0x00007f5bd4f65bb8:   pop    %rbp
    1.46%     0x00007f5bd4f65bb9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2694,9 +2694,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   14.38%  <total for region 5>
 
 ....[Hottest Region 6]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 489 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 489 
 
-             # {method} {0x00007f5bb54d7660} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;
+             # {method} {0x00007f5bb54d7660} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f5bd4f65880:   mov    0x8(%rsi),%r10d
              0x00007f5bd4f65884:   movabs $0x800000000,%r11
@@ -2708,12 +2708,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    7.28%     0x00007f5bd4f658a0:   sub    $0x18,%rsp
    3.06%     0x00007f5bd4f658a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@-1 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@-1 (line 273)
    2.21%     0x00007f5bd4f658ac:   mov    0xc(%rsi),%eax
              0x00007f5bd4f658af:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@6 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@6 (line 273)
              0x00007f5bd4f658b1:   mov    %eax,0xc(%rsi)               ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
              0x00007f5bd4f658b4:   add    $0x10,%rsp
    0.36%     0x00007f5bd4f658b8:   pop    %rbp
    1.44%     0x00007f5bd4f658b9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2733,11 +2733,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Regions]...............................................................................
   24.17%                      <unknown> 
-  15.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 496 
-  15.24%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 491 
-  14.48%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 492 
-  14.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 490 
-  14.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 489 
+  15.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 496 
+  15.24%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 491 
+  14.48%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 492 
+  14.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 490 
+  14.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 489 
    0.61%              kernel  [unknown] 
    0.12%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
@@ -2758,11 +2758,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Methods (after inlining)]..............................................................
   24.27%                      <unknown> 
-  15.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 496 
-  15.24%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 491 
-  14.48%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 492 
-  14.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 490 
-  14.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 489 
+  15.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 496 
+  15.24%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 491 
+  14.48%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 492 
+  14.38%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 490 
+  14.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 489 
    1.52%              kernel  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%      hsdis-amd64.so  print_insn 
@@ -2773,7 +2773,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
    0.01%        libc-2.31.so  getifaddrs_internal 
    0.01%        libc-2.31.so  re_search_stub 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
-   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 542 
+   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 542 
    0.01%           libjvm.so  xmlTextStream::write 
    0.01%           libjvm.so  os::PlatformMonitor::wait 
    0.01%           libjvm.so  fileStream::flush 
@@ -2809,7 +2809,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MEGAMORPHIC_5)
 
 # Run progress: 75.00% complete, ETA 00:07:11
@@ -2829,12 +2829,12 @@ Iteration   5: 25.119 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   25.111 ±(99.9%) 0.069 ns/op [Average]
   (min, avg, max) = (25.079, 25.111, 25.120), stdev = 0.018
   CI (99.9%): [25.042, 25.180] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 117157 total address lines.
 Perf output processed (skipped 55.672 seconds):
  Column 1: cycles (50709 events)
@@ -2850,13 +2850,13 @@ Hottest code regions (>10.00% "cycles" events):
           Decoding VtableStub vtbl[5]@12
           --------------------------------------------------------------------------------
           ============================= C2-compiled nmethod ==============================
-          <nmethod compile_id='489' compiler='c2' level='4' entry='0x00007f212cf65780' size='616' address='0x00007f212cf65610' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4 compute ()I' bytes='12' count='14216' iicount='14216' stamp='5.269'/>
+          <nmethod compile_id='489' compiler='c2' level='4' entry='0x00007f212cf65780' size='616' address='0x00007f212cf65610' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4 compute ()I' bytes='12' count='14216' iicount='14216' stamp='5.269'/>
    1.44%    0x00007f212cabc0a0:   
           <make_not_entrant thread='22933' compile_id='484' compiler='c1' level='2' stamp='5.269'/>
           mov    
           <print_nmethod compile_id='489' compiler='c2' level='4' stamp='5.269'>
           ----------------------------------- Assembly -----------------------------------
-          Compiled method (c2)    5268  489       4       com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute (12 bytes)
+          Compiled method (c2)    5268  489       4       com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute (12 bytes)
            total in heap  [0x00007f212cf65610,0x00007f212cf65878] = 616
            relocation     [0x00007f212cf65770,0x00007f212cf65780] = 16
            main code      [0x00007f212cf65780,0x00007f212cf657e0] = 96
@@ -2867,36 +2867,36 @@ Hottest code regions (>10.00% "cycles" events):
   24.01%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 494 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 494 
 
                0x00007f212cf6625e:   mov    %r10d,%r11d
                0x00007f212cf66261:   dec    %r11d
                0x00007f212cf66264:   cmp    %r10d,%r11d
           ╭    0x00007f212cf66267:   jae    0x00007f212cf662bf
           │    0x00007f212cf6626d:   lea    (%r12,%r9,8),%r11            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
           │    0x00007f212cf66271:   xor    %ebp,%ebp
           │    0x00007f212cf66273:   mov    %r10d,0x8(%rsp)
           │╭   0x00007f212cf66278:   jmp    0x00007f212cf66284
           ││   0x00007f212cf6627a:   nopw   0x0(%rax,%rax,1)
    4.62%  ││↗  0x00007f212cf66280:   mov    (%rsp),%r11                  ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    0.01%  │↘│  0x00007f212cf66284:   mov    0x10(%r11,%rbp,4),%r10d
    6.93%  │ │  0x00007f212cf66289:   mov    %r11,(%rsp)
    0.01%  │ │  0x00007f212cf6628d:   mov    %r10,%rsi
           │ │  0x00007f212cf66290:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    1.61%  │ │  0x00007f212cf66294:   nop
           │ │  0x00007f212cf66295:   movabs $0x800c27428,%rax
    0.02%  │ │  0x00007f212cf6629f:   call   0x00007f212c9f8ca0           ; ImmutableOopMap {[0]=Oop }
           │ │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │ │                                                            ;   {virtual_call}
    1.26%  │ │  0x00007f212cf662a4:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.31%  │ │  0x00007f212cf662a6:   cmp    0x8(%rsp),%ebp
           │ ╰  0x00007f212cf662aa:   jl     0x00007f212cf66280           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
    0.00%  │    0x00007f212cf662ac:   add    $0x20,%rsp
           │    0x00007f212cf662b0:   pop    %rbp
    0.00%  │    0x00007f212cf662b1:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2908,15 +2908,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                0x00007f212cf662cd:   xchg   %ax,%ax
                0x00007f212cf662cf:   call   0x00007f212ca01600           ; ImmutableOopMap {[4]=NarrowOop }
                                                                          ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
                                                                          ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   15.76%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 490 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 490 
 
-             # {method} {0x00007f210d4d2570} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;
+             # {method} {0x00007f210d4d2570} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg5&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f212cf65a80:   mov    0x8(%rsi),%r10d
              0x00007f212cf65a84:   movabs $0x800000000,%r11
@@ -2928,12 +2928,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    5.77%     0x00007f212cf65aa0:   sub    $0x18,%rsp
    2.44%     0x00007f212cf65aa7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@-1 (line 297)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@-1 (line 297)
    1.91%     0x00007f212cf65aac:   mov    0x1c(%rsi),%eax
    0.35%     0x00007f212cf65aaf:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@6 (line 297)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@6 (line 297)
    0.07%     0x00007f212cf65ab1:   mov    %eax,0x1c(%rsi)              ;*putfield c5 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@8 (line 297)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute@8 (line 297)
    0.15%     0x00007f212cf65ab4:   add    $0x10,%rsp
    0.24%     0x00007f212cf65ab8:   pop    %rbp
    0.92%     0x00007f212cf65ab9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2952,9 +2952,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   11.91%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 487 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 487 
 
-             # {method} {0x00007f210d4d7a80} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;
+             # {method} {0x00007f210d4d7a80} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg2&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f212cf65180:   mov    0x8(%rsi),%r10d
              0x00007f212cf65184:   movabs $0x800000000,%r11
@@ -2966,12 +2966,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    5.82%     0x00007f212cf651a0:   sub    $0x18,%rsp
    2.44%     0x00007f212cf651a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@-1 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@-1 (line 279)
    1.77%     0x00007f212cf651ac:   mov    0x10(%rsi),%eax
    0.20%     0x00007f212cf651af:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@6 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@6 (line 279)
    0.04%     0x00007f212cf651b1:   mov    %eax,0x10(%rsi)              ;*putfield c2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute@8 (line 279)
    0.12%     0x00007f212cf651b4:   add    $0x10,%rsp
    0.31%     0x00007f212cf651b8:   pop    %rbp
    1.07%     0x00007f212cf651b9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -2991,9 +2991,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   11.79%  <total for region 4>
 
 ....[Hottest Region 5]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 489 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 489 
 
-             # {method} {0x00007f210d4d21d0} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;
+             # {method} {0x00007f210d4d21d0} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f212cf65780:   mov    0x8(%rsi),%r10d
              0x00007f212cf65784:   movabs $0x800000000,%r11
@@ -3005,12 +3005,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    5.81%     0x00007f212cf657a0:   sub    $0x18,%rsp
    2.35%     0x00007f212cf657a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@-1 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@-1 (line 291)
    1.83%     0x00007f212cf657ac:   mov    0x18(%rsi),%eax
    0.32%     0x00007f212cf657af:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@6 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@6 (line 291)
    0.06%     0x00007f212cf657b1:   mov    %eax,0x18(%rsi)              ;*putfield c4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
    0.14%     0x00007f212cf657b4:   add    $0x10,%rsp
    0.23%     0x00007f212cf657b8:   pop    %rbp
    0.89%     0x00007f212cf657b9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3029,9 +3029,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   11.72%  <total for region 5>
 
 ....[Hottest Region 6]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 488 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 488 
 
-             # {method} {0x00007f210d4d7e20} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;
+             # {method} {0x00007f210d4d7e20} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg3&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f212cf65480:   mov    0x8(%rsi),%r10d
              0x00007f212cf65484:   movabs $0x800000000,%r11
@@ -3043,12 +3043,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    5.79%     0x00007f212cf654a0:   sub    $0x18,%rsp
    2.46%     0x00007f212cf654a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@-1 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@-1 (line 285)
    1.73%     0x00007f212cf654ac:   mov    0x14(%rsi),%eax
    0.24%     0x00007f212cf654af:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@6 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@6 (line 285)
    0.04%     0x00007f212cf654b1:   mov    %eax,0x14(%rsi)              ;*putfield c3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute@8 (line 285)
    0.12%     0x00007f212cf654b4:   add    $0x10,%rsp
    0.25%     0x00007f212cf654b8:   pop    %rbp
    1.06%     0x00007f212cf654b9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3068,9 +3068,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   11.71%  <total for region 6>
 
 ....[Hottest Region 7]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 486 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 486 
 
-             # {method} {0x00007f210d4d7660} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;
+             # {method} {0x00007f210d4d7660} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg1&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f212cf64e80:   mov    0x8(%rsi),%r10d
              0x00007f212cf64e84:   movabs $0x800000000,%r11
@@ -3082,12 +3082,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    5.61%     0x00007f212cf64ea0:   sub    $0x18,%rsp
    2.41%     0x00007f212cf64ea7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@-1 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@-1 (line 273)
    1.75%     0x00007f212cf64eac:   mov    0xc(%rsi),%eax
    0.00%     0x00007f212cf64eaf:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@6 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@6 (line 273)
              0x00007f212cf64eb1:   mov    %eax,0xc(%rsi)               ;*putfield c1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute@8 (line 273)
              0x00007f212cf64eb4:   add    $0x10,%rsp
    0.31%     0x00007f212cf64eb8:   pop    %rbp
    1.12%     0x00007f212cf64eb9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3107,12 +3107,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Regions]...............................................................................
   24.01%                      <unknown> 
-  15.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 494 
-  11.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 490 
-  11.79%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 487 
-  11.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 489 
-  11.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 488 
-  11.22%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 486 
+  15.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 494 
+  11.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 490 
+  11.79%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 487 
+  11.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 489 
+  11.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 488 
+  11.22%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 486 
    0.75%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -3132,12 +3132,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Methods (after inlining)]..............................................................
   24.04%                      <unknown> 
-  15.77%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 494 
-  11.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 490 
-  11.79%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 487 
-  11.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 489 
-  11.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 488 
-  11.22%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 486 
+  15.77%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 494 
+  11.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 490 
+  11.79%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 487 
+  11.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 489 
+  11.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 488 
+  11.22%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 486 
    1.55%              kernel  [unknown] 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.03%        libc-2.31.so  [unknown] 
@@ -3182,7 +3182,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MEGAMORPHIC_6)
 
 # Run progress: 81.25% complete, ETA 00:05:23
@@ -3202,12 +3202,12 @@ Iteration   5: 24.841 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   24.859 ±(99.9%) 0.084 ns/op [Average]
   (min, avg, max) = (24.841, 24.859, 24.889), stdev = 0.022
   CI (99.9%): [24.775, 24.944] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 116620 total address lines.
 Perf output processed (skipped 55.682 seconds):
  Column 1: cycles (50758 events)
@@ -3220,8 +3220,8 @@ Hottest code regions (>10.00% "cycles" events):
 
           --------------------------------------------------------------------------------
           </print_nmethod>
-          <task_queued compile_id='492' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6 compute ()I' bytes='12' count='13196' iicount='13196' stamp='5.301' comment='tiered' hot_count='13196'/>
-          <task_queued compile_id='493' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='79309' iicount='2' level='3' stamp='5.301' comment='tiered' hot_count='2'/>
+          <task_queued compile_id='492' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6 compute ()I' bytes='12' count='13196' iicount='13196' stamp='5.301' comment='tiered' hot_count='13196'/>
+          <task_queued compile_id='493' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark virtual_call ()V' bytes='38' count='2' backedge_count='79309' iicount='2' level='3' stamp='5.301' comment='tiered' hot_count='2'/>
           Decoding VtableStub vtbl[5]@12
           --------------------------------------------------------------------------------
    1.53%    0x00007f8a10abdf50:   mov    0x8(%rsi),%eax
@@ -3232,47 +3232,47 @@ Hottest code regions (>10.00% "cycles" events):
             0x00007f8a10abdf6a:   .byte 0x0
           --------------------------------------------------------------------------------
           ============================= C2-compiled nmethod ==============================
-          <nmethod compile_id='491' compiler='c2' level='4' entry='0x00007f8a10f64880' size='616' address='0x00007f8a10f64710' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4 compute ()I' bytes='12' count='13453' iicount='13454' stamp='5.301'/>
+          <nmethod compile_id='491' compiler='c2' level='4' entry='0x00007f8a10f64880' size='616' address='0x00007f8a10f64710' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4 compute ()I' bytes='12' count='13453' iicount='13454' stamp='5.301'/>
           <make_not_entrant thread='22988' compile_id='484' compiler='c1' level='2' stamp='5.301'/>
           <print_nmethod compile_id='491' compiler='c2' level='4' stamp='5.301'>
           ----------------------------------- Assembly -----------------------------------
-          Compiled method (c2)    5301  491       4       com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute (12 bytes)
+          Compiled method (c2)    5301  491       4       com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute (12 bytes)
            total in heap  [0x00007f8a10f64710,0x00007f8a10f64978] = 616
            relocation     [0x00007f8a10f64870,0x00007f8a10f64880] = 16
 ....................................................................................................
   23.44%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 495 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 495 
 
                0x00007f8a10f6535e:   mov    %r10d,%r11d
                0x00007f8a10f65361:   dec    %r11d
                0x00007f8a10f65364:   cmp    %r10d,%r11d
           ╭    0x00007f8a10f65367:   jae    0x00007f8a10f653bf
           │    0x00007f8a10f6536d:   lea    (%r12,%r9,8),%r11            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
           │    0x00007f8a10f65371:   xor    %ebp,%ebp
           │    0x00007f8a10f65373:   mov    %r10d,0x8(%rsp)
           │╭   0x00007f8a10f65378:   jmp    0x00007f8a10f65384
           ││   0x00007f8a10f6537a:   nopw   0x0(%rax,%rax,1)
    4.55%  ││↗  0x00007f8a10f65380:   mov    (%rsp),%r11                  ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    0.02%  │↘│  0x00007f8a10f65384:   mov    0x10(%r11,%rbp,4),%r10d
    6.74%  │ │  0x00007f8a10f65389:   mov    %r11,(%rsp)
    0.03%  │ │  0x00007f8a10f6538d:   mov    %r10,%rsi
           │ │  0x00007f8a10f65390:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    1.51%  │ │  0x00007f8a10f65394:   nop
           │ │  0x00007f8a10f65395:   movabs $0x800c27428,%rax
    0.02%  │ │  0x00007f8a10f6539f:   call   0x00007f8a109f8be0           ; ImmutableOopMap {[0]=Oop }
           │ │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │ │                                                            ;   {virtual_call}
    1.16%  │ │  0x00007f8a10f653a4:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.18%  │ │  0x00007f8a10f653a6:   cmp    0x8(%rsp),%ebp
           │ ╰  0x00007f8a10f653aa:   jl     0x00007f8a10f65380           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
           │    0x00007f8a10f653ac:   add    $0x20,%rsp
           │    0x00007f8a10f653b0:   pop    %rbp
           │    0x00007f8a10f653b1:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3284,9 +3284,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
   15.20%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 491 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 491 
 
-             # {method} {0x00007f89f18d21d0} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;
+             # {method} {0x00007f89f18d21d0} &apos;compute&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark$Alg4&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f8a10f64880:   mov    0x8(%rsi),%r10d
              0x00007f8a10f64884:   movabs $0x800000000,%r11
@@ -3298,12 +3298,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
            [Verified Entry Point]
    4.88%     0x00007f8a10f648a0:   sub    $0x18,%rsp
    2.00%     0x00007f8a10f648a7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@-1 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@-1 (line 291)
    1.55%     0x00007f8a10f648ac:   mov    0x18(%rsi),%eax
    0.57%     0x00007f8a10f648af:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@6 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@6 (line 291)
    0.12%     0x00007f8a10f648b1:   mov    %eax,0x18(%rsi)              ;*putfield c4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute@8 (line 291)
    0.26%     0x00007f8a10f648b4:   add    $0x10,%rsp
    0.10%     0x00007f8a10f648b8:   pop    %rbp
    0.52%     0x00007f8a10f648b9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3324,13 +3324,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Regions]...............................................................................
   23.44%                      <unknown> 
-  15.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 495 
-  10.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 491 
-   9.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 492 
-   9.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 488 
-   9.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 487 
-   9.62%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 489 
-   9.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 486 
+  15.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 495 
+  10.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 491 
+   9.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 492 
+   9.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 488 
+   9.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 487 
+   9.62%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 489 
+   9.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 486 
    0.83%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -3349,19 +3349,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Methods (after inlining)]..............................................................
   23.47%                      <unknown> 
-  15.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 495 
-  10.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 491 
-   9.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 492 
-   9.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 488 
-   9.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 487 
-   9.62%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 489 
-   9.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 486 
+  15.20%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 495 
+  10.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 491 
+   9.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 492 
+   9.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 488 
+   9.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 487 
+   9.62%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 489 
+   9.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 486 
    2.19%              kernel  [unknown] 
    0.03%        libc-2.31.so  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%        libc-2.31.so  tcache_init.part.0 
    0.01%        libc-2.31.so  __strncat_ssse3 
-   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 537 
+   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 537 
    0.01%        libc-2.31.so  __strxfrm_l 
    0.01%         interpreter  return entry points  
    0.01%           libjvm.so  fileStream::write 
@@ -3400,7 +3400,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MEGAMORPHIC_7)
 
 # Run progress: 87.50% complete, ETA 00:03:35
@@ -3420,12 +3420,12 @@ Iteration   5: 24.925 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   24.894 ±(99.9%) 0.072 ns/op [Average]
   (min, avg, max) = (24.879, 24.894, 24.925), stdev = 0.019
   CI (99.9%): [24.821, 24.966] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 118685 total address lines.
 Perf output processed (skipped 55.744 seconds):
  Column 1: cycles (50705 events)
@@ -3443,12 +3443,12 @@ Hottest code regions (>10.00% "cycles" events):
    1.53%    0x00007f71d8abdb20:   mov    0x8(%rsi),%eax
   12.66%    0x00007f71d8abdb23:   
           ============================= C2-compiled nmethod ==============================
-          <nmethod compile_id='497' compiler='c2' level='4' entry='0x00007f71d8f64b80' size='616' address='0x00007f71d8f64a10' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4 compute ()I' bytes='12' count='15825' iicount='15825' stamp='5.326'/>
+          <nmethod compile_id='497' compiler='c2' level='4' entry='0x00007f71d8f64b80' size='616' address='0x00007f71d8f64a10' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4 compute ()I' bytes='12' count='15825' iicount='15825' stamp='5.326'/>
           <make_not_entrant thread='23044' compile_id='489' compiler='c1' level='2' stamp='5.326'/>
           movabs $0x800000000,
           <print_nmethod compile_id='497' compiler='c2' level='4' stamp='5.326'>
           ----------------------------------- Assembly -----------------------------------
-          Compiled method (c2)    5326  497       4       com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute (12 bytes)
+          Compiled method (c2)    5326  497       4       com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute (12 bytes)
            total in heap  [0x00007f71d8f64a10,0x00007f71d8f64c78] = 616
            relocation     [0x00007f71d8f64b70,0x00007f71d8f64b80] = 16
            main code      [0x00007f71d8f64b80,0x00007f71d8f64be0] = 96
@@ -3457,36 +3457,36 @@ Hottest code regions (>10.00% "cycles" events):
   23.17%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 503 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 503 
 
                0x00007f71d8f65c5e:   mov    %r10d,%r11d
                0x00007f71d8f65c61:   dec    %r11d
                0x00007f71d8f65c64:   cmp    %r10d,%r11d
           ╭    0x00007f71d8f65c67:   jae    0x00007f71d8f65cbf
           │    0x00007f71d8f65c6d:   lea    (%r12,%r9,8),%r11            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
           │    0x00007f71d8f65c71:   xor    %ebp,%ebp
           │    0x00007f71d8f65c73:   mov    %r10d,0x8(%rsp)
           │╭   0x00007f71d8f65c78:   jmp    0x00007f71d8f65c84
           ││   0x00007f71d8f65c7a:   nopw   0x0(%rax,%rax,1)
    4.54%  ││↗  0x00007f71d8f65c80:   mov    (%rsp),%r11                  ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    0.01%  │↘│  0x00007f71d8f65c84:   mov    0x10(%r11,%rbp,4),%r10d
    6.68%  │ │  0x00007f71d8f65c89:   mov    %r11,(%rsp)
    0.02%  │ │  0x00007f71d8f65c8d:   mov    %r10,%rsi
    0.00%  │ │  0x00007f71d8f65c90:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    1.57%  │ │  0x00007f71d8f65c94:   nop
           │ │  0x00007f71d8f65c95:   movabs $0x800c27428,%rax
    0.02%  │ │  0x00007f71d8f65c9f:   call   0x00007f71d89f8da0           ; ImmutableOopMap {[0]=Oop }
           │ │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │ │                                                            ;   {virtual_call}
    1.14%  │ │  0x00007f71d8f65ca4:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.19%  │ │  0x00007f71d8f65ca6:   cmp    0x8(%rsp),%ebp
           │ ╰  0x00007f71d8f65caa:   jl     0x00007f71d8f65c80           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
    0.00%  │    0x00007f71d8f65cac:   add    $0x20,%rsp
           │    0x00007f71d8f65cb0:   pop    %rbp
           │    0x00007f71d8f65cb1:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3502,14 +3502,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Regions]...............................................................................
   23.17%                      <unknown> 
-  15.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 503 
-   8.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 501 
-   8.69%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 500 
-   8.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 495 
-   8.61%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 498 
-   8.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 497 
-   8.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 494 
-   8.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 493 
+  15.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 503 
+   8.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 501 
+   8.69%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 500 
+   8.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 495 
+   8.61%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 498 
+   8.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 497 
+   8.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 494 
+   8.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 493 
    0.61%              kernel  [unknown] 
    0.12%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
@@ -3527,19 +3527,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Methods (after inlining)]..............................................................
   23.20%                      <unknown> 
-  15.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 503 
-   8.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 501 
-   8.69%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 500 
-   8.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 495 
-   8.61%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 498 
-   8.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 497 
-   8.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 494 
-   8.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 493 
+  15.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 503 
+   8.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 501 
+   8.69%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 500 
+   8.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 495 
+   8.61%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 498 
+   8.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 497 
+   8.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 494 
+   8.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 493 
    1.80%              kernel  [unknown] 
    0.03%        libc-2.31.so  [unknown] 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
-   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 552 
+   0.01%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicMethodCallBenchmark_virtual_call_jmhTest::virtual_call_avgt_jmhStub, version 2, compile id 552 
    0.01%           libjvm.so  xmlStream::write_text 
    0.01%  libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
    0.01%  libpthread-2.31.so  __pthread_disable_asynccancel 
@@ -3578,7 +3578,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call
 # Parameters: (targetType = MEGAMORPHIC_8)
 
 # Run progress: 93.75% complete, ETA 00:01:47
@@ -3598,12 +3598,12 @@ Iteration   5: 24.666 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call":
   24.661 ±(99.9%) 0.061 ns/op [Average]
   (min, avg, max) = (24.646, 24.661, 24.687), stdev = 0.016
   CI (99.9%): [24.601, 24.722] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark.virtual_call:·asm":
 PrintAssembly processed: 115885 total address lines.
 Perf output processed (skipped 55.654 seconds):
  Column 1: cycles (50841 events)
@@ -3621,12 +3621,12 @@ Hottest code regions (>10.00% "cycles" events):
    1.56%    0x00007f65acabdda0:   mov    0x8(%rsi),
           ============================= C2-compiled nmethod ==============================
           %eax
-          <nmethod compile_id='487' compiler='c2' level='4' entry='0x00007f65acf65500' size='616' address='0x00007f65acf65390' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6 compute ()I' bytes='12' count='15581' iicount='15581' stamp='5.207'/>
+          <nmethod compile_id='487' compiler='c2' level='4' entry='0x00007f65acf65500' size='616' address='0x00007f65acf65390' relocation_offset='352' insts_offset='368' stub_offset='464' scopes_data_offset='504' scopes_pcs_offset='528' dependencies_offset='608' oops_offset='488' metadata_offset='496' method='com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6 compute ()I' bytes='12' count='15581' iicount='15581' stamp='5.207'/>
           <make_not_entrant thread='23102' compile_id='478' compiler='c1' level='2' stamp='5.207'/>
   11.49%   0x00007f65acabdda3:   
           <print_nmethod compile_id='487' compiler='c2' level='4' stamp='5.207'>
           ----------------------------------- Assembly -----------------------------------
-          Compiled method (c2)    5206  487       4       com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute (12 bytes)
+          Compiled method (c2)    5206  487       4       com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute (12 bytes)
            total in heap  [0x00007f65acf65390,0x00007f65acf655f8] = 616
            relocation     [0x00007f65acf654f0,0x00007f65acf65500] = 16
            main code      [0x00007f65acf65500,0x00007f65acf65560] = 96
@@ -3639,36 +3639,36 @@ Hottest code regions (>10.00% "cycles" events):
   22.32%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 492 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 492 
 
                0x00007f65acf662de:   mov    %r10d,%r11d
                0x00007f65acf662e1:   dec    %r11d
                0x00007f65acf662e4:   cmp    %r10d,%r11d
           ╭    0x00007f65acf662e7:   jae    0x00007f65acf6633f
           │    0x00007f65acf662ed:   lea    (%r12,%r9,8),%r11            ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@1 (line 168)
           │    0x00007f65acf662f1:   xor    %ebp,%ebp
           │    0x00007f65acf662f3:   mov    %r10d,0x8(%rsp)
           │╭   0x00007f65acf662f8:   jmp    0x00007f65acf66304
           ││   0x00007f65acf662fa:   nopw   0x0(%rax,%rax,1)
    4.55%  ││↗  0x00007f65acf66300:   mov    (%rsp),%r11                  ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@19 (line 169)
    0.03%  │↘│  0x00007f65acf66304:   mov    0x10(%r11,%rbp,4),%r10d
    6.89%  │ │  0x00007f65acf66309:   mov    %r11,(%rsp)
    0.02%  │ │  0x00007f65acf6630d:   mov    %r10,%rsi
    0.00%  │ │  0x00007f65acf66310:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@22 (line 169)
    1.46%  │ │  0x00007f65acf66314:   nop
           │ │  0x00007f65acf66315:   movabs $0xffffffffffffffff,%rax
    0.01%  │ │  0x00007f65acf6631f:   call   0x00007f65ac9fc380           ; ImmutableOopMap {[0]=Oop }
           │ │                                                            ;*invokevirtual compute {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@27 (line 170)
           │ │                                                            ;   {virtual_call}
    1.11%  │ │  0x00007f65acf66324:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@31 (line 169)
    1.05%  │ │  0x00007f65acf66326:   cmp    0x8(%rsp),%ebp
           │ ╰  0x00007f65acf6632a:   jl     0x00007f65acf66300           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
           │    0x00007f65acf6632c:   add    $0x20,%rsp
           │    0x00007f65acf66330:   pop    %rbp
    0.00%  │    0x00007f65acf66331:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -3680,22 +3680,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
                0x00007f65acf6634d:   xchg   %ax,%ax
                0x00007f65acf6634f:   call   0x00007f65aca01600           ; ImmutableOopMap {[4]=NarrowOop }
                                                                          ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call@16 (line 169)
                                                                          ;   {runtime_call UncommonTrapBlob}
 ....................................................................................................
   15.13%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
   22.32%                      <unknown> 
-  15.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 492 
-   8.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg8::compute, version 2, compile id 490 
-   7.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 484 
-   7.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 485 
-   7.42%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 488 
-   7.37%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 487 
-   7.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 483 
-   7.29%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 482 
-   7.21%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 481 
+  15.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 492 
+   8.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg8::compute, version 2, compile id 490 
+   7.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 484 
+   7.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 485 
+   7.42%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 488 
+   7.37%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 487 
+   7.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 483 
+   7.29%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 482 
+   7.21%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 481 
    0.96%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -3712,15 +3712,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megamorp
 
 ....[Hottest Methods (after inlining)]..............................................................
   22.35%                      <unknown> 
-  15.14%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 492 
-   8.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg8::compute, version 2, compile id 490 
-   7.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 484 
-   7.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 485 
-   7.42%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 488 
-   7.37%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 487 
-   7.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 483 
-   7.29%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 482 
-   7.21%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 481 
+  15.14%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark::virtual_call, version 4, compile id 492 
+   8.07%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg8::compute, version 2, compile id 490 
+   7.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg3::compute, version 2, compile id 484 
+   7.72%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg4::compute, version 2, compile id 485 
+   7.42%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg7::compute, version 2, compile id 488 
+   7.37%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg6::compute, version 2, compile id 487 
+   7.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg1::compute, version 2, compile id 483 
+   7.29%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg5::compute, version 2, compile id 482 
+   7.21%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicMethodCallBenchmark$Alg2::compute, version 2, compile id 481 
    2.00%              kernel  [unknown] 
    0.02%           libjvm.so  xmlStream::write_text 
    0.02%           libjvm.so  ElfSymbolTable::lookup 

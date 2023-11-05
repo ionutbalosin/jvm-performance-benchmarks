@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter
 # Parameters: (size = 262144)
 
 # Run progress: 0.00% complete, ETA 00:20:00
@@ -28,12 +28,12 @@ Iteration   5: 203.086 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter":
   202.912 ±(99.9%) 1.549 us/op [Average]
   (min, avg, max) = (202.193, 202.912, 203.109), stdev = 0.402
   CI (99.9%): [201.363, 204.462] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter:·asm":
 PrintAssembly processed: 128132 total address lines.
 Perf output processed (skipped 56.234 seconds):
  Column 1: cycles (50769 events)
@@ -42,7 +42,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
 
                          0x00007f8ea0f6acc8:   cmp    %ecx,%r10d
                          0x00007f8ea0f6accb:   cmovl  %r11d,%ecx
@@ -50,66 +50,66 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                          0x00007f8ea0f6acd4:   cmp    $0x1,%ecx
           ╭              0x00007f8ea0f6acd7:   jle    0x00007f8ea0f6ada5
           │              0x00007f8ea0f6acdd:   mov    $0xfa0,%ebp                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
           │              0x00007f8ea0f6ace2:   xor    %ebx,%ebx
           │╭             0x00007f8ea0f6ace4:   jmp    0x00007f8ea0f6ad8b
           ││             0x00007f8ea0f6ace9:   nopl   0x0(%rax)
    2.35%  ││    ↗        0x00007f8ea0f6acf0:   mov    %r10d,0x1c(%rsi,%rdi,4)
    4.02%  ││    │↗       0x00007f8ea0f6acf5:   add    $0x4,%edi                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          ││    ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    1.86%  ││    ││       0x00007f8ea0f6acf8:   cmp    %eax,%edi
    3.85%  ││    ││       0x00007f8ea0f6acfa:   nopw   0x0(%rax,%rax,1)
    2.45%  ││╭   ││       0x00007f8ea0f6ad00:   jge    0x00007f8ea0f6ad7e           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@20 (line 100)
+          │││   ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@20 (line 100)
    4.13%  │││   ││ ↗     0x00007f8ea0f6ad06:   mov    0x10(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    2.01%  │││   ││ │     0x00007f8ea0f6ad0b:   mov    %r10d,%r11d
    3.97%  │││   ││ │     0x00007f8ea0f6ad0e:   shr    $0x1f,%r11d
    2.32%  │││   ││ │     0x00007f8ea0f6ad12:   add    %r10d,%r11d
    4.17%  │││   ││ │     0x00007f8ea0f6ad15:   and    $0xfffffffe,%r11d
    2.19%  │││   ││ │     0x00007f8ea0f6ad19:   cmp    %r11d,%r10d
           │││╭  ││ │     0x00007f8ea0f6ad1c:   jne    0x00007f8ea0f6ad23           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
           ││││  ││ │     0x00007f8ea0f6ad1e:   mov    %r10d,0x10(%rsi,%rdi,4)      ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    4.45%  │││↘  ││ │     0x00007f8ea0f6ad23:   mov    0x14(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    1.81%  │││   ││ │     0x00007f8ea0f6ad28:   mov    %r10d,%r11d
    3.99%  │││   ││ │     0x00007f8ea0f6ad2b:   shr    $0x1f,%r11d
    1.91%  │││   ││ │     0x00007f8ea0f6ad2f:   add    %r10d,%r11d
    4.43%  │││   ││ │     0x00007f8ea0f6ad32:   and    $0xfffffffe,%r11d
    1.84%  │││   ││ │     0x00007f8ea0f6ad36:   cmp    %r11d,%r10d
           │││ ╭ ││ │     0x00007f8ea0f6ad39:   jne    0x00007f8ea0f6ad40           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
    4.34%  │││ │ ││ │     0x00007f8ea0f6ad3b:   mov    %r10d,0x14(%rsi,%rdi,4)      ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    1.76%  │││ ↘ ││ │     0x00007f8ea0f6ad40:   mov    0x18(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    4.30%  │││   ││ │     0x00007f8ea0f6ad45:   mov    %r10d,%r11d
    1.85%  │││   ││ │     0x00007f8ea0f6ad48:   shr    $0x1f,%r11d
    4.15%  │││   ││ │     0x00007f8ea0f6ad4c:   add    %r10d,%r11d
    1.91%  │││   ││ │     0x00007f8ea0f6ad4f:   and    $0xfffffffe,%r11d
    4.30%  │││   ││ │     0x00007f8ea0f6ad53:   cmp    %r11d,%r10d
           │││  ╭││ │     0x00007f8ea0f6ad56:   jne    0x00007f8ea0f6ad5d           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
           │││  │││ │     0x00007f8ea0f6ad58:   mov    %r10d,0x18(%rsi,%rdi,4)      ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    1.95%  │││  ↘││ │     0x00007f8ea0f6ad5d:   mov    0x1c(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    8.32%  │││   ││ │     0x00007f8ea0f6ad62:   mov    %r10d,%r11d
    1.69%  │││   ││ │     0x00007f8ea0f6ad65:   shr    $0x1f,%r11d
    4.59%  │││   ││ │     0x00007f8ea0f6ad69:   add    %r10d,%r11d
    2.24%  │││   ││ │     0x00007f8ea0f6ad6c:   and    $0xfffffffe,%r11d
    4.45%  │││   ││ │     0x00007f8ea0f6ad70:   cmp    %r11d,%r10d
           │││   ╰│ │     0x00007f8ea0f6ad73:   je     0x00007f8ea0f6acf0           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││    │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          │││    │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
           │││    ╰ │     0x00007f8ea0f6ad79:   jmp    0x00007f8ea0f6acf5           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │││      │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          │││      │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
    0.02%  ││↘      │     0x00007f8ea0f6ad7e:   mov    0x348(%r15),%rax             ; ImmutableOopMap {r8=Oop r9=NarrowOop rdx=Oop rsi=Oop r14=Oop }
           ││       │                                                               ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││       │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          ││       │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
    0.17%  ││       │     0x00007f8ea0f6ad85:   test   %eax,(%rax)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
           ││       │                                                               ;   {poll}
    0.14%  ││       │     0x00007f8ea0f6ad87:   cmp    %ecx,%edi
           ││      ╭│     0x00007f8ea0f6ad89:   jge    0x00007f8ea0f6ada5
@@ -125,9 +125,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ↘       ↘      0x00007f8ea0f6ada5:   cmp    %r13d,%edi
                     ╭    0x00007f8ea0f6ada8:   jge    0x00007f8ea0f6add1
                     │    0x00007f8ea0f6adaa:   xchg   %ax,%ax                      ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@20 (line 100)
+                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@20 (line 100)
                     │ ↗  0x00007f8ea0f6adac:   mov    0x10(%r8,%rdi,4),%r11d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
                     │ │  0x00007f8ea0f6adb1:   mov    %r11d,%r10d
    0.00%            │ │  0x00007f8ea0f6adb4:   shr    $0x1f,%r10d
                     │ │  0x00007f8ea0f6adb8:   add    %r11d,%r10d
@@ -135,21 +135,21 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                     │ │  0x00007f8ea0f6adbf:   nop
                     │ │  0x00007f8ea0f6adc0:   cmp    %r10d,%r11d
                     │╭│  0x00007f8ea0f6adc3:   jne    0x00007f8ea0f6adca           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+                    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
                     │││  0x00007f8ea0f6adc5:   mov    %r11d,0x10(%rsi,%rdi,4)
    0.00%            │↘│  0x00007f8ea0f6adca:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
                     │ │  0x00007f8ea0f6adcc:   cmp    %r13d,%edi
                     │ ╰  0x00007f8ea0f6adcf:   jl     0x00007f8ea0f6adac           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@17 (line 99)
+                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@17 (line 99)
                     ↘    0x00007f8ea0f6add1:   test   %rdx,%rdx
                          0x00007f8ea0f6add4:   je     0x00007f8ea0f6ae10           ;*synchronization entry
                                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 314)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@49 (line 105)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@49 (line 105)
                          0x00007f8ea0f6add6:   mov    %r9,%r10
                          0x00007f8ea0f6add9:   shl    $0x3,%r10                    ;*invokestatic consumeCompiler {reexecute=0 rethrow=0 return_oop=0}
                                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@7 (line 315)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@49 (line 105)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@49 (line 105)
                          0x00007f8ea0f6addd:   add    $0x30,%rsp
                          0x00007f8ea0f6ade1:   pop    %rbp
    0.01%                 0x00007f8ea0f6ade2:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -167,7 +167,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   97.98%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.98%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
+  97.98%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
    1.00%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
@@ -177,11 +177,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.VectorApiBenchmark_baseline_filter_jmhTest::baseline_filter_avgt_jmhStub, version 4, compile id 591 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.VectorApiBenchmark_baseline_filter_jmhTest::baseline_filter_avgt_jmhStub, version 4, compile id 591 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -192,12 +192,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.00%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
+  98.00%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 560 
    1.73%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%        libc-2.31.so  __strncat_ssse3 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.VectorApiBenchmark_baseline_filter_jmhTest::baseline_filter_avgt_jmhStub, version 4, compile id 591 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.VectorApiBenchmark_baseline_filter_jmhTest::baseline_filter_avgt_jmhStub, version 4, compile id 591 
    0.01%           libjvm.so  xmlStream::write_text 
    0.01%        libc-2.31.so  getifaddrs_internal 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -242,7 +242,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter
 # Parameters: (size = 1048576)
 
 # Run progress: 8.33% complete, ETA 00:20:01
@@ -262,12 +262,12 @@ Iteration   5: 804.911 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter":
   804.802 ±(99.9%) 0.517 us/op [Average]
   (min, avg, max) = (804.610, 804.802, 804.930), stdev = 0.134
   CI (99.9%): [804.284, 805.319] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter:·asm":
 PrintAssembly processed: 131211 total address lines.
 Perf output processed (skipped 56.277 seconds):
  Column 1: cycles (50690 events)
@@ -276,7 +276,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 574 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 574 
 
                          0x00007f150cf6d442:   mov    $0x80000000,%r11d
                          0x00007f150cf6d448:   cmp    %ecx,%r10d
@@ -285,66 +285,66 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                          0x00007f150cf6d454:   cmp    $0x1,%ecx
           ╭              0x00007f150cf6d457:   jle    0x00007f150cf6d51d
           │              0x00007f150cf6d45d:   mov    $0xfa0,%ebp                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
           │              0x00007f150cf6d462:   xor    %ebx,%ebx
           │╭             0x00007f150cf6d464:   jmp    0x00007f150cf6d504
    3.61%  ││    ↗        0x00007f150cf6d469:   mov    %r10d,0x1c(%rsi,%rdi,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-          ││    │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@40 (line 102)
+          ││    │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@40 (line 102)
    2.92%  ││    │        0x00007f150cf6d46e:   xchg   %ax,%ax
    2.63%  ││    │↗       0x00007f150cf6d470:   add    $0x4,%edi                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          ││    ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    3.13%  ││    ││       0x00007f150cf6d473:   cmp    %eax,%edi
           ││╭   ││       0x00007f150cf6d475:   jge    0x00007f150cf6d4f3           ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@20 (line 100)
+          │││   ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@20 (line 100)
    3.45%  │││   ││ ↗     0x00007f150cf6d47b:   mov    0x10(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    3.50%  │││   ││ │     0x00007f150cf6d480:   mov    %r10d,%r11d
    2.73%  │││   ││ │     0x00007f150cf6d483:   shr    $0x1f,%r11d
    3.32%  │││   ││ │     0x00007f150cf6d487:   add    %r10d,%r11d
    3.61%  │││   ││ │     0x00007f150cf6d48a:   and    $0xfffffffe,%r11d
    3.47%  │││   ││ │     0x00007f150cf6d48e:   cmp    %r11d,%r10d
           │││╭  ││ │     0x00007f150cf6d491:   jne    0x00007f150cf6d498           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
           ││││  ││ │     0x00007f150cf6d493:   mov    %r10d,0x10(%rsi,%rdi,4)      ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          ││││  ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    3.30%  │││↘  ││ │     0x00007f150cf6d498:   mov    0x14(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    3.14%  │││   ││ │     0x00007f150cf6d49d:   mov    %r10d,%r11d
    2.91%  │││   ││ │     0x00007f150cf6d4a0:   shr    $0x1f,%r11d
    2.96%  │││   ││ │     0x00007f150cf6d4a4:   add    %r10d,%r11d
    3.28%  │││   ││ │     0x00007f150cf6d4a7:   and    $0xfffffffe,%r11d
    2.98%  │││   ││ │     0x00007f150cf6d4ab:   cmp    %r11d,%r10d
           │││ ╭ ││ │     0x00007f150cf6d4ae:   jne    0x00007f150cf6d4b5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
    3.12%  │││ │ ││ │     0x00007f150cf6d4b0:   mov    %r10d,0x14(%rsi,%rdi,4)      ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          │││ │ ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    2.91%  │││ ↘ ││ │     0x00007f150cf6d4b5:   mov    0x18(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    3.18%  │││   ││ │     0x00007f150cf6d4ba:   mov    %r10d,%r11d
    2.93%  │││   ││ │     0x00007f150cf6d4bd:   shr    $0x1f,%r11d
    3.10%  │││   ││ │     0x00007f150cf6d4c1:   add    %r10d,%r11d
    3.12%  │││   ││ │     0x00007f150cf6d4c4:   and    $0xfffffffe,%r11d
    3.05%  │││   ││ │     0x00007f150cf6d4c8:   cmp    %r11d,%r10d
           │││  ╭││ │     0x00007f150cf6d4cb:   jne    0x00007f150cf6d4d2           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
           │││  │││ │     0x00007f150cf6d4cd:   mov    %r10d,0x18(%rsi,%rdi,4)      ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+          │││  │││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
    3.26%  │││  ↘││ │     0x00007f150cf6d4d2:   mov    0x1c(%r8,%rdi,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+          │││   ││ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
    8.79%  │││   ││ │     0x00007f150cf6d4d7:   mov    %r10d,%r11d
    2.95%  │││   ││ │     0x00007f150cf6d4da:   shr    $0x1f,%r11d
    3.44%  │││   ││ │     0x00007f150cf6d4de:   add    %r10d,%r11d
    3.31%  │││   ││ │     0x00007f150cf6d4e1:   and    $0xfffffffe,%r11d
    3.39%  │││   ││ │     0x00007f150cf6d4e5:   cmp    %r11d,%r10d
           │││   ╰│ │     0x00007f150cf6d4e8:   je     0x00007f150cf6d469           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││    │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+          │││    │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
           │││    ╰ │     0x00007f150cf6d4ee:   jmp    0x00007f150cf6d470           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │││      │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          │││      │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
    0.01%  ││↘      │     0x00007f150cf6d4f3:   mov    0x348(%r15),%rax             ; ImmutableOopMap {r8=Oop r9=NarrowOop rdx=Oop rsi=Oop r14=Oop }
           ││       │                                                               ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││       │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          ││       │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
    0.14%  ││       │     0x00007f150cf6d4fa:   test   %eax,(%rax)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@44 (line 99)
+          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@44 (line 99)
           ││       │                                                               ;   {poll}
    0.14%  ││       │     0x00007f150cf6d4fc:   nopl   0x0(%rax)
           ││       │     0x00007f150cf6d500:   cmp    %ecx,%edi
@@ -361,9 +361,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                          0x00007f150cf6d520:   cmp    %r13d,%edi
                     ╭    0x00007f150cf6d523:   jge    0x00007f150cf6d551
                     │    0x00007f150cf6d525:   data16 xchg %ax,%ax                 ;*aload_2 {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@20 (line 100)
+                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@20 (line 100)
                     │ ↗  0x00007f150cf6d528:   mov    0x10(%r8,%rdi,4),%r11d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@23 (line 100)
+                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@23 (line 100)
                     │ │  0x00007f150cf6d52d:   mov    %r11d,%r10d
                     │ │  0x00007f150cf6d530:   shr    $0x1f,%r10d
    0.00%            │ │  0x00007f150cf6d534:   add    %r11d,%r10d
@@ -371,21 +371,21 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                     │ │  0x00007f150cf6d53b:   nopl   0x0(%rax,%rax,1)
                     │ │  0x00007f150cf6d540:   cmp    %r10d,%r11d
                     │╭│  0x00007f150cf6d543:   jne    0x00007f150cf6d54a           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@32 (line 101)
+                    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@32 (line 101)
                     │││  0x00007f150cf6d545:   mov    %r11d,0x10(%rsi,%rdi,4)
    0.00%            │↘│  0x00007f150cf6d54a:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@41 (line 99)
+                    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@41 (line 99)
                     │ │  0x00007f150cf6d54c:   cmp    %r13d,%edi
                     │ ╰  0x00007f150cf6d54f:   jl     0x00007f150cf6d528           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@17 (line 99)
+                    │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@17 (line 99)
                     ↘    0x00007f150cf6d551:   test   %rdx,%rdx
                          0x00007f150cf6d554:   je     0x00007f150cf6d5b0           ;*synchronization entry
                                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 314)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@49 (line 105)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@49 (line 105)
                          0x00007f150cf6d556:   mov    %r9,%r10
                          0x00007f150cf6d559:   shl    $0x3,%r10                    ;*invokestatic consumeCompiler {reexecute=0 rethrow=0 return_oop=0}
                                                                                    ; - org.openjdk.jmh.infra.Blackhole::consume@7 (line 315)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter@49 (line 105)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter@49 (line 105)
    0.00%                 0x00007f150cf6d55d:   add    $0x30,%rsp
                          0x00007f150cf6d561:   pop    %rbp
    0.01%                 0x00007f150cf6d562:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -403,7 +403,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   97.82%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.82%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 574 
+  97.82%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 574 
    0.54%              kernel  [unknown] 
    0.13%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -428,7 +428,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.83%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_filter, version 3, compile id 574 
+  97.83%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_filter, version 3, compile id 574 
    1.78%              kernel  [unknown] 
    0.06%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
@@ -478,7 +478,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul
 # Parameters: (size = 262144)
 
 # Run progress: 16.67% complete, ETA 00:18:10
@@ -498,12 +498,12 @@ Iteration   5: 35521.831 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul":
   33955.885 ±(99.9%) 3542.338 us/op [Average]
   (min, avg, max) = (33137.919, 33955.885, 35521.831), stdev = 919.934
   CI (99.9%): [30413.547, 37498.222] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul:·asm":
 PrintAssembly processed: 130846 total address lines.
 Perf output processed (skipped 56.329 seconds):
  Column 1: cycles (50664 events)
@@ -570,7 +570,7 @@ runtime stub, StubRoutines::jint_disjoint_arraycopy
   57.86%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
 
                       0x00007f9b30f6d88b:   mov    0x10(%rsp),%r10d
                       0x00007f9b30f6d890:   test   %r10d,%r10d
@@ -580,59 +580,59 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       0x00007f9b30f6d89e:   xchg   %ax,%ax
           ╭           0x00007f9b30f6d8a0:   jmp    0x00007f9b30f6d912
           │           0x00007f9b30f6d8a5:   data16 xchg %ax,%ax                 ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.05%  │↗      ↗   0x00007f9b30f6d8a8:   vpmulld 0x10(%rbp,%r8,4),%ymm0,%ymm2
    0.79%  ││      │   0x00007f9b30f6d8af:   vpaddd 0x10(%r13,%r8,4),%ymm2,%ymm2
    0.41%  ││      │   0x00007f9b30f6d8b6:   vmovdqu %ymm2,0x10(%r13,%r8,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.04%  ││      │   0x00007f9b30f6d8bd:   add    $0x8,%r8d                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.43%  ││      │   0x00007f9b30f6d8c1:   cmp    0x1c(%rsp),%r8d
           │╰      │   0x00007f9b30f6d8c6:   jl     0x00007f9b30f6d8a8           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@6 (line 223)
-          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@6 (line 223)
+          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.04%  │       │↗  0x00007f9b30f6d8c8:   cmp    0x10(%rsp),%r8d
           │ ╭     ││  0x00007f9b30f6d8cd:   jge    0x00007f9b30f6d8ea
    0.09%  │ │     ││  0x00007f9b30f6d8cf:   nop                                 ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.29%  │ │↗    ││  0x00007f9b30f6d8d0:   mov    0x10(%rbp,%r8,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@19 (line 224)
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@19 (line 224)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.16%  │ ││    ││  0x00007f9b30f6d8d5:   imul   0x74(%rsp),%r10d
    0.21%  │ ││    ││  0x00007f9b30f6d8db:   add    %r10d,0x10(%r13,%r8,4)       ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.74%  │ ││    ││  0x00007f9b30f6d8e0:   inc    %r8d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.19%  │ ││    ││  0x00007f9b30f6d8e3:   cmp    0x10(%rsp),%r8d
           │ │╰    ││  0x00007f9b30f6d8e8:   jl     0x00007f9b30f6d8d0           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.02%  │ ↘     ││  0x00007f9b30f6d8ea:   mov    0x348(%r15),%r10
    0.16%  │       ││  0x00007f9b30f6d8f1:   mov    0x84(%rsp),%r11d
    0.09%  │       ││  0x00007f9b30f6d8f9:   inc    %r11d                        ; ImmutableOopMap {rbp=Oop r13=Oop [0]=Oop [8]=Oop [20]=NarrowOop [24]=NarrowOop [40]=Derived_oop_rbp [48]=Oop [56]=Oop }
           │       ││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │       ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
+          │       ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
    0.01%  │       ││  0x00007f9b30f6d8fc:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
           │       ││                                                            ;   {poll}
    0.03%  │       ││  0x00007f9b30f6d8ff:   nop
    0.18%  │       ││  0x00007f9b30f6d900:   cmp    0x10(%rsp),%r11d
           │       ││  0x00007f9b30f6d905:   jge    0x00007f9b30f6d693           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.10%  │       ││  0x00007f9b30f6d90b:   mov    0x80(%rsp),%ebx              ;*aload_3 {reexecute=0 rethrow=0 return_oop=0}
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@55 (line 140)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@55 (line 140)
    0.00%  ↘       ││  0x00007f9b30f6d912:   movslq %r11d,%r10
    0.03%          ││  0x00007f9b30f6d915:   add    0x78(%rsp),%r10
    0.22%          ││  0x00007f9b30f6d91a:   mov    0x30(%rsp),%r8
    0.08%          ││  0x00007f9b30f6d91f:   mov    0x10(%r8,%r10,4),%r14d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@61 (line 140)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@61 (line 140)
    0.15%          ││  0x00007f9b30f6d924:   mov    %r14d,0x74(%rsp)
    0.07%          ││  0x00007f9b30f6d929:   test   %ebx,%ebx
                   ││  0x00007f9b30f6d92b:   jl     0x00007f9b30f6daf2
@@ -656,26 +656,26 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.28%          ││  0x00007f9b30f6d98b:   movabs $0x7f9b309e3020,%r10
    0.18%          ││  0x00007f9b30f6d995:   call   *%r10
                   ││  0x00007f9b30f6d998:   vmovdqu 0x40(%rsp),%ymm1            ;*invokestatic arraycopy {reexecute=0 rethrow=0 return_oop=0}
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@71 (line 141)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@71 (line 141)
                   ││  0x00007f9b30f6d99e:   xor    %r8d,%r8d                    ;*aload {reexecute=0 rethrow=0 return_oop=0}
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.37%       ↗  ││  0x00007f9b30f6d9a1:   mov    0x10(%rbp,%r8,4),%r11d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@19 (line 224)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@19 (line 224)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.38%       │  ││  0x00007f9b30f6d9a6:   imul   0x74(%rsp),%r11d
    0.31%       │  ││  0x00007f9b30f6d9ac:   add    %r11d,0x10(%r13,%r8,4)       ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    1.08%       │  ││  0x00007f9b30f6d9b1:   mov    %r8d,%r10d
    0.29%       │  ││  0x00007f9b30f6d9b4:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.26%       │  ││  0x00007f9b30f6d9b7:   nopw   0x0(%rax,%rax,1)
    0.42%       │  ││  0x00007f9b30f6d9c0:   cmp    0x64(%rsp),%r10d
               ╭│  ││  0x00007f9b30f6d9c5:   jge    0x00007f9b30f6d9cc           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@6 (line 223)
-              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@6 (line 223)
+              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.32%      ││  ││  0x00007f9b30f6d9c7:   mov    %r10d,%r8d
    0.28%      │╰  ││  0x00007f9b30f6d9ca:   jmp    0x00007f9b30f6d9a1
    0.11%      ↘   ││  0x00007f9b30f6d9cc:   cmp    0x88(%rsp),%r10d
@@ -693,8 +693,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.00%         │││  0x00007f9b30f6da0e:   cmova  %r11d,%r10d
    0.11%         │││  0x00007f9b30f6da12:   add    %r8d,%r10d
    0.17%         │││  0x00007f9b30f6da15:   data16 data16 nopw 0x0(%rax,%rax,1) ;*aload {reexecute=0 rethrow=0 return_oop=0}
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.19%        ↗│││  0x00007f9b30f6da20:   vpmulld 0x10(%rbp,%r8,4),%ymm0,%ymm2
    3.98%        ││││  0x00007f9b30f6da27:   vpaddd 0x10(%r13,%r8,4),%ymm2,%ymm2
    2.21%        ││││  0x00007f9b30f6da2e:   vmovdqu %ymm2,0x10(%r13,%r8,4)
@@ -707,22 +707,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.21%        ││││  0x00007f9b30f6da5f:   vpmulld 0x70(%rbp,%r8,4),%ymm0,%ymm2
    4.32%        ││││  0x00007f9b30f6da66:   vpaddd 0x70(%r13,%r8,4),%ymm2,%ymm2
    2.22%        ││││  0x00007f9b30f6da6d:   vmovdqu %ymm2,0x70(%r13,%r8,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.21%        ││││  0x00007f9b30f6da74:   add    $0x20,%r8d                   ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    2.03%        ││││  0x00007f9b30f6da78:   cmp    %r10d,%r8d
                 ╰│││  0x00007f9b30f6da7b:   jl     0x00007f9b30f6da20           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.02%         │││  0x00007f9b30f6da7d:   mov    0x348(%r15),%r10             ; ImmutableOopMap {rbp=Oop r13=Oop [0]=Oop [8]=Oop [20]=NarrowOop [24]=NarrowOop [40]=Derived_oop_rbp [48]=Oop [56]=Oop }
                  │││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                 │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.13%         │││  0x00007f9b30f6da84:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
                  │││                                                            ;   {poll}
    0.02%         │││  0x00007f9b30f6da87:   cmp    0x88(%rsp),%r8d
                  ╰││  0x00007f9b30f6da8f:   jl     0x00007f9b30f6d9e4
@@ -731,12 +731,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.17%          ╰│  0x00007f9b30f6daa0:   jl     0x00007f9b30f6d8a8
                    ╰  0x00007f9b30f6daa6:   jmp    0x00007f9b30f6d8c8
                       0x00007f9b30f6daab:   mov    0x18(%rsp),%ebx              ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@40 (line 137)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@40 (line 137)
                       0x00007f9b30f6daaf:   mov    0x8(%rsp),%r10
                       0x00007f9b30f6dab4:   test   %r10,%r10
                       0x00007f9b30f6dab7:   je     0x00007f9b30f6dbff           ;*synchronization entry
                                                                                 ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 314)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@129 (line 149)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@129 (line 149)
                       0x00007f9b30f6dabd:   mov    %rbx,%r10
                       0x00007f9b30f6dac0:   shl    $0x3,%r10                    ;*invokestatic consumeCompiler {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
@@ -744,22 +744,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 
 ....[Hottest Regions]...............................................................................
   57.86%        runtime stub  StubRoutines::jint_disjoint_arraycopy 
-  40.40%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+  40.40%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
    0.60%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
-   0.06%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+   0.06%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
    0.05%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.03%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
    0.02%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -769,7 +769,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 
 ....[Hottest Methods (after inlining)]..............................................................
   57.86%        runtime stub  StubRoutines::jint_disjoint_arraycopy 
-  40.52%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
+  40.52%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 4, compile id 575 
    1.35%              kernel  [unknown] 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.02%                      <unknown> 
@@ -820,7 +820,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul
 # Parameters: (size = 1048576)
 
 # Run progress: 25.00% complete, ETA 00:16:19
@@ -840,12 +840,12 @@ Iteration   5: 333538.785 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul":
   311625.686 ±(99.9%) 60503.304 us/op [Average]
   (min, avg, max) = (290208.563, 311625.686, 333538.785), stdev = 15712.516
   CI (99.9%): [251122.382, 372128.991] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul:·asm":
 PrintAssembly processed: 133387 total address lines.
 Perf output processed (skipped 57.000 seconds):
  Column 1: cycles (51235 events)
@@ -854,7 +854,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
 
                       0x00007f6c80f70a2b:   mov    0x10(%rsp),%r10d
                       0x00007f6c80f70a30:   test   %r10d,%r10d
@@ -864,59 +864,59 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       0x00007f6c80f70a3e:   xchg   %ax,%ax
           ╭           0x00007f6c80f70a40:   jmp    0x00007f6c80f70ab2
           │           0x00007f6c80f70a45:   data16 xchg %ax,%ax                 ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.35%  │↗      ↗   0x00007f6c80f70a48:   vpmulld 0x10(%rbp,%r8,4),%ymm2,%ymm0
    1.23%  ││      │   0x00007f6c80f70a4f:   vpaddd 0x10(%r13,%r8,4),%ymm0,%ymm0
    0.87%  ││      │   0x00007f6c80f70a56:   vmovdqu %ymm0,0x10(%r13,%r8,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.58%  ││      │   0x00007f6c80f70a5d:   add    $0x8,%r8d                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
           ││      │   0x00007f6c80f70a61:   cmp    0x1c(%rsp),%r8d
           │╰      │   0x00007f6c80f70a66:   jl     0x00007f6c80f70a48           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@6 (line 223)
-          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@6 (line 223)
+          │       │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.07%  │       │↗  0x00007f6c80f70a68:   cmp    0x10(%rsp),%r8d
           │ ╭     ││  0x00007f6c80f70a6d:   jge    0x00007f6c80f70a8a
           │ │     ││  0x00007f6c80f70a6f:   nop                                 ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.10%  │ │↗    ││  0x00007f6c80f70a70:   mov    0x10(%rbp,%r8,4),%r10d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@19 (line 224)
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@19 (line 224)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.09%  │ ││    ││  0x00007f6c80f70a75:   imul   0x74(%rsp),%r10d
    0.09%  │ ││    ││  0x00007f6c80f70a7b:   add    %r10d,0x10(%r13,%r8,4)       ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.28%  │ ││    ││  0x00007f6c80f70a80:   inc    %r8d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+          │ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.11%  │ ││    ││  0x00007f6c80f70a83:   cmp    0x10(%rsp),%r8d
           │ │╰    ││  0x00007f6c80f70a88:   jl     0x00007f6c80f70a70           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+          │ │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.04%  │ ↘     ││  0x00007f6c80f70a8a:   mov    0x348(%r15),%r10
    0.01%  │       ││  0x00007f6c80f70a91:   mov    0x84(%rsp),%r11d
    0.07%  │       ││  0x00007f6c80f70a99:   inc    %r11d                        ; ImmutableOopMap {rbp=Oop r13=Oop [0]=Oop [8]=Oop [20]=NarrowOop [24]=NarrowOop [40]=Derived_oop_rbp [48]=Oop [56]=Oop }
           │       ││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │       ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
+          │       ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
    0.02%  │       ││  0x00007f6c80f70a9c:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@94 (line 139)
           │       ││                                                            ;   {poll}
    0.05%  │       ││  0x00007f6c80f70a9f:   nop
    0.01%  │       ││  0x00007f6c80f70aa0:   cmp    0x10(%rsp),%r11d
           │       ││  0x00007f6c80f70aa5:   jge    0x00007f6c80f70813           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.04%  │       ││  0x00007f6c80f70aab:   mov    0x80(%rsp),%ebx              ;*aload_3 {reexecute=0 rethrow=0 return_oop=0}
-          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@55 (line 140)
+          │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@55 (line 140)
    0.01%  ↘       ││  0x00007f6c80f70ab2:   movslq %r11d,%r10
    0.05%          ││  0x00007f6c80f70ab5:   add    0x78(%rsp),%r10
    0.01%          ││  0x00007f6c80f70aba:   mov    0x30(%rsp),%r8
    0.03%          ││  0x00007f6c80f70abf:   mov    0x10(%r8,%r10,4),%r14d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@61 (line 140)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@61 (line 140)
    0.13%          ││  0x00007f6c80f70ac4:   mov    %r14d,0x74(%rsp)
    0.05%          ││  0x00007f6c80f70ac9:   test   %ebx,%ebx
                   ││  0x00007f6c80f70acb:   jl     0x00007f6c80f70d0c
@@ -940,26 +940,26 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.13%          ││  0x00007f6c80f70b2b:   movabs $0x7f6c809e3020,%r10
    0.00%          ││  0x00007f6c80f70b35:   call   *%r10
                   ││  0x00007f6c80f70b38:   vmovdqu 0x40(%rsp),%ymm1            ;*invokestatic arraycopy {reexecute=0 rethrow=0 return_oop=0}
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@71 (line 141)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@71 (line 141)
                   ││  0x00007f6c80f70b3e:   xor    %r8d,%r8d                    ;*aload {reexecute=0 rethrow=0 return_oop=0}
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+                  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.19%       ↗  ││  0x00007f6c80f70b41:   mov    0x10(%rbp,%r8,4),%r11d       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@19 (line 224)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@19 (line 224)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.17%       │  ││  0x00007f6c80f70b46:   imul   0x74(%rsp),%r11d
    0.16%       │  ││  0x00007f6c80f70b4c:   add    %r11d,0x10(%r13,%r8,4)       ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.53%       │  ││  0x00007f6c80f70b51:   mov    %r8d,%r10d
    0.14%       │  ││  0x00007f6c80f70b54:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+               │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.14%       │  ││  0x00007f6c80f70b57:   nopw   0x0(%rax,%rax,1)
    0.18%       │  ││  0x00007f6c80f70b60:   cmp    0x64(%rsp),%r10d
               ╭│  ││  0x00007f6c80f70b65:   jge    0x00007f6c80f70b6c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@6 (line 223)
-              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@6 (line 223)
+              ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.14%      ││  ││  0x00007f6c80f70b67:   mov    %r10d,%r8d
    0.14%      │╰  ││  0x00007f6c80f70b6a:   jmp    0x00007f6c80f70b41
    0.07%      ↘   ││  0x00007f6c80f70b6c:   cmp    0x88(%rsp),%r10d
@@ -977,8 +977,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                  │││  0x00007f6c80f70bae:   cmova  %r11d,%r10d
    0.06%         │││  0x00007f6c80f70bb2:   add    %r8d,%r10d
    0.04%         │││  0x00007f6c80f70bb5:   data16 data16 nopw 0x0(%rax,%rax,1) ;*aload {reexecute=0 rethrow=0 return_oop=0}
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@9 (line 224)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@9 (line 224)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.67%        ↗│││  0x00007f6c80f70bc0:   vpmulld 0x10(%rbp,%r8,4),%ymm2,%ymm0
    2.09%        ││││  0x00007f6c80f70bc7:   vpaddd 0x10(%r13,%r8,4),%ymm0,%ymm0
    1.99%        ││││  0x00007f6c80f70bce:   vmovdqu %ymm0,0x10(%r13,%r8,4)
@@ -1003,22 +1003,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.84%        ││││  0x00007f6c80f70c6e:   vpmulld 0xf0(%rbp,%r8,4),%ymm2,%ymm0
    2.41%        ││││  0x00007f6c80f70c78:   vpaddd 0xf0(%r13,%r8,4),%ymm0,%ymm0
    2.08%        ││││  0x00007f6c80f70c82:   vmovdqu %ymm0,0xf0(%r13,%r8,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@22 (line 224)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@22 (line 224)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.77%        ││││  0x00007f6c80f70c8c:   add    $0x40,%r8d                   ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@23 (line 223)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@23 (line 223)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.19%        ││││  0x00007f6c80f70c90:   cmp    %r10d,%r8d
                 ╰│││  0x00007f6c80f70c93:   jl     0x00007f6c80f70bc0           ;*goto {reexecute=0 rethrow=0 return_oop=0}
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
    0.04%         │││  0x00007f6c80f70c99:   mov    0x348(%r15),%r10             ; ImmutableOopMap {rbp=Oop r13=Oop [0]=Oop [8]=Oop [20]=NarrowOop [24]=NarrowOop [40]=Derived_oop_rbp [48]=Oop [56]=Oop }
                  │││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                 │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
                  │││  0x00007f6c80f70ca0:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::saxpy@26 (line 223)
-                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::saxpy@26 (line 223)
+                 │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@82 (line 142)
                  │││                                                            ;   {poll}
    0.11%         │││  0x00007f6c80f70ca3:   cmp    0x88(%rsp),%r8d
                  ╰││  0x00007f6c80f70cab:   jl     0x00007f6c80f70b84
@@ -1027,7 +1027,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                    │  0x00007f6c80f70cbc:   nopl   0x0(%rax)
                    ╰  0x00007f6c80f70cc0:   jmp    0x00007f6c80f70a68
                       0x00007f6c80f70cc5:   mov    0x18(%rsp),%ebx              ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul@40 (line 137)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul@40 (line 137)
 ....................................................................................................
   49.19%  <total for region 1>
 
@@ -1069,7 +1069,7 @@ runtime stub, StubRoutines::jint_disjoint_arraycopy
   48.64%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  49.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
+  49.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
   48.64%        runtime stub  StubRoutines::jint_disjoint_arraycopy 
    0.40%        runtime stub  StubRoutines::jint_disjoint_arraycopy 
    0.24%              kernel  [unknown] 
@@ -1084,7 +1084,7 @@ runtime stub, StubRoutines::jint_disjoint_arraycopy
    0.03%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
    0.02%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -1095,7 +1095,7 @@ runtime stub, StubRoutines::jint_disjoint_arraycopy
 
 ....[Hottest Methods (after inlining)]..............................................................
   49.23%        runtime stub  StubRoutines::jint_disjoint_arraycopy 
-  49.22%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
+  49.22%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_matrix_mul, version 7, compile id 572 
    1.18%              kernel  [unknown] 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.04%        libc-2.31.so  [unknown] 
@@ -1147,7 +1147,7 @@ runtime stub, StubRoutines::jint_disjoint_arraycopy
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum
 # Parameters: (size = 262144)
 
 # Run progress: 33.33% complete, ETA 00:14:33
@@ -1167,12 +1167,12 @@ Iteration   5: 103.612 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum":
   103.620 ±(99.9%) 0.101 us/op [Average]
   (min, avg, max) = (103.606, 103.620, 103.666), stdev = 0.026
   CI (99.9%): [103.519, 103.720] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum:·asm":
 PrintAssembly processed: 129657 total address lines.
 Perf output processed (skipped 56.232 seconds):
  Column 1: cycles (50598 events)
@@ -1181,7 +1181,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
 
                   0x00007fa148f6a2f9:   add    $0xfffffff9,%ebx
                   0x00007fa148f6a2fc:   mov    $0x80000000,%r9d
@@ -1199,7 +1199,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │ │     0x00007fa148f6a332:   cmova  %r9d,%r11d
    0.00%  │ │     0x00007fa148f6a336:   add    %r8d,%r11d
           │ │     0x00007fa148f6a339:   nopl   0x0(%rax)                    ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@15 (line 74)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@15 (line 74)
           │↗│     0x00007fa148f6a340:   add    0x10(%r10,%r8,4),%eax
   12.24%  │││     0x00007fa148f6a345:   add    0x14(%r10,%r8,4),%eax
   12.04%  │││     0x00007fa148f6a34a:   add    0x18(%r10,%r8,4),%eax
@@ -1208,17 +1208,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   12.11%  │││     0x00007fa148f6a359:   add    0x24(%r10,%r8,4),%eax
   11.77%  │││     0x00007fa148f6a35e:   add    0x28(%r10,%r8,4),%eax
   12.03%  │││     0x00007fa148f6a363:   add    0x2c(%r10,%r8,4),%eax        ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@19 (line 74)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@19 (line 74)
   12.43%  │││     0x00007fa148f6a368:   add    $0x8,%r8d                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@21 (line 73)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@21 (line 73)
           │││     0x00007fa148f6a36c:   cmp    %r11d,%r8d
           │╰│     0x00007fa148f6a36f:   jl     0x00007fa148f6a340           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@12 (line 73)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@12 (line 73)
           │ │     0x00007fa148f6a371:   mov    0x348(%r15),%r11             ; ImmutableOopMap {r10=Oop }
           │ │                                                               ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@24 (line 73)
+          │ │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@24 (line 73)
           │ │     0x00007fa148f6a378:   test   %eax,(%r11)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@24 (line 73)
+          │ │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@24 (line 73)
           │ │                                                               ;   {poll}
    0.01%  │ │     0x00007fa148f6a37b:   nopl   0x0(%rax,%rax,1)
           │ │     0x00007fa148f6a380:   cmp    %ebx,%r8d
@@ -1226,14 +1226,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ↘       0x00007fa148f6a385:   cmp    %ebp,%r8d
              ╭    0x00007fa148f6a388:   jge    0x00007fa148f6a399
              │    0x00007fa148f6a38a:   xchg   %ax,%ax                      ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@15 (line 74)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@15 (line 74)
              │↗   0x00007fa148f6a38c:   add    0x10(%r10,%r8,4),%eax        ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@19 (line 74)
+             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@19 (line 74)
    0.01%     ││   0x00007fa148f6a391:   inc    %r8d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@21 (line 73)
+             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@21 (line 73)
              ││   0x00007fa148f6a394:   cmp    %ebp,%r8d
              │╰   0x00007fa148f6a397:   jl     0x00007fa148f6a38c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@12 (line 73)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@12 (line 73)
              ↘ ↗  0x00007fa148f6a399:   add    $0x20,%rsp
                │  0x00007fa148f6a39d:   pop    %rbp
    0.01%       │  0x00007fa148f6a39e:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1246,12 +1246,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                   0x00007fa148f6a3b9:   xchg   %ax,%ax
                   0x00007fa148f6a3bb:   call   0x00007fa148a01600           ; ImmutableOopMap {[0]=NarrowOop }
                                                                             ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@12 (line 73)
+                                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@12 (line 73)
 ....................................................................................................
   98.30%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
+  98.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
    0.33%              kernel  [unknown] 
    0.13%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
@@ -1259,7 +1259,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.06%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
    0.05%           libjvm.so  ElfSymbolTable::lookup 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
    0.02%           libjvm.so  RelocIterator::initialize 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
@@ -1276,7 +1276,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
+  98.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 4, compile id 565 
    1.30%              kernel  [unknown] 
    0.05%           libjvm.so  ElfSymbolTable::lookup 
    0.03%        libc-2.31.so  [unknown] 
@@ -1287,7 +1287,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.01%        libc-2.31.so  __strncat_ssse3 
    0.01%      hsdis-amd64.so  print_insn 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.VectorApiBenchmark_baseline_sum_jmhTest::baseline_sum_avgt_jmhStub, version 4, compile id 593 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.VectorApiBenchmark_baseline_sum_jmhTest::baseline_sum_avgt_jmhStub, version 4, compile id 593 
    0.01%        libc-2.31.so  __strchr_sse2 
    0.01%        libc-2.31.so  re_search_stub 
    0.01%  libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
@@ -1327,7 +1327,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum
 # Parameters: (size = 1048576)
 
 # Run progress: 41.67% complete, ETA 00:12:43
@@ -1347,12 +1347,12 @@ Iteration   5: 412.663 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum":
   413.032 ±(99.9%) 2.891 us/op [Average]
   (min, avg, max) = (412.663, 413.032, 414.375), stdev = 0.751
   CI (99.9%): [410.141, 415.923] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum:·asm":
 PrintAssembly processed: 132326 total address lines.
 Perf output processed (skipped 56.375 seconds):
  Column 1: cycles (50805 events)
@@ -1361,7 +1361,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 3, compile id 575 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 3, compile id 575 
 
                  0x00007f21c4f6c5f9:   add    $0xfffffff9,%ebx
                  0x00007f21c4f6c5fc:   mov    $0x80000000,%r9d
@@ -1379,7 +1379,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │ │    0x00007f21c4f6c632:   cmova  %r9d,%r11d
    0.01%  │ │    0x00007f21c4f6c636:   add    %r8d,%r11d
           │ │    0x00007f21c4f6c639:   nopl   0x0(%rax)                    ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@15 (line 74)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@15 (line 74)
           │↗│    0x00007f21c4f6c640:   add    0x10(%r10,%r8,4),%eax
   12.20%  │││    0x00007f21c4f6c645:   add    0x14(%r10,%r8,4),%eax
   12.10%  │││    0x00007f21c4f6c64a:   add    0x18(%r10,%r8,4),%eax
@@ -1388,17 +1388,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   12.35%  │││    0x00007f21c4f6c659:   add    0x24(%r10,%r8,4),%eax
   11.96%  │││    0x00007f21c4f6c65e:   add    0x28(%r10,%r8,4),%eax
   12.04%  │││    0x00007f21c4f6c663:   add    0x2c(%r10,%r8,4),%eax        ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@19 (line 74)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@19 (line 74)
   12.21%  │││    0x00007f21c4f6c668:   add    $0x8,%r8d                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@21 (line 73)
+          │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@21 (line 73)
           │││    0x00007f21c4f6c66c:   cmp    %r11d,%r8d
           │╰│    0x00007f21c4f6c66f:   jl     0x00007f21c4f6c640           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@12 (line 73)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@12 (line 73)
           │ │    0x00007f21c4f6c671:   mov    0x348(%r15),%r11             ; ImmutableOopMap {r10=Oop }
           │ │                                                              ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@24 (line 73)
+          │ │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@24 (line 73)
           │ │    0x00007f21c4f6c678:   test   %eax,(%r11)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@24 (line 73)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@24 (line 73)
           │ │                                                              ;   {poll}
    0.02%  │ │    0x00007f21c4f6c67b:   nopl   0x0(%rax,%rax,1)
           │ │    0x00007f21c4f6c680:   cmp    %ebx,%r8d
@@ -1406,14 +1406,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ↘      0x00007f21c4f6c685:   cmp    %ebp,%r8d
              ╭   0x00007f21c4f6c688:   jge    0x00007f21c4f6c699
              │   0x00007f21c4f6c68a:   xchg   %ax,%ax                      ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@15 (line 74)
+             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@15 (line 74)
              │↗  0x00007f21c4f6c68c:   add    0x10(%r10,%r8,4),%eax        ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@19 (line 74)
+             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@19 (line 74)
    0.00%     ││  0x00007f21c4f6c691:   inc    %r8d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@21 (line 73)
+             ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@21 (line 73)
              ││  0x00007f21c4f6c694:   cmp    %ebp,%r8d
              │╰  0x00007f21c4f6c697:   jl     0x00007f21c4f6c68c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum@12 (line 73)
+             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum@12 (line 73)
              ↘   0x00007f21c4f6c699:   add    $0x20,%rsp
                  0x00007f21c4f6c69d:   pop    %rbp
                  0x00007f21c4f6c69e:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1423,7 +1423,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   97.94%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 3, compile id 575 
+  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 3, compile id 575 
    0.81%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
@@ -1448,7 +1448,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::baseline_sum, version 3, compile id 575 
+  97.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::baseline_sum, version 3, compile id 575 
    1.69%              kernel  [unknown] 
    0.06%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
@@ -1500,7 +1500,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter
 # Parameters: (size = 262144)
 
 # Run progress: 50.00% complete, ETA 00:10:53
@@ -1520,12 +1520,12 @@ Iteration   5: 602.525 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter":
   602.716 ±(99.9%) 0.965 us/op [Average]
   (min, avg, max) = (602.525, 602.716, 603.152), stdev = 0.251
   CI (99.9%): [601.751, 603.681] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter:·asm":
 PrintAssembly processed: 177481 total address lines.
 Perf output processed (skipped 56.451 seconds):
  Column 1: cycles (51103 events)
@@ -1534,13 +1534,13 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter, version 2, compile id 850 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter, version 2, compile id 850 
 
                                                                                        ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                                                                                        ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                                                                                        ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                                                                                        ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                              0x00007fd60cf9016d:   lea    (%r12,%r10,8),%r11
                              0x00007fd60cf90171:   mov    %r11,0x38(%rsp)
                              0x00007fd60cf90176:   mov    %r10d,0x14(%rsp)
@@ -1551,19 +1551,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                                                                                        ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
                                                                                        ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
                                                                                        ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
                              0x00007fd60cf90188:   vpxor  %ymm4,%ymm4,%ymm4            ;*synchronization entry
                                                                                        ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                                                                                        ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                                                                                        ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                                                                                        ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                              0x00007fd60cf9018c:   vpcmpeqb %ymm2,%ymm2,%ymm2          ;*invokevirtual vectorType {reexecute=0 rethrow=0 return_oop=0}
                                                                                        ; - jdk.incubator.vector.IntVector::fromArray0Template@6 (line 3240)
                                                                                        ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                                                                                        ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
                              0x00007fd60cf90190:   xor    %r10d,%r10d
                              0x00007fd60cf90193:   mov    %r10d,0x34(%rsp)
           ╭                  0x00007fd60cf90198:   jmp    0x00007fd60cf902b7
@@ -1573,27 +1573,27 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │    │                                                                       ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │    │                                                                       ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │    │                                                                       ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.10%  │    │             0x00007fd60cf901a7:   mov    %r10d,0x1c(%r11,%rax,4)      ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │    │                                                                       ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           │    │                                                                       ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.92%  │    │             0x00007fd60cf901ac:   nopl   0x0(%rax)                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@25 (line 114)
+          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@25 (line 114)
    1.00%  │    │↗            0x00007fd60cf901b0:   add    $0x4,%edi
           │    ││            0x00007fd60cf901b3:   cmp    %edx,%edi
           │╭   ││            0x00007fd60cf901b5:   jge    0x00007fd60cf9022b           ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           ││   ││                                                                      ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           ││   ││                                                                      ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││                                                                      ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.86%  ││   ││ ↗          0x00007fd60cf901bb:   movslq %edi,%rsi                    ;*synchronization entry
           ││   ││ │                                                                    ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.14%  ││   ││ │          0x00007fd60cf901be:   movzbl 0x10(%rcx,%rsi,1),%r11d      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@21 (line 3536)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
@@ -1603,8 +1603,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.98%  ││   ││ │          0x00007fd60cf901c4:   mov    0x40(%rsp),%rax
    0.09%  ││   ││ │          0x00007fd60cf901c9:   add    %rsi,%rax
    0.97%  ││   ││ │          0x00007fd60cf901cc:   test   %r11d,%r11d
@@ -1615,13 +1615,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │││  ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │││  ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │││  ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │││  ││ │          0x00007fd60cf901db:   mov    %r10d,0x10(%r11,%rax,4)      ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           │││  ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           │││  ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           │││  ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.10%  ││↘  ││ │          0x00007fd60cf901e0:   movzbl 0x11(%rcx,%rsi,1),%r10d      ;*invokevirtual broadcast {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::broadcastTemplate@7 (line 478)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::broadcast@2 (line 125)
@@ -1629,8 +1629,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.95%  ││   ││ │          0x00007fd60cf901e6:   test   %r10d,%r10d
           ││ ╭ ││ │          0x00007fd60cf901e9:   je     0x00007fd60cf901fa
    0.07%  ││ │ ││ │          0x00007fd60cf901eb:   mov    0x14(%r9,%rsi,4),%r11d
@@ -1639,19 +1639,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.12%  ││ │ ││ │          0x00007fd60cf901f5:   mov    %r11d,0x14(%r10,%rax,4)      ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.94%  ││ ↘ ││ │          0x00007fd60cf901fa:   movzbl 0x12(%rcx,%rsi,1),%r10d      ;*invokevirtual broadcast {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.08%  ││   ││ │          0x00007fd60cf90200:   test   %r10d,%r10d
           ││  ╭││ │          0x00007fd60cf90203:   je     0x00007fd60cf90214
           ││  │││ │          0x00007fd60cf90205:   mov    0x18(%r9,%rsi,4),%r10d
@@ -1660,7 +1660,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           ││  │││ │          0x00007fd60cf9020f:   mov    %r10d,0x18(%r11,%rax,4)      ;*synchronization entry
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::broadcastTemplate@-1 (line 477)
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::broadcast@2 (line 125)
@@ -1668,37 +1668,37 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.90%  ││  ↘││ │          0x00007fd60cf90214:   movzbl 0x13(%rcx,%rsi,1),%r10d      ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.12%  ││   ││ │          0x00007fd60cf9021a:   nopw   0x0(%rax,%rax,1)
    0.96%  ││   ││ │          0x00007fd60cf90220:   test   %r10d,%r10d                  ;*synchronization entry
           ││   ││ │                                                                    ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           ││   ╰│ │          0x00007fd60cf90223:   jne    0x00007fd60cf9019d
           ││    ╰ │          0x00007fd60cf90229:   jmp    0x00007fd60cf901b0           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           ││      │                                                                    ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           ││      │                                                                    ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          ││      │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          ││      │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.14%  │↘      │          0x00007fd60cf9022b:   mov    0x348(%r15),%r10             ; ImmutableOopMap {r9=Oop rcx=Oop [0]=Oop [8]=Oop [20]=NarrowOop [24]=Oop [48]=NarrowOop [56]=Oop }
           │       │                                                                    ;*goto {reexecute=1 rethrow=0 return_oop=0}
           │       │                                                                    ; - (reexecute) jdk.incubator.vector.IntVector::stOp@53 (line 354)
           │       │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │       │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │       │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.93%  │       │          0x00007fd60cf90232:   test   %eax,(%r10)                  ;   {poll}
    1.04%  │       │          0x00007fd60cf90235:   cmp    %ebx,%edi
           │      ╭│          0x00007fd60cf90237:   jge    0x00007fd60cf90260           ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           │      ││                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           │      ││                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           │      ││                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.11%  │      ││       ↗  0x00007fd60cf90239:   mov    %ebx,%edx
    1.00%  │      ││       │  0x00007fd60cf9023b:   sub    %edi,%edx
    0.07%  │      ││       │  0x00007fd60cf9023d:   xor    %esi,%esi
@@ -1716,7 +1716,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │     ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │        │     ││  0x00007fd60cf90265:   data16 xchg %ax,%ax
    2.15%  │        │ ↗   ││  0x00007fd60cf90268:   movslq %edi,%r10                    ;*invokevirtual opKind {reexecute=0 rethrow=0 return_oop=0}
           │        │ │   ││                                                            ; - jdk.incubator.vector.VectorOperators::opKind@5 (line 411)
@@ -1726,16 +1726,16 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.93%  │        │ │   ││  0x00007fd60cf9026b:   movzbl 0x10(%rcx,%r10,1),%r11d      ;*invokestatic opKind {reexecute=0 rethrow=0 return_oop=0}
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::lanewiseTemplate@15 (line 590)
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.26%  │        │ │   ││  0x00007fd60cf90271:   test   %r11d,%r11d
           │        │╭│   ││  0x00007fd60cf90274:   je     0x00007fd60cf9028d
    0.99%  │        │││   ││  0x00007fd60cf90276:   mov    0x10(%r9,%r10,4),%r11d
@@ -1746,7 +1746,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │││   ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.98%  │        │││   ││  0x00007fd60cf90288:   mov    %r11d,0x10(%r10,%rbx,4)      ;*invokevirtual opKind {reexecute=0 rethrow=0 return_oop=0}
           │        │││   ││                                                            ; - jdk.incubator.vector.VectorOperators::opKind@5 (line 411)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::opKind@2 (line 72)
@@ -1755,36 +1755,36 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │││   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.08%  │        │↘│   ││  0x00007fd60cf9028d:   inc    %edi
    0.99%  │        │ │   ││  0x00007fd60cf9028f:   cmp    %r8d,%edi                    ;*synchronization entry
           │        │ │   ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │        │ ╰   ││  0x00007fd60cf90292:   jl     0x00007fd60cf90268           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.99%  │        ↘   ↗ ││  0x00007fd60cf90294:   mov    0x348(%r15),%r10
    1.15%  │            │ ││  0x00007fd60cf9029b:   mov    0x34(%rsp),%r8d              ;*synchronization entry
           │            │ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           │            │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │            │ ││  0x00007fd60cf902a0:   add    $0x8,%r8d
           │            │ ││  0x00007fd60cf902a4:   mov    %r8d,0x34(%rsp)              ; ImmutableOopMap {[0]=Oop [8]=Oop [20]=NarrowOop [24]=Oop [48]=NarrowOop [56]=Oop }
           │            │ ││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │            │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@70 (line 114)
+          │            │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@70 (line 114)
    0.87%  │            │ ││  0x00007fd60cf902a9:   test   %eax,(%r10)                  ;   {poll}
    1.09%  │            │ ││  0x00007fd60cf902ac:   cmp    0x20(%rsp),%r8d
           │            │ ││  0x00007fd60cf902b1:   jge    0x00007fd60cf905ab           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
           ↘            │ ││  0x00007fd60cf902b7:   mov    0x108(%r15),%rax
    0.00%               │ ││  0x00007fd60cf902be:   mov    %rax,%r10
    0.95%               │ ││  0x00007fd60cf902c1:   add    $0x30,%r10                   ;*synchronization entry
@@ -1792,34 +1792,34 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                        │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    1.08%               │ ││  0x00007fd60cf902c5:   movslq 0x34(%rsp),%r11              ;*invokestatic opKind {reexecute=0 rethrow=0 return_oop=0}
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@3 (line 705)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.08%               │ ││  0x00007fd60cf902ca:   mov    %r11,0x40(%rsp)              ;*synchronization entry
                        │ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                        │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.03%               │ ││  0x00007fd60cf902cf:   shl    $0x2,%r11
    0.96%               │ ││  0x00007fd60cf902d3:   mov    %r11,0x48(%rsp)              ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                        │ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.18%               │ ││  0x00007fd60cf902d8:   nopl   0x0(%rax,%rax,1)
                        │ ││  0x00007fd60cf902e0:   cmp    0x118(%r15),%r10             ;*synchronization entry
                        │ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                        │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ╭│ ││  0x00007fd60cf902e7:   jae    0x00007fd60cf904e5           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.01%              ││ ││  0x00007fd60cf902ed:   mov    %r10,0x108(%r15)
    0.98%              ││ ││  0x00007fd60cf902f4:   prefetchw 0xc0(%r10)
    1.08%              ││ ││  0x00007fd60cf902fc:   movq   $0x1,(%rax)
@@ -1835,7 +1835,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@31 (line 3239)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.01%              ││ ││  0x00007fd60cf90339:   mov    %rax,%rbp
    0.85%              ││ ││  0x00007fd60cf9033c:   mov    0x18(%rsp),%r10
    1.08%              ││ ││  0x00007fd60cf90341:   mov    0x48(%rsp),%r11              ;*synchronization entry
@@ -1843,12 +1843,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.04%              ││ ││  0x00007fd60cf90346:   vmovdqu 0x10(%r10,%r11,1),%ymm7     ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                       ││ ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    3.44%              ││ ││  0x00007fd60cf9034d:   vmovdqu %ymm7,0x10(%rax)
    2.42%              ││ ││  0x00007fd60cf90352:   mov    0x108(%r15),%rax
    1.06%              ││ ││  0x00007fd60cf90359:   vpand  %ymm3,%ymm7,%ymm1
@@ -1856,17 +1856,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.00%              ││ ││  0x00007fd60cf90360:   add    $0x18,%r10                   ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.65%              ││ ││  0x00007fd60cf90364:   cmp    0x118(%r15),%r10             ;*synchronization entry
                       ││ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ││ ││  0x00007fd60cf9036b:   jae    0x00007fd60cf90539           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.96%              ││ ││  0x00007fd60cf90371:   mov    %r10,0x108(%r15)
    0.38%              ││ ││  0x00007fd60cf90378:   prefetchw 0xc0(%r10)
    0.00%              ││ ││  0x00007fd60cf90380:   movq   $0x1,(%rax)
@@ -1880,12 +1880,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.38%              ││ ││  0x00007fd60cf903b1:   vpcmpeqd %ymm4,%ymm1,%ymm1          ;*invokevirtual vectorType {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@6 (line 3240)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.32%              ││ ││  0x00007fd60cf903b5:   vptest %ymm2,%ymm1
    1.57%              ││ ││  0x00007fd60cf903ba:   setb   %r11b
    1.74%              ││ ││  0x00007fd60cf903be:   movzbl %r11b,%r11d                  ;*synchronization entry
@@ -1893,19 +1893,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.94%              ││ ││  0x00007fd60cf903c2:   vextracti128 $0x1,%ymm1,%xmm0
    0.20%              ││ ││  0x00007fd60cf903c8:   vpackssdw %xmm0,%xmm1,%xmm0
    1.00%              ││ ││  0x00007fd60cf903cc:   vpacksswb %xmm0,%xmm0,%xmm0
    0.02%              ││ ││  0x00007fd60cf903d0:   vpabsb %xmm0,%xmm0                  ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    2.50%              ││ ││  0x00007fd60cf903d5:   vmovq  %xmm0,0x10(%rax)             ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                       ││ ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.13%              ││ ││  0x00007fd60cf903da:   nopw   0x0(%rax,%rax,1)
    1.03%              ││ ││  0x00007fd60cf903e0:   test   %r11d,%r11d
                       ││ ││  0x00007fd60cf903e3:   jne    0x00007fd60cf90730
@@ -1918,15 +1918,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.93%              ││ ││  0x00007fd60cf90407:   mov    $0x8,%r8d
    0.17%              ││ ││  0x00007fd60cf9040d:   cmovge %r8d,%r10d                   ;*invokevirtual opKind {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.VectorOperators::opKind@5 (line 411)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::opKind@2 (line 72)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@3 (line 705)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.99%              ││ ││  0x00007fd60cf90411:   xor    %r11d,%r11d
                       ││ ││  0x00007fd60cf90414:   test   %r10d,%r10d
    0.82%              ││ ││  0x00007fd60cf90417:   cmovle %r11d,%r10d
@@ -1939,13 +1939,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ││ ││                                                            ;   {external_word}
    0.44%              ││ ││  0x00007fd60cf90431:   vpand  %ymm1,%ymm5,%ymm5            ;*invokevirtual elementType {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@10 (line 3240)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.06%              ││ ││  0x00007fd60cf90435:   vptest %ymm2,%ymm5
    1.04%              ││ ││  0x00007fd60cf9043a:   setne  %r11b
    0.17%              ││ ││  0x00007fd60cf9043e:   movzbl %r11b,%r11d
@@ -1954,40 +1954,40 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ││ ││  0x00007fd60cf90445:   jne    0x00007fd60cf90768           ;*invokestatic roundDown {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.AbstractSpecies::loopBound@5 (line 203)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@20 (line 114)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@20 (line 114)
    0.08%              ││ ││  0x00007fd60cf9044b:   mov    %rbp,%r9                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@34 (line 3239)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.90%              ││ ││  0x00007fd60cf9044e:   mov    0xc(%rbp),%r8d               ;*invokestatic checkFromIndexSize {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.13%              ││ ││  0x00007fd60cf90452:   test   %r8d,%r8d                    ;*synchronization entry
                       ││ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       │╰ ││  0x00007fd60cf90455:   jbe    0x00007fd60cf90294           ;*synchronization entry
                       │  ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::roundDown@-1 (line 84)
                       │  ││                                                            ; - jdk.incubator.vector.AbstractSpecies::loopBound@5 (line 203)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@20 (line 114)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@20 (line 114)
    1.00%              │  ││  0x00007fd60cf9045b:   mov    %rax,%rcx                    ;*synchronization entry
                       │  ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                       │  ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.06%              │  ││  0x00007fd60cf9045e:   mov    0xc(%rax),%r11d              ;*invokestatic opKind {reexecute=0 rethrow=0 return_oop=0}
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::opKind@2 (line 72)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@3 (line 705)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.08%              │  ││  0x00007fd60cf90462:   test   %r11d,%r11d
                       │  ││  0x00007fd60cf90465:   jbe    0x00007fd60cf906c7
    0.13%              │  ││  0x00007fd60cf9046b:   mov    %r8d,%r10d
@@ -2012,7 +2012,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       │ │││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.05%              │ │││  0x00007fd60cf904b7:   mov    %r11d,0x10(%rbx,%rdi,1)      ;*invokestatic opCode {reexecute=0 rethrow=0 return_oop=0}
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::opCode@7 (line 63)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::lanewiseTemplate@207 (line 619)
@@ -2020,8 +2020,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       │ │││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.97%              │ ↘││  0x00007fd60cf904bc:   mov    %r8d,%ebx
    0.13%              │  ││  0x00007fd60cf904bf:   add    $0xfffffffd,%ebx
    0.94%              │  ││  0x00007fd60cf904c2:   cmp    %ebx,%r10d
@@ -2041,12 +2041,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                                                                                        ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                                                                                        ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                                                                                        ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
 ....................................................................................................
   96.39%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  96.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter, version 2, compile id 850 
+  96.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter, version 2, compile id 850 
    0.96%              kernel  [unknown] 
    0.13%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
@@ -2071,7 +2071,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  96.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter, version 2, compile id 850 
+  96.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter, version 2, compile id 850 
    2.09%              kernel  [unknown] 
    0.14%                      <unknown> 
    0.09%        libc-2.31.so  [unknown] 
@@ -2122,7 +2122,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter
 # Parameters: (size = 1048576)
 
 # Run progress: 58.33% complete, ETA 00:09:04
@@ -2142,12 +2142,12 @@ Iteration   5: 2417.231 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter":
   2430.342 ±(99.9%) 30.091 us/op [Average]
   (min, avg, max) = (2417.231, 2430.342, 2437.320), stdev = 7.815
   CI (99.9%): [2400.251, 2460.434] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter:·asm":
 PrintAssembly processed: 171881 total address lines.
 Perf output processed (skipped 56.376 seconds):
  Column 1: cycles (50903 events)
@@ -2156,15 +2156,15 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter, version 2, compile id 847 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter, version 2, compile id 847 
 
                                                                                        ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                              0x00007fb93cf8a80c:   vpcmpeqb %ymm2,%ymm2,%ymm2          ;*invokevirtual vectorType {reexecute=0 rethrow=0 return_oop=0}
                                                                                        ; - jdk.incubator.vector.IntVector::fromArray0Template@6 (line 3240)
                                                                                        ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                                                                                        ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
                              0x00007fb93cf8a810:   xor    %r10d,%r10d
                              0x00007fb93cf8a813:   mov    %r10d,0x34(%rsp)
           ╭                  0x00007fb93cf8a818:   jmp    0x00007fb93cf8a937
@@ -2174,27 +2174,27 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │    │                                                                       ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │    │                                                                       ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │    │                                                                       ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.16%  │    │             0x00007fb93cf8a827:   mov    %r10d,0x1c(%r11,%rax,4)      ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │    │                                                                       ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           │    │                                                                       ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.01%  │    │             0x00007fb93cf8a82c:   nopl   0x0(%rax)                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@25 (line 114)
+          │    │                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@25 (line 114)
    1.04%  │    │↗            0x00007fb93cf8a830:   add    $0x4,%edi
           │    ││            0x00007fb93cf8a833:   cmp    %edx,%edi
           │╭   ││            0x00007fb93cf8a835:   jge    0x00007fb93cf8a8ab           ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           ││   ││                                                                      ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           ││   ││                                                                      ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││                                                                      ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.92%  ││   ││ ↗          0x00007fb93cf8a83b:   movslq %edi,%rsi                    ;*synchronization entry
           ││   ││ │                                                                    ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.12%  ││   ││ │          0x00007fb93cf8a83e:   movzbl 0x10(%rcx,%rsi,1),%r11d      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@21 (line 3536)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
@@ -2204,8 +2204,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.07%  ││   ││ │          0x00007fb93cf8a844:   mov    0x40(%rsp),%rax
    0.06%  ││   ││ │          0x00007fb93cf8a849:   add    %rsi,%rax
    0.92%  ││   ││ │          0x00007fb93cf8a84c:   test   %r11d,%r11d
@@ -2216,13 +2216,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │││  ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │││  ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │││  ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │││  ││ │          0x00007fb93cf8a85b:   mov    %r10d,0x10(%r11,%rax,4)      ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           │││  ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           │││  ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           │││  ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          │││  ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.13%  ││↘  ││ │          0x00007fb93cf8a860:   movzbl 0x11(%rcx,%rsi,1),%r10d      ;*invokevirtual broadcast {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::broadcastTemplate@7 (line 478)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::broadcast@2 (line 125)
@@ -2230,8 +2230,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.93%  ││   ││ │          0x00007fb93cf8a866:   test   %r10d,%r10d
           ││ ╭ ││ │          0x00007fb93cf8a869:   je     0x00007fb93cf8a87a
    0.07%  ││ │ ││ │          0x00007fb93cf8a86b:   mov    0x14(%r9,%rsi,4),%r11d
@@ -2240,19 +2240,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.12%  ││ │ ││ │          0x00007fb93cf8a875:   mov    %r11d,0x14(%r10,%rax,4)      ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││ │ ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││ │ ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.01%  ││ ↘ ││ │          0x00007fb93cf8a87a:   movzbl 0x12(%rcx,%rsi,1),%r10d      ;*invokevirtual broadcast {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.06%  ││   ││ │          0x00007fb93cf8a880:   test   %r10d,%r10d
           ││  ╭││ │          0x00007fb93cf8a883:   je     0x00007fb93cf8a894
           ││  │││ │          0x00007fb93cf8a885:   mov    0x18(%r9,%rsi,4),%r10d
@@ -2261,7 +2261,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           ││  │││ │          0x00007fb93cf8a88f:   mov    %r10d,0x18(%r11,%rax,4)      ;*synchronization entry
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::broadcastTemplate@-1 (line 477)
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::broadcast@2 (line 125)
@@ -2269,37 +2269,37 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           ││  │││ │                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@5 (line 1815)
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           ││  │││ │                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          ││  │││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.94%  ││  ↘││ │          0x00007fb93cf8a894:   movzbl 0x13(%rcx,%rsi,1),%r10d      ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.11%  ││   ││ │          0x00007fb93cf8a89a:   nopw   0x0(%rax,%rax,1)
    0.90%  ││   ││ │          0x00007fb93cf8a8a0:   test   %r10d,%r10d                  ;*synchronization entry
           ││   ││ │                                                                    ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           ││   ││ │                                                                    ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           ││   ││ │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          ││   ││ │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           ││   ╰│ │          0x00007fb93cf8a8a3:   jne    0x00007fb93cf8a81d
           ││    ╰ │          0x00007fb93cf8a8a9:   jmp    0x00007fb93cf8a830           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           ││      │                                                                    ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           ││      │                                                                    ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          ││      │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          ││      │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.10%  │↘      │          0x00007fb93cf8a8ab:   mov    0x348(%r15),%r10             ; ImmutableOopMap {r9=Oop rcx=Oop [0]=Oop [8]=Oop [20]=NarrowOop [24]=Oop [48]=NarrowOop [56]=Oop }
           │       │                                                                    ;*goto {reexecute=1 rethrow=0 return_oop=0}
           │       │                                                                    ; - (reexecute) jdk.incubator.vector.IntVector::stOp@53 (line 354)
           │       │                                                                    ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │       │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │       │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.94%  │       │          0x00007fb93cf8a8b2:   test   %eax,(%r10)                  ;   {poll}
    1.05%  │       │          0x00007fb93cf8a8b5:   cmp    %ebx,%edi
           │      ╭│          0x00007fb93cf8a8b7:   jge    0x00007fb93cf8a8e0           ;*invokevirtual compareTemplate {reexecute=0 rethrow=0 return_oop=0}
           │      ││                                                                    ; - jdk.incubator.vector.IntVector::compareTemplate@8 (line 1815)
           │      ││                                                                    ; - jdk.incubator.vector.Int256Vector::compare@5 (line 357)
           │      ││                                                                    ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
-          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@9 (line 233)
-          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@9 (line 233)
+          │      ││                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.12%  │      ││       ↗  0x00007fb93cf8a8b9:   mov    %ebx,%edx
    0.96%  │      ││       │  0x00007fb93cf8a8bb:   sub    %edi,%edx
    0.08%  │      ││       │  0x00007fb93cf8a8bd:   xor    %esi,%esi
@@ -2317,7 +2317,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │     ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │        │     ││  0x00007fb93cf8a8e5:   data16 xchg %ax,%ax
    2.06%  │        │ ↗   ││  0x00007fb93cf8a8e8:   movslq %edi,%r10                    ;*invokevirtual opKind {reexecute=0 rethrow=0 return_oop=0}
           │        │ │   ││                                                            ; - jdk.incubator.vector.VectorOperators::opKind@5 (line 411)
@@ -2327,16 +2327,16 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.78%  │        │ │   ││  0x00007fb93cf8a8eb:   movzbl 0x10(%rcx,%r10,1),%r11d      ;*invokestatic opKind {reexecute=0 rethrow=0 return_oop=0}
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::lanewiseTemplate@15 (line 590)
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.25%  │        │ │   ││  0x00007fb93cf8a8f1:   test   %r11d,%r11d
           │        │╭│   ││  0x00007fb93cf8a8f4:   je     0x00007fb93cf8a90d
    1.00%  │        │││   ││  0x00007fb93cf8a8f6:   mov    0x10(%r9,%r10,4),%r11d
@@ -2347,7 +2347,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │││   ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.85%  │        │││   ││  0x00007fb93cf8a908:   mov    %r11d,0x10(%r10,%rbx,4)      ;*invokevirtual opKind {reexecute=0 rethrow=0 return_oop=0}
           │        │││   ││                                                            ; - jdk.incubator.vector.VectorOperators::opKind@5 (line 411)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::opKind@2 (line 72)
@@ -2356,36 +2356,36 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │        │││   ││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
           │        │││   ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+          │        │││   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.13%  │        │↘│   ││  0x00007fb93cf8a90d:   inc    %edi
    0.93%  │        │ │   ││  0x00007fb93cf8a90f:   cmp    %r8d,%edi                    ;*synchronization entry
           │        │ │   ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           │        │ │   ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │        │ │   ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │        │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │        │ ╰   ││  0x00007fb93cf8a912:   jl     0x00007fb93cf8a8e8           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           │        │     ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          │        │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.01%  │        ↘   ↗ ││  0x00007fb93cf8a914:   mov    0x348(%r15),%r10
    1.08%  │            │ ││  0x00007fb93cf8a91b:   mov    0x34(%rsp),%r8d              ;*synchronization entry
           │            │ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
           │            │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
           │            │ ││  0x00007fb93cf8a920:   add    $0x8,%r8d
           │            │ ││  0x00007fb93cf8a924:   mov    %r8d,0x34(%rsp)              ; ImmutableOopMap {[0]=Oop [8]=Oop [20]=NarrowOop [24]=Oop [48]=NarrowOop [56]=Oop }
           │            │ ││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │            │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@70 (line 114)
+          │            │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@70 (line 114)
    1.02%  │            │ ││  0x00007fb93cf8a929:   test   %eax,(%r10)                  ;   {poll}
    1.20%  │            │ ││  0x00007fb93cf8a92c:   cmp    0x20(%rsp),%r8d
           │            │ ││  0x00007fb93cf8a931:   jge    0x00007fb93cf8ac2b           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
           │            │ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+          │            │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.01%  ↘            │ ││  0x00007fb93cf8a937:   mov    0x108(%r15),%rax
    0.02%               │ ││  0x00007fb93cf8a93e:   mov    %rax,%r10
    0.92%               │ ││  0x00007fb93cf8a941:   add    $0x30,%r10                   ;*synchronization entry
@@ -2393,34 +2393,34 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                        │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    1.12%               │ ││  0x00007fb93cf8a945:   movslq 0x34(%rsp),%r11              ;*invokestatic opKind {reexecute=0 rethrow=0 return_oop=0}
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@3 (line 705)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.08%               │ ││  0x00007fb93cf8a94a:   mov    %r11,0x40(%rsp)              ;*synchronization entry
                        │ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                        │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.02%               │ ││  0x00007fb93cf8a94f:   shl    $0x2,%r11
    0.88%               │ ││  0x00007fb93cf8a953:   mov    %r11,0x48(%rsp)              ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                        │ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.15%               │ ││  0x00007fb93cf8a958:   nopl   0x0(%rax,%rax,1)
                        │ ││  0x00007fb93cf8a960:   cmp    0x118(%r15),%r10             ;*synchronization entry
                        │ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                        │ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                        │ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                       │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ╭│ ││  0x00007fb93cf8a967:   jae    0x00007fb93cf8ab65           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.00%              ││ ││  0x00007fb93cf8a96d:   mov    %r10,0x108(%r15)
    0.88%              ││ ││  0x00007fb93cf8a974:   prefetchw 0xc0(%r10)
    1.11%              ││ ││  0x00007fb93cf8a97c:   movq   $0x1,(%rax)
@@ -2436,7 +2436,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@31 (line 3239)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.01%              ││ ││  0x00007fb93cf8a9b9:   mov    %rax,%rbp
    1.00%              ││ ││  0x00007fb93cf8a9bc:   mov    0x18(%rsp),%r10
    1.08%              ││ ││  0x00007fb93cf8a9c1:   mov    0x48(%rsp),%r11              ;*synchronization entry
@@ -2444,12 +2444,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.03%              ││ ││  0x00007fb93cf8a9c6:   vmovdqu 0x10(%r10,%r11,1),%ymm7     ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                       ││ ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    4.16%              ││ ││  0x00007fb93cf8a9cd:   vmovdqu %ymm7,0x10(%rax)
    2.37%              ││ ││  0x00007fb93cf8a9d2:   mov    0x108(%r15),%rax
    1.06%              ││ ││  0x00007fb93cf8a9d9:   vpand  %ymm3,%ymm7,%ymm1
@@ -2457,17 +2457,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.01%              ││ ││  0x00007fb93cf8a9e0:   add    $0x18,%r10                   ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.64%              ││ ││  0x00007fb93cf8a9e4:   cmp    0x118(%r15),%r10             ;*synchronization entry
                       ││ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ││ ││  0x00007fb93cf8a9eb:   jae    0x00007fb93cf8abb9           ;*invokespecial dummyVector {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.01%              ││ ││  0x00007fb93cf8a9f1:   mov    %r10,0x108(%r15)
    0.41%              ││ ││  0x00007fb93cf8a9f8:   prefetchw 0xc0(%r10)
    0.01%              ││ ││  0x00007fb93cf8aa00:   movq   $0x1,(%rax)
@@ -2481,12 +2481,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.43%              ││ ││  0x00007fb93cf8aa31:   vpcmpeqd %ymm4,%ymm1,%ymm1          ;*invokevirtual vectorType {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@6 (line 3240)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.32%              ││ ││  0x00007fb93cf8aa35:   vptest %ymm2,%ymm1
    1.59%              ││ ││  0x00007fb93cf8aa3a:   setb   %r11b
    1.68%              ││ ││  0x00007fb93cf8aa3e:   movzbl %r11b,%r11d                  ;*synchronization entry
@@ -2494,19 +2494,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.92%              ││ ││  0x00007fb93cf8aa42:   vextracti128 $0x1,%ymm1,%xmm0
    0.20%              ││ ││  0x00007fb93cf8aa48:   vpackssdw %xmm0,%xmm1,%xmm0
    0.98%              ││ ││  0x00007fb93cf8aa4c:   vpacksswb %xmm0,%xmm0,%xmm0
    0.02%              ││ ││  0x00007fb93cf8aa50:   vpabsb %xmm0,%xmm0                  ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    2.22%              ││ ││  0x00007fb93cf8aa55:   vmovq  %xmm0,0x10(%rax)             ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                       ││ ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.13%              ││ ││  0x00007fb93cf8aa5a:   nopw   0x0(%rax,%rax,1)
    1.01%              ││ ││  0x00007fb93cf8aa60:   test   %r11d,%r11d
                       ││ ││  0x00007fb93cf8aa63:   jne    0x00007fb93cf8adb0
@@ -2519,15 +2519,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.85%              ││ ││  0x00007fb93cf8aa87:   mov    $0x8,%r8d
    0.15%              ││ ││  0x00007fb93cf8aa8d:   cmovge %r8d,%r10d                   ;*invokevirtual opKind {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.VectorOperators::opKind@5 (line 411)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::opKind@2 (line 72)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@3 (line 705)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.94%              ││ ││  0x00007fb93cf8aa91:   xor    %r11d,%r11d
                       ││ ││  0x00007fb93cf8aa94:   test   %r10d,%r10d
    0.92%              ││ ││  0x00007fb93cf8aa97:   cmovle %r11d,%r10d
@@ -2540,13 +2540,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ││ ││                                                            ;   {external_word}
    0.42%              ││ ││  0x00007fb93cf8aab1:   vpand  %ymm1,%ymm5,%ymm5            ;*invokevirtual elementType {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@10 (line 3240)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    1.05%              ││ ││  0x00007fb93cf8aab5:   vptest %ymm2,%ymm5
    1.05%              ││ ││  0x00007fb93cf8aaba:   setne  %r11b
    0.24%              ││ ││  0x00007fb93cf8aabe:   movzbl %r11b,%r11d
@@ -2555,40 +2555,40 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       ││ ││  0x00007fb93cf8aac5:   jne    0x00007fb93cf8ade8           ;*invokestatic roundDown {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.AbstractSpecies::loopBound@5 (line 203)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@20 (line 114)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@20 (line 114)
    0.06%              ││ ││  0x00007fb93cf8aacb:   mov    %rbp,%r9                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@34 (line 3239)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.89%              ││ ││  0x00007fb93cf8aace:   mov    0xc(%rbp),%r8d               ;*invokestatic checkFromIndexSize {reexecute=0 rethrow=0 return_oop=0}
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@34 (line 115)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@34 (line 115)
    0.15%              ││ ││  0x00007fb93cf8aad2:   test   %r8d,%r8d                    ;*synchronization entry
                       ││ ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                       ││ ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       ││ ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
                       │╰ ││  0x00007fb93cf8aad5:   jbe    0x00007fb93cf8a914           ;*synchronization entry
                       │  ││                                                            ; - jdk.incubator.vector.VectorIntrinsics::roundDown@-1 (line 84)
                       │  ││                                                            ; - jdk.incubator.vector.AbstractSpecies::loopBound@5 (line 203)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@20 (line 114)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@20 (line 114)
    0.92%              │  ││  0x00007fb93cf8aadb:   mov    %rax,%rcx                    ;*synchronization entry
                       │  ││                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@-1 (line 133)
                       │  ││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.08%              │  ││  0x00007fb93cf8aade:   mov    0xc(%rax),%r11d              ;*invokestatic opKind {reexecute=0 rethrow=0 return_oop=0}
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::opKind@2 (line 72)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::lanewise@3 (line 705)
                       │  ││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                      │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    1.21%              │  ││  0x00007fb93cf8aae2:   test   %r11d,%r11d
                       │  ││  0x00007fb93cf8aae5:   jbe    0x00007fb93cf8ad47
    0.14%              │  ││  0x00007fb93cf8aaeb:   mov    %r8d,%r10d
@@ -2613,7 +2613,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       │ │││                                                            ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
    0.06%              │ │││  0x00007fb93cf8ab37:   mov    %r11d,0x10(%rbx,%rdi,1)      ;*invokestatic opCode {reexecute=0 rethrow=0 return_oop=0}
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::opCode@7 (line 63)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::lanewiseTemplate@207 (line 619)
@@ -2621,8 +2621,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                       │ │││                                                            ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::lanewise@43 (line 711)
                       │ │││                                                            ; - jdk.incubator.vector.IntVector::and@5 (line 1510)
-                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::test_value_vector@2 (line 233)
-                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@42 (line 116)
+                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::test_value_vector@2 (line 233)
+                      │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@42 (line 116)
    0.97%              │ ↘││  0x00007fb93cf8ab3c:   mov    %r8d,%ebx
    0.17%              │  ││  0x00007fb93cf8ab3f:   add    $0xfffffffd,%ebx
    0.87%              │  ││  0x00007fb93cf8ab42:   cmp    %ebx,%r10d
@@ -2642,12 +2642,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                                                                                        ; - jdk.incubator.vector.Int256Vector::vec@1 (line 117)
                                                                                        ; - jdk.incubator.vector.IntVector::stOp@1 (line 352)
                                                                                        ; - jdk.incubator.vector.IntVector::intoArray@41 (line 3034)
-                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter@54 (line 117)
+                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter@54 (line 117)
 ....................................................................................................
   96.91%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  96.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter, version 2, compile id 847 
+  96.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter, version 2, compile id 847 
    0.49%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.07%           libjvm.so  HeapRegionManager::par_iterate 
@@ -2672,7 +2672,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  96.92%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_filter, version 2, compile id 847 
+  96.92%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_filter, version 2, compile id 847 
    1.36%              kernel  [unknown] 
    0.14%                      <unknown> 
    0.11%        libc-2.31.so  [unknown] 
@@ -2724,7 +2724,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul
 # Parameters: (size = 262144)
 
 # Run progress: 66.67% complete, ETA 00:07:15
@@ -2744,12 +2744,12 @@ Iteration   5: 14395.758 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul":
   14481.124 ±(99.9%) 338.378 us/op [Average]
   (min, avg, max) = (14394.752, 14481.124, 14603.197), stdev = 87.876
   CI (99.9%): [14142.745, 14819.502] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul:·asm":
 PrintAssembly processed: 182789 total address lines.
 Perf output processed (skipped 56.251 seconds):
  Column 1: cycles (50531 events)
@@ -2758,7 +2758,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul, version 5, compile id 745 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul, version 5, compile id 745 
 
                       0x00007f2140f8a94c:   mov    %r11,0x30(%rsp)
                       0x00007f2140f8a951:   cmp    (%rsp),%r11
@@ -2773,11 +2773,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.00%  │↗ ↗        0x00007f2140f8a97a:   mov    0x348(%r15),%r8
    0.05%  ││ │        0x00007f2140f8a981:   mov    0x13c(%rsp),%r11d            ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
           ││ │                                                                  ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+          ││ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.00%  ││ │        0x00007f2140f8a989:   inc    %r11d
    0.03%  ││ │        0x00007f2140f8a98c:   mov    %r11d,0x13c(%rsp)            ; ImmutableOopMap {rsi=Oop xmm0=Oop [8]=Oop [288]=Oop [296]=NarrowOop [300]=NarrowOop }
           ││ │                                                                  ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││ │                                                                  ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@685 (line 162)
+          ││ │                                                                  ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@685 (line 162)
           ││ │        0x00007f2140f8a994:   test   %eax,(%r8)                   ;   {poll}
    0.05%  ││ │        0x00007f2140f8a997:   cmp    %r10d,%r11d
           ││ │        0x00007f2140f8a99a:   nopw   0x0(%rax,%rax,1)
@@ -2834,55 +2834,55 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.00%     │        0x00007f2140f8aa7f:   add    $0xfffffff9,%ecx
    0.04%     │        0x00007f2140f8aa82:   test   %ecx,%ecx                    ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
              │                                                                  ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-             │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+             │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
              │        0x00007f2140f8aa84:   jl     0x00007f2140f8b0fc
              │        0x00007f2140f8aa8a:   mov    0x28(%rsp),%r11d
    0.03%     │        0x00007f2140f8aa8f:   cmp    $0x7fffffc0,%r11d
              │        0x00007f2140f8aa96:   jg     0x00007f2140f8b114
              │        0x00007f2140f8aa9c:   mov    0x134(%rsp),%edx
    0.04%    ╭│        0x00007f2140f8aaa3:   jmp    0x00007f2140f8ab0a           ;*invokestatic fromArray {reexecute=0 rethrow=0 return_oop=0}
-            ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+            ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.11%    ││↗    ↗  0x00007f2140f8aaa5:   mov    0x8(%rsp),%r11
    0.16%    │││    │  0x00007f2140f8aaaa:   mov    0x40(%rsp),%r9               ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.12%    │││    │  0x00007f2140f8aaaf:   vmovdqu %ymm2,0x10(%r11,%r9,4)      ;*invokevirtual fromArray0 {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.27%    │││    │  0x00007f2140f8aab6:   vmovdqu %ymm3,0x30(%r11,%r13,4)     ;*invokestatic checkFromIndexSize {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    0.10%    │││    │  0x00007f2140f8aabd:   vmovdqu %ymm9,0x50(%r11,%r13,4)     ;*invokeinterface length {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@2 (line 2715)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    0.18%    │││    │  0x00007f2140f8aac4:   vmovdqu %ymm8,0x70(%r11,%r13,4)     ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.12%    │││    │  0x00007f2140f8aacb:   vmovdqu %ymm7,0x90(%r11,%r13,4)     ;*synchronization entry
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@-1 (line 3238)
             │││    │                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.28%    │││    │  0x00007f2140f8aad5:   vmovdqu %ymm6,0xb0(%r11,%r13,4)     ;*invokevirtual vectorType {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@6 (line 3240)
             │││    │                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.12%    │││    │  0x00007f2140f8aadf:   vmovdqu %ymm5,0xd0(%r11,%r13,4)     ;*invokevirtual dummyVector {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.16%    │││    │  0x00007f2140f8aae9:   vmovdqu %ymm4,0xf0(%r11,%r13,4)     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
    1.60%    │││    │  0x00007f2140f8aaf3:   mov    0x348(%r15),%r11             ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
             │││    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+            │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.31%    │││    │  0x00007f2140f8aafa:   add    $0x40,%edx                   ; ImmutableOopMap {rsi=Oop xmm0=Oop [8]=Oop [288]=Oop [296]=NarrowOop [300]=NarrowOop }
             │││    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-            │││    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@679 (line 163)
+            │││    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@679 (line 163)
    0.09%    │││    │  0x00007f2140f8aafd:   test   %eax,(%r11)                  ;   {poll}
    0.86%    │││    │  0x00007f2140f8ab00:   cmp    0x28(%rsp),%edx
             │╰│    │  0x00007f2140f8ab04:   jge    0x00007f2140f8a97a           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
+            │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
    0.19%    ↘ │    │  0x00007f2140f8ab0a:   cmp    %r10d,%edx
               │    │  0x00007f2140f8ab0d:   jge    0x00007f2140f8b0c8
    0.27%      │    │  0x00007f2140f8ab13:   mov    %edx,%ebx
@@ -2894,11 +2894,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.19%      │    │  0x00007f2140f8ab27:   mov    0x8(%rsp),%r11
    0.11%      │    │  0x00007f2140f8ab2c:   mov    0x40(%rsp),%rdi              ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.28%      │    │  0x00007f2140f8ab31:   vmovdqu 0x10(%r11,%rdi,4),%ymm2     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
+              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
    0.12%      │    │  0x00007f2140f8ab38:   movslq %ebx,%r13                    ;*invokestatic fromArray {reexecute=0 rethrow=0 return_oop=0}
-              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    0.21%      │    │  0x00007f2140f8ab3b:   vmovdqu 0x30(%r11,%r13,4),%ymm3
    0.82%      │    │  0x00007f2140f8ab42:   vmovdqu 0xf0(%r11,%r13,4),%ymm4
    8.49%      │    │  0x00007f2140f8ab4c:   vmovdqu 0xd0(%r11,%r13,4),%ymm5
@@ -2906,17 +2906,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    1.12%      │    │  0x00007f2140f8ab60:   vmovdqu 0x90(%r11,%r13,4),%ymm7
    0.06%      │    │  0x00007f2140f8ab6a:   vmovdqu 0x70(%r11,%r13,4),%ymm8
    0.51%      │    │  0x00007f2140f8ab71:   vmovdqu 0x50(%r11,%r13,4),%ymm9     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
+              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
    0.02%      │    │  0x00007f2140f8ab78:   mov    0x138(%rsp),%r11d
    0.28%      │    │  0x00007f2140f8ab80:   cmp    0x20(%rsp),%r11d             ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
               ╰    │  0x00007f2140f8ab85:   jge    0x00007f2140f8aaa5
    0.02%           │  0x00007f2140f8ab8b:   mov    0x138(%rsp),%edi             ;*invokevirtual vspecies {reexecute=0 rethrow=0 return_oop=0}
                    │                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@1 (line 3238)
                    │                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+                   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.39%       ↗   │  0x00007f2140f8ab92:   cmp    %r10d,%edi
                │   │  0x00007f2140f8ab95:   jge    0x00007f2140f8aff8
    0.03%       │   │  0x00007f2140f8ab9b:   mov    %edi,%r11d
@@ -2926,35 +2926,35 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.03%       │   │  0x00007f2140f8aba7:   movslq %edi,%rbx
    0.26%       │   │  0x00007f2140f8abaa:   add    %r8,%rbx                     ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.01%       │   │  0x00007f2140f8abad:   vpbroadcastd 0x10(%rsi,%rbx,4),%ymm1;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.93%       │   │  0x00007f2140f8abb4:   cmp    %ecx,%eax
                │   │  0x00007f2140f8abb6:   jae    0x00007f2140f8ae0f
    0.01%       │   │  0x00007f2140f8abbc:   movslq %r11d,%r11
    0.23%       │   │  0x00007f2140f8abbf:   add    %r9,%r11
    0.02%       │   │  0x00007f2140f8abc2:   vpmulld 0x10(%rsi,%r11,4),%ymm1,%ymm10;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    1.40%       │   │  0x00007f2140f8abc9:   vpaddd %ymm10,%ymm2,%ymm2           ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.63%       │   │  0x00007f2140f8abce:   mov    %eax,%r11d
    0.28%       │   │  0x00007f2140f8abd1:   add    $0x38,%r11d
    0.00%       │   │  0x00007f2140f8abd5:   cmp    %ecx,%r11d
                │   │  0x00007f2140f8abd8:   jae    0x00007f2140f8ae8c           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.19%       │   │  0x00007f2140f8abde:   movslq %eax,%r11                    ;*ifnull {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.AbstractSpecies::dummyVector@6 (line 296)
                │   │                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
                │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.34%       │   │  0x00007f2140f8abe1:   vpmulld 0x30(%rsi,%r11,4),%ymm1,%ymm10
    2.03%       │   │  0x00007f2140f8abe8:   vpmulld 0xf0(%rsi,%r11,4),%ymm1,%ymm11
    1.34%       │   │  0x00007f2140f8abf2:   vpmulld 0x50(%rsi,%r11,4),%ymm1,%ymm12
@@ -2963,11 +2963,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.52%       │   │  0x00007f2140f8ac0a:   vpmulld 0xb0(%rsi,%r11,4),%ymm1,%ymm15
    0.65%       │   │  0x00007f2140f8ac14:   vpmulld 0xd0(%rsi,%r11,4),%ymm1,%ymm1;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.46%       │   │  0x00007f2140f8ac1e:   vpaddd %ymm10,%ymm3,%ymm3           ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.19%       │   │  0x00007f2140f8ac23:   vpaddd %ymm1,%ymm5,%ymm5
    0.15%       │   │  0x00007f2140f8ac27:   vpaddd %ymm15,%ymm6,%ymm6
    0.14%       │   │  0x00007f2140f8ac2c:   vpaddd %ymm14,%ymm7,%ymm7
@@ -2977,18 +2977,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
                │   │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.11%       │   │  0x00007f2140f8ac40:   inc    %edi
    0.17%       │   │  0x00007f2140f8ac42:   cmp    0x24(%rsp),%edi              ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
                ╰   │  0x00007f2140f8ac46:   jl     0x00007f2140f8ab92
    0.23%           │  0x00007f2140f8ac4c:   cmp    %ebp,%edi
                 ╭  │  0x00007f2140f8ac4e:   jge    0x00007f2140f8ad3d           ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                 │  │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                 │  │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                 │  │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@177 (line 168)
+                │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@177 (line 168)
    0.15%        │ ↗│  0x00007f2140f8ac54:   mov    %ebp,%r11d
    0.10%        │ ││  0x00007f2140f8ac57:   sub    %edi,%r11d
    0.25%        │ ││  0x00007f2140f8ac5a:   xor    %eax,%eax
@@ -2999,7 +2999,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.20%        │ ││  0x00007f2140f8ac6e:   cmova  %eax,%r11d
    0.24%        │ ││  0x00007f2140f8ac72:   add    %edi,%r11d
    0.18%        │ ││  0x00007f2140f8ac75:   data16 data16 nopw 0x0(%rax,%rax,1) ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@57 (line 162)
+                │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@57 (line 162)
    1.64%        │↗││  0x00007f2140f8ac80:   mov    %edi,%ebx
    0.85%        ││││  0x00007f2140f8ac82:   imul   %r10d,%ebx
    0.85%        ││││  0x00007f2140f8ac86:   mov    %ebx,%eax
@@ -3007,27 +3007,27 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    1.48%        ││││  0x00007f2140f8ac8a:   movslq %edi,%r14
    0.92%        ││││  0x00007f2140f8ac8d:   add    %r8,%r14                     ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                 ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.95%        ││││  0x00007f2140f8ac90:   vpbroadcastd 0x10(%rsi,%r14,4),%ymm1;*invokestatic checkFromIndexSize {reexecute=0 rethrow=0 return_oop=0}
                 ││││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    1.79%        ││││  0x00007f2140f8ac97:   cmp    %ecx,%eax
                 ││││  0x00007f2140f8ac99:   jae    0x00007f2140f8ae0f
    1.58%        ││││  0x00007f2140f8ac9f:   movslq %ebx,%rbx
    0.92%        ││││  0x00007f2140f8aca2:   add    %r9,%rbx
    0.88%        ││││  0x00007f2140f8aca5:   vpmulld 0x10(%rsi,%rbx,4),%ymm1,%ymm10;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                 ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    5.11%        ││││  0x00007f2140f8acac:   vpaddd %ymm10,%ymm2,%ymm2           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
    2.25%        ││││  0x00007f2140f8acb1:   mov    %eax,%ebx
    1.38%        ││││  0x00007f2140f8acb3:   add    $0x38,%ebx
    1.34%        ││││  0x00007f2140f8acb6:   cmp    %ecx,%ebx
                 ││││  0x00007f2140f8acb8:   jae    0x00007f2140f8ae8c           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                 ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.81%        ││││  0x00007f2140f8acbe:   movslq %eax,%rbx                    ;*invokestatic fromArray {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    1.68%        ││││  0x00007f2140f8acc1:   vpmulld 0x30(%rsi,%rbx,4),%ymm1,%ymm10
    4.60%        ││││  0x00007f2140f8acc8:   vpmulld 0xf0(%rsi,%rbx,4),%ymm1,%ymm11
    4.41%        ││││  0x00007f2140f8acd2:   vpmulld 0x50(%rsi,%rbx,4),%ymm1,%ymm12
@@ -3036,25 +3036,25 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    3.82%        ││││  0x00007f2140f8acea:   vpmulld 0xb0(%rsi,%rbx,4),%ymm1,%ymm15
    4.34%        ││││  0x00007f2140f8acf4:   vpmulld 0xd0(%rsi,%rbx,4),%ymm1,%ymm1;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                 ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    3.19%        ││││  0x00007f2140f8acfe:   vpaddd %ymm10,%ymm3,%ymm3
    1.75%        ││││  0x00007f2140f8ad03:   vpaddd %ymm1,%ymm5,%ymm5            ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
    0.97%        ││││  0x00007f2140f8ad07:   vpaddd %ymm15,%ymm6,%ymm6
    1.11%        ││││  0x00007f2140f8ad0c:   vpaddd %ymm14,%ymm7,%ymm7           ;*iconst_0 {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@40 (line 161)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@40 (line 161)
    1.31%        ││││  0x00007f2140f8ad11:   vpaddd %ymm13,%ymm8,%ymm8           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                 ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    1.76%        ││││  0x00007f2140f8ad16:   vpaddd %ymm12,%ymm9,%ymm9           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@43 (line 161)
+                ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@43 (line 161)
    0.92%        ││││  0x00007f2140f8ad1b:   vpaddd %ymm11,%ymm4,%ymm4
    0.93%        ││││  0x00007f2140f8ad20:   inc    %edi
    1.27%        ││││  0x00007f2140f8ad22:   cmp    %r11d,%edi
                 │╰││  0x00007f2140f8ad25:   jl     0x00007f2140f8ac80
    0.27%        │ ││  0x00007f2140f8ad2b:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop xmm0=Oop [8]=Oop [288]=Oop [296]=NarrowOop [300]=NarrowOop }
                 │ ││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@532 (line 172)
+                │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@532 (line 172)
    0.11%        │ ││  0x00007f2140f8ad32:   test   %eax,(%r11)                  ;   {poll}
    0.15%        │ ││  0x00007f2140f8ad35:   cmp    %ebp,%edi
                 │ ╰│  0x00007f2140f8ad37:   jl     0x00007f2140f8ac54
@@ -3062,10 +3062,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.29%           │  0x00007f2140f8ad40:   cmp    0x20(%rsp),%edi
                    ╰  0x00007f2140f8ad44:   jge    0x00007f2140f8aaa5           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                                                                                 ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
                       0x00007f2140f8ad4a:   xchg   %ax,%ax                      ;*synchronization entry
                                                                                 ; - jdk.incubator.vector.IntVector::fromArray@-1 (line 2715)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@135 (line 166)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@135 (line 166)
                       0x00007f2140f8ad4c:   cmp    %r10d,%edi
                       0x00007f2140f8ad4f:   jge    0x00007f2140f8b035
                       0x00007f2140f8ad55:   mov    %edi,%r11d
@@ -3074,7 +3074,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   98.53%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul, version 5, compile id 745 
+  98.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul, version 5, compile id 745 
    0.29%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -3099,7 +3099,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul, version 5, compile id 745 
+  98.53%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul, version 5, compile id 745 
    1.13%              kernel  [unknown] 
    0.03%        libc-2.31.so  [unknown] 
    0.02%           libjvm.so  xmlStream::write_text 
@@ -3152,7 +3152,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul
 # Parameters: (size = 1048576)
 
 # Run progress: 75.00% complete, ETA 00:05:26
@@ -3172,12 +3172,12 @@ Iteration   5: 139263.954 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul":
   139268.252 ±(99.9%) 71.247 us/op [Average]
   (min, avg, max) = (139245.669, 139268.252, 139287.323), stdev = 18.503
   CI (99.9%): [139197.005, 139339.498] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul:·asm":
 PrintAssembly processed: 193634 total address lines.
 Perf output processed (skipped 56.530 seconds):
  Column 1: cycles (50755 events)
@@ -3186,12 +3186,12 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul, version 6, compile id 742 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul, version 6, compile id 742 
 
                      0x00007f3594f92845:   je     0x00007f3594f9303c
                      0x00007f3594f9284b:   mov    %r11,%r10
                      0x00007f3594f9284e:   shl    $0x3,%r10                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
                      0x00007f3594f92852:   vzeroupper 
                      0x00007f3594f92855:   add    $0x170,%rsp
                      0x00007f3594f9285c:   pop    %rbp
@@ -3201,11 +3201,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.01%  ↗ ↗        0x00007f3594f9286b:   mov    0x348(%r15),%r11
           │ │        0x00007f3594f92872:   mov    0x13c(%rsp),%r10d            ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
           │ │                                                                  ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.02%  │ │        0x00007f3594f9287a:   inc    %r10d
    0.03%  │ │        0x00007f3594f9287d:   mov    %r10d,0x13c(%rsp)            ; ImmutableOopMap {rax=Oop xmm0=Oop [8]=Oop [288]=Oop [296]=NarrowOop [300]=NarrowOop }
           │ │                                                                  ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                                  ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@685 (line 162)
+          │ │                                                                  ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@685 (line 162)
    0.01%  │ │        0x00007f3594f92885:   test   %eax,(%r11)                  ;   {poll}
    0.03%  │ │        0x00007f3594f92888:   cmp    %ecx,%r10d
           │ │        0x00007f3594f9288b:   jge    0x00007f3594f927be
@@ -3262,55 +3262,55 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.01%    │        0x00007f3594f92970:   add    $0xfffffff9,%r10d
             │        0x00007f3594f92974:   test   %r10d,%r10d                  ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
             │                                                                  ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-            │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+            │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
             │        0x00007f3594f92977:   jl     0x00007f3594f92fe4
    0.02%    │        0x00007f3594f9297d:   mov    0x28(%rsp),%r8d
    0.03%    │        0x00007f3594f92982:   cmp    $0x7fffffc0,%r8d
             │        0x00007f3594f92989:   jg     0x00007f3594f92ffc
    0.01%    │        0x00007f3594f9298f:   mov    0x134(%rsp),%ebx
    0.01%   ╭│        0x00007f3594f92996:   jmp    0x00007f3594f929fd           ;*invokestatic fromArray {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+           ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.44%   ││↗    ↗  0x00007f3594f92998:   mov    0x8(%rsp),%r8
    0.03%   │││    │  0x00007f3594f9299d:   mov    0x40(%rsp),%r9               ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.10%   │││    │  0x00007f3594f929a2:   vmovdqu %ymm2,0x10(%r8,%r9,4)       ;*invokevirtual fromArray0 {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.00%   │││    │  0x00007f3594f929a9:   vmovdqu %ymm3,0x30(%r8,%r13,4)      ;*invokestatic checkFromIndexSize {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    0.45%   │││    │  0x00007f3594f929b0:   vmovdqu %ymm9,0x50(%r8,%r13,4)      ;*invokeinterface length {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@2 (line 2715)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    0.04%   │││    │  0x00007f3594f929b7:   vmovdqu %ymm8,0x70(%r8,%r13,4)      ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.08%   │││    │  0x00007f3594f929be:   vmovdqu %ymm7,0x90(%r8,%r13,4)      ;*synchronization entry
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@-1 (line 3238)
            │││    │                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.00%   │││    │  0x00007f3594f929c8:   vmovdqu %ymm6,0xb0(%r8,%r13,4)      ;*invokevirtual vectorType {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@6 (line 3240)
            │││    │                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.41%   │││    │  0x00007f3594f929d2:   vmovdqu %ymm5,0xd0(%r8,%r13,4)      ;*invokevirtual dummyVector {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    0.04%   │││    │  0x00007f3594f929dc:   vmovdqu %ymm4,0xf0(%r8,%r13,4)      ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
    1.71%   │││    │  0x00007f3594f929e6:   mov    0x348(%r15),%r8              ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
            │││    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+           │││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.07%   │││    │  0x00007f3594f929ed:   add    $0x40,%ebx                   ; ImmutableOopMap {rax=Oop xmm0=Oop [8]=Oop [288]=Oop [296]=NarrowOop [300]=NarrowOop }
            │││    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-           │││    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@679 (line 163)
+           │││    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@679 (line 163)
    0.43%   │││    │  0x00007f3594f929f0:   test   %eax,(%r8)                   ;   {poll}
    0.66%   │││    │  0x00007f3594f929f3:   cmp    0x28(%rsp),%ebx
            │╰│    │  0x00007f3594f929f7:   jge    0x00007f3594f9286b           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-           │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
+           │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
    0.19%   ↘ │    │  0x00007f3594f929fd:   data16 xchg %ax,%ax
    0.03%     │    │  0x00007f3594f92a00:   cmp    %ecx,%ebx
              │    │  0x00007f3594f92a02:   jge    0x00007f3594f92fb0
@@ -3323,11 +3323,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.12%     │    │  0x00007f3594f92a1e:   mov    0x8(%rsp),%rdi
    0.03%     │    │  0x00007f3594f92a23:   mov    0x40(%rsp),%rdx              ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
              │    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.43%     │    │  0x00007f3594f92a28:   vmovdqu 0x10(%rdi,%rdx,4),%ymm2     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
+             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
    2.46%     │    │  0x00007f3594f92a2e:   movslq %r8d,%r13                    ;*invokestatic fromArray {reexecute=0 rethrow=0 return_oop=0}
-             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    0.08%     │    │  0x00007f3594f92a31:   vmovdqu 0x30(%rdi,%r13,4),%ymm3
    0.95%     │    │  0x00007f3594f92a38:   vmovdqu 0xf0(%rdi,%r13,4),%ymm4
    3.98%     │    │  0x00007f3594f92a42:   vmovdqu 0xd0(%rdi,%r13,4),%ymm5
@@ -3335,18 +3335,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.39%     │    │  0x00007f3594f92a56:   vmovdqu 0x90(%rdi,%r13,4),%ymm7
    0.07%     │    │  0x00007f3594f92a60:   vmovdqu 0x70(%rdi,%r13,4),%ymm8
    0.63%     │    │  0x00007f3594f92a67:   vmovdqu 0x50(%rdi,%r13,4),%ymm9     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
+             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@70 (line 163)
    0.05%     │    │  0x00007f3594f92a6e:   mov    0x138(%rsp),%r8d
    0.11%     │    │  0x00007f3594f92a76:   data16 nopw 0x0(%rax,%rax,1)
    0.04%     │    │  0x00007f3594f92a80:   cmp    0x20(%rsp),%r8d              ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
              │    │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+             │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
              ╰    │  0x00007f3594f92a85:   jge    0x00007f3594f92998
    0.44%          │  0x00007f3594f92a8b:   mov    0x138(%rsp),%edx             ;*invokevirtual vspecies {reexecute=0 rethrow=0 return_oop=0}
                   │                                                            ; - jdk.incubator.vector.IntVector::fromArray0Template@1 (line 3238)
                   │                                                            ; - jdk.incubator.vector.Int256Vector::fromArray0@3 (line 787)
                   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@24 (line 2717)
-                  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+                  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.04%      ↗   │  0x00007f3594f92a92:   cmp    %ecx,%edx
               │   │  0x00007f3594f92a94:   jge    0x00007f3594f92edf
    0.10%      │   │  0x00007f3594f92a9a:   mov    %edx,%ebp
@@ -3356,35 +3356,35 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.09%      │   │  0x00007f3594f92aa5:   movslq %edx,%rdi
    0.05%      │   │  0x00007f3594f92aa8:   add    %r11,%rdi                    ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.38%      │   │  0x00007f3594f92aab:   vpbroadcastd 0x10(%rax,%rdi,4),%ymm1;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
               │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
               │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.42%      │   │  0x00007f3594f92ab2:   cmp    %r10d,%r8d
               │   │  0x00007f3594f92ab5:   jae    0x00007f3594f92cfd
    0.11%      │   │  0x00007f3594f92abb:   movslq %ebp,%rdi
    0.04%      │   │  0x00007f3594f92abe:   add    %r9,%rdi
    0.38%      │   │  0x00007f3594f92ac1:   vpmulld 0x10(%rax,%rdi,4),%ymm1,%ymm10;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.92%      │   │  0x00007f3594f92ac8:   vpaddd %ymm10,%ymm2,%ymm2           ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
               │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
               │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.81%      │   │  0x00007f3594f92acd:   mov    %r8d,%ebp
    0.03%      │   │  0x00007f3594f92ad0:   add    $0x38,%ebp
    0.07%      │   │  0x00007f3594f92ad3:   cmp    %r10d,%ebp
               │   │  0x00007f3594f92ad6:   jae    0x00007f3594f92d78           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.04%      │   │  0x00007f3594f92adc:   movslq %r8d,%r8                     ;*ifnull {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.AbstractSpecies::dummyVector@6 (line 296)
               │   │                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
               │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@19 (line 2717)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.52%      │   │  0x00007f3594f92adf:   vpmulld 0x30(%rax,%r8,4),%ymm1,%ymm10
    2.35%      │   │  0x00007f3594f92ae6:   vpmulld 0xf0(%rax,%r8,4),%ymm1,%ymm11
    2.94%      │   │  0x00007f3594f92af0:   vpmulld 0x50(%rax,%r8,4),%ymm1,%ymm12
@@ -3393,11 +3393,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.33%      │   │  0x00007f3594f92b08:   vpmulld 0xb0(%rax,%r8,4),%ymm1,%ymm15
    0.94%      │   │  0x00007f3594f92b12:   vpmulld 0xd0(%rax,%r8,4),%ymm1,%ymm1;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.32%      │   │  0x00007f3594f92b1c:   vpaddd %ymm10,%ymm3,%ymm3           ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
               │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.27%      │   │  0x00007f3594f92b21:   vpaddd %ymm1,%ymm5,%ymm5
    0.08%      │   │  0x00007f3594f92b25:   vpaddd %ymm15,%ymm6,%ymm6
    0.21%      │   │  0x00007f3594f92b2a:   vpaddd %ymm14,%ymm7,%ymm7
@@ -3407,18 +3407,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
               │   │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
               │   │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
               │   │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@156 (line 167)
    0.18%      │   │  0x00007f3594f92b3e:   inc    %edx
    0.01%      │   │  0x00007f3594f92b40:   cmp    0x24(%rsp),%edx              ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
               │   │                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
               ╰   │  0x00007f3594f92b44:   jl     0x00007f3594f92a92
    0.30%          │  0x00007f3594f92b4a:   cmp    %esi,%edx
                ╭  │  0x00007f3594f92b4c:   jge    0x00007f3594f92c31           ;*invokestatic checkIndex {reexecute=0 rethrow=0 return_oop=0}
                │  │                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                │  │                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                │  │                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-               │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@177 (line 168)
+               │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@177 (line 168)
    0.06%       │ ↗│  0x00007f3594f92b52:   mov    %esi,%ebp
    0.14%       │ ││  0x00007f3594f92b54:   sub    %edx,%ebp
                │ ││  0x00007f3594f92b56:   xor    %r8d,%r8d
@@ -3428,7 +3428,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.02%       │ ││  0x00007f3594f92b65:   mov    $0x3e8,%r8d
    0.28%       │ ││  0x00007f3594f92b6b:   cmova  %r8d,%ebp
    0.28%       │ ││  0x00007f3594f92b6f:   add    %edx,%ebp                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-               │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@57 (line 162)
+               │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@57 (line 162)
    1.92%       │↗││  0x00007f3594f92b71:   mov    %edx,%edi
    0.86%       ││││  0x00007f3594f92b73:   imul   %ecx,%edi
    0.69%       ││││  0x00007f3594f92b76:   mov    %edi,%r8d
@@ -3436,27 +3436,27 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    1.99%       ││││  0x00007f3594f92b7c:   movslq %edx,%r14
    0.87%       ││││  0x00007f3594f92b7f:   add    %r11,%r14                    ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.69%       ││││  0x00007f3594f92b82:   vpbroadcastd 0x10(%rax,%r14,4),%ymm1;*invokestatic checkFromIndexSize {reexecute=0 rethrow=0 return_oop=0}
                ││││                                                            ; - jdk.incubator.vector.IntVector::fromArray@9 (line 2715)
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@93 (line 164)
    1.03%       ││││  0x00007f3594f92b89:   cmp    %r10d,%r8d
                ││││  0x00007f3594f92b8c:   jae    0x00007f3594f92cfd
    1.94%       ││││  0x00007f3594f92b92:   movslq %edi,%rdi
    0.86%       ││││  0x00007f3594f92b95:   add    %r9,%rdi
    0.63%       ││││  0x00007f3594f92b98:   vpmulld 0x10(%rax,%rdi,4),%ymm1,%ymm10;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    4.08%       ││││  0x00007f3594f92b9f:   vpaddd %ymm10,%ymm2,%ymm2           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@37 (line 160)
    1.31%       ││││  0x00007f3594f92ba4:   mov    %r8d,%edi
    0.47%       ││││  0x00007f3594f92ba7:   add    $0x38,%edi
    1.84%       ││││  0x00007f3594f92baa:   cmp    %r10d,%edi
                ││││  0x00007f3594f92bad:   jae    0x00007f3594f92d78           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    0.86%       ││││  0x00007f3594f92bb3:   movslq %r8d,%r8                     ;*invokestatic fromArray {reexecute=0 rethrow=0 return_oop=0}
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@114 (line 165)
    1.05%       ││││  0x00007f3594f92bb6:   vpmulld 0x30(%rax,%r8,4),%ymm1,%ymm10
    5.82%       ││││  0x00007f3594f92bbd:   vpmulld 0xf0(%rax,%r8,4),%ymm1,%ymm11
   12.59%       ││││  0x00007f3594f92bc7:   vpmulld 0x50(%rax,%r8,4),%ymm1,%ymm12
@@ -3465,35 +3465,35 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    3.21%       ││││  0x00007f3594f92bdf:   vpmulld 0xb0(%rax,%r8,4),%ymm1,%ymm15
    5.05%       ││││  0x00007f3594f92be9:   vpmulld 0xd0(%rax,%r8,4),%ymm1,%ymm1;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    1.67%       ││││  0x00007f3594f92bf3:   vpaddd %ymm10,%ymm3,%ymm3
    2.46%       ││││  0x00007f3594f92bf8:   vpaddd %ymm1,%ymm5,%ymm5            ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@47 (line 161)
    0.64%       ││││  0x00007f3594f92bfc:   vpaddd %ymm15,%ymm6,%ymm6
    0.85%       ││││  0x00007f3594f92c01:   vpaddd %ymm14,%ymm7,%ymm7           ;*iconst_0 {reexecute=0 rethrow=0 return_oop=0}
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@40 (line 161)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@40 (line 161)
    0.33%       ││││  0x00007f3594f92c06:   vpaddd %ymm13,%ymm8,%ymm8           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                ││││                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
    2.37%       ││││  0x00007f3594f92c0b:   vpaddd %ymm12,%ymm9,%ymm9           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@43 (line 161)
+               ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@43 (line 161)
    0.63%       ││││  0x00007f3594f92c10:   vpaddd %ymm11,%ymm4,%ymm4
    0.69%       ││││  0x00007f3594f92c15:   inc    %edx
    0.34%       ││││  0x00007f3594f92c17:   cmp    %ebp,%edx
                │╰││  0x00007f3594f92c19:   jl     0x00007f3594f92b71
    0.42%       │ ││  0x00007f3594f92c1f:   mov    0x348(%r15),%r8              ; ImmutableOopMap {rax=Oop xmm0=Oop [8]=Oop [288]=Oop [296]=NarrowOop [300]=NarrowOop }
                │ ││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-               │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@532 (line 172)
+               │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@532 (line 172)
    0.05%       │ ││  0x00007f3594f92c26:   test   %eax,(%r8)                   ;   {poll}
    0.09%       │ ││  0x00007f3594f92c29:   cmp    %esi,%edx
                │ ╰│  0x00007f3594f92c2b:   jl     0x00007f3594f92b52
    0.00%       ↘  │  0x00007f3594f92c31:   cmp    0x20(%rsp),%edx
                   ╰  0x00007f3594f92c35:   jge    0x00007f3594f92998           ;*invokestatic store {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@673 (line 214)
                      0x00007f3594f92c3b:   nop                                 ;*synchronization entry
                                                                                ; - jdk.incubator.vector.IntVector::fromArray@-1 (line 2715)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul@135 (line 166)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul@135 (line 166)
                      0x00007f3594f92c3c:   nopl   0x0(%rax)
                      0x00007f3594f92c40:   cmp    %ecx,%edx
                      0x00007f3594f92c42:   jge    0x00007f3594f92f1c
@@ -3502,7 +3502,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   98.30%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul, version 6, compile id 742 
+  98.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul, version 6, compile id 742 
    0.56%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
@@ -3527,7 +3527,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_matrix_mul, version 6, compile id 742 
+  98.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_matrix_mul, version 6, compile id 742 
    1.27%              kernel  [unknown] 
    0.05%           libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
    0.03%           libjvm.so  OtherRegionsTable::occupied 
@@ -3576,7 +3576,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum
 # Parameters: (size = 262144)
 
 # Run progress: 83.33% complete, ETA 00:03:37
@@ -3596,12 +3596,12 @@ Iteration   5: 89.661 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum":
   89.636 ±(99.9%) 0.170 us/op [Average]
   (min, avg, max) = (89.569, 89.636, 89.681), stdev = 0.044
   CI (99.9%): [89.466, 89.806] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum:·asm":
 PrintAssembly processed: 145230 total address lines.
 Perf output processed (skipped 56.177 seconds):
  Column 1: cycles (50683 events)
@@ -3610,7 +3610,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
 
              0x00007f323cf77f66:   xor    %esi,%esi
              0x00007f323cf77f68:   cmp    %ebp,%ebx
@@ -3626,7 +3626,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
              0x00007f323cf77f8e:   mov    %ebx,0x18(%rsp)
              0x00007f323cf77f92:   mov    %edx,0x1c(%rsp)
    0.00%     0x00007f323cf77f96:   data16 nopw 0x0(%rax,%rax,1)        ;*getstatic INT_VECTOR_SPECIES {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@23 (line 85)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@23 (line 85)
    0.00%  ↗  0x00007f323cf77fa0:   vmovdqu 0x130(%r10,%rbp,4),%ymm0
    3.46%  │  0x00007f323cf77faa:   vmovdqu 0xd0(%r10,%rbp,4),%ymm1
    2.32%  │  0x00007f323cf77fb4:   vmovdqu 0x30(%r10,%rbp,4),%ymm2
@@ -3798,13 +3798,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │  0x00007f323cf782dd:   add    %r9d,%r11d                   ;*invokestatic reductionCoerced {reexecute=0 rethrow=0 return_oop=0}
           │                                                            ; - jdk.incubator.vector.IntVector::reduceLanesTemplate@62 (line 2441)
           │                                                            ; - jdk.incubator.vector.Int256Vector::reduceLanes@2 (line 310)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@39 (line 86)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@39 (line 86)
    0.67%  │  0x00007f323cf782e0:   add    $0x80,%ebp
    0.23%  │  0x00007f323cf782e6:   cmp    0x1c(%rsp),%ebp
           ╰  0x00007f323cf782ea:   jl     0x00007f323cf77fa0
              0x00007f323cf782f0:   mov    0x348(%r15),%r8              ; ImmutableOopMap {r10=Oop [0]=NarrowOop }
                                                                        ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@55 (line 84)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@55 (line 84)
    0.02%     0x00007f323cf782f7:   test   %eax,(%r8)                   ;   {poll}
    0.05%     0x00007f323cf782fa:   nopw   0x0(%rax,%rax,1)
              0x00007f323cf78300:   cmp    0x18(%rsp),%ebp
@@ -3820,20 +3820,20 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
              0x00007f323cf78329:   cmp    %r9d,%ebp                    ;*invokestatic reductionCoerced {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.IntVector::reduceLanesTemplate@62 (line 2441)
                                                                        ; - jdk.incubator.vector.Int256Vector::reduceLanes@2 (line 310)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@39 (line 86)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@39 (line 86)
 ....................................................................................................
   98.04%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
+  98.04%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
    0.51%              kernel  [unknown] 
    0.12%              kernel  [unknown] 
-   0.08%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
+   0.08%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
    0.07%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
    0.04%              kernel  [unknown] 
-   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
+   0.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
@@ -3842,7 +3842,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.VectorApiBenchmark_vectorized_sum_jmhTest::vectorized_sum_avgt_jmhStub, version 4, compile id 718 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.VectorApiBenchmark_vectorized_sum_jmhTest::vectorized_sum_avgt_jmhStub, version 4, compile id 718 
    0.01%              kernel  [unknown] 
    0.01%              kernel  [unknown] 
    0.85%  <...other 300 warm regions...>
@@ -3850,14 +3850,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
+  98.16%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 688 
    1.46%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%        libc-2.31.so  __strncat_ssse3 
    0.02%  libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
    0.02%        libc-2.31.so  __strxfrm_l 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
-   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.VectorApiBenchmark_vectorized_sum_jmhTest::vectorized_sum_avgt_jmhStub, version 4, compile id 718 
+   0.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.VectorApiBenchmark_vectorized_sum_jmhTest::vectorized_sum_avgt_jmhStub, version 4, compile id 718 
    0.01%          ld-2.31.so  _dl_tunable_set_hwcaps 
    0.01%              [vdso]  __vdso_clock_gettime 
    0.01%        libc-2.31.so  getifaddrs_internal 
@@ -3901,7 +3901,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum
 # Parameters: (size = 1048576)
 
 # Run progress: 91.67% complete, ETA 00:01:48
@@ -3921,12 +3921,12 @@ Iteration   5: 359.066 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum":
   359.348 ±(99.9%) 1.579 us/op [Average]
   (min, avg, max) = (359.049, 359.348, 359.931), stdev = 0.410
   CI (99.9%): [357.769, 360.927] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum:·asm":
 PrintAssembly processed: 145762 total address lines.
 Perf output processed (skipped 56.318 seconds):
  Column 1: cycles (50584 events)
@@ -3935,7 +3935,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
 
              0x00007f0268f73d78:   cmova  %esi,%edx
              0x00007f0268f73d7b:   add    %ebp,%edx
@@ -3946,7 +3946,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
              0x00007f0268f73d8e:   mov    %ebx,0x18(%rsp)
              0x00007f0268f73d92:   mov    %edx,0x1c(%rsp)
              0x00007f0268f73d96:   data16 nopw 0x0(%rax,%rax,1)        ;*getstatic INT_VECTOR_SPECIES {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@23 (line 85)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@23 (line 85)
    0.00%  ↗  0x00007f0268f73da0:   vmovdqu 0x130(%r10,%rbp,4),%ymm0
    3.81%  │  0x00007f0268f73daa:   vmovdqu 0xd0(%r10,%rbp,4),%ymm1
    2.42%  │  0x00007f0268f73db4:   vmovdqu 0x30(%r10,%rbp,4),%ymm2
@@ -4118,13 +4118,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
           │  0x00007f0268f740dd:   add    %r9d,%r11d                   ;*invokestatic reductionCoerced {reexecute=0 rethrow=0 return_oop=0}
           │                                                            ; - jdk.incubator.vector.IntVector::reduceLanesTemplate@62 (line 2441)
           │                                                            ; - jdk.incubator.vector.Int256Vector::reduceLanes@2 (line 310)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@39 (line 86)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@39 (line 86)
    0.72%  │  0x00007f0268f740e0:   add    $0x80,%ebp
    0.22%  │  0x00007f0268f740e6:   cmp    0x1c(%rsp),%ebp
           ╰  0x00007f0268f740ea:   jl     0x00007f0268f73da0
              0x00007f0268f740f0:   mov    0x348(%r15),%r8              ; ImmutableOopMap {r10=Oop [0]=NarrowOop }
                                                                        ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum@55 (line 84)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum@55 (line 84)
    0.05%     0x00007f0268f740f7:   test   %eax,(%r8)                   ;   {poll}
    0.03%     0x00007f0268f740fa:   nopw   0x0(%rax,%rax,1)
              0x00007f0268f74100:   cmp    0x18(%rsp),%ebp
@@ -4144,7 +4144,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
   98.34%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.34%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
+  98.34%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
    0.40%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -4154,7 +4154,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.02%              kernel  [unknown] 
    0.02%              kernel  [unknown] 
-   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
+   0.02%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
    0.01%              kernel  [unknown] 
    0.01%        libc-2.31.so  getifaddrs_internal 
    0.01%        libc-2.31.so  [unknown] 
@@ -4169,7 +4169,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorAp
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.37%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
+  98.37%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark::vectorized_sum, version 2, compile id 683 
    1.29%              kernel  [unknown] 
    0.04%                      <unknown> 
    0.03%        libc-2.31.so  [unknown] 

@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
 # Parameters: (typePollution = false)
 
 # Run progress: 0.00% complete, ETA 00:20:00
@@ -28,69 +28,69 @@ Iteration   5: 1.299 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
   1.282 ±(99.9%) 0.090 ns/op [Average]
   (min, avg, max) = (1.246, 1.282, 1.300), stdev = 0.023
   CI (99.9%): [1.192, 1.372] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:CPI":
   0.365 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:IPC":
   2.741 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-loads":
   5.037 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-icache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-stores":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branch-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branches":
   2.027 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:cycles":
   3.324 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-load-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-loads":
   5.045 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-stores":
   0.002 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-load-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:instructions":
   9.111 #/op
 
 
@@ -104,7 +104,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
 # Parameters: (typePollution = true)
 
 # Run progress: 8.33% complete, ETA 00:18:46
@@ -124,69 +124,69 @@ Iteration   5: 8.381 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
   8.402 ±(99.9%) 0.047 ns/op [Average]
   (min, avg, max) = (8.381, 8.402, 8.412), stdev = 0.012
   CI (99.9%): [8.356, 8.449] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:CPI":
   0.307 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:IPC":
   3.257 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-load-misses":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-loads":
   16.986 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-dcache-stores":
   2.019 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:L1-icache-load-misses":
   0.002 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-load-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-loads":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-store-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:LLC-stores":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branch-misses":
   ≈ 10⁻³ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:branches":
   17.010 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:cycles":
   21.840 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-load-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-loads":
   17.076 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-store-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:dTLB-stores":
   2.016 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-load-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:iTLB-loads":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:instructions":
   71.132 #/op
 
 
@@ -200,7 +200,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 2 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
 # Parameters: (typePollution = false)
 
 # Run progress: 16.67% complete, ETA 00:17:08
@@ -220,69 +220,69 @@ Iteration   5: 1.218 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
   1.226 ±(99.9%) 0.034 ns/op [Average]
   (min, avg, max) = (1.218, 1.226, 1.237), stdev = 0.009
   CI (99.9%): [1.192, 1.259] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:CPI":
   0.353 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:IPC":
   2.832 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-loads":
   5.008 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-stores":
   0.002 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-icache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-stores":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branch-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branches":
   2.004 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:cycles":
   3.177 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-load-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-loads":
   5.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-loads":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:instructions":
   8.998 #/op
 
 
@@ -296,7 +296,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 2 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
 # Parameters: (typePollution = true)
 
 # Run progress: 25.00% complete, ETA 00:15:27
@@ -316,69 +316,69 @@ Iteration   5: 60.213 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
   59.970 ±(99.9%) 0.875 ns/op [Average]
   (min, avg, max) = (59.725, 59.970, 60.213), stdev = 0.227
   CI (99.9%): [59.095, 60.845] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:CPI":
   2.170 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:IPC":
   0.461 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-load-misses":
   0.970 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-loads":
   17.129 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-dcache-stores":
   2.088 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:L1-icache-load-misses":
   0.006 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-loads":
   0.013 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:LLC-stores":
   1.906 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branch-misses":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:branches":
   17.078 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:cycles":
   155.037 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-loads":
   17.100 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:dTLB-stores":
   2.075 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:iTLB-loads":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:instructions":
   71.449 #/op
 
 
@@ -392,7 +392,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 3 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
 # Parameters: (typePollution = false)
 
 # Run progress: 33.33% complete, ETA 00:13:44
@@ -412,69 +412,69 @@ Iteration   5: 1.179 ±(99.9%) 0.082 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
   1.180 ±(99.9%) 0.011 ns/op [Average]
   (min, avg, max) = (1.178, 1.180, 1.184), stdev = 0.003
   CI (99.9%): [1.169, 1.192] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:CPI":
   0.339 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:IPC":
   2.953 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-loads":
   5.023 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-icache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-stores":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branch-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branches":
   2.010 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:cycles":
   3.061 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-loads":
   4.945 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-loads":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:instructions":
   9.039 #/op
 
 
@@ -488,7 +488,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 3 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
 # Parameters: (typePollution = true)
 
 # Run progress: 41.67% complete, ETA 00:12:01
@@ -508,69 +508,69 @@ Iteration   5: 77.928 ±(99.9%) 559.953 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
   77.519 ±(99.9%) 27.145 ns/op [Average]
   (min, avg, max) = (70.323, 77.519, 84.586), stdev = 7.049
   CI (99.9%): [50.375, 104.664] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:CPI":
   2.669 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:IPC":
   0.375 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
   0.800 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-loads":
   17.107 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-stores":
   2.071 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:L1-icache-load-misses":
   0.010 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-loads":
   0.043 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-store-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:LLC-stores":
   1.509 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branch-misses":
   0.002 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:branches":
   17.051 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:cycles":
   190.381 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-loads":
   17.078 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:dTLB-stores":
   2.058 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:iTLB-loads":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:instructions":
   71.336 #/op
 
 
@@ -584,7 +584,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 4 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
 # Parameters: (typePollution = false)
 
 # Run progress: 50.00% complete, ETA 00:10:18
@@ -604,69 +604,69 @@ Iteration   5: 1.225 ±(99.9%) 0.132 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
   1.221 ±(99.9%) 0.031 ns/op [Average]
   (min, avg, max) = (1.209, 1.221, 1.230), stdev = 0.008
   CI (99.9%): [1.190, 1.251] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:CPI":
   0.351 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:IPC":
   2.853 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads":
   5.014 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-icache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-stores":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branch-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branches":
   2.008 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:cycles":
   3.162 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-loads":
   4.971 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-loads":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:instructions":
   9.022 #/op
 
 
@@ -680,7 +680,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 4 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
 # Parameters: (typePollution = true)
 
 # Run progress: 58.33% complete, ETA 00:08:35
@@ -700,69 +700,69 @@ Iteration   5: 110.285 ±(99.9%) 182.522 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
   115.400 ±(99.9%) 74.677 ns/op [Average]
   (min, avg, max) = (100.068, 115.400, 148.257), stdev = 19.393
   CI (99.9%): [40.723, 190.078] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:CPI":
   3.426 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:IPC":
   0.292 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses":
   0.736 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads":
   17.116 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-stores":
   2.072 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:L1-icache-load-misses":
   0.011 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-loads":
   0.005 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:LLC-stores":
   1.450 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branch-misses":
   0.002 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:branches":
   17.059 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:cycles":
   247.895 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-loads":
   17.093 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:dTLB-stores":
   2.076 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:iTLB-loads":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:instructions":
   72.355 #/op
 
 
@@ -776,7 +776,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
 # Parameters: (typePollution = false)
 
 # Run progress: 66.67% complete, ETA 00:06:52
@@ -796,69 +796,69 @@ Iteration   5: 1.164 ±(99.9%) 0.008 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
   1.164 ±(99.9%) 0.002 ns/op [Average]
   (min, avg, max) = (1.163, 1.164, 1.164), stdev = 0.001
   CI (99.9%): [1.161, 1.166] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:CPI":
   0.335 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:IPC":
   2.987 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-loads":
   4.993 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-icache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-stores":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branch-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branches":
   1.997 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:cycles":
   3.010 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-loads":
   4.989 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-loads":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:instructions":
   8.989 #/op
 
 
@@ -872,7 +872,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
 # Parameters: (typePollution = true)
 
 # Run progress: 75.00% complete, ETA 00:05:09
@@ -892,69 +892,69 @@ Iteration   5: 133.712 ±(99.9%) 191.586 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
   128.131 ±(99.9%) 23.258 ns/op [Average]
   (min, avg, max) = (120.361, 128.131, 134.255), stdev = 6.040
   CI (99.9%): [104.873, 151.390] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:CPI":
   4.346 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:IPC":
   0.230 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-load-misses":
   0.770 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-loads":
   16.969 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-dcache-stores":
   2.050 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:L1-icache-load-misses":
   0.016 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-loads":
   0.143 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:LLC-stores":
   1.250 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branch-misses":
   0.046 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:branches":
   16.797 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:cycles":
   305.784 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-loads":
   17.038 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:dTLB-stores":
   2.069 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:iTLB-loads":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:instructions":
   70.364 #/op
 
 
@@ -968,7 +968,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 6 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
 # Parameters: (typePollution = false)
 
 # Run progress: 83.33% complete, ETA 00:03:26
@@ -988,69 +988,69 @@ Iteration   5: 1.196 ±(99.9%) 0.032 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
   1.196 ±(99.9%) 0.009 ns/op [Average]
   (min, avg, max) = (1.194, 1.196, 1.199), stdev = 0.002
   CI (99.9%): [1.187, 1.205] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:CPI":
   0.342 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:IPC":
   2.928 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-loads":
   5.007 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-icache-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-loads":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-store-misses":
   ≈ 10⁻⁷ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-stores":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branch-misses":
   ≈ 10⁻⁵ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branches":
   2.005 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:cycles":
   3.083 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-loads":
   4.997 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-store-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-stores":
   0.001 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-load-misses":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-loads":
   ≈ 10⁻⁶ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:instructions":
   9.027 #/op
 
 
@@ -1064,7 +1064,7 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Typ
 # Timeout: 10 min per iteration
 # Threads: 6 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
 # Parameters: (typePollution = true)
 
 # Run progress: 91.67% complete, ETA 00:01:43
@@ -1084,69 +1084,69 @@ Iteration   5: 193.545 ±(99.9%) 255.357 ns/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
   193.042 ±(99.9%) 8.065 ns/op [Average]
   (min, avg, max) = (189.335, 193.042, 194.291), stdev = 2.094
   CI (99.9%): [184.977, 201.106] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:CPI":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:CPI":
   5.605 clks/insn
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:IPC":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:IPC":
   0.178 insns/clk
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-load-misses":
   0.896 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-loads":
   17.062 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-dcache-stores":
   2.083 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-icache-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:L1-icache-load-misses":
   0.024 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-loads":
   0.268 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:LLC-stores":
   1.257 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branch-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branch-misses":
   0.027 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branches":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:branches":
   16.942 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:cycles":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:cycles":
   398.014 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-loads":
   17.109 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-store-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-store-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-stores":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:dTLB-stores":
   2.099 #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-load-misses":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-load-misses":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-loads":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:iTLB-loads":
   ≈ 10⁻⁴ #/op
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:instructions":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:instructions":
   71.013 #/op
 
 

@@ -1,2 +1,2 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ByteArrayOutputStreamBenchmark.write","avgt",1,25,87.840677,1.106346,"ns/op",_1_KB,_64_MB
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ByteArrayOutputStreamBenchmark.write","avgt",1,25,87.840677,1.106346,"ns/op",_1_KB,_64_MB

@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_non_static_method
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_non_static_method
 # Parameters: (depth = 256)
 
 # Run progress: 0.00% complete, ETA 00:10:00
@@ -28,12 +28,12 @@ Iteration   5: 475.910 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_non_static_method":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_non_static_method":
   475.909 ±(99.9%) 0.221 ns/op [Average]
   (min, avg, max) = (475.815, 475.909, 475.969), stdev = 0.057
   CI (99.9%): [475.688, 476.130] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_non_static_method:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_non_static_method:·asm":
 PrintAssembly processed: 193002 total address lines.
 Perf output processed (skipped 58.714 seconds):
  Column 1: cycles (50919 events)
@@ -42,10 +42,10 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
 
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@11 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@11 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
    3.92%       0x00007f9722ffcced:   cmp    $0x2,%r10d
           ╭    0x00007f9722ffccf1:   jge    0x00007f9722ffcd15
           │    0x00007f9722ffccf7:   cmp    $0x0,%r10d
@@ -58,25 +58,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
            │   0x00007f9722ffcd19:   je     0x00007f9722ffcd92
    0.34%   │   0x00007f9722ffcd1f:   cmp    $0x3,%r10d
            │   0x00007f9722ffcd23:   je     0x00007f9722ffcda2           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@1 (line 108)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@1 (line 108)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
    0.28%   ↘   0x00007f9722ffcd29:   lea    -0x6(%rdx),%edx              ;*isub {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@11 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@11 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
    3.72%       0x00007f9722ffcd2c:   data16 xchg %ax,%ax
    0.01%       0x00007f9722ffcd2f:   call   0x00007f9722ffccc0           ; ImmutableOopMap {}
                                                                          ;*invokevirtual cls_non_static {reexecute=0 rethrow=0 return_oop=1}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
                                                                          ;   {optimized virtual_call}
   24.97%       0x00007f9722ffcd34:   nop
    2.07%    ↗  0x00007f9722ffcd35:   mov    0x10(%rsp),%rbp
@@ -98,7 +98,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   71.47%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
 
             #           [sp+0x20]  (sp of caller)
             0x00007f9722ffcca0:   mov    0x8(%rsi),%r10d
@@ -115,15 +115,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
    0.09%    0x00007f9722ffcccb:   mov    %rbp,0x10(%rsp)
    4.14%    0x00007f9722ffccd0:   test   %edx,%edx
             0x00007f9722ffccd2:   je     0x00007f9722ffcd48           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@1 (line 108)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@1 (line 108)
    0.03%    0x00007f9722ffccd8:   nopl   0x0(%rax,%rax,1)
    0.06%    0x00007f9722ffcce0:   cmp    $0x1,%edx
             0x00007f9722ffcce3:   je     0x00007f9722ffcd65           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@1 (line 108)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@1 (line 108)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
    0.20%    0x00007f9722ffcce9:   lea    -0x2(%rdx),%r10d             ;*isub {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@11 (line 111)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@11 (line 111)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static@12 (line 111)
    3.92%    0x00007f9722ffcced:   cmp    $0x2,%r10d
             0x00007f9722ffccf1:   jge    0x00007f9722ffcd15
             0x00007f9722ffccf7:   cmp    $0x0,%r10d
@@ -137,15 +137,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   20.08%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  71.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
-  20.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
-   2.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_non_static_method_jmhTest::class_non_static_method_avgt_jmhStub, version 5, compile id 764 
-   2.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::class_non_static_method, version 2, compile id 750 
+  71.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
+  20.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
+   2.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_non_static_method_jmhTest::class_non_static_method_avgt_jmhStub, version 5, compile id 764 
+   2.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::class_non_static_method, version 2, compile id 750 
    0.80%               kernel  [unknown] 
-   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::class_non_static_method, version 2, compile id 750 
+   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::class_non_static_method, version 2, compile id 750 
    0.11%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
-   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
+   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -162,9 +162,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  91.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
-   3.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::class_non_static_method, version 2, compile id 750 
-   2.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_non_static_method_jmhTest::class_non_static_method_avgt_jmhStub, version 5, compile id 764 
+  91.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_non_static, version 2, compile id 749 
+   3.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::class_non_static_method, version 2, compile id 750 
+   2.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_non_static_method_jmhTest::class_non_static_method_avgt_jmhStub, version 5, compile id 764 
    2.03%               kernel  [unknown] 
    0.06%                       <unknown> 
    0.01%           ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -215,7 +215,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_static_method
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_static_method
 # Parameters: (depth = 256)
 
 # Run progress: 16.67% complete, ETA 00:09:23
@@ -235,12 +235,12 @@ Iteration   5: 478.008 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_static_method":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_static_method":
   477.999 ±(99.9%) 0.043 ns/op [Average]
   (min, avg, max) = (477.986, 477.999, 478.013), stdev = 0.011
   CI (99.9%): [477.956, 478.042] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.class_static_method:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_static_method:·asm":
 PrintAssembly processed: 190538 total address lines.
 Perf output processed (skipped 58.520 seconds):
  Column 1: cycles (50763 events)
@@ -249,10 +249,10 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
 
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@10 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@10 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
    2.54%       0x00007f2a22ffb44d:   cmp    $0x2,%r10d
           ╭    0x00007f2a22ffb451:   jge    0x00007f2a22ffb475
           │    0x00007f2a22ffb457:   cmp    $0x0,%r10d
@@ -265,25 +265,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
            │   0x00007f2a22ffb479:   je     0x00007f2a22ffb4f2
    0.15%   │   0x00007f2a22ffb47f:   cmp    $0x3,%r10d
            │   0x00007f2a22ffb483:   je     0x00007f2a22ffb502           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@1 (line 115)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@1 (line 115)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
    0.13%   ↘   0x00007f2a22ffb489:   lea    -0x6(%rsi),%esi              ;*isub {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@10 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@10 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
    2.44%       0x00007f2a22ffb48c:   data16 xchg %ax,%ax
    0.00%       0x00007f2a22ffb48f:   call   0x00007f2a22ffb420           ; ImmutableOopMap {}
                                                                          ;*invokestatic cls_static {reexecute=0 rethrow=0 return_oop=1}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
                                                                          ;   {static_call}
   28.57%       0x00007f2a22ffb494:   nop
    2.28%    ↗  0x00007f2a22ffb495:   mov    0x10(%rsp),%rbp
@@ -305,7 +305,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   81.95%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
 
            dependencies   [0x00007f2a22ffb628,0x00007f2a22ffb630] = 8
            JVMCI data     [0x00007f2a22ffb630,0x00007f2a22ffb640] = 16
@@ -314,7 +314,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
           [Constant Pool (empty)]
           --------------------------------------------------------------------------------
           [Verified Entry Point]
-            # {method} {0x00007f2a10c75ba8} &apos;cls_static&apos; &apos;(I)Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/RecursiveMethodCallBenchmark&apos;
+            # {method} {0x00007f2a10c75ba8} &apos;cls_static&apos; &apos;(I)Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/RecursiveMethodCallBenchmark&apos;
             # parm0:    rsi       = int
             #           [sp+0x20]  (sp of caller)
    0.21%    0x00007f2a22ffb420:   mov    %eax,-0x14000(%rsp)
@@ -322,15 +322,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
    0.05%    0x00007f2a22ffb42b:   mov    %rbp,0x10(%rsp)
    2.63%    0x00007f2a22ffb430:   test   %esi,%esi
             0x00007f2a22ffb432:   je     0x00007f2a22ffb4a8           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@1 (line 115)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@1 (line 115)
    0.01%    0x00007f2a22ffb438:   nopl   0x0(%rax,%rax,1)
    0.01%    0x00007f2a22ffb440:   cmp    $0x1,%esi
             0x00007f2a22ffb443:   je     0x00007f2a22ffb4c5           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@1 (line 115)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@1 (line 115)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
    0.05%    0x00007f2a22ffb449:   lea    -0x2(%rsi),%r10d             ;*isub {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@10 (line 118)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@10 (line 118)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static@11 (line 118)
    2.54%    0x00007f2a22ffb44d:   cmp    $0x2,%r10d
             0x00007f2a22ffb451:   jge    0x00007f2a22ffb475
             0x00007f2a22ffb457:   cmp    $0x0,%r10d
@@ -344,14 +344,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   12.75%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  81.95%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
-  12.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
-   1.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::class_static_method, version 2, compile id 734 
-   1.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_static_method_jmhTest::class_static_method_avgt_jmhStub, version 5, compile id 750 
+  81.95%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
+  12.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
+   1.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::class_static_method, version 2, compile id 734 
+   1.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_static_method_jmhTest::class_static_method_avgt_jmhStub, version 5, compile id 750 
    0.85%               kernel  [unknown] 
-   0.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::class_static_method, version 2, compile id 734 
+   0.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::class_static_method, version 2, compile id 734 
    0.12%               kernel  [unknown] 
-   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
+   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
    0.07%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
@@ -369,10 +369,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  94.79%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
+  94.79%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::cls_static, version 2, compile id 733 
    1.93%               kernel  [unknown] 
-   1.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::class_static_method, version 2, compile id 734 
-   1.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_static_method_jmhTest::class_static_method_avgt_jmhStub, version 5, compile id 750 
+   1.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::class_static_method, version 2, compile id 734 
+   1.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_class_static_method_jmhTest::class_static_method_avgt_jmhStub, version 5, compile id 750 
    0.03%         libc-2.31.so  [unknown] 
    0.02%         libc-2.31.so  __strncat_ssse3 
    0.02%            libjvm.so  xmlStream::write_text 
@@ -420,7 +420,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_non_static_method
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_non_static_method
 # Parameters: (depth = 256)
 
 # Run progress: 33.33% complete, ETA 00:07:26
@@ -440,12 +440,12 @@ Iteration   5: 509.568 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_non_static_method":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_non_static_method":
   509.647 ±(99.9%) 0.551 ns/op [Average]
   (min, avg, max) = (509.568, 509.647, 509.903), stdev = 0.143
   CI (99.9%): [509.096, 510.199] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_non_static_method:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_non_static_method:·asm":
 PrintAssembly processed: 197948 total address lines.
 Perf output processed (skipped 58.635 seconds):
  Column 1: cycles (50601 events)
@@ -454,7 +454,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
 
                   #           [sp+0x20]  (sp of caller)
                   0x00007f3df6ffc4a0:   mov    0x8(%rsi),%r10d
@@ -471,18 +471,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
    0.08%      │   0x00007f3df6ffc4cb:   mov    %rbp,0x10(%rsp)
    3.31%      │   0x00007f3df6ffc4d0:   test   %edx,%edx
           ╭   │   0x00007f3df6ffc4d2:   je     0x00007f3df6ffc550           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@1 (line 124)
+          │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@1 (line 124)
           │   │   0x00007f3df6ffc4d8:   nopl   0x0(%rax,%rax,1)
-   0.09%  │   │   0x00007f3df6ffc4e0:   cmpl   $0xc26e78,0x8(%rsi)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/RecursiveMethodCallBenchmark$1&apos;)}
+   0.09%  │   │   0x00007f3df6ffc4e0:   cmpl   $0xc26e78,0x8(%rsi)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/RecursiveMethodCallBenchmark$1&apos;)}
    0.05%  │   │   0x00007f3df6ffc4e7:   jne    0x00007f3df6ffc5b8           ;*invokeinterface itf_non_static {reexecute=0 rethrow=0 return_oop=0}
-          │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
    3.29%  │   │   0x00007f3df6ffc4ed:   cmp    $0x1,%edx
           │╭  │   0x00007f3df6ffc4f0:   je     0x00007f3df6ffc56d           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@1 (line 124)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@1 (line 124)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
    0.01%  ││  │   0x00007f3df6ffc4f6:   lea    -0x2(%rdx),%r10d             ;*isub {reexecute=0 rethrow=0 return_oop=0}
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@11 (line 127)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@11 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
    0.09%  ││  │   0x00007f3df6ffc4fa:   cmp    $0x2,%r10d
    0.07%  ││  │   0x00007f3df6ffc4fe:   xchg   %ax,%ax
    3.43%  ││╭ │   0x00007f3df6ffc500:   jge    0x00007f3df6ffc51f
@@ -495,25 +495,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
           ││ ││   0x00007f3df6ffc523:   je     0x00007f3df6ffc59a
    0.17%  ││ ││   0x00007f3df6ffc529:   cmp    $0x3,%r10d
           ││ ││   0x00007f3df6ffc52d:   je     0x00007f3df6ffc5a9           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          ││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@1 (line 124)
-          ││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@1 (line 124)
+          ││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
    0.10%  ││ ↘│   0x00007f3df6ffc533:   lea    -0x6(%rdx),%edx              ;*isub {reexecute=0 rethrow=0 return_oop=0}
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@11 (line 127)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@11 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
    3.20%  ││  │   0x00007f3df6ffc536:   nop
    0.01%  ││  ╰   0x00007f3df6ffc537:   call   0x00007f3df6ffc4c0           ; ImmutableOopMap {}
           ││                                                                ;*invokeinterface itf_non_static {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static@12 (line 127)
           ││                                                                ;   {optimized virtual_call}
   24.16%  ││      0x00007f3df6ffc53c:   nop
    1.95%  ││   ↗  0x00007f3df6ffc53d:   mov    0x10(%rsp),%rbp
@@ -535,16 +535,16 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   92.28%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  92.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
-   2.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::interface_non_static_method, version 2, compile id 744 
-   2.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_non_static_method_jmhTest::interface_non_static_method_avgt_jmhStub, version 5, compile id 758 
-   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::interface_non_static_method, version 2, compile id 744 
+  92.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
+   2.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::interface_non_static_method, version 2, compile id 744 
+   2.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_non_static_method_jmhTest::interface_non_static_method_avgt_jmhStub, version 5, compile id 758 
+   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::interface_non_static_method, version 2, compile id 744 
    0.47%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
@@ -560,9 +560,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  92.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
-   3.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::interface_non_static_method, version 2, compile id 744 
-   2.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_non_static_method_jmhTest::interface_non_static_method_avgt_jmhStub, version 5, compile id 758 
+  92.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_non_static, version 2, compile id 743 
+   3.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::interface_non_static_method, version 2, compile id 744 
+   2.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_non_static_method_jmhTest::interface_non_static_method_avgt_jmhStub, version 5, compile id 758 
    1.44%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.01%            libjvm.so  ElfSymbolTable::lookup 
@@ -612,7 +612,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_static_method
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_static_method
 # Parameters: (depth = 256)
 
 # Run progress: 50.00% complete, ETA 00:05:35
@@ -632,12 +632,12 @@ Iteration   5: 477.617 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_static_method":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_static_method":
   477.849 ±(99.9%) 1.234 ns/op [Average]
   (min, avg, max) = (477.606, 477.849, 478.246), stdev = 0.320
   CI (99.9%): [476.615, 479.084] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.interface_static_method:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_static_method:·asm":
 PrintAssembly processed: 195399 total address lines.
 Perf output processed (skipped 58.715 seconds):
  Column 1: cycles (50859 events)
@@ -646,10 +646,10 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
 
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@10 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@10 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
    3.27%       0x00007f9646ffc1cd:   cmp    $0x2,%r10d
           ╭    0x00007f9646ffc1d1:   jge    0x00007f9646ffc1f5
           │    0x00007f9646ffc1d7:   cmp    $0x0,%r10d
@@ -662,25 +662,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
            │   0x00007f9646ffc1f9:   je     0x00007f9646ffc272
    0.30%   │   0x00007f9646ffc1ff:   cmp    $0x3,%r10d
            │   0x00007f9646ffc203:   je     0x00007f9646ffc282           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@1 (line 131)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@1 (line 131)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
    0.26%   ↘   0x00007f9646ffc209:   lea    -0x6(%rsi),%esi              ;*isub {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@10 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@10 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
    3.32%       0x00007f9646ffc20c:   data16 xchg %ax,%ax
    0.01%       0x00007f9646ffc20f:   call   0x00007f9646ffc1a0           ; ImmutableOopMap {}
                                                                          ;*invokestatic itf_static {reexecute=0 rethrow=0 return_oop=1}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
                                                                          ;   {static_call}
   25.99%       0x00007f9646ffc214:   nop
    2.03%    ↗  0x00007f9646ffc215:   mov    0x10(%rsp),%rbp
@@ -702,7 +702,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   75.14%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
 
            dependencies   [0x00007f9646ffc3a8,0x00007f9646ffc3b0] = 8
            JVMCI data     [0x00007f9646ffc3b0,0x00007f9646ffc3c0] = 16
@@ -711,7 +711,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
           [Constant Pool (empty)]
           --------------------------------------------------------------------------------
           [Verified Entry Point]
-            # {method} {0x00007f9625cd6238} &apos;itf_static&apos; &apos;(I)Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/RecursiveMethodCallBenchmark$RInterface&apos;
+            # {method} {0x00007f9625cd6238} &apos;itf_static&apos; &apos;(I)Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/RecursiveMethodCallBenchmark$RInterface&apos;
             # parm0:    rsi       = int
             #           [sp+0x20]  (sp of caller)
    0.39%    0x00007f9646ffc1a0:   mov    %eax,-0x14000(%rsp)
@@ -719,15 +719,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
    0.08%    0x00007f9646ffc1ab:   mov    %rbp,0x10(%rsp)
    3.53%    0x00007f9646ffc1b0:   test   %esi,%esi
             0x00007f9646ffc1b2:   je     0x00007f9646ffc228           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@1 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@1 (line 131)
    0.04%    0x00007f9646ffc1b8:   nopl   0x0(%rax,%rax,1)
    0.02%    0x00007f9646ffc1c0:   cmp    $0x1,%esi
             0x00007f9646ffc1c3:   je     0x00007f9646ffc245           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@1 (line 131)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@1 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
    0.15%    0x00007f9646ffc1c9:   lea    -0x2(%rsi),%r10d             ;*isub {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@10 (line 134)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@10 (line 134)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static@11 (line 134)
    3.27%    0x00007f9646ffc1cd:   cmp    $0x2,%r10d
             0x00007f9646ffc1d1:   jge    0x00007f9646ffc1f5
             0x00007f9646ffc1d7:   cmp    $0x0,%r10d
@@ -741,14 +741,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
   17.45%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  75.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
-  17.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
-   2.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::interface_static_method, version 2, compile id 739 
-   2.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_static_method_jmhTest::interface_static_method_avgt_jmhStub, version 5, compile id 755 
+  75.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
+  17.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
+   2.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::interface_static_method, version 2, compile id 739 
+   2.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_static_method_jmhTest::interface_static_method_avgt_jmhStub, version 5, compile id 755 
    0.92%               kernel  [unknown] 
-   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::interface_static_method, version 2, compile id 739 
+   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::interface_static_method, version 2, compile id 739 
    0.11%               kernel  [unknown] 
-   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
+   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
    0.06%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -766,9 +766,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  92.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
-   2.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::interface_static_method, version 2, compile id 739 
-   2.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_static_method_jmhTest::interface_static_method_avgt_jmhStub, version 5, compile id 755 
+  92.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$RInterface::itf_static, version 2, compile id 738 
+   2.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::interface_static_method, version 2, compile id 739 
+   2.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_interface_static_method_jmhTest::interface_static_method_avgt_jmhStub, version 5, compile id 755 
    1.83%               kernel  [unknown] 
    0.03%         libc-2.31.so  [unknown] 
    0.03%                       <unknown> 
@@ -817,7 +817,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_non_static
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_non_static
 # Parameters: (depth = 256)
 
 # Run progress: 66.67% complete, ETA 00:03:43
@@ -837,12 +837,12 @@ Iteration   5: 7.798 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_non_static":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_non_static":
   7.824 ±(99.9%) 0.187 ns/op [Average]
   (min, avg, max) = (7.792, 7.824, 7.910), stdev = 0.048
   CI (99.9%): [7.638, 8.011] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_non_static:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_non_static:·asm":
 PrintAssembly processed: 197251 total address lines.
 Perf output processed (skipped 58.644 seconds):
  Column 1: cycles (50875 events)
@@ -851,7 +851,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static, version 2, compile id 744 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static, version 2, compile id 744 
 
              #           [sp+0x20]  (sp of caller)
              0x00007f305effb2a0:   mov    0x8(%rsi),%r10d
@@ -867,28 +867,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
    1.17%     0x00007f305effb2c7:   sub    $0x18,%rsp
    3.60%     0x00007f305effb2cb:   mov    %rbp,0x10(%rsp)
    0.65%     0x00007f305effb2d0:   mov    0x18(%rsi),%eax              ;*getfield LAMBDA_NON_STATIC {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@1 (line 98)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@1 (line 98)
    0.02%     0x00007f305effb2d3:   nopw   0x0(%rax,%rax,1)
    0.48%     0x00007f305effb2dc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
    3.51%     0x00007f305effb2e0:   cmpl   $0xc26c30,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f305effb367
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/RecursiveMethodCallBenchmark$$Lambda$52+0x0000000800c26c30&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/RecursiveMethodCallBenchmark$$Lambda$52+0x0000000800c26c30&apos;)}
   10.18%  ╭  0x00007f305effb2eb:   jne    0x00007f305effb337           ;*invokeinterface apply {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@8 (line 98)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@8 (line 98)
    4.80%  │  0x00007f305effb2f1:   mov    0x14(%rsi),%r10d             ;*getfield wrapper {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@5 (line 98)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@5 (line 98)
           │  0x00007f305effb2f5:   data16 data16 nopw 0x0(%rax,%rax,1) ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
           │                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-          │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
+          │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
           │  0x00007f305effb300:   cmpl   $0x0,0xc(,%r10,8)            ; implicit exception: dispatches to 0x00007f305effb386
    8.55%  │  0x00007f305effb309:   jne    0x00007f305effb358           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda$new$0@4 (line 140)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$$Lambda$52/0x0000000800c26c30::apply@8
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@8 (line 98)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda$new$0@4 (line 140)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$$Lambda$52/0x0000000800c26c30::apply@8
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@8 (line 98)
    3.56%  │  0x00007f305effb30f:   mov    0xc(,%rax,8),%eax            ; ImmutableOopMap {rsi=Oop }
           │                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-          │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
+          │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
           │  0x00007f305effb316:   test   %eax,(%r12,%rax,8)           ; implicit exception: dispatches to 0x00007f305effb3a6
    8.20%  │  0x00007f305effb31a:   movabs $0x7fef253c0,%rax            ;   {oop(a &apos;java/lang/Object&apos;{0x00000007fef253c0})}
           │  0x00007f305effb324:   mov    0x10(%rsp),%rbp
@@ -899,66 +899,66 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
           ↘  0x00007f305effb337:   mov    $0x14,%r11
              0x00007f305effb33e:   mov    $0xffffffcd,%r10d
              0x00007f305effb344:   mov    %r10d,0x370(%r15)            ;*invokeinterface apply {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@8 (line 98)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@8 (line 98)
              0x00007f305effb34b:   mov    %r11,0x378(%r15)
              0x00007f305effb352:   call   0x00007f305750527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static@0 (line 98)
                                                                        ;   {runtime_call DeoptimizationBlob}
              0x00007f305effb357:   nop                                 ;*areturn {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   53.16%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub, version 6, compile id 767 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub, version 6, compile id 767 
 
               0x00007f305efffef5:   mov    0x18(%rsp),%rsi
               0x00007f305efffefa:   nopw   0x0(%rax,%rax,1)
               0x00007f305effff00:   cmpb   $0x0,0x94(%rsi)
               0x00007f305effff07:   jne    0x00007f305effff8e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
               0x00007f305effff0d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f305effff16:   jmp    0x00007f305effff2f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@13 (line 232)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@13 (line 232)
           │   0x00007f305effff1b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
    4.25%  │↗  0x00007f305effff20:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
    0.53%  ││  0x00007f305effff27:   test   %eax,(%r11)                  ;   {poll}
    3.62%  ││  0x00007f305effff2a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@13 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@13 (line 232)
           ↘│  0x00007f305effff2f:   mov    0x8(%rsp),%r10
    0.69%   │  0x00007f305effff34:   mov    %r10,%rsi
    0.52%   │  0x00007f305effff37:   call   0x00007f30574ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual lambda_non_static {reexecute=0 rethrow=0 return_oop=1}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@17 (line 232)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@17 (line 232)
            │                                                            ;   {optimized virtual_call}
    9.50%   │  0x00007f305effff3c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@20 (line 232)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@20 (line 232)
            │  0x00007f305effff3d:   mov    0x20(%rsp),%r10
    4.39%   │  0x00007f305effff42:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@26 (line 233)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@26 (line 233)
    4.26%   │  0x00007f305effff45:   mov    0x18(%rsp),%rsi
            │  0x00007f305effff4a:   cmpb   $0x0,0x94(%rsi)
   16.80%   ╰  0x00007f305effff51:   je     0x00007f305effff20           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@33 (line 234)
               0x00007f305effff53:   mov    %r10,0x20(%rsp)
               0x00007f305effff58:   call   0x00007f30771346f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f305effff5d:   nop
               0x00007f305effff5e:   mov    0x10(%rsp),%rdx
               0x00007f305effff63:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@40 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@40 (line 235)
               0x00007f305effff67:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@46 (line 236)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub@46 (line 236)
               0x00007f305effff6f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   44.54%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  53.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static, version 2, compile id 744 
-  44.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub, version 6, compile id 767 
+  53.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static, version 2, compile id 744 
+  44.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub, version 6, compile id 767 
    0.81%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
@@ -982,8 +982,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  53.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_non_static, version 2, compile id 744 
-  44.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub, version 6, compile id 767 
+  53.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_non_static, version 2, compile id 744 
+  44.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_non_static_jmhTest::lambda_non_static_avgt_jmhStub, version 6, compile id 767 
    1.92%               kernel  [unknown] 
    0.04%                       <unknown> 
    0.04%         libc-2.31.so  [unknown] 
@@ -1034,7 +1034,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_static
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_static
 # Parameters: (depth = 256)
 
 # Run progress: 83.33% complete, ETA 00:01:51
@@ -1054,12 +1054,12 @@ Iteration   5: 6.962 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_static":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_static":
   6.959 ±(99.9%) 0.028 ns/op [Average]
   (min, avg, max) = (6.947, 6.959, 6.965), stdev = 0.007
   CI (99.9%): [6.931, 6.987] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark.lambda_static:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_static:·asm":
 PrintAssembly processed: 187563 total address lines.
 Perf output processed (skipped 58.452 seconds):
  Column 1: cycles (50747 events)
@@ -1068,7 +1068,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static, version 2, compile id 736 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static, version 2, compile id 736 
 
              #           [sp+0x20]  (sp of caller)
              0x00007f619effcd00:   mov    0x8(%rsi),%r10d
@@ -1084,11 +1084,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
    6.49%     0x00007f619effcd27:   sub    $0x18,%rsp
    0.10%     0x00007f619effcd2b:   mov    %rbp,0x10(%rsp)
    2.19%     0x00007f619effcd30:   mov    0x14(%rsi),%eax              ;*getfield wrapper {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static@4 (line 104)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static@4 (line 104)
    2.06%     0x00007f619effcd33:   nopw   0x0(%rax,%rax,1)
    1.01%     0x00007f619effcd3c:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*getstatic LAMBDA_STATIC {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static@0 (line 104)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static@0 (line 104)
    0.10%     0x00007f619effcd40:   cmpl   $0x0,0xc(,%rax,8)            ; implicit exception: dispatches to 0x00007f619effcd87
   26.72%  ╭  0x00007f619effcd48:   jne    0x00007f619effcd6b
    5.47%  │  0x00007f619effcd4e:   movabs $0x7fef253c0,%rax            ;   {oop(a &apos;java/lang/Object&apos;{0x00000007fef253c0})}
@@ -1097,68 +1097,68 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Recur
           │  0x00007f619effcd61:   mov    0x348(%r15),%rcx
    5.45%  │  0x00007f619effcd68:   test   %eax,(%rcx)                  ;   {poll_return}
           │  0x00007f619effcd6a:   ret                                 ;*areturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static@12 (line 104)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static@12 (line 104)
           ↘  0x00007f619effcd6b:   movl   $0xffffffed,0x370(%r15)      ;*getfield depth {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda$static$1@1 (line 148)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark$$Lambda$51/0x0000000800c269f0::apply@4
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static@7 (line 104)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda$static$1@1 (line 148)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark$$Lambda$51/0x0000000800c269f0::apply@4
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static@7 (line 104)
              0x00007f619effcd76:   movq   $0x10,0x378(%r15)
              0x00007f619effcd81:   call   0x00007f619750527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*getstatic LAMBDA_STATIC {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static@0 (line 104)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static@0 (line 104)
 ....................................................................................................
   49.69%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub, version 6, compile id 753 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub, version 6, compile id 753 
 
               0x00007f619efff1f5:   mov    0x18(%rsp),%rsi
               0x00007f619efff1fa:   nopw   0x0(%rax,%rax,1)
               0x00007f619efff200:   cmpb   $0x0,0x94(%rsi)
               0x00007f619efff207:   jne    0x00007f619efff28e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
               0x00007f619efff20d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f619efff216:   jmp    0x00007f619efff22f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@13 (line 232)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@13 (line 232)
           │   0x00007f619efff21b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
    5.44%  │↗  0x00007f619efff220:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
           ││  0x00007f619efff227:   test   %eax,(%r11)                  ;   {poll}
    0.10%  ││  0x00007f619efff22a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@13 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@13 (line 232)
           ↘│  0x00007f619efff22f:   mov    0x8(%rsp),%r10
    5.29%   │  0x00007f619efff234:   mov    %r10,%rsi
            │  0x00007f619efff237:   call   0x00007f61974ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual lambda_static {reexecute=0 rethrow=0 return_oop=1}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@17 (line 232)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@17 (line 232)
            │                                                            ;   {optimized virtual_call}
    9.91%   │  0x00007f619efff23c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@20 (line 232)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@20 (line 232)
            │  0x00007f619efff23d:   mov    0x20(%rsp),%r10
    4.47%   │  0x00007f619efff242:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@26 (line 233)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@26 (line 233)
    5.45%   │  0x00007f619efff245:   mov    0x18(%rsp),%rsi
            │  0x00007f619efff24a:   cmpb   $0x0,0x94(%rsi)
   17.70%   ╰  0x00007f619efff251:   je     0x00007f619efff220           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@33 (line 234)
               0x00007f619efff253:   mov    %r10,0x20(%rsp)
               0x00007f619efff258:   call   0x00007f61b5caa6f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f619efff25d:   nop
               0x00007f619efff25e:   mov    0x10(%rsp),%rdx
               0x00007f619efff263:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@40 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@40 (line 235)
               0x00007f619efff267:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@46 (line 236)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub@46 (line 236)
               0x00007f619efff26f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   48.36%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  49.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static, version 2, compile id 736 
-  48.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub, version 6, compile id 753 
+  49.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static, version 2, compile id 736 
+  48.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub, version 6, compile id 753 
    0.69%               kernel  [unknown] 
    0.11%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -1182,8 +1182,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  49.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.RecursiveMethodCallBenchmark::lambda_static, version 2, compile id 736 
-  48.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub, version 6, compile id 753 
+  49.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark::lambda_static, version 2, compile id 736 
+  48.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.RecursiveMethodCallBenchmark_lambda_static_jmhTest::lambda_static_avgt_jmhStub, version 6, compile id 753 
    1.63%               kernel  [unknown] 
    0.05%                       <unknown> 
    0.01%         libc-2.31.so  __strxfrm_l 

@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: objectEscapes","Param: size","Param: value"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.arg_escape_obj","avgt",1,25,"0,562450","0,023731","ns/op",false,128,3
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.branch_escape_obj","avgt",1,25,"0,651216","0,012511","ns/op",false,128,3
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape","avgt",1,25,"0,580191","0,018490","ns/op",false,128,3
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape_array_obj","avgt",1,25,"0,618477","0,033648","ns/op",false,128,3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.arg_escape_obj","avgt",1,25,"0,562450","0,023731","ns/op",false,128,3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.branch_escape_obj","avgt",1,25,"0,651216","0,012511","ns/op",false,128,3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape","avgt",1,25,"0,580191","0,018490","ns/op",false,128,3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape_array_obj","avgt",1,25,"0,618477","0,033648","ns/op",false,128,3

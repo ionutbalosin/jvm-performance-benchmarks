@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 64, vectorSize = 64)
 
 # Run progress: 0.00% complete, ETA 00:20:00
@@ -28,12 +28,12 @@ Iteration   5: 2.410 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   2.410 ±(99.9%) 0.001 us/op [Average]
   (min, avg, max) = (2.410, 2.410, 2.410), stdev = 0.001
   CI (99.9%): [2.409, 2.411] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 280156 total address lines.
 Perf output processed (skipped 58.786 seconds):
  Column 1: cycles (50492 events)
@@ -42,7 +42,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
 
                  0x00007fcb72b43ade:   xchg   %ax,%ax
                  0x00007fcb72b43ae0:   jmp    0x00007fcb72b44713           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -53,7 +53,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.50%         0x00007fcb72b43ae5:   mov    0x10(%r8),%esi
                  0x00007fcb72b43ae9:   mov    0x14(%r8),%edx               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -64,7 +64,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
                  0x00007fcb72b43aed:   cmp    0xe0(%rsp),%esi
                  0x00007fcb72b43af4:   setg   %r10b
    0.49%         0x00007fcb72b43af8:   movzbl %r10b,%r10d
@@ -82,9 +82,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.48%         0x00007fcb72b43b0b:   mov    %r11d,%edx                   ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
                  0x00007fcb72b43b0e:   mov    $0x0,%esi
           ╭      0x00007fcb72b43b13:   jmp    0x00007fcb72b43b2f           ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@9 (line 3614)
@@ -94,7 +94,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
           │      0x00007fcb72b43b18:   nopl   0x0(%rax,%rax,1)             ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@12 (line 3614)
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::lambda$broadcastBits$1@7 (line 3539)
@@ -103,7 +103,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    1.06%  │↗     0x00007fcb72b43b20:   cmp    %esi,%ebp
           ││     0x00007fcb72b43b22:   jbe    0x00007fcb72b45780
           ││     0x00007fcb72b43b28:   mov    %r11d,0x10(%rbx,%rsi,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -114,7 +114,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%  ││     0x00007fcb72b43b2d:   inc    %esi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@34 (line 3614)
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::lambda$broadcastBits$1@7 (line 3539)
@@ -123,7 +123,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           ││                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
           ↘│     0x00007fcb72b43b2f:   cmp    %esi,%ebp
            ╰     0x00007fcb72b43b31:   jg     0x00007fcb72b43b20           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@12 (line 3614)
@@ -133,7 +133,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.43%         0x00007fcb72b43b33:   mov    0x44(,%r9,8),%esi            ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -144,7 +144,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%         0x00007fcb72b43b3b:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {rbx=Oop r9=NarrowOop [32]=Oop [40]=Oop [48]=Oop [72]=Oop [80]=Oop [96]=Oop [116]=NarrowOop }
                                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                            ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -154,18 +154,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%         0x00007fcb72b43b40:   cmpl   $0xc3c130,0x8(,%rsi,8)       ; implicit exception: dispatches to 0x00007fcb72b46506
                                                                            ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
    0.50%         0x00007fcb72b43b4b:   jne    0x00007fcb72b4623a
    0.01%         0x00007fcb72b43b51:   cmp    $0xc3c130,%edi               ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
                  0x00007fcb72b43b57:   jne    0x00007fcb72b461c5           ;*invokevirtual blend {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%         0x00007fcb72b43b5d:   mov    0x30(%rsp),%r13
    0.01%         0x00007fcb72b43b62:   cmpl   $0xc3c130,0x8(%r13)          ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
    0.46%         0x00007fcb72b43b6a:   jne    0x00007fcb72b46117           ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.02%         0x00007fcb72b43b70:   cmp    $0x2,%ebp
                  0x00007fcb72b43b73:   jb     0x00007fcb72b456a7
    0.01%         0x00007fcb72b43b79:   mov    %rdx,0xa0(%rsp)
@@ -181,7 +181,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
                  0x00007fcb72b43b96:   movzbl 0x10(%r11),%edi
    0.44%         0x00007fcb72b43b9b:   mov    %rbx,0x18(%rsp)
    0.03%         0x00007fcb72b43ba0:   movzbl 0x11(%r11),%ebx              ;*baload {reexecute=0 rethrow=0 return_oop=0}
@@ -192,7 +192,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::xor@27 (line 642)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@5 (line 612)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@1 (line 496)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.00%         0x00007fcb72b43ba5:   mov    0xc(%rbp),%edx               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                            ; - jdk.incubator.vector.Int64Vector::vec@1 (line 117)
@@ -205,7 +205,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%         0x00007fcb72b43ba8:   test   %edx,%edx
                  0x00007fcb72b43baa:   je     0x00007fcb72b448cc
    0.47%         0x00007fcb72b43bb0:   mov    0x8(,%rdx,8),%ebp
@@ -226,7 +226,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.11%         0x00007fcb72b43bde:   xchg   %ax,%ax                      ; ImmutableOopMap {rdx=NarrowOop r9=NarrowOop r13=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop [72]=Oop [80]=Oop [96]=Oop [116]=NarrowOop }
                                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                            ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -236,7 +236,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.00%         0x00007fcb72b43be0:   cmpl   $0x2,0xc(,%rdx,8)            ; implicit exception: dispatches to 0x00007fcb72b46526
    0.36%         0x00007fcb72b43be8:   jb     0x00007fcb72b4616a
    0.13%         0x00007fcb72b43bee:   cmp    0xdc(%rsp),%eax
@@ -253,7 +253,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.01%         0x00007fcb72b43bfb:   xor    %ebx,%eax                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::lambda$xor$4@2 (line 644)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -264,7 +264,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::xor@27 (line 642)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@5 (line 612)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@1 (line 496)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.11%         0x00007fcb72b43bfd:   cmp    0xe0(%rsp),%esi
    0.02%         0x00007fcb72b43c04:   setg   %sil
    0.34%         0x00007fcb72b43c08:   movzbl %sil,%esi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -279,7 +279,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.01%         0x00007fcb72b43c0c:   xor    %edi,%esi                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::lambda$xor$4@2 (line 644)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -290,7 +290,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::xor@27 (line 642)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@5 (line 612)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@1 (line 496)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.15%         0x00007fcb72b43c0e:   test   %esi,%r10d
                  0x00007fcb72b43c11:   je     0x00007fcb72b44839           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -302,7 +302,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.62%         0x00007fcb72b43c17:   mov    0x20(%rsp),%rbx
    1.14%         0x00007fcb72b43c1c:   mov    0x10(%rbx),%edi              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@67 (line 224)
@@ -314,7 +314,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.49%         0x00007fcb72b43c1f:   nop
    0.04%         0x00007fcb72b43c20:   test   %eax,%r8d
                  0x00007fcb72b43c23:   je     0x00007fcb72b44865           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -327,7 +327,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
                  0x00007fcb72b43c29:   mov    0x14(%rbx),%ebp              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@67 (line 224)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -338,7 +338,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.25%         0x00007fcb72b43c2c:   mov    0xc(%r13),%ebx               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                            ; - jdk.incubator.vector.Int64Vector::vec@1 (line 117)
@@ -352,7 +352,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%         0x00007fcb72b43c30:   test   %ebx,%ebx
                  0x00007fcb72b43c32:   je     0x00007fcb72b448c0
    0.06%         0x00007fcb72b43c38:   mov    0x8(,%rbx,8),%r13d
@@ -369,7 +369,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.25%         0x00007fcb72b43c4e:   shl    $0x3,%rdx                    ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                            ; - jdk.incubator.vector.Int64Vector::vec@1 (line 117)
@@ -382,7 +382,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.03%         0x00007fcb72b43c52:   and    %esi,%r10d
    0.08%         0x00007fcb72b43c55:   and    %eax,%r8d                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::lambda$and$0@2 (line 624)
@@ -393,7 +393,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::and@27 (line 622)
                                                                            ; - jdk.incubator.vector.Int64Vector$Int64Mask::and@2 (line 496)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.12%         0x00007fcb72b43c58:   test   %ebx,%ebx
             ╭    0x00007fcb72b43c5a:   je     0x00007fcb72b43c69           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
             │                                                              ; - jdk.incubator.vector.Int64Vector::vec@4 (line 117)
@@ -407,7 +407,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
             │                                                              ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
             │                                                              ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
             │                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-            │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+            │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.48%    │    0x00007fcb72b43c60:   cmp    %r13,%r11
             │    0x00007fcb72b43c63:   jne    0x00007fcb72b45906           ; ImmutableOopMap {rdx=Oop rbx=NarrowOop r9=NarrowOop [32]=Oop [40]=Oop [48]=Oop [72]=Oop [80]=Oop [96]=Oop [116]=NarrowOop }
             │                                                              ;*iastore {reexecute=1 rethrow=0 return_oop=0}
@@ -420,7 +420,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
             │                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
             │                                                              ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
             │                                                              ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-            │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+            │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.05%    ↘    0x00007fcb72b43c69:   cmpl   $0x2,0xc(,%rbx,8)            ; implicit exception: dispatches to 0x00007fcb72b46546
    0.91%         0x00007fcb72b43c71:   jb     0x00007fcb72b45f95
    0.25%         0x00007fcb72b43c77:   mov    0x50(%rsp),%r13
@@ -435,7 +435,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.09%         0x00007fcb72b43c83:   add    0x10(%r13),%esi              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -447,7 +447,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.70%         0x00007fcb72b43c87:   mov    0x14(,%rbx,8),%edx           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -459,7 +459,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%         0x00007fcb72b43c8e:   add    0x14(%r13),%edx              ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
                                                                            ; - jdk.incubator.vector.IntVector$$Lambda$80/0x0000000800c873e8::apply@3
@@ -473,7 +473,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.55%         0x00007fcb72b43c92:   mov    %ebp,0xac(%rsp)
    0.11%         0x00007fcb72b43c99:   mov    %edi,0x9c(%rsp)
    0.13%         0x00007fcb72b43ca0:   mov    %esi,0x98(%rsp)
@@ -483,17 +483,17 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.12%         0x00007fcb72b43cbb:   mov    0xe0(%rsp),%edx
    0.01%         0x00007fcb72b43cc2:   data16 nopw 0x0(%rax,%rax,1)
    0.27%         0x00007fcb72b43ccc:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.12%         0x00007fcb72b43cd0:   cmp    0xc(,%r9,8),%r10d
                  0x00007fcb72b43cd8:   jge    0x00007fcb72b44566           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@72 (line 81)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@72 (line 81)
    0.11%         0x00007fcb72b43cde:   cmp    $0x1,%r10d
              ╭   0x00007fcb72b43ce2:   je     0x00007fcb72b43cf7
              │   0x00007fcb72b43ce8:   cmp    $0x0,%r10d
              │   0x00007fcb72b43cec:   je     0x00007fcb72b442a5
              │   0x00007fcb72b43cf2:   jmp    0x00007fcb72b4573b           ;*lookupswitch {reexecute=0 rethrow=0 return_oop=0}
              │                                                             ; - jdk.incubator.vector.Int64Vector::lane@1 (line 456)
-             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@79 (line 82)
+             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@79 (line 82)
    0.30%     ↘   0x00007fcb72b43cf7:   mov    0xc(,%r9,8),%eax             ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -503,7 +503,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.09%         0x00007fcb72b43cff:   nop
    0.14%         0x00007fcb72b43d00:   test   %eax,%eax
                  0x00007fcb72b43d02:   jl     0x00007fcb72b4613b
@@ -549,7 +549,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   20.42%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
 
                0x00007fcb72b4455c:   mov    0x74(%rsp),%r9d
                0x00007fcb72b44561:   jmp    0x00007fcb72b43f45           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -560,7 +560,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.49%       0x00007fcb72b44566:   mov    0x98(%rsp),%esi
    0.01%       0x00007fcb72b4456d:   mov    0x94(%rsp),%r14d
    0.46%       0x00007fcb72b44575:   mov    0x48(%rsp),%rcx
@@ -568,7 +568,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.26%       0x00007fcb72b44582:   mov    0x9c(%rsp),%edx
    0.01%       0x00007fcb72b44589:   mov    0x1c(%rcx),%r8d              ; ImmutableOopMap {rcx=Oop r8=NarrowOop [72]=Oop [80]=Oop [96]=Oop [116]=NarrowOop }
                                                                          ;*aload_3 {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@177 (line 93)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@177 (line 93)
    0.12%       0x00007fcb72b4458d:   mov    0xc(,%r8,8),%eax             ; implicit exception: dispatches to 0x00007fcb72b46626
    0.81%       0x00007fcb72b44595:   test   %eax,%eax
                0x00007fcb72b44597:   je     0x00007fcb72b4560d           ;* unwind (locked if synchronized)
@@ -576,11 +576,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - java.util.Objects::checkIndex@3 (line 359)
                                                                          ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.42%       0x00007fcb72b4459d:   dec    %eax                         ;*isub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@42 (line 52)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.14%       0x00007fcb72b4459f:   nop
    0.06%       0x00007fcb72b445a0:   cmp    0xe4(%rsp),%eax
                0x00007fcb72b445a7:   jbe    0x00007fcb72b4560d           ;* unwind (locked if synchronized)
@@ -588,7 +588,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - java.util.Objects::checkIndex@3 (line 359)
                                                                          ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.38%       0x00007fcb72b445ad:   mov    0x108(%r15),%rax
    0.05%       0x00007fcb72b445b4:   lea    0x50(%rax),%rdi
                0x00007fcb72b445b8:   nopl   0x0(%rax,%rax,1)
@@ -613,7 +613,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                0x00007fcb72b445f9:   mov    %rax,%rdi                    ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 219)
                                                                          ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -624,7 +624,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%       0x00007fcb72b445fc:   lea    0x18(%rax),%r10              ;*new {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.Int64Vector::vectorFactory@0 (line 171)
                                                                          ; - jdk.incubator.vector.Int64Vector::vectorFactory@2 (line 41)
@@ -638,7 +638,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.41%       0x00007fcb72b44600:   lea    0x28(%rax),%rbp              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 200)
                                                                          ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -650,7 +650,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.05%       0x00007fcb72b44604:   lea    0x40(%rax),%rbx              ;*new {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.Int64Vector::vectorFactory@0 (line 171)
                                                                          ; - jdk.incubator.vector.Int64Vector::vectorFactory@2 (line 41)
@@ -663,7 +663,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%       0x00007fcb72b44608:   movl   $0x2,0xc(%rax)               ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 219)
                                                                          ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -674,7 +674,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%       0x00007fcb72b4460f:   movq   $0x1,(%rax)
    0.46%       0x00007fcb72b44616:   movl   $0x6c38,0x8(%rax)            ;   {metadata({type array int})}
    0.04%       0x00007fcb72b4461d:   mov    %edx,0x10(%rax)
@@ -694,7 +694,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%       0x00007fcb72b44637:   mov    %ebp,0x24(%rax)
    0.13%       0x00007fcb72b4463a:   movl   $0x2,0x34(%rax)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 200)
@@ -707,7 +707,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.43%       0x00007fcb72b44641:   movq   $0x1,0x28(%rax)
    0.11%       0x00007fcb72b44649:   movl   $0x6c38,0x30(%rax)           ;   {metadata({type array int})}
    0.17%       0x00007fcb72b44650:   mov    %esi,0x38(%rax)
@@ -727,10 +727,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                          ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.07%       0x00007fcb72b4466d:   mov    %esi,0x4c(%rax)
    0.34%       0x00007fcb72b44670:   shl    $0x3,%r8                     ;*getfield result {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@179 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@179 (line 93)
    0.08%       0x00007fcb72b44674:   mov    $0x2,%esi
    0.02%       0x00007fcb72b44679:   mov    0xe8(%rsp),%rax
    0.09%       0x00007fcb72b44681:   mov    0xc(%r8),%edx                ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -741,14 +741,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                          ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.36%       0x00007fcb72b44685:   mov    0xc(%rdi),%ebp               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
                                                                          ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
                                                                          ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                          ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.08%       0x00007fcb72b44688:   mov    $0x0,%r9d
    0.01%       0x00007fcb72b4468e:   mov    0xe4(%rsp),%r14d
    0.07%  ╭    0x00007fcb72b44696:   jmp    0x00007fcb72b446c5           ;*iload {reexecute=0 rethrow=0 return_oop=0}
@@ -757,14 +757,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           │                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           │                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           │    0x00007fcb72b4469b:   nopl   0x0(%rax,%rax,1)             ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - jdk.incubator.vector.IntVector::stOp@14 (line 341)
           │                                                              ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           │                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           │                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           │                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.98%  │↗   0x00007fcb72b446a0:   cmp    %r9d,%ebp
           ││   0x00007fcb72b446a3:   jbe    0x00007fcb72b455ed           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
           ││                                                             ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
@@ -772,7 +772,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                             ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                             ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││   0x00007fcb72b446a9:   mov    %r9d,%r11d
    0.01%  ││   0x00007fcb72b446ac:   add    %r14d,%r11d                  ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           ││                                                             ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@3 (line 2997)
@@ -782,7 +782,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                             ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                             ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││   0x00007fcb72b446af:   cmp    %r11d,%edx
           ││   0x00007fcb72b446b2:   jbe    0x00007fcb72b455ed           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
           ││                                                             ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@5 (line 2997)
@@ -792,14 +792,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                             ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                             ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    1.07%  ││   0x00007fcb72b446b8:   mov    0x10(%rdi,%r9,4),%ecx        ;*iaload {reexecute=0 rethrow=0 return_oop=0}
           ││                                                             ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
           ││                                                             ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                             ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                             ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││   0x00007fcb72b446bd:   mov    %ecx,0x10(%r8,%r11,4)        ;*iastore {reexecute=0 rethrow=0 return_oop=0}
           ││                                                             ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@5 (line 2997)
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$82/0x0000000800c87c28::apply@8
@@ -808,14 +808,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                             ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                             ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.02%  ││   0x00007fcb72b446c2:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           ││                                                             ; - jdk.incubator.vector.IntVector::stOp@32 (line 341)
           ││                                                             ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           ││                                                             ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                             ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                             ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.34%  ↘│   0x00007fcb72b446c5:   cmp    %r9d,%esi
            ╰   0x00007fcb72b446c8:   ja     0x00007fcb72b446a0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.IntVector::stOp@14 (line 341)
@@ -823,7 +823,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                          ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.48%       0x00007fcb72b446ca:   mov    0x74(%rsp),%ecx
    0.01%       0x00007fcb72b446ce:   mov    0x348(%r15),%rsi             ; ImmutableOopMap {rcx=NarrowOop rbx=Oop r8=Oop r10=Oop [72]=Oop [80]=Oop [96]=Oop [116]=NarrowOop }
                                                                          ;*return {reexecute=1 rethrow=0 return_oop=0}
@@ -832,14 +832,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                          ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                          ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.04%       0x00007fcb72b446d5:   test   %eax,(%rsi)                  ;   {poll}
    0.05%       0x00007fcb72b446d7:   mov    0xc(,%rcx,8),%esi            ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.AbstractSpecies::length@1 (line 116)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@190 (line 79)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@190 (line 79)
    0.44%       0x00007fcb72b446de:   mov    %r14d,%edx
                0x00007fcb72b446e1:   add    %esi,%edx                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@195 (line 79)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@195 (line 79)
    0.02%       0x00007fcb72b446e3:   mov    %rbx,%rbp
    0.01%       0x00007fcb72b446e6:   mov    %r10,0x30(%rsp)
    0.43%       0x00007fcb72b446eb:   mov    %edx,%ebx
@@ -847,15 +847,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.02%       0x00007fcb72b446f1:   mov    %ecx,%r9d
    0.01%       0x00007fcb72b446f4:   mov    0x48(%rsp),%r11
    0.51%       0x00007fcb72b446f9:   mov    %esi,%eax                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
    0.00%       0x00007fcb72b446fb:   mov    0x18(%r11),%ecx              ; ImmutableOopMap {rcx=NarrowOop rbp=Oop r9=NarrowOop r11=Oop [48]=Oop [72]=Oop [80]=Oop [96]=Oop [116]=NarrowOop }
                                                                          ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
    0.05%       0x00007fcb72b446ff:   mov    0xc(,%rcx,8),%edi            ; implicit exception: dispatches to 0x00007fcb72b46646
    0.12%       0x00007fcb72b44706:   cmp    %ebx,%edi
                0x00007fcb72b44708:   jg     0x00007fcb72b436e0
    0.21%       0x00007fcb72b4470e:   jmp    0x00007fcb72b44ec5           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@46 (line 79)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@46 (line 79)
    0.02%       0x00007fcb72b44713:   lea    -0x2(%r10),%rdx
                0x00007fcb72b44717:   cmp    %rdx,%rax
                0x00007fcb72b4471a:   jg     0x00007fcb72b44898
@@ -873,7 +873,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.52%       0x00007fcb72b4473e:   lea    -0x2(%r8),%rbx
                0x00007fcb72b44742:   cmp    %rbx,%rbp
             ╭  0x00007fcb72b44745:   jg     0x00007fcb72b44754
@@ -891,7 +891,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.10%       0x00007fcb72b44769:   lea    -0x2(%r10),%rsi
                0x00007fcb72b4476d:   cmp    %rsi,%rdx
                0x00007fcb72b44770:   jg     0x00007fcb72b448b8
@@ -912,34 +912,34 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   16.07%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  20.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-  16.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   8.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   7.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   7.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   7.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   6.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   5.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   3.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   2.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   2.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   1.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   1.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   1.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   0.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   0.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
-   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+  20.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+  16.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   8.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   7.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   7.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   7.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   6.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   5.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   3.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   2.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   2.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   1.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   1.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   1.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   0.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   0.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
    5.45%  <...other 451 warm regions...>
 ....................................................................................................
   99.99%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
+  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1048 
    0.91%               kernel  [unknown] 
-   0.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1072 
+   0.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1072 
    0.16%                       <unknown> 
    0.04%            libjvm.so  HeapRegionClaimer::claim_region 
    0.03%            libjvm.so  HeapRegionManager::par_iterate 
@@ -990,7 +990,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 64, vectorSize = 128)
 
 # Run progress: 8.33% complete, ETA 00:20:49
@@ -1010,12 +1010,12 @@ Iteration   5: 2.825 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   2.825 ±(99.9%) 0.002 us/op [Average]
   (min, avg, max) = (2.825, 2.825, 2.826), stdev = 0.001
   CI (99.9%): [2.824, 2.827] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 289683 total address lines.
 Perf output processed (skipped 58.631 seconds):
  Column 1: cycles (50519 events)
@@ -1024,7 +1024,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
 
                     0x00007f3652b57aef:   jmp    0x00007f3652b57d4c           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -1034,7 +1034,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
               ↗↗    0x00007f3652b57af4:   mov    0x18(%r9),%edx
    0.05%      ││    0x00007f3652b57af8:   mov    0x1c(%r9),%eax
    0.60%      ││    0x00007f3652b57afc:   mov    0x14(%r9),%ecx
@@ -1047,7 +1047,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.00%      ││    0x00007f3652b57b04:   test   %r10d,%r10d
           ╭   ││    0x00007f3652b57b07:   je     0x00007f3652b57b6f
    0.05%  │   ││    0x00007f3652b57b0d:   lea    0x10(%rbp),%r9
@@ -1078,7 +1078,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │  │││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │  │││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │  │││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │  │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │  │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.04%  ↘  ↘││    0x00007f3652b57b6f:   mov    0x44(,%r8,8),%edi            ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -1089,9 +1089,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.02%      ││    0x00007f3652b57b77:   mov    %esi,%r9d                    ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
               ││    0x00007f3652b57b7a:   cmp    0x148(%rsp),%r11d
    0.60%      ││    0x00007f3652b57b82:   setg   %r11b
    0.06%      ││    0x00007f3652b57b86:   movzbl %r11b,%r11d
@@ -1115,7 +1115,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.33%      ││    0x00007f3652b57bb1:   data16 data16 nopw 0x0(%rax,%rax,1)
    0.27%      ││    0x00007f3652b57bbc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rbp=Oop [8]=Oop [72]=Oop [92]=NarrowOop [96]=Oop [112]=Oop }
               ││                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -1126,7 +1126,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%      ││    0x00007f3652b57bc0:   cmpl   $0xc3d218,0x8(,%rdi,8)       ; implicit exception: dispatches to 0x00007f3652b5a926
               ││                                                              ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.38%      ││    0x00007f3652b57bcb:   jne    0x00007f3652b59acf           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -1138,7 +1138,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.33%      ││    0x00007f3652b57bd1:   cmp    $0x4,%r10d
               ││    0x00007f3652b57bd5:   jb     0x00007f3652b5a577
    0.00%      ││    0x00007f3652b57bdb:   movabs $0x7f16c9b80,%rsi            ;   {oop([Z{0x00000007f16c9b80})}
@@ -1154,7 +1154,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
               ││    0x00007f3652b57bf2:   movzbl 0x10(%rsi),%r9d
    0.28%      ││    0x00007f3652b57bf7:   movzbl 0x11(%rsi),%r14d
    0.29%      ││    0x00007f3652b57bfc:   movzbl 0x13(%rsi),%r8d
@@ -1166,7 +1166,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.00%      ││    0x00007f3652b57c06:   cmp    0x144(%rsp),%edi
    0.29%      ││    0x00007f3652b57c0d:   setg   %dil
    0.33%      ││    0x00007f3652b57c11:   movzbl %dil,%edi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1181,7 +1181,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.03%      ││    0x00007f3652b57c15:   xor    %r14d,%edi                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1192,7 +1192,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.03%      ││    0x00007f3652b57c18:   cmp    0x148(%rsp),%eax
    0.32%      ││    0x00007f3652b57c1f:   setg   %al
    0.28%      ││    0x00007f3652b57c22:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1207,7 +1207,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.02%      ││    0x00007f3652b57c25:   xor    %r9d,%eax                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1218,7 +1218,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.04%      ││    0x00007f3652b57c28:   test   %eax,%r11d
               ││    0x00007f3652b57c2b:   jne    0x00007f3652b57e94
    0.24%      ││    0x00007f3652b57c31:   test   %edi,%ecx
@@ -1232,7 +1232,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.13%      ││    0x00007f3652b57c39:   mov    %rax,0x160(%rsp)
    0.04%      ││    0x00007f3652b57c41:   mov    0x9c(%rsp),%eax
    0.00%      ││    0x00007f3652b57c48:   mov    %eax,0x7c(%rsp)
@@ -1249,7 +1249,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.15%      ││    0x00007f3652b57c67:   mov    0x48(%rsp),%rsi
    0.16%      ││    0x00007f3652b57c6c:   mov    0x1c(%r14),%r9d
    0.09%      ││    0x00007f3652b57c70:   mov    %r9d,0x78(%rsp)
@@ -1263,7 +1263,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.14%      ││    0x00007f3652b57c79:   and    %eax,%r11d
    0.18%      ││    0x00007f3652b57c7c:   and    %edi,%ecx                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -1274,7 +1274,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.07%      ││    0x00007f3652b57c7e:   cmp    0x140(%rsp),%ebp
    0.18%      ││    0x00007f3652b57c85:   setg   %al
    0.11%      ││    0x00007f3652b57c88:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1289,7 +1289,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.25%      ││    0x00007f3652b57c8b:   xor    %r13d,%eax                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1300,7 +1300,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.21%      ││    0x00007f3652b57c8e:   mov    %ebx,%edi
    0.08%      ││    0x00007f3652b57c90:   and    %eax,%edi                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -1311,7 +1311,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.40%      ││    0x00007f3652b57c92:   cmp    0x13c(%rsp),%r10d
    0.16%      ││    0x00007f3652b57c9a:   setg   %r10b
    0.02%      ││    0x00007f3652b57c9e:   movzbl %r10b,%r10d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1326,7 +1326,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.12%      ││    0x00007f3652b57ca2:   xor    %r8d,%r10d                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1337,7 +1337,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.38%      ││    0x00007f3652b57ca5:   mov    %edx,%ebp
    0.12%      ││    0x00007f3652b57ca7:   and    %r10d,%ebp                   ;*iand {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -1348,7 +1348,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
               ││                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.05%      ││    0x00007f3652b57caa:   mov    0x348(%r15),%r8              ; ImmutableOopMap {rsi=Oop r14=Oop [72]=Oop [92]=NarrowOop [96]=Oop [112]=Oop }
               ││                                                              ;*iastore {reexecute=1 rethrow=0 return_oop=0}
               ││                                                              ; - (reexecute) jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -1360,7 +1360,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.08%      ││    0x00007f3652b57cb1:   test   %eax,(%r8)                   ;   {poll}
    0.35%      ││    0x00007f3652b57cb4:   mov    0xc4(%rsp),%edi
    0.14%      ││    0x00007f3652b57cbb:   add    0x14(%rsi),%edi
@@ -1378,7 +1378,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.04%      ││    0x00007f3652b57cd6:   mov    0x94(%rsp),%r11d
    0.11%      ││    0x00007f3652b57cde:   add    0x1c(%rsi),%r11d             ;*iadd {reexecute=0 rethrow=0 return_oop=0}
               ││                                                              ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
@@ -1393,10 +1393,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               ││                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.33%      ││    0x00007f3652b57ce2:   mov    0x90(%rsp),%ecx
    0.14%      ││    0x00007f3652b57ce9:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@171 (line 81)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@171 (line 81)
    0.04%      ││    0x00007f3652b57ceb:   test   %eax,%ebx
               ││    0x00007f3652b57ced:   jne    0x00007f3652b57ed0
    0.10%      ││    0x00007f3652b57cf3:   test   %r10d,%edx
@@ -1410,7 +1410,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.21%      ││    0x00007f3652b57cfc:   mov    %edi,0xc4(%rsp)
    0.00%      ││    0x00007f3652b57d03:   mov    %r8d,0xac(%rsp)
    0.03%      ││    0x00007f3652b57d0b:   mov    %rax,0x160(%rsp)
@@ -1423,7 +1423,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.01%      ││    0x00007f3652b57d3c:   mov    %r11d,0x94(%rsp)
    0.03%      ││    0x00007f3652b57d44:   mov    %ecx,%r10d
    0.08%      ││    0x00007f3652b57d47:   jmp    0x00007f3652b575d0           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+              ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.63%      ││    0x00007f3652b57d4c:   lea    -0x2(%rcx),%rax
               ││    0x00007f3652b57d50:   cmp    %rax,%r11
               ││    0x00007f3652b57d53:   jg     0x00007f3652b58045
@@ -1441,7 +1441,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.38%            0x00007f3652b57d78:   lea    -0x2(%r11),%r14
                     0x00007f3652b57d7c:   nopl   0x0(%rax)
                     0x00007f3652b57d80:   cmp    %r14,%rdx
@@ -1460,7 +1460,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.38%            0x00007f3652b57da7:   lea    -0x2(%r14),%rbx
                     0x00007f3652b57dab:   cmp    %rbx,%r9
                  ╭  0x00007f3652b57dae:   jg     0x00007f3652b57dbe
@@ -1481,7 +1481,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   19.61%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
 
                    0x00007f3652b5726d:   jle    0x00007f3652b57260
                    0x00007f3652b5726f:   jmp    0x00007f3652b58674           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -1492,7 +1492,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.12%           0x00007f3652b57274:   mov    0x1c(%r8),%ecx
    0.09%           0x00007f3652b57278:   mov    0x18(%r8),%edi
    0.00%           0x00007f3652b5727c:   mov    0x14(%r8),%r10d
@@ -1505,7 +1505,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.12%           0x00007f3652b57284:   test   %r11d,%r11d
           ╭        0x00007f3652b57287:   je     0x00007f3652b572f2
    0.08%  │        0x00007f3652b5728d:   lea    0x10(%r9),%r13
@@ -1536,7 +1536,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.21%  ↘  ↘     0x00007f3652b572f2:   mov    0x44(,%rsi,8),%ebp           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -1547,9 +1547,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%           0x00007f3652b572f9:   mov    %edx,%ebx                    ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
                    0x00007f3652b572fb:   cmp    0x148(%rsp),%r8d
    0.01%           0x00007f3652b57303:   setg   %r8b
    0.20%           0x00007f3652b57307:   movzbl %r8b,%r8d
@@ -1573,7 +1573,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.10%           0x00007f3652b57337:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {r9=Oop [24]=Oop [32]=Oop [48]=Oop [72]=Oop [92]=NarrowOop [96]=Oop [112]=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -1583,18 +1583,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.03%           0x00007f3652b57340:   cmpl   $0xc3d218,0x8(,%rbp,8)       ; implicit exception: dispatches to 0x00007f3652b5a886
                                                                              ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.13%           0x00007f3652b5734b:   jne    0x00007f3652b5a4ea
    0.15%           0x00007f3652b57351:   cmp    $0xc3d218,%eax               ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
                    0x00007f3652b57357:   jne    0x00007f3652b5a480           ;*invokevirtual blend {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%           0x00007f3652b5735d:   mov    0x30(%rsp),%rbp
    0.07%           0x00007f3652b57362:   cmpl   $0xc3d218,0x8(%rbp)          ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.15%           0x00007f3652b57369:   jne    0x00007f3652b59ce6           ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.18%           0x00007f3652b5736f:   cmp    $0x4,%r11d
                    0x00007f3652b57373:   jb     0x00007f3652b599a7
                    0x00007f3652b57379:   mov    %ecx,0xc8(%rsp)
@@ -1613,7 +1613,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
                    0x00007f3652b573a7:   mov    %r9,0x10(%rsp)
    0.03%           0x00007f3652b573ac:   movzbl 0x10(%r11),%r9d
    0.00%           0x00007f3652b573b1:   movzbl 0x11(%r11),%esi
@@ -1626,7 +1626,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.04%           0x00007f3652b573c0:   mov    0xc(%r13),%r11d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                              ; - jdk.incubator.vector.Int128Vector::vec@1 (line 117)
@@ -1639,7 +1639,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
                    0x00007f3652b573c4:   test   %r11d,%r11d
                    0x00007f3652b573c7:   je     0x00007f3652b5892a
    0.17%           0x00007f3652b573cd:   mov    %ecx,0xc4(%rsp)
@@ -1658,7 +1658,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%           0x00007f3652b573f3:   mov    0x158(%rsp),%rcx
    0.05%           0x00007f3652b573fb:   nopl   0x0(%rax,%rax,1)
                    0x00007f3652b57400:   cmp    %r13,%rcx
@@ -1671,7 +1671,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.16%           0x00007f3652b57409:   cmpl   $0x4,0xc(,%r11,8)            ; implicit exception: dispatches to 0x00007f3652b5a8a6
    0.05%           0x00007f3652b57412:   jb     0x00007f3652b5a1ed
    0.10%           0x00007f3652b57418:   cmp    0x148(%rsp),%edx
@@ -1688,7 +1688,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.03%           0x00007f3652b57425:   xor    %r9d,%edx                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1699,7 +1699,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.12%           0x00007f3652b57428:   test   %edx,%r8d
                    0x00007f3652b5742b:   jne    0x00007f3652b58879           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -1711,7 +1711,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.06%           0x00007f3652b57431:   mov    0x10(,%r11,8),%r9d           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -1722,7 +1722,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%           0x00007f3652b57439:   mov    %r9d,0xb8(%rsp)
    0.06%           0x00007f3652b57441:   mov    0x18(%rsp),%r13              ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -1734,7 +1734,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.08%           0x00007f3652b57446:   cmp    0x144(%rsp),%eax
    0.06%           0x00007f3652b5744d:   setg   %al
    0.00%           0x00007f3652b57450:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1749,7 +1749,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.06%           0x00007f3652b57453:   xor    %esi,%eax                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1760,7 +1760,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.09%           0x00007f3652b57455:   test   %eax,%r10d
                    0x00007f3652b57458:   jne    0x00007f3652b5888f           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -1772,7 +1772,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.05%           0x00007f3652b5745e:   mov    0x14(,%r11,8),%esi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -1783,7 +1783,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.06%           0x00007f3652b57466:   mov    %esi,0xb4(%rsp)
    0.03%           0x00007f3652b5746d:   cmp    0x140(%rsp),%r14d
    0.04%           0x00007f3652b57475:   setg   %r14b
@@ -1799,7 +1799,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.08%           0x00007f3652b5747d:   xor    %ebp,%r14d                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1810,7 +1810,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.03%           0x00007f3652b57480:   test   %r14d,%edi
                    0x00007f3652b57483:   jne    0x00007f3652b58898           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -1822,7 +1822,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.05%           0x00007f3652b57489:   mov    0x18(,%r11,8),%ebp           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -1833,7 +1833,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.03%           0x00007f3652b57491:   mov    %ebp,0xb0(%rsp)
    0.08%           0x00007f3652b57498:   mov    0xc4(%rsp),%ebp
    0.03%           0x00007f3652b5749f:   cmp    0x13c(%rsp),%ebx
@@ -1850,7 +1850,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.11%           0x00007f3652b574ac:   xor    %ebp,%ebx                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -1861,7 +1861,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.07%           0x00007f3652b574ae:   test   %ebx,0xc8(%rsp)
                    0x00007f3652b574b5:   jne    0x00007f3652b58870           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -1873,7 +1873,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.05%           0x00007f3652b574bb:   mov    0x1c(,%r11,8),%ebp           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -1884,7 +1884,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.09%           0x00007f3652b574c3:   mov    %ebp,%r13d
    0.07%           0x00007f3652b574c6:   mov    0x30(%rsp),%rbp
    0.01%           0x00007f3652b574cb:   mov    0xc(%rbp),%r9d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
@@ -1900,7 +1900,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.07%           0x00007f3652b574cf:   test   %r9d,%r9d
                    0x00007f3652b574d2:   je     0x00007f3652b5891e
    0.10%           0x00007f3652b574d8:   mov    0x8(,%r9,8),%ebp
@@ -1917,7 +1917,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.17%           0x00007f3652b574ee:   shl    $0x3,%r11                    ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                              ; - jdk.incubator.vector.Int128Vector::vec@1 (line 117)
@@ -1930,7 +1930,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%           0x00007f3652b574f2:   and    %edx,%r8d
    0.01%           0x00007f3652b574f5:   and    %eax,%r10d
    0.00%           0x00007f3652b574f8:   and    %r14d,%edi
@@ -1943,7 +1943,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.01%           0x00007f3652b57502:   test   %r9d,%r9d
               ╭    0x00007f3652b57505:   je     0x00007f3652b57514
    0.01%      │    0x00007f3652b5750b:   cmp    %rbp,%rcx
@@ -1959,7 +1959,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               │                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               │                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               │                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%      ↘    0x00007f3652b57514:   nopl   0x0(%rax,%rax,1)
    0.16%           0x00007f3652b5751c:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {r9=NarrowOop r11=Oop [24]=Oop [32]=Oop [48]=Oop [72]=Oop [92]=NarrowOop [96]=Oop [112]=Oop }
                                                                              ;*iastore {reexecute=1 rethrow=0 return_oop=0}
@@ -1972,7 +1972,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%           0x00007f3652b57520:   cmpl   $0x4,0xc(,%r9,8)             ; implicit exception: dispatches to 0x00007f3652b5a8c6
    0.02%           0x00007f3652b57529:   jb     0x00007f3652b5a14b
    0.15%           0x00007f3652b5752f:   mov    0x48(%rsp),%rbp
@@ -1987,7 +1987,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%           0x00007f3652b5753c:   add    0x10(%rbp),%esi              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -1999,7 +1999,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%           0x00007f3652b5753f:   mov    0x14(,%r9,8),%edx            ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -2011,7 +2011,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.16%           0x00007f3652b57547:   add    0x14(%rbp),%edx              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -2023,7 +2023,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.04%           0x00007f3652b5754a:   mov    0x18(,%r9,8),%eax            ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -2035,7 +2035,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.02%           0x00007f3652b57552:   add    0x18(%rbp),%eax              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -2047,7 +2047,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.12%           0x00007f3652b57555:   mov    0x1c(,%r9,8),%edi            ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -2059,7 +2059,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.05%           0x00007f3652b5755d:   add    0x1c(%rbp),%edi              ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
                                                                              ; - jdk.incubator.vector.IntVector$$Lambda$80/0x0000000800c873e8::apply@3
@@ -2073,7 +2073,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.06%           0x00007f3652b57560:   mov    %edx,0xc4(%rsp)
    0.09%           0x00007f3652b57567:   mov    %esi,0xac(%rsp)
    0.04%           0x00007f3652b5756e:   mov    %r13d,0xa8(%rsp)
@@ -2090,7 +2090,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.07%           0x00007f3652b575be:   mov    $0x1,%r10d
    0.02%           0x00007f3652b575c4:   nopl   0x0(%rax,%rax,1)
                    0x00007f3652b575cc:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.46%           0x00007f3652b575d0:   mov    0xd0(%rsp),%r11d
    0.06%           0x00007f3652b575d8:   mov    0xd4(%rsp),%r13d
    0.08%           0x00007f3652b575e0:   mov    0xe4(%rsp),%edx
@@ -2100,7 +2100,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.09%           0x00007f3652b575fc:   data16 data16 xchg %ax,%ax
    0.18%           0x00007f3652b57600:   cmp    0xc(,%r8,8),%r10d
                    0x00007f3652b57608:   jge    0x00007f3652b58371           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@72 (line 81)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@72 (line 81)
    0.58%           0x00007f3652b5760e:   cmp    $0x3,%r10d
                ╭   0x00007f3652b57612:   je     0x00007f3652b5763f
    0.03%       │   0x00007f3652b57618:   cmp    $0x0,%r10d
@@ -2112,7 +2112,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │   0x00007f3652b57634:   je     0x00007f3652b57f73
                │   0x00007f3652b5763a:   jmp    0x00007f3652b5a3fc           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
                │                                                             ; - jdk.incubator.vector.Int128Vector::lane@1 (line 456)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@79 (line 82)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@79 (line 82)
    0.02%       ↘   0x00007f3652b5763f:   mov    %r10d,0x90(%rsp)
    0.06%           0x00007f3652b57647:   mov    0xc(,%r8,8),%r10d            ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
@@ -2123,7 +2123,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                              ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.10%           0x00007f3652b5764f:   test   %r10d,%r10d
                    0x00007f3652b57652:   jl     0x00007f3652b59de9
    0.04%           0x00007f3652b57658:   mov    %edi,%ecx
@@ -2169,7 +2169,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   17.27%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
 
                 0x00007f3652b57720:   jmp    0x00007f3652b57da7           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -2179,7 +2179,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
                 0x00007f3652b57725:   mov    %rbp,0x8(%rsp)
    0.19%        0x00007f3652b5772a:   test   %r10d,%r10d
           ╭     0x00007f3652b5772d:   je     0x00007f3652b5778e
@@ -2210,7 +2210,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │ │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │ │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
           │ │                                                             ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.22%  ↘ ↘   0x00007f3652b5778e:   mov    0x44(,%r8,8),%esi            ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -2221,12 +2221,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.01%        0x00007f3652b57796:   movslq %ecx,%r9                     ;*i2l {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::toBits@1 (line 390)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
                 0x00007f3652b57799:   nopl   0x0(%rax)                    ; ImmutableOopMap {rbp=Oop r8=NarrowOop [8]=Oop [72]=Oop [92]=NarrowOop [96]=Oop [112]=Oop }
                                                                           ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                           ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -2236,7 +2236,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.39%        0x00007f3652b577a0:   cmpl   $0xc3d218,0x8(,%rsi,8)       ; implicit exception: dispatches to 0x00007f3652b5a8e6
                                                                           ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.34%        0x00007f3652b577ab:   jne    0x00007f3652b5a451           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -2248,7 +2248,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.08%        0x00007f3652b577b1:   cmp    $0x4,%r10d
                 0x00007f3652b577b5:   jb     0x00007f3652b59d31           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -2259,7 +2259,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.35%        0x00007f3652b577bb:   mov    0x14(%rbp),%r10d
    0.22%        0x00007f3652b577bf:   mov    0x18(%rbp),%r9d
    0.01%        0x00007f3652b577c3:   mov    0x1c(%rbp),%ecx
@@ -2272,7 +2272,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.33%        0x00007f3652b577c9:   cmp    %r11d,%esi
    0.20%        0x00007f3652b577cc:   setg   %bl
    0.02%        0x00007f3652b577cf:   movzbl %bl,%ebx                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -2287,7 +2287,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.08%        0x00007f3652b577d2:   cmp    %r13d,%r10d
                 0x00007f3652b577d5:   jg     0x00007f3652b57def
    0.21%        0x00007f3652b577db:   nopl   0x0(%rax,%rax,1)
@@ -2298,7 +2298,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.03%        0x00007f3652b577e9:   mov    %ebx,%esi
    0.26%        0x00007f3652b577eb:   mov    %ebx,0x8c(%rsp)
    0.37%        0x00007f3652b577f2:   mov    %r9d,0x88(%rsp)
@@ -2315,7 +2315,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.06%        0x00007f3652b57810:   mov    0xc(,%r8,8),%r10d            ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -2325,7 +2325,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.23%        0x00007f3652b57818:   mov    %esi,%ebp
    0.16%        0x00007f3652b5781a:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -2333,7 +2333,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.15%        0x00007f3652b5781c:   cmp    %edi,%ecx
    0.08%        0x00007f3652b5781e:   cmovg  %ebp,%esi                    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -2341,7 +2341,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.19%        0x00007f3652b57821:   test   %r10d,%r10d
                 0x00007f3652b57824:   jl     0x00007f3652b59a10           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -2351,7 +2351,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.16%        0x00007f3652b5782a:   cmp    %r11d,%r9d
    0.17%        0x00007f3652b5782d:   sete   %r9b
    0.08%        0x00007f3652b57831:   movzbl %r9b,%r9d                    ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
@@ -2366,7 +2366,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.21%        0x00007f3652b57835:   cmp    %r13d,%eax
                 0x00007f3652b57838:   je     0x00007f3652b57e05
    0.11%        0x00007f3652b5783e:   xchg   %ax,%ax
@@ -2377,7 +2377,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.06%        0x00007f3652b57849:   mov    %r9d,%ebp
    0.20%        0x00007f3652b5784c:   cmp    %r13d,%eax
    0.03%        0x00007f3652b5784f:   sete   %cl
@@ -2399,7 +2399,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.04%        0x00007f3652b57868:   cmp    $0x1,%r10d
                 0x00007f3652b5786c:   jl     0x00007f3652b57dd3
    0.19%        0x00007f3652b57872:   mov    %ecx,0x84(%rsp)
@@ -2417,7 +2417,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.05%        0x00007f3652b5789b:   mov    0x108(%r15),%r9
    0.14%        0x00007f3652b578a2:   mov    %r10d,%ecx
    0.19%        0x00007f3652b578a5:   mov    %rcx,%r14
@@ -2460,36 +2460,36 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   15.16%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  19.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-  17.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-  15.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   9.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   8.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   5.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   3.79%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   3.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   2.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   1.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   1.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.88%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
-   0.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+  19.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+  17.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+  15.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   9.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   8.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   5.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   3.79%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   3.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   2.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   1.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   1.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.88%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+   0.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
    5.14%  <...other 500 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
+  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1064 
    1.08%               kernel  [unknown] 
    0.09%                       <unknown> 
    0.07%         libc-2.31.so  [unknown] 
-   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1089 
+   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1089 
    0.04%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
    0.03%            libjvm.so  HeapRegionManager::par_iterate 
    0.03%            libjvm.so  ObjArrayAllocator::initialize 
@@ -2536,7 +2536,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 64, vectorSize = 256)
 
 # Run progress: 16.67% complete, ETA 00:18:56
@@ -2556,12 +2556,12 @@ Iteration   5: 4.943 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   4.943 ±(99.9%) 0.003 us/op [Average]
   (min, avg, max) = (4.942, 4.943, 4.944), stdev = 0.001
   CI (99.9%): [4.940, 4.946] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 296857 total address lines.
 Perf output processed (skipped 58.556 seconds):
  Column 1: cycles (50479 events)
@@ -2570,45 +2570,45 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
 
  <region is too big to display, has 2247 lines, but threshold is 1000>
 ....................................................................................................
   64.28%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  64.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   5.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   5.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   4.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   4.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   2.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   1.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   1.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   1.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.92%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
-   0.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+  64.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   5.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   5.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   4.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   4.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   2.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   1.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   1.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   1.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.92%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+   0.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
    3.39%  <...other 424 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
+  98.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 6, compile id 1063 
    0.94%               kernel  [unknown] 
    0.10%                       <unknown> 
    0.06%         libc-2.31.so  [unknown] 
    0.05%            libjvm.so  HeapRegionManager::par_iterate 
    0.03%            libjvm.so  HeapRegionClaimer::claim_region 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1090 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1090 
    0.02%   libpthread-2.31.so  __pthread_mutex_trylock 
    0.02%            libjvm.so  G1Allocator::unsafe_max_tlab_alloc 
    0.02%            libjvm.so  G1ScanCollectionSetRegionClosure::do_heap_region 
@@ -2654,7 +2654,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 64, vectorSize = 512)
 
 # Run progress: 25.00% complete, ETA 00:16:53
@@ -2674,12 +2674,12 @@ Iteration   5: 10.150 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   10.050 ±(99.9%) 0.214 us/op [Average]
   (min, avg, max) = (10.024, 10.050, 10.150), stdev = 0.056
   CI (99.9%): [9.836, 10.264] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 294068 total address lines.
 Perf output processed (skipped 58.592 seconds):
  Column 1: cycles (50392 events)
@@ -2688,56 +2688,56 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
 
  <region is too big to display, has 1152 lines, but threshold is 1000>
 ....................................................................................................
   31.55%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
 
  <region is too big to display, has 1720 lines, but threshold is 1000>
 ....................................................................................................
   28.42%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
 
  <region is too big to display, has 1166 lines, but threshold is 1000>
 ....................................................................................................
   11.82%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  31.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-  28.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-  11.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   9.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   2.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   1.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   1.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   1.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   1.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   1.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.29%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
-   0.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+  31.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+  28.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+  11.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   9.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   2.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   1.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   1.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   1.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   1.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   1.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.29%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+   0.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
    5.31%  <...other 513 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
+  97.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1035 
    0.96%               kernel  [unknown] 
    0.19%                       <unknown> 
-   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1069 
+   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1069 
    0.05%            libjvm.so  HeapRegionClaimer::claim_region 
    0.04%            libjvm.so  ObjArrayAllocator::initialize 
    0.04%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
@@ -2786,7 +2786,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 1024, vectorSize = 64)
 
 # Run progress: 33.33% complete, ETA 00:14:57
@@ -2806,12 +2806,12 @@ Iteration   5: 36.101 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   36.108 ±(99.9%) 0.047 us/op [Average]
   (min, avg, max) = (36.097, 36.108, 36.127), stdev = 0.012
   CI (99.9%): [36.062, 36.155] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 282324 total address lines.
 Perf output processed (skipped 58.627 seconds):
  Column 1: cycles (50691 events)
@@ -2820,7 +2820,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
 
                 0x00007f82b6b516e3:   mov    %r11d,%esi
                 0x00007f82b6b516e6:   jmp    0x00007f82b6b50fa5           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -2831,7 +2831,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.29%        0x00007f82b6b516eb:   mov    0x94(%rsp),%edx
                 0x00007f82b6b516f2:   mov    0x90(%rsp),%esi
    0.28%        0x00007f82b6b516f9:   mov    0x8c(%rsp),%r13d
@@ -2839,7 +2839,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.27%        0x00007f82b6b51706:   mov    0xa4(%rsp),%r10d
    0.00%        0x00007f82b6b5170e:   mov    0x1c(%rcx),%r11d             ; ImmutableOopMap {rcx=Oop r11=NarrowOop [80]=Oop [96]=Oop [108]=NarrowOop [112]=Oop }
                                                                           ;*aload_3 {reexecute=1 rethrow=0 return_oop=0}
-                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@177 (line 93)
+                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@177 (line 93)
    0.25%        0x00007f82b6b51712:   mov    0xc(,%r11,8),%eax            ; implicit exception: dispatches to 0x00007f82b6b53a26
    0.06%        0x00007f82b6b5171a:   nopw   0x0(%rax,%rax,1)
    0.22%        0x00007f82b6b51720:   test   %eax,%eax
@@ -2848,18 +2848,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - java.util.Objects::checkIndex@3 (line 359)
                                                                           ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.05%        0x00007f82b6b51728:   dec    %eax                         ;*isub {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@42 (line 52)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.26%        0x00007f82b6b5172a:   cmp    0xdc(%rsp),%eax
                 0x00007f82b6b51731:   jbe    0x00007f82b6b52852           ;* unwind (locked if synchronized)
                                                                           ; - jdk.internal.util.Preconditions::checkIndex@-3
                                                                           ; - java.util.Objects::checkIndex@3 (line 359)
                                                                           ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.06%        0x00007f82b6b51737:   mov    0x108(%r15),%rax
    0.25%        0x00007f82b6b5173e:   lea    0x50(%rax),%rdi
                 0x00007f82b6b51742:   cmp    0x118(%r15),%rdi
@@ -2883,7 +2883,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.21%        0x00007f82b6b5177b:   mov    %rax,%rdi                    ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 219)
                                                                           ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -2894,7 +2894,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%        0x00007f82b6b5177e:   lea    0x18(%rax),%rbp              ;*new {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.Int64Vector::vectorFactory@0 (line 171)
                                                                           ; - jdk.incubator.vector.Int64Vector::vectorFactory@2 (line 41)
@@ -2908,7 +2908,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.25%        0x00007f82b6b51782:   lea    0x28(%rax),%r8               ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 200)
                                                                           ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -2920,7 +2920,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.08%        0x00007f82b6b51786:   lea    0x40(%rax),%r9               ;*new {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.Int64Vector::vectorFactory@0 (line 171)
                                                                           ; - jdk.incubator.vector.Int64Vector::vectorFactory@2 (line 41)
@@ -2933,7 +2933,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.23%        0x00007f82b6b5178a:   movl   $0x2,0xc(%rax)               ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 219)
                                                                           ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -2944,7 +2944,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
                 0x00007f82b6b51791:   movq   $0x1,(%rax)
    0.28%        0x00007f82b6b51798:   movl   $0x6c38,0x8(%rax)            ;   {metadata({type array int})}
    0.08%        0x00007f82b6b5179f:   mov    %edx,0x10(%rax)
@@ -2964,7 +2964,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.18%        0x00007f82b6b517b9:   mov    %r8d,0x24(%rax)
    0.04%        0x00007f82b6b517bd:   movl   $0x2,0x34(%rax)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 200)
@@ -2977,7 +2977,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.34%        0x00007f82b6b517c4:   movq   $0x1,0x28(%rax)
    0.04%        0x00007f82b6b517cc:   movl   $0x6c38,0x30(%rax)           ;   {metadata({type array int})}
    0.20%        0x00007f82b6b517d3:   mov    %esi,0x38(%rax)
@@ -2997,10 +2997,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.21%        0x00007f82b6b517f0:   mov    %esi,0x4c(%rax)
    0.17%        0x00007f82b6b517f3:   shl    $0x3,%r11                    ;*getfield result {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@179 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@179 (line 93)
    0.12%        0x00007f82b6b517f7:   mov    $0x2,%esi
                 0x00007f82b6b517fc:   mov    0xe0(%rsp),%r13
    0.25%        0x00007f82b6b51804:   mov    0xc(%r11),%edx               ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -3011,14 +3011,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                           ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.16%        0x00007f82b6b51808:   mov    0xc(%rdi),%eax               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
                                                                           ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
                                                                           ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                           ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.13%        0x00007f82b6b5180b:   mov    $0x0,%r10d
    0.00%        0x00007f82b6b51811:   mov    0xdc(%rsp),%r8d
    0.22%  ╭     0x00007f82b6b51819:   jmp    0x00007f82b6b51844           ;*iload {reexecute=0 rethrow=0 return_oop=0}
@@ -3027,14 +3027,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           │                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           │                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           │     0x00007f82b6b5181e:   xchg   %ax,%ax                      ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │                                                               ; - jdk.incubator.vector.IntVector::stOp@14 (line 341)
           │                                                               ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           │                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           │                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           │                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    1.02%  │↗    0x00007f82b6b51820:   cmp    %r10d,%eax
           ││    0x00007f82b6b51823:   jbe    0x00007f82b6b52818           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
           ││                                                              ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
@@ -3042,7 +3042,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││    0x00007f82b6b51829:   mov    %r10d,%ebx
    0.01%  ││    0x00007f82b6b5182c:   add    %r8d,%ebx                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           ││                                                              ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@3 (line 2997)
@@ -3052,7 +3052,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││    0x00007f82b6b5182f:   cmp    %ebx,%edx
           ││    0x00007f82b6b51831:   jbe    0x00007f82b6b52818           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
           ││                                                              ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@5 (line 2997)
@@ -3062,14 +3062,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    1.03%  ││    0x00007f82b6b51837:   mov    0x10(%rdi,%r10,4),%ecx       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
           ││                                                              ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
           ││                                                              ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.00%  ││    0x00007f82b6b5183c:   mov    %ecx,0x10(%r11,%rbx,4)       ;*iastore {reexecute=0 rethrow=0 return_oop=0}
           ││                                                              ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@5 (line 2997)
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$82/0x0000000800c87c28::apply@8
@@ -3078,14 +3078,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.02%  ││    0x00007f82b6b51841:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           ││                                                              ; - jdk.incubator.vector.IntVector::stOp@32 (line 341)
           ││                                                              ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           ││                                                              ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                              ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                              ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.18%  ↘│    0x00007f82b6b51844:   cmp    %r10d,%esi
            ╰    0x00007f82b6b51847:   ja     0x00007f82b6b51820           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::stOp@14 (line 341)
@@ -3093,7 +3093,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                           ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.50%        0x00007f82b6b51849:   mov    0x6c(%rsp),%r10d
    0.01%        0x00007f82b6b5184e:   mov    0x348(%r15),%rsi             ; ImmutableOopMap {rbp=Oop r9=Oop r10=NarrowOop r11=Oop [80]=Oop [96]=Oop [108]=NarrowOop [112]=Oop }
                                                                           ;*return {reexecute=1 rethrow=0 return_oop=0}
@@ -3102,28 +3102,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                           ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.04%        0x00007f82b6b51855:   test   %eax,(%rsi)                  ;   {poll}
    0.04%        0x00007f82b6b51857:   mov    0xc(,%r10,8),%esi            ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractSpecies::length@1 (line 116)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@190 (line 79)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@190 (line 79)
    0.57%        0x00007f82b6b5185f:   mov    %r8d,%edx
                 0x00007f82b6b51862:   add    %esi,%edx                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@195 (line 79)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@195 (line 79)
    0.01%        0x00007f82b6b51864:   mov    %rbp,0x28(%rsp)
    0.02%        0x00007f82b6b51869:   vpxor  %xmm0,%xmm0,%xmm0
    0.53%        0x00007f82b6b5186d:   mov    0x70(%rsp),%r11
    0.02%        0x00007f82b6b51872:   mov    %r9,%r13
    0.02%        0x00007f82b6b51875:   mov    %edx,%r9d                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
    0.01%        0x00007f82b6b51878:   mov    0x18(%r11),%edx              ; ImmutableOopMap {rdx=NarrowOop r10=NarrowOop r11=Oop r13=Oop [40]=Oop [80]=Oop [96]=Oop [108]=NarrowOop [112]=Oop }
                                                                           ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
    0.55%        0x00007f82b6b5187c:   mov    0xc(,%rdx,8),%r8d            ; implicit exception: dispatches to 0x00007f82b6b53a46
    0.09%        0x00007f82b6b51884:   cmp    %r9d,%r8d
                 0x00007f82b6b51887:   jg     0x00007f82b6b50880
    0.01%        0x00007f82b6b5188d:   jmp    0x00007f82b6b5203c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@46 (line 79)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@46 (line 79)
    0.04%        0x00007f82b6b51892:   lea    -0x2(%rbx),%rdi
                 0x00007f82b6b51896:   cmp    %rdi,%r13
                 0x00007f82b6b51899:   jg     0x00007f82b6b51b05
@@ -3141,7 +3141,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.54%        0x00007f82b6b518be:   lea    -0x2(%rbx),%r9
                 0x00007f82b6b518c2:   cmp    %r9,%r13
                 0x00007f82b6b518c5:   jg     0x00007f82b6b51b0d
@@ -3160,7 +3160,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.07%        0x00007f82b6b518f2:   lea    -0x2(%rbp),%r14
                 0x00007f82b6b518f6:   cmp    %r14,%rax
             ╭   0x00007f82b6b518f9:   jg     0x00007f82b6b51908
@@ -3178,7 +3178,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.56%        0x00007f82b6b5191d:   data16 xchg %ax,%ax
    0.23%        0x00007f82b6b51920:   test   %esi,%ebx
                 0x00007f82b6b51922:   je     0x00007f82b6b51a8c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -3191,7 +3191,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                           ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.43%        0x00007f82b6b51928:   test   %r14d,%r14d
              ╭  0x00007f82b6b5192b:   je     0x00007f82b6b5193a
    0.03%     │  0x00007f82b6b51931:   cmp    %r13,%rbp
@@ -3207,7 +3207,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
              │                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
              │                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.16%     ↘  0x00007f82b6b5193a:   mov    0x50(%rsp),%r11
    0.43%        0x00007f82b6b5193f:   nop                                 ; ImmutableOopMap {r11=Oop r14=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [80]=Oop [96]=Oop [108]=NarrowOop [112]=Oop }
                                                                           ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -3218,7 +3218,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%        0x00007f82b6b51940:   cmpl   $0x2,0xc(,%r14,8)            ; implicit exception: dispatches to 0x00007f82b6b53a66
    0.26%        0x00007f82b6b51949:   jb     0x00007f82b6b53448
    0.23%        0x00007f82b6b5194f:   mov    0xa4(%rsp),%esi
@@ -3233,7 +3233,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                 0x00007f82b6b5195e:   mov    0x10(%r11),%eax              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                           ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -3245,7 +3245,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.22%        0x00007f82b6b51962:   mov    0x14(,%r14,8),%edi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                           ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -3257,7 +3257,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.12%        0x00007f82b6b5196a:   mov    0x14(%r11),%r10d             ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                           ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -3269,7 +3269,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                           ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.12%        0x00007f82b6b5196e:   mov    %edx,0xa4(%rsp)
                 0x00007f82b6b51975:   mov    %eax,%edx
    0.07%        0x00007f82b6b51977:   mov    %edi,%eax
@@ -3280,10 +3280,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                 0x00007f82b6b5198b:   cmp    $0xc3c130,%r8d               ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
                 0x00007f82b6b51992:   jne    0x00007f82b6b52f86           ;*invokevirtual length {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::intoArray@2 (line 2988)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
                 0x00007f82b6b51998:   mov    0x1c(%r11),%ebp              ; ImmutableOopMap {rbp=NarrowOop r11=Oop r13=Oop [32]=Oop [40]=Oop [80]=Oop [96]=Oop [108]=NarrowOop [112]=Oop }
                                                                           ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
                 0x00007f82b6b5199c:   mov    0xc(,%rbp,8),%esi            ; implicit exception: dispatches to 0x00007f82b6b53a86
                 0x00007f82b6b519a3:   test   %esi,%esi
                 0x00007f82b6b519a5:   je     0x00007f82b6b52fdb           ;* unwind (locked if synchronized)
@@ -3291,7 +3291,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   18.52%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
 
               0x00007f82b6b50c7f:   nop
               0x00007f82b6b50c80:   jmp    0x00007f82b6b51892           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -3302,7 +3302,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.56%      0x00007f82b6b50c85:   mov    0x10(%r9),%eax
               0x00007f82b6b50c89:   mov    0x14(%r9),%edi               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -3313,7 +3313,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.00%      0x00007f82b6b50c8d:   cmp    0xd8(%rsp),%eax
               0x00007f82b6b50c94:   setg   %r9b
    0.59%      0x00007f82b6b50c98:   movzbl %r9b,%r9d
@@ -3331,9 +3331,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.54%      0x00007f82b6b50ca9:   mov    %r11d,%edi                   ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
               0x00007f82b6b50cac:   mov    $0x0,%eax
           ╭   0x00007f82b6b50cb1:   jmp    0x00007f82b6b50ccf           ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@9 (line 3614)
@@ -3343,7 +3343,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
           │   0x00007f82b6b50cb6:   data16 nopw 0x0(%rax,%rax,1)        ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@12 (line 3614)
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::lambda$broadcastBits$1@7 (line 3539)
@@ -3352,7 +3352,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    1.02%  │↗  0x00007f82b6b50cc0:   cmp    %eax,%ebp
           ││  0x00007f82b6b50cc2:   jbe    0x00007f82b6b53338
           ││  0x00007f82b6b50cc8:   mov    %r11d,0x10(%rsi,%rax,4)      ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -3363,7 +3363,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.00%  ││  0x00007f82b6b50ccd:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@34 (line 3614)
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::lambda$broadcastBits$1@7 (line 3539)
@@ -3372,7 +3372,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
           ↘│  0x00007f82b6b50ccf:   cmp    %eax,%ebp
            ╰  0x00007f82b6b50cd1:   jg     0x00007f82b6b50cc0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@12 (line 3614)
@@ -3382,7 +3382,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.56%      0x00007f82b6b50cd3:   mov    0x44(,%r10,8),%eax           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -3393,7 +3393,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.00%      0x00007f82b6b50cdb:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {rsi=Oop [24]=Oop [32]=Oop [40]=Oop [80]=Oop [96]=Oop [108]=NarrowOop [112]=Oop }
                                                                         ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                         ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -3403,18 +3403,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
               0x00007f82b6b50ce0:   cmpl   $0xc3c130,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f82b6b53906
                                                                         ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
    0.59%      0x00007f82b6b50ceb:   jne    0x00007f82b6b531fb
    0.01%      0x00007f82b6b50cf1:   cmp    $0xc3c130,%r8d               ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
               0x00007f82b6b50cf8:   jne    0x00007f82b6b535cf           ;*invokevirtual blend {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%      0x00007f82b6b50cfe:   mov    0x28(%rsp),%r13
    0.01%      0x00007f82b6b50d03:   cmpl   $0xc3c130,0x8(%r13)          ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
    0.55%      0x00007f82b6b50d0b:   jne    0x00007f82b6b532b2           ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%      0x00007f82b6b50d11:   cmp    $0x2,%ebp
               0x00007f82b6b50d14:   jb     0x00007f82b6b53150
               0x00007f82b6b50d1a:   mov    %rdi,0x98(%rsp)
@@ -3430,7 +3430,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.01%      0x00007f82b6b50d38:   movzbl 0x10(%rbp),%r8d
    0.53%      0x00007f82b6b50d3d:   movzbl 0x11(%rbp),%edi              ;*baload {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::bOp@50 (line 556)
@@ -3440,7 +3440,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::xor@27 (line 642)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@5 (line 612)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@1 (line 496)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.01%      0x00007f82b6b50d41:   mov    %rsi,0x10(%rsp)
    0.01%      0x00007f82b6b50d46:   mov    0xc(%r14),%esi               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -3454,7 +3454,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%      0x00007f82b6b50d4a:   test   %esi,%esi
               0x00007f82b6b50d4c:   je     0x00007f82b6b51b25
    0.54%      0x00007f82b6b50d52:   mov    0x8(,%rsi,8),%r14d
@@ -3472,7 +3472,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.38%      0x00007f82b6b50d71:   mov    0xe0(%rsp),%rbp
    0.02%      0x00007f82b6b50d79:   nopl   0x0(%rax)
               0x00007f82b6b50d80:   cmp    %r14,%rbp
@@ -3485,7 +3485,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.18%      0x00007f82b6b50d89:   cmpl   $0x2,0xc(,%rsi,8)            ; implicit exception: dispatches to 0x00007f82b6b53926
    0.40%      0x00007f82b6b50d91:   jb     0x00007f82b6b5340f
               0x00007f82b6b50d97:   mov    0x18(%rsp),%r14
@@ -3499,7 +3499,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.34%      0x00007f82b6b50da3:   mov    0x14(%r14),%ecx
    0.01%      0x00007f82b6b50da7:   mov    0x10(%r14),%r10d             ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@67 (line 224)
@@ -3511,7 +3511,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
               0x00007f82b6b50dab:   mov    0x10(,%rsi,8),%esi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                         ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -3522,7 +3522,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.13%      0x00007f82b6b50db2:   mov    0xc(%r13),%r14d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                         ; - jdk.incubator.vector.Int64Vector::vec@1 (line 117)
@@ -3536,7 +3536,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                         ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.41%      0x00007f82b6b50db6:   test   %r14d,%r14d
               0x00007f82b6b50db9:   je     0x00007f82b6b51b31
    0.01%      0x00007f82b6b50dbf:   mov    %esi,0xa4(%rsp)
@@ -3554,7 +3554,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                         ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%      0x00007f82b6b50ddc:   cmp    0xd4(%rsp),%r11d
    0.00%      0x00007f82b6b50de4:   setg   %sil
    0.12%      0x00007f82b6b50de8:   movzbl %sil,%esi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -3569,7 +3569,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.34%      0x00007f82b6b50dec:   xor    %edi,%esi                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::lambda$xor$4@2 (line 644)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -3580,7 +3580,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::xor@27 (line 642)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@5 (line 612)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@1 (line 496)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.02%      0x00007f82b6b50dee:   cmp    0xd8(%rsp),%eax
    0.00%      0x00007f82b6b50df5:   setg   %al
    0.11%      0x00007f82b6b50df8:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -3595,7 +3595,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int64Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.37%      0x00007f82b6b50dfb:   xor    %r8d,%eax                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::lambda$xor$4@2 (line 644)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -3606,7 +3606,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::xor@27 (line 642)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@5 (line 612)
                                                                         ; - jdk.incubator.vector.Int64Vector$Int64Mask::not@1 (line 496)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.02%      0x00007f82b6b50dfe:   xchg   %ax,%ax
               0x00007f82b6b50e00:   test   %eax,%r9d
               0x00007f82b6b50e03:   je     0x00007f82b6b5191d
@@ -3625,22 +3625,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   10.53%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  18.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-  10.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   8.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   8.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   7.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   7.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   7.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   6.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   6.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   3.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   3.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   2.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   2.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   1.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+  18.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+  10.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   8.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   8.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   7.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   7.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   7.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   6.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   6.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   3.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   3.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   2.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   2.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   1.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
    0.19%               kernel  [unknown] 
    0.10%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -3650,7 +3650,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+  97.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
    1.43%               kernel  [unknown] 
    0.09%                       <unknown> 
    0.08%         libc-2.31.so  [unknown] 
@@ -3659,7 +3659,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.04%            libjvm.so  OtherRegionsTable::occupied 
    0.04%            libjvm.so  G1MergeHeapRootsTask::G1MergeCardSetClosure::do_heap_region 
    0.03%            libjvm.so  TypeArrayKlass::allocate_common 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1079 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 5, compile id 1079 
    0.03%           ld-2.31.so  _dl_tunable_set_hwcaps 
    0.02%            libjvm.so  HeapRegionManager::par_iterate 
    0.02%            libjvm.so  ObjArrayAllocator::initialize 
@@ -3702,7 +3702,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 1024, vectorSize = 128)
 
 # Run progress: 41.67% complete, ETA 00:13:03
@@ -3722,12 +3722,12 @@ Iteration   5: 46.181 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   46.146 ±(99.9%) 0.092 us/op [Average]
   (min, avg, max) = (46.122, 46.146, 46.181), stdev = 0.024
   CI (99.9%): [46.054, 46.237] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 280786 total address lines.
 Perf output processed (skipped 58.690 seconds):
  Column 1: cycles (50720 events)
@@ -3736,7 +3736,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
 
                    0x00007f3d02b5286d:   jle    0x00007f3d02b52860
           ╭        0x00007f3d02b5286f:   jmp    0x00007f3d02b52ad9           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -3747,7 +3747,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                                  ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │                                                                  ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │                                                                  ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.05%  │    ↗↗  0x00007f3d02b52874:   mov    0x18(%r8),%eax
    0.60%  │    ││  0x00007f3d02b52878:   mov    0x1c(%r8),%ecx
           │    ││  0x00007f3d02b5287c:   mov    0x14(%r8),%edi
@@ -3760,7 +3760,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.01%  │    ││  0x00007f3d02b52884:   test   %r11d,%r11d
           │╭   ││  0x00007f3d02b52887:   je     0x00007f3d02b528ef
    0.55%  ││   ││  0x00007f3d02b5288d:   lea    0x10(%rbx),%r9
@@ -3791,7 +3791,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││  │││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           ││  │││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           ││  │││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.56%  │↘  ↘││  0x00007f3d02b528ef:   mov    0x44(,%r10,8),%edx           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -3802,9 +3802,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.00%  │    ││  0x00007f3d02b528f7:   mov    %ebp,%r9d                    ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
           │    ││  0x00007f3d02b528fa:   cmp    0x138(%rsp),%r8d
    0.00%  │    ││  0x00007f3d02b52902:   setg   %r8b
    0.61%  │    ││  0x00007f3d02b52906:   movzbl %r8b,%r8d
@@ -3828,7 +3828,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.00%  │    ││  0x00007f3d02b52933:   nopw   0x0(%rax,%rax,1)
    0.00%  │    ││  0x00007f3d02b5293c:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rbx=Oop [8]=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
           │    ││                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -3839,7 +3839,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.61%  │    ││  0x00007f3d02b52940:   cmpl   $0xc3d218,0x8(,%rdx,8)       ; implicit exception: dispatches to 0x00007f3d02b558c6
           │    ││                                                            ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.03%  │    ││  0x00007f3d02b5294b:   jne    0x00007f3d02b55296           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -3851,7 +3851,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │    ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%  │    ││  0x00007f3d02b52951:   cmp    $0x4,%r11d
           │    ││  0x00007f3d02b52955:   jb     0x00007f3d02b54ff7
    0.58%  │    ││  0x00007f3d02b5295b:   movabs $0x7f162fd48,%rdx            ;   {oop([Z{0x00000007f162fd48})}
@@ -3867,7 +3867,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
           │    ││  0x00007f3d02b52973:   movzbl 0x10(%rdx),%r13d
    0.02%  │    ││  0x00007f3d02b52978:   movzbl 0x11(%rdx),%r14d
    0.01%  │    ││  0x00007f3d02b5297d:   movzbl 0x13(%rdx),%r10d
@@ -3879,7 +3879,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.00%  │    ││  0x00007f3d02b52986:   cmp    0x134(%rsp),%r11d
    0.01%  │    ││  0x00007f3d02b5298e:   setg   %r11b
    0.02%  │    ││  0x00007f3d02b52992:   movzbl %r11b,%r11d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -3894,7 +3894,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.60%  │    ││  0x00007f3d02b52996:   xor    %r14d,%r11d                  ;*ixor {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -3905,7 +3905,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.01%  │    ││  0x00007f3d02b52999:   cmp    0x138(%rsp),%ebp
    0.00%  │    ││  0x00007f3d02b529a0:   setg   %bpl
    0.02%  │    ││  0x00007f3d02b529a4:   movzbl %bpl,%ebp                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -3920,7 +3920,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.61%  │    ││  0x00007f3d02b529a8:   xor    %r13d,%ebp                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -3931,7 +3931,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.02%  │    ││  0x00007f3d02b529ab:   test   %ebp,%r8d
           │    ││  0x00007f3d02b529ae:   jne    0x00007f3d02b52c15
    0.18%  │    ││  0x00007f3d02b529b4:   test   %r11d,%edi
@@ -3945,7 +3945,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.06%  │    ││  0x00007f3d02b529bd:   mov    %rax,0x150(%rsp)
    0.36%  │    ││  0x00007f3d02b529c5:   mov    0x94(%rsp),%eax
    0.01%  │    ││  0x00007f3d02b529cc:   mov    %eax,0x80(%rsp)
@@ -3962,7 +3962,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.17%  │    ││  0x00007f3d02b529eb:   mov    0xa8(%rsp),%r13d
    0.12%  │    ││  0x00007f3d02b529f3:   mov    0x1c(%r14),%edx
    0.35%  │    ││  0x00007f3d02b529f7:   mov    %edx,0x70(%rsp)
@@ -3976,7 +3976,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.12%  │    ││  0x00007f3d02b529ff:   and    %ebp,%r8d
    0.12%  │    ││  0x00007f3d02b52a02:   and    %r11d,%edi                   ;*iand {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -3987,7 +3987,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.30%  │    ││  0x00007f3d02b52a05:   cmp    0x130(%rsp),%ebx
    0.10%  │    ││  0x00007f3d02b52a0c:   setg   %bpl
    0.14%  │    ││  0x00007f3d02b52a10:   movzbl %bpl,%ebp                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -4002,7 +4002,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.15%  │    ││  0x00007f3d02b52a14:   xor    %esi,%ebp                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -4013,7 +4013,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.30%  │    ││  0x00007f3d02b52a16:   mov    %eax,%esi
    0.08%  │    ││  0x00007f3d02b52a18:   and    %ebp,%esi                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -4024,7 +4024,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.17%  │    ││  0x00007f3d02b52a1a:   cmp    0x12c(%rsp),%r9d
    0.12%  │    ││  0x00007f3d02b52a22:   setg   %r11b
    0.28%  │    ││  0x00007f3d02b52a26:   movzbl %r11b,%r11d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -4039,7 +4039,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.09%  │    ││  0x00007f3d02b52a2a:   xor    %r10d,%r11d                  ;*ixor {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -4050,7 +4050,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.15%  │    ││  0x00007f3d02b52a2d:   mov    %ecx,%r10d
    0.12%  │    ││  0x00007f3d02b52a30:   and    %r11d,%r10d                  ;*iand {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -4061,7 +4061,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.28%  │    ││  0x00007f3d02b52a33:   mov    0x348(%r15),%r9              ; ImmutableOopMap {r14=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
           │    ││                                                            ;*iastore {reexecute=1 rethrow=0 return_oop=0}
           │    ││                                                            ; - (reexecute) jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -4073,7 +4073,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.12%  │    ││  0x00007f3d02b52a3a:   test   %eax,(%r9)                   ;   {poll}
    0.20%  │    ││  0x00007f3d02b52a3d:   mov    0x40(%rsp),%r9
    0.10%  │    ││  0x00007f3d02b52a42:   add    0x14(%r9),%r13d
@@ -4091,7 +4091,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.54%  │    ││  0x00007f3d02b52a5d:   mov    0x8c(%rsp),%r8d
    0.01%  │    ││  0x00007f3d02b52a65:   add    0x1c(%r9),%r8d               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           │    ││                                                            ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
@@ -4106,10 +4106,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
           │    ││                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.24%  │    ││  0x00007f3d02b52a69:   mov    0x88(%rsp),%esi
    0.06%  │    ││  0x00007f3d02b52a70:   inc    %esi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@171 (line 81)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@171 (line 81)
    0.28%  │    ││  0x00007f3d02b52a72:   test   %ebp,%eax
           │    ││  0x00007f3d02b52a74:   jne    0x00007f3d02b52c51
    0.03%  │    ││  0x00007f3d02b52a7a:   nopw   0x0(%rax,%rax,1)
@@ -4124,7 +4124,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │    ││                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
           │    ││                                                            ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.09%  │    ││  0x00007f3d02b52a89:   mov    %r13d,0xa8(%rsp)
    0.09%  │    ││  0x00007f3d02b52a91:   mov    %r10d,0xa4(%rsp)
    0.01%  │    ││  0x00007f3d02b52a99:   mov    %rax,0x150(%rsp)
@@ -4137,7 +4137,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.07%  │    ││  0x00007f3d02b52ac9:   mov    %r8d,0x8c(%rsp)
    0.00%  │    ││  0x00007f3d02b52ad1:   mov    %esi,%r11d
    0.15%  │    ││  0x00007f3d02b52ad4:   jmp    0x00007f3d02b52350           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.59%  ↘    ││  0x00007f3d02b52ad9:   lea    -0x2(%rcx),%rdi
                ││  0x00007f3d02b52add:   data16 xchg %ax,%ax
                ││  0x00007f3d02b52ae0:   cmp    %rdi,%r9
@@ -4156,7 +4156,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.66%           0x00007f3d02b52b08:   lea    -0x2(%r14),%rcx
                    0x00007f3d02b52b0c:   cmp    %rcx,%rbx
                    0x00007f3d02b52b0f:   jg     0x00007f3d02b52de5
@@ -4174,7 +4174,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.27%           0x00007f3d02b52b36:   lea    -0x2(%r14),%r8
                    0x00007f3d02b52b3a:   nopw   0x0(%rax,%rax,1)
    0.27%           0x00007f3d02b52b40:   cmp    %r8,%r13
@@ -4197,7 +4197,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   21.02%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
 
                    0x00007f3d02b52000:   jmp    0x00007f3d02b533e7           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -4207,7 +4207,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
                    0x00007f3d02b52005:   mov    0x1c(%r9),%esi
    0.03%           0x00007f3d02b52009:   mov    0x18(%r9),%edx
    0.19%           0x00007f3d02b5200d:   mov    0x14(%r9),%ecx
@@ -4220,7 +4220,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
                    0x00007f3d02b52015:   test   %ebp,%ebp
           ╭        0x00007f3d02b52017:   je     0x00007f3d02b5207a
    0.05%  │        0x00007f3d02b5201d:   lea    0x10(%rbx),%r11
@@ -4251,7 +4251,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.04%  ↘  ↘     0x00007f3d02b5207a:   mov    0x44(,%r10,8),%eax           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -4262,9 +4262,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%           0x00007f3d02b52082:   mov    %r13d,%r11d                  ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
                    0x00007f3d02b52085:   cmp    0x138(%rsp),%edi
    0.19%           0x00007f3d02b5208c:   setg   %r9b
    0.04%           0x00007f3d02b52090:   movzbl %r9b,%r9d
@@ -4288,7 +4288,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.01%           0x00007f3d02b520bd:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rbx=Oop [24]=Oop [32]=Oop [40]=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -4298,18 +4298,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.19%           0x00007f3d02b520c0:   cmpl   $0xc3d218,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f3d02b55826
                                                                              ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.04%           0x00007f3d02b520cb:   jne    0x00007f3d02b54f96
    0.03%           0x00007f3d02b520d1:   cmp    $0xc3d218,%r8d               ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
                    0x00007f3d02b520d8:   jne    0x00007f3d02b548a6           ;*invokevirtual blend {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.11%           0x00007f3d02b520de:   mov    0x28(%rsp),%r13
    0.05%           0x00007f3d02b520e3:   cmpl   $0xc3d218,0x8(%r13)          ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.15%           0x00007f3d02b520eb:   jne    0x00007f3d02b54732           ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.08%           0x00007f3d02b520f1:   cmp    $0x4,%ebp
                    0x00007f3d02b520f4:   jb     0x00007f3d02b54b4e
    0.10%           0x00007f3d02b520fa:   mov    %edx,0xc4(%rsp)
@@ -4328,7 +4328,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.10%           0x00007f3d02b52127:   mov    %rbx,0x10(%rsp)
    0.10%           0x00007f3d02b5212c:   movzbl 0x10(%rsi),%ebx
    0.00%           0x00007f3d02b52130:   movzbl 0x11(%rsi),%r10d
@@ -4341,7 +4341,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.07%           0x00007f3d02b5213e:   mov    0xc(%rax),%esi               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                              ; - jdk.incubator.vector.Int128Vector::vec@1 (line 117)
@@ -4354,7 +4354,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%           0x00007f3d02b52141:   test   %esi,%esi
                    0x00007f3d02b52143:   je     0x00007f3d02b536bc
    0.05%           0x00007f3d02b52149:   mov    %edi,0xb8(%rsp)
@@ -4376,7 +4376,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.16%           0x00007f3d02b5217e:   xchg   %ax,%ax                      ; ImmutableOopMap {rsi=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -4386,7 +4386,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%           0x00007f3d02b52180:   cmpl   $0x4,0xc(,%rsi,8)            ; implicit exception: dispatches to 0x00007f3d02b55846
    0.10%           0x00007f3d02b52188:   jb     0x00007f3d02b54ec5
    0.13%           0x00007f3d02b5218e:   cmp    0x134(%rsp),%r8d
@@ -4403,7 +4403,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.07%           0x00007f3d02b5219c:   xor    %r10d,%eax                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -4414,7 +4414,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.15%           0x00007f3d02b5219f:   cmp    0x138(%rsp),%ebp
    0.00%           0x00007f3d02b521a6:   setg   %r10b
    0.08%           0x00007f3d02b521aa:   movzbl %r10b,%r10d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -4429,7 +4429,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.01%           0x00007f3d02b521ae:   xor    %ebx,%r10d                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -4440,7 +4440,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.16%           0x00007f3d02b521b1:   test   %r10d,%r9d
                    0x00007f3d02b521b4:   jne    0x00007f3d02b5355b           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -4452,7 +4452,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.10%           0x00007f3d02b521ba:   mov    0x10(,%rsi,8),%ebp           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -4463,7 +4463,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.16%           0x00007f3d02b521c1:   test   %eax,%ecx
                    0x00007f3d02b521c3:   jne    0x00007f3d02b5365d           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -4475,7 +4475,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.07%           0x00007f3d02b521c9:   mov    0x14(,%rsi,8),%r8d           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -4486,7 +4486,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.14%           0x00007f3d02b521d1:   mov    %r8d,0xb0(%rsp)
    0.03%           0x00007f3d02b521d9:   mov    0x18(%rsp),%rbx              ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -4498,7 +4498,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%           0x00007f3d02b521de:   cmp    0x12c(%rsp),%r11d
    0.03%           0x00007f3d02b521e6:   setg   %r11b
    0.08%           0x00007f3d02b521ea:   movzbl %r11b,%r11d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -4513,7 +4513,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.09%           0x00007f3d02b521ee:   xor    %edx,%r11d                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -4524,7 +4524,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.06%           0x00007f3d02b521f1:   cmp    0x130(%rsp),%r14d
    0.03%           0x00007f3d02b521f9:   setg   %dl
    0.05%           0x00007f3d02b521fc:   movzbl %dl,%edx                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -4539,7 +4539,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.07%           0x00007f3d02b521ff:   xor    %r13d,%edx                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -4550,7 +4550,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.06%           0x00007f3d02b52202:   test   %edx,0xb8(%rsp)
                    0x00007f3d02b52209:   jne    0x00007f3d02b53535           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -4562,7 +4562,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.09%           0x00007f3d02b5220f:   mov    0x18(,%rsi,8),%r13d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -4573,7 +4573,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.06%           0x00007f3d02b52217:   nopw   0x0(%rax,%rax,1)
    0.07%           0x00007f3d02b52220:   test   %r11d,0xc4(%rsp)
                    0x00007f3d02b52228:   jne    0x00007f3d02b53673           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -4586,7 +4586,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%           0x00007f3d02b5222e:   mov    0x1c(,%rsi,8),%r14d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -4597,7 +4597,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.08%           0x00007f3d02b52236:   mov    %r13d,0xac(%rsp)
    0.05%           0x00007f3d02b5223e:   mov    0x28(%rsp),%r13
    0.05%           0x00007f3d02b52243:   mov    0xc(%r13),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
@@ -4613,7 +4613,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.12%           0x00007f3d02b52247:   test   %r8d,%r8d
                    0x00007f3d02b5224a:   je     0x00007f3d02b536b0
    0.11%           0x00007f3d02b52250:   mov    0x8(,%r8,8),%r13d
@@ -4630,7 +4630,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.18%           0x00007f3d02b52266:   shl    $0x3,%rsi                    ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                              ; - jdk.incubator.vector.Int128Vector::vec@1 (line 117)
@@ -4643,7 +4643,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%           0x00007f3d02b5226a:   and    %r10d,%r9d
                    0x00007f3d02b5226d:   and    %eax,%ecx
    0.01%           0x00007f3d02b5226f:   mov    0xb8(%rsp),%r10d
@@ -4658,7 +4658,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.00%           0x00007f3d02b52284:   test   %r8d,%r8d
               ╭    0x00007f3d02b52287:   je     0x00007f3d02b52296
    0.17%      │    0x00007f3d02b5228d:   cmp    %r13,%rdi
@@ -4674,7 +4674,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               │                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               │                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               │                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.03%      ↘    0x00007f3d02b52296:   data16 nopw 0x0(%rax,%rax,1)        ; ImmutableOopMap {rsi=Oop r8=NarrowOop [24]=Oop [32]=Oop [40]=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
                                                                              ;*iastore {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -4686,7 +4686,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%           0x00007f3d02b522a0:   cmpl   $0x4,0xc(,%r8,8)             ; implicit exception: dispatches to 0x00007f3d02b55866
    0.17%           0x00007f3d02b522a9:   jb     0x00007f3d02b55516
    0.03%           0x00007f3d02b522af:   mov    0x40(%rsp),%r9
@@ -4701,7 +4701,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%           0x00007f3d02b522bc:   add    0x10(%r9),%esi               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -4713,7 +4713,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.17%           0x00007f3d02b522c0:   mov    0x14(,%r8,8),%edx            ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -4725,7 +4725,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.04%           0x00007f3d02b522c8:   add    0x14(%r9),%edx               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -4737,7 +4737,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%           0x00007f3d02b522cc:   mov    0x18(,%r8,8),%eax            ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -4749,7 +4749,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%           0x00007f3d02b522d4:   add    0x18(%r9),%eax               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -4761,7 +4761,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.16%           0x00007f3d02b522d8:   mov    0x1c(,%r8,8),%ecx            ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -4773,7 +4773,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.03%           0x00007f3d02b522e0:   add    0x1c(%r9),%ecx               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
                                                                              ; - jdk.incubator.vector.IntVector$$Lambda$80/0x0000000800c873e8::apply@3
@@ -4787,7 +4787,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.03%           0x00007f3d02b522e4:   mov    %edx,0xa8(%rsp)
    0.04%           0x00007f3d02b522eb:   mov    %esi,0xa4(%rsp)
    0.13%           0x00007f3d02b522f2:   mov    %r14d,0xa0(%rsp)
@@ -4803,7 +4803,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.00%           0x00007f3d02b5233b:   mov    $0x1,%r11d
    0.01%           0x00007f3d02b52341:   data16 data16 nopw 0x0(%rax,%rax,1)
    0.01%           0x00007f3d02b5234c:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.29%           0x00007f3d02b52350:   mov    0xd8(%rsp),%ebx
    0.22%           0x00007f3d02b52357:   mov    0xd4(%rsp),%ecx
    0.04%           0x00007f3d02b5235e:   mov    0xcc(%rsp),%esi
@@ -4811,7 +4811,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.26%           0x00007f3d02b5236c:   mov    0x64(%rsp),%r10d
    0.24%           0x00007f3d02b52371:   cmp    0xc(,%r10,8),%r11d
                    0x00007f3d02b52379:   jge    0x00007f3d02b53125           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@72 (line 81)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@72 (line 81)
    0.53%           0x00007f3d02b5237f:   cmp    $0x3,%r11d
                ╭   0x00007f3d02b52383:   je     0x00007f3d02b523ac
    0.22%       │   0x00007f3d02b52389:   cmp    $0x0,%r11d
@@ -4822,7 +4822,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │   0x00007f3d02b523a1:   je     0x00007f3d02b52cf3
                │   0x00007f3d02b523a7:   jmp    0x00007f3d02b55054           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
                │                                                             ; - jdk.incubator.vector.Int128Vector::lane@1 (line 456)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@79 (line 82)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@79 (line 82)
    0.03%       ↘   0x00007f3d02b523ac:   mov    %r11d,0x88(%rsp)
    0.06%           0x00007f3d02b523b4:   mov    0xc(,%r10,8),%r11d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
@@ -4833,7 +4833,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                              ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.01%           0x00007f3d02b523bc:   nopl   0x0(%rax)
    0.10%           0x00007f3d02b523c0:   test   %r11d,%r11d
                    0x00007f3d02b523c3:   jl     0x00007f3d02b546bf
@@ -4879,7 +4879,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   17.66%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
 
    0.17%         0x00007f3d02b52462:   cmp    $0x4,%r14
                  0x00007f3d02b52466:   jb     0x00007f3d02b52df5
@@ -4899,7 +4899,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.28%         0x00007f3d02b52498:   mov    %r8,0x8(%rsp)
    0.00%         0x00007f3d02b5249d:   data16 xchg %ax,%ax
    0.22%         0x00007f3d02b524a0:   test   %r11d,%r11d
@@ -4932,7 +4932,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
            │ │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
            │ │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
            │ │                                                             ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-           │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+           │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.32%   ↘ ↘   0x00007f3d02b5250f:   mov    0x44(,%r10,8),%eax           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -4943,12 +4943,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.02%         0x00007f3d02b52517:   movslq %r9d,%rdi                    ;*i2l {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::toBits@1 (line 390)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
                  0x00007f3d02b5251a:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {r8=Oop r10=NarrowOop [8]=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
                                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                            ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -4958,7 +4958,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.27%         0x00007f3d02b52520:   cmpl   $0xc3d218,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f3d02b55886
                                                                            ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.47%         0x00007f3d02b5252b:   jne    0x00007f3d02b54e98           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4970,7 +4970,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.09%         0x00007f3d02b52531:   cmp    $0x4,%r11d
                  0x00007f3d02b52535:   jb     0x00007f3d02b548f6           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -4981,7 +4981,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.24%         0x00007f3d02b5253b:   mov    0x14(%r8),%r11d
    0.33%         0x00007f3d02b5253f:   mov    0x18(%r8),%r9d
    0.00%         0x00007f3d02b52543:   mov    0x1c(%r8),%edi
@@ -4994,7 +4994,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.24%         0x00007f3d02b5254b:   cmp    %ebx,%eax
    0.26%         0x00007f3d02b5254d:   setg   %al
                  0x00007f3d02b52550:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -5009,7 +5009,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.11%         0x00007f3d02b52553:   cmp    %ecx,%r11d
                  0x00007f3d02b52556:   jg     0x00007f3d02b52b88
    0.12%         0x00007f3d02b5255c:   nopl   0x0(%rax)
@@ -5020,7 +5020,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.07%         0x00007f3d02b52569:   mov    %eax,%ebp
    0.32%         0x00007f3d02b5256b:   mov    %eax,0x84(%rsp)
    0.49%         0x00007f3d02b52572:   mov    %r9d,0x80(%rsp)
@@ -5037,7 +5037,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.04%         0x00007f3d02b5258f:   mov    0xc(,%r10,8),%r11d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -5047,7 +5047,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.27%         0x00007f3d02b52597:   mov    %ebp,%r8d
    0.12%         0x00007f3d02b5259a:   inc    %r8d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -5055,7 +5055,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.16%         0x00007f3d02b5259d:   cmp    %edx,%edi
    0.05%         0x00007f3d02b5259f:   cmovg  %r8d,%ebp                    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -5063,7 +5063,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.27%         0x00007f3d02b525a3:   test   %r11d,%r11d
                  0x00007f3d02b525a6:   jl     0x00007f3d02b55331           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5073,7 +5073,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.09%         0x00007f3d02b525ac:   cmp    %ebx,%eax
    0.20%         0x00007f3d02b525ae:   sete   %r8b
    0.05%         0x00007f3d02b525b2:   movzbl %r8b,%r8d                    ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
@@ -5088,7 +5088,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.31%         0x00007f3d02b525b6:   cmp    %ecx,%r13d
                  0x00007f3d02b525b9:   je     0x00007f3d02b52b9c
    0.08%         0x00007f3d02b525bf:   nop
@@ -5099,7 +5099,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.02%         0x00007f3d02b525c9:   mov    %r8d,%eax
    0.45%         0x00007f3d02b525cc:   cmp    %ecx,%r13d
    0.04%         0x00007f3d02b525cf:   sete   %dil
@@ -5121,7 +5121,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.03%         0x00007f3d02b525ed:   cmp    $0x1,%r11d
                  0x00007f3d02b525f1:   jl     0x00007f3d02b52b6a
    0.13%         0x00007f3d02b525f7:   mov    %edi,0x84(%rsp)
@@ -5140,7 +5140,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.15%         0x00007f3d02b52622:   mov    0x108(%r15),%r8
    0.03%         0x00007f3d02b52629:   mov    %r11d,%edi
    0.38%         0x00007f3d02b5262c:   mov    %rdi,%r13
@@ -5182,7 +5182,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   16.46%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
 
                  0x00007f3d02b526e0:   jmp    0x00007f3d02b52b08           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5192,7 +5192,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                  0x00007f3d02b526e5:   mov    %eax,%ecx
    0.08%         0x00007f3d02b526e7:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -5200,7 +5200,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.50%         0x00007f3d02b526e9:   cmp    %edx,%r9d
                  0x00007f3d02b526ec:   cmove  %ecx,%eax                    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -5208,9 +5208,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                            ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
                  0x00007f3d02b526ef:   add    %ebp,%eax                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@122 (line 86)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@122 (line 86)
    0.08%         0x00007f3d02b526f1:   test   %r11d,%r11d
           ╭      0x00007f3d02b526f4:   je     0x00007f3d02b52759
    0.64%  │      0x00007f3d02b526fa:   lea    0x10(%r8),%rcx
@@ -5241,7 +5241,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │ │                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │ │                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │ │                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+          │ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.64%  ↘ ↘    0x00007f3d02b52759:   mov    0x44(,%r10,8),%ecx           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -5252,7 +5252,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.03%         0x00007f3d02b52761:   mov    %eax,%r9d                    ; ImmutableOopMap {r8=Oop r10=NarrowOop [8]=Oop [64]=Oop [80]=Oop [100]=NarrowOop [104]=Oop }
                                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                            ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -5262,7 +5262,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                  0x00007f3d02b52764:   cmpl   $0xc3d218,0x8(,%rcx,8)       ; implicit exception: dispatches to 0x00007f3d02b558a6
                                                                            ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.70%         0x00007f3d02b5276f:   jne    0x00007f3d02b55285           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -5274,7 +5274,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.06%         0x00007f3d02b52775:   cmp    $0x4,%r11d
                  0x00007f3d02b52779:   jb     0x00007f3d02b54a91           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -5285,7 +5285,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                            ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
                  0x00007f3d02b5277f:   mov    0xc(,%r10,8),%r11d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -5295,7 +5295,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%         0x00007f3d02b52787:   test   %r11d,%r11d
                  0x00007f3d02b5278a:   jl     0x00007f3d02b54d34           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5305,7 +5305,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.52%         0x00007f3d02b52790:   cmp    $0x1,%r11d
              ╭   0x00007f3d02b52794:   jl     0x00007f3d02b527ac
    0.04%     │   0x00007f3d02b5279a:   mov    %r11d,%eax
@@ -5320,7 +5320,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
              │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
              │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+             │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.05%     ↘   0x00007f3d02b527ac:   mov    0x108(%r15),%rbx
    0.02%         0x00007f3d02b527b3:   mov    %r11d,%r13d
                  0x00007f3d02b527b6:   mov    %r13,%rax
@@ -5362,22 +5362,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   10.11%  <total for region 4>
 
 ....[Hottest Regions]...............................................................................
-  21.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-  17.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-  16.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-  10.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   9.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   7.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   3.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   3.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   3.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   1.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   1.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   0.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   0.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
-   0.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+  21.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+  17.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+  16.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+  10.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   9.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   7.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   3.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   3.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   3.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   1.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   1.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   0.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   0.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   0.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
    0.36%               kernel  [unknown] 
-   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
    0.06%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.05%            libjvm.so  HeapRegionClaimer::claim_region 
@@ -5387,7 +5387,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
+  97.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1041 
    1.59%               kernel  [unknown] 
    0.08%         libc-2.31.so  [unknown] 
    0.08%                       <unknown> 
@@ -5395,7 +5395,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.04%            libjvm.so  ElfSymbolTable::lookup 
    0.04%            libjvm.so  G1MergeHeapRootsTask::G1MergeCardSetClosure::do_heap_region 
    0.03%            libjvm.so  HeapRegionManager::par_iterate 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 4, compile id 1060 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 4, compile id 1060 
    0.02%            libjvm.so  G1Policy::preventive_collection_required 
    0.02%            libjvm.so  OtherRegionsTable::occupied 
    0.02%               [vdso]  __vdso_clock_gettime 
@@ -5438,7 +5438,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 1024, vectorSize = 256)
 
 # Run progress: 50.00% complete, ETA 00:11:11
@@ -5458,12 +5458,12 @@ Iteration   5: 99.594 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   99.545 ±(99.9%) 0.262 us/op [Average]
   (min, avg, max) = (99.444, 99.545, 99.609), stdev = 0.068
   CI (99.9%): [99.284, 99.807] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 291577 total address lines.
 Perf output processed (skipped 58.748 seconds):
  Column 1: cycles (50691 events)
@@ -5472,21 +5472,21 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
 
  <region is too big to display, has 1206 lines, but threshold is 1000>
 ....................................................................................................
   55.38%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
 
  <region is too big to display, has 1594 lines, but threshold is 1000>
 ....................................................................................................
   16.76%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
 
                    0x00007f548eb59670:   mov    %r9d,0xd4(%rsp)
                    0x00007f548eb59678:   jmp    0x00007f548eb58e2b           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -5497,7 +5497,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.00%           0x00007f548eb5967d:   mov    %rdx,0x18(%rsp)
    0.02%           0x00007f548eb59682:   lea    -0x8(%r14),%rdx
    0.27%           0x00007f548eb59686:   mov    $0x0,%rbp
@@ -5515,7 +5515,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.31%           0x00007f548eb596ab:   lea    -0x8(%r9),%rax
                    0x00007f548eb596af:   mov    $0x0,%rcx
                    0x00007f548eb596b6:   data16 nopw 0x0(%rax,%rax,1)
@@ -5531,7 +5531,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.37%           0x00007f548eb596d4:   lea    -0x8(%rdx),%rax
    0.04%           0x00007f548eb596d8:   mov    $0x0,%rcx
    0.00%           0x00007f548eb596df:   nop
@@ -5547,14 +5547,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                              ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.45%           0x00007f548eb596f4:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.23%           0x00007f548eb596f7:   nopw   0x0(%rax,%rax,1)
    0.01%           0x00007f548eb59700:   cmp    0x178(%rsp),%edi
                    0x00007f548eb59707:   jle    0x00007f548eb58c58           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5563,28 +5563,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.84%           0x00007f548eb5970d:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.25%           0x00007f548eb59710:   jmp    0x00007f548eb58c58           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.87%           0x00007f548eb59715:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.28%           0x00007f548eb59718:   nopl   0x0(%rax,%rax,1)
                    0x00007f548eb59720:   cmp    0x180(%rsp),%esi
                    0x00007f548eb59727:   jle    0x00007f548eb58c7a           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5593,21 +5593,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.82%           0x00007f548eb5972d:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.26%           0x00007f548eb59730:   jmp    0x00007f548eb58c7a           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.07%           0x00007f548eb59735:   mov    %r8d,%eax
    0.03%           0x00007f548eb59738:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -5615,7 +5615,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.13%           0x00007f548eb5973a:   nopw   0x0(%rax,%rax,1)
    0.00%           0x00007f548eb59740:   cmp    %r11d,%edx
                    0x00007f548eb59743:   jne    0x00007f548eb58d2c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5624,49 +5624,49 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.20%       ↗   0x00007f548eb59749:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                │                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                │                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.00%       │   0x00007f548eb5974b:   jmp    0x00007f548eb58d2c           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                │                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                │                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.15%      ↗│   0x00007f548eb59750:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.07%      ││   0x00007f548eb59752:   jmp    0x00007f548eb58d4d           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.06%     ↗││   0x00007f548eb59757:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.05%     │││   0x00007f548eb59759:   jmp    0x00007f548eb58d8e           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.14%     │││   0x00007f548eb5975e:   mov    %r8d,0xf0(%rsp)
    0.13%     │││   0x00007f548eb59766:   mov    0xd0(%rsp),%r8d
              │││   0x00007f548eb5976e:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
@@ -5675,7 +5675,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.02%     │││   0x00007f548eb59770:   cmp    0x180(%rsp),%r8d
              │││   0x00007f548eb59778:   jne    0x00007f548eb58d8e
              ╰││   0x00007f548eb5977e:   jmp    0x00007f548eb59757           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5684,14 +5684,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.10%      ││   0x00007f548eb59780:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
               ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.11%      ││   0x00007f548eb59782:   cmp    0x178(%rsp),%ecx
               ││   0x00007f548eb59789:   jne    0x00007f548eb58d4d
               ╰│   0x00007f548eb5978f:   jmp    0x00007f548eb59750           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5700,7 +5700,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                │                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.24%       │   0x00007f548eb59791:   mov    %r10d,0xec(%rsp)
    0.47%       │   0x00007f548eb59799:   mov    %eax,%r10d
    0.07%       │   0x00007f548eb5979c:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
@@ -5709,7 +5709,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                │                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.00%       │   0x00007f548eb5979f:   nop
    0.03%       │   0x00007f548eb597a0:   cmp    %r11d,%r9d
                │   0x00007f548eb597a3:   jle    0x00007f548eb58c42           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5718,21 +5718,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                │                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                │                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.09%       │↗  0x00007f548eb597a9:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                ││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
                ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                ││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.12%       ││  0x00007f548eb597ac:   jmp    0x00007f548eb58c42           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                ││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
                ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
                ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                ││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
                ││  0x00007f548eb597b1:   mov    %rdx,0x18(%rsp)
                ││  0x00007f548eb597b6:   jmp    0x00007f548eb59140           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@33 (line 3616)
@@ -5742,7 +5742,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+               ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.13%       ││  0x00007f548eb597bb:   mov    %r8d,%eax
    0.02%       ╰│  0x00007f548eb597be:   jmp    0x00007f548eb59749           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                 │                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -5750,7 +5750,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                 │                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                 │                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                 │                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.48%        │  0x00007f548eb597c0:   mov    %r10d,0xec(%rsp)
    0.47%        │  0x00007f548eb597c8:   mov    %eax,%r10d
    0.00%        ╰  0x00007f548eb597cb:   jmp    0x00007f548eb597a9
@@ -5766,7 +5766,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.33%           0x00007f548eb597e5:   mov    %rcx,%rax
                    0x00007f548eb597e8:   jmp    0x00007f548eb58f5b           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@33 (line 3616)
@@ -5776,7 +5776,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.33%           0x00007f548eb597ed:   mov    %rcx,%rax
                    0x00007f548eb597f0:   jmp    0x00007f548eb58ba7           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@33 (line 3616)
@@ -5786,7 +5786,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                              ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.28%           0x00007f548eb597f5:   mov    %rdi,%rax
                    0x00007f548eb597f8:   jmp    0x00007f548eb595fb           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5796,7 +5796,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.33%           0x00007f548eb597fd:   mov    %rcx,%rdx
                    0x00007f548eb59800:   jmp    0x00007f548eb59628           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5806,7 +5806,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                    0x00007f548eb59805:   mov    $0x0,%rdi
                    0x00007f548eb5980c:   jmp    0x00007f548eb595e5           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5816,7 +5816,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
                    0x00007f548eb59811:   mov    $0x0,%rcx
                    0x00007f548eb59818:   jmp    0x00007f548eb59612           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -5826,7 +5826,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.17%           0x00007f548eb5981d:   mov    %rdi,%rcx
                    0x00007f548eb59820:   jmp    0x00007f548eb59653
                    0x00007f548eb59825:   mov    $0x0,%rdi
@@ -5834,32 +5834,32 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   11.79%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  55.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-  16.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-  11.79%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   6.18%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   2.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   1.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   0.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
-   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+  55.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+  16.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+  11.79%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   6.18%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   2.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   1.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
    0.09%               kernel  [unknown] 
-   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
    0.08%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
-   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
    0.06%               kernel  [unknown] 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
    0.06%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
-   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
    2.58%  <...other 549 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
+  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1051 
    1.30%               kernel  [unknown] 
    0.09%                       <unknown> 
    0.06%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
@@ -5910,7 +5910,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 1024, vectorSize = 512)
 
 # Run progress: 58.33% complete, ETA 00:09:19
@@ -5930,12 +5930,12 @@ Iteration   5: 204.804 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   204.656 ±(99.9%) 1.148 us/op [Average]
   (min, avg, max) = (204.247, 204.656, 204.986), stdev = 0.298
   CI (99.9%): [203.508, 205.805] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 311130 total address lines.
 Perf output processed (skipped 58.579 seconds):
  Column 1: cycles (50768 events)
@@ -5944,51 +5944,51 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
 
  <region is too big to display, has 1148 lines, but threshold is 1000>
 ....................................................................................................
   39.27%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
 
  <region is too big to display, has 1336 lines, but threshold is 1000>
 ....................................................................................................
   24.84%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  39.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-  24.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   8.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   7.93%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   5.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   2.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   1.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   1.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.99%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+  39.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+  24.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   8.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   7.93%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   5.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   2.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   1.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   1.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.99%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
    0.31%               kernel  [unknown] 
-   0.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
    0.12%               kernel  [unknown] 
-   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
-   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
    4.35%  <...other 643 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
+  97.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1050 
    1.62%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.05%         libc-2.31.so  [unknown] 
    0.03%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 4, compile id 1081 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.jmh_generated.SortVectorApiBenchmark_sortVector_jmhTest::sortVector_avgt_jmhStub, version 4, compile id 1081 
    0.03%            libjvm.so  OtherRegionsTable::occupied 
    0.02%            libjvm.so  HeapRegionClaimer::claim_region 
    0.02%            libjvm.so  G1MergeHeapRootsTask::G1MergeCardSetClosure::do_heap_region 
@@ -6036,7 +6036,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 65536, vectorSize = 64)
 
 # Run progress: 66.67% complete, ETA 00:07:27
@@ -6056,12 +6056,12 @@ Iteration   5: 2431.768 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   2410.760 ±(99.9%) 45.308 us/op [Average]
   (min, avg, max) = (2404.600, 2410.760, 2431.768), stdev = 11.766
   CI (99.9%): [2365.452, 2456.068] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 281027 total address lines.
 Perf output processed (skipped 58.671 seconds):
  Column 1: cycles (50967 events)
@@ -6070,7 +6070,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
 
                  0x00007f38dab4ec35:   mov    0x74(%rsp),%r10d
                  0x00007f38dab4ec3a:   jmp    0x00007f38dab4e4c5           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -6081,7 +6081,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.34%         0x00007f38dab4ec3f:   mov    0x9c(%rsp),%edx
                  0x00007f38dab4ec46:   mov    0x98(%rsp),%r11d
    0.24%         0x00007f38dab4ec4e:   mov    0x94(%rsp),%r14d
@@ -6089,7 +6089,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.22%         0x00007f38dab4ec5b:   mov    0xac(%rsp),%r10d
    0.00%         0x00007f38dab4ec63:   mov    0x1c(%rsi),%r8d              ; ImmutableOopMap {rsi=Oop r8=NarrowOop [88]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                            ;*aload_3 {reexecute=1 rethrow=0 return_oop=0}
-                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@177 (line 93)
+                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@177 (line 93)
    0.22%         0x00007f38dab4ec67:   mov    0xc(,%r8,8),%eax             ; implicit exception: dispatches to 0x00007f38dab51086
    0.57%         0x00007f38dab4ec6f:   test   %eax,%eax
                  0x00007f38dab4ec71:   je     0x00007f38dab4fdc6           ;* unwind (locked if synchronized)
@@ -6097,11 +6097,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.42%         0x00007f38dab4ec77:   dec    %eax                         ;*isub {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@42 (line 52)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.03%         0x00007f38dab4ec79:   nopl   0x0(%rax)
    0.08%         0x00007f38dab4ec80:   cmp    0xec(%rsp),%eax
                  0x00007f38dab4ec87:   jbe    0x00007f38dab4fdc6           ;* unwind (locked if synchronized)
@@ -6109,7 +6109,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - java.util.Objects::checkIndex@3 (line 359)
                                                                            ; - jdk.incubator.vector.VectorIntrinsics::checkFromIndexSize@43 (line 52)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@7 (line 2988)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.32%         0x00007f38dab4ec8d:   mov    0x108(%r15),%rax
    0.08%         0x00007f38dab4ec94:   lea    0x50(%rax),%rcx
                  0x00007f38dab4ec98:   nopl   0x0(%rax,%rax,1)
@@ -6134,7 +6134,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                  0x00007f38dab4ecd9:   mov    %rax,%rcx                    ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 219)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -6145,7 +6145,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.09%         0x00007f38dab4ecdc:   lea    0x18(%rax),%rdi              ;*new {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.Int64Vector::vectorFactory@0 (line 171)
                                                                            ; - jdk.incubator.vector.Int64Vector::vectorFactory@2 (line 41)
@@ -6159,7 +6159,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.26%         0x00007f38dab4ece0:   lea    0x28(%rax),%rbp              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 200)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -6171,7 +6171,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.11%         0x00007f38dab4ece4:   lea    0x40(%rax),%r9               ;*new {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.Int64Vector::vectorFactory@0 (line 171)
                                                                            ; - jdk.incubator.vector.Int64Vector::vectorFactory@2 (line 41)
@@ -6184,7 +6184,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%         0x00007f38dab4ece8:   movl   $0x2,0xc(%rax)               ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 219)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@10 (line 214)
@@ -6195,7 +6195,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.08%         0x00007f38dab4ecef:   movq   $0x1,(%rax)
    0.36%         0x00007f38dab4ecf6:   movl   $0x6c38,0x8(%rax)            ;   {metadata({type array int})}
    0.10%         0x00007f38dab4ecfd:   mov    %edx,0x10(%rax)
@@ -6215,7 +6215,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.04%         0x00007f38dab4ed17:   mov    %ebp,0x24(%rax)
    0.10%         0x00007f38dab4ed1a:   movl   $0x2,0x34(%rax)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@4 (line 200)
@@ -6228,7 +6228,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.26%         0x00007f38dab4ed21:   movq   $0x1,0x28(%rax)
    0.22%         0x00007f38dab4ed29:   movl   $0x6c38,0x30(%rax)           ;   {metadata({type array int})}
    0.09%         0x00007f38dab4ed30:   mov    %r11d,0x38(%rax)
@@ -6248,10 +6248,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%         0x00007f38dab4ed4e:   mov    %edx,0x4c(%rax)
    0.22%         0x00007f38dab4ed51:   shl    $0x3,%r8                     ;*getfield result {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@179 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@179 (line 93)
    0.21%         0x00007f38dab4ed55:   mov    $0x2,%edx
    0.05%         0x00007f38dab4ed5a:   mov    0xf0(%rsp),%r13
    0.06%         0x00007f38dab4ed62:   mov    0xc(%r8),%eax                ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -6262,14 +6262,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                            ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.25%         0x00007f38dab4ed66:   mov    0xc(%rcx),%r10d              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
                                                                            ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
                                                                            ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                            ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.23%         0x00007f38dab4ed6a:   mov    $0x0,%r11d
    0.04%         0x00007f38dab4ed70:   mov    0xec(%rsp),%r14d
    0.06%  ╭      0x00007f38dab4ed78:   jmp    0x00007f38dab4eda4           ;*iload {reexecute=0 rethrow=0 return_oop=0}
@@ -6278,14 +6278,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │                                                                ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           │                                                                ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           │                                                                ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           │      0x00007f38dab4ed7d:   data16 xchg %ax,%ax                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │                                                                ; - jdk.incubator.vector.IntVector::stOp@14 (line 341)
           │                                                                ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           │                                                                ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           │                                                                ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           │                                                                ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    1.03%  │↗     0x00007f38dab4ed80:   cmp    %r11d,%r10d
           ││     0x00007f38dab4ed83:   jbe    0x00007f38dab4fd87           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
@@ -6293,7 +6293,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││     0x00007f38dab4ed89:   mov    %r11d,%ebp
    0.01%  ││     0x00007f38dab4ed8c:   add    %r14d,%ebp                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@3 (line 2997)
@@ -6303,7 +6303,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
           ││     0x00007f38dab4ed8f:   cmp    %ebp,%eax
           ││     0x00007f38dab4ed91:   jbe    0x00007f38dab4fd87           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@5 (line 2997)
@@ -6313,14 +6313,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    1.01%  ││     0x00007f38dab4ed97:   mov    0x10(%rcx,%r11,4),%ebx       ;*iaload {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector::stOp@26 (line 342)
           ││                                                               ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.02%  ││     0x00007f38dab4ed9c:   mov    %ebx,0x10(%r8,%rbp,4)        ;*iastore {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector::lambda$intoArray$80@5 (line 2997)
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$82/0x0000000800c87c28::apply@8
@@ -6329,14 +6329,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.08%  ││     0x00007f38dab4eda1:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           ││                                                               ; - jdk.incubator.vector.IntVector::stOp@32 (line 341)
           ││                                                               ; - jdk.incubator.vector.IntVector::lambda$intoArray$81@8 (line 2996)
           ││                                                               ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
           ││                                                               ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
           ││                                                               ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.22%  ↘│     0x00007f38dab4eda4:   cmp    %r11d,%edx
            ╰     0x00007f38dab4eda7:   ja     0x00007f38dab4ed80           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::stOp@14 (line 341)
@@ -6344,7 +6344,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                            ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.52%         0x00007f38dab4eda9:   mov    0x74(%rsp),%r10d
    0.02%         0x00007f38dab4edae:   mov    0x348(%r15),%rdx             ; ImmutableOopMap {rsi=Oop rdi=Oop r8=Oop r9=Oop r10=NarrowOop [88]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                            ;*return {reexecute=1 rethrow=0 return_oop=0}
@@ -6353,29 +6353,29 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$$Lambda$81/0x0000000800c87808::store@9
                                                                            ; - jdk.internal.vm.vector.VectorSupport::store@32 (line 347)
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@42 (line 2990)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
    0.05%         0x00007f38dab4edb5:   test   %eax,(%rdx)                  ;   {poll}
    0.06%         0x00007f38dab4edb7:   mov    0xc(,%r10,8),%edx            ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.AbstractSpecies::length@1 (line 116)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@190 (line 79)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@190 (line 79)
    0.56%         0x00007f38dab4edbf:   mov    %r14d,%eax
                  0x00007f38dab4edc2:   add    %edx,%eax                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@195 (line 79)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@195 (line 79)
    0.02%         0x00007f38dab4edc4:   mov    %rdi,0x30(%rsp)
    0.01%         0x00007f38dab4edc9:   vpxor  %xmm0,%xmm0,%xmm0
    0.52%         0x00007f38dab4edcd:   mov    %rsi,%r11
                  0x00007f38dab4edd0:   mov    %edx,%esi
    0.02%         0x00007f38dab4edd2:   mov    %r9,%rdi
    0.00%         0x00007f38dab4edd5:   mov    %eax,%r9d                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
    0.52%         0x00007f38dab4edd8:   mov    0x18(%r11),%r8d              ; ImmutableOopMap {rdi=Oop r8=NarrowOop r10=NarrowOop r11=Oop [48]=Oop [88]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                            ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
                  0x00007f38dab4eddc:   mov    0xc(,%r8,8),%r13d            ; implicit exception: dispatches to 0x00007f38dab510a6
    0.05%         0x00007f38dab4ede4:   cmp    %r9d,%r13d
                  0x00007f38dab4ede7:   jg     0x00007f38dab4dda0
                  0x00007f38dab4eded:   jmp    0x00007f38dab4ccc5           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@46 (line 79)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@46 (line 79)
    0.02%         0x00007f38dab4edf2:   lea    -0x2(%rcx),%rdi
                  0x00007f38dab4edf6:   cmp    %rdi,%rbx
                  0x00007f38dab4edf9:   jg     0x00007f38dab4f071
@@ -6393,7 +6393,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.50%         0x00007f38dab4ee1d:   lea    -0x2(%rbx),%r9
                  0x00007f38dab4ee21:   cmp    %r9,%rdi
             ╭    0x00007f38dab4ee24:   jg     0x00007f38dab4ee33
@@ -6411,7 +6411,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.06%         0x00007f38dab4ee48:   lea    -0x2(%rbp),%r14
                  0x00007f38dab4ee4c:   cmp    %r14,%rax
              ╭   0x00007f38dab4ee4f:   jg     0x00007f38dab4ee5e
@@ -6429,7 +6429,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                            ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.42%         0x00007f38dab4ee73:   test   %esi,%ecx
                  0x00007f38dab4ee75:   je     0x00007f38dab4efe5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -6441,7 +6441,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@11 (line 370)
                                                                            ; - jdk.incubator.vector.Int64Vector::blend@3 (line 41)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.64%         0x00007f38dab4ee7b:   nopl   0x0(%rax,%rax,1)
    0.00%         0x00007f38dab4ee80:   test   %r14d,%r14d
               ╭  0x00007f38dab4ee83:   je     0x00007f38dab4ee92
@@ -6458,7 +6458,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               │                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
               │                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
               │                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.01%      ↘  0x00007f38dab4ee92:   mov    0x58(%rsp),%r11
    0.42%         0x00007f38dab4ee97:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {r11=Oop r14=NarrowOop [16]=Oop [32]=Oop [40]=Oop [48]=Oop [88]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -6469,7 +6469,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.00%         0x00007f38dab4eea0:   cmpl   $0x2,0xc(,%r14,8)            ; implicit exception: dispatches to 0x00007f38dab510c6
    0.15%         0x00007f38dab4eea9:   jb     0x00007f38dab50af8
    0.21%         0x00007f38dab4eeaf:   mov    0xac(%rsp),%esi
@@ -6484,7 +6484,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%         0x00007f38dab4eebe:   mov    0x10(%r11),%ecx              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -6496,7 +6496,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.17%         0x00007f38dab4eec2:   mov    0x14(,%r14,8),%edi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -6508,7 +6508,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.18%         0x00007f38dab4eeca:   mov    0x14(%r11),%r10d             ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                            ; - jdk.incubator.vector.Int64Vector::bOp@6 (line 206)
@@ -6520,7 +6520,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 279)
                                                                            ; - jdk.incubator.vector.Int64Vector::lanewise@3 (line 41)
                                                                            ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.07%         0x00007f38dab4eece:   mov    %eax,0xac(%rsp)
    0.00%         0x00007f38dab4eed5:   mov    %ecx,%eax
    0.02%         0x00007f38dab4eed7:   mov    %edi,%ecx
@@ -6531,10 +6531,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                  0x00007f38dab4eeeb:   cmp    $0xc3c130,%r13d              ;   {metadata(&apos;jdk/incubator/vector/Int64Vector&apos;)}
                  0x00007f38dab4eef2:   jne    0x00007f38dab50565           ;*invokevirtual length {reexecute=0 rethrow=0 return_oop=0}
                                                                            ; - jdk.incubator.vector.IntVector::intoArray@2 (line 2988)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@184 (line 93)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@184 (line 93)
                  0x00007f38dab4eef8:   mov    0x1c(%r11),%ebp              ; ImmutableOopMap {rbp=NarrowOop rdi=Oop r11=Oop [40]=Oop [48]=Oop [88]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                            ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@39 (line 79)
+                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@39 (line 79)
                  0x00007f38dab4eefc:   mov    0xc(,%rbp,8),%esi            ; implicit exception: dispatches to 0x00007f38dab510e6
                  0x00007f38dab4ef03:   test   %esi,%esi
                  0x00007f38dab4ef05:   je     0x00007f38dab50987           ;* unwind (locked if synchronized)
@@ -6542,22 +6542,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   18.67%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  18.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   9.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   9.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   8.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   8.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   7.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   7.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   6.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   5.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   3.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   2.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   2.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   1.97%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   1.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   1.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
-   1.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+  18.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   9.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   9.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   8.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   8.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   7.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   7.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   6.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   5.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   3.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   2.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   2.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   1.97%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   1.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   1.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+   1.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
    0.57%               kernel  [unknown] 
    0.18%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
@@ -6567,7 +6567,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  96.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
+  96.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1029 
    2.13%               kernel  [unknown] 
    0.13%                       <unknown> 
    0.10%         libc-2.31.so  [unknown] 
@@ -6622,7 +6622,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 65536, vectorSize = 128)
 
 # Run progress: 75.00% complete, ETA 00:05:35
@@ -6642,12 +6642,12 @@ Iteration   5: 3231.264 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   3231.826 ±(99.9%) 2.478 us/op [Average]
   (min, avg, max) = (3231.264, 3231.826, 3232.796), stdev = 0.643
   CI (99.9%): [3229.348, 3234.304] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 291115 total address lines.
 Perf output processed (skipped 58.677 seconds):
  Column 1: cycles (50739 events)
@@ -6656,7 +6656,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
 
                    0x00007f9b0eb5c32e:   jmp    0x00007f9b0eb5c58c           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -6666,7 +6666,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
               ↗↗   0x00007f9b0eb5c333:   mov    0x18(%rbp),%edx
    0.02%      ││   0x00007f9b0eb5c336:   mov    0x1c(%rbp),%ecx
    0.56%      ││   0x00007f9b0eb5c339:   mov    0x14(%rbp),%edi
@@ -6679,7 +6679,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
               ││   0x00007f9b0eb5c33f:   nop
    0.04%      ││   0x00007f9b0eb5c340:   test   %r10d,%r10d
           ╭   ││   0x00007f9b0eb5c343:   je     0x00007f9b0eb5c3ad
@@ -6711,7 +6711,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │  │││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │  │││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │  │││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │  │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │  │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.02%  ↘  ↘││   0x00007f9b0eb5c3ad:   mov    0x44(,%r11,8),%esi           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -6722,9 +6722,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.04%      ││   0x00007f9b0eb5c3b5:   mov    %eax,%r8d                    ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
    0.58%      ││   0x00007f9b0eb5c3b8:   cmp    0x13c(%rsp),%ebp
    0.01%      ││   0x00007f9b0eb5c3bf:   setg   %bl
    0.03%      ││   0x00007f9b0eb5c3c2:   movzbl %bl,%ebx
@@ -6746,7 +6746,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.04%      ││   0x00007f9b0eb5c3e8:   setg   %cl
    0.02%      ││   0x00007f9b0eb5c3eb:   movzbl %cl,%ecx                     ; ImmutableOopMap {r9=Oop [8]=Oop [80]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
               ││                                                             ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -6757,7 +6757,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.48%      ││   0x00007f9b0eb5c3ee:   cmpl   $0xc3d218,0x8(,%rsi,8)       ; implicit exception: dispatches to 0x00007f9b0eb5f4e6
               ││                                                             ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.17%      ││   0x00007f9b0eb5c3f9:   jne    0x00007f9b0eb5e3b0           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -6769,7 +6769,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.26%      ││   0x00007f9b0eb5c3ff:   nop
    0.31%      ││   0x00007f9b0eb5c400:   cmp    $0x4,%r10d
               ││   0x00007f9b0eb5c404:   jb     0x00007f9b0eb5e7f6
@@ -6786,7 +6786,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.01%      ││   0x00007f9b0eb5c424:   movzbl 0x10(%r8),%r9d
    0.21%      ││   0x00007f9b0eb5c429:   movzbl 0x11(%r8),%r13d
    0.34%      ││   0x00007f9b0eb5c42e:   movzbl 0x13(%r8),%r11d
@@ -6798,7 +6798,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.02%      ││   0x00007f9b0eb5c438:   cmp    0x138(%rsp),%eax
    0.24%      ││   0x00007f9b0eb5c43f:   setg   %al
    0.51%      ││   0x00007f9b0eb5c442:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -6813,7 +6813,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.34%      ││   0x00007f9b0eb5c445:   xor    %r13d,%eax                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -6824,7 +6824,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.36%      ││   0x00007f9b0eb5c448:   cmp    0x13c(%rsp),%esi
    0.02%      ││   0x00007f9b0eb5c44f:   setg   %sil
    0.22%      ││   0x00007f9b0eb5c453:   movzbl %sil,%esi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -6839,7 +6839,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.12%      ││   0x00007f9b0eb5c457:   xor    %r9d,%esi                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -6850,7 +6850,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.40%      ││   0x00007f9b0eb5c45a:   nopw   0x0(%rax,%rax,1)
    0.01%      ││   0x00007f9b0eb5c460:   test   %esi,%ebx
               ││   0x00007f9b0eb5c462:   jne    0x00007f9b0eb5c6d4
@@ -6865,7 +6865,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.23%      ││   0x00007f9b0eb5c470:   mov    %rax,0x170(%rsp)
    0.21%      ││   0x00007f9b0eb5c478:   mov    0xa8(%rsp),%eax
    0.01%      ││   0x00007f9b0eb5c47f:   mov    %eax,0x90(%rsp)
@@ -6882,7 +6882,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.25%      ││   0x00007f9b0eb5c4a1:   mov    0x50(%rsp),%r9
    0.01%      ││   0x00007f9b0eb5c4a6:   mov    0x1c(%r13),%r8d
    0.11%      ││   0x00007f9b0eb5c4aa:   mov    %r8d,0x84(%rsp)
@@ -6896,7 +6896,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.10%      ││   0x00007f9b0eb5c4b6:   and    %esi,%ebx
    0.02%      ││   0x00007f9b0eb5c4b8:   and    %eax,%edi                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -6907,7 +6907,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.11%      ││   0x00007f9b0eb5c4ba:   cmp    0x134(%rsp),%ebp
    0.40%      ││   0x00007f9b0eb5c4c1:   setg   %sil
    0.08%      ││   0x00007f9b0eb5c4c5:   movzbl %sil,%esi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -6922,7 +6922,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.04%      ││   0x00007f9b0eb5c4c9:   xor    %r14d,%esi                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -6933,7 +6933,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.11%      ││   0x00007f9b0eb5c4cc:   mov    %edx,%eax
    0.31%      ││   0x00007f9b0eb5c4ce:   and    %esi,%eax                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -6944,7 +6944,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.14%      ││   0x00007f9b0eb5c4d0:   cmp    0x130(%rsp),%r10d
    0.02%      ││   0x00007f9b0eb5c4d8:   setg   %r10b
    0.08%      ││   0x00007f9b0eb5c4dc:   movzbl %r10b,%r10d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -6959,7 +6959,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.35%      ││   0x00007f9b0eb5c4e0:   xor    %r11d,%r10d                  ;*ixor {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -6970,7 +6970,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.22%      ││   0x00007f9b0eb5c4e3:   mov    %ecx,%ebp
    0.02%      ││   0x00007f9b0eb5c4e5:   and    %r10d,%ebp                   ;*iand {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$and$0@2 (line 628)
@@ -6981,7 +6981,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
               ││                                                             ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.23%      ││   0x00007f9b0eb5c4e8:   mov    0x348(%r15),%r11             ; ImmutableOopMap {r9=Oop r13=Oop [80]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
               ││                                                             ;*iastore {reexecute=1 rethrow=0 return_oop=0}
               ││                                                             ; - (reexecute) jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -6993,7 +6993,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.17%      ││   0x00007f9b0eb5c4ef:   test   %eax,(%r11)                  ;   {poll}
    0.70%      ││   0x00007f9b0eb5c4f2:   mov    0xbc(%rsp),%edi
    0.01%      ││   0x00007f9b0eb5c4f9:   add    0x14(%r9),%edi
@@ -7011,7 +7011,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.09%      ││   0x00007f9b0eb5c515:   mov    0xa0(%rsp),%ebp
    0.07%      ││   0x00007f9b0eb5c51c:   add    0x1c(%r9),%ebp               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
               ││                                                             ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
@@ -7026,10 +7026,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               ││                                                             ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.47%      ││   0x00007f9b0eb5c520:   mov    0x9c(%rsp),%eax
    0.00%      ││   0x00007f9b0eb5c527:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@171 (line 81)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@171 (line 81)
    0.07%      ││   0x00007f9b0eb5c529:   test   %esi,%edx
               ││   0x00007f9b0eb5c52b:   jne    0x00007f9b0eb5c713
    0.10%      ││   0x00007f9b0eb5c531:   test   %r10d,%ecx
@@ -7043,7 +7043,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                             ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               ││                                                             ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.20%      ││   0x00007f9b0eb5c53a:   mov    %edi,0xbc(%rsp)
    0.00%      ││   0x00007f9b0eb5c541:   mov    %r11d,0xb8(%rsp)
    0.06%      ││   0x00007f9b0eb5c549:   mov    %rax,0x170(%rsp)
@@ -7056,7 +7056,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.01%      ││   0x00007f9b0eb5c57d:   mov    %ebp,0xa0(%rsp)
    0.03%      ││   0x00007f9b0eb5c584:   mov    %eax,%r10d
    0.01%      ││   0x00007f9b0eb5c587:   jmp    0x00007f9b0eb5be10           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+              ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.62%      ││   0x00007f9b0eb5c58c:   lea    -0x2(%r8),%rcx
               ││   0x00007f9b0eb5c590:   cmp    %rcx,%rdi
               ││   0x00007f9b0eb5c593:   jg     0x00007f9b0eb5c88b
@@ -7074,7 +7074,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.46%           0x00007f9b0eb5c5b7:   lea    -0x2(%r8),%r13
                    0x00007f9b0eb5c5bb:   nopl   0x0(%rax,%rax,1)
                    0x00007f9b0eb5c5c0:   cmp    %r13,%rdi
@@ -7093,7 +7093,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.38%           0x00007f9b0eb5c5e7:   lea    -0x2(%rax),%rdx
                    0x00007f9b0eb5c5eb:   cmp    %rdx,%rbp
                    0x00007f9b0eb5c5ee:   jg     0x00007f9b0eb5c8ab
@@ -7114,7 +7114,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   21.39%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
 
                    0x00007f9b0eb5baae:   jmp    0x00007f9b0eb5ce73           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -7124,7 +7124,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
                    0x00007f9b0eb5bab3:   mov    0x1c(%r10),%edx
    0.12%           0x00007f9b0eb5bab7:   mov    0x18(%r10),%ecx
    0.06%           0x00007f9b0eb5babb:   mov    0x14(%r10),%edi
@@ -7137,7 +7137,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
                    0x00007f9b0eb5bac3:   test   %ebp,%ebp
           ╭        0x00007f9b0eb5bac5:   je     0x00007f9b0eb5bb2e
    0.13%  │        0x00007f9b0eb5bacb:   lea    0x10(%r9),%r8
@@ -7168,7 +7168,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
           │  │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.08%  ↘  ↘     0x00007f9b0eb5bb2e:   mov    0x44(,%r11,8),%eax           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -7179,9 +7179,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%           0x00007f9b0eb5bb36:   mov    %esi,%r8d                    ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
                    0x00007f9b0eb5bb39:   cmp    0x13c(%rsp),%r10d
    0.09%           0x00007f9b0eb5bb41:   setg   %r10b
    0.08%           0x00007f9b0eb5bb45:   movzbl %r10b,%r10d
@@ -7205,7 +7205,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.00%           0x00007f9b0eb5bb72:   data16 nopw 0x0(%rax,%rax,1)
    0.07%           0x00007f9b0eb5bb7c:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {r9=Oop [24]=Oop [32]=Oop [48]=Oop [80]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -7216,18 +7216,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.13%           0x00007f9b0eb5bb80:   cmpl   $0xc3d218,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f9b0eb5f446
                                                                              ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.02%           0x00007f9b0eb5bb8b:   jne    0x00007f9b0eb5ed9f
    0.07%           0x00007f9b0eb5bb91:   cmp    $0xc3d218,%r13d              ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
                    0x00007f9b0eb5bb98:   jne    0x00007f9b0eb5e61b           ;*invokevirtual blend {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.12%           0x00007f9b0eb5bb9e:   mov    0x30(%rsp),%r14
    0.00%           0x00007f9b0eb5bba3:   cmpl   $0xc3d218,0x8(%r14)          ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.08%           0x00007f9b0eb5bbab:   jne    0x00007f9b0eb5eeb7           ;*invokevirtual lanewise {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.13%           0x00007f9b0eb5bbb1:   cmp    $0x4,%ebp
                    0x00007f9b0eb5bbb4:   jb     0x00007f9b0eb5e6bd
    0.06%           0x00007f9b0eb5bbba:   mov    %edi,0xc4(%rsp)
@@ -7246,7 +7246,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.07%           0x00007f9b0eb5bbe8:   mov    %r9,0x10(%rsp)
    0.01%           0x00007f9b0eb5bbed:   movzbl 0x10(%r13),%r9d
                    0x00007f9b0eb5bbf2:   movzbl 0x11(%r13),%r11d
@@ -7259,7 +7259,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.00%           0x00007f9b0eb5bc01:   mov    0xc(%rax),%r13d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                              ; - jdk.incubator.vector.Int128Vector::vec@1 (line 117)
@@ -7272,7 +7272,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%           0x00007f9b0eb5bc05:   test   %r13d,%r13d
                    0x00007f9b0eb5bc08:   je     0x00007f9b0eb5d151
    0.13%           0x00007f9b0eb5bc0e:   mov    %ecx,0xc8(%rsp)
@@ -7291,7 +7291,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%           0x00007f9b0eb5bc34:   mov    0x168(%rsp),%rcx
                    0x00007f9b0eb5bc3c:   nopl   0x0(%rax)
    0.00%           0x00007f9b0eb5bc40:   cmp    %rax,%rcx
@@ -7304,7 +7304,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.15%           0x00007f9b0eb5bc49:   cmpl   $0x4,0xc(,%r13,8)            ; implicit exception: dispatches to 0x00007f9b0eb5f466
    0.09%           0x00007f9b0eb5bc52:   jb     0x00007f9b0eb5ec79
    0.13%           0x00007f9b0eb5bc58:   cmp    0x138(%rsp),%edx
@@ -7321,7 +7321,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
                    0x00007f9b0eb5bc65:   xor    %r11d,%edx                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -7332,7 +7332,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.13%           0x00007f9b0eb5bc68:   cmp    0x13c(%rsp),%esi
    0.01%           0x00007f9b0eb5bc6f:   setg   %sil
    0.03%           0x00007f9b0eb5bc73:   movzbl %sil,%esi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -7347,7 +7347,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
                    0x00007f9b0eb5bc77:   xor    %r9d,%esi                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -7358,7 +7358,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.14%           0x00007f9b0eb5bc7a:   nopw   0x0(%rax,%rax,1)
    0.02%           0x00007f9b0eb5bc80:   test   %esi,%r10d
                    0x00007f9b0eb5bc83:   jne    0x00007f9b0eb5cfd5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -7371,7 +7371,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.14%           0x00007f9b0eb5bc89:   mov    0x10(,%r13,8),%eax           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -7382,7 +7382,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.15%           0x00007f9b0eb5bc91:   test   %edx,%ebx
                    0x00007f9b0eb5bc93:   jne    0x00007f9b0eb5d0e5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -7394,7 +7394,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.16%           0x00007f9b0eb5bc99:   mov    0x14(,%r13,8),%r11d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -7405,7 +7405,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.10%           0x00007f9b0eb5bca1:   mov    %r11d,0xd8(%rsp)
    0.05%           0x00007f9b0eb5bca9:   mov    0x18(%rsp),%r11              ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -7417,7 +7417,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.03%           0x00007f9b0eb5bcae:   cmp    0x130(%rsp),%r8d
    0.07%           0x00007f9b0eb5bcb6:   setg   %r8b
    0.02%           0x00007f9b0eb5bcba:   movzbl %r8b,%r8d                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -7432,7 +7432,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.10%           0x00007f9b0eb5bcbe:   xor    %edi,%r8d                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -7443,7 +7443,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.03%           0x00007f9b0eb5bcc1:   cmp    0x134(%rsp),%ebp
    0.17%           0x00007f9b0eb5bcc8:   setg   %dil
    0.08%           0x00007f9b0eb5bccc:   movzbl %dil,%edi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -7458,7 +7458,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                              ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.10%           0x00007f9b0eb5bcd0:   xor    %r14d,%edi                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::lambda$xor$4@2 (line 648)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -7469,7 +7469,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::xor@27 (line 646)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@5 (line 616)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::not@1 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.06%           0x00007f9b0eb5bcd3:   test   %edi,0xc8(%rsp)
                    0x00007f9b0eb5bcda:   jne    0x00007f9b0eb5cffd           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -7481,7 +7481,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.08%           0x00007f9b0eb5bce0:   mov    0x18(,%r13,8),%ebp           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -7492,7 +7492,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.02%           0x00007f9b0eb5bce8:   test   %r8d,0xc4(%rsp)
                    0x00007f9b0eb5bcf0:   jne    0x00007f9b0eb5d0fb           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@52 (line 224)
@@ -7504,7 +7504,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.07%           0x00007f9b0eb5bcf6:   mov    0x1c(,%r13,8),%r14d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@80 (line 224)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@10 (line 214)
@@ -7515,7 +7515,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.04%           0x00007f9b0eb5bcfe:   mov    %ebp,0xc0(%rsp)
    0.06%           0x00007f9b0eb5bd05:   mov    %r14d,%ebp
    0.02%           0x00007f9b0eb5bd08:   mov    0x30(%rsp),%r14
@@ -7532,7 +7532,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.24%           0x00007f9b0eb5bd11:   test   %r11d,%r11d
                    0x00007f9b0eb5bd14:   je     0x00007f9b0eb5d145
    0.11%           0x00007f9b0eb5bd1a:   mov    0x8(,%r11,8),%r14d
@@ -7549,7 +7549,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.16%           0x00007f9b0eb5bd30:   shl    $0x3,%r13                    ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                              ; - jdk.incubator.vector.Int128Vector::vec@1 (line 117)
@@ -7562,7 +7562,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
                                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.01%           0x00007f9b0eb5bd34:   and    %esi,%r10d
                    0x00007f9b0eb5bd37:   and    %edx,%ebx
    0.00%           0x00007f9b0eb5bd39:   mov    0xc8(%rsp),%r9d
@@ -7577,7 +7577,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@27 (line 626)
                                                                              ; - jdk.incubator.vector.Int128Vector$Int128Mask::and@2 (line 500)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
                    0x00007f9b0eb5bd4e:   test   %r11d,%r11d
               ╭    0x00007f9b0eb5bd51:   je     0x00007f9b0eb5bd60           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
               │                                                              ; - jdk.incubator.vector.Int128Vector::vec@4 (line 117)
@@ -7591,7 +7591,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               │                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
               │                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
               │                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.18%      │    0x00007f9b0eb5bd57:   cmp    %r14,%rcx
               │    0x00007f9b0eb5bd5a:   jne    0x00007f9b0eb5eb3d           ; ImmutableOopMap {r11=NarrowOop r13=Oop [24]=Oop [32]=Oop [48]=Oop [80]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
               │                                                              ;*iastore {reexecute=1 rethrow=0 return_oop=0}
@@ -7604,7 +7604,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               │                                                              ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
               │                                                              ; - jdk.incubator.vector.Int128Vector::blend@11 (line 370)
               │                                                              ; - jdk.incubator.vector.Int128Vector::blend@3 (line 41)
-              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.00%      ↘    0x00007f9b0eb5bd60:   cmpl   $0x4,0xc(,%r11,8)            ; implicit exception: dispatches to 0x00007f9b0eb5f486
                    0x00007f9b0eb5bd69:   jb     0x00007f9b0eb5e426
    0.19%           0x00007f9b0eb5bd6f:   mov    0x50(%rsp),%r9
@@ -7619,7 +7619,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%           0x00007f9b0eb5bd7c:   add    0x10(%r9),%esi               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -7631,7 +7631,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.02%           0x00007f9b0eb5bd80:   mov    0x14(,%r11,8),%edx           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -7643,7 +7643,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.14%           0x00007f9b0eb5bd88:   add    0x14(%r9),%edx               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -7655,7 +7655,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.05%           0x00007f9b0eb5bd8c:   mov    0x18(,%r11,8),%edi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -7667,7 +7667,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%           0x00007f9b0eb5bd94:   add    0x18(%r9),%edi               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -7679,7 +7679,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.03%           0x00007f9b0eb5bd98:   mov    0x1c(,%r11,8),%r10d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                              ; - jdk.incubator.vector.Int128Vector::bOp@6 (line 206)
@@ -7691,7 +7691,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.13%           0x00007f9b0eb5bda0:   add    0x1c(%r9),%r10d              ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
                                                                              ; - jdk.incubator.vector.IntVector$$Lambda$80/0x0000000800c873e8::apply@3
@@ -7705,7 +7705,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 279)
                                                                              ; - jdk.incubator.vector.Int128Vector::lanewise@3 (line 41)
                                                                              ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.05%           0x00007f9b0eb5bda4:   mov    %edx,0xbc(%rsp)
    0.03%           0x00007f9b0eb5bdab:   mov    %esi,0xb8(%rsp)
    0.01%           0x00007f9b0eb5bdb2:   mov    %ebp,0xb4(%rsp)
@@ -7721,7 +7721,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.14%           0x00007f9b0eb5bdfb:   mov    $0x1,%r10d
    0.00%           0x00007f9b0eb5be01:   data16 data16 nopw 0x0(%rax,%rax,1)
    0.05%           0x00007f9b0eb5be0c:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.36%           0x00007f9b0eb5be10:   mov    0xdc(%rsp),%r8d
    0.20%           0x00007f9b0eb5be18:   mov    0xe0(%rsp),%edi
    0.08%           0x00007f9b0eb5be1f:   mov    0xe4(%rsp),%esi
@@ -7731,7 +7731,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.10%           0x00007f9b0eb5be3c:   data16 data16 xchg %ax,%ax
    0.12%           0x00007f9b0eb5be40:   cmp    0xc(,%r11,8),%r10d
                    0x00007f9b0eb5be48:   jge    0x00007f9b0eb5cbae           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@72 (line 81)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@72 (line 81)
    0.81%           0x00007f9b0eb5be4e:   cmp    $0x3,%r10d
                ╭   0x00007f9b0eb5be52:   je     0x00007f9b0eb5be7f
    0.04%       │   0x00007f9b0eb5be58:   cmp    $0x0,%r10d
@@ -7743,7 +7743,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │   0x00007f9b0eb5be74:   je     0x00007f9b0eb5c7b8
                │   0x00007f9b0eb5be7a:   jmp    0x00007f9b0eb5e516           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
                │                                                             ; - jdk.incubator.vector.Int128Vector::lane@1 (line 456)
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@79 (line 82)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@79 (line 82)
    0.03%       ↘   0x00007f9b0eb5be7f:   mov    %r10d,0x9c(%rsp)
    0.02%           0x00007f9b0eb5be87:   mov    0xc(,%r11,8),%r10d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
@@ -7754,7 +7754,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                              ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                              ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.10%           0x00007f9b0eb5be8f:   test   %r10d,%r10d
                    0x00007f9b0eb5be92:   jl     0x00007f9b0eb5f074
    0.04%           0x00007f9b0eb5be98:   mov    %r14d,%r9d
@@ -7800,7 +7800,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   16.94%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
 
                 0x00007f9b0eb5bf60:   jmp    0x00007f9b0eb5c5e7
                 0x00007f9b0eb5bf65:   mov    %rcx,%rbx                    ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -7811,7 +7811,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.19%        0x00007f9b0eb5bf68:   mov    %rbx,0x8(%rsp)
    0.44%        0x00007f9b0eb5bf6d:   test   %r10d,%r10d
           ╭     0x00007f9b0eb5bf70:   je     0x00007f9b0eb5bfd9
@@ -7843,7 +7843,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
           │ │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
           │ │                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
           │ │                                                             ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.58%  ↘ ↘   0x00007f9b0eb5bfd9:   mov    0x44(,%r11,8),%edx           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -7854,7 +7854,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.02%        0x00007f9b0eb5bfe1:   movslq %r9d,%rcx                    ; ImmutableOopMap {rbx=Oop r11=NarrowOop [8]=Oop [80]=Oop [104]=Oop [116]=NarrowOop [120]=Oop }
                                                                           ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                           ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -7864,7 +7864,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
                 0x00007f9b0eb5bfe4:   cmpl   $0xc3d218,0x8(,%rdx,8)       ; implicit exception: dispatches to 0x00007f9b0eb5f4a6
                                                                           ;   {metadata(&apos;jdk/incubator/vector/Int128Vector&apos;)}
    0.66%        0x00007f9b0eb5bfef:   jne    0x00007f9b0eb5ebdd           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7876,7 +7876,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                           ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.03%        0x00007f9b0eb5bff5:   cmp    $0x4,%r10d
                 0x00007f9b0eb5bff9:   jb     0x00007f9b0eb5eb7a           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -7887,7 +7887,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
                 0x00007f9b0eb5bfff:   mov    0x14(%rbx),%r10d
    0.02%        0x00007f9b0eb5c003:   mov    0x18(%rbx),%r9d
    0.53%        0x00007f9b0eb5c007:   mov    0x1c(%rbx),%ecx
@@ -7900,7 +7900,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.01%        0x00007f9b0eb5c00d:   cmp    %r8d,%edx
    0.02%        0x00007f9b0eb5c010:   setg   %dl
    0.54%        0x00007f9b0eb5c013:   movzbl %dl,%edx                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -7915,7 +7915,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.11%        0x00007f9b0eb5c016:   cmp    %edi,%r10d
                 0x00007f9b0eb5c019:   jg     0x00007f9b0eb5c62d
    0.01%        0x00007f9b0eb5c01f:   nop
@@ -7926,7 +7926,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.45%        0x00007f9b0eb5c029:   mov    %edx,%eax
    0.34%        0x00007f9b0eb5c02b:   mov    %edx,0x98(%rsp)
    0.71%        0x00007f9b0eb5c032:   mov    %r9d,0x94(%rsp)
@@ -7943,7 +7943,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.27%        0x00007f9b0eb5c050:   mov    0xc(,%r11,8),%r10d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -7953,7 +7953,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.19%        0x00007f9b0eb5c058:   mov    %eax,%ebx
    0.14%        0x00007f9b0eb5c05a:   inc    %ebx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -7961,7 +7961,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.03%        0x00007f9b0eb5c05c:   cmp    %r14d,%ecx
    0.26%        0x00007f9b0eb5c05f:   cmovg  %ebx,%eax                    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -7969,7 +7969,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.20%        0x00007f9b0eb5c062:   test   %r10d,%r10d
                 0x00007f9b0eb5c065:   jl     0x00007f9b0eb5ec07           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -7979,7 +7979,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.10%        0x00007f9b0eb5c06b:   cmp    %r8d,%edx
    0.03%        0x00007f9b0eb5c06e:   sete   %cl
    0.29%        0x00007f9b0eb5c071:   movzbl %cl,%ecx                     ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
@@ -7994,7 +7994,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.17%        0x00007f9b0eb5c074:   cmp    %edi,%ebp
                 0x00007f9b0eb5c076:   je     0x00007f9b0eb5c645
    0.04%        0x00007f9b0eb5c07c:   nopl   0x0(%rax)
@@ -8005,7 +8005,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                           ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                           ; - jdk.incubator.vector.Int128Vector$Int128Mask::trueCount@16 (line 656)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.07%        0x00007f9b0eb5c089:   mov    %ecx,%ebx
    0.33%        0x00007f9b0eb5c08b:   cmp    %edi,%ebp
    0.08%        0x00007f9b0eb5c08d:   sete   %bpl
@@ -8027,7 +8027,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@5 (line 351)
                                                                           ; - jdk.incubator.vector.Int128Vector::compare@3 (line 41)
                                                                           ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.06%        0x00007f9b0eb5c0a9:   cmp    $0x1,%r10d
                 0x00007f9b0eb5c0ad:   jl     0x00007f9b0eb5c612
    0.07%        0x00007f9b0eb5c0b3:   mov    %ebp,0x94(%rsp)
@@ -8045,7 +8045,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                           ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.07%        0x00007f9b0eb5c0db:   mov    0x108(%r15),%rbp
    0.08%        0x00007f9b0eb5c0e2:   mov    %r10d,%ecx
    0.17%        0x00007f9b0eb5c0e5:   mov    %rcx,%r13
@@ -8088,22 +8088,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   15.39%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  21.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-  16.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-  15.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   9.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   8.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   6.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   4.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   3.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   3.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   2.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   1.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   0.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   0.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   0.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
-   0.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+  21.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+  16.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+  15.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   9.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   8.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   6.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   4.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   3.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   3.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   2.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   1.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   1.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   0.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   0.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   0.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+   0.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
    0.15%               kernel  [unknown] 
    0.12%               kernel  [unknown] 
    0.10%               kernel  [unknown] 
@@ -8113,7 +8113,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
+  97.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 5, compile id 1051 
    1.16%               kernel  [unknown] 
    0.09%         libc-2.31.so  [unknown] 
    0.07%                       <unknown> 
@@ -8168,7 +8168,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 65536, vectorSize = 256)
 
 # Run progress: 83.33% complete, ETA 00:03:43
@@ -8188,12 +8188,12 @@ Iteration   5: 6929.078 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   7031.463 ±(99.9%) 577.834 us/op [Average]
   (min, avg, max) = (6929.078, 7031.463, 7283.909), stdev = 150.062
   CI (99.9%): [6453.629, 7609.298] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 297291 total address lines.
 Perf output processed (skipped 58.891 seconds):
  Column 1: cycles (50953 events)
@@ -8202,7 +8202,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
 
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@3 (line 41)
@@ -8213,7 +8213,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.04%                      0x00007fbbaeb5b8d8:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {rsi=NarrowOop r14=Oop [48]=Oop [56]=Oop [64]=Oop [112]=Oop [144]=Oop [156]=NarrowOop [160]=Oop }
                                                                                         ;*iastore {reexecute=1 rethrow=0 return_oop=0}
                                                                                         ; - (reexecute) jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -8225,7 +8225,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
                               0x00007fbbaeb5b8e0:   cmpl   $0x8,0xc(,%rsi,8)            ; implicit exception: dispatches to 0x00007fbbaeb5fd86
    0.00%                      0x00007fbbaeb5b8e8:   jb     0x00007fbbaeb5efce
    0.03%                      0x00007fbbaeb5b8ee:   mov    0x70(%rsp),%r9
@@ -8240,7 +8240,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b8fa:   add    0x10(%r9),%edx               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8252,7 +8252,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b8fe:   mov    0x14(,%rsi,8),%eax           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8264,7 +8264,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.04%                      0x00007fbbaeb5b905:   add    0x14(%r9),%eax               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8276,7 +8276,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b909:   mov    0x18(,%rsi,8),%ecx           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8288,7 +8288,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b910:   add    0x18(%r9),%ecx               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8300,7 +8300,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%                      0x00007fbbaeb5b914:   mov    0x1c(,%rsi,8),%edi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8312,7 +8312,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.03%                      0x00007fbbaeb5b91b:   add    0x1c(%r9),%edi               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8324,7 +8324,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%                      0x00007fbbaeb5b91f:   mov    0x20(,%rsi,8),%r10d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8336,7 +8336,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b927:   add    0x20(%r9),%r10d              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8348,7 +8348,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b92b:   mov    0x24(,%rsi,8),%ebp           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8360,7 +8360,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.03%                      0x00007fbbaeb5b932:   add    0x24(%r9),%ebp               ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8372,7 +8372,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%                      0x00007fbbaeb5b936:   mov    0x28(,%rsi,8),%r11d          ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8384,7 +8384,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b93e:   add    0x28(%r9),%r11d              ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@47 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8396,7 +8396,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
                               0x00007fbbaeb5b942:   mov    0x2c(,%rsi,8),%esi           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bOpTemplate@42 (line 204)
                                                                                         ; - jdk.incubator.vector.Int256Vector::bOp@6 (line 206)
@@ -8408,7 +8408,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.05%                      0x00007fbbaeb5b949:   add    0x2c(%r9),%esi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
                                                                                         ; - jdk.incubator.vector.IntVector$$Lambda$80/0x0000000800c873e8::apply@3
@@ -8422,7 +8422,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.00%                      0x00007fbbaeb5b94d:   mov    %rax,0x290(%rsp)
                               0x00007fbbaeb5b955:   mov    0x154(%rsp),%eax
    0.00%                      0x00007fbbaeb5b95c:   mov    %eax,0x134(%rsp)
@@ -8462,10 +8462,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.02%                      0x00007fbbaeb5ba50:   mov    0x180(%rsp),%ebx
                               0x00007fbbaeb5ba57:   mov    0x9c(%rsp),%r10d
    0.00%                      0x00007fbbaeb5ba5f:   nop                                 ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.24%                      0x00007fbbaeb5ba60:   cmp    0xc(,%r10,8),%r11d
                               0x00007fbbaeb5ba68:   jge    0x00007fbbaeb5d03f           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@72 (line 81)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@72 (line 81)
    0.11%                      0x00007fbbaeb5ba6e:   cmp    $0x4,%r11d
           ╭                   0x00007fbbaeb5ba72:   jge    0x00007fbbaeb5baae
    0.05%  │                   0x00007fbbaeb5ba78:   cmp    $0x2,%r11d
@@ -8490,7 +8490,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
             │                 0x00007fbbaeb5bad4:   je     0x00007fbbaeb5cad9
    0.04%    │                 0x00007fbbaeb5bada:   jmp    0x00007fbbaeb5cafa           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
             │                                                                           ; - jdk.incubator.vector.Int256Vector::lane@1 (line 456)
-            │                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@79 (line 82)
+            │                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@79 (line 82)
    0.12%    ↘                 0x00007fbbaeb5badf:   mov    %r11d,0x104(%rsp)
    0.16%                      0x00007fbbaeb5bae7:   mov    0xc(,%r10,8),%r11d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
@@ -8501,7 +8501,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                                         ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.00%                      0x00007fbbaeb5baef:   test   %r11d,%r11d
                               0x00007fbbaeb5baf2:   jl     0x00007fbbaeb5efb2
    0.01%                      0x00007fbbaeb5baf8:   mov    %ebx,%r9d
@@ -8550,7 +8550,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
              │                                                                          ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
              │                                                                          ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-             │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+             │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.29%     ↘                0x00007fbbaeb5bbc5:   mov    %r13,0x20(%rsp)
    0.03%                      0x00007fbbaeb5bbca:   test   %r11d,%r11d
                ╭              0x00007fbbaeb5bbcd:   je     0x00007fbbaeb5bc30
@@ -8581,7 +8581,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │ │                                                                      ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                │ │                                                                      ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                │ │                                                                      ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-               │ │                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+               │ │                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.27%       ↘ ↘            0x00007fbbaeb5bc30:   mov    0x44(,%r10,8),%eax           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -8592,12 +8592,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                                         ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.01%                      0x00007fbbaeb5bc38:   movslq %r9d,%r8                     ;*i2l {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::toBits@1 (line 390)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3545)
                                                                                         ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
                               0x00007fbbaeb5bc3b:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {r10=NarrowOop r13=Oop [32]=Oop [112]=Oop [144]=Oop [156]=NarrowOop [160]=Oop }
                                                                                         ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                                         ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -8607,7 +8607,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                                         ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
                               0x00007fbbaeb5bc40:   cmpl   $0xc3dd70,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007fbbaeb5fda6
                                                                                         ;   {metadata(&apos;jdk/incubator/vector/Int256Vector&apos;)}
    0.68%                      0x00007fbbaeb5bc4b:   jne    0x00007fbbaeb5ee0d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -8619,7 +8619,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                                         ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.15%                      0x00007fbbaeb5bc51:   cmp    $0x8,%r11d
                               0x00007fbbaeb5bc55:   jb     0x00007fbbaeb5f46d           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.IntVector::bTest@52 (line 378)
@@ -8630,7 +8630,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
                               0x00007fbbaeb5bc5b:   mov    0x14(%r13),%r11d
    0.16%                      0x00007fbbaeb5bc5f:   mov    0x18(%r13),%r8d
                               0x00007fbbaeb5bc63:   mov    0x1c(%r13),%r9d
@@ -8648,7 +8648,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.17%                      0x00007fbbaeb5bc82:   cmp    %esi,%eax
    0.00%                      0x00007fbbaeb5bc84:   setg   %al
    0.15%                      0x00007fbbaeb5bc87:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -8663,7 +8663,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@96 (line 84)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@96 (line 84)
    0.04%                      0x00007fbbaeb5bc8a:   cmp    %ebp,%r11d
                               0x00007fbbaeb5bc8d:   jg     0x00007fbbaeb5c7b0
    0.30%                      0x00007fbbaeb5bc93:   cmp    %edx,%r8d
@@ -8684,7 +8684,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                                         ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    1.13%                      0x00007fbbaeb5bcda:   mov    %eax,0xf8(%rsp)
    1.21%                      0x00007fbbaeb5bce1:   mov    0x100(%rsp),%eax
    0.02%                      0x00007fbbaeb5bce8:   mov    %edi,0xf4(%rsp)
@@ -8711,7 +8711,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.03%                      0x00007fbbaeb5bd45:   mov    0xc(,%r10,8),%r13d           ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -8721,7 +8721,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.08%                      0x00007fbbaeb5bd4d:   mov    %r11d,%r10d
    0.01%                      0x00007fbbaeb5bd50:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -8729,7 +8729,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                                         ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.19%                      0x00007fbbaeb5bd53:   cmp    0x180(%rsp),%eax
    0.01%                      0x00007fbbaeb5bd5a:   cmovg  %r10d,%r11d                  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -8737,7 +8737,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                                         ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.09%                      0x00007fbbaeb5bd5e:   xchg   %ax,%ax
    0.00%                      0x00007fbbaeb5bd60:   test   %r13d,%r13d
                               0x00007fbbaeb5bd63:   jl     0x00007fbbaeb5ee75           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
@@ -8748,7 +8748,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.25%                      0x00007fbbaeb5bd69:   cmp    %esi,%r8d
    0.01%                      0x00007fbbaeb5bd6c:   sete   %r10b
    0.09%                      0x00007fbbaeb5bd70:   movzbl %r10b,%r10d                  ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
@@ -8763,7 +8763,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.02%                      0x00007fbbaeb5bd74:   cmp    %ebp,%edi
                               0x00007fbbaeb5bd76:   je     0x00007fbbaeb5c79c
    0.18%                      0x00007fbbaeb5bd7c:   nopl   0x0(%rax)
@@ -8790,7 +8790,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                                         ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.30%                      0x00007fbbaeb5bdee:   mov    %eax,%esi
    0.05%                      0x00007fbbaeb5bdf0:   mov    0xdc(%rsp),%eax
    0.15%                      0x00007fbbaeb5bdf7:   cmp    %ebp,%edi
@@ -8826,7 +8826,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::eq@5 (line 1635)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@108 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@108 (line 85)
    0.05%                      0x00007fbbaeb5be59:   nopl   0x0(%rax)
    0.04%                      0x00007fbbaeb5be60:   cmp    $0x1,%r13d
                               0x00007fbbaeb5be64:   jl     0x00007fbbaeb5c6c9
@@ -8844,7 +8844,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.08%                      0x00007fbbaeb5be8c:   mov    %r9d,0xf8(%rsp)
    0.04%                      0x00007fbbaeb5be94:   mov    %ecx,0xe4(%rsp)
    0.07%                      0x00007fbbaeb5be9b:   mov    0x108(%r15),%r10
@@ -8892,7 +8892,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                   │                                                                     ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                   │                                                                     ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                   │                                                                     ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                  │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                  │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.28%          ↘           0x00007fbbaeb5bf65:   mov    %esi,%ecx
                               0x00007fbbaeb5bf67:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -8900,7 +8900,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                                         ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
                               0x00007fbbaeb5bf69:   cmp    0x180(%rsp),%eax
    0.01%                      0x00007fbbaeb5bf70:   cmove  %ecx,%esi                    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -8908,9 +8908,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                                                                                         ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.31%                      0x00007fbbaeb5bf73:   add    %r11d,%esi                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@122 (line 86)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@122 (line 86)
    0.01%                      0x00007fbbaeb5bf76:   test   %r13d,%r13d
                     ╭         0x00007fbbaeb5bf79:   je     0x00007fbbaeb5bfd9
                     │         0x00007fbbaeb5bf7f:   lea    0x10(%r10),%rax
@@ -8940,7 +8940,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                     │ │                                                                 ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                     │ │                                                                 ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                     │ │                                                                 ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                    │ │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                    │ │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.34%            ↘ ↘       0x00007fbbaeb5bfd9:   mov    0x9c(%rsp),%ecx
    0.00%                      0x00007fbbaeb5bfe0:   mov    0x44(,%rcx,8),%eax           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
@@ -8952,7 +8952,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.23%                      0x00007fbbaeb5bfe7:   mov    %esi,%r8d                    ; ImmutableOopMap {rcx=NarrowOop r10=Oop [32]=Oop [112]=Oop [144]=Oop [156]=NarrowOop [160]=Oop }
                                                                                         ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                                         ; - (reexecute) jdk.incubator.vector.IntVector$IntSpecies::rvOp@40 (line 3618)
@@ -8962,7 +8962,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                               0x00007fbbaeb5bfea:   cmpl   $0xc3dd70,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007fbbaeb5fdc6
                                                                                         ;   {metadata(&apos;jdk/incubator/vector/Int256Vector&apos;)}
    1.35%                      0x00007fbbaeb5bff5:   jne    0x00007fbbaeb5ef5c           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -8974,7 +8974,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.30%                      0x00007fbbaeb5bffb:   nopl   0x0(%rax,%rax,1)
                               0x00007fbbaeb5c000:   cmp    $0x8,%r13d
                               0x00007fbbaeb5c004:   jb     0x00007fbbaeb5f5a5           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
@@ -8986,7 +8986,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.03%                      0x00007fbbaeb5c00a:   mov    0xc(,%rcx,8),%r9d            ;*getfield laneCount {reexecute=0 rethrow=0 return_oop=0}
                                                                                         ; - jdk.incubator.vector.AbstractSpecies::laneCount@1 (line 125)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@1 (line 3613)
@@ -8996,7 +8996,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
                               0x00007fbbaeb5c012:   mov    %r9d,0xe4(%rsp)
    0.27%                      0x00007fbbaeb5c01a:   nopw   0x0(%rax,%rax,1)
                               0x00007fbbaeb5c020:   test   %r9d,%r9d
@@ -9008,7 +9008,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.03%                      0x00007fbbaeb5c029:   cmp    $0x1,%r9d
                        ╭      0x00007fbbaeb5c02d:   jl     0x00007fbbaeb5c049
                        │      0x00007fbbaeb5c033:   mov    %r9d,%esi
@@ -9024,7 +9024,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                        │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                        │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                        │                                                                ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                       │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                       │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.26%               ↘      0x00007fbbaeb5c049:   mov    0x108(%r15),%rbx
                               0x00007fbbaeb5c050:   mov    %r9d,%r13d
    0.03%                      0x00007fbbaeb5c053:   mov    %r13,%rsi
@@ -9069,7 +9069,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                         │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                         │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                         │                                                               ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                        │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                        │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.33%                ↘     0x00007fbbaeb5c105:   mov    0x28(%r10),%esi
                               0x00007fbbaeb5c109:   mov    0x2c(%r10),%eax
                               0x00007fbbaeb5c10d:   mov    0x24(%r10),%edi
@@ -9086,7 +9086,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.29%                      0x00007fbbaeb5c125:   test   %r9d,%r9d
                               0x00007fbbaeb5c128:   je     0x00007fbbaeb5c812
                               0x00007fbbaeb5c12e:   mov    %eax,0xf8(%rsp)
@@ -9114,7 +9114,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   38.63%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
 
    0.05%      0x00007fbbaeb5c15d:   data16 xchg %ax,%ax
    0.27%      0x00007fbbaeb5c160:   cmp    %rbx,%r9
@@ -9138,7 +9138,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.30%      0x00007fbbaeb5c1a1:   mov    0x44(,%rcx,8),%r9d           ;*getfield dummyVector {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.AbstractSpecies::dummyVector@1 (line 295)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::dummyVector@1 (line 3606)
@@ -9149,9 +9149,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.01%      0x00007fbbaeb5c1a9:   mov    %r11d,%r11d                  ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@136 (line 88)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@136 (line 88)
               0x00007fbbaeb5c1ac:   cmp    0x254(%rsp),%r10d
    0.01%      0x00007fbbaeb5c1b4:   setg   %r10b
    0.33%      0x00007fbbaeb5c1b8:   movzbl %r10b,%r10d
@@ -9185,7 +9185,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@129 (line 88)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@129 (line 88)
    0.22%      0x00007fbbaeb5c21b:   setg   %al
    0.01%      0x00007fbbaeb5c21e:   movzbl %al,%eax                     ; ImmutableOopMap {[24]=Oop [32]=Oop [112]=Oop [144]=Oop [156]=NarrowOop [160]=Oop }
                                                                         ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -9196,7 +9196,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.03%      0x00007fbbaeb5c221:   cmpl   $0xc3dd70,0x8(,%r9,8)        ; implicit exception: dispatches to 0x00007fbbaeb5fde6
                                                                         ;   {metadata(&apos;jdk/incubator/vector/Int256Vector&apos;)}
    0.28%      0x00007fbbaeb5c22d:   jne    0x00007fbbaeb5f05a           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -9208,7 +9208,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.04%      0x00007fbbaeb5c233:   nopw   0x0(%rax,%rax,1)
    0.02%      0x00007fbbaeb5c23c:   data16 data16 xchg %ax,%ax
    0.02%      0x00007fbbaeb5c240:   cmpl   $0x8,0xe4(%rsp)
@@ -9237,7 +9237,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.02%      0x00007fbbaeb5c2a9:   movzbl 0x10(%r14),%r8d
    0.01%      0x00007fbbaeb5c2ae:   mov    %r9d,0xd0(%rsp)
    0.19%      0x00007fbbaeb5c2b6:   movzbl 0x11(%r14),%r9d
@@ -9259,7 +9259,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.02%      0x00007fbbaeb5c2fc:   cmp    0x250(%rsp),%r13d
    0.15%      0x00007fbbaeb5c304:   setg   %r13b
    0.01%      0x00007fbbaeb5c308:   movzbl %r13b,%r13d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -9274,7 +9274,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.15%      0x00007fbbaeb5c30c:   xor    %r9d,%r13d                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9285,7 +9285,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.07%      0x00007fbbaeb5c30f:   cmp    0x254(%rsp),%r11d
    0.10%      0x00007fbbaeb5c317:   setg   %r11b
    0.00%      0x00007fbbaeb5c31b:   movzbl %r11b,%r11d                  ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -9300,7 +9300,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.13%      0x00007fbbaeb5c31f:   xor    %r8d,%r11d                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9311,7 +9311,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.06%      0x00007fbbaeb5c322:   test   %r11d,%r10d
               0x00007fbbaeb5c325:   jne    0x00007fbbaeb5c8f3
    0.21%      0x00007fbbaeb5c32b:   test   %r13d,%ebx
@@ -9325,7 +9325,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.10%      0x00007fbbaeb5c334:   mov    %rax,0x290(%rsp)
    0.15%      0x00007fbbaeb5c33c:   mov    0x130(%rsp),%eax
    0.04%      0x00007fbbaeb5c343:   mov    %eax,0xb8(%rsp)
@@ -9342,7 +9342,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.07%      0x00007fbbaeb5c365:   cmp    0x248(%rsp),%eax
    0.08%      0x00007fbbaeb5c36c:   setg   %al
    0.16%      0x00007fbbaeb5c36f:   movzbl %al,%eax                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -9357,7 +9357,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.15%      0x00007fbbaeb5c372:   xor    %edi,%eax                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9368,7 +9368,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.16%      0x00007fbbaeb5c374:   cmp    0x24c(%rsp),%ecx
    0.01%      0x00007fbbaeb5c37b:   setg   %cl
    0.10%      0x00007fbbaeb5c37e:   movzbl %cl,%ecx                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -9383,7 +9383,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.06%      0x00007fbbaeb5c381:   xor    %esi,%ecx                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9394,7 +9394,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.14%      0x00007fbbaeb5c383:   test   %ecx,%ebp
               0x00007fbbaeb5c385:   jne    0x00007fbbaeb5ca3f
    0.08%      0x00007fbbaeb5c38b:   test   %eax,0xd8(%rsp)
@@ -9408,7 +9408,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.10%      0x00007fbbaeb5c398:   mov    %rax,0x290(%rsp)
    0.15%      0x00007fbbaeb5c3a0:   mov    0x14c(%rsp),%eax
    0.05%      0x00007fbbaeb5c3a7:   mov    %eax,0xb0(%rsp)
@@ -9424,7 +9424,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.16%      0x00007fbbaeb5c3c4:   mov    0xc0(%rsp),%esi
    0.02%      0x00007fbbaeb5c3cb:   mov    0xc4(%rsp),%r14d
    0.08%      0x00007fbbaeb5c3d3:   mov    0xc8(%rsp),%edi
@@ -9443,7 +9443,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.14%      0x00007fbbaeb5c3f1:   xor    %esi,%edi                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9454,7 +9454,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.12%      0x00007fbbaeb5c3f3:   cmp    0x244(%rsp),%r8d
    0.03%      0x00007fbbaeb5c3fb:   setg   %sil
    0.05%      0x00007fbbaeb5c3ff:   movzbl %sil,%esi                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -9469,7 +9469,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.13%      0x00007fbbaeb5c403:   xor    %r14d,%esi                   ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9480,7 +9480,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.13%      0x00007fbbaeb5c406:   test   %esi,0xf4(%rsp)
               0x00007fbbaeb5c40d:   jne    0x00007fbbaeb5ca7a
    0.13%      0x00007fbbaeb5c413:   test   %edi,0xf0(%rsp)
@@ -9494,7 +9494,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.17%      0x00007fbbaeb5c420:   mov    %rax,0x290(%rsp)
    0.19%      0x00007fbbaeb5c428:   mov    0x150(%rsp),%eax
    0.03%      0x00007fbbaeb5c42f:   mov    %eax,0xcc(%rsp)
@@ -9510,7 +9510,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.30%      0x00007fbbaeb5c44c:   mov    0xd0(%rsp),%r8d
    0.06%      0x00007fbbaeb5c454:   mov    0x2c(%r9),%r14d
    0.04%      0x00007fbbaeb5c458:   mov    %r14d,0xd0(%rsp)
@@ -9524,7 +9524,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.12%      0x00007fbbaeb5c464:   and    %r11d,%r10d
    0.02%      0x00007fbbaeb5c467:   and    %r13d,%ebx
    0.03%      0x00007fbbaeb5c46a:   and    %ecx,%ebp
@@ -9539,7 +9539,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::and@27 (line 634)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::and@2 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.02%      0x00007fbbaeb5c481:   cmp    0x23c(%rsp),%r8d
    0.10%      0x00007fbbaeb5c489:   setg   %cl
    0.16%      0x00007fbbaeb5c48c:   movzbl %cl,%ecx                     ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -9554,7 +9554,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.11%      0x00007fbbaeb5c48f:   xor    %edx,%ecx                    ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9565,7 +9565,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.13%      0x00007fbbaeb5c491:   mov    0xf8(%rsp),%edx
    0.08%      0x00007fbbaeb5c498:   and    %ecx,%edx                    ;*iand {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$and$0@2 (line 636)
@@ -9576,7 +9576,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::and@27 (line 634)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::and@2 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.23%      0x00007fbbaeb5c49a:   mov    0xd4(%rsp),%r8d
    0.00%      0x00007fbbaeb5c4a2:   cmp    0x238(%rsp),%r8d
    0.02%      0x00007fbbaeb5c4aa:   setg   %r11b
@@ -9592,7 +9592,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@5 (line 351)
                                                                         ; - jdk.incubator.vector.Int256Vector::compare@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::lt@5 (line 1663)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@142 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@142 (line 89)
    0.25%      0x00007fbbaeb5c4b2:   xor    0xbc(%rsp),%r11d             ;*ixor {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$xor$4@2 (line 656)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$73/0x0000000800c860d0::apply@3
@@ -9603,7 +9603,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::xor@27 (line 654)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@5 (line 624)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::not@1 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@145 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@145 (line 89)
    0.09%      0x00007fbbaeb5c4ba:   mov    0xe4(%rsp),%r8d
    0.02%      0x00007fbbaeb5c4c2:   and    %r11d,%r8d                   ;*iand {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$and$0@2 (line 636)
@@ -9614,7 +9614,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::and@27 (line 634)
                                                                         ; - jdk.incubator.vector.Int256Vector$Int256Mask::and@2 (line 508)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@148 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@148 (line 89)
    0.23%      0x00007fbbaeb5c4c5:   mov    0x348(%r15),%r13             ; ImmutableOopMap {r9=Oop [112]=Oop [144]=Oop [156]=NarrowOop [160]=Oop }
                                                                         ;*iastore {reexecute=1 rethrow=0 return_oop=0}
                                                                         ; - (reexecute) jdk.incubator.vector.IntVector::bOpTemplate@81 (line 224)
@@ -9626,7 +9626,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.08%      0x00007fbbaeb5c4cc:   test   %eax,0x0(%r13)               ;   {poll}
    0.39%      0x00007fbbaeb5c4d0:   mov    0x12c(%rsp),%ebx
    0.01%      0x00007fbbaeb5c4d7:   mov    0x70(%rsp),%rbp
@@ -9653,7 +9653,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.29%      0x00007fbbaeb5c51f:   mov    0x110(%rsp),%r9d
    0.00%      0x00007fbbaeb5c527:   add    0x10(%rbp),%r9d              ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                         ; - jdk.incubator.vector.IntVector::lambda$lanewiseTemplate$7@2 (line 626)
@@ -9668,10 +9668,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 279)
                                                                         ; - jdk.incubator.vector.Int256Vector::lanewise@3 (line 41)
                                                                         ; - jdk.incubator.vector.IntVector::add@5 (line 1083)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@166 (line 91)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@166 (line 91)
    0.29%      0x00007fbbaeb5c52b:   mov    0x104(%rsp),%r13d
    0.00%      0x00007fbbaeb5c533:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@171 (line 81)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@171 (line 81)
    0.02%      0x00007fbbaeb5c536:   data16 nopw 0x0(%rax,%rax,1)
    0.01%      0x00007fbbaeb5c540:   test   %ecx,0xf8(%rsp)
               0x00007fbbaeb5c547:   jne    0x00007fbbaeb5c934
@@ -9686,7 +9686,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector::blendTemplate@26 (line 1885)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@11 (line 370)
                                                                         ; - jdk.incubator.vector.Int256Vector::blend@3 (line 41)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@158 (line 90)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@158 (line 90)
    0.02%      0x00007fbbaeb5c55b:   mov    %rax,0x290(%rsp)
    0.01%      0x00007fbbaeb5c563:   mov    0xc8(%rsp),%eax
               0x00007fbbaeb5c56a:   mov    %eax,0x134(%rsp)
@@ -9721,7 +9721,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
    0.00%      0x00007fbbaeb5c638:   mov    0x1c0(%rsp),%ebp
               0x00007fbbaeb5c63f:   nop
    0.05%      0x00007fbbaeb5c640:   jmp    0x00007fbbaeb5ba60           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@64 (line 81)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@64 (line 81)
    0.25%      0x00007fbbaeb5c645:   lea    -0x2(%r8),%rax
    0.02%      0x00007fbbaeb5c649:   cmp    %rax,%rdi
               0x00007fbbaeb5c64c:   jg     0x00007fbbaeb5c84d
@@ -9740,7 +9740,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.18%      0x00007fbbaeb5c672:   lea    -0x2(%rcx),%r9
    0.06%      0x00007fbbaeb5c676:   cmp    %r9,%rbx
               0x00007fbbaeb5c679:   jg     0x00007fbbaeb5c855
@@ -9758,7 +9758,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                         ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.19%      0x00007fbbaeb5c69d:   lea    -0x2(%rcx),%rdi
    0.06%      0x00007fbbaeb5c6a1:   cmp    %rdi,%r8
               0x00007fbbaeb5c6a4:   jg     0x00007fbbaeb5c875
@@ -9779,7 +9779,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   22.27%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
 
                   0x00007fbbaeb5c6d9:   jmp    0x00007fbbaeb5be8c           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@33 (line 3616)
@@ -9789,7 +9789,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                   0x00007fbbaeb5c6de:   mov    %rbx,0x18(%rsp)
    0.00%          0x00007fbbaeb5c6e3:   lea    -0x8(%r13),%rbx
    0.33%          0x00007fbbaeb5c6e7:   mov    $0x0,%r9
@@ -9807,7 +9807,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
                   0x00007fbbaeb5c70b:   lea    -0x8(%r8),%rcx
                   0x00007fbbaeb5c70f:   mov    $0x0,%rdi
    0.30%          0x00007fbbaeb5c716:   data16 nopw 0x0(%rax,%rax,1)
@@ -9823,7 +9823,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                   0x00007fbbaeb5c734:   lea    -0x8(%rax),%rdi
    0.00%          0x00007fbbaeb5c738:   mov    $0x0,%r8
    0.33%          0x00007fbbaeb5c73f:   nop
@@ -9839,28 +9839,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                             ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.82%     ↗    0x00007fbbaeb5c755:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.25%     │    0x00007fbbaeb5c758:   jmp    0x00007fbbaeb5bcda           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.16%     │    0x00007fbbaeb5c75d:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.14%     │    0x00007fbbaeb5c75f:   nop
    0.01%     │    0x00007fbbaeb5c760:   cmp    0x1b4(%rsp),%r9d
              │    0x00007fbbaeb5c768:   jne    0x00007fbbaeb5bdae           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -9869,21 +9869,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.18%     │    0x00007fbbaeb5c76e:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.12%     │    0x00007fbbaeb5c770:   jmp    0x00007fbbaeb5bdae           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.22%     │    0x00007fbbaeb5c775:   mov    %r10d,0x100(%rsp)
    0.21%     │    0x00007fbbaeb5c77d:   mov    0xe0(%rsp),%r10d
    0.01%     │    0x00007fbbaeb5c785:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
@@ -9892,7 +9892,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
              │    0x00007fbbaeb5c787:   cmp    0x17c(%rsp),%r10d
              │    0x00007fbbaeb5c78f:   jne    0x00007fbbaeb5bdee           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -9900,21 +9900,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.09%     │    0x00007fbbaeb5c795:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.07%     │    0x00007fbbaeb5c797:   jmp    0x00007fbbaeb5bdee           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.12%     │    0x00007fbbaeb5c79c:   mov    %r10d,%eax
    0.03%     │    0x00007fbbaeb5c79f:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
@@ -9922,7 +9922,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.15%     │    0x00007fbbaeb5c7a1:   cmp    %edx,%ebx
              │    0x00007fbbaeb5c7a3:   jne    0x00007fbbaeb5bd8b           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
              │                                                              ; - jdk.incubator.vector.AbstractMask::trueCountHelper@24 (line 144)
@@ -9930,21 +9930,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │                                                              ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │                                                              ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.22%     │↗   0x00007fbbaeb5c7a9:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              ││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.02%     ││   0x00007fbbaeb5c7ab:   jmp    0x00007fbbaeb5bd8b           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              ││                                                             ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@111 (line 85)
+             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@111 (line 85)
    0.33%     ││   0x00007fbbaeb5c7b0:   mov    %r11d,0xfc(%rsp)
    0.56%     ││   0x00007fbbaeb5c7b8:   mov    %eax,%r11d
    0.03%     ││   0x00007fbbaeb5c7bb:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
@@ -9953,7 +9953,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.01%     ││   0x00007fbbaeb5c7be:   xchg   %ax,%ax
    0.05%     ││   0x00007fbbaeb5c7c0:   cmp    %edx,%r8d
              ││   0x00007fbbaeb5c7c3:   jle    0x00007fbbaeb5bca7           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -9962,28 +9962,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              ││                                                             ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              ││                                                             ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.12%     ││↗  0x00007fbbaeb5c7c9:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.12%     │││  0x00007fbbaeb5c7cc:   jmp    0x00007fbbaeb5bca7           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.47%     │││  0x00007fbbaeb5c7d1:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.28%     │││  0x00007fbbaeb5c7d4:   nopl   0x0(%rax,%rax,1)
    0.01%     │││  0x00007fbbaeb5c7dc:   data16 data16 xchg %ax,%ax
              │││  0x00007fbbaeb5c7e0:   cmp    0x1b4(%rsp),%ecx
@@ -9993,28 +9993,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    1.02%     │││  0x00007fbbaeb5c7ed:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.31%     │││  0x00007fbbaeb5c7f0:   jmp    0x00007fbbaeb5bcbd           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@30 (line 143)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    1.14%     │││  0x00007fbbaeb5c7f5:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │││                                                            ; - jdk.incubator.vector.AbstractMask::trueCountHelper@27 (line 144)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::lambda$trueCount$6@4 (line 665)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
              │││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
              │││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+             │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.32%     │││  0x00007fbbaeb5c7f8:   nopl   0x0(%rax,%rax,1)
              │││  0x00007fbbaeb5c800:   cmp    0x17c(%rsp),%edi
              │││  0x00007fbbaeb5c807:   jle    0x00007fbbaeb5bcda
@@ -10024,7 +10024,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
               ││                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
               ││                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
               ││  0x00007fbbaeb5c812:   mov    %rbx,0x18(%rsp)
               ││  0x00007fbbaeb5c817:   jmp    0x00007fbbaeb5c1a1           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
               ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@33 (line 3616)
@@ -10034,7 +10034,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
               ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
               ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
               ││                                                            ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.09%      ││  0x00007fbbaeb5c81c:   mov    %r10d,%eax
    0.04%      ││  0x00007fbbaeb5c81f:   nop
    0.02%      ╰│  0x00007fbbaeb5c820:   jmp    0x00007fbbaeb5c7a9           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -10043,7 +10043,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                │                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask$$Lambda$70/0x0000000800c85860::apply@4
                │                                                            ; - jdk.internal.vm.vector.VectorSupport::maskReductionCoerced@28 (line 497)
                │                                                            ; - jdk.incubator.vector.Int256Vector$Int256Mask::trueCount@16 (line 664)
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@99 (line 84)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@99 (line 84)
    0.43%       │  0x00007fbbaeb5c822:   mov    %r11d,0xfc(%rsp)
    0.42%       │  0x00007fbbaeb5c82a:   mov    %eax,%r11d
    0.00%       ╰  0x00007fbbaeb5c82d:   jmp    0x00007fbbaeb5c7c9
@@ -10056,7 +10056,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.31%          0x00007fbbaeb5c83b:   mov    %rdi,%rcx
                   0x00007fbbaeb5c83e:   xchg   %ax,%ax
                   0x00007fbbaeb5c840:   jmp    0x00007fbbaeb5bfb3           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -10067,7 +10067,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.32%          0x00007fbbaeb5c845:   mov    %r8,%rdi
                   0x00007fbbaeb5c848:   jmp    0x00007fbbaeb5bc09           ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@33 (line 3616)
@@ -10077,7 +10077,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@5 (line 3545)
                                                                             ; - jdk.incubator.vector.IntVector::broadcast@7 (line 471)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@87 (line 83)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@87 (line 83)
    0.29%          0x00007fbbaeb5c84d:   mov    %rdi,%rax
                   0x00007fbbaeb5c850:   jmp    0x00007fbbaeb5c65b           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -10087,7 +10087,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
    0.26%          0x00007fbbaeb5c855:   mov    %rbx,%r9
                   0x00007fbbaeb5c858:   jmp    0x00007fbbaeb5c688           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -10097,7 +10097,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
                   0x00007fbbaeb5c85d:   mov    $0x0,%rdi
                   0x00007fbbaeb5c864:   jmp    0x00007fbbaeb5c645           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -10107,7 +10107,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@137 (line 89)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@137 (line 89)
                   0x00007fbbaeb5c869:   mov    $0x0,%rbx
                   0x00007fbbaeb5c870:   jmp    0x00007fbbaeb5c672           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::rvOp@4 (line 3613)
@@ -10117,7 +10117,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcastBits@18 (line 3536)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@6 (line 3551)
                                                                             ; - jdk.incubator.vector.IntVector$IntSpecies::broadcast@2 (line 3492)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector@124 (line 88)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector@124 (line 88)
    0.21%          0x00007fbbaeb5c875:   mov    %r8,%rdi
                   0x00007fbbaeb5c878:   jmp    0x00007fbbaeb5c6b4
                   0x00007fbbaeb5c87d:   mov    $0x0,%r8
@@ -10125,32 +10125,32 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
   12.33%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  38.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-  22.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-  12.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   7.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   4.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   4.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   2.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   1.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   1.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   1.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   0.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
-   0.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+  38.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+  22.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+  12.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   7.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   4.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   4.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   2.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   1.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   1.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   1.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   0.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   0.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
    0.39%               kernel  [unknown] 
    0.16%               kernel  [unknown] 
    0.13%               kernel  [unknown] 
    0.10%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
-   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
    0.03%            libjvm.so  HeapRegionClaimer::claim_region 
    1.66%  <...other 518 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
+  97.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1056 
    1.57%               kernel  [unknown] 
    0.09%         libc-2.31.so  [unknown] 
    0.09%                       <unknown> 
@@ -10206,7 +10206,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortV
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector
 # Parameters: (arraySize = 65536, vectorSize = 512)
 
 # Run progress: 91.67% complete, ETA 00:01:51
@@ -10226,12 +10226,12 @@ Iteration   5: 14097.518 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector":
   14105.678 ±(99.9%) 30.801 us/op [Average]
   (min, avg, max) = (14097.518, 14105.678, 14114.655), stdev = 7.999
   CI (99.9%): [14074.877, 14136.480] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark.sortVector:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector:·asm":
 PrintAssembly processed: 308559 total address lines.
 Perf output processed (skipped 58.639 seconds):
  Column 1: cycles (51156 events)
@@ -10240,46 +10240,46 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
 
  <region is too big to display, has 1157 lines, but threshold is 1000>
 ....................................................................................................
   39.51%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
 
  <region is too big to display, has 1448 lines, but threshold is 1000>
 ....................................................................................................
   29.42%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  39.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-  29.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   9.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   8.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   1.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   1.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   1.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.99%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.77%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+  39.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+  29.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   9.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   8.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   1.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   1.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   1.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.99%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.77%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
    0.70%               kernel  [unknown] 
-   0.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
    0.12%               kernel  [unknown] 
-   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
    2.35%  <...other 523 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
+  97.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark::sortVector, version 4, compile id 1060 
    1.98%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.05%         libc-2.31.so  [unknown] 

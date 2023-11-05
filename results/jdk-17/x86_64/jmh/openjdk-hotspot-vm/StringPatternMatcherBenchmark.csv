@@ -1,4 +1,4 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: regexp"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_find","avgt",1,25,1628.730930,10.824724,"us/op","^(.*[aeuio].*){3,}$"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_matches","avgt",1,25,1624.134232,12.060560,"us/op","^(.*[aeuio].*){3,}$"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.string_matches","avgt",1,25,2393.901111,23.915162,"us/op","^(.*[aeuio].*){3,}$"
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_find","avgt",1,25,1628.730930,10.824724,"us/op","^(.*[aeuio].*){3,}$"
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_matches","avgt",1,25,1624.134232,12.060560,"us/op","^(.*[aeuio].*){3,}$"
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.string_matches","avgt",1,25,2393.901111,23.915162,"us/op","^(.*[aeuio].*){3,}$"

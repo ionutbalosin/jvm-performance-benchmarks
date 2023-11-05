@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline
 # Parameters: (iterations = 1000, size = 256)
 
 # Run progress: 0.00% complete, ETA 00:13:20
@@ -28,12 +28,12 @@ Iteration   5: 32.916 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline":
   32.915 ±(99.9%) 0.006 ms/op [Average]
   (min, avg, max) = (32.914, 32.915, 32.918), stdev = 0.001
   CI (99.9%): [32.910, 32.921] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline:·asm":
 PrintAssembly processed: 270230 total address lines.
 Perf output processed (skipped 58.784 seconds):
  Column 1: cycles (55440 events)
@@ -42,120 +42,120 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 8, compile id 757 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 8, compile id 757 
 
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
                       0x00007f3d03003df9:   vaddsd %xmm5,%xmm6,%xmm7            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
                       0x00007f3d03003dfd:   mov    $0x0,%edx
                       0x00007f3d03003e02:   data16 nopw 0x0(%rax,%rax,1)
                       0x00007f3d03003e0c:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
                  ↗↗   0x00007f3d03003e10:   cmp    %edx,%r11d
           ╭      ││   0x00007f3d03003e13:   jle    0x00007f3d03003ef3           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
+          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
    0.02%  │      ││   0x00007f3d03003e19:   nopl   0x0(%rax)
    0.04%  │      ││   0x00007f3d03003e20:   cmp    $0x1,%r8d
           │╭     ││   0x00007f3d03003e24:   jl     0x00007f3d03003eec           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.01%  ││     ││   0x00007f3d03003e2a:   vcvtsi2sd %edx,%xmm8,%xmm8          ;*i2d {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
    0.01%  ││     ││   0x00007f3d03003e2e:   vsubsd %xmm2,%xmm8,%xmm8            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
    0.05%  ││     ││   0x00007f3d03003e32:   vmulsd %xmm4,%xmm8,%xmm8            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
    0.00%  ││     ││   0x00007f3d03003e36:   vdivsd %xmm0,%xmm8,%xmm8            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
    0.13%  ││     ││   0x00007f3d03003e3a:   vaddsd %xmm5,%xmm8,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    0.09%  ││     ││   0x00007f3d03003e3e:   vmovapd %xmm9,%xmm10
    0.03%  ││     ││   0x00007f3d03003e43:   vmovapd %xmm7,%xmm9
    0.01%  ││     ││   0x00007f3d03003e47:   mov    $0x1,%ebp
           ││╭    ││   0x00007f3d03003e4c:   jmp    0x00007f3d03003e9d           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
           │││    ││   0x00007f3d03003e51:   data16 data16 nopw 0x0(%rax,%rax,1)
           │││    ││   0x00007f3d03003e5c:   data16 data16 xchg %ax,%ax          ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.82%  │││  ↗ ││   0x00007f3d03003e60:   vmulsd %xmm10,%xmm10,%xmm11         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
   17.73%  │││  │ ││   0x00007f3d03003e65:   vmulsd %xmm9,%xmm9,%xmm12           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
    2.27%  │││  │ ││   0x00007f3d03003e6a:   vaddsd %xmm12,%xmm11,%xmm13         ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
   28.56%  │││  │ ││   0x00007f3d03003e6f:   vucomisd %xmm4,%xmm13
   11.50%  │││╭ │ ││   0x00007f3d03003e73:   jp     0x00007f3d03003ea5
   10.81%  ││││╭│ ││   0x00007f3d03003e79:   ja     0x00007f3d03003ea5           ;*ifgt {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
    2.82%  ││││││ ││   0x00007f3d03003e7f:   vsubsd %xmm12,%xmm11,%xmm11         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
    0.04%  ││││││ ││   0x00007f3d03003e84:   vaddsd %xmm8,%xmm11,%xmm11          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    5.40%  ││││││ ││   0x00007f3d03003e89:   vmulsd %xmm1,%xmm10,%xmm10          ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
    1.08%  ││││││ ││   0x00007f3d03003e8d:   vmulsd %xmm9,%xmm10,%xmm9           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
    0.61%  ││││││ ││   0x00007f3d03003e92:   vaddsd %xmm6,%xmm9,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
    0.48%  ││││││ ││   0x00007f3d03003e96:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
    4.67%  ││││││ ││   0x00007f3d03003e98:   vmovapd %xmm11,%xmm10               ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
    1.03%  ││↘│││ ││   0x00007f3d03003e9d:   data16 xchg %ax,%ax
    0.92%  ││ │││ ││   0x00007f3d03003ea0:   cmp    %ebp,%r8d
           ││ ││╰ ││   0x00007f3d03003ea3:   jg     0x00007f3d03003e60           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.08%  ││ ↘↘  ││↗  0x00007f3d03003ea5:   mov    %edx,%r13d
    0.03%  ││     │││  0x00007f3d03003ea8:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
    0.01%  ││     │││  0x00007f3d03003eab:   mov    %edx,%r14d
    0.01%  ││     │││  0x00007f3d03003eae:   add    %edi,%r14d                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
    0.04%  ││     │││  0x00007f3d03003eb1:   cmp    %ebp,%r8d
           ││    ╭│││  0x00007f3d03003eb4:   jle    0x00007f3d03003ed3           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
    0.01%  ││    ││││  0x00007f3d03003eba:   vmovsd %xmm5,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
    0.01%  ││    ││││  0x00007f3d03003ec1:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││    ││││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
+          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
    0.01%  ││    ││││  0x00007f3d03003ec8:   test   %eax,0x0(%rbp)               ;   {poll}
    0.05%  ││    ││││  0x00007f3d03003ecb:   mov    %r13d,%edx
           ││    │╰││  0x00007f3d03003ece:   jmp    0x00007f3d03003e10           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
    0.00%  ││    ↘ ││  0x00007f3d03003ed3:   vmovsd %xmm3,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
+          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
           ││      ││  0x00007f3d03003eda:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││      ││                                                            ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ││      ││  0x00007f3d03003ee1:   test   %eax,0x0(%rbp)               ;   {poll}
    0.00%  ││      ││  0x00007f3d03003ee4:   mov    %r13d,%edx
    0.01%  ││      ╰│  0x00007f3d03003ee7:   jmp    0x00007f3d03003e10
           │↘       │  0x00007f3d03003eec:   mov    $0x0,%ebp
           │        ╰  0x00007f3d03003ef1:   jmp    0x00007f3d03003ea5           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ↘           0x00007f3d03003ef3:   mov    0x348(%r15),%rdi             ; ImmutableOopMap {rax=Oop rsi=Oop }
                                                                                 ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f3d03003efa:   test   %eax,(%rdi)                  ;   {poll}
                       0x00007f3d03003efc:   inc    %ebx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f3d03003efe:   xchg   %ax,%ax
    0.00%              0x00007f3d03003f00:   cmp    %ebx,%r11d
                       0x00007f3d03003f03:   jg     0x00007f3d03003dc0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@11 (line 75)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@11 (line 75)
                       0x00007f3d03003f09:   mov    0x10(%rsp),%rbp
                       0x00007f3d03003f0e:   add    $0x18,%rsp
                       0x00007f3d03003f12:   mov    0x348(%r15),%rcx
                       0x00007f3d03003f19:   test   %eax,(%rcx)                  ;   {poll_return}
                       0x00007f3d03003f1b:   ret    
                       0x00007f3d03003f1c:   movl   $0xffffffe5,0x370(%r15)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
                       0x00007f3d03003f27:   movq   $0x294,0x378(%r15)
 ....................................................................................................
   89.39%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  89.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 8, compile id 757 
+  89.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 8, compile id 757 
    1.07%               kernel  [unknown] 
    1.02%               kernel  [unknown] 
    0.88%               kernel  [unknown] 
@@ -180,7 +180,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  89.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 8, compile id 757 
+  89.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 8, compile id 757 
    6.62%               kernel  [unknown] 
    0.45%                       <unknown> 
    0.16%         libc-2.31.so  __strncat_ssse3 
@@ -194,7 +194,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
    0.06%          c1, level 3  jdk.incubator.vector.Double256Vector::compare, version 1, compile id 1012 
    0.06%   libpthread-2.31.so  __libc_write 
    0.06%         libc-2.31.so  __GI___strcasecmp_l_sse2 
-   0.06%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1072 
+   0.06%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1072 
    0.05%         libc-2.31.so  tcache_init.part.0 
    0.05%            libjvm.so  defaultStream::write 
    0.05%            libjvm.so  stringStream::write 
@@ -237,7 +237,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline
 # Parameters: (iterations = 1000, size = 512)
 
 # Run progress: 12.50% complete, ETA 00:13:32
@@ -257,12 +257,12 @@ Iteration   5: 131.314 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline":
   131.323 ±(99.9%) 0.035 ms/op [Average]
   (min, avg, max) = (131.314, 131.323, 131.338), stdev = 0.009
   CI (99.9%): [131.289, 131.358] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline:·asm":
 PrintAssembly processed: 272456 total address lines.
 Perf output processed (skipped 59.283 seconds):
  Column 1: cycles (58063 events)
@@ -271,115 +271,115 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 750 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 750 
 
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@52 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@52 (line 78)
                       0x00007f2456ffed6d:   vsubsd %xmm2,%xmm6,%xmm6            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@62 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@62 (line 78)
                       0x00007f2456ffed71:   vmulsd %xmm4,%xmm6,%xmm6            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@66 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@66 (line 78)
                       0x00007f2456ffed75:   vdivsd %xmm0,%xmm6,%xmm6            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
                       0x00007f2456ffed79:   vaddsd %xmm5,%xmm6,%xmm7            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
                       0x00007f2456ffed7d:   mov    $0x0,%edx
    0.00%              0x00007f2456ffed82:   data16 nopw 0x0(%rax,%rax,1)
                       0x00007f2456ffed8c:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
                  ↗↗   0x00007f2456ffed90:   cmp    %edx,%r11d
           ╭      ││   0x00007f2456ffed93:   jle    0x00007f2456ffee73           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
+          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
    0.01%  │      ││   0x00007f2456ffed99:   nopl   0x0(%rax)
    0.05%  │      ││   0x00007f2456ffeda0:   cmp    $0x1,%r8d
           │╭     ││   0x00007f2456ffeda4:   jl     0x00007f2456ffee6c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.01%  ││     ││   0x00007f2456ffedaa:   vcvtsi2sd %edx,%xmm8,%xmm8          ;*i2d {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
    0.02%  ││     ││   0x00007f2456ffedae:   vsubsd %xmm2,%xmm8,%xmm8            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
    0.07%  ││     ││   0x00007f2456ffedb2:   vmulsd %xmm4,%xmm8,%xmm8            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
    0.01%  ││     ││   0x00007f2456ffedb6:   vdivsd %xmm0,%xmm8,%xmm8            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
    0.12%  ││     ││   0x00007f2456ffedba:   vaddsd %xmm5,%xmm8,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    0.08%  ││     ││   0x00007f2456ffedbe:   vmovapd %xmm9,%xmm10
    0.03%  ││     ││   0x00007f2456ffedc3:   vmovapd %xmm7,%xmm9
    0.00%  ││     ││   0x00007f2456ffedc7:   mov    $0x1,%ebp
           ││╭    ││   0x00007f2456ffedcc:   jmp    0x00007f2456ffee1d           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
           │││    ││   0x00007f2456ffedd1:   data16 data16 nopw 0x0(%rax,%rax,1)
           │││    ││   0x00007f2456ffeddc:   data16 data16 xchg %ax,%ax          ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.76%  │││  ↗ ││   0x00007f2456ffede0:   vmulsd %xmm10,%xmm10,%xmm11         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
   17.27%  │││  │ ││   0x00007f2456ffede5:   vmulsd %xmm9,%xmm9,%xmm12           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
    2.16%  │││  │ ││   0x00007f2456ffedea:   vaddsd %xmm12,%xmm11,%xmm13         ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
   27.64%  │││  │ ││   0x00007f2456ffedef:   vucomisd %xmm4,%xmm13
   10.96%  │││╭ │ ││   0x00007f2456ffedf3:   jp     0x00007f2456ffee25
   10.87%  ││││╭│ ││   0x00007f2456ffedf9:   ja     0x00007f2456ffee25           ;*ifgt {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
    2.89%  ││││││ ││   0x00007f2456ffedff:   vsubsd %xmm12,%xmm11,%xmm11         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
    0.03%  ││││││ ││   0x00007f2456ffee04:   vaddsd %xmm8,%xmm11,%xmm11          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    5.13%  ││││││ ││   0x00007f2456ffee09:   vmulsd %xmm1,%xmm10,%xmm10          ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
    1.01%  ││││││ ││   0x00007f2456ffee0d:   vmulsd %xmm9,%xmm10,%xmm9           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
    0.69%  ││││││ ││   0x00007f2456ffee12:   vaddsd %xmm6,%xmm9,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
    0.49%  ││││││ ││   0x00007f2456ffee16:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
    4.48%  ││││││ ││   0x00007f2456ffee18:   vmovapd %xmm11,%xmm10               ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
    1.11%  ││↘│││ ││   0x00007f2456ffee1d:   data16 xchg %ax,%ax
    0.93%  ││ │││ ││   0x00007f2456ffee20:   cmp    %ebp,%r8d
           ││ ││╰ ││   0x00007f2456ffee23:   jg     0x00007f2456ffede0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.08%  ││ ↘↘  ││↗  0x00007f2456ffee25:   mov    %edx,%r13d
    0.03%  ││     │││  0x00007f2456ffee28:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
    0.01%  ││     │││  0x00007f2456ffee2b:   mov    %edx,%r14d
    0.01%  ││     │││  0x00007f2456ffee2e:   add    %edi,%r14d                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
    0.05%  ││     │││  0x00007f2456ffee31:   cmp    %ebp,%r8d
           ││    ╭│││  0x00007f2456ffee34:   jle    0x00007f2456ffee53           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
           ││    ││││  0x00007f2456ffee3a:   vmovsd %xmm5,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
    0.02%  ││    ││││  0x00007f2456ffee41:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││    ││││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
+          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
    0.01%  ││    ││││  0x00007f2456ffee48:   test   %eax,0x0(%rbp)               ;   {poll}
    0.07%  ││    ││││  0x00007f2456ffee4b:   mov    %r13d,%edx
           ││    │╰││  0x00007f2456ffee4e:   jmp    0x00007f2456ffed90           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
    0.00%  ││    ↘ ││  0x00007f2456ffee53:   vmovsd %xmm3,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
+          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
           ││      ││  0x00007f2456ffee5a:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││      ││                                                            ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
    0.00%  ││      ││  0x00007f2456ffee61:   test   %eax,0x0(%rbp)               ;   {poll}
    0.00%  ││      ││  0x00007f2456ffee64:   mov    %r13d,%edx
    0.00%  ││      ╰│  0x00007f2456ffee67:   jmp    0x00007f2456ffed90
           │↘       │  0x00007f2456ffee6c:   mov    $0x0,%ebp
           │        ╰  0x00007f2456ffee71:   jmp    0x00007f2456ffee25           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ↘           0x00007f2456ffee73:   mov    0x348(%r15),%rdi             ; ImmutableOopMap {rax=Oop rsi=Oop }
                                                                                 ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f2456ffee7a:   test   %eax,(%rdi)                  ;   {poll}
                       0x00007f2456ffee7c:   inc    %ebx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f2456ffee7e:   xchg   %ax,%ax
 ....................................................................................................
   87.11%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  87.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 750 
+  87.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 750 
    1.40%               kernel  [unknown] 
    1.08%               kernel  [unknown] 
    0.99%               kernel  [unknown] 
@@ -404,11 +404,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  87.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 750 
+  87.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 750 
    7.31%               kernel  [unknown] 
    0.54%                       <unknown> 
    0.40%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 941 
-   0.30%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1062 
+   0.30%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1062 
    0.24%       jvmci, level 4  jdk.incubator.vector.Double256Vector::lanewise, version 2, compile id 971 
    0.12%         libc-2.31.so  __strxfrm_l 
    0.12%         libc-2.31.so  __strncat_ssse3 
@@ -461,7 +461,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline
 # Parameters: (iterations = 2000, size = 256)
 
 # Run progress: 25.00% complete, ETA 00:11:39
@@ -481,12 +481,12 @@ Iteration   5: 64.637 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline":
   64.637 ±(99.9%) 0.002 ms/op [Average]
   (min, avg, max) = (64.636, 64.637, 64.638), stdev = 0.001
   CI (99.9%): [64.635, 64.639] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline:·asm":
 PrintAssembly processed: 273789 total address lines.
 Perf output processed (skipped 58.824 seconds):
  Column 1: cycles (56264 events)
@@ -495,109 +495,109 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 7, compile id 752 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 7, compile id 752 
 
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
                       0x00007f8de3001579:   vaddsd %xmm5,%xmm6,%xmm7            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
                       0x00007f8de300157d:   mov    $0x0,%edx
                       0x00007f8de3001582:   data16 nopw 0x0(%rax,%rax,1)
                       0x00007f8de300158c:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
                  ↗↗   0x00007f8de3001590:   cmp    %edx,%r11d
           ╭      ││   0x00007f8de3001593:   jle    0x00007f8de3001673           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
+          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
    0.01%  │      ││   0x00007f8de3001599:   nopl   0x0(%rax)
    0.03%  │      ││   0x00007f8de30015a0:   cmp    $0x1,%r8d
           │╭     ││   0x00007f8de30015a4:   jl     0x00007f8de300166c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.00%  ││     ││   0x00007f8de30015aa:   vcvtsi2sd %edx,%xmm8,%xmm8          ;*i2d {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
           ││     ││   0x00007f8de30015ae:   vsubsd %xmm2,%xmm8,%xmm8            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
    0.04%  ││     ││   0x00007f8de30015b2:   vmulsd %xmm4,%xmm8,%xmm8            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
    0.01%  ││     ││   0x00007f8de30015b6:   vdivsd %xmm0,%xmm8,%xmm8            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
    0.06%  ││     ││   0x00007f8de30015ba:   vaddsd %xmm5,%xmm8,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    0.05%  ││     ││   0x00007f8de30015be:   vmovapd %xmm9,%xmm10
    0.01%  ││     ││   0x00007f8de30015c3:   vmovapd %xmm7,%xmm9
    0.00%  ││     ││   0x00007f8de30015c7:   mov    $0x1,%ebp
           ││╭    ││   0x00007f8de30015cc:   jmp    0x00007f8de300161d           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
           │││    ││   0x00007f8de30015d1:   data16 data16 nopw 0x0(%rax,%rax,1)
           │││    ││   0x00007f8de30015dc:   data16 data16 xchg %ax,%ax          ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.69%  │││  ↗ ││   0x00007f8de30015e0:   vmulsd %xmm10,%xmm10,%xmm11         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
   17.84%  │││  │ ││   0x00007f8de30015e5:   vmulsd %xmm9,%xmm9,%xmm12           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
    2.34%  │││  │ ││   0x00007f8de30015ea:   vaddsd %xmm12,%xmm11,%xmm13         ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
   28.31%  │││  │ ││   0x00007f8de30015ef:   vucomisd %xmm4,%xmm13
   11.29%  │││╭ │ ││   0x00007f8de30015f3:   jp     0x00007f8de3001625
   10.83%  ││││╭│ ││   0x00007f8de30015f9:   ja     0x00007f8de3001625           ;*ifgt {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
    3.00%  ││││││ ││   0x00007f8de30015ff:   vsubsd %xmm12,%xmm11,%xmm11         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
    0.03%  ││││││ ││   0x00007f8de3001604:   vaddsd %xmm8,%xmm11,%xmm11          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    5.32%  ││││││ ││   0x00007f8de3001609:   vmulsd %xmm1,%xmm10,%xmm10          ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
    1.05%  ││││││ ││   0x00007f8de300160d:   vmulsd %xmm9,%xmm10,%xmm9           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
    0.62%  ││││││ ││   0x00007f8de3001612:   vaddsd %xmm6,%xmm9,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
    0.51%  ││││││ ││   0x00007f8de3001616:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
    4.49%  ││││││ ││   0x00007f8de3001618:   vmovapd %xmm11,%xmm10               ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
    1.09%  ││↘│││ ││   0x00007f8de300161d:   data16 xchg %ax,%ax
    0.92%  ││ │││ ││   0x00007f8de3001620:   cmp    %ebp,%r8d
           ││ ││╰ ││   0x00007f8de3001623:   jg     0x00007f8de30015e0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.05%  ││ ↘↘  ││↗  0x00007f8de3001625:   mov    %edx,%r13d
    0.02%  ││     │││  0x00007f8de3001628:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
    0.01%  ││     │││  0x00007f8de300162b:   mov    %edx,%r14d
    0.00%  ││     │││  0x00007f8de300162e:   add    %edi,%r14d                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
    0.03%  ││     │││  0x00007f8de3001631:   cmp    %ebp,%r8d
           ││    ╭│││  0x00007f8de3001634:   jle    0x00007f8de3001653           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
           ││    ││││  0x00007f8de300163a:   vmovsd %xmm5,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
    0.02%  ││    ││││  0x00007f8de3001641:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││    ││││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
+          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
    0.01%  ││    ││││  0x00007f8de3001648:   test   %eax,0x0(%rbp)               ;   {poll}
    0.03%  ││    ││││  0x00007f8de300164b:   mov    %r13d,%edx
           ││    │╰││  0x00007f8de300164e:   jmp    0x00007f8de3001590           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
    0.00%  ││    ↘ ││  0x00007f8de3001653:   vmovsd %xmm3,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
+          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
           ││      ││  0x00007f8de300165a:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││      ││                                                            ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ││      ││  0x00007f8de3001661:   test   %eax,0x0(%rbp)               ;   {poll}
    0.00%  ││      ││  0x00007f8de3001664:   mov    %r13d,%edx
    0.00%  ││      ╰│  0x00007f8de3001667:   jmp    0x00007f8de3001590
           │↘       │  0x00007f8de300166c:   mov    $0x0,%ebp
           │        ╰  0x00007f8de3001671:   jmp    0x00007f8de3001625           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ↘           0x00007f8de3001673:   mov    0x348(%r15),%rdi             ; ImmutableOopMap {rax=Oop rsi=Oop }
                                                                                 ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f8de300167a:   test   %eax,(%rdi)                  ;   {poll}
                       0x00007f8de300167c:   inc    %ebx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f8de300167e:   xchg   %ax,%ax
 ....................................................................................................
   88.72%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  88.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 7, compile id 752 
+  88.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 7, compile id 752 
    1.15%               kernel  [unknown] 
    0.90%               kernel  [unknown] 
    0.66%               kernel  [unknown] 
@@ -622,13 +622,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  88.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 7, compile id 752 
+  88.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 7, compile id 752 
    6.92%               kernel  [unknown] 
    0.50%                       <unknown> 
    0.26%       jvmci, level 4  jdk.incubator.vector.Double256Vector::lanewise, version 2, compile id 964 
    0.13%         libc-2.31.so  __strncat_ssse3 
    0.13%         libc-2.31.so  __strxfrm_l 
-   0.12%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1048 
+   0.12%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1048 
    0.12%            libjvm.so  xmlStream::write_text 
    0.09%            libjvm.so  ElfSymbolTable::lookup 
    0.08%       hsdis-amd64.so  print_insn 
@@ -679,7 +679,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline
 # Parameters: (iterations = 2000, size = 512)
 
 # Run progress: 37.50% complete, ETA 00:09:42
@@ -699,12 +699,12 @@ Iteration   5: 258.021 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline":
   258.023 ±(99.9%) 0.045 ms/op [Average]
   (min, avg, max) = (258.009, 258.023, 258.038), stdev = 0.012
   CI (99.9%): [257.978, 258.067] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline:·asm":
 PrintAssembly processed: 285710 total address lines.
 Perf output processed (skipped 59.283 seconds):
  Column 1: cycles (58555 events)
@@ -713,109 +713,109 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 757 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 757 
 
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@72 (line 78)
                       0x00007f47fefff779:   vaddsd %xmm5,%xmm6,%xmm7            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
                       0x00007f47fefff77d:   mov    $0x0,%edx
                       0x00007f47fefff782:   data16 nopw 0x0(%rax,%rax,1)
                       0x00007f47fefff78c:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
                  ↗↗   0x00007f47fefff790:   cmp    %edx,%r11d
           ╭      ││   0x00007f47fefff793:   jle    0x00007f47fefff873           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
+          │      ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@23 (line 76)
    0.01%  │      ││   0x00007f47fefff799:   nopl   0x0(%rax)
    0.02%  │      ││   0x00007f47fefff7a0:   cmp    $0x1,%r8d
           │╭     ││   0x00007f47fefff7a4:   jl     0x00007f47fefff86c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.01%  ││     ││   0x00007f47fefff7aa:   vcvtsi2sd %edx,%xmm8,%xmm8          ;*i2d {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@28 (line 77)
    0.01%  ││     ││   0x00007f47fefff7ae:   vsubsd %xmm2,%xmm8,%xmm8            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@38 (line 77)
    0.03%  ││     ││   0x00007f47fefff7b2:   vmulsd %xmm4,%xmm8,%xmm8            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@42 (line 77)
    0.00%  ││     ││   0x00007f47fefff7b6:   vdivsd %xmm0,%xmm8,%xmm8            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@48 (line 77)
    0.05%  ││     ││   0x00007f47fefff7ba:   vaddsd %xmm5,%xmm8,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││     ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    0.04%  ││     ││   0x00007f47fefff7be:   vmovapd %xmm9,%xmm10
    0.03%  ││     ││   0x00007f47fefff7c3:   vmovapd %xmm7,%xmm9
    0.01%  ││     ││   0x00007f47fefff7c7:   mov    $0x1,%ebp
           ││╭    ││   0x00007f47fefff7cc:   jmp    0x00007f47fefff81d           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
           │││    ││   0x00007f47fefff7d1:   data16 data16 nopw 0x0(%rax,%rax,1)
           │││    ││   0x00007f47fefff7dc:   data16 data16 xchg %ax,%ax          ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          │││    ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.78%  │││  ↗ ││   0x00007f47fefff7e0:   vmulsd %xmm10,%xmm10,%xmm11         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@97 (line 81)
   17.18%  │││  │ ││   0x00007f47fefff7e5:   vmulsd %xmm9,%xmm9,%xmm12           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@102 (line 81)
    2.24%  │││  │ ││   0x00007f47fefff7ea:   vaddsd %xmm12,%xmm11,%xmm13         ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
+          │││  │ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@103 (line 81)
   27.37%  │││  │ ││   0x00007f47fefff7ef:   vucomisd %xmm4,%xmm13
   10.93%  │││╭ │ ││   0x00007f47fefff7f3:   jp     0x00007f47fefff825
   10.66%  ││││╭│ ││   0x00007f47fefff7f9:   ja     0x00007f47fefff825           ;*ifgt {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@106 (line 81)
    2.93%  ││││││ ││   0x00007f47fefff7ff:   vsubsd %xmm12,%xmm11,%xmm11         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@119 (line 82)
    0.01%  ││││││ ││   0x00007f47fefff804:   vaddsd %xmm8,%xmm11,%xmm11          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@122 (line 82)
    5.13%  ││││││ ││   0x00007f47fefff809:   vmulsd %xmm1,%xmm10,%xmm10          ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@130 (line 83)
    0.99%  ││││││ ││   0x00007f47fefff80d:   vmulsd %xmm9,%xmm10,%xmm9           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@133 (line 83)
    0.58%  ││││││ ││   0x00007f47fefff812:   vaddsd %xmm6,%xmm9,%xmm9            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@136 (line 83)
    0.45%  ││││││ ││   0x00007f47fefff816:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@143 (line 86)
    4.39%  ││││││ ││   0x00007f47fefff818:   vmovapd %xmm11,%xmm10               ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
+          ││││││ ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@84 (line 81)
    1.09%  ││↘│││ ││   0x00007f47fefff81d:   data16 xchg %ax,%ax
    0.88%  ││ │││ ││   0x00007f47fefff820:   cmp    %ebp,%r8d
           ││ ││╰ ││   0x00007f47fefff823:   jg     0x00007f47fefff7e0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
+          ││ ││  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@90 (line 81)
    0.04%  ││ ↘↘  ││↗  0x00007f47fefff825:   mov    %edx,%r13d
    0.01%  ││     │││  0x00007f47fefff828:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
    0.00%  ││     │││  0x00007f47fefff82b:   mov    %edx,%r14d
    0.01%  ││     │││  0x00007f47fefff82e:   add    %edi,%r14d                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
+          ││     │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@188 (line 89)
    0.03%  ││     │││  0x00007f47fefff831:   cmp    %ebp,%r8d
           ││    ╭│││  0x00007f47fefff834:   jle    0x00007f47fefff853           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@155 (line 88)
           ││    ││││  0x00007f47fefff83a:   vmovsd %xmm5,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
+          ││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@172 (line 88)
    0.01%  ││    ││││  0x00007f47fefff841:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││    ││││                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
-          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
+          ││    ││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@173 (line 88)
    0.01%  ││    ││││  0x00007f47fefff848:   test   %eax,0x0(%rbp)               ;   {poll}
    0.02%  ││    ││││  0x00007f47fefff84b:   mov    %r13d,%edx
           ││    │╰││  0x00007f47fefff84e:   jmp    0x00007f47fefff790           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
+          ││    │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@17 (line 76)
           ││    ↘ ││  0x00007f47fefff853:   vmovsd %xmm3,0x10(%rax,%r14,8)      ;*dastore {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
+          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@190 (line 89)
           ││      ││  0x00007f47fefff85a:   mov    0x348(%r15),%rbp             ; ImmutableOopMap {rax=Oop rsi=Oop }
           ││      ││                                                            ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ││      ││  0x00007f47fefff861:   test   %eax,0x0(%rbp)               ;   {poll}
           ││      ││  0x00007f47fefff864:   mov    %r13d,%edx
    0.00%  ││      ╰│  0x00007f47fefff867:   jmp    0x00007f47fefff790
           │↘       │  0x00007f47fefff86c:   mov    $0x0,%ebp
           │        ╰  0x00007f47fefff871:   jmp    0x00007f47fefff825           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
+          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@191 (line 76)
           ↘           0x00007f47fefff873:   mov    0x348(%r15),%rdi             ; ImmutableOopMap {rax=Oop rsi=Oop }
                                                                                 ;*iinc {reexecute=1 rethrow=0 return_oop=0}
-                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f47fefff87a:   test   %eax,(%rdi)                  ;   {poll}
                       0x00007f47fefff87c:   inc    %ebx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline@197 (line 75)
                       0x00007f47fefff87e:   xchg   %ax,%ax
 ....................................................................................................
   85.96%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  85.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 757 
+  85.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 757 
    2.50%               kernel  [unknown] 
    1.12%               kernel  [unknown] 
    0.56%               kernel  [unknown] 
@@ -840,13 +840,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  85.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 757 
+  85.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 5, compile id 757 
    7.20%               kernel  [unknown] 
    0.63%       jvmci, level 4  jdk.incubator.vector.Double256Vector::lanewise, version 2, compile id 953 
    0.60%                       <unknown> 
    0.32%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 979 
-   0.29%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1059 
-   0.18%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1067 
+   0.29%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 1, compile id 1059 
+   0.18%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1067 
    0.15%         libc-2.31.so  __strncat_ssse3 
    0.15%         libc-2.31.so  __strxfrm_l 
    0.12%            libjvm.so  xmlStream::write_text 
@@ -896,7 +896,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized
 # Parameters: (iterations = 1000, size = 256)
 
 # Run progress: 50.00% complete, ETA 00:07:47
@@ -916,12 +916,12 @@ Iteration   5: 56.267 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized":
   56.162 ±(99.9%) 0.260 ms/op [Average]
   (min, avg, max) = (56.095, 56.162, 56.267), stdev = 0.067
   CI (99.9%): [55.902, 56.422] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized:·asm":
 PrintAssembly processed: 294786 total address lines.
 Perf output processed (skipped 59.296 seconds):
  Column 1: cycles (51245 events)
@@ -930,7 +930,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
 
                                                                       ; - jdk.incubator.vector.DoubleVector$$Lambda$66/0x0000000800c84a30::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::binaryOp@30 (line 276)
@@ -939,12 +939,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
             0x00007fb307039a54:   mov    %rdx,%r14
             0x00007fb307039a57:   mov    %rax,%r13
    0.11%    0x00007fb307039a5a:   movabs $0x7662af100,%rdi            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$76+0x0000000800c867e8&apos;{0x00000007662af100})}
             0x00007fb307039a64:   shl    $0x3,%rcx                    ;*getfield ones {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
    0.11%    0x00007fb307039a68:   mov    0xb8(%rsp),%rsi
    0.09%    0x00007fb307039a70:   mov    0x90(%rsp),%rdx
    0.08%    0x00007fb307039a78:   mov    %rcx,0x48(%rsp)
@@ -960,7 +960,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.13%    0x00007fb307039a9d:   mov    %r14,0x40(%rsp)
    0.01%    0x00007fb307039aa2:   mov    %r13,0x38(%rsp)
    0.13%    0x00007fb307039aa7:   call   0x00007fb3070135c0           ; ImmutableOopMap {[56]=Oop [64]=Oop [72]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -970,7 +970,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
                                                                       ;   {static_call}
    0.18%    0x00007fb307039aac:   nop
    0.05%    0x00007fb307039aad:   mov    %rax,%r11                    ; ImmutableOopMap {r11=Oop [56]=Oop [64]=Oop [72]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -980,7 +980,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.08%    0x00007fb307039ab0:   cmpl   $0xc3dce8,0x8(%r11)          ; implicit exception: dispatches to 0x00007fb30703c8c6
                                                                       ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.11%    0x00007fb307039ab8:   jne    0x00007fb30703c1e5           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -989,7 +989,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.20%    0x00007fb307039abe:   mov    0x38(%rsp),%r10
    0.43%    0x00007fb307039ac3:   mov    0xc(%r10),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -998,7 +998,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.76%    0x00007fb307039ac7:   test   %r8d,%r8d
             0x00007fb307039aca:   je     0x00007fb30703a085
    0.24%    0x00007fb307039ad0:   mov    0x8(,%r8,8),%esi
@@ -1009,7 +1009,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.23%    0x00007fb307039ae6:   test   %r8d,%r8d
             0x00007fb307039ae9:   je     0x00007fb307039f59
    0.01%    0x00007fb307039aef:   movabs $0x800000960,%r14            ;   {metadata({type array bool})}
@@ -1022,7 +1022,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.25%    0x00007fb307039b09:   mov    0xc(,%r8,8),%r9d             ; implicit exception: dispatches to 0x00007fb30703c8e6
    0.02%    0x00007fb307039b11:   test   %r9d,%r9d
             0x00007fb307039b14:   je     0x00007fb30703b2b7           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1031,10 +1031,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.04%    0x00007fb307039b1a:   mov    0x174(%rsp),%ecx
    0.01%    0x00007fb307039b21:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
    0.21%    0x00007fb307039b23:   cmpb   $0x0,0x10(,%r8,8)
    0.06%    0x00007fb307039b2c:   je     0x00007fb307039f75           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@19 (line 126)
@@ -1042,7 +1042,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%    0x00007fb307039b32:   mov    0x108(%r15),%rsi
    0.22%    0x00007fb307039b39:   lea    0x10(%rsi),%rax
    0.02%    0x00007fb307039b3d:   data16 xchg %ax,%ax
@@ -1066,7 +1066,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.01%    0x00007fb307039b73:   mov    0x108(%r15),%rsi
    0.04%    0x00007fb307039b7a:   lea    0x30(%rsi),%rax
    0.02%    0x00007fb307039b7e:   xchg   %ax,%ax
@@ -1103,7 +1103,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.10%    0x00007fb307039c20:   mov    0x108(%r15),%rsi
    0.04%    0x00007fb307039c27:   lea    0x10(%rsi),%rax
    0.07%    0x00007fb307039c2b:   cmp    0x118(%r15),%rax
@@ -1126,7 +1126,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.01%    0x00007fb307039c5e:   mov    0x108(%r15),%rsi
    0.04%    0x00007fb307039c65:   lea    0x30(%rsi),%rax
    0.12%    0x00007fb307039c69:   cmp    0x118(%r15),%rax
@@ -1162,7 +1162,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.03%    0x00007fb307039d09:   mov    0x108(%r15),%rsi
    0.04%    0x00007fb307039d10:   lea    0x30(%rsi),%rax
    0.01%    0x00007fb307039d14:   nopl   0x0(%rax,%rax,1)
@@ -1200,7 +1200,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.14%    0x00007fb307039dc0:   mov    0x108(%r15),%rsi
    0.05%    0x00007fb307039dc7:   lea    0x30(%rsi),%rax
    0.04%    0x00007fb307039dcb:   cmp    0x118(%r15),%rax
@@ -1236,7 +1236,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.27%    0x00007fb307039e6f:   mov    %rbp,%rsi
    0.01%    0x00007fb307039e72:   shr    $0x3,%rsi
    0.00%    0x00007fb307039e76:   mov    %esi,0xc(%r8)
@@ -1257,7 +1257,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
   22.53%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
 
                0x00007fb307039304:   vmovsd 0x1c0(%rsp),%xmm3
                0x00007fb30703930d:   vmovsd 0x208(%rsp),%xmm0
@@ -1268,10 +1268,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                0x00007fb307039338:   mov    0xb0(%rsp),%rax
                0x00007fb307039340:   mov    0xb8(%rsp),%rbx
                0x00007fb307039348:   mov    0xc0(%rsp),%rsi              ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.23%       0x00007fb307039350:   cmp    0x10(%rsi),%r14d
                0x00007fb307039354:   jge    0x00007fb30703b417           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
    0.08%       0x00007fb30703935a:   nopw   0x0(%rax,%rax,1)
    0.04%       0x00007fb307039360:   cmpl   $0x4,0xc(%r9)
    0.01%       0x00007fb307039365:   jb     0x00007fb30703b86d           ;*daload {reexecute=0 rethrow=0 return_oop=0}
@@ -1285,7 +1285,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.24%       0x00007fb30703936b:   cmpl   $0x4,0xc(%r8)
    0.05%       0x00007fb307039370:   jb     0x00007fb30703bfbd
    0.03%       0x00007fb307039376:   vmovsd 0x28(%r8),%xmm8              ;*daload {reexecute=0 rethrow=0 return_oop=0}
@@ -1299,7 +1299,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.01%       0x00007fb30703937c:   vmovsd %xmm8,0x168(%rsp)
    0.22%       0x00007fb307039385:   vmovsd 0x28(%r9),%xmm9              ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
@@ -1312,7 +1312,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.05%       0x00007fb30703938b:   vmovsd %xmm9,0x160(%rsp)
    0.04%       0x00007fb307039394:   vmovsd 0x20(%r8),%xmm10             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@47 (line 204)
@@ -1325,7 +1325,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.00%       0x00007fb30703939a:   vmovsd 0x20(%r9),%xmm11             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -1337,7 +1337,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.24%       0x00007fb3070393a0:   vmovsd 0x18(%r8),%xmm12             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@47 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -1349,7 +1349,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.04%       0x00007fb3070393a6:   vmovsd 0x18(%r9),%xmm13             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -1361,7 +1361,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.04%       0x00007fb3070393ac:   vmovsd 0x10(%r8),%xmm14             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@47 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -1373,7 +1373,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.01%       0x00007fb3070393b2:   vmovsd 0x10(%r9),%xmm15             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -1385,7 +1385,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.23%       0x00007fb3070393b8:   mov    %r8,0x68(%rsp)
    0.04%       0x00007fb3070393bd:   mov    0xc(%r10),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -1400,7 +1400,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.03%       0x00007fb3070393c1:   test   %r8d,%r8d
                0x00007fb3070393c4:   je     0x00007fb30703a04b
    0.01%       0x00007fb3070393ca:   mov    %r9,0x60(%rsp)
@@ -1422,10 +1422,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │                                                              ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
           │                                                              ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
           │                                                              ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.04%  ↘    0x00007fb3070393f8:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {rax=Oop rbx=Oop rsi=Oop r8=NarrowOop r10=Oop r11=Oop [96]=Oop [104]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                          ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.01%       0x00007fb307039400:   cmpl   $0x4,0xc(,%r8,8)             ; implicit exception: dispatches to 0x00007fb30703c7c6
    0.19%       0x00007fb307039409:   jb     0x00007fb30703b700
    0.05%       0x00007fb30703940f:   mov    0xc(%r10),%r9d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
@@ -1441,7 +1441,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.04%       0x00007fb307039413:   test   %r9d,%r9d
                0x00007fb307039416:   je     0x00007fb30703a065
    0.02%       0x00007fb30703941c:   mov    %r10,0x58(%rsp)
@@ -1461,11 +1461,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
            │                                                             ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
            │                                                             ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
            │                                                             ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.21%   │   0x00007fb307039440:   cmp    %r13,%rbp
            │   0x00007fb307039443:   jne    0x00007fb30703bbbc           ; ImmutableOopMap {rax=Oop rbx=Oop rsi=Oop r8=NarrowOop r9=NarrowOop r11=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
            │                                                             ;*iload {reexecute=1 rethrow=0 return_oop=0}
-           │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+           │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.04%   ↘   0x00007fb307039449:   cmpl   $0x4,0xc(,%r9,8)             ; implicit exception: dispatches to 0x00007fb30703c7e6
    0.02%       0x00007fb307039452:   jb     0x00007fb30703b585
    0.19%       0x00007fb307039458:   vmovsd 0x10(,%r8,8),%xmm7
@@ -1482,7 +1482,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.19%       0x00007fb307039480:   vaddsd 0x28(,%r9,8),%xmm9,%xmm9
    0.11%       0x00007fb30703948a:   vaddsd 0x20(,%r9,8),%xmm8,%xmm8
    0.20%       0x00007fb307039494:   vaddsd 0x18(,%r9,8),%xmm6,%xmm6
@@ -1497,7 +1497,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.26%       0x00007fb3070394a8:   mov    0xc(%r11),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                          ; - jdk.incubator.vector.Double256Vector::vec@1 (line 117)
@@ -1511,7 +1511,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.08%       0x00007fb3070394ac:   test   %r8d,%r8d
                0x00007fb3070394af:   je     0x00007fb30703a076
    0.04%       0x00007fb3070394b5:   mov    0x8(,%r8,8),%r9d
@@ -1532,10 +1532,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
             │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
             │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
             │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.04%    ↘  0x00007fb3070394dd:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop rbx=Oop rsi=Oop r8=NarrowOop r11=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                          ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.19%       0x00007fb3070394e0:   cmpl   $0x4,0xc(,%r8,8)             ; implicit exception: dispatches to 0x00007fb30703c806
    0.10%       0x00007fb3070394e9:   jb     0x00007fb30703c350
    0.04%       0x00007fb3070394ef:   vmovsd %xmm8,0x158(%rsp)
@@ -1558,7 +1558,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.08%       0x00007fb30703954a:   vsubsd %xmm14,%xmm15,%xmm14         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$41@2 (line 638)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$69/0x0000000800c852e0::apply@4
@@ -1572,7 +1572,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.02%       0x00007fb30703954f:   vaddsd %xmm0,%xmm14,%xmm14          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1586,7 +1586,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.05%       0x00007fb307039553:   vmulsd %xmm14,%xmm14,%xmm15         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1600,7 +1600,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.26%       0x00007fb307039558:   vmulsd %xmm8,%xmm7,%xmm7            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1614,7 +1614,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.12%       0x00007fb30703955d:   vaddsd %xmm1,%xmm7,%xmm7            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1628,7 +1628,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.64%       0x00007fb307039561:   vmulsd %xmm7,%xmm7,%xmm8            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1642,7 +1642,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    1.06%       0x00007fb307039565:   vaddsd %xmm8,%xmm15,%xmm0           ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1656,7 +1656,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    1.12%       0x00007fb30703956a:   vmovsd %xmm0,0x140(%rsp)
    0.31%       0x00007fb307039573:   vsubsd %xmm12,%xmm13,%xmm12         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$41@2 (line 638)
@@ -1671,7 +1671,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
                0x00007fb307039578:   vaddsd %xmm2,%xmm12,%xmm12          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1685,7 +1685,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.00%       0x00007fb30703957c:   vmulsd %xmm12,%xmm12,%xmm13         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1699,7 +1699,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.01%       0x00007fb307039581:   vmulsd %xmm5,%xmm6,%xmm5            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1713,7 +1713,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.33%       0x00007fb307039585:   vaddsd %xmm3,%xmm5,%xmm5            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1727,7 +1727,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
                0x00007fb307039589:   vmulsd %xmm5,%xmm5,%xmm6            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1741,7 +1741,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.00%       0x00007fb30703958d:   vaddsd %xmm6,%xmm13,%xmm0           ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1755,7 +1755,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.01%       0x00007fb307039591:   vmovsd %xmm0,0x138(%rsp)
    0.27%       0x00007fb30703959a:   vsubsd %xmm10,%xmm11,%xmm10         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$41@2 (line 638)
@@ -1770,7 +1770,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.01%       0x00007fb30703959f:   vaddsd %xmm4,%xmm10,%xmm10          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1784,7 +1784,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.00%       0x00007fb3070395a3:   vmulsd %xmm10,%xmm10,%xmm11         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800c85748::apply@4
@@ -1798,7 +1798,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
                0x00007fb3070395a8:   vmovsd 0x158(%rsp),%xmm0
    0.33%       0x00007fb3070395b1:   vmulsd %xmm9,%xmm0,%xmm0            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -1813,7 +1813,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
                0x00007fb3070395b6:   vaddsd 0x1c8(%rsp),%xmm0,%xmm0      ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1827,7 +1827,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
                0x00007fb3070395bf:   vmovsd %xmm0,0x158(%rsp)
    0.00%       0x00007fb3070395c8:   vmulsd %xmm0,%xmm0,%xmm9            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -1842,7 +1842,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.26%       0x00007fb3070395cc:   vaddsd %xmm9,%xmm11,%xmm0           ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1856,7 +1856,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.22%       0x00007fb3070395d1:   vmovsd %xmm0,0x130(%rsp)
    0.13%       0x00007fb3070395da:   vmovsd 0x160(%rsp),%xmm0
    0.01%       0x00007fb3070395e3:   vsubsd 0x168(%rsp),%xmm0,%xmm0      ;*dsub {reexecute=0 rethrow=0 return_oop=0}
@@ -1872,7 +1872,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.16%       0x00007fb3070395ec:   vaddsd 0x220(%rsp),%xmm0,%xmm0      ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1886,7 +1886,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
                0x00007fb3070395f5:   vmovsd %xmm0,0x168(%rsp)
    0.16%       0x00007fb3070395fe:   vmulsd %xmm0,%xmm0,%xmm1            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -1901,7 +1901,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.00%       0x00007fb307039602:   vmovsd 0x150(%rsp),%xmm0
    0.15%       0x00007fb30703960b:   vmulsd 0x148(%rsp),%xmm0,%xmm0      ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -1916,7 +1916,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
                0x00007fb307039614:   vaddsd 0x1d0(%rsp),%xmm0,%xmm0      ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1930,7 +1930,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.12%       0x00007fb30703961d:   vmovsd %xmm0,0x148(%rsp)
    0.01%       0x00007fb307039626:   vmulsd %xmm0,%xmm0,%xmm2            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -1945,7 +1945,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.17%       0x00007fb30703962a:   vaddsd %xmm2,%xmm1,%xmm0            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -1959,7 +1959,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.31%       0x00007fb30703962e:   mov    %rbx,%rsi
    0.10%       0x00007fb307039631:   mov    %rdx,%r8
    0.01%       0x00007fb307039634:   mov    %rax,%rdx
@@ -1975,7 +1975,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.06%       0x00007fb307039645:   vmovsd %xmm8,0x150(%rsp)
    0.20%       0x00007fb30703964e:   vmovsd %xmm6,0x160(%rsp)
    0.09%       0x00007fb307039657:   vmovsd %xmm9,0x128(%rsp)
@@ -2000,7 +2000,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                                                                          ;   {static_call}
    0.12%       0x00007fb3070396c8:   nop
                0x00007fb3070396c9:   mov    %rax,%r11                    ; ImmutableOopMap {r11=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -2013,7 +2013,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                0x00007fb3070396cc:   cmpl   $0xc3dce8,0x8(%r11)          ; implicit exception: dispatches to 0x00007fb30703c826
                                                                          ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.26%       0x00007fb3070396d4:   jne    0x00007fb30703c206           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -2025,7 +2025,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.07%       0x00007fb3070396da:   mov    0x108(%r15),%rsi
    0.02%       0x00007fb3070396e1:   lea    0x10(%rsi),%rax
                0x00007fb3070396e5:   cmp    0x118(%r15),%rax
@@ -2047,7 +2047,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.08%       0x00007fb307039715:   mov    0x108(%r15),%rax
    0.03%       0x00007fb30703971c:   lea    0x30(%rax),%rdx
    0.05%       0x00007fb307039720:   cmp    0x118(%r15),%rdx
@@ -2082,7 +2082,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.12%       0x00007fb3070397bd:   mov    %rax,%rdx
    0.03%       0x00007fb3070397c0:   shr    $0x3,%rdx
    0.08%       0x00007fb3070397c4:   mov    %edx,0xc(%rsi)
@@ -2416,7 +2416,7 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::blend, version 2, compile 
   14.10%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
 
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@3 (line 41)
@@ -2427,7 +2427,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.08%     0x00007fb30703980e:   mov    $0x5,%esi
              0x00007fb307039813:   mov    %r8,%rdx
    0.13%     0x00007fb307039816:   mov    %r11,%rcx                    ;*invokestatic lambda$compareTemplate$62 {reexecute=0 rethrow=0 return_oop=0}
@@ -2437,7 +2437,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.08%     0x00007fb307039819:   mov    %r8,0x50(%rsp)
    0.09%     0x00007fb30703981e:   nop
              0x00007fb30703981f:   nop
@@ -2450,7 +2450,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                                                                        ;   {static_call}
    0.09%     0x00007fb307039828:   nop                                 ; ImmutableOopMap {rax=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                        ;*areturn {reexecute=1 rethrow=0 return_oop=0}
@@ -2460,7 +2460,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.07%     0x00007fb307039829:   cmpl   $0xc3e318,0x8(%rax)          ; implicit exception: dispatches to 0x00007fb30703c846
                                                                        ;   {metadata(&apos;jdk/incubator/vector/Double256Vector$Double256Mask&apos;)}
    0.06%     0x00007fb307039830:   jne    0x00007fb30703bcec           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -2469,7 +2469,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.10%     0x00007fb307039836:   mov    0xc0(%rsp),%rsi
    0.15%     0x00007fb30703983e:   mov    0x1c(%rsi),%ecx              ; ImmutableOopMap {rax=Oop rcx=NarrowOop rsi=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                        ;*areturn {reexecute=1 rethrow=0 return_oop=0}
@@ -2479,7 +2479,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.28%     0x00007fb307039841:   cmpl   $0xc3dce8,0x8(,%rcx,8)       ; implicit exception: dispatches to 0x00007fb30703c866
                                                                        ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    1.19%     0x00007fb30703984c:   jne    0x00007fb30703b5c8           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -2488,7 +2488,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.28%     0x00007fb307039852:   mov    0x70(%rsp),%r11
    0.02%     0x00007fb307039857:   mov    0xc(%r11),%r10d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -2504,7 +2504,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.02%     0x00007fb30703985b:   nopl   0x0(%rax,%rax,1)
    0.02%     0x00007fb307039860:   test   %r10d,%r10d
              0x00007fb307039863:   je     0x00007fb30703a09c
@@ -2528,7 +2528,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.29%     0x00007fb30703989a:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {rax=Oop rcx=NarrowOop rsi=Oop r10=NarrowOop r11=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                        ;*areturn {reexecute=1 rethrow=0 return_oop=0}
                                                                        ; - (reexecute) jdk.incubator.vector.DoubleVector$$Lambda$74/0x0000000800c85fa8::apply@12
@@ -2537,7 +2537,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.01%     0x00007fb3070398a0:   cmpl   $0x4,0xc(,%r10,8)            ; implicit exception: dispatches to 0x00007fb30703c886
    0.04%     0x00007fb3070398a9:   jb     0x00007fb30703befa
    0.23%     0x00007fb3070398af:   mov    0xc(,%rcx,8),%r8d            ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
@@ -2554,7 +2554,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007fb3070398b7:   test   %r8d,%r8d
              0x00007fb3070398ba:   je     0x00007fb30703a0a8
    0.04%     0x00007fb3070398c0:   mov    0x8(,%r8,8),%edx
@@ -2574,7 +2574,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
           │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
           │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.02%  │  0x00007fb3070398df:   nop
           │  0x00007fb3070398e0:   cmp    %rdx,%rbp
           │  0x00007fb3070398e3:   jne    0x00007fb30703be25           ; ImmutableOopMap {rax=Oop rcx=NarrowOop rsi=Oop r8=NarrowOop r10=NarrowOop r11=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -2585,7 +2585,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
           │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
           │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.52%  ↘  0x00007fb3070398e9:   cmpl   $0x4,0xc(,%r8,8)             ; implicit exception: dispatches to 0x00007fb30703c8a6
    0.02%     0x00007fb3070398f2:   jb     0x00007fb30703c47d
    0.00%     0x00007fb3070398f8:   mov    0x108(%r15),%rdx
@@ -2610,7 +2610,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007fb307039933:   mov    0x108(%r15),%r9
    0.29%     0x00007fb30703993a:   lea    0x30(%r9),%rdi
    0.20%     0x00007fb30703993e:   xchg   %ax,%ax
@@ -2639,7 +2639,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.07%     0x00007fb3070399ab:   vmovsd 0x28(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2652,7 +2652,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007fb3070399b5:   vaddsd 0x28(,%r8,8),%xmm0,%xmm0     ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -2667,7 +2667,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.25%     0x00007fb3070399bf:   vmovsd %xmm0,0x28(%r9)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2680,7 +2680,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.07%     0x00007fb3070399c5:   vmovsd 0x20(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2693,7 +2693,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007fb3070399cf:   vaddsd 0x20(,%r8,8),%xmm0,%xmm0     ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -2708,7 +2708,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.21%     0x00007fb3070399d9:   vmovsd %xmm0,0x20(%r9)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2721,7 +2721,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.08%     0x00007fb3070399df:   vmovsd 0x18(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2734,7 +2734,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.02%     0x00007fb3070399e9:   vaddsd 0x18(,%r8,8),%xmm0,%xmm0     ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -2749,7 +2749,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.23%     0x00007fb3070399f3:   vmovsd %xmm0,0x18(%r9)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2762,7 +2762,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.10%     0x00007fb3070399f9:   vmovsd 0x10(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2775,7 +2775,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007fb307039a03:   vaddsd 0x10(,%r8,8),%xmm0,%xmm0     ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800c84e78::apply@4
@@ -2790,7 +2790,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.29%     0x00007fb307039a0d:   vmovsd %xmm0,0x10(%r9)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -2803,7 +2803,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.09%     0x00007fb307039a13:   mov    %r9,%r10
    0.01%     0x00007fb307039a16:   shr    $0x3,%r10
    0.08%     0x00007fb307039a1a:   mov    %r10d,0xc(%rdx)
@@ -3061,38 +3061,38 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 
   10.04%  <total for region 5>
 
 ....[Hottest Regions]...............................................................................
-  22.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
-  20.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+  22.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+  20.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
   14.10%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1016 
-  11.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+  11.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
   10.04%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
    7.91%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1008 
    3.03%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1008 
-   1.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
-   1.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   1.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   1.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
    1.01%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1016 
    0.86%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1008 
-   0.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
-   0.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
-   0.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
-   0.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
-   0.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   0.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   0.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   0.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   0.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   0.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
    0.14%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
    0.10%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
-   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
    3.94%  <...other 694 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  59.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
+  59.51%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1035 
   15.11%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1016 
   11.80%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1008 
   10.23%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
    1.36%               kernel  [unknown] 
    0.27%                       <unknown> 
-   0.07%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1074 
+   0.07%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1074 
    0.06%            libjvm.so  HeapRegionManager::par_iterate 
    0.06%            libjvm.so  HeapRegionClaimer::claim_region 
    0.05%            libjvm.so  G1MergeHeapRootsTask::G1MergeCardSetClosure::do_heap_region 
@@ -3139,7 +3139,7 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized
 # Parameters: (iterations = 1000, size = 512)
 
 # Run progress: 62.50% complete, ETA 00:05:48
@@ -3159,12 +3159,12 @@ Iteration   5: 418.831 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized":
   418.732 ±(99.9%) 0.825 ms/op [Average]
   (min, avg, max) = (418.401, 418.732, 418.947), stdev = 0.214
   CI (99.9%): [417.906, 419.557] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized:·asm":
 PrintAssembly processed: 296607 total address lines.
 Perf output processed (skipped 59.379 seconds):
  Column 1: cycles (51917 events)
@@ -3810,9 +3810,9 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compi
   54.94%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
 
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@155 (line 117)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@155 (line 117)
                         0x00007fc0af03e62d:   mov    %rax,0xb8(%rsp)
    0.00%                0x00007fc0af03e635:   mov    0x160(%rsp),%rsi
                         0x00007fc0af03e63d:   mov    0x158(%rsp),%rdx
@@ -3821,22 +3821,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                         0x00007fc0af03e651:   mov    0x150(%rsp),%r9
                         0x00007fc0af03e659:   mov    0x140(%rsp),%rdi             ;*invokestatic broadcastCoerced {reexecute=0 rethrow=0 return_oop=0}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@28 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
    0.00%                0x00007fc0af03e661:   xchg   %ax,%ax
                         0x00007fc0af03e663:   call   0x00007fc0a7500080           ; ImmutableOopMap {[184]=Oop [192]=Oop [200]=Oop [208]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                                                                                   ;*invokestatic broadcastCoerced {reexecute=0 rethrow=0 return_oop=1}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@28 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                                                                                   ;   {static_call}
                         0x00007fc0af03e668:   nop                                 ; ImmutableOopMap {rax=Oop [184]=Oop [192]=Oop [200]=Oop [208]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                                                                                   ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
                                                                                   ; - (reexecute) jdk.incubator.vector.DoubleVector::zero@31 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                         0x00007fc0af03e669:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fbc6
                                                                                   ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.00%                0x00007fc0af03e670:   jne    0x00007fc0af03f9a6           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@31 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                         0x00007fc0af03e676:   mov    $0x0,%r13d
                         0x00007fc0af03e67c:   mov    %rax,0xb0(%rsp)
    0.01%                0x00007fc0af03e684:   mov    0xb8(%rsp),%r9
@@ -3847,14 +3847,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
    0.00%                0x00007fc0af03e6ac:   rex.W pop 0xa0(%rsp)
    0.00%                0x00007fc0af03e6b4:   nopl   0x0(%rax,%rax,1)
                         0x00007fc0af03e6bc:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.04%      ↗      ↗  0x00007fc0af03e6c0:   mov    0x158(%rsp),%rbx
    0.08%      │      │  0x00007fc0af03e6c8:   mov    0x160(%rsp),%r11
    0.01%      │      │  0x00007fc0af03e6d0:   mov    0x168(%rsp),%rsi
    0.01%      │      │  0x00007fc0af03e6d8:   nopl   0x0(%rax,%rax,1)
    0.05%      │      │  0x00007fc0af03e6e0:   cmp    0x10(%rsi),%r13d
               │      │  0x00007fc0af03e6e4:   jge    0x00007fc0af03ef7b           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
    0.12%      │      │  0x00007fc0af03e6ea:   mov    %r13d,0x17c(%rsp)
    0.01%      │      │  0x00007fc0af03e6f2:   movabs $0x7f1638d20,%r13            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$68+0x0000000800c85098&apos;{0x00000007f1638d20})}
    0.01%      │      │  0x00007fc0af03e6fc:   mov    $0x5,%esi
@@ -3870,7 +3870,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.08%      │      │  0x00007fc0af03e722:   mov    %r10,0x90(%rsp)
    0.08%      │      │  0x00007fc0af03e72a:   nop
    0.00%      │      │  0x00007fc0af03e72b:   call   0x00007fc0a7500080           ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -3879,7 +3879,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
               │      │                                                            ;   {static_call}
    0.11%      │      │  0x00007fc0af03e730:   nop                                 ; ImmutableOopMap {rax=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -3887,7 +3887,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.01%      │      │  0x00007fc0af03e731:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fbe6
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.02%      │      │  0x00007fc0af03e738:   jne    0x00007fc0af03f5ed
@@ -3903,7 +3903,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.02%      │      │  0x00007fc0af03e772:   mov    %rax,0x88(%rsp)
    0.43%      │      │  0x00007fc0af03e77a:   nop
               │      │  0x00007fc0af03e77b:   call   0x00007fc0a7500080           ; ImmutableOopMap {[136]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -3912,7 +3912,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
               │      │                                                            ;   {static_call}
    0.15%      │      │  0x00007fc0af03e780:   nop                                 ; ImmutableOopMap {rax=Oop [136]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -3920,7 +3920,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.01%      │      │  0x00007fc0af03e781:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fc06
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.00%      │      │  0x00007fc0af03e788:   jne    0x00007fc0af03f147           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -3928,7 +3928,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.04%      │      │  0x00007fc0af03e78e:   mov    %rax,0x80(%rsp)
    0.29%      │      │  0x00007fc0af03e796:   movabs $0x7f1638cf8,%rbp            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$66+0x0000000800c84a30&apos;{0x00000007f1638cf8})}
    0.00%      │      │  0x00007fc0af03e7a0:   mov    $0x4,%esi
@@ -3941,7 +3941,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.01%      │      │  0x00007fc0af03e7cb:   mov    %rbp,(%rsp)
    0.09%      │      │  0x00007fc0af03e7cf:   call   0x00007fc0a7500080           ; ImmutableOopMap {[128]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -3949,7 +3949,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
               │      │                                                            ;   {static_call}
    0.15%      │      │  0x00007fc0af03e7d4:   nop
    0.00%      │      │  0x00007fc0af03e7d5:   data16 data16 nopw 0x0(%rax,%rax,1) ; ImmutableOopMap {rax=Oop [128]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -3958,7 +3958,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
               │      │  0x00007fc0af03e7e0:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fc26
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.03%      │      │  0x00007fc0af03e7e7:   jne    0x00007fc0af03f96e
@@ -3975,7 +3975,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
               │      │  0x00007fc0af03e824:   mov    %rax,0x78(%rsp)
    0.46%      │      │  0x00007fc0af03e829:   xchg   %ax,%ax
    0.01%      │      │  0x00007fc0af03e82b:   call   0x00007fc0a7500080           ; ImmutableOopMap {[120]=Oop [128]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -3984,7 +3984,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
               │      │                                                            ;   {static_call}
    0.05%      │      │  0x00007fc0af03e830:   nop                                 ; ImmutableOopMap {rax=Oop [120]=Oop [128]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -3992,7 +3992,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.09%      │      │  0x00007fc0af03e831:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fc46
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.03%      │      │  0x00007fc0af03e838:   jne    0x00007fc0af03f09d
@@ -4008,7 +4008,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.00%      │      │  0x00007fc0af03e872:   mov    %rax,0x70(%rsp)
    0.43%      │      │  0x00007fc0af03e877:   call   0x00007fc0a7500080           ; ImmutableOopMap {[112]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -4016,7 +4016,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
               │      │                                                            ;   {static_call}
    0.11%      │      │  0x00007fc0af03e87c:   nop
    0.00%      │      │  0x00007fc0af03e87d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [112]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4025,7 +4025,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
               │      │  0x00007fc0af03e880:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fc66
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.04%      │      │  0x00007fc0af03e887:   jne    0x00007fc0af03f808           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4033,7 +4033,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.11%      │      │  0x00007fc0af03e88d:   mov    %rax,0x68(%rsp)
    0.32%      │      │  0x00007fc0af03e892:   movabs $0x7f1638d48,%rdx            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$70+0x0000000800c85500&apos;{0x00000007f1638d48})}
    0.03%      │      │  0x00007fc0af03e89c:   mov    $0x6,%esi
@@ -4048,7 +4048,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.01%      │      │  0x00007fc0af03e8ce:   nop
    0.01%      │      │  0x00007fc0af03e8cf:   call   0x00007fc0a7500080           ; ImmutableOopMap {[104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -4056,7 +4056,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
               │      │                                                            ;   {static_call}
    0.03%      │      │  0x00007fc0af03e8d4:   nop
    0.06%      │      │  0x00007fc0af03e8d5:   data16 data16 nopw 0x0(%rax,%rax,1) ; ImmutableOopMap {rax=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4065,7 +4065,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
               │      │  0x00007fc0af03e8e0:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fc86
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.09%      │      │  0x00007fc0af03e8e7:   jne    0x00007fc0af03f4f2           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4073,7 +4073,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.10%      │      │  0x00007fc0af03e8ed:   mov    %rax,0x60(%rsp)
    0.43%      │      │  0x00007fc0af03e8f2:   movabs $0x7f1638d48,%rdx            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$70+0x0000000800c85500&apos;{0x00000007f1638d48})}
               │      │  0x00007fc0af03e8fc:   mov    $0x6,%esi
@@ -4088,7 +4088,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.25%      │      │  0x00007fc0af03e928:   data16 xchg %ax,%ax
    0.00%      │      │  0x00007fc0af03e92b:   call   0x00007fc0a7500080           ; ImmutableOopMap {[96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -4096,7 +4096,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
               │      │                                                            ;   {static_call}
    0.04%      │      │  0x00007fc0af03e930:   nop                                 ; ImmutableOopMap {rax=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -4104,7 +4104,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.07%      │      │  0x00007fc0af03e931:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fca6
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.02%      │      │  0x00007fc0af03e938:   jne    0x00007fc0af03f78d
@@ -4120,7 +4120,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.35%      │      │  0x00007fc0af03e96f:   mov    %rax,0x58(%rsp)
               │      │  0x00007fc0af03e974:   data16 xchg %ax,%ax
               │      │  0x00007fc0af03e977:   call   0x00007fc0a7500080           ; ImmutableOopMap {[88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4129,7 +4129,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
               │      │                                                            ;   {static_call}
    0.18%      │      │  0x00007fc0af03e97c:   nop
    0.00%      │      │  0x00007fc0af03e97d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4138,7 +4138,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
               │      │  0x00007fc0af03e980:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fcc6
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.06%      │      │  0x00007fc0af03e987:   jne    0x00007fc0af03f49e           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4146,7 +4146,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.12%      │      │  0x00007fc0af03e98d:   mov    %rax,0x50(%rsp)
    0.42%      │      │  0x00007fc0af03e992:   mov    0x160(%rsp),%rsi
    0.03%      │      │  0x00007fc0af03e99a:   mov    0x158(%rsp),%rdx
@@ -4162,7 +4162,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.09%      │      │  0x00007fc0af03e9bf:   nop
    0.00%      │      │  0x00007fc0af03e9c0:   data16 xchg %ax,%ax
    0.03%      │      │  0x00007fc0af03e9c3:   call   0x00007fc0a7500080           ; ImmutableOopMap {[80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4175,7 +4175,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
               │      │                                                            ;   {static_call}
    0.13%      │      │  0x00007fc0af03e9c8:   nop                                 ; ImmutableOopMap {rax=Oop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -4187,7 +4187,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.00%      │      │  0x00007fc0af03e9c9:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fce6
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.00%      │      │  0x00007fc0af03e9d0:   jne    0x00007fc0af03f46b           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4199,7 +4199,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.04%      │      │  0x00007fc0af03e9d6:   mov    $0x5,%esi
    0.11%      │      │  0x00007fc0af03e9db:   mov    0x50(%rsp),%rdx              ;*invokestatic lambda$compareTemplate$62 {reexecute=0 rethrow=0 return_oop=0}
               │      │                                                            ; - jdk.incubator.vector.DoubleVector$$Lambda$74/0x0000000800c85fa8::apply@9
@@ -4208,7 +4208,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.01%      │      │  0x00007fc0af03e9e0:   mov    %rax,%rcx
    0.03%      │      │  0x00007fc0af03e9e3:   call   0x00007fc0a7500080           ; ImmutableOopMap {[80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*invokestatic lambda$compareTemplate$62 {reexecute=0 rethrow=0 return_oop=1}
@@ -4218,7 +4218,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
               │      │                                                            ;   {static_call}
    0.09%      │      │  0x00007fc0af03e9e8:   nop
    0.02%      │      │  0x00007fc0af03e9e9:   mov    %rax,0x48(%rsp)              ; ImmutableOopMap {rax=Oop [72]=Oop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4229,7 +4229,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.21%      │      │  0x00007fc0af03e9ee:   cmpl   $0xc3e318,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fd06
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector$Double256Mask&apos;)}
    0.05%      │      │  0x00007fc0af03e9f5:   jne    0x00007fc0af03f408           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4238,7 +4238,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.01%      │      │  0x00007fc0af03e9fb:   mov    0x168(%rsp),%rsi
    0.02%      │      │  0x00007fc0af03ea03:   mov    0x1c(%rsi),%edx              ; ImmutableOopMap {rax=Oop rdx=NarrowOop rsi=Oop [72]=Oop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*areturn {reexecute=1 rethrow=0 return_oop=0}
@@ -4248,13 +4248,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.44%      │      │  0x00007fc0af03ea06:   cmpl   $0xc3dce8,0x8(,%rdx,8)       ; implicit exception: dispatches to 0x00007fc0af03fd26
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.82%      │      │  0x00007fc0af03ea11:   jne    0x00007fc0af03f06c
    0.14%      │      │  0x00007fc0af03ea17:   movabs $0x7f1638cf8,%rbp            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$66+0x0000000800c84a30&apos;{0x00000007f1638cf8})}
               │      │  0x00007fc0af03ea21:   shl    $0x3,%rdx                    ;*getfield ones {reexecute=0 rethrow=0 return_oop=0}
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
    0.00%      │      │  0x00007fc0af03ea25:   mov    $0x4,%esi
               │      │  0x00007fc0af03ea2a:   mov    %rdx,%r11
    0.18%      │      │  0x00007fc0af03ea2d:   mov    0x160(%rsp),%rdx
@@ -4268,7 +4268,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%      │      │  0x00007fc0af03ea52:   mov    %r11,0x40(%rsp)
    0.00%      │      │  0x00007fc0af03ea57:   call   0x00007fc0a7500080           ; ImmutableOopMap {[64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
               │      │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -4277,7 +4277,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
               │      │                                                            ;   {static_call}
    0.13%      │      │  0x00007fc0af03ea5c:   nop
    0.00%      │      │  0x00007fc0af03ea5d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4287,7 +4287,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%      │      │  0x00007fc0af03ea60:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fd46
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.03%      │      │  0x00007fc0af03ea67:   jne    0x00007fc0af03f42e           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4296,7 +4296,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.12%      │      │  0x00007fc0af03ea6d:   mov    0x48(%rsp),%r10
    0.20%      │      │  0x00007fc0af03ea72:   movabs $0x7f1638d98,%r9             ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$76+0x0000000800c867e8&apos;{0x00000007f1638d98})}
    0.02%      │      │  0x00007fc0af03ea7c:   mov    0x160(%rsp),%rsi
@@ -4313,7 +4313,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.13%      │      │  0x00007fc0af03eab1:   mov    %rax,0x38(%rsp)
    0.53%      │      │  0x00007fc0af03eab6:   nop
    0.01%      │      │  0x00007fc0af03eab7:   call   0x00007fc0a7500080           ; ImmutableOopMap {[56]=Oop [64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4323,7 +4323,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
               │      │                                                            ;   {static_call}
    0.05%      │      │  0x00007fc0af03eabc:   nop
    0.02%      │      │  0x00007fc0af03eabd:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [56]=Oop [64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -4333,7 +4333,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.03%      │      │  0x00007fc0af03eac0:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007fc0af03fd66
               │      │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.05%      │      │  0x00007fc0af03eac7:   jne    0x00007fc0af03f3c1           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -4342,7 +4342,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
               │      │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.06%      │      │  0x00007fc0af03eacd:   mov    0x48(%rsp),%r10
    0.05%      │      │  0x00007fc0af03ead2:   mov    0xc(%r10),%r11d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
               │      │                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -4351,7 +4351,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
               │      │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
               │      │                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
               │      │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+              │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.06%      │      │  0x00007fc0af03ead6:   test   %r11d,%r11d
           ╭   │      │  0x00007fc0af03ead9:   je     0x00007fc0af03ebcb
    0.07%  │   │      │  0x00007fc0af03eadf:   mov    0x8(,%r11,8),%esi
@@ -4362,7 +4362,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │   │      │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │   │      │                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │   │      │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │   │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │   │      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.10%  │   │     ↗│  0x00007fc0af03eaf5:   test   %r11d,%r11d
           │╭  │     ││  0x00007fc0af03eaf8:   je     0x00007fc0af03eb85
    0.03%  ││  │     ││  0x00007fc0af03eafe:   movabs $0x800000960,%rdi            ;   {metadata({type array bool})}
@@ -4374,7 +4374,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           ││  │     ││                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
           ││  │     ││                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
           ││  │     ││                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-          ││  │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+          ││  │     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.09%  ││  │↗    ││  0x00007fc0af03eb11:   mov    0xc(,%r11,8),%r8d            ; implicit exception: dispatches to 0x00007fc0af03fd86
    0.03%  ││  ││    ││  0x00007fc0af03eb19:   nopl   0x0(%rax)
    0.06%  ││  ││    ││  0x00007fc0af03eb20:   test   %r8d,%r8d
@@ -4384,10 +4384,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │││ ││    ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │││ ││    ││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │││ ││    ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │││ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │││ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.00%  │││ ││    ││  0x00007fc0af03eb29:   mov    0x17c(%rsp),%r13d
    0.08%  │││ ││    ││  0x00007fc0af03eb31:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
+          │││ ││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
    0.02%  │││ ││    ││  0x00007fc0af03eb34:   nopl   0x0(%rax,%rax,1)
    0.03%  │││ ││    ││  0x00007fc0af03eb3c:   data16 data16 xchg %ax,%ax
    0.01%  │││ ││    ││  0x00007fc0af03eb40:   cmpb   $0x0,0x10(,%r11,8)
@@ -4397,7 +4397,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           ││││││    ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           ││││││    ││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           ││││││    ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          ││││││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          ││││││    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.03%  ││││││    ││  0x00007fc0af03eb4f:   mov    %rax,0xb0(%rsp)
    0.01%  ││││││    ││  0x00007fc0af03eb57:   mov    0x58(%rsp),%r9
    0.07%  ││││││    ││  0x00007fc0af03eb5c:   mov    0x60(%rsp),%rdi
@@ -4414,7 +4414,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │ ││      ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ ││      ││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ ││      ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.00%  │ │↘      ││  0x00007fc0af03eb91:   mov    $0x1,%r10d
           │ │   ╭   ││  0x00007fc0af03eb97:   jmp    0x00007fc0af03ebb8           ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
           │ │   │   ││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@7 (line 125)
@@ -4422,14 +4422,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │ │   │   ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ │   │   ││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ │   │   ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ │   │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ │   │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
           │ │   │   ││  0x00007fc0af03eb9c:   nopl   0x0(%rax)                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │ │   │   ││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@9 (line 125)
           │ │   │   ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::lambda$anyTrue$9@7 (line 677)
           │ │   │   ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ │   │   ││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ │   │   ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ │   │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ │   │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.02%  │ │   │  ↗││  0x00007fc0af03eba0:   cmp    %r10d,%r8d
           │ │   │  │││  0x00007fc0af03eba3:   jbe    0x00007fc0af03f32c           ;*baload {reexecute=0 rethrow=0 return_oop=0}
           │ │   │  │││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@14 (line 125)
@@ -4437,7 +4437,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │ │   │  │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ │   │  │││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ │   │  │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ │   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ │   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.00%  │ │   │  │││  0x00007fc0af03eba9:   cmpb   $0x0,0x10(%r10,%r11,8)
           │ │   │╭ │││  0x00007fc0af03ebaf:   jne    0x00007fc0af03ebd7           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
           │ │   ││ │││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@19 (line 126)
@@ -4445,14 +4445,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │ │   ││ │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ │   ││ │││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ │   ││ │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ │   ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ │   ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.02%  │ │   ││ │││  0x00007fc0af03ebb5:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           │ │   ││ │││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@24 (line 125)
           │ │   ││ │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::lambda$anyTrue$9@7 (line 677)
           │ │   ││ │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ │   ││ │││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ │   ││ │││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ │   ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ │   ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%  │ │   ↘│ │││  0x00007fc0af03ebb8:   nopl   0x0(%rax,%rax,1)
           │ │    │ │││  0x00007fc0af03ebc0:   cmp    %r10d,%r8d
           │ │    │╭│││  0x00007fc0af03ebc3:   jle    0x00007fc0af03ec0b
@@ -4462,7 +4462,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │ │    ││ ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │ │    ││ ││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │ │    ││ ││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │ │    ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │ │    ││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
           ↘ │    ││ ││  0x00007fc0af03ebcb:   mov    $0x0,%rsi
             │    ││ ╰│  0x00007fc0af03ebd2:   jmp    0x00007fc0af03eaf5           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
             │    ││  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::getBits@4 (line 537)
@@ -4470,7 +4470,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
             │    ││  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
             │    ││  │                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
             │    ││  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-            │    ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+            │    ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%    │    ↘│  │  0x00007fc0af03ebd7:   mov    %rax,0xb0(%rsp)
             │     │  │  0x00007fc0af03ebdf:   mov    0x58(%rsp),%r9
             │     │  │  0x00007fc0af03ebe4:   mov    0x60(%rsp),%rdi
@@ -4479,9 +4479,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
    0.02%    │     │  │  0x00007fc0af03ebf6:   rex.W push 0x80(%rsp)
    0.01%    │     │  │  0x00007fc0af03ebfe:   rex.W pop 0xa0(%rsp)
    0.03%    │     │  ╰  0x00007fc0af03ec06:   jmp    0x00007fc0af03e6c0           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-            │     │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+            │     │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.00%    ↘     ↘     0x00007fc0af03ec0b:   mov    %rax,0x30(%rsp)              ;*getstatic DOUBLE_VECTOR_SPECIES {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@281 (line 137)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@281 (line 137)
                         0x00007fc0af03ec10:   mov    0x160(%rsp),%rsi
                         0x00007fc0af03ec18:   mov    0x158(%rsp),%rdx
                         0x00007fc0af03ec20:   mov    $0x4,%ecx
@@ -4489,13 +4489,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                         0x00007fc0af03ec2c:   mov    0x150(%rsp),%r9
                         0x00007fc0af03ec34:   mov    0x140(%rsp),%rdi             ;*invokestatic broadcastCoerced {reexecute=0 rethrow=0 return_oop=0}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@28 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@284 (line 138)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@284 (line 138)
 ....................................................................................................
   16.29%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
   54.94%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 950 
-  16.29%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
+  16.29%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
    7.61%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1047 
    7.06%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 983 
    5.56%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
@@ -4504,15 +4504,15 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
    0.42%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
    0.40%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
-   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1102 
+   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1102 
    0.11%               kernel  [unknown] 
    0.10%               kernel  [unknown] 
-   0.10%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1101 
+   0.10%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1101 
    0.07%               kernel  [unknown] 
-   0.06%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1101 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
+   0.06%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1101 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
    0.06%         libc-2.31.so  [unknown] 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
    0.05%               kernel  [unknown] 
    2.88%  <...other 670 warm regions...>
 ....................................................................................................
@@ -4520,13 +4520,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 
 ....[Hottest Methods (after inlining)]..............................................................
   54.95%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 950 
-  16.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
+  16.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1065 
    9.15%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1047 
    8.32%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
    7.09%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 983 
    1.87%               kernel  [unknown] 
-   0.16%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1101 
-   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1102 
+   0.16%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1101 
+   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1102 
    0.12%         libc-2.31.so  [unknown] 
    0.11%                       <unknown> 
    0.05%            libjvm.so  HeapRegionManager::par_iterate 
@@ -4572,7 +4572,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized
 # Parameters: (iterations = 2000, size = 256)
 
 # Run progress: 75.00% complete, ETA 00:03:50
@@ -4592,12 +4592,12 @@ Iteration   5: 110.234 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized":
   109.722 ±(99.9%) 1.107 ms/op [Average]
   (min, avg, max) = (109.572, 109.722, 110.234), stdev = 0.287
   CI (99.9%): [108.615, 110.829] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized:·asm":
 PrintAssembly processed: 303317 total address lines.
 Perf output processed (skipped 59.274 seconds):
  Column 1: cycles (51387 events)
@@ -4606,7 +4606,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
 
                0x00007f4a6703b04c:   vmovsd 0x208(%rsp),%xmm0
                0x00007f4a6703b055:   vmovsd 0x210(%rsp),%xmm2
@@ -4617,10 +4617,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                0x00007f4a6703b07f:   mov    0xb8(%rsp),%rbx
                0x00007f4a6703b087:   mov    0xc0(%rsp),%rsi
                0x00007f4a6703b08f:   nop                                 ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.01%       0x00007f4a6703b090:   cmp    0x10(%rsi),%edi
                0x00007f4a6703b093:   jge    0x00007f4a6703d1d7           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
    0.15%       0x00007f4a6703b099:   nopl   0x0(%rax)
    0.25%       0x00007f4a6703b0a0:   cmpl   $0x4,0xc(%r9)
    0.03%       0x00007f4a6703b0a5:   jb     0x00007f4a6703d586           ;*daload {reexecute=0 rethrow=0 return_oop=0}
@@ -4634,7 +4634,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.00%       0x00007f4a6703b0ab:   cmpl   $0x4,0xc(%r8)
    0.06%       0x00007f4a6703b0b0:   jb     0x00007f4a6703dd9e
    0.22%       0x00007f4a6703b0b6:   vmovsd 0x28(%r8),%xmm8              ;*daload {reexecute=0 rethrow=0 return_oop=0}
@@ -4648,7 +4648,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.03%       0x00007f4a6703b0bc:   vmovsd %xmm8,0x168(%rsp)
    0.01%       0x00007f4a6703b0c5:   vmovsd 0x28(%r9),%xmm9              ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
@@ -4661,7 +4661,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.05%       0x00007f4a6703b0cb:   vmovsd %xmm9,0x160(%rsp)
    0.23%       0x00007f4a6703b0d4:   vmovsd 0x20(%r8),%xmm10             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@47 (line 204)
@@ -4674,7 +4674,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.03%       0x00007f4a6703b0da:   vmovsd 0x20(%r9),%xmm11             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -4686,7 +4686,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.02%       0x00007f4a6703b0e0:   vmovsd 0x18(%r8),%xmm12             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@47 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -4698,7 +4698,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.07%       0x00007f4a6703b0e6:   vmovsd 0x18(%r9),%xmm13             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -4710,7 +4710,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.21%       0x00007f4a6703b0ec:   vmovsd 0x10(%r8),%xmm14             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@47 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -4722,7 +4722,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.04%       0x00007f4a6703b0f2:   vmovsd 0x10(%r9),%xmm15             ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                          ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -4734,7 +4734,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.01%       0x00007f4a6703b0f8:   mov    %r8,0x68(%rsp)
    0.06%       0x00007f4a6703b0fd:   mov    0xc(%r10),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -4749,7 +4749,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.19%       0x00007f4a6703b101:   test   %r8d,%r8d
                0x00007f4a6703b104:   je     0x00007f4a6703bdcb
    0.05%       0x00007f4a6703b10a:   mov    %r9,0x60(%rsp)
@@ -4771,10 +4771,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │                                                              ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
           │                                                              ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
           │                                                              ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.04%  ↘    0x00007f4a6703b137:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {rbx=Oop rbp=Oop rsi=Oop r8=NarrowOop r10=Oop r11=Oop [96]=Oop [104]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                          ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.24%       0x00007f4a6703b140:   cmpl   $0x4,0xc(,%r8,8)             ; implicit exception: dispatches to 0x00007f4a6703e586
    0.03%       0x00007f4a6703b149:   jb     0x00007f4a6703d4be
    0.07%       0x00007f4a6703b14f:   mov    0xc(%r10),%r9d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
@@ -4790,7 +4790,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.23%       0x00007f4a6703b153:   test   %r9d,%r9d
                0x00007f4a6703b156:   je     0x00007f4a6703be13
    0.03%       0x00007f4a6703b15c:   mov    %r10,0x58(%rsp)
@@ -4810,11 +4810,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
            │                                                             ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
            │                                                             ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
            │                                                             ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.01%   │   0x00007f4a6703b180:   cmp    %r14,%rax
            │   0x00007f4a6703b183:   jne    0x00007f4a6703da15           ; ImmutableOopMap {rbx=Oop rbp=Oop rsi=Oop r8=NarrowOop r9=NarrowOop r11=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
            │                                                             ;*iload {reexecute=1 rethrow=0 return_oop=0}
-           │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+           │                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.07%   ↘   0x00007f4a6703b189:   cmpl   $0x4,0xc(,%r9,8)             ; implicit exception: dispatches to 0x00007f4a6703e5a6
    0.25%       0x00007f4a6703b192:   jb     0x00007f4a6703d345
    0.01%       0x00007f4a6703b198:   vmovsd 0x10(,%r8,8),%xmm7
@@ -4831,7 +4831,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.02%       0x00007f4a6703b1c0:   vaddsd 0x28(,%r9,8),%xmm9,%xmm9
    0.29%       0x00007f4a6703b1ca:   vaddsd 0x20(,%r9,8),%xmm8,%xmm8
    0.06%       0x00007f4a6703b1d4:   vaddsd 0x18(,%r9,8),%xmm6,%xmm6
@@ -4846,7 +4846,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.06%       0x00007f4a6703b1e8:   mov    0xc(%r11),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
                                                                          ; - jdk.incubator.vector.Double256Vector::vec@1 (line 117)
@@ -4860,7 +4860,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.13%       0x00007f4a6703b1ec:   test   %r8d,%r8d
                0x00007f4a6703b1ef:   je     0x00007f4a6703be25
    0.13%       0x00007f4a6703b1f5:   mov    0x8(,%r8,8),%r9d
@@ -4881,10 +4881,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
             │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
             │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
             │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.07%    ↘  0x00007f4a6703b21d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rbx=Oop rbp=Oop rsi=Oop r8=NarrowOop r11=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                          ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.01%       0x00007f4a6703b220:   cmpl   $0x4,0xc(,%r8,8)             ; implicit exception: dispatches to 0x00007f4a6703e5c6
    0.28%       0x00007f4a6703b229:   jb     0x00007f4a6703def3
    0.08%       0x00007f4a6703b22f:   vmovsd %xmm8,0x158(%rsp)
@@ -4907,7 +4907,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.08%       0x00007f4a6703b289:   vsubsd %xmm14,%xmm15,%xmm14         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$41@2 (line 638)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$69/0x0000000800cc4ca0::apply@4
@@ -4921,7 +4921,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.13%       0x00007f4a6703b28e:   vaddsd %xmm0,%xmm14,%xmm14          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -4935,7 +4935,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.07%       0x00007f4a6703b292:   vmulsd %xmm14,%xmm14,%xmm15         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -4949,7 +4949,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.71%       0x00007f4a6703b297:   vmulsd %xmm8,%xmm7,%xmm7            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -4963,7 +4963,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.10%       0x00007f4a6703b29c:   vaddsd %xmm1,%xmm7,%xmm7            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -4977,7 +4977,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.33%       0x00007f4a6703b2a0:   vmulsd %xmm7,%xmm7,%xmm8            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -4991,7 +4991,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.91%       0x00007f4a6703b2a4:   vaddsd %xmm8,%xmm15,%xmm0           ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5005,7 +5005,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    1.14%       0x00007f4a6703b2a9:   vmovsd %xmm0,0x140(%rsp)
    0.31%       0x00007f4a6703b2b2:   vsubsd %xmm12,%xmm13,%xmm12         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$41@2 (line 638)
@@ -5020,7 +5020,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.00%       0x00007f4a6703b2b7:   vaddsd %xmm2,%xmm12,%xmm12          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5034,7 +5034,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
                0x00007f4a6703b2bb:   vmulsd %xmm12,%xmm12,%xmm13         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -5048,7 +5048,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
                0x00007f4a6703b2c0:   vmulsd %xmm5,%xmm6,%xmm5            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -5062,7 +5062,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.24%       0x00007f4a6703b2c4:   vaddsd %xmm3,%xmm5,%xmm5            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5076,7 +5076,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.00%       0x00007f4a6703b2c8:   vmulsd %xmm5,%xmm5,%xmm6            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -5090,7 +5090,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.01%       0x00007f4a6703b2cc:   vaddsd %xmm6,%xmm13,%xmm0           ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5104,7 +5104,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.01%       0x00007f4a6703b2d0:   vmovsd %xmm0,0x138(%rsp)
    0.33%       0x00007f4a6703b2d9:   vsubsd %xmm10,%xmm11,%xmm10         ;*dsub {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$41@2 (line 638)
@@ -5119,7 +5119,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.00%       0x00007f4a6703b2de:   vaddsd %xmm4,%xmm10,%xmm10          ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5133,7 +5133,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.00%       0x00007f4a6703b2e2:   vmulsd %xmm10,%xmm10,%xmm11         ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$71/0x0000000800cc5108::apply@4
@@ -5147,7 +5147,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.00%       0x00007f4a6703b2e7:   vmovsd 0x158(%rsp),%xmm0
    0.29%       0x00007f4a6703b2f0:   vmulsd %xmm9,%xmm0,%xmm0            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -5162,7 +5162,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
                0x00007f4a6703b2f5:   vaddsd 0x1c8(%rsp),%xmm0,%xmm0      ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5176,7 +5176,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.00%       0x00007f4a6703b2fe:   vmovsd %xmm0,0x158(%rsp)
    0.00%       0x00007f4a6703b307:   vmulsd %xmm0,%xmm0,%xmm9            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -5191,7 +5191,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.28%       0x00007f4a6703b30b:   vaddsd %xmm9,%xmm11,%xmm0           ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5205,7 +5205,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.25%       0x00007f4a6703b310:   vmovsd %xmm0,0x130(%rsp)
    0.15%       0x00007f4a6703b319:   vmovsd 0x160(%rsp),%xmm0
    0.00%       0x00007f4a6703b322:   vsubsd 0x168(%rsp),%xmm0,%xmm0      ;*dsub {reexecute=0 rethrow=0 return_oop=0}
@@ -5221,7 +5221,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.15%       0x00007f4a6703b32b:   vaddsd 0x220(%rsp),%xmm0,%xmm0      ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5235,7 +5235,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.00%       0x00007f4a6703b334:   vmovsd %xmm0,0x168(%rsp)
    0.16%       0x00007f4a6703b33d:   vmulsd %xmm0,%xmm0,%xmm1            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -5250,7 +5250,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.01%       0x00007f4a6703b341:   vmovsd 0x150(%rsp),%xmm0
    0.15%       0x00007f4a6703b34a:   vmulsd 0x148(%rsp),%xmm0,%xmm0      ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -5265,7 +5265,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
                0x00007f4a6703b353:   vaddsd 0x1d0(%rsp),%xmm0,%xmm0      ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5279,7 +5279,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.19%       0x00007f4a6703b35c:   vmovsd %xmm0,0x148(%rsp)
    0.00%       0x00007f4a6703b365:   vmulsd %xmm0,%xmm0,%xmm2            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$43@2 (line 640)
@@ -5294,7 +5294,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.14%       0x00007f4a6703b369:   vaddsd %xmm2,%xmm1,%xmm0            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                          ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                          ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -5308,7 +5308,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.49%       0x00007f4a6703b36d:   mov    %rbx,%rsi
    0.03%       0x00007f4a6703b370:   mov    %rbp,%rdx
                0x00007f4a6703b373:   mov    $0x4,%ecx
@@ -5323,7 +5323,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                0x00007f4a6703b381:   vmovsd %xmm8,0x150(%rsp)
    0.04%       0x00007f4a6703b38a:   vmovsd %xmm6,0x160(%rsp)
    0.25%       0x00007f4a6703b393:   vmovsd %xmm9,0x128(%rsp)
@@ -5350,7 +5350,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                                                                          ;   {static_call}
    0.16%       0x00007f4a6703b408:   nop
                0x00007f4a6703b409:   mov    %rax,%r11                    ; ImmutableOopMap {r11=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -5363,7 +5363,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                0x00007f4a6703b40c:   cmpl   $0xc3d778,0x8(%r11)          ; implicit exception: dispatches to 0x00007f4a6703e5e6
                                                                          ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.21%       0x00007f4a6703b414:   jne    0x00007f4a6703e025           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -5375,7 +5375,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                          ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.12%       0x00007f4a6703b41a:   mov    0x108(%r15),%rsi
    0.01%       0x00007f4a6703b421:   lea    0x10(%rsi),%rax
                0x00007f4a6703b425:   cmp    0x118(%r15),%rax
@@ -5397,7 +5397,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.09%       0x00007f4a6703b455:   mov    0x108(%r15),%rax
    0.04%       0x00007f4a6703b45c:   lea    0x30(%rax),%rdx
    0.07%       0x00007f4a6703b460:   cmp    0x118(%r15),%rdx
@@ -5432,7 +5432,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                          ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                          ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.14%       0x00007f4a6703b4fd:   mov    %rax,%rdx
    0.03%       0x00007f4a6703b500:   shr    $0x3,%rdx
    0.09%       0x00007f4a6703b504:   mov    %edx,0xc(%rsi)
@@ -5453,7 +5453,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
   21.21%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
 
    0.13%    0x00007f4a6703b79a:   mov    %rdx,%r10
    0.10%    0x00007f4a6703b79d:   xor    %r8,%r10
@@ -5479,12 +5479,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
             0x00007f4a6703b7d0:   mov    %rdx,%rdi
             0x00007f4a6703b7d3:   mov    %rax,%r14
    0.09%    0x00007f4a6703b7d6:   movabs $0x7f1bb5940,%r10            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$76+0x0000000800cc61a8&apos;{0x00000007f1bb5940})}
             0x00007f4a6703b7e0:   shl    $0x3,%rcx                    ;*getfield ones {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
    0.14%    0x00007f4a6703b7e4:   mov    0xb8(%rsp),%rsi
    0.09%    0x00007f4a6703b7ec:   mov    0x90(%rsp),%rdx
    0.11%    0x00007f4a6703b7f4:   mov    %rcx,0x48(%rsp)
@@ -5499,7 +5499,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.10%    0x00007f4a6703b816:   mov    %r11,0x40(%rsp)
    0.12%    0x00007f4a6703b81b:   mov    %r14,0x38(%rsp)
    0.01%    0x00007f4a6703b820:   data16 xchg %ax,%ax
@@ -5510,7 +5510,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
                                                                       ;   {static_call}
    0.20%    0x00007f4a6703b828:   nop
    0.01%    0x00007f4a6703b829:   mov    %rax,%r11                    ; ImmutableOopMap {r11=Oop [56]=Oop [64]=Oop [72]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -5520,7 +5520,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.03%    0x00007f4a6703b82c:   cmpl   $0xc3d778,0x8(%r11)          ; implicit exception: dispatches to 0x00007f4a6703e686
                                                                       ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.07%    0x00007f4a6703b834:   jne    0x00007f4a6703d6cd           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -5529,7 +5529,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.19%    0x00007f4a6703b83a:   mov    0x38(%rsp),%r10
    0.09%    0x00007f4a6703b83f:   mov    0xc(%r10),%r8d               ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -5538,7 +5538,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800cc6808::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.11%    0x00007f4a6703b843:   test   %r8d,%r8d
             0x00007f4a6703b846:   je     0x00007f4a6703bddc
    0.21%    0x00007f4a6703b84c:   mov    0x8(,%r8,8),%esi
@@ -5549,7 +5549,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800cc6808::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.23%    0x00007f4a6703b862:   test   %r8d,%r8d
             0x00007f4a6703b865:   je     0x00007f4a6703bcd6
    0.09%    0x00007f4a6703b86b:   movabs $0x800000960,%r14            ;   {metadata({type array bool})}
@@ -5561,7 +5561,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.21%    0x00007f4a6703b87e:   mov    0xc(,%r8,8),%r9d             ; implicit exception: dispatches to 0x00007f4a6703e6a6
    0.02%    0x00007f4a6703b886:   test   %r9d,%r9d
             0x00007f4a6703b889:   je     0x00007f4a6703d075           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -5570,10 +5570,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800cc6808::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.10%    0x00007f4a6703b88f:   mov    0x174(%rsp),%edi
    0.03%    0x00007f4a6703b896:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
    0.20%    0x00007f4a6703b898:   nopl   0x0(%rax,%rax,1)
    0.02%    0x00007f4a6703b8a0:   cmpb   $0x0,0x10(,%r8,8)
    0.10%    0x00007f4a6703b8a9:   je     0x00007f4a6703bcf2           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -5582,7 +5582,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800cc6808::apply@8
                                                                       ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                                                                       ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.19%    0x00007f4a6703b8af:   mov    0x108(%r15),%rsi
    0.02%    0x00007f4a6703b8b6:   lea    0x10(%rsi),%rax
    0.09%    0x00007f4a6703b8ba:   nopw   0x0(%rax,%rax,1)
@@ -5606,7 +5606,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.07%    0x00007f4a6703b8f3:   mov    0x108(%r15),%rsi
    0.03%    0x00007f4a6703b8fa:   lea    0x30(%rsi),%rax
    0.16%    0x00007f4a6703b8fe:   xchg   %ax,%ax
@@ -5643,7 +5643,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.14%    0x00007f4a6703b9a0:   mov    0x108(%r15),%rsi
    0.08%    0x00007f4a6703b9a7:   lea    0x10(%rsi),%rax
    0.02%    0x00007f4a6703b9ab:   cmp    0x118(%r15),%rax
@@ -5666,7 +5666,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.01%    0x00007f4a6703b9de:   mov    0x108(%r15),%rsi
    0.03%    0x00007f4a6703b9e5:   lea    0x30(%rsi),%rax
    0.05%    0x00007f4a6703b9e9:   cmp    0x118(%r15),%rax
@@ -5702,7 +5702,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.03%    0x00007f4a6703ba8d:   mov    0x108(%r15),%rsi
    0.11%    0x00007f4a6703ba94:   lea    0x30(%rsi),%rax
    0.03%    0x00007f4a6703ba98:   nopl   0x0(%rax,%rax,1)
@@ -5739,7 +5739,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.14%    0x00007f4a6703bb40:   mov    0x108(%r15),%rsi
    0.03%    0x00007f4a6703bb47:   lea    0x30(%rsi),%rax
    0.09%    0x00007f4a6703bb4b:   cmp    0x118(%r15),%rax
@@ -5775,7 +5775,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                       ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                       ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.21%    0x00007f4a6703bbef:   mov    %rbp,%rsi
    0.01%    0x00007f4a6703bbf2:   shr    $0x3,%rsi
    0.01%    0x00007f4a6703bbf6:   mov    %esi,0xc(%rcx)
@@ -5797,7 +5797,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
   20.31%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
 
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$40@7 (line 636)
@@ -5807,7 +5807,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
              0x00007f4a6703b54b:   mov    %rsi,%rbx
    0.22%     0x00007f4a6703b54e:   movabs $0x7f1bb58e8,%r9             ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$74+0x0000000800cc5968&apos;{0x00000007f1bb58e8})}
              0x00007f4a6703b558:   mov    $0x5,%esi
@@ -5823,7 +5823,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.01%     0x00007f4a6703b58a:   mov    %rbx,0x50(%rsp)
    0.13%     0x00007f4a6703b58f:   call   0x00007f4a5f500080           ; ImmutableOopMap {[80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                        ;*invokestatic compare {reexecute=0 rethrow=0 return_oop=1}
@@ -5831,7 +5831,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                                                                        ;   {static_call}
    0.15%     0x00007f4a6703b594:   nop
    0.02%     0x00007f4a6703b595:   data16 data16 nopw 0x0(%rax,%rax,1) ; ImmutableOopMap {rax=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -5840,7 +5840,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.07%     0x00007f4a6703b5a0:   cmpl   $0xc3dda8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f4a6703e606
                                                                        ;   {metadata(&apos;jdk/incubator/vector/Double256Vector$Double256Mask&apos;)}
    0.12%     0x00007f4a6703b5a7:   jne    0x00007f4a6703dc0f           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -5848,17 +5848,17 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.13%     0x00007f4a6703b5ad:   mov    0xc0(%rsp),%rsi
    0.13%     0x00007f4a6703b5b5:   mov    0x1c(%rsi),%ecx              ;*getfield ones {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
    0.29%     0x00007f4a6703b5b8:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {rax=Oop rcx=NarrowOop rsi=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                        ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
                                                                        ; - (reexecute) jdk.incubator.vector.DoubleVector::compareTemplate@55 (line 1654)
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.05%     0x00007f4a6703b5c0:   cmpl   $0xc3d778,0x8(,%rcx,8)       ; implicit exception: dispatches to 0x00007f4a6703e626
                                                                        ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    1.25%     0x00007f4a6703b5cb:   jne    0x00007f4a6703d387           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -5867,7 +5867,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.30%     0x00007f4a6703b5d1:   mov    0x70(%rsp),%r11
    0.02%     0x00007f4a6703b5d6:   mov    0xc(%r11),%r10d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -5883,7 +5883,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.00%     0x00007f4a6703b5da:   nopw   0x0(%rax,%rax,1)
    0.01%     0x00007f4a6703b5e0:   test   %r10d,%r10d
              0x00007f4a6703b5e3:   je     0x00007f4a6703bdf3
@@ -5907,14 +5907,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.29%     0x00007f4a6703b61a:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {rax=Oop rcx=NarrowOop rsi=Oop r10=NarrowOop r11=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
                                                                        ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
                                                                        ; - (reexecute) jdk.incubator.vector.DoubleVector::compareTemplate@55 (line 1654)
                                                                        ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                                                                        ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.00%     0x00007f4a6703b620:   cmpl   $0x4,0xc(,%r10,8)            ; implicit exception: dispatches to 0x00007f4a6703e646
    0.02%     0x00007f4a6703b629:   jb     0x00007f4a6703d833
    0.31%     0x00007f4a6703b62f:   mov    0xc(,%rcx,8),%ebp            ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
@@ -5931,7 +5931,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007f4a6703b636:   test   %ebp,%ebp
              0x00007f4a6703b638:   je     0x00007f4a6703bdff
    0.02%     0x00007f4a6703b63e:   mov    0x8(,%rbp,8),%edx
@@ -5951,7 +5951,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
           │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
           │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.00%  │  0x00007f4a6703b65b:   nopl   0x0(%rax,%rax,1)
    0.00%  │  0x00007f4a6703b660:   cmp    %rdx,%rbx
           │  0x00007f4a6703b663:   jne    0x00007f4a6703e1c8           ; ImmutableOopMap {rax=Oop rcx=NarrowOop rbp=NarrowOop rsi=Oop r10=NarrowOop r11=Oop [80]=Oop [112]=Oop [136]=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [184]=Oop [192]=Oop }
@@ -5960,7 +5960,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
           │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
           │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.58%  ↘  0x00007f4a6703b669:   cmpl   $0x4,0xc(,%rbp,8)            ; implicit exception: dispatches to 0x00007f4a6703e666
    0.01%     0x00007f4a6703b671:   jb     0x00007f4a6703d953
    0.00%     0x00007f4a6703b677:   mov    0x108(%r15),%rdx
@@ -5985,7 +5985,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.02%     0x00007f4a6703b6b2:   mov    0x108(%r15),%r8
    0.31%     0x00007f4a6703b6b9:   lea    0x30(%r8),%r9
    0.28%     0x00007f4a6703b6bd:   data16 xchg %ax,%ax
@@ -6014,7 +6014,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.08%     0x00007f4a6703b72b:   vmovsd 0x28(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6027,7 +6027,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007f4a6703b735:   vaddsd 0x28(,%rbp,8),%xmm0,%xmm0    ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -6042,7 +6042,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.28%     0x00007f4a6703b73e:   vmovsd %xmm0,0x28(%r8)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6055,7 +6055,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.08%     0x00007f4a6703b744:   vmovsd 0x20(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6068,7 +6068,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007f4a6703b74e:   vaddsd 0x20(,%rbp,8),%xmm0,%xmm0    ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -6083,7 +6083,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.21%     0x00007f4a6703b757:   vmovsd %xmm0,0x20(%r8)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6096,7 +6096,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.08%     0x00007f4a6703b75d:   vmovsd 0x18(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6109,7 +6109,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%     0x00007f4a6703b767:   vaddsd 0x18(,%rbp,8),%xmm0,%xmm0    ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -6124,7 +6124,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.23%     0x00007f4a6703b770:   vmovsd %xmm0,0x18(%r8)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6137,7 +6137,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.07%     0x00007f4a6703b776:   vmovsd 0x10(,%r10,8),%xmm0          ;*daload {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@42 (line 204)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6150,7 +6150,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.02%     0x00007f4a6703b780:   vaddsd 0x10(,%rbp,8),%xmm0,%xmm0    ;*dadd {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::lambda$lanewiseTemplate$39@2 (line 636)
                                                                        ; - jdk.incubator.vector.DoubleVector$$Lambda$67/0x0000000800cc4838::apply@4
@@ -6165,7 +6165,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.23%     0x00007f4a6703b789:   vmovsd %xmm0,0x10(%r8)              ;*newarray {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - jdk.incubator.vector.DoubleVector::bOpTemplate@4 (line 200)
                                                                        ; - jdk.incubator.vector.Double256Vector::bOp@6 (line 206)
@@ -6178,7 +6178,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                        ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                        ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                                                                        ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.07%     0x00007f4a6703b78f:   mov    %r8,%r10
    0.02%     0x00007f4a6703b792:   shr    $0x3,%r10
    0.09%     0x00007f4a6703b796:   mov    %r10d,0xc(%rdx)
@@ -6485,38 +6485,38 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::blend, version 2, compile 
   12.33%  <total for region 4>
 
 ....[Hottest Regions]...............................................................................
-  21.21%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-  20.31%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-  12.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+  21.21%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+  20.31%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+  12.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
   12.33%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1028 
    8.23%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::compare, version 2, compile id 1021 
    5.48%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
    3.73%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::compare, version 2, compile id 1021 
    3.59%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
    2.72%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1028 
-   1.77%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-   1.34%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   1.77%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   1.34%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
    0.91%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::compare, version 2, compile id 1021 
-   0.54%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-   0.50%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-   0.29%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-   0.28%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   0.54%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   0.50%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   0.29%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   0.28%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
    0.17%              kernel  [unknown] 
    0.14%              kernel  [unknown] 
-   0.14%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
-   0.13%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1105 
+   0.14%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+   0.13%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1105 
    3.45%  <...other 659 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  59.67%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
+  59.67%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 3, compile id 1055 
   15.05%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1028 
   12.87%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::compare, version 2, compile id 1021 
    9.14%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 967 
    1.38%              kernel  [unknown] 
    0.22%                      <unknown> 
-   0.13%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1105 
+   0.13%         c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1105 
    0.13%        libc-2.31.so  [unknown] 
    0.06%          ld-2.31.so  _dl_tunable_set_hwcaps 
    0.06%           libjvm.so  HeapRegionClaimer::claim_region 
@@ -6562,7 +6562,7 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::blend, version 2, compile 
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized
 # Parameters: (iterations = 2000, size = 512)
 
 # Run progress: 87.50% complete, ETA 00:01:55
@@ -6582,12 +6582,12 @@ Iteration   5: 811.002 ms/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized":
   809.654 ±(99.9%) 4.074 ms/op [Average]
   (min, avg, max) = (808.579, 809.654, 811.002), stdev = 1.058
   CI (99.9%): [805.580, 813.728] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark.vectorized:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized:·asm":
 PrintAssembly processed: 301260 total address lines.
 Perf output processed (skipped 61.773 seconds):
  Column 1: cycles (54818 events)
@@ -7233,7 +7233,7 @@ jvmci, level 4, jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compi
   54.97%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 6, compile id 1072 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 6, compile id 1072 
 
                         0x00007f1777047618:   nop
                         0x00007f1777047619:   nopl   0x0(%rax)                    ; ImmutableOopMap {rax=Oop [192]=Oop [200]=Oop [208]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7242,7 +7242,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                                   ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                                   ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                                   ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@155 (line 117)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@155 (line 117)
                         0x00007f1777047620:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048ba6
                                                                                   ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.00%                0x00007f1777047627:   jne    0x00007f1777048327           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7250,7 +7250,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                                                                                   ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                                                                                   ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                                                                                   ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@155 (line 117)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@155 (line 117)
                         0x00007f177704762d:   mov    %rax,0xb8(%rsp)
    0.01%                0x00007f1777047635:   mov    0x160(%rsp),%rsi
                         0x00007f177704763d:   mov    0x158(%rsp),%rdx
@@ -7259,22 +7259,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
    0.00%                0x00007f1777047651:   mov    0x150(%rsp),%r9
                         0x00007f1777047659:   mov    0x140(%rsp),%rdi             ;*invokestatic broadcastCoerced {reexecute=0 rethrow=0 return_oop=0}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@28 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                         0x00007f1777047661:   xchg   %ax,%ax
                         0x00007f1777047663:   call   0x00007f176f500080           ; ImmutableOopMap {[184]=Oop [192]=Oop [200]=Oop [208]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                                                                                   ;*invokestatic broadcastCoerced {reexecute=0 rethrow=0 return_oop=1}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@28 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                                                                                   ;   {static_call}
                         0x00007f1777047668:   nop                                 ; ImmutableOopMap {rax=Oop [184]=Oop [192]=Oop [200]=Oop [208]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                                                                                   ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
                                                                                   ; - (reexecute) jdk.incubator.vector.DoubleVector::zero@31 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                         0x00007f1777047669:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048bc6
                                                                                   ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.00%                0x00007f1777047670:   jne    0x00007f1777048866           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@31 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@163 (line 119)
                         0x00007f1777047676:   mov    $0x0,%r13d
                         0x00007f177704767c:   mov    %rax,0xb0(%rsp)
    0.00%                0x00007f1777047684:   mov    0xb8(%rsp),%r9
@@ -7285,14 +7285,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                         0x00007f17770476ac:   rex.W pop 0xa0(%rsp)
    0.01%                0x00007f17770476b4:   nopl   0x0(%rax,%rax,1)
                         0x00007f17770476bc:   data16 data16 xchg %ax,%ax          ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.01%          ↗  ↗  0x00007f17770476c0:   mov    0x158(%rsp),%rbx
    0.07%          │  │  0x00007f17770476c8:   mov    0x160(%rsp),%r11
    0.05%          │  │  0x00007f17770476d0:   mov    0x168(%rsp),%rsi
    0.00%          │  │  0x00007f17770476d8:   nopl   0x0(%rax,%rax,1)
    0.01%          │  │  0x00007f17770476e0:   cmp    0x10(%rsi),%r13d
                   │  │  0x00007f17770476e4:   jge    0x00007f1777047f7b           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@177 (line 121)
    0.19%          │  │  0x00007f17770476ea:   mov    %r13d,0x17c(%rsp)
    0.02%          │  │  0x00007f17770476f2:   movabs $0x7666b1af8,%r13            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$68+0x0000000800c85098&apos;{0x00000007666b1af8})}
    0.00%          │  │  0x00007f17770476fc:   mov    $0x5,%esi
@@ -7308,7 +7308,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.02%          │  │  0x00007f1777047722:   mov    %r10,0x90(%rsp)
    0.16%          │  │  0x00007f177704772a:   nop
    0.02%          │  │  0x00007f177704772b:   call   0x00007f176f500080           ; ImmutableOopMap {[144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7317,7 +7317,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
                   │  │                                                            ;   {static_call}
    0.12%          │  │  0x00007f1777047730:   nop                                 ; ImmutableOopMap {rax=Oop [144]=Oop [152]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -7325,7 +7325,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::sub@5 (line 1098)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@184 (line 122)
    0.01%          │  │  0x00007f1777047731:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048be6
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.01%          │  │  0x00007f1777047738:   jne    0x00007f17770485db
@@ -7341,7 +7341,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.01%          │  │  0x00007f1777047772:   mov    %rax,0x88(%rsp)
    0.47%          │  │  0x00007f177704777a:   nop
    0.00%          │  │  0x00007f177704777b:   call   0x00007f176f500080           ; ImmutableOopMap {[136]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7350,7 +7350,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
                   │  │                                                            ;   {static_call}
    0.14%          │  │  0x00007f1777047780:   nop                                 ; ImmutableOopMap {rax=Oop [136]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -7358,7 +7358,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.01%          │  │  0x00007f1777047781:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048c06
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
                   │  │  0x00007f1777047788:   jne    0x00007f1777048146           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7366,7 +7366,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@189 (line 122)
    0.04%          │  │  0x00007f177704778e:   mov    %rax,0x80(%rsp)
    0.34%          │  │  0x00007f1777047796:   movabs $0x7666b1a68,%rbp            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$66+0x0000000800c84a30&apos;{0x00000007666b1a68})}
                   │  │  0x00007f17770477a0:   mov    $0x4,%esi
@@ -7379,7 +7379,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
    0.01%          │  │  0x00007f17770477cb:   mov    %rbp,(%rsp)
    0.10%          │  │  0x00007f17770477cf:   call   0x00007f176f500080           ; ImmutableOopMap {[128]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -7387,7 +7387,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
                   │  │                                                            ;   {static_call}
    0.14%          │  │  0x00007f17770477d4:   nop
    0.01%          │  │  0x00007f17770477d5:   data16 data16 nopw 0x0(%rax,%rax,1) ; ImmutableOopMap {rax=Oop [128]=Oop [160]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7396,7 +7396,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@198 (line 123)
                   │  │  0x00007f17770477e0:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048c26
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.05%          │  │  0x00007f17770477e7:   jne    0x00007f177704810c
@@ -7413,7 +7413,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.00%          │  │  0x00007f1777047824:   mov    %rax,0x78(%rsp)
    0.47%          │  │  0x00007f1777047829:   xchg   %ax,%ax
    0.00%          │  │  0x00007f177704782b:   call   0x00007f176f500080           ; ImmutableOopMap {[120]=Oop [128]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7422,7 +7422,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
                   │  │                                                            ;   {static_call}
    0.06%          │  │  0x00007f1777047830:   nop                                 ; ImmutableOopMap {rax=Oop [120]=Oop [128]=Oop [168]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -7430,7 +7430,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@203 (line 123)
    0.08%          │  │  0x00007f1777047831:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048c46
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.01%          │  │  0x00007f1777047838:   jne    0x00007f177704809d
@@ -7446,7 +7446,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.01%          │  │  0x00007f1777047872:   mov    %rax,0x70(%rsp)
    0.37%          │  │  0x00007f1777047877:   call   0x00007f176f500080           ; ImmutableOopMap {[112]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -7454,7 +7454,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
                   │  │                                                            ;   {static_call}
    0.11%          │  │  0x00007f177704787c:   nop
    0.00%          │  │  0x00007f177704787d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [112]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7463,7 +7463,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
                   │  │  0x00007f1777047880:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048c66
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.04%          │  │  0x00007f1777047887:   jne    0x00007f17770487f9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7471,7 +7471,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@208 (line 123)
    0.12%          │  │  0x00007f177704788d:   mov    %rax,0x68(%rsp)
    0.33%          │  │  0x00007f1777047892:   movabs $0x7666b19e8,%rdx            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$70+0x0000000800c85500&apos;{0x00000007666b19e8})}
    0.03%          │  │  0x00007f177704789c:   mov    $0x6,%esi
@@ -7486,7 +7486,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.01%          │  │  0x00007f17770478ce:   nop
    0.01%          │  │  0x00007f17770478cf:   call   0x00007f176f500080           ; ImmutableOopMap {[104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -7494,7 +7494,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
                   │  │                                                            ;   {static_call}
    0.03%          │  │  0x00007f17770478d4:   nop
    0.06%          │  │  0x00007f17770478d5:   data16 data16 nopw 0x0(%rax,%rax,1) ; ImmutableOopMap {rax=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7503,7 +7503,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
                   │  │  0x00007f17770478e0:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048c86
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.07%          │  │  0x00007f17770478e7:   jne    0x00007f17770484da           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7511,7 +7511,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@221 (line 126)
    0.11%          │  │  0x00007f17770478ed:   mov    %rax,0x60(%rsp)
    0.43%          │  │  0x00007f17770478f2:   movabs $0x7666b19e8,%rdx            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$70+0x0000000800c85500&apos;{0x00000007666b19e8})}
    0.00%          │  │  0x00007f17770478fc:   mov    $0x6,%esi
@@ -7526,7 +7526,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.26%          │  │  0x00007f1777047928:   data16 xchg %ax,%ax
                   │  │  0x00007f177704792b:   call   0x00007f176f500080           ; ImmutableOopMap {[96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -7534,7 +7534,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
                   │  │                                                            ;   {static_call}
    0.06%          │  │  0x00007f1777047930:   nop                                 ; ImmutableOopMap {rax=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -7542,7 +7542,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::mul@5 (line 1172)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@230 (line 127)
    0.07%          │  │  0x00007f1777047931:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048ca6
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.02%          │  │  0x00007f1777047938:   jne    0x00007f1777048786
@@ -7558,7 +7558,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.33%          │  │  0x00007f177704796f:   mov    %rax,0x58(%rsp)
                   │  │  0x00007f1777047974:   data16 xchg %ax,%ax
                   │  │  0x00007f1777047977:   call   0x00007f176f500080           ; ImmutableOopMap {[88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7567,7 +7567,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
                   │  │                                                            ;   {static_call}
    0.16%          │  │  0x00007f177704797c:   nop
    0.01%          │  │  0x00007f177704797d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7576,7 +7576,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
                   │  │  0x00007f1777047980:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048cc6
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.07%          │  │  0x00007f1777047987:   jne    0x00007f1777048486           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7584,7 +7584,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 279)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@5 (line 1023)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@239 (line 130)
    0.12%          │  │  0x00007f177704798d:   mov    %rax,0x50(%rsp)
    0.37%          │  │  0x00007f1777047992:   mov    0x160(%rsp),%rsi
    0.03%          │  │  0x00007f177704799a:   mov    0x158(%rsp),%rdx
@@ -7600,7 +7600,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.10%          │  │  0x00007f17770479bf:   nop
                   │  │  0x00007f17770479c0:   data16 xchg %ax,%ax
    0.02%          │  │  0x00007f17770479c3:   call   0x00007f176f500080           ; ImmutableOopMap {[80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7613,7 +7613,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                   │  │                                                            ;   {static_call}
    0.14%          │  │  0x00007f17770479c8:   nop                                 ; ImmutableOopMap {rax=Oop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*checkcast {reexecute=1 rethrow=0 return_oop=0}
@@ -7625,7 +7625,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.01%          │  │  0x00007f17770479c9:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048ce6
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.00%          │  │  0x00007f17770479d0:   jne    0x00007f1777048453           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7637,7 +7637,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@5 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.03%          │  │  0x00007f17770479d6:   mov    $0x5,%esi
    0.11%          │  │  0x00007f17770479db:   mov    0x50(%rsp),%rdx              ;*invokestatic lambda$compareTemplate$62 {reexecute=0 rethrow=0 return_oop=0}
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector$$Lambda$74/0x0000000800c85fa8::apply@9
@@ -7646,7 +7646,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.03%          │  │  0x00007f17770479e0:   mov    %rax,%rcx
    0.02%          │  │  0x00007f17770479e3:   call   0x00007f176f500080           ; ImmutableOopMap {[80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*invokestatic lambda$compareTemplate$62 {reexecute=0 rethrow=0 return_oop=1}
@@ -7656,7 +7656,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
                   │  │                                                            ;   {static_call}
    0.08%          │  │  0x00007f17770479e8:   nop
    0.02%          │  │  0x00007f17770479e9:   mov    %rax,0x48(%rsp)              ; ImmutableOopMap {rax=Oop [72]=Oop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7667,7 +7667,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.20%          │  │  0x00007f17770479ee:   cmpl   $0xc3e318,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048d06
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector$Double256Mask&apos;)}
    0.05%          │  │  0x00007f17770479f5:   jne    0x00007f17770483f0           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7676,7 +7676,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.01%          │  │  0x00007f17770479fb:   mov    0x168(%rsp),%rsi
    0.01%          │  │  0x00007f1777047a03:   mov    0x1c(%rsi),%edx              ; ImmutableOopMap {rax=Oop rdx=NarrowOop rsi=Oop [72]=Oop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*areturn {reexecute=1 rethrow=0 return_oop=0}
@@ -7686,13 +7686,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::compareTemplate@8 (line 1723)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@5 (line 351)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::compare@3 (line 41)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@246 (line 130)
    0.39%          │  │  0x00007f1777047a06:   cmpl   $0xc3dce8,0x8(,%rdx,8)       ; implicit exception: dispatches to 0x00007f1777048d26
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.81%          │  │  0x00007f1777047a11:   jne    0x00007f177704806c
    0.15%          │  │  0x00007f1777047a17:   movabs $0x7666b1a68,%rbp            ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$66+0x0000000800c84a30&apos;{0x00000007666b1a68})}
    0.00%          │  │  0x00007f1777047a21:   shl    $0x3,%rdx                    ;*getfield ones {reexecute=0 rethrow=0 return_oop=0}
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@254 (line 131)
    0.01%          │  │  0x00007f1777047a25:   mov    $0x4,%esi
                   │  │  0x00007f1777047a2a:   mov    %rdx,%r11
    0.15%          │  │  0x00007f1777047a2d:   mov    0x160(%rsp),%rdx
@@ -7706,7 +7706,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.01%          │  │  0x00007f1777047a52:   mov    %r11,0x40(%rsp)
    0.00%          │  │  0x00007f1777047a57:   call   0x00007f176f500080           ; ImmutableOopMap {[64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
                   │  │                                                            ;*invokestatic binaryOp {reexecute=0 rethrow=0 return_oop=1}
@@ -7715,7 +7715,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
                   │  │                                                            ;   {static_call}
    0.16%          │  │  0x00007f1777047a5c:   nop
    0.01%          │  │  0x00007f1777047a5d:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7725,7 +7725,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
                   │  │  0x00007f1777047a60:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048d46
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.03%          │  │  0x00007f1777047a67:   jne    0x00007f1777048416           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7734,7 +7734,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::lanewise@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@4 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.09%          │  │  0x00007f1777047a6d:   mov    0x48(%rsp),%r10
    0.22%          │  │  0x00007f1777047a72:   movabs $0x7666b1a78,%r9             ;   {oop(a &apos;jdk/incubator/vector/DoubleVector$$Lambda$76+0x0000000800c867e8&apos;{0x00000007666b1a78})}
    0.02%          │  │  0x00007f1777047a7c:   mov    0x160(%rsp),%rsi
@@ -7751,7 +7751,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.14%          │  │  0x00007f1777047ab1:   mov    %rax,0x38(%rsp)
    0.54%          │  │  0x00007f1777047ab6:   nop
    0.00%          │  │  0x00007f1777047ab7:   call   0x00007f176f500080           ; ImmutableOopMap {[56]=Oop [64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7761,7 +7761,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
                   │  │                                                            ;   {static_call}
    0.08%          │  │  0x00007f1777047abc:   nop
    0.01%          │  │  0x00007f1777047abd:   data16 xchg %ax,%ax                 ; ImmutableOopMap {rax=Oop [56]=Oop [64]=Oop [72]=Oop [88]=Oop [96]=Oop [104]=Oop [128]=Oop [176]=Oop [216]=Oop [248]=Oop [304]=Oop [312]=Oop [320]=Oop [328]=Oop [336]=Oop [344]=Oop [352]=Oop [360]=Oop }
@@ -7771,7 +7771,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.04%          │  │  0x00007f1777047ac0:   cmpl   $0xc3dce8,0x8(%rax)          ; implicit exception: dispatches to 0x00007f1777048d66
                   │  │                                                            ;   {metadata(&apos;jdk/incubator/vector/Double256Vector&apos;)}
    0.04%          │  │  0x00007f1777047ac7:   jne    0x00007f17770483a1           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -7780,7 +7780,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
                   │  │                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.08%          │  │  0x00007f1777047acd:   mov    0x48(%rsp),%r10
    0.08%          │  │  0x00007f1777047ad2:   mov    0xc(%r10),%r11d              ;*getfield payload {reexecute=0 rethrow=0 return_oop=0}
                   │  │                                                            ; - jdk.internal.vm.vector.VectorSupport$VectorPayload::getPayload@7 (line 133)
@@ -7789,7 +7789,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
                   │  │                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
                   │  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+                  │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.06%          │  │  0x00007f1777047ad6:   test   %r11d,%r11d
           ╭       │  │  0x00007f1777047ad9:   je     0x00007f1777047bce
    0.07%  │       │  │  0x00007f1777047adf:   mov    0x8(,%r11,8),%esi
@@ -7800,7 +7800,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │       │  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │       │  │                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │       │  │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │       │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │       │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.06%  │       │ ↗│  0x00007f1777047af5:   test   %r11d,%r11d
           │╭      │ ││  0x00007f1777047af8:   je     0x00007f1777047bbf
    0.04%  ││      │ ││  0x00007f1777047afe:   movabs $0x800000960,%rdi            ;   {metadata({type array bool})}
@@ -7812,7 +7812,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           ││      │ ││                                                            ; - jdk.incubator.vector.Double256Vector::blend@3 (line 41)
           ││      │ ││                                                            ; - jdk.incubator.vector.DoubleVector::lanewise@8 (line 669)
           ││      │ ││                                                            ; - jdk.incubator.vector.DoubleVector::add@6 (line 1060)
-          ││      │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
+          ││      │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@259 (line 131)
    0.06%  ││      │↗││  0x00007f1777047b11:   mov    0xc(,%r11,8),%r8d            ; implicit exception: dispatches to 0x00007f1777048d86
    0.03%  ││      ││││  0x00007f1777047b19:   nopl   0x0(%rax)
    0.05%  ││      ││││  0x00007f1777047b20:   test   %r8d,%r8d
@@ -7822,10 +7822,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │││     ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │││     ││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │││     ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │││     ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │││     ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%  │││     ││││  0x00007f1777047b29:   mov    0x17c(%rsp),%r13d
    0.12%  │││     ││││  0x00007f1777047b31:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││     ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
+          │││     ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@275 (line 135)
    0.02%  │││     ││││  0x00007f1777047b34:   nopl   0x0(%rax,%rax,1)
    0.05%  │││     ││││  0x00007f1777047b3c:   data16 data16 xchg %ax,%ax
    0.01%  │││     ││││  0x00007f1777047b40:   cmpb   $0x0,0x10(,%r11,8)
@@ -7835,7 +7835,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           ││││    ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           ││││    ││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           ││││    ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          ││││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          ││││    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%  ││││    ││││  0x00007f1777047b4f:   mov    $0x1,%r10d
           ││││╭   ││││  0x00007f1777047b55:   jmp    0x00007f1777047b78           ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
           │││││   ││││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@7 (line 125)
@@ -7843,14 +7843,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │││││   ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │││││   ││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │││││   ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │││││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │││││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
           │││││   ││││  0x00007f1777047b5a:   nopw   0x0(%rax,%rax,1)             ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │││││   ││││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@9 (line 125)
           │││││   ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::lambda$anyTrue$9@7 (line 677)
           │││││   ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │││││   ││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │││││   ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │││││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │││││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%  │││││  ↗││││  0x00007f1777047b60:   cmp    %r10d,%r8d
           │││││  │││││  0x00007f1777047b63:   jbe    0x00007f177704897d           ;*baload {reexecute=0 rethrow=0 return_oop=0}
           │││││  │││││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@14 (line 125)
@@ -7858,7 +7858,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           │││││  │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           │││││  │││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           │││││  │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          │││││  │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          │││││  │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
           │││││  │││││  0x00007f1777047b69:   cmpb   $0x0,0x10(%r10,%r11,8)
    0.01%  │││││╭ │││││  0x00007f1777047b6f:   jne    0x00007f1777047bda           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
           ││││││ │││││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@19 (line 126)
@@ -7866,14 +7866,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           ││││││ │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           ││││││ │││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           ││││││ │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          ││││││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          ││││││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.01%  ││││││ │││││  0x00007f1777047b75:   inc    %r10d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           ││││││ │││││                                                            ; - jdk.incubator.vector.AbstractMask::anyTrueHelper@24 (line 125)
           ││││││ │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::lambda$anyTrue$9@7 (line 677)
           ││││││ │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           ││││││ │││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           ││││││ │││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          ││││││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          ││││││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.00%  ││││↘│ │││││  0x00007f1777047b78:   nopl   0x0(%rax,%rax,1)
    0.00%  ││││ │ │││││  0x00007f1777047b80:   cmp    %r10d,%r8d
           ││││ │╭│││││  0x00007f1777047b83:   jle    0x00007f1777047c0e
@@ -7883,7 +7883,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
           ││││ ││ ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
           ││││ ││ ││││                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
           ││││ ││ ││││                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-          ││││ ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+          ││││ ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.03%  │││↘ ││ ││││  0x00007f1777047b8b:   mov    %rax,0xb0(%rsp)
    0.01%  │││  ││ ││││  0x00007f1777047b93:   mov    0x58(%rsp),%r9
    0.07%  │││  ││ ││││  0x00007f1777047b98:   mov    0x60(%rsp),%rdi
@@ -7901,7 +7901,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
             │  ││    │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask$$Lambda$79/0x0000000800c86e48::apply@8
             │  ││    │                                                            ; - jdk.internal.vm.vector.VectorSupport::test@30 (line 377)
             │  ││    │                                                            ; - jdk.incubator.vector.Double256Vector$Double256Mask::anyTrue@23 (line 675)
-            │  ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
+            │  ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@266 (line 132)
    0.00%    │  ↘│    │  0x00007f1777047bda:   mov    %rax,0xb0(%rsp)
             │   │    │  0x00007f1777047be2:   mov    0x58(%rsp),%r9
             │   │    │  0x00007f1777047be7:   mov    0x60(%rsp),%rdi
@@ -7910,9 +7910,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
    0.02%    │   │    │  0x00007f1777047bf9:   rex.W push 0x80(%rsp)
    0.02%    │   │    │  0x00007f1777047c01:   rex.W pop 0xa0(%rsp)
    0.03%    │   │    ╰  0x00007f1777047c09:   jmp    0x00007f17770476c0           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-            │   │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
+            │   │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@171 (line 121)
    0.00%    ↘   ↘       0x00007f1777047c0e:   mov    %rax,0x30(%rsp)              ;*getstatic DOUBLE_VECTOR_SPECIES {reexecute=0 rethrow=0 return_oop=0}
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@281 (line 137)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@281 (line 137)
                         0x00007f1777047c13:   mov    0x160(%rsp),%rsi
                         0x00007f1777047c1b:   mov    0x158(%rsp),%rdx
                         0x00007f1777047c23:   mov    $0x4,%ecx
@@ -7920,24 +7920,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
                         0x00007f1777047c2f:   mov    0x150(%rsp),%r9
                         0x00007f1777047c37:   mov    0x140(%rsp),%rdi             ;*invokestatic broadcastCoerced {reexecute=0 rethrow=0 return_oop=0}
                                                                                   ; - jdk.incubator.vector.DoubleVector::zero@28 (line 423)
-                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized@284 (line 138)
+                                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized@284 (line 138)
 ....................................................................................................
   16.22%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
   54.97%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 976 
-  16.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 6, compile id 1072 
+  16.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 6, compile id 1072 
    7.81%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1033 
    5.70%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 991 
    5.59%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
    2.41%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
    1.48%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1033 
    1.01%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 991 
-   0.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1111 
+   0.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1111 
    0.43%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
    0.43%               kernel  [unknown] 
    0.16%               kernel  [unknown] 
-   0.15%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1110 
+   0.15%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1110 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -7951,14 +7951,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Mande
 
 ....[Hottest Methods (after inlining)]..............................................................
   54.97%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::binaryOp, version 2, compile id 976 
-  16.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::vectorized, version 6, compile id 1072 
+  16.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 6, compile id 1072 
    9.30%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1033 
    8.44%       jvmci, level 4  jdk.incubator.vector.DoubleVector::lambda$compareTemplate$62, version 2, compile id 1044 
    6.80%       jvmci, level 4  jdk.internal.vm.vector.VectorSupport::broadcastCoerced, version 2, compile id 991 
    1.91%               kernel  [unknown] 
-   0.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1111 
+   0.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 2, compile id 1111 
    0.23%                       <unknown> 
-   0.15%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1110 
+   0.15%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::baseline, version 1, compile id 1110 
    0.05%            libjvm.so  HeapRegionClaimer::claim_region 
    0.04%            libjvm.so  HeapRegionManager::par_iterate 
    0.03%            libjvm.so  G1MergeHeapRootsTask::G1MergeCardSetClosure::do_heap_region 

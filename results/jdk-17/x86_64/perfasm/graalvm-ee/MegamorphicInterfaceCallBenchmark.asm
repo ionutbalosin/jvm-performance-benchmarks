@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MONOMORPHIC)
 
 # Run progress: 0.00% complete, ETA 00:23:20
@@ -28,12 +28,12 @@ Iteration   5: 1.358 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   1.358 ±(99.9%) 0.001 ns/op [Average]
   (min, avg, max) = (1.358, 1.358, 1.358), stdev = 0.001
   CI (99.9%): [1.357, 1.359] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 206468 total address lines.
 Perf output processed (skipped 58.453 seconds):
  Column 1: cycles (50856 events)
@@ -42,188 +42,188 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
 
                    0x00007f904eb1bb58:   jb     0x00007f904eb1bc9b           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
                    0x00007f904eb1bb5e:   xchg   %ax,%ax
                    0x00007f904eb1bb60:   cmp    $0x1c1e,%r9d
           ╭        0x00007f904eb1bb67:   jb     0x00007f904eb1bc9b           ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
           │        0x00007f904eb1bb6d:   cmp    $0x1c1f,%r11d
           │╭       0x00007f904eb1bb74:   jb     0x00007f904eb1bc9b           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
           ││       0x00007f904eb1bb7a:   nopw   0x0(%rax,%rax,1)
    0.01%  ││       0x00007f904eb1bb80:   cmp    $0x1c1f,%r9d
           ││╭      0x00007f904eb1bb87:   jb     0x00007f904eb1bc9b           ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
           │││      0x00007f904eb1bb8d:   mov    $0x1,%ecx
           │││╭     0x00007f904eb1bb92:   jmp    0x00007f904eb1bc1a
           ││││     0x00007f904eb1bb97:   nopw   0x0(%rax,%rax,1)             ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+          ││││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    3.22%  ││││↗    0x00007f904eb1bba0:   movsbl 0x10(%rcx,%r8,8),%esi        ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    3.57%  │││││    0x00007f904eb1bba6:   test   %esi,%esi
           │││││    0x00007f904eb1bba8:   jne    0x00007f904eb1bcbb           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    3.63%  │││││    0x00007f904eb1bbae:   mov    0x10(%r10,%rcx,4),%esi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    3.81%  │││││    0x00007f904eb1bbb3:   nopw   0x0(%rax,%rax,1)
    3.25%  │││││    0x00007f904eb1bbbc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rdx=Oop rbx=Oop rsi=NarrowOop r8=NarrowOop r10=Oop }
           │││││                                                              ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-          │││││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
+          │││││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
    3.48%  │││││    0x00007f904eb1bbc0:   cmpl   $0xc2c400,0x8(,%rsi,8)       ; implicit exception: dispatches to 0x00007f904eb1be17
-          │││││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+          │││││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    7.95%  │││││    0x00007f904eb1bbcb:   jne    0x00007f904eb1bd7e           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.32%  │││││    0x00007f904eb1bbd1:   mov    %edi,%eax
    3.58%  │││││    0x00007f904eb1bbd3:   inc    %eax                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.34%  │││││    0x00007f904eb1bbd5:   mov    %eax,0xc(%rbx)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.48%  │││││    0x00007f904eb1bbd8:   lea    0x11(%rcx),%eax
    3.41%  │││││    0x00007f904eb1bbdb:   mov    %eax,%eax
    3.45%  │││││    0x00007f904eb1bbdd:   movsbl (%rax,%r8,8),%eax            ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    3.63%  │││││    0x00007f904eb1bbe2:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    3.49%  │││││    0x00007f904eb1bbe6:   test   %eax,%eax
           │││││    0x00007f904eb1bbe8:   jne    0x00007f904eb1bd5d           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    3.69%  │││││    0x00007f904eb1bbee:   mov    0x14(%r10,%rcx,4),%eax       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    3.33%  │││││    0x00007f904eb1bbf3:   nopw   0x0(%rax,%rax,1)
    3.42%  │││││    0x00007f904eb1bbfc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rdx=Oop rbx=Oop rsi=Oop r8=NarrowOop r10=Oop }
           │││││                                                              ;*return {reexecute=1 rethrow=0 return_oop=0}
-          │││││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.48%  │││││    0x00007f904eb1bc00:   cmpl   $0xc2c400,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f904eb1be33
-          │││││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+          │││││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    9.38%  │││││    0x00007f904eb1bc0b:   jne    0x00007f904eb1bcdc           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.72%  │││││    0x00007f904eb1bc11:   lea    0x2(%rdi),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.03%  │││││    0x00007f904eb1bc14:   mov    %edi,0xc(%rbx)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    3.40%  │││││    0x00007f904eb1bc17:   lea    0x2(%rcx),%ecx               ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+          │││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
    3.41%  │││↘│    0x00007f904eb1bc1a:   nopw   0x0(%rax,%rax,1)
    3.71%  │││ │    0x00007f904eb1bc20:   cmp    $0x1c1e,%ecx
           │││ ╰    0x00007f904eb1bc26:   jb     0x00007f904eb1bba0
           │││  ╭   0x00007f904eb1bc2c:   jmp    0x00007f904eb1bc80
           │││  │   0x00007f904eb1bc31:   data16 data16 nopw 0x0(%rax,%rax,1)
           │││  │   0x00007f904eb1bc3c:   data16 data16 xchg %ax,%ax          ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+          │││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    0.05%  │││  │↗  0x00007f904eb1bc40:   cmp    %ecx,%r11d
           │││  ││  0x00007f904eb1bc43:   jbe    0x00007f904eb1bd90           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    0.02%  │││  ││  0x00007f904eb1bc49:   cmp    %ecx,%r9d
           │││  ││  0x00007f904eb1bc4c:   jbe    0x00007f904eb1bd1e
    0.00%  │││  ││  0x00007f904eb1bc52:   movsbl 0x10(%rcx,%r8,8),%esi        ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    0.02%  │││  ││  0x00007f904eb1bc58:   test   %esi,%esi
           │││  ││  0x00007f904eb1bc5a:   jne    0x00007f904eb1bcfd           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.00%  │││  ││  0x00007f904eb1bc60:   mov    0x10(%r10,%rcx,4),%esi       ; ImmutableOopMap {rdx=Oop rbx=Oop r8=NarrowOop r10=Oop }
           │││  ││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
+          │││  ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
    0.01%  │││  ││  0x00007f904eb1bc65:   cmpl   $0xc2c400,0x8(,%rsi,8)       ; implicit exception: dispatches to 0x00007f904eb1be4f
-          │││  ││                                                            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+          │││  ││                                                            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.03%  │││  ││  0x00007f904eb1bc70:   jne    0x00007f904eb1bd2d           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    0.01%  │││  ││  0x00007f904eb1bc76:   inc    %edi                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
           │││  ││  0x00007f904eb1bc78:   mov    %edi,0xc(%rbx)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
           │││  ││  0x00007f904eb1bc7b:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
           │││  ││  0x00007f904eb1bc7d:   data16 xchg %ax,%ax
    0.01%  │││  ↘│  0x00007f904eb1bc80:   cmp    $0x1c20,%ecx
           │││   ╰  0x00007f904eb1bc86:   jb     0x00007f904eb1bc40           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+          │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    0.01%  │││      0x00007f904eb1bc88:   mov    0x10(%rsp),%rbp
    0.03%  │││      0x00007f904eb1bc8d:   add    $0x18,%rsp
           │││      0x00007f904eb1bc91:   mov    0x348(%r15),%rcx
@@ -231,21 +231,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.05%  │││      0x00007f904eb1bc9a:   ret    
           ↘↘↘      0x00007f904eb1bc9b:   shl    $0x3,%rcx
                    0x00007f904eb1bc9f:   movl   $0xffffffe5,0x370(%r15)      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
                    0x00007f904eb1bcaa:   movq   $0xe94,0x378(%r15)
                    0x00007f904eb1bcb5:   call   0x00007f904702427a           ; ImmutableOopMap {rcx=Oop rdx=Oop r10=Oop }
                                                                              ;*return {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
 ....................................................................................................
   97.44%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
+  97.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
    1.17%               kernel  [unknown] 
-   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
+   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
    0.07%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -255,7 +255,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.03%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 758 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 758 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
@@ -268,10 +268,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
+  97.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 740 
    2.18%               kernel  [unknown] 
    0.03%         libc-2.31.so  [unknown] 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 758 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 758 
    0.02%         libc-2.31.so  __strxfrm_l 
    0.02%                       <unknown> 
    0.01%            libjvm.so  outputStream::do_vsnprintf_and_write_with_automatic_buffer 
@@ -319,7 +319,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = BIMORPHIC)
 
 # Run progress: 7.14% complete, ETA 00:24:16
@@ -339,12 +339,12 @@ Iteration   5: 1.744 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   1.745 ±(99.9%) 0.001 ns/op [Average]
   (min, avg, max) = (1.744, 1.745, 1.745), stdev = 0.001
   CI (99.9%): [1.744, 1.745] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 195477 total address lines.
 Perf output processed (skipped 58.712 seconds):
  Column 1: cycles (50584 events)
@@ -353,108 +353,108 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
 
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
                    0x00007f3e46b1d11b:   shl    $0x3,%r10
-                   0x00007f3e46b1d11f:   movabs $0x800c2c8d0,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
-                   0x00007f3e46b1d129:   movabs $0x800c2c400,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+                   0x00007f3e46b1d11f:   movabs $0x800c2c8d0,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+                   0x00007f3e46b1d129:   movabs $0x800c2c400,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
                    0x00007f3e46b1d133:   mov    %r9d,%edi
                    0x00007f3e46b1d136:   mov    $0x0,%r9d
                    0x00007f3e46b1d13c:   nopl   0x0(%rax)                    ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
    0.43%     ↗ ↗   0x00007f3e46b1d140:   cmp    $0x1c20,%r9d
           ╭  │ │   0x00007f3e46b1d147:   jae    0x00007f3e46b1d1bd           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │  │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+          │  │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    1.71%  │  │ │   0x00007f3e46b1d14d:   mov    0x10(%r10,%r9,4),%edx        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │  │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │  │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
   10.35%  │  │ │   0x00007f3e46b1d152:   test   %edx,%edx
           │╭ │ │   0x00007f3e46b1d154:   je     0x00007f3e46b1d1b4
    9.15%  ││ │ │   0x00007f3e46b1d15a:   mov    0x8(,%rdx,8),%edx
    0.46%  ││ │ │   0x00007f3e46b1d161:   movabs $0x800000000,%rsi
    1.61%  ││ │ │   0x00007f3e46b1d16b:   lea    (%rsi,%rdx,1),%rdx           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││ │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          ││ │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
   10.65%  ││ │ │↗  0x00007f3e46b1d16f:   movsbl 0x10(%r9,%r8,8),%esi         ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    9.41%  ││ │ ││  0x00007f3e46b1d175:   mov    %r9d,%eax
    0.37%  ││ │ ││  0x00007f3e46b1d178:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
    1.80%  ││ │ ││  0x00007f3e46b1d17a:   inc    %edi                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
   10.66%  ││ │ ││  0x00007f3e46b1d17c:   cmp    $0x0,%esi
    9.29%  ││ │ ││  0x00007f3e46b1d17f:   nop
    0.40%  ││╭│ ││  0x00007f3e46b1d180:   je     0x00007f3e46b1d1a2
    1.33%  ││││ ││  0x00007f3e46b1d186:   cmp    $0x1,%esi
           ││││ ││  0x00007f3e46b1d189:   jne    0x00007f3e46b1d220           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    9.02%  ││││ ││  0x00007f3e46b1d18f:   cmp    %rdx,%rcx
           ││││ ││  0x00007f3e46b1d192:   jne    0x00007f3e46b1d211           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    0.05%  ││││ ││  0x00007f3e46b1d198:   mov    %edi,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││││ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    0.38%  ││││ ││  0x00007f3e46b1d19c:   mov    %eax,%r9d
    1.30%  ││││ ││  0x00007f3e46b1d19f:   nop
    9.00%  │││╰ ││  0x00007f3e46b1d1a0:   jmp    0x00007f3e46b1d140           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.35%  ││↘  ││  0x00007f3e46b1d1a2:   cmp    %rdx,%rbx
           ││  ╭││  0x00007f3e46b1d1a5:   jne    0x00007f3e46b1d1ec           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    1.27%  ││  │││  0x00007f3e46b1d1ab:   mov    %edi,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    9.21%  ││  │││  0x00007f3e46b1d1af:   mov    %eax,%r9d
    0.08%  ││  │╰│  0x00007f3e46b1d1b2:   jmp    0x00007f3e46b1d140
           │↘  │ │  0x00007f3e46b1d1b4:   mov    $0x0,%rdx
           │   │ ╰  0x00007f3e46b1d1bb:   jmp    0x00007f3e46b1d16f           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │   │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          │   │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    0.00%  ↘   │    0x00007f3e46b1d1bd:   mov    0x10(%rsp),%rbp
    0.01%      │    0x00007f3e46b1d1c2:   add    $0x18,%rsp
               │    0x00007f3e46b1d1c6:   mov    0x348(%r15),%rcx
    0.00%      │    0x00007f3e46b1d1cd:   test   %eax,(%rcx)                  ;   {poll_return}
    0.04%      │    0x00007f3e46b1d1cf:   ret    
               │    0x00007f3e46b1d1d0:   movl   $0xffffffe5,0x370(%r15)      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+              │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
               │    0x00007f3e46b1d1db:   movq   $0x1194,0x378(%r15)
               │    0x00007f3e46b1d1e6:   call   0x00007f3e3f02427a           ; ImmutableOopMap {rsi=Oop }
               │                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-              │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@0 (line 156)
+              │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@0 (line 156)
               │                                                              ;   {runtime_call DeoptimizationBlob}
               │    0x00007f3e46b1d1eb:   nop
               ↘    0x00007f3e46b1d1ec:   mov    $0xc94,%rcx
@@ -463,7 +463,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   98.33%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
+  98.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
    0.36%               kernel  [unknown] 
    0.11%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
@@ -472,9 +472,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.03%               kernel  [unknown] 
    0.03%            libjvm.so  ElfSymbolTable::lookup 
    0.02%               kernel  [unknown] 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
    0.02%               kernel  [unknown] 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 763 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 763 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%            libjvm.so  os::PlatformMonitor::wait 
@@ -488,13 +488,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   99.99%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
+  98.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 741 
    1.29%               kernel  [unknown] 
    0.04%                       <unknown> 
    0.03%            libjvm.so  ElfSymbolTable::lookup 
    0.02%         libc-2.31.so  [unknown] 
    0.02%   libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 763 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 763 
    0.01%            libjvm.so  os::PlatformMonitor::wait 
    0.01%         libc-2.31.so  __strxfrm_l 
    0.01%           ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -540,7 +540,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_3)
 
 # Run progress: 14.29% complete, ETA 00:22:28
@@ -560,12 +560,12 @@ Iteration   5: 2.195 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   2.196 ±(99.9%) 0.004 ns/op [Average]
   (min, avg, max) = (2.195, 2.196, 2.197), stdev = 0.001
   CI (99.9%): [2.192, 2.200] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 192968 total address lines.
 Perf output processed (skipped 58.646 seconds):
  Column 1: cycles (50955 events)
@@ -574,48 +574,48 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
 
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
                      0x00007fbeaeb1cd9b:   shl    $0x3,%r10
-                     0x00007fbeaeb1cd9f:   movabs $0x800c2cb98,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
-                     0x00007fbeaeb1cda9:   movabs $0x800c2c8d0,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
-                     0x00007fbeaeb1cdb3:   movabs $0x800c2c400,%rdi            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+                     0x00007fbeaeb1cd9f:   movabs $0x800c2cb98,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+                     0x00007fbeaeb1cda9:   movabs $0x800c2c8d0,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+                     0x00007fbeaeb1cdb3:   movabs $0x800c2c400,%rdi            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
                      0x00007fbeaeb1cdbd:   mov    %r9d,%edx
                      0x00007fbeaeb1cdc0:   mov    $0x0,%r9d
                      0x00007fbeaeb1cdc6:   data16 nopw 0x0(%rax,%rax,1)        ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
    2.38%       ↗↗↗   0x00007fbeaeb1cdd0:   cmp    $0x1c20,%r9d
           ╭    │││   0x00007fbeaeb1cdd7:   jae    0x00007fbeaeb1ce73           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    8.28%  │    │││   0x00007fbeaeb1cddd:   mov    0x10(%r10,%r9,4),%esi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    6.31%  │    │││   0x00007fbeaeb1cde2:   test   %esi,%esi
           │╭   │││   0x00007fbeaeb1cde4:   je     0x00007fbeaeb1ce6a
    0.49%  ││   │││   0x00007fbeaeb1cdea:   mov    0x8(,%rsi,8),%esi
   29.56%  ││   │││   0x00007fbeaeb1cdf1:   movabs $0x800000000,%rax
    5.04%  ││   │││   0x00007fbeaeb1cdfb:   lea    (%rax,%rsi,1),%rsi           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
   10.55%  ││   │││↗  0x00007fbeaeb1cdff:   movsbl 0x10(%r9,%r8,8),%eax         ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    0.11%  ││   ││││  0x00007fbeaeb1ce05:   mov    %r9d,%ebp
    1.63%  ││   ││││  0x00007fbeaeb1ce08:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
    5.12%  ││   ││││  0x00007fbeaeb1ce0a:   inc    %edx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││   ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
   10.20%  ││   ││││  0x00007fbeaeb1ce0c:   cmp    $0x0,%eax
           ││╭  ││││  0x00007fbeaeb1ce0f:   je     0x00007fbeaeb1ce3e
    0.03%  │││  ││││  0x00007fbeaeb1ce15:   cmp    $0x1,%eax
@@ -623,69 +623,69 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.32%  ││││ ││││  0x00007fbeaeb1ce1e:   cmp    $0x2,%eax
           ││││╭││││  0x00007fbeaeb1ce21:   je     0x00007fbeaeb1ce55
           │││││││││  0x00007fbeaeb1ce27:   jmp    0x00007fbeaeb1cea6           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.70%  │││↘│││││  0x00007fbeaeb1ce2c:   cmp    %rsi,%rbx
           │││ │││││  0x00007fbeaeb1ce2f:   jne    0x00007fbeaeb1ceda           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    1.40%  │││ │││││  0x00007fbeaeb1ce35:   mov    %edx,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││ │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    3.55%  │││ │││││  0x00007fbeaeb1ce39:   mov    %ebp,%r9d
    0.03%  │││ │╰│││  0x00007fbeaeb1ce3c:   jmp    0x00007fbeaeb1cdd0           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││ │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.05%  ││↘ │ │││  0x00007fbeaeb1ce3e:   xchg   %ax,%ax
    0.69%  ││  │ │││  0x00007fbeaeb1ce40:   cmp    %rsi,%rdi
           ││  │ │││  0x00007fbeaeb1ce43:   jne    0x00007fbeaeb1cee9           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    2.39%  ││  │ │││  0x00007fbeaeb1ce49:   mov    %edx,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    2.50%  ││  │ │││  0x00007fbeaeb1ce4d:   mov    %ebp,%r9d
    0.04%  ││  │ ╰││  0x00007fbeaeb1ce50:   jmp    0x00007fbeaeb1cdd0
    1.08%  ││  ↘  ││  0x00007fbeaeb1ce55:   cmp    %rsi,%rcx
           ││     ││  0x00007fbeaeb1ce58:   jne    0x00007fbeaeb1cecb           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
    4.38%  ││     ││  0x00007fbeaeb1ce5e:   mov    %edx,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││     ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
    0.02%  ││     ││  0x00007fbeaeb1ce62:   mov    %ebp,%r9d
    0.32%  ││     ╰│  0x00007fbeaeb1ce65:   jmp    0x00007fbeaeb1cdd0
           │↘      │  0x00007fbeaeb1ce6a:   mov    $0x0,%rsi
           │       ╰  0x00007fbeaeb1ce71:   jmp    0x00007fbeaeb1cdff           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
    0.01%  ↘          0x00007fbeaeb1ce73:   mov    0x10(%rsp),%rbp
    0.04%             0x00007fbeaeb1ce78:   add    $0x18,%rsp
                      0x00007fbeaeb1ce7c:   mov    0x348(%r15),%rcx
@@ -693,11 +693,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.03%             0x00007fbeaeb1ce85:   ret    
                      0x00007fbeaeb1ce86:   movl   $0xffffffe5,0x370(%r15)
                      0x00007fbeaeb1ce91:   movq   $0x2114,0x378(%r15)          ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
                      0x00007fbeaeb1ce9c:   nopl   0x0(%rax)
                      0x00007fbeaeb1cea0:   call   0x00007fbea702427a           ; ImmutableOopMap {rsi=Oop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@0 (line 156)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@0 (line 156)
                                                                                ;   {runtime_call DeoptimizationBlob}
                      0x00007fbeaeb1cea5:   nop
                      0x00007fbeaeb1cea6:   mov    $0x10,%rcx
@@ -705,10 +705,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   97.25%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  97.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    0.43%               kernel  [unknown] 
    0.16%               kernel  [unknown] 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -730,14 +730,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  97.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    2.11%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.06%   libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
    0.03%               [vdso]  __vdso_clock_gettime 
    0.02%         libc-2.31.so  re_search_stub 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 770 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 770 
    0.01%            libjvm.so  ElfSymbolTable::lookup 
    0.01%            libjvm.so  Monitor::wait_without_safepoint_check 
    0.01%         libc-2.31.so  __strncat_ssse3 
@@ -782,7 +782,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_4)
 
 # Run progress: 21.43% complete, ETA 00:20:32
@@ -802,12 +802,12 @@ Iteration   5: 2.331 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   2.331 ±(99.9%) 0.002 ns/op [Average]
   (min, avg, max) = (2.331, 2.331, 2.332), stdev = 0.001
   CI (99.9%): [2.329, 2.333] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 197207 total address lines.
 Perf output processed (skipped 58.696 seconds):
  Column 1: cycles (50886 events)
@@ -816,52 +816,52 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
 
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    0.00%               0x00007f5a02b1d19b:   shl    $0x3,%r10
-                       0x00007f5a02b1d19f:   movabs $0x800c2ce60,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
-                       0x00007f5a02b1d1a9:   movabs $0x800c2cb98,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
-                       0x00007f5a02b1d1b3:   movabs $0x800c2c8d0,%rdi            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
-   0.00%               0x00007f5a02b1d1bd:   movabs $0x800c2c400,%rdx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+                       0x00007f5a02b1d19f:   movabs $0x800c2ce60,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+                       0x00007f5a02b1d1a9:   movabs $0x800c2cb98,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+                       0x00007f5a02b1d1b3:   movabs $0x800c2c8d0,%rdi            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.00%               0x00007f5a02b1d1bd:   movabs $0x800c2c400,%rdx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
                        0x00007f5a02b1d1c7:   mov    %r9d,%esi
                        0x00007f5a02b1d1ca:   mov    $0x0,%r9d                    ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
    5.10%        ↗↗↗↗   0x00007f5a02b1d1d0:   cmp    $0x1c20,%r9d
           ╭     ││││   0x00007f5a02b1d1d7:   jae    0x00007f5a02b1d296           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │     ││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+          │     ││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    1.12%  │     ││││   0x00007f5a02b1d1dd:   mov    0x10(%r10,%r9,4),%eax        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │     ││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+          │     ││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    7.29%  │     ││││   0x00007f5a02b1d1e2:   test   %eax,%eax
           │╭    ││││   0x00007f5a02b1d1e4:   je     0x00007f5a02b1d28a
    3.16%  ││    ││││   0x00007f5a02b1d1ea:   mov    0x8(,%rax,8),%eax
   17.00%  ││    ││││   0x00007f5a02b1d1f1:   movabs $0x800000000,%rbp
    0.07%  ││    ││││   0x00007f5a02b1d1fb:   lea    0x0(%rbp,%rax,1),%rax        ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││    ││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
+          ││    ││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
   27.99%  ││    ││││↗  0x00007f5a02b1d200:   movsbl 0x10(%r9,%r8,8),%ebp         ;*baload {reexecute=0 rethrow=0 return_oop=0}
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    0.18%  ││    │││││  0x00007f5a02b1d206:   mov    %r9d,%r13d
    3.96%  ││    │││││  0x00007f5a02b1d209:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
    0.09%  ││    │││││  0x00007f5a02b1d20c:   inc    %esi                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││    │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
   12.00%  ││    │││││  0x00007f5a02b1d20e:   cmp    $0x0,%ebp
           ││╭   │││││  0x00007f5a02b1d211:   je     0x00007f5a02b1d249
    0.08%  │││   │││││  0x00007f5a02b1d217:   cmp    $0x1,%ebp
@@ -871,88 +871,88 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.01%  │││││ │││││  0x00007f5a02b1d229:   cmp    $0x2,%ebp
           │││││╭│││││  0x00007f5a02b1d22c:   je     0x00007f5a02b1d275
           │││││││││││  0x00007f5a02b1d232:   jmp    0x00007f5a02b1d2c6           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.03%  │││↘│││││││  0x00007f5a02b1d237:   cmp    %rax,%rdi
           │││ │││││││  0x00007f5a02b1d23a:   jne    0x00007f5a02b1d2eb           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    0.02%  │││ │││││││  0x00007f5a02b1d240:   mov    %esi,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@76 (line 165)
    3.97%  │││ │││││││  0x00007f5a02b1d244:   mov    %r13d,%r9d
    0.02%  │││ ││╰││││  0x00007f5a02b1d247:   jmp    0x00007f5a02b1d1d0           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │││ ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │││ ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.03%  ││↘ ││ ││││  0x00007f5a02b1d249:   cmp    %rax,%rdx
           ││  ││ ││││  0x00007f5a02b1d24c:   jne    0x00007f5a02b1d309           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    1.01%  ││  ││ ││││  0x00007f5a02b1d252:   mov    %esi,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││  ││ ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    0.03%  ││  ││ ││││  0x00007f5a02b1d256:   mov    %r13d,%r9d
    3.05%  ││  ││ ╰│││  0x00007f5a02b1d259:   jmp    0x00007f5a02b1d1d0
    0.02%  ││  ↘│  │││  0x00007f5a02b1d25e:   xchg   %ax,%ax
    1.07%  ││   │  │││  0x00007f5a02b1d260:   cmp    %rax,%rcx
           ││   │  │││  0x00007f5a02b1d263:   jne    0x00007f5a02b1d318           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
    0.02%  ││   │  │││  0x00007f5a02b1d269:   mov    %esi,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││   │  │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
    3.16%  ││   │  │││  0x00007f5a02b1d26d:   mov    %r13d,%r9d
    0.03%  ││   │  ╰││  0x00007f5a02b1d270:   jmp    0x00007f5a02b1d1d0
    3.96%  ││   ↘   ││  0x00007f5a02b1d275:   cmp    %rax,%rbx
           ││       ││  0x00007f5a02b1d278:   jne    0x00007f5a02b1d2fa           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
    0.03%  ││       ││  0x00007f5a02b1d27e:   mov    %esi,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@86 (line 168)
    0.02%  ││       ││  0x00007f5a02b1d282:   mov    %r13d,%r9d
    0.02%  ││       ╰│  0x00007f5a02b1d285:   jmp    0x00007f5a02b1d1d0
           │↘        │  0x00007f5a02b1d28a:   mov    $0x0,%rax
           │         ╰  0x00007f5a02b1d291:   jmp    0x00007f5a02b1d200           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
+          │                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@96 (line 171)
           ↘            0x00007f5a02b1d296:   mov    0x10(%rsp),%rbp
    0.07%               0x00007f5a02b1d29b:   add    $0x18,%rsp
                        0x00007f5a02b1d29f:   mov    0x348(%r15),%rcx
@@ -960,11 +960,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.01%               0x00007f5a02b1d2a8:   ret    
                        0x00007f5a02b1d2a9:   movl   $0xffffffe5,0x370(%r15)
                        0x00007f5a02b1d2b4:   movq   $0x1294,0x378(%r15)          ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
                        0x00007f5a02b1d2bf:   nop
                        0x00007f5a02b1d2c0:   call   0x00007f59fb02427a           ; ImmutableOopMap {rsi=Oop }
                                                                                  ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                                 ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@0 (line 156)
+                                                                                 ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@0 (line 156)
                                                                                  ;   {runtime_call DeoptimizationBlob}
                        0x00007f5a02b1d2c5:   nop
                        0x00007f5a02b1d2c6:   mov    $0x10,%rcx
@@ -972,16 +972,16 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   97.61%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  97.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    0.90%               kernel  [unknown] 
-   0.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+   0.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    0.08%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 773 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 773 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
@@ -997,12 +997,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  97.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    1.81%               kernel  [unknown] 
    0.03%                       <unknown> 
    0.03%         libc-2.31.so  [unknown] 
    0.03%         libc-2.31.so  __strncat_ssse3 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 773 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 773 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 
    0.02%         libc-2.31.so  __strxfrm_l 
    0.01%            libjvm.so  ElfSymbolTable::lookup 
@@ -1049,7 +1049,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_5)
 
 # Run progress: 28.57% complete, ETA 00:18:38
@@ -1069,12 +1069,12 @@ Iteration   5: 26.073 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   26.138 ±(99.9%) 0.231 ns/op [Average]
   (min, avg, max) = (26.073, 26.138, 26.222), stdev = 0.060
   CI (99.9%): [25.906, 26.369] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 196594 total address lines.
 Perf output processed (skipped 58.748 seconds):
  Column 1: cycles (50594 events)
@@ -1108,38 +1108,38 @@ Hottest code regions (>10.00% "cycles" events):
   18.79%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
 
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
                                                                           ;   {optimized virtual_call}
                 0x00007f7a4eb1d68c:   nop
-                0x00007f7a4eb1d68d:   movabs $0x7fef3e8a8,%rbp            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
-                0x00007f7a4eb1d697:   movabs $0x800c2cb98,%rax            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
-                0x00007f7a4eb1d6a1:   movabs $0x800c2ce60,%rdx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+                0x00007f7a4eb1d68d:   movabs $0x7fef3e8a8,%rbp            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+                0x00007f7a4eb1d697:   movabs $0x800c2cb98,%rax            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+                0x00007f7a4eb1d6a1:   movabs $0x800c2ce60,%rdx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
                 0x00007f7a4eb1d6ab:   mov    $0x1,%r10d
                 0x00007f7a4eb1d6b1:   data16 data16 nopw 0x0(%rax,%rax,1)
                 0x00007f7a4eb1d6bc:   data16 data16 xchg %ax,%ax
-   0.36%        0x00007f7a4eb1d6c0:   movabs $0x800c2c400,%r14            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   0.36%        0x00007f7a4eb1d6c0:   movabs $0x800c2c400,%r14            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.00%        0x00007f7a4eb1d6ca:   mov    0x10(%rsp),%r11
    0.20%        0x00007f7a4eb1d6cf:   mov    0x20(%rsp),%r8d
    0.21%        0x00007f7a4eb1d6d4:   nopl   0x0(%rax,%rax,1)
    0.37%        0x00007f7a4eb1d6dc:   data16 data16 xchg %ax,%ax
    0.01%        0x00007f7a4eb1d6e0:   cmp    $0x1c1e,%r10d
                 0x00007f7a4eb1d6e7:   jae    0x00007f7a4eb1da51           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    0.16%        0x00007f7a4eb1d6ed:   mov    0x10(%r11,%r10,4),%esi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    0.74%        0x00007f7a4eb1d6f2:   test   %esi,%esi
                 0x00007f7a4eb1d6f4:   je     0x00007f7a4eb1da36
    0.46%        0x00007f7a4eb1d6fa:   mov    0x8(,%rsi,8),%r9d
    1.15%        0x00007f7a4eb1d702:   movabs $0x800000000,%rcx
    0.12%        0x00007f7a4eb1d70c:   lea    (%rcx,%r9,1),%r9             ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@106 (line 174)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@106 (line 174)
    0.43%        0x00007f7a4eb1d710:   movsbl 0x10(%r10,%r8,8),%ecx        ;*baload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    0.16%        0x00007f7a4eb1d716:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    0.00%        0x00007f7a4eb1d71a:   mov    %rsi,0x18(%rsp)
    0.11%        0x00007f7a4eb1d71f:   cmp    $0x3,%ecx
           ╭     0x00007f7a4eb1d722:   jge    0x00007f7a4eb1d74b
@@ -1157,47 +1157,47 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
            │    0x00007f7a4eb1d757:   je     0x00007f7a4eb1d932
            │    0x00007f7a4eb1d75d:   data16 xchg %ax,%ax
            │    0x00007f7a4eb1d760:   jmp    0x00007f7a4eb1df06           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
            ↘    0x00007f7a4eb1d765:   cmp    %r9,%r14
                 0x00007f7a4eb1d768:   jne    0x00007f7a4eb1decf           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
                 0x00007f7a4eb1d76e:   mov    %r10d,0x34(%rsp)
    0.12%        0x00007f7a4eb1d773:   mov    %rsi,%r9
    0.01%        0x00007f7a4eb1d776:   nop
    0.00%        0x00007f7a4eb1d777:   call   0x00007f7a4eb1b7c0           ; ImmutableOopMap {[8]=Oop [16]=Oop [24]=Oop [32]=NarrowOop }
                                                                           ;*invokeinterface foo_4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
                                                                           ;   {optimized virtual_call}
                 0x00007f7a4eb1d77c:   nop
                 0x00007f7a4eb1d77d:   mov    0x34(%rsp),%r11d
-   1.00%        0x00007f7a4eb1d782:   movabs $0x7fef3e8a8,%rbp            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
-                0x00007f7a4eb1d78c:   movabs $0x800c2cb98,%rax            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+   1.00%        0x00007f7a4eb1d782:   movabs $0x7fef3e8a8,%rbp            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+                0x00007f7a4eb1d78c:   movabs $0x800c2cb98,%rax            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
                 0x00007f7a4eb1d796:   mov    0x10(%rsp),%r10
    0.38%        0x00007f7a4eb1d79b:   mov    0x14(%r10,%r11,4),%esi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    1.98%        0x00007f7a4eb1d7a0:   test   %esi,%esi
                 0x00007f7a4eb1d7a2:   je     0x00007f7a4eb1da45
    0.55%        0x00007f7a4eb1d7a8:   mov    0x8(,%rsi,8),%r8d
    4.88%        0x00007f7a4eb1d7b0:   movabs $0x800000000,%r9
    0.09%        0x00007f7a4eb1d7ba:   lea    (%r9,%r8,1),%r8
    0.58%        0x00007f7a4eb1d7be:   mov    %r8,%r9                      ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@106 (line 174)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@106 (line 174)
    0.02%        0x00007f7a4eb1d7c1:   mov    0x20(%rsp),%r8d
                 0x00007f7a4eb1d7c6:   lea    0x11(%r11),%ecx
    0.11%        0x00007f7a4eb1d7ca:   mov    %ecx,%ecx
    0.60%        0x00007f7a4eb1d7cc:   movsbl (%rcx,%r8,8),%ecx            ;*baload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    0.06%        0x00007f7a4eb1d7d1:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
                 0x00007f7a4eb1d7d5:   mov    %rsi,0x18(%rsp)
    0.10%        0x00007f7a4eb1d7da:   lea    0x2(%r11),%ebx
    0.60%        0x00007f7a4eb1d7de:   mov    %ebx,0x30(%rsp)
    0.04%        0x00007f7a4eb1d7e2:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
                 0x00007f7a4eb1d7e5:   cmp    $0x3,%ecx
             ╭   0x00007f7a4eb1d7e8:   jge    0x00007f7a4eb1d80e
    0.02%    │   0x00007f7a4eb1d7ee:   cmp    $0x2,%ecx
@@ -1212,10 +1212,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.08%     │  0x00007f7a4eb1d817:   cmp    $0x4,%ecx
              │  0x00007f7a4eb1d81a:   je     0x00007f7a4eb1d9b8
              │  0x00007f7a4eb1d820:   jmp    0x00007f7a4eb1de65
-             ↘  0x00007f7a4eb1d825:   movabs $0x800c2c400,%r14            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+             ↘  0x00007f7a4eb1d825:   movabs $0x800c2c400,%r14            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
                 0x00007f7a4eb1d82f:   cmp    %r9,%r14
                 0x00007f7a4eb1d832:   jne    0x00007f7a4eb1de45           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 162)
    0.01%        0x00007f7a4eb1d838:   mov    %r11d,0x2c(%rsp)
    0.11%        0x00007f7a4eb1d83d:   mov    %rsi,%r9
    0.01%        0x00007f7a4eb1d840:   data16 xchg %ax,%ax
@@ -1224,7 +1224,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   16.69%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
 
                 #           [sp+0x20]  (sp of caller)
                 0x00007f7a4eb1a8a0:   mov    0x8(%rsi),%r10d
@@ -1242,48 +1242,48 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.29%        0x00007f7a4eb1a8d0:   mov    0x8(%rsi),%r10d
    0.02%        0x00007f7a4eb1a8d4:   movabs $0x800000000,%r11
                 0x00007f7a4eb1a8de:   lea    (%r11,%r10,1),%r8
-                0x00007f7a4eb1a8e2:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
+                0x00007f7a4eb1a8e2:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
    0.30%        0x00007f7a4eb1a8ec:   cmp    0x20(%r8),%r11
           ╭     0x00007f7a4eb1a8f0:   je     0x00007f7a4eb1a90d
    0.87%  │     0x00007f7a4eb1a8f6:   data16 nopw 0x0(%rax,%rax,1)
-          │     0x00007f7a4eb1a900:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
+          │     0x00007f7a4eb1a900:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
           │╭    0x00007f7a4eb1a907:   jne    0x00007f7a4eb1a974           ;*invokeinterface baz_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
    0.29%  ↘│    0x00007f7a4eb1a90d:   mov    0x8(%rsi),%r10d
-   0.02%   │    0x00007f7a4eb1a911:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.02%   │    0x00007f7a4eb1a911:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            │╭   0x00007f7a4eb1a918:   je     0x00007f7a4eb1a964
    0.01%   ││   0x00007f7a4eb1a91e:   xchg   %ax,%ax
-           ││   0x00007f7a4eb1a920:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+           ││   0x00007f7a4eb1a920:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
            ││   0x00007f7a4eb1a927:   je     0x00007f7a4eb1a9ce
-   0.31%   ││   0x00007f7a4eb1a92d:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.31%   ││   0x00007f7a4eb1a92d:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
            ││   0x00007f7a4eb1a934:   je     0x00007f7a4eb1a9e5           ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
    0.29%   ││   0x00007f7a4eb1a93a:   mov    %rsi,%r10
            ││   0x00007f7a4eb1a93d:   mov    %r10,(%rsp)
    1.04%   ││   0x00007f7a4eb1a941:   movabs $0xffffffffffffffff,%rax
    0.00%   ││   0x00007f7a4eb1a94b:   call   0x00007f7a4701bc20           ; ImmutableOopMap {[0]=Oop }
            ││                                                             ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            ││                                                             ;   {virtual_call}
            ││   0x00007f7a4eb1a950:   nop                                 ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            ││↗  0x00007f7a4eb1a951:   mov    0x10(%rsp),%rbp
    1.68%   │││  0x00007f7a4eb1a956:   add    $0x18,%rsp
            │││  0x00007f7a4eb1a95a:   mov    0x348(%r15),%rcx
            │││  0x00007f7a4eb1a961:   test   %eax,(%rcx)                  ;   {poll_return}
    1.41%   │││  0x00007f7a4eb1a963:   ret    
-           │↘│  0x00007f7a4eb1a964:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           │↘│  0x00007f7a4eb1a964:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │ │  0x00007f7a4eb1a96e:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            │ ╰  0x00007f7a4eb1a972:   jmp    0x00007f7a4eb1a951           ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            ↘    0x00007f7a4eb1a974:   mov    0x28(%r8),%r10
                 0x00007f7a4eb1a978:   mov    (%r10),%r9d
    0.90%        0x00007f7a4eb1a97b:   mov    $0x0,%ecx
@@ -1301,7 +1301,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   15.90%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
 
                 #           [sp+0x20]  (sp of caller)
                 0x00007f7a4eb1cf20:   mov    0x8(%rsi),%r10d
@@ -1319,50 +1319,50 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.30%        0x00007f7a4eb1cf50:   mov    0x8(%rsi),%r10d
    0.00%        0x00007f7a4eb1cf54:   movabs $0x800000000,%r11
                 0x00007f7a4eb1cf5e:   lea    (%r11,%r10,1),%r8
-   0.00%        0x00007f7a4eb1cf62:   movabs $0x800c269e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
+   0.00%        0x00007f7a4eb1cf62:   movabs $0x800c269e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
    0.28%        0x00007f7a4eb1cf6c:   cmp    0x20(%r8),%r11
           ╭     0x00007f7a4eb1cf70:   je     0x00007f7a4eb1cf8d
    0.88%  │     0x00007f7a4eb1cf76:   data16 nopw 0x0(%rax,%rax,1)
-          │     0x00007f7a4eb1cf80:   cmp    $0xc269e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
+          │     0x00007f7a4eb1cf80:   cmp    $0xc269e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
           │╭    0x00007f7a4eb1cf87:   jne    0x00007f7a4eb1cff4           ;*invokeinterface baz_3 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
    0.34%  ↘│    0x00007f7a4eb1cf8d:   mov    0x8(%rsi),%r10d
-   0.01%   │    0x00007f7a4eb1cf91:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.01%   │    0x00007f7a4eb1cf91:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
            │╭   0x00007f7a4eb1cf98:   je     0x00007f7a4eb1cfe4
    0.00%   ││   0x00007f7a4eb1cf9e:   xchg   %ax,%ax
-           ││   0x00007f7a4eb1cfa0:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+           ││   0x00007f7a4eb1cfa0:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
            ││   0x00007f7a4eb1cfa7:   je     0x00007f7a4eb1d04e
-   0.30%   ││   0x00007f7a4eb1cfad:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.30%   ││   0x00007f7a4eb1cfad:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            ││   0x00007f7a4eb1cfb4:   je     0x00007f7a4eb1d065           ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
    0.12%   ││   0x00007f7a4eb1cfba:   mov    %rsi,%r10
            ││   0x00007f7a4eb1cfbd:   mov    %r10,(%rsp)
    0.99%   ││   0x00007f7a4eb1cfc1:   movabs $0x800c2d128,%rax
    0.00%   ││   0x00007f7a4eb1cfcb:   call   0x00007f7a4701be60           ; ImmutableOopMap {[0]=Oop }
            ││                                                             ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            ││                                                             ;   {virtual_call}
            ││   0x00007f7a4eb1cfd0:   nop                                 ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            ││↗  0x00007f7a4eb1cfd1:   mov    0x10(%rsp),%rbp
    1.76%   │││  0x00007f7a4eb1cfd6:   add    $0x18,%rsp
            │││  0x00007f7a4eb1cfda:   mov    0x348(%r15),%rcx
            │││  0x00007f7a4eb1cfe1:   test   %eax,(%rcx)                  ;   {poll_return}
    1.47%   │││  0x00007f7a4eb1cfe3:   ret    
-           │↘│  0x00007f7a4eb1cfe4:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           │↘│  0x00007f7a4eb1cfe4:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │ │  0x00007f7a4eb1cfee:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            │ ╰  0x00007f7a4eb1cff2:   jmp    0x00007f7a4eb1cfd1           ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            ↘    0x00007f7a4eb1cff4:   mov    0x28(%r8),%r10
                 0x00007f7a4eb1cff8:   mov    (%r10),%r9d
    0.90%        0x00007f7a4eb1cffb:   mov    $0x0,%ecx
@@ -1380,7 +1380,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   15.57%  <total for region 4>
 
 ....[Hottest Region 5]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 743 
 
                    #           [sp+0x20]  (sp of caller)
                    0x00007f7a4eb1ed20:   mov    0x8(%rsi),%r10d
@@ -1398,17 +1398,17 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.28%           0x00007f7a4eb1ed50:   mov    0x8(%rsi),%r10d
    0.21%           0x00007f7a4eb1ed54:   movabs $0x800000000,%r11
    0.07%           0x00007f7a4eb1ed5e:   lea    (%r11,%r10,1),%r8
-   0.00%           0x00007f7a4eb1ed62:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
+   0.00%           0x00007f7a4eb1ed62:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
    0.25%           0x00007f7a4eb1ed6c:   cmp    0x20(%r8),%r11
           ╭        0x00007f7a4eb1ed70:   je     0x00007f7a4eb1ed8d           ;*invokeinterface baz_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
    0.82%  │        0x00007f7a4eb1ed76:   data16 nopw 0x0(%rax,%rax,1)
-          │        0x00007f7a4eb1ed80:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
+          │        0x00007f7a4eb1ed80:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
           │╭       0x00007f7a4eb1ed87:   jne    0x00007f7a4eb1edae
-   0.64%  ↘│    ↗  0x00007f7a4eb1ed8d:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   0.64%  ↘│    ↗  0x00007f7a4eb1ed8d:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
    0.07%   │    │  0x00007f7a4eb1ed97:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
    1.16%   │    │  0x00007f7a4eb1ed9b:   mov    0x10(%rsp),%rbp
    0.06%   │    │  0x00007f7a4eb1eda0:   add    $0x18,%rsp
            │    │  0x00007f7a4eb1eda4:   mov    0x348(%r15),%rcx
@@ -1435,11 +1435,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                │╰  0x00007f7a4eb1ede9:   jmp    0x00007f7a4eb1ed8d
                ↘   0x00007f7a4eb1edeb:   movl   $0xffffffdf,0x370(%r15)
                    0x00007f7a4eb1edf6:   mov    %r12,0x378(%r15)             ;*invokeinterface baz_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
                    0x00007f7a4eb1edfd:   data16 xchg %ax,%ax
                    0x00007f7a4eb1ee00:   call   0x00007f7a4702427a           ; ImmutableOopMap {rsi=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@0 (line 213)
+                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@0 (line 213)
                                                                              ;   {runtime_call DeoptimizationBlob}
                    0x00007f7a4eb1ee05:   nop
 ....................................................................................................
@@ -1447,19 +1447,19 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 
 ....[Hottest Regions]...............................................................................
   18.79%                       <unknown> 
-  16.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
-  15.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
-  15.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
-  14.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 743 
-   6.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
-   2.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
-   2.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
-   1.91%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
-   1.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
-   1.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
-   0.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  16.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  15.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
+  15.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+  14.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 743 
+   6.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
+   2.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
+   2.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+   1.91%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+   1.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+   1.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
+   0.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    0.36%               kernel  [unknown] 
-   0.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+   0.28%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
    0.11%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -1471,16 +1471,16 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  21.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
+  21.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 747 
   18.87%                       <unknown> 
-  17.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
-  17.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
-  14.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 743 
-   8.93%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
+  17.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+  17.04%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 738 
+  14.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 743 
+   8.93%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
    1.28%               kernel  [unknown] 
    0.02%         libc-2.31.so  __strncat_ssse3 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 771 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 4, compile id 771 
    0.01%         libc-2.31.so  __strxfrm_l 
    0.01%            libjvm.so  outputStream::do_vsnprintf_and_write_with_automatic_buffer 
    0.01%            libjvm.so  outputStream::print 
@@ -1524,7 +1524,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_6)
 
 # Run progress: 35.71% complete, ETA 00:16:46
@@ -1544,12 +1544,12 @@ Iteration   5: 57.495 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   57.424 ±(99.9%) 0.227 ns/op [Average]
   (min, avg, max) = (57.352, 57.424, 57.495), stdev = 0.059
   CI (99.9%): [57.196, 57.651] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 196894 total address lines.
 Perf output processed (skipped 58.590 seconds):
  Column 1: cycles (51095 events)
@@ -2384,7 +2384,7 @@ Hottest code regions (>10.00% "cycles" events):
   21.18%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
 
                 #           [sp+0x20]  (sp of caller)
                 0x00007feb5eb1f320:   mov    0x8(%rsi),%r10d
@@ -2402,48 +2402,48 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.34%        0x00007feb5eb1f350:   mov    0x8(%rsi),%r10d
    0.03%        0x00007feb5eb1f354:   movabs $0x800000000,%r11
                 0x00007feb5eb1f35e:   lea    (%r11,%r10,1),%r8
-   0.00%        0x00007feb5eb1f362:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
+   0.00%        0x00007feb5eb1f362:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
    0.29%        0x00007feb5eb1f36c:   cmp    0x20(%r8),%r11
           ╭     0x00007feb5eb1f370:   je     0x00007feb5eb1f38d
    1.05%  │     0x00007feb5eb1f376:   data16 nopw 0x0(%rax,%rax,1)
-          │     0x00007feb5eb1f380:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
+          │     0x00007feb5eb1f380:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
           │╭    0x00007feb5eb1f387:   jne    0x00007feb5eb1f3f4           ;*invokeinterface baz_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
    0.30%  ↘│    0x00007feb5eb1f38d:   mov    0x8(%rsi),%r10d
-   0.02%   │    0x00007feb5eb1f391:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.02%   │    0x00007feb5eb1f391:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
            │╭   0x00007feb5eb1f398:   je     0x00007feb5eb1f3e4
    0.00%   ││   0x00007feb5eb1f39e:   xchg   %ax,%ax
-           ││   0x00007feb5eb1f3a0:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+           ││   0x00007feb5eb1f3a0:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
            ││   0x00007feb5eb1f3a7:   je     0x00007feb5eb1f44e
-   0.29%   ││   0x00007feb5eb1f3ad:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.29%   ││   0x00007feb5eb1f3ad:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            ││   0x00007feb5eb1f3b4:   je     0x00007feb5eb1f465           ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
    0.33%   ││   0x00007feb5eb1f3ba:   mov    %rsi,%r10
            ││   0x00007feb5eb1f3bd:   mov    %r10,(%rsp)
    1.48%   ││   0x00007feb5eb1f3c1:   movabs $0x800c2c400,%rax
    0.00%   ││   0x00007feb5eb1f3cb:   call   0x00007feb5701c0e0           ; ImmutableOopMap {[0]=Oop }
            ││                                                             ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            ││                                                             ;   {virtual_call}
            ││   0x00007feb5eb1f3d0:   nop                                 ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            ││↗  0x00007feb5eb1f3d1:   mov    0x10(%rsp),%rbp
    1.84%   │││  0x00007feb5eb1f3d6:   add    $0x18,%rsp
            │││  0x00007feb5eb1f3da:   mov    0x348(%r15),%rcx
            │││  0x00007feb5eb1f3e1:   test   %eax,(%rcx)                  ;   {poll_return}
    1.72%   │││  0x00007feb5eb1f3e3:   ret    
-           │↘│  0x00007feb5eb1f3e4:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           │↘│  0x00007feb5eb1f3e4:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │ │  0x00007feb5eb1f3ee:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            │ ╰  0x00007feb5eb1f3f2:   jmp    0x00007feb5eb1f3d1           ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            ↘    0x00007feb5eb1f3f4:   mov    0x28(%r8),%r10
                 0x00007feb5eb1f3f8:   mov    (%r10),%r9d
    1.04%        0x00007feb5eb1f3fb:   mov    $0x0,%ecx
@@ -2461,7 +2461,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   17.85%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
 
                 #           [sp+0x20]  (sp of caller)
                 0x00007feb5eb1d9a0:   mov    0x8(%rsi),%r10d
@@ -2479,50 +2479,50 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.33%        0x00007feb5eb1d9d0:   mov    0x8(%rsi),%r10d
    0.04%        0x00007feb5eb1d9d4:   movabs $0x800000000,%r11
                 0x00007feb5eb1d9de:   lea    (%r11,%r10,1),%r8
-   0.00%        0x00007feb5eb1d9e2:   movabs $0x800c269e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
+   0.00%        0x00007feb5eb1d9e2:   movabs $0x800c269e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
    0.31%        0x00007feb5eb1d9ec:   cmp    0x20(%r8),%r11
           ╭     0x00007feb5eb1d9f0:   je     0x00007feb5eb1da0d
    0.99%  │     0x00007feb5eb1d9f6:   data16 nopw 0x0(%rax,%rax,1)
-          │     0x00007feb5eb1da00:   cmp    $0xc269e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
+          │     0x00007feb5eb1da00:   cmp    $0xc269e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I3&apos;)}
           │╭    0x00007feb5eb1da07:   jne    0x00007feb5eb1da74           ;*invokeinterface baz_3 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
    0.34%  ↘│    0x00007feb5eb1da0d:   mov    0x8(%rsi),%r10d
-   0.01%   │    0x00007feb5eb1da11:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+   0.01%   │    0x00007feb5eb1da11:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
            │╭   0x00007feb5eb1da18:   je     0x00007feb5eb1da64
    0.00%   ││   0x00007feb5eb1da1e:   xchg   %ax,%ax
-           ││   0x00007feb5eb1da20:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+           ││   0x00007feb5eb1da20:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
            ││   0x00007feb5eb1da27:   je     0x00007feb5eb1dace
-   0.32%   ││   0x00007feb5eb1da2d:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.32%   ││   0x00007feb5eb1da2d:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            ││   0x00007feb5eb1da34:   je     0x00007feb5eb1dae5           ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
    0.15%   ││   0x00007feb5eb1da3a:   mov    %rsi,%r10
            ││   0x00007feb5eb1da3d:   mov    %r10,(%rsp)
    1.26%   ││   0x00007feb5eb1da41:   movabs $0x800c2d3f0,%rax
    0.00%   ││   0x00007feb5eb1da4b:   call   0x00007feb5701bfe0           ; ImmutableOopMap {[0]=Oop }
            ││                                                             ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            ││                                                             ;   {virtual_call}
    0.00%   ││   0x00007feb5eb1da50:   nop                                 ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            ││↗  0x00007feb5eb1da51:   mov    0x10(%rsp),%rbp
    1.92%   │││  0x00007feb5eb1da56:   add    $0x18,%rsp
            │││  0x00007feb5eb1da5a:   mov    0x348(%r15),%rcx
            │││  0x00007feb5eb1da61:   test   %eax,(%rcx)                  ;   {poll_return}
    1.60%   │││  0x00007feb5eb1da63:   ret    
-           │↘│  0x00007feb5eb1da64:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           │↘│  0x00007feb5eb1da64:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │ │  0x00007feb5eb1da6e:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            │ ╰  0x00007feb5eb1da72:   jmp    0x00007feb5eb1da51           ;*invokeinterface foo_2 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
            ↘    0x00007feb5eb1da74:   mov    0x28(%r8),%r10
                 0x00007feb5eb1da78:   mov    (%r10),%r9d
    1.05%        0x00007feb5eb1da7b:   mov    $0x0,%ecx
@@ -2540,7 +2540,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   17.55%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 745 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 745 
 
                    #           [sp+0x20]  (sp of caller)
                    0x00007feb5eb1cc20:   mov    0x8(%rsi),%r10d
@@ -2558,17 +2558,17 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.36%           0x00007feb5eb1cc50:   mov    0x8(%rsi),%r10d
    0.02%           0x00007feb5eb1cc54:   movabs $0x800000000,%r11
                    0x00007feb5eb1cc5e:   lea    (%r11,%r10,1),%r8
-                   0x00007feb5eb1cc62:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
+                   0x00007feb5eb1cc62:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
    0.34%           0x00007feb5eb1cc6c:   cmp    0x20(%r8),%r11
           ╭        0x00007feb5eb1cc70:   je     0x00007feb5eb1cc8d           ;*invokeinterface baz_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
    0.97%  │        0x00007feb5eb1cc76:   data16 nopw 0x0(%rax,%rax,1)
-          │        0x00007feb5eb1cc80:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
+          │        0x00007feb5eb1cc80:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
           │╭       0x00007feb5eb1cc87:   jne    0x00007feb5eb1ccae
-   0.28%  ↘│    ↗  0x00007feb5eb1cc8d:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   0.28%  ↘│    ↗  0x00007feb5eb1cc8d:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │    │  0x00007feb5eb1cc97:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
    1.03%   │    │  0x00007feb5eb1cc9b:   mov    0x10(%rsp),%rbp
            │    │  0x00007feb5eb1cca0:   add    $0x18,%rsp
            │    │  0x00007feb5eb1cca4:   mov    0x348(%r15),%rcx
@@ -2595,11 +2595,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                │╰  0x00007feb5eb1cce9:   jmp    0x00007feb5eb1cc8d
                ↘   0x00007feb5eb1cceb:   movl   $0xffffffdf,0x370(%r15)
                    0x00007feb5eb1ccf6:   mov    %r12,0x378(%r15)             ;*invokeinterface baz_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
                    0x00007feb5eb1ccfd:   data16 xchg %ax,%ax
                    0x00007feb5eb1cd00:   call   0x00007feb5702427a           ; ImmutableOopMap {rsi=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@0 (line 213)
+                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@0 (line 213)
                                                                              ;   {runtime_call DeoptimizationBlob}
                    0x00007feb5eb1cd05:   nop
 ....................................................................................................
@@ -2607,24 +2607,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 
 ....[Hottest Regions]...............................................................................
   21.18%                       <unknown> 
-  17.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
-  17.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
-  14.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 745 
-   8.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   6.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 748 
-   2.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 748 
-   2.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
+  17.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
+  17.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
+  14.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 745 
+   8.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   6.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 748 
+   2.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 748 
+   2.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
    1.48%               kernel  [unknown] 
-   1.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
-   1.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   1.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
+   1.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
    0.09%               kernel  [unknown] 
    1.14%  <...other 267 warm regions...>
 ....................................................................................................
@@ -2632,11 +2632,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 
 ....[Hottest Methods (after inlining)]..............................................................
   21.22%                       <unknown> 
-  19.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
-  19.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
-  14.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 745 
-  12.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
-   9.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 748 
+  19.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 749 
+  19.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 750 
+  14.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 745 
+  12.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 754 
+   9.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 748 
    2.34%               kernel  [unknown] 
    0.02%            libjvm.so  ElfSymbolTable::lookup 
    0.01%         libc-2.31.so  __strncat_ssse3 
@@ -2682,7 +2682,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic
 # Parameters: (targetType = MEGAMORPHIC_6_DOMINANT_TARGET)
 
 # Run progress: 42.86% complete, ETA 00:14:52
@@ -2702,12 +2702,12 @@ Iteration   5: 9.880 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic":
   9.888 ±(99.9%) 0.037 ns/op [Average]
   (min, avg, max) = (9.879, 9.888, 9.901), stdev = 0.010
   CI (99.9%): [9.851, 9.925] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.devirtualize_to_monomorphic:·asm":
 PrintAssembly processed: 195242 total address lines.
 Perf output processed (skipped 58.538 seconds):
  Column 1: cycles (50774 events)
@@ -2716,37 +2716,37 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
 
-             0x00007f1f9ab1b122:   movabs $0x800c2d3f0,%r9             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C6&apos;)}
-   0.00%     0x00007f1f9ab1b12c:   movabs $0x800c2d128,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C5&apos;)}
-             0x00007f1f9ab1b136:   movabs $0x800c2ce60,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
-             0x00007f1f9ab1b140:   movabs $0x800c2cb98,%rdi            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
-             0x00007f1f9ab1b14a:   movabs $0x800c2c8d0,%rdx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
-             0x00007f1f9ab1b154:   movabs $0x7fef3e8a8,%rax            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
-             0x00007f1f9ab1b15e:   movabs $0x800c2c400,%rbp            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+             0x00007f1f9ab1b122:   movabs $0x800c2d3f0,%r9             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C6&apos;)}
+   0.00%     0x00007f1f9ab1b12c:   movabs $0x800c2d128,%rcx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C5&apos;)}
+             0x00007f1f9ab1b136:   movabs $0x800c2ce60,%rbx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+             0x00007f1f9ab1b140:   movabs $0x800c2cb98,%rdi            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+             0x00007f1f9ab1b14a:   movabs $0x800c2c8d0,%rdx            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+             0x00007f1f9ab1b154:   movabs $0x7fef3e8a8,%rax            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+             0x00007f1f9ab1b15e:   movabs $0x800c2c400,%rbp            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
              0x00007f1f9ab1b168:   mov    $0x0,%r11d
              0x00007f1f9ab1b16e:   xchg   %ax,%ax                      ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@12 (line 158)
    1.66%     0x00007f1f9ab1b170:   cmp    $0x1c20,%r11d
              0x00007f1f9ab1b177:   jae    0x00007f1f9ab1b3cb           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@16 (line 158)
    0.03%     0x00007f1f9ab1b17d:   mov    0x10(%r10,%r11,4),%esi       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    3.30%     0x00007f1f9ab1b182:   test   %esi,%esi
              0x00007f1f9ab1b184:   je     0x00007f1f9ab1b214
    0.35%     0x00007f1f9ab1b18a:   mov    0x8(,%rsi,8),%r14d
    4.10%     0x00007f1f9ab1b192:   movabs $0x800000000,%r13
    0.03%     0x00007f1f9ab1b19c:   lea    0x0(%r13,%r14,1),%r14        ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@116 (line 177)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@116 (line 177)
    2.59%     0x00007f1f9ab1b1a1:   movsbl 0x10(%r11,%r8,8),%r13d       ;*baload {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@26 (line 160)
    0.03%     0x00007f1f9ab1b1a7:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@21 (line 159)
    1.76%     0x00007f1f9ab1b1ab:   mov    %rsi,(%rsp)
    0.03%     0x00007f1f9ab1b1af:   mov    %r11d,%esi
    2.00%     0x00007f1f9ab1b1b2:   inc    %esi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@134 (line 158)
    0.03%     0x00007f1f9ab1b1b4:   mov    %esi,0x24(%rsp)
    1.83%     0x00007f1f9ab1b1b8:   cmp    $0x0,%r13d
    0.03%     0x00007f1f9ab1b1bc:   nopl   0x0(%rax)
@@ -2763,7 +2763,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
           │  0x00007f1f9ab1b1f0:   cmp    $0x5,%r13d
           │  0x00007f1f9ab1b1f4:   je     0x00007f1f9ab1b36f
           │  0x00007f1f9ab1b1fa:   jmp    0x00007f1f9ab1b444           ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@27 (line 160)
    0.03%  ↘  0x00007f1f9ab1b1ff:   nop
    1.62%     0x00007f1f9ab1b200:   cmp    %r14,%rbp
              0x00007f1f9ab1b203:   jne    0x00007f1f9ab1b3fa           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
@@ -2824,7 +2824,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   17.64%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 744 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 744 
 
                    #           [sp+0x20]  (sp of caller)
                    0x00007f1f9ab1bd20:   mov    0x8(%rsi),%r10d
@@ -2842,17 +2842,17 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.37%           0x00007f1f9ab1bd50:   mov    0x8(%rsi),%r10d
    0.03%           0x00007f1f9ab1bd54:   movabs $0x800000000,%r11
                    0x00007f1f9ab1bd5e:   lea    (%r11,%r10,1),%r8
-                   0x00007f1f9ab1bd62:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
+                   0x00007f1f9ab1bd62:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
    0.32%           0x00007f1f9ab1bd6c:   cmp    0x20(%r8),%r11
           ╭        0x00007f1f9ab1bd70:   je     0x00007f1f9ab1bd8d           ;*invokeinterface baz_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
    0.99%  │        0x00007f1f9ab1bd76:   data16 nopw 0x0(%rax,%rax,1)
-          │        0x00007f1f9ab1bd80:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
+          │        0x00007f1f9ab1bd80:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I1&apos;)}
           │╭       0x00007f1f9ab1bd87:   jne    0x00007f1f9ab1bdae
-   0.31%  ↘│    ↗  0x00007f1f9ab1bd8d:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   0.31%  ↘│    ↗  0x00007f1f9ab1bd8d:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │    │  0x00007f1f9ab1bd97:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
    1.10%   │    │  0x00007f1f9ab1bd9b:   mov    0x10(%rsp),%rbp
            │    │  0x00007f1f9ab1bda0:   add    $0x18,%rsp
            │    │  0x00007f1f9ab1bda4:   mov    0x348(%r15),%rcx
@@ -2879,18 +2879,18 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                │╰  0x00007f1f9ab1bde9:   jmp    0x00007f1f9ab1bd8d
                ↘   0x00007f1f9ab1bdeb:   movl   $0xffffffdf,0x370(%r15)
                    0x00007f1f9ab1bdf6:   mov    %r12,0x378(%r15)             ;*invokeinterface baz_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
                    0x00007f1f9ab1bdfd:   data16 xchg %ax,%ax
                    0x00007f1f9ab1be00:   call   0x00007f1f9302427a           ; ImmutableOopMap {rsi=Oop }
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@0 (line 213)
+                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@0 (line 213)
                                                                              ;   {runtime_call DeoptimizationBlob}
                    0x00007f1f9ab1be05:   nop
 ....................................................................................................
   14.81%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
 
               #           [sp+0x20]  (sp of caller)
               0x00007f1f9ab1ac20:   mov    0x8(%rsi),%r10d
@@ -2908,23 +2908,23 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.32%      0x00007f1f9ab1ac50:   mov    0x8(%rsi),%r10d
    0.02%      0x00007f1f9ab1ac54:   movabs $0x800000000,%r11
               0x00007f1f9ab1ac5e:   lea    (%r11,%r10,1),%r8
-   0.00%      0x00007f1f9ab1ac62:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
+   0.00%      0x00007f1f9ab1ac62:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
    0.33%      0x00007f1f9ab1ac6c:   cmp    0x20(%r8),%r11
           ╭   0x00007f1f9ab1ac70:   je     0x00007f1f9ab1ac8d           ;*invokeinterface baz_2 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
    1.03%  │   0x00007f1f9ab1ac76:   data16 nopw 0x0(%rax,%rax,1)
-          │   0x00007f1f9ab1ac80:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
+          │   0x00007f1f9ab1ac80:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I2&apos;)}
           │   0x00007f1f9ab1ac87:   jne    0x00007f1f9ab1ace5
-   0.32%  ↘   0x00007f1f9ab1ac8d:   cmpl   $0xc2c400,0x8(%rsi)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   0.32%  ↘   0x00007f1f9ab1ac8d:   cmpl   $0xc2c400,0x8(%rsi)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.01%   ╭  0x00007f1f9ab1ac94:   je     0x00007f1f9ab1acc4           ;*return {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@6 (line 224)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@6 (line 224)
            │  0x00007f1f9ab1ac9a:   mov    %rsi,%r10
            │  0x00007f1f9ab1ac9d:   mov    %r10,(%rsp)
    0.33%   │  0x00007f1f9ab1aca1:   movabs $0x800c2c8d0,%rax
            │  0x00007f1f9ab1acab:   call   0x00007f1f9301bca0           ; ImmutableOopMap {[0]=Oop }
            │                                                            ;*invokeinterface foo_1 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
            │                                                            ;   {virtual_call}
            │  0x00007f1f9ab1acb0:   nop
            │  0x00007f1f9ab1acb1:   mov    0x10(%rsp),%rbp
@@ -2932,12 +2932,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
            │  0x00007f1f9ab1acba:   mov    0x348(%r15),%rcx
            │  0x00007f1f9ab1acc1:   test   %eax,(%rcx)                  ;   {poll_return}
    1.61%   │  0x00007f1f9ab1acc3:   ret    
-           ↘  0x00007f1f9ab1acc4:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           ↘  0x00007f1f9ab1acc4:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
               0x00007f1f9ab1acce:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
               0x00007f1f9ab1acd2:   mov    0x10(%rsp),%rbp
               0x00007f1f9ab1acd7:   add    $0x18,%rsp
               0x00007f1f9ab1acdb:   mov    0x348(%r15),%rcx
@@ -2946,42 +2946,42 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   14.77%  <total for region 4>
 
 ....[Hottest Regions]...............................................................................
-  19.99%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+  19.99%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
   17.64%                       <unknown> 
-  14.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 744 
-  14.77%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
-   9.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
-   5.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   4.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
-   3.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
-   2.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
-   1.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
-   1.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 740 
+  14.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 744 
+  14.77%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
+   9.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+   5.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   4.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
+   3.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+   2.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
+   1.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
+   1.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 740 
    0.87%               kernel  [unknown] 
-   0.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 740 
-   0.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   0.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   0.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
-   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 740 
+   0.63%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
    1.17%  <...other 265 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  28.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
+  28.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic, version 4, compile id 748 
   17.67%                       <unknown> 
-  17.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
-  14.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 744 
-  12.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
-   5.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
-   1.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 740 
+  17.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 743 
+  14.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 744 
+  12.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 742 
+   5.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 741 
+   1.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 740 
    1.70%               kernel  [unknown] 
    0.02%         libc-2.31.so  [unknown] 
    0.02%            libjvm.so  xmlStream::write_text 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 779 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_devirtualize_to_monomorphic_jmhTest::devirtualize_to_monomorphic_avgt_jmhStub, version 5, compile id 779 
    0.02%            libjvm.so  fileStream::write 
    0.01%            libjvm.so  outputStream::update_position 
    0.01%            libjvm.so  fileStream::flush 
@@ -3023,7 +3023,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = MONOMORPHIC)
 
 # Run progress: 50.00% complete, ETA 00:12:59
@@ -3043,12 +3043,12 @@ Iteration   5: 0.878 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   0.879 ±(99.9%) 0.001 ns/op [Average]
   (min, avg, max) = (0.878, 0.879, 0.879), stdev = 0.001
   CI (99.9%): [0.878, 0.879] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 192493 total address lines.
 Perf output processed (skipped 58.545 seconds):
  Column 1: cycles (50790 events)
@@ -3057,55 +3057,55 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
 
    0.01%           0x00007fbe62b1a717:   shl    $0x3,%r10                    ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
                    0x00007fbe62b1a71b:   mov    %r9d,%ebx
                    0x00007fbe62b1a71e:   mov    $0x0,%r9d
           ╭        0x00007fbe62b1a724:   jmp    0x00007fbe62b1a75f           ;*iload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
           │        0x00007fbe62b1a729:   data16 data16 nopw 0x0(%rax,%rax,1)
           │        0x00007fbe62b1a734:   data16 data16 xchg %ax,%ax
           │        0x00007fbe62b1a738:   nopl   0x0(%rax,%rax,1)             ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+          │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.02%  │↗       0x00007fbe62b1a740:   mov    0x10(%r10,%r9,4),%edi        ; ImmutableOopMap {r8=Oop r10=Oop }
           ││                                                                 ;*iload {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                                 ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          ││                                                                 ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.00%  ││       0x00007fbe62b1a745:   cmpl   $0xc2c400,0x8(,%rdi,8)       ; implicit exception: dispatches to 0x00007fbe62b1a926
-          ││                                                                 ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+          ││                                                                 ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.09%  ││       0x00007fbe62b1a750:   jne    0x00007fbe62b1a8d8           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.01%  ││       0x00007fbe62b1a756:   inc    %ebx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           ││       0x00007fbe62b1a758:   mov    %ebx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           ││       0x00007fbe62b1a75c:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+          ││                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    0.01%  ↘│       0x00007fbe62b1a75f:   nop
    0.01%   │       0x00007fbe62b1a760:   cmp    %r9d,%ecx
            ╰       0x00007fbe62b1a763:   ja     0x00007fbe62b1a740
@@ -3114,200 +3114,200 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
             │      0x00007fbe62b1a76e:   data16 data16 nopw 0x0(%rax,%rax,1)
             │      0x00007fbe62b1a779:   data16 data16 xchg %ax,%ax
             │      0x00007fbe62b1a77d:   data16 xchg %ax,%ax                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+            │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.20%    │ ↗    0x00007fbe62b1a780:   mov    0x10(%r10,%r9,4),%edi        ; ImmutableOopMap {rdi=NarrowOop r8=Oop r10=Oop }
             │ │                                                              ;*iload {reexecute=1 rethrow=0 return_oop=0}
-            │ │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+            │ │                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
   10.11%    │ │    0x00007fbe62b1a785:   cmpl   $0xc2c400,0x8(,%rdi,8)       ; implicit exception: dispatches to 0x00007fbe62b1a946
-            │ │                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+            │ │                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.58%    │╭│    0x00007fbe62b1a790:   jne    0x00007fbe62b1a878           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.26%    │││    0x00007fbe62b1a796:   mov    %ebx,%edx
    9.74%    │││    0x00007fbe62b1a798:   inc    %edx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             │││    0x00007fbe62b1a79a:   mov    %edx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.59%    │││    0x00007fbe62b1a79e:   mov    0x14(%r10,%r9,4),%edx        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.24%    │││    0x00007fbe62b1a7a3:   shl    $0x3,%rdi                    ; ImmutableOopMap {rdx=NarrowOop rdi=Oop r8=Oop r10=Oop }
             │││                                                              ;*return {reexecute=1 rethrow=0 return_oop=0}
-            │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
   10.18%    │││    0x00007fbe62b1a7a7:   cmpl   $0xc2c400,0x8(,%rdx,8)       ; implicit exception: dispatches to 0x00007fbe62b1a966
-            │││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+            │││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.60%    │││    0x00007fbe62b1a7b2:   jne    0x00007fbe62b1a8f0           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.23%    │││    0x00007fbe62b1a7b8:   lea    0x2(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    9.81%    │││    0x00007fbe62b1a7bb:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             │││    0x00007fbe62b1a7bf:   mov    0x18(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.90%    │││    0x00007fbe62b1a7c4:   mov    %r9d,%esi
    0.18%    │││    0x00007fbe62b1a7c7:   inc    %esi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
   10.21%    │││    0x00007fbe62b1a7c9:   shl    $0x3,%rdx                    ; ImmutableOopMap {rdx=Oop rdi=NarrowOop r8=Oop r10=Oop }
             │││                                                              ;*return {reexecute=1 rethrow=0 return_oop=0}
-            │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             │││    0x00007fbe62b1a7cd:   cmpl   $0xc2c400,0x8(,%rdi,8)       ; implicit exception: dispatches to 0x00007fbe62b1a986
-            │││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+            │││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    1.12%    │││    0x00007fbe62b1a7d8:   jne    0x00007fbe62b1a8c0           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    9.97%    │││    0x00007fbe62b1a7de:   lea    0x3(%rbx),%edx               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             │││    0x00007fbe62b1a7e1:   mov    %edx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.62%    │││    0x00007fbe62b1a7e5:   mov    0x1c(%r10,%r9,4),%edx        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.22%    │││    0x00007fbe62b1a7ea:   lea    0x2(%r9),%esi                ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    9.82%    │││    0x00007fbe62b1a7ee:   shl    $0x3,%rdi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
             │││    0x00007fbe62b1a7f2:   data16 nopw 0x0(%rax,%rax,1)
    0.57%    │││    0x00007fbe62b1a7fc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rdi=Oop r8=Oop r10=Oop }
             │││                                                              ;*return {reexecute=1 rethrow=0 return_oop=0}
-            │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@12 (line 210)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.22%    │││    0x00007fbe62b1a800:   cmpl   $0xc2c400,0x8(,%rdx,8)       ; implicit exception: dispatches to 0x00007fbe62b1a9a6
-            │││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+            │││                                                              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
   10.03%    │││    0x00007fbe62b1a80b:   jne    0x00007fbe62b1a890           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.61%    │││    0x00007fbe62b1a811:   lea    0x4(%rbx),%ebx               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.28%    │││    0x00007fbe62b1a814:   mov    %ebx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    9.67%    │││    0x00007fbe62b1a818:   lea    0x4(%r9),%r9d                ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+            │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
             ↘││    0x00007fbe62b1a81c:   nopl   0x0(%rax)
    0.59%     ││    0x00007fbe62b1a820:   cmp    %r9d,%ecx
              │╰    0x00007fbe62b1a823:   jg     0x00007fbe62b1a780
@@ -3315,76 +3315,76 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
              │ │   0x00007fbe62b1a82e:   data16 data16 nopw 0x0(%rax,%rax,1)
              │ │   0x00007fbe62b1a839:   data16 data16 xchg %ax,%ax
              │ │   0x00007fbe62b1a83d:   data16 xchg %ax,%ax                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+             │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.01%     │ │↗  0x00007fbe62b1a840:   mov    0x10(%r10,%r9,4),%ecx        ; ImmutableOopMap {r8=Oop r10=Oop }
              │ ││                                                            ;*iload {reexecute=1 rethrow=0 return_oop=0}
-             │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+             │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
              │ ││  0x00007fbe62b1a845:   cmpl   $0xc2c400,0x8(,%rcx,8)       ; implicit exception: dispatches to 0x00007fbe62b1a9c6
-             │ ││                                                            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+             │ ││                                                            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    0.02%     │ ││  0x00007fbe62b1a850:   jne    0x00007fbe62b1a8a8           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.02%     │ ││  0x00007fbe62b1a856:   inc    %ebx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
              │ ││  0x00007fbe62b1a858:   mov    %ebx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.01%     │ ││  0x00007fbe62b1a85c:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+             │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    0.00%     │ ││  0x00007fbe62b1a85f:   nop
    0.01%     │ ↘│  0x00007fbe62b1a860:   cmp    %r9d,%r11d
              │  ╰  0x00007fbe62b1a863:   ja     0x00007fbe62b1a840           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
              │     0x00007fbe62b1a865:   mov    0x10(%rsp),%rbp
    0.01%     │     0x00007fbe62b1a86a:   add    $0x18,%rsp
              │     0x00007fbe62b1a86e:   mov    0x348(%r15),%rcx
    0.00%     │     0x00007fbe62b1a875:   test   %eax,(%rcx)                  ;   {poll_return}
    0.06%     │     0x00007fbe62b1a877:   ret    
              ↘     0x00007fbe62b1a878:   movl   $0xffffffc4,0x370(%r15)      ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
                    0x00007fbe62b1a883:   mov    %r12,0x378(%r15)
                    0x00007fbe62b1a88a:   call   0x00007fbe5b02427a           ; ImmutableOopMap {r10=Oop }
                                                                              ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
                                                                              ;   {runtime_call DeoptimizationBlob}
                    0x00007fbe62b1a88f:   nop
                    0x00007fbe62b1a890:   movl   $0xffffffc4,0x370(%r15)      ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
 ....................................................................................................
   97.85%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
+  97.85%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
    0.97%               kernel  [unknown] 
-   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
+   0.09%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
    0.09%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 761 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 761 
    0.03%               kernel  [unknown] 
    0.02%            libjvm.so  ElfSymbolTable::lookup 
    0.02%               kernel  [unknown] 
@@ -3401,9 +3401,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
+  97.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 3, compile id 743 
    1.77%               kernel  [unknown] 
-   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 761 
+   0.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 761 
    0.02%            libjvm.so  ElfSymbolTable::lookup 
    0.02%         libc-2.31.so  [unknown] 
    0.01%                       <unknown> 
@@ -3452,7 +3452,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = BIMORPHIC)
 
 # Run progress: 57.14% complete, ETA 00:11:07
@@ -3472,12 +3472,12 @@ Iteration   5: 1.071 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   1.070 ±(99.9%) 0.002 ns/op [Average]
   (min, avg, max) = (1.069, 1.070, 1.071), stdev = 0.001
   CI (99.9%): [1.068, 1.072] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 189828 total address lines.
 Perf output processed (skipped 58.473 seconds):
  Column 1: cycles (50672 events)
@@ -3486,340 +3486,340 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
 
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bc1c:   mov    %edx,%r9d
             0x00007f8106b1bc1f:   nop
             0x00007f8106b1bc20:   jmp    0x00007f8106b1bbf0
-            0x00007f8106b1bc22:   cmp    $0xc2c400,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+            0x00007f8106b1bc22:   cmp    $0xc2c400,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
             0x00007f8106b1bc28:   jne    0x00007f8106b1bf66           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.01%    0x00007f8106b1bc2e:   mov    %ebx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bc32:   mov    %edx,%r9d
             0x00007f8106b1bc35:   jmp    0x00007f8106b1bbf0
    0.01%    0x00007f8106b1bc37:   lea    -0x8(%r11),%ecx
             0x00007f8106b1bc3b:   nopl   0x0(%rax,%rax,1)
    1.61%    0x00007f8106b1bc40:   cmp    %r9d,%ecx
             0x00007f8106b1bc43:   jle    0x00007f8106b1be40           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    1.57%    0x00007f8106b1bc49:   mov    0x10(%r10,%r9,4),%edi        ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.01%    0x00007f8106b1bc4e:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c026
    1.15%    0x00007f8106b1bc55:   data16 data16 nopw 0x0(%rax,%rax,1)
-   1.68%    0x00007f8106b1bc60:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   1.68%    0x00007f8106b1bc60:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bc66:   jne    0x00007f8106b1bd75
    1.52%    0x00007f8106b1bc6c:   mov    %ebx,%edi
    0.01%    0x00007f8106b1bc6e:   inc    %edi                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    1.27%    0x00007f8106b1bc70:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    1.72%    0x00007f8106b1bc74:   mov    0x14(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    1.44%    0x00007f8106b1bc79:   mov    %r9d,%edx
    0.01%    0x00007f8106b1bc7c:   inc    %edx                         ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    1.16%    0x00007f8106b1bc7e:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c046
-   2.52%    0x00007f8106b1bc85:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   2.52%    0x00007f8106b1bc85:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bc8b:   jne    0x00007f8106b1bdd5
    4.56%    0x00007f8106b1bc91:   lea    0x2(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bc94:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bc98:   mov    0x18(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.52%    0x00007f8106b1bc9d:   lea    0x2(%r9),%edx                ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    4.42%    0x00007f8106b1bca1:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c066
-   0.76%    0x00007f8106b1bca8:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.76%    0x00007f8106b1bca8:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bcae:   jne    0x00007f8106b1bdf1
    1.42%    0x00007f8106b1bcb4:   lea    0x3(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.00%    0x00007f8106b1bcb7:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    3.11%    0x00007f8106b1bcbb:   mov    0x1c(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
             0x00007f8106b1bcc0:   lea    0x3(%r9),%edx                ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    1.35%    0x00007f8106b1bcc4:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c086
-   0.34%    0x00007f8106b1bccb:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.34%    0x00007f8106b1bccb:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bcd1:   jne    0x00007f8106b1bd91
    4.32%    0x00007f8106b1bcd7:   lea    0x4(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bcda:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bcde:   mov    0x20(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
             0x00007f8106b1bce3:   lea    0x4(%r9),%edx                ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    4.32%    0x00007f8106b1bce7:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c0a6
-   0.00%    0x00007f8106b1bcee:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.00%    0x00007f8106b1bcee:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bcf4:   jne    0x00007f8106b1bda5
    0.00%    0x00007f8106b1bcfa:   lea    0x5(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bcfd:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    4.26%    0x00007f8106b1bd01:   mov    0x24(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.01%    0x00007f8106b1bd06:   lea    0x5(%r9),%edx                ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.00%    0x00007f8106b1bd0a:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c0c6
-  13.57%    0x00007f8106b1bd11:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+  13.57%    0x00007f8106b1bd11:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bd17:   jne    0x00007f8106b1be05
    4.36%    0x00007f8106b1bd1d:   lea    0x6(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bd20:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bd24:   mov    0x28(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
             0x00007f8106b1bd29:   lea    0x6(%r9),%edx                ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    4.39%    0x00007f8106b1bd2d:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c0e6
-   2.14%    0x00007f8106b1bd34:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   2.14%    0x00007f8106b1bd34:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bd3a:   jne    0x00007f8106b1be16
    2.24%    0x00007f8106b1bd40:   lea    0x7(%rbx),%edi               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bd43:   mov    %edi,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    2.36%    0x00007f8106b1bd47:   mov    0x2c(%r10,%r9,4),%edi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
             0x00007f8106b1bd4c:   lea    0x7(%r9),%edx                ; ImmutableOopMap {r8=Oop r10=Oop }
                                                                       ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    2.06%    0x00007f8106b1bd50:   mov    0x8(,%rdi,8),%edi            ; implicit exception: dispatches to 0x00007f8106b1c106
    3.11%    0x00007f8106b1bd57:   lea    0x8(%r9),%r9d                ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    1.56%    0x00007f8106b1bd5b:   lea    0x8(%rbx),%ebx               ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bd5e:   xchg   %ax,%ax
-   1.33%    0x00007f8106b1bd60:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   1.33%    0x00007f8106b1bd60:   cmp    $0xc2c8d0,%edi               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
             0x00007f8106b1bd66:   jne    0x00007f8106b1bdb6           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
             0x00007f8106b1bd6c:   mov    %ebx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
 ....................................................................................................
   82.21%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  82.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
-   6.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
-   4.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
-   4.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+  82.21%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+   6.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+   4.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+   4.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
    0.79%               kernel  [unknown] 
-   0.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+   0.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
    0.10%               kernel  [unknown] 
-   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
-   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 764 
+   0.08%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+   0.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 764 
    0.06%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
@@ -3835,9 +3835,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
+  97.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 746 
    1.79%               kernel  [unknown] 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 764 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 764 
    0.02%                       <unknown> 
    0.02%         libc-2.31.so  [unknown] 
    0.02%         libc-2.31.so  __strncat_ssse3 
@@ -3887,7 +3887,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = MEGAMORPHIC_3)
 
 # Run progress: 64.29% complete, ETA 00:09:15
@@ -3907,12 +3907,12 @@ Iteration   5: 1.765 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   1.753 ±(99.9%) 0.073 ns/op [Average]
   (min, avg, max) = (1.723, 1.753, 1.770), stdev = 0.019
   CI (99.9%): [1.680, 1.826] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 189849 total address lines.
 Perf output processed (skipped 58.509 seconds):
  Column 1: cycles (50407 events)
@@ -3921,99 +3921,99 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
 
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
                    0x00007fcedeb1bb6a:   shl    $0x3,%r10                    ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
                    0x00007fcedeb1bb6e:   mov    %r9d,%ecx
                    0x00007fcedeb1bb71:   mov    $0x0,%r9d
                    0x00007fcedeb1bb77:   nopw   0x0(%rax,%rax,1)             ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    7.10%     ↗↗ ↗  0x00007fcedeb1bb80:   cmp    %r9d,%r11d
           ╭  ││ │  0x00007fcedeb1bb83:   jbe    0x00007fcedeb1bbe0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    2.72%  │  ││ │  0x00007fcedeb1bb89:   mov    0x10(%r10,%r9,4),%ebx        ; ImmutableOopMap {r8=Oop r10=Oop }
           │  ││ │                                                            ;*iload {reexecute=1 rethrow=0 return_oop=0}
-          │  ││ │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          │  ││ │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    7.97%  │  ││ │  0x00007fcedeb1bb8e:   mov    0x8(,%rbx,8),%ebx            ; implicit exception: dispatches to 0x00007fcedeb1bc2b
   38.45%  │  ││ │  0x00007fcedeb1bb95:   mov    %r9d,%edi
    2.98%  │  ││ │  0x00007fcedeb1bb98:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    1.27%  │  ││ │  0x00007fcedeb1bb9a:   inc    %ecx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │  ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    3.78%  │  ││ │  0x00007fcedeb1bb9c:   nopl   0x0(%rax)
-  13.47%  │  ││ │  0x00007fcedeb1bba0:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+  13.47%  │  ││ │  0x00007fcedeb1bba0:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
           │╭ ││ │  0x00007fcedeb1bba6:   je     0x00007fcedeb1bbc2
-   2.31%  ││ ││ │  0x00007fcedeb1bbac:   cmp    $0xc2c400,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   2.31%  ││ ││ │  0x00007fcedeb1bbac:   cmp    $0xc2c400,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
           ││╭││ │  0x00007fcedeb1bbb2:   jne    0x00007fcedeb1bbcb           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    1.31%  │││││ │  0x00007fcedeb1bbb8:   mov    %ecx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.82%  │││││ │  0x00007fcedeb1bbbc:   mov    %edi,%r9d
    4.79%  │││││ │  0x00007fcedeb1bbbf:   nop
    0.25%  │││╰│ │  0x00007fcedeb1bbc0:   jmp    0x00007fcedeb1bb80           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.89%  │↘│ │ │  0x00007fcedeb1bbc2:   mov    %ecx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │ │ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.68%  │ │ │ │  0x00007fcedeb1bbc6:   mov    %edi,%r9d
    2.50%  │ │ ╰ │  0x00007fcedeb1bbc9:   jmp    0x00007fcedeb1bb80
-   1.68%  │ ↘   │  0x00007fcedeb1bbcb:   cmp    $0xc2cb98,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+   1.68%  │ ↘   │  0x00007fcedeb1bbcb:   cmp    $0xc2cb98,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
           │    ╭│  0x00007fcedeb1bbd1:   jne    0x00007fcedeb1bbf3           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    1.89%  │    ││  0x00007fcedeb1bbd7:   mov    %ecx,0xc(%r8)                ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │    ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    1.61%  │    ││  0x00007fcedeb1bbdb:   mov    %edi,%r9d
    2.00%  │    │╰  0x00007fcedeb1bbde:   jmp    0x00007fcedeb1bb80
    0.00%  ↘    │   0x00007fcedeb1bbe0:   mov    0x10(%rsp),%rbp
@@ -4021,13 +4021,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                │   0x00007fcedeb1bbe9:   mov    0x348(%r15),%rcx
    0.01%       │   0x00007fcedeb1bbf0:   test   %eax,(%rcx)                  ;   {poll_return}
    0.04%       │   0x00007fcedeb1bbf2:   ret                                 ;*return {reexecute=0 rethrow=0 return_oop=0}
-               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@38 (line 148)
+               │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@38 (line 148)
                ↘   0x00007fcedeb1bbf3:   movl   $0xffffffcd,0x370(%r15)      ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
                    0x00007fcedeb1bbfe:   movq   $0x14,0x378(%r15)
                    0x00007fcedeb1bc09:   call   0x00007fced702427a           ; ImmutableOopMap {r10=Oop }
                                                                              ;*iload {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
                                                                              ;   {runtime_call DeoptimizationBlob}
                    0x00007fcedeb1bc0e:   nop
                    0x00007fcedeb1bc0f:   movl   $0xfffffff5,0x370(%r15)
@@ -4035,16 +4035,16 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   98.59%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
+  98.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
    0.15%               kernel  [unknown] 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
    0.10%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 763 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 763 
    0.02%            libjvm.so  xmlStream::write_text 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
@@ -4060,10 +4060,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
+  98.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 743 
    1.01%               kernel  [unknown] 
    0.02%                       <unknown> 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 763 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 5, compile id 763 
    0.02%            libjvm.so  xmlStream::write_text 
    0.02%         libc-2.31.so  [unknown] 
    0.02%            libjvm.so  fileStream::write 
@@ -4111,7 +4111,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = MEGAMORPHIC_4)
 
 # Run progress: 71.43% complete, ETA 00:07:24
@@ -4131,12 +4131,12 @@ Iteration   5: 15.430 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   15.404 ±(99.9%) 0.133 ns/op [Average]
   (min, avg, max) = (15.351, 15.404, 15.437), stdev = 0.035
   CI (99.9%): [15.271, 15.538] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 194026 total address lines.
 Perf output processed (skipped 58.672 seconds):
  Column 1: cycles (50518 events)
@@ -4145,105 +4145,105 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 749 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 749 
 
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
    0.01%             0x00007f25a2b1c654:   mov    0xc(,%r10,8),%r11d           ; implicit exception: dispatches to 0x00007f25a2b1c745
    0.00%             0x00007f25a2b1c65c:   mov    %r11d,0x14(%rsp)
                      0x00007f25a2b1c661:   shl    $0x3,%r10                    ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
                      0x00007f25a2b1c665:   mov    %r10,(%rsp)
-                     0x00007f25a2b1c669:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+                     0x00007f25a2b1c669:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
                      0x00007f25a2b1c673:   mov    $0x0,%r9d
                      0x00007f25a2b1c679:   nopl   0x0(%rax)                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.00%       ↗↗↗↗  0x00007f25a2b1c680:   cmp    %r9d,%r11d
           ╭    ││││  0x00007f25a2b1c683:   jbe    0x00007f25a2b1c732           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.65%  │    ││││  0x00007f25a2b1c689:   mov    0x10(%r10,%r9,4),%esi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    2.72%  │    ││││  0x00007f25a2b1c68e:   mov    %r9d,%ecx
    1.10%  │    ││││  0x00007f25a2b1c691:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    0.01%  │    ││││  0x00007f25a2b1c693:   test   %esi,%esi
           │╭   ││││  0x00007f25a2b1c695:   je     0x00007f25a2b1c6cc
    0.61%  ││   ││││  0x00007f25a2b1c69b:   mov    0x8(,%rsi,8),%ebx
-   4.85%  ││   ││││  0x00007f25a2b1c6a2:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   4.85%  ││   ││││  0x00007f25a2b1c6a2:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
           ││╭  ││││  0x00007f25a2b1c6a8:   je     0x00007f25a2b1c70e
-   1.82%  │││  ││││  0x00007f25a2b1c6ae:   cmp    $0xc2c400,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   1.82%  │││  ││││  0x00007f25a2b1c6ae:   cmp    $0xc2c400,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
           │││╭ ││││  0x00007f25a2b1c6b4:   je     0x00007f25a2b1c71a
    1.01%  ││││ ││││  0x00007f25a2b1c6ba:   nopw   0x0(%rax,%rax,1)
-          ││││ ││││  0x00007f25a2b1c6c0:   cmp    $0xc2ce60,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+          ││││ ││││  0x00007f25a2b1c6c0:   cmp    $0xc2ce60,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
           ││││╭││││  0x00007f25a2b1c6c6:   je     0x00007f25a2b1c726           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.58%  │↘│││││││  0x00007f25a2b1c6cc:   mov    %ecx,0x10(%rsp)
    0.00%  │ │││││││  0x00007f25a2b1c6d0:   mov    %r9d,0xc(%rsp)               ;*iload {reexecute=1 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          │ │││││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
           │ │││││││  0x00007f25a2b1c6d5:   test   %eax,0x0(,%rsi,8)            ; implicit exception: deoptimizes
           │ │││││││                                                            ; ImmutableOopMap {rsi=NarrowOop [0]=Oop }
    0.60%  │ │││││││  0x00007f25a2b1c6dc:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.01%  │ │││││││  0x00007f25a2b1c6e0:   nop
    0.00%  │ │││││││  0x00007f25a2b1c6e1:   movabs $0x800c2cb98,%rax
           │ │││││││  0x00007f25a2b1c6eb:   call   0x00007f25a2b1a7a0           ; ImmutableOopMap {[0]=Oop }
           │ │││││││                                                            ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           │ │││││││                                                            ;   {virtual_call}
           │ │││││││  0x00007f25a2b1c6f0:   nop
           │ │││││││  0x00007f25a2b1c6f1:   mov    0x10(%rsp),%r9d
-   4.58%  │ │││││││  0x00007f25a2b1c6f6:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   4.58%  │ │││││││  0x00007f25a2b1c6f6:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
           │ │││││││  0x00007f25a2b1c700:   mov    (%rsp),%r10
    0.13%  │ │││││││  0x00007f25a2b1c704:   mov    0x14(%rsp),%r11d
    0.50%  │ │││╰│││  0x00007f25a2b1c709:   jmp    0x00007f25a2b1c680           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │ │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.48%  │ ↘││ │││  0x00007f25a2b1c70e:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.31%  │  ││ │││  0x00007f25a2b1c712:   mov    %ecx,%r9d
    0.47%  │  ││ ╰││  0x00007f25a2b1c715:   jmp    0x00007f25a2b1c680           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │  ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.02%  │  ↘│  ││  0x00007f25a2b1c71a:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    1.29%  │   │  ││  0x00007f25a2b1c71e:   mov    %ecx,%r9d
    0.02%  │   │  ╰│  0x00007f25a2b1c721:   jmp    0x00007f25a2b1c680           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.60%  │   ↘   │  0x00007f25a2b1c726:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.00%  │       │  0x00007f25a2b1c72a:   mov    %ecx,%r9d
    0.58%  │       ╰  0x00007f25a2b1c72d:   jmp    0x00007f25a2b1c680
    0.00%  ↘          0x00007f25a2b1c732:   mov    0x20(%rsp),%rbp
@@ -4255,14 +4255,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                      0x00007f25a2b1c750:   movq   $0x0,0x378(%r15)
                      0x00007f25a2b1c75b:   call   0x00007f259b02427a           ; ImmutableOopMap {rsi=Oop r10=NarrowOop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
                                                                                ;   {runtime_call DeoptimizationBlob}
                      0x00007f25a2b1c760:   nop
 ....................................................................................................
   22.96%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 740 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 740 
 
                    scopes pcs     [0x00007f25a2b1aa00,0x00007f25a2b1ab00] = 256
                    dependencies   [0x00007f25a2b1ab00,0x00007f25a2b1ab08] = 8
@@ -4272,7 +4272,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                   [Constant Pool (empty)]
                   --------------------------------------------------------------------------------
                   [Entry Point]
-                    # {method} {0x00007f25908d78d8} &apos;foo&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;
+                    # {method} {0x00007f25908d78d8} &apos;foo&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;
                     #           [sp+0x20]  (sp of caller)
    0.63%            0x00007f25a2b1a7a0:   mov    0x8(%rsi),%r10d
                     0x00007f25a2b1a7a4:   movabs $0x800000000,%r12
@@ -4289,38 +4289,38 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.59%            0x00007f25a2b1a7d0:   mov    0x8(%rsi),%r10d
    0.01%            0x00007f25a2b1a7d4:   movabs $0x800000000,%r11
    0.00%            0x00007f25a2b1a7de:   lea    (%r11,%r10,1),%r8
-                    0x00007f25a2b1a7e2:   movabs $0x800c26fe0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
+                    0x00007f25a2b1a7e2:   movabs $0x800c26fe0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
    0.57%            0x00007f25a2b1a7ec:   cmp    0x20(%r8),%r11
           ╭         0x00007f25a2b1a7f0:   je     0x00007f25a2b1a80d
    0.84%  │         0x00007f25a2b1a7f6:   data16 nopw 0x0(%rax,%rax,1)
-          │         0x00007f25a2b1a800:   cmp    $0xc26fe0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
+          │         0x00007f25a2b1a800:   cmp    $0xc26fe0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
           │╭        0x00007f25a2b1a807:   jne    0x00007f25a2b1a882           ;*invokeinterface baz {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.65%  ↘│     ↗  0x00007f25a2b1a80d:   mov    0x8(%rsi),%r10d
-           │     │  0x00007f25a2b1a811:   movabs $0x7fef3e8a8,%r11            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           │     │  0x00007f25a2b1a811:   movabs $0x7fef3e8a8,%r11            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │     │  0x00007f25a2b1a81b:   mov    $0x1,%r8d                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@8 (line 209)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            │     │  0x00007f25a2b1a821:   add    0xc(%r11),%r8d
-   0.55%   │     │  0x00007f25a2b1a825:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.55%   │     │  0x00007f25a2b1a825:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
            │╭    │  0x00007f25a2b1a82c:   je     0x00007f25a2b1a87c
-           ││    │  0x00007f25a2b1a832:   cmp    $0xc2c400,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+           ││    │  0x00007f25a2b1a832:   cmp    $0xc2c400,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
            ││    │  0x00007f25a2b1a839:   je     0x00007f25a2b1a8ce
            ││    │  0x00007f25a2b1a83f:   nop
-   0.00%   ││    │  0x00007f25a2b1a840:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.00%   ││    │  0x00007f25a2b1a840:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            ││    │  0x00007f25a2b1a847:   je     0x00007f25a2b1a8d4           ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.61%   ││    │  0x00007f25a2b1a84d:   mov    %rsi,%r10
            ││    │  0x00007f25a2b1a850:   mov    %r10,(%rsp)
    0.00%   ││    │  0x00007f25a2b1a854:   nop
@@ -4329,8 +4329,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
            ││    │  0x00007f25a2b1a859:   movabs $0x800c2cb98,%rax
    0.00%   ││    │  0x00007f25a2b1a863:   call   0x00007f259b727ac0           ; ImmutableOopMap {[0]=Oop }
            ││    │                                                            ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ││    │                                                            ;   {virtual_call}
    0.00%   ││    │  0x00007f25a2b1a868:   nop
            ││↗   │  0x00007f25a2b1a869:   mov    0x10(%rsp),%rbp
@@ -4338,24 +4338,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
            │││   │  0x00007f25a2b1a872:   mov    0x348(%r15),%rcx
            │││   │  0x00007f25a2b1a879:   test   %eax,(%rcx)                  ;   {poll_return}
    2.53%   │││   │  0x00007f25a2b1a87b:   ret                                 ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           │││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            │↘│   │  0x00007f25a2b1a87c:   mov    %r8d,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            │ ╰   │  0x00007f25a2b1a880:   jmp    0x00007f25a2b1a869           ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.00%   ↘     │  0x00007f25a2b1a882:   mov    0x28(%r8),%r10
    0.28%         │  0x00007f25a2b1a886:   mov    (%r10),%r9d
    1.28%         │  0x00007f25a2b1a889:   mov    $0x0,%ecx
@@ -4376,31 +4376,31 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                │ │  0x00007f25a2b1a8c0:   jmp    0x00007f25a2b1a8da
    0.05%       ↘ │  0x00007f25a2b1a8c5:   mov    %r11,0x20(%r8)
                  ╰  0x00007f25a2b1a8c9:   jmp    0x00007f25a2b1a80d           ;*invokeinterface baz {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
                     0x00007f25a2b1a8ce:   mov    %r8d,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
 ....................................................................................................
   22.37%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
 
                  0x00007f25a2b1b2a1:   add    0xc(%r11),%r8d
-   0.66%         0x00007f25a2b1b2a5:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.66%         0x00007f25a2b1b2a5:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
           ╭      0x00007f25a2b1b2ac:   je     0x00007f25a2b1b2fc
-          │      0x00007f25a2b1b2b2:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+          │      0x00007f25a2b1b2b2:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
           │      0x00007f25a2b1b2b9:   je     0x00007f25a2b1b34e
           │      0x00007f25a2b1b2bf:   nop
-          │      0x00007f25a2b1b2c0:   cmp    $0xc2c400,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+          │      0x00007f25a2b1b2c0:   cmp    $0xc2c400,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
           │      0x00007f25a2b1b2c7:   je     0x00007f25a2b1b354           ;*invokeinterface foo_4 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
    0.58%  │      0x00007f25a2b1b2cd:   mov    %rsi,%r10
           │      0x00007f25a2b1b2d0:   mov    %r10,(%rsp)
    0.02%  │      0x00007f25a2b1b2d4:   nop
@@ -4409,8 +4409,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.00%  │      0x00007f25a2b1b2d9:   movabs $0x800c2cb98,%rax
    0.04%  │      0x00007f25a2b1b2e3:   call   0x00007f259b727f40           ; ImmutableOopMap {[0]=Oop }
           │                                                                ;*invokeinterface foo_4 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
           │                                                                ;   {virtual_call}
    0.00%  │      0x00007f25a2b1b2e8:   nop
           │↗     0x00007f25a2b1b2e9:   mov    0x10(%rsp),%rbp
@@ -4418,22 +4418,22 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
           ││     0x00007f25a2b1b2f2:   mov    0x348(%r15),%rcx
           ││     0x00007f25a2b1b2f9:   test   %eax,(%rcx)                  ;   {poll_return}
    2.43%  ││     0x00007f25a2b1b2fb:   ret                                 ;*invokeinterface foo_4 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
           ↘│     0x00007f25a2b1b2fc:   mov    %r8d,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
            ╰     0x00007f25a2b1b300:   jmp    0x00007f25a2b1b2e9           ;*invokeinterface foo_4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
                  0x00007f25a2b1b302:   mov    0x28(%r8),%r10
                  0x00007f25a2b1b306:   mov    (%r10),%r9d
    1.00%         0x00007f25a2b1b309:   mov    $0x0,%ecx
@@ -4454,31 +4454,31 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
              │   0x00007f25a2b1b340:   jmp    0x00007f25a2b1b35a
    0.12%     ↘   0x00007f25a2b1b345:   mov    %r11,0x20(%r8)
                  0x00007f25a2b1b349:   jmp    0x00007f25a2b1b28d           ;*invokeinterface baz_5 {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
                  0x00007f25a2b1b34e:   mov    %r8d,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
 ....................................................................................................
   15.46%  <total for region 3>
 
 ....[Hottest Region 4]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
 
                  0x00007f25a2b1c1a1:   add    0xc(%r11),%r8d
-   0.58%         0x00007f25a2b1c1a5:   cmp    $0xc2c400,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   0.58%         0x00007f25a2b1c1a5:   cmp    $0xc2c400,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
           ╭      0x00007f25a2b1c1ac:   je     0x00007f25a2b1c1fc
-          │      0x00007f25a2b1c1b2:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+          │      0x00007f25a2b1c1b2:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
           │      0x00007f25a2b1c1b9:   je     0x00007f25a2b1c24e
           │      0x00007f25a2b1c1bf:   nop
-          │      0x00007f25a2b1c1c0:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+          │      0x00007f25a2b1c1c0:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
           │      0x00007f25a2b1c1c7:   je     0x00007f25a2b1c254           ;*invokeinterface foo_3 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
    0.61%  │      0x00007f25a2b1c1cd:   mov    %rsi,%r10
           │      0x00007f25a2b1c1d0:   mov    %r10,(%rsp)
    0.00%  │      0x00007f25a2b1c1d4:   nop
@@ -4487,8 +4487,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
           │      0x00007f25a2b1c1d9:   movabs $0x800c2cb98,%rax
           │      0x00007f25a2b1c1e3:   call   0x00007f25a2b1ad20           ; ImmutableOopMap {[0]=Oop }
           │                                                                ;*invokeinterface foo_3 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
           │                                                                ;   {virtual_call}
    0.01%  │      0x00007f25a2b1c1e8:   nop
           │↗     0x00007f25a2b1c1e9:   mov    0x10(%rsp),%rbp
@@ -4496,20 +4496,20 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
           ││     0x00007f25a2b1c1f2:   mov    0x348(%r15),%rcx
           ││     0x00007f25a2b1c1f9:   test   %eax,(%rcx)                  ;   {poll_return}
    2.48%  ││     0x00007f25a2b1c1fb:   ret                                 ;*invokeinterface foo_3 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
           ↘│     0x00007f25a2b1c1fc:   mov    %r8d,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+           │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
            ╰     0x00007f25a2b1c200:   jmp    0x00007f25a2b1c1e9           ;*invokeinterface foo_3 {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
                  0x00007f25a2b1c202:   mov    0x28(%r8),%r10
                  0x00007f25a2b1c206:   mov    (%r10),%r9d
    1.77%         0x00007f25a2b1c209:   mov    $0x0,%ecx
@@ -4530,27 +4530,27 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
              │   0x00007f25a2b1c240:   jmp    0x00007f25a2b1c25a
    0.24%     ↘   0x00007f25a2b1c245:   mov    %r11,0x20(%r8)
                  0x00007f25a2b1c249:   jmp    0x00007f25a2b1c18d           ;*invokeinterface baz_4 {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
                  0x00007f25a2b1c24e:   mov    %r8d,0xc(%r11)               ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
 ....................................................................................................
   13.94%  <total for region 4>
 
 ....[Hottest Regions]...............................................................................
-  22.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 749 
-  22.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 740 
-  15.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
-  13.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
-   7.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 741 
-   6.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 741 
-   5.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
-   4.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
+  22.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 749 
+  22.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 740 
+  15.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
+  13.94%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
+   7.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 741 
+   6.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 741 
+   5.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
+   4.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
    0.36%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -4568,11 +4568,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  22.97%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 749 
-  22.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 740 
-  20.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
-  19.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
-  13.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 741 
+  22.97%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 749 
+  22.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 740 
+  20.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 742 
+  19.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 743 
+  13.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 741 
    1.20%               kernel  [unknown] 
    0.06%                       <unknown> 
    0.02%         libc-2.31.so  __strxfrm_l 
@@ -4580,7 +4580,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.01%           ld-2.31.so  _dl_tunable_set_hwcaps 
    0.01%            libjvm.so  defaultStream::write 
    0.01%            libjvm.so  xmlStream::write_text 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 4, compile id 769 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.MegamorphicInterfaceCallBenchmark_virtual_calls_chain_jmhTest::virtual_calls_chain_avgt_jmhStub, version 4, compile id 769 
    0.01%            libjvm.so  fileStream::write 
    0.01%         libc-2.31.so  __strncat_ssse3 
    0.01%            libjvm.so  Mutex::lock_without_safepoint_check 
@@ -4619,7 +4619,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = MEGAMORPHIC_5)
 
 # Run progress: 78.57% complete, ETA 00:05:33
@@ -4639,12 +4639,12 @@ Iteration   5: 46.160 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   46.145 ±(99.9%) 0.047 ns/op [Average]
   (min, avg, max) = (46.127, 46.145, 46.160), stdev = 0.012
   CI (99.9%): [46.098, 46.192] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 200228 total address lines.
 Perf output processed (skipped 58.891 seconds):
  Column 1: cycles (50597 events)
@@ -4676,7 +4676,7 @@ Hottest code regions (>10.00% "cycles" events):
   30.77%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
 
                 #           [sp+0x20]  (sp of caller)
                 0x00007ff97eb1d4a0:   mov    0x8(%rsi),%r10d
@@ -4694,56 +4694,56 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.35%        0x00007ff97eb1d4d0:   mov    0x8(%rsi),%r10d
    0.01%        0x00007ff97eb1d4d4:   movabs $0x800000000,%r11
                 0x00007ff97eb1d4de:   lea    (%r11,%r10,1),%r8
-   0.00%        0x00007ff97eb1d4e2:   movabs $0x800c26fe0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
+   0.00%        0x00007ff97eb1d4e2:   movabs $0x800c26fe0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
    0.34%        0x00007ff97eb1d4ec:   cmp    0x20(%r8),%r11
           ╭     0x00007ff97eb1d4f0:   je     0x00007ff97eb1d50d
    0.51%  │     0x00007ff97eb1d4f6:   data16 nopw 0x0(%rax,%rax,1)
-          │     0x00007ff97eb1d500:   cmp    $0xc26fe0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
+          │     0x00007ff97eb1d500:   cmp    $0xc26fe0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
           │╭    0x00007ff97eb1d507:   jne    0x00007ff97eb1d574           ;*invokeinterface baz {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.67%  ↘│    0x00007ff97eb1d50d:   mov    0x8(%rsi),%r10d
-   0.02%   │    0x00007ff97eb1d511:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.02%   │    0x00007ff97eb1d511:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            │╭   0x00007ff97eb1d518:   je     0x00007ff97eb1d564
    0.12%   ││   0x00007ff97eb1d51e:   xchg   %ax,%ax
-           ││   0x00007ff97eb1d520:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+           ││   0x00007ff97eb1d520:   cmp    $0xc2c8d0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
            ││   0x00007ff97eb1d527:   je     0x00007ff97eb1d5e5
-   0.45%   ││   0x00007ff97eb1d52d:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+   0.45%   ││   0x00007ff97eb1d52d:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
            ││   0x00007ff97eb1d534:   je     0x00007ff97eb1d5ce           ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.20%   ││   0x00007ff97eb1d53a:   mov    %rsi,%r10
            ││   0x00007ff97eb1d53d:   mov    %r10,(%rsp)
    0.27%   ││   0x00007ff97eb1d541:   movabs $0x800c2c400,%rax
            ││   0x00007ff97eb1d54b:   call   0x00007ff97701bb60           ; ImmutableOopMap {[0]=Oop }
            ││                                                             ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ││                                                             ;   {virtual_call}
            ││   0x00007ff97eb1d550:   nop                                 ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ││↗  0x00007ff97eb1d551:   mov    0x10(%rsp),%rbp
    0.97%   │││  0x00007ff97eb1d556:   add    $0x18,%rsp
    0.16%   │││  0x00007ff97eb1d55a:   mov    0x348(%r15),%rcx
            │││  0x00007ff97eb1d561:   test   %eax,(%rcx)                  ;   {poll_return}
    1.44%   │││  0x00007ff97eb1d563:   ret    
-           │↘│  0x00007ff97eb1d564:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+           │↘│  0x00007ff97eb1d564:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │ │  0x00007ff97eb1d56e:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            │ ╰  0x00007ff97eb1d572:   jmp    0x00007ff97eb1d551           ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ↘    0x00007ff97eb1d574:   mov    0x28(%r8),%r10
                 0x00007ff97eb1d578:   mov    (%r10),%r9d
    0.52%        0x00007ff97eb1d57b:   mov    $0x0,%ecx
@@ -4761,102 +4761,102 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   14.49%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 763 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 763 
 
                      0x00007ff97eb1f961:   shl    $0x3,%r10                    ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
                      0x00007ff97eb1f965:   mov    %r10,(%rsp)
-                     0x00007ff97eb1f969:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+                     0x00007ff97eb1f969:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
                      0x00007ff97eb1f973:   mov    $0x0,%r9d
                      0x00007ff97eb1f979:   nopl   0x0(%rax)                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
                ↗↗↗↗  0x00007ff97eb1f980:   cmp    %r9d,%r11d
           ╭    ││││  0x00007ff97eb1f983:   jbe    0x00007ff97eb1fa32           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.33%  │    ││││  0x00007ff97eb1f989:   mov    0x10(%r10,%r9,4),%esi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    1.24%  │    ││││  0x00007ff97eb1f98e:   mov    %r9d,%ecx
    0.43%  │    ││││  0x00007ff97eb1f991:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
           │    ││││  0x00007ff97eb1f993:   test   %esi,%esi
           │╭   ││││  0x00007ff97eb1f995:   je     0x00007ff97eb1f9cc
    0.37%  ││   ││││  0x00007ff97eb1f99b:   mov    0x8(,%rsi,8),%ebx
-   2.87%  ││   ││││  0x00007ff97eb1f9a2:   cmp    $0xc2d128,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C5&apos;)}
+   2.87%  ││   ││││  0x00007ff97eb1f9a2:   cmp    $0xc2d128,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C5&apos;)}
           ││╭  ││││  0x00007ff97eb1f9a8:   je     0x00007ff97eb1fa0e
-   0.69%  │││  ││││  0x00007ff97eb1f9ae:   cmp    $0xc2ce60,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.69%  │││  ││││  0x00007ff97eb1f9ae:   cmp    $0xc2ce60,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
           │││╭ ││││  0x00007ff97eb1f9b4:   je     0x00007ff97eb1fa1a
    0.26%  ││││ ││││  0x00007ff97eb1f9ba:   nopw   0x0(%rax,%rax,1)
-          ││││ ││││  0x00007ff97eb1f9c0:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+          ││││ ││││  0x00007ff97eb1f9c0:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
           ││││╭││││  0x00007ff97eb1f9c6:   je     0x00007ff97eb1fa26           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.12%  │↘│││││││  0x00007ff97eb1f9cc:   mov    %ecx,0x10(%rsp)
    0.15%  │ │││││││  0x00007ff97eb1f9d0:   mov    %r9d,0xc(%rsp)               ;*iload {reexecute=1 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          │ │││││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.00%  │ │││││││  0x00007ff97eb1f9d5:   test   %eax,0x0(,%rsi,8)            ; implicit exception: deoptimizes
           │ │││││││                                                            ; ImmutableOopMap {rsi=NarrowOop [0]=Oop }
    0.19%  │ │││││││  0x00007ff97eb1f9dc:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.13%  │ │││││││  0x00007ff97eb1f9e0:   nop
    0.01%  │ │││││││  0x00007ff97eb1f9e1:   movabs $0x800c2c400,%rax
           │ │││││││  0x00007ff97eb1f9eb:   call   0x00007ff97701bfe0           ; ImmutableOopMap {[0]=Oop }
           │ │││││││                                                            ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           │ │││││││                                                            ;   {virtual_call}
           │ │││││││  0x00007ff97eb1f9f0:   nop
           │ │││││││  0x00007ff97eb1f9f1:   mov    0x10(%rsp),%r9d
-   2.22%  │ │││││││  0x00007ff97eb1f9f6:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   2.22%  │ │││││││  0x00007ff97eb1f9f6:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
           │ │││││││  0x00007ff97eb1fa00:   mov    (%rsp),%r10
           │ │││││││  0x00007ff97eb1fa04:   mov    0x14(%rsp),%r11d
    0.31%  │ │││╰│││  0x00007ff97eb1fa09:   jmp    0x00007ff97eb1f980           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │ │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.14%  │ ↘││ │││  0x00007ff97eb1fa0e:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.02%  │  ││ │││  0x00007ff97eb1fa12:   mov    %ecx,%r9d
    0.15%  │  ││ ╰││  0x00007ff97eb1fa15:   jmp    0x00007ff97eb1f980           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │  ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.12%  │  ↘│  ││  0x00007ff97eb1fa1a:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.02%  │   │  ││  0x00007ff97eb1fa1e:   mov    %ecx,%r9d
    0.15%  │   │  ╰│  0x00007ff97eb1fa21:   jmp    0x00007ff97eb1f980           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.17%  │   ↘   │  0x00007ff97eb1fa26:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           │       │  0x00007ff97eb1fa2a:   mov    %ecx,%r9d
    0.18%  │       ╰  0x00007ff97eb1fa2d:   jmp    0x00007ff97eb1f980
           ↘          0x00007ff97eb1fa32:   mov    0x20(%rsp),%rbp
@@ -4868,24 +4868,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                      0x00007ff97eb1fa50:   movq   $0x0,0x378(%r15)
                      0x00007ff97eb1fa5b:   call   0x00007ff97702427a           ; ImmutableOopMap {rsi=Oop r10=NarrowOop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
 ....................................................................................................
   10.30%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
   30.77%                       <unknown> 
-  14.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
-  10.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 763 
-   8.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 757 
-   8.77%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 756 
-   8.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 755 
-   5.97%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
-   3.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
-   2.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
-   1.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 755 
-   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 756 
-   1.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
-   1.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 757 
+  14.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
+  10.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 763 
+   8.86%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 757 
+   8.77%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 756 
+   8.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 755 
+   5.97%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
+   3.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
+   2.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
+   1.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 755 
+   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 756 
+   1.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
+   1.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 757 
    0.46%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
@@ -4899,12 +4899,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 
 ....[Hottest Methods (after inlining)]..............................................................
   30.83%                       <unknown> 
-  17.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
-  10.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 755 
-  10.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 763 
-  10.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 756 
-   9.91%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 757 
-   9.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
+  17.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 754 
+  10.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 755 
+  10.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 763 
+  10.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 756 
+   9.91%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 757 
+   9.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 758 
    1.35%               kernel  [unknown] 
    0.01%         libc-2.31.so  __strncat_ssse3 
    0.01%         libc-2.31.so  __strxfrm_l 
@@ -4948,7 +4948,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = MEGAMORPHIC_6)
 
 # Run progress: 85.71% complete, ETA 00:03:42
@@ -4968,12 +4968,12 @@ Iteration   5: 44.077 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   44.087 ±(99.9%) 0.115 ns/op [Average]
   (min, avg, max) = (44.069, 44.087, 44.140), stdev = 0.030
   CI (99.9%): [43.972, 44.202] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 197381 total address lines.
 Perf output processed (skipped 58.744 seconds):
  Column 1: cycles (50891 events)
@@ -5020,7 +5020,7 @@ Hottest code regions (>10.00% "cycles" events):
   30.60%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
 
                 #           [sp+0x20]  (sp of caller)
                 0x00007f363ab198a0:   mov    0x8(%rsi),%r10d
@@ -5038,56 +5038,56 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
    0.41%        0x00007f363ab198d0:   mov    0x8(%rsi),%r10d
    0.02%        0x00007f363ab198d4:   movabs $0x800000000,%r11
                 0x00007f363ab198de:   lea    (%r11,%r10,1),%r8
-                0x00007f363ab198e2:   movabs $0x800c26fe0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
+                0x00007f363ab198e2:   movabs $0x800c26fe0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
    0.43%        0x00007f363ab198ec:   cmp    0x20(%r8),%r11
           ╭     0x00007f363ab198f0:   je     0x00007f363ab1990d
    0.40%  │     0x00007f363ab198f6:   data16 nopw 0x0(%rax,%rax,1)
-          │     0x00007f363ab19900:   cmp    $0xc26fe0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
+          │     0x00007f363ab19900:   cmp    $0xc26fe0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$I&apos;)}
           │╭    0x00007f363ab19907:   jne    0x00007f363ab19974           ;*invokeinterface baz {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.95%  ↘│    0x00007f363ab1990d:   mov    0x8(%rsi),%r10d
-           │    0x00007f363ab19911:   cmp    $0xc2d128,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C5&apos;)}
+           │    0x00007f363ab19911:   cmp    $0xc2d128,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C5&apos;)}
            │╭   0x00007f363ab19918:   je     0x00007f363ab19964
    0.10%   ││   0x00007f363ab1991e:   xchg   %ax,%ax
-           ││   0x00007f363ab19920:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+           ││   0x00007f363ab19920:   cmp    $0xc2cb98,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
            ││   0x00007f363ab19927:   je     0x00007f363ab199ce
-   0.35%   ││   0x00007f363ab1992d:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
+   0.35%   ││   0x00007f363ab1992d:   cmp    $0xc2ce60,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C4&apos;)}
            ││   0x00007f363ab19934:   je     0x00007f363ab199e5           ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.12%   ││   0x00007f363ab1993a:   mov    %rsi,%r10
            ││   0x00007f363ab1993d:   mov    %r10,(%rsp)
    0.24%   ││   0x00007f363ab19941:   movabs $0xffffffffffffffff,%rax
            ││   0x00007f363ab1994b:   call   0x00007f363301ed80           ; ImmutableOopMap {[0]=Oop }
            ││                                                             ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ││                                                             ;   {virtual_call}
            ││   0x00007f363ab19950:   nop                                 ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ││↗  0x00007f363ab19951:   mov    0x10(%rsp),%rbp
    0.93%   │││  0x00007f363ab19956:   add    $0x18,%rsp
            │││  0x00007f363ab1995a:   mov    0x348(%r15),%rcx
    1.18%   │││  0x00007f363ab19961:   test   %eax,(%rcx)                  ;   {poll_return}
    2.02%   │││  0x00007f363ab19963:   ret    
-   0.17%   │↘│  0x00007f363ab19964:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   0.17%   │↘│  0x00007f363ab19964:   movabs $0x7fef3e8a8,%r10            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
            │ │  0x00007f363ab1996e:   incl   0xc(%r10)                    ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
    0.52%   │ ╰  0x00007f363ab19972:   jmp    0x00007f363ab19951           ;*invokeinterface foo_5 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+           │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
            ↘    0x00007f363ab19974:   mov    0x28(%r8),%r10
                 0x00007f363ab19978:   mov    (%r10),%r9d
    0.46%        0x00007f363ab1997b:   mov    $0x0,%ecx
@@ -5105,105 +5105,105 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
   19.01%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 765 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 765 
 
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
                      0x00007f363ab1bfd4:   mov    0xc(,%r10,8),%r11d           ; implicit exception: dispatches to 0x00007f363ab1c0c5
    0.00%             0x00007f363ab1bfdc:   mov    %r11d,0x14(%rsp)
                      0x00007f363ab1bfe1:   shl    $0x3,%r10                    ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
                      0x00007f363ab1bfe5:   mov    %r10,(%rsp)
-                     0x00007f363ab1bfe9:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+                     0x00007f363ab1bfe9:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
                      0x00007f363ab1bff3:   mov    $0x0,%r9d
                      0x00007f363ab1bff9:   nopl   0x0(%rax)                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.13%       ↗↗↗↗  0x00007f363ab1c000:   cmp    %r9d,%r11d
           ╭    ││││  0x00007f363ab1c003:   jbe    0x00007f363ab1c0b2           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.39%  │    ││││  0x00007f363ab1c009:   mov    0x10(%r10,%r9,4),%esi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    1.57%  │    ││││  0x00007f363ab1c00e:   mov    %r9d,%ecx
    0.30%  │    ││││  0x00007f363ab1c011:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+          │    ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
    0.05%  │    ││││  0x00007f363ab1c013:   test   %esi,%esi
           │╭   ││││  0x00007f363ab1c015:   je     0x00007f363ab1c04c
    0.44%  ││   ││││  0x00007f363ab1c01b:   mov    0x8(,%rsi,8),%ebx
-   3.14%  ││   ││││  0x00007f363ab1c022:   cmp    $0xc2c400,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   3.14%  ││   ││││  0x00007f363ab1c022:   cmp    $0xc2c400,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
           ││╭  ││││  0x00007f363ab1c028:   je     0x00007f363ab1c08e
-   0.63%  │││  ││││  0x00007f363ab1c02e:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
+   0.63%  │││  ││││  0x00007f363ab1c02e:   cmp    $0xc2c8d0,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C2&apos;)}
           │││╭ ││││  0x00007f363ab1c034:   je     0x00007f363ab1c09a
    0.41%  ││││ ││││  0x00007f363ab1c03a:   nopw   0x0(%rax,%rax,1)
-          ││││ ││││  0x00007f363ab1c040:   cmp    $0xc2cb98,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
+          ││││ ││││  0x00007f363ab1c040:   cmp    $0xc2cb98,%ebx               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C3&apos;)}
           ││││╭││││  0x00007f363ab1c046:   je     0x00007f363ab1c0a6           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.32%  │↘│││││││  0x00007f363ab1c04c:   mov    %ecx,0x10(%rsp)
    0.09%  │ │││││││  0x00007f363ab1c050:   mov    %r9d,0xc(%rsp)               ;*iload {reexecute=1 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          │ │││││││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.06%  │ │││││││  0x00007f363ab1c055:   test   %eax,0x0(,%rsi,8)            ; implicit exception: deoptimizes
           │ │││││││                                                            ; ImmutableOopMap {rsi=NarrowOop [0]=Oop }
    0.64%  │ │││││││  0x00007f363ab1c05c:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    0.08%  │ │││││││  0x00007f363ab1c060:   nop
    0.06%  │ │││││││  0x00007f363ab1c061:   movabs $0x800c2ce60,%rax
           │ │││││││  0x00007f363ab1c06b:   call   0x00007f363301bee0           ; ImmutableOopMap {[0]=Oop }
           │ │││││││                                                            ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           │ │││││││                                                            ;   {virtual_call}
           │ │││││││  0x00007f363ab1c070:   nop
           │ │││││││  0x00007f363ab1c071:   mov    0x10(%rsp),%r9d
-   1.84%  │ │││││││  0x00007f363ab1c076:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   1.84%  │ │││││││  0x00007f363ab1c076:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
           │ │││││││  0x00007f363ab1c080:   mov    (%rsp),%r10
           │ │││││││  0x00007f363ab1c084:   mov    0x14(%rsp),%r11d
    0.37%  │ │││╰│││  0x00007f363ab1c089:   jmp    0x00007f363ab1c000           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │ │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │ │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.15%  │ ↘││ │││  0x00007f363ab1c08e:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │  ││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           │  ││ │││  0x00007f363ab1c092:   mov    %ecx,%r9d
    0.12%  │  ││ ╰││  0x00007f363ab1c095:   jmp    0x00007f363ab1c000           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │  ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │  ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.10%  │  ↘│  ││  0x00007f363ab1c09a:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.05%  │   │  ││  0x00007f363ab1c09e:   mov    %ecx,%r9d
    0.09%  │   │  ╰│  0x00007f363ab1c0a1:   jmp    0x00007f363ab1c000           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.07%  │   ↘   │  0x00007f363ab1c0a6:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.05%  │       │  0x00007f363ab1c0aa:   mov    %ecx,%r9d
    0.07%  │       ╰  0x00007f363ab1c0ad:   jmp    0x00007f363ab1c000
           ↘          0x00007f363ab1c0b2:   mov    0x20(%rsp),%rbp
@@ -5215,26 +5215,26 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                      0x00007f363ab1c0d0:   movq   $0x0,0x378(%r15)
                      0x00007f363ab1c0db:   call   0x00007f363302427a           ; ImmutableOopMap {rsi=Oop r10=NarrowOop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
 ....................................................................................................
   11.24%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
   30.60%                       <unknown> 
-  19.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
-  11.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 765 
-   7.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 759 
-   7.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 757 
-   7.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 758 
-   5.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
-   2.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
-   1.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 757 
-   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 758 
-   1.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
+  19.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
+  11.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 765 
+   7.78%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 759 
+   7.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 757 
+   7.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 758 
+   5.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
+   2.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
+   1.57%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 757 
+   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 758 
+   1.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
    1.09%               kernel  [unknown] 
-   0.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 759 
-   0.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
-   0.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
+   0.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 759 
+   0.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
+   0.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
    0.08%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
@@ -5246,12 +5246,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 
 ....[Hottest Methods (after inlining)]..............................................................
   30.63%                       <unknown> 
-  21.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
-  11.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 765 
-   8.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 757 
-   8.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 759 
-   8.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 758 
-   7.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
+  21.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 756 
+  11.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 765 
+   8.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 757 
+   8.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 759 
+   8.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 758 
+   7.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 760 
    2.19%               kernel  [unknown] 
    0.02%         libc-2.31.so  __strxfrm_l 
    0.01%         libc-2.31.so  [unknown] 
@@ -5296,7 +5296,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain
 # Parameters: (targetType = MEGAMORPHIC_6_DOMINANT_TARGET)
 
 # Run progress: 92.86% complete, ETA 00:01:51
@@ -5316,12 +5316,12 @@ Iteration   5: 19.266 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain":
   19.263 ±(99.9%) 0.027 ns/op [Average]
   (min, avg, max) = (19.253, 19.263, 19.271), stdev = 0.007
   CI (99.9%): [19.237, 19.290] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark.virtual_calls_chain:·asm":
 PrintAssembly processed: 193653 total address lines.
 Perf output processed (skipped 58.650 seconds):
  Column 1: cycles (50737 events)
@@ -5354,62 +5354,62 @@ Hottest code regions (>10.00% "cycles" events):
   28.90%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 737 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 737 
 
                  0x00007fc6fab1bc61:   shl    $0x3,%r10                    ;*getfield instances {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@1 (line 144)
                  0x00007fc6fab1bc65:   mov    %r10,(%rsp)
-                 0x00007fc6fab1bc69:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+                 0x00007fc6fab1bc69:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
                  0x00007fc6fab1bc73:   mov    $0x0,%r9d
                  0x00007fc6fab1bc79:   nopl   0x0(%rax)                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
              ↗↗  0x00007fc6fab1bc80:   cmp    %r9d,%r11d
           ╭  ││  0x00007fc6fab1bc83:   jbe    0x00007fc6fab1bcfb           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
+          │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@16 (line 145)
    0.17%  │  ││  0x00007fc6fab1bc89:   mov    0x10(%r10,%r9,4),%esi        ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
    2.53%  │  ││  0x00007fc6fab1bc8e:   mov    %r9d,%ecx
    0.01%  │  ││  0x00007fc6fab1bc91:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
+          │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@32 (line 145)
           │  ││  0x00007fc6fab1bc93:   test   %esi,%esi
           │╭ ││  0x00007fc6fab1bc95:   je     0x00007fc6fab1bcba
    0.24%  ││ ││  0x00007fc6fab1bc9b:   nopl   0x0(%rax,%rax,1)
-   1.79%  ││ ││  0x00007fc6fab1bca0:   cmpl   $0xc2c400,0x8(,%rsi,8)       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
+   1.79%  ││ ││  0x00007fc6fab1bca0:   cmpl   $0xc2c400,0x8(,%rsi,8)       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$C1&apos;)}
    1.51%  ││╭││  0x00007fc6fab1bcab:   jne    0x00007fc6fab1bcba           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.43%  │││││  0x00007fc6fab1bcb1:   incl   0xc(%r8)                     ;*putfield x {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
-          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::baz_1@9 (line 209)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1@1 (line 213)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::baz_2@1 (line 219)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2@1 (line 223)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::baz_3@1 (line 229)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3@1 (line 233)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::baz_4@1 (line 239)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4@1 (line 243)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 249)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 253)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::baz@1 (line 259)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo@1 (line 263)
+          │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    5.11%  │││││  0x00007fc6fab1bcb5:   mov    %ecx,%r9d
    0.00%  │││╰│  0x00007fc6fab1bcb8:   jmp    0x00007fc6fab1bc80           ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
    0.17%  │↘↘ │  0x00007fc6fab1bcba:   mov    %ecx,0x10(%rsp)
    0.01%  │   │  0x00007fc6fab1bcbe:   mov    %r9d,0xc(%rsp)               ;*iload {reexecute=1 rethrow=0 return_oop=0}
-          │   │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
+          │   │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@13 (line 145)
    0.00%  │   │  0x00007fc6fab1bcc3:   test   %eax,0x0(,%rsi,8)            ; implicit exception: deoptimizes
           │   │                                                            ; ImmutableOopMap {rsi=NarrowOop [0]=Oop }
    0.47%  │   │  0x00007fc6fab1bcca:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
+          │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@22 (line 145)
           │   │  0x00007fc6fab1bcce:   data16 xchg %ax,%ax
           │   │  0x00007fc6fab1bcd1:   movabs $0x800c2c8d0,%rax
           │   │  0x00007fc6fab1bcdb:   call   0x00007fc6f301bd60           ; ImmutableOopMap {[0]=Oop }
           │   │                                                            ;*invokeinterface foo {reexecute=0 rethrow=0 return_oop=0}
-          │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
+          │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@27 (line 146)
           │   │                                                            ;   {virtual_call}
           │   │  0x00007fc6fab1bce0:   nop
           │   │  0x00007fc6fab1bce1:   mov    0x10(%rsp),%r9d
-   1.10%  │   │  0x00007fc6fab1bce6:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
+   1.10%  │   │  0x00007fc6fab1bce6:   movabs $0x7fef3e8a8,%r8             ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark$Wrapper&apos;{0x00000007fef3e8a8})}
           │   │  0x00007fc6fab1bcf0:   mov    (%rsp),%r10
           │   │  0x00007fc6fab1bcf4:   mov    0x14(%rsp),%r11d
    0.14%  │   ╰  0x00007fc6fab1bcf9:   jmp    0x00007fc6fab1bc80
@@ -5422,24 +5422,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
                  0x00007fc6fab1bd19:   movq   $0x0,0x378(%r15)
                  0x00007fc6fab1bd24:   call   0x00007fc6f302427a           ; ImmutableOopMap {rsi=Oop r10=NarrowOop }
                                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
+                                                                           ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain@0 (line 144)
 ....................................................................................................
   13.70%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
   28.90%                       <unknown> 
-  13.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 737 
-   8.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 727 
-   7.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 730 
-   7.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 732 
-   7.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 733 
-   7.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 731 
-   7.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 729 
-   2.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 729 
-   2.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 727 
-   2.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 730 
-   1.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 731 
-   1.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 732 
+  13.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 737 
+   8.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 727 
+   7.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 730 
+   7.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 732 
+   7.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 733 
+   7.42%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 731 
+   7.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 729 
+   2.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 729 
+   2.16%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 727 
+   2.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 730 
+   1.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 731 
+   1.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 732 
    0.30%               kernel  [unknown] 
    0.30%               kernel  [unknown] 
    0.10%               kernel  [unknown] 
@@ -5453,13 +5453,13 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Megam
 
 ....[Hottest Methods (after inlining)]..............................................................
   28.96%                       <unknown> 
-  13.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 737 
-  10.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 727 
-   9.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 730 
-   9.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 729 
-   9.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 731 
-   8.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 732 
-   7.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 733 
+  13.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark::virtual_calls_chain, version 4, compile id 737 
+  10.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I5::foo_5, version 2, compile id 727 
+   9.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I4::foo_4, version 2, compile id 730 
+   9.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I::foo, version 2, compile id 729 
+   9.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I3::foo_3, version 2, compile id 731 
+   8.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I2::foo_2, version 2, compile id 732 
+   7.52%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.MegamorphicInterfaceCallBenchmark$I1::foo_1, version 2, compile id 733 
    1.55%               kernel  [unknown] 
    0.02%            libjvm.so  ElfSymbolTable::lookup 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 

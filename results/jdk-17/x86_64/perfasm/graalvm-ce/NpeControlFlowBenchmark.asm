@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement
 # Parameters: (nullThreshold = 0, size = 262144)
 
 # Run progress: 0.00% complete, ETA 00:13:20
@@ -28,12 +28,12 @@ Iteration   5: 235.989 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement":
   234.521 ±(99.9%) 13.567 us/op [Average]
   (min, avg, max) = (228.224, 234.521, 236.253), stdev = 3.523
   CI (99.9%): [220.953, 248.088] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement:·asm":
 PrintAssembly processed: 195539 total address lines.
 Perf output processed (skipped 58.638 seconds):
  Column 1: cycles (50710 events)
@@ -42,43 +42,43 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
 
    0.01%       0x00007f1566ffdf83:   shl    $0x3,%r10                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@13 (line 101)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@13 (line 101)
                0x00007f1566ffdf87:   mov    %r11d,%r8d
                0x00007f1566ffdf8a:   mov    $0x1,%r11d
           ╭    0x00007f1566ffdf90:   jmp    0x00007f1566ffdfb6           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
           │    0x00007f1566ffdf95:   data16 data16 nopw 0x0(%rax,%rax,1) ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
           │↗   0x00007f1566ffdfa0:   mov    0x10(%r10,%r11,4),%r9d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
   25.35%  ││   0x00007f1566ffdfa5:   mov    %r8d,%ecx                    ; ImmutableOopMap {rsi=Oop r9=NarrowOop r10=Oop }
           ││                                                             ;*iload_2 {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
+          ││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
           ││   0x00007f1566ffdfa8:   add    0xc(,%r9,8),%ecx             ; implicit exception: dispatches to 0x00007f1566ffe046
   55.29%  ││   0x00007f1566ffdfb0:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@33 (line 100)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@33 (line 100)
    0.00%  ││   0x00007f1566ffdfb3:   mov    %ecx,%r8d                    ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
   17.46%  ↘│   0x00007f1566ffdfb6:   cmp    %r11d,%eax
            ╰   0x00007f1566ffdfb9:   jg     0x00007f1566ffdfa0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
             ↗  0x00007f1566ffdfbb:   mov    %r8d,%eax                    ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@40 (line 105)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@40 (line 105)
             │  0x00007f1566ffdfbe:   mov    0x10(%rsp),%rbp
             │  0x00007f1566ffdfc3:   add    $0x18,%rsp
             │  0x00007f1566ffdfc7:   mov    0x348(%r15),%rcx
             │  0x00007f1566ffdfce:   test   %eax,(%rcx)                  ;   {poll_return}
    0.01%    │  0x00007f1566ffdfd0:   ret                                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
             │  0x00007f1566ffdfd1:   mov    $0x0,%r8d
             ╰  0x00007f1566ffdfd7:   jmp    0x00007f1566ffdfbb           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@40 (line 105)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@40 (line 105)
                0x00007f1566ffdfd9:   mov    $0x214,%r10
                0x00007f1566ffdfe0:   movl   $0xffffffe5,0x370(%r15)      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
                0x00007f1566ffdfeb:   mov    %r10,0x378(%r15)
                0x00007f1566ffdff2:   call   0x00007f155f50527a           ; ImmutableOopMap {rsi=Oop }
                                                                          ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -86,7 +86,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
   98.10%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
+  98.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
    0.51%               kernel  [unknown] 
    0.11%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
@@ -103,7 +103,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.86%  <...other 303 warm regions...>
@@ -111,7 +111,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
+  98.12%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 738 
    1.52%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.01%         libc-2.31.so  __strxfrm_l 
@@ -164,7 +164,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement
 # Parameters: (nullThreshold = 16, size = 262144)
 
 # Run progress: 12.50% complete, ETA 00:13:01
@@ -184,12 +184,12 @@ Iteration   5: 1454.609 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement":
   1454.933 ±(99.9%) 1.019 us/op [Average]
   (min, avg, max) = (1454.609, 1454.933, 1455.170), stdev = 0.265
   CI (99.9%): [1453.915, 1455.952] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_not_npe_do_statement:·asm":
 PrintAssembly processed: 194804 total address lines.
 Perf output processed (skipped 58.595 seconds):
  Column 1: cycles (50835 events)
@@ -198,54 +198,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 745 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 745 
 
                   0x00007fd70affaf00:   cmp    %r9d,%r11d
           ╭       0x00007fd70affaf03:   jbe    0x00007fd70affaf66
           │       0x00007fd70affaf09:   cmp    $0x2,%r11d
           │╭      0x00007fd70affaf0d:   jb     0x00007fd70affaf66           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
           ││      0x00007fd70affaf13:   shl    $0x3,%r10                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@13 (line 101)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@13 (line 101)
           ││      0x00007fd70affaf17:   mov    $0x1,%r11d
           ││      0x00007fd70affaf1d:   data16 xchg %ax,%ax                 ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
   16.81%  ││ ↗↗   0x00007fd70affaf20:   cmp    %r11d,%eax
           ││╭││   0x00007fd70affaf23:   jle    0x00007fd70affaf40           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
+          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@9 (line 100)
   10.18%  │││││   0x00007fd70affaf29:   mov    0x10(%r10,%r11,4),%r9d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
+          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
    9.07%  │││││   0x00007fd70affaf2e:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@33 (line 100)
+          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@33 (line 100)
    3.18%  │││││   0x00007fd70affaf31:   test   %r9d,%r9d
           │││╰│   0x00007fd70affaf34:   je     0x00007fd70affaf20           ;*ifnull {reexecute=0 rethrow=0 return_oop=0}
-          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@18 (line 101)
+          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@18 (line 101)
   24.07%  │││ │   0x00007fd70affaf36:   add    0xc(,%r9,8),%r8d             ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@31 (line 102)
+          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@31 (line 102)
   34.54%  │││ ╰   0x00007fd70affaf3e:   jmp    0x00007fd70affaf20           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@33 (line 100)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@33 (line 100)
           ││↘  ↗  0x00007fd70affaf40:   mov    %r8d,%eax                    ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@40 (line 105)
+          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@40 (line 105)
           ││   │  0x00007fd70affaf43:   mov    0x10(%rsp),%rbp
           ││   │  0x00007fd70affaf48:   add    $0x18,%rsp
           ││   │  0x00007fd70affaf4c:   mov    0x348(%r15),%rcx
           ││   │  0x00007fd70affaf53:   test   %eax,(%rcx)                  ;   {poll_return}
    0.00%  ││   │  0x00007fd70affaf55:   ret                                 ;*ifnull {reexecute=0 rethrow=0 return_oop=0}
-          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@18 (line 101)
+          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@18 (line 101)
           ││   │  0x00007fd70affaf56:   mov    $0x0,%r8d
           ││   │  0x00007fd70affaf5c:   jmp    0x00007fd70affaef1           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
+          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@4 (line 100)
           ││   │  0x00007fd70affaf5e:   mov    $0x0,%r8d
           ││   ╰  0x00007fd70affaf64:   jmp    0x00007fd70affaf40
           ↘↘      0x00007fd70affaf66:   movl   $0xffffffe5,0x370(%r15)
                   0x00007fd70affaf71:   movq   $0x14,0x378(%r15)            ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement@17 (line 101)
                   0x00007fd70affaf7c:   nopl   0x0(%rax)
 ....................................................................................................
   97.87%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 745 
+  97.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 745 
    0.67%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
    0.11%               kernel  [unknown] 
@@ -270,7 +270,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 745 
+  97.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_not_npe_do_statement, version 3, compile id 745 
    1.75%               kernel  [unknown] 
    0.06%                       <unknown> 
    0.02%         libc-2.31.so  __strxfrm_l 
@@ -322,7 +322,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue
 # Parameters: (nullThreshold = 0, size = 262144)
 
 # Run progress: 25.00% complete, ETA 00:11:07
@@ -342,12 +342,12 @@ Iteration   5: 230.686 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue":
   230.768 ±(99.9%) 0.791 us/op [Average]
   (min, avg, max) = (230.569, 230.768, 231.104), stdev = 0.205
   CI (99.9%): [229.977, 231.558] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue:·asm":
 PrintAssembly processed: 199606 total address lines.
 Perf output processed (skipped 58.769 seconds):
  Column 1: cycles (50604 events)
@@ -356,53 +356,53 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
 
                0x00007f26e2ffd45a:   jbe    0x00007f26e2ffd4d9
                0x00007f26e2ffd460:   cmp    $0x2,%r11d
                0x00007f26e2ffd464:   jb     0x00007f26e2ffd4f8
                0x00007f26e2ffd46a:   test   %r11d,%r11d
                0x00007f26e2ffd46d:   je     0x00007f26e2ffd502           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
                0x00007f26e2ffd473:   mov    0x10(,%r10,8),%r11d          ; ImmutableOopMap {rsi=Oop r10=NarrowOop }
                                                                          ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@0 (line 111)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@0 (line 111)
                0x00007f26e2ffd47b:   mov    0xc(,%r11,8),%r11d           ; implicit exception: dispatches to 0x00007f26e2ffd527
    0.00%       0x00007f26e2ffd483:   shl    $0x3,%r10                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@13 (line 113)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@13 (line 113)
                0x00007f26e2ffd487:   mov    %r11d,%r8d
                0x00007f26e2ffd48a:   mov    $0x1,%r11d
           ╭    0x00007f26e2ffd490:   jmp    0x00007f26e2ffd4b6           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
           │    0x00007f26e2ffd495:   data16 data16 nopw 0x0(%rax,%rax,1) ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
    0.00%  │↗   0x00007f26e2ffd4a0:   mov    0x10(%r10,%r11,4),%r9d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
   25.95%  ││   0x00007f26e2ffd4a5:   mov    %r8d,%ecx                    ; ImmutableOopMap {rsi=Oop r9=NarrowOop r10=Oop }
           ││                                                             ;*iload_2 {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
+          ││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
           ││   0x00007f26e2ffd4a8:   add    0xc(,%r9,8),%ecx             ; implicit exception: dispatches to 0x00007f26e2ffd546
   54.48%  ││   0x00007f26e2ffd4b0:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@36 (line 112)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@36 (line 112)
           ││   0x00007f26e2ffd4b3:   mov    %ecx,%r8d                    ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
   17.86%  ↘│   0x00007f26e2ffd4b6:   cmp    %r11d,%eax
            ╰   0x00007f26e2ffd4b9:   jg     0x00007f26e2ffd4a0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
             ↗  0x00007f26e2ffd4bb:   mov    %r8d,%eax                    ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@43 (line 118)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@43 (line 118)
             │  0x00007f26e2ffd4be:   mov    0x10(%rsp),%rbp
             │  0x00007f26e2ffd4c3:   add    $0x18,%rsp
    0.00%    │  0x00007f26e2ffd4c7:   mov    0x348(%r15),%rcx
             │  0x00007f26e2ffd4ce:   test   %eax,(%rcx)                  ;   {poll_return}
    0.01%    │  0x00007f26e2ffd4d0:   ret                                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
             │  0x00007f26e2ffd4d1:   mov    $0x0,%r8d
             ╰  0x00007f26e2ffd4d7:   jmp    0x00007f26e2ffd4bb           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@43 (line 118)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@43 (line 118)
                0x00007f26e2ffd4d9:   mov    $0x214,%r10
                0x00007f26e2ffd4e0:   movl   $0xffffffe5,0x370(%r15)      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
                0x00007f26e2ffd4eb:   mov    %r10,0x378(%r15)
                0x00007f26e2ffd4f2:   call   0x00007f26db50527a           ; ImmutableOopMap {rsi=Oop }
                                                                          ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -410,7 +410,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
   98.32%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
+  98.32%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
    0.56%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
@@ -425,7 +425,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
    0.01%         libc-2.31.so  __strncat_ssse3 
    0.01%         libc-2.31.so  getifaddrs_internal 
    0.01%           ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -435,7 +435,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
+  98.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 747 
    1.33%               kernel  [unknown] 
    0.04%                       <unknown> 
    0.03%         libc-2.31.so  [unknown] 
@@ -485,7 +485,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue
 # Parameters: (nullThreshold = 16, size = 262144)
 
 # Run progress: 37.50% complete, ETA 00:09:16
@@ -505,12 +505,12 @@ Iteration   5: 1454.546 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue":
   1454.760 ±(99.9%) 1.693 us/op [Average]
   (min, avg, max) = (1454.082, 1454.760, 1455.093), stdev = 0.440
   CI (99.9%): [1453.067, 1456.453] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.if_npe_continue:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.if_npe_continue:·asm":
 PrintAssembly processed: 193305 total address lines.
 Perf output processed (skipped 58.564 seconds):
  Column 1: cycles (50987 events)
@@ -519,54 +519,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 741 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 741 
 
                   0x00007f4026ffb580:   cmp    %r9d,%r11d
           ╭       0x00007f4026ffb583:   jbe    0x00007f4026ffb5e6
           │       0x00007f4026ffb589:   cmp    $0x2,%r11d
           │╭      0x00007f4026ffb58d:   jb     0x00007f4026ffb5e6           ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
           ││      0x00007f4026ffb593:   shl    $0x3,%r10                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@13 (line 113)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@13 (line 113)
           ││      0x00007f4026ffb597:   mov    $0x1,%r11d
           ││      0x00007f4026ffb59d:   data16 xchg %ax,%ax                 ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
+          ││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
   16.71%  ││ ↗↗   0x00007f4026ffb5a0:   cmp    %r11d,%eax
           ││╭││   0x00007f4026ffb5a3:   jle    0x00007f4026ffb5c0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
+          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@9 (line 112)
   10.21%  │││││   0x00007f4026ffb5a9:   mov    0x10(%r10,%r11,4),%r9d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
+          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
    9.47%  │││││   0x00007f4026ffb5ae:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@36 (line 112)
+          │││││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@36 (line 112)
    3.31%  │││││   0x00007f4026ffb5b1:   test   %r9d,%r9d
           │││╰│   0x00007f4026ffb5b4:   je     0x00007f4026ffb5a0           ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
-          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@18 (line 113)
+          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@18 (line 113)
   23.50%  │││ │   0x00007f4026ffb5b6:   add    0xc(,%r9,8),%r8d             ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@34 (line 116)
+          │││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@34 (line 116)
   34.14%  │││ ╰   0x00007f4026ffb5be:   jmp    0x00007f4026ffb5a0           ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@36 (line 112)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@36 (line 112)
           ││↘  ↗  0x00007f4026ffb5c0:   mov    %r8d,%eax                    ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@43 (line 118)
+          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@43 (line 118)
           ││   │  0x00007f4026ffb5c3:   mov    0x10(%rsp),%rbp
           ││   │  0x00007f4026ffb5c8:   add    $0x18,%rsp
           ││   │  0x00007f4026ffb5cc:   mov    0x348(%r15),%rcx
           ││   │  0x00007f4026ffb5d3:   test   %eax,(%rcx)                  ;   {poll_return}
    0.00%  ││   │  0x00007f4026ffb5d5:   ret                                 ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
-          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@18 (line 113)
+          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@18 (line 113)
           ││   │  0x00007f4026ffb5d6:   mov    $0x0,%r8d
           ││   │  0x00007f4026ffb5dc:   jmp    0x00007f4026ffb571           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
+          ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@4 (line 112)
           ││   │  0x00007f4026ffb5de:   mov    $0x0,%r8d
           ││   ╰  0x00007f4026ffb5e4:   jmp    0x00007f4026ffb5c0
           ↘↘      0x00007f4026ffb5e6:   movl   $0xffffffe5,0x370(%r15)
                   0x00007f4026ffb5f1:   movq   $0x14,0x378(%r15)            ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue@17 (line 113)
                   0x00007f4026ffb5fc:   nopl   0x0(%rax)
 ....................................................................................................
   97.35%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 741 
+  97.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 741 
    0.79%               kernel  [unknown] 
    0.15%               kernel  [unknown] 
    0.13%               kernel  [unknown] 
@@ -591,7 +591,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 741 
+  97.35%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::if_npe_continue, version 3, compile id 741 
    2.15%               kernel  [unknown] 
    0.06%                       <unknown> 
    0.02%         libc-2.31.so  __strncat_ssse3 
@@ -643,7 +643,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe
 # Parameters: (nullThreshold = 0, size = 262144)
 
 # Run progress: 50.00% complete, ETA 00:07:24
@@ -663,12 +663,12 @@ Iteration   5: 5076.560 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe":
   5081.739 ±(99.9%) 13.562 us/op [Average]
   (min, avg, max) = (5076.560, 5081.739, 5085.258), stdev = 3.522
   CI (99.9%): [5068.176, 5095.301] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe:·asm":
 PrintAssembly processed: 214782 total address lines.
 Perf output processed (skipped 58.618 seconds):
  Column 1: cycles (50865 events)
@@ -710,7 +710,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) java.util.stream.ReferencePipeline$2$1::accept@0 (line 178)
    0.02%           0x00007f4d7effeb00:   cmpl   $0xc26bf0,0x8(,%rsi,8)       ; implicit exception: dispatches to 0x00007f4d7effee66
-                                                                             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$$Lambda$51+0x0000000800c26bf0&apos;)}
+                                                                             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$$Lambda$51+0x0000000800c26bf0&apos;)}
   11.09%           0x00007f4d7effeb0b:   jne    0x00007f4d7effee0c           ;*invokeinterface test {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - java.util.stream.ReferencePipeline$2$1::accept@8 (line 178)
    1.89%           0x00007f4d7effeb11:   test   %rdx,%rdx
@@ -718,11 +718,11 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
    0.01%           0x00007f4d7effeb1a:   mov    0x8(%rdx),%esi
    1.43%           0x00007f4d7effeb1d:   movabs $0x800000000,%rbp
    0.04%           0x00007f4d7effeb27:   lea    0x0(%rbp,%rsi,1),%rsi        ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$51/0x0000000800c26bf0::test@1
+                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$51/0x0000000800c26bf0::test@1
                                                                              ; - java.util.stream.ReferencePipeline$2$1::accept@8 (line 178)
    1.94%           0x00007f4d7effeb2c:   test   %rdx,%rdx
           ╭        0x00007f4d7effeb2f:   je     0x00007f4d7effeb49
-   0.01%  │        0x00007f4d7effeb35:   movabs $0x800c265e0,%rbp            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$Wrapper&apos;)}
+   0.01%  │        0x00007f4d7effeb35:   movabs $0x800c265e0,%rbp            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$Wrapper&apos;)}
    0.02%  │        0x00007f4d7effeb3f:   nop
    0.03%  │        0x00007f4d7effeb40:   cmp    %rsi,%rbp
           │        0x00007f4d7effeb43:   jne    0x00007f4d7effee39           ; ImmutableOopMap {rdx=Oop r10=Oop }
@@ -748,7 +748,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) java.util.stream.ReferencePipeline$2$1::accept@0 (line 178)
    0.03%           0x00007f4d7effeb80:   cmpl   $0xc26e40,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f4d7effeee6
-                                                                             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$$Lambda$52+0x0000000800c26e40&apos;)}
+                                                                             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$$Lambda$52+0x0000000800c26e40&apos;)}
    5.39%           0x00007f4d7effeb8b:   jne    0x00007f4d7effee1b           ;*invokeinterface apply {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - java.util.stream.ReferencePipeline$3$1::accept@12 (line 197)
                                                                              ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -771,7 +771,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
                                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
                                                                              ; - (reexecute) java.util.stream.ReferencePipeline$2$1::accept@0 (line 178)
    0.07%           0x00007f4d7effebc0:   cmpl   $0xc27080,0x8(,%rbp,8)       ; implicit exception: dispatches to 0x00007f4d7effef26
-                                                                             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$$Lambda$53+0x0000000800c27080&apos;)}
+                                                                             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$$Lambda$53+0x0000000800c27080&apos;)}
    1.80%           0x00007f4d7effebcb:   jne    0x00007f4d7effedfd           ;*invokeinterface apply {reexecute=0 rethrow=0 return_oop=0}
                                                                              ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
                                                                              ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
@@ -792,7 +792,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
    0.81%   │       0x00007f4d7effec08:   movabs $0x800045fb0,%r8             ;   {metadata(&apos;java/lang/Integer&apos;)}
    0.06%   │       0x00007f4d7effec12:   cmp    %rax,%r8
            │       0x00007f4d7effec15:   jne    0x00007f4d7effee2a           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@1
+           │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@1
            │                                                                 ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
            │                                                                 ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
            │                                                                 ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -814,7 +814,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
    0.07%    │      0x00007f4d7effec6d:   movl   $0x0,0xc(%rsi)
    0.95%    │      0x00007f4d7effec74:   mov    %r8d,0xc(%rsi)               ;* unwind (locked if synchronized)
             │                                                                ; - java.lang.Integer::valueOf@-3
-            │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
+            │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
             │                                                                ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
             │                                                                ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
             │                                                                ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -856,7 +856,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
              │  │  0x00007f4d7effecfc:   nopl   0x0(%rax)
              │  ╰  0x00007f4d7effed00:   jmp    0x00007f4d7effec78           ;* unwind (locked if synchronized)
              │                                                               ; - java.lang.Integer::valueOf@-3
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
+             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
              │                                                               ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
              │                                                               ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
              │                                                               ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -1002,7 +1002,7 @@ jvmci, level 4, java.util.Spliterators$ArraySpliterator::forEachRemaining, versi
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe
 # Parameters: (nullThreshold = 16, size = 262144)
 
 # Run progress: 62.50% complete, ETA 00:05:33
@@ -1022,12 +1022,12 @@ Iteration   5: 4906.810 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe":
   5224.355 ±(99.9%) 728.256 us/op [Average]
   (min, avg, max) = (4906.810, 5224.355, 5411.914), stdev = 189.126
   CI (99.9%): [4496.099, 5952.611] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.stream_filter_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.stream_filter_npe:·asm":
 PrintAssembly processed: 209653 total address lines.
 Perf output processed (skipped 58.591 seconds):
  Column 1: cycles (50606 events)
@@ -1056,7 +1056,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
                                                                                ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
                                                                                ; - (reexecute) java.util.stream.ReferencePipeline$2$1::accept@13 (line 178)
                      0x00007f3826ffc960:   cmpl   $0xc26e40,0x8(,%rbp,8)       ; implicit exception: dispatches to 0x00007f3826ffd4a6
-                                                                               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$$Lambda$52+0x0000000800c26e40&apos;)}
+                                                                               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$$Lambda$52+0x0000000800c26e40&apos;)}
    5.29%             0x00007f3826ffc96b:   jne    0x00007f3826ffd371           ;*invokeinterface apply {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.stream.ReferencePipeline$3$1::accept@12 (line 197)
                                                                                ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -1079,14 +1079,14 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
                                                                                ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
                                                                                ; - (reexecute) java.util.stream.ReferencePipeline$2$1::accept@13 (line 178)
                      0x00007f3826ffc9a0:   cmpl   $0xc27080,0x8(,%rbp,8)       ; implicit exception: dispatches to 0x00007f3826ffd4e6
-                                                                               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$$Lambda$53+0x0000000800c27080&apos;)}
+                                                                               ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$$Lambda$53+0x0000000800c27080&apos;)}
    1.05%             0x00007f3826ffc9ab:   jne    0x00007f3826ffd32c           ;*invokeinterface apply {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
                                                                                ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
                                                                                ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
    0.05%             0x00007f3826ffc9b1:   test   %rdx,%rdx
            ╭         0x00007f3826ffc9b4:   je     0x00007f3826ffc9c9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$52/0x0000000800c26e40::apply@1
+           │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$52/0x0000000800c26e40::apply@1
            │                                                                   ; - java.util.stream.ReferencePipeline$3$1::accept@12 (line 197)
            │                                                                   ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
            │         0x00007f3826ffc9ba:   nopw   0x0(%rax,%rax,1)
@@ -1104,7 +1104,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
    0.98%             0x00007f3826ffc9dc:   mov    0x8(,%rax,8),%r11d
    0.00%             0x00007f3826ffc9e4:   movabs $0x800000000,%r9
    0.05%             0x00007f3826ffc9ee:   lea    (%r9,%r11,1),%r11            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@1
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@1
                                                                                ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
                                                                                ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
                                                                                ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -1132,7 +1132,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
    0.05%     │       0x00007f3826ffca69:   movl   $0x0,0xc(%rax)
              │       0x00007f3826ffca70:   mov    %ebp,0xc(%rax)               ;* unwind (locked if synchronized)
              │                                                                 ; - java.lang.Integer::valueOf@-3
-             │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
+             │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
              │                                                                 ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
              │                                                                 ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
              │                                                                 ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -1176,7 +1176,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
               │  ││  0x00007f3826ffcb01:   mov    %rsi,%rax
               │  ╰│  0x00007f3826ffcb04:   jmp    0x00007f3826ffca73           ;* unwind (locked if synchronized)
               │   │                                                            ; - java.lang.Integer::valueOf@-3
-              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
+              │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$53/0x0000000800c27080::apply@17
               │   │                                                            ; - java.util.stream.ReduceOps$1ReducingSink::accept@10 (line 80)
               │   │                                                            ; - java.util.stream.ReferencePipeline$3$1::accept@17 (line 197)
               │   │                                                            ; - java.util.stream.ReferencePipeline$2$1::accept@21 (line 179)
@@ -1236,7 +1236,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
                                                                       ; - jdk.internal.module.DefaultRoots$$Lambda$3/0x800000004::test@5
                                                                       ; - java.util.stream.ReferencePipeline$2$1::accept@8 (line 178)
    0.01%    0x00007f3826ffc85f:   lea    (%r11,%rax,1),%rax
-   1.74%    0x00007f3826ffc863:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark$Wrapper&apos;)}
+   1.74%    0x00007f3826ffc863:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark$Wrapper&apos;)}
             0x00007f3826ffc86d:   movabs $0x800000000,%r8
    0.23%    0x00007f3826ffc877:   lea    (%r8,%rbp,1),%rbp
    0.87%    0x00007f3826ffc87b:   cmp    -0xe2(%rip),%rbp        # 0x00007f3826ffc7a0
@@ -1328,13 +1328,13 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
    1.64%    0x00007f3826ffc8d2:   test   %rdx,%rdx
    0.01%    0x00007f3826ffc8d5:   setne  %r10b
    0.32%    0x00007f3826ffc8d9:   movzbl %r10b,%r10d                  ;*ifnull {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::lambda$stream_filter_npe$0@1 (line 125)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$51/0x0000000800c26bf0::test@4
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::lambda$stream_filter_npe$0@1 (line 125)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$51/0x0000000800c26bf0::test@4
                                                                       ; - java.util.stream.ReferencePipeline$2$1::accept@8 (line 178)
    0.20%    0x00007f3826ffc8dd:   data16 xchg %ax,%ax
    1.92%    0x00007f3826ffc8e0:   test   %rdx,%rdx
             0x00007f3826ffc8e3:   jne    0x00007f3826ffcae1           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark$$Lambda$51/0x0000000800c26bf0::test@1
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark$$Lambda$51/0x0000000800c26bf0::test@1
                                                                       ; - java.util.stream.ReferencePipeline$2$1::accept@8 (line 178)
    1.36%    0x00007f3826ffc8e9:   test   %r10d,%r10d
             0x00007f3826ffc8ec:   je     0x00007f3826ffcacb           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
@@ -1447,7 +1447,7 @@ jvmci, level 4, java.util.stream.ReferencePipeline$2$1::accept, version 2, compi
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch
 # Parameters: (nullThreshold = 0, size = 262144)
 
 # Run progress: 75.00% complete, ETA 00:03:42
@@ -1467,12 +1467,12 @@ Iteration   5: 228.898 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch":
   233.119 ±(99.9%) 14.985 us/op [Average]
   (min, avg, max) = (228.819, 233.119, 236.067), stdev = 3.892
   CI (99.9%): [218.134, 248.105] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch:·asm":
 PrintAssembly processed: 198053 total address lines.
 Perf output processed (skipped 58.803 seconds):
  Column 1: cycles (50703 events)
@@ -1481,43 +1481,43 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
 
    0.01%       0x00007fd732ffdb03:   shl    $0x3,%r10                    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@14 (line 88)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@14 (line 88)
                0x00007fd732ffdb07:   mov    %r11d,%r8d
                0x00007fd732ffdb0a:   mov    $0x1,%r11d
           ╭    0x00007fd732ffdb10:   jmp    0x00007fd732ffdb36           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@4 (line 86)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@4 (line 86)
           │    0x00007fd732ffdb15:   data16 data16 nopw 0x0(%rax,%rax,1) ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@9 (line 86)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@9 (line 86)
           │↗   0x00007fd732ffdb20:   mov    0x10(%r10,%r11,4),%r9d       ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@18 (line 88)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@18 (line 88)
   25.79%  ││   0x00007fd732ffdb25:   mov    %r8d,%ecx                    ; ImmutableOopMap {rsi=Oop r9=NarrowOop r10=Oop }
           ││                                                             ;*iload_2 {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@4 (line 86)
+          ││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@4 (line 86)
    0.00%  ││   0x00007fd732ffdb28:   add    0xc(,%r9,8),%ecx             ; implicit exception: dispatches to 0x00007fd732ffdbc6
   55.19%  ││   0x00007fd732ffdb30:   inc    %r11d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@33 (line 86)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@33 (line 86)
    0.00%  ││   0x00007fd732ffdb33:   mov    %ecx,%r8d                    ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@4 (line 86)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@4 (line 86)
   17.12%  ↘│   0x00007fd732ffdb36:   cmp    %r11d,%eax
            ╰   0x00007fd732ffdb39:   jg     0x00007fd732ffdb20           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@9 (line 86)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@9 (line 86)
             ↗  0x00007fd732ffdb3b:   mov    %r8d,%eax                    ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@40 (line 93)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@40 (line 93)
             │  0x00007fd732ffdb3e:   mov    0x10(%rsp),%rbp
             │  0x00007fd732ffdb43:   add    $0x18,%rsp
             │  0x00007fd732ffdb47:   mov    0x348(%r15),%rcx
             │  0x00007fd732ffdb4e:   test   %eax,(%rcx)                  ;   {poll_return}
    0.00%    │  0x00007fd732ffdb50:   ret                                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@9 (line 86)
+            │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@9 (line 86)
             │  0x00007fd732ffdb51:   mov    $0x0,%r8d
             ╰  0x00007fd732ffdb57:   jmp    0x00007fd732ffdb3b           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@40 (line 93)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@40 (line 93)
                0x00007fd732ffdb59:   mov    $0x14,%r10
                0x00007fd732ffdb60:   movl   $0xffffffe5,0x370(%r15)      ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch@18 (line 88)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch@18 (line 88)
                0x00007fd732ffdb6b:   mov    %r10,0x378(%r15)
                0x00007fd732ffdb72:   call   0x00007fd72b50527a           ; ImmutableOopMap {rsi=Oop }
                                                                          ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -1525,7 +1525,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
   98.10%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
+  98.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
    0.40%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
    0.09%               kernel  [unknown] 
@@ -1535,7 +1535,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
    0.05%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%         libc-2.31.so  getifaddrs_internal 
@@ -1543,14 +1543,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
    0.01%            libjvm.so  defaultStream::write 
    0.91%  <...other 320 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
+  98.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark::try_npe_catch, version 3, compile id 753 
    1.51%               kernel  [unknown] 
    0.06%                       <unknown> 
    0.02%         libc-2.31.so  getifaddrs_internal 
@@ -1564,7 +1564,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
    0.01%            libjvm.so  xmlStream::write_text 
    0.01%            libjvm.so  WatcherThread::sleep 
    0.01%         libc-2.31.so  _int_realloc 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.NpeControlFlowBenchmark_try_npe_catch_jmhTest::try_npe_catch_avgt_jmhStub, version 4, compile id 776 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.NpeControlFlowBenchmark_try_npe_catch_jmhTest::try_npe_catch_avgt_jmhStub, version 4, compile id 776 
    0.01%         libc-2.31.so  realloc_check 
    0.01%            libjvm.so  event_to_env 
    0.01%            libjvm.so  stringStream::write 
@@ -1602,7 +1602,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeCo
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch
 # Parameters: (nullThreshold = 16, size = 262144)
 
 # Run progress: 87.50% complete, ETA 00:01:51
@@ -1622,12 +1622,12 @@ Iteration   5: 1943550.968 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch":
   1944536.311 ±(99.9%) 2588.692 us/op [Average]
   (min, avg, max) = (1943550.968, 1944536.311, 1945346.128), stdev = 672.275
   CI (99.9%): [1941947.619, 1947125.003] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeControlFlowBenchmark.try_npe_catch:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch:·asm":
 PrintAssembly processed: 194383 total address lines.
 Perf output processed (skipped 66.964 seconds):
  Column 1: cycles (59755 events)

@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split
 # Parameters: (regexp = _)
 
 # Run progress: 0.00% complete, ETA 00:06:40
@@ -28,12 +28,12 @@ Iteration   5: 160.295 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split":
   160.033 ±(99.9%) 3.171 us/op [Average]
   (min, avg, max) = (159.376, 160.033, 161.360), stdev = 0.824
   CI (99.9%): [156.862, 163.205] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split:·asm":
 PrintAssembly processed: 221883 total address lines.
 Perf output processed (skipped 59.130 seconds):
  Column 1: cycles (50733 events)
@@ -797,7 +797,7 @@ jvmci, level 4, java.util.regex.Matcher::search, version 4, compile id 798
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split
 # Parameters: (regexp = __)
 
 # Run progress: 25.00% complete, ETA 00:05:38
@@ -817,12 +817,12 @@ Iteration   5: 320.730 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split":
   320.991 ±(99.9%) 0.817 us/op [Average]
   (min, avg, max) = (320.730, 320.991, 321.251), stdev = 0.212
   CI (99.9%): [320.175, 321.808] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split:·asm":
 PrintAssembly processed: 220373 total address lines.
 Perf output processed (skipped 59.089 seconds):
  Column 1: cycles (50897 events)
@@ -1566,7 +1566,7 @@ jvmci, level 4, java.lang.String::charAt, version 2, compile id 207
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split
 # Parameters: (regexp = _)
 
 # Run progress: 50.00% complete, ETA 00:03:44
@@ -1586,12 +1586,12 @@ Iteration   5: 90.757 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split":
   90.775 ±(99.9%) 0.063 us/op [Average]
   (min, avg, max) = (90.757, 90.775, 90.791), stdev = 0.016
   CI (99.9%): [90.712, 90.838] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split:·asm":
 PrintAssembly processed: 211377 total address lines.
 Perf output processed (skipped 58.910 seconds):
  Column 1: cycles (51109 events)
@@ -2026,7 +2026,7 @@ jvmci, level 4, java.lang.String::split, version 4, compile id 792
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split
 # Parameters: (regexp = __)
 
 # Run progress: 75.00% complete, ETA 00:01:52
@@ -2046,12 +2046,12 @@ Iteration   5: 324.083 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split":
   324.053 ±(99.9%) 2.907 us/op [Average]
   (min, avg, max) = (323.023, 324.053, 324.965), stdev = 0.755
   CI (99.9%): [321.146, 326.960] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split:·asm":
 PrintAssembly processed: 235038 total address lines.
 Perf output processed (skipped 58.841 seconds):
  Column 1: cycles (51036 events)

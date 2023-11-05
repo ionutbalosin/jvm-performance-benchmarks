@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.iterative
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.iterative
 # Parameters: (n = 262144)
 
 # Run progress: 0.00% complete, ETA 00:03:20
@@ -28,12 +28,12 @@ Iteration   5: 260.494 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.iterative":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.iterative":
   260.483 ±(99.9%) 0.043 us/op [Average]
   (min, avg, max) = (260.470, 260.483, 260.494), stdev = 0.011
   CI (99.9%): [260.439, 260.526] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.iterative:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.iterative:·asm":
 PrintAssembly processed: 191141 total address lines.
 Perf output processed (skipped 58.540 seconds):
  Column 1: cycles (50903 events)
@@ -42,7 +42,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::iterative, version 4, compile id 719 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::iterative, version 4, compile id 719 
 
                0x00007f8e4eb17917:   vmovdqa -0xcf(%rip),%xmm6        # 0x00007f8e4eb17850
                                                                          ;   {section_word}
@@ -53,7 +53,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
                0x00007f8e4eb17932:   vmovdqu %ymm0,%ymm1
           ╭    0x00007f8e4eb17936:   jmp    0x00007f8e4eb1798e
           │    0x00007f8e4eb1793b:   nopl   0x0(%rax,%rax,1)             ;*iload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::iterative@0 (line 94)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::iterative@0 (line 94)
    8.32%  │ ↗  0x00007f8e4eb17940:   vpsrad $0x1f,%xmm9,%xmm0
    1.26%  │ │  0x00007f8e4eb17946:   vpsrld $0x16,%xmm0,%xmm0
           │ │  0x00007f8e4eb1794b:   vpaddd %xmm9,%xmm0,%xmm0
@@ -62,7 +62,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
    1.35%  │ │  0x00007f8e4eb17958:   vpmovzxdq %xmm0,%ymm0
           │ │  0x00007f8e4eb1795d:   vpsllq $0x2,%ymm0,%ymm0
    0.00%  │ │  0x00007f8e4eb17962:   vpaddq %ymm4,%ymm0,%ymm10           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::iterative@16 (line 97)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::iterative@16 (line 97)
    8.10%  │ │  0x00007f8e4eb17966:   vpcmpeqd %ymm0,%ymm0,%ymm0
    1.22%  │ │  0x00007f8e4eb1796a:   vpgatherqd %xmm0,(%rax,%ymm10,1),%xmm11
   28.72%  │ │  0x00007f8e4eb17970:   vpmovsxdq %xmm11,%ymm0
@@ -85,7 +85,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
            │   0x00007f8e4eb179b9:   jmp    0x00007f8e4eb17aa6
            ↘   0x00007f8e4eb179be:   vmovd  %xmm9,%r8d
                0x00007f8e4eb179c3:   vmovd  %xmm8,%ebx                   ;*iload_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::iterative@0 (line 94)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::iterative@0 (line 94)
                0x00007f8e4eb179c7:   vextracti128 $0x1,%ymm1,%xmm0
                0x00007f8e4eb179cd:   vpaddq %xmm0,%xmm1,%xmm0
                0x00007f8e4eb179d1:   vmovq  %xmm0,%rdi
@@ -95,7 +95,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
   97.75%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::iterative, version 4, compile id 719 
+  97.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::iterative, version 4, compile id 719 
    0.78%               kernel  [unknown] 
    0.11%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -120,7 +120,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::iterative, version 4, compile id 719 
+  97.76%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::iterative, version 4, compile id 719 
    1.82%               kernel  [unknown] 
    0.04%   libpthread-2.31.so  pthread_cond_timedwait@@GLIBC_2.3.2 
    0.03%                       <unknown> 
@@ -174,7 +174,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.tail_recursive
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.tail_recursive
 # Parameters: (n = 262144)
 
 # Run progress: 50.00% complete, ETA 00:01:52
@@ -194,12 +194,12 @@ Iteration   5: 5196.653 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.tail_recursive":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.tail_recursive":
   5202.586 ±(99.9%) 22.942 us/op [Average]
   (min, avg, max) = (5196.510, 5202.586, 5210.304), stdev = 5.958
   CI (99.9%): [5179.644, 5225.528] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.tail_recursive:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.tail_recursive:·asm":
 PrintAssembly processed: 182969 total address lines.
 Perf output processed (skipped 58.337 seconds):
  Column 1: cycles (51123 events)
@@ -208,7 +208,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive, version 4, compile id 717 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive, version 4, compile id 717 
 
                #           [sp+0x20]  (sp of caller)
                0x00007fc272b1b420:   mov    0x8(%rsi),%r10d
@@ -225,9 +225,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
    0.91%    │  0x00007fc272b1b44b:   mov    %rbp,0x10(%rsp)
    3.28%    │  0x00007fc272b1b450:   test   %edx,%edx
           ╭ │  0x00007fc272b1b452:   je     0x00007fc272b1b4bc           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@1 (line 85)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@1 (line 85)
    0.01%  │ │  0x00007fc272b1b458:   mov    0x14(%rsi),%r10d             ;*getfield A {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@12 (line 88)
+          │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@12 (line 88)
    0.03%  │ │  0x00007fc272b1b45c:   mov    %edx,%r11d
    0.90%  │ │  0x00007fc272b1b45f:   sar    $0x1f,%r11d
    1.09%  │ │  0x00007fc272b1b463:   shr    $0x16,%r11d
@@ -237,24 +237,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
    0.94%  │ │  0x00007fc272b1b474:   sub    %r11d,%r8d
    0.00%  │ │  0x00007fc272b1b477:   nopw   0x0(%rax,%rax,1)             ; ImmutableOopMap {rsi=Oop r10=NarrowOop }
           │ │                                                            ;*iload_1 {reexecute=1 rethrow=0 return_oop=0}
-          │ │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@0 (line 85)
+          │ │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@0 (line 85)
    0.03%  │ │  0x00007fc272b1b480:   cmp    0xc(,%r10,8),%r8d            ; implicit exception: dispatches to 0x00007fc272b1b4ea
           │╭│  0x00007fc272b1b488:   jae    0x00007fc272b1b4d2           ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@20 (line 88)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@20 (line 88)
    3.07%  │││  0x00007fc272b1b48e:   shl    $0x3,%r10                    ;*getfield A {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@12 (line 88)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@12 (line 88)
    0.01%  │││  0x00007fc272b1b492:   dec    %edx                         ;*isub {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@9 (line 88)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@9 (line 88)
    0.03%  │││  0x00007fc272b1b494:   movslq 0x10(%r10,%r8,4),%r10        ;*i2l {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@21 (line 88)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@21 (line 88)
    3.35%  │││  0x00007fc272b1b499:   add    %r10,%rcx                    ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@22 (line 88)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@22 (line 88)
    1.68%  │││  0x00007fc272b1b49c:   data16 xchg %ax,%ax
    0.01%  │││  0x00007fc272b1b49f:   nop
    0.03%  │││  0x00007fc272b1b4a0:   data16 xchg %ax,%ax
    0.26%  ││╰  0x00007fc272b1b4a3:   call   0x00007fc272b1b440           ; ImmutableOopMap {}
           ││                                                             ;*invokevirtual recursive {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@23 (line 88)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@23 (line 88)
           ││                                                             ;   {optimized virtual_call}
   28.76%  ││   0x00007fc272b1b4a8:   nop
    1.82%  ││   0x00007fc272b1b4a9:   mov    0x10(%rsp),%rbp
@@ -262,21 +262,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
    0.08%  ││   0x00007fc272b1b4b2:   mov    0x348(%r15),%rcx
    0.01%  ││   0x00007fc272b1b4b9:   test   %eax,(%rcx)                  ;   {poll_return}
    3.63%  ││   0x00007fc272b1b4bb:   ret                                 ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@1 (line 85)
+          ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@1 (line 85)
           ↘│   0x00007fc272b1b4bc:   mov    %rcx,%rax                    ;*lreturn {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@5 (line 86)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@5 (line 86)
            │   0x00007fc272b1b4bf:   mov    0x10(%rsp),%rbp
            │   0x00007fc272b1b4c4:   add    $0x18,%rsp
            │   0x00007fc272b1b4c8:   mov    0x348(%r15),%rcx
            │   0x00007fc272b1b4cf:   test   %eax,(%rcx)                  ;   {poll_return}
    0.00%   │   0x00007fc272b1b4d1:   ret                                 ;*lreturn {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@26 (line 88)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@26 (line 88)
            ↘   0x00007fc272b1b4d2:   movl   $0xffffffe5,0x370(%r15)      ;*iaload {reexecute=0 rethrow=0 return_oop=0}
-                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@20 (line 88)
+                                                                         ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@20 (line 88)
                0x00007fc272b1b4dd:   mov    %r12,0x378(%r15)
                0x00007fc272b1b4e4:   call   0x00007fc26b02427a           ; ImmutableOopMap {rsi=Oop }
                                                                          ;*iload_1 {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive@0 (line 85)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive@0 (line 85)
                                                                          ;   {runtime_call DeoptimizationBlob}
                0x00007fc272b1b4e9:   nop
                0x00007fc272b1b4ea:   movl   $0xfffffff5,0x370(%r15)
@@ -284,7 +284,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
   97.15%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive, version 4, compile id 717 
+  97.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive, version 4, compile id 717 
    1.36%               kernel  [unknown] 
    0.10%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
@@ -309,7 +309,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailR
   99.99%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark::recursive, version 4, compile id 717 
+  97.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark::recursive, version 4, compile id 717 
    2.46%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.02%           ld-2.31.so  _dl_tunable_set_hwcaps 

@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.initial_loop
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark.initial_loop
 # Parameters: (iterations = 1048576, offset = 128)
 
 # Run progress: 0.00% complete, ETA 00:03:20
@@ -28,12 +28,12 @@ Iteration   5: 10.899 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.initial_loop":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark.initial_loop":
   10.894 ±(99.9%) 0.155 ns/op [Average]
   (min, avg, max) = (10.835, 10.894, 10.942), stdev = 0.040
   CI (99.9%): [10.739, 11.049] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.initial_loop:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark.initial_loop:·asm":
 PrintAssembly processed: 116793 total address lines.
 Perf output processed (skipped 55.659 seconds):
  Column 1: cycles (50860 events)
@@ -42,44 +42,44 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub, version 6, compile id 508 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub, version 6, compile id 508 
 
               0x00007f36f8f0ac00:   movzbl 0x94(%r10),%r10d             ; implicit exception: dispatches to 0x00007f36f8f0acb0
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@25 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@25 (line 192)
               0x00007f36f8f0ac08:   mov    $0x1,%ebp
               0x00007f36f8f0ac0d:   test   %r10d,%r10d
           ╭   0x00007f36f8f0ac10:   jne    0x00007f36f8f0ac4c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@28 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@28 (line 192)
           │   0x00007f36f8f0ac12:   data16 nopw 0x0(%rax,%rax,1)
           │   0x00007f36f8f0ac1c:   data16 data16 xchg %ax,%ax          ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@31 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@31 (line 193)
    3.48%  │↗  0x00007f36f8f0ac20:   mov    0x30(%rsp),%rsi
           ││  0x00007f36f8f0ac25:   xchg   %ax,%ax
           ││  0x00007f36f8f0ac27:   call   0x00007f36f899f080           ; ImmutableOopMap {[32]=Oop [40]=Oop [48]=Oop }
           ││                                                            ;*invokevirtual initial_loop {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@15 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@15 (line 190)
           ││                                                            ;   {optimized virtual_call}
   19.33%  ││  0x00007f36f8f0ac2c:   mov    0x28(%rsp),%r10
   16.57%  ││  0x00007f36f8f0ac31:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@28 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@28 (line 192)
   13.71%  ││  0x00007f36f8f0ac39:   mov    0x348(%r15),%r11
           ││  0x00007f36f8f0ac40:   add    $0x1,%rbp                    ; ImmutableOopMap {[32]=Oop [40]=Oop [48]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@28 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@28 (line 192)
           ││  0x00007f36f8f0ac44:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007f36f8f0ac47:   test   %r10d,%r10d
           │╰  0x00007f36f8f0ac4a:   je     0x00007f36f8f0ac20           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@31 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub@31 (line 193)
           ↘   0x00007f36f8f0ac4c:   movabs $0x7f370ce80d10,%r10
               0x00007f36f8f0ac56:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   53.09%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop, version 2, compile id 478 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop, version 2, compile id 478 
 
-             # {method} {0x00007f36c7874af8} &apos;initial_loop&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopReductionBenchmark&apos;
+             # {method} {0x00007f36c7874af8} &apos;initial_loop&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopReductionBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f36f8f08620:   mov    0x8(%rsi),%r10d
              0x00007f36f8f08624:   movabs $0x800000000,%r11
@@ -92,22 +92,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
    3.51%     0x00007f36f8f08640:   mov    %eax,-0x14000(%rsp)
    7.14%     0x00007f36f8f08647:   push   %rbp
              0x00007f36f8f08648:   sub    $0x10,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop@-1 (line 66)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop@-1 (line 66)
    0.32%     0x00007f36f8f0864c:   mov    0xc(%rsi),%edx               ;*getfield iterations {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop@2 (line 66)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop@2 (line 66)
    3.21%     0x00007f36f8f0864f:   mov    0x10(%rsi),%ecx              ;*getfield offset {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop@6 (line 66)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop@6 (line 66)
              0x00007f36f8f08652:   nop
    0.29%     0x00007f36f8f08653:   call   0x00007f36f8f08020           ; ImmutableOopMap {}
                                                                        ;*invokevirtual auto_reduction {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop@9 (line 66)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop@9 (line 66)
                                                                        ;   {optimized virtual_call}
              0x00007f36f8f08658:   add    $0x10,%rsp
    3.56%     0x00007f36f8f0865c:   pop    %rbp
    4.52%     0x00007f36f8f0865d:   cmp    0x340(%r15),%rsp             ;   {poll_return}
           ╭  0x00007f36f8f08664:   ja     0x00007f36f8f08678
    0.84%  │  0x00007f36f8f0866a:   ret                                 ;*invokevirtual auto_reduction {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop@9 (line 66)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop@9 (line 66)
           │  0x00007f36f8f0866b:   mov    %rax,%rsi
           │  0x00007f36f8f0866e:   add    $0x10,%rsp
           │  0x00007f36f8f08672:   pop    %rbp
@@ -121,7 +121,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
   23.39%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction, version 3, compile id 476 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction, version 3, compile id 476 
 
                  # parm1:    rcx       = int
                  #           [sp+0x20]  (sp of caller)
@@ -135,17 +135,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
                [Verified Entry Point]
    3.18%         0x00007f36f8f08020:   sub    $0x18,%rsp
    0.29%         0x00007f36f8f08027:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction@-1 (line 77)
+                                                                           ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction@-1 (line 77)
    2.70%         0x00007f36f8f0802c:   test   %edx,%edx
           ╭      0x00007f36f8f0802e:   jle    0x00007f36f8f08058
    1.97%  │      0x00007f36f8f08030:   mov    $0x1,%r10d
           │      0x00007f36f8f08036:   cmp    %edx,%r10d
           │╭     0x00007f36f8f08039:   jge    0x00007f36f8f08052           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction@4 (line 77)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction@4 (line 77)
    0.06%  ││     0x00007f36f8f0803b:   add    %ecx,%edx                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction@7 (line 78)
+          ││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction@7 (line 78)
    1.39%  ││ ↗   0x00007f36f8f0803d:   mov    %edx,%eax                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction@4 (line 77)
+          ││ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction@4 (line 77)
    1.94%  ││ │↗  0x00007f36f8f0803f:   add    $0x10,%rsp
           ││ ││  0x00007f36f8f08043:   pop    %rbp
    9.82%  ││ ││  0x00007f36f8f08044:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -153,7 +153,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
           │││││  0x00007f36f8f08051:   ret    
           │↘│││  0x00007f36f8f08052:   mov    %ecx,%edx
           │ │││  0x00007f36f8f08054:   inc    %edx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction@7 (line 78)
+          │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction@7 (line 78)
           │ │╰│  0x00007f36f8f08056:   jmp    0x00007f36f8f0803d
           ↘ │ │  0x00007f36f8f08058:   mov    %ecx,%eax
             │ ╰  0x00007f36f8f0805a:   jmp    0x00007f36f8f0803f
@@ -163,9 +163,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
   21.35%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  53.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub, version 6, compile id 508 
-  23.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop, version 2, compile id 478 
-  21.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction, version 3, compile id 476 
+  53.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub, version 6, compile id 508 
+  23.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop, version 2, compile id 478 
+  21.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction, version 3, compile id 476 
    0.96%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -188,9 +188,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  53.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub, version 6, compile id 508 
-  23.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::initial_loop, version 2, compile id 478 
-  21.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::auto_reduction, version 3, compile id 476 
+  53.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_initial_loop_jmhTest::initial_loop_avgt_jmhStub, version 6, compile id 508 
+  23.39%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::initial_loop, version 2, compile id 478 
+  21.35%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::auto_reduction, version 3, compile id 476 
    1.86%              kernel  [unknown] 
    0.04%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
@@ -238,7 +238,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.manual_loop_reduction
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark.manual_loop_reduction
 # Parameters: (iterations = 1048576, offset = 128)
 
 # Run progress: 50.00% complete, ETA 00:01:49
@@ -258,12 +258,12 @@ Iteration   5: 10.646 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.manual_loop_reduction":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark.manual_loop_reduction":
   10.720 ±(99.9%) 0.202 ns/op [Average]
   (min, avg, max) = (10.646, 10.720, 10.787), stdev = 0.053
   CI (99.9%): [10.518, 10.922] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.manual_loop_reduction:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark.manual_loop_reduction:·asm":
 PrintAssembly processed: 114886 total address lines.
 Perf output processed (skipped 55.527 seconds):
  Column 1: cycles (51221 events)
@@ -272,9 +272,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction, version 2, compile id 465 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction, version 2, compile id 465 
 
-             # {method} {0x00007fd82fc7f308} &apos;manual_loop_reduction&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopReductionBenchmark&apos;
+             # {method} {0x00007fd82fc7f308} &apos;manual_loop_reduction&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopReductionBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007fd868f63620:   mov    0x8(%rsi),%r10d
              0x00007fd868f63624:   movabs $0x800000000,%r11
@@ -287,22 +287,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
    3.43%     0x00007fd868f63640:   mov    %eax,-0x14000(%rsp)
    4.67%     0x00007fd868f63647:   push   %rbp
    0.01%     0x00007fd868f63648:   sub    $0x10,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction@-1 (line 72)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction@-1 (line 72)
    0.04%     0x00007fd868f6364c:   mov    0xc(%rsi),%edx               ;*getfield iterations {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction@2 (line 72)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction@2 (line 72)
    3.44%     0x00007fd868f6364f:   mov    0x10(%rsi),%ecx              ;*getfield offset {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction@6 (line 72)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction@6 (line 72)
    0.00%     0x00007fd868f63652:   nop
    0.04%     0x00007fd868f63653:   call   0x00007fd861503740           ; ImmutableOopMap {}
                                                                        ;*invokevirtual manual_reduction {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction@9 (line 72)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction@9 (line 72)
                                                                        ;   {optimized virtual_call}
   38.80%     0x00007fd868f63658:   add    $0x10,%rsp
              0x00007fd868f6365c:   pop    %rbp
              0x00007fd868f6365d:   cmp    0x340(%r15),%rsp             ;   {poll_return}
           ╭  0x00007fd868f63664:   ja     0x00007fd868f63678
    3.46%  │  0x00007fd868f6366a:   ret                                 ;*invokevirtual manual_reduction {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction@9 (line 72)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction@9 (line 72)
           │  0x00007fd868f6366b:   mov    %rax,%rsi
           │  0x00007fd868f6366e:   add    $0x10,%rsp
           │  0x00007fd868f63672:   pop    %rbp
@@ -316,7 +316,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
   53.88%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction, version 2, compile id 466 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction, version 2, compile id 466 
 
               # parm1:    rcx       = int
               #           [sp+0x30]  (sp of caller)
@@ -331,13 +331,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
    4.03%      0x00007fd868f639c0:   mov    %eax,-0x14000(%rsp)
   15.45%      0x00007fd868f639c7:   push   %rbp
    0.69%      0x00007fd868f639c8:   sub    $0x20,%rsp                   ;*synchronization entry
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction@-1 (line 85)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction@-1 (line 85)
               0x00007fd868f639cc:   test   %edx,%edx
           ╭   0x00007fd868f639ce:   jle    0x00007fd868f639e7           ;*ifle {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction@1 (line 85)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction@1 (line 85)
    2.90%  │   0x00007fd868f639d0:   mov    %edx,%eax
    0.55%  │   0x00007fd868f639d2:   add    %ecx,%eax                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction@6 (line 86)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction@6 (line 86)
           │   0x00007fd868f639d4:   add    $0x20,%rsp
           │   0x00007fd868f639d8:   pop    %rbp
    5.72%  │   0x00007fd868f639d9:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -348,7 +348,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
            │  0x00007fd868f639ef:   mov    %edx,0x4(%rsp)
            │  0x00007fd868f639f3:   call   0x00007fd868a01600           ; ImmutableOopMap {}
            │                                                            ;*ifle {reexecute=1 rethrow=0 return_oop=0}
-           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction@1 (line 85)
+           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction@1 (line 85)
            │                                                            ;   {runtime_call UncommonTrapBlob}
            ↘  0x00007fd868f639f8:   movabs $0x7fd868f639d9,%r10         ;   {internal_word}
               0x00007fd868f63a02:   mov    %r10,0x358(%r15)
@@ -357,50 +357,50 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopRedu
   30.03%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub, version 6, compile id 500 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub, version 6, compile id 500 
 
               0x00007fd868f66700:   movzbl 0x94(%r10),%r10d             ; implicit exception: dispatches to 0x00007fd868f667b0
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@25 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@25 (line 192)
               0x00007fd868f66708:   mov    $0x1,%ebp
               0x00007fd868f6670d:   test   %r10d,%r10d
           ╭   0x00007fd868f66710:   jne    0x00007fd868f6674c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@28 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@28 (line 192)
           │   0x00007fd868f66712:   data16 nopw 0x0(%rax,%rax,1)
           │   0x00007fd868f6671c:   data16 data16 xchg %ax,%ax          ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@31 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@31 (line 193)
    3.08%  │↗  0x00007fd868f66720:   mov    0x30(%rsp),%rsi
           ││  0x00007fd868f66725:   xchg   %ax,%ax
           ││  0x00007fd868f66727:   call   0x00007fd8689fc080           ; ImmutableOopMap {[32]=Oop [40]=Oop [48]=Oop }
           ││                                                            ;*invokevirtual manual_loop_reduction {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@15 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@15 (line 190)
           ││                                                            ;   {optimized virtual_call}
    0.03%  ││  0x00007fd868f6672c:   mov    0x28(%rsp),%r10
    3.51%  ││  0x00007fd868f66731:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@28 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@28 (line 192)
    6.11%  ││  0x00007fd868f66739:   mov    0x348(%r15),%r11
           ││  0x00007fd868f66740:   add    $0x1,%rbp                    ; ImmutableOopMap {[32]=Oop [40]=Oop [48]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@28 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@28 (line 192)
           ││  0x00007fd868f66744:   test   %eax,(%r11)                  ;   {poll}
    0.53%  ││  0x00007fd868f66747:   test   %r10d,%r10d
           │╰  0x00007fd868f6674a:   je     0x00007fd868f66720           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@31 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@31 (line 193)
           ↘   0x00007fd868f6674c:   movabs $0x7fd87d7d7d10,%r10
               0x00007fd868f66756:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@32 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@32 (line 193)
               0x00007fd868f66759:   mov    0x20(%rsp),%r10
               0x00007fd868f6675e:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@35 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@35 (line 193)
               0x00007fd868f66762:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@41 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub@41 (line 194)
 ....................................................................................................
   13.26%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  53.88%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction, version 2, compile id 465 
-  30.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction, version 2, compile id 466 
-  13.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub, version 6, compile id 500 
+  53.88%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction, version 2, compile id 465 
+  30.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction, version 2, compile id 466 
+  13.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub, version 6, compile id 500 
    1.73%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
@@ -423,9 +423,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  53.88%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_loop_reduction, version 2, compile id 465 
-  30.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark::manual_reduction, version 2, compile id 466 
-  13.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub, version 6, compile id 500 
+  53.88%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_loop_reduction, version 2, compile id 465 
+  30.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopReductionBenchmark::manual_reduction, version 2, compile id 466 
+  13.26%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LoopReductionBenchmark_manual_loop_reduction_jmhTest::manual_loop_reduction_avgt_jmhStub, version 6, compile id 500 
    2.59%              kernel  [unknown] 
    0.03%           libjvm.so  ElfSymbolTable::lookup 
    0.03%        libc-2.31.so  [unknown] 

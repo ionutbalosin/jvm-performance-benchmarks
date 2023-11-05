@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize","Param: streamType"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.FilterInputStreamBenchmark.read","avgt",1,25,0.412927,0.002421,"us/op",_1_KB,_64_MB,BUFFERED_IN_STREAM
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.FilterInputStreamBenchmark.read","avgt",1,25,1.662928,0.005837,"us/op",_1_KB,_64_MB,DATA_IN_STREAM
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.FilterInputStreamBenchmark.read","avgt",1,25,0.412927,0.002421,"us/op",_1_KB,_64_MB,BUFFERED_IN_STREAM
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.FilterInputStreamBenchmark.read","avgt",1,25,1.662928,0.005837,"us/op",_1_KB,_64_MB,DATA_IN_STREAM

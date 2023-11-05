@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCodingBenchmark.decode","avgt",1,25,40.972218,0.341867,"ms/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.macro.huffmancoding.HuffmanCodingBenchmark.encode","avgt",1,25,24.926571,0.361473,"ms/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.huffmancoding.HuffmanCodingBenchmark.decode","avgt",1,25,40.972218,0.341867,"ms/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.huffmancoding.HuffmanCodingBenchmark.encode","avgt",1,25,24.926571,0.361473,"ms/op",262144

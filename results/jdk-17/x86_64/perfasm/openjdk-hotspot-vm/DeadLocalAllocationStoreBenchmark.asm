@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_baseline
 # Parameters: (size = 64)
 
 # Run progress: 0.00% complete, ETA 00:13:20
@@ -28,12 +28,12 @@ Iteration   5: 13.484 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_baseline":
   13.293 ±(99.9%) 1.056 ns/op [Average]
   (min, avg, max) = (13.072, 13.293, 13.681), stdev = 0.274
   CI (99.9%): [12.237, 14.348] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_baseline:·asm":
 PrintAssembly processed: 113778 total address lines.
 Perf output processed (skipped 55.518 seconds):
  Column 1: cycles (50863 events)
@@ -42,9 +42,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
 
-                # {method} {0x00007f2047875208} &apos;array_baseline&apos; &apos;()[B&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+                # {method} {0x00007f2047875208} &apos;array_baseline&apos; &apos;()[B&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
                 #           [sp+0x20]  (sp of caller)
                 0x00007f2080f63620:   mov    0x8(%rsi),%r10d
                 0x00007f2080f63624:   movabs $0x800000000,%r11
@@ -57,9 +57,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    2.80%        0x00007f2080f63640:   mov    %eax,-0x14000(%rsp)
    5.91%        0x00007f2080f63647:   push   %rbp
    0.23%        0x00007f2080f63648:   sub    $0x10,%rsp                   ;*synchronization entry
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_baseline@-1 (line 154)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_baseline@-1 (line 154)
    0.44%        0x00007f2080f6364c:   mov    0xc(%rsi),%edx               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_baseline@1 (line 154)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_baseline@1 (line 154)
    2.31%        0x00007f2080f6364f:   cmp    $0x100000,%edx
                 0x00007f2080f63655:   ja     0x00007f2080f63762
    0.25%        0x00007f2080f6365b:   movslq %edx,%rcx
@@ -107,50 +107,50 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   63.59%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub, version 6, compile id 502 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub, version 6, compile id 502 
 
               0x00007f2080f67ea6:   mov    0x38(%rsp),%r10
               0x00007f2080f67eab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f2080f67f60
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@30 (line 192)
               0x00007f2080f67eb3:   mov    $0x1,%ebp
               0x00007f2080f67eb8:   test   %r11d,%r11d
           ╭   0x00007f2080f67ebb:   jne    0x00007f2080f67eec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@33 (line 192)
           │   0x00007f2080f67ebd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@36 (line 193)
    2.53%  │↗  0x00007f2080f67ec0:   mov    0x40(%rsp),%rsi
    0.06%  ││  0x00007f2080f67ec5:   xchg   %ax,%ax
    0.00%  ││  0x00007f2080f67ec7:   call   0x00007f20809fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual array_baseline {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
    2.48%  ││  0x00007f2080f67ecc:   mov    0x38(%rsp),%r10
   11.24%  ││  0x00007f2080f67ed1:   movzbl 0x94(%r10),%r11d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@33 (line 192)
    9.92%  ││  0x00007f2080f67ed9:   mov    0x348(%r15),%r10
    0.07%  ││  0x00007f2080f67ee0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@33 (line 192)
    0.01%  ││  0x00007f2080f67ee4:   test   %eax,(%r10)                  ;   {poll}
    0.45%  ││  0x00007f2080f67ee7:   test   %r11d,%r11d
           │╰  0x00007f2080f67eea:   je     0x00007f2080f67ec0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@36 (line 193)
           ↘   0x00007f2080f67eec:   movabs $0x7f2095041d10,%r10
               0x00007f2080f67ef6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@37 (line 193)
               0x00007f2080f67ef9:   mov    0x30(%rsp),%r10
               0x00007f2080f67efe:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@40 (line 193)
               0x00007f2080f67f02:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   26.75%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  63.59%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
-  26.75%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub, version 6, compile id 502 
-   5.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
+  63.59%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
+  26.75%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub, version 6, compile id 502 
+   5.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
    0.96%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -173,8 +173,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  69.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
-  26.75%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub, version 6, compile id 502 
+  69.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_baseline, version 2, compile id 463 
+  26.75%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_baseline_jmhTest::array_baseline_avgt_jmhStub, version 6, compile id 502 
    1.98%              kernel  [unknown] 
    0.23%                      <unknown> 
    0.07%           libjvm.so  ObjArrayAllocator::initialize 
@@ -223,7 +223,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_dse
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_dse
 # Parameters: (size = 64)
 
 # Run progress: 12.50% complete, ETA 00:12:37
@@ -243,12 +243,12 @@ Iteration   5: 12.659 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_dse":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_dse":
   12.668 ±(99.9%) 0.341 ns/op [Average]
   (min, avg, max) = (12.544, 12.668, 12.786), stdev = 0.089
   CI (99.9%): [12.327, 13.009] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_dse:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_dse:·asm":
 PrintAssembly processed: 115545 total address lines.
 Perf output processed (skipped 55.614 seconds):
  Column 1: cycles (50710 events)
@@ -257,9 +257,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
 
-                # {method} {0x00007f0f898752f8} &apos;array_dse&apos; &apos;()[B&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+                # {method} {0x00007f0f898752f8} &apos;array_dse&apos; &apos;()[B&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
                 #           [sp+0x30]  (sp of caller)
                 0x00007f0fa8f63e20:   mov    0x8(%rsi),%r10d
                 0x00007f0fa8f63e24:   movabs $0x800000000,%r11
@@ -272,20 +272,20 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    2.78%        0x00007f0fa8f63e40:   mov    %eax,-0x14000(%rsp)
    2.13%        0x00007f0fa8f63e47:   push   %rbp
    0.29%        0x00007f0fa8f63e48:   sub    $0x20,%rsp                   ;*synchronization entry
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse@-1 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse@-1 (line 162)
    1.99%        0x00007f0fa8f63e4c:   mov    %rsi,(%rsp)
    0.68%        0x00007f0fa8f63e50:   mov    0xc(%rsi),%ebp               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse@1 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse@1 (line 162)
    0.47%        0x00007f0fa8f63e53:   cmp    $0x100000,%ebp
                 0x00007f0fa8f63e59:   ja     0x00007f0fa8f63fa2           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse@4 (line 162)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse@4 (line 162)
    1.97%        0x00007f0fa8f63e5f:   nop
    0.06%        0x00007f0fa8f63e60:   cmp    $0x100000,%ebp
                 0x00007f0fa8f63e66:   ja     0x00007f0fa8f63fb9           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse@11 (line 163)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse@11 (line 163)
    0.73%        0x00007f0fa8f63e6c:   cmp    $0x100000,%ebp
                 0x00007f0fa8f63e72:   ja     0x00007f0fa8f63fd1           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse@18 (line 164)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse@18 (line 164)
    0.26%        0x00007f0fa8f63e78:   nopl   0x0(%rax,%rax,1)
    1.92%        0x00007f0fa8f63e80:   cmp    $0x100000,%ebp
                 0x00007f0fa8f63e86:   ja     0x00007f0fa8f63fe9
@@ -337,50 +337,50 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   74.42%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub, version 6, compile id 504 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub, version 6, compile id 504 
 
               0x00007f0fa8f67026:   mov    0x38(%rsp),%r10
               0x00007f0fa8f6702b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f0fa8f670e0
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@30 (line 192)
               0x00007f0fa8f67033:   mov    $0x1,%ebp
               0x00007f0fa8f67038:   test   %r11d,%r11d
           ╭   0x00007f0fa8f6703b:   jne    0x00007f0fa8f6706c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@33 (line 192)
           │   0x00007f0fa8f6703d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@36 (line 193)
    2.63%  │↗  0x00007f0fa8f67040:   mov    0x40(%rsp),%rsi
    0.10%  ││  0x00007f0fa8f67045:   xchg   %ax,%ax
    0.01%  ││  0x00007f0fa8f67047:   call   0x00007f0fa89fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual array_dse {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
    2.15%  ││  0x00007f0fa8f6704c:   mov    0x38(%rsp),%r10
    4.20%  ││  0x00007f0fa8f67051:   movzbl 0x94(%r10),%r11d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@33 (line 192)
    7.81%  ││  0x00007f0fa8f67059:   mov    0x348(%r15),%r10
    0.06%  ││  0x00007f0fa8f67060:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@33 (line 192)
    0.01%  ││  0x00007f0fa8f67064:   test   %eax,(%r10)                  ;   {poll}
    0.70%  ││  0x00007f0fa8f67067:   test   %r11d,%r11d
           │╰  0x00007f0fa8f6706a:   je     0x00007f0fa8f67040           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@36 (line 193)
           ↘   0x00007f0fa8f6706c:   movabs $0x7f0fbfcd9d10,%r10
               0x00007f0fa8f67076:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@37 (line 193)
               0x00007f0fa8f67079:   mov    0x30(%rsp),%r10
               0x00007f0fa8f6707e:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@40 (line 193)
               0x00007f0fa8f67082:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   17.68%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  74.42%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
-  17.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub, version 6, compile id 504 
-   4.47%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
+  74.42%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
+  17.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub, version 6, compile id 504 
+   4.47%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
    0.15%              kernel  [unknown] 
    0.09%        libc-2.31.so  [unknown] 
    0.08%           libjvm.so  HeapRegionManager::par_iterate 
@@ -403,8 +403,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  78.89%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
-  17.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub, version 6, compile id 504 
+  78.89%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse, version 2, compile id 471 
+  17.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_jmhTest::array_dse_avgt_jmhStub, version 6, compile id 504 
    1.25%              kernel  [unknown] 
    0.15%                      <unknown> 
    0.15%        libc-2.31.so  [unknown] 
@@ -455,7 +455,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_dse_inter_procedural
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_dse_inter_procedural
 # Parameters: (size = 64)
 
 # Run progress: 25.00% complete, ETA 00:10:48
@@ -475,12 +475,12 @@ Iteration   5: 26.914 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_dse_inter_procedural":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_dse_inter_procedural":
   26.691 ±(99.9%) 0.487 ns/op [Average]
   (min, avg, max) = (26.603, 26.691, 26.914), stdev = 0.126
   CI (99.9%): [26.204, 27.178] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.array_dse_inter_procedural:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.array_dse_inter_procedural:·asm":
 PrintAssembly processed: 114961 total address lines.
 Perf output processed (skipped 55.577 seconds):
  Column 1: cycles (50689 events)
@@ -489,9 +489,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
 
-                # {method} {0x00007f0870c7f010} &apos;array_dse_inter_procedural&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+                # {method} {0x00007f0870c7f010} &apos;array_dse_inter_procedural&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
                 #           [sp+0x20]  (sp of caller)
                 0x00007f0884f63b40:   mov    0x8(%rsi),%r10d
                 0x00007f0884f63b44:   movabs $0x800000000,%r11
@@ -504,43 +504,43 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    1.21%        0x00007f0884f63b60:   mov    %eax,-0x14000(%rsp)
    2.64%        0x00007f0884f63b67:   push   %rbp
    0.04%        0x00007f0884f63b68:   sub    $0x10,%rsp                   ;*synchronization entry
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@-1 (line 174)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@-1 (line 174)
    0.43%        0x00007f0884f63b6c:   mov    %rsi,%rbp
    0.90%        0x00007f0884f63b6f:   mov    0xc(%rsi),%edx               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@1 (line 174)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@1 (line 174)
    0.12%        0x00007f0884f63b72:   cmp    $0x100000,%edx
                 0x00007f0884f63b78:   ja     0x00007f0884f63cdd           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@4 (line 174)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@4 (line 174)
    0.37%        0x00007f0884f63b7e:   mov    %rbp,%rsi
    0.01%        0x00007f0884f63b81:   xchg   %ax,%ax
    0.88%        0x00007f0884f63b83:   call   0x00007f0884f63820           ; ImmutableOopMap {rbp=Oop }
                                                                           ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@8 (line 175)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@8 (line 175)
                                                                           ;   {optimized virtual_call}
    0.06%        0x00007f0884f63b88:   mov    0xc(%rbp),%edx               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@12 (line 176)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@12 (line 176)
    8.09%        0x00007f0884f63b8b:   cmp    $0x100000,%edx
                 0x00007f0884f63b91:   ja     0x00007f0884f63cf1           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@15 (line 176)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@15 (line 176)
    1.35%        0x00007f0884f63b97:   mov    %rbp,%rsi
    0.00%        0x00007f0884f63b9a:   nop
                 0x00007f0884f63b9b:   call   0x00007f0884f63820           ; ImmutableOopMap {rbp=Oop }
                                                                           ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@19 (line 177)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@19 (line 177)
                                                                           ;   {optimized virtual_call}
    0.10%        0x00007f0884f63ba0:   mov    0xc(%rbp),%edx               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@23 (line 178)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@23 (line 178)
    8.35%        0x00007f0884f63ba3:   cmp    $0x100000,%edx
                 0x00007f0884f63ba9:   ja     0x00007f0884f63d05           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@26 (line 178)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@26 (line 178)
    1.51%        0x00007f0884f63baf:   mov    %rbp,%rsi
                 0x00007f0884f63bb2:   nop
    0.01%        0x00007f0884f63bb3:   call   0x00007f0884f63820           ; ImmutableOopMap {rbp=Oop }
                                                                           ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@30 (line 179)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@30 (line 179)
                                                                           ;   {optimized virtual_call}
    0.01%        0x00007f0884f63bb8:   mov    0xc(%rbp),%edx               ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@34 (line 180)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural@34 (line 180)
    8.34%        0x00007f0884f63bbb:   nopl   0x0(%rax,%rax,1)
    0.00%        0x00007f0884f63bc0:   cmp    $0x100000,%edx
                 0x00007f0884f63bc6:   ja     0x00007f0884f63d19
@@ -590,9 +590,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   63.73%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 474 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 474 
 
-             # {method} {0x00007f0870c7f0d0} &apos;sink&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+             # {method} {0x00007f0870c7f0d0} &apos;sink&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f0884f63800:   mov    0x8(%rsi),%r10d
              0x00007f0884f63804:   movabs $0x800000000,%r11
@@ -604,7 +604,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
            [Verified Entry Point]
    3.31%     0x00007f0884f63820:   sub    $0x18,%rsp
    0.99%     0x00007f0884f63827:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink@-1 (line 187)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink@-1 (line 187)
    0.40%     0x00007f0884f6382c:   add    $0x10,%rsp
    3.00%     0x00007f0884f63830:   pop    %rbp
   11.66%     0x00007f0884f63831:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -624,51 +624,51 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   19.43%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub, version 6, compile id 508 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub, version 6, compile id 508 
 
               0x00007f0884f66ca6:   mov    0x38(%rsp),%r10
               0x00007f0884f66cab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f0884f66d60
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@30 (line 192)
               0x00007f0884f66cb3:   mov    $0x1,%ebp
               0x00007f0884f66cb8:   test   %r11d,%r11d
           ╭   0x00007f0884f66cbb:   jne    0x00007f0884f66cec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@33 (line 192)
           │   0x00007f0884f66cbd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@36 (line 193)
    1.32%  │↗  0x00007f0884f66cc0:   mov    0x40(%rsp),%rsi
    0.03%  ││  0x00007f0884f66cc5:   xchg   %ax,%ax
    0.04%  ││  0x00007f0884f66cc7:   call   0x00007f08849fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual array_dse_inter_procedural {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
    0.06%  ││  0x00007f0884f66ccc:   mov    0x38(%rsp),%r10
    3.65%  ││  0x00007f0884f66cd1:   movzbl 0x94(%r10),%r11d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@33 (line 192)
    5.37%  ││  0x00007f0884f66cd9:   mov    0x348(%r15),%r10
    0.02%  ││  0x00007f0884f66ce0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@33 (line 192)
    0.05%  ││  0x00007f0884f66ce4:   test   %eax,(%r10)                  ;   {poll}
    0.16%  ││  0x00007f0884f66ce7:   test   %r11d,%r11d
           │╰  0x00007f0884f66cea:   je     0x00007f0884f66cc0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@36 (line 193)
           ↘   0x00007f0884f66cec:   movabs $0x7f089a42cd10,%r10
               0x00007f0884f66cf6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@37 (line 193)
               0x00007f0884f66cf9:   mov    0x30(%rsp),%r10
               0x00007f0884f66cfe:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@40 (line 193)
               0x00007f0884f66d02:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   10.71%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  63.73%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
-  19.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 474 
-  10.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub, version 6, compile id 508 
-   3.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
+  63.73%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
+  19.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 474 
+  10.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub, version 6, compile id 508 
+   3.17%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
    0.76%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -690,9 +690,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
   99.99%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  66.89%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
-  19.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 474 
-  10.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub, version 6, compile id 508 
+  66.89%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::array_dse_inter_procedural, version 2, compile id 477 
+  19.43%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 474 
+  10.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_array_dse_inter_procedural_jmhTest::array_dse_inter_procedural_avgt_jmhStub, version 6, compile id 508 
    1.83%              kernel  [unknown] 
    0.11%                      <unknown> 
    0.06%        libc-2.31.so  [unknown] 
@@ -741,7 +741,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_alloc_baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_alloc_baseline
 # Parameters: (size = 64)
 
 # Run progress: 37.50% complete, ETA 00:08:58
@@ -761,12 +761,12 @@ Iteration   5: 7.023 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_alloc_baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_alloc_baseline":
   7.024 ±(99.9%) 0.025 ns/op [Average]
   (min, avg, max) = (7.019, 7.024, 7.035), stdev = 0.006
   CI (99.9%): [7.000, 7.049] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_alloc_baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_alloc_baseline:·asm":
 PrintAssembly processed: 117696 total address lines.
 Perf output processed (skipped 55.698 seconds):
  Column 1: cycles (50971 events)
@@ -775,9 +775,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline, version 2, compile id 482 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline, version 2, compile id 482 
 
-              # {method} {0x00007fda6dc74bf8} &apos;obj_alloc_baseline&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+              # {method} {0x00007fda6dc74bf8} &apos;obj_alloc_baseline&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
               #           [sp+0x20]  (sp of caller)
               0x00007fda8cf64a20:   mov    0x8(%rsi),%r10d
               0x00007fda8cf64a24:   movabs $0x800000000,%r11
@@ -801,7 +801,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    6.84%  │   0x00007fda8cf64a78:   movq   $0x1,(%rax)
   15.88%  │   0x00007fda8cf64a7f:   movl   $0xd68,0x8(%rax)             ;   {metadata(&apos;java/lang/Object&apos;)}
    0.38%  │   0x00007fda8cf64a86:   mov    %r12d,0xc(%rax)              ;*synchronization entry
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline@-1 (line 62)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline@-1 (line 62)
    3.26%  │↗  0x00007fda8cf64a8a:   add    $0x10,%rsp
    0.12%  ││  0x00007fda8cf64a8e:   pop    %rbp
    3.81%  ││  0x00007fda8cf64a8f:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -810,10 +810,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
           ↘│  0x00007fda8cf64a9d:   movabs $0x800000d68,%rsi            ;   {metadata(&apos;java/lang/Object&apos;)}
            │  0x00007fda8cf64aa7:   call   0x00007fda8ca0fc00           ; ImmutableOopMap {}
            │                                                            ;*new {reexecute=0 rethrow=0 return_oop=1}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline@0 (line 62)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline@0 (line 62)
            │                                                            ;   {runtime_call _new_instance_Java}
            ╰  0x00007fda8cf64aac:   jmp    0x00007fda8cf64a8a           ;*new {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline@0 (line 62)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline@0 (line 62)
               0x00007fda8cf64aae:   mov    %rax,%rsi
               0x00007fda8cf64ab1:   add    $0x10,%rsp
               0x00007fda8cf64ab5:   pop    %rbp
@@ -821,49 +821,49 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   51.30%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub, version 6, compile id 515 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub, version 6, compile id 515 
 
               0x00007fda8cf67aa6:   mov    0x38(%rsp),%r10
               0x00007fda8cf67aab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007fda8cf67b60
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@30 (line 192)
               0x00007fda8cf67ab3:   mov    $0x1,%ebp
               0x00007fda8cf67ab8:   test   %r11d,%r11d
           ╭   0x00007fda8cf67abb:   jne    0x00007fda8cf67aec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@33 (line 192)
           │   0x00007fda8cf67abd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@36 (line 193)
    1.49%  │↗  0x00007fda8cf67ac0:   mov    0x40(%rsp),%rsi
    3.99%  ││  0x00007fda8cf67ac5:   xchg   %ax,%ax
    0.01%  ││  0x00007fda8cf67ac7:   call   0x00007fda8c9fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual obj_alloc_baseline {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
   29.92%  ││  0x00007fda8cf67acc:   mov    0x38(%rsp),%r10
    0.37%  ││  0x00007fda8cf67ad1:   movzbl 0x94(%r10),%r11d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@33 (line 192)
    5.43%  ││  0x00007fda8cf67ad9:   mov    0x348(%r15),%r10
    4.06%  ││  0x00007fda8cf67ae0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@33 (line 192)
    0.01%  ││  0x00007fda8cf67ae4:   test   %eax,(%r10)                  ;   {poll}
    0.24%  ││  0x00007fda8cf67ae7:   test   %r11d,%r11d
           │╰  0x00007fda8cf67aea:   je     0x00007fda8cf67ac0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@36 (line 193)
           ↘   0x00007fda8cf67aec:   movabs $0x7fdaa3343d10,%r10
               0x00007fda8cf67af6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@37 (line 193)
               0x00007fda8cf67af9:   mov    0x30(%rsp),%r10
               0x00007fda8cf67afe:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@40 (line 193)
               0x00007fda8cf67b02:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   45.51%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  51.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline, version 2, compile id 482 
-  45.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub, version 6, compile id 515 
+  51.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline, version 2, compile id 482 
+  45.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub, version 6, compile id 515 
    1.06%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -887,8 +887,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  51.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline, version 2, compile id 482 
-  45.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub, version 6, compile id 515 
+  51.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_alloc_baseline, version 2, compile id 482 
+  45.51%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_alloc_baseline_jmhTest::obj_alloc_baseline_avgt_jmhStub, version 6, compile id 515 
    2.18%              kernel  [unknown] 
    0.14%                      <unknown> 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
@@ -938,7 +938,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_dse
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_dse
 # Parameters: (size = 64)
 
 # Run progress: 50.00% complete, ETA 00:07:11
@@ -958,12 +958,12 @@ Iteration   5: 7.023 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_dse":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_dse":
   7.024 ±(99.9%) 0.006 ns/op [Average]
   (min, avg, max) = (7.023, 7.024, 7.027), stdev = 0.002
   CI (99.9%): [7.018, 7.030] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_dse:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_dse:·asm":
 PrintAssembly processed: 116379 total address lines.
 Perf output processed (skipped 55.681 seconds):
  Column 1: cycles (50492 events)
@@ -972,9 +972,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse, version 2, compile id 479 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse, version 2, compile id 479 
 
-              # {method} {0x00007fa747874d50} &apos;obj_dse&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+              # {method} {0x00007fa747874d50} &apos;obj_dse&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
               #           [sp+0x20]  (sp of caller)
               0x00007fa780f642a0:   mov    0x8(%rsi),%r10d
               0x00007fa780f642a4:   movabs $0x800000000,%r11
@@ -998,7 +998,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    6.11%  │   0x00007fa780f642f8:   movq   $0x1,(%rax)
   15.08%  │   0x00007fa780f642ff:   movl   $0xd68,0x8(%rax)             ;   {metadata(&apos;java/lang/Object&apos;)}
    1.68%  │   0x00007fa780f64306:   mov    %r12d,0xc(%rax)              ;*synchronization entry
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse@-1 (line 70)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse@-1 (line 70)
    3.64%  │↗  0x00007fa780f6430a:   add    $0x10,%rsp
    0.11%  ││  0x00007fa780f6430e:   pop    %rbp
    3.47%  ││  0x00007fa780f6430f:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1007,10 +1007,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.00%  ↘│  0x00007fa780f6431d:   movabs $0x800000d68,%rsi            ;   {metadata(&apos;java/lang/Object&apos;)}
            │  0x00007fa780f64327:   call   0x00007fa780a0f900           ; ImmutableOopMap {}
            │                                                            ;*new {reexecute=0 rethrow=0 return_oop=1}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse@120 (line 85)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse@120 (line 85)
            │                                                            ;   {runtime_call _new_instance_Java}
            ╰  0x00007fa780f6432c:   jmp    0x00007fa780f6430a           ;*new {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse@0 (line 70)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse@0 (line 70)
               0x00007fa780f6432e:   mov    %rax,%rsi
               0x00007fa780f64331:   add    $0x10,%rsp
               0x00007fa780f64335:   pop    %rbp
@@ -1019,49 +1019,49 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   55.91%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub, version 6, compile id 511 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub, version 6, compile id 511 
 
               0x00007fa780f66926:   mov    0x38(%rsp),%r10
               0x00007fa780f6692b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007fa780f669e0
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@30 (line 192)
               0x00007fa780f66933:   mov    $0x1,%ebp
               0x00007fa780f66938:   test   %r11d,%r11d
           ╭   0x00007fa780f6693b:   jne    0x00007fa780f6696c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@33 (line 192)
           │   0x00007fa780f6693d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@36 (line 193)
    2.69%  │↗  0x00007fa780f66940:   mov    0x40(%rsp),%rsi
    2.90%  ││  0x00007fa780f66945:   xchg   %ax,%ax
    0.01%  ││  0x00007fa780f66947:   call   0x00007fa7809fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual obj_dse {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
   21.84%  ││  0x00007fa780f6694c:   mov    0x38(%rsp),%r10
    0.35%  ││  0x00007fa780f66951:   movzbl 0x94(%r10),%r11d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@33 (line 192)
   11.12%  ││  0x00007fa780f66959:   mov    0x348(%r15),%r10
    2.92%  ││  0x00007fa780f66960:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@33 (line 192)
    0.01%  ││  0x00007fa780f66964:   test   %eax,(%r10)                  ;   {poll}
    0.29%  ││  0x00007fa780f66967:   test   %r11d,%r11d
           │╰  0x00007fa780f6696a:   je     0x00007fa780f66940           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@36 (line 193)
           ↘   0x00007fa780f6696c:   movabs $0x7fa795220d10,%r10
               0x00007fa780f66976:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@37 (line 193)
               0x00007fa780f66979:   mov    0x30(%rsp),%r10
               0x00007fa780f6697e:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@40 (line 193)
               0x00007fa780f66982:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   42.12%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  55.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse, version 2, compile id 479 
-  42.12%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub, version 6, compile id 511 
+  55.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse, version 2, compile id 479 
+  42.12%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub, version 6, compile id 511 
    0.10%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
@@ -1085,8 +1085,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  55.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse, version 2, compile id 479 
-  42.12%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub, version 6, compile id 511 
+  55.91%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse, version 2, compile id 479 
+  42.12%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_jmhTest::obj_dse_avgt_jmhStub, version 6, compile id 511 
    0.93%              kernel  [unknown] 
    0.10%                      <unknown> 
    0.04%        libc-2.31.so  [unknown] 
@@ -1135,7 +1135,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_dse_inter_procedural
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_dse_inter_procedural
 # Parameters: (size = 64)
 
 # Run progress: 62.50% complete, ETA 00:05:23
@@ -1155,12 +1155,12 @@ Iteration   5: 78.102 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_dse_inter_procedural":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_dse_inter_procedural":
   78.365 ±(99.9%) 0.953 ns/op [Average]
   (min, avg, max) = (78.096, 78.365, 78.619), stdev = 0.248
   CI (99.9%): [77.412, 79.319] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.obj_dse_inter_procedural:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.obj_dse_inter_procedural:·asm":
 PrintAssembly processed: 121150 total address lines.
 Perf output processed (skipped 55.838 seconds):
  Column 1: cycles (51085 events)
@@ -1169,9 +1169,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 483 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 483 
 
-             # {method} {0x00007f53b107f0d0} &apos;sink&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+             # {method} {0x00007f53b107f0d0} &apos;sink&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f53d0f64d80:   mov    0x8(%rsi),%r10d
              0x00007f53d0f64d84:   movabs $0x800000000,%r11
@@ -1183,7 +1183,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
            [Verified Entry Point]
   26.39%     0x00007f53d0f64da0:   sub    $0x18,%rsp
    1.33%     0x00007f53d0f64da7:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink@-1 (line 187)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink@-1 (line 187)
   33.84%     0x00007f53d0f64dac:   add    $0x10,%rsp
    0.01%     0x00007f53d0f64db0:   pop    %rbp
    7.28%     0x00007f53d0f64db1:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1203,9 +1203,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   68.85%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural, version 2, compile id 485 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural, version 2, compile id 485 
 
-              # {method} {0x00007f53b107eb18} &apos;obj_dse_inter_procedural&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+              # {method} {0x00007f53b107eb18} &apos;obj_dse_inter_procedural&apos; &apos;()Ljava/lang/Object;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
               #           [sp+0x20]  (sp of caller)
               0x00007f53d0f65440:   mov    0x8(%rsi),%r10d
               0x00007f53d0f65444:   movabs $0x800000000,%r11
@@ -1218,81 +1218,81 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.52%      0x00007f53d0f65460:   mov    %eax,-0x14000(%rsp)
    1.48%      0x00007f53d0f65467:   push   %rbp
    0.00%      0x00007f53d0f65468:   sub    $0x10,%rsp                   ;*synchronization entry
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@-1 (line 94)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@-1 (line 94)
    0.01%      0x00007f53d0f6546c:   mov    %rsi,%rbp
    0.47%      0x00007f53d0f6546f:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@9 (line 95)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@9 (line 95)
                                                                         ;   {optimized virtual_call}
               0x00007f53d0f65474:   mov    %rbp,%rsi
    0.46%      0x00007f53d0f65477:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@21 (line 97)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@21 (line 97)
                                                                         ;   {optimized virtual_call}
    0.94%      0x00007f53d0f6547c:   mov    %rbp,%rsi
    0.02%      0x00007f53d0f6547f:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@33 (line 99)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@33 (line 99)
                                                                         ;   {optimized virtual_call}
    0.96%      0x00007f53d0f65484:   mov    %rbp,%rsi
               0x00007f53d0f65487:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@45 (line 101)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@45 (line 101)
                                                                         ;   {optimized virtual_call}
    0.83%      0x00007f53d0f6548c:   mov    %rbp,%rsi
               0x00007f53d0f6548f:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@57 (line 103)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@57 (line 103)
                                                                         ;   {optimized virtual_call}
    0.98%      0x00007f53d0f65494:   mov    %rbp,%rsi
               0x00007f53d0f65497:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@69 (line 105)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@69 (line 105)
                                                                         ;   {optimized virtual_call}
    0.96%      0x00007f53d0f6549c:   mov    %rbp,%rsi
               0x00007f53d0f6549f:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@81 (line 107)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@81 (line 107)
                                                                         ;   {optimized virtual_call}
    0.93%      0x00007f53d0f654a4:   mov    %rbp,%rsi
               0x00007f53d0f654a7:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@93 (line 109)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@93 (line 109)
                                                                         ;   {optimized virtual_call}
    0.99%      0x00007f53d0f654ac:   mov    %rbp,%rsi
               0x00007f53d0f654af:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@105 (line 111)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@105 (line 111)
                                                                         ;   {optimized virtual_call}
    1.00%      0x00007f53d0f654b4:   mov    %rbp,%rsi
               0x00007f53d0f654b7:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@117 (line 113)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@117 (line 113)
                                                                         ;   {optimized virtual_call}
    0.94%      0x00007f53d0f654bc:   mov    %rbp,%rsi
               0x00007f53d0f654bf:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@129 (line 115)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@129 (line 115)
                                                                         ;   {optimized virtual_call}
    0.94%      0x00007f53d0f654c4:   mov    %rbp,%rsi
               0x00007f53d0f654c7:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@141 (line 117)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@141 (line 117)
                                                                         ;   {optimized virtual_call}
    0.88%      0x00007f53d0f654cc:   mov    %rbp,%rsi
               0x00007f53d0f654cf:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@153 (line 119)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@153 (line 119)
                                                                         ;   {optimized virtual_call}
    0.90%      0x00007f53d0f654d4:   mov    %rbp,%rsi
               0x00007f53d0f654d7:   call   0x00007f53d0f64da0           ; ImmutableOopMap {rbp=Oop }
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@165 (line 121)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@165 (line 121)
                                                                         ;   {optimized virtual_call}
    1.03%      0x00007f53d0f654dc:   mov    %rbp,%rsi
               0x00007f53d0f654df:   call   0x00007f53d0f64da0           ; ImmutableOopMap {}
                                                                         ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@177 (line 123)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@177 (line 123)
                                                                         ;   {optimized virtual_call}
    0.94%      0x00007f53d0f654e4:   mov    0x108(%r15),%rax
    1.00%      0x00007f53d0f654eb:   mov    %rax,%r10
@@ -1306,7 +1306,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    2.00%  │   0x00007f53d0f65518:   movq   $0x1,(%rax)
    0.17%  │   0x00007f53d0f6551f:   movl   $0xd68,0x8(%rax)             ;   {metadata(&apos;java/lang/Object&apos;)}
    0.68%  │   0x00007f53d0f65526:   mov    %r12d,0xc(%rax)              ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@177 (line 123)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@177 (line 123)
    1.38%  │↗  0x00007f53d0f6552a:   add    $0x10,%rsp
    0.01%  ││  0x00007f53d0f6552e:   pop    %rbp
    0.00%  ││  0x00007f53d0f6552f:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1315,20 +1315,20 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
           ↘│  0x00007f53d0f6553d:   movabs $0x800000d68,%rsi            ;   {metadata(&apos;java/lang/Object&apos;)}
            │  0x00007f53d0f65547:   call   0x00007f53d0a10500           ; ImmutableOopMap {}
            │                                                            ;*new {reexecute=0 rethrow=0 return_oop=1}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@180 (line 124)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@180 (line 124)
            │                                                            ;   {runtime_call _new_instance_Java}
            ╰  0x00007f53d0f6554c:   jmp    0x00007f53d0f6552a           ;*new {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@180 (line 124)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@180 (line 124)
               0x00007f53d0f6554e:   mov    %rax,%rsi
               0x00007f53d0f65551:   jmp    0x00007f53d0f655ba           ;*invokevirtual sink {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@177 (line 123)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural@177 (line 123)
 ....................................................................................................
   23.31%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  68.85%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 483 
-  23.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural, version 2, compile id 485 
-   5.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_inter_procedural_jmhTest::obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 510 
+  68.85%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 483 
+  23.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural, version 2, compile id 485 
+   5.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_inter_procedural_jmhTest::obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 510 
    1.09%              kernel  [unknown] 
    0.13%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
@@ -1351,9 +1351,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  68.85%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 483 
-  23.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural, version 2, compile id 485 
-   5.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_inter_procedural_jmhTest::obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 510 
+  68.85%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::sink, version 2, compile id 483 
+  23.31%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::obj_dse_inter_procedural, version 2, compile id 485 
+   5.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_obj_dse_inter_procedural_jmhTest::obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 510 
    2.17%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.03%        libc-2.31.so  [unknown] 
@@ -1402,7 +1402,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_baseline
 # Parameters: (size = 64)
 
 # Run progress: 75.00% complete, ETA 00:03:36
@@ -1422,12 +1422,12 @@ Iteration   5: 27.668 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_baseline":
   27.654 ±(99.9%) 0.076 ns/op [Average]
   (min, avg, max) = (27.623, 27.654, 27.668), stdev = 0.020
   CI (99.9%): [27.578, 27.730] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_baseline:·asm":
 PrintAssembly processed: 117367 total address lines.
 Perf output processed (skipped 55.583 seconds):
  Column 1: cycles (50475 events)
@@ -1436,9 +1436,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline, version 2, compile id 472 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline, version 2, compile id 472 
 
-                      # {method} {0x00007f736507f750} &apos;wrapper_obj_baseline&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark$Wrapper;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+                      # {method} {0x00007f736507f750} &apos;wrapper_obj_baseline&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark$Wrapper;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
                       #           [sp+0x30]  (sp of caller)
                       0x00007f7374f63c60:   mov    0x8(%rsi),%r10d
                       0x00007f7374f63c64:   movabs $0x800000000,%r11
@@ -1460,7 +1460,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.31%              0x00007f7374f63cad:   mov    %r10,0x108(%r15)
    0.42%              0x00007f7374f63cb4:   prefetchw 0xc0(%r10)
    0.95%              0x00007f7374f63cbc:   movq   $0x1,0x0(%rbp)
-   0.49%              0x00007f7374f63cc4:   movl   $0xc26be0,0x8(%rbp)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark$Wrapper&apos;)}
+   0.49%              0x00007f7374f63cc4:   movl   $0xc26be0,0x8(%rbp)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark$Wrapper&apos;)}
    0.27%              0x00007f7374f63ccb:   mov    %r12d,0xc(%rbp)
    0.45%              0x00007f7374f63ccf:   mov    %r12,0x10(%rbp)
    0.38%              0x00007f7374f63cd3:   mov    %r12,0x18(%rbp)
@@ -1471,15 +1471,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.36%              0x00007f7374f63ce9:   add    $0x10,%r10
    0.33%              0x00007f7374f63ced:   cmp    0x118(%r15),%r10
                       0x00007f7374f63cf4:   jae    0x00007f7374f64565           ;*putfield obj1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
    0.37%              0x00007f7374f63cfa:   mov    %r10,0x108(%r15)
    0.31%              0x00007f7374f63d01:   prefetchw 0xc0(%r10)
    0.93%              0x00007f7374f63d09:   movq   $0x1,(%rax)
    0.78%              0x00007f7374f63d10:   movl   $0xd68,0x8(%rax)             ;   {metadata(&apos;java/lang/Object&apos;)}
    0.63%              0x00007f7374f63d17:   mov    %r12d,0xc(%rax)              ;*new {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@5 (line 193)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@5 (line 193)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
    0.40%              0x00007f7374f63d1b:   mov    %rbp,%r10
    0.30%              0x00007f7374f63d1e:   mov    %rax,%r8
    0.32%              0x00007f7374f63d21:   shr    $0x3,%r8
@@ -1666,8 +1666,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    1.88%        │  │  0x00007f7374f6407c:   movq   $0x1,(%rbx)
    1.81%        │  │  0x00007f7374f64083:   movl   $0xd68,0x8(%rbx)             ;   {metadata(&apos;java/lang/Object&apos;)}
    0.83%        │  │  0x00007f7374f6408a:   mov    %r12d,0xc(%rbx)              ;*putfield obj1 {reexecute=0 rethrow=0 return_oop=0}
-                │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
-                │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
+                │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
+                │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
    0.67%        │  │  0x00007f7374f6408e:   cmpb   $0x0,0x38(%r15)
    0.32%        │  │  0x00007f7374f64093:   jne    0x00007f7374f6411f
    0.42%        │  │  0x00007f7374f64099:   mov    %rbx,%r11
@@ -1684,8 +1684,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
                 │ ││  0x00007f7374f640c4:   add    %r10,%r8
                 │ ││  0x00007f7374f640c7:   cmpb   $0x4,(%r8)
                 │ ││  0x00007f7374f640cb:   jne    0x00007f7374f64365           ;*putfield obj8 {reexecute=0 rethrow=0 return_oop=0}
-                │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@89 (line 200)
-                │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
+                │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@89 (line 200)
+                │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline@4 (line 132)
    0.43%        │ ↘│  0x00007f7374f640d1:   mov    %rbp,%rax
    0.26%        │  │  0x00007f7374f640d4:   add    $0x20,%rsp
    0.40%        │  │  0x00007f7374f640d8:   pop    %rbp
@@ -1701,13 +1701,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
                       0x00007f7374f640ff:   nop
                       0x00007f7374f64100:   test   %r11,%r11
                       0x00007f7374f64103:   je     0x00007f7374f64652           ;*putfield obj1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
+                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
 ....................................................................................................
   93.48%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  93.48%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline, version 2, compile id 472 
-   3.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_baseline_jmhTest::wrapper_obj_baseline_avgt_jmhStub, version 6, compile id 508 
+  93.48%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline, version 2, compile id 472 
+   3.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_baseline_jmhTest::wrapper_obj_baseline_avgt_jmhStub, version 6, compile id 508 
    0.11%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.08%          ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -1731,8 +1731,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  93.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline, version 2, compile id 472 
-   3.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_baseline_jmhTest::wrapper_obj_baseline_avgt_jmhStub, version 6, compile id 508 
+  93.49%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_baseline, version 2, compile id 472 
+   3.68%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_baseline_jmhTest::wrapper_obj_baseline_avgt_jmhStub, version 6, compile id 508 
    0.91%              kernel  [unknown] 
    0.11%        libc-2.31.so  [unknown] 
    0.11%                      <unknown> 
@@ -1782,7 +1782,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_dse_inter_procedural
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_dse_inter_procedural
 # Parameters: (size = 64)
 
 # Run progress: 87.50% complete, ETA 00:01:47
@@ -1802,12 +1802,12 @@ Iteration   5: 56.818 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_dse_inter_procedural":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_dse_inter_procedural":
   56.482 ±(99.9%) 0.739 ns/op [Average]
   (min, avg, max) = (56.354, 56.482, 56.818), stdev = 0.192
   CI (99.9%): [55.743, 57.222] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_dse_inter_procedural:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark.wrapper_obj_dse_inter_procedural:·asm":
 PrintAssembly processed: 120978 total address lines.
 Perf output processed (skipped 55.777 seconds):
  Column 1: cycles (50716 events)
@@ -1816,9 +1816,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
 
-                         # {method} {0x00007f978087edb0} &apos;wrapper_obj_dse_inter_procedural&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark$Wrapper;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark&apos;
+                         # {method} {0x00007f978087edb0} &apos;wrapper_obj_dse_inter_procedural&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark$Wrapper;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark&apos;
                          #           [sp+0xe0]  (sp of caller)
                          0x00007f9794f64fa0:   mov    0x8(%rsi),%r10d
                          0x00007f9794f64fa4:   movabs $0x800000000,%r11
@@ -1837,15 +1837,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.19%                 0x00007f9794f64fdd:   data16 xchg %ax,%ax
    0.21%                 0x00007f9794f64fe0:   cmp    0x118(%r15),%r10
                          0x00007f9794f64fe7:   jae    0x00007f9794f662c5           ;*putfield obj1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@1 (line 214)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@86 (line 147)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@1 (line 214)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@86 (line 147)
    0.10%                 0x00007f9794f64fed:   mov    %r10,0x108(%r15)
    0.11%                 0x00007f9794f64ff4:   prefetchw 0xc0(%r10)
    0.23%                 0x00007f9794f64ffc:   movq   $0x1,(%r11)
    0.22%                 0x00007f9794f65003:   movl   $0xd68,0x8(%r11)             ;   {metadata(&apos;java/lang/Object&apos;)}
    0.13%                 0x00007f9794f6500b:   mov    %r12d,0xc(%r11)              ;*new {reexecute=0 rethrow=0 return_oop=0}
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@0 (line 139)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@0 (line 139)
    0.16%                 0x00007f9794f6500f:   mov    %r11,0x78(%rsp)
    0.23%                 0x00007f9794f65014:   mov    0x108(%r15),%r10
    0.24%                 0x00007f9794f6501b:   mov    %r10,%r11
@@ -1932,7 +1932,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.12%                 0x00007f9794f651ed:   mov    %rdx,0x108(%r15)
    0.16%                 0x00007f9794f651f4:   prefetchw 0xc0(%rdx)
    1.19%                 0x00007f9794f651fb:   movq   $0x1,0x0(%rbp)
-   2.37%                 0x00007f9794f65203:   movl   $0xc26be0,0x8(%rbp)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark$Wrapper&apos;)}
+   2.37%                 0x00007f9794f65203:   movl   $0xc26be0,0x8(%rbp)          ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark$Wrapper&apos;)}
    0.62%                 0x00007f9794f6520a:   mov    %r12d,0xc(%rbp)
    0.35%                 0x00007f9794f6520e:   mov    %r12,0x10(%rbp)
    0.70%                 0x00007f9794f65212:   mov    %r12,0x18(%rbp)
@@ -1943,9 +1943,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.02%                 0x00007f9794f65228:   add    $0x10,%rdx
    0.10%                 0x00007f9794f6522c:   cmp    0x118(%r15),%rdx
                          0x00007f9794f65233:   jae    0x00007f9794f664e7           ;*putfield obj1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@1 (line 214)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@86 (line 147)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@12 (line 193)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@1 (line 214)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@86 (line 147)
    0.53%                 0x00007f9794f65239:   mov    %rdx,0x108(%r15)
    0.09%                 0x00007f9794f65240:   prefetchw 0xc0(%rdx)
    0.40%                 0x00007f9794f65247:   movq   $0x1,(%rax)
@@ -1958,9 +1958,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
    0.51%                 0x00007f9794f6526d:   mov    %rcx,0x80(%rsp)
    0.04%                 0x00007f9794f65275:   mov    %rbx,0x88(%rsp)
    0.09%                 0x00007f9794f6527d:   mov    %rdi,0x90(%rsp)              ;*new {reexecute=0 rethrow=0 return_oop=0}
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@5 (line 193)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@1 (line 214)
-                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@86 (line 147)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@5 (line 193)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark$Wrapper::&lt;init&gt;@1 (line 214)
+                                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural@86 (line 147)
    0.08%                 0x00007f9794f65285:   mov    0x90(%rsp),%r10
    0.54%                 0x00007f9794f6528d:   shr    $0x3,%r10
    0.03%                 0x00007f9794f65291:   mov    %r10d,0x98(%rsp)
@@ -2276,10 +2276,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
   88.96%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  88.96%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
-   4.84%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
-   1.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_dse_inter_procedural_jmhTest::wrapper_obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 523 
-   1.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
+  88.96%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
+   4.84%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
+   1.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_dse_inter_procedural_jmhTest::wrapper_obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 523 
+   1.01%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
    0.33%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
@@ -2301,8 +2301,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLoca
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  94.83%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
-   1.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_dse_inter_procedural_jmhTest::wrapper_obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 523 
+  94.83%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLocalAllocationStoreBenchmark::wrapper_obj_dse_inter_procedural, version 2, compile id 486 
+   1.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.DeadLocalAllocationStoreBenchmark_wrapper_obj_dse_inter_procedural_jmhTest::wrapper_obj_dse_inter_procedural_avgt_jmhStub, version 6, compile id 523 
    1.46%              kernel  [unknown] 
    0.17%        libc-2.31.so  [unknown] 
    0.10%                      <unknown> 

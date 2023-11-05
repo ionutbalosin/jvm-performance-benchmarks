@@ -1,7 +1,7 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: strideType"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,2.733068,0.000332,"ns/op",LINEAR_WALK
-"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,6.984303,0.050230,"ns/op",RANDOM_PAGE_WALK
-"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,4.043851,0.003165,"ns/op",RANDOM_HEAP_WALK
-"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,1.047703,0.000968,"ns/op",LINEAR_WALK
-"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,3.128587,0.009843,"ns/op",RANDOM_PAGE_WALK
-"com.ionutbalosin.jvm.performance.benchmarks.macro.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,14.767652,0.146004,"ns/op",RANDOM_HEAP_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,2.733068,0.000332,"ns/op",LINEAR_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,6.984303,0.050230,"ns/op",RANDOM_PAGE_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,4.043851,0.003165,"ns/op",RANDOM_HEAP_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,1.047703,0.000968,"ns/op",LINEAR_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,3.128587,0.009843,"ns/op",RANDOM_PAGE_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,14.767652,0.146004,"ns/op",RANDOM_HEAP_WALK

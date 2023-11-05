@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.arg_escape_obj
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.arg_escape_obj
 # Parameters: (objectEscapes = false, size = 128, value = 3)
 
 # Run progress: 0.00% complete, ETA 00:06:40
@@ -28,12 +28,12 @@ Iteration   5: 13.959 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.arg_escape_obj":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.arg_escape_obj":
   13.971 ±(99.9%) 0.198 ns/op [Average]
   (min, avg, max) = (13.911, 13.971, 14.031), stdev = 0.051
   CI (99.9%): [13.773, 14.169] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.arg_escape_obj:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.arg_escape_obj:·asm":
 PrintAssembly processed: 116048 total address lines.
 Perf output processed (skipped 55.675 seconds):
  Column 1: cycles (50990 events)
@@ -42,9 +42,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj, version 2, compile id 472 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj, version 2, compile id 472 
 
-                           # {method} {0x00007f4dc3c75298} &apos;arg_escape_obj&apos; &apos;()Z&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark&apos;
+                           # {method} {0x00007f4dc3c75298} &apos;arg_escape_obj&apos; &apos;()Z&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark&apos;
                            #           [sp+0x40]  (sp of caller)
                            0x00007f4dfcf648a0:   mov    0x8(%rsi),%r10d
                            0x00007f4dfcf648a4:   movabs $0x800000000,%r11
@@ -57,23 +57,23 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
    2.65%                   0x00007f4dfcf648c0:   mov    %eax,-0x14000(%rsp)
    5.53%                   0x00007f4dfcf648c7:   push   %rbp
    0.10%                   0x00007f4dfcf648c8:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@-1 (line 120)
+                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@-1 (line 120)
    0.68%                   0x00007f4dfcf648cc:   mov    %rsi,%rdi
    1.89%                   0x00007f4dfcf648cf:   mov    0x10(%rsi),%r10d             ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@9 (line 120)
+                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@9 (line 120)
    0.21%                   0x00007f4dfcf648d3:   nopw   0x0(%rax,%rax,1)
    0.62%                   0x00007f4dfcf648dc:   data16 data16 xchg %ax,%ax
    0.00%                   0x00007f4dfcf648e0:   cmp    $0x100000,%r10d
           ╭                0x00007f4dfcf648e7:   ja     0x00007f4dfcf64a33
    1.95%  │                0x00007f4dfcf648ed:   movslq %r10d,%rcx                   ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
+          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
    0.13%  │             ↗  0x00007f4dfcf648f0:   mov    0xc(%rsi),%r8d               ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@5 (line 120)
+          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@5 (line 120)
    0.66%  │             │  0x00007f4dfcf648f4:   mov    %r8d,%ebp
    0.01%  │             │  0x00007f4dfcf648f7:   shl    %ebp                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@12 (line 140)
-          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
+          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@12 (line 140)
+          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
    1.83%  │             │  0x00007f4dfcf648f9:   nopl   0x0(%rax)
    0.09%  │             │  0x00007f4dfcf64900:   cmp    $0x100000,%r10d
           │╭            │  0x00007f4dfcf64907:   ja     0x00007f4dfcf64a01
@@ -125,8 +125,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
           │││ │ │   ││  │  0x00007f4dfcf649cb:   add    $0x8,%rdi
           │││ │ │   ││  │  0x00007f4dfcf649cf:   dec    %rcx
           │││ │ │   │╰  │  0x00007f4dfcf649d2:   jge    0x00007f4dfcf649c7           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
+          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
    2.71%  │││ ↘ ↘   ↘  ↗│  0x00007f4dfcf649d4:   nopl   0x0(%rax,%rax,1)
           │││          ││  0x00007f4dfcf649dc:   data16 data16 xchg %ax,%ax
           │││          ││  0x00007f4dfcf649e0:   cmp    $0x100000,%r10d
@@ -145,19 +145,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
           │           │││  0x00007f4dfcf64a1c:   data16 xchg %ax,%ax
    0.00%  │           │││  0x00007f4dfcf64a1f:   call   0x00007f4dfcaa3c00           ; ImmutableOopMap {[0]=Oop }
           │           │││                                                            ;*newarray {reexecute=0 rethrow=0 return_oop=1}
-          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
+          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
           │           │││                                                            ;   {runtime_call _new_array_Java}
           │           │││  0x00007f4dfcf64a24:   mov    0x8(%rsp),%r10d
           │           │││  0x00007f4dfcf64a29:   mov    0xc(%rsp),%r8d
           │           │││  0x00007f4dfcf64a2e:   mov    %rax,%r11
    0.00%  │           │╰│  0x00007f4dfcf64a31:   jmp    0x00007f4dfcf649d4
           ↘           │ │  0x00007f4dfcf64a33:   movslq %r10d,%rcx                   ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
+                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@12 (line 120)
                       │ ╰  0x00007f4dfcf64a36:   jmp    0x00007f4dfcf648f0           ;*invokespecial &lt;init&gt; {reexecute=0 rethrow=0 return_oop=0}
-                      │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@1 (line 138)
-                      │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj@28 (line 121)
+                      │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@1 (line 138)
+                      │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj@28 (line 121)
                       ↘    0x00007f4dfcf64a3b:   movabs $0x800006848,%rsi            ;   {metadata({type array byte})}
                            0x00007f4dfcf64a45:   mov    %r8d,0x4(%rsp)
                            0x00007f4dfcf64a4a:   mov    %r10d,%edx
@@ -166,49 +166,49 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
   72.19%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub, version 6, compile id 507 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub, version 6, compile id 507 
 
               0x00007f4dfcf68726:   mov    0x38(%rsp),%r10
               0x00007f4dfcf6872b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f4dfcf687dc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@30 (line 192)
               0x00007f4dfcf68733:   mov    $0x1,%ebp
               0x00007f4dfcf68738:   test   %r11d,%r11d
           ╭   0x00007f4dfcf6873b:   jne    0x00007f4dfcf6876c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@33 (line 192)
           │   0x00007f4dfcf6873d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@36 (line 193)
    2.50%  │↗  0x00007f4dfcf68740:   mov    0x40(%rsp),%rsi
    0.03%  ││  0x00007f4dfcf68745:   xchg   %ax,%ax
           ││  0x00007f4dfcf68747:   call   0x00007f4dfc9fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual arg_escape_obj {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
    1.15%  ││  0x00007f4dfcf6874c:   mov    0x38(%rsp),%r10
    9.91%  ││  0x00007f4dfcf68751:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@33 (line 192)
    8.81%  ││  0x00007f4dfcf68759:   mov    0x348(%r15),%r11
    0.10%  ││  0x00007f4dfcf68760:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@33 (line 192)
           ││  0x00007f4dfcf68764:   test   %eax,(%r11)                  ;   {poll}
    0.75%  ││  0x00007f4dfcf68767:   test   %r10d,%r10d
           │╰  0x00007f4dfcf6876a:   je     0x00007f4dfcf68740           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@36 (line 193)
           ↘   0x00007f4dfcf6876c:   movabs $0x7f4e11722d10,%r10
               0x00007f4dfcf68776:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@37 (line 193)
               0x00007f4dfcf68779:   mov    0x30(%rsp),%r10
               0x00007f4dfcf6877e:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@40 (line 193)
               0x00007f4dfcf68782:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   23.25%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  72.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj, version 2, compile id 472 
-  23.25%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub, version 6, compile id 507 
+  72.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj, version 2, compile id 472 
+  23.25%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub, version 6, compile id 507 
    0.29%              kernel  [unknown] 
    0.17%           libjvm.so  HeapRegionClaimer::claim_region 
    0.14%           libjvm.so  HeapRegionManager::par_iterate 
@@ -232,8 +232,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  72.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::arg_escape_obj, version 2, compile id 472 
-  23.25%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub, version 6, compile id 507 
+  72.19%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::arg_escape_obj, version 2, compile id 472 
+  23.25%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_arg_escape_obj_jmhTest::arg_escape_obj_avgt_jmhStub, version 6, compile id 507 
    1.41%              kernel  [unknown] 
    0.26%        libc-2.31.so  [unknown] 
    0.17%           libjvm.so  HeapRegionClaimer::claim_region 
@@ -282,7 +282,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.branch_escape_obj
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.branch_escape_obj
 # Parameters: (objectEscapes = false, size = 128, value = 3)
 
 # Run progress: 25.00% complete, ETA 00:05:24
@@ -302,12 +302,12 @@ Iteration   5: 14.034 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.branch_escape_obj":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.branch_escape_obj":
   14.025 ±(99.9%) 0.204 ns/op [Average]
   (min, avg, max) = (13.942, 14.025, 14.083), stdev = 0.053
   CI (99.9%): [13.821, 14.229] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.branch_escape_obj:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.branch_escape_obj:·asm":
 PrintAssembly processed: 116758 total address lines.
 Perf output processed (skipped 55.679 seconds):
  Column 1: cycles (51782 events)
@@ -316,9 +316,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj, version 2, compile id 484 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj, version 2, compile id 484 
 
-                           # {method} {0x00007ffb44c751d0} &apos;branch_escape_obj&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark$HeavyWrapper;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark&apos;
+                           # {method} {0x00007ffb44c751d0} &apos;branch_escape_obj&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark$HeavyWrapper;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark&apos;
                            #           [sp+0x40]  (sp of caller)
                            0x00007ffb58f63020:   mov    0x8(%rsi),%r10d
                            0x00007ffb58f63024:   movabs $0x800000000,%r11
@@ -331,24 +331,24 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
    1.94%                   0x00007ffb58f63040:   mov    %eax,-0x14000(%rsp)
    5.87%                   0x00007ffb58f63047:   push   %rbp
    0.15%                   0x00007ffb58f63048:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@-1 (line 104)
+                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@-1 (line 104)
    0.16%                   0x00007ffb58f6304c:   mov    %rsi,0x10(%rsp)
    2.45%                   0x00007ffb58f63051:   mov    0x10(%rsi),%edx              ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@9 (line 104)
+                                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@9 (line 104)
    0.28%                   0x00007ffb58f63054:   nopl   0x0(%rax,%rax,1)
    0.12%                   0x00007ffb58f6305c:   data16 data16 xchg %ax,%ax
    0.02%                   0x00007ffb58f63060:   cmp    $0x100000,%edx
           ╭                0x00007ffb58f63066:   ja     0x00007ffb58f631a2
    2.38%  │                0x00007ffb58f6306c:   movslq %edx,%rcx                    ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
+          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+          │                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
    0.13%  │             ↗  0x00007ffb58f6306f:   mov    0xc(%rsi),%r10d              ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@5 (line 104)
+          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@5 (line 104)
    0.12%  │             │  0x00007ffb58f63073:   mov    %r10d,0x8(%rsp)
    0.46%  │             │  0x00007ffb58f63078:   mov    %r10d,%r11d
    2.19%  │             │  0x00007ffb58f6307b:   shl    %r11d                        ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@12 (line 140)
-          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
+          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@12 (line 140)
+          │             │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
    0.17%  │             │  0x00007ffb58f6307e:   mov    %r11d,0xc(%rsp)
    0.42%  │             │  0x00007ffb58f63083:   cmp    $0x100000,%edx
           │╭            │  0x00007ffb58f63089:   ja     0x00007ffb58f63186
@@ -400,18 +400,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
           │││ │ │   ││  │  0x00007ffb58f63151:   add    $0x8,%rdi
           │││ │ │   ││  │  0x00007ffb58f63155:   dec    %rcx
           │││ │ │   │╰  │  0x00007ffb58f63158:   jge    0x00007ffb58f6314d           ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
+          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+          │││ │ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
    2.53%  │││ ↘ ↘   ↘  ↗│  0x00007ffb58f6315a:   mov    0x10(%rsp),%r10
    0.05%  │││          ││  0x00007ffb58f6315f:   movzbl 0x14(%r10),%ebp              ;*getfield objectEscapes {reexecute=0 rethrow=0 return_oop=0}
-          │││          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@17 (line 108)
+          │││          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@17 (line 108)
    1.96%  │││          ││  0x00007ffb58f63164:   test   %ebp,%ebp
           │││         ╭││  0x00007ffb58f63166:   jne    0x00007ffb58f631aa           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││         │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@20 (line 108)
+          │││         │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@20 (line 108)
    0.91%  │││         │││  0x00007ffb58f63168:   mov    0x18(%r10),%r10d
    1.69%  │││         │││  0x00007ffb58f6316c:   mov    %r10,%rax
           │││         │││  0x00007ffb58f6316f:   shl    $0x3,%rax                    ;*getfield CACHED_WRAPPER {reexecute=0 rethrow=0 return_oop=0}
-          │││         │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@29 (line 111)
+          │││         │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@29 (line 111)
    0.03%  │││         │││  0x00007ffb58f63173:   add    $0x30,%rsp
    1.00%  │││         │││  0x00007ffb58f63177:   pop    %rbp
    1.82%  │││         │││  0x00007ffb58f63178:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -422,17 +422,17 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
    0.00%  │           │││  0x00007ffb58f63195:   xchg   %ax,%ax
           │           │││  0x00007ffb58f63197:   call   0x00007ffb58aa1e00           ; ImmutableOopMap {rbp=Oop [16]=Oop }
           │           │││                                                            ;*newarray {reexecute=0 rethrow=0 return_oop=1}
-          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
+          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+          │           │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
           │           │││                                                            ;   {runtime_call _new_array_Java}
           │           │││  0x00007ffb58f6319c:   mov    %rax,%r8
    0.00%  │           │││  0x00007ffb58f6319f:   nop
           │           │╰│  0x00007ffb58f631a0:   jmp    0x00007ffb58f6315a
           ↘           │ │  0x00007ffb58f631a2:   movslq %edx,%rcx                    ;*newarray {reexecute=0 rethrow=0 return_oop=0}
-                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
+                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+                      │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
                       │ ╰  0x00007ffb58f631a5:   jmp    0x00007ffb58f6306f           ;*invokespecial &lt;init&gt; {reexecute=0 rethrow=0 return_oop=0}
-                      │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
+                      │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj@12 (line 104)
                       ↘    0x00007ffb58f631aa:   mov    $0xffffff45,%esi
                            0x00007ffb58f631af:   mov    %r10,(%rsp)
                            0x00007ffb58f631b3:   mov    %r8,0x10(%rsp)
@@ -441,49 +441,49 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
   75.13%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub, version 6, compile id 518 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub, version 6, compile id 518 
 
               0x00007ffb58f660a6:   mov    0x38(%rsp),%r10
               0x00007ffb58f660ab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007ffb58f66160
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@30 (line 192)
               0x00007ffb58f660b3:   mov    $0x1,%ebp
               0x00007ffb58f660b8:   test   %r11d,%r11d
           ╭   0x00007ffb58f660bb:   jne    0x00007ffb58f660ec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@33 (line 192)
           │   0x00007ffb58f660bd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@36 (line 193)
    1.71%  │↗  0x00007ffb58f660c0:   mov    0x40(%rsp),%rsi
    0.14%  ││  0x00007ffb58f660c5:   xchg   %ax,%ax
    0.76%  ││  0x00007ffb58f660c7:   call   0x00007ffb589fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual branch_escape_obj {reexecute=0 rethrow=0 return_oop=1}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
    1.71%  ││  0x00007ffb58f660cc:   mov    0x38(%rsp),%r10
    6.10%  ││  0x00007ffb58f660d1:   movzbl 0x94(%r10),%r11d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@33 (line 192)
    6.70%  ││  0x00007ffb58f660d9:   mov    0x348(%r15),%r10
    0.17%  ││  0x00007ffb58f660e0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@33 (line 192)
    0.78%  ││  0x00007ffb58f660e4:   test   %eax,(%r10)                  ;   {poll}
    0.89%  ││  0x00007ffb58f660e7:   test   %r11d,%r11d
           │╰  0x00007ffb58f660ea:   je     0x00007ffb58f660c0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@36 (line 193)
           ↘   0x00007ffb58f660ec:   movabs $0x7ffb6e439d10,%r10
               0x00007ffb58f660f6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@37 (line 193)
               0x00007ffb58f660f9:   mov    0x30(%rsp),%r10
               0x00007ffb58f660fe:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@40 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@40 (line 193)
               0x00007ffb58f66102:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@46 (line 194)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub@46 (line 194)
 ....................................................................................................
   18.95%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  75.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj, version 2, compile id 484 
-  18.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub, version 6, compile id 518 
+  75.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj, version 2, compile id 484 
+  18.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub, version 6, compile id 518 
    1.73%              kernel  [unknown] 
    0.14%           libjvm.so  HeapRegionClaimer::claim_region 
    0.12%           libjvm.so  HeapRegionManager::par_iterate 
@@ -507,8 +507,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  75.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::branch_escape_obj, version 2, compile id 484 
-  18.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub, version 6, compile id 518 
+  75.13%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::branch_escape_obj, version 2, compile id 484 
+  18.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_branch_escape_obj_jmhTest::branch_escape_obj_avgt_jmhStub, version 6, compile id 518 
    3.06%              kernel  [unknown] 
    0.16%        libc-2.31.so  [unknown] 
    0.14%           libjvm.so  HeapRegionClaimer::claim_region 
@@ -557,7 +557,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape
 # Parameters: (objectEscapes = false, size = 128, value = 3)
 
 # Run progress: 50.00% complete, ETA 00:03:35
@@ -577,12 +577,12 @@ Iteration   5: 6.189 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape":
   6.190 ±(99.9%) 0.004 ns/op [Average]
   (min, avg, max) = (6.189, 6.190, 6.191), stdev = 0.001
   CI (99.9%): [6.186, 6.194] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape:·asm":
 PrintAssembly processed: 114844 total address lines.
 Perf output processed (skipped 55.504 seconds):
  Column 1: cycles (50894 events)
@@ -591,44 +591,44 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub, version 6, compile id 504 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub, version 6, compile id 504 
 
               0x00007f0d5cf67b26:   mov    0x38(%rsp),%r10
               0x00007f0d5cf67b2b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f0d5cf67bdc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@30 (line 192)
               0x00007f0d5cf67b33:   mov    $0x1,%ebp
               0x00007f0d5cf67b38:   test   %r11d,%r11d
           ╭   0x00007f0d5cf67b3b:   jne    0x00007f0d5cf67b6c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@33 (line 192)
           │   0x00007f0d5cf67b3d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@36 (line 193)
    6.17%  │↗  0x00007f0d5cf67b40:   mov    0x40(%rsp),%rsi
           ││  0x00007f0d5cf67b45:   xchg   %ax,%ax
           ││  0x00007f0d5cf67b47:   call   0x00007f0d5c9fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual no_escape {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
           ││  0x00007f0d5cf67b4c:   mov    0x38(%rsp),%r10
   30.22%  ││  0x00007f0d5cf67b51:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@33 (line 192)
   24.56%  ││  0x00007f0d5cf67b59:   mov    0x348(%r15),%r11
           ││  0x00007f0d5cf67b60:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@33 (line 192)
           ││  0x00007f0d5cf67b64:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007f0d5cf67b67:   test   %r10d,%r10d
           │╰  0x00007f0d5cf67b6a:   je     0x00007f0d5cf67b40           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub@36 (line 193)
           ↘   0x00007f0d5cf67b6c:   movabs $0x7f0d74011d10,%r10
               0x00007f0d5cf67b76:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   60.95%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape, version 2, compile id 461 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape, version 2, compile id 461 
 
-             # {method} {0x00007f0d4c874e10} &apos;no_escape&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark&apos;
+             # {method} {0x00007f0d4c874e10} &apos;no_escape&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f0d5cf63300:   mov    0x8(%rsi),%r10d
              0x00007f0d5cf63304:   movabs $0x800000000,%r11
@@ -640,13 +640,13 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
            [Verified Entry Point]
    6.17%     0x00007f0d5cf63320:   sub    $0x18,%rsp
              0x00007f0d5cf63327:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape@-1 (line 78)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape@-1 (line 78)
              0x00007f0d5cf6332c:   mov    0xc(%rsi),%r11d              ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape@5 (line 78)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape@5 (line 78)
    6.06%     0x00007f0d5cf63330:   mov    %r11d,%eax
              0x00007f0d5cf63333:   shl    %eax
              0x00007f0d5cf63335:   add    %r11d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape@20 (line 79)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape@20 (line 79)
              0x00007f0d5cf63338:   add    $0x10,%rsp
    6.26%     0x00007f0d5cf6333c:   pop    %rbp
   18.26%     0x00007f0d5cf6333d:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -664,8 +664,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
   36.76%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  60.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub, version 6, compile id 504 
-  36.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape, version 2, compile id 461 
+  60.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub, version 6, compile id 504 
+  36.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape, version 2, compile id 461 
    1.04%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -689,8 +689,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  60.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub, version 6, compile id 504 
-  36.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape, version 2, compile id 461 
+  60.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_jmhTest::no_escape_avgt_jmhStub, version 6, compile id 504 
+  36.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape, version 2, compile id 461 
    2.00%              kernel  [unknown] 
    0.04%                      <unknown> 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
@@ -739,7 +739,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape_array_obj
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape_array_obj
 # Parameters: (objectEscapes = false, size = 128, value = 3)
 
 # Run progress: 75.00% complete, ETA 00:01:47
@@ -759,12 +759,12 @@ Iteration   5: 6.583 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape_array_obj":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape_array_obj":
   6.584 ±(99.9%) 0.002 ns/op [Average]
   (min, avg, max) = (6.583, 6.584, 6.584), stdev = 0.001
   CI (99.9%): [6.582, 6.585] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark.no_escape_array_obj:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape_array_obj:·asm":
 PrintAssembly processed: 114341 total address lines.
 Perf output processed (skipped 55.598 seconds):
  Column 1: cycles (50599 events)
@@ -773,46 +773,46 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub, version 6, compile id 504 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub, version 6, compile id 504 
 
               0x00007ff05cf68226:   mov    0x38(%rsp),%r10
               0x00007ff05cf6822b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007ff05cf682dc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@30 (line 192)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@30 (line 192)
               0x00007ff05cf68233:   mov    $0x1,%ebp
               0x00007ff05cf68238:   test   %r11d,%r11d
           ╭   0x00007ff05cf6823b:   jne    0x00007ff05cf6826c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@33 (line 192)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@33 (line 192)
           │   0x00007ff05cf6823d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@36 (line 193)
    1.96%  │↗  0x00007ff05cf68240:   mov    0x40(%rsp),%rsi
    3.89%  ││  0x00007ff05cf68245:   xchg   %ax,%ax
           ││  0x00007ff05cf68247:   call   0x00007ff05c9fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual no_escape_array_obj {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@17 (line 190)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@17 (line 190)
           ││                                                            ;   {optimized virtual_call}
   50.08%  ││  0x00007ff05cf6824c:   mov    0x38(%rsp),%r10
    0.00%  ││  0x00007ff05cf68251:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@33 (line 192)
    5.82%  ││  0x00007ff05cf68259:   mov    0x348(%r15),%r11
    3.88%  ││  0x00007ff05cf68260:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@33 (line 192)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@33 (line 192)
           ││  0x00007ff05cf68264:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007ff05cf68267:   test   %r10d,%r10d
           │╰  0x00007ff05cf6826a:   je     0x00007ff05cf68240           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@36 (line 193)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@36 (line 193)
           ↘   0x00007ff05cf6826c:   movabs $0x7ff0720ffd10,%r10
               0x00007ff05cf68276:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@37 (line 193)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub@37 (line 193)
               0x00007ff05cf68279:   mov    0x30(%rsp),%r10
 ....................................................................................................
   65.63%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj, version 2, compile id 471 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj, version 2, compile id 471 
 
-             # {method} {0x00007ff048874fa0} &apos;no_escape_array_obj&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark&apos;
+             # {method} {0x00007ff048874fa0} &apos;no_escape_array_obj&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark&apos;
              #           [sp+0x30]  (sp of caller)
              0x00007ff05cf651a0:   mov    0x8(%rsi),%r10d
              0x00007ff05cf651a4:   movabs $0x800000000,%r11
@@ -825,22 +825,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
    1.96%     0x00007ff05cf651c0:   mov    %eax,-0x14000(%rsp)
    9.83%     0x00007ff05cf651c7:   push   %rbp
              0x00007ff05cf651c8:   sub    $0x20,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@-1 (line 91)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@-1 (line 91)
    3.70%     0x00007ff05cf651cc:   mov    0xc(%rsi),%ebp               ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@5 (line 91)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@5 (line 91)
    1.99%     0x00007ff05cf651cf:   mov    0x10(%rsi),%r11d             ;*getfield size {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@9 (line 91)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@9 (line 91)
              0x00007ff05cf651d3:   mov    %ebp,%eax
              0x00007ff05cf651d5:   shl    %eax                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@12 (line 140)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@12 (line 91)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@12 (line 140)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@12 (line 91)
    3.87%     0x00007ff05cf651d7:   nopw   0x0(%rax,%rax,1)
    1.85%     0x00007ff05cf651e0:   cmp    $0x100000,%r11d
           ╭  0x00007ff05cf651e7:   ja     0x00007ff05cf65201           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@-1 (line 91)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@-1 (line 91)
           │  0x00007ff05cf651e9:   add    %ebp,%eax
    0.00%  │  0x00007ff05cf651eb:   add    %r11d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@30 (line 92)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@30 (line 92)
    3.80%  │  0x00007ff05cf651ee:   add    $0x20,%rsp
    1.94%  │  0x00007ff05cf651f2:   pop    %rbp
           │  0x00007ff05cf651f3:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -853,15 +853,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
              0x00007ff05cf65216:   nop
              0x00007ff05cf65217:   call   0x00007ff05caa1800           ; ImmutableOopMap {}
                                                                        ;*newarray {reexecute=0 rethrow=0 return_oop=1}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj@12 (line 91)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark$HeavyWrapper::&lt;init&gt;@18 (line 141)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj@12 (line 91)
                                                                        ;   {runtime_call _new_array_Java}
 ....................................................................................................
   32.71%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  65.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub, version 6, compile id 504 
-  32.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj, version 2, compile id 471 
+  65.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub, version 6, compile id 504 
+  32.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj, version 2, compile id 471 
    0.58%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
    0.06%              kernel  [unknown] 
@@ -885,8 +885,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarRe
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  65.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub, version 6, compile id 504 
-  32.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.ScalarReplacementBenchmark::no_escape_array_obj, version 2, compile id 471 
+  65.63%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ScalarReplacementBenchmark_no_escape_array_obj_jmhTest::no_escape_array_obj_avgt_jmhStub, version 6, compile id 504 
+  32.71%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark::no_escape_array_obj, version 2, compile id 471 
    1.42%              kernel  [unknown] 
    0.06%                      <unknown> 
    0.01%           libjvm.so  ElfSymbolTable::lookup 

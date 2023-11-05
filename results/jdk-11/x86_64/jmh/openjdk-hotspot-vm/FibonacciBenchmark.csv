@@ -1,9 +1,9 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,105429.366236,479.341136,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,1557262.732537,7425.624056,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,15.104304,0.081937,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,248.586208,1.201741,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,14.573497,0.135535,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,233.763567,0.342705,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,18.011027,0.058871,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,254.557687,0.110471,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,105429.366236,479.341136,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,1557262.732537,7425.624056,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,15.104304,0.081937,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,248.586208,1.201741,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,14.573497,0.135535,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,233.763567,0.342705,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,18.011027,0.058871,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,254.557687,0.110471,"us/op",3000

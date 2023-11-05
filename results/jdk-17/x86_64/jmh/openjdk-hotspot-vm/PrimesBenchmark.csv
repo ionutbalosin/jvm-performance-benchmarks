@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.prime.PrimesBenchmark.eratosthenes_sieve","avgt",1,25,34.622173,0.159533,"ms/op",8388608
-"com.ionutbalosin.jvm.performance.benchmarks.macro.prime.PrimesBenchmark.sqrt_stream","avgt",1,25,7411.811411,197.997543,"ms/op",8388608
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.prime.PrimesBenchmark.eratosthenes_sieve","avgt",1,25,34.622173,0.159533,"ms/op",8388608
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.prime.PrimesBenchmark.sqrt_stream","avgt",1,25,7411.811411,197.997543,"ms/op",8388608

@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.iterative","avgt",1,25,"169,636632","0,185035","us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TailRecursionBenchmark.tail_recursive","avgt",1,25,"993,917243","2,631266","us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.iterative","avgt",1,25,"169,636632","0,185035","us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.tail_recursive","avgt",1,25,"993,917243","2,631266","us/op",262144

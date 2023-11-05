@@ -1,11 +1,11 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,101573.522702,710.746480,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,1491936.237040,8290.645321,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,16.090455,0.101866,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,197.718790,0.361977,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.functional","avgt",1,25,20.181460,0.229672,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.functional","avgt",1,25,223.366339,2.046985,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,15.676628,0.267859,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,193.672868,0.852155,"us/op",3000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,17.362047,0.039685,"us/op",500
-"com.ionutbalosin.jvm.performance.benchmarks.macro.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,206.025160,1.164345,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,101573.522702,710.746480,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.binet_formula","avgt",1,25,1491936.237040,8290.645321,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,16.090455,0.101866,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.dynamic","avgt",1,25,197.718790,0.361977,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.functional","avgt",1,25,20.181460,0.229672,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.functional","avgt",1,25,223.366339,2.046985,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,15.676628,0.267859,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.iterative","avgt",1,25,193.672868,0.852155,"us/op",3000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,17.362047,0.039685,"us/op",500
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.fibonacci.FibonacciBenchmark.recursive","avgt",1,25,206.025160,1.164345,"us/op",3000

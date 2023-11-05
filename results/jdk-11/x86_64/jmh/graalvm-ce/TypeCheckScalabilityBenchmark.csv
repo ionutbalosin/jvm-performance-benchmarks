@@ -1,9 +1,9 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: typePollution"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1","avgt",1,25,7.341162,0.007919,"ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1","avgt",1,25,14.948105,0.274413,"ns/op",true
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2","avgt",2,25,7.355204,0.013154,"ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2","avgt",2,25,57.184433,5.427422,"ns/op",true
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3","avgt",3,25,7.375614,0.041805,"ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3","avgt",3,25,94.997978,3.378437,"ns/op",true
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4","avgt",4,25,7.346531,0.016557,"ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4","avgt",4,25,125.181722,4.436224,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1","avgt",1,25,7.341162,0.007919,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1","avgt",1,25,14.948105,0.274413,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2","avgt",2,25,7.355204,0.013154,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2","avgt",2,25,57.184433,5.427422,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3","avgt",3,25,7.375614,0.041805,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3","avgt",3,25,94.997978,3.378437,"ns/op",true
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4","avgt",4,25,7.346531,0.016557,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4","avgt",4,25,125.181722,4.436224,"ns/op",true

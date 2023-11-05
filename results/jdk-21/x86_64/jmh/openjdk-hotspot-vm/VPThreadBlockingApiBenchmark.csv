@@ -1,9 +1,9 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: stackDepth","Param: threadType"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,20.954660,0.065533,"us/op",1,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,104.992989,1.068430,"us/op",1,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,35.246102,0.827831,"us/op",10,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,172.156482,0.910799,"us/op",10,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,123.313299,8.424291,"us/op",100,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,784.371005,12.037705,"us/op",100,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,995.348079,12.345892,"us/op",1000,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,4935.218848,25.083368,"us/op",1000,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,20.954660,0.065533,"us/op",1,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,104.992989,1.068430,"us/op",1,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,35.246102,0.827831,"us/op",10,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,172.156482,0.910799,"us/op",10,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,123.313299,8.424291,"us/op",100,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,784.371005,12.037705,"us/op",100,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,995.348079,12.345892,"us/op",1000,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadBlockingApiBenchmark.blocking_calls","avgt",1,25,4935.218848,25.083368,"us/op",1000,PLATFORM

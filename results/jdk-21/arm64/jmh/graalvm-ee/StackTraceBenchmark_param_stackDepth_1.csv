@@ -1,6 +1,6 @@
 "Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..stackDepth"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackTraceBenchmark.constant_exception","avgt",1,25,15.967173,0.017228,"ns/op",1
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackTraceBenchmark.current_thread","avgt",1,25,3180.767235,33.879345,"ns/op",1
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackTraceBenchmark.lambda_exception","avgt",1,25,3096.659401,10.685633,"ns/op",1
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackTraceBenchmark.new_exception","avgt",1,25,2974.960212,3.794347,"ns/op",1
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StackTraceBenchmark.new_exception_override_fillInStackTrace","avgt",1,25,2.671047,0.035212,"ns/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackTraceBenchmark.constant_exception","avgt",1,25,15.967173,0.017228,"ns/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackTraceBenchmark.current_thread","avgt",1,25,3180.767235,33.879345,"ns/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackTraceBenchmark.lambda_exception","avgt",1,25,3096.659401,10.685633,"ns/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackTraceBenchmark.new_exception","avgt",1,25,2974.960212,3.794347,"ns/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.StackTraceBenchmark.new_exception_override_fillInStackTrace","avgt",1,25,2.671047,0.035212,"ns/op",1

@@ -1,6 +1,6 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: supertypes"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,48.354682,0.016152,"ns/op",16
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,60.706262,0.002590,"ns/op",32
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,85.460110,0.132884,"ns/op",64
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,134.866297,0.199101,"ns/op",128
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,233.613209,0.039668,"ns/op",256
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,48.354682,0.016152,"ns/op",16
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,60.706262,0.002590,"ns/op",32
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,85.460110,0.132884,"ns/op",64
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,134.866297,0.199101,"ns/op",128
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,233.613209,0.039668,"ns/op",256

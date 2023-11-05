@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe
 # Parameters: (size = 1024, threshold = 0.0)
 
 # Run progress: 0.00% complete, ETA 00:10:00
@@ -28,12 +28,12 @@ Iteration   5: 5957.564 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe":
   5957.413 ±(99.9%) 0.475 ns/op [Average]
   (min, avg, max) = (5957.221, 5957.413, 5957.564), stdev = 0.123
   CI (99.9%): [5956.938, 5957.889] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe:·asm":
 PrintAssembly processed: 116601 total address lines.
 Perf output processed (skipped 55.687 seconds):
  Column 1: cycles (50980 events)
@@ -42,9 +42,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe, version 4, compile id 487 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe, version 4, compile id 487 
 
-                # {method} {0x00007fc61fc75570} &apos;explicit_throw_npe&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeThrowBenchmark&apos;
+                # {method} {0x00007fc61fc75570} &apos;explicit_throw_npe&apos; &apos;()V&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeThrowBenchmark&apos;
                 #           [sp+0x40]  (sp of caller)
                 0x00007fc658f640a0:   mov    0x8(%rsi),%r10d
                 0x00007fc658f640a4:   movabs $0x800000000,%r11
@@ -57,46 +57,46 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
    0.00%        0x00007fc658f640c0:   mov    %eax,-0x14000(%rsp)
    0.01%        0x00007fc658f640c7:   push   %rbp
                 0x00007fc658f640c8:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@-1 (line 94)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@-1 (line 94)
    0.00%        0x00007fc658f640cc:   mov    %rsi,%r10
    0.00%        0x00007fc658f640cf:   mov    0x18(%rsi),%ecx              ;*getfield A {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@1 (line 94)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@1 (line 94)
                 0x00007fc658f640d2:   mov    0xc(%r12,%rcx,8),%r8d        ; implicit exception: dispatches to 0x00007fc658f6417e
                                                                           ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@6 (line 94)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@6 (line 94)
    0.01%        0x00007fc658f640d7:   test   %r8d,%r8d
    0.00%        0x00007fc658f640da:   nopw   0x0(%rax,%rax,1)
           ╭     0x00007fc658f640e0:   jbe    0x00007fc658f64138           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@12 (line 94)
+          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@12 (line 94)
    0.02%  │     0x00007fc658f640e6:   mov    %r8d,%r11d
           │     0x00007fc658f640e9:   dec    %r11d
           │     0x00007fc658f640ec:   cmp    %r8d,%r11d
           │╭    0x00007fc658f640ef:   jae    0x00007fc658f6414b
           ││    0x00007fc658f640f5:   lea    (%r12,%rcx,8),%r11           ;*getfield A {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@1 (line 94)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@1 (line 94)
    0.00%  ││    0x00007fc658f640f9:   xor    %ebp,%ebp
           ││    0x00007fc658f640fb:   mov    %rsi,0x8(%rsp)
           ││    0x00007fc658f64100:   mov    %r8d,0x10(%rsp)
           ││╭   0x00007fc658f64105:   jmp    0x00007fc658f64114
           │││   0x00007fc658f64107:   nopw   0x0(%rax,%rax,1)
    6.49%  │││↗  0x00007fc658f64110:   mov    (%rsp),%r11                  ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@15 (line 94)
+          ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@15 (line 94)
    0.01%  ││↘│  0x00007fc658f64114:   mov    0x10(%r11,%rbp,4),%r10d
    2.32%  ││ │  0x00007fc658f64119:   mov    %r11,(%rsp)
           ││ │  0x00007fc658f6411d:   mov    %r10,%rdx
    4.43%  ││ │  0x00007fc658f64120:   shl    $0x3,%rdx                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@17 (line 94)
+          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@17 (line 94)
    2.14%  ││ │  0x00007fc658f64124:   mov    0x8(%rsp),%rsi
           ││ │  0x00007fc658f64129:   xchg   %ax,%ax
           ││ │  0x00007fc658f6412b:   call   0x00007fc658f63840           ; ImmutableOopMap {[0]=Oop [8]=Oop }
           ││ │                                                            ;*invokevirtual explicitThrowNpe {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@23 (line 96)
+          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@23 (line 96)
           ││ │                                                            ;   {optimized virtual_call}
   53.38%  ││ │  0x00007fc658f64130:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@32 (line 94)
+          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@32 (line 94)
           ││ │  0x00007fc658f64132:   cmp    0x10(%rsp),%ebp
           ││ ╰  0x00007fc658f64136:   jl     0x00007fc658f64110           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@12 (line 94)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@12 (line 94)
    0.06%  ↘│    0x00007fc658f64138:   add    $0x30,%rsp
    0.04%   │    0x00007fc658f6413c:   pop    %rbp
    0.04%   │    0x00007fc658f6413d:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -109,16 +109,16 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
                 0x00007fc658f6415c:   data16 xchg %ax,%ax
                 0x00007fc658f6415f:   call   0x00007fc658a01600           ; ImmutableOopMap {rbp=Oop [8]=NarrowOop }
                                                                           ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe@12 (line 94)
+                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe@12 (line 94)
                                                                           ;   {runtime_call UncommonTrapBlob}
                 0x00007fc658f64164:   mov    0x8(%rax),%r10d
 ....................................................................................................
   68.95%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicitThrowNpe, version 2, compile id 484 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicitThrowNpe, version 2, compile id 484 
 
-              # parm0:    rdx:rdx   = &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeThrowBenchmark$Wrapper&apos;
+              # parm0:    rdx:rdx   = &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeThrowBenchmark$Wrapper&apos;
               #           [sp+0x30]  (sp of caller)
               0x00007fc658f63820:   mov    0x8(%rsi),%r10d
               0x00007fc658f63824:   movabs $0x800000000,%r11
@@ -131,10 +131,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
    6.45%      0x00007fc658f63840:   mov    %eax,-0x14000(%rsp)
    2.25%      0x00007fc658f63847:   push   %rbp
    3.57%      0x00007fc658f63848:   sub    $0x20,%rsp                   ;*synchronization entry
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicitThrowNpe@-1 (line 105)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicitThrowNpe@-1 (line 105)
    2.07%  ╭   0x00007fc658f6384c:   mov    0xc(%rdx),%eax               ; implicit exception: dispatches to 0x00007fc658f63862
           │                                                             ;*getfield x {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicitThrowNpe@15 (line 108)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicitThrowNpe@15 (line 108)
    7.65%  │   0x00007fc658f6384f:   add    $0x20,%rsp
    3.47%  │   0x00007fc658f63853:   pop    %rbp
    0.00%  │   0x00007fc658f63854:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -144,7 +144,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
            │  0x00007fc658f63867:   mov    %rdx,(%rsp)
            │  0x00007fc658f6386b:   call   0x00007fc658a01600           ; ImmutableOopMap {[0]=Oop }
            │                                                            ;*ifnonnull {reexecute=1 rethrow=0 return_oop=0}
-           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicitThrowNpe@1 (line 105)
+           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicitThrowNpe@1 (line 105)
            │                                                            ;   {runtime_call UncommonTrapBlob}
            ↘  0x00007fc658f63870:   movabs $0x7fc658f63854,%r10         ;   {internal_word}
               0x00007fc658f6387a:   mov    %r10,0x358(%r15)
@@ -154,10 +154,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
   28.34%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  68.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe, version 4, compile id 487 
-  28.34%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicitThrowNpe, version 2, compile id 484 
+  68.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe, version 4, compile id 487 
+  28.34%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicitThrowNpe, version 2, compile id 484 
    1.39%              kernel  [unknown] 
-   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.NpeThrowBenchmark_explicit_throw_npe_jmhTest::explicit_throw_npe_avgt_jmhStub, version 5, compile id 514 
+   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.NpeThrowBenchmark_explicit_throw_npe_jmhTest::explicit_throw_npe_avgt_jmhStub, version 5, compile id 514 
    0.09%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
@@ -179,10 +179,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  68.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicit_throw_npe, version 4, compile id 487 
-  28.34%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::explicitThrowNpe, version 2, compile id 484 
+  68.95%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicit_throw_npe, version 4, compile id 487 
+  28.34%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::explicitThrowNpe, version 2, compile id 484 
    2.35%              kernel  [unknown] 
-   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.NpeThrowBenchmark_explicit_throw_npe_jmhTest::explicit_throw_npe_avgt_jmhStub, version 5, compile id 514 
+   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.NpeThrowBenchmark_explicit_throw_npe_jmhTest::explicit_throw_npe_avgt_jmhStub, version 5, compile id 514 
    0.03%                      <unknown> 
    0.02%        libc-2.31.so  __strncat_ssse3 
    0.01%           libjvm.so  fileStream::write 
@@ -229,7 +229,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe
 # Parameters: (size = 1024, threshold = 0.5)
 
 # Run progress: 16.67% complete, ETA 00:09:06
@@ -249,12 +249,12 @@ Iteration   5: 3033717.025 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe":
   3034840.451 ±(99.9%) 4098.937 ns/op [Average]
   (min, avg, max) = (3033717.025, 3034840.451, 3036212.286), stdev = 1064.481
   CI (99.9%): [3030741.513, 3038939.388] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe:·asm":
 PrintAssembly processed: 115647 total address lines.
 Perf output processed (skipped 55.580 seconds):
  Column 1: cycles (51116 events)
@@ -340,7 +340,7 @@ Use "hotThreshold" profiler option to lower the filter threshold.
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe
 # Parameters: (size = 1024, threshold = 1.0)
 
 # Run progress: 33.33% complete, ETA 00:07:13
@@ -360,12 +360,12 @@ Iteration   5: 5945986.130 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe":
   5945261.144 ±(99.9%) 9231.947 ns/op [Average]
   (min, avg, max) = (5941974.933, 5945261.144, 5947566.241), stdev = 2397.507
   CI (99.9%): [5936029.197, 5954493.090] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.explicit_throw_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe:·asm":
 PrintAssembly processed: 118032 total address lines.
 Perf output processed (skipped 55.738 seconds):
  Column 1: cycles (51026 events)
@@ -451,7 +451,7 @@ Use "hotThreshold" profiler option to lower the filter threshold.
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe
 # Parameters: (size = 1024, threshold = 0.0)
 
 # Run progress: 50.00% complete, ETA 00:05:25
@@ -471,12 +471,12 @@ Iteration   5: 5959.730 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe":
   5958.230 ±(99.9%) 3.565 ns/op [Average]
   (min, avg, max) = (5957.486, 5958.230, 5959.730), stdev = 0.926
   CI (99.9%): [5954.665, 5961.795] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe:·asm":
 PrintAssembly processed: 117385 total address lines.
 Perf output processed (skipped 55.695 seconds):
  Column 1: cycles (50856 events)
@@ -485,7 +485,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 489 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 489 
 
                 #           [sp+0x40]  (sp of caller)
                 0x00007f7e58f65820:   mov    0x8(%rsi),%r10d
@@ -499,46 +499,46 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
                 0x00007f7e58f65840:   mov    %eax,-0x14000(%rsp)
    0.01%        0x00007f7e58f65847:   push   %rbp
                 0x00007f7e58f65848:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@-1 (line 82)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@-1 (line 82)
                 0x00007f7e58f6584c:   mov    %rsi,%r10
    0.01%        0x00007f7e58f6584f:   mov    0x18(%rsi),%ecx              ;*getfield A {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@1 (line 82)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@1 (line 82)
                 0x00007f7e58f65852:   mov    0xc(%r12,%rcx,8),%r8d        ; implicit exception: dispatches to 0x00007f7e58f658fe
                                                                           ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@6 (line 82)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@6 (line 82)
    0.01%        0x00007f7e58f65857:   test   %r8d,%r8d
    0.00%        0x00007f7e58f6585a:   nopw   0x0(%rax,%rax,1)
           ╭     0x00007f7e58f65860:   jbe    0x00007f7e58f658b8           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@12 (line 82)
+          │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@12 (line 82)
    0.01%  │     0x00007f7e58f65866:   mov    %r8d,%r11d
           │     0x00007f7e58f65869:   dec    %r11d
           │     0x00007f7e58f6586c:   cmp    %r8d,%r11d
           │╭    0x00007f7e58f6586f:   jae    0x00007f7e58f658cb
           ││    0x00007f7e58f65875:   lea    (%r12,%rcx,8),%r11           ;*getfield A {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@1 (line 82)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@1 (line 82)
    0.01%  ││    0x00007f7e58f65879:   xor    %ebp,%ebp
           ││    0x00007f7e58f6587b:   mov    %rsi,0x8(%rsp)
           ││    0x00007f7e58f65880:   mov    %r8d,0x10(%rsp)
           ││╭   0x00007f7e58f65885:   jmp    0x00007f7e58f65894
           │││   0x00007f7e58f65887:   nopw   0x0(%rax,%rax,1)
    6.47%  │││↗  0x00007f7e58f65890:   mov    (%rsp),%r11                  ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@15 (line 82)
+          ││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@15 (line 82)
    0.01%  ││↘│  0x00007f7e58f65894:   mov    0x10(%r11,%rbp,4),%r10d
    2.38%  ││ │  0x00007f7e58f65899:   mov    %r11,(%rsp)
           ││ │  0x00007f7e58f6589d:   mov    %r10,%rdx
    4.31%  ││ │  0x00007f7e58f658a0:   shl    $0x3,%rdx                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@17 (line 82)
+          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@17 (line 82)
    2.24%  ││ │  0x00007f7e58f658a4:   mov    0x8(%rsp),%rsi
           ││ │  0x00007f7e58f658a9:   xchg   %ax,%ax
           ││ │  0x00007f7e58f658ab:   call   0x00007f7e58f64fc0           ; ImmutableOopMap {[0]=Oop [8]=Oop }
           ││ │                                                            ;*invokevirtual implicitThrowNpe {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@23 (line 84)
+          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@23 (line 84)
           ││ │                                                            ;   {optimized virtual_call}
   53.35%  ││ │  0x00007f7e58f658b0:   inc    %ebp                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@32 (line 82)
+          ││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@32 (line 82)
           ││ │  0x00007f7e58f658b2:   cmp    0x10(%rsp),%ebp
           ││ ╰  0x00007f7e58f658b6:   jl     0x00007f7e58f65890           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@12 (line 82)
+          ││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@12 (line 82)
    0.07%  ↘│    0x00007f7e58f658b8:   add    $0x30,%rsp
    0.04%   │    0x00007f7e58f658bc:   pop    %rbp
    0.05%   │    0x00007f7e58f658bd:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -551,16 +551,16 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
                 0x00007f7e58f658dc:   data16 xchg %ax,%ax
                 0x00007f7e58f658df:   call   0x00007f7e58a01600           ; ImmutableOopMap {rbp=Oop [8]=NarrowOop }
                                                                           ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
-                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe@12 (line 82)
+                                                                          ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe@12 (line 82)
                                                                           ;   {runtime_call UncommonTrapBlob}
                 0x00007f7e58f658e4:   mov    0x8(%rax),%r10d
 ....................................................................................................
   68.97%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 486 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 486 
 
-              # parm0:    rdx:rdx   = &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeThrowBenchmark$Wrapper&apos;
+              # parm0:    rdx:rdx   = &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeThrowBenchmark$Wrapper&apos;
               #           [sp+0x20]  (sp of caller)
               0x00007f7e58f64fa0:   mov    0x8(%rsi),%r10d
               0x00007f7e58f64fa4:   movabs $0x800000000,%r11
@@ -573,10 +573,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
    6.66%      0x00007f7e58f64fc0:   mov    %eax,-0x14000(%rsp)
    2.38%      0x00007f7e58f64fc7:   push   %rbp
    3.68%      0x00007f7e58f64fc8:   sub    $0x10,%rsp                   ;*synchronization entry
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe@-1 (line 113)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe@-1 (line 113)
    1.84%  ╭   0x00007f7e58f64fcc:   mov    0xc(%rdx),%eax               ; implicit exception: dispatches to 0x00007f7e58f64fe2
           │                                                             ;*getfield x {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe@1 (line 113)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe@1 (line 113)
    7.74%  │   0x00007f7e58f64fcf:   add    $0x10,%rsp
    3.54%  │   0x00007f7e58f64fd3:   pop    %rbp
           │   0x00007f7e58f64fd4:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -585,7 +585,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
           ↘│  0x00007f7e58f64fe2:   mov    $0xfffffff6,%esi
            │  0x00007f7e58f64fe7:   call   0x00007f7e58a01600           ; ImmutableOopMap {}
            │                                                            ;*getfield x {reexecute=1 rethrow=0 return_oop=0}
-           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe@1 (line 113)
+           │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe@1 (line 113)
            │                                                            ;   {runtime_call UncommonTrapBlob}
            ↘  0x00007f7e58f64fec:   movabs $0x7f7e58f64fd4,%r10         ;   {internal_word}
               0x00007f7e58f64ff6:   mov    %r10,0x358(%r15)
@@ -596,10 +596,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
   28.76%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  68.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 489 
-  28.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 486 
+  68.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 489 
+  28.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 486 
    1.15%              kernel  [unknown] 
-   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.NpeThrowBenchmark_implicit_throw_npe_jmhTest::implicit_throw_npe_avgt_jmhStub, version 5, compile id 517 
+   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.NpeThrowBenchmark_implicit_throw_npe_jmhTest::implicit_throw_npe_avgt_jmhStub, version 5, compile id 517 
    0.07%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
    0.05%              kernel  [unknown] 
@@ -621,10 +621,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  68.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 489 
-  28.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 486 
+  68.97%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 489 
+  28.76%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 486 
    1.92%              kernel  [unknown] 
-   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.NpeThrowBenchmark_implicit_throw_npe_jmhTest::implicit_throw_npe_avgt_jmhStub, version 5, compile id 517 
+   0.10%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.NpeThrowBenchmark_implicit_throw_npe_jmhTest::implicit_throw_npe_avgt_jmhStub, version 5, compile id 517 
    0.03%                      <unknown> 
    0.02%        libc-2.31.so  [unknown] 
    0.01%           libjvm.so  ElfSymbolTable::lookup 
@@ -670,7 +670,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrow
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe
 # Parameters: (size = 1024, threshold = 0.5)
 
 # Run progress: 66.67% complete, ETA 00:03:36
@@ -690,12 +690,12 @@ Iteration   5: 247420.366 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe":
   247686.724 ±(99.9%) 592.054 ns/op [Average]
   (min, avg, max) = (247420.366, 247686.724, 247811.463), stdev = 153.755
   CI (99.9%): [247094.669, 248278.778] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe:·asm":
 PrintAssembly processed: 117955 total address lines.
 Perf output processed (skipped 55.652 seconds):
  Column 1: cycles (50842 events)
@@ -727,14 +727,14 @@ libjvm.so, CodeCache::find_blob
    3.72%           libjvm.so  CompiledMethod::is_compiled 
    3.56%           libjvm.so  frame::sender 
    3.53%           libjvm.so  SharedRuntime::raw_exception_handler_for_return_address 
-   2.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 476 
+   2.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 476 
    2.84%                      <unknown> 
    2.78%           libjvm.so  JavaThread::pd_last_frame 
    2.67%           libjvm.so  OptoRuntime::handle_exception_C 
    2.26%           libjvm.so  SafepointMechanism::update_poll_values 
    2.13%           libjvm.so  frame::sender 
    2.03%           libjvm.so  OptoRuntime::handle_exception_C_helper 
-   1.93%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 480 
+   1.93%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 480 
    1.91%           libjvm.so  OptoRuntime::handle_exception_C_helper 
    1.80%                      <unknown> 
    1.64%           libjvm.so  OptoRuntime::handle_exception_C_helper 
@@ -753,10 +753,10 @@ libjvm.so, CodeCache::find_blob
    4.21%           libjvm.so  CodeBlob::is_compiled 
    3.84%           libjvm.so  JavaThread::pd_last_frame 
    3.72%           libjvm.so  CompiledMethod::is_compiled 
-   3.56%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 480 
+   3.56%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 480 
    3.53%           libjvm.so  SharedRuntime::raw_exception_handler_for_return_address 
    3.17%           libjvm.so  SafepointMechanism::update_poll_values 
-   2.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 476 
+   2.86%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicitThrowNpe, version 2, compile id 476 
    2.67%           libjvm.so  OptoRuntime::handle_exception_C 
    1.81%              kernel  [unknown] 
    1.56%           libjvm.so  CodeBlob::is_deoptimization_stub 
@@ -794,7 +794,7 @@ libjvm.so, CodeCache::find_blob
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe
 # Parameters: (size = 1024, threshold = 1.0)
 
 # Run progress: 83.33% complete, ETA 00:01:48
@@ -814,12 +814,12 @@ Iteration   5: 465783.976 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe":
   465957.945 ±(99.9%) 620.992 ns/op [Average]
   (min, avg, max) = (465783.976, 465957.945, 466212.658), stdev = 161.270
   CI (99.9%): [465336.953, 466578.937] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe:·asm":
 PrintAssembly processed: 117969 total address lines.
 Perf output processed (skipped 55.670 seconds):
  Column 1: cycles (50872 events)
@@ -880,7 +880,7 @@ libjvm.so, CodeCache::find_blob
    3.77%           libjvm.so  SafepointMechanism::update_poll_values 
    3.47%           libjvm.so  SharedRuntime::raw_exception_handler_for_return_address 
    2.85%           libjvm.so  OptoRuntime::handle_exception_C 
-   2.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 493 
+   2.30%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark::implicit_throw_npe, version 4, compile id 493 
    1.88%              kernel  [unknown] 
    1.61%           libjvm.so  CodeBlob::is_deoptimization_stub 
    1.48%           libjvm.so  OptoRuntime::rethrow_C 

@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: bufferSize","Param: tcpNoDelay"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.NioSelectorRoundtripLatencyBenchmark.send_receive","avgt",1,25,23.195361,0.038517,"us/op",_1_KB,true
-"com.ionutbalosin.jvm.performance.benchmarks.macro.networkio.NioSelectorRoundtripLatencyBenchmark.send_receive","avgt",1,25,23.149545,0.074763,"us/op",_1_KB,false
+"com.ionutbalosin.jvm.performance.benchmarks.api.networkio.NioSelectorRoundtripLatencyBenchmark.send_receive","avgt",1,25,23.195361,0.038517,"us/op",_1_KB,true
+"com.ionutbalosin.jvm.performance.benchmarks.api.networkio.NioSelectorRoundtripLatencyBenchmark.send_receive","avgt",1,25,23.149545,0.074763,"us/op",_1_KB,false

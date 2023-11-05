@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
 # Parameters: (typePollution = false)
 
 # Run progress: 0.00% complete, ETA 00:20:00
@@ -28,12 +28,12 @@ Iteration   5: 6.965 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
   6.966 ±(99.9%) 0.010 ns/op [Average]
   (min, avg, max) = (6.964, 6.966, 6.971), stdev = 0.003
   CI (99.9%): [6.956, 6.977] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:·asm":
 PrintAssembly processed: 194554 total address lines.
 Perf output processed (skipped 58.665 seconds):
  Column 1: cycles (50749 events)
@@ -42,7 +42,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 734 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 734 
 
              #           [sp+0x20]  (sp of caller)
              0x00007fe63eff9800:   mov    0x8(%rsi),%r10d
@@ -58,28 +58,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    6.39%     0x00007fe63eff9827:   sub    $0x18,%rsp
    0.03%     0x00007fe63eff982b:   mov    %rbp,0x10(%rsp)
    2.36%     0x00007fe63eff9830:   mov    0x10(%rsi),%eax              ;*getfield msg {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@1 (line 95)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@1 (line 95)
    2.11%     0x00007fe63eff9833:   nopw   0x0(%rax,%rax,1)
    0.99%     0x00007fe63eff983c:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@0 (line 95)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@0 (line 95)
    0.04%     0x00007fe63eff9840:   cmpl   $0xc269e0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007fe63eff9886
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
   26.35%  ╭  0x00007fe63eff984b:   jne    0x00007fe63eff9869           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
    5.55%  │  0x00007fe63eff9851:   mov    $0x1,%eax
           │  0x00007fe63eff9856:   mov    0x10(%rsp),%rbp
           │  0x00007fe63eff985b:   add    $0x18,%rsp
           │  0x00007fe63eff985f:   mov    0x348(%r15),%rcx
    5.46%  │  0x00007fe63eff9866:   test   %eax,(%rcx)                  ;   {poll_return}
           │  0x00007fe63eff9868:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@7 (line 95)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@7 (line 95)
           ↘  0x00007fe63eff9869:   movl   $0xffffffdd,0x370(%r15)
              0x00007fe63eff9874:   movq   $0x0,0x378(%r15)             ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - java.util.Objects::requireNonNull@1 (line 207)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
              0x00007fe63eff987f:   nop
              0x00007fe63eff9880:   call   0x00007fe63750527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -87,55 +87,55 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   49.31%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 6, compile id 757 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 6, compile id 757 
 
               0x00007fe63effdef5:   mov    0x18(%rsp),%rsi
               0x00007fe63effdefa:   nopw   0x0(%rax,%rax,1)
               0x00007fe63effdf00:   cmpb   $0x0,0x94(%rsi)
               0x00007fe63effdf07:   jne    0x00007fe63effdf8e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
               0x00007fe63effdf0d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007fe63effdf16:   jmp    0x00007fe63effdf2f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
           │   0x00007fe63effdf1b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
    5.49%  │↗  0x00007fe63effdf20:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
           ││  0x00007fe63effdf27:   test   %eax,(%r11)                  ;   {poll}
    0.03%  ││  0x00007fe63effdf2a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
           ↘│  0x00007fe63effdf2f:   mov    0x8(%rsp),%r10
    5.25%   │  0x00007fe63effdf34:   mov    %r10,%rsi
            │  0x00007fe63effdf37:   call   0x00007fe6374ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_1 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
   10.14%   │  0x00007fe63effdf3c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@20 (line 186)
            │  0x00007fe63effdf3d:   mov    0x20(%rsp),%r10
    4.40%   │  0x00007fe63effdf42:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@26 (line 187)
    5.41%   │  0x00007fe63effdf45:   mov    0x18(%rsp),%rsi
    0.00%   │  0x00007fe63effdf4a:   cmpb   $0x0,0x94(%rsi)
   17.75%   ╰  0x00007fe63effdf51:   je     0x00007fe63effdf20           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
               0x00007fe63effdf53:   mov    %r10,0x20(%rsp)
               0x00007fe63effdf58:   call   0x00007fe658afc6f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fe63effdf5d:   nop
               0x00007fe63effdf5e:   mov    0x10(%rsp),%rdx
               0x00007fe63effdf63:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@40 (line 189)
               0x00007fe63effdf67:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@46 (line 190)
               0x00007fe63effdf6f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   48.47%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  49.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 734 
-  48.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 6, compile id 757 
+  49.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 734 
+  48.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 6, compile id 757 
    0.69%               kernel  [unknown] 
    0.14%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -159,8 +159,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  49.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 734 
-  48.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 6, compile id 757 
+  49.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 734 
+  48.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 6, compile id 757 
    1.89%               kernel  [unknown] 
    0.07%                       <unknown> 
    0.01%         libc-2.31.so  __strncat_ssse3 
@@ -210,7 +210,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1
 # Parameters: (typePollution = true)
 
 # Run progress: 8.33% complete, ETA 00:20:37
@@ -230,12 +230,12 @@ Iteration   5: 14.788 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1":
   14.784 ±(99.9%) 0.093 ns/op [Average]
   (min, avg, max) = (14.746, 14.784, 14.813), stdev = 0.024
   CI (99.9%): [14.691, 14.877] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_1:·asm":
 PrintAssembly processed: 193253 total address lines.
 Perf output processed (skipped 58.640 seconds):
  Column 1: cycles (50581 events)
@@ -244,7 +244,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
 
                #           [sp+0x20]  (sp of caller)
                0x00007f67f6ffb4c0:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
@@ -261,28 +261,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    1.89%       0x00007f67f6ffb4eb:   mov    %rbp,0x10(%rsp)
    0.04%       0x00007f67f6ffb4f0:   mov    0x10(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                          ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@0 (line 95)
+                                                                         ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@0 (line 95)
    0.54%       0x00007f67f6ffb4f3:   mov    0x8(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007f67f6ffb6b5
    7.55%       0x00007f67f6ffb4fb:   movabs $0x800000000,%r11
                0x00007f67f6ffb505:   lea    (%r11,%r10,1),%r8
-   2.66%       0x00007f67f6ffb509:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   2.66%       0x00007f67f6ffb509:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
                0x00007f67f6ffb513:   cmp    0x20(%r8),%r11
           ╭    0x00007f67f6ffb517:   je     0x00007f67f6ffb52d
   15.15%  │    0x00007f67f6ffb51d:   data16 xchg %ax,%ax
-          │    0x00007f67f6ffb520:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+          │    0x00007f67f6ffb520:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
           │    0x00007f67f6ffb527:   jne    0x00007f67f6ffb5bd           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
    2.54%  ↘    0x00007f67f6ffb52d:   mov    0x8(,%rax,8),%r10d
                0x00007f67f6ffb535:   movabs $0x800000000,%r11
                0x00007f67f6ffb53f:   lea    (%r11,%r10,1),%r8
-               0x00007f67f6ffb543:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+               0x00007f67f6ffb543:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
    2.64%       0x00007f67f6ffb54d:   cmp    0x20(%r8),%r11
            ╭   0x00007f67f6ffb551:   je     0x00007f67f6ffb56d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+           │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
            │   0x00007f67f6ffb557:   nopw   0x0(%rax,%rax,1)
-           │   0x00007f67f6ffb560:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+           │   0x00007f67f6ffb560:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
            │   0x00007f67f6ffb567:   jne    0x00007f67f6ffb605
    2.57%   ↘   0x00007f67f6ffb56d:   mov    0x8(,%rax,8),%eax
                0x00007f67f6ffb574:   movabs $0x800000000,%r10
@@ -303,7 +303,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   40.92%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
 
                                                                           ;   {section_word}
    2.67%        0x00007f67f6ffb589:   je     0x00007f67f6ffb5a5
@@ -337,8 +337,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
            ╰    0x00007f67f6ffb5fd:   jg     0x00007f67f6ffb5e0
                 0x00007f67f6ffb5ff:   nop
                 0x00007f67f6ffb600:   jmp    0x00007f67f6ffb686           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
                 0x00007f67f6ffb605:   mov    0x28(%r8),%r10
    2.63%        0x00007f67f6ffb609:   mov    (%r10),%r9d
    0.03%        0x00007f67f6ffb60c:   mov    $0x0,%ecx
@@ -356,63 +356,63 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
              ╰  0x00007f67f6ffb63d:   jg     0x00007f67f6ffb620
                 0x00007f67f6ffb63f:   nop
                 0x00007f67f6ffb640:   jmp    0x00007f67f6ffb6a6           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1@4 (line 95)
                 0x00007f67f6ffb645:   mov    %r11,0x20(%r8)
 ....................................................................................................
   29.46%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 5, compile id 754 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 5, compile id 754 
 
               0x00007f67f6fff775:   mov    0x18(%rsp),%rsi
               0x00007f67f6fff77a:   nopw   0x0(%rax,%rax,1)
               0x00007f67f6fff780:   cmpb   $0x0,0x94(%rsi)
               0x00007f67f6fff787:   jne    0x00007f67f6fff80e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
               0x00007f67f6fff78d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f67f6fff796:   jmp    0x00007f67f6fff7af           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
           │   0x00007f67f6fff79b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
    2.53%  │↗  0x00007f67f6fff7a0:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
           ││  0x00007f67f6fff7a7:   test   %eax,(%r11)                  ;   {poll}
    1.81%  ││  0x00007f67f6fff7aa:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@13 (line 186)
           ↘│  0x00007f67f6fff7af:   mov    0x8(%rsp),%r10
    0.73%   │  0x00007f67f6fff7b4:   mov    %r10,%rsi
            │  0x00007f67f6fff7b7:   call   0x00007f67ef4ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_1 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
            │  0x00007f67f6fff7bc:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@20 (line 186)
    2.52%   │  0x00007f67f6fff7bd:   mov    0x20(%rsp),%r10
    7.61%   │  0x00007f67f6fff7c2:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@26 (line 187)
    2.41%   │  0x00007f67f6fff7c5:   mov    0x18(%rsp),%rsi
    0.12%   │  0x00007f67f6fff7ca:   cmpb   $0x0,0x94(%rsi)
   10.16%   ╰  0x00007f67f6fff7d1:   je     0x00007f67f6fff7a0           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@33 (line 188)
               0x00007f67f6fff7d3:   mov    %r10,0x20(%rsp)
               0x00007f67f6fff7d8:   call   0x00007f680ff5f6f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f67f6fff7dd:   nop
               0x00007f67f6fff7de:   mov    0x10(%rsp),%rdx
               0x00007f67f6fff7e3:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@40 (line 189)
               0x00007f67f6fff7e7:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub@46 (line 190)
               0x00007f67f6fff7ef:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   27.89%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  40.92%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
-  29.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
-  27.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 5, compile id 754 
+  40.92%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
+  29.46%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
+  27.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 5, compile id 754 
    0.21%               kernel  [unknown] 
    0.13%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -435,8 +435,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  70.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
-  27.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 5, compile id 754 
+  70.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_1, version 2, compile id 741 
+  27.89%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_1_jmhTest::is_duplicated_1_avgt_jmhStub, version 5, compile id 754 
    1.33%               kernel  [unknown] 
    0.04%                       <unknown> 
    0.03%         libc-2.31.so  [unknown] 
@@ -488,7 +488,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
 # Timeout: 10 min per iteration
 # Threads: 2 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
 # Parameters: (typePollution = false)
 
 # Run progress: 16.67% complete, ETA 00:18:41
@@ -508,12 +508,12 @@ Iteration   5: 6.963 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
   6.966 ±(99.9%) 0.008 ns/op [Average]
   (min, avg, max) = (6.963, 6.966, 6.969), stdev = 0.002
   CI (99.9%): [6.957, 6.974] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:·asm":
 PrintAssembly processed: 193652 total address lines.
 Perf output processed (skipped 58.634 seconds):
  Column 1: cycles (100989 events)
@@ -522,54 +522,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 752 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 752 
 
               0x00007fdd2afffbf5:   mov    0x18(%rsp),%rsi
               0x00007fdd2afffbfa:   nopw   0x0(%rax,%rax,1)
               0x00007fdd2afffc00:   cmpb   $0x0,0x94(%rsi)
               0x00007fdd2afffc07:   jne    0x00007fdd2afffc8e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
               0x00007fdd2afffc0d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007fdd2afffc16:   jmp    0x00007fdd2afffc2f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@13 (line 186)
           │   0x00007fdd2afffc1b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
    5.46%  │↗  0x00007fdd2afffc20:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
           ││  0x00007fdd2afffc27:   test   %eax,(%r11)                  ;   {poll}
    0.01%  ││  0x00007fdd2afffc2a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@13 (line 186)
           ↘│  0x00007fdd2afffc2f:   mov    0x8(%rsp),%r10
    5.42%   │  0x00007fdd2afffc34:   mov    %r10,%rsi
            │  0x00007fdd2afffc37:   call   0x00007fdd234ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_2 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
    8.15%   │  0x00007fdd2afffc3c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@20 (line 186)
    0.80%   │  0x00007fdd2afffc3d:   mov    0x20(%rsp),%r10
    3.77%   │  0x00007fdd2afffc42:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@26 (line 187)
    5.19%   │  0x00007fdd2afffc45:   mov    0x18(%rsp),%rsi
    0.00%   │  0x00007fdd2afffc4a:   cmpb   $0x0,0x94(%rsi)
   25.00%   ╰  0x00007fdd2afffc51:   je     0x00007fdd2afffc20           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@33 (line 188)
               0x00007fdd2afffc53:   mov    %r10,0x20(%rsp)
               0x00007fdd2afffc58:   call   0x00007fdd448ac6f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fdd2afffc5d:   nop
               0x00007fdd2afffc5e:   mov    0x10(%rsp),%rdx
               0x00007fdd2afffc63:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@40 (line 189)
               0x00007fdd2afffc67:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub@46 (line 190)
               0x00007fdd2afffc6f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   53.80%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 739 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 739 
 
              #           [sp+0x20]  (sp of caller)
              0x00007fdd2affc280:   mov    0x8(%rsi),%r10d
@@ -585,28 +585,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    6.24%     0x00007fdd2affc2a7:   sub    $0x18,%rsp
    0.00%     0x00007fdd2affc2ab:   mov    %rbp,0x10(%rsp)
    2.04%     0x00007fdd2affc2b0:   mov    0x10(%rsi),%eax              ;*getfield msg {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@1 (line 102)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@1 (line 102)
    2.78%     0x00007fdd2affc2b3:   nopw   0x0(%rax,%rax,1)
    0.78%     0x00007fdd2affc2bc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@0 (line 102)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@0 (line 102)
    0.00%     0x00007fdd2affc2c0:   cmpl   $0xc269e0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007fdd2affc306
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
   22.50%  ╭  0x00007fdd2affc2cb:   jne    0x00007fdd2affc2e9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
    4.77%  │  0x00007fdd2affc2d1:   mov    $0x1,%eax
           │  0x00007fdd2affc2d6:   mov    0x10(%rsp),%rbp
           │  0x00007fdd2affc2db:   add    $0x18,%rsp
    0.74%  │  0x00007fdd2affc2df:   mov    0x348(%r15),%rcx
    4.80%  │  0x00007fdd2affc2e6:   test   %eax,(%rcx)                  ;   {poll_return}
           │  0x00007fdd2affc2e8:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@7 (line 102)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@7 (line 102)
           ↘  0x00007fdd2affc2e9:   movl   $0xffffffdd,0x370(%r15)
              0x00007fdd2affc2f4:   movq   $0x0,0x378(%r15)             ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - java.util.Objects::requireNonNull@1 (line 207)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
              0x00007fdd2affc2ff:   nop
              0x00007fdd2affc300:   call   0x00007fdd2350527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -614,8 +614,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   44.67%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  53.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 752 
-  44.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 739 
+  53.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 752 
+  44.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 739 
    0.63%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.05%               kernel  [unknown] 
@@ -639,8 +639,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  53.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 752 
-  44.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 739 
+  53.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 752 
+  44.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 739 
    1.35%               kernel  [unknown] 
    0.02%                       <unknown> 
    0.01%         libc-2.31.so  [unknown] 
@@ -692,7 +692,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 2 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2
 # Parameters: (typePollution = true)
 
 # Run progress: 25.00% complete, ETA 00:16:46
@@ -712,12 +712,12 @@ Iteration   5: 43.952 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2":
   53.134 ±(99.9%) 25.063 ns/op [Average]
   (min, avg, max) = (43.952, 53.134, 62.355), stdev = 6.509
   CI (99.9%): [28.071, 78.197] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_2:·asm":
 PrintAssembly processed: 193940 total address lines.
 Perf output processed (skipped 58.634 seconds):
  Column 1: cycles (100418 events)
@@ -726,7 +726,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 743 
 
                             #           [sp+0x20]  (sp of caller)
                             0x00007f5042ffc2c0:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
@@ -743,28 +743,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    0.70%                    0x00007f5042ffc2eb:   mov    %rbp,0x10(%rsp)
    0.01%                    0x00007f5042ffc2f0:   mov    0x10(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                                       ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@0 (line 102)
+                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@0 (line 102)
    0.00%                    0x00007f5042ffc2f3:   mov    0x8(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007f5042ffc4b5
    0.06%                    0x00007f5042ffc2fb:   movabs $0x800000000,%r11
    0.77%                    0x00007f5042ffc305:   lea    (%r11,%r10,1),%r8
-   0.02%                    0x00007f5042ffc309:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.02%                    0x00007f5042ffc309:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
                             0x00007f5042ffc313:   cmp    0x20(%r8),%r11
           ╭                 0x00007f5042ffc317:   je     0x00007f5042ffc32d
   19.36%  │                 0x00007f5042ffc31d:   data16 xchg %ax,%ax
-   0.24%  │                 0x00007f5042ffc320:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.24%  │                 0x00007f5042ffc320:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
           │╭                0x00007f5042ffc327:   jne    0x00007f5042ffc3bd           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
    4.12%  ↘│           ↗    0x00007f5042ffc32d:   mov    0x8(,%rax,8),%r10d
    0.21%   │           │    0x00007f5042ffc335:   movabs $0x800000000,%r11
            │           │    0x00007f5042ffc33f:   lea    (%r11,%r10,1),%r8
-   0.03%   │           │    0x00007f5042ffc343:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+   0.03%   │           │    0x00007f5042ffc343:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
    0.71%   │           │    0x00007f5042ffc34d:   cmp    0x20(%r8),%r11
            │╭          │    0x00007f5042ffc351:   je     0x00007f5042ffc36d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           ││          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-           ││          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+           ││          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+           ││          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
    1.23%   ││          │    0x00007f5042ffc357:   nopw   0x0(%rax,%rax,1)
-   0.00%   ││          │    0x00007f5042ffc360:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+   0.00%   ││          │    0x00007f5042ffc360:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
            ││╭         │    0x00007f5042ffc367:   jne    0x00007f5042ffc405
    1.87%   │↘│         │↗   0x00007f5042ffc36d:   mov    0x8(,%rax,8),%eax
    0.00%   │ │         ││   0x00007f5042ffc374:   movabs $0x800000000,%r10
@@ -802,8 +802,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
              │ ││ │╰   │││  0x00007f5042ffc3fd:   jg     0x00007f5042ffc3e0
              │ ││ │    │││  0x00007f5042ffc3ff:   nop
              │ ││ │    │││  0x00007f5042ffc400:   jmp    0x00007f5042ffc486           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-             │ ││ │    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-             │ ││ │    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+             │ ││ │    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+             │ ││ │    │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
    0.01%     ↘ ││ │    │││  0x00007f5042ffc405:   mov    0x28(%r8),%r10
    3.87%       ││ │    │││  0x00007f5042ffc409:   mov    (%r10),%r9d
    0.20%       ││ │    │││  0x00007f5042ffc40c:   mov    $0x0,%ecx
@@ -821,30 +821,30 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
                ││ │  │╰│││  0x00007f5042ffc43d:   jg     0x00007f5042ffc420
                ││ │  │ │││  0x00007f5042ffc43f:   nop
                ││ │  │ │││  0x00007f5042ffc440:   jmp    0x00007f5042ffc4a6           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-               ││ │  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-               ││ │  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+               ││ │  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+               ││ │  │ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
    0.02%       ││ ↘  │ │││  0x00007f5042ffc445:   mov    %r11,0x20(%r8)
                ││    │ ╰││  0x00007f5042ffc449:   jmp    0x00007f5042ffc32d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-               ││    │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-               ││    │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+               ││    │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+               ││    │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
    0.01%       ││    ↘  ││  0x00007f5042ffc44e:   mov    %r11,0x20(%r8)
    0.00%       ││       ╰│  0x00007f5042ffc452:   jmp    0x00007f5042ffc36d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-               ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-               ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
+               ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+               ││        │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@4 (line 102)
                ↘│        │  0x00007f5042ffc457:   mov    $0x0,%eax
                 │        │  0x00007f5042ffc45c:   nopl   0x0(%rax)
                 │        ╰  0x00007f5042ffc460:   jmp    0x00007f5042ffc3aa           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-                │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@7 (line 102)
+                │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2@7 (line 102)
                 ↘           0x00007f5042ffc465:   mov    $0x614,%r11
                             0x00007f5042ffc46c:   mov    $0xffffffcd,%r10d
                             0x00007f5042ffc472:   mov    %r10d,0x370(%r15)            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
 ....................................................................................................
   96.53%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  96.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 743 
-   2.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 757 
+  96.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 743 
+   2.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 757 
    0.24%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
@@ -868,8 +868,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  96.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 743 
-   2.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 757 
+  96.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_2, version 2, compile id 743 
+   2.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_2_jmhTest::is_duplicated_2_avgt_jmhStub, version 5, compile id 757 
    0.87%               kernel  [unknown] 
    0.01%                       <unknown> 
    0.01%         libc-2.31.so  [unknown] 
@@ -919,7 +919,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 3 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
 # Parameters: (typePollution = false)
 
 # Run progress: 33.33% complete, ETA 00:14:52
@@ -939,12 +939,12 @@ Iteration   5: 6.968 ±(99.9%) 0.116 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
   6.983 ±(99.9%) 0.164 ns/op [Average]
   (min, avg, max) = (6.963, 6.983, 7.060), stdev = 0.043
   CI (99.9%): [6.819, 7.148] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:·asm":
 PrintAssembly processed: 194739 total address lines.
 Perf output processed (skipped 58.584 seconds):
  Column 1: cycles (150062 events)
@@ -953,54 +953,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 6, compile id 759 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 6, compile id 759 
 
               0x00007f9b5b0000f5:   mov    0x18(%rsp),%rsi
               0x00007f9b5b0000fa:   nopw   0x0(%rax,%rax,1)
               0x00007f9b5b000100:   cmpb   $0x0,0x94(%rsi)
               0x00007f9b5b000107:   jne    0x00007f9b5b00018e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
               0x00007f9b5b00010d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f9b5b000116:   jmp    0x00007f9b5b00012f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@13 (line 186)
           │   0x00007f9b5b00011b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
    5.45%  │↗  0x00007f9b5b000120:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
           ││  0x00007f9b5b000127:   test   %eax,(%r11)                  ;   {poll}
    0.01%  ││  0x00007f9b5b00012a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@13 (line 186)
           ↘│  0x00007f9b5b00012f:   mov    0x8(%rsp),%r10
    5.58%   │  0x00007f9b5b000134:   mov    %r10,%rsi
            │  0x00007f9b5b000137:   call   0x00007f9b534ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_3 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
    9.99%   │  0x00007f9b5b00013c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@20 (line 186)
            │  0x00007f9b5b00013d:   mov    0x20(%rsp),%r10
    4.65%   │  0x00007f9b5b000142:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@26 (line 187)
    5.49%   │  0x00007f9b5b000145:   mov    0x18(%rsp),%rsi
            │  0x00007f9b5b00014a:   cmpb   $0x0,0x94(%rsi)
   18.49%   ╰  0x00007f9b5b000151:   je     0x00007f9b5b000120           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@33 (line 188)
               0x00007f9b5b000153:   mov    %r10,0x20(%rsp)
               0x00007f9b5b000158:   call   0x00007f9b7145a6f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f9b5b00015d:   nop
               0x00007f9b5b00015e:   mov    0x10(%rsp),%rdx
               0x00007f9b5b000163:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@40 (line 189)
               0x00007f9b5b000167:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub@46 (line 190)
               0x00007f9b5b00016f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   49.66%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 733 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 733 
 
              #           [sp+0x20]  (sp of caller)
              0x00007f9b5affc580:   mov    0x8(%rsi),%r10d
@@ -1016,28 +1016,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    6.39%     0x00007f9b5affc5a7:   sub    $0x18,%rsp
    0.01%     0x00007f9b5affc5ab:   mov    %rbp,0x10(%rsp)
    2.46%     0x00007f9b5affc5b0:   mov    0x10(%rsi),%eax              ;*getfield msg {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@1 (line 109)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@1 (line 109)
    2.13%     0x00007f9b5affc5b3:   nopw   0x0(%rax,%rax,1)
    0.92%     0x00007f9b5affc5bc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@0 (line 109)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@0 (line 109)
    0.01%     0x00007f9b5affc5c0:   cmpl   $0xc269e0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f9b5affc606
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
   26.44%  ╭  0x00007f9b5affc5cb:   jne    0x00007f9b5affc5e9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
    5.54%  │  0x00007f9b5affc5d1:   mov    $0x1,%eax
           │  0x00007f9b5affc5d6:   mov    0x10(%rsp),%rbp
    0.00%  │  0x00007f9b5affc5db:   add    $0x18,%rsp
           │  0x00007f9b5affc5df:   mov    0x348(%r15),%rcx
    5.55%  │  0x00007f9b5affc5e6:   test   %eax,(%rcx)                  ;   {poll_return}
           │  0x00007f9b5affc5e8:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@7 (line 109)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@7 (line 109)
           ↘  0x00007f9b5affc5e9:   movl   $0xffffffdd,0x370(%r15)
              0x00007f9b5affc5f4:   movq   $0x0,0x378(%r15)             ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - java.util.Objects::requireNonNull@1 (line 207)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
              0x00007f9b5affc5ff:   nop
              0x00007f9b5affc600:   call   0x00007f9b5350527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -1045,8 +1045,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   49.47%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  49.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 6, compile id 759 
-  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 733 
+  49.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 6, compile id 759 
+  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 733 
    0.31%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
@@ -1070,8 +1070,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  49.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 6, compile id 759 
-  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 733 
+  49.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 6, compile id 759 
+  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 733 
    0.76%               kernel  [unknown] 
    0.01%         libc-2.31.so  [unknown] 
    0.01%                       <unknown> 
@@ -1122,7 +1122,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 3 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3
 # Parameters: (typePollution = true)
 
 # Run progress: 41.67% complete, ETA 00:13:01
@@ -1142,12 +1142,12 @@ Iteration   5: 84.114 ±(99.9%) 309.936 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3":
   83.712 ±(99.9%) 26.826 ns/op [Average]
   (min, avg, max) = (73.611, 83.712, 93.247), stdev = 6.967
   CI (99.9%): [56.886, 110.538] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_3:·asm":
 PrintAssembly processed: 193006 total address lines.
 Perf output processed (skipped 58.658 seconds):
  Column 1: cycles (150262 events)
@@ -1156,7 +1156,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 743 
 
                             #           [sp+0x20]  (sp of caller)
                             0x00007f1c0affb240:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
@@ -1173,26 +1173,26 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    0.47%                    0x00007f1c0affb26b:   mov    %rbp,0x10(%rsp)
                             0x00007f1c0affb270:   mov    0x10(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                                       ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@0 (line 109)
+                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@0 (line 109)
                             0x00007f1c0affb273:   mov    0x8(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007f1c0affb423
    0.00%                    0x00007f1c0affb27b:   movabs $0x800000000,%r11
    0.49%                    0x00007f1c0affb285:   lea    (%r11,%r10,1),%r8
-   0.00%                    0x00007f1c0affb289:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.00%                    0x00007f1c0affb289:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
                             0x00007f1c0affb293:   cmp    0x20(%r8),%r11
           ╭                 0x00007f1c0affb297:   je     0x00007f1c0affb2ad
   11.71%  │                 0x00007f1c0affb29d:   data16 xchg %ax,%ax
-   0.15%  │                 0x00007f1c0affb2a0:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.15%  │                 0x00007f1c0affb2a0:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
           │╭                0x00007f1c0affb2a7:   jne    0x00007f1c0affb385           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
    0.68%  ↘│             ↗  0x00007f1c0affb2ad:   mov    0x8(,%rax,8),%r10d
    0.01%   │             │  0x00007f1c0affb2b5:   movabs $0x800000000,%r11
            │             │  0x00007f1c0affb2bf:   lea    (%r11,%r10,1),%r8
-   0.00%   │             │  0x00007f1c0affb2c3:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+   0.00%   │             │  0x00007f1c0affb2c3:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
    0.46%   │             │  0x00007f1c0affb2cd:   cmp    0x20(%r8),%r11
            │╭            │  0x00007f1c0affb2d1:   je     0x00007f1c0affb2ed
    1.15%   ││            │  0x00007f1c0affb2d7:   nopw   0x0(%rax,%rax,1)
-           ││            │  0x00007f1c0affb2e0:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+           ││            │  0x00007f1c0affb2e0:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
            ││╭           │  0x00007f1c0affb2e7:   jne    0x00007f1c0affb344
    0.58%   │↘│          ↗│  0x00007f1c0affb2ed:   mov    0x8(,%rax,8),%eax
    0.00%   │ │          ││  0x00007f1c0affb2f4:   movabs $0x800000000,%r10
@@ -1230,8 +1230,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
            │      │╰    ││  0x00007f1c0affb37d:   jg     0x00007f1c0affb360
            │      │     ││  0x00007f1c0affb37f:   nop
            │      │ ╭   ││  0x00007f1c0affb380:   jmp    0x00007f1c0affb3d7           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
    0.00%   ↘      │ │   ││  0x00007f1c0affb385:   mov    0x28(%r8),%r10
   65.94%          │ │   ││  0x00007f1c0affb389:   mov    (%r10),%r9d
    1.81%          │ │   ││  0x00007f1c0affb38c:   mov    $0x0,%ecx
@@ -1249,27 +1249,27 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
                   │ │ │╰││  0x00007f1c0affb3bd:   jg     0x00007f1c0affb3a0
                   │ │ │ ││  0x00007f1c0affb3bf:   nop
                   │ │ │ ││  0x00007f1c0affb3c0:   jmp    0x00007f1c0affb3f8           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
    0.02%          ↘ │ │ ││  0x00007f1c0affb3c5:   mov    %r11,0x20(%r8)
                     │ │ ╰│  0x00007f1c0affb3c9:   jmp    0x00007f1c0affb2ed           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
    0.00%            │ ↘  │  0x00007f1c0affb3ce:   mov    %r11,0x20(%r8)
                     │    ╰  0x00007f1c0affb3d2:   jmp    0x00007f1c0affb2ad           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
                     ↘       0x00007f1c0affb3d7:   mov    $0x0,%r11
                             0x00007f1c0affb3de:   mov    $0xffffffdd,%r10d
                             0x00007f1c0affb3e4:   mov    %r10d,0x370(%r15)            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3@4 (line 109)
 ....................................................................................................
   97.75%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 743 
-   1.42%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 5, compile id 759 
+  97.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 743 
+   1.42%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 5, compile id 759 
    0.23%              kernel  [unknown] 
    0.03%              kernel  [unknown] 
    0.03%              kernel  [unknown] 
@@ -1293,8 +1293,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 743 
-   1.42%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 5, compile id 759 
+  97.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_3, version 2, compile id 743 
+   1.42%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_3_jmhTest::is_duplicated_3_avgt_jmhStub, version 5, compile id 759 
    0.71%              kernel  [unknown] 
    0.01%                      <unknown> 
    0.00%        libc-2.31.so  getifaddrs_internal 
@@ -1345,7 +1345,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 4 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
 # Parameters: (typePollution = false)
 
 # Run progress: 50.00% complete, ETA 00:11:10
@@ -1365,12 +1365,12 @@ Iteration   5: 6.964 ±(99.9%) 0.013 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
   6.968 ±(99.9%) 0.014 ns/op [Average]
   (min, avg, max) = (6.964, 6.968, 6.972), stdev = 0.004
   CI (99.9%): [6.955, 6.982] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:·asm":
 PrintAssembly processed: 200386 total address lines.
 Perf output processed (skipped 58.804 seconds):
  Column 1: cycles (200891 events)
@@ -1379,7 +1379,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 738 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 738 
 
              #           [sp+0x20]  (sp of caller)
              0x00007fa56effc280:   mov    0x8(%rsi),%r10d
@@ -1395,28 +1395,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    6.46%     0x00007fa56effc2a7:   sub    $0x18,%rsp
    0.01%     0x00007fa56effc2ab:   mov    %rbp,0x10(%rsp)
    2.51%     0x00007fa56effc2b0:   mov    0x10(%rsi),%eax              ;*getfield msg {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@1 (line 116)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@1 (line 116)
    2.07%     0x00007fa56effc2b3:   nopw   0x0(%rax,%rax,1)
    0.87%     0x00007fa56effc2bc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@0 (line 116)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@0 (line 116)
    0.02%     0x00007fa56effc2c0:   cmpl   $0xc269e0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007fa56effc306
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
   26.59%  ╭  0x00007fa56effc2cb:   jne    0x00007fa56effc2e9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
    5.49%  │  0x00007fa56effc2d1:   mov    $0x1,%eax
           │  0x00007fa56effc2d6:   mov    0x10(%rsp),%rbp
           │  0x00007fa56effc2db:   add    $0x18,%rsp
           │  0x00007fa56effc2df:   mov    0x348(%r15),%rcx
    5.38%  │  0x00007fa56effc2e6:   test   %eax,(%rcx)                  ;   {poll_return}
           │  0x00007fa56effc2e8:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@7 (line 116)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@7 (line 116)
           ↘  0x00007fa56effc2e9:   movl   $0xffffffdd,0x370(%r15)
              0x00007fa56effc2f4:   movq   $0x0,0x378(%r15)             ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - java.util.Objects::requireNonNull@1 (line 207)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
              0x00007fa56effc2ff:   nop
              0x00007fa56effc300:   call   0x00007fa56750527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -1424,55 +1424,55 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   49.41%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 6, compile id 764 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 6, compile id 764 
 
               0x00007fa56f0018f5:   mov    0x18(%rsp),%rsi
               0x00007fa56f0018fa:   nopw   0x0(%rax,%rax,1)
               0x00007fa56f001900:   cmpb   $0x0,0x94(%rsi)
               0x00007fa56f001907:   jne    0x00007fa56f00198e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
               0x00007fa56f00190d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007fa56f001916:   jmp    0x00007fa56f00192f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@13 (line 186)
           │   0x00007fa56f00191b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
    5.56%  │↗  0x00007fa56f001920:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
           ││  0x00007fa56f001927:   test   %eax,(%r11)                  ;   {poll}
    0.01%  ││  0x00007fa56f00192a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@13 (line 186)
           ↘│  0x00007fa56f00192f:   mov    0x8(%rsp),%r10
    5.57%   │  0x00007fa56f001934:   mov    %r10,%rsi
            │  0x00007fa56f001937:   call   0x00007fa5674ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_4 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
    9.67%   │  0x00007fa56f00193c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@20 (line 186)
            │  0x00007fa56f00193d:   mov    0x20(%rsp),%r10
    4.62%   │  0x00007fa56f001942:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@26 (line 187)
    5.51%   │  0x00007fa56f001945:   mov    0x18(%rsp),%rsi
            │  0x00007fa56f00194a:   cmpb   $0x0,0x94(%rsi)
   18.40%   ╰  0x00007fa56f001951:   je     0x00007fa56f001920           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@33 (line 188)
               0x00007fa56f001953:   mov    %r10,0x20(%rsp)
               0x00007fa56f001958:   call   0x00007fa585b856f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fa56f00195d:   nop
               0x00007fa56f00195e:   mov    0x10(%rsp),%rdx
               0x00007fa56f001963:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@40 (line 189)
               0x00007fa56f001967:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub@46 (line 190)
               0x00007fa56f00196f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   49.33%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  49.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 738 
-  49.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 6, compile id 764 
+  49.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 738 
+  49.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 6, compile id 764 
    0.35%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
@@ -1482,7 +1482,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
    0.02%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_AverageTime, version 5, compile id 794 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_AverageTime, version 5, compile id 794 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
@@ -1496,11 +1496,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  49.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 738 
-  49.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 6, compile id 764 
+  49.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 738 
+  49.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 6, compile id 764 
    0.93%               kernel  [unknown] 
    0.03%                       <unknown> 
-   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_AverageTime, version 5, compile id 794 
+   0.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_AverageTime, version 5, compile id 794 
    0.01%            libjvm.so  CompilerOracle::has_option_value<bool> 
    0.01%         libc-2.31.so  [unknown] 
    0.01%            libjvm.so  xmlStream::write_text 
@@ -1547,7 +1547,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_g
 # Timeout: 10 min per iteration
 # Threads: 4 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4
 # Parameters: (typePollution = true)
 
 # Run progress: 58.33% complete, ETA 00:09:19
@@ -1567,12 +1567,12 @@ Iteration   5: 117.394 ±(99.9%) 228.453 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4":
   111.902 ±(99.9%) 12.737 ns/op [Average]
   (min, avg, max) = (109.064, 111.902, 117.394), stdev = 3.308
   CI (99.9%): [99.165, 124.639] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_4:·asm":
 PrintAssembly processed: 199954 total address lines.
 Perf output processed (skipped 58.810 seconds):
  Column 1: cycles (200391 events)
@@ -1581,7 +1581,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 743 
 
                             #           [sp+0x20]  (sp of caller)
                             0x00007fc782ffc3c0:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
@@ -1598,26 +1598,26 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    0.35%                    0x00007fc782ffc3eb:   mov    %rbp,0x10(%rsp)
    0.01%                    0x00007fc782ffc3f0:   mov    0x10(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                                       ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@0 (line 116)
+                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@0 (line 116)
    0.00%                    0x00007fc782ffc3f3:   mov    0x8(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007fc782ffc5a3
    0.06%                    0x00007fc782ffc3fb:   movabs $0x800000000,%r11
    0.33%                    0x00007fc782ffc405:   lea    (%r11,%r10,1),%r8
-   0.02%                    0x00007fc782ffc409:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.02%                    0x00007fc782ffc409:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
    0.00%                    0x00007fc782ffc413:   cmp    0x20(%r8),%r11
    0.00%  ╭                 0x00007fc782ffc417:   je     0x00007fc782ffc42d
    9.32%  │                 0x00007fc782ffc41d:   data16 xchg %ax,%ax
-   0.19%  │                 0x00007fc782ffc420:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.19%  │                 0x00007fc782ffc420:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
           │╭                0x00007fc782ffc427:   jne    0x00007fc782ffc505           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
    2.73%  ↘│             ↗  0x00007fc782ffc42d:   mov    0x8(,%rax,8),%r10d
    0.07%   │             │  0x00007fc782ffc435:   movabs $0x800000000,%r11
            │             │  0x00007fc782ffc43f:   lea    (%r11,%r10,1),%r8
-   0.01%   │             │  0x00007fc782ffc443:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+   0.01%   │             │  0x00007fc782ffc443:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
    0.35%   │             │  0x00007fc782ffc44d:   cmp    0x20(%r8),%r11
            │╭            │  0x00007fc782ffc451:   je     0x00007fc782ffc46d
    5.10%   ││            │  0x00007fc782ffc457:   nopw   0x0(%rax,%rax,1)
-           ││            │  0x00007fc782ffc460:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+           ││            │  0x00007fc782ffc460:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
            ││╭           │  0x00007fc782ffc467:   jne    0x00007fc782ffc4c4
    3.60%   │↘│          ↗│  0x00007fc782ffc46d:   mov    0x8(,%rax,8),%eax
    0.09%   │ │          ││  0x00007fc782ffc474:   movabs $0x800000000,%r10
@@ -1655,8 +1655,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
            │      │╰    ││  0x00007fc782ffc4fd:   jg     0x00007fc782ffc4e0
            │      │     ││  0x00007fc782ffc4ff:   nop
            │      │ ╭   ││  0x00007fc782ffc500:   jmp    0x00007fc782ffc557           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
    0.01%   ↘      │ │   ││  0x00007fc782ffc505:   mov    0x28(%r8),%r10
   47.26%          │ │   ││  0x00007fc782ffc509:   mov    (%r10),%r9d
    0.99%          │ │   ││  0x00007fc782ffc50c:   mov    $0x0,%ecx
@@ -1674,27 +1674,27 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
                   │ │ │╰││  0x00007fc782ffc53d:   jg     0x00007fc782ffc520
                   │ │ │ ││  0x00007fc782ffc53f:   nop
                   │ │ │ ││  0x00007fc782ffc540:   jmp    0x00007fc782ffc578           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
    0.03%          ↘ │ │ ││  0x00007fc782ffc545:   mov    %r11,0x20(%r8)
                     │ │ ╰│  0x00007fc782ffc549:   jmp    0x00007fc782ffc46d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
    0.00%            │ ↘  │  0x00007fc782ffc54e:   mov    %r11,0x20(%r8)
                     │    ╰  0x00007fc782ffc552:   jmp    0x00007fc782ffc42d           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
                     ↘       0x00007fc782ffc557:   mov    $0x0,%r11
                             0x00007fc782ffc55e:   mov    $0xffffffdd,%r10d
                             0x00007fc782ffc564:   mov    %r10d,0x370(%r15)            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4@4 (line 116)
 ....................................................................................................
   97.83%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  97.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 743 
-   1.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 5, compile id 761 
+  97.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 743 
+   1.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 5, compile id 761 
    0.09%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
@@ -1718,8 +1718,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  97.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 743 
-   1.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 5, compile id 761 
+  97.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_4, version 2, compile id 743 
+   1.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_4_jmhTest::is_duplicated_4_avgt_jmhStub, version 5, compile id 761 
    0.65%               kernel  [unknown] 
    0.03%                       <unknown> 
    0.01%         libc-2.31.so  __strxfrm_l 
@@ -1771,7 +1771,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
 # Parameters: (typePollution = false)
 
 # Run progress: 66.67% complete, ETA 00:07:28
@@ -1791,12 +1791,12 @@ Iteration   5: 7.100 ±(99.9%) 0.136 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
   7.074 ±(99.9%) 0.078 ns/op [Average]
   (min, avg, max) = (7.054, 7.074, 7.100), stdev = 0.020
   CI (99.9%): [6.997, 7.152] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:·asm":
 PrintAssembly processed: 201611 total address lines.
 Perf output processed (skipped 58.809 seconds):
  Column 1: cycles (249845 events)
@@ -1805,54 +1805,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 772 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 772 
 
               0x00007f750f0014f5:   mov    0x18(%rsp),%rsi
               0x00007f750f0014fa:   nopw   0x0(%rax,%rax,1)
               0x00007f750f001500:   cmpb   $0x0,0x94(%rsi)
               0x00007f750f001507:   jne    0x00007f750f00158e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
               0x00007f750f00150d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f750f001516:   jmp    0x00007f750f00152f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@13 (line 186)
           │   0x00007f750f00151b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
    5.39%  │↗  0x00007f750f001520:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
           ││  0x00007f750f001527:   test   %eax,(%r11)                  ;   {poll}
    0.05%  ││  0x00007f750f00152a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@13 (line 186)
           ↘│  0x00007f750f00152f:   mov    0x8(%rsp),%r10
    5.42%   │  0x00007f750f001534:   mov    %r10,%rsi
            │  0x00007f750f001537:   call   0x00007f75074ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_5 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
    9.96%   │  0x00007f750f00153c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@20 (line 186)
    0.00%   │  0x00007f750f00153d:   mov    0x20(%rsp),%r10
    5.55%   │  0x00007f750f001542:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@26 (line 187)
    5.50%   │  0x00007f750f001545:   mov    0x18(%rsp),%rsi
            │  0x00007f750f00154a:   cmpb   $0x0,0x94(%rsi)
   18.33%   ╰  0x00007f750f001551:   je     0x00007f750f001520           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@33 (line 188)
               0x00007f750f001553:   mov    %r10,0x20(%rsp)
               0x00007f750f001558:   call   0x00007f75265906f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f750f00155d:   nop
               0x00007f750f00155e:   mov    0x10(%rsp),%rdx
               0x00007f750f001563:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@40 (line 189)
               0x00007f750f001567:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub@46 (line 190)
               0x00007f750f00156f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   50.20%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 739 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 739 
 
              #           [sp+0x20]  (sp of caller)
              0x00007f750effb480:   mov    0x8(%rsi),%r10d
@@ -1868,28 +1868,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    6.33%     0x00007f750effb4a7:   sub    $0x18,%rsp
    0.04%     0x00007f750effb4ab:   mov    %rbp,0x10(%rsp)
    2.39%     0x00007f750effb4b0:   mov    0x10(%rsi),%eax              ;*getfield msg {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@1 (line 123)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@1 (line 123)
    2.14%     0x00007f750effb4b3:   nopw   0x0(%rax,%rax,1)
    0.91%     0x00007f750effb4bc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@0 (line 123)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@0 (line 123)
    0.05%     0x00007f750effb4c0:   cmpl   $0xc269e0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007f750effb506
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
   26.17%  ╭  0x00007f750effb4cb:   jne    0x00007f750effb4e9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
    5.42%  │  0x00007f750effb4d1:   mov    $0x1,%eax
           │  0x00007f750effb4d6:   mov    0x10(%rsp),%rbp
           │  0x00007f750effb4db:   add    $0x18,%rsp
           │  0x00007f750effb4df:   mov    0x348(%r15),%rcx
    5.51%  │  0x00007f750effb4e6:   test   %eax,(%rcx)                  ;   {poll_return}
           │  0x00007f750effb4e8:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@7 (line 123)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@7 (line 123)
           ↘  0x00007f750effb4e9:   movl   $0xffffffdd,0x370(%r15)
              0x00007f750effb4f4:   movq   $0x0,0x378(%r15)             ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - java.util.Objects::requireNonNull@1 (line 207)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
              0x00007f750effb4ff:   nop
              0x00007f750effb500:   call   0x00007f750750527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -1897,8 +1897,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   49.00%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  50.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 772 
-  49.00%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 739 
+  50.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 772 
+  49.00%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 739 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
@@ -1922,14 +1922,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  50.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 772 
-  49.00%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 739 
+  50.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 772 
+  49.00%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 739 
    0.60%               kernel  [unknown] 
    0.03%                       <unknown> 
    0.01%         libc-2.31.so  __strncat_ssse3 
    0.01%            libjvm.so  xmlStream::write_text 
    0.01%            libjvm.so  ElfSymbolTable::lookup 
-   0.01%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 783 
+   0.01%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 783 
    0.01%            libjvm.so  defaultStream::write 
    0.01%         libc-2.31.so  __strxfrm_l 
    0.01%           ld-2.31.so  _dl_tunable_set_hwcaps 
@@ -1973,7 +1973,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5
 # Parameters: (typePollution = true)
 
 # Run progress: 75.00% complete, ETA 00:05:36
@@ -1993,12 +1993,12 @@ Iteration   5: 193.462 ±(99.9%) 342.056 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5":
   194.242 ±(99.9%) 6.311 ns/op [Average]
   (min, avg, max) = (191.737, 194.242, 195.640), stdev = 1.639
   CI (99.9%): [187.931, 200.553] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_5:·asm":
 PrintAssembly processed: 201699 total address lines.
 Perf output processed (skipped 58.687 seconds):
  Column 1: cycles (250389 events)
@@ -2007,7 +2007,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
 
                                                                                ;   {section_word}
    0.24%             0x00007ff372ffce09:   je     0x00007ff372ffce25
@@ -2041,8 +2041,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
           ││ │╰   │  0x00007ff372ffce7d:   jg     0x00007ff372ffce60
           ││ │    │  0x00007ff372ffce7f:   nop
           ││ │    │  0x00007ff372ffce80:   jmp    0x00007ff372ffcf06           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          ││ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+          ││ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          ││ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
           ││ │    │  0x00007ff372ffce85:   mov    0x28(%r8),%r10
    4.49%  ││ │    │  0x00007ff372ffce89:   mov    (%r10),%r9d
    0.07%  ││ │    │  0x00007ff372ffce8c:   mov    $0x0,%ecx
@@ -2060,25 +2060,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
           ││ │  │╰│  0x00007ff372ffcebd:   jg     0x00007ff372ffcea0
           ││ │  │ │  0x00007ff372ffcebf:   nop
           ││ │  │ │  0x00007ff372ffcec0:   jmp    0x00007ff372ffcf26           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││ │  │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-          ││ │  │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+          ││ │  │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+          ││ │  │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
    0.00%  ││ ↘  │ │  0x00007ff372ffcec5:   mov    %r11,0x20(%r8)
    0.00%  ││    │ │  0x00007ff372ffcec9:   jmp    0x00007ff372ffcdad           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          ││    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+          ││    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          ││    │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
    0.00%  ││    ↘ │  0x00007ff372ffcece:   mov    %r11,0x20(%r8)
    0.00%  ││      │  0x00007ff372ffced2:   jmp    0x00007ff372ffcded           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
           ↘│      │  0x00007ff372ffced7:   mov    $0x1,%eax
    0.24%   │      │  0x00007ff372ffcedc:   nopl   0x0(%rax)
            │      ╰  0x00007ff372ffcee0:   jmp    0x00007ff372ffce2a           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@7 (line 123)
+           │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@7 (line 123)
            ↘         0x00007ff372ffcee5:   mov    $0x614,%r11
                      0x00007ff372ffceec:   mov    $0xffffffcd,%r10d
                      0x00007ff372ffcef2:   mov    %r10d,0x370(%r15)            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5@4 (line 123)
                      0x00007ff372ffcef9:   mov    %r11,0x378(%r15)
                      0x00007ff372ffcf00:   call   0x00007ff36b50527a           ; ImmutableOopMap {rsi=Oop }
                                                                                ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
@@ -2086,19 +2086,19 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
   88.75%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  88.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
-   9.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
-   0.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 776 
+  88.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
+   9.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
+   0.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 776 
    0.05%               kernel  [unknown] 
-   0.03%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
-   0.03%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
+   0.03%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
+   0.03%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
    0.03%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
-   0.01%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
+   0.01%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
    0.01%               kernel  [unknown] 
    0.01%               kernel  [unknown] 
    0.01%            libjvm.so  CompilerOracle::has_option_value<bool> 
@@ -2111,10 +2111,10 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
-   0.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 776 
+  98.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_5, version 2, compile id 743 
+   0.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_avgt_jmhStub, version 6, compile id 776 
    0.48%               kernel  [unknown] 
-   0.08%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
+   0.08%          c1, level 3  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_5_jmhTest::is_duplicated_5_AverageTime, version 2, compile id 780 
    0.04%                       <unknown> 
    0.01%         libc-2.31.so  __strncat_ssse3 
    0.01%            libjvm.so  ElfSymbolTable::lookup 
@@ -2162,7 +2162,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 6 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
 # Parameters: (typePollution = false)
 
 # Run progress: 83.33% complete, ETA 00:03:44
@@ -2182,12 +2182,12 @@ Iteration   5: 7.024 ±(99.9%) 0.108 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
   7.063 ±(99.9%) 0.155 ns/op [Average]
   (min, avg, max) = (7.022, 7.063, 7.115), stdev = 0.040
   CI (99.9%): [6.909, 7.218] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:·asm":
 PrintAssembly processed: 206832 total address lines.
 Perf output processed (skipped 58.784 seconds):
  Column 1: cycles (298182 events)
@@ -2196,54 +2196,54 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 773 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 773 
 
               0x00007fb17f0003f5:   mov    0x18(%rsp),%rsi
               0x00007fb17f0003fa:   nopw   0x0(%rax,%rax,1)
               0x00007fb17f000400:   cmpb   $0x0,0x94(%rsi)
               0x00007fb17f000407:   jne    0x00007fb17f00048e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
               0x00007fb17f00040d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007fb17f000416:   jmp    0x00007fb17f00042f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@13 (line 186)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@13 (line 186)
           │   0x00007fb17f00041b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
    5.41%  │↗  0x00007fb17f000420:   mov    0x348(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
           ││  0x00007fb17f000427:   test   %eax,(%r11)                  ;   {poll}
    0.04%  ││  0x00007fb17f00042a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@13 (line 186)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@13 (line 186)
           ↘│  0x00007fb17f00042f:   mov    0x8(%rsp),%r10
    5.43%   │  0x00007fb17f000434:   mov    %r10,%rsi
            │  0x00007fb17f000437:   call   0x00007fb1774ffa80           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual is_duplicated_6 {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@17 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@17 (line 186)
            │                                                            ;   {optimized virtual_call}
   10.04%   │  0x00007fb17f00043c:   nop                                 ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@20 (line 186)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@20 (line 186)
    0.00%   │  0x00007fb17f00043d:   mov    0x20(%rsp),%r10
    4.94%   │  0x00007fb17f000442:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@26 (line 187)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@26 (line 187)
    5.49%   │  0x00007fb17f000445:   mov    0x18(%rsp),%rsi
    0.00%   │  0x00007fb17f00044a:   cmpb   $0x0,0x94(%rsi)
   18.48%   ╰  0x00007fb17f000451:   je     0x00007fb17f000420           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@33 (line 188)
               0x00007fb17f000453:   mov    %r10,0x20(%rsp)
               0x00007fb17f000458:   call   0x00007fb195b576f0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fb17f00045d:   nop
               0x00007fb17f00045e:   mov    0x10(%rsp),%rdx
               0x00007fb17f000463:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@40 (line 189)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@40 (line 189)
               0x00007fb17f000467:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@46 (line 190)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub@46 (line 190)
               0x00007fb17f00046f:   vcvtsi2sdq 0x20(%rsp),%xmm0,%xmm0   ;*l2d {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   49.83%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 736 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 736 
 
              #           [sp+0x20]  (sp of caller)
              0x00007fb17effc280:   mov    0x8(%rsi),%r10d
@@ -2259,42 +2259,42 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    6.29%     0x00007fb17effc2a7:   sub    $0x18,%rsp
    0.04%     0x00007fb17effc2ab:   mov    %rbp,0x10(%rsp)
    2.49%     0x00007fb17effc2b0:   mov    0x10(%rsi),%eax              ;*getfield msg {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@1 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@1 (line 130)
    2.07%     0x00007fb17effc2b3:   nopw   0x0(%rax,%rax,1)
    0.89%     0x00007fb17effc2bc:   data16 data16 xchg %ax,%ax          ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@0 (line 130)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@0 (line 130)
    0.05%     0x00007fb17effc2c0:   cmpl   $0xc269e0,0x8(,%rax,8)       ; implicit exception: dispatches to 0x00007fb17effc306
-                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
+                                                                       ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$DuplicatedContext&apos;)}
   26.72%  ╭  0x00007fb17effc2cb:   jne    0x00007fb17effc2e9           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
    5.44%  │  0x00007fb17effc2d1:   mov    $0x1,%eax
           │  0x00007fb17effc2d6:   mov    0x10(%rsp),%rbp
           │  0x00007fb17effc2db:   add    $0x18,%rsp
           │  0x00007fb17effc2df:   mov    0x348(%r15),%rcx
    5.43%  │  0x00007fb17effc2e6:   test   %eax,(%rcx)                  ;   {poll_return}
    0.00%  │  0x00007fb17effc2e8:   ret                                 ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@7 (line 130)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@7 (line 130)
           ↘  0x00007fb17effc2e9:   movl   $0xffffffdd,0x370(%r15)
              0x00007fb17effc2f4:   movq   $0x0,0x378(%r15)             ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
                                                                        ; - java.util.Objects::requireNonNull@1 (line 207)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@1 (line 136)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
              0x00007fb17effc2ff:   nop
              0x00007fb17effc300:   call   0x00007fb17750527a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@0 (line 130)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@0 (line 130)
 ....................................................................................................
   49.47%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  49.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 773 
-  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 736 
+  49.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 773 
+  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 736 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_AverageTime, version 5, compile id 803 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_AverageTime, version 5, compile id 803 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
    0.02%               kernel  [unknown] 
@@ -2314,11 +2314,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  49.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 773 
-  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 736 
+  49.83%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 773 
+  49.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 736 
    0.51%               kernel  [unknown] 
    0.02%                       <unknown> 
-   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_AverageTime, version 5, compile id 803 
+   0.02%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_AverageTime, version 5, compile id 803 
    0.01%         libc-2.31.so  __strncat_ssse3 
    0.01%            libjvm.so  xmlStream::write_text 
    0.01%         libc-2.31.so  __strxfrm_l 
@@ -2364,7 +2364,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
 # Timeout: 10 min per iteration
 # Threads: 6 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6
 # Parameters: (typePollution = true)
 
 # Run progress: 91.67% complete, ETA 00:01:52
@@ -2384,12 +2384,12 @@ Iteration   5: 249.393 ±(99.9%) 328.387 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6":
   242.442 ±(99.9%) 20.787 ns/op [Average]
   (min, avg, max) = (235.514, 242.442, 249.393), stdev = 5.398
   CI (99.9%): [221.655, 263.229] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark.is_duplicated_6:·asm":
 PrintAssembly processed: 202617 total address lines.
 Perf output processed (skipped 58.768 seconds):
  Column 1: cycles (298072 events)
@@ -2398,7 +2398,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 740 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 740 
 
                             #           [sp+0x20]  (sp of caller)
                             0x00007f5ceaffea40:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
@@ -2415,26 +2415,26 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
    0.00%                    0x00007f5ceaffea6b:   mov    %rbp,0x10(%rsp)
    0.18%                    0x00007f5ceaffea70:   mov    0x10(%rsi),%eax              ; ImmutableOopMap {rax=NarrowOop rsi=Oop }
                                                                                       ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@0 (line 130)
+                                                                                      ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@0 (line 130)
    0.00%                    0x00007f5ceaffea73:   mov    0x8(,%rax,8),%r10d           ; implicit exception: dispatches to 0x00007f5ceaffec23
    0.01%                    0x00007f5ceaffea7b:   movabs $0x800000000,%r11
                             0x00007f5ceaffea85:   lea    (%r11,%r10,1),%r8
-   0.20%                    0x00007f5ceaffea89:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.20%                    0x00007f5ceaffea89:   movabs $0x800c265e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
    0.00%                    0x00007f5ceaffea93:   cmp    0x20(%r8),%r11
           ╭                 0x00007f5ceaffea97:   je     0x00007f5ceaffeaad
    8.21%  │                 0x00007f5ceaffea9d:   data16 xchg %ax,%ax
-   0.00%  │                 0x00007f5ceaffeaa0:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
+   0.00%  │                 0x00007f5ceaffeaa0:   cmp    $0xc265e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$Context&apos;)}
           │╭                0x00007f5ceaffeaa7:   jne    0x00007f5ceaffeb85           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
    1.14%  ↘│             ↗  0x00007f5ceaffeaad:   mov    0x8(,%rax,8),%r10d
    0.02%   │             │  0x00007f5ceaffeab5:   movabs $0x800000000,%r11
            │             │  0x00007f5ceaffeabf:   lea    (%r11,%r10,1),%r8
-   0.00%   │             │  0x00007f5ceaffeac3:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+   0.00%   │             │  0x00007f5ceaffeac3:   movabs $0x800c267e0,%r11            ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
    0.19%   │             │  0x00007f5ceaffeacd:   cmp    0x20(%r8),%r11
            │╭            │  0x00007f5ceaffead1:   je     0x00007f5ceaffeaed
    3.97%   ││            │  0x00007f5ceaffead7:   nopw   0x0(%rax,%rax,1)
-   0.00%   ││            │  0x00007f5ceaffeae0:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
+   0.00%   ││            │  0x00007f5ceaffeae0:   cmp    $0xc267e0,%r10d              ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark$InternalContext&apos;)}
            ││╭           │  0x00007f5ceaffeae7:   jne    0x00007f5ceaffeb44
    2.11%   │↘│          ↗│  0x00007f5ceaffeaed:   mov    0x8(,%rax,8),%eax
    0.03%   │ │          ││  0x00007f5ceaffeaf4:   movabs $0x800000000,%r10
@@ -2472,8 +2472,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
            │      │╰    ││  0x00007f5ceaffeb7d:   jg     0x00007f5ceaffeb60
            │      │     ││  0x00007f5ceaffeb7f:   nop
            │      │ ╭   ││  0x00007f5ceaffeb80:   jmp    0x00007f5ceaffebd7           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+           │      │ │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
    0.08%   ↘      │ │   ││  0x00007f5ceaffeb85:   mov    0x28(%r8),%r10
   49.35%          │ │   ││  0x00007f5ceaffeb89:   mov    (%r10),%r9d
    0.69%          │ │   ││  0x00007f5ceaffeb8c:   mov    $0x0,%ecx
@@ -2491,27 +2491,27 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
                   │ │ │╰││  0x00007f5ceaffebbd:   jg     0x00007f5ceaffeba0
                   │ │ │ ││  0x00007f5ceaffebbf:   nop
                   │ │ │ ││  0x00007f5ceaffebc0:   jmp    0x00007f5ceaffebf8           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                  │ │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
    0.03%          ↘ │ │ ││  0x00007f5ceaffebc5:   mov    %r11,0x20(%r8)
    0.00%            │ │ ╰│  0x00007f5ceaffebc9:   jmp    0x00007f5ceaffeaed           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                    │ │  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
    0.00%            │ ↘  │  0x00007f5ceaffebce:   mov    %r11,0x20(%r8)
                     │    ╰  0x00007f5ceaffebd2:   jmp    0x00007f5ceaffeaad           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
-                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@4 (line 136)
+                    │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
                     ↘       0x00007f5ceaffebd7:   mov    $0x0,%r11
                             0x00007f5ceaffebde:   mov    $0xffffffdd,%r10d
                             0x00007f5ceaffebe4:   mov    %r10d,0x370(%r15)            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::isDuplicated@9 (line 137)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6@4 (line 130)
 ....................................................................................................
   98.53%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  98.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 740 
-   0.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 770 
+  98.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 740 
+   0.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 770 
    0.04%               kernel  [unknown] 
    0.04%               kernel  [unknown] 
    0.03%               kernel  [unknown] 
@@ -2535,8 +2535,8 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeC
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  98.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 740 
-   0.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 770 
+  98.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckScalabilityBenchmark::is_duplicated_6, version 2, compile id 740 
+   0.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.TypeCheckScalabilityBenchmark_is_duplicated_6_jmhTest::is_duplicated_6_avgt_jmhStub, version 6, compile id 770 
    0.53%               kernel  [unknown] 
    0.04%                       <unknown> 
    0.01%         libc-2.31.so  __strxfrm_l 

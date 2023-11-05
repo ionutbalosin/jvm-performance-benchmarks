@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.initial_loop
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop
 # Parameters: (iterations = 16384)
 
 # Run progress: 0.00% complete, ETA 00:03:20
@@ -28,12 +28,12 @@ Iteration   5: 4460.940 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.initial_loop":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop":
   4460.948 ±(99.9%) 0.177 us/op [Average]
   (min, avg, max) = (4460.893, 4460.948, 4461.005), stdev = 0.046
   CI (99.9%): [4460.771, 4461.125] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.initial_loop:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop:·asm":
 PrintAssembly processed: 118295 total address lines.
 Perf output processed (skipped 55.709 seconds):
  Column 1: cycles (50685 events)
@@ -485,7 +485,7 @@ libjava.so, jatan
   40.65%        runtime stub  StubRoutines::libmTan 
   27.99%        runtime stub  StubRoutines::libmTan 
   10.29%          libjava.so  jatan 
-   6.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 479 
+   6.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 479 
    3.44%    Unknown, level 0  java.lang.StrictMath::atan, version 1, compile id 474 
    2.61%          libjava.so  jfabs 
    1.96%          libjava.so  jatan 
@@ -509,7 +509,7 @@ libjava.so, jatan
 ....[Hottest Methods (after inlining)]..............................................................
   71.71%        runtime stub  StubRoutines::libmTan 
   12.97%          libjava.so  jatan 
-   6.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 479 
+   6.09%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::initial_loop, version 4, compile id 479 
    4.79%    Unknown, level 0  java.lang.StrictMath::atan, version 1, compile id 474 
    2.61%          libjava.so  jfabs 
    1.43%              kernel  [unknown] 
@@ -561,7 +561,7 @@ libjava.so, jatan
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking
 # Parameters: (iterations = 16384)
 
 # Run progress: 50.00% complete, ETA 00:01:49
@@ -581,12 +581,12 @@ Iteration   5: 1210.578 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking":
   1210.907 ±(99.9%) 1.953 us/op [Average]
   (min, avg, max) = (1210.578, 1210.907, 1211.789), stdev = 0.507
   CI (99.9%): [1208.954, 1212.860] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking:·asm":
 PrintAssembly processed: 115466 total address lines.
 Perf output processed (skipped 55.600 seconds):
  Column 1: cycles (50609 events)
@@ -889,7 +889,7 @@ runtime stub, StubRoutines::libmTan
   75.98%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking, version 3, compile id 467 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking, version 3, compile id 467 
 
              0x00007f7a3cf64520:   cmovl  %r11d,%r14d
              0x00007f7a3cf64524:   cmp    $0x1f40,%r14d
@@ -898,7 +898,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
              0x00007f7a3cf64535:   add    %r13d,%r14d
              0x00007f7a3cf64538:   mov    %ebx,0x38(%rsp)
              0x00007f7a3cf6453c:   nopl   0x0(%rax)                    ;*iload {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@32 (line 100)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@32 (line 100)
           ↗  0x00007f7a3cf64540:   mov    %r13d,%r10d
           │  0x00007f7a3cf64543:   add    $0x6,%r10d
    0.08%  │  0x00007f7a3cf64547:   mov    %r13d,%r11d
@@ -916,14 +916,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
    0.26%  │  0x00007f7a3cf6457e:   vmovq  %xmm0,%rbx
    0.11%  │  0x00007f7a3cf64583:   vcvtsi2sd %r10d,%xmm0,%xmm0
    0.12%  │  0x00007f7a3cf64588:   vmulsd (%rsp),%xmm0,%xmm0           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
    0.25%  │  0x00007f7a3cf6458d:   movabs $0x7f7a3c9aec72,%r10
           │  0x00007f7a3cf64597:   call   *%r10
           │  0x00007f7a3cf6459a:   vmovsd %xmm0,0x30(%rsp)
    0.07%  │  0x00007f7a3cf645a0:   vmovq  %rbx,%xmm0
           │  0x00007f7a3cf645a5:   movabs $0x7f7a3c9aec72,%r10
           │  0x00007f7a3cf645af:   call   *%r10                        ;*invokestatic tan {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
           │  0x00007f7a3cf645b2:   vmovsd 0x30(%rsp),%xmm1
    0.07%  │  0x00007f7a3cf645b8:   vmulsd 0x8(%rsp),%xmm1,%xmm1
           │  0x00007f7a3cf645be:   vmulsd 0x8(%rsp),%xmm0,%xmm2
@@ -944,10 +944,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
           │  0x00007f7a3cf64605:   add    $0x2,%ebx
    0.07%  │  0x00007f7a3cf64608:   vcvtsi2sd %r10d,%xmm0,%xmm0
    0.10%  │  0x00007f7a3cf6460d:   vmulsd (%rsp),%xmm0,%xmm0           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
    0.19%  │  0x00007f7a3cf64612:   movabs $0x7f7a3c9aec72,%r10
           │  0x00007f7a3cf6461c:   call   *%r10                        ;*invokestatic tan {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
           │  0x00007f7a3cf6461f:   vaddsd 0x8(%rsp),%xmm0,%xmm1
    0.18%  │  0x00007f7a3cf64625:   vmulsd 0x8(%rsp),%xmm0,%xmm0
    0.02%  │  0x00007f7a3cf6462b:   vmovsd 0x10(%rsp),%xmm2
@@ -957,10 +957,10 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
    0.24%  │  0x00007f7a3cf6463f:   vmovsd %xmm0,0x18(%rsp)
    0.07%  │  0x00007f7a3cf64645:   vcvtsi2sd %ebx,%xmm0,%xmm0
    0.23%  │  0x00007f7a3cf64649:   vmulsd (%rsp),%xmm0,%xmm0           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
    0.28%  │  0x00007f7a3cf6464e:   movabs $0x7f7a3c9aec72,%r10
           │  0x00007f7a3cf64658:   call   *%r10                        ;*invokestatic tan {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
           │  0x00007f7a3cf6465b:   vaddsd 0x8(%rsp),%xmm0,%xmm1
    0.21%  │  0x00007f7a3cf64661:   vmulsd 0x8(%rsp),%xmm0,%xmm0
    0.02%  │  0x00007f7a3cf64667:   vmovsd 0x10(%rsp),%xmm2
@@ -974,11 +974,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
           │  0x00007f7a3cf6468b:   add    $0x4,%ebx
    0.05%  │  0x00007f7a3cf6468e:   vcvtsi2sd %r11d,%xmm0,%xmm0
    0.12%  │  0x00007f7a3cf64693:   vmulsd (%rsp),%xmm0,%xmm0           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
    0.25%  │  0x00007f7a3cf64698:   nopl   0x0(%rax,%rax,1)
           │  0x00007f7a3cf646a0:   movabs $0x7f7a3c9aec72,%r10
           │  0x00007f7a3cf646aa:   call   *%r10                        ;*invokestatic tan {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
           │  0x00007f7a3cf646ad:   vaddsd 0x8(%rsp),%xmm0,%xmm1
    0.20%  │  0x00007f7a3cf646b3:   vmulsd 0x8(%rsp),%xmm0,%xmm0
    0.01%  │  0x00007f7a3cf646b9:   vmovsd 0x10(%rsp),%xmm2
@@ -988,7 +988,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
    0.26%  │  0x00007f7a3cf646cd:   vmovsd %xmm0,0x18(%rsp)
    0.08%  │  0x00007f7a3cf646d3:   vcvtsi2sd %ebx,%xmm0,%xmm0
    0.19%  │  0x00007f7a3cf646d7:   vmulsd (%rsp),%xmm0,%xmm0           ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@39 (line 100)
    0.27%  │  0x00007f7a3cf646dc:   nopl   0x0(%rax)
           │  0x00007f7a3cf646e0:   movabs $0x7f7a3c9aec72,%r10
           │  0x00007f7a3cf646ea:   call   *%r10
@@ -1002,7 +1002,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
           │  0x00007f7a3cf64719:   nopl   0x0(%rax)
           │  0x00007f7a3cf64720:   movabs $0x7f7a3c9aec72,%r10
    0.06%  │  0x00007f7a3cf6472a:   call   *%r10                        ;*invokestatic tan {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@40 (line 100)
           │  0x00007f7a3cf6472d:   vmovq  %rbx,%xmm1
    0.08%  │  0x00007f7a3cf64732:   vmulsd 0x8(%rsp),%xmm1,%xmm1
           │  0x00007f7a3cf64738:   vmulsd 0x8(%rsp),%xmm0,%xmm2
@@ -1025,25 +1025,25 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
    0.08%  │  0x00007f7a3cf64791:   vaddsd 0x18(%rsp),%xmm1,%xmm1
           │  0x00007f7a3cf64797:   vaddsd %xmm1,%xmm0,%xmm0
           │  0x00007f7a3cf6479b:   vaddsd %xmm0,%xmm2,%xmm0            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@64 (line 103)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@64 (line 103)
    0.11%  │  0x00007f7a3cf6479f:   vmovsd %xmm0,0x18(%rsp)
    0.06%  │  0x00007f7a3cf647a5:   add    $0x8,%r13d                   ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@67 (line 98)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@67 (line 98)
           │  0x00007f7a3cf647a9:   cmp    %r14d,%r13d
           ╰  0x00007f7a3cf647ac:   jl     0x00007f7a3cf64540           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@29 (line 98)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@29 (line 98)
              0x00007f7a3cf647b2:   mov    0x348(%r15),%r10             ; ImmutableOopMap {}
                                                                        ;*goto {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@70 (line 98)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@70 (line 98)
              0x00007f7a3cf647b9:   test   %eax,(%r10)                  ;*goto {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@70 (line 98)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking@70 (line 98)
                                                                        ;   {poll}
 ....................................................................................................
   12.58%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
   75.98%        runtime stub  StubRoutines::libmTan 
-  12.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking, version 3, compile id 467 
+  12.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking, version 3, compile id 467 
    4.35%        runtime stub  StubRoutines::libmTan 
    3.37%        runtime stub  StubRoutines::libmTan 
    1.30%        runtime stub  StubRoutines::libmTan 
@@ -1068,7 +1068,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInva
 
 ....[Hottest Methods (after inlining)]..............................................................
   85.49%        runtime stub  StubRoutines::libmTan 
-  12.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking, version 3, compile id 467 
+  12.58%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark::manual_loop_hoisting_and_sinking, version 3, compile id 467 
    1.55%              kernel  [unknown] 
    0.04%                      <unknown> 
    0.03%           libjvm.so  ElfSymbolTable::lookup 

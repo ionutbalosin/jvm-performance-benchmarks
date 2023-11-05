@@ -1,7 +1,7 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: backoffType","Param: cpuLoadFactor","Param: cpuTokens","Param: threadType"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.496196,0.005531,"s/op",NONE,16,_1_M,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.501762,0.010701,"s/op",NONE,16,_1_M,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.506896,0.012027,"s/op",YIELD,16,_1_M,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.554750,0.012554,"s/op",YIELD,16,_1_M,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.669163,0.028790,"s/op",PARK,16,_1_M,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.685817,0.030151,"s/op",PARK,16,_1_M,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.496196,0.005531,"s/op",NONE,16,_1_M,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.501762,0.010701,"s/op",NONE,16,_1_M,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.506896,0.012027,"s/op",YIELD,16,_1_M,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.554750,0.012554,"s/op",YIELD,16,_1_M,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.669163,0.028790,"s/op",PARK,16,_1_M,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,4.685817,0.030151,"s/op",PARK,16,_1_M,PLATFORM

@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split
 # Parameters: (regexp = _)
 
 # Run progress: 0.00% complete, ETA 00:06:40
@@ -28,12 +28,12 @@ Iteration   5: 77.858 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split":
   77.774 ±(99.9%) 0.395 us/op [Average]
   (min, avg, max) = (77.653, 77.774, 77.900), stdev = 0.102
   CI (99.9%): [77.379, 78.168] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split:·asm":
 PrintAssembly processed: 231305 total address lines.
 Perf output processed (skipped 59.084 seconds):
  Column 1: cycles (51138 events)
@@ -42,7 +42,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
 
             0x00007efe82b4388f:   lea    0x2(%rcx),%rcx
             0x00007efe82b43893:   cmp    %rsi,%rcx
@@ -52,7 +52,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
             0x00007efe82b438a4:   jmp    0x00007efe82b437b5
    3.79%    0x00007efe82b438a9:   movabs $0x800269f50,%r8             ;   {metadata(&apos;java/util/regex/Pattern$LastNode&apos;)}
    4.30%    0x00007efe82b438b3:   nopw   0x0(%rax,%rax,1)
@@ -65,7 +65,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    4.37%    0x00007efe82b438ce:   cmp    $0x2,%r14d
             0x00007efe82b438d2:   jb     0x00007efe82b477dc
    0.14%    0x00007efe82b438d8:   mov    %r10d,0x10(%rdx)             ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -76,7 +76,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    1.38%    0x00007efe82b438dc:   mov    %r13d,0x14(%rdx)             ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - java.util.regex.Pattern$LastNode::match@42 (line 3582)
                                                                       ; - java.util.regex.Pattern$BmpCharProperty::match@36 (line 3955)
@@ -85,28 +85,28 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    2.92%    0x00007efe82b438e0:   mov    %r11d,0x10(%rdx)             ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - java.util.regex.Pattern$Start::match@64 (line 3610)
                                                                       ; - java.util.regex.Matcher::search@121 (line 1728)
                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.01%    0x00007efe82b438e4:   mov    %r13d,0x14(%rdx)             ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - java.util.regex.Pattern$Start::match@74 (line 3611)
                                                                       ; - java.util.regex.Matcher::search@121 (line 1728)
                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.48%    0x00007efe82b438e8:   mov    %r13d,%r11d
    0.04%    0x00007efe82b438eb:   dec    %r11d
    0.47%    0x00007efe82b438ee:   test   %r10d,%r10d
             0x00007efe82b438f1:   je     0x00007efe82b44555           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - java.util.regex.Pattern::split@54 (line 1267)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.02%    0x00007efe82b438f7:   mov    %r8,0x88(%rsp)
    0.50%    0x00007efe82b438ff:   mov    %r11d,%r8d
    0.02%    0x00007efe82b43902:   mov    0x88(%rsp),%r11
@@ -117,7 +117,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.02%    0x00007efe82b43913:   cmp    %ebp,%r8d
             0x00007efe82b43916:   ja     0x00007efe82b4702b           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - java.lang.String::checkBoundsBeginEnd@11 (line 4603)
@@ -125,7 +125,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.42%    0x00007efe82b4391c:   nopl   0x0(%rax)
    0.03%    0x00007efe82b43920:   cmp    %r10d,%r8d
             0x00007efe82b43923:   je     0x00007efe82b4499d           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
@@ -134,14 +134,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.55%    0x00007efe82b43929:   mov    %r8d,%r14d
    0.01%    0x00007efe82b4392c:   sub    %r10d,%r14d                  ;*isub {reexecute=0 rethrow=0 return_oop=0}
                                                                       ; - java.lang.String::substring@24 (line 2711)
                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.42%    0x00007efe82b4392f:   test   %r14d,%r14d
             0x00007efe82b43932:   jl     0x00007efe82b46d2b
    0.02%    0x00007efe82b43938:   nopl   0x0(%rax,%rax,1)
@@ -193,7 +193,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   31.22%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
 
                     0x00007efe82b43713:   mov    0xdc(%rsp),%r9d
                     0x00007efe82b4371b:   mov    0x4c(%rsp),%eax
@@ -204,25 +204,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                     0x00007efe82b4373c:   data16 data16 xchg %ax,%ax          ;*aload {reexecute=0 rethrow=0 return_oop=0}
                                                                               ; - java.util.regex.Pattern::split@29 (line 1265)
                                                                               ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.14%            0x00007efe82b43740:   cmp    %r10d,%r11d
                     0x00007efe82b43743:   je     0x00007efe82b47360           ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
                                                                               ; - java.util.regex.Matcher::find@10 (line 732)
                                                                               ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                               ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.71%            0x00007efe82b43749:   test   %r10d,%r10d
                     0x00007efe82b4374c:   jl     0x00007efe82b47b57           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                               ; - java.util.regex.Matcher::find@21 (line 736)
                                                                               ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                               ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.09%            0x00007efe82b43752:   cmp    %ebp,%r10d
                     0x00007efe82b43755:   jg     0x00007efe82b47630           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
                                                                               ; - java.util.regex.Matcher::find@34 (line 740)
                                                                               ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                               ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.08%            0x00007efe82b4375b:   nopl   0x0(%rax,%rax,1)
    0.12%            0x00007efe82b43760:   test   %ecx,%ecx
                     0x00007efe82b43762:   jl     0x00007efe82b44365           ;*ifge {reexecute=0 rethrow=0 return_oop=0}
@@ -230,7 +230,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                               ; - java.util.regex.Matcher::find@65 (line 745)
                                                                               ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                               ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.61%            0x00007efe82b43768:   mov    %ecx,0x98(%rsp)
    0.13%            0x00007efe82b4376f:   test   $0x7fffffff,%r13d
           ╭         0x00007efe82b43776:   je     0x00007efe82b437b5
@@ -249,7 +249,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           ││                                                                  ; - java.util.regex.Matcher::find@65 (line 745)
           ││                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           ││                                                                  ; - java.util.regex.Pattern::split@3 (line 1335)
-          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    1.04%  ↘│     ↗  0x00007efe82b437b5:   cmp    %r9d,%r10d
            │     │  0x00007efe82b437b8:   jg     0x00007efe82b47bef           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.util.regex.Pattern$Start::match@10 (line 3602)
@@ -257,7 +257,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │     │  0x00007efe82b437be:   xchg   %ax,%ax
            │     │  0x00007efe82b437c0:   cmp    %r10d,%ebp
            │     │  0x00007efe82b437c3:   jle    0x00007efe82b47c7c           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -267,7 +267,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%   │     │  0x00007efe82b437c9:   cmp    %r10d,%ebp
            │     │  0x00007efe82b437cc:   jle    0x00007efe82b4727e           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.lang.StringLatin1::charAt@7 (line 47)
@@ -278,7 +278,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.96%   │     │  0x00007efe82b437d2:   cmp    %r10d,%ebp
            │     │  0x00007efe82b437d5:   jbe    0x00007efe82b4785e           ;*baload {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.lang.StringLatin1::charAt@21 (line 50)
@@ -289,7 +289,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%   │     │  0x00007efe82b437db:   mov    0xa4(%rsp),%ecx
    0.01%   │     │  0x00007efe82b437e2:   movzbl 0x10(%r10,%rax,8),%r11d      ;*iand {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.lang.StringLatin1::charAt@25 (line 50)
@@ -300,14 +300,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.04%   │     │  0x00007efe82b437e8:   mov    0x9c(%rsp),%ebx
    1.03%   │     │  0x00007efe82b437ef:   inc    %ebx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.util.regex.Matcher::search@148 (line 1732)
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%   │     │  0x00007efe82b437f1:   mov    %r10d,%r8d
            │     │  0x00007efe82b437f4:   inc    %r8d                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.util.regex.Pattern$BmpCharProperty::match@34 (line 3954)
@@ -316,7 +316,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.01%   │     │  0x00007efe82b437f7:   cmp    %r11d,%ecx
            │     │  0x00007efe82b437fa:   je     0x00007efe82b43d56           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
            │     │                                                            ; - java.util.regex.Pattern$BmpCharProperty::match@24 (line 3954)
@@ -325,7 +325,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    1.00%   │     │  0x00007efe82b43800:   mov    %r8d,%r11d
    0.01%   │ ╭   │  0x00007efe82b43803:   jmp    0x00007efe82b4385d           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
            │ │   │                                                            ; - java.util.regex.Pattern$Start::match@31 (line 3607)
@@ -333,7 +333,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │   │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │   │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │   │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │ │   │  0x00007efe82b43808:   data16 data16 nopw 0x0(%rax,%rax,1)
            │ │   │  0x00007efe82b43813:   data16 data16 xchg %ax,%ax
            │ │   │  0x00007efe82b43817:   nopw   0x0(%rax,%rax,1)             ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
@@ -342,7 +342,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │   │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │   │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │   │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    4.48%   │ │↗  │  0x00007efe82b43820:   cmp    %r11d,%ebp
            │ ││  │  0x00007efe82b43823:   jle    0x00007efe82b47885           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.util.regex.Pattern$BmpCharProperty::match@5 (line 3953)
@@ -351,7 +351,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    1.09%   │ ││  │  0x00007efe82b43829:   cmp    %r11d,%ebp
            │ ││  │  0x00007efe82b4382c:   jbe    0x00007efe82b47807           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.lang.StringLatin1::charAt@7 (line 47)
@@ -362,7 +362,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%   │ ││  │  0x00007efe82b43832:   cmp    %r11d,%ebp
            │ ││  │  0x00007efe82b43835:   jbe    0x00007efe82b47113           ;*baload {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.lang.StringLatin1::charAt@21 (line 50)
@@ -373,7 +373,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.12%   │ ││  │  0x00007efe82b4383b:   movzbl 0x10(%r11,%rax,8),%r8d       ;*iand {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.lang.StringLatin1::charAt@25 (line 50)
            │ ││  │                                                            ; - java.lang.String::charAt@12 (line 1515)
@@ -383,7 +383,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    4.76%   │ ││  │  0x00007efe82b43841:   mov    %r11d,%r13d
    1.02%   │ ││  │  0x00007efe82b43844:   inc    %r13d                        ;*iadd {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.util.regex.Pattern$BmpCharProperty::match@34 (line 3954)
@@ -392,7 +392,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%   │ ││  │  0x00007efe82b43847:   cmp    %r8d,%ecx
            │ ││  │  0x00007efe82b4384a:   je     0x00007efe82b438a9           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.util.regex.Pattern$BmpCharProperty::match@24 (line 3954)
@@ -401,7 +401,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.67%   │ ││  │  0x00007efe82b43850:   mov    0x348(%r15),%r8              ; ImmutableOopMap {rax=NarrowOop rdx=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop [76]=NarrowOop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop }
            │ ││  │                                                            ;*iload_2 {reexecute=1 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - (reexecute) java.util.regex.Pattern$Start::match@31 (line 3607)
@@ -409,7 +409,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    4.66%   │ ││  │  0x00007efe82b43857:   test   %eax,(%r8)                   ;   {poll}
    1.98%   │ ││  │  0x00007efe82b4385a:   mov    %r13d,%r11d                  ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
            │ ││  │                                                            ; - java.util.regex.Pattern$Start::match@31 (line 3607)
@@ -417,7 +417,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ ││  │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ ││  │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ ││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.02%   │ ↘│  │  0x00007efe82b4385d:   data16 xchg %ax,%ax
    0.11%   │  │  │  0x00007efe82b43860:   cmp    %r9d,%r11d
            │  ╰  │  0x00007efe82b43863:   jle    0x00007efe82b43820
@@ -427,7 +427,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │     │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │     │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │     │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │     │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.12%   ↘     │  0x00007efe82b4386a:   cmp    %r8,%rcx
                ╭ │  0x00007efe82b4386d:   jg     0x00007efe82b4387d
                │ │  0x00007efe82b43873:   vmovdqu %xmm1,(%r11,%rcx,4)
@@ -448,7 +448,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   30.14%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
 
                0x00007efe82b43b1d:   jle    0x00007efe82b43b10
                0x00007efe82b43b1f:   nop
@@ -459,7 +459,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                              ; - java.lang.String::subSequence@3 (line 2745)
           │                                                              ; - java.util.regex.Pattern::split@89 (line 1272)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.19%  │    0x00007efe82b43b25:   mov    0x108(%r15),%rdx
    0.25%  │    0x00007efe82b43b2c:   lea    0x18(%rdx),%rcx
    0.33%  │    0x00007efe82b43b30:   cmp    0x118(%r15),%rcx
@@ -478,7 +478,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                              ; - java.lang.String::subSequence@3 (line 2745)
           │                                                              ; - java.util.regex.Pattern::split@89 (line 1272)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.42%  │    0x00007efe82b43b6d:   mov    %r8d,%r9d
    0.23%  │    0x00007efe82b43b70:   mov    %rdx,%r8
    0.26%  │    0x00007efe82b43b73:   mov    0x20(%rsp),%r11
@@ -492,26 +492,26 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.34%  │    0x00007efe82b43b81:   mov    0xc(%r11),%r10d              ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.ArrayList::add@2 (line 453)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.30%  │    0x00007efe82b43b85:   mov    %r8,%rdi
    0.24%  │    0x00007efe82b43b88:   shr    $0x3,%rdi                    ;*aastore {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.ArrayList::add@14 (line 455)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.24%  │    0x00007efe82b43b8c:   mov    0xa0(%rsp),%ecx
    0.27%  │    0x00007efe82b43b93:   inc    %ecx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.ArrayList::add@6 (line 466)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.25%  │    0x00007efe82b43b95:   data16 data16 nopw 0x0(%rax,%rax,1)
    0.20%  │    0x00007efe82b43ba0:   cmp    0xa0(%rsp),%r10d
           │    0x00007efe82b43ba8:   je     0x00007efe82b43f3e
@@ -541,14 +541,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │││                                                            ; - java.util.ArrayList::add@20 (line 467)
           │││                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.13%  │↘↘  0x00007efe82b43c2a:   mov    0x348(%r15),%rsi             ; ImmutableOopMap {r11=Oop [24]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop [76]=NarrowOop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop }
           │                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
           │                                                              ; - (reexecute) java.util.ArrayList::add@15 (line 456)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.74%  │    0x00007efe82b43c31:   test   %eax,(%rsi)                  ;   {poll}
    0.19%  │    0x00007efe82b43c33:   mov    %r11,0x20(%rsp)
    0.07%  │    0x00007efe82b43c38:   mov    %ecx,0xa0(%rsp)
@@ -574,7 +574,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
    0.08%  │    0x00007efe82b43cb6:   jmp    0x00007efe82b43740           ;*aload {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.regex.Pattern::split@29 (line 1265)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
           ↘    0x00007efe82b43cbb:   lea    -0x10(%rcx),%rdi
                0x00007efe82b43cbf:   nop
                0x00007efe82b43cc0:   cmp    %rdi,%r10
@@ -586,32 +586,32 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   17.64%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  31.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
-  30.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
-  17.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
-   8.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+  31.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+  30.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+  17.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   8.58%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
    4.97%         runtime stub  StubRoutines::checkcast_arraycopy 
-   1.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   1.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
    1.10%               kernel  [unknown] 
-   0.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
-   0.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
-   0.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
-   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   0.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   0.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   0.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
    0.10%               kernel  [unknown] 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
    0.08%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
    0.06%            libjvm.so  G1BarrierSet::invalidate 
    0.05%               kernel  [unknown] 
-   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
    0.04%            libjvm.so  HeapRegionClaimer::claim_region 
    1.99%  <...other 458 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  91.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
+  91.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 2, compile id 808 
    4.98%         runtime stub  StubRoutines::checkcast_arraycopy 
    2.15%               kernel  [unknown] 
    0.09%                       <unknown> 
@@ -665,7 +665,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split
 # Parameters: (regexp = __)
 
 # Run progress: 25.00% complete, ETA 00:05:39
@@ -685,12 +685,12 @@ Iteration   5: 93.067 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split":
   92.785 ±(99.9%) 0.709 us/op [Average]
   (min, avg, max) = (92.566, 92.785, 93.067), stdev = 0.184
   CI (99.9%): [92.075, 93.494] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.pattern_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split:·asm":
 PrintAssembly processed: 247813 total address lines.
 Perf output processed (skipped 58.984 seconds):
  Column 1: cycles (50820 events)
@@ -699,7 +699,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
 
    0.00%                    0x00007f2d6ab5c7fb:   mov    $0xffffffff,%r9d
                             0x00007f2d6ab5c801:   mov    $0x0,%r10d
@@ -718,34 +718,34 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.05%                    0x00007f2d6ab5c84b:   mov    %edi,0x98(%rsp)
    0.11%                    0x00007f2d6ab5c852:   cmp    %r10d,%r9d
                             0x00007f2d6ab5c855:   je     0x00007f2d6ab60216           ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Matcher::find@10 (line 732)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.60%                    0x00007f2d6ab5c85b:   nopl   0x0(%rax,%rax,1)
    0.09%                    0x00007f2d6ab5c860:   test   %r10d,%r10d
                             0x00007f2d6ab5c863:   jl     0x00007f2d6ab60769           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Matcher::find@21 (line 736)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.06%                    0x00007f2d6ab5c869:   cmp    %r8d,%r10d
                             0x00007f2d6ab5c86c:   jg     0x00007f2d6ab6083d           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Matcher::find@34 (line 740)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.13%                    0x00007f2d6ab5c872:   test   %ecx,%ecx
                             0x00007f2d6ab5c874:   jl     0x00007f2d6ab5d6aa           ;*ifge {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Matcher::search@30 (line 1720)
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.66%                    0x00007f2d6ab5c87a:   mov    %ecx,0x90(%rsp)
    0.07%                    0x00007f2d6ab5c881:   test   $0x7fffffff,%r13d
           ╭                 0x00007f2d6ab5c888:   je     0x00007f2d6ab5c8cb
@@ -765,7 +765,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           ││                                                                          ; - java.util.regex.Matcher::find@65 (line 745)
           ││                                                                          ; - java.util.regex.Pattern::split@31 (line 1265)
           ││                                                                          ; - java.util.regex.Pattern::split@3 (line 1335)
-          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          ││                                                                          ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.83%  ↘│            ↗↗  0x00007f2d6ab5c8cb:   cmp    0xc0(%rsp),%r10d
            │            ││  0x00007f2d6ab5c8d3:   jg     0x00007f2d6ab609b9           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
            │            ││                                                            ; - java.util.regex.Pattern$Start::match@10 (line 3602)
@@ -773,7 +773,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │            ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │            ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │            ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │            ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │            ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.02%   │            ││  0x00007f2d6ab5c8d9:   mov    $0x0,%r9d
            │            ││  0x00007f2d6ab5c8df:   mov    0x18(%rsp),%rsi
    0.02%   │            ││  0x00007f2d6ab5c8e4:   mov    0xb4(%rsp),%ecx
@@ -785,7 +785,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │          ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │          ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │          ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │ │          ││  0x00007f2d6ab5c8f5:   data16 data16 nopw 0x0(%rax,%rax,1) ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
            │ │          ││                                                            ; - java.util.regex.Pattern$Slice::match@18 (line 4080)
            │ │          ││                                                            ; - java.util.regex.Pattern$Start::match@44 (line 3608)
@@ -793,7 +793,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │          ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │          ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │          ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.83%   │ │ ↗        ││  0x00007f2d6ab5c900:   mov    %r9d,%r13d
            │ │ │        ││  0x00007f2d6ab5c903:   add    %r10d,%r13d                  ;*iadd {reexecute=0 rethrow=0 return_oop=0}
            │ │ │        ││                                                            ; - java.util.regex.Pattern$Slice::match@24 (line 4081)
@@ -802,7 +802,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │ │        ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%   │ │ │        ││  0x00007f2d6ab5c906:   cmp    %r13d,%r8d
            │ │ │        ││  0x00007f2d6ab5c909:   jle    0x00007f2d6ab60c25           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
            │ │ │        ││                                                            ; - java.util.regex.Pattern$Slice::match@29 (line 4081)
@@ -811,7 +811,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │ │        ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │ │ │        ││  0x00007f2d6ab5c90f:   cmp    %r13d,%r8d
            │ │ │        ││  0x00007f2d6ab5c912:   jbe    0x00007f2d6ab60bc0           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
            │ │ │        ││                                                            ; - java.lang.StringLatin1::charAt@7 (line 47)
@@ -822,7 +822,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │ │        ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.81%   │ │ │        ││  0x00007f2d6ab5c918:   movzbl 0x10(%r13,%r11,8),%r13d      ;*baload {reexecute=0 rethrow=0 return_oop=0}
            │ │ │        ││                                                            ; - java.lang.StringLatin1::charAt@21 (line 50)
            │ │ │        ││                                                            ; - java.lang.String::charAt@12 (line 1515)
@@ -832,7 +832,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │ │        ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │ │        ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │ │        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.05%   │ │ │        ││  0x00007f2d6ab5c91e:   xchg   %ax,%ax
            │ │ │        ││  0x00007f2d6ab5c920:   cmp    0x10(%rsi,%r9,4),%r13d
            │ │╭│        ││  0x00007f2d6ab5c925:   jne    0x00007f2d6ab5c938           ;*if_icmpeq {reexecute=0 rethrow=0 return_oop=0}
@@ -842,7 +842,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │││        ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │││        ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │││        ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │││        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │││        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │ │││        ││  0x00007f2d6ab5c92b:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
            │ │││        ││                                                            ; - java.util.regex.Pattern$Slice::match@59 (line 4080)
            │ │││        ││                                                            ; - java.util.regex.Pattern$Start::match@44 (line 3608)
@@ -850,7 +850,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │ │││        ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │ │││        ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │ │││        ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │ │││        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │ │││        ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │ ↘││        ││  0x00007f2d6ab5c92e:   cmp    %r9d,%ecx
            │  │╰        ││  0x00007f2d6ab5c931:   ja     0x00007f2d6ab5c900
            │  │         ││  0x00007f2d6ab5c933:   jmp    0x00007f2d6ab5ce75           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -860,7 +860,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │  │         ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │  │         ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │  │         ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │  │         ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │  │         ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.80%   │  ↘         ││  0x00007f2d6ab5c938:   mov    %r10d,%r9d
            │            ││  0x00007f2d6ab5c93b:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
            │            ││                                                            ; - java.util.regex.Pattern$Start::match@77 (line 3607)
@@ -868,7 +868,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │            ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │            ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │            ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │            ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │            ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │            ││  0x00007f2d6ab5c93e:   mov    %r9d,%r13d
            │            ││  0x00007f2d6ab5c941:   mov    0xc0(%rsp),%r9d
    0.81%   │            ││  0x00007f2d6ab5c949:   mov    0xa4(%rsp),%ebx
@@ -878,14 +878,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    │       ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    │       ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    │       ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │    │       ││  0x00007f2d6ab5c955:   data16 data16 nopw 0x0(%rax,%rax,1) ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
            │    │       ││                                                            ; - java.util.regex.Pattern$Start::match@34 (line 3607)
            │    │       ││                                                            ; - java.util.regex.Matcher::search@121 (line 1728)
            │    │       ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    │       ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    │       ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    │       ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    4.31%   │    │    ↗  ││  0x00007f2d6ab5c960:   mov    $0x0,%edi
            │    │╭   │  ││  0x00007f2d6ab5c965:   jmp    0x00007f2d6ab5c9ac           ;*iload {reexecute=0 rethrow=0 return_oop=0}
            │    ││   │  ││                                                            ; - java.util.regex.Pattern$Slice::match@14 (line 4080)
@@ -894,7 +894,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││   │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││   │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││   │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │    ││   │  ││  0x00007f2d6ab5c96a:   data16 data16 nopw 0x0(%rax,%rax,1)
            │    ││   │  ││  0x00007f2d6ab5c975:   data16 data16 xchg %ax,%ax
            │    ││   │  ││  0x00007f2d6ab5c979:   nopl   0x0(%rax)                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -904,7 +904,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││   │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││   │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││   │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││   │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    5.23%   │    ││ ↗ │  ││  0x00007f2d6ab5c980:   mov    %edi,%eax
            │    ││ │ │  ││  0x00007f2d6ab5c982:   add    %r13d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern$Slice::match@24 (line 4081)
@@ -913,7 +913,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││ │ │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.25%   │    ││ │ │  ││  0x00007f2d6ab5c985:   cmp    %eax,%r8d
            │    ││ │ │  ││  0x00007f2d6ab5c988:   jle    0x00007f2d6ab603bf           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern$Slice::match@29 (line 4081)
@@ -922,7 +922,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││ │ │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.45%   │    ││ │ │  ││  0x00007f2d6ab5c98e:   cmp    %eax,%r8d
            │    ││ │ │  ││  0x00007f2d6ab5c991:   jbe    0x00007f2d6ab60e59           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
            │    ││ │ │  ││                                                            ; - java.lang.StringLatin1::charAt@7 (line 47)
@@ -933,7 +933,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││ │ │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    5.04%   │    ││ │ │  ││  0x00007f2d6ab5c997:   movzbl 0x10(%rax,%r11,8),%eax       ;*baload {reexecute=0 rethrow=0 return_oop=0}
            │    ││ │ │  ││                                                            ; - java.lang.StringLatin1::charAt@21 (line 50)
            │    ││ │ │  ││                                                            ; - java.lang.String::charAt@12 (line 1515)
@@ -943,7 +943,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││ │ │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││ │ │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││ │ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    2.80%   │    ││ │ │  ││  0x00007f2d6ab5c99d:   data16 xchg %ax,%ax
    0.18%   │    ││ │ │  ││  0x00007f2d6ab5c9a0:   cmp    0x10(%rsi,%rdi,4),%eax
            │    ││╭│ │  ││  0x00007f2d6ab5c9a4:   jne    0x00007f2d6ab5c9b5           ;*if_icmpeq {reexecute=0 rethrow=0 return_oop=0}
@@ -953,7 +953,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││││ │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││││ │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││││ │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││││ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││││ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    3.09%   │    ││││ │  ││  0x00007f2d6ab5c9aa:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
            │    ││││ │  ││                                                            ; - java.util.regex.Pattern$Slice::match@59 (line 4080)
            │    ││││ │  ││                                                            ; - java.util.regex.Pattern$Start::match@44 (line 3608)
@@ -961,7 +961,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    ││││ │  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    ││││ │  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    ││││ │  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    ││││ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    ││││ │  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    8.99%   │    │↘││ │  ││  0x00007f2d6ab5c9ac:   cmp    %edi,%ebx
            │    │ │╰ │  ││  0x00007f2d6ab5c9ae:   ja     0x00007f2d6ab5c980
    0.21%   │    │ │ ╭│  ││  0x00007f2d6ab5c9b0:   jmp    0x00007f2d6ab5ca09           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -971,7 +971,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    │ │ ││  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    │ │ ││  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    │ │ ││  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    │ │ ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    │ │ ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    4.86%   │    │ ↘ ││  ││  0x00007f2d6ab5c9b5:   mov    0x348(%r15),%rax             ; ImmutableOopMap {rdx=Oop rsi=Oop r11=NarrowOop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop [76]=NarrowOop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop }
            │    │   ││  ││                                                            ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
            │    │   ││  ││                                                            ; - (reexecute) java.util.regex.Pattern$Slice::match@57 (line 4086)
@@ -980,7 +980,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    │   ││  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    │   ││  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    │   ││  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    │   ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    │   ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    1.97%   │    │   ││  ││  0x00007f2d6ab5c9bc:   test   %eax,(%rax)                  ;   {poll}
    1.72%   │    │   ││  ││  0x00007f2d6ab5c9be:   inc    %r13d                        ;*iinc {reexecute=0 rethrow=0 return_oop=0}
            │    │   ││  ││                                                            ; - java.util.regex.Pattern$Start::match@77 (line 3607)
@@ -988,7 +988,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │    │   ││  ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │    │   ││  ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │    │   ││  ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │    │   ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │    │   ││  ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
            │    ↘   ││  ││  0x00007f2d6ab5c9c1:   cmp    %r9d,%r13d
            │        │╰  ││  0x00007f2d6ab5c9c4:   jle    0x00007f2d6ab5c960
            │        │   ││  0x00007f2d6ab5c9c6:   jmp    0x00007f2d6ab5dd52           ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
@@ -997,7 +997,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │        │   ││                                                            ; - java.util.regex.Matcher::find@65 (line 745)
            │        │   ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
            │        │   ││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-           │        │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+           │        │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.58%   ↘        │   ││  0x00007f2d6ab5c9cb:   cmp    %rbx,%rcx
                     │ ╭ ││  0x00007f2d6ab5c9ce:   jg     0x00007f2d6ab5c9de
    0.11%            │ │ ││  0x00007f2d6ab5c9d4:   vmovdqu %xmm1,(%r9,%rcx,4)
@@ -1014,7 +1014,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                     │    │                                                            ; - java.util.regex.Matcher::find@65 (line 745)
                     │    │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
                     │    │                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-                    │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                    │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
                     │    ╰  0x00007f2d6ab5ca04:   jmp    0x00007f2d6ab5c8cb
                     ↘       0x00007f2d6ab5ca09:   movabs $0x800269f50,%rdi            ;   {metadata(&apos;java/util/regex/Pattern$LastNode&apos;)}
    0.97%                    0x00007f2d6ab5ca13:   nopw   0x0(%rax,%rax,1)
@@ -1027,7 +1027,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.02%                    0x00007f2d6ab5ca2e:   cmp    $0x2,%ebp
                             0x00007f2d6ab5ca31:   jb     0x00007f2d6ab609f2
    0.66%                    0x00007f2d6ab5ca37:   mov    %r10d,0x10(%rdx)             ;*iastore {reexecute=0 rethrow=0 return_oop=0}
@@ -1038,7 +1038,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%                    0x00007f2d6ab5ca3b:   mov    %ebx,%eax
    0.21%                    0x00007f2d6ab5ca3d:   add    %r13d,%eax                   ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Pattern$Slice::match@73 (line 4088)
@@ -1047,7 +1047,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.00%                    0x00007f2d6ab5ca40:   mov    %eax,0x14(%rdx)              ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Pattern$LastNode::match@42 (line 3582)
                                                                                       ; - java.util.regex.Pattern$Slice::match@75 (line 4088)
@@ -1056,25 +1056,25 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.74%                    0x00007f2d6ab5ca43:   mov    %r13d,0x10(%rdx)             ;*iastore {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Pattern$Start::match@64 (line 3610)
                                                                                       ; - java.util.regex.Matcher::search@121 (line 1728)
                                                                                       ; - java.util.regex.Matcher::find@65 (line 745)
                                                                                       ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    2.47%                    0x00007f2d6ab5ca47:   test   %r10d,%r10d
                             0x00007f2d6ab5ca4a:   je     0x00007f2d6ab5d6b7           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Pattern::split@54 (line 1267)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.16%                    0x00007f2d6ab5ca50:   test   %r13d,%r13d
                             0x00007f2d6ab5ca53:   jl     0x00007f2d6ab60775           ;*ifge {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.util.regex.Matcher::start@4 (line 449)
                                                                                       ; - java.util.regex.Pattern::split@86 (line 1272)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
                             0x00007f2d6ab5ca59:   nopl   0x0(%rax)
    0.05%                    0x00007f2d6ab5ca60:   cmp    %r13d,%r10d
                             0x00007f2d6ab5ca63:   jg     0x00007f2d6ab60cee           ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
@@ -1083,7 +1083,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.60%                    0x00007f2d6ab5ca69:   cmp    %r8d,%r13d
                             0x00007f2d6ab5ca6c:   jg     0x00007f2d6ab60a48           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.lang.String::checkBoundsBeginEnd@11 (line 4603)
@@ -1091,7 +1091,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.15%                    0x00007f2d6ab5ca72:   cmp    %r10d,%r13d
                             0x00007f2d6ab5ca75:   je     0x00007f2d6ab5d8c5           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.lang.StringLatin1::newString@1 (line 766)
@@ -1099,14 +1099,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
                             0x00007f2d6ab5ca7b:   mov    %r13d,%r11d
    0.06%                    0x00007f2d6ab5ca7e:   sub    %r10d,%r11d                  ;*isub {reexecute=0 rethrow=0 return_oop=0}
                                                                                       ; - java.lang.String::substring@24 (line 2711)
                                                                                       ; - java.lang.String::subSequence@3 (line 2745)
                                                                                       ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                       ; - java.util.regex.Pattern::split@3 (line 1335)
-                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.61%                    0x00007f2d6ab5ca81:   test   %r11d,%r11d
                             0x00007f2d6ab5ca84:   jl     0x00007f2d6ab5ffae
    0.16%                    0x00007f2d6ab5ca8a:   cmp    %r8d,%r10d
@@ -1155,7 +1155,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   66.56%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
 
                0x00007f2d6ab5cc5c:   jle    0x00007f2d6ab5cc50
                0x00007f2d6ab5cc5e:   xchg   %ax,%ax
@@ -1166,7 +1166,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                              ; - java.lang.String::subSequence@3 (line 2745)
           │                                                              ; - java.util.regex.Pattern::split@89 (line 1272)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.17%  │    0x00007f2d6ab5cc65:   mov    0x108(%r15),%rcx
    0.30%  │    0x00007f2d6ab5cc6c:   lea    0x18(%rcx),%rdi
    0.27%  │    0x00007f2d6ab5cc70:   cmp    0x118(%r15),%rdi
@@ -1185,7 +1185,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                              ; - java.lang.String::subSequence@3 (line 2745)
           │                                                              ; - java.util.regex.Pattern::split@89 (line 1272)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.12%  │    0x00007f2d6ab5ccad:   mov    %eax,%r9d
    0.30%  │    0x00007f2d6ab5ccb0:   mov    %rcx,%r11
    0.19%  │    0x00007f2d6ab5ccb3:   mov    0x10(%rsp),%r8
@@ -1199,27 +1199,27 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.35%  │    0x00007f2d6ab5ccc1:   mov    0xc(%r8),%r10d               ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.ArrayList::add@2 (line 453)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.15%  │    0x00007f2d6ab5ccc5:   mov    %r11,%rdi
    0.24%  │    0x00007f2d6ab5ccc8:   shr    $0x3,%rdi                    ;*aastore {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.ArrayList::add@14 (line 455)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.19%  │    0x00007f2d6ab5cccc:   mov    0xa0(%rsp),%ecx
    0.32%  │    0x00007f2d6ab5ccd3:   inc    %ecx                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.ArrayList::add@18 (line 456)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.17%  │    0x00007f2d6ab5ccd5:   data16 data16 nopw 0x0(%rax,%rax,1)
    0.26%  │    0x00007f2d6ab5cce0:   cmp    0xa0(%rsp),%r10d
           │    0x00007f2d6ab5cce8:   je     0x00007f2d6ab5d094
@@ -1250,14 +1250,14 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │││                                                            ; - java.util.ArrayList::add@20 (line 467)
           │││                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │││                                                            ; - java.util.regex.Pattern::split@3 (line 1335)
-          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.08%  │↘↘  0x00007f2d6ab5cd71:   mov    0x348(%r15),%rsi             ; ImmutableOopMap {r8=Oop [8]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop [76]=NarrowOop [80]=Oop [88]=Oop [96]=Oop [104]=Oop [112]=Oop }
           │                                                              ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
           │                                                              ; - (reexecute) java.util.ArrayList::add@15 (line 456)
           │                                                              ; - java.util.ArrayList::add@20 (line 467)
           │                                                              ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
    0.07%  │    0x00007f2d6ab5cd78:   test   %eax,(%rsi)                  ;   {poll}
    0.21%  │    0x00007f2d6ab5cd7a:   mov    %r8,0x10(%rsp)
    0.53%  │    0x00007f2d6ab5cd7f:   mov    %ecx,0xa0(%rsp)
@@ -1277,7 +1277,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
    0.04%  │    0x00007f2d6ab5cdcd:   jmp    0x00007f2d6ab5c840           ;*aload {reexecute=0 rethrow=0 return_oop=0}
           │                                                              ; - java.util.regex.Pattern::split@29 (line 1265)
           │                                                              ; - java.util.regex.Pattern::split@3 (line 1335)
-          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split@8 (line 103)
+          │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split@8 (line 103)
           ↘    0x00007f2d6ab5cdd2:   lea    -0x10(%rcx),%r10
                0x00007f2d6ab5cdd6:   cmp    %r10,%rbp
                0x00007f2d6ab5cdd9:   jg     0x00007f2d6ab5cf00
@@ -1289,24 +1289,24 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   14.72%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  66.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-  14.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   7.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+  66.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+  14.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   7.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
    4.14%         runtime stub  StubRoutines::checkcast_arraycopy 
-   1.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   1.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   1.64%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   1.24%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
    0.36%               kernel  [unknown] 
-   0.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   0.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   0.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.25%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.10%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
    0.09%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.07%               kernel  [unknown] 
    0.06%               kernel  [unknown] 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
-   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+   0.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
    0.05%            libjvm.so  G1BarrierSet::invalidate 
    0.04%               kernel  [unknown] 
    2.00%  <...other 476 warm regions...>
@@ -1314,7 +1314,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  93.29%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
+  93.29%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::pattern_split, version 6, compile id 805 
    4.16%         runtime stub  StubRoutines::checkcast_arraycopy 
    1.50%               kernel  [unknown] 
    0.16%                       <unknown> 
@@ -1367,7 +1367,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split
 # Parameters: (regexp = _)
 
 # Run progress: 50.00% complete, ETA 00:03:46
@@ -1387,12 +1387,12 @@ Iteration   5: 69.894 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split":
   69.844 ±(99.9%) 0.231 us/op [Average]
   (min, avg, max) = (69.754, 69.844, 69.894), stdev = 0.060
   CI (99.9%): [69.612, 70.075] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split:·asm":
 PrintAssembly processed: 217457 total address lines.
 Perf output processed (skipped 58.967 seconds):
  Column 1: cycles (50633 events)
@@ -1768,7 +1768,7 @@ jvmci, level 4, java.lang.String::split, version 4, compile id 781
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split
 # Parameters: (regexp = __)
 
 # Run progress: 75.00% complete, ETA 00:01:52
@@ -1788,12 +1788,12 @@ Iteration   5: 98.002 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split":
   97.957 ±(99.9%) 0.186 us/op [Average]
   (min, avg, max) = (97.902, 97.957, 98.002), stdev = 0.048
   CI (99.9%): [97.771, 98.142] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark.string_split:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.string_split:·asm":
 PrintAssembly processed: 245976 total address lines.
 Perf output processed (skipped 59.017 seconds):
  Column 1: cycles (50629 events)
@@ -1802,7 +1802,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
 
                      0x00007f824eb4610e:   mov    %rsi,%rdi
                      0x00007f824eb46111:   mov    $0x0,%r14d
@@ -1813,7 +1813,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@29 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.52%             0x00007f824eb46130:   mov    %eax,0x8c(%rsp)
    0.09%             0x00007f824eb46137:   mov    %rdi,0x18(%rsp)
    0.06%             0x00007f824eb4613c:   mov    0xc(%rdi),%ebp               ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
@@ -1822,7 +1822,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@105 (line 1273)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.22%             0x00007f824eb4613f:   mov    %ebp,0x88(%rsp)
    0.48%             0x00007f824eb46146:   cmp    %ecx,%esi
                      0x00007f824eb46148:   je     0x00007f824eb48b25           ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
@@ -1830,21 +1830,21 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.07%             0x00007f824eb4614e:   test   %ecx,%ecx
                      0x00007f824eb46150:   jl     0x00007f824eb48add           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Matcher::find@21 (line 736)
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.04%             0x00007f824eb46156:   cmp    %r8d,%ecx
                      0x00007f824eb46159:   jg     0x00007f824eb48d0a           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Matcher::find@34 (line 740)
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.17%             0x00007f824eb4615f:   nop
    0.46%             0x00007f824eb46160:   cmp    %r10d,%ecx
                      0x00007f824eb46163:   jg     0x00007f824eb48e5a           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
@@ -1854,7 +1854,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.07%             0x00007f824eb46169:   test   %r9d,%r9d
                      0x00007f824eb4616c:   jl     0x00007f824eb46c53           ;*ifge {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Matcher::search@30 (line 1720)
@@ -1862,7 +1862,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.05%             0x00007f824eb46172:   mov    %r9d,0x80(%rsp)
    0.20%             0x00007f824eb4617a:   mov    %r14d,%esi
    0.49%             0x00007f824eb4617d:   inc    %esi                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
@@ -1870,7 +1870,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@105 (line 1273)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.14%             0x00007f824eb4617f:   mov    %esi,0x7c(%rsp)
    0.10%             0x00007f824eb46183:   mov    %r8d,%r9d
    0.19%             0x00007f824eb46186:   sub    %ecx,%r9d                    ;* unwind (locked if synchronized)
@@ -1881,7 +1881,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@208 (line 1289)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.43%             0x00007f824eb46189:   mov    %eax,%esi
    0.04%             0x00007f824eb4618b:   inc    %esi                         ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Matcher::search@148 (line 1732)
@@ -1889,7 +1889,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.08%             0x00007f824eb4618d:   mov    %esi,0x78(%rsp)
    0.16%             0x00007f824eb46191:   mov    $0x0,%eax
    0.44%  ╭          0x00007f824eb46196:   jmp    0x00007f824eb461cc           ;*iload {reexecute=0 rethrow=0 return_oop=0}
@@ -1900,7 +1900,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                                    ; - java.util.regex.Pattern::split@31 (line 1265)
           │                                                                    ; - java.lang.String::split@323 (line 3153)
           │                                                                    ; - java.lang.String::split@3 (line 3199)
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
           │          0x00007f824eb4619b:   nopl   0x0(%rax,%rax,1)             ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
           │                                                                    ; - java.util.regex.Pattern$Slice::match@18 (line 4080)
           │                                                                    ; - java.util.regex.Pattern$Start::match@44 (line 3608)
@@ -1909,7 +1909,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                                    ; - java.util.regex.Pattern::split@31 (line 1265)
           │                                                                    ; - java.lang.String::split@323 (line 3153)
           │                                                                    ; - java.lang.String::split@3 (line 3199)
-          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.85%  │ ↗        0x00007f824eb461a0:   mov    %eax,%esi
           │ │        0x00007f824eb461a2:   add    %ecx,%esi                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
           │ │                                                                  ; - java.util.regex.Pattern$Slice::match@24 (line 4081)
@@ -1919,7 +1919,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │ │                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           │ │                                                                  ; - java.lang.String::split@323 (line 3153)
           │ │                                                                  ; - java.lang.String::split@3 (line 3199)
-          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
           │ │        0x00007f824eb461a4:   cmp    %esi,%r8d
           │ │        0x00007f824eb461a7:   jle    0x00007f824eb48eaf           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
           │ │                                                                  ; - java.util.regex.Pattern$Slice::match@29 (line 4081)
@@ -1929,7 +1929,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │ │                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           │ │                                                                  ; - java.lang.String::split@323 (line 3153)
           │ │                                                                  ; - java.lang.String::split@3 (line 3199)
-          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
           │ │        0x00007f824eb461ad:   cmp    %esi,%r8d
           │ │        0x00007f824eb461b0:   jbe    0x00007f824eb48d8b           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
           │ │                                                                  ; - java.lang.StringLatin1::charAt@7 (line 47)
@@ -1941,7 +1941,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │ │                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           │ │                                                                  ; - java.lang.String::split@323 (line 3153)
           │ │                                                                  ; - java.lang.String::split@3 (line 3199)
-          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.76%  │ │        0x00007f824eb461b6:   movzbl 0x10(%rsi,%r11,8),%esi       ;*baload {reexecute=0 rethrow=0 return_oop=0}
           │ │                                                                  ; - java.lang.StringLatin1::charAt@21 (line 50)
           │ │                                                                  ; - java.lang.String::charAt@12 (line 1515)
@@ -1952,7 +1952,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │ │                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           │ │                                                                  ; - java.lang.String::split@323 (line 3153)
           │ │                                                                  ; - java.lang.String::split@3 (line 3199)
-          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │ │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.05%  │ │        0x00007f824eb461bc:   nopl   0x0(%rax)
           │ │        0x00007f824eb461c0:   cmp    0x10(%rdx,%rax,4),%esi
           │╭│        0x00007f824eb461c4:   jne    0x00007f824eb461d5           ;*if_icmpeq {reexecute=0 rethrow=0 return_oop=0}
@@ -1963,7 +1963,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │││                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           │││                                                                  ; - java.lang.String::split@323 (line 3153)
           │││                                                                  ; - java.lang.String::split@3 (line 3199)
-          │││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
           │││        0x00007f824eb461ca:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
           │││                                                                  ; - java.util.regex.Pattern$Slice::match@59 (line 4080)
           │││                                                                  ; - java.util.regex.Pattern$Start::match@44 (line 3608)
@@ -1972,7 +1972,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │││                                                                  ; - java.util.regex.Pattern::split@31 (line 1265)
           │││                                                                  ; - java.lang.String::split@323 (line 3153)
           │││                                                                  ; - java.lang.String::split@3 (line 3199)
-          │││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.04%  ↘││        0x00007f824eb461cc:   cmp    %eax,%ebx
            │╰        0x00007f824eb461ce:   ja     0x00007f824eb461a0
            │         0x00007f824eb461d0:   jmp    0x00007f824eb46665           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -1983,7 +1983,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
            │                                                                   ; - java.util.regex.Pattern::split@31 (line 1265)
            │                                                                   ; - java.lang.String::split@323 (line 3153)
            │                                                                   ; - java.lang.String::split@3 (line 3199)
-           │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+           │                                                                   ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.78%   ↘         0x00007f824eb461d5:   mov    %ecx,%esi
                      0x00007f824eb461d7:   inc    %esi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Pattern$Start::match@77 (line 3607)
@@ -1992,7 +1992,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
              ╭       0x00007f824eb461d9:   jmp    0x00007f824eb46240           ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
              │                                                                 ; - java.util.regex.Pattern$Start::match@31 (line 3607)
              │                                                                 ; - java.util.regex.Matcher::search@121 (line 1728)
@@ -2000,7 +2000,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              │                                                                 ; - java.util.regex.Pattern::split@31 (line 1265)
              │                                                                 ; - java.lang.String::split@323 (line 3153)
              │                                                                 ; - java.lang.String::split@3 (line 3199)
-             │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
              │       0x00007f824eb461de:   xchg   %ax,%ax                      ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
              │                                                                 ; - java.util.regex.Pattern$Start::match@34 (line 3607)
              │                                                                 ; - java.util.regex.Matcher::search@121 (line 1728)
@@ -2008,7 +2008,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              │                                                                 ; - java.util.regex.Pattern::split@31 (line 1265)
              │                                                                 ; - java.lang.String::split@323 (line 3153)
              │                                                                 ; - java.lang.String::split@3 (line 3199)
-             │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    4.11%     │    ↗  0x00007f824eb461e0:   mov    $0x0,%eax
              │╭   │  0x00007f824eb461e5:   jmp    0x00007f824eb4622c           ;*iload {reexecute=0 rethrow=0 return_oop=0}
              ││   │                                                            ; - java.util.regex.Pattern$Slice::match@14 (line 4080)
@@ -2018,7 +2018,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││   │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││   │                                                            ; - java.lang.String::split@323 (line 3153)
              ││   │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
              ││   │  0x00007f824eb461ea:   data16 data16 nopw 0x0(%rax,%rax,1)
              ││   │  0x00007f824eb461f5:   data16 data16 xchg %ax,%ax
              ││   │  0x00007f824eb461f9:   nopl   0x0(%rax)                    ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -2029,7 +2029,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││   │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││   │                                                            ; - java.lang.String::split@323 (line 3153)
              ││   │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    4.55%     ││ ↗ │  0x00007f824eb46200:   mov    %eax,%ebp
              ││ │ │  0x00007f824eb46202:   add    %esi,%ebp                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
              ││ │ │                                                            ; - java.util.regex.Pattern$Slice::match@24 (line 4081)
@@ -2039,7 +2039,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││ │ │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││ │ │                                                            ; - java.lang.String::split@323 (line 3153)
              ││ │ │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.19%     ││ │ │  0x00007f824eb46204:   cmp    %ebp,%r8d
              ││ │ │  0x00007f824eb46207:   jle    0x00007f824eb48fca           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
              ││ │ │                                                            ; - java.util.regex.Pattern$Slice::match@29 (line 4081)
@@ -2049,7 +2049,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││ │ │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││ │ │                                                            ; - java.lang.String::split@323 (line 3153)
              ││ │ │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.59%     ││ │ │  0x00007f824eb4620d:   cmp    %ebp,%r8d
              ││ │ │  0x00007f824eb46210:   jbe    0x00007f824eb48f05           ;*if_icmplt {reexecute=0 rethrow=0 return_oop=0}
              ││ │ │                                                            ; - java.lang.StringLatin1::charAt@7 (line 47)
@@ -2061,7 +2061,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││ │ │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││ │ │                                                            ; - java.lang.String::split@323 (line 3153)
              ││ │ │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    4.74%     ││ │ │  0x00007f824eb46216:   movzbl 0x10(%rbp,%r11,8),%ebp       ;*baload {reexecute=0 rethrow=0 return_oop=0}
              ││ │ │                                                            ; - java.lang.StringLatin1::charAt@21 (line 50)
              ││ │ │                                                            ; - java.lang.String::charAt@12 (line 1515)
@@ -2072,7 +2072,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││ │ │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││ │ │                                                            ; - java.lang.String::split@323 (line 3153)
              ││ │ │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││ │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    2.70%     ││ │ │  0x00007f824eb4621c:   nopl   0x0(%rax)
    0.17%     ││ │ │  0x00007f824eb46220:   cmp    0x10(%rdx,%rax,4),%ebp
              ││╭│ │  0x00007f824eb46224:   jne    0x00007f824eb46235           ;*if_icmpeq {reexecute=0 rethrow=0 return_oop=0}
@@ -2083,7 +2083,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││││ │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││││ │                                                            ; - java.lang.String::split@323 (line 3153)
              ││││ │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    2.90%     ││││ │  0x00007f824eb4622a:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              ││││ │                                                            ; - java.util.regex.Pattern$Slice::match@59 (line 4080)
              ││││ │                                                            ; - java.util.regex.Pattern$Start::match@44 (line 3608)
@@ -2092,7 +2092,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              ││││ │                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              ││││ │                                                            ; - java.lang.String::split@323 (line 3153)
              ││││ │                                                            ; - java.lang.String::split@3 (line 3199)
-             ││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             ││││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    9.29%     │↘││ │  0x00007f824eb4622c:   cmp    %eax,%ebx
              │ │╰ │  0x00007f824eb4622e:   ja     0x00007f824eb46200
    0.20%     │ │ ╭│  0x00007f824eb46230:   jmp    0x00007f824eb4624a           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
@@ -2103,7 +2103,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              │ │ ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              │ │ ││                                                            ; - java.lang.String::split@323 (line 3153)
              │ │ ││                                                            ; - java.lang.String::split@3 (line 3199)
-             │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    4.95%     │ ↘ ││  0x00007f824eb46235:   mov    0x348(%r15),%rax             ; ImmutableOopMap {rdx=Oop rdi=Oop r11=NarrowOop [24]=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [80]=Oop [88]=Oop [100]=NarrowOop [104]=Oop }
              │   ││                                                            ;*iconst_0 {reexecute=1 rethrow=0 return_oop=0}
              │   ││                                                            ; - (reexecute) java.util.regex.Pattern$Slice::match@57 (line 4086)
@@ -2113,7 +2113,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              │   ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              │   ││                                                            ; - java.lang.String::split@323 (line 3153)
              │   ││                                                            ; - java.lang.String::split@3 (line 3199)
-             │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    2.38%     │   ││  0x00007f824eb4623c:   test   %eax,(%rax)                  ;   {poll}
    1.83%     │   ││  0x00007f824eb4623e:   inc    %esi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
              │   ││                                                            ; - java.util.regex.Pattern$Start::match@77 (line 3607)
@@ -2122,7 +2122,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
              │   ││                                                            ; - java.util.regex.Pattern::split@31 (line 1265)
              │   ││                                                            ; - java.lang.String::split@323 (line 3153)
              │   ││                                                            ; - java.lang.String::split@3 (line 3199)
-             │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+             │   ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.84%     ↘   ││  0x00007f824eb46240:   cmp    %r10d,%esi
                  │╰  0x00007f824eb46243:   jle    0x00007f824eb461e0
                  │   0x00007f824eb46245:   jmp    0x00007f824eb47488
@@ -2136,7 +2136,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
                      0x00007f824eb4625d:   mov    %esi,%eax
    0.17%             0x00007f824eb4625f:   add    %ebx,%eax                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Pattern$Slice::match@73 (line 4088)
@@ -2146,20 +2146,20 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@31 (line 1265)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
                      0x00007f824eb46261:   test   %ecx,%ecx
                      0x00007f824eb46263:   je     0x00007f824eb46f6d           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Pattern::split@54 (line 1267)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.55%             0x00007f824eb46269:   test   %esi,%esi
                      0x00007f824eb4626b:   jl     0x00007f824eb48bb1           ;*ifge {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.util.regex.Matcher::start@4 (line 449)
                                                                                ; - java.util.regex.Pattern::split@86 (line 1272)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.03%             0x00007f824eb46271:   cmp    %esi,%ecx
                      0x00007f824eb46273:   jg     0x00007f824eb48665           ;*if_icmpgt {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.lang.String::checkBoundsBeginEnd@6 (line 4603)
@@ -2168,7 +2168,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.24%             0x00007f824eb46279:   nopl   0x0(%rax)
                      0x00007f824eb46280:   cmp    %r8d,%esi
                      0x00007f824eb46283:   jg     0x00007f824eb48cfe           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
@@ -2178,7 +2178,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    2.12%             0x00007f824eb46289:   cmp    %ecx,%esi
                      0x00007f824eb4628b:   je     0x00007f824eb46fdb           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.lang.StringLatin1::newString@1 (line 766)
@@ -2187,7 +2187,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.03%             0x00007f824eb46291:   mov    %esi,%r11d
    0.16%             0x00007f824eb46294:   sub    %ecx,%r11d                   ;*isub {reexecute=0 rethrow=0 return_oop=0}
                                                                                ; - java.lang.String::substring@24 (line 2711)
@@ -2195,7 +2195,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
                                                                                ; - java.util.regex.Pattern::split@89 (line 1272)
                                                                                ; - java.lang.String::split@323 (line 3153)
                                                                                ; - java.lang.String::split@3 (line 3199)
-                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
                      0x00007f824eb46297:   test   %r11d,%r11d
                      0x00007f824eb4629a:   jl     0x00007f824eb48539
    0.66%             0x00007f824eb462a0:   cmp    %r8d,%ecx
@@ -2243,7 +2243,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   65.68%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
 
              0x00007f824eb4647f:   nop
           ╭  0x00007f824eb46480:   jmp    0x00007f824eb465c6           ;* unwind (locked if synchronized)
@@ -2254,7 +2254,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@89 (line 1272)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.15%  │  0x00007f824eb46485:   mov    0x108(%r15),%rcx
    0.41%  │  0x00007f824eb4648c:   lea    0x18(%rcx),%r10
    0.23%  │  0x00007f824eb46490:   cmp    0x118(%r15),%r10
@@ -2274,7 +2274,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@89 (line 1272)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.13%  │  0x00007f824eb464ce:   mov    %esi,%r9d
    0.24%  │  0x00007f824eb464d1:   mov    %eax,%r8d
    0.19%  │  0x00007f824eb464d4:   mov    %rcx,%r11
@@ -2290,7 +2290,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.13%  │  0x00007f824eb464e6:   mov    %r11,%r13
    0.24%  │  0x00007f824eb464e9:   shr    $0x3,%r13                    ;*aastore {reexecute=0 rethrow=0 return_oop=0}
           │                                                            ; - java.util.ArrayList::add@14 (line 455)
@@ -2298,7 +2298,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.12%  │  0x00007f824eb464ed:   cmp    %r14d,%ebp
           │  0x00007f824eb464f0:   je     0x00007f824eb4688d           ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
           │                                                            ; - java.util.ArrayList::add@3 (line 453)
@@ -2306,7 +2306,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.34%  │  0x00007f824eb464f6:   data16 nopw 0x0(%rax,%rax,1)
    0.10%  │  0x00007f824eb46500:   cmp    $0x1550,%ebx                 ;   {metadata(&apos;java/lang/Object&apos;[])}
           │  0x00007f824eb46506:   jne    0x00007f824eb48c5d
@@ -2336,7 +2336,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.56%  │  0x00007f824eb4657a:   mov    0x348(%r15),%rsi             ; ImmutableOopMap {rdx=Oop [16]=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [80]=Oop [88]=Oop [100]=NarrowOop [104]=Oop }
           │                                                            ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
           │                                                            ; - (reexecute) java.util.ArrayList::add@15 (line 456)
@@ -2344,7 +2344,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@105 (line 1273)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
    0.03%  │  0x00007f824eb46581:   test   %eax,(%rsi)                  ;   {poll}
    0.17%  │  0x00007f824eb46583:   mov    %ecx,%r14d
    0.22%  │  0x00007f824eb46586:   mov    %edi,%eax
@@ -2363,7 +2363,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
           │                                                            ; - java.util.regex.Pattern::split@29 (line 1265)
           │                                                            ; - java.lang.String::split@323 (line 3153)
           │                                                            ; - java.lang.String::split@3 (line 3199)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split@8 (line 97)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split@8 (line 97)
           ↘  0x00007f824eb465c6:   lea    -0x10(%rcx),%rbp
              0x00007f824eb465ca:   cmp    %rbp,%r11
              0x00007f824eb465cd:   jg     0x00007f824eb466b2
@@ -2374,32 +2374,32 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
   14.95%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  65.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-  14.95%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-   8.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+  65.68%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+  14.95%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   8.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
    3.92%         runtime stub  StubRoutines::checkcast_arraycopy 
-   1.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-   0.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-   0.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-   0.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
-   0.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   1.44%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.80%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.41%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.39%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.31%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
    0.21%               kernel  [unknown] 
-   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
    0.09%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
    0.07%            libjvm.so  G1BarrierSet::invalidate 
    0.06%         libc-2.31.so  [unknown] 
    0.05%               kernel  [unknown] 
-   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+   0.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
    0.04%               kernel  [unknown] 
    1.79%  <...other 457 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  93.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
+  93.82%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark::string_split, version 2, compile id 829 
    3.94%         runtime stub  StubRoutines::checkcast_arraycopy 
    1.23%               kernel  [unknown] 
    0.10%         libc-2.31.so  [unknown] 

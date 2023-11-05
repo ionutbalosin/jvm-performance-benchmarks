@@ -1,2 +1,2 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.diskio.ObjectInputStreamBenchmark.read","avgt",1,25,1.184010,0.004163,"us/op"
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ObjectInputStreamBenchmark.read","avgt",1,25,1.184010,0.004163,"us/op"

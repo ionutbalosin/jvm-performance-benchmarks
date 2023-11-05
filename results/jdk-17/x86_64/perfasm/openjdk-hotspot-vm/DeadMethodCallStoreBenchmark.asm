@@ -3,9 +3,9 @@
 # VM invoker: /usr/lib/jvm/adoptium-temurin-jdk-17.0.6+10/bin/java
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline, version 2, compile id 496 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline, version 2, compile id 496 
 
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@-1 (line 83)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@-1 (line 83)
                     0x00007fffe0ee9aec:   mov    $0x5,%r9d
    0.01%            0x00007fffe0ee9af2:   vmovsd -0x5a(%rip),%xmm3        # 0x00007fffe0ee9aa0
                                                                               ;   {section_word}
@@ -16,8 +16,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMeth
           │         0x00007fffe0ee9b0c:   data16 data16 xchg %ax,%ax
           │↗        0x00007fffe0ee9b10:   vaddsd %xmm1,%xmm0,%xmm0
    1.65%  ││        0x00007fffe0ee9b14:   mov    %r10d,%r9d                   ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@26 (line 96)
-          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@26 (line 96)
+          ││                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
           ↘│        0x00007fffe0ee9b17:   mov    %r9d,%r11d
    0.03%   │        0x00007fffe0ee9b1a:   add    $0x1e,%r11d
            │        0x00007fffe0ee9b1e:   mov    %r9d,%r8d
@@ -93,60 +93,60 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMeth
    6.15%   │        0x00007fffe0ee9c37:   vsubsd %xmm1,%xmm0,%xmm0
    1.78%   │        0x00007fffe0ee9c3b:   vaddsd %xmm5,%xmm0,%xmm0
    1.92%   │        0x00007fffe0ee9c3f:   vsubsd %xmm4,%xmm0,%xmm0            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@38 (line 98)
-           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@38 (line 98)
+           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
    1.79%   │        0x00007fffe0ee9c43:   mov    %r9d,%r10d
            │        0x00007fffe0ee9c46:   add    $0x20,%r10d                  ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
            │        0x00007fffe0ee9c4a:   vcvtsi2sd %r10d,%xmm1,%xmm1
    0.47%   │        0x00007fffe0ee9c4f:   vdivsd %xmm1,%xmm3,%xmm1            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
-           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
+           │                                                                  ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
    2.42%   │        0x00007fffe0ee9c53:   nopw   0x0(%rax,%rax,1)
    0.00%   │        0x00007fffe0ee9c5c:   data16 data16 xchg %ax,%ax
    0.02%   │        0x00007fffe0ee9c60:   cmp    $0x3e2,%r10d
            ╰        0x00007fffe0ee9c67:   jl     0x00007fffe0ee9b10           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
                     0x00007fffe0ee9c6d:   cmp    $0x3e8,%r10d
             ╭       0x00007fffe0ee9c74:   jge    0x00007fffe0ee9cb8
    0.01%    │       0x00007fffe0ee9c7a:   add    $0x20,%r9d
             │       0x00007fffe0ee9c7e:   mov    $0x1,%r11d                   ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-            │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
-            │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
+            │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
             │   ↗   0x00007fffe0ee9c84:   test   %r11d,%r11d
             │╭  │   0x00007fffe0ee9c87:   je     0x00007fffe0ee9c8f           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@16 (line 95)
-            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@16 (line 95)
+            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
             ││  │   0x00007fffe0ee9c89:   vaddsd %xmm1,%xmm0,%xmm0            ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@26 (line 96)
-            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@26 (line 96)
+            ││  │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
    0.04%    ││╭ │   0x00007fffe0ee9c8d:   jmp    0x00007fffe0ee9c93
    0.02%    │↘│ │   0x00007fffe0ee9c8f:   vsubsd %xmm1,%xmm0,%xmm0            ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-            │ │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@40 (line 100)
-            │ │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            │ │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@40 (line 100)
+            │ │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
    0.03%    │ ↘ │   0x00007fffe0ee9c93:   add    $0x2,%r9d                    ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-            │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-            │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+            │   │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
             │   │   0x00007fffe0ee9c97:   nopw   0x0(%rax,%rax,1)
             │   │   0x00007fffe0ee9ca0:   cmp    $0x3e8,%r9d
             │  ╭│   0x00007fffe0ee9ca7:   jge    0x00007fffe0ee9cb8           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
    0.01%    │  ││   0x00007fffe0ee9ca9:   vcvtsi2sd %r9d,%xmm1,%xmm1
             │  ││   0x00007fffe0ee9cae:   vdivsd %xmm1,%xmm3,%xmm1            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
-            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
+            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
    0.20%    │  ││   0x00007fffe0ee9cb2:   xor    $0x1,%r11d                   ;*istore_2 {reexecute=0 rethrow=0 return_oop=0}
-            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@49 (line 100)
-            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
+            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@49 (line 100)
+            │  ││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@0 (line 83)
             │  │╰   0x00007fffe0ee9cb6:   jmp    0x00007fffe0ee9c84
             ↘  ↘    0x00007fffe0ee9cb8:   vmovsd 0x10(%rsi),%xmm1             ;*getfield circleRadius {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@5 (line 84)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@5 (line 84)
    0.01%            0x00007fffe0ee9cbd:   vmulsd %xmm1,%xmm1,%xmm1
                     0x00007fffe0ee9cc1:   vmulsd %xmm0,%xmm1,%xmm0            ;*dmul {reexecute=0 rethrow=0 return_oop=0}
-                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@14 (line 84)
+                                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_baseline@14 (line 84)
    0.03%            0x00007fffe0ee9cc5:   add    $0x10,%rsp
                     0x00007fffe0ee9cc9:   pop    %rbp
                     0x00007fffe0ee9cca:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -166,9 +166,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMeth
   99.01%  <total for region 1>
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse, version 2, compile id 494 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse, version 2, compile id 494 
 
-                  # {method} {0x00007fffc5471868} &apos;method_call_dse&apos; &apos;()D&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadMethodCallStoreBenchmark&apos;
+                  # {method} {0x00007fffc5471868} &apos;method_call_dse&apos; &apos;()D&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadMethodCallStoreBenchmark&apos;
                   #           [sp+0x20]  (sp of caller)
                   0x00007fffe0ef1740:   mov    0x8(%rsi),%r10d              ;   {no_reloc}
                   0x00007fffe0ef1744:   movabs $0x800000000,%r11
@@ -180,56 +180,56 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMeth
                 [Verified Entry Point]
    0.02%          0x00007fffe0ef1760:   sub    $0x18,%rsp
                   0x00007fffe0ef1767:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@-1 (line 72)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@-1 (line 72)
                   0x00007fffe0ef176c:   mov    $0x5,%ecx
    0.01%          0x00007fffe0ef1771:   mov    $0x5,%r11d
                   0x00007fffe0ef1777:   nopw   0x0(%rax,%rax,1)             ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@0 (line 72)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@0 (line 72)
    0.44%  ↗       0x00007fffe0ef1780:   add    $0x20,%r11d                  ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-          │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@0 (line 72)
+          │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+          │                                                                 ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@0 (line 72)
           │       0x00007fffe0ef1784:   cmp    $0x3e2,%r11d
           ╰       0x00007fffe0ef178b:   jl     0x00007fffe0ef1780           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@0 (line 72)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@0 (line 72)
                   0x00007fffe0ef178d:   mov    $0x5,%r10d                   ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@4 (line 73)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@4 (line 73)
    0.41%   ↗      0x00007fffe0ef1793:   add    $0x20,%r10d                  ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-           │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-           │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@4 (line 73)
+           │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+           │                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@4 (line 73)
    0.02%   │      0x00007fffe0ef1797:   nopw   0x0(%rax,%rax,1)
    0.01%   │      0x00007fffe0ef17a0:   cmp    $0x3e2,%r10d
            ╰      0x00007fffe0ef17a7:   jl     0x00007fffe0ef1793           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@4 (line 73)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@4 (line 73)
                   0x00007fffe0ef17a9:   mov    $0x5,%r11d
    0.02%          0x00007fffe0ef17af:   nop                                 ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@8 (line 74)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@8 (line 74)
             ↗     0x00007fffe0ef17b0:   add    $0x20,%r11d                  ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-            │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-            │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@8 (line 74)
+            │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+            │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@8 (line 74)
             │     0x00007fffe0ef17b4:   nopl   0x0(%rax,%rax,1)
             │     0x00007fffe0ef17bc:   data16 data16 xchg %ax,%ax
    0.44%    │     0x00007fffe0ef17c0:   cmp    $0x3e2,%r11d
             ╰     0x00007fffe0ef17c7:   jl     0x00007fffe0ef17b0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@8 (line 74)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@8 (line 74)
                   0x00007fffe0ef17c9:   mov    $0x5,%r10d
                   0x00007fffe0ef17cf:   nop                                 ;*iload_2 {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@12 (line 75)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@15 (line 95)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@12 (line 75)
              ↗    0x00007fffe0ef17d0:   add    $0x20,%r10d                  ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@12 (line 75)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+             │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@12 (line 75)
    0.46%     │    0x00007fffe0ef17d4:   nopl   0x0(%rax,%rax,1)
              │    0x00007fffe0ef17dc:   data16 data16 xchg %ax,%ax
              │    0x00007fffe0ef17e0:   cmp    $0x3e2,%r10d
              ╰    0x00007fffe0ef17e7:   jl     0x00007fffe0ef17d0           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@12 (line 75)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@12 (line 75)
                   0x00007fffe0ef17e9:   vmovsd -0xd1(%rip),%xmm2        # 0x00007fffe0ef1720
                                                                             ;   {section_word}
    0.01%          0x00007fffe0ef17f1:   vmovsd -0xd1(%rip),%xmm0        # 0x00007fffe0ef1728
@@ -238,8 +238,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMeth
               │   0x00007fffe0ef17fb:   nopl   0x0(%rax,%rax,1)
               │↗  0x00007fffe0ef1800:   vaddsd %xmm1,%xmm0,%xmm0
    1.26%      ││  0x00007fffe0ef1804:   mov    %r10d,%ecx                   ;*dadd {reexecute=0 rethrow=0 return_oop=0}
-              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@26 (line 96)
-              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
+              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@26 (line 96)
+              ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
    0.00%      ↘│  0x00007fffe0ef1807:   mov    %ecx,%r11d
                │  0x00007fffe0ef180a:   add    $0x1e,%r11d
    0.02%       │  0x00007fffe0ef180e:   mov    %ecx,%r8d
@@ -315,20 +315,20 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMeth
    1.87%       │  0x00007fffe0ef1927:   vsubsd %xmm4,%xmm0,%xmm0
    1.86%       │  0x00007fffe0ef192b:   vaddsd %xmm0,%xmm5,%xmm0
    1.85%       │  0x00007fffe0ef192f:   vsubsd %xmm3,%xmm0,%xmm0            ;*dsub {reexecute=0 rethrow=0 return_oop=0}
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@38 (line 98)
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@38 (line 98)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
    1.87%       │  0x00007fffe0ef1933:   mov    %ecx,%r10d
    0.00%       │  0x00007fffe0ef1936:   add    $0x20,%r10d                  ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@50 (line 94)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
                │  0x00007fffe0ef193a:   vcvtsi2sd %r10d,%xmm1,%xmm1
    0.67%       │  0x00007fffe0ef193f:   vdivsd %xmm1,%xmm2,%xmm1            ;*ddiv {reexecute=0 rethrow=0 return_oop=0}
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
-               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@25 (line 96)
+               │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
                │  0x00007fffe0ef1943:   cmp    $0x3e2,%r10d
                ╰  0x00007fffe0ef194a:   jl     0x00007fffe0ef1800           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
-                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::computePi@12 (line 94)
+                                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadMethodCallStoreBenchmark::method_call_dse@16 (line 76)
                   0x00007fffe0ef1950:   cmp    $0x3e8,%r10d
                   0x00007fffe0ef1957:   jge    0x00007fffe0ef1996
                   0x00007fffe0ef195d:   add    $0x20,%ecx

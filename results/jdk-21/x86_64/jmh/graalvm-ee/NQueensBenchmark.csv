@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.backtracking","avgt",1,25,0.012162,0.000039,"ms/op",16
-"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.backtracking","avgt",1,25,257.105203,3.317847,"ms/op",64
-"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.simulated_annealing","avgt",1,25,2.617285,0.003293,"ms/op",16
-"com.ionutbalosin.jvm.performance.benchmarks.macro.nqueens.NQueensBenchmark.simulated_annealing","avgt",1,25,21.407522,0.033988,"ms/op",64
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.nqueens.NQueensBenchmark.backtracking","avgt",1,25,0.012162,0.000039,"ms/op",16
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.nqueens.NQueensBenchmark.backtracking","avgt",1,25,257.105203,3.317847,"ms/op",64
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.nqueens.NQueensBenchmark.simulated_annealing","avgt",1,25,2.617285,0.003293,"ms/op",16
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.nqueens.NQueensBenchmark.simulated_annealing","avgt",1,25,21.407522,0.033988,"ms/op",64

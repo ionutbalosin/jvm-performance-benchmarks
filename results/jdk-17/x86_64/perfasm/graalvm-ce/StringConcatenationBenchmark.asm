@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.plus_operator
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.plus_operator
 # Parameters: (capacity = 128, coder = LATIN1)
 
 # Run progress: 0.00% complete, ETA 00:13:20
@@ -28,12 +28,12 @@ Iteration   5: 633.747 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.plus_operator":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.plus_operator":
   634.022 ±(99.9%) 0.815 ns/op [Average]
   (min, avg, max) = (633.747, 634.022, 634.240), stdev = 0.212
   CI (99.9%): [633.207, 634.837] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.plus_operator:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.plus_operator:·asm":
 PrintAssembly processed: 231095 total address lines.
 Perf output processed (skipped 58.739 seconds):
  Column 1: cycles (50689 events)
@@ -659,7 +659,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
   16.30%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
 
  <region is too big to display, has 1319 lines, but threshold is 1000>
 ....................................................................................................
@@ -668,20 +668,20 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
 ....[Hottest Regions]...............................................................................
   46.29%      jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 898 
   16.30%      jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 898 
-  10.64%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
-   5.33%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+  10.64%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   5.33%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
    4.69%      jvmci, level 4  java.lang.Long::toString, version 2, compile id 923 
-   4.23%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   4.23%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
    3.58%        runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    1.48%      jvmci, level 4  java.lang.Long::toString, version 2, compile id 923 
    1.14%        runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.94%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
-   0.92%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
-   0.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
-   0.46%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 941 
-   0.45%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   0.94%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   0.92%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   0.75%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   0.46%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 941 
+   0.45%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
    0.34%              kernel  [unknown] 
-   0.33%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+   0.33%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
    0.12%      jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 898 
    0.10%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -692,12 +692,12 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
 
 ....[Hottest Methods (after inlining)]..............................................................
   62.71%      jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 898 
-  23.64%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
+  23.64%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 925 
    6.17%      jvmci, level 4  java.lang.Long::toString, version 2, compile id 923 
    3.58%        runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    1.68%              kernel  [unknown] 
    1.14%        runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.46%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 941 
+   0.46%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 941 
    0.06%                      <unknown> 
    0.04%        libc-2.31.so  [unknown] 
    0.02%           libjvm.so  HeapRegionManager::par_iterate 
@@ -742,7 +742,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.Strin
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.plus_operator
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.plus_operator
 # Parameters: (capacity = 128, coder = UTF16)
 
 # Run progress: 12.50% complete, ETA 00:13:10
@@ -762,12 +762,12 @@ Iteration   5: 622.510 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.plus_operator":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.plus_operator":
   622.560 ±(99.9%) 0.766 ns/op [Average]
   (min, avg, max) = (622.276, 622.560, 622.772), stdev = 0.199
   CI (99.9%): [621.794, 623.326] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.plus_operator:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.plus_operator:·asm":
 PrintAssembly processed: 234332 total address lines.
 Perf output processed (skipped 58.623 seconds):
  Column 1: cycles (51066 events)
@@ -1364,22 +1364,22 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Regions]...............................................................................
   63.58%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 912 
-   7.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   7.38%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
    5.88%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 937 
-   4.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   4.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   2.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   1.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   1.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   4.87%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   4.17%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   2.49%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   1.81%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   1.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
    1.13%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    1.09%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   0.98%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
    0.81%               kernel  [unknown] 
-   0.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   0.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 961 
-   0.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
-   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   0.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   0.43%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 961 
+   0.23%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+   0.22%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
    0.20%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 912 
    0.13%               kernel  [unknown] 
    0.08%               kernel  [unknown] 
@@ -1389,12 +1389,12 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Methods (after inlining)]..............................................................
   63.78%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 912 
-  24.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
+  24.69%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::plus_operator, version 2, compile id 939 
    5.88%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 937 
    2.35%               kernel  [unknown] 
    1.13%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    1.09%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 961 
+   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_plus_operator_jmhTest::plus_operator_avgt_jmhStub, version 5, compile id 961 
    0.10%                       <unknown> 
    0.06%         libc-2.31.so  [unknown] 
    0.02%            libjvm.so  HeapRegionClaimer::claim_region 
@@ -1442,7 +1442,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_buffer
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_buffer
 # Parameters: (capacity = 128, coder = LATIN1)
 
 # Run progress: 25.00% complete, ETA 00:11:11
@@ -1462,12 +1462,12 @@ Iteration   5: 809.622 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_buffer":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_buffer":
   809.563 ±(99.9%) 1.461 ns/op [Average]
   (min, avg, max) = (809.106, 809.563, 810.147), stdev = 0.379
   CI (99.9%): [808.102, 811.024] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_buffer:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_buffer:·asm":
 PrintAssembly processed: 211180 total address lines.
 Perf output processed (skipped 58.608 seconds):
  Column 1: cycles (51110 events)
@@ -2081,32 +2081,32 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Regions]...............................................................................
   46.85%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 785 
-   8.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
-   6.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
-   5.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   8.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   6.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   5.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    4.38%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 788 
    3.70%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
-   3.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   3.36%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    2.07%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 823 
    2.05%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 823 
    2.00%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 804 
    1.72%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 805 
    1.70%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 804 
-   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    1.29%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 805 
-   1.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   1.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    1.24%               kernel  [unknown] 
-   1.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   1.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    0.90%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 823 
    0.50%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+   0.48%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    4.06%  <...other 392 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
   46.85%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 785 
-  28.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
+  28.01%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 806 
    5.28%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 823 
    4.38%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 788 
    4.34%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 804 
@@ -2115,7 +2115,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
    2.30%               kernel  [unknown] 
    0.66%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
    0.19%         runtime stub  StubRoutines::jshort_arraycopy 
-   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_buffer_jmhTest::string_buffer_avgt_jmhStub, version 5, compile id 826 
+   0.14%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_buffer_jmhTest::string_buffer_avgt_jmhStub, version 5, compile id 826 
    0.07%                       <unknown> 
    0.05%         libc-2.31.so  [unknown] 
    0.02%            libjvm.so  fileStream::write 
@@ -2157,7 +2157,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_buffer
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_buffer
 # Parameters: (capacity = 128, coder = UTF16)
 
 # Run progress: 37.50% complete, ETA 00:09:18
@@ -2177,12 +2177,12 @@ Iteration   5: 919.006 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_buffer":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_buffer":
   919.023 ±(99.9%) 0.691 ns/op [Average]
   (min, avg, max) = (918.879, 919.023, 919.331), stdev = 0.179
   CI (99.9%): [918.332, 919.714] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_buffer:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_buffer:·asm":
 PrintAssembly processed: 216265 total address lines.
 Perf output processed (skipped 58.659 seconds):
  Column 1: cycles (50655 events)
@@ -2742,20 +2742,20 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Regions]...............................................................................
   40.97%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 798 
-   9.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
-   7.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
-   5.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+   9.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+   7.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+   5.53%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
    4.86%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 853 
    3.36%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 828 
    3.12%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    3.10%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 799 
-   3.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
-   2.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+   3.03%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+   2.26%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
    2.14%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 809 
    1.92%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 809 
    1.69%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 832 
    1.55%       jvmci, level 4  java.lang.AbstractStringBuilder::inflate, version 2, compile id 817 
-   1.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+   1.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
    1.11%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 832 
    0.77%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 853 
    0.64%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
@@ -2767,7 +2767,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Methods (after inlining)]..............................................................
   41.48%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 798 
-  29.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
+  29.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_buffer, version 2, compile id 835 
    5.63%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 853 
    4.06%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 809 
    3.72%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 799 
@@ -2778,7 +2778,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
    1.28%               kernel  [unknown] 
    0.64%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
    0.18%         runtime stub  StubRoutines::jshort_arraycopy 
-   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_buffer_jmhTest::string_buffer_avgt_jmhStub, version 5, compile id 856 
+   0.11%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_buffer_jmhTest::string_buffer_avgt_jmhStub, version 5, compile id 856 
    0.09%                       <unknown> 
    0.06%         libc-2.31.so  [unknown] 
    0.04%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
@@ -2819,7 +2819,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_builder
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_builder
 # Parameters: (capacity = 128, coder = LATIN1)
 
 # Run progress: 50.00% complete, ETA 00:07:26
@@ -2839,12 +2839,12 @@ Iteration   5: 727.786 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_builder":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_builder":
   727.725 ±(99.9%) 1.843 ns/op [Average]
   (min, avg, max) = (727.352, 727.725, 728.532), stdev = 0.479
   CI (99.9%): [725.882, 729.569] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_builder:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_builder:·asm":
 PrintAssembly processed: 207734 total address lines.
 Perf output processed (skipped 58.566 seconds):
  Column 1: cycles (50710 events)
@@ -3477,23 +3477,23 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 ....[Hottest Regions]...............................................................................
   43.45%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 785 
   12.17%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 785 
-   5.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+   5.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
    5.23%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    5.22%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 791 
    4.98%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 821 
    3.95%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 804 
-   3.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
-   2.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+   3.27%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+   2.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
    1.72%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 805 
    1.38%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 804 
    1.37%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 805 
    1.11%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
    0.81%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 821 
    0.71%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 821 
-   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
-   0.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
-   0.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_builder_jmhTest::string_builder_avgt_jmhStub, version 5, compile id 824 
-   0.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+   0.70%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+   0.67%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+   0.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_builder_jmhTest::string_builder_avgt_jmhStub, version 5, compile id 824 
+   0.54%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
    0.53%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 805 
    3.33%  <...other 447 warm regions...>
 ....................................................................................................
@@ -3501,7 +3501,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Methods (after inlining)]..............................................................
   55.61%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 785 
-  13.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
+  13.96%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 806 
    6.51%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 821 
    5.32%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 804 
    5.23%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
@@ -3509,7 +3509,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
    4.20%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 805 
    1.44%               kernel  [unknown] 
    1.11%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_builder_jmhTest::string_builder_avgt_jmhStub, version 5, compile id 824 
+   0.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_builder_jmhTest::string_builder_avgt_jmhStub, version 5, compile id 824 
    0.08%                       <unknown> 
    0.06%         libc-2.31.so  [unknown] 
    0.02%            libjvm.so  ElfSymbolTable::lookup 
@@ -3554,7 +3554,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_builder
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_builder
 # Parameters: (capacity = 128, coder = UTF16)
 
 # Run progress: 62.50% complete, ETA 00:05:34
@@ -3574,12 +3574,12 @@ Iteration   5: 830.289 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_builder":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_builder":
   829.694 ±(99.9%) 1.394 ns/op [Average]
   (min, avg, max) = (829.359, 829.694, 830.289), stdev = 0.362
   CI (99.9%): [828.300, 831.088] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_builder:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_builder:·asm":
 PrintAssembly processed: 210224 total address lines.
 Perf output processed (skipped 58.468 seconds):
  Column 1: cycles (50606 events)
@@ -4221,19 +4221,19 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
    4.53%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 820 
    4.50%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 799 
    4.43%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
-   3.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+   3.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
    3.13%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 795 
    2.99%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 819 
-   2.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
-   2.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+   2.55%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+   2.19%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
    2.02%       jvmci, level 4  java.lang.AbstractStringBuilder::inflate, version 2, compile id 805 
-   1.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
-   1.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+   1.74%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+   1.56%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
    1.40%       jvmci, level 4  java.lang.AbstractStringBuilder::inflate, version 2, compile id 805 
    1.23%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 795 
    1.07%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 799 
    0.88%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+   0.75%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
    0.61%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 819 
    4.53%  <...other 529 warm regions...>
 ....................................................................................................
@@ -4241,7 +4241,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 
 ....[Hottest Methods (after inlining)]..............................................................
   49.05%       jvmci, level 4  jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, version 2, compile id 787 
-  12.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
+  12.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_builder, version 2, compile id 823 
    7.77%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 4, compile id 845 
    5.81%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 799 
    4.64%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 795 
@@ -4251,7 +4251,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
    3.60%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 819 
    1.53%               kernel  [unknown] 
    0.88%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_builder_jmhTest::string_builder_avgt_jmhStub, version 5, compile id 848 
+   0.45%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_builder_jmhTest::string_builder_avgt_jmhStub, version 5, compile id 848 
    0.12%                       <unknown> 
    0.06%         libc-2.31.so  [unknown] 
    0.03%         libc-2.31.so  __strncat_ssse3 
@@ -4294,7 +4294,7 @@ jvmci, level 4, jdk.internal.math.FloatingDecimal$BinaryToASCIIBuffer::dtoa, ver
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_format
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_format
 # Parameters: (capacity = 128, coder = LATIN1)
 
 # Run progress: 75.00% complete, ETA 00:03:42
@@ -4314,12 +4314,12 @@ Iteration   5: 1214.520 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_format":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_format":
   1214.767 ±(99.9%) 1.308 ns/op [Average]
   (min, avg, max) = (1214.304, 1214.767, 1215.105), stdev = 0.340
   CI (99.9%): [1213.459, 1216.074] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_format:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_format:·asm":
 PrintAssembly processed: 222717 total address lines.
 Perf output processed (skipped 58.617 seconds):
  Column 1: cycles (50703 events)
@@ -5664,7 +5664,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 850
    6.60%      jvmci, level 4  java.util.Formatter::parse, version 2, compile id 849 
    4.81%      jvmci, level 4  java.lang.Long::toString, version 2, compile id 857 
    4.78%        runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
-   3.65%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 868 
+   3.65%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 868 
    3.19%      jvmci, level 4  java.util.Formatter::format, version 2, compile id 850 
    2.82%      jvmci, level 4  java.lang.Float::toString, version 2, compile id 870 
    2.52%      jvmci, level 4  java.lang.Integer::toString, version 2, compile id 869 
@@ -5675,7 +5675,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 850
    1.60%      jvmci, level 4  java.util.Formatter::format, version 2, compile id 850 
    1.60%      jvmci, level 4  java.util.Formatter::format, version 2, compile id 850 
    1.36%      jvmci, level 4  java.util.Formatter::parse, version 2, compile id 849 
-   1.24%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 868 
+   1.24%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 868 
    1.12%      jvmci, level 4  java.util.Formatter::format, version 2, compile id 850 
    0.84%      jvmci, level 4  java.util.Formatter::parse, version 2, compile id 849 
    0.81%      jvmci, level 4  java.lang.String::toString, version 2, compile id 836 
@@ -5688,7 +5688,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 850
   23.64%      jvmci, level 4  java.util.Formatter::format, version 2, compile id 850 
    9.79%      jvmci, level 4  java.util.Formatter::parse, version 2, compile id 849 
    6.70%      jvmci, level 4  java.lang.Long::toString, version 2, compile id 857 
-   5.01%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 868 
+   5.01%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 868 
    4.78%        runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    3.52%      jvmci, level 4  java.lang.Float::toString, version 2, compile id 870 
    3.49%      jvmci, level 4  java.lang.Double::toString, version 2, compile id 872 
@@ -5699,7 +5699,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 850
    0.81%      jvmci, level 4  java.lang.String::toString, version 2, compile id 836 
    0.77%      jvmci, level 4  java.lang.Boolean::toString, version 2, compile id 874 
    0.57%        runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.35%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_format_jmhTest::string_format_avgt_jmhStub, version 5, compile id 889 
+   0.35%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_format_jmhTest::string_format_avgt_jmhStub, version 5, compile id 889 
    0.06%        libc-2.31.so  [unknown] 
    0.04%           libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 
    0.02%           libjvm.so  HeapRegionManager::allocate_free_region 
@@ -5736,7 +5736,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 850
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_format
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_format
 # Parameters: (capacity = 128, coder = UTF16)
 
 # Run progress: 87.50% complete, ETA 00:01:51
@@ -5756,12 +5756,12 @@ Iteration   5: 1308.101 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_format":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_format":
   1308.156 ±(99.9%) 0.903 ns/op [Average]
   (min, avg, max) = (1307.796, 1308.156, 1308.417), stdev = 0.235
   CI (99.9%): [1307.253, 1309.060] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark.string_format:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark.string_format:·asm":
 PrintAssembly processed: 227491 total address lines.
 Perf output processed (skipped 58.488 seconds):
  Column 1: cycles (51149 events)
@@ -6619,11 +6619,11 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 860
    7.62%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 841 
    5.88%       jvmci, level 4  java.util.Formatter::parse, version 2, compile id 861 
    4.47%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 869 
-   3.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 880 
+   3.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 880 
    2.76%         runtime stub  StubRoutines::jbyte_disjoint_arraycopy 
    2.38%       jvmci, level 4  java.lang.Float::toString, version 2, compile id 882 
    2.36%       jvmci, level 4  java.lang.Integer::toString, version 2, compile id 881 
-   2.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 880 
+   2.15%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 880 
    2.14%       jvmci, level 4  java.util.Formatter::format, version 2, compile id 860 
    2.07%       jvmci, level 4  java.lang.Double::toString, version 2, compile id 884 
    1.95%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 869 
@@ -6631,7 +6631,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 860
    1.64%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 841 
    1.62%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 870 
    1.19%       jvmci, level 4  java.util.Formatter::parse, version 2, compile id 861 
-   1.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 880 
+   1.07%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 880 
    1.03%       jvmci, level 4  java.util.Formatter::format, version 2, compile id 860 
    0.96%       jvmci, level 4  java.util.Formatter::parse, version 2, compile id 861 
   13.59%  <...other 582 warm regions...>
@@ -6643,7 +6643,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 860
   15.19%       jvmci, level 4  java.util.Formatter::format, version 2, compile id 860 
   12.34%       jvmci, level 4  java.lang.AbstractStringBuilder::append, version 2, compile id 841 
    8.97%       jvmci, level 4  java.util.Formatter::parse, version 2, compile id 861 
-   6.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringConcatenationBenchmark::string_format, version 2, compile id 880 
+   6.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringConcatenationBenchmark::string_format, version 2, compile id 880 
    6.42%       jvmci, level 4  java.lang.Long::toString, version 2, compile id 869 
    3.30%       jvmci, level 4  java.lang.Double::toString, version 2, compile id 884 
    3.09%       jvmci, level 4  java.lang.Float::toString, version 2, compile id 882 
@@ -6655,7 +6655,7 @@ jvmci, level 4, java.util.Formatter::format, version 2, compile id 860
    0.78%       jvmci, level 4  java.lang.String::toString, version 2, compile id 843 
    0.77%       jvmci, level 4  java.lang.Boolean::toString, version 2, compile id 886 
    0.59%         runtime stub  StubRoutines::jshort_disjoint_arraycopy 
-   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.StringConcatenationBenchmark_string_format_jmhTest::string_format_avgt_jmhStub, version 5, compile id 906 
+   0.30%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.jmh_generated.StringConcatenationBenchmark_string_format_jmhTest::string_format_avgt_jmhStub, version 5, compile id 906 
    0.04%            libjvm.so  HeapRegionClaimer::claim_region 
    0.03%            libjvm.so  OtherRegionsTable::occupied 
    0.03%            libjvm.so  G1YoungRemSetSamplingClosure::do_heap_region 

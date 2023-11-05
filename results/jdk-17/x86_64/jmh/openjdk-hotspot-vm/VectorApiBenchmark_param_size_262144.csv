@@ -1,7 +1,7 @@
 "Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..size"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_filter","avgt",1,25,213.613065,4.068175,"us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_matrix_mul","avgt",1,25,34697.352829,968.692124,"us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.baseline_sum","avgt",1,25,103.204096,0.236046,"us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_filter","avgt",1,25,603.643483,2.514515,"us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_matrix_mul","avgt",1,25,14439.509093,50.28291,"us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.VectorApiBenchmark.vectorized_sum","avgt",1,25,81.53993,0.406406,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_filter","avgt",1,25,213.613065,4.068175,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_matrix_mul","avgt",1,25,34697.352829,968.692124,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.baseline_sum","avgt",1,25,103.204096,0.236046,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_filter","avgt",1,25,603.643483,2.514515,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_matrix_mul","avgt",1,25,14439.509093,50.28291,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorApiBenchmark.vectorized_sum","avgt",1,25,81.53993,0.406406,"us/op",262144

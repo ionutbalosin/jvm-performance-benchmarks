@@ -1,4 +1,4 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.PopulationVarianceBenchmark.divide_and_conquer","avgt",1,25,89.923209,0.182359,"ms/op"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.PopulationVarianceBenchmark.functional","avgt",1,25,338.228656,0.081868,"ms/op"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.populationvariance.PopulationVarianceBenchmark.iterative","avgt",1,25,420.556707,0.018147,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.populationvariance.PopulationVarianceBenchmark.divide_and_conquer","avgt",1,25,89.923209,0.182359,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.populationvariance.PopulationVarianceBenchmark.functional","avgt",1,25,338.228656,0.081868,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.populationvariance.PopulationVarianceBenchmark.iterative","avgt",1,25,420.556707,0.018147,"ms/op"

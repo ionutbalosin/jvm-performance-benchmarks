@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.baseline
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.baseline
 
 # Run progress: 0.00% complete, ETA 00:10:00
 # Fork: 1 of 1
@@ -27,12 +27,12 @@ Iteration   5: 9.580 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.baseline":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.baseline":
   9.552 ±(99.9%) 0.263 ns/op [Average]
   (min, avg, max) = (9.473, 9.552, 9.634), stdev = 0.068
   CI (99.9%): [9.288, 9.815] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.baseline:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.baseline:·asm":
 PrintAssembly processed: 118880 total address lines.
 Perf output processed (skipped 55.756 seconds):
  Column 1: cycles (50936 events)
@@ -41,9 +41,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline, version 2, compile id 481 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline, version 2, compile id 481 
 
-             # {method} {0x00007f3683c743a8} &apos;baseline&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark&apos;
+             # {method} {0x00007f3683c743a8} &apos;baseline&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockCoarseningBenchmark&apos;
              #           [sp+0x40]  (sp of caller)
              0x00007f36bcf64aa0:   mov    0x8(%rsi),%r10d
              0x00007f36bcf64aa4:   movabs $0x800000000,%r11
@@ -56,12 +56,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    3.94%     0x00007f36bcf64ac0:   mov    %eax,-0x14000(%rsp)
    8.42%     0x00007f36bcf64ac7:   push   %rbp
    0.16%     0x00007f36bcf64ac8:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline@-1 (line 209)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline@-1 (line 209)
    0.93%     0x00007f36bcf64acc:   mov    %rsi,(%rsp)
    2.89%     0x00007f36bcf64ad0:   mov    0x10(%rsi),%ebp
    0.18%     0x00007f36bcf64ad3:   mov    (%rsi),%rax
    0.96%     0x00007f36bcf64ad6:   shl    %ebp                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline@5 (line 209)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline@5 (line 209)
              0x00007f36bcf64ad8:   mov    %rax,%r10
    2.74%     0x00007f36bcf64adb:   and    $0x7,%r10
    0.20%     0x00007f36bcf64adf:   nop
@@ -77,7 +77,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007f36bcf64b0b:   xor    %rax,%r8
    4.06%  │  0x00007f36bcf64b0e:   test   $0xffffffffffffff87,%r8
           │  0x00007f36bcf64b15:   jne    0x00007f36bcf64c95           ;*monitorenter {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline@10 (line 211)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline@10 (line 211)
    3.97%  │  0x00007f36bcf64b1b:   mov    (%rsp),%r10
           │  0x00007f36bcf64b1f:   mov    0x14(%r10),%ebx
    0.20%  │  0x00007f36bcf64b23:   mov    $0x7,%r10d
@@ -85,7 +85,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    3.84%  │  0x00007f36bcf64b2d:   and    (%r11),%r10
           │  0x00007f36bcf64b30:   cmp    $0x5,%r10
           │  0x00007f36bcf64b34:   jne    0x00007f36bcf64bdd           ;*monitorexit {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline@68 (line 220)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline@68 (line 220)
    0.12%  │  0x00007f36bcf64b3a:   add    %ebx,%ebp
    0.15%  │  0x00007f36bcf64b3c:   add    %ebx,%ebp
    4.36%  │  0x00007f36bcf64b3e:   add    %ebx,%ebp
@@ -94,7 +94,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   11.72%  │  0x00007f36bcf64b44:   add    %ebx,%ebp
    0.20%  │  0x00007f36bcf64b46:   add    %ebx,%ebp
    0.22%  │  0x00007f36bcf64b48:   add    %ebx,%ebp                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline@65 (line 219)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline@65 (line 219)
    0.96%  │  0x00007f36bcf64b4a:   mov    %ebp,%eax
    2.85%  │  0x00007f36bcf64b4c:   add    $0x30,%rsp
           │  0x00007f36bcf64b50:   pop    %rbp
@@ -115,49 +115,49 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   75.90%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 517 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 517 
 
               0x00007f36bcf67ea6:   mov    0x38(%rsp),%r10
               0x00007f36bcf67eab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f36bcf67f5c
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@30 (line 234)
               0x00007f36bcf67eb3:   mov    $0x1,%ebp
               0x00007f36bcf67eb8:   test   %r11d,%r11d
           ╭   0x00007f36bcf67ebb:   jne    0x00007f36bcf67eec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
           │   0x00007f36bcf67ebd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
    3.65%  │↗  0x00007f36bcf67ec0:   mov    0x40(%rsp),%rsi
           ││  0x00007f36bcf67ec5:   xchg   %ax,%ax
           ││  0x00007f36bcf67ec7:   call   0x00007f36bc9fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual baseline {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
    2.51%  ││  0x00007f36bcf67ecc:   mov    0x38(%rsp),%r10
    2.26%  ││  0x00007f36bcf67ed1:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
   13.18%  ││  0x00007f36bcf67ed9:   mov    0x348(%r15),%r11
           ││  0x00007f36bcf67ee0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@33 (line 234)
           ││  0x00007f36bcf67ee4:   test   %eax,(%r11)                  ;   {poll}
    0.18%  ││  0x00007f36bcf67ee7:   test   %r10d,%r10d
           │╰  0x00007f36bcf67eea:   je     0x00007f36bcf67ec0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@36 (line 235)
           ↘   0x00007f36bcf67eec:   movabs $0x7f36d135bd10,%r10
               0x00007f36bcf67ef6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@37 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@37 (line 235)
               0x00007f36bcf67ef9:   mov    0x30(%rsp),%r10
               0x00007f36bcf67efe:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@40 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@40 (line 235)
               0x00007f36bcf67f02:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@46 (line 236)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub@46 (line 236)
 ....................................................................................................
   21.78%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  75.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline, version 2, compile id 481 
-  21.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 517 
+  75.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline, version 2, compile id 481 
+  21.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 517 
    1.12%              kernel  [unknown] 
    0.13%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -181,8 +181,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  75.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::baseline, version 2, compile id 481 
-  21.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 517 
+  75.90%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::baseline, version 2, compile id 481 
+  21.78%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_baseline_jmhTest::baseline_avgt_jmhStub, version 6, compile id 517 
    1.98%              kernel  [unknown] 
    0.03%                      <unknown> 
    0.02%        libc-2.31.so  [unknown] 
@@ -233,7 +233,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.chain_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.chain_method_calls
 
 # Run progress: 16.67% complete, ETA 00:09:05
 # Fork: 1 of 1
@@ -252,12 +252,12 @@ Iteration   5: 9.573 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.chain_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.chain_method_calls":
   9.586 ±(99.9%) 0.096 ns/op [Average]
   (min, avg, max) = (9.556, 9.586, 9.624), stdev = 0.025
   CI (99.9%): [9.489, 9.682] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.chain_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.chain_method_calls:·asm":
 PrintAssembly processed: 121876 total address lines.
 Perf output processed (skipped 55.792 seconds):
  Column 1: cycles (50833 events)
@@ -266,9 +266,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls, version 2, compile id 489 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls, version 2, compile id 489 
 
-             # {method} {0x00007f7a11c73fb8} &apos;chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark&apos;
+             # {method} {0x00007f7a11c73fb8} &apos;chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockCoarseningBenchmark&apos;
              #           [sp+0x40]  (sp of caller)
              0x00007f7a30f65220:   mov    0x8(%rsi),%r10d
              0x00007f7a30f65224:   movabs $0x800000000,%r11
@@ -281,12 +281,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    3.75%     0x00007f7a30f65240:   mov    %eax,-0x14000(%rsp)
    9.57%     0x00007f7a30f65247:   push   %rbp
    0.04%     0x00007f7a30f65248:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls@-1 (line 124)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls@-1 (line 124)
    0.67%     0x00007f7a30f6524c:   mov    %rsi,(%rsp)
    3.18%     0x00007f7a30f65250:   mov    0x10(%rsi),%ebp
    0.06%     0x00007f7a30f65253:   mov    (%rsi),%rax
    0.62%     0x00007f7a30f65256:   shl    %ebp                         ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls@5 (line 124)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls@5 (line 124)
              0x00007f7a30f65258:   mov    %rax,%r10
    3.18%     0x00007f7a30f6525b:   and    $0x7,%r10
    0.06%     0x00007f7a30f6525f:   nop
@@ -302,8 +302,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007f7a30f6528b:   xor    %rax,%r8
    4.02%  │  0x00007f7a30f6528e:   test   $0xffffffffffffff87,%r8
           │  0x00007f7a30f65295:   jne    0x00007f7a30f65415           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls@9 (line 126)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls@9 (line 126)
    4.01%  │  0x00007f7a30f6529b:   mov    (%rsp),%r10
    0.00%  │  0x00007f7a30f6529f:   mov    0x14(%r10),%ebx
    0.02%  │  0x00007f7a30f652a3:   mov    $0x7,%r10d
@@ -311,8 +311,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    4.03%  │  0x00007f7a30f652ad:   and    (%r11),%r10
    0.00%  │  0x00007f7a30f652b0:   cmp    $0x5,%r10
           │  0x00007f7a30f652b4:   jne    0x00007f7a30f6535d           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls@51 (line 133)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls@51 (line 133)
    0.07%  │  0x00007f7a30f652ba:   add    %ebx,%ebp
    0.04%  │  0x00007f7a30f652bc:   add    %ebx,%ebp
    4.10%  │  0x00007f7a30f652be:   add    %ebx,%ebp
@@ -321,8 +321,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   13.49%  │  0x00007f7a30f652c4:   add    %ebx,%ebp
    0.05%  │  0x00007f7a30f652c6:   add    %ebx,%ebp
    0.08%  │  0x00007f7a30f652c8:   add    %ebx,%ebp                    ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@5 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls@51 (line 133)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@5 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls@51 (line 133)
    0.53%  │  0x00007f7a30f652ca:   mov    %ebp,%eax
    3.37%  │  0x00007f7a30f652cc:   add    $0x30,%rsp
    0.00%  │  0x00007f7a30f652d0:   pop    %rbp
@@ -343,49 +343,49 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   74.54%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 528 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 528 
 
               0x00007f7a30f68726:   mov    0x38(%rsp),%r10
               0x00007f7a30f6872b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007f7a30f687dc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@30 (line 234)
               0x00007f7a30f68733:   mov    $0x1,%ebp
               0x00007f7a30f68738:   test   %r11d,%r11d
           ╭   0x00007f7a30f6873b:   jne    0x00007f7a30f6876c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007f7a30f6873d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
    3.72%  │↗  0x00007f7a30f68740:   mov    0x40(%rsp),%rsi
           ││  0x00007f7a30f68745:   xchg   %ax,%ax
           ││  0x00007f7a30f68747:   call   0x00007f7a309fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual chain_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
    2.97%  ││  0x00007f7a30f6874c:   mov    0x38(%rsp),%r10
    1.16%  ││  0x00007f7a30f68751:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
   14.40%  ││  0x00007f7a30f68759:   mov    0x348(%r15),%r11
           ││  0x00007f7a30f68760:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007f7a30f68764:   test   %eax,(%r11)                  ;   {poll}
    0.07%  ││  0x00007f7a30f68767:   test   %r10d,%r10d
           │╰  0x00007f7a30f6876a:   je     0x00007f7a30f68740           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007f7a30f6876c:   movabs $0x7f7a4735ad10,%r10
               0x00007f7a30f68776:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@37 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@37 (line 235)
               0x00007f7a30f68779:   mov    0x30(%rsp),%r10
               0x00007f7a30f6877e:   mov    %rax,0x30(%r10)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@40 (line 235)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@40 (line 235)
               0x00007f7a30f68782:   mov    %r12,0x20(%r10)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@46 (line 236)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub@46 (line 236)
 ....................................................................................................
   22.32%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  74.54%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls, version 2, compile id 489 
-  22.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 528 
+  74.54%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls, version 2, compile id 489 
+  22.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 528 
    0.90%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.10%              kernel  [unknown] 
@@ -409,8 +409,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  74.54%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::chain_method_calls, version 2, compile id 489 
-  22.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 528 
+  74.54%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::chain_method_calls, version 2, compile id 489 
+  22.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_chain_method_calls_jmhTest::chain_method_calls_avgt_jmhStub, version 6, compile id 528 
    2.78%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
@@ -459,7 +459,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_chain_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.conditional_chain_method_calls
 
 # Run progress: 33.33% complete, ETA 00:07:15
 # Fork: 1 of 1
@@ -478,12 +478,12 @@ Iteration   5: 27.220 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_chain_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.conditional_chain_method_calls":
   27.064 ±(99.9%) 0.711 ns/op [Average]
   (min, avg, max) = (26.795, 27.064, 27.227), stdev = 0.185
   CI (99.9%): [26.353, 27.775] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_chain_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.conditional_chain_method_calls:·asm":
 PrintAssembly processed: 122289 total address lines.
 Perf output processed (skipped 55.835 seconds):
  Column 1: cycles (50563 events)
@@ -492,9 +492,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls, version 2, compile id 484 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls, version 2, compile id 484 
 
-             # {method} {0x00007fb8ac87ee30} &apos;conditional_chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark&apos;
+             # {method} {0x00007fb8ac87ee30} &apos;conditional_chain_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockCoarseningBenchmark&apos;
              #           [sp+0x40]  (sp of caller)
              0x00007fb8c0f62540:   mov    0x8(%rsi),%r10d
              0x00007fb8c0f62544:   movabs $0x800000000,%r11
@@ -507,15 +507,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.41%     0x00007fb8c0f62560:   mov    %eax,-0x14000(%rsp)
    1.11%     0x00007fb8c0f62567:   push   %rbp
              0x00007fb8c0f62568:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@-1 (line 141)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@-1 (line 141)
    1.03%     0x00007fb8c0f6256c:   mov    %rsi,%rbp
    0.34%     0x00007fb8c0f6256f:   mov    0x10(%rsi),%r13d
              0x00007fb8c0f62573:   shl    %r13d                        ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@5 (line 141)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@5 (line 141)
    1.15%     0x00007fb8c0f62576:   cmp    $0x20,%r13d
    0.00%     0x00007fb8c0f6257a:   nopw   0x0(%rax,%rax,1)
    0.36%     0x00007fb8c0f62580:   jle    0x00007fb8c0f635d4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@10 (line 144)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@10 (line 144)
              0x00007fb8c0f62586:   mov    (%rsi),%rax
    1.09%     0x00007fb8c0f62589:   mov    %rax,%r10
              0x00007fb8c0f6258c:   and    $0x7,%r10
@@ -532,19 +532,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.38%  │  0x00007fb8c0f625be:   xchg   %ax,%ax
           │  0x00007fb8c0f625c0:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f625c7:   jne    0x00007fb8c0f62c32           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@15 (line 145)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@15 (line 145)
    1.30%  │  0x00007fb8c0f625cd:   add    0x14(%rbp),%r13d
           │  0x00007fb8c0f625d1:   mov    $0x7,%r10d
           │  0x00007fb8c0f625d7:   and    0x0(%rbp),%r10
           │  0x00007fb8c0f625db:   nopl   0x0(%rax,%rax,1)
    1.44%  │  0x00007fb8c0f625e0:   cmp    $0x5,%r10
           │  0x00007fb8c0f625e4:   jne    0x00007fb8c0f6298e           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@15 (line 145)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@15 (line 145)
           │  0x00007fb8c0f625ea:   cmp    $0x20,%r13d
           │  0x00007fb8c0f625ee:   jle    0x00007fb8c0f635e4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@22 (line 147)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@22 (line 147)
           │  0x00007fb8c0f625f4:   mov    0x0(%rbp),%rax
           │  0x00007fb8c0f625f8:   mov    %rax,%r10
    1.37%  │  0x00007fb8c0f625fb:   and    $0x7,%r10
@@ -561,18 +561,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fb8c0f6262b:   xor    %rax,%r8
    0.69%  │  0x00007fb8c0f6262e:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f62635:   jne    0x00007fb8c0f62dc5           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@27 (line 148)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@27 (line 148)
    1.36%  │  0x00007fb8c0f6263b:   add    0x14(%rbp),%r13d
           │  0x00007fb8c0f6263f:   mov    $0x7,%r10d
           │  0x00007fb8c0f62645:   and    0x0(%rbp),%r10
           │  0x00007fb8c0f62649:   cmp    $0x5,%r10
           │  0x00007fb8c0f6264d:   jne    0x00007fb8c0f62ae5           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@27 (line 148)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@27 (line 148)
    1.34%  │  0x00007fb8c0f62653:   cmp    $0x20,%r13d
           │  0x00007fb8c0f62657:   jle    0x00007fb8c0f635f4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@34 (line 150)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@34 (line 150)
           │  0x00007fb8c0f6265d:   mov    0x0(%rbp),%rax
           │  0x00007fb8c0f62661:   mov    %rax,%r10
           │  0x00007fb8c0f62664:   and    $0x7,%r10
@@ -589,19 +589,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    0.39%  │  0x00007fb8c0f62696:   data16 nopw 0x0(%rax,%rax,1)
           │  0x00007fb8c0f626a0:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f626a7:   jne    0x00007fb8c0f62f65           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@39 (line 151)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@39 (line 151)
    0.33%  │  0x00007fb8c0f626ad:   add    0x14(%rbp),%r13d
    1.04%  │  0x00007fb8c0f626b1:   mov    $0x7,%r10d
           │  0x00007fb8c0f626b7:   and    0x0(%rbp),%r10
           │  0x00007fb8c0f626bb:   nopl   0x0(%rax,%rax,1)
    0.30%  │  0x00007fb8c0f626c0:   cmp    $0x5,%r10
           │  0x00007fb8c0f626c4:   jne    0x00007fb8c0f62c73           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@39 (line 151)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@39 (line 151)
    1.04%  │  0x00007fb8c0f626ca:   cmp    $0x20,%r13d
           │  0x00007fb8c0f626ce:   jle    0x00007fb8c0f63604           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@46 (line 153)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@46 (line 153)
           │  0x00007fb8c0f626d4:   mov    0x0(%rbp),%rax
           │  0x00007fb8c0f626d8:   mov    %rax,%r10
    0.39%  │  0x00007fb8c0f626db:   and    $0x7,%r10
@@ -618,18 +618,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fb8c0f6270b:   xor    %rax,%r8
    0.41%  │  0x00007fb8c0f6270e:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f62715:   jne    0x00007fb8c0f63105           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@51 (line 154)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@51 (line 154)
    0.40%  │  0x00007fb8c0f6271b:   add    0x14(%rbp),%r13d
    0.89%  │  0x00007fb8c0f6271f:   mov    $0x7,%r10d
           │  0x00007fb8c0f62725:   and    0x0(%rbp),%r10
           │  0x00007fb8c0f62729:   cmp    $0x5,%r10
           │  0x00007fb8c0f6272d:   jne    0x00007fb8c0f62e0b           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@51 (line 154)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@51 (line 154)
    0.43%  │  0x00007fb8c0f62733:   cmp    $0x20,%r13d
           │  0x00007fb8c0f62737:   jle    0x00007fb8c0f63614           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@58 (line 156)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@58 (line 156)
    0.97%  │  0x00007fb8c0f6273d:   mov    0x0(%rbp),%rax
           │  0x00007fb8c0f62741:   mov    %rax,%r10
           │  0x00007fb8c0f62744:   and    $0x7,%r10
@@ -646,19 +646,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.43%  │  0x00007fb8c0f62776:   data16 nopw 0x0(%rax,%rax,1)
           │  0x00007fb8c0f62780:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f62787:   jne    0x00007fb8c0f632a5           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@63 (line 157)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@63 (line 157)
    1.18%  │  0x00007fb8c0f6278d:   add    0x14(%rbp),%r13d
           │  0x00007fb8c0f62791:   mov    $0x7,%r10d
    0.16%  │  0x00007fb8c0f62797:   and    0x0(%rbp),%r10
           │  0x00007fb8c0f6279b:   nopl   0x0(%rax,%rax,1)
    1.21%  │  0x00007fb8c0f627a0:   cmp    $0x5,%r10
           │  0x00007fb8c0f627a4:   jne    0x00007fb8c0f62fab           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@63 (line 157)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@63 (line 157)
    0.00%  │  0x00007fb8c0f627aa:   cmp    $0x20,%r13d
           │  0x00007fb8c0f627ae:   jle    0x00007fb8c0f63624           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@70 (line 159)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@70 (line 159)
    0.19%  │  0x00007fb8c0f627b4:   mov    0x0(%rbp),%rax
           │  0x00007fb8c0f627b8:   mov    %rax,%r10
    1.30%  │  0x00007fb8c0f627bb:   and    $0x7,%r10
@@ -675,18 +675,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    0.15%  │  0x00007fb8c0f627eb:   xor    %rax,%r8
    1.23%  │  0x00007fb8c0f627ee:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f627f5:   jne    0x00007fb8c0f63445           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@75 (line 160)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@75 (line 160)
    1.29%  │  0x00007fb8c0f627fb:   add    0x14(%rbp),%r13d
           │  0x00007fb8c0f627ff:   mov    $0x7,%r10d
    0.12%  │  0x00007fb8c0f62805:   and    0x0(%rbp),%r10
           │  0x00007fb8c0f62809:   cmp    $0x5,%r10
           │  0x00007fb8c0f6280d:   jne    0x00007fb8c0f6314b           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@75 (line 160)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@75 (line 160)
    1.21%  │  0x00007fb8c0f62813:   cmp    $0x20,%r13d
           │  0x00007fb8c0f62817:   jle    0x00007fb8c0f63634           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@82 (line 162)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@82 (line 162)
           │  0x00007fb8c0f6281d:   mov    0x0(%rbp),%rax
    0.11%  │  0x00007fb8c0f62821:   mov    %rax,%r10
           │  0x00007fb8c0f62824:   and    $0x7,%r10
@@ -703,19 +703,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.33%  │  0x00007fb8c0f62856:   data16 nopw 0x0(%rax,%rax,1)
    0.01%  │  0x00007fb8c0f62860:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f62867:   jne    0x00007fb8c0f63552           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@87 (line 163)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@87 (line 163)
    1.40%  │  0x00007fb8c0f6286d:   add    0x14(%rbp),%r13d
    0.01%  │  0x00007fb8c0f62871:   mov    $0x7,%r10d
           │  0x00007fb8c0f62877:   and    0x0(%rbp),%r10
    0.00%  │  0x00007fb8c0f6287b:   nopl   0x0(%rax,%rax,1)
    1.31%  │  0x00007fb8c0f62880:   cmp    $0x5,%r10
           │  0x00007fb8c0f62884:   jne    0x00007fb8c0f632eb           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@87 (line 163)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@87 (line 163)
    0.01%  │  0x00007fb8c0f6288a:   cmp    $0x20,%r13d
           │  0x00007fb8c0f6288e:   jle    0x00007fb8c0f63644           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@94 (line 165)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@94 (line 165)
           │  0x00007fb8c0f62894:   mov    0x0(%rbp),%rax
    0.00%  │  0x00007fb8c0f62898:   mov    %rax,%r10
    1.32%  │  0x00007fb8c0f6289b:   and    $0x7,%r10
@@ -732,14 +732,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fb8c0f628cb:   xor    %rax,%r8
    1.20%  │  0x00007fb8c0f628ce:   test   $0xffffffffffffff87,%r8
           │  0x00007fb8c0f628d5:   jne    0x00007fb8c0f63594           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@99 (line 166)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@99 (line 166)
    1.31%  │  0x00007fb8c0f628db:   add    0x14(%rbp),%r13d
    0.00%  │  0x00007fb8c0f628df:   mov    $0x7,%r10d
           │  0x00007fb8c0f628e5:   and    0x0(%rbp),%r10
    0.00%  │  0x00007fb8c0f628e9:   cmp    $0x5,%r10
           │  0x00007fb8c0f628ed:   jne    0x00007fb8c0f6348b           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@-1 (line 141)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls@-1 (line 141)
    1.45%  │  0x00007fb8c0f628f3:   mov    %r13d,%eax
           │  0x00007fb8c0f628f6:   add    $0x30,%rsp
           │  0x00007fb8c0f628fa:   pop    %rbp
@@ -760,43 +760,43 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   81.14%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 519 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 519 
 
               0x00007fb8c0f66e26:   mov    0x38(%rsp),%r10
               0x00007fb8c0f66e2b:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007fb8c0f66edc
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@30 (line 234)
               0x00007fb8c0f66e33:   mov    $0x1,%ebp
               0x00007fb8c0f66e38:   test   %r11d,%r11d
           ╭   0x00007fb8c0f66e3b:   jne    0x00007fb8c0f66e6c           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007fb8c0f66e3d:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
    1.40%  │↗  0x00007fb8c0f66e40:   mov    0x40(%rsp),%rsi
           ││  0x00007fb8c0f66e45:   xchg   %ax,%ax
           ││  0x00007fb8c0f66e47:   call   0x00007fb8c09fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual conditional_chain_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
    0.10%  ││  0x00007fb8c0f66e4c:   mov    0x38(%rsp),%r10
    9.87%  ││  0x00007fb8c0f66e51:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
    5.66%  ││  0x00007fb8c0f66e59:   mov    0x348(%r15),%r11
           ││  0x00007fb8c0f66e60:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007fb8c0f66e64:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007fb8c0f66e67:   test   %r10d,%r10d
           │╰  0x00007fb8c0f66e6a:   je     0x00007fb8c0f66e40           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007fb8c0f66e6c:   movabs $0x7fb8d60e5d10,%r10
               0x00007fb8c0f66e76:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   17.03%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  81.14%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls, version 2, compile id 484 
-  17.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 519 
+  81.14%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls, version 2, compile id 484 
+  17.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 519 
    0.32%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -820,8 +820,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  81.14%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_chain_method_calls, version 2, compile id 484 
-  17.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 519 
+  81.14%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_chain_method_calls, version 2, compile id 484 
+  17.03%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_chain_method_calls_jmhTest::conditional_chain_method_calls_avgt_jmhStub, version 6, compile id 519 
    1.49%              kernel  [unknown] 
    0.04%           libjvm.so  ElfSymbolTable::lookup 
    0.03%                      <unknown> 
@@ -871,7 +871,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_nested_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.conditional_nested_method_calls
 
 # Run progress: 50.00% complete, ETA 00:05:26
 # Fork: 1 of 1
@@ -890,12 +890,12 @@ Iteration   5: 28.788 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_nested_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.conditional_nested_method_calls":
   28.521 ±(99.9%) 1.108 ns/op [Average]
   (min, avg, max) = (28.113, 28.521, 28.788), stdev = 0.288
   CI (99.9%): [27.413, 29.629] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.conditional_nested_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.conditional_nested_method_calls:·asm":
 PrintAssembly processed: 116704 total address lines.
 Perf output processed (skipped 55.455 seconds):
  Column 1: cycles (50493 events)
@@ -904,9 +904,9 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 464 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 464 
 
-             # {method} {0x00007fe11f87ef90} &apos;conditional_nested_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark&apos;
+             # {method} {0x00007fe11f87ef90} &apos;conditional_nested_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockCoarseningBenchmark&apos;
              #           [sp+0x40]  (sp of caller)
              0x00007fe158f63ec0:   mov    0x8(%rsi),%r10d
              0x00007fe158f63ec4:   movabs $0x800000000,%r11
@@ -919,15 +919,15 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.21%     0x00007fe158f63ee0:   mov    %eax,-0x14000(%rsp)
    3.00%     0x00007fe158f63ee7:   push   %rbp
              0x00007fe158f63ee8:   sub    $0x30,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@-1 (line 175)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@-1 (line 175)
    0.31%     0x00007fe158f63eec:   mov    %rsi,%rbp
    1.01%     0x00007fe158f63eef:   mov    0x10(%rsi),%r13d
              0x00007fe158f63ef3:   shl    %r13d                        ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@5 (line 175)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@5 (line 175)
    0.31%     0x00007fe158f63ef6:   cmp    $0x20,%r13d
    0.00%     0x00007fe158f63efa:   nopw   0x0(%rax,%rax,1)
    1.01%     0x00007fe158f63f00:   jle    0x00007fe158f64f54           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@10 (line 178)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@10 (line 178)
              0x00007fe158f63f06:   mov    (%rsi),%rax
    0.31%     0x00007fe158f63f09:   mov    %rax,%r10
              0x00007fe158f63f0c:   and    $0x7,%r10
@@ -944,19 +944,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.32%  │  0x00007fe158f63f3e:   xchg   %ax,%ax
           │  0x00007fe158f63f40:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f63f47:   jne    0x00007fe158f645b2           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@15 (line 179)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@15 (line 179)
    1.41%  │  0x00007fe158f63f4d:   add    0x14(%rbp),%r13d
           │  0x00007fe158f63f51:   mov    $0x7,%r10d
           │  0x00007fe158f63f57:   and    0x0(%rbp),%r10
           │  0x00007fe158f63f5b:   nopl   0x0(%rax,%rax,1)
    1.30%  │  0x00007fe158f63f60:   cmp    $0x5,%r10
           │  0x00007fe158f63f64:   jne    0x00007fe158f6430e           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@15 (line 179)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@15 (line 179)
           │  0x00007fe158f63f6a:   cmp    $0x20,%r13d
           │  0x00007fe158f63f6e:   jle    0x00007fe158f64f64           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@22 (line 180)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@22 (line 180)
           │  0x00007fe158f63f74:   mov    0x0(%rbp),%rax
           │  0x00007fe158f63f78:   mov    %rax,%r10
    1.33%  │  0x00007fe158f63f7b:   and    $0x7,%r10
@@ -973,18 +973,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fe158f63fab:   xor    %rax,%r8
    0.65%  │  0x00007fe158f63fae:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f63fb5:   jne    0x00007fe158f64745           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@27 (line 181)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@27 (line 181)
    1.46%  │  0x00007fe158f63fbb:   add    0x14(%rbp),%r13d
           │  0x00007fe158f63fbf:   mov    $0x7,%r10d
           │  0x00007fe158f63fc5:   and    0x0(%rbp),%r10
           │  0x00007fe158f63fc9:   cmp    $0x5,%r10
           │  0x00007fe158f63fcd:   jne    0x00007fe158f64465           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@27 (line 181)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@27 (line 181)
    1.35%  │  0x00007fe158f63fd3:   cmp    $0x20,%r13d
           │  0x00007fe158f63fd7:   jle    0x00007fe158f64f74           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@34 (line 182)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@34 (line 182)
           │  0x00007fe158f63fdd:   mov    0x0(%rbp),%rax
           │  0x00007fe158f63fe1:   mov    %rax,%r10
           │  0x00007fe158f63fe4:   and    $0x7,%r10
@@ -1001,19 +1001,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    0.84%  │  0x00007fe158f64016:   data16 nopw 0x0(%rax,%rax,1)
           │  0x00007fe158f64020:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f64027:   jne    0x00007fe158f648e5           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@39 (line 183)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@39 (line 183)
    0.90%  │  0x00007fe158f6402d:   add    0x14(%rbp),%r13d
    0.44%  │  0x00007fe158f64031:   mov    $0x7,%r10d
           │  0x00007fe158f64037:   and    0x0(%rbp),%r10
           │  0x00007fe158f6403b:   nopl   0x0(%rax,%rax,1)
    0.85%  │  0x00007fe158f64040:   cmp    $0x5,%r10
           │  0x00007fe158f64044:   jne    0x00007fe158f645f3           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@39 (line 183)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@39 (line 183)
    0.45%  │  0x00007fe158f6404a:   cmp    $0x20,%r13d
           │  0x00007fe158f6404e:   jle    0x00007fe158f64f84           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@46 (line 184)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@46 (line 184)
           │  0x00007fe158f64054:   mov    0x0(%rbp),%rax
           │  0x00007fe158f64058:   mov    %rax,%r10
    0.88%  │  0x00007fe158f6405b:   and    $0x7,%r10
@@ -1030,18 +1030,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fe158f6408b:   xor    %rax,%r8
    0.95%  │  0x00007fe158f6408e:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f64095:   jne    0x00007fe158f64a85           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@51 (line 185)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@51 (line 185)
    1.13%  │  0x00007fe158f6409b:   add    0x14(%rbp),%r13d
    0.25%  │  0x00007fe158f6409f:   mov    $0x7,%r10d
           │  0x00007fe158f640a5:   and    0x0(%rbp),%r10
           │  0x00007fe158f640a9:   cmp    $0x5,%r10
           │  0x00007fe158f640ad:   jne    0x00007fe158f6478b           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@51 (line 185)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@51 (line 185)
    1.14%  │  0x00007fe158f640b3:   cmp    $0x20,%r13d
           │  0x00007fe158f640b7:   jle    0x00007fe158f64f94           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@58 (line 186)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@58 (line 186)
    0.25%  │  0x00007fe158f640bd:   mov    0x0(%rbp),%rax
           │  0x00007fe158f640c1:   mov    %rax,%r10
           │  0x00007fe158f640c4:   and    $0x7,%r10
@@ -1058,19 +1058,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.32%  │  0x00007fe158f640f6:   data16 nopw 0x0(%rax,%rax,1)
           │  0x00007fe158f64100:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f64107:   jne    0x00007fe158f64c25           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@63 (line 187)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@63 (line 187)
    1.30%  │  0x00007fe158f6410d:   add    0x14(%rbp),%r13d
           │  0x00007fe158f64111:   mov    $0x7,%r10d
    0.02%  │  0x00007fe158f64117:   and    0x0(%rbp),%r10
           │  0x00007fe158f6411b:   nopl   0x0(%rax,%rax,1)
    1.36%  │  0x00007fe158f64120:   cmp    $0x5,%r10
           │  0x00007fe158f64124:   jne    0x00007fe158f6492b           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@63 (line 187)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@63 (line 187)
           │  0x00007fe158f6412a:   cmp    $0x20,%r13d
           │  0x00007fe158f6412e:   jle    0x00007fe158f64fa4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@70 (line 188)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@70 (line 188)
    0.02%  │  0x00007fe158f64134:   mov    0x0(%rbp),%rax
           │  0x00007fe158f64138:   mov    %rax,%r10
    1.32%  │  0x00007fe158f6413b:   and    $0x7,%r10
@@ -1087,18 +1087,18 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    0.02%  │  0x00007fe158f6416b:   xor    %rax,%r8
    1.32%  │  0x00007fe158f6416e:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f64175:   jne    0x00007fe158f64dc5           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@75 (line 189)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@75 (line 189)
    1.32%  │  0x00007fe158f6417b:   add    0x14(%rbp),%r13d
           │  0x00007fe158f6417f:   mov    $0x7,%r10d
    0.01%  │  0x00007fe158f64185:   and    0x0(%rbp),%r10
           │  0x00007fe158f64189:   cmp    $0x5,%r10
           │  0x00007fe158f6418d:   jne    0x00007fe158f64acb           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@75 (line 189)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@75 (line 189)
    1.27%  │  0x00007fe158f64193:   cmp    $0x20,%r13d
           │  0x00007fe158f64197:   jle    0x00007fe158f64fb4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@82 (line 190)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@82 (line 190)
           │  0x00007fe158f6419d:   mov    0x0(%rbp),%rax
    0.01%  │  0x00007fe158f641a1:   mov    %rax,%r10
           │  0x00007fe158f641a4:   and    $0x7,%r10
@@ -1115,19 +1115,19 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.37%  │  0x00007fe158f641d6:   data16 nopw 0x0(%rax,%rax,1)
           │  0x00007fe158f641e0:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f641e7:   jne    0x00007fe158f64ed2           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@87 (line 191)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@87 (line 191)
    1.31%  │  0x00007fe158f641ed:   add    0x14(%rbp),%r13d
           │  0x00007fe158f641f1:   mov    $0x7,%r10d
           │  0x00007fe158f641f7:   and    0x0(%rbp),%r10
    0.00%  │  0x00007fe158f641fb:   nopl   0x0(%rax,%rax,1)
    1.27%  │  0x00007fe158f64200:   cmp    $0x5,%r10
           │  0x00007fe158f64204:   jne    0x00007fe158f64c6b           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@6 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@87 (line 191)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@6 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@87 (line 191)
    0.00%  │  0x00007fe158f6420a:   cmp    $0x20,%r13d
           │  0x00007fe158f6420e:   jle    0x00007fe158f64fc4           ;*if_icmple {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@94 (line 192)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@94 (line 192)
           │  0x00007fe158f64214:   mov    0x0(%rbp),%rax
           │  0x00007fe158f64218:   mov    %rax,%r10
    1.35%  │  0x00007fe158f6421b:   and    $0x7,%r10
@@ -1144,14 +1144,14 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fe158f6424b:   xor    %rax,%r8
    0.84%  │  0x00007fe158f6424e:   test   $0xffffffffffffff87,%r8
           │  0x00007fe158f64255:   jne    0x00007fe158f64f14           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@99 (line 193)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::sum@-1 (line 226)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@99 (line 193)
    1.36%  │  0x00007fe158f6425b:   add    0x14(%rbp),%r13d
           │  0x00007fe158f6425f:   mov    $0x7,%r10d
           │  0x00007fe158f64265:   and    0x0(%rbp),%r10
           │  0x00007fe158f64269:   cmp    $0x5,%r10
           │  0x00007fe158f6426d:   jne    0x00007fe158f64e0b           ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@-1 (line 175)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@-1 (line 175)
    1.22%  │  0x00007fe158f64273:   mov    %r13d,%eax
           │  0x00007fe158f64276:   add    $0x30,%rsp
           │  0x00007fe158f6427a:   pop    %rbp
@@ -1172,43 +1172,43 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   82.94%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 5, compile id 495 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 5, compile id 495 
 
               0x00007fe158f676a6:   mov    0x38(%rsp),%r10
               0x00007fe158f676ab:   movzbl 0x94(%r10),%r11d             ; implicit exception: dispatches to 0x00007fe158f6775c
                                                                         ;*getfield isDone {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@30 (line 234)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@30 (line 234)
               0x00007fe158f676b3:   mov    $0x1,%ebp
               0x00007fe158f676b8:   test   %r11d,%r11d
           ╭   0x00007fe158f676bb:   jne    0x00007fe158f676ec           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
           │   0x00007fe158f676bd:   data16 xchg %ax,%ax                 ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
    1.30%  │↗  0x00007fe158f676c0:   mov    0x40(%rsp),%rsi
           ││  0x00007fe158f676c5:   xchg   %ax,%ax
           ││  0x00007fe158f676c7:   call   0x00007fe1589fc080           ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*invokevirtual conditional_nested_method_calls {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@17 (line 232)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@17 (line 232)
           ││                                                            ;   {optimized virtual_call}
    0.42%  ││  0x00007fe158f676cc:   mov    0x38(%rsp),%r10
    8.39%  ││  0x00007fe158f676d1:   movzbl 0x94(%r10),%r10d             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
    5.48%  ││  0x00007fe158f676d9:   mov    0x348(%r15),%r11
           ││  0x00007fe158f676e0:   add    $0x1,%rbp                    ; ImmutableOopMap {[48]=Oop [56]=Oop [64]=Oop [0]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@33 (line 234)
           ││  0x00007fe158f676e4:   test   %eax,(%r11)                  ;   {poll}
           ││  0x00007fe158f676e7:   test   %r10d,%r10d
           │╰  0x00007fe158f676ea:   je     0x00007fe158f676c0           ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub@36 (line 235)
           ↘   0x00007fe158f676ec:   movabs $0x7fe16d1f9d10,%r10
               0x00007fe158f676f6:   call   *%r10                        ;*invokestatic nanoTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   15.59%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  82.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 464 
-  15.59%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 5, compile id 495 
+  82.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 464 
+  15.59%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 5, compile id 495 
    0.16%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
@@ -1232,8 +1232,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  82.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 464 
-  15.59%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 5, compile id 495 
+  82.94%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 464 
+  15.59%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 5, compile id 495 
    1.08%              kernel  [unknown] 
    0.07%                      <unknown> 
    0.04%        libc-2.31.so  [unknown] 
@@ -1283,7 +1283,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_gene
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.nested_synchronized
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.nested_synchronized
 
 # Run progress: 66.67% complete, ETA 00:03:36
 # Fork: 1 of 1
@@ -1302,12 +1302,12 @@ Iteration   5: 1353.922 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.nested_synchronized":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.nested_synchronized":
   1353.107 ±(99.9%) 7.013 ns/op [Average]
   (min, avg, max) = (1350.029, 1353.107, 1354.802), stdev = 1.821
   CI (99.9%): [1346.094, 1360.120] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.nested_synchronized:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.nested_synchronized:·asm":
 PrintAssembly processed: 115628 total address lines.
 Perf output processed (skipped 55.492 seconds):
  Column 1: cycles (50801 events)
@@ -1433,7 +1433,7 @@ interpreter, fast_iaccess_0  221 fast_iaccess_0
    0.92%         interpreter  ishl  120 ishl  
    0.86%         interpreter  aload_3  45 aload_3  
    0.81%         interpreter  aload_2  44 aload_2  
-   0.80%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_nested_synchronized_jmhTest::nested_synchronized_avgt_jmhStub, version 5, compile id 490 
+   0.80%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_nested_synchronized_jmhTest::nested_synchronized_avgt_jmhStub, version 5, compile id 490 
    0.77%         interpreter  astore_2  77 astore_2  
    0.74%              kernel  [unknown] 
    0.72%         interpreter  ireturn  172 ireturn  
@@ -1458,7 +1458,7 @@ interpreter, fast_iaccess_0  221 fast_iaccess_0
    1.89%         interpreter  ireturn  172 ireturn  
    0.92%         interpreter  ishl  120 ishl  
    0.86%         interpreter  aload_3  45 aload_3  
-   0.83%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_nested_synchronized_jmhTest::nested_synchronized_avgt_jmhStub, version 5, compile id 490 
+   0.83%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_nested_synchronized_jmhTest::nested_synchronized_avgt_jmhStub, version 5, compile id 490 
    0.81%         interpreter  aload_2  44 aload_2  
    0.77%         interpreter  astore_2  77 astore_2  
    0.69%         interpreter  astore_3  78 astore_3  
@@ -1494,7 +1494,7 @@ interpreter, fast_iaccess_0  221 fast_iaccess_0
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.recursive_method_calls
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.recursive_method_calls
 
 # Run progress: 83.33% complete, ETA 00:01:48
 # Fork: 1 of 1
@@ -1513,12 +1513,12 @@ Iteration   5: 42.546 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.recursive_method_calls":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.recursive_method_calls":
   42.590 ±(99.9%) 0.538 ns/op [Average]
   (min, avg, max) = (42.509, 42.590, 42.839), stdev = 0.140
   CI (99.9%): [42.052, 43.129] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark.recursive_method_calls:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark.recursive_method_calls:·asm":
 PrintAssembly processed: 115483 total address lines.
 Perf output processed (skipped 55.473 seconds):
  Column 1: cycles (51206 events)
@@ -1527,7 +1527,7 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum, version 2, compile id 454 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum, version 2, compile id 454 
 
                   # parm1:    rcx       = int
                   #           [sp+0x50]  (sp of caller)
@@ -1560,29 +1560,29 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    1.70%  │  │    0x00007fd7f4f6330b:   xor    %rax,%r8
    3.24%  │  │    0x00007fd7f4f6330e:   test   $0xffffffffffffff87,%r8
           │  │    0x00007fd7f4f63315:   jne    0x00007fd7f4f63425           ;*synchronization entry
-          │  │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@-1 (line 230)
+          │  │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@-1 (line 230)
    2.97%  │  │    0x00007fd7f4f6331b:   mov    %ebp,%ecx
    0.11%  │  │    0x00007fd7f4f6331d:   data16 xchg %ax,%ax
    0.04%  │  │    0x00007fd7f4f63320:   test   %ecx,%ecx
           │╭ │    0x00007fd7f4f63322:   je     0x00007fd7f4f63381           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@1 (line 230)
+          ││ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@1 (line 230)
    0.22%  ││ │    0x00007fd7f4f63328:   mov    0x8(%rsp),%r10
    2.28%  ││ │    0x00007fd7f4f6332d:   mov    0x14(%r10),%ebp              ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-          ││ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@7 (line 233)
+          ││ │                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@7 (line 233)
    0.22%  ││ │    0x00007fd7f4f63331:   cmp    $0x1,%ecx
           ││╭│    0x00007fd7f4f63334:   je     0x00007fd7f4f6339e           ;*ifne {reexecute=0 rethrow=0 return_oop=0}
-          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@1 (line 230)
-          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
+          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@1 (line 230)
+          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
           ││││    0x00007fd7f4f6333a:   add    $0xfffffffe,%ecx             ;*isub {reexecute=0 rethrow=0 return_oop=0}
-          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@14 (line 233)
-          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
+          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@14 (line 233)
+          ││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
    0.29%  ││││    0x00007fd7f4f6333d:   mov    %r10,%rsi
    2.15%  ││││    0x00007fd7f4f63340:   mov    (%rsp),%edx
    0.19%  ││││    0x00007fd7f4f63343:   mov    %rsi,(%rsp)
           │││╰    0x00007fd7f4f63347:   call   0x00007fd7f4f632c0           ; ImmutableOopMap {[0]=Oop [8]=Oop }
           │││                                                               ;*invokevirtual recursiveSum {reexecute=0 rethrow=0 return_oop=0}
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
-          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
+          │││                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
           │││                                                               ;   {optimized virtual_call}
    1.70%  │││     0x00007fd7f4f6334c:   mov    %eax,%ebx
    1.86%  │││     0x00007fd7f4f6334e:   add    %ebp,%ebx
@@ -1592,7 +1592,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   10.18%  │││  │  0x00007fd7f4f6335e:   xchg   %ax,%ax
           │││  │  0x00007fd7f4f63360:   cmp    $0x5,%r10
           │││  │  0x00007fd7f4f63364:   jne    0x00007fd7f4f63467           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@19 (line 233)
+          │││  │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@19 (line 233)
    2.54%  │││  │  0x00007fd7f4f6336a:   add    %ebp,%ebx
    0.14%  │││ ↗│  0x00007fd7f4f6336c:   mov    %ebx,%eax
    0.06%  │││ ││  0x00007fd7f4f6336e:   add    $0x40,%rsp
@@ -1605,7 +1605,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    0.00%  │ │ ││  0x00007fd7f4f6338c:   and    (%r11),%r10
    0.04%  │ │ ││  0x00007fd7f4f6338f:   cmp    $0x5,%r10
           │ │ ││  0x00007fd7f4f63393:   jne    0x00007fd7f4f63525           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@5 (line 231)
+          │ │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@5 (line 231)
    0.22%  │ │ ││  0x00007fd7f4f63399:   mov    (%rsp),%ebx
    0.61%  │ │ ╰│  0x00007fd7f4f6339c:   jmp    0x00007fd7f4f6336c
           │ ↘  │  0x00007fd7f4f6339e:   mov    (%rsp),%ebx
@@ -1622,9 +1622,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   65.32%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls, version 2, compile id 455 
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls, version 2, compile id 455 
 
-             # {method} {0x00007fd7e507e5e8} &apos;recursive_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark&apos;
+             # {method} {0x00007fd7e507e5e8} &apos;recursive_method_calls&apos; &apos;()I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/LockCoarseningBenchmark&apos;
              #           [sp+0x50]  (sp of caller)
              0x00007fd7f4f63aa0:   mov    0x8(%rsi),%r10d
              0x00007fd7f4f63aa4:   movabs $0x800000000,%r11
@@ -1637,12 +1637,12 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
    0.82%     0x00007fd7f4f63ac0:   mov    %eax,-0x14000(%rsp)
    1.29%     0x00007fd7f4f63ac7:   push   %rbp
              0x00007fd7f4f63ac8:   sub    $0x40,%rsp                   ;*synchronization entry
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@-1 (line 116)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@-1 (line 116)
    0.27%     0x00007fd7f4f63acc:   mov    %rsi,%rbp
    0.54%     0x00007fd7f4f63acf:   mov    0x10(%rsi),%r11d
              0x00007fd7f4f63ad3:   mov    (%rsi),%rax
    0.30%     0x00007fd7f4f63ad6:   shl    %r11d                        ;*ishl {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@5 (line 116)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@5 (line 116)
              0x00007fd7f4f63ad9:   mov    %rax,%r10
    0.57%     0x00007fd7f4f63adc:   and    $0x7,%r10
              0x00007fd7f4f63ae0:   cmp    $0x5,%r10
@@ -1659,11 +1659,11 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fd7f4f63b15:   jne    0x00007fd7f4f63bfa
    0.90%  │  0x00007fd7f4f63b1b:   mov    %r11d,%edx
           │  0x00007fd7f4f63b1e:   mov    %rbp,(%rsp)                  ;*synchronization entry
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@-1 (line 230)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@-1 (line 230)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
           │  0x00007fd7f4f63b22:   mov    0x14(%rbp),%r11d             ;*getfield incrementValue {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@7 (line 233)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@7 (line 233)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
           │  0x00007fd7f4f63b26:   mov    %r11d,0x10(%rsp)
    0.88%  │  0x00007fd7f4f63b2b:   mov    $0x7,%ebp
           │  0x00007fd7f4f63b30:   mov    $0x6,%ecx
@@ -1671,22 +1671,22 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
           │  0x00007fd7f4f63b39:   xchg   %ax,%ax
    0.86%  │  0x00007fd7f4f63b3b:   call   0x00007fd7f4f632c0           ; ImmutableOopMap {[0]=Oop }
           │                                                            ;*invokevirtual recursiveSum {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@15 (line 233)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
           │                                                            ;   {optimized virtual_call}
           │  0x00007fd7f4f63b40:   mov    %eax,%r13d
    0.89%  │  0x00007fd7f4f63b43:   mov    (%rsp),%r11
    2.51%  │  0x00007fd7f4f63b47:   and    (%r11),%rbp
    4.30%  │  0x00007fd7f4f63b4a:   cmp    $0x5,%rbp
           │  0x00007fd7f4f63b4e:   jne    0x00007fd7f4f63c2f           ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@19 (line 233)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@19 (line 233)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
    0.92%  │  0x00007fd7f4f63b54:   mov    %r13d,%eax
           │  0x00007fd7f4f63b57:   add    0x10(%rsp),%eax
           │  0x00007fd7f4f63b5b:   add    0x10(%rsp),%eax              ;*iadd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum@18 (line 233)
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum@18 (line 233)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls@11 (line 117)
           │  0x00007fd7f4f63b5f:   add    $0x40,%rsp
    0.92%  │  0x00007fd7f4f63b63:   pop    %rbp
           │  0x00007fd7f4f63b64:   cmp    0x340(%r15),%rsp             ;   {poll_return}
@@ -1703,9 +1703,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
   21.65%  <total for region 2>
 
 ....[Hottest Regions]...............................................................................
-  65.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum, version 2, compile id 454 
-  21.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls, version 2, compile id 455 
-   9.99%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 494 
+  65.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum, version 2, compile id 454 
+  21.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls, version 2, compile id 455 
+   9.99%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 494 
    1.73%              kernel  [unknown] 
    0.12%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -1728,9 +1728,9 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoar
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  65.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursiveSum, version 2, compile id 454 
-  21.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LockCoarseningBenchmark::recursive_method_calls, version 2, compile id 455 
-   9.99%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.jmh_generated.LockCoarseningBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 494 
+  65.32%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursiveSum, version 2, compile id 454 
+  21.65%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::recursive_method_calls, version 2, compile id 455 
+   9.99%         c2, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.LockCoarseningBenchmark_recursive_method_calls_jmhTest::recursive_method_calls_avgt_jmhStub, version 6, compile id 494 
    2.72%              kernel  [unknown] 
    0.04%                      <unknown> 
    0.04%           libjvm.so  ElfSymbolTable::lookup 

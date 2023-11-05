@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.DesEcbCryptoBenchmark.decrypt","avgt",1,25,1.017333,0.000704,"ms/op",16384,168,DESede/ECB/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.DesEcbCryptoBenchmark.decrypt","avgt",1,25,1.018699,0.000609,"ms/op",16384,168,DESede/ECB/PKCS5Padding
-"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.DesEcbCryptoBenchmark.encrypt","avgt",1,25,1.017028,0.000329,"ms/op",16384,168,DESede/ECB/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.macro.crypto.DesEcbCryptoBenchmark.encrypt","avgt",1,25,1.018574,0.001094,"ms/op",16384,168,DESede/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.decrypt","avgt",1,25,1.017333,0.000704,"ms/op",16384,168,DESede/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.decrypt","avgt",1,25,1.018699,0.000609,"ms/op",16384,168,DESede/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.encrypt","avgt",1,25,1.017028,0.000329,"ms/op",16384,168,DESede/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.encrypt","avgt",1,25,1.018574,0.001094,"ms/op",16384,168,DESede/ECB/PKCS5Padding

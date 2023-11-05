@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.cached_enum_values","avgt",1,25,16.132276,0.019239,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.EnumValuesLookupBenchmark.enum_values","avgt",1,25,23.652073,0.029678,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values","avgt",1,25,16.132276,0.019239,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values","avgt",1,25,23.652073,0.029678,"ns/op"

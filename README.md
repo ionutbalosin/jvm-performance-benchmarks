@@ -6,11 +6,11 @@
 
 This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
-The repository's benchmarks encompass several main areas.
-The first area, referred to as *micro compiler*, is dedicated to directly targeting JIT Compiler optimizations by following specific handwritten code patterns. 
-Complementary, the second area, referred to as *macro*, covers a broader spectrum of programs and has multiple focuses:
-   - Implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, game of life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional) and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
-   - Benchmarks that specifically target the JDK API (e.g., `java.io`, `java.nio`, `java.security`, `java.util.random`, etc.).
+The repository's benchmarks encompass several main areas:
+
+- The first area, referred to as *compiler*, is dedicated to directly targeting JIT Compiler optimizations by following specific handwritten code patterns.
+- The second area, referred to as *api*, covers benchmarks that specifically target the Java Platform, Standard Edition (Java SE) APIs (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) as well as Java Development Kit (JDK) APIs (e.g., `jdk.incubator.vector`, etc.).
+- The third area, referred to as *miscellaneous*, covers a broader spectrum of programs and includes implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, Game of Life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
 The benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
 
@@ -50,8 +50,8 @@ The main objectives of this project are:
 Each benchmark focuses on a specific execution pattern or task that could be fully optimized under ideal conditions (i.e., clean profiles). While some of these patterns might rarely appear directly in user programs, they can emerge after several optimizations, such as inlining high-level operations. Real-life applications can have varying conditions, making benchmarks not always a reliable predictor on a larger scale. Nonetheless, even though artificial benchmarks may not capture the complete truth, they can still offer valuable insights when properly implemented.
 
 **Out of Scope**:
-- Micro-benchmarking of any "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
-- Micro-benchmarking of any Garbage Collector (*)
+- Benchmarking of any "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
+- Benchmarking of any Garbage Collector (*)
 - Benchmarking of large applications (e.g., web-based microservices, etc.)
 
 > (*) Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
@@ -289,7 +289,7 @@ If the `<arch>` parameter is omitted, it is automatically detected based on the 
 
 Before generating the benchmarks, the script triggers a few additional steps:
 - Pre-process (e.g., merge, split) some benchmark result files. This is necessary to avoid either too fragmented or too sparse generated benchmark plots.
-- Calculate the normalized geometric mean for each benchmark category (e.g., jit, macro). The results of the normalized geometric mean are saved under the `results/jdk-$JDK_VERSION/$ARCH/geomean` directory.
+- Calculate the normalized geometric mean for each benchmark category (e.g., micro-optimizations, JDK API, miscellaneous). The results of the normalized geometric mean are saved under the `results/jdk-$JDK_VERSION/$ARCH/geomean` directory.
 
 The benchmark plots are saved under the `results/jdk-$JDK_VERSION/$ARCH/plot` directory.
 

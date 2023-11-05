@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_find
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_find
 # Parameters: (regexp = ^(.*[aeuio].*){3,}$)
 
 # Run progress: 0.00% complete, ETA 00:05:00
@@ -28,12 +28,12 @@ Iteration   5: 1582.461 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_find":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_find":
   1582.792 ±(99.9%) 3.577 us/op [Average]
   (min, avg, max) = (1581.613, 1582.792, 1583.929), stdev = 0.929
   CI (99.9%): [1579.215, 1586.370] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_find:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_find:·asm":
 PrintAssembly processed: 216609 total address lines.
 Perf output processed (skipped 58.838 seconds):
  Column 1: cycles (50862 events)
@@ -820,23 +820,23 @@ jvmci, level 4, java.util.regex.Pattern$GroupTail::match, version 2, compile id 
   36.59%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 785 
   13.80%       jvmci, level 4  java.util.regex.Pattern$GroupTail::match, version 2, compile id 782 
    8.82%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 778 
-   8.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   8.13%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
    7.78%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 778 
    6.91%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 785 
-   2.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   2.59%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
    2.08%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 785 
    1.50%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 778 
-   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
-   1.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
-   1.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   1.34%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   1.33%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   1.05%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
    0.84%       jvmci, level 4  java.util.regex.IntHashSet::contains, version 2, compile id 798 
    0.70%       jvmci, level 4  java.util.regex.IntHashSet::add, version 2, compile id 799 
    0.62%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 778 
    0.61%               kernel  [unknown] 
-   0.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
-   0.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
-   0.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
-   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   0.61%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   0.60%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   0.47%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+   0.37%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
    3.28%  <...other 469 warm regions...>
 ....................................................................................................
  100.00%  <totals>
@@ -844,7 +844,7 @@ jvmci, level 4, java.util.regex.Pattern$GroupTail::match, version 2, compile id 
 ....[Hottest Methods (after inlining)]..............................................................
   45.58%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 785 
   18.96%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 778 
-  16.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
+  16.73%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_find, version 4, compile id 804 
   13.80%       jvmci, level 4  java.util.regex.Pattern$GroupTail::match, version 2, compile id 782 
    2.05%               kernel  [unknown] 
    0.84%       jvmci, level 4  java.util.regex.IntHashSet::contains, version 2, compile id 798 
@@ -895,7 +895,7 @@ jvmci, level 4, java.util.regex.Pattern$GroupTail::match, version 2, compile id 
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_matches
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_matches
 # Parameters: (regexp = ^(.*[aeuio].*){3,}$)
 
 # Run progress: 33.33% complete, ETA 00:03:46
@@ -915,12 +915,12 @@ Iteration   5: 1497.516 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_matches":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_matches":
   1496.952 ±(99.9%) 3.037 us/op [Average]
   (min, avg, max) = (1495.615, 1496.952, 1497.542), stdev = 0.789
   CI (99.9%): [1493.915, 1499.989] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.pattern_matches:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_matches:·asm":
 PrintAssembly processed: 224882 total address lines.
 Perf output processed (skipped 59.026 seconds):
  Column 1: cycles (50558 events)
@@ -1562,24 +1562,24 @@ jvmci, level 4, java.util.regex.Pattern$Loop::match, version 2, compile id 792
 
 ....[Hottest Regions]...............................................................................
   38.72%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 792 
-   8.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
-   7.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   8.40%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   7.84%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
    7.38%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 792 
    7.00%       jvmci, level 4  java.util.regex.Pattern$GroupTail::match, version 2, compile id 791 
    4.00%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 783 
    3.75%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 783 
-   3.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
-   2.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
-   2.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   3.06%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   2.71%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   2.65%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
    2.39%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 792 
-   1.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
-   1.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   1.90%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   1.62%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
    1.25%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 783 
    0.81%       jvmci, level 4  java.util.regex.IntHashSet::contains, version 2, compile id 806 
-   0.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   0.72%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
    0.69%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 783 
    0.67%       jvmci, level 4  java.util.regex.IntHashSet::add, version 2, compile id 808 
-   0.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+   0.50%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
    0.38%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 783 
    3.55%  <...other 384 warm regions...>
 ....................................................................................................
@@ -1587,7 +1587,7 @@ jvmci, level 4, java.util.regex.Pattern$Loop::match, version 2, compile id 792
 
 ....[Hottest Methods (after inlining)]..............................................................
   48.49%       jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 792 
-  30.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
+  30.20%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::pattern_matches, version 4, compile id 811 
   10.22%       jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 783 
    7.00%       jvmci, level 4  java.util.regex.Pattern$GroupTail::match, version 2, compile id 791 
    1.14%               kernel  [unknown] 
@@ -1638,7 +1638,7 @@ jvmci, level 4, java.util.regex.Pattern$Loop::match, version 2, compile id 792
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.string_matches
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.string_matches
 # Parameters: (regexp = ^(.*[aeuio].*){3,}$)
 
 # Run progress: 66.67% complete, ETA 00:01:53
@@ -1658,12 +1658,12 @@ Iteration   5: 2139.672 us/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.string_matches":
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.string_matches":
   2143.312 ±(99.9%) 97.682 us/op [Average]
   (min, avg, max) = (2108.091, 2143.312, 2179.546), stdev = 25.368
   CI (99.9%): [2045.630, 2240.994] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark.string_matches:·asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.string_matches:·asm":
 PrintAssembly processed: 275190 total address lines.
 Perf output processed (skipped 58.853 seconds):
  Column 1: cycles (50738 events)
@@ -2305,31 +2305,31 @@ jvmci, level 4, java.util.regex.Pattern$Loop::match, version 2, compile id 826
 
 ....[Hottest Regions]...............................................................................
   28.30%      jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 826 
-   7.18%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   7.04%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   7.18%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   7.04%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
    6.20%      jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 826 
-   5.99%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   5.99%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
    5.39%      jvmci, level 4  java.util.regex.Pattern$GroupTail::match, version 2, compile id 825 
    3.00%      jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 794 
    2.87%      jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 794 
-   1.80%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.77%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.80%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.77%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
    1.75%      jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 826 
-   1.51%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.47%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.34%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.28%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.18%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.13%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.10%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.07%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
-   1.04%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.51%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.47%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.34%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.28%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.18%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.13%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.10%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.07%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+   1.04%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
   17.58%  <...other 495 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  45.26%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
+  45.26%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark::string_matches, version 4, compile id 872 
   36.25%      jvmci, level 4  java.util.regex.Pattern$Loop::match, version 2, compile id 826 
    7.79%      jvmci, level 4  java.util.regex.Pattern$CharPropertyGreedy::match, version 2, compile id 794 
    5.39%      jvmci, level 4  java.util.regex.Pattern$GroupTail::match, version 2, compile id 825 
