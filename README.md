@@ -51,12 +51,12 @@ Each benchmark focuses on a specific execution pattern or task that could be ful
 
 **Out of Scope**:
 - Benchmarking "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
-- Benchmarking Garbage Collectors [*]
+- Benchmarking Garbage Collectors `(*)`
 - Benchmarking large applications (e.g., web-based microservices, etc.)
 - Benchmarking the entire Java SE APIs or JDK APIs
 
 **Notes:**
-- [*] Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
+- `(*)` Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
 
 ## JMH Caveats
 
@@ -114,18 +114,18 @@ Windows is not the primary focus of this benchmark, so the script [configure-os-
 
 The table below summarizes the JVM distributions included in the benchmark. For transparency, we provide a brief explanation of why others are not supported.
 
-JVM Distribution     | Included | Build
--------------------- |----------| -------------------------------------------------------
-OpenJDK HotSpot VM   | Yes      | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads)                        
-GraalVM CE           | Yes      | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)                       
-Oracle GraalVM [1]   | Yes      | [Download](https://www.graalvm.org/downloads)                      
-Azul Prime VM        | Yes [2]  | [Download](https://www.azul.com/downloads)
-Eclipse OpenJ9 VM    | No [3]   | NA
+JVM Distribution     | Included  | Build
+-------------------- |-----------| -------------------------------------------------------
+OpenJDK HotSpot VM   | Yes       | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads)                        
+GraalVM CE           | Yes       | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)                       
+Oracle GraalVM `(1)`   | Yes       | [Download](https://www.graalvm.org/downloads)                      
+Azul Prime VM        | Yes `(2)` | [Download](https://www.azul.com/downloads)
+Eclipse OpenJ9 VM    | No `(3)`  | NA
 
 **Notes:**
-- [1] Oracle GraalVM was formerly known as GraalVM EE
-- [2] License restrictions might apply
-- [3] Please see the reasons below
+- `(1)` Oracle GraalVM was formerly known as GraalVM EE
+- `(2)` License restrictions might apply
+- `(3)` Please see the reasons below
 
 ### Azul Prime VM
 
