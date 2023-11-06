@@ -1,0 +1,5 @@
+"VM","Normalized.Geometric.Mean","Nr.of.Benchmarks","Benchmarks.Unit"
+"OpenJDK HotSpot VM",1,433,"ns/op"
+"GraalVM CE",1.06,433,"ns/op"
+"Oracle GraalVM",0.91,433,"ns/op"
+"Azul Prime VM",NA,0,"ns/op"

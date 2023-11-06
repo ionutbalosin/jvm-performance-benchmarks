@@ -53,6 +53,9 @@ sanitizeAndMergeBenchmarkResults <- function(jmh_output_folder, jvm_identifier, 
     }
   }
 
+  # To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
+  closeAllConnections()
+
   return(result)
 }
 

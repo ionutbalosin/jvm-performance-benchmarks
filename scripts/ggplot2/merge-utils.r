@@ -41,6 +41,9 @@ mergeBenchmarkResults <- function(path, benchmark_file_paths, column_name, colum
     }
   }
 
+  # To prevent the "all connections are in use" error that can occur when dealing with multiple file connections and not closing them properly
+  closeAllConnections()
+
   return(result)
 }
 

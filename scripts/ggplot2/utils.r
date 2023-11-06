@@ -79,9 +79,11 @@ writeDataToCsvFile <- function(path, file, data) {
       write.table(data, csv_file, sep = ",", row.names = FALSE)
     },
     warning = function(w) {
+      cat("Warning: ", conditionMessage(w), "\n")
       cat("Cannot write to", file.path(path, file), "File skipped.\n")
     },
     error = function(e) {
+      cat("Error: ", conditionMessage(e), "\n")
       cat("Cannot write to", file.path(path, file), "File skipped.\n")
     },
     finally = {

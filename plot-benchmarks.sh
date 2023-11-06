@@ -143,18 +143,22 @@ extract_benchmark_files() {
 benchmarks_geometric_mean() {
   echo "Extracting benchmark categories (may take a few seconds) ..."
 
-  jit_benchmark_files=($(extract_benchmark_files "micro/compiler"))
-  echo "Identified ${#jit_benchmark_files[@]} 'jit' benchmarks (possibly including duplicates)."
+  api_benchmark_files=($(extract_benchmark_files "api"))
+  echo "Identified ${#api_benchmark_files[@]} 'api' benchmarks (possibly including duplicates)."
 
-  macro_benchmark_files=($(extract_benchmark_files "macro"))
-  echo "Identified ${#macro_benchmark_files[@]} 'macro' benchmarks (possibly including duplicates)."
+  compiler_benchmark_files=($(extract_benchmark_files "compiler"))
+  echo "Identified ${#compiler_benchmark_files[@]} 'compiler' benchmarks (possibly including duplicates)."
+
+  miscellaneous_benchmark_files=($(extract_benchmark_files "miscellaneous"))
+  echo "Identified ${#miscellaneous_benchmark_files[@]} 'miscellaneous' benchmarks (possibly including duplicates)."
 
   if R <./scripts/ggplot2/geomean-benchmark.r --no-save \
     --args "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
     "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
     "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
     "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT" \
-    "${#jit_benchmark_files[@]}" "${#macro_benchmark_files[@]}" "${jit_benchmark_files[@]}" "${macro_benchmark_files[@]}"; then
+    "${#api_benchmark_files[@]}" "${#compiler_benchmark_files[@]}" "${#miscellaneous_benchmark_files[@]}" \
+    "${api_benchmark_files[@]}" "${compiler_benchmark_files[@]}" "${miscellaneous_benchmark_files[@]}"; then
     echo ""
     echo "Benchmarks' normalized geometric mean successfully calculated."
   else
@@ -167,8 +171,9 @@ benchmarks_geometric_mean() {
 calculate_benchmarks_geometric_mean() {
   echo "This will calculate the normalized geometric mean (per category) for a specific set of benchmarks."
   echo "For example:"
-  echo " - JIT compiler benchmarks' normalized geometric mean"
-  echo " - Macro benchmarks' normalized geometric mean"
+  echo " - API benchmarks' normalized geometric mean"
+  echo " - Compiler benchmarks' normalized geometric mean"
+  echo " - Miscellaneous benchmarks' normalized geometric mean"
   echo "WARNING: You might skip this step if the normalized geometric mean was already calculated during a previous execution."
   echo ""
 
