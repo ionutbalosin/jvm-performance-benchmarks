@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.*;
 
-
 /*
  * Test the performance of:
  * - instanceof checks
@@ -48,115 +47,6 @@ public class TypeSwitchBenchmark {
   private final int SIZE = 100_000;
   private I[] interfaceArray;
   private AsIs[] asIsArray;
-
-  static int switchMethod(I i) {
-    return switch (i) {
-      case AsIs a -> a.value;
-      case LongToInt b -> (int) b.value;
-      case ShortToInt b -> b.value;
-      case ByteToInt b -> b.value;
-      case CharToInt b -> b.value;
-      case DoubleToInt b -> (int) b.value;
-      case FloatToInt b -> (int) b.value;
-      case StringLength c -> c.value.length();
-    };
-  }
-
-  static int switchIfMethod(I i) {
-    return switch (i) {
-      case AsIs a -> {
-        if ((a.value & 1) == 0) {
-          yield 2 * a.value;
-        }
-        yield a.value;
-      }
-      case LongToInt b -> {
-        if ((b.value & 1) == 0) {
-          yield 2 * (int) b.value;
-        }
-        yield (int) b.value;
-      }
-      case ShortToInt b -> {
-        if ((b.value & 1) == 0) {
-          yield 2 * b.value;
-        }
-        yield b.value;
-      }
-      case ByteToInt b -> {
-        if ((b.value & 1) == 0) {
-          yield 2 * b.value;
-        }
-        yield b.value;
-      }
-      case CharToInt b -> {
-        if ((b.value & 1) == 0) {
-          yield 2 * b.value;
-        }
-        yield b.value;
-      }
-      case DoubleToInt b -> {
-        if (((int) b.value & 1) == 0) {
-          yield 2 * (int) b.value;
-        }
-        yield (int) b.value;
-      }
-      case FloatToInt b -> {
-        if (((int) b.value & 1) == 0) {
-          yield 2 * (int) b.value;
-        }
-        yield (int) b.value;
-      }
-      case StringLength c -> {
-        if ((c.value.length() & 1) == 0) {
-          yield 2 * c.value.length();
-        }
-        yield c.value.length();
-      }
-    };
-  }
-
-  static int switchWhenMethod(I i) {
-    return switch (i) {
-      case AsIs a when (a.value & 1) == 0 -> 2 * a.value;
-      case AsIs a -> a.value;
-      case LongToInt b when (b.value & 1) == 0 -> 2 * (int) b.value;
-      case LongToInt b -> (int) b.value;
-      case ShortToInt b when (b.value & 1) == 0 -> 2 * b.value;
-      case ShortToInt b -> b.value;
-      case ByteToInt b when (b.value & 1) == 0 -> 2 * b.value;
-      case ByteToInt b -> b.value;
-      case CharToInt b when (b.value & 1) == 0 -> 2 * b.value;
-      case CharToInt b -> b.value;
-      case DoubleToInt b when (((int) b.value & 1) == 0) -> 2 * (int) b.value;
-      case DoubleToInt b -> (int) b.value;
-      case FloatToInt b when (((int) b.value & 1) == 0) -> 2 * (int) b.value;
-      case FloatToInt b -> (int) b.value;
-      case StringLength c when (c.value.length() & 1) == 0 -> 2 * c.value.length();
-      case StringLength c -> c.value.length();
-    };
-  }
-
-  static int if_instanceof(I i) {
-    if (i instanceof AsIs) {
-      return ((AsIs) i).value;
-    } else if (i instanceof LongToInt) {
-      return (int) ((LongToInt) i).value;
-    } else if (i instanceof ShortToInt) {
-      return ((ShortToInt) i).value;
-    } else if (i instanceof ByteToInt) {
-      return ((ByteToInt) i).value;
-    } else if (i instanceof CharToInt) {
-      return ((CharToInt) i).value;
-    } else if (i instanceof DoubleToInt) {
-      return (int) ((DoubleToInt) i).value;
-    } else if (i instanceof FloatToInt) {
-      return (int) ((FloatToInt) i).value;
-    } else if (i instanceof StringLength) {
-      return ((StringLength) i).value.length();
-    } else {
-      throw new AssertionError();
-    }
-  }
 
   @Setup
   public void init() {
@@ -277,4 +167,113 @@ public class TypeSwitchBenchmark {
   record FloatToInt(float value) implements I {}
 
   record StringLength(String value) implements I {}
+
+  static int switchMethod(I i) {
+    return switch (i) {
+      case AsIs a -> a.value;
+      case LongToInt b -> (int) b.value;
+      case ShortToInt b -> b.value;
+      case ByteToInt b -> b.value;
+      case CharToInt b -> b.value;
+      case DoubleToInt b -> (int) b.value;
+      case FloatToInt b -> (int) b.value;
+      case StringLength c -> c.value.length();
+    };
+  }
+
+  static int switchIfMethod(I i) {
+    return switch (i) {
+      case AsIs a -> {
+        if ((a.value & 1) == 0) {
+          yield 2 * a.value;
+        }
+        yield a.value;
+      }
+      case LongToInt b -> {
+        if ((b.value & 1) == 0) {
+          yield 2 * (int) b.value;
+        }
+        yield (int) b.value;
+      }
+      case ShortToInt b -> {
+        if ((b.value & 1) == 0) {
+          yield 2 * b.value;
+        }
+        yield b.value;
+      }
+      case ByteToInt b -> {
+        if ((b.value & 1) == 0) {
+          yield 2 * b.value;
+        }
+        yield b.value;
+      }
+      case CharToInt b -> {
+        if ((b.value & 1) == 0) {
+          yield 2 * b.value;
+        }
+        yield b.value;
+      }
+      case DoubleToInt b -> {
+        if (((int) b.value & 1) == 0) {
+          yield 2 * (int) b.value;
+        }
+        yield (int) b.value;
+      }
+      case FloatToInt b -> {
+        if (((int) b.value & 1) == 0) {
+          yield 2 * (int) b.value;
+        }
+        yield (int) b.value;
+      }
+      case StringLength c -> {
+        if ((c.value.length() & 1) == 0) {
+          yield 2 * c.value.length();
+        }
+        yield c.value.length();
+      }
+    };
+  }
+
+  static int switchWhenMethod(I i) {
+    return switch (i) {
+      case AsIs a when (a.value & 1) == 0 -> 2 * a.value;
+      case AsIs a -> a.value;
+      case LongToInt b when (b.value & 1) == 0 -> 2 * (int) b.value;
+      case LongToInt b -> (int) b.value;
+      case ShortToInt b when (b.value & 1) == 0 -> 2 * b.value;
+      case ShortToInt b -> b.value;
+      case ByteToInt b when (b.value & 1) == 0 -> 2 * b.value;
+      case ByteToInt b -> b.value;
+      case CharToInt b when (b.value & 1) == 0 -> 2 * b.value;
+      case CharToInt b -> b.value;
+      case DoubleToInt b when (((int) b.value & 1) == 0) -> 2 * (int) b.value;
+      case DoubleToInt b -> (int) b.value;
+      case FloatToInt b when (((int) b.value & 1) == 0) -> 2 * (int) b.value;
+      case FloatToInt b -> (int) b.value;
+      case StringLength c when (c.value.length() & 1) == 0 -> 2 * c.value.length();
+      case StringLength c -> c.value.length();
+    };
+  }
+
+  static int if_instanceof(I i) {
+    if (i instanceof AsIs) {
+      return ((AsIs) i).value;
+    } else if (i instanceof LongToInt) {
+      return (int) ((LongToInt) i).value;
+    } else if (i instanceof ShortToInt) {
+      return ((ShortToInt) i).value;
+    } else if (i instanceof ByteToInt) {
+      return ((ByteToInt) i).value;
+    } else if (i instanceof CharToInt) {
+      return ((CharToInt) i).value;
+    } else if (i instanceof DoubleToInt) {
+      return (int) ((DoubleToInt) i).value;
+    } else if (i instanceof FloatToInt) {
+      return (int) ((FloatToInt) i).value;
+    } else if (i instanceof StringLength) {
+      return ((StringLength) i).value.length();
+    } else {
+      throw new AssertionError();
+    }
+  }
 }

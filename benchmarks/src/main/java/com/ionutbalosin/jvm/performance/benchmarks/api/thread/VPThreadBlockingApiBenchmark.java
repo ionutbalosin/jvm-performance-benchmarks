@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.api;
+package com.ionutbalosin.jvm.performance.benchmarks.api.thread;
 
 import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;

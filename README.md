@@ -8,9 +8,9 @@ This repository contains various Java Virtual Machine (JVM) benchmarks with a pr
 
 The repository's benchmarks encompass several main areas:
 
-- The first area, referred to as *compiler*, is dedicated to directly targeting JIT Compiler optimizations by following specific handwritten code patterns.
-- The second area, referred to as *api*, covers benchmarks that specifically target the Java Platform, Standard Edition (Java SE) APIs (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) as well as Java Development Kit (JDK) APIs (e.g., `jdk.incubator.vector`, etc.).
-- The third area, referred to as *miscellaneous*, covers a broader spectrum of programs and includes implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, Game of Life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
+1. The first area, referred to as **compiler**, is dedicated to directly targeting JIT Compiler optimizations by following specific handwritten code patterns.
+2. The second area, referred to as **api**, covers benchmarks that specifically target the Java Platform, Standard Edition (Java SE) APIs (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) as well as Java Development Kit (JDK) APIs (e.g., `jdk.incubator.vector`, etc.).
+3. The third area, referred to as **miscellaneous**, covers a broader spectrum of programs and includes implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, Game of Life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
 The benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
 

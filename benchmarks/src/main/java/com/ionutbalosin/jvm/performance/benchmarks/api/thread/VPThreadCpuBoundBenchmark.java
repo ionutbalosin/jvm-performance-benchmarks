@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.ionutbalosin.jvm.performance.benchmarks.api;
+package com.ionutbalosin.jvm.performance.benchmarks.api.thread;
 
 import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;
@@ -29,7 +29,6 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -39,69 +38,53 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
 
-/**
- * This benchmark assesses the performance of synchronized blocks in the context of virtual threads,
- * comparing them with platform threads. The synchronization mechanism is implemented using lock
- * objects, reentrant locks, and no locks at all. Within the synchronized execution block, different
- * backoff strategies (such as thread parking, sleeping, or none) are triggered.
+/*
+ * This benchmark evaluates the performance of running CPU-bound (or CPU-intensive) tasks, which are submitted
+ * to either a virtual thread executor service or a cached thread pool.
  *
- * <p>Note: A virtual thread cannot be preempted during a synchronized block because it is pinned to
- * its carrier.
+ * When a virtual thread executes CPU-bound code without involving any blocking I/O
+ * or other blocking JDK methods, the virtual thread cannot be unmounted.
+ * Consequently, it will not yield and may continue to occupy its carrier thread until it completes its computation.
+ * To address this, the CPU-bound tasks include explicit various backoff strategies (such as yielding, or parking)
+ * in an attempt to de-schedule the running thread and permit other threads to execute on the CPU, thereby facilitating
+ * the unmounting of the virtual thread from its carrier.
+ *
+ * Note: When the workload is CPU-bound, virtual threads may not offer a substantial improvement
+ * in application throughput compared to traditional platform threads.
+ * Additionally, using virtual threads just for in-memory processing is not their intended use case.
  */
+
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class VPThreadSynchronizationBenchmark {
+public class VPThreadCpuBoundBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VPThreadSynchronizationBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VPThreadCpuBoundBenchmark.*"
 
   private final int CPUs = Runtime.getRuntime().availableProcessors();
-  private final Object objectLock = new Object();
-  private final ReentrantLock reentrantLock = new ReentrantLock();
 
-  @Param({"2"})
+  private volatile boolean preventUnrolling = true;
+
+  @Param({"16"})
   private int cpuLoadFactor;
 
   @Param private ThreadType threadType;
-  @Param private LockType lockType;
   @Param private BackoffType backoffType;
-
-  private int tasks;
-
-  @Setup()
-  public void setup() {
-    tasks = CPUs * cpuLoadFactor;
-  }
+  @Param private CpuTokens cpuTokens;
 
   @Benchmark
-  public void synchronized_calls() {
+  public void cpu_bound_tasks() {
+    final int tasks = CPUs * cpuLoadFactor;
     try (final ExecutorService executor = getExecutorService()) {
-      IntStream.range(0, tasks).forEach(i -> executor.submit(synchronizedWork()));
+      IntStream.range(0, tasks).forEach(i -> executor.submit(() -> cpuBoundWork()));
     }
-  }
-
-  public enum ThreadType {
-    VIRTUAL,
-    PLATFORM;
-  }
-
-  public enum LockType {
-    OBJECT_LOCK,
-    REENTRANT_LOCK,
-    NO_LOCK
-  }
-
-  public enum BackoffType {
-    NONE,
-    SLEEP,
-    PARK
   }
 
   private ExecutorService getExecutorService() {
@@ -111,41 +94,58 @@ public class VPThreadSynchronizationBenchmark {
     };
   }
 
-  private Runnable synchronizedWork() {
-    return switch (lockType) {
-      case OBJECT_LOCK -> () -> {
-        synchronized (objectLock) {
-          backoff();
-        }
-      };
-      case REENTRANT_LOCK -> () -> {
-        reentrantLock.lock();
-        try {
-          backoff();
-        } finally {
-          reentrantLock.unlock();
-        }
-      };
-      case NO_LOCK -> () -> backoff();
-    };
+  private void cpuBoundWork() {
+    // Process each chunk of tokens sequentially with potential back-off in between each chunk
+    Blackhole.consumeCPU(cpuTokens.getTokens());
+    for (int chunks = 1; chunks < cpuTokens.getChunks() && preventUnrolling; chunks++) {
+      backoff();
+      Blackhole.consumeCPU(cpuTokens.getTokens());
+    }
   }
 
   private void backoff() {
     switch (backoffType) {
       case NONE:
         break;
-      case SLEEP:
-        try {
-          Thread.sleep(0, 1);
-        } catch (InterruptedException e) {
-          throw new RuntimeException(e);
-        }
+      case YIELD:
+        Thread.yield();
         break;
       case PARK:
-        LockSupport.parkNanos(1);
+        LockSupport.parkNanos(1L);
         break;
       default:
         throw new UnsupportedOperationException("Unsupported backoff type " + backoffType);
+    }
+  }
+
+  public enum ThreadType {
+    VIRTUAL,
+    PLATFORM;
+  }
+
+  public enum BackoffType {
+    NONE,
+    YIELD,
+    PARK;
+  }
+
+  public enum CpuTokens {
+    _1_M(1_000_000, 100);
+
+    private long tokens;
+    private int chunks;
+
+    CpuTokens(int tokens, int chunks) {
+      this.tokens = tokens;
+      this.chunks = chunks;
+    }
+
+    public long getTokens() {
+      return tokens;
+    }
+
+    public int getChunks() {
+      return chunks;
     }
   }
 }
