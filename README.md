@@ -6,13 +6,12 @@
 
 This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
-The repository's benchmarks encompass several main areas:
+The benchmarks are structured in three distinct categories:
+1. **Compiler**: this category is dedicated to assessing JIT Compiler optimizations by following specific handwritten code patterns.
+3. **Api**: this category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
+3. **Miscellaneous**: this category covers a broader spectrum of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, Game of Life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
-1. The first area, referred to as **compiler**, is dedicated to directly targeting JIT Compiler optimizations by following specific handwritten code patterns.
-2. The second area, referred to as **api**, covers benchmarks that specifically target the Java Platform, Standard Edition (Java SE) APIs (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) as well as Java Development Kit (JDK) APIs (e.g., `jdk.incubator.vector`, etc.).
-3. The third area, referred to as **miscellaneous**, covers a broader spectrum of programs and includes implementations of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, Game of Life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
-
-The benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
+All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
 
 ## Contents
 
@@ -44,15 +43,17 @@ Florin Blanaru
 ## Purpose
 
 The main objectives of this project are:
-1. To evaluate various JIT Compiler optimizations commonly found in compilers, such as inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
-2. To assess the behavior of each JIT Compiler across a broader range of programs.
+1. To evaluate common JIT Compiler optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
+2. To assess the performance of each JIT Compiler while executing the most commonly used Java SE APIs and JDK APIs across a wide range of applications.
+3. To evaluate the performance of each JIT Compiler across a wider variety of programs.
 
 Each benchmark focuses on a specific execution pattern or task that could be fully optimized under ideal conditions (i.e., clean profiles). While some of these patterns might rarely appear directly in user programs, they can emerge after several optimizations, such as inlining high-level operations. Real-life applications can have varying conditions, making benchmarks not always a reliable predictor on a larger scale. Nonetheless, even though artificial benchmarks may not capture the complete truth, they can still offer valuable insights when properly implemented.
 
 **Out of Scope**:
-- Benchmarking of any "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
-- Benchmarking of any Garbage Collector (*)
-- Benchmarking of large applications (e.g., web-based microservices, etc.)
+- Benchmarking "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
+- Benchmarking Garbage Collectors (*)
+- Benchmarking large applications (e.g., web-based microservices, etc.)
+- Benchmarking the entire Java SE APIs or JDK APIs
 
 > (*) Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
 
@@ -85,7 +86,7 @@ When conducting benchmarking, it is advisable to disable potential sources of pe
 
 ### Linux
 
-The Linux tuning script [configure-linux-os.sh](./scripts/shell/configure-linux-os.sh) performs the following actions:
+The Linux tuning script [configure-os-linux.sh](./scripts/shell/configure-os-linux.sh) performs the following actions:
 - Sets CPU(s) isolation (with `isolcpus` or `cgroups`)
 - Disables address space layout randomization (ASLR)
 - Disables turbo boost mode
@@ -102,11 +103,11 @@ For further references, please check:
 
 For macOS, the Linux tuning settings described above do not apply. For instance, Apple M1/M2 (ARM-based) chips do not have hyper-threading or turbo-boost mode, and disabling ASLR is more complex.
 
-Due to these differences, the script [configure-mac-os.sh](./scripts/shell/configure-mac-os.sh) does not enable any specific macOS tuning configurations.
+Due to these differences, the script [configure-os-mac.sh](./scripts/shell/configure-os-mac.sh) does not enable any specific macOS tuning configurations.
 
 ### Windows
 
-Windows is not the primary focus of this benchmark, so the script [configure-win-os.sh](./scripts/shell/configure-win-os.sh) does not enable any specific Windows tuning configurations.
+Windows is not the primary focus of this benchmark, so the script [configure-os-win.sh](./scripts/shell/configure-os-win.sh) does not enable any specific Windows tuning configurations.
 
 ## JVM Coverage
 
@@ -114,11 +115,13 @@ The table below summarizes the JVM distributions included in the benchmark. For 
 
 JVM Distribution     | Included                                | Build
 -------------------- |-----------------------------------------| -------------------------------------------------------
-OpenJDK HotSpot VM   | Yes                                     | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads/)                        
-GraalVM CE           | Yes                                     | [Download](https://www.graalvm.org/downloads/)                       
-GraalVM EE           | Yes                                     | [Download](https://www.graalvm.org/downloads/)                      
-Azul Prime VM        | Yes (license restrictions might apply)  | [Download](https://www.azul.com/downloads/)
+OpenJDK HotSpot VM   | Yes                                     | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads)                        
+GraalVM CE           | Yes                                     | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)                       
+Oracle GraalVM (*)   | Yes                                     | [Download](https://www.graalvm.org/downloads)                      
+Azul Prime VM        | Yes (license restrictions might apply)  | [Download](https://www.azul.com/downloads)
 Eclipse OpenJ9 VM    | No, see the reasons below               | NA
+
+> (*) Oracle GraalVM was formerly known as GraalVM EE
 
 ### Azul Prime VM
 
@@ -152,12 +155,12 @@ After installing the JDK, you must update the JDK path in the configuration prop
 
 2. Update the specific **VM_HOME** property for the JDK you intend to use. You don't need to update all of them, only the one you plan to use for compiling and running the benchmarks.
 
-    ```properties
-    OPENJDK_HOTSPOT_VM_HOME="<path_to_jdk>"
-    GRAAL_VM_CE_HOME="<path_to_jdk>"
-    GRAAL_VM_EE_HOME="<path_to_jdk>"
-    AZUL_PRIME_VM_HOME="<path_to_jdk>"
-    ```
+ ```properties
+ OPENJDK_HOTSPOT_VM_HOME="<path_to_jdk>"
+ GRAAL_VM_CE_HOME="<path_to_jdk>"
+ GRAAL_VM_EE_HOME="<path_to_jdk>"
+ AZUL_PRIME_VM_HOME="<path_to_jdk>"
+ ```
 
 #### Examples
 
@@ -187,7 +190,7 @@ JVM Distribution   | Top-tier JIT Compiler
 ------------------ |--------------
 OpenJDK HotSpot VM | C2 JIT
 GraalVM CE         | Graal JIT
-GraalVM EE         | Graal JIT   
+Oracle GraalVM     | Graal JIT   
 Azul Prime VM      | Falcon JIT   
 
 ## Benchmarks suites
