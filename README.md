@@ -51,11 +51,12 @@ Each benchmark focuses on a specific execution pattern or task that could be ful
 
 **Out of Scope**:
 - Benchmarking "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
-- Benchmarking Garbage Collectors (*)
+- Benchmarking Garbage Collectors [*]
 - Benchmarking large applications (e.g., web-based microservices, etc.)
 - Benchmarking the entire Java SE APIs or JDK APIs
 
-> (*) Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
+**Notes:**
+- [*] Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
 
 ## JMH Caveats
 
@@ -113,15 +114,18 @@ Windows is not the primary focus of this benchmark, so the script [configure-os-
 
 The table below summarizes the JVM distributions included in the benchmark. For transparency, we provide a brief explanation of why others are not supported.
 
-JVM Distribution     | Included                                | Build
--------------------- |-----------------------------------------| -------------------------------------------------------
-OpenJDK HotSpot VM   | Yes                                     | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads)                        
-GraalVM CE           | Yes                                     | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)                       
-Oracle GraalVM (*)   | Yes                                     | [Download](https://www.graalvm.org/downloads)                      
-Azul Prime VM        | Yes (license restrictions might apply)  | [Download](https://www.azul.com/downloads)
-Eclipse OpenJ9 VM    | No, see the reasons below               | NA
+JVM Distribution     | Included | Build
+-------------------- |----------| -------------------------------------------------------
+OpenJDK HotSpot VM   | Yes      | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads)                        
+GraalVM CE           | Yes      | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)                       
+Oracle GraalVM [1]   | Yes      | [Download](https://www.graalvm.org/downloads)                      
+Azul Prime VM        | Yes [2]  | [Download](https://www.azul.com/downloads)
+Eclipse OpenJ9 VM    | No [3]   | NA
 
-> (*) Oracle GraalVM was formerly known as GraalVM EE
+**Notes:**
+- [1] Oracle GraalVM was formerly known as GraalVM EE
+- [2] License restrictions might apply
+- [3] Please see the reasons below
 
 ### Azul Prime VM
 
@@ -209,7 +213,7 @@ There are several reasons why such a custom configuration is necessary:
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
-**Note**: For historical reasons, a newer suite (e.g., a suite for JDK 21) may contain benchmarks that are compatible with an older JDK version (e.g., JDK 17). However, we do not plan to include a newly created benchmark in an older suite that has already been run and published. We are following a forward-only approach.
+> For historical reasons, a newer suite (e.g., JDK 21 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite. In other words, we do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
 
 ## Infrastructure baseline benchmark
 
