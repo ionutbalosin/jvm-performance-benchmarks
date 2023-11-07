@@ -7,9 +7,9 @@
 This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
 The benchmarks are structured in three distinct categories:
-1. **Compiler**: this category is dedicated to assessing JIT Compiler optimizations by following specific handwritten code patterns.
-3. **Api**: this category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
-3. **Miscellaneous**: this category covers a broader spectrum of classical programs (e.g., Fibonacci, factorial, palindrome, N queens, Game of Life, Huffman coding/encoding, Lempel-Ziv-Welch Compression, etc.) using different techniques (e.g., dynamic, greedy, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
+1. **Compiler**: This category is dedicated to assessing JIT compiler optimizations by following specific handwritten code patterns. It assesses common optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
+2. **Api**: This category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
+3. **Miscellaneous**: This category covers a broader spectrum of classical programs (e.g., Dijkstra's shortest path, factorial, Fibonacci, Game of Life, image rotation, knapsack problem, N queens, palindrome, Huffman coding/encoding, Lempel-Ziv-Welch compression, etc.) using different techniques (e.g., dynamic programming, greedy algorithms, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
 All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
 
@@ -24,6 +24,7 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 - [JIT Coverage](#jit-coverage)
 - [Benchmarks Suites](#benchmarks-suites)
 - [Infrastructure Baseline Benchmark](#infrastructure-baseline-benchmark)
+- [Build the Benchmarks Suite](#build-the-benchmarks-suite)
 - [Run the Benchmarks Suite](#run-the-benchmarks-suite)
 - [Benchmark Plots](#benchmark-plots)
 - [Contribute](#contribute)
@@ -43,20 +44,17 @@ Florin Blanaru
 ## Purpose
 
 The main objectives of this project are:
-1. To evaluate common JIT Compiler optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
-2. To assess the performance of each JIT Compiler while executing the most commonly used Java SE APIs and JDK APIs across a wide range of applications.
-3. To evaluate the performance of each JIT Compiler across a wider variety of programs.
+1. To evaluate common JIT compiler optimizations found in compilers.
+2. To assess the performance of a JIT compiler while executing commonly used Java SE APIs and JDK APIs.
+3. To evaluate the performance of a JIT compiler across a wider variety of high-level programs.
 
 Each benchmark focuses on a specific execution pattern or task that could be fully optimized under ideal conditions (i.e., clean profiles). While some of these patterns might rarely appear directly in user programs, they can emerge after several optimizations, such as inlining high-level operations. Real-life applications can have varying conditions, making benchmarks not always a reliable predictor on a larger scale. Nonetheless, even though artificial benchmarks may not capture the complete truth, they can still offer valuable insights when properly implemented.
 
 **Out of Scope**:
 - Benchmarking "syntactic sugar" language features (e.g., records, sealed classes, local-variable type inference, etc.)
-- Benchmarking Garbage Collectors `(*)`
+- Benchmarking the entire Java SE APIs or JDK APIs, but only the most commonly used APIs
 - Benchmarking large applications (e.g., web-based microservices, etc.)
-- Benchmarking the entire Java SE APIs or JDK APIs
-
-**Notes:**
-- `(*)` Using micro-benchmarks to gauge the performance of Garbage Collectors may lead to misleading conclusions.
+- Benchmarking Garbage Collectors, as using micro-benchmarks to assess the performance of Garbage Collectors may lead to misleading conclusions
 
 ## JMH Caveats
 
@@ -141,15 +139,15 @@ Currently, Eclipse OpenJ9 is **out of scope** until a suitable alternative is id
 
 ## JDK Coverage
 
-At present, the benchmark is configured to work only with the JDK Long-Term Support (LTS) versions.
+At present, the benchmark is configured to work only with the latest JDK Long-Term Support (LTS) versions.
 
- JDK Versions |
+ Version      |
 --------------|
- 11           |
- 17           |
- 21           |
+ 11 - LTS     |
+ 17 - LTS     |
+ 21 - LTS     |
 
-If you need another JDK LTS version (or a feature release), you will need to configure it manually.
+If you need another LTS (or non-LTS) version, you will need to configure it manually.
 
 ### Configure JDK
 
@@ -223,17 +221,10 @@ This benchmark evaluates the performance of empty methods both with and without 
 
 This benchmark is particularly valuable when comparing different JVMs and JDKs. It is recommended to run it before any other real benchmark to establish baseline performance metrics. If the results of the infrastructure baseline benchmark differ, it may not be meaningful to compare the results of other benchmarks across different JVMs and JDKs.
 
-## Run the benchmarks suite
+## Build the benchmarks suite
 
-Running a benchmark suite triggers the complete setup process in a highly interactive manner, allowing the user to choose which steps to skip. The process includes the following:
-- Configure the operating system.
-- Configure the JVM (e.g., setting JAVA_HOME, etc.).
-- Configure JMH (e.g., selecting the benchmark suite for the specific JDK, etc.).
-- Compile the benchmarks using a JDK Maven profile.
-
-Depending on the coverage, each benchmark suite takes a significant amount of time to run, generally on the order of days.
-
-**Note**: For benchmark compilation, please run the following command:
+Running these commands will build the benchmark suite only, without executing any benchmarks.
+For building and running the benchmark suite (e.g., via the `./run-benchmarks.sh` command), please refer to the next section.
 
 ```bash
 ./mvnw -P jdk$<jdk-version>_profile clean package
@@ -253,6 +244,14 @@ Examples:
 ```bash
 ./mvnw -P jdk21_profile clean package
 ```
+
+## Run the benchmarks suite
+
+Running a benchmark suite triggers the complete setup process in a highly interactive manner, allowing the user to choose which steps to skip. The process includes the following:
+- Configure the operating system.
+- Configure the JVM (e.g., setting JAVA_HOME, etc.).
+- Configure JMH (e.g., selecting the benchmark suite for the specific JDK, etc.).
+- Compile the benchmarks using a JDK Maven profile.
 
 ### Dry run
 
