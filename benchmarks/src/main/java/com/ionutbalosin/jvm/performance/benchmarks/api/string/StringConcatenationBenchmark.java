@@ -22,6 +22,10 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.charArray;
+import static java.lang.String.valueOf;
+
+import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils;
 import java.text.MessageFormat;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -42,9 +46,10 @@ import org.openjdk.jmh.annotations.Warmup;
  * - StringBuilder
  * - StringBuffer
  * - String.format()
+ * - String.concat()
  * - MessageFormat
  * - plus operator
- * The input String to be concatenated with the other types has either LATIN1 or UTF16 characters.
+ * The input String to be concatenated with the other types has either LATIN_1 or UTF_16 characters.
  *
  * Note: The number of allocations during benchmarking slightly influences the overall results but not fundamentally.
  */
@@ -58,40 +63,24 @@ public class StringConcatenationBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringConcatenationBenchmark.*" -prof gc
 
-  private final Random random = new Random(16384);
+  private static final Random random = new Random(16384);
 
-  private String aString;
-  private int anInt;
-  private float aFloat;
-  private long aLong;
-  private double aDouble;
-  private boolean aBool;
-  private Object anObject;
+  private static String aString;
+  private static int anInt;
+  private static float aFloat;
+  private static long aLong;
+  private static double aDouble;
+  private static boolean aBool;
+  private static Object anObject;
 
   @Param({"128"})
-  private int capacity;
+  private static int length = 128;
 
-  @Param private Coder coder;
+  @Param private static StringUtils.Coder coder = StringUtils.Coder.ISO_8859_1;
 
   @Setup
-  public void setup() {
-    final char aChar;
-    switch (coder) {
-      case LATIN1:
-        aChar = 'a';
-        break;
-      case UTF16:
-        aChar = 'ʬ';
-        break;
-      default:
-        throw new UnsupportedOperationException("Unsupported coder type " + coder);
-    }
-
-    final StringBuilder sb = new StringBuilder(capacity);
-    for (int i = 0; i < capacity; i++) {
-      sb.append((char) (aChar + random.nextInt(26)));
-    }
-    aString = sb.toString();
+  public static void setup() {
+    aString = new String(charArray(length, coder));
     anInt = random.nextInt();
     aFloat = random.nextFloat();
     aLong = random.nextLong();
@@ -101,8 +90,8 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public String string_builder() {
-    // explicitly do not set a capacity (i.e., the cost is impacted by the byte array resizing)
+  public static String string_builder() {
+    // explicitly do not set a capacity
     return new StringBuilder()
         .append(aString)
         .append(anInt)
@@ -115,8 +104,8 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public String string_buffer() {
-    // explicitly do not set a capacity (i.e., the cost is impacted by the byte array resizing)
+  public static String string_buffer() {
+    // explicitly do not set a capacity
     return new StringBuffer()
         .append(aString)
         .append(anInt)
@@ -129,13 +118,25 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public String string_format() {
+  public static String string_concat() {
+    return new String()
+        .concat(aString)
+        .concat(valueOf(anInt))
+        .concat(valueOf(aFloat))
+        .concat(valueOf(aLong))
+        .concat(valueOf(aDouble))
+        .concat(valueOf(aBool))
+        .concat(valueOf(anObject));
+  }
+
+  @Benchmark
+  public static String string_format() {
     return String.format(
         "%s%d%.8f%d%.17f%b%s", aString, anInt, aFloat, aLong, aDouble, aBool, anObject);
   }
 
   @Benchmark
-  public String message_format() {
+  public static String message_format() {
     final MessageFormat mf =
         new MessageFormat(
             "{0}{1,number,#}{2,number,#.########}{3,number,#}{4,number,#.#################}{5}{6,number,#.##########}");
@@ -143,12 +144,17 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public String plus_operator() {
+  public static String plus_operator() {
     return aString + anInt + aFloat + aLong + aDouble + aBool + anObject;
   }
 
-  public enum Coder {
-    LATIN1,
-    UTF16;
+  public static void main(String args[]) {
+    setup();
+    System.out.println(string_builder());
+    System.out.println(string_buffer());
+    System.out.println(string_concat());
+    System.out.println(string_format());
+    System.out.println(message_format());
+    System.out.println(plus_operator());
   }
 }
