@@ -36,6 +36,13 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Evaluates the performance of DateTimeFormatter creation using various styles and patterns
+ * available in Java's DateTimeFormatter API. This benchmark measures the efficiency of
+ * DateTimeFormatter instantiation for localized date, time, and datetime formats employing
+ * different styles. Additionally, it assesses the speed of DateTimeFormatter creation using a
+ * custom-defined pattern with specific formatting elements and locale.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

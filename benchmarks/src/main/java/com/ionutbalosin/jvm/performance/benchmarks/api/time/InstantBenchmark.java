@@ -22,13 +22,10 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.time;
 
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -49,11 +46,11 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the performance of various LocalDateTime operations in Java's Date and Time API. This
- * benchmark evaluates the efficiency of LocalDateTime manipulation, including methods for
- * comparison, creation, parsing, and conversion to other temporal types like LocalDate and
- * LocalTime. It explores methods for offsetting, time zone adjustments, formatting, arithmetic
- * operations, and precision adjustments.
+ * This benchmark measures the speed of Instant-related functionalities including time manipulation,
+ * comparison, formatting, parsing, and epoch second/millisecond conversions. It evaluates
+ * operations such as atOffset, atZone, comparison to another Instant, retrieval of time components,
+ * addition and subtraction of nanoseconds, current time retrieval, instantiation from different
+ * time units, parsing of Instant from a formatted string, and epoch second/millisecond conversions.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -61,152 +58,119 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class LocalDateTimeBenchmark {
+public class InstantBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*LocalDateTimeBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*InstantBenchmark.*"
 
-  private static final ZoneId UTC = ZoneId.of("UTC");
-
+  private final ZoneId UTC = ZoneId.of("UTC");
   private final Random random = new Random(16384);
 
   private long epochSecond;
-  private int year, month, dayOfMonth, hour, minute, second, nanoOfSecond;
-  private String dateTimeFormat;
-  private LocalDateTime localDateTime, targetLocalDateTime;
+  private int nanoOfSecond;
+  private long epochMilli;
+  private String instantFormat;
+  private Instant instant, targetInstant;
 
   @Setup
   public void setup() {
     epochSecond = random.nextLong(0, 315_537_963_048L); // approx 9,999 yr
-    year = random.nextInt(0, 10_000);
-    month = random.nextInt(1, 13);
-    dayOfMonth = random.nextInt(1, 32);
-    hour = random.nextInt(0, 24);
-    minute = random.nextInt(0, 60);
-    second = random.nextInt(0, 60);
+    epochMilli = random.nextLong(0, 1_000_000_000_000L);
     nanoOfSecond = random.nextInt(0, 1_000_000_000);
 
-    localDateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
-    targetLocalDateTime = LocalDateTime.ofEpochSecond(epochSecond, nanoOfSecond, ZoneOffset.UTC);
+    instant = Instant.ofEpochSecond(epochSecond, nanoOfSecond);
+    targetInstant = Instant.ofEpochMilli(epochMilli);
 
-    dateTimeFormat = localDateTime.format(ISO_LOCAL_DATE_TIME);
+    instantFormat = ISO_INSTANT.format(instant);
   }
 
   @Benchmark
   public OffsetDateTime at_offset() {
-    return localDateTime.atOffset(ZoneOffset.UTC);
+    return instant.atOffset(ZoneOffset.UTC);
   }
 
   @Benchmark
   public ZonedDateTime at_zone() {
-    return localDateTime.atZone(UTC);
+    return instant.atZone(UTC);
   }
 
   @Benchmark
   public int compare_to() {
-    return localDateTime.compareTo(targetLocalDateTime);
+    return instant.compareTo(targetInstant);
   }
 
   @Benchmark
-  public boolean is_after() {
-    return localDateTime.isAfter(targetLocalDateTime);
-  }
-
-  @Benchmark
-  public boolean is_before() {
-    return localDateTime.isBefore(targetLocalDateTime);
-  }
-
-  @Benchmark
-  public boolean is_equal() {
-    return localDateTime.isEqual(targetLocalDateTime);
+  public long get_epoch_second() {
+    return instant.getEpochSecond();
   }
 
   @Benchmark
   public long get_nano_of_day() {
-    return localDateTime.getLong(ChronoField.NANO_OF_DAY);
+    return instant.getLong(ChronoField.NANO_OF_SECOND);
   }
 
   @Benchmark
-  public LocalDateTime minus_nanos() {
-    return localDateTime.minusNanos(nanoOfSecond);
+  public boolean is_after() {
+    return instant.isAfter(targetInstant);
   }
 
   @Benchmark
-  public LocalDateTime now() {
-    return LocalDateTime.now();
+  public boolean is_before() {
+    return instant.isBefore(targetInstant);
   }
 
   @Benchmark
-  public LocalDateTime now_clock() {
+  public Instant minus_nanos() {
+    return instant.minusNanos(nanoOfSecond);
+  }
+
+  @Benchmark
+  public Instant now() {
+    return Instant.now();
+  }
+
+  @Benchmark
+  public Instant now_clock() {
     final Clock clock = Clock.system(ZoneOffset.UTC);
-    return LocalDateTime.now(clock);
+    return Instant.now(clock);
   }
 
   @Benchmark
-  public LocalDateTime now_zone_id() {
-    return LocalDateTime.now(UTC);
+  public Instant of_epoch_milli() {
+    return Instant.ofEpochMilli(epochMilli);
   }
 
   @Benchmark
-  public LocalDateTime now_zone_offset() {
-    return LocalDateTime.now(ZoneOffset.UTC);
+  public Instant of_epoch_second() {
+    return Instant.ofEpochSecond(epochSecond);
   }
 
   @Benchmark
-  public LocalDateTime of() {
-    return LocalDateTime.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
+  public Instant of_epoch_second_nano() {
+    return Instant.ofEpochSecond(epochSecond, nanoOfSecond);
   }
 
   @Benchmark
-  public LocalDateTime of_local_date_time() {
-    final LocalDate localDate = LocalDate.of(year, month, dayOfMonth);
-    final LocalTime localTime = LocalTime.of(hour, minute, second, nanoOfSecond);
-    return LocalDateTime.of(localDate, localTime);
+  public Instant parse() {
+    return Instant.parse(instantFormat);
   }
 
   @Benchmark
-  public LocalDateTime of_epoch_second() {
-    return LocalDateTime.ofEpochSecond(epochSecond, nanoOfSecond, ZoneOffset.UTC);
+  public Instant plus_nanos() {
+    return instant.plusNanos(nanoOfSecond);
   }
 
   @Benchmark
-  public LocalDateTime of_instant() {
-    final Instant instant = Instant.ofEpochSecond(epochSecond);
-    return LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
-  }
-
-  @Benchmark
-  public LocalDateTime parse() {
-    return LocalDateTime.parse(dateTimeFormat, ISO_LOCAL_DATE_TIME);
-  }
-
-  @Benchmark
-  public LocalDateTime plus_nanos() {
-    return localDateTime.plusNanos(nanoOfSecond);
-  }
-
-  @Benchmark
-  public LocalDate to_local_date() {
-    return localDateTime.toLocalDate();
-  }
-
-  @Benchmark
-  public LocalTime to_local_time() {
-    return localDateTime.toLocalTime();
+  public long to_epoch_milli() {
+    return instant.toEpochMilli();
   }
 
   @Benchmark
   public String to_string() {
-    return localDateTime.toString();
+    return instant.toString();
   }
 
   @Benchmark
-  public LocalDateTime truncated_to_nanos() {
-    return localDateTime.truncatedTo(ChronoUnit.NANOS);
-  }
-
-  @Benchmark
-  public LocalDateTime with() {
-    return localDateTime.with(ChronoField.NANO_OF_DAY, nanoOfSecond);
+  public Instant truncated_to_nanos() {
+    return instant.truncatedTo(ChronoUnit.NANOS);
   }
 }

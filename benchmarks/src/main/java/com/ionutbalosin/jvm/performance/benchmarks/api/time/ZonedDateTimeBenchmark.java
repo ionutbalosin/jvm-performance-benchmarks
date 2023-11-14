@@ -48,6 +48,14 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/**
+ * Evaluates the performance of various operations involving ZonedDateTime from Java's Date and Time
+ * API. This benchmark measures the efficiency of ZonedDateTime methods for comparison,
+ * manipulation, creation, parsing, formatting, and conversion to other temporal types like
+ * LocalDateTime, OffsetDateTime, LocalDate, LocalTime, and Instant. It assesses functions for
+ * comparison, offsetting, obtaining date/time fields, adjusting time zones, parsing strings,
+ * arithmetic operations, precision adjustments, and type conversions.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -58,7 +66,7 @@ public class ZonedDateTimeBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*ZonedDateTimeBenchmark.*"
 
-  private static final ZoneId UTC = ZoneId.of("UTC");
+  private final ZoneId UTC = ZoneId.of("UTC");
 
   private final Random random = new Random(16384);
 

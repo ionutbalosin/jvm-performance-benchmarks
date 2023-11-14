@@ -48,6 +48,13 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Measures the performance of various LocalDateTime operations in Java's Date and Time API. This
+ * benchmark evaluates the efficiency of LocalDateTime manipulation, including methods for
+ * comparison, creation, parsing, and conversion to other temporal types like LocalDate and
+ * LocalTime. It explores methods for offsetting, time zone adjustments, formatting, arithmetic
+ * operations, and precision adjustments.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -58,7 +65,7 @@ public class LocalDateTimeBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*LocalDateTimeBenchmark.*"
 
-  private static final ZoneId UTC = ZoneId.of("UTC");
+  private final ZoneId UTC = ZoneId.of("UTC");
 
   private final Random random = new Random(16384);
 
@@ -100,6 +107,11 @@ public class LocalDateTimeBenchmark {
   }
 
   @Benchmark
+  public long get_nano_of_day() {
+    return localDateTime.getLong(ChronoField.NANO_OF_DAY);
+  }
+
+  @Benchmark
   public boolean is_after() {
     return localDateTime.isAfter(targetLocalDateTime);
   }
@@ -112,11 +124,6 @@ public class LocalDateTimeBenchmark {
   @Benchmark
   public boolean is_equal() {
     return localDateTime.isEqual(targetLocalDateTime);
-  }
-
-  @Benchmark
-  public long get_nano_of_day() {
-    return localDateTime.getLong(ChronoField.NANO_OF_DAY);
   }
 
   @Benchmark

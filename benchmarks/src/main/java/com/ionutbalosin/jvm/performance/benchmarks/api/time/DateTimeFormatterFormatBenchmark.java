@@ -42,6 +42,14 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Assesses the performance of formatting date and time using various pre-defined DateTimeFormatter
+ * instances available in Java's DateTimeFormatter API. This benchmark evaluates the efficiency of
+ * formatting operations for different temporal accessors, such as ZonedDateTime and OffsetDateTime,
+ * with selected DateTimeFormatter types. It measures the speed of formatting date and time data
+ * both as String output and direct StringBuilder manipulation using the format() and formatTo()
+ * methods respectively.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)

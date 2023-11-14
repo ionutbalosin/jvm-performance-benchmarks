@@ -40,6 +40,13 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Assesses the performance of various Clock operations available in Java's Time API. This benchmark
+ * evaluates the efficiency of Clock methods for generating different types of clocks, accessing
+ * time, setting fixed times, and creating ticking clocks with different granularities. It measures
+ * the speed of creating clocks for system default, system UTC, fixed, offset, and ticking with
+ * nanosecond, millisecond, second, and minute precision.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -50,8 +57,8 @@ public class ClockBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*ClockBenchmark.*"
 
-  private static final ZoneId UTC = ZoneId.of("UTC");
-
+  private final ZoneId UTC = ZoneId.of("UTC");
+  private final long NANOS_PER_SECOND = 1_000_000_000L;
   private final Random random = new Random(16384);
 
   private long epochSecond;
@@ -105,7 +112,7 @@ public class ClockBenchmark {
 
   @Benchmark
   public Clock tick() {
-    return Clock.tick(clock, Duration.ofNanos(instant.getNano()));
+    return Clock.tick(clock, Duration.ofNanos(NANOS_PER_SECOND));
   }
 
   @Benchmark

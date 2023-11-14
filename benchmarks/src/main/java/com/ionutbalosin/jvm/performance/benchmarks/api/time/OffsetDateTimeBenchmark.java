@@ -49,6 +49,13 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Measures the performance of various operations involving OffsetDateTime from Java's Date and Time
+ * API. This benchmark evaluates the efficiency of OffsetDateTime manipulation, including
+ * comparison, creation, parsing, formatting, and conversion to other temporal types like
+ * ZonedDateTime, LocalDate, LocalTime, and Instant. It explores methods for offsetting, time zone
+ * adjustments, arithmetic operations, and precision adjustments.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -59,7 +66,7 @@ public class OffsetDateTimeBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*OffsetDateTimeBenchmark.*"
 
-  private static final ZoneId UTC = ZoneId.of("UTC");
+  private final ZoneId UTC = ZoneId.of("UTC");
 
   private final Random random = new Random(16384);
 

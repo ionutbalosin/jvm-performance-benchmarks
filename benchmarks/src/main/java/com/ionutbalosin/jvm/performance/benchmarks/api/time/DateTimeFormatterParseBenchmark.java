@@ -59,6 +59,14 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * Evaluates the performance of parsing date and time strings into temporal data using different
+ * pre-defined DateTimeFormatter instances available in Java's DateTimeFormatter API. This benchmark
+ * assesses the efficiency of parsing operations for various DateTimeFormatter types, measuring
+ * parsing speed for different temporal queries such as LocalDate, LocalTime, Chronology, and
+ * TemporalUnit. It measures the performance of parsing operations with DateTimeFormatter instances
+ * handling different date-time formats.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
