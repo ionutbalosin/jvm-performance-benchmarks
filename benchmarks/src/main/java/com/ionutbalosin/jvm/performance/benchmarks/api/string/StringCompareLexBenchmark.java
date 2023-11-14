@@ -23,9 +23,10 @@
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.COMMON_ENGLISH_CHARS_TARGET;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.encodeCharArray;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
 
-import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
+import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.ComparisonType;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -40,12 +41,16 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark evaluates the performance of various string replacement operations, measuring the
- * efficiency of character-based and string-based replacements. It assesses the effectiveness of
- * replacing individual characters or substrings within strings, employing different methods such as
- * 'replace', 'replaceAll', and 'replaceFirst'.
+ * This benchmark evaluates the performance of various string lexicographical comparison operations,
+ * such as 'compareTo' and 'compareToIgnoreCase'.
  *
- * The generated strings and characters are encoding-specific for Latin-1 and UTF-16.
+ * The generated strings are encoding-specific, representing distinct character sets—specifically
+ * Latin-1 and UTF-16. Additionally, variations between these encodings (Latin-1 to UTF-16) are
+ * included to cover a wider range of scenarios.
+ *
+ * All string comparisons assume inspection of the entire character arrays to determine the
+ * result. This deliberate design aims to trigger an exhaustive number of checks, involving a higher
+ * number of (char/byte arrays) comparisons to determine the result.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -53,72 +58,48 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StringReplaceBenchmark {
+public class StringCompareLexBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*StringReplaceBenchmark.*"
+  // java -jar benchmarks/target/benchmarks.jar ".*StringCompareLexBenchmark.*"
 
-  private static final String REGEX = "([a-zA-Z0-9]){2,}";
+  private static String sourceStr, uppercaseSourceStr;
+  private static String targetStr, lowercaseTargetStr;
 
-  private static char[] sourceChArray;
-  private static String sourceStr;
-  private static int offsetIdx;
-  private static String replacementStr;
-  private static char replacementCh;
-
-  @Param private static Coder coder = Coder.LATIN1;
+  @Param private static ComparisonType comparisonType = ComparisonType.UTF16_TO_LATIN1;
 
   @Param({"1024"})
   private static int length = 1024;
 
   @Setup
   public static void setup() {
-    offsetIdx = 0;
-
     // Generate encoding-specific sources
-    sourceChArray = generateCharArray(length, coder, COMMON_ENGLISH_CHARS_TARGET);
+    final char[] sourceChArray =
+        generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
     sourceStr = new String(sourceChArray);
+    uppercaseSourceStr = sourceStr.toUpperCase();
 
-    // Generate encoding-specific targets
-    replacementStr = new String(generateCharArray(2, coder)); // a (short) String of 2 chars
-    replacementCh = generateCharArray(1, coder)[0];
+    // Generate encoding-specific targets derived from the same source character array
+    // Note: This creates equivalent Strings to the source, possibly with different encodings
+    // (according to the target coder), except when converting from UTF-16 to Latin-1, which may
+    // result in unequal strings due to character loss.
+    final byte[] targetByteArray = encodeCharArray(sourceChArray, comparisonType.getTarget());
+    targetStr = new String(targetByteArray, comparisonType.getTarget().getCharset());
+    lowercaseTargetStr = targetStr.toLowerCase();
   }
 
   @Benchmark
-  public static String replace_char() {
-    final char target = sourceChArray[nextPosition()];
-    return sourceStr.replace(target, replacementCh);
+  public static int compare_to() {
+    return sourceStr.compareTo(targetStr);
   }
 
   @Benchmark
-  public static String replace_string() {
-    final String target = String.valueOf(sourceChArray[nextPosition()]);
-    return sourceStr.replace(target, replacementStr);
-  }
-
-  @Benchmark
-  public static String replace_all_regexp() {
-    return sourceStr.replaceAll(REGEX, replacementStr);
-  }
-
-  @Benchmark
-  public static String replace_first_regexp() {
-    return sourceStr.replaceFirst(REGEX, replacementStr);
+  public static int compare_to_ignore_case() {
+    return uppercaseSourceStr.compareToIgnoreCase(lowercaseTargetStr);
   }
 
   public static void main(String args[]) {
     setup();
-    System.out.println(sourceStr);
-    System.out.println(replace_char());
-    System.out.println(replace_string());
-    System.out.println(replace_all_regexp());
-    System.out.println(replace_first_regexp());
-  }
-
-  private static int nextPosition() {
-    if (++offsetIdx >= length) {
-      offsetIdx = 0;
-    }
-
-    return offsetIdx;
+    System.out.println(compare_to());
+    System.out.println(compare_to_ignore_case());
   }
 }

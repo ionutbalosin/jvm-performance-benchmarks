@@ -109,22 +109,6 @@ public class DeadArgumentEliminationBenchmark {
     return chainMethod8(defaultValue, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
   }
 
-  @Benchmark
-  public int chain_method_calls_synchronized() {
-    final Object obj1 = new Object();
-    final Object obj2 = new Object();
-    final Object obj3 = new Object();
-    final Object obj4 = new Object();
-    final Object obj5 = new Object();
-    final Object obj6 = new Object();
-    final Object obj7 = new Object();
-    final Object obj8 = new Object();
-
-    synchronized (this) {
-      return chainMethod8(defaultValue, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
-    }
-  }
-
   private int recursiveMethod(
       int depth,
       int aValue,

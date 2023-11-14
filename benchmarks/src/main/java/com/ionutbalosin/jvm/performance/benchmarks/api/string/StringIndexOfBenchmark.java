@@ -22,10 +22,10 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.charArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.COMMON_ENGLISH_CHARS_TARGET;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
 
-import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils;
-import java.io.IOException;
+import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -39,6 +39,13 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+/*
+ * This benchmark evaluates the efficiency of index-based search operations, focusing on the
+ * 'indexOf' and 'lastIndexOf' methods applied to strings. It aims to assess the effectiveness of
+ * locating individual characters, substrings, and their respective occurrences within strings.
+ *
+ * The generated strings are encoding-specific for Latin-1 and UTF-16.
+ */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -49,53 +56,66 @@ public class StringIndexOfBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*StringIndexOfBenchmark.*"
 
-  private static final float COMMON_ENGLISH_CHARS = 0.75f;
+  private static char[] sourceChArray;
+  private static String sourceStr;
+  private static int offsetIdx;
 
-  private char[] textChArray;
-  private String textStr;
-  private int offsetIdx;
-
-  @Param private StringUtils.Coder coder;
+  @Param private static Coder coder = Coder.UTF16;
 
   @Param({"1024"})
-  private int length;
+  private static int length = 1024;
 
   @Setup
-  public void setup() throws IOException {
-    // Generate encoding-specific text String
-    textChArray = charArray(length, coder, COMMON_ENGLISH_CHARS);
-    textStr = new String(textChArray);
+  public static void setup() {
+    offsetIdx = 0;
+
+    // Generate encoding-specific sources
+    sourceChArray = generateCharArray(length, coder, COMMON_ENGLISH_CHARS_TARGET);
+    sourceStr = new String(sourceChArray);
   }
 
   @Benchmark
-  public int index_of_char() {
-    final char ch = textChArray[nextPosition()];
-    return textStr.indexOf(ch);
+  public static int index_of_char() {
+    final char ch = sourceChArray[nextPosition()];
+    return sourceStr.indexOf(ch);
   }
 
   @Benchmark
-  public int index_of_string() {
-    final String str = String.valueOf(textChArray[nextPosition()]);
-    return textStr.indexOf(str);
+  public static int index_of_string() {
+    final String str = String.valueOf(sourceChArray[nextPosition()]);
+    return sourceStr.indexOf(str);
   }
 
   @Benchmark
-  public int last_index_of_char() {
-    final char ch = textChArray[nextPosition()];
-    return textStr.lastIndexOf(ch);
+  public static int last_index_of_char() {
+    final char ch = sourceChArray[nextPosition()];
+    return sourceStr.lastIndexOf(ch);
   }
 
   @Benchmark
-  public int last_index_of_string() {
-    final String str = String.valueOf(textChArray[nextPosition()]);
-    return textStr.lastIndexOf(str);
+  public static int last_index_of_string() {
+    final String str = String.valueOf(sourceChArray[nextPosition()]);
+    return sourceStr.lastIndexOf(str);
   }
 
-  private int nextPosition() {
+  private static int nextPosition() {
     if (++offsetIdx >= length) {
       offsetIdx = 0;
     }
 
     return offsetIdx;
+  }
+
+  public static void main(String args[]) {
+    setup();
+    System.out.println(sourceStr);
+    int i = 0;
+    while (i++ < 10) {
+      System.out.println();
+      System.out.println(index_of_char());
+      System.out.println(index_of_string());
+      System.out.println(last_index_of_char());
+      System.out.println(last_index_of_string());
+    }
   }
 }

@@ -41,14 +41,14 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark evaluates the performance of various string comparison operations, covering
- * 'equals', 'equalsIgnoreCase', 'contentEquals', and their counterparts for String, StringBuilder,
- * and CharSequence.
+ * This benchmark evaluates the performance of various string comparison operations, encompassing
+ * 'contains', 'startsWith', 'endsWith', 'regionMatches', and their corresponding variants.
  *
- * The generated strings are specific to different encodings, notably Latin-1 and UTF-16. Additionally,
- * variations between these encodings (Latin-1 to UTF-16) are included to address a wider range of scenarios.
+ * The generated strings are specific to different encodings, particularly Latin-1 and UTF-16.
+ * Furthermore, variations between these encodings (Latin-1 to UTF-16) are included to cover a wider
+ * range of scenarios.
  *
- * All string comparisons involve inspecting the entire character arrays to determine the result.
+ * All comparisons involving substrings examine the entire character arrays to determine the result.
  * This deliberate design aims to trigger a comprehensive number of checks, involving a higher count
  * of (char/byte arrays) comparisons to determine the result.
  */
@@ -59,16 +59,17 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StringEqualsBenchmark {
+public class StringContainsBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*StringEqualsBenchmark.*"
+  // java -jar benchmarks/target/benchmarks.jar ".*StringContainsBenchmark.*"
 
-  private static String sourceStr, uppercaseSourceStr;
-  private static String targetStr, lowercaseTargetStr;
-  private static StringBuilder targetStrBuilder;
-  private static CharSequence targetChSequence;
+  private static final int TARGET_COUNT = 3;
 
-  @Param private static ComparisonType comparisonType = ComparisonType.LATIN1_TO_UTF16;
+  private static String source, lowercaseSource;
+  private static int targetLength;
+  private static String startTarget, middleTarget, uppercaseMiddleTarget, endTarget;
+
+  @Param private static ComparisonType comparisonType = ComparisonType.LATIN1_TO_LATIN1;
 
   @Param({"1024"})
   private static int length = 1024;
@@ -78,51 +79,60 @@ public class StringEqualsBenchmark {
     // Generate encoding-specific sources
     final char[] sourceChArray =
         generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
-    sourceStr = new String(sourceChArray);
-    uppercaseSourceStr = sourceStr.toUpperCase();
+    source = new String(sourceChArray);
+    lowercaseSource = source.toLowerCase();
 
     // Generate encoding-specific targets derived from the same source character array
     // Note: This creates equivalent Strings to the source, possibly with different encodings
     // (according to the target coder), except when converting from UTF-16 to Latin-1, which may
     // result in unequal strings due to character loss.
     final byte[] targetByteArray = encodeCharArray(sourceChArray, comparisonType.getTarget());
-    targetStr = new String(targetByteArray, comparisonType.getTarget().getCharset());
-    lowercaseTargetStr = targetStr.toLowerCase();
-    targetStrBuilder = new StringBuilder(targetStr);
-    targetChSequence = targetStr.subSequence(0, targetStr.length());
+    final String target = new String(targetByteArray, comparisonType.getTarget().getCharset());
+    targetLength = length / TARGET_COUNT;
+    startTarget = target.substring(0, targetLength);
+    middleTarget = target.substring(targetLength, 2 * targetLength);
+    uppercaseMiddleTarget = middleTarget.toUpperCase();
+    endTarget = target.substring(2 * targetLength);
   }
 
   @Benchmark
-  public static boolean equals() {
-    return sourceStr.equals(targetStr);
+  public static boolean contains() {
+    return source.contains(middleTarget);
   }
 
   @Benchmark
-  public static boolean equals_ignore_case() {
-    return uppercaseSourceStr.equalsIgnoreCase(lowercaseTargetStr);
+  public static boolean starts_with() {
+    return source.startsWith(startTarget);
   }
 
   @Benchmark
-  public static boolean content_equals_string() {
-    return sourceStr.contentEquals(targetStr);
+  public static boolean starts_with_offset() {
+    return source.startsWith(middleTarget, targetLength);
   }
 
   @Benchmark
-  public static boolean equals_content_string_builder() {
-    return sourceStr.contentEquals(targetStrBuilder);
+  public static boolean ends_with() {
+    return source.endsWith(endTarget);
   }
 
   @Benchmark
-  public static boolean equals_content_char_sequence() {
-    return sourceStr.contentEquals(targetChSequence);
+  public static boolean region_matches() {
+    return source.regionMatches(targetLength, middleTarget, 0, middleTarget.length());
+  }
+
+  @Benchmark
+  public static boolean region_matches_ignore_case() {
+    return lowercaseSource.regionMatches(
+        true, targetLength, uppercaseMiddleTarget, 0, uppercaseMiddleTarget.length());
   }
 
   public static void main(String args[]) {
     setup();
-    System.out.println(equals());
-    System.out.println(equals_ignore_case());
-    System.out.println(content_equals_string());
-    System.out.println(equals_content_string_builder());
-    System.out.println(equals_content_char_sequence());
+    System.out.println(starts_with());
+    System.out.println(starts_with_offset());
+    System.out.println(ends_with());
+    System.out.println(contains());
+    System.out.println(region_matches());
+    System.out.println(region_matches_ignore_case());
   }
 }

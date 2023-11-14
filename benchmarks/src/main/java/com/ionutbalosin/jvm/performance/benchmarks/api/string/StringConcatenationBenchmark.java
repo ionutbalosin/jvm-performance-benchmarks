@@ -22,7 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.charArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
 import static java.lang.String.valueOf;
 
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils;
@@ -42,16 +42,19 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the performance of concatenating different types (e.g., String, int, float, long, double, boolean, Object) into a String object using:
+ * Measures the performance of concatenating different types (e.g., String, int, float, long,
+ * double, boolean, Object) into a String object using various methods:
  * - StringBuilder
  * - StringBuffer
- * - String.format()
  * - String.concat()
+ * - String.format()
  * - MessageFormat
  * - plus operator
- * The input String to be concatenated with the other types has either LATIN_1 or UTF_16 characters.
  *
- * Note: The number of allocations during benchmarking slightly influences the overall results but not fundamentally.
+ * The input String concatenated with other types consists of either Latin-1 or UTF-16 characters.
+ *
+ * Note: The number of allocations during benchmarking may have a slight influence on the overall
+ * results but doesn't fundamentally alter the outcomes.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -76,11 +79,11 @@ public class StringConcatenationBenchmark {
   @Param({"128"})
   private static int length = 128;
 
-  @Param private static StringUtils.Coder coder = StringUtils.Coder.ISO_8859_1;
+  @Param private static StringUtils.Coder coder = StringUtils.Coder.LATIN1;
 
   @Setup
   public static void setup() {
-    aString = new String(charArray(length, coder));
+    aString = new String(generateCharArray(length, coder));
     anInt = random.nextInt();
     aFloat = random.nextFloat();
     aLong = random.nextLong();
@@ -91,7 +94,7 @@ public class StringConcatenationBenchmark {
 
   @Benchmark
   public static String string_builder() {
-    // explicitly do not set a capacity
+    // Do not explicitly set a capacity
     return new StringBuilder()
         .append(aString)
         .append(anInt)
@@ -105,7 +108,7 @@ public class StringConcatenationBenchmark {
 
   @Benchmark
   public static String string_buffer() {
-    // explicitly do not set a capacity
+    // Do not explicitly set a capacity
     return new StringBuffer()
         .append(aString)
         .append(anInt)
