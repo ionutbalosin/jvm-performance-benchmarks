@@ -63,18 +63,18 @@ public class StringEqualsBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringEqualsBenchmark.*"
 
-  private static String sourceStr, uppercaseSourceStr;
-  private static String targetStr, lowercaseTargetStr;
-  private static StringBuilder targetStrBuilder;
-  private static CharSequence targetChSequence;
+  private String sourceStr, uppercaseSourceStr;
+  private String targetStr, lowercaseTargetStr;
+  private StringBuilder targetStrBuilder;
+  private CharSequence targetChSequence;
 
-  @Param private static ComparisonType comparisonType = ComparisonType.LATIN1_TO_UTF16;
+  @Param private ComparisonType comparisonType;
 
   @Param({"1024"})
-  private static int length = 1024;
+  private int length;
 
   @Setup
-  public static void setup() {
+  public void setup() {
     // Generate encoding-specific sources
     final char[] sourceChArray =
         generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
@@ -93,36 +93,27 @@ public class StringEqualsBenchmark {
   }
 
   @Benchmark
-  public static boolean equals() {
+  public boolean equals() {
     return sourceStr.equals(targetStr);
   }
 
   @Benchmark
-  public static boolean equals_ignore_case() {
+  public boolean equals_ignore_case() {
     return uppercaseSourceStr.equalsIgnoreCase(lowercaseTargetStr);
   }
 
   @Benchmark
-  public static boolean content_equals_string() {
+  public boolean content_equals_string() {
     return sourceStr.contentEquals(targetStr);
   }
 
   @Benchmark
-  public static boolean equals_content_string_builder() {
+  public boolean equals_content_string_builder() {
     return sourceStr.contentEquals(targetStrBuilder);
   }
 
   @Benchmark
-  public static boolean equals_content_char_sequence() {
+  public boolean equals_content_char_sequence() {
     return sourceStr.contentEquals(targetChSequence);
-  }
-
-  public static void main(String args[]) {
-    setup();
-    System.out.println(equals());
-    System.out.println(equals_ignore_case());
-    System.out.println(content_equals_string());
-    System.out.println(equals_content_string_builder());
-    System.out.println(equals_content_char_sequence());
   }
 }

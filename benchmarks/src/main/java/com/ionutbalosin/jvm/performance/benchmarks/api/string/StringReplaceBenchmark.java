@@ -57,21 +57,21 @@ public class StringReplaceBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringReplaceBenchmark.*"
 
-  private static final String REGEX = "([a-zA-Z0-9]){2,}";
+  private final String REGEX = "([a-zA-Z0-9]){2,}";
 
-  private static char[] sourceChArray;
-  private static String sourceStr;
-  private static int offsetIdx;
-  private static String replacementStr;
-  private static char replacementCh;
+  private char[] sourceChArray;
+  private String sourceStr;
+  private int offsetIdx;
+  private String replacementStr;
+  private char replacementCh;
 
-  @Param private static Coder coder = Coder.LATIN1;
+  @Param private Coder coder;
 
   @Param({"1024"})
-  private static int length = 1024;
+  private int length;
 
   @Setup
-  public static void setup() {
+  public void setup() {
     offsetIdx = 0;
 
     // Generate encoding-specific sources
@@ -84,37 +84,28 @@ public class StringReplaceBenchmark {
   }
 
   @Benchmark
-  public static String replace_char() {
+  public String replace_char() {
     final char target = sourceChArray[nextPosition()];
     return sourceStr.replace(target, replacementCh);
   }
 
   @Benchmark
-  public static String replace_string() {
+  public String replace_string() {
     final String target = String.valueOf(sourceChArray[nextPosition()]);
     return sourceStr.replace(target, replacementStr);
   }
 
   @Benchmark
-  public static String replace_all_regexp() {
+  public String replace_all_regexp() {
     return sourceStr.replaceAll(REGEX, replacementStr);
   }
 
   @Benchmark
-  public static String replace_first_regexp() {
+  public String replace_first_regexp() {
     return sourceStr.replaceFirst(REGEX, replacementStr);
   }
 
-  public static void main(String args[]) {
-    setup();
-    System.out.println(sourceStr);
-    System.out.println(replace_char());
-    System.out.println(replace_string());
-    System.out.println(replace_all_regexp());
-    System.out.println(replace_first_regexp());
-  }
-
-  private static int nextPosition() {
+  private int nextPosition() {
     if (++offsetIdx >= length) {
       offsetIdx = 0;
     }

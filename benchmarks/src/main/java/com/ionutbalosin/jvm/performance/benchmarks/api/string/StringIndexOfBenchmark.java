@@ -56,17 +56,17 @@ public class StringIndexOfBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*StringIndexOfBenchmark.*"
 
-  private static char[] sourceChArray;
-  private static String sourceStr;
-  private static int offsetIdx;
+  private char[] sourceChArray;
+  private String sourceStr;
+  private int offsetIdx;
 
-  @Param private static Coder coder = Coder.UTF16;
+  @Param private Coder coder;
 
   @Param({"1024"})
-  private static int length = 1024;
+  private int length;
 
   @Setup
-  public static void setup() {
+  public void setup() {
     offsetIdx = 0;
 
     // Generate encoding-specific sources
@@ -75,47 +75,34 @@ public class StringIndexOfBenchmark {
   }
 
   @Benchmark
-  public static int index_of_char() {
+  public int index_of_char() {
     final char ch = sourceChArray[nextPosition()];
     return sourceStr.indexOf(ch);
   }
 
   @Benchmark
-  public static int index_of_string() {
+  public int index_of_string() {
     final String str = String.valueOf(sourceChArray[nextPosition()]);
     return sourceStr.indexOf(str);
   }
 
   @Benchmark
-  public static int last_index_of_char() {
+  public int last_index_of_char() {
     final char ch = sourceChArray[nextPosition()];
     return sourceStr.lastIndexOf(ch);
   }
 
   @Benchmark
-  public static int last_index_of_string() {
+  public int last_index_of_string() {
     final String str = String.valueOf(sourceChArray[nextPosition()]);
     return sourceStr.lastIndexOf(str);
   }
 
-  private static int nextPosition() {
+  private int nextPosition() {
     if (++offsetIdx >= length) {
       offsetIdx = 0;
     }
 
     return offsetIdx;
-  }
-
-  public static void main(String args[]) {
-    setup();
-    System.out.println(sourceStr);
-    int i = 0;
-    while (i++ < 10) {
-      System.out.println();
-      System.out.println(index_of_char());
-      System.out.println(index_of_string());
-      System.out.println(last_index_of_char());
-      System.out.println(last_index_of_string());
-    }
   }
 }

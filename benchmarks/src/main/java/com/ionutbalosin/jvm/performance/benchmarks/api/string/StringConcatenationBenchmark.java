@@ -66,23 +66,23 @@ public class StringConcatenationBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringConcatenationBenchmark.*" -prof gc
 
-  private static final Random random = new Random(16384);
+  private final Random random = new Random(16384);
 
-  private static String aString;
-  private static int anInt;
-  private static float aFloat;
-  private static long aLong;
-  private static double aDouble;
-  private static boolean aBool;
-  private static Object anObject;
+  private String aString;
+  private int anInt;
+  private float aFloat;
+  private long aLong;
+  private double aDouble;
+  private boolean aBool;
+  private Object anObject;
 
   @Param({"128"})
-  private static int length = 128;
+  private int length;
 
-  @Param private static StringUtils.Coder coder = StringUtils.Coder.LATIN1;
+  @Param private StringUtils.Coder coder;
 
   @Setup
-  public static void setup() {
+  public void setup() {
     aString = new String(generateCharArray(length, coder));
     anInt = random.nextInt();
     aFloat = random.nextFloat();
@@ -93,7 +93,7 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public static String string_builder() {
+  public String string_builder() {
     // Do not explicitly set a capacity
     return new StringBuilder()
         .append(aString)
@@ -107,7 +107,7 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public static String string_buffer() {
+  public String string_buffer() {
     // Do not explicitly set a capacity
     return new StringBuffer()
         .append(aString)
@@ -121,7 +121,7 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public static String string_concat() {
+  public String string_concat() {
     return new String()
         .concat(aString)
         .concat(valueOf(anInt))
@@ -133,13 +133,13 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public static String string_format() {
+  public String string_format() {
     return String.format(
         "%s%d%.8f%d%.17f%b%s", aString, anInt, aFloat, aLong, aDouble, aBool, anObject);
   }
 
   @Benchmark
-  public static String message_format() {
+  public String message_format() {
     final MessageFormat mf =
         new MessageFormat(
             "{0}{1,number,#}{2,number,#.########}{3,number,#}{4,number,#.#################}{5}{6,number,#.##########}");
@@ -147,17 +147,7 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public static String plus_operator() {
+  public String plus_operator() {
     return aString + anInt + aFloat + aLong + aDouble + aBool + anObject;
-  }
-
-  public static void main(String args[]) {
-    setup();
-    System.out.println(string_builder());
-    System.out.println(string_buffer());
-    System.out.println(string_concat());
-    System.out.println(string_format());
-    System.out.println(message_format());
-    System.out.println(plus_operator());
   }
 }

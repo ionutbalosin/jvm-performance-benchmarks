@@ -62,16 +62,16 @@ public class StringCompareLexBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringCompareLexBenchmark.*"
 
-  private static String sourceStr, uppercaseSourceStr;
-  private static String targetStr, lowercaseTargetStr;
+  private String sourceStr, uppercaseSourceStr;
+  private String targetStr, lowercaseTargetStr;
 
-  @Param private static ComparisonType comparisonType = ComparisonType.UTF16_TO_LATIN1;
+  @Param private ComparisonType comparisonType;
 
   @Param({"1024"})
-  private static int length = 1024;
+  private int length;
 
   @Setup
-  public static void setup() {
+  public void setup() {
     // Generate encoding-specific sources
     final char[] sourceChArray =
         generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
@@ -88,18 +88,12 @@ public class StringCompareLexBenchmark {
   }
 
   @Benchmark
-  public static int compare_to() {
+  public int compare_to() {
     return sourceStr.compareTo(targetStr);
   }
 
   @Benchmark
-  public static int compare_to_ignore_case() {
+  public int compare_to_ignore_case() {
     return uppercaseSourceStr.compareToIgnoreCase(lowercaseTargetStr);
-  }
-
-  public static void main(String args[]) {
-    setup();
-    System.out.println(compare_to());
-    System.out.println(compare_to_ignore_case());
   }
 }

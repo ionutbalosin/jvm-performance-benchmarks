@@ -63,19 +63,19 @@ public class StringContainsBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringContainsBenchmark.*"
 
-  private static final int TARGET_COUNT = 3;
+  private final int TARGET_COUNT = 3;
 
-  private static String source, lowercaseSource;
-  private static int targetLength;
-  private static String startTarget, middleTarget, uppercaseMiddleTarget, endTarget;
+  private String source, lowercaseSource;
+  private int targetLength;
+  private String startTarget, middleTarget, uppercaseMiddleTarget, endTarget;
 
-  @Param private static ComparisonType comparisonType = ComparisonType.LATIN1_TO_LATIN1;
+  @Param private ComparisonType comparisonType;
 
   @Param({"1024"})
-  private static int length = 1024;
+  private int length;
 
   @Setup
-  public static void setup() {
+  public void setup() {
     // Generate encoding-specific sources
     final char[] sourceChArray =
         generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
@@ -96,43 +96,33 @@ public class StringContainsBenchmark {
   }
 
   @Benchmark
-  public static boolean contains() {
+  public boolean contains() {
     return source.contains(middleTarget);
   }
 
   @Benchmark
-  public static boolean starts_with() {
+  public boolean starts_with() {
     return source.startsWith(startTarget);
   }
 
   @Benchmark
-  public static boolean starts_with_offset() {
+  public boolean starts_with_offset() {
     return source.startsWith(middleTarget, targetLength);
   }
 
   @Benchmark
-  public static boolean ends_with() {
+  public boolean ends_with() {
     return source.endsWith(endTarget);
   }
 
   @Benchmark
-  public static boolean region_matches() {
+  public boolean region_matches() {
     return source.regionMatches(targetLength, middleTarget, 0, middleTarget.length());
   }
 
   @Benchmark
-  public static boolean region_matches_ignore_case() {
+  public boolean region_matches_ignore_case() {
     return lowercaseSource.regionMatches(
         true, targetLength, uppercaseMiddleTarget, 0, uppercaseMiddleTarget.length());
-  }
-
-  public static void main(String args[]) {
-    setup();
-    System.out.println(starts_with());
-    System.out.println(starts_with_offset());
-    System.out.println(ends_with());
-    System.out.println(contains());
-    System.out.println(region_matches());
-    System.out.println(region_matches_ignore_case());
   }
 }
