@@ -54,6 +54,8 @@ import org.openjdk.jmh.annotations.Warmup;
 public class StringSubstringBenchmark {
 
   // java -jar benchmarks/target/benchmarks.jar ".*StringSubstringBenchmark.*"
+  // Recommended command line options:
+  // - JMH options: -prof gc
 
   private char[] sourceChArray;
   private String sourceStr;

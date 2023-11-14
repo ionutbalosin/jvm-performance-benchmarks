@@ -64,7 +64,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringConcatenationBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*StringConcatenationBenchmark.*" -prof gc
+  // java -jar benchmarks/target/benchmarks.jar ".*StringConcatenationBenchmark.*"
+  // Recommended command line options:
+  // - JMH options: -prof gc
 
   private final Random random = new Random(16384);
 
