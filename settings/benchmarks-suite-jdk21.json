@@ -42,6 +42,21 @@
       "name": "CodeCacheBusterBenchmark"
     },
     {
+      "name": "ClockBenchmark"
+    },
+    {
+      "name": "DateTimeFormatterBenchmark"
+    },
+    {
+      "name": "DateTimeFormatterFormatBenchmark"
+    },
+    {
+      "name": "DateTimeFormatterParseBenchmark"
+    },
+    {
+      "name": "DeadArgumentEliminationBenchmark"
+    },
+    {
       "name": "DeadLocalAllocationStoreBenchmark",
       "jmhOpts": "-prof gc"
     },
@@ -127,6 +142,9 @@
       "name": "InfrastructureBaselineBenchmark"
     },
     {
+      "name": "InstantBenchmark"
+    },
+    {
       "name": "IoBlockingRoundtripChunksLatencyBenchmark"
     },
     {
@@ -134,6 +152,9 @@
     },
     {
       "name": "KnapsackBenchmark"
+    },
+    {
+      "name": "LocalDateTimeBenchmark"
     },
     {
       "name": "LockCoarseningBenchmark"
@@ -215,6 +236,9 @@
       "name": "ObjectStreamClassBenchmark"
     },
     {
+      "name": "OffsetDateTimeBenchmark"
+    },
+    {
       "name": "PalindromeBenchmark",
       "jvmArgsAppend": "-Xss20M"
     },
@@ -287,8 +311,20 @@
       "name": "StrengthReductionBenchmark"
     },
     {
+      "name": "StringCompareLexBenchmark"
+    },
+    {
       "name": "StringConcatenationBenchmark",
       "jmhOpts": "-prof gc"
+    },
+    {
+      "name": "StringContainsBenchmark"
+    },
+    {
+      "name": "StringEqualsBenchmark"
+    },
+    {
+      "name": "StringIndexOfBenchmark"
     },
     {
       "name": "StringPatternMatcherBenchmark"
@@ -298,7 +334,16 @@
       "jmhOpts": "-prof gc"
     },
     {
+      "name": "StringReplaceBenchmark"
+    },
+    {
+      "name": "StringSubstringBenchmark"
+    },
+    {
       "name": "StringSwitchBenchmark"
+    },
+    {
+      "name": "StringWsBenchmark"
     },
     {
       "name": "TailRecursionBenchmark",
@@ -358,6 +403,9 @@
     },
     {
       "name": "WriterBenchmark"
+    },
+    {
+      "name": "ZonedDateTimeBenchmark"
     }
   ]
 }
