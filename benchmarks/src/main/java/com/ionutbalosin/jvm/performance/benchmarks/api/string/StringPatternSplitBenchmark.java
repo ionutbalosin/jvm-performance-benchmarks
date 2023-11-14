@@ -66,7 +66,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringPatternSplitBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringPatternSplitBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringPatternSplitBenchmark.*"
   // Recommended command line options:
   // - JMH options: -prof gc
 

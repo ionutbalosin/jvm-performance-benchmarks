@@ -61,7 +61,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringContainsBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringContainsBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringContainsBenchmark.*"
 
   private final int TARGET_COUNT = 3;
 

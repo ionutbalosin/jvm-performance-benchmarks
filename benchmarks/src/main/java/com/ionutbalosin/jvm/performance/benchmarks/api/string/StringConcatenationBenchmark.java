@@ -64,7 +64,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringConcatenationBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringConcatenationBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringConcatenationBenchmark.*"
   // Recommended command line options:
   // - JMH options: -prof gc
 

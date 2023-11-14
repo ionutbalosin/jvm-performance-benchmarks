@@ -53,7 +53,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringSubstringBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringSubstringBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringSubstringBenchmark.*"
   // Recommended command line options:
   // - JMH options: -prof gc
 

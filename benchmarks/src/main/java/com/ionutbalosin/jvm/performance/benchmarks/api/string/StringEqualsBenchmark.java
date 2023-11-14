@@ -61,7 +61,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringEqualsBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringEqualsBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringEqualsBenchmark.*"
 
   private String sourceStr, uppercaseSourceStr;
   private String targetStr, lowercaseTargetStr;

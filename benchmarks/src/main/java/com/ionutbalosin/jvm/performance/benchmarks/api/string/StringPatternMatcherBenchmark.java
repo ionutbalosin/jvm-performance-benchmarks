@@ -59,7 +59,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringPatternMatcherBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringPatternMatcherBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringPatternMatcherBenchmark.*"
 
   private final String SPACE = "\\s+";
   private final String CURRENT_DIR = System.getProperty("user.dir", ".");

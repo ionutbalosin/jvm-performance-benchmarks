@@ -60,7 +60,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringCompareLexBenchmark {
 
-  // $ java -jar benchmarks/target/benchmarks.jar ".*StringCompareLexBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringCompareLexBenchmark.*"
 
   private String sourceStr, uppercaseSourceStr;
   private String targetStr, lowercaseTargetStr;
