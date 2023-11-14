@@ -111,6 +111,16 @@ public class StringUtils {
   };
 
   /*
+   * Whitespace character set includes standard ASCII whitespace characters:
+   * - space (' '), tab ('\t'), newline ('\n'), carriage return ('\r'), form feed ('\f'),
+   * as well as additional Unicode whitespace characters:
+   * - vertical tab ('\u000B'), and information separator characters.
+   */
+  private static final char[] WHITESPACES = {
+    ' ', '\t', '\n', '\r', '\u000B', '\f', '\u001C', '\u001D', '\u001E', '\u001F'
+  };
+
+  /*
    * Character set to be excluded due to potential issues when comparing uppercase to lowercase formats
    * References:
    * - https://bugs.openjdk.org/browse/JDK-8186073
@@ -118,6 +128,24 @@ public class StringUtils {
   private static final Set<Character> CASE_SENSITIVE_CHARS = Set.of('ß');
 
   private static final Random random = new Random(16384);
+
+  /*
+   * Generates a character array of specified length filled with randomly selected whitespace characters.
+   */
+  public static char[] generateWhiteSpaceCharArray(int length) {
+    final char[] charArray = new char[length];
+    int charIdx = 0;
+
+    // Fill the array with whitespace characters
+    for (; charIdx < length; charIdx++) {
+      charArray[charIdx] = WHITESPACES[random.nextInt(WHITESPACES.length)];
+    }
+
+    // Shuffle the array to randomly distribute the characters
+    shuffleCharArray(charArray);
+
+    return charArray;
+  }
 
   /*
    * Generates a character array of a specified length using code units from a specific coder.
