@@ -61,9 +61,9 @@ import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 2, time = 2, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 2, time = 2, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class DateTimeFormatterParseBenchmark {
 
