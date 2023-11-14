@@ -55,7 +55,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class StringReplaceBenchmark {
 
-  // java -jar benchmarks/target/benchmarks.jar ".*StringReplaceBenchmark.*"
+  // $ java -jar benchmarks/target/benchmarks.jar ".*StringReplaceBenchmark.*"
 
   private final String REGEX = "([a-zA-Z0-9]){2,}";
 
