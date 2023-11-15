@@ -50,15 +50,15 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StringWsBenchmark {
+public class StringWhitespaceBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*StringWsBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringWhitespaceBenchmark.*"
 
   private final int TARGET_COUNT = 3;
   private String sourceStr;
 
   @Param private Coder coder;
-  @Param private WhiteSpaceDistribution wsDistribution;
+  @Param private WhiteSpaceDistribution distribution;
 
   @Param({"1024"})
   private int length = 1024;
@@ -66,7 +66,7 @@ public class StringWsBenchmark {
   @Setup
   public void setup() {
     sourceStr =
-        switch (wsDistribution) {
+        switch (distribution) {
           case BALANCED_HEAD_TAIL -> generateBalancedHeadTailWhiteSpaceStr();
           case FULL -> generateFullWhiteSpaceStr();
         };

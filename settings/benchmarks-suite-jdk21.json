@@ -343,7 +343,7 @@
       "name": "StringSwitchBenchmark"
     },
     {
-      "name": "StringWsBenchmark"
+      "name": "StringWhitespaceBenchmark"
     },
     {
       "name": "TailRecursionBenchmark",
