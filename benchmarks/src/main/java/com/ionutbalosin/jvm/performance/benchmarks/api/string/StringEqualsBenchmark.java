@@ -77,7 +77,7 @@ public class StringEqualsBenchmark {
   public void setup() {
     // Generate encoding-specific sources
     final char[] sourceChArray =
-        generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
+        generateCharArray(length, comparisonType.getSourceCoder(), COMMON_ENGLISH_CHARS_TARGET);
     sourceStr = new String(sourceChArray);
     uppercaseSourceStr = sourceStr.toUpperCase();
 
@@ -85,8 +85,8 @@ public class StringEqualsBenchmark {
     // Note: This creates equivalent Strings to the source, possibly with different encodings
     // (according to the target coder), except when converting from UTF-16 to Latin-1, which may
     // result in unequal strings due to character loss.
-    final byte[] targetByteArray = encodeCharArray(sourceChArray, comparisonType.getTarget());
-    targetStr = new String(targetByteArray, comparisonType.getTarget().getCharset());
+    final byte[] targetByteArray = encodeCharArray(sourceChArray, comparisonType.getTargetCoder());
+    targetStr = new String(targetByteArray, comparisonType.getTargetCoder().getCharset());
     lowercaseTargetStr = targetStr.toLowerCase();
     targetStrBuilder = new StringBuilder(targetStr);
     targetChSequence = targetStr.subSequence(0, targetStr.length());

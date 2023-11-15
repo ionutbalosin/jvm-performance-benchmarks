@@ -58,7 +58,7 @@ public class StringWsBenchmark {
   private String sourceStr;
 
   @Param private Coder coder;
-  @Param private WhiteSpaceAllocation wsAllocation;
+  @Param private WhiteSpaceDistribution wsDistribution;
 
   @Param({"1024"})
   private int length = 1024;
@@ -66,7 +66,7 @@ public class StringWsBenchmark {
   @Setup
   public void setup() {
     sourceStr =
-        switch (wsAllocation) {
+        switch (wsDistribution) {
           case BALANCED_HEAD_TAIL -> generateBalancedHeadTailWhiteSpaceStr();
           case FULL -> generateFullWhiteSpaceStr();
         };
@@ -103,7 +103,7 @@ public class StringWsBenchmark {
     return new String(generateWhiteSpaceCharArray(length));
   }
 
-  public enum WhiteSpaceAllocation {
+  public enum WhiteSpaceDistribution {
     BALANCED_HEAD_TAIL,
     FULL
   }

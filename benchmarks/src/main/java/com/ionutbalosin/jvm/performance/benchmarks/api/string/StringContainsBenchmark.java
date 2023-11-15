@@ -65,9 +65,9 @@ public class StringContainsBenchmark {
 
   private final int TARGET_COUNT = 3;
 
-  private String source, lowercaseSource;
+  private String sourceStr, lowercaseSourceStr;
   private int targetLength;
-  private String startTarget, middleTarget, uppercaseMiddleTarget, endTarget;
+  private String startTargetStr, middleTargetStr, uppercaseMiddleTargetStr, endTargetStr;
 
   @Param private ComparisonType comparisonType;
 
@@ -78,51 +78,51 @@ public class StringContainsBenchmark {
   public void setup() {
     // Generate encoding-specific sources
     final char[] sourceChArray =
-        generateCharArray(length, comparisonType.getSource(), COMMON_ENGLISH_CHARS_TARGET);
-    source = new String(sourceChArray);
-    lowercaseSource = source.toLowerCase();
+        generateCharArray(length, comparisonType.getSourceCoder(), COMMON_ENGLISH_CHARS_TARGET);
+    sourceStr = new String(sourceChArray);
+    lowercaseSourceStr = sourceStr.toLowerCase();
 
     // Generate encoding-specific targets derived from the same source character array
     // Note: This creates equivalent Strings to the source, possibly with different encodings
     // (according to the target coder), except when converting from UTF-16 to Latin-1, which may
     // result in unequal strings due to character loss.
-    final byte[] targetByteArray = encodeCharArray(sourceChArray, comparisonType.getTarget());
-    final String target = new String(targetByteArray, comparisonType.getTarget().getCharset());
+    final byte[] targetByteArray = encodeCharArray(sourceChArray, comparisonType.getTargetCoder());
+    final String target = new String(targetByteArray, comparisonType.getTargetCoder().getCharset());
     targetLength = length / TARGET_COUNT;
-    startTarget = target.substring(0, targetLength);
-    middleTarget = target.substring(targetLength, 2 * targetLength);
-    uppercaseMiddleTarget = middleTarget.toUpperCase();
-    endTarget = target.substring(2 * targetLength);
+    startTargetStr = target.substring(0, targetLength);
+    middleTargetStr = target.substring(targetLength, 2 * targetLength);
+    uppercaseMiddleTargetStr = middleTargetStr.toUpperCase();
+    endTargetStr = target.substring(2 * targetLength);
   }
 
   @Benchmark
   public boolean contains() {
-    return source.contains(middleTarget);
+    return sourceStr.contains(middleTargetStr);
   }
 
   @Benchmark
   public boolean starts_with() {
-    return source.startsWith(startTarget);
+    return sourceStr.startsWith(startTargetStr);
   }
 
   @Benchmark
   public boolean starts_with_offset() {
-    return source.startsWith(middleTarget, targetLength);
+    return sourceStr.startsWith(middleTargetStr, targetLength);
   }
 
   @Benchmark
   public boolean ends_with() {
-    return source.endsWith(endTarget);
+    return sourceStr.endsWith(endTargetStr);
   }
 
   @Benchmark
   public boolean region_matches() {
-    return source.regionMatches(targetLength, middleTarget, 0, middleTarget.length());
+    return sourceStr.regionMatches(targetLength, middleTargetStr, 0, middleTargetStr.length());
   }
 
   @Benchmark
   public boolean region_matches_ignore_case() {
-    return lowercaseSource.regionMatches(
-        true, targetLength, uppercaseMiddleTarget, 0, uppercaseMiddleTarget.length());
+    return lowercaseSourceStr.regionMatches(
+        true, targetLength, uppercaseMiddleTargetStr, 0, uppercaseMiddleTargetStr.length());
   }
 }

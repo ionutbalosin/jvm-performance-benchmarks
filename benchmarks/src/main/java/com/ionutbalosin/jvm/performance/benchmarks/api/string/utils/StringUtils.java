@@ -74,19 +74,19 @@ public class StringUtils {
     LATIN1_TO_UTF16(LATIN1, UTF16),
     UTF16_TO_UTF16(UTF16, UTF16),
     UTF16_TO_LATIN1(UTF16, UTF16);
-    private final Coder source, target;
+    private final Coder sourceCoder, targetCoder;
 
-    ComparisonType(Coder source, Coder target) {
-      this.source = source;
-      this.target = target;
+    ComparisonType(Coder sourceCoder, Coder targetCoder) {
+      this.sourceCoder = sourceCoder;
+      this.targetCoder = targetCoder;
     }
 
-    public Coder getSource() {
-      return source;
+    public Coder getSourceCoder() {
+      return sourceCoder;
     }
 
-    public Coder getTarget() {
-      return target;
+    public Coder getTargetCoder() {
+      return targetCoder;
     }
   }
 
