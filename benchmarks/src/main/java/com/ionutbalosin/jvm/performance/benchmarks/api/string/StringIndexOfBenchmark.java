@@ -22,8 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.COMMON_ENGLISH_CHARS_TARGET;
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCommonEnglishCharArray;
 
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
 import java.util.concurrent.TimeUnit;
@@ -70,7 +69,7 @@ public class StringIndexOfBenchmark {
     offsetIdx = 0;
 
     // Generate encoding-specific sources
-    sourceChArray = generateCharArray(length, coder, COMMON_ENGLISH_CHARS_TARGET);
+    sourceChArray = generateCommonEnglishCharArray(length, coder);
     sourceStr = new String(sourceChArray);
   }
 

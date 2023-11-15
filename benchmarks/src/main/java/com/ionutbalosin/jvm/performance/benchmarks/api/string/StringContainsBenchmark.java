@@ -22,9 +22,8 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.COMMON_ENGLISH_CHARS_TARGET;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.encodeCharArray;
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCommonEnglishCharArray;
 
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.ComparisonType;
 import java.util.concurrent.TimeUnit;
@@ -78,7 +77,7 @@ public class StringContainsBenchmark {
   public void setup() {
     // Generate encoding-specific sources
     final char[] sourceChArray =
-        generateCharArray(length, comparisonType.getSourceCoder(), COMMON_ENGLISH_CHARS_TARGET);
+        generateCommonEnglishCharArray(length, comparisonType.getSourceCoder());
     sourceStr = new String(sourceChArray);
     lowercaseSourceStr = sourceStr.toLowerCase();
 

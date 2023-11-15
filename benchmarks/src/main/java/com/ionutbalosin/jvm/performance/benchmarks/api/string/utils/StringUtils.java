@@ -91,7 +91,7 @@ public class StringUtils {
   }
 
   // Consider 75% of the characters in a text being English common ones
-  public static final float COMMON_ENGLISH_CHARS_TARGET = 0.75f;
+  private static final float COMMON_ENGLISH_CHARS_TARGET = 0.75f;
 
   /*
    * The common English character set in a text typically includes:
@@ -145,6 +145,15 @@ public class StringUtils {
     shuffleCharArray(charArray);
 
     return charArray;
+  }
+
+  /*
+   * Generates a character array of a specified length using code units from a specific coder. The
+   * array is filled randomly with common English characters up to a certain threshold.
+   * The generated char array is guaranteed to match the specified character encoding.
+   */
+  public static char[] generateCommonEnglishCharArray(int length, Coder coder) {
+    return generateCharArray(length, coder, COMMON_ENGLISH_CHARS_TARGET);
   }
 
   /*
