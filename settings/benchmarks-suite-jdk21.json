@@ -94,12 +94,10 @@
       "name": "FactorialBenchmark"
     },
     {
-      "name": "FalseSharingBenchmark",
-      "jvmArgsAppend": "-XX:-RestrictContended"
+      "name": "FalseSharingBenchmark"
     },
     {
-      "name": "FibonacciBenchmark",
-      "jvmArgsAppend": "-Xss20M"
+      "name": "FibonacciBenchmark"
     },
     {
       "name": "FileChannelReadBenchmark"
@@ -239,8 +237,7 @@
       "name": "OffsetDateTimeBenchmark"
     },
     {
-      "name": "PalindromeBenchmark",
-      "jvmArgsAppend": "-Xss20M"
+      "name": "PalindromeBenchmark"
     },
     {
       "name": "PipedInputStreamBenchmark"
@@ -318,10 +315,15 @@
       "jmhOpts": "-prof gc"
     },
     {
-      "name": "StringContainsBenchmark"
+      "name": "StringContainsBenchmark",
+      "jvmArgsAppend": "--enable-preview"
     },
     {
       "name": "StringEqualsBenchmark"
+    },
+    {
+      "name": "StringFormatBenchmark",
+      "jvmArgsAppend": "--enable-preview"
     },
     {
       "name": "StringIndexOfBenchmark"
@@ -346,8 +348,7 @@
       "name": "StringWhitespaceBenchmark"
     },
     {
-      "name": "TailRecursionBenchmark",
-      "jvmArgsAppend": "-Xss64M"
+      "name": "TailRecursionBenchmark"
     },
     {
       "name": "ThreadLocalRandomBenchmark"

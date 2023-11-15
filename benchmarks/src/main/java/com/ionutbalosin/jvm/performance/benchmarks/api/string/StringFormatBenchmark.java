@@ -22,12 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
-import static java.lang.String.valueOf;
-
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -40,19 +35,25 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-/**
- * Benchmark measuring the performance of various concatenation methods using different data types
- * (e.g., String, int, float, char, long, double, boolean, Object):
- * - StringBuilder
- * - StringBuffer
- * - String.concat()
- * - plus operator
- * - StringTemplate
+import java.text.MessageFormat;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
+import static java.util.FormatProcessor.FMT;
+
+/*
+ * This benchmark measures the performance of different formatting approaches utilizing various data types
+ * (e.g., String, int, float, char, long, double, boolean, Object) using different methods:
+ * - String.format()
+ * - MessageFormat
+ * - String.formatted()
+ * - FormatProcessor
  *
- * The input String and char contain characters encoded in either Latin-1 or UTF-16.
+ * The input String and char consist of characters encoded in either Latin-1 or UTF-16.
  *
- * Note: The benchmarking process may involve varying numbers of allocations, which could affect
- * the overall results without fundamentally altering the outcomes.
+ * Note: The benchmarking process may involve a varying number of allocations, potentially influencing
+ * the overall results, albeit without fundamentally altering the outcomes.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -60,9 +61,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StringConcatenationBenchmark {
+public class StringFormatBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*StringConcatenationBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*StringFormatBenchmark.*"
   // Recommended command line options:
   // - JMH options: -prof gc
 
@@ -95,55 +96,26 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public String string_builder() {
-    // Do not explicitly set a capacity
-    return new StringBuilder()
-        .append(aString)
-        .append(anInt)
-        .append(aFloat)
-        .append(aChar)
-        .append(aLong)
-        .append(aDouble)
-        .append(aBool)
-        .append(anObject)
-        .toString();
+  public String string_format() {
+    return String.format(
+        "%s%d%.8f%s%d%.17f%b%s", aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
   }
 
   @Benchmark
-  public String string_buffer() {
-    // Do not explicitly set a capacity
-    return new StringBuffer()
-        .append(aString)
-        .append(anInt)
-        .append(aFloat)
-        .append(aChar)
-        .append(aLong)
-        .append(aDouble)
-        .append(aBool)
-        .append(anObject)
-        .toString();
+  public String message_format() {
+    final MessageFormat mf =
+        new MessageFormat(
+            "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
+    return mf.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
   }
 
   @Benchmark
-  public String string_concat() {
-    return new String()
-        .concat(aString)
-        .concat(valueOf(anInt))
-        .concat(valueOf(aFloat))
-        .concat(valueOf(aChar))
-        .concat(valueOf(aLong))
-        .concat(valueOf(aDouble))
-        .concat(valueOf(aBool))
-        .concat(valueOf(anObject));
+  public String string_formatted() {
+    return "%s%d%.8f%s%d%.17f%b%s".formatted(aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
   }
 
   @Benchmark
-  public String plus_operator() {
-    return aString + anInt + aFloat+ aChar + aLong + aDouble + aBool + anObject ;
-  }
-
-  @Benchmark
-  public String string_template() {
-    return STR."\{aString}\{anInt}\{aFloat}\{aChar}\{aLong}\{aDouble}\{aBool}\{anObject}";
+  public String format_processor() {
+    return FMT."%s\{aString}%d\{anInt}%.8f\{aFloat}%s\{aChar}%d\{aLong}%.17f\{aDouble}%b\{aBool}%s\{anObject}";
   }
 }

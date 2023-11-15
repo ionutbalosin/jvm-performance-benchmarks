@@ -28,12 +28,10 @@
       "name": "FactorialBenchmark"
     },
     {
-      "name": "FalseSharingBenchmark",
-      "jvmArgsAppend": "-XX:-RestrictContended"
+      "name": "FalseSharingBenchmark"
     },
     {
-      "name": "FibonacciBenchmark",
-      "jvmArgsAppend": "-Xss20M"
+      "name": "FibonacciBenchmark"
     },
     {
       "name": "HuffmanCodingBenchmark"
@@ -94,8 +92,7 @@
       "name": "NpeThrowBenchmark"
     },
     {
-      "name": "PalindromeBenchmark",
-      "jvmArgsAppend": "-Xss20M"
+      "name": "PalindromeBenchmark"
     },
     {
       "name": "PopulationVarianceBenchmark"
@@ -130,8 +127,7 @@
       "jmhOpts": "-prof gc"
     },
     {
-      "name": "TailRecursionBenchmark",
-      "jvmArgsAppend": "-Xss64M"
+      "name": "TailRecursionBenchmark"
     },
     {
       "name": "TypeCheckScalabilityBenchmark"
