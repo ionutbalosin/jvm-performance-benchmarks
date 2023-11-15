@@ -25,7 +25,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
 import static java.lang.String.valueOf;
 
-import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils;
+import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
 import java.text.MessageFormat;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -81,7 +81,7 @@ public class StringConcatenationBenchmark {
   @Param({"128"})
   private int length;
 
-  @Param private StringUtils.Coder coder;
+  @Param private Coder coder;
 
   @Setup
   public void setup() {
