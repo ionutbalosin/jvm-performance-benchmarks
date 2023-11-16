@@ -39,10 +39,10 @@
             <properties>
                 <jdk.version>11</jdk.version>
                 <spotlessExcludedFiles>
-                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java
+                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java,**/StringWhitespaceBenchmark.java,**/api/time/**.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java,**/*VectorApiBenchmark.java,**/RandomGeneratorBenchmark.java,**/ThreadLocalRandomBenchmark.java
+                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java,**/*VectorApiBenchmark.java,**/RandomGeneratorBenchmark.java,**/ThreadLocalRandomBenchmark.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java,**/StringWhitespaceBenchmark.java,**/api/time/**.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
@@ -55,10 +55,10 @@
             <properties>
                 <jdk.version>17</jdk.version>
                 <spotlessExcludedFiles>
-                    **/TypeSwitchBenchmark.java
+                    **/TypeSwitchBenchmark.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java
+                    **/TypeSwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingServer.java,**/IoBlockingClient.java,**/IoBlockingRoundtripChunksLatencyBenchmark.java,**/VPThread*.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
@@ -74,7 +74,7 @@
             <properties>
                 <jdk.version>21</jdk.version>
                 <spotlessExcludedFiles>
-                    **/TypeSwitchBenchmark.java
+                    **/TypeSwitchBenchmark.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java
                 </spotlessExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
