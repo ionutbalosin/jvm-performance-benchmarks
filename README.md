@@ -8,7 +8,7 @@ This repository contains various Java Virtual Machine (JVM) benchmarks with a pr
 
 The benchmarks are structured in three distinct categories:
 1. **Compiler**: This category is dedicated to assessing JIT compiler optimizations by following specific handwritten code patterns. It assesses common optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
-2. **Api**: This category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util.random`, `java.text`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
+2. **Api**: This category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util`, `java.text`, `java.time`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
 3. **Miscellaneous**: This category covers a broader spectrum of classical programs (e.g., Dijkstra's shortest path, factorial, Fibonacci, Game of Life, image rotation, knapsack problem, N queens, palindrome, Huffman coding/encoding, Lempel-Ziv-Welch compression, etc.) using different techniques (e.g., dynamic programming, greedy algorithms, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
 All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
@@ -211,7 +211,13 @@ There are several reasons why such a custom configuration is necessary:
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
-> For historical reasons, a newer suite (e.g., JDK 21 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite. In other words, we do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
+### Forward and backward compatibility
+
+For historical reasons, a newer suite (e.g., JDK 21 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite. In other words, we do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
+
+Moreover, a benchmark that previously functioned within a specific suite (e.g., JDK 17 suite) might no longer operate. This change could be due to the inclusion of additional benchmark methods that rely on newer language features (e.g., JDK 21) not present in the previous JDK version (e.g., JDK 17).
+
+To avoid these inconsistencies on the main branch, we recommend switching to the appropriate JDK release branch when running on a previous JDK and initiating the suite from there.
 
 ## Infrastructure baseline benchmark
 
