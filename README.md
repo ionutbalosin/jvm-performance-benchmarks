@@ -211,11 +211,13 @@ There are several reasons why such a custom configuration is necessary:
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
-### Forward and backward compatibility
+### Main branch forward and backward compatibility
 
-For historical reasons, a newer suite (e.g., JDK 21 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite. In other words, we do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
+On the main branch, we adhere to a forward-only approach for newly created benchmarks that function with the latest LTS release. We do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
 
-Moreover, a benchmark that previously functioned within a specific suite (e.g., JDK 17 suite) might no longer operate. This change could be due to the inclusion of additional benchmark methods that rely on newer language features (e.g., JDK 21) not present in the previous JDK version (e.g., JDK 17).
+Examples:
+- A newer suite (e.g., JDK 21 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite.
+- A benchmark that previously functioned within a specific suite (e.g., JDK 17 suite) might no longer operate. This change could be due to the inclusion of additional benchmark methods that rely on newer language features (e.g., JDK 21) not present in the previous JDK version (e.g., JDK 17).
 
 To avoid these inconsistencies on the main branch, we recommend switching to the appropriate JDK release branch when running on a previous JDK and initiating the suite from there.
 
