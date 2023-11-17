@@ -24,7 +24,7 @@
 
 export JMH_JAR="benchmarks/target/benchmarks.jar"
 export JMH_BENCHMARKS="settings/benchmarks-suite-jdk${JDK_VERSION}.json"
-export JMH_OUTPUT_FOLDER="results/jdk-$JDK_VERSION/$ARCH/jmh/$JVM_IDENTIFIER"
+export JMH_OUTPUT_FOLDER="results/jdk-$JDK_VERSION/$ARCH/perfasm/$JVM_IDENTIFIER"
 
 echo "JMH JAR: $JMH_JAR"
 echo "JMH benchmarks suite configuration file: $JMH_BENCHMARKS"
