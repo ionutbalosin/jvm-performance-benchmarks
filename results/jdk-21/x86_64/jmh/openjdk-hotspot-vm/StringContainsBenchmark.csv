@@ -1,0 +1,25 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: comparisonType","Param: length"
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.contains","avgt",1,25,107.980972,0.011404,"ns/op",LATIN1_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.contains","avgt",1,25,108.067896,0.118584,"ns/op",LATIN1_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.contains","avgt",1,25,287.747757,0.077301,"ns/op",UTF16_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.contains","avgt",1,25,287.749065,0.073146,"ns/op",UTF16_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.ends_with","avgt",1,25,38.778689,0.171366,"ns/op",LATIN1_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.ends_with","avgt",1,25,38.866969,0.120098,"ns/op",LATIN1_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.ends_with","avgt",1,25,44.810045,0.277315,"ns/op",UTF16_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.ends_with","avgt",1,25,45.117842,0.024328,"ns/op",UTF16_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches","avgt",1,25,41.039682,0.113858,"ns/op",LATIN1_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches","avgt",1,25,40.924831,0.095291,"ns/op",LATIN1_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches","avgt",1,25,47.110386,0.062243,"ns/op",UTF16_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches","avgt",1,25,47.211099,0.051199,"ns/op",UTF16_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches_ignore_case","avgt",1,25,988.747023,0.417320,"ns/op",LATIN1_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches_ignore_case","avgt",1,25,976.852173,18.870628,"ns/op",LATIN1_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches_ignore_case","avgt",1,25,1192.922181,7.070035,"ns/op",UTF16_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.region_matches_ignore_case","avgt",1,25,1189.094995,8.246377,"ns/op",UTF16_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with","avgt",1,25,38.354745,0.228815,"ns/op",LATIN1_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with","avgt",1,25,37.885486,0.104375,"ns/op",LATIN1_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with","avgt",1,25,45.837090,0.039011,"ns/op",UTF16_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with","avgt",1,25,45.822178,0.056407,"ns/op",UTF16_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with_offset","avgt",1,25,38.438893,0.196127,"ns/op",LATIN1_TO_LATIN1,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with_offset","avgt",1,25,38.299354,0.140654,"ns/op",LATIN1_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with_offset","avgt",1,25,46.105789,0.347743,"ns/op",UTF16_TO_UTF16,1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringContainsBenchmark.starts_with_offset","avgt",1,25,46.630267,0.459725,"ns/op",UTF16_TO_LATIN1,1024
