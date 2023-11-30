@@ -6,6 +6,20 @@ Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-perfor
 
 [![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
 
-### Conclusions:
+### Analysis
+
+#### C2 JIT Compiler
+
+... TODO ...
+
+#### Oracle GraalVM JIT Compiler
+
+... TODO ...
+
+#### GraalVM CE JIT Compiler
+
+... TODO ...
+
+### Conclusions
 
 ... TODO ...
