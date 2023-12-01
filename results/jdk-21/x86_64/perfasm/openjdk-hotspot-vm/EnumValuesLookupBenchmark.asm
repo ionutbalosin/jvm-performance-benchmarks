@@ -1,7 +1,7 @@
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
-# VM options: <none>
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
+# VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
 # Measurement: 5 iterations, 10 s each
@@ -12,30 +12,30 @@
 
 # Run progress: 0.00% complete, ETA 00:03:20
 # Fork: 1 of 1
-# Preparing profilers: LinuxPerfAsmProfiler
+# Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 88.072 ns/op
-# Warmup Iteration   2: 82.474 ns/op
-# Warmup Iteration   3: 85.685 ns/op
-# Warmup Iteration   4: 82.649 ns/op
-# Warmup Iteration   5: 81.968 ns/op
-Iteration   1: 82.776 ns/op
-Iteration   2: 82.867 ns/op
-Iteration   3: 82.204 ns/op
-Iteration   4: 82.221 ns/op
-Iteration   5: 82.740 ns/op
-# Processing profiler results: LinuxPerfAsmProfiler
+# Warmup Iteration   1: 36.752 ns/op
+# Warmup Iteration   2: 35.244 ns/op
+# Warmup Iteration   3: 36.184 ns/op
+# Warmup Iteration   4: 35.677 ns/op
+# Warmup Iteration   5: 35.666 ns/op
+Iteration   1: 35.670 ns/op
+Iteration   2: 35.259 ns/op
+Iteration   3: 35.739 ns/op
+Iteration   4: 35.745 ns/op
+Iteration   5: 35.647 ns/op
+# Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values":
-  82.561 ±(99.9%) 1.240 ns/op [Average]
-  (min, avg, max) = (82.204, 82.561, 82.867), stdev = 0.322
-  CI (99.9%): [81.321, 83.802] (assumes normal distribution)
+  35.612 ±(99.9%) 0.776 ns/op [Average]
+  (min, avg, max) = (35.259, 35.612, 35.745), stdev = 0.202
+  CI (99.9%): [34.835, 36.388] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values:asm":
-PrintAssembly processed: 131525 total address lines.
-Perf output processed (skipped 66.902 seconds):
- Column 1: cycles (50231 events)
+PrintAssembly processed: 125740 total address lines.
+Perf output processed (skipped 56.292 seconds):
+ Column 1: cycles (50682 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
@@ -186,8 +186,8 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBen
 
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
-# VM options: <none>
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
+# VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
 # Measurement: 5 iterations, 10 s each
@@ -196,32 +196,32 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBen
 # Benchmark mode: Average time, time/op
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values
 
-# Run progress: 50.00% complete, ETA 00:02:03
+# Run progress: 50.00% complete, ETA 00:01:49
 # Fork: 1 of 1
-# Preparing profilers: LinuxPerfAsmProfiler
+# Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 141.349 ns/op
-# Warmup Iteration   2: 122.691 ns/op
-# Warmup Iteration   3: 116.710 ns/op
-# Warmup Iteration   4: 117.265 ns/op
-# Warmup Iteration   5: 118.221 ns/op
-Iteration   1: 116.278 ns/op
-Iteration   2: 118.940 ns/op
-Iteration   3: 119.364 ns/op
-Iteration   4: 116.541 ns/op
-Iteration   5: 120.577 ns/op
-# Processing profiler results: LinuxPerfAsmProfiler
+# Warmup Iteration   1: 61.847 ns/op
+# Warmup Iteration   2: 60.499 ns/op
+# Warmup Iteration   3: 61.088 ns/op
+# Warmup Iteration   4: 60.391 ns/op
+# Warmup Iteration   5: 60.356 ns/op
+Iteration   1: 60.394 ns/op
+Iteration   2: 60.422 ns/op
+Iteration   3: 60.287 ns/op
+Iteration   4: 60.462 ns/op
+Iteration   5: 60.391 ns/op
+# Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values":
-  118.340 ±(99.9%) 7.178 ns/op [Average]
-  (min, avg, max) = (116.278, 118.340, 120.577), stdev = 1.864
-  CI (99.9%): [111.162, 125.519] (assumes normal distribution)
+  60.391 ±(99.9%) 0.249 ns/op [Average]
+  (min, avg, max) = (60.287, 60.391, 60.462), stdev = 0.065
+  CI (99.9%): [60.142, 60.640] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values:asm":
-PrintAssembly processed: 126833 total address lines.
-Perf output processed (skipped 66.141 seconds):
- Column 1: cycles (51216 events)
+PrintAssembly processed: 123377 total address lines.
+Perf output processed (skipped 56.138 seconds):
+ Column 1: cycles (50485 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
@@ -497,7 +497,7 @@ c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBen
 
 
 
-# Run complete. Total time: 00:04:04
+# Run complete. Total time: 00:03:38
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -511,8 +511,8 @@ works, and factor in a small probability of new VM bugs. Additionally, while com
 different JVMs are already problematic, the performance difference caused by different Blackhole
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
-Benchmark                                         Mode  Cnt    Score   Error  Units
-EnumValuesLookupBenchmark.cached_enum_values      avgt    5   82.561 ± 1.240  ns/op
-EnumValuesLookupBenchmark.cached_enum_values:asm  avgt           NaN            ---
-EnumValuesLookupBenchmark.enum_values             avgt    5  118.340 ± 7.178  ns/op
-EnumValuesLookupBenchmark.enum_values:asm         avgt           NaN            ---
+Benchmark                                         Mode  Cnt   Score   Error  Units
+EnumValuesLookupBenchmark.cached_enum_values      avgt    5  35.612 ± 0.776  ns/op
+EnumValuesLookupBenchmark.cached_enum_values:asm  avgt          NaN            ---
+EnumValuesLookupBenchmark.enum_values             avgt    5  60.391 ± 0.249  ns/op
+EnumValuesLookupBenchmark.enum_values:asm         avgt          NaN            ---

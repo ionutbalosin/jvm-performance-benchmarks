@@ -1,7 +1,7 @@
 # JMH version: 1.37
-# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
-# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
-# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
 # Measurement: 5 iterations, 10 s each
@@ -12,30 +12,30 @@
 
 # Run progress: 0.00% complete, ETA 00:03:20
 # Fork: 1 of 1
-# Preparing profilers: LinuxPerfAsmProfiler
+# Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 145.154 ns/op
-# Warmup Iteration   2: 134.277 ns/op
-# Warmup Iteration   3: 132.534 ns/op
-# Warmup Iteration   4: 141.314 ns/op
-# Warmup Iteration   5: 144.341 ns/op
-Iteration   1: 136.897 ns/op
-Iteration   2: 136.649 ns/op
-Iteration   3: 134.743 ns/op
-Iteration   4: 127.535 ns/op
-Iteration   5: 140.124 ns/op
-# Processing profiler results: LinuxPerfAsmProfiler
+# Warmup Iteration   1: 53.083 ns/op
+# Warmup Iteration   2: 55.749 ns/op
+# Warmup Iteration   3: 55.502 ns/op
+# Warmup Iteration   4: 55.781 ns/op
+# Warmup Iteration   5: 55.825 ns/op
+Iteration   1: 55.731 ns/op
+Iteration   2: 55.669 ns/op
+Iteration   3: 55.781 ns/op
+Iteration   4: 55.887 ns/op
+Iteration   5: 55.808 ns/op
+# Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values":
-  135.190 ±(99.9%) 18.080 ns/op [Average]
-  (min, avg, max) = (127.535, 135.190, 140.124), stdev = 4.695
-  CI (99.9%): [117.110, 153.270] (assumes normal distribution)
+  55.775 ±(99.9%) 0.316 ns/op [Average]
+  (min, avg, max) = (55.669, 55.775, 55.887), stdev = 0.082
+  CI (99.9%): [55.459, 56.092] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values:asm":
-PrintAssembly processed: 221477 total address lines.
-Perf output processed (skipped 84.926 seconds):
- Column 1: cycles (49965 events)
+PrintAssembly processed: 227266 total address lines.
+Perf output processed (skipped 60.663 seconds):
+ Column 1: cycles (50673 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
@@ -239,9 +239,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookup
 
 
 # JMH version: 1.37
-# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
-# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
-# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
 # Measurement: 5 iterations, 10 s each
@@ -250,32 +250,32 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookup
 # Benchmark mode: Average time, time/op
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values
 
-# Run progress: 50.00% complete, ETA 00:02:24
+# Run progress: 50.00% complete, ETA 00:01:55
 # Fork: 1 of 1
-# Preparing profilers: LinuxPerfAsmProfiler
+# Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 200.899 ns/op
-# Warmup Iteration   2: 179.086 ns/op
-# Warmup Iteration   3: 178.821 ns/op
-# Warmup Iteration   4: 179.108 ns/op
-# Warmup Iteration   5: 179.763 ns/op
-Iteration   1: 176.094 ns/op
-Iteration   2: 177.676 ns/op
-Iteration   3: 176.881 ns/op
-Iteration   4: 177.089 ns/op
-Iteration   5: 180.250 ns/op
-# Processing profiler results: LinuxPerfAsmProfiler
+# Warmup Iteration   1: 70.042 ns/op
+# Warmup Iteration   2: 68.374 ns/op
+# Warmup Iteration   3: 68.348 ns/op
+# Warmup Iteration   4: 68.678 ns/op
+# Warmup Iteration   5: 68.409 ns/op
+Iteration   1: 68.544 ns/op
+Iteration   2: 68.322 ns/op
+Iteration   3: 68.354 ns/op
+Iteration   4: 68.451 ns/op
+Iteration   5: 68.432 ns/op
+# Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values":
-  177.598 ±(99.9%) 6.112 ns/op [Average]
-  (min, avg, max) = (176.094, 177.598, 180.250), stdev = 1.587
-  CI (99.9%): [171.486, 183.710] (assumes normal distribution)
+  68.420 ±(99.9%) 0.336 ns/op [Average]
+  (min, avg, max) = (68.322, 68.420, 68.544), stdev = 0.087
+  CI (99.9%): [68.085, 68.756] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values:asm":
-PrintAssembly processed: 224225 total address lines.
-Perf output processed (skipped 80.022 seconds):
- Column 1: cycles (50792 events)
+PrintAssembly processed: 226334 total address lines.
+Perf output processed (skipped 60.607 seconds):
+ Column 1: cycles (50696 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
@@ -522,7 +522,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookup
 
 
 
-# Run complete. Total time: 00:04:40
+# Run complete. Total time: 00:03:48
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -536,8 +536,8 @@ works, and factor in a small probability of new VM bugs. Additionally, while com
 different JVMs are already problematic, the performance difference caused by different Blackhole
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
-Benchmark                                         Mode  Cnt    Score    Error  Units
-EnumValuesLookupBenchmark.cached_enum_values      avgt    5  135.190 ± 18.080  ns/op
-EnumValuesLookupBenchmark.cached_enum_values:asm  avgt           NaN             ---
-EnumValuesLookupBenchmark.enum_values             avgt    5  177.598 ±  6.112  ns/op
-EnumValuesLookupBenchmark.enum_values:asm         avgt           NaN             ---
+Benchmark                                         Mode  Cnt   Score   Error  Units
+EnumValuesLookupBenchmark.cached_enum_values      avgt    5  55.775 ± 0.316  ns/op
+EnumValuesLookupBenchmark.cached_enum_values:asm  avgt          NaN            ---
+EnumValuesLookupBenchmark.enum_values             avgt    5  68.420 ± 0.336  ns/op
+EnumValuesLookupBenchmark.enum_values:asm         avgt          NaN            ---
