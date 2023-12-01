@@ -65,7 +65,7 @@ public class EnumValuesLookupBenchmark {
 
   @Setup
   public void setup() {
-    lookUpValue = enumValues[random.nextInt(enumValues.length)].value;
+    lookUpValue = enumValues[random.nextInt(enumValues.length)].carValue;
   }
 
   @Benchmark
@@ -121,10 +121,10 @@ public class EnumValuesLookupBenchmark {
     VOLKSWAGEN("Volkswagen"),
     VOLVO("Volvo");
 
-    private String value;
+    private String carValue;
 
-    Car(final String value) {
-      this.value = value;
+    Car(final String carValue) {
+      this.carValue = carValue;
     }
 
     private static final Car[] cachedCars = Car.values();
@@ -133,22 +133,22 @@ public class EnumValuesLookupBenchmark {
       return cachedCars;
     }
 
-    public static Car fromValues(String value) {
+    public static Car fromValues(String targetValue) {
       for (Car b : Car.values()) {
-        if (b.value.equals(value)) {
+        if (b.carValue.equals(targetValue)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      throw new IllegalArgumentException("Unexpected value '" + targetValue + "'");
     }
 
-    public static Car fromCachedValues(String value) {
+    public static Car fromCachedValues(String targetValue) {
       for (Car b : Car.cachedValues()) {
-        if (b.value.equals(value)) {
+        if (b.carValue.equals(targetValue)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      throw new IllegalArgumentException("Unexpected value '" + targetValue + "'");
     }
   }
 }
