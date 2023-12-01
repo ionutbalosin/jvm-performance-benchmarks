@@ -26,6 +26,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -52,7 +53,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class EnumValuesLookupBenchmark {
 
@@ -65,15 +66,17 @@ public class EnumValuesLookupBenchmark {
 
   @Setup
   public void setup() {
-    lookUpValue = enumValues[random.nextInt(enumValues.length)].value;
+    lookUpValue = enumValues[random.nextInt(enumValues.length)].carValue;
   }
 
   @Benchmark
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public Car cached_enum_values() {
     return Car.fromCachedValues(lookUpValue);
   }
 
   @Benchmark
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public Car enum_values() {
     return Car.fromValues(lookUpValue);
   }
@@ -121,10 +124,10 @@ public class EnumValuesLookupBenchmark {
     VOLKSWAGEN("Volkswagen"),
     VOLVO("Volvo");
 
-    private String value;
+    private String carValue;
 
-    Car(final String value) {
-      this.value = value;
+    Car(final String carValue) {
+      this.carValue = carValue;
     }
 
     private static final Car[] cachedCars = Car.values();
@@ -133,22 +136,22 @@ public class EnumValuesLookupBenchmark {
       return cachedCars;
     }
 
-    public static Car fromValues(String value) {
+    public static Car fromValues(String targetValue) {
       for (Car b : Car.values()) {
-        if (b.value.equals(value)) {
+        if (b.carValue.equals(targetValue)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      throw new IllegalArgumentException("Unexpected value '" + targetValue + "'");
     }
 
-    public static Car fromCachedValues(String value) {
+    public static Car fromCachedValues(String targetValue) {
       for (Car b : Car.cachedValues()) {
-        if (b.value.equals(value)) {
+        if (b.carValue.equals(targetValue)) {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      throw new IllegalArgumentException("Unexpected value '" + targetValue + "'");
     }
   }
 }
