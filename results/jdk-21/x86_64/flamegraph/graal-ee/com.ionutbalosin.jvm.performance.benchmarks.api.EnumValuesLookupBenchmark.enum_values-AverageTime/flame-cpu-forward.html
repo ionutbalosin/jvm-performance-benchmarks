@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<style>
+	body {margin: 0; padding: 10px; background-color: #ffffff}
+	h1 {margin: 5px 0 0 0; font-size: 18px; font-weight: normal; text-align: center}
+	header {margin: -24px 0 5px 0; line-height: 24px}
+	button {font: 12px sans-serif; cursor: pointer}
+	p {margin: 5px 0 5px 0}
+	a {color: #0366d6}
+	#hl {position: absolute; display: none; overflow: hidden; white-space: nowrap; pointer-events: none; background-color: #ffffe0; outline: 1px solid #ffc000; height: 15px}
+	#hl span {padding: 0 3px 0 3px}
+	#status {overflow: hidden; white-space: nowrap}
+	#match {overflow: hidden; white-space: nowrap; display: none; float: right; text-align: right}
+	#reset {cursor: pointer}
+	#canvas {width: 100%; height: 848px}
+</style>
+</head>
+<body style='font: 12px Verdana, sans-serif'>
+<h1>CPU profile</h1>
+<header style='text-align: left'><button id='reverse' title='Reverse'>&#x1f53b;</button>&nbsp;&nbsp;<button id='search' title='Search'>&#x1f50d;</button></header>
+<header style='text-align: right'>Produced by <a href='https://github.com/jvm-profiling-tools/async-profiler'>async-profiler</a></header>
+<canvas id='canvas'></canvas>
+<div id='hl'><span></span></div>
+<p id='match'>Matched: <span id='matchval'></span> <span id='reset' title='Clear'>&#x274c;</span></p>
+<p id='status'>&nbsp;</p>
+<script>
+	// Copyright 2020 Andrei Pangin
+	// Licensed under the Apache License, Version 2.0.
+	'use strict';
+	var root, rootLevel, px, pattern;
+	var reverse = false;
+	const levels = Array(53);
+	for (let h = 0; h < levels.length; h++) {
+		levels[h] = [];
+	}
+
+	const canvas = document.getElementById('canvas');
+	const c = canvas.getContext('2d');
+	const hl = document.getElementById('hl');
+	const status = document.getElementById('status');
+
+	const canvasWidth = canvas.offsetWidth;
+	const canvasHeight = canvas.offsetHeight;
+	canvas.style.width = canvasWidth + 'px';
+	canvas.width = canvasWidth * (devicePixelRatio || 1);
+	canvas.height = canvasHeight * (devicePixelRatio || 1);
+	if (devicePixelRatio) c.scale(devicePixelRatio, devicePixelRatio);
+	c.font = document.body.style.font;
+
+	const palette = [
+		[0xb2e1b2, 20, 20, 20],
+		[0x50e150, 30, 30, 30],
+		[0x50cccc, 30, 30, 30],
+		[0xe15a5a, 30, 40, 40],
+		[0xc8c83c, 30, 30, 10],
+		[0xe17d00, 30, 30,  0],
+		[0xcce880, 20, 20, 20],
+	];
+
+	function getColor(p) {
+		const v = Math.random();
+		return '#' + (p[0] + ((p[1] * v) << 16 | (p[2] * v) << 8 | (p[3] * v))).toString(16);
+	}
+
+	function f(level, left, width, type, title, inln, c1, int) {
+		levels[level].push({left: left, width: width, color: getColor(palette[type]), title: title,
+			details: (int ? ', int=' + int : '') + (c1 ? ', c1=' + c1 : '') + (inln ? ', inln=' + inln : '')
+		});
+	}
+
+	function samples(n) {
+		return n === 1 ? '1 sample' : n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' samples';
+	}
+
+	function pct(a, b) {
+		return a >= b ? '100' : (100 * a / b).toFixed(2);
+	}
+
+	function findFrame(frames, x) {
+		let left = 0;
+		let right = frames.length - 1;
+
+		while (left <= right) {
+			const mid = (left + right) >>> 1;
+			const f = frames[mid];
+
+			if (f.left > x) {
+				right = mid - 1;
+			} else if (f.left + f.width <= x) {
+				left = mid + 1;
+			} else {
+				return f;
+			}
+		}
+
+		if (frames[left] && (frames[left].left - x) * px < 0.5) return frames[left];
+		if (frames[right] && (x - (frames[right].left + frames[right].width)) * px < 0.5) return frames[right];
+
+		return null;
+	}
+
+	function search(r) {
+		if (r === true && (r = prompt('Enter regexp to search:', '')) === null) {
+			return;
+		}
+
+		pattern = r ? RegExp(r) : undefined;
+		const matched = render(root, rootLevel);
+		document.getElementById('matchval').textContent = pct(matched, root.width) + '%';
+		document.getElementById('match').style.display = r ? 'inherit' : 'none';
+	}
+
+	function render(newRoot, newLevel) {
+		if (root) {
+			c.fillStyle = '#ffffff';
+			c.fillRect(0, 0, canvasWidth, canvasHeight);
+		}
+
+		root = newRoot || levels[0][0];
+		rootLevel = newLevel || 0;
+		px = canvasWidth / root.width;
+
+		const x0 = root.left;
+		const x1 = x0 + root.width;
+		const marked = [];
+
+		function mark(f) {
+			return marked[f.left] >= f.width || (marked[f.left] = f.width);
+		}
+
+		function totalMarked() {
+			let total = 0;
+			let left = 0;
+			Object.keys(marked).sort(function(a, b) { return a - b; }).forEach(function(x) {
+				if (+x >= left) {
+					total += marked[x];
+					left = +x + marked[x];
+				}
+			});
+			return total;
+		}
+
+		function drawFrame(f, y, alpha) {
+			if (f.left < x1 && f.left + f.width > x0) {
+				c.fillStyle = pattern && f.title.match(pattern) && mark(f) ? '#ee00ee' : f.color;
+				c.fillRect((f.left - x0) * px, y, f.width * px, 15);
+
+				if (f.width * px >= 21) {
+					const chars = Math.floor(f.width * px / 7);
+					const title = f.title.length <= chars ? f.title : f.title.substring(0, chars - 2) + '..';
+					c.fillStyle = '#000000';
+					c.fillText(title, Math.max(f.left - x0, 0) * px + 3, y + 12, f.width * px - 6);
+				}
+
+				if (alpha) {
+					c.fillStyle = 'rgba(255, 255, 255, 0.5)';
+					c.fillRect((f.left - x0) * px, y, f.width * px, 15);
+				}
+			}
+		}
+
+		for (let h = 0; h < levels.length; h++) {
+			const y = reverse ? h * 16 : canvasHeight - (h + 1) * 16;
+			const frames = levels[h];
+			for (let i = 0; i < frames.length; i++) {
+				drawFrame(frames[i], y, h < rootLevel);
+			}
+		}
+
+		return totalMarked();
+	}
+
+	canvas.onmousemove = function() {
+		const h = Math.floor((reverse ? event.offsetY : (canvasHeight - event.offsetY)) / 16);
+		if (h >= 0 && h < levels.length) {
+			const f = findFrame(levels[h], event.offsetX / px + root.left);
+			if (f) {
+				if (f != root) getSelection().removeAllRanges();
+				hl.style.left = (Math.max(f.left - root.left, 0) * px + canvas.offsetLeft) + 'px';
+				hl.style.width = (Math.min(f.width, root.width) * px) + 'px';
+				hl.style.top = ((reverse ? h * 16 : canvasHeight - (h + 1) * 16) + canvas.offsetTop) + 'px';
+				hl.firstChild.textContent = f.title;
+				hl.style.display = 'block';
+				canvas.title = f.title + '\n(' + samples(f.width) + f.details + ', ' + pct(f.width, levels[0][0].width) + '%)';
+				canvas.style.cursor = 'pointer';
+				canvas.onclick = function() {
+					if (f != root) {
+						render(f, h);
+						canvas.onmousemove();
+					}
+				};
+				status.textContent = 'Function: ' + canvas.title;
+				return;
+			}
+		}
+		canvas.onmouseout();
+	}
+
+	canvas.onmouseout = function() {
+		hl.style.display = 'none';
+		status.textContent = '\xa0';
+		canvas.title = '';
+		canvas.style.cursor = '';
+		canvas.onclick = '';
+	}
+
+	canvas.ondblclick = function() {
+		getSelection().selectAllChildren(hl);
+	}
+
+	document.getElementById('reverse').onclick = function() {
+		reverse = !reverse;
+		render();
+	}
+
+	document.getElementById('search').onclick = function() {
+		search(true);
+	}
+
+	document.getElementById('reset').onclick = function() {
+		search(false);
+	}
+
+	window.onkeydown = function() {
+		if (event.ctrlKey && event.keyCode === 70) {
+			event.preventDefault();
+			search(true);
+		} else if (event.keyCode === 27) {
+			search(false);
+		}
+	}
+
+f(0,0,5020,3,'all')
+f(1,0,1,3,'[unknown]')
+f(2,0,1,3,'___pthread_cond_timedwait64')
+f(1,1,1,3,'[unknown_Java]')
+f(2,1,1,1,'I2C/C2I adapters')
+f(1,2,2,3,'__futex_abstimed_wait_cancelable64')
+f(2,2,2,5,'entry_SYSCALL_64_after_hwframe')
+f(3,2,2,5,'do_syscall_64')
+f(4,2,1,5,'__x64_sys_futex')
+f(5,2,1,5,'do_futex')
+f(6,2,1,5,'futex_wait')
+f(7,2,1,5,'futex_wait_queue')
+f(8,2,1,5,'plist_add')
+f(4,3,1,5,'syscall_exit_to_user_mode')
+f(5,3,1,5,'exit_to_user_mode_prepare')
+f(6,3,1,5,'exit_to_user_mode_loop')
+f(7,3,1,5,'blkcg_maybe_throttle_current')
+f(1,4,4966,1,'java/lang/Thread.run')
+f(2,4,4966,1,'java/lang/Thread.runWith')
+f(3,4,4966,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(4,4,4966,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(5,4,4966,1,'java/util/concurrent/FutureTask.run')
+f(6,4,4966,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(7,4,4966,1,'java/util/concurrent/FutureTask.run')
+f(8,4,4966,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(9,4,4966,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(10,4,4966,1,'java/lang/reflect/Method.invoke')
+f(11,4,4966,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(12,4,4966,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(13,4,4966,1,'java/lang/invoke/LambdaForm$MH.0x00007f45e802e400.invokeExact_MT')
+f(14,4,4966,1,'java/lang/invoke/LambdaForm$MH.0x00007f45e802e000.invoke')
+f(15,4,4966,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(16,4,4966,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_enum_values_jmhTest.enum_values_AverageTime')
+f(17,4,4966,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_enum_values_jmhTest.enum_values_avgt_jmhStub')
+f(18,139,4828,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark.enum_values',4603,0,0)
+f(19,200,4767,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car.fromValues',4542,0,0)
+f(20,1991,1,4,'ClassLoaderData::holder() const')
+f(20,1992,17,4,'JVMCIRuntime::new_array_common(JavaThread*, Klass*, int, bool)')
+f(21,1992,16,4,'InstanceKlass::allocate_objArray(int, int, JavaThread*)')
+f(22,1992,1,4,'InstanceKlass::array_klass(int, JavaThread*)')
+f(22,1993,15,4,'MemAllocator::allocate() const')
+f(23,1994,12,4,'MemAllocator::mem_allocate_inside_tlab_slow(MemAllocator::Allocation&) const')
+f(24,1995,1,4,'G1Allocator::unsafe_max_tlab_alloc()')
+f(24,1996,5,4,'G1CollectedHeap::allocate_new_tlab(unsigned long, unsigned long, unsigned long*)')
+f(25,1997,3,4,'G1CollectedHeap::attempt_allocation_slow(unsigned long)')
+f(26,1997,1,4,'G1AllocRegion::new_alloc_region_and_allocate(unsigned long, bool)')
+f(27,1997,1,4,'G1CollectedHeap::new_mutator_alloc_region(unsigned long, bool, unsigned int)')
+f(28,1997,1,4,'G1CollectedHeap::new_region(unsigned long, HeapRegionType, bool, unsigned int)')
+f(29,1997,1,4,'HeapRegionManager::allocate_free_region(HeapRegionType, unsigned int)')
+f(26,1998,2,4,'MutatorAllocRegion::retire(bool)')
+f(27,1998,1,4,'G1CollectionSet::add_eden_region(HeapRegion*)')
+f(27,1999,1,4,'G1MonitoringSupport::update_eden_size()')
+f(28,1999,1,3,'___pthread_mutex_lock')
+f(25,2000,1,3,'pthread_mutex_unlock@@GLIBC_2.2.5')
+f(24,2001,1,4,'G1CollectedHeap::fill_with_dummy_object(HeapWordImpl**, HeapWordImpl**, bool)')
+f(24,2002,1,4,'ThreadLocalAllocBuffer::fill(HeapWordImpl**, HeapWordImpl**, unsigned long)')
+f(24,2003,1,4,'ThreadLocalAllocBuffer::retire_before_allocation()')
+f(24,2004,2,3,'__memset_avx2_unaligned_erms')
+f(23,2006,2,4,'ObjArrayAllocator::initialize(HeapWordImpl**) const')
+f(21,2008,1,4,'InstanceKlass::array_klass(int, JavaThread*)')
+f(20,2009,3,4,'SharedRuntime::on_slowpath_allocation_exit(JavaThread*)')
+f(20,2012,35,1,'Stub<IntrinsicStubsGen.arrayRegionEqualsS1S1>')
+f(20,2047,1,3,'[unknown]')
+f(21,2047,1,3,'pthread_mutex_trylock@@GLIBC_2.34')
+f(20,2048,95,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car.values',95,0,0)
+f(20,2143,2824,2,'java/lang/String.equals',2824,0,0)
+f(21,4964,1,5,'asm_common_interrupt')
+f(22,4964,1,5,'common_interrupt')
+f(23,4964,1,5,'irq_exit_rcu')
+f(24,4964,1,5,'__irq_exit_rcu')
+f(25,4964,1,5,'__do_softirq')
+f(21,4965,2,5,'asm_sysvec_apic_timer_interrupt')
+f(22,4965,2,5,'sysvec_apic_timer_interrupt')
+f(23,4965,2,5,'irq_exit_rcu')
+f(24,4965,2,5,'__irq_exit_rcu')
+f(25,4965,2,5,'__do_softirq')
+f(26,4965,2,5,'run_rebalance_domains')
+f(27,4965,1,5,'rebalance_domains')
+f(28,4965,1,5,'load_balance')
+f(29,4965,1,5,'find_busiest_group')
+f(30,4965,1,5,'update_sd_lb_stats.constprop.0')
+f(27,4966,1,5,'update_blocked_averages')
+f(18,4967,3,2,'org/openjdk/jmh/infra/Blackhole.consume',3,0,0)
+f(1,4970,50,3,'start_thread')
+f(2,4970,50,3,'thread_native_entry(Thread*)')
+f(3,4970,50,4,'Thread::call_run()')
+f(4,4970,15,4,'JavaThread::thread_main_inner() [clone .part.0]')
+f(5,4970,15,4,'CompileBroker::compiler_thread_loop()')
+f(6,4970,14,4,'CompileBroker::invoke_compiler_on_method(CompileTask*)')
+f(7,4970,3,4,'Compiler::compile_method(ciEnv*, ciMethod*, int, bool, DirectiveSet*)')
+f(8,4970,3,4,'Compilation::Compilation(AbstractCompiler*, ciEnv*, ciMethod*, int, BufferBlob*, bool, DirectiveSet*)')
+f(9,4970,3,4,'Compilation::compile_method()')
+f(10,4970,3,4,'Compilation::compile_java_method()')
+f(11,4970,3,4,'Compilation::build_hir() [clone .part.0]')
+f(12,4970,1,4,'GlobalValueNumbering::GlobalValueNumbering(IR*)')
+f(13,4970,1,4,'BlockBegin::iterate_preorder(BlockClosure*)')
+f(14,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(15,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(16,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(17,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(18,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(19,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(20,4970,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(21,4970,1,4,'SubstitutionResolver::block_do(BlockBegin*)')
+f(22,4970,1,4,'BlockBegin::state_values_do(ValueVisitor*)')
+f(23,4970,1,4,'ValueStack::values_do(ValueVisitor*)')
+f(12,4971,2,4,'IR::IR(Compilation*, ciMethod*, int)')
+f(13,4971,2,4,'IRScope::IRScope(Compilation*, IRScope*, int, ciMethod*, int, bool)')
+f(14,4971,2,4,'GraphBuilder::GraphBuilder(Compilation*, IRScope*)')
+f(15,4971,2,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(16,4971,2,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(17,4971,2,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(18,4971,2,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(19,4971,2,4,'GraphBuilder::try_inline_full(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(20,4971,2,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(21,4971,2,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(22,4971,2,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(23,4971,2,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(24,4971,1,4,'DirectiveSet::should_not_inline(ciMethod*)')
+f(25,4971,1,4,'CompilerOracle::should_not_inline(methodHandle const&)')
+f(26,4971,1,3,'resolve_inlining_predicate(CompileCommand, methodHandle const&)')
+f(27,4971,1,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(24,4972,1,4,'GraphBuilder::try_inline_full(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(25,4972,1,4,'GraphBuilder::push_scope(ciMethod*, BlockBegin*)')
+f(26,4972,1,4,'BlockListBuilder::BlockListBuilder(Compilation*, IRScope*, int)')
+f(27,4972,1,4,'BlockListBuilder::set_leaders()')
+f(28,4972,1,4,'ciMethod::bci_block_start()')
+f(29,4972,1,4,'MethodLiveness::compute_liveness()')
+f(30,4972,1,4,'MethodLiveness::init_basic_blocks()')
+f(31,4972,1,4,'resource_allocate_bytes(unsigned long, AllocFailStrategy::AllocFailEnum)')
+f(7,4973,1,4,'JVMCIEnv::init_env_mode_runtime(JavaThread*, JNIEnv_*)')
+f(8,4973,1,4,'JVMCIRuntime::init_shared_library_javavm(int*)')
+f(9,4973,1,3,'JNI_CreateJavaVM')
+f(10,4973,1,4,'int com.oracle.svm.core.jni.functions.JNIInvocationInterface$Exports$JNICreateJavaVMPrologue::enter(com.oracle.svm.core.jni.headers.JNIJavaVMPointer, com.oracle.svm.core.jni.headers.JNIEnvironmentPointer, com.oracle.svm.core.jni.headers.JNIJavaVMInitArgs)')
+f(11,4973,1,4,'int com.oracle.svm.core.graal.snippets.CEntryPointSnippets::createIsolate(com.oracle.svm.core.c.function.CEntryPointCreateIsolateParameters, int)')
+f(12,4973,1,4,'int com.oracle.svm.core.Isolates::create(org.graalvm.nativeimage.c.type.WordPointer, com.oracle.svm.core.c.function.CEntryPointCreateIsolateParameters)')
+f(13,4973,1,4,'int com.oracle.svm.enterprise.core.EnterpriseAddressRangeCommittedMemoryProvider::initialize(org.graalvm.nativeimage.c.type.WordPointer, com.oracle.svm.core.c.function.CEntryPointCreateIsolateParameters)')
+f(14,4973,1,3,'__memmove_avx_unaligned_erms')
+f(15,4973,1,5,'asm_exc_page_fault')
+f(16,4973,1,5,'exc_page_fault')
+f(17,4973,1,5,'do_user_addr_fault')
+f(18,4973,1,5,'handle_mm_fault')
+f(19,4973,1,5,'__handle_mm_fault')
+f(20,4973,1,5,'handle_pte_fault')
+f(21,4973,1,5,'do_anonymous_page')
+f(22,4973,1,5,'vma_alloc_folio')
+f(23,4973,1,5,'__folio_alloc')
+f(24,4973,1,5,'__alloc_pages')
+f(25,4973,1,5,'get_page_from_freelist')
+f(26,4973,1,5,'clear_page_erms')
+f(7,4974,10,4,'JVMCIRuntime::compile_method(JVMCIEnv*, JVMCICompiler*, methodHandle const&, int)')
+f(8,4974,9,4,'JVMCIEnv::call_HotSpotJVMCIRuntime_compileMethod(JVMCIObject, JVMCIObject, int, long, int)')
+f(9,4974,9,4,'JNIEnv_::CallNonvirtualObjectMethod(_jobject*, _jclass*, _jmethodID*, ...)')
+f(10,4974,9,4,'long com.oracle.svm.core.jni.JNIJavaCallVariantWrapperHolder::invokeJJIJIJI_J_VA_LIST_Nonvirtual(long, long, long, long, long)')
+f(11,4974,9,4,'long com.oracle.svm.core.jni.JNIJavaCallWrapperHolder::invoke_AIJI_A(long, long, int, long, int, long, int)')
+f(12,4974,9,4,'jdk.vm.ci.hotspot.HotSpotCompilationRequestResult* jdk.vm.ci.hotspot.HotSpotJVMCIRuntime::compileMethod(jdk.vm.ci.hotspot.HotSpotResolvedJavaMethod*, int, long, int)')
+f(13,4974,7,4,'jdk.vm.ci.code.CompilationRequestResult* org.graalvm.compiler.hotspot.HotSpotGraalCompiler::compileMethod(org.graalvm.compiler.hotspot.HotSpotGraalCompiler*, jdk.vm.ci.code.CompilationRequest*)')
+f(14,4974,7,4,'jdk.vm.ci.code.CompilationRequestResult* org.graalvm.compiler.hotspot.HotSpotGraalCompiler::compileMethod(jdk.vm.ci.code.CompilationRequest*, bool, org.graalvm.compiler.options.OptionValues*)')
+f(15,4974,7,4,'jdk.vm.ci.hotspot.HotSpotCompilationRequestResult* org.graalvm.compiler.hotspot.CompilationTask::runCompilation(org.graalvm.compiler.debug.DebugContext*)')
+f(16,4974,7,4,'jdk.vm.ci.hotspot.HotSpotCompilationRequestResult* org.graalvm.compiler.hotspot.CompilationTask::runCompilation(org.graalvm.compiler.debug.DebugContext*, org.graalvm.compiler.hotspot.CompilationTask$HotSpotCompilationWrapper*)')
+f(17,4974,7,4,'java.lang.Object* org.graalvm.compiler.core.CompilationWrapper::run(org.graalvm.compiler.debug.DebugContext*)')
+f(18,4974,7,4,'java.lang.Object* org.graalvm.compiler.hotspot.CompilationTask$HotSpotCompilationWrapper::performCompilation(org.graalvm.compiler.debug.DebugContext*)')
+f(19,4974,7,4,'jdk.vm.ci.hotspot.HotSpotCompilationRequestResult* org.graalvm.compiler.hotspot.CompilationTask$HotSpotCompilationWrapper::performCompilation(org.graalvm.compiler.debug.DebugContext*)')
+f(20,4974,7,4,'org.graalvm.compiler.code.CompilationResult* org.graalvm.compiler.hotspot.HotSpotGraalCompiler::compile(org.graalvm.compiler.nodes.StructuredGraph*, bool, bool, org.graalvm.compiler.core.common.CompilationIdentifier*, org.graalvm.compiler.debug.DebugContext*)')
+f(21,4974,7,4,'org.graalvm.compiler.code.CompilationResult* org.graalvm.compiler.hotspot.HotSpotGraalCompiler::compileHelper(org.graalvm.compiler.lir.asm.CompilationResultBuilderFactory*, org.graalvm.compiler.code.CompilationResult*, org.graalvm.compiler.nodes.StructuredGraph*, bool, bool, org.graalvm.compiler.options.OptionValues*)')
+f(22,4974,7,4,'org.graalvm.compiler.code.CompilationResult* org.graalvm.compiler.core.GraalCompiler::compile(org.graalvm.compiler.core.GraalCompiler$Request*)')
+f(23,4974,7,4,'void org.graalvm.compiler.core.GraalCompiler::emitFrontEnd(org.graalvm.compiler.phases.util.Providers*, org.graalvm.compiler.phases.tiers.TargetProvider*, org.graalvm.compiler.nodes.StructuredGraph*, org.graalvm.compiler.phases.PhaseSuite*, org.graalvm.compiler.phases.OptimisticOptimizations*, jdk.vm.ci.meta.ProfilingInfo*, org.graalvm.compiler.phases.tiers.Suites*)')
+f(24,4974,7,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(25,4974,6,4,'void org.graalvm.compiler.core.phases.BaseTier::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(26,4974,6,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(27,4974,3,4,'void com.oracle.graal.phases.preciseinline.priorityinline.PriorityInliningPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(28,4974,3,4,'void com.oracle.graal.phases.preciseinline.priorityinline.PriorityInliningPhase$a::c(org.graalvm.compiler.nodes.spi.CoreProviders*)')
+f(29,4974,3,4,'int com.oracle.graal.phases.preciseinline.priorityinline.PriorityInliningPhase$a::d(org.graalvm.compiler.nodes.spi.CoreProviders*)')
+f(30,4974,3,4,'com.oracle.graal.phases.preciseinline.priorityinline.nodes.a* com.oracle.graal.phases.preciseinline.priorityinline.d::a(com.oracle.graal.phases.preciseinline.priorityinline.nodes.a*, org.graalvm.compiler.nodes.spi.CoreProviders*, int)')
+f(31,4974,2,4,'com.oracle.graal.phases.preciseinline.priorityinline.nodes.a* com.oracle.graal.phases.preciseinline.priorityinline.a::b(com.oracle.graal.phases.preciseinline.priorityinline.nodes.b*)')
+f(32,4974,2,4,'com.oracle.graal.phases.preciseinline.priorityinline.e$a* com.oracle.graal.phases.preciseinline.priorityinline.a::a(jdk.vm.ci.meta.ResolvedJavaMethod*, org.graalvm.compiler.nodes.Invoke*, bool, org.graalvm.compiler.graph.NodeSourcePosition*)')
+f(33,4974,2,4,'bool com.oracle.graal.phases.preciseinline.priorityinline.a::a(org.graalvm.compiler.nodes.StructuredGraph*, org.graalvm.compiler.nodes.Invoke*)')
+f(34,4974,2,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(35,4974,2,4,'void org.graalvm.compiler.phases.PhaseSuite::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(36,4974,2,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(37,4974,2,4,'void org.graalvm.compiler.java.GraphBuilderPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(38,4974,2,4,'void org.graalvm.compiler.java.BytecodeParser::buildRootMethod()')
+f(39,4974,2,4,'void org.graalvm.compiler.java.BytecodeParser::build(org.graalvm.compiler.nodes.FixedWithNextNode*, org.graalvm.compiler.java.FrameStateBuilder*)')
+f(40,4974,2,4,'void org.graalvm.compiler.java.BytecodeParser::processBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(41,4974,2,4,'void org.graalvm.compiler.java.BytecodeParser::handleBytecodeBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(42,4974,2,4,'void org.graalvm.compiler.java.BytecodeParser::iterateBytecodesForBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(43,4974,2,4,'void org.graalvm.compiler.java.BytecodeParser::processBytecode(int, int)')
+f(44,4974,1,4,'void org.graalvm.compiler.java.BytecodeParser::genIfZero(org.graalvm.compiler.core.common.calc.Condition*)')
+f(45,4974,1,4,'void org.graalvm.compiler.java.BytecodeParser::genIf(org.graalvm.compiler.nodes.ValueNode*, org.graalvm.compiler.core.common.calc.Condition*, org.graalvm.compiler.nodes.ValueNode*)')
+f(46,4974,1,4,'void org.graalvm.compiler.java.BytecodeParser::genIf(org.graalvm.compiler.nodes.LogicNode*, org.graalvm.compiler.java.BciBlockMapping$BciBlock*, org.graalvm.compiler.java.BciBlockMapping$BciBlock*, org.graalvm.compiler.nodes.ProfileData$BranchProbabilityData*)')
+f(47,4974,1,4,'org.graalvm.compiler.nodes.IfNode::IfNode(org.graalvm.compiler.nodes.LogicNode*, org.graalvm.compiler.nodes.FixedNode*, org.graalvm.compiler.nodes.FixedNode*, org.graalvm.compiler.nodes.ProfileData$BranchProbabilityData*)')
+f(48,4974,1,4,'org.graalvm.compiler.nodes.AbstractBeginNode* org.graalvm.compiler.nodes.BeginNode::begin(org.graalvm.compiler.nodes.FixedNode*)')
+f(49,4974,1,4,'org.graalvm.compiler.graph.Graph$NodeSourcePositionScope* com.oracle.svm.core.code.FactoryMethodHolder::Graph$NodeSourcePositionScope_constructor_2dbd3f2013c7deb1e8405d3e6f12284694b8ed59(org.graalvm.compiler.graph.Graph*, org.graalvm.compiler.graph.NodeSourcePosition*)')
+f(44,4975,1,4,'void org.graalvm.compiler.java.BytecodeParser::genInvokeStatic(int, int)')
+f(45,4975,1,4,'jdk.vm.ci.meta.JavaMethod* org.graalvm.compiler.java.BytecodeParser::lookupMethod(int, int)')
+f(46,4975,1,4,'java.lang.Object* com.oracle.svm.core.reflect.ReflectionAccessorHolder::invoke_8e2bd2af16de2bf54ff2db0d8309b5c26baec302(java.lang.Object*, java.lang.Object[]*, org.graalvm.nativeimage.c.function.CFunctionPointer)')
+f(47,4975,1,4,'jdk.vm.ci.meta.JavaMethod* jdk.vm.ci.hotspot.HotSpotConstantPool::lookupMethod(int, int, jdk.vm.ci.meta.ResolvedJavaMethod*)')
+f(48,4975,1,4,'jdk.vm.ci.hotspot.HotSpotResolvedJavaMethodImpl* jdk.vm.ci.hotspot.CompilerToVM::lookupMethodInPool(jdk.vm.ci.hotspot.HotSpotConstantPool*, long, int, signed char, jdk.vm.ci.hotspot.HotSpotResolvedJavaMethodImpl*, long)')
+f(49,4975,1,3,'c2v_lookupMethodInPool(JNIEnv_*, _jobject*, _jobject*, long, int, signed char, _jobject*, long)')
+f(50,4975,1,4,'JVMCIEnv::get_jvmci_method(methodHandle const&, JVMCIEnv*) [clone .part.0]')
+f(51,4975,1,4,'CompilerOracle::tag_blackhole_if_possible(methodHandle const&)')
+f(52,4975,1,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(31,4976,1,4,'com.oracle.graal.phases.preciseinline.priorityinline.nodes.a* com.oracle.graal.phases.preciseinline.priorityinline.d::a(com.oracle.graal.phases.preciseinline.priorityinline.nodes.a*, org.graalvm.compiler.nodes.spi.CoreProviders*, int)')
+f(32,4976,1,4,'com.oracle.graal.phases.preciseinline.priorityinline.nodes.a* com.oracle.graal.phases.preciseinline.priorityinline.a::b(com.oracle.graal.phases.preciseinline.priorityinline.nodes.b*)')
+f(33,4976,1,4,'com.oracle.graal.phases.preciseinline.priorityinline.e$a* com.oracle.graal.phases.preciseinline.priorityinline.a::a(jdk.vm.ci.meta.ResolvedJavaMethod*, org.graalvm.compiler.nodes.Invoke*, bool, org.graalvm.compiler.graph.NodeSourcePosition*)')
+f(34,4976,1,4,'bool com.oracle.graal.phases.preciseinline.priorityinline.a::a(org.graalvm.compiler.nodes.StructuredGraph*, org.graalvm.compiler.nodes.Invoke*)')
+f(35,4976,1,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(36,4976,1,4,'void org.graalvm.compiler.phases.PhaseSuite::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(37,4976,1,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(38,4976,1,4,'void org.graalvm.compiler.java.GraphBuilderPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(39,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::buildRootMethod()')
+f(40,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::build(org.graalvm.compiler.nodes.FixedWithNextNode*, org.graalvm.compiler.java.FrameStateBuilder*)')
+f(41,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::processBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(42,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::handleBytecodeBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(43,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::iterateBytecodesForBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(44,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::processBytecode(int, int)')
+f(45,4976,1,4,'void org.graalvm.compiler.java.BytecodeParser::genPutField(int, int)')
+f(46,4976,1,4,'jdk.vm.ci.meta.JavaField* org.graalvm.compiler.java.BytecodeParser::lookupField(int, int)')
+f(47,4976,1,4,'jdk.vm.ci.meta.JavaField* jdk.vm.ci.hotspot.HotSpotConstantPool::lookupField(int, jdk.vm.ci.meta.ResolvedJavaMethod*, int)')
+f(48,4976,1,4,'jdk.vm.ci.meta.JavaType* jdk.vm.ci.hotspot.HotSpotJVMCIRuntime::lookupTypeInternal(java.lang.String*, jdk.vm.ci.hotspot.HotSpotResolvedObjectType*, bool)')
+f(49,4976,1,4,'jdk.vm.ci.hotspot.HotSpotResolvedJavaType* jdk.vm.ci.hotspot.CompilerToVM::lookupType(java.lang.String*, jdk.vm.ci.hotspot.HotSpotResolvedObjectTypeImpl*, long, bool)')
+f(50,4976,1,3,'c2v_lookupType(JNIEnv_*, _jobject*, _jstring*, _jobject*, long, unsigned char)')
+f(51,4976,1,4,'AccessInternal::PostRuntimeDispatch<G1BarrierSet::AccessBarrier<548964ul, G1BarrierSet>, (AccessInternal::BarrierType)2, 548964ul>::oop_access_barrier(void*)')
+f(27,4977,1,4,'void com.oracle.graal.vector.phases.NodeVectorizationPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(27,4978,1,4,'void org.graalvm.compiler.phases.common.LoweringPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(28,4978,1,4,'void org.graalvm.compiler.phases.common.LoweringPhase::lower(org.graalvm.compiler.nodes.StructuredGraph*, org.graalvm.compiler.nodes.spi.CoreProviders*, org.graalvm.compiler.phases.common.LoweringPhase$LoweringMode*)')
+f(29,4978,1,4,'org.graalvm.compiler.nodes.extended.AnchoringNode* org.graalvm.compiler.phases.common.LoweringPhase::process(org.graalvm.compiler.nodes.spi.CoreProviders*, org.graalvm.compiler.nodes.cfg.HIRBlock*, org.graalvm.compiler.graph.NodeBitMap*, org.graalvm.compiler.nodes.extended.AnchoringNode*, org.graalvm.compiler.nodes.StructuredGraph$ScheduleResult*)')
+f(30,4978,1,4,'void org.graalvm.compiler.nodes.spi.Lowerable::lower(org.graalvm.compiler.nodes.spi.LoweringTool*)')
+f(31,4978,1,4,'void com.oracle.graal.compiler.enterprise.h::lower(org.graalvm.compiler.graph.Node*, org.graalvm.compiler.nodes.spi.LoweringTool*)')
+f(32,4978,1,4,'void org.graalvm.compiler.hotspot.amd64.AMD64HotSpotLoweringProvider::lower(org.graalvm.compiler.graph.Node*, org.graalvm.compiler.nodes.spi.LoweringTool*)')
+f(33,4978,1,4,'void org.graalvm.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lower(org.graalvm.compiler.graph.Node*, org.graalvm.compiler.nodes.spi.LoweringTool*)')
+f(34,4978,1,4,'bool org.graalvm.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lowerWithoutDelegation(org.graalvm.compiler.graph.Node*, org.graalvm.compiler.nodes.spi.LoweringTool*)')
+f(35,4978,1,4,'void org.graalvm.compiler.replacements.InstanceOfSnippetsTemplates::lower(org.graalvm.compiler.nodes.calc.FloatingNode*, org.graalvm.compiler.nodes.spi.LoweringTool*)')
+f(36,4978,1,4,'org.graalvm.compiler.replacements.SnippetTemplate* org.graalvm.compiler.replacements.SnippetTemplate$AbstractTemplates::template(org.graalvm.compiler.nodes.spi.CoreProviders*, org.graalvm.compiler.nodes.ValueNode*, org.graalvm.compiler.replacements.SnippetTemplate$Arguments*)')
+f(37,4978,1,4,'org.graalvm.compiler.replacements.SnippetTemplate* com.oracle.svm.core.code.FactoryMethodHolder::SnippetTemplate_constructor_f79a949d0bcfec6024c39011506bf150e9fc5295(org.graalvm.compiler.options.OptionValues*, org.graalvm.compiler.debug.DebugContext*, org.graalvm.compiler.nodes.spi.CoreProviders*, org.graalvm.compiler.api.replacements.SnippetReflectionProvider*, org.graalvm.compiler.replacements.SnippetTemplate$Arguments*, bool, org.graalvm.compiler.graph.Node*, org.graalvm.compiler.phases.PhaseSuite*, org.graalvm.compiler.phases.PhaseSuite*)')
+f(38,4978,1,4,'org.graalvm.compiler.replacements.SnippetTemplate::SnippetTemplate(org.graalvm.compiler.options.OptionValues*, org.graalvm.compiler.debug.DebugContext*, org.graalvm.compiler.nodes.spi.CoreProviders*, org.graalvm.compiler.api.replacements.SnippetReflectionProvider*, org.graalvm.compiler.replacements.SnippetTemplate$Arguments*, bool, org.graalvm.compiler.graph.Node*, org.graalvm.compiler.phases.PhaseSuite*, org.graalvm.compiler.phases.PhaseSuite*)')
+f(39,4978,1,4,'org.graalvm.compiler.nodes.StructuredGraph* org.graalvm.compiler.hotspot.HotSpotReplacementsImpl::getSnippet(jdk.vm.ci.meta.ResolvedJavaMethod*, jdk.vm.ci.meta.ResolvedJavaMethod*, java.lang.Object[]*, java.util.BitSet*, bool, org.graalvm.compiler.graph.NodeSourcePosition*, org.graalvm.compiler.options.OptionValues*)')
+f(40,4978,1,4,'org.graalvm.compiler.nodes.StructuredGraph* org.graalvm.compiler.hotspot.EncodedSnippets::getEncodedSnippet(jdk.vm.ci.meta.ResolvedJavaMethod*, jdk.vm.ci.meta.ResolvedJavaMethod*, org.graalvm.compiler.hotspot.HotSpotReplacementsImpl*, java.lang.Object[]*, org.graalvm.compiler.nodes.StructuredGraph$AllowAssumptions*, org.graalvm.compiler.options.OptionValues*)')
+f(41,4978,1,4,'org.graalvm.compiler.nodes.StructuredGraph* org.graalvm.compiler.hotspot.EncodedSnippets::decodeSnippetGraph(org.graalvm.compiler.hotspot.EncodedSnippets$SymbolicEncodedGraph*, jdk.vm.ci.meta.ResolvedJavaMethod*, jdk.vm.ci.meta.ResolvedJavaMethod*, org.graalvm.compiler.hotspot.HotSpotReplacementsImpl*, java.lang.Object[]*, org.graalvm.compiler.nodes.StructuredGraph$AllowAssumptions*, org.graalvm.compiler.options.OptionValues*, bool)')
+f(42,4978,1,4,'void org.graalvm.compiler.replacements.PEGraphDecoder::cleanupGraph(org.graalvm.compiler.nodes.GraphDecoder$MethodScope*)')
+f(43,4978,1,4,'void org.graalvm.compiler.graph.GraphNodeIterator::forward()')
+f(27,4979,1,4,'void org.graalvm.compiler.virtual.phases.ea.ReadEliminationPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(28,4979,1,4,'void org.graalvm.compiler.virtual.phases.ea.ReadEliminationPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, org.graalvm.compiler.nodes.spi.CoreProviders*)')
+f(29,4979,1,4,'bool org.graalvm.compiler.virtual.phases.ea.EffectsPhase::runAnalysis(org.graalvm.compiler.nodes.StructuredGraph*, org.graalvm.compiler.nodes.spi.CoreProviders*)')
+f(30,4979,1,4,'void org.graalvm.compiler.phases.graph.ReentrantBlockIterator::apply(org.graalvm.compiler.phases.graph.ReentrantBlockIterator$BlockIteratorClosure*, org.graalvm.compiler.nodes.cfg.HIRBlock*)')
+f(31,4979,1,4,'org.graalvm.collections.EconomicMap* org.graalvm.compiler.phases.graph.ReentrantBlockIterator::apply(org.graalvm.compiler.phases.graph.ReentrantBlockIterator$BlockIteratorClosure*, org.graalvm.compiler.nodes.cfg.HIRBlock*, java.lang.Object*, java.util.function.Predicate*)')
+f(32,4979,1,4,'org.graalvm.compiler.virtual.phases.ea.EffectsBlockState* org.graalvm.compiler.virtual.phases.ea.EffectsClosure::processBlock(org.graalvm.compiler.nodes.cfg.HIRBlock*, org.graalvm.compiler.virtual.phases.ea.EffectsBlockState*)')
+f(25,4980,1,4,'void org.graalvm.compiler.phases.PhaseSuite::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(26,4980,1,4,'void org.graalvm.compiler.phases.BasePhase::apply(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*, bool)')
+f(27,4980,1,4,'void org.graalvm.compiler.java.GraphBuilderPhase::run(org.graalvm.compiler.nodes.StructuredGraph*, java.lang.Object*)')
+f(28,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::buildRootMethod()')
+f(29,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::build(org.graalvm.compiler.nodes.FixedWithNextNode*, org.graalvm.compiler.java.FrameStateBuilder*)')
+f(30,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::processBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(31,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::handleBytecodeBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(32,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::iterateBytecodesForBlock(org.graalvm.compiler.java.BciBlockMapping$BciBlock*)')
+f(33,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::processBytecode(int, int)')
+f(34,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::genInvokeVirtual(int, int)')
+f(35,4980,1,4,'void org.graalvm.compiler.java.BytecodeParser::genInvokeVirtual(jdk.vm.ci.meta.ResolvedJavaMethod*)')
+f(36,4980,1,4,'bool org.graalvm.compiler.java.BytecodeParser::genDynamicInvokeHelper(jdk.vm.ci.meta.ResolvedJavaMethod*, int, int)')
+f(37,4980,1,4,'org.graalvm.compiler.nodes.Invokable* org.graalvm.compiler.java.BytecodeParser::appendInvoke(org.graalvm.compiler.nodes.CallTargetNode$InvokeKind*, jdk.vm.ci.meta.ResolvedJavaMethod*, org.graalvm.compiler.nodes.ValueNode[]*, jdk.vm.ci.meta.ResolvedJavaType*)')
+f(38,4980,1,4,'bool org.graalvm.compiler.java.BytecodeParser::tryInvocationPlugin(org.graalvm.compiler.nodes.CallTargetNode$InvokeKind*, org.graalvm.compiler.nodes.ValueNode[]*, jdk.vm.ci.meta.ResolvedJavaMethod*, jdk.vm.ci.meta.JavaKind*)')
+f(39,4980,1,4,'org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugin* org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugins::lookupInvocation(jdk.vm.ci.meta.ResolvedJavaMethod*, bool, bool, org.graalvm.compiler.options.OptionValues*)')
+f(40,4980,1,4,'org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugin* org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugins::get(jdk.vm.ci.meta.ResolvedJavaMethod*)')
+f(41,4980,1,4,'void org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugins::flushDeferrables()')
+f(42,4980,1,4,'void org.graalvm.compiler.hotspot.meta.HotSpotGraphBuilderPlugins$1::run()')
+f(43,4980,1,4,'void org.graalvm.compiler.replacements.StandardGraphBuilderPlugins::registerInvocationPlugins(org.graalvm.compiler.api.replacements.SnippetReflectionProvider*, org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugins*, org.graalvm.compiler.nodes.spi.Replacements*, bool, bool, bool, org.graalvm.compiler.nodes.spi.LoweringProvider*)')
+f(44,4980,1,4,'void org.graalvm.compiler.replacements.StandardGraphBuilderPlugins::registerUnsafePlugins(org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugins*, org.graalvm.compiler.nodes.spi.Replacements*, bool)')
+f(45,4980,1,4,'void org.graalvm.compiler.replacements.StandardGraphBuilderPlugins::registerUnsafePlugins0(org.graalvm.compiler.nodes.graphbuilderconf.InvocationPlugins$Registration*, bool, bool)')
+f(46,4980,1,4,'java.lang.String* com.oracle.svm.enterprise.core.sboutlining.c::String(AAA)(java.lang.Object*, java.lang.Object*, java.lang.Object*)')
+f(13,4981,2,4,'jdk.vm.ci.runtime.JVMCICompiler* org.graalvm.compiler.hotspot.HotSpotGraalCompilerFactory::createCompiler(jdk.vm.ci.runtime.JVMCIRuntime*)')
+f(14,4981,2,4,'org.graalvm.compiler.hotspot.HotSpotGraalCompiler* org.graalvm.compiler.hotspot.HotSpotGraalCompilerFactory::createCompiler(jdk.vm.ci.runtime.JVMCIRuntime*)')
+f(15,4981,2,4,'org.graalvm.compiler.hotspot.HotSpotGraalCompiler* org.graalvm.compiler.hotspot.HotSpotGraalCompilerFactory::createCompiler(java.lang.String*, jdk.vm.ci.runtime.JVMCIRuntime*, org.graalvm.compiler.options.OptionValues*, org.graalvm.compiler.hotspot.CompilerConfigurationFactory*)')
+f(16,4981,2,4,'org.graalvm.compiler.hotspot.HotSpotGraalRuntime* com.oracle.svm.core.code.FactoryMethodHolder::HotSpotGraalRuntime_constructor_f063585f051f4e0ee44b4620a820760a7e561efd(java.lang.String*, jdk.vm.ci.hotspot.HotSpotJVMCIRuntime*, org.graalvm.compiler.hotspot.CompilerConfigurationFactory*, org.graalvm.compiler.options.OptionValues*)')
+f(17,4981,2,4,'org.graalvm.compiler.hotspot.HotSpotGraalRuntime::HotSpotGraalRuntime(java.lang.String*, jdk.vm.ci.hotspot.HotSpotJVMCIRuntime*, org.graalvm.compiler.hotspot.CompilerConfigurationFactory*, org.graalvm.compiler.options.OptionValues*)')
+f(18,4981,1,4,'org.graalvm.compiler.hotspot.HotSpotBackend* org.graalvm.compiler.hotspot.HotSpotBackendFactory::createBackend(org.graalvm.compiler.hotspot.HotSpotGraalRuntimeProvider*, org.graalvm.compiler.phases.tiers.CompilerConfiguration*, jdk.vm.ci.hotspot.HotSpotJVMCIRuntime*, org.graalvm.compiler.hotspot.HotSpotBackend*)')
+f(19,4981,1,4,'org.graalvm.compiler.hotspot.meta.HotSpotSuitesProvider* com.oracle.graal.enterprise.hotspot.amd64.b::createSuites(org.graalvm.compiler.hotspot.GraalHotSpotVMConfig*, org.graalvm.compiler.hotspot.HotSpotGraalRuntimeProvider*, org.graalvm.compiler.phases.tiers.CompilerConfiguration*, org.graalvm.compiler.nodes.graphbuilderconf.GraphBuilderConfiguration$Plugins*, org.graalvm.compiler.hotspot.meta.HotSpotRegistersProvider*, org.graalvm.compiler.hotspot.HotSpotReplacementsImpl*, org.graalvm.compiler.options.OptionValues*)')
+f(20,4981,1,4,'org.graalvm.compiler.hotspot.amd64.AMD64HotSpotSuitesCreator* com.oracle.svm.core.code.FactoryMethodHolder::AMD64HotSpotSuitesCreator_constructor_023ed7cc85c8e67951a4d3c241d00220abd4b1fb(org.graalvm.compiler.phases.tiers.CompilerConfiguration*, org.graalvm.compiler.nodes.graphbuilderconf.GraphBuilderConfiguration$Plugins*)')
+f(21,4981,1,5,'asm_exc_page_fault')
+f(22,4981,1,5,'exc_page_fault')
+f(23,4981,1,5,'do_user_addr_fault')
+f(24,4981,1,5,'handle_mm_fault')
+f(25,4981,1,5,'__handle_mm_fault')
+f(26,4981,1,5,'handle_pte_fault')
+f(27,4981,1,5,'do_fault')
+f(28,4981,1,5,'do_read_fault')
+f(29,4981,1,5,'filemap_map_pages')
+f(30,4981,1,5,'do_set_pte')
+f(31,4981,1,5,'page_add_file_rmap')
+f(32,4981,1,5,'unlock_page_memcg')
+f(33,4981,1,5,'__rcu_read_unlock')
+f(18,4982,1,4,'void org.graalvm.compiler.hotspot.HotSpotHostBackend::completeInitialization(jdk.vm.ci.hotspot.HotSpotJVMCIRuntime*, org.graalvm.compiler.options.OptionValues*)')
+f(19,4982,1,4,'void com.oracle.graal.enterprise.hotspot.amd64.e::initialize(org.graalvm.compiler.options.OptionValues*, java.lang.Iterable*, org.graalvm.compiler.hotspot.meta.HotSpotProviders*, org.graalvm.compiler.hotspot.GraalHotSpotVMConfig*)')
+f(20,4982,1,4,'void com.oracle.graal.enterprise.hotspot.c::initialize(org.graalvm.compiler.options.OptionValues*, java.lang.Iterable*, org.graalvm.compiler.hotspot.meta.HotSpotProviders*, org.graalvm.compiler.hotspot.GraalHotSpotVMConfig*)')
+f(21,4982,1,4,'com.oracle.graal.vector.replacements.VectorSnippets$c* com.oracle.svm.core.code.FactoryMethodHolder::VectorSnippets$c_constructor_7dc6640378f26bf2f4c80f016a9c7503865734cd(org.graalvm.compiler.options.OptionValues*, org.graalvm.compiler.replacements.SnippetCounter$Group$Factory*, org.graalvm.compiler.phases.util.Providers*, jdk.vm.ci.code.TargetDescription*, com.oracle.graal.vector.architecture.b*)')
+f(22,4982,1,4,'com.oracle.graal.vector.replacements.VectorSnippets$c::VectorSnippets$c(org.graalvm.compiler.options.OptionValues*, org.graalvm.compiler.replacements.SnippetCounter$Group$Factory*, org.graalvm.compiler.phases.util.Providers*, jdk.vm.ci.code.TargetDescription*, com.oracle.graal.vector.architecture.b*)')
+f(23,4982,1,4,'org.graalvm.compiler.replacements.SnippetTemplate$SnippetInfo* org.graalvm.compiler.replacements.SnippetTemplate$AbstractTemplates::snippet(org.graalvm.compiler.phases.util.Providers*, java.lang.Class*, java.lang.String*, jdk.vm.ci.meta.ResolvedJavaMethod*, java.lang.Object*, org.graalvm.word.LocationIdentity[]*)')
+f(24,4982,1,4,'org.graalvm.compiler.nodes.spi.SnippetParameterInfo* org.graalvm.compiler.hotspot.HotSpotReplacementsImpl::getSnippetParameterInfo(jdk.vm.ci.meta.ResolvedJavaMethod*)')
+f(25,4982,1,4,'java.lang.String* jdk.vm.ci.meta.JavaMethod::format(java.lang.String*)')
+f(26,4982,1,4,'java.lang.String* jdk.vm.ci.meta.JavaType::toJavaName(bool)')
+f(27,4982,1,4,'java.lang.String* jdk.vm.ci.meta.MetaUtil::internalNameToJava(java.lang.String*, bool, bool)')
+f(8,4983,1,4,'JVMCIRuntime::get_HotSpotJVMCIRuntime(JVMCIEnv*)')
+f(9,4983,1,4,'JVMCIEnv::call_JVMCI_getRuntime(JVMCIEnv*)')
+f(10,4983,1,4,'JNIEnv_::CallStaticObjectMethod(_jclass*, _jmethodID*, ...)')
+f(11,4983,1,4,'long com.oracle.svm.core.jni.JNIJavaCallVariantWrapperHolder::invokeJJI_J_VA_LIST(long, long, long, long)')
+f(12,4983,1,4,'long com.oracle.svm.core.jni.JNIJavaCallWrapperHolder::invoke__A(long, long, int)')
+f(13,4983,1,4,'jdk.vm.ci.runtime.JVMCIRuntime* jdk.vm.ci.runtime.JVMCI::getRuntime()')
+f(14,4983,1,4,'jdk.vm.ci.runtime.JVMCIRuntime* jdk.vm.ci.runtime.JVMCI::initializeRuntime()')
+f(15,4983,1,3,'JVM_GetJVMCIRuntime')
+f(16,4983,1,4,'JVMCIRuntime::initialize_HotSpotJVMCIRuntime(JVMCIEnv*)')
+f(17,4983,1,4,'JVMCIEnv::call_HotSpotJVMCIRuntime_runtime(JVMCIEnv*)')
+f(18,4983,1,4,'JNIEnv_::CallStaticObjectMethod(_jclass*, _jmethodID*, ...)')
+f(19,4983,1,4,'long com.oracle.svm.core.jni.JNIJavaCallVariantWrapperHolder::invokeJJI_J_VA_LIST(long, long, long, long)')
+f(20,4983,1,4,'long com.oracle.svm.core.jni.JNIJavaCallWrapperHolder::invoke__A(long, long, int)')
+f(21,4983,1,4,'jdk.vm.ci.hotspot.HotSpotJVMCIRuntime* jdk.vm.ci.hotspot.HotSpotJVMCIRuntime::runtime()')
+f(22,4983,1,4,'jdk.vm.ci.hotspot.HotSpotJVMCIRuntime* com.oracle.svm.core.code.FactoryMethodHolder::HotSpotJVMCIRuntime_constructor_8981daab0a4145ed951ab52bdc559924a3cd26dd()')
+f(23,4983,1,4,'jdk.vm.ci.hotspot.HotSpotJVMCIRuntime::HotSpotJVMCIRuntime()')
+f(24,4983,1,4,'jdk.vm.ci.hotspot.HotSpotVMConfigStore* com.oracle.svm.core.code.FactoryMethodHolder::HotSpotVMConfigStore_constructor_6eed48d03a9f44f846b783eb69b005734d809bde(jdk.vm.ci.hotspot.CompilerToVM*)')
+f(25,4983,1,4,'jdk.vm.ci.hotspot.HotSpotVMConfigStore::HotSpotVMConfigStore(jdk.vm.ci.hotspot.CompilerToVM*)')
+f(26,4983,1,4,'java.lang.Object[]* jdk.vm.ci.hotspot.CompilerToVM::readConfiguration()')
+f(27,4983,1,3,'c2v_readConfiguration(JNIEnv_*)')
+f(28,4983,1,3,'readConfiguration0(JNIEnv_*, JVMCIEnv*)')
+f(29,4983,1,4,'CompilerToVM::initialize_intrinsics(JVMCIEnv*)')
+f(30,4983,1,4,'JVMCIEnv::create_string(Symbol*, JVMCIEnv*)')
+f(31,4983,1,4,'JVMCIEnv::create_string(char const*, JVMCIEnv*)')
+f(32,4983,1,4,'com.oracle.svm.core.jni.headers.JNIObjectHandle com.oracle.svm.core.code.IsolateEnterStub::JNIFunctions_NewStringUTF_c237fd4ef354165a4519a443538676a09b4268ca(com.oracle.svm.core.jni.headers.JNIEnvironment, org.graalvm.nativeimage.c.type.CCharPointer)')
+f(33,4983,1,4,'com.oracle.svm.core.jni.headers.JNIObjectHandle com.oracle.svm.core.jni.functions.JNIFunctions::NewStringUTF(com.oracle.svm.core.jni.headers.JNIEnvironment, org.graalvm.nativeimage.c.type.CCharPointer)')
+f(34,4983,1,5,'asm_exc_page_fault')
+f(35,4983,1,5,'exc_page_fault')
+f(36,4983,1,5,'do_user_addr_fault')
+f(37,4983,1,5,'handle_mm_fault')
+f(38,4983,1,5,'__handle_mm_fault')
+f(39,4983,1,5,'handle_pte_fault')
+f(40,4983,1,5,'do_anonymous_page')
+f(41,4983,1,5,'vma_alloc_folio')
+f(42,4983,1,5,'__folio_alloc')
+f(43,4983,1,5,'__alloc_pages')
+f(44,4983,1,5,'get_page_from_freelist')
+f(45,4983,1,5,'clear_page_erms')
+f(6,4984,1,4,'CompileQueue::get(CompilerThread*)')
+f(7,4984,1,4,'JVMCICompiler::on_empty_queue(CompileQueue*, CompilerThread*)')
+f(8,4984,1,4,'JVMCIRuntime::detach_thread(JavaThread*, char const*, bool)')
+f(9,4984,1,4,'JVMCIRuntime::destroy_shared_library_javavm()')
+f(10,4984,1,4,'int com.oracle.svm.core.code.IsolateEnterStub::JNIInvocationInterface_DestroyJavaVM_7a5b190b972294dd00cc207df293d2ebf2dacdd1(com.oracle.svm.core.jni.headers.JNIJavaVM)')
+f(11,4984,1,4,'int com.oracle.svm.core.graal.snippets.CEntryPointSnippets::tearDownIsolate()')
+f(12,4984,1,4,'int com.oracle.svm.core.Isolates::tearDownCurrent()')
+f(13,4984,1,4,'int com.oracle.svm.enterprise.core.EnterpriseAddressRangeCommittedMemoryProvider::tearDown()')
+f(14,4984,1,3,'__GI___munmap')
+f(15,4984,1,5,'entry_SYSCALL_64_after_hwframe')
+f(16,4984,1,5,'do_syscall_64')
+f(17,4984,1,5,'__x64_sys_munmap')
+f(18,4984,1,5,'__vm_munmap')
+f(19,4984,1,5,'do_mas_munmap')
+f(20,4984,1,5,'do_mas_align_munmap')
+f(21,4984,1,5,'unmap_region')
+f(22,4984,1,5,'unmap_vmas')
+f(23,4984,1,5,'unmap_single_vma')
+f(24,4984,1,5,'unmap_page_range')
+f(25,4984,1,5,'zap_pmd_range.isra.0')
+f(26,4984,1,5,'zap_pte_range')
+f(4,4985,2,4,'VMThread::run()')
+f(5,4985,2,4,'VMThread::inner_execute(VM_Operation*)')
+f(6,4985,2,4,'VMThread::evaluate_operation(VM_Operation*)')
+f(7,4985,2,4,'VM_Operation::evaluate()')
+f(8,4985,2,4,'VM_G1CollectForAllocation::doit()')
+f(9,4985,2,4,'G1CollectedHeap::do_collection_pause_at_safepoint()')
+f(10,4985,1,4,'CHeapBitMap::~CHeapBitMap()')
+f(10,4986,1,4,'G1CollectedHeap::do_collection_pause_at_safepoint_helper()')
+f(11,4986,1,4,'G1YoungCollector::collect()')
+f(12,4986,1,4,'G1YoungCollector::pre_evacuate_collection_set(G1EvacInfo*)')
+f(13,4986,1,4,'G1CollectionSet::finalize_initial_collection_set(double, G1SurvivorRegions*)')
+f(14,4986,1,4,'G1CollectionSet::finalize_young_part(double, G1SurvivorRegions*)')
+f(15,4986,1,4,'G1Policy::predict_base_time_ms(unsigned long) const')
+f(16,4986,1,4,'G1Analytics::predict_rs_length(bool) const')
+f(4,4987,2,4,'WatcherThread::run()')
+f(5,4987,2,3,'__lll_lock_wake')
+f(6,4988,1,5,'entry_SYSCALL_64_after_hwframe')
+f(7,4988,1,5,'do_syscall_64')
+f(8,4988,1,5,'syscall_enter_from_user_mode')
+f(4,4989,31,4,'WorkerThread::run()')
+f(5,4989,12,4,'G1BatchedTask::work(unsigned int)')
+f(6,4989,9,4,'G1PostEvacuateCollectionSetCleanupTask2::FreeCollectionSetTask::do_work(unsigned int)')
+f(7,4989,8,4,'G1CollectedHeap::par_iterate_regions_array(HeapRegionClosure*, HeapRegionClaimer*, unsigned int const*, unsigned long, unsigned int) const')
+f(8,4989,8,4,'FreeCSetClosure::do_heap_region(HeapRegion*)')
+f(9,4989,7,4,'G1CollectedHeap::free_region(HeapRegion*, FreeRegionList*)')
+f(10,4989,7,4,'HeapRegion::hr_clear(bool)')
+f(11,4989,6,4,'HeapRegionRemSet::clear_locked(bool)')
+f(12,4989,5,4,'FreeListAllocator::reset()')
+f(12,4994,1,4,'G1CardSet::clear()')
+f(11,4995,1,4,'HeapRegionTracer::send_region_type_change(unsigned int, G1HeapRegionTraceType::Type, G1HeapRegionTraceType::Type, unsigned long, unsigned long)')
+f(9,4996,1,4,'os::elapsed_counter()')
+f(7,4997,1,4,'HeapRegionClaimer::claim_region(unsigned int)')
+f(6,4998,1,4,'G1PreEvacuateCollectionSetBatchTask::JavaThreadRetireTLABAndFlushLogs::do_work(unsigned int)')
+f(7,4998,1,4,'ThreadLocalAllocBuffer::retire(ThreadLocalAllocStats*)')
+f(6,4999,2,4,'HeapRegion::clear_cardtable()')
+f(5,5001,5,4,'G1EvacuateRegionsBaseTask::work(unsigned int)')
+f(6,5001,1,4,'G1EvacuateRegionsTask::evacuate_live_objects(G1ParScanThreadState*, unsigned int)')
+f(7,5001,1,4,'G1ParEvacuateFollowersClosure::do_void()')
+f(8,5001,1,3,'SpinPause')
+f(6,5002,1,4,'G1EvacuateRegionsTask::scan_roots(G1ParScanThreadState*, unsigned int)')
+f(7,5002,1,4,'G1RootProcessor::evacuate_roots(G1ParScanThreadState*, unsigned int)')
+f(8,5002,1,4,'G1RootProcessor::process_java_roots(G1RootClosures*, G1GCPhaseTimes*, unsigned int)')
+f(9,5002,1,4,'Threads::possibly_parallel_oops_do(bool, OopClosure*, CodeBlobClosure*)')
+f(10,5002,1,4,'Thread::oops_do(OopClosure*, CodeBlobClosure*)')
+f(11,5002,1,4,'JavaThread::oops_do_frames(OopClosure*, CodeBlobClosure*) [clone .part.0]')
+f(12,5002,1,4,'frame::oops_interpreted_do(OopClosure*, RegisterMap const*, bool) const')
+f(6,5003,3,4,'G1RemSet::scan_collection_set_regions(G1ParScanThreadState*, unsigned int, G1GCPhaseTimes::GCParPhases, G1GCPhaseTimes::GCParPhases, G1GCPhaseTimes::GCParPhases)')
+f(7,5003,3,4,'G1CollectedHeap::par_iterate_regions_array(HeapRegionClosure*, HeapRegionClaimer*, unsigned int const*, unsigned long, unsigned int) const')
+f(8,5004,2,4,'G1ScanCollectionSetRegionClosure::do_heap_region(HeapRegion*)')
+f(9,5004,1,4,'G1EvacPhaseWithTrimTimeTracker::G1EvacPhaseWithTrimTimeTracker(G1ParScanThreadState*, TimeInterval<CompositeCounterRepresentation, CompositeElapsedCounterSource>&, TimeInterval<CompositeCounterRepresentation, CompositeElapsedCounterSource>&)')
+f(10,5004,1,4,'CompositeElapsedCounterSource::now()')
+f(11,5004,1,3,'clock_gettime@@GLIBC_2.17')
+f(12,5004,1,3,'[vdso]')
+f(9,5005,1,4,'G1EvacPhaseWithTrimTimeTracker::~G1EvacPhaseWithTrimTimeTracker()')
+f(5,5006,4,4,'G1MergeHeapRootsTask::work(unsigned int)')
+f(6,5006,4,4,'G1CollectedHeap::par_iterate_regions_array(HeapRegionClosure*, HeapRegionClaimer*, unsigned int const*, unsigned long, unsigned int) const')
+f(7,5006,4,4,'G1MergeHeapRootsTask::G1CombinedClosure::do_heap_region(HeapRegion*)')
+f(8,5006,4,4,'G1MergeHeapRootsTask::G1MergeCardSetClosure::do_heap_region(HeapRegion*)')
+f(5,5010,8,4,'G1PrepareEvacuationTask::work(unsigned int)')
+f(6,5010,8,4,'HeapRegionManager::par_iterate(HeapRegionClosure*, HeapRegionClaimer*, unsigned int) const')
+f(7,5014,4,4,'G1PrepareEvacuationTask::G1PrepareRegionsClosure::do_heap_region(HeapRegion*)')
+f(8,5014,3,4,'G1CardSet::reset_table_scanner()')
+f(8,5017,1,4,'HeapRegionRemSet::card_set_memory_stats() const')
+f(9,5017,1,4,'G1MonotonicArena::slot_size() const')
+f(5,5018,2,4,'G1RebuildFreeListTask::work(unsigned int)')
+
+search();
+</script></body></html>

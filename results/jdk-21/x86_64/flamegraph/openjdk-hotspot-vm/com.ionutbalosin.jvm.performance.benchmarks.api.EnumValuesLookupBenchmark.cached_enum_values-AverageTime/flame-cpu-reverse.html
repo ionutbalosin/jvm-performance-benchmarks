@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<style>
+	body {margin: 0; padding: 10px; background-color: #ffffff}
+	h1 {margin: 5px 0 0 0; font-size: 18px; font-weight: normal; text-align: center}
+	header {margin: -24px 0 5px 0; line-height: 24px}
+	button {font: 12px sans-serif; cursor: pointer}
+	p {margin: 5px 0 5px 0}
+	a {color: #0366d6}
+	#hl {position: absolute; display: none; overflow: hidden; white-space: nowrap; pointer-events: none; background-color: #ffffe0; outline: 1px solid #ffc000; height: 15px}
+	#hl span {padding: 0 3px 0 3px}
+	#status {overflow: hidden; white-space: nowrap}
+	#match {overflow: hidden; white-space: nowrap; display: none; float: right; text-align: right}
+	#reset {cursor: pointer}
+	#canvas {width: 100%; height: 1136px}
+</style>
+</head>
+<body style='font: 12px Verdana, sans-serif'>
+<h1>CPU profile</h1>
+<header style='text-align: left'><button id='reverse' title='Reverse'>&#x1f53b;</button>&nbsp;&nbsp;<button id='search' title='Search'>&#x1f50d;</button></header>
+<header style='text-align: right'>Produced by <a href='https://github.com/jvm-profiling-tools/async-profiler'>async-profiler</a></header>
+<canvas id='canvas'></canvas>
+<div id='hl'><span></span></div>
+<p id='match'>Matched: <span id='matchval'></span> <span id='reset' title='Clear'>&#x274c;</span></p>
+<p id='status'>&nbsp;</p>
+<script>
+	// Copyright 2020 Andrei Pangin
+	// Licensed under the Apache License, Version 2.0.
+	'use strict';
+	var root, rootLevel, px, pattern;
+	var reverse = true;
+	const levels = Array(71);
+	for (let h = 0; h < levels.length; h++) {
+		levels[h] = [];
+	}
+
+	const canvas = document.getElementById('canvas');
+	const c = canvas.getContext('2d');
+	const hl = document.getElementById('hl');
+	const status = document.getElementById('status');
+
+	const canvasWidth = canvas.offsetWidth;
+	const canvasHeight = canvas.offsetHeight;
+	canvas.style.width = canvasWidth + 'px';
+	canvas.width = canvasWidth * (devicePixelRatio || 1);
+	canvas.height = canvasHeight * (devicePixelRatio || 1);
+	if (devicePixelRatio) c.scale(devicePixelRatio, devicePixelRatio);
+	c.font = document.body.style.font;
+
+	const palette = [
+		[0xb2e1b2, 20, 20, 20],
+		[0x50e150, 30, 30, 30],
+		[0x50cccc, 30, 30, 30],
+		[0xe15a5a, 30, 40, 40],
+		[0xc8c83c, 30, 30, 10],
+		[0xe17d00, 30, 30,  0],
+		[0xcce880, 20, 20, 20],
+	];
+
+	function getColor(p) {
+		const v = Math.random();
+		return '#' + (p[0] + ((p[1] * v) << 16 | (p[2] * v) << 8 | (p[3] * v))).toString(16);
+	}
+
+	function f(level, left, width, type, title, inln, c1, int) {
+		levels[level].push({left: left, width: width, color: getColor(palette[type]), title: title,
+			details: (int ? ', int=' + int : '') + (c1 ? ', c1=' + c1 : '') + (inln ? ', inln=' + inln : '')
+		});
+	}
+
+	function samples(n) {
+		return n === 1 ? '1 sample' : n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' samples';
+	}
+
+	function pct(a, b) {
+		return a >= b ? '100' : (100 * a / b).toFixed(2);
+	}
+
+	function findFrame(frames, x) {
+		let left = 0;
+		let right = frames.length - 1;
+
+		while (left <= right) {
+			const mid = (left + right) >>> 1;
+			const f = frames[mid];
+
+			if (f.left > x) {
+				right = mid - 1;
+			} else if (f.left + f.width <= x) {
+				left = mid + 1;
+			} else {
+				return f;
+			}
+		}
+
+		if (frames[left] && (frames[left].left - x) * px < 0.5) return frames[left];
+		if (frames[right] && (x - (frames[right].left + frames[right].width)) * px < 0.5) return frames[right];
+
+		return null;
+	}
+
+	function search(r) {
+		if (r === true && (r = prompt('Enter regexp to search:', '')) === null) {
+			return;
+		}
+
+		pattern = r ? RegExp(r) : undefined;
+		const matched = render(root, rootLevel);
+		document.getElementById('matchval').textContent = pct(matched, root.width) + '%';
+		document.getElementById('match').style.display = r ? 'inherit' : 'none';
+	}
+
+	function render(newRoot, newLevel) {
+		if (root) {
+			c.fillStyle = '#ffffff';
+			c.fillRect(0, 0, canvasWidth, canvasHeight);
+		}
+
+		root = newRoot || levels[0][0];
+		rootLevel = newLevel || 0;
+		px = canvasWidth / root.width;
+
+		const x0 = root.left;
+		const x1 = x0 + root.width;
+		const marked = [];
+
+		function mark(f) {
+			return marked[f.left] >= f.width || (marked[f.left] = f.width);
+		}
+
+		function totalMarked() {
+			let total = 0;
+			let left = 0;
+			Object.keys(marked).sort(function(a, b) { return a - b; }).forEach(function(x) {
+				if (+x >= left) {
+					total += marked[x];
+					left = +x + marked[x];
+				}
+			});
+			return total;
+		}
+
+		function drawFrame(f, y, alpha) {
+			if (f.left < x1 && f.left + f.width > x0) {
+				c.fillStyle = pattern && f.title.match(pattern) && mark(f) ? '#ee00ee' : f.color;
+				c.fillRect((f.left - x0) * px, y, f.width * px, 15);
+
+				if (f.width * px >= 21) {
+					const chars = Math.floor(f.width * px / 7);
+					const title = f.title.length <= chars ? f.title : f.title.substring(0, chars - 2) + '..';
+					c.fillStyle = '#000000';
+					c.fillText(title, Math.max(f.left - x0, 0) * px + 3, y + 12, f.width * px - 6);
+				}
+
+				if (alpha) {
+					c.fillStyle = 'rgba(255, 255, 255, 0.5)';
+					c.fillRect((f.left - x0) * px, y, f.width * px, 15);
+				}
+			}
+		}
+
+		for (let h = 0; h < levels.length; h++) {
+			const y = reverse ? h * 16 : canvasHeight - (h + 1) * 16;
+			const frames = levels[h];
+			for (let i = 0; i < frames.length; i++) {
+				drawFrame(frames[i], y, h < rootLevel);
+			}
+		}
+
+		return totalMarked();
+	}
+
+	canvas.onmousemove = function() {
+		const h = Math.floor((reverse ? event.offsetY : (canvasHeight - event.offsetY)) / 16);
+		if (h >= 0 && h < levels.length) {
+			const f = findFrame(levels[h], event.offsetX / px + root.left);
+			if (f) {
+				if (f != root) getSelection().removeAllRanges();
+				hl.style.left = (Math.max(f.left - root.left, 0) * px + canvas.offsetLeft) + 'px';
+				hl.style.width = (Math.min(f.width, root.width) * px) + 'px';
+				hl.style.top = ((reverse ? h * 16 : canvasHeight - (h + 1) * 16) + canvas.offsetTop) + 'px';
+				hl.firstChild.textContent = f.title;
+				hl.style.display = 'block';
+				canvas.title = f.title + '\n(' + samples(f.width) + f.details + ', ' + pct(f.width, levels[0][0].width) + '%)';
+				canvas.style.cursor = 'pointer';
+				canvas.onclick = function() {
+					if (f != root) {
+						render(f, h);
+						canvas.onmousemove();
+					}
+				};
+				status.textContent = 'Function: ' + canvas.title;
+				return;
+			}
+		}
+		canvas.onmouseout();
+	}
+
+	canvas.onmouseout = function() {
+		hl.style.display = 'none';
+		status.textContent = '\xa0';
+		canvas.title = '';
+		canvas.style.cursor = '';
+		canvas.onclick = '';
+	}
+
+	canvas.ondblclick = function() {
+		getSelection().selectAllChildren(hl);
+	}
+
+	document.getElementById('reverse').onclick = function() {
+		reverse = !reverse;
+		render();
+	}
+
+	document.getElementById('search').onclick = function() {
+		search(true);
+	}
+
+	document.getElementById('reset').onclick = function() {
+		search(false);
+	}
+
+	window.onkeydown = function() {
+		if (event.ctrlKey && event.keyCode === 70) {
+			event.preventDefault();
+			search(true);
+		} else if (event.keyCode === 27) {
+			search(false);
+		}
+	}
+
+f(0,0,4976,3,'all')
+f(1,0,1,4,'ConstantPool::klass_at_if_loaded(constantPoolHandle const&, int)')
+f(2,0,1,4,'ciEnv::get_klass_by_index_impl(constantPoolHandle const&, int, bool&, ciInstanceKlass*)')
+f(3,0,1,4,'ciField::ciField(ciInstanceKlass*, int, Bytecodes::Code)')
+f(4,0,1,4,'ciEnv::get_field_by_index_impl(ciInstanceKlass*, int, Bytecodes::Code)')
+f(5,0,1,4,'ciEnv::get_field_by_index(ciInstanceKlass*, int, Bytecodes::Code)')
+f(6,0,1,4,'ciBytecodeStream::get_field(bool&)')
+f(7,0,1,4,'GraphBuilder::access_field(Bytecodes::Code)')
+f(8,0,1,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(9,0,1,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(10,0,1,4,'GraphBuilder::GraphBuilder(Compilation*, IRScope*)')
+f(11,0,1,4,'IRScope::IRScope(Compilation*, IRScope*, int, ciMethod*, int, bool)')
+f(12,0,1,4,'IR::IR(Compilation*, ciMethod*, int)')
+f(13,0,1,4,'Compilation::build_hir() [clone .part.0]')
+f(14,0,1,4,'Compilation::compile_java_method()')
+f(15,0,1,4,'Compilation::compile_method()')
+f(16,0,1,4,'Compilation::Compilation(AbstractCompiler*, ciEnv*, ciMethod*, int, BufferBlob*, bool, DirectiveSet*)')
+f(17,0,1,4,'Compiler::compile_method(ciEnv*, ciMethod*, int, bool, DirectiveSet*)')
+f(18,0,1,4,'CompileBroker::invoke_compiler_on_method(CompileTask*)')
+f(19,0,1,4,'CompileBroker::compiler_thread_loop()')
+f(20,0,1,4,'JavaThread::thread_main_inner() [clone .part.0]')
+f(21,0,1,4,'Thread::call_run()')
+f(22,0,1,3,'thread_native_entry(Thread*)')
+f(23,0,1,3,'start_thread')
+f(1,1,1,4,'ValueStack::values_do(ValueVisitor*)')
+f(2,1,1,4,'BlockBegin::state_values_do(ValueVisitor*)')
+f(3,1,1,4,'SubstitutionResolver::block_do(BlockBegin*)')
+f(4,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(5,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(6,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(7,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(8,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(9,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(10,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(11,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(12,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(13,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(14,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(15,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(16,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(17,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(18,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(19,1,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(20,1,1,4,'BlockBegin::iterate_preorder(BlockClosure*)')
+f(21,1,1,4,'GlobalValueNumbering::GlobalValueNumbering(IR*)')
+f(22,1,1,4,'Compilation::build_hir() [clone .part.0]')
+f(23,1,1,4,'Compilation::compile_java_method()')
+f(24,1,1,4,'Compilation::compile_method()')
+f(25,1,1,4,'Compilation::Compilation(AbstractCompiler*, ciEnv*, ciMethod*, int, BufferBlob*, bool, DirectiveSet*)')
+f(26,1,1,4,'Compiler::compile_method(ciEnv*, ciMethod*, int, bool, DirectiveSet*)')
+f(27,1,1,4,'CompileBroker::invoke_compiler_on_method(CompileTask*)')
+f(28,1,1,4,'CompileBroker::compiler_thread_loop()')
+f(29,1,1,4,'JavaThread::thread_main_inner() [clone .part.0]')
+f(30,1,1,4,'Thread::call_run()')
+f(31,1,1,3,'thread_native_entry(Thread*)')
+f(32,1,1,3,'start_thread')
+f(1,2,1,3,'___pthread_cond_timedwait64')
+f(2,2,1,3,'[unknown]')
+f(1,3,1,3,'__futex_abstimed_wait_cancelable64')
+f(2,3,1,3,'[unknown]')
+f(1,4,1,5,'_raw_spin_unlock_irq')
+f(2,4,1,5,'__run_timers.part.0')
+f(3,4,1,5,'run_timer_softirq')
+f(4,4,1,5,'__do_softirq')
+f(5,4,1,5,'__irq_exit_rcu')
+f(6,4,1,5,'irq_exit_rcu')
+f(7,4,1,5,'sysvec_apic_timer_interrupt')
+f(8,4,1,5,'asm_sysvec_apic_timer_interrupt')
+f(9,4,1,2,'java/lang/String.equals',1,0,0)
+f(10,4,1,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car.fromCachedValues',1,0,0)
+f(11,4,1,1,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark.cached_enum_values')
+f(12,4,1,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_avgt_jmhStub')
+f(13,4,1,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(14,4,1,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(15,4,1,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(16,4,1,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(17,4,1,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(18,4,1,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(19,4,1,1,'java/lang/reflect/Method.invoke')
+f(20,4,1,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(21,4,1,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(22,4,1,1,'java/util/concurrent/FutureTask.run')
+f(23,4,1,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(24,4,1,1,'java/util/concurrent/FutureTask.run')
+f(25,4,1,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(26,4,1,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(27,4,1,1,'java/lang/Thread.runWith')
+f(28,4,1,1,'java/lang/Thread.run')
+f(1,5,1,5,'_raw_spin_unlock_irqrestore')
+f(2,5,1,5,'xhci_urb_enqueue')
+f(3,5,1,5,'usb_hcd_submit_urb')
+f(4,5,1,5,'usb_submit_urb')
+f(5,5,1,5,'hid_irq_in?[usbhid]')
+f(6,5,1,5,'__usb_hcd_giveback_urb')
+f(7,5,1,5,'usb_giveback_urb_bh')
+f(8,5,1,5,'tasklet_action_common.constprop.0')
+f(9,5,1,5,'tasklet_hi_action')
+f(10,5,1,5,'__do_softirq')
+f(11,5,1,5,'__irq_exit_rcu')
+f(12,5,1,5,'irq_exit_rcu')
+f(13,5,1,5,'common_interrupt')
+f(14,5,1,5,'asm_common_interrupt')
+f(15,5,1,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car.fromCachedValues',1,0,0)
+f(16,5,1,1,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark.cached_enum_values')
+f(17,5,1,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_avgt_jmhStub')
+f(18,5,1,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(19,5,1,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(20,5,1,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(21,5,1,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(22,5,1,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(23,5,1,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(24,5,1,1,'java/lang/reflect/Method.invoke')
+f(25,5,1,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(26,5,1,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(27,5,1,1,'java/util/concurrent/FutureTask.run')
+f(28,5,1,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(29,5,1,1,'java/util/concurrent/FutureTask.run')
+f(30,5,1,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(31,5,1,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(32,5,1,1,'java/lang/Thread.runWith')
+f(33,5,1,1,'java/lang/Thread.run')
+f(1,6,1,3,'clock_gettime@plt')
+f(2,6,1,4,'WatcherThread::sleep() const')
+f(3,6,1,4,'WatcherThread::run()')
+f(4,6,1,4,'Thread::call_run()')
+f(5,6,1,3,'thread_native_entry(Thread*)')
+f(6,6,1,3,'start_thread')
+f(1,7,1429,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car.fromCachedValues',1429,0,0)
+f(2,7,1429,1,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark.cached_enum_values')
+f(3,7,1429,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_avgt_jmhStub')
+f(4,7,1429,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(5,7,1429,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(6,7,1429,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(7,7,1429,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(8,7,1429,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(9,7,1429,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(10,7,1429,1,'java/lang/reflect/Method.invoke')
+f(11,7,1429,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(12,7,1429,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(13,7,1429,1,'java/util/concurrent/FutureTask.run')
+f(14,7,1429,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(15,7,1429,1,'java/util/concurrent/FutureTask.run')
+f(16,7,1429,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(17,7,1429,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(18,7,1429,1,'java/lang/Thread.runWith')
+f(19,7,1429,1,'java/lang/Thread.run')
+f(1,1436,169,1,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark.cached_enum_values')
+f(2,1436,63,3,'[unknown_Java]')
+f(2,1499,106,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_avgt_jmhStub')
+f(3,1499,106,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(4,1499,106,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(5,1499,106,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(6,1499,106,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(7,1499,106,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(8,1499,106,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(9,1499,106,1,'java/lang/reflect/Method.invoke')
+f(10,1499,106,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(11,1499,106,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(12,1499,106,1,'java/util/concurrent/FutureTask.run')
+f(13,1499,106,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(14,1499,106,1,'java/util/concurrent/FutureTask.run')
+f(15,1499,106,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(16,1499,106,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(17,1499,106,1,'java/lang/Thread.runWith')
+f(18,1499,106,1,'java/lang/Thread.run')
+f(1,1605,183,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_avgt_jmhStub')
+f(2,1605,183,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(3,1605,183,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(4,1605,183,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(5,1605,183,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(6,1605,183,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(7,1605,183,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(8,1605,183,1,'java/lang/reflect/Method.invoke')
+f(9,1605,183,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(10,1605,183,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(11,1605,183,1,'java/util/concurrent/FutureTask.run')
+f(12,1605,183,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(13,1605,183,1,'java/util/concurrent/FutureTask.run')
+f(14,1605,183,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(15,1605,183,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(16,1605,183,1,'java/lang/Thread.runWith')
+f(17,1605,183,1,'java/lang/Thread.run')
+f(1,1788,3187,2,'java/lang/String.equals',3187,0,0)
+f(2,1788,3187,2,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car.fromCachedValues',3187,0,0)
+f(3,1788,3187,1,'com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark.cached_enum_values')
+f(4,1788,3,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(5,1788,3,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(6,1788,3,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(7,1788,3,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(8,1788,3,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(9,1788,3,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(10,1788,3,1,'java/lang/reflect/Method.invoke')
+f(11,1788,3,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(12,1788,3,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(13,1788,3,1,'java/util/concurrent/FutureTask.run')
+f(14,1788,3,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(15,1788,3,1,'java/util/concurrent/FutureTask.run')
+f(16,1788,3,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(17,1788,3,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(18,1788,3,1,'java/lang/Thread.runWith')
+f(19,1788,3,1,'java/lang/Thread.run')
+f(4,1791,3184,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_avgt_jmhStub')
+f(5,1791,3184,1,'com/ionutbalosin/jvm/performance/benchmarks/api/jmh_generated/EnumValuesLookupBenchmark_cached_enum_values_jmhTest.cached_enum_values_AverageTime')
+f(6,1791,3184,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(7,1791,3184,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e000.invoke')
+f(8,1791,3184,1,'java/lang/invoke/LambdaForm$MH.0x00007f520402e400.invokeExact_MT')
+f(9,1791,3184,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(10,1791,3184,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(11,1791,3184,1,'java/lang/reflect/Method.invoke')
+f(12,1791,3184,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(13,1791,3184,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(14,1791,3184,1,'java/util/concurrent/FutureTask.run')
+f(15,1791,3184,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(16,1791,3184,1,'java/util/concurrent/FutureTask.run')
+f(17,1791,3184,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(18,1791,3184,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(19,1791,3184,1,'java/lang/Thread.runWith')
+f(20,1791,3184,1,'java/lang/Thread.run')
+f(1,4975,1,5,'nf_conntrack_in?[nf_conntrack]')
+f(2,4975,1,5,'ipv4_conntrack_local?[nf_conntrack]')
+f(3,4975,1,5,'nf_hook_slow')
+f(4,4975,1,5,'__ip_local_out')
+f(5,4975,1,5,'ip_local_out')
+f(6,4975,1,5,'__ip_queue_xmit')
+f(7,4975,1,5,'ip_queue_xmit')
+f(8,4975,1,5,'__tcp_transmit_skb')
+f(9,4975,1,5,'__tcp_send_ack.part.0')
+f(10,4975,1,5,'tcp_send_ack')
+f(11,4975,1,5,'__tcp_ack_snd_check')
+f(12,4975,1,5,'tcp_rcv_established')
+f(13,4975,1,5,'tcp_v4_do_rcv')
+f(14,4975,1,5,'tcp_v4_rcv')
+f(15,4975,1,5,'ip_protocol_deliver_rcu')
+f(16,4975,1,5,'ip_local_deliver_finish')
+f(17,4975,1,5,'ip_local_deliver')
+f(18,4975,1,5,'ip_rcv')
+f(19,4975,1,5,'__netif_receive_skb_one_core')
+f(20,4975,1,5,'__netif_receive_skb')
+f(21,4975,1,5,'process_backlog')
+f(22,4975,1,5,'__napi_poll')
+f(23,4975,1,5,'net_rx_action')
+f(24,4975,1,5,'__do_softirq')
+f(25,4975,1,5,'do_softirq.part.0')
+f(26,4975,1,5,'__local_bh_enable_ip')
+f(27,4975,1,5,'ip_finish_output2')
+f(28,4975,1,5,'__ip_finish_output')
+f(29,4975,1,5,'ip_finish_output')
+f(30,4975,1,5,'ip_output')
+f(31,4975,1,5,'ip_local_out')
+f(32,4975,1,5,'__ip_queue_xmit')
+f(33,4975,1,5,'ip_queue_xmit')
+f(34,4975,1,5,'__tcp_transmit_skb')
+f(35,4975,1,5,'tcp_write_xmit')
+f(36,4975,1,5,'__tcp_push_pending_frames')
+f(37,4975,1,5,'tcp_push')
+f(38,4975,1,5,'tcp_sendmsg_locked')
+f(39,4975,1,5,'tcp_sendmsg')
+f(40,4975,1,5,'inet6_sendmsg')
+f(41,4975,1,5,'sock_sendmsg')
+f(42,4975,1,5,'sock_write_iter')
+f(43,4975,1,5,'vfs_write')
+f(44,4975,1,5,'ksys_write')
+f(45,4975,1,5,'__x64_sys_write')
+f(46,4975,1,5,'do_syscall_64')
+f(47,4975,1,5,'entry_SYSCALL_64_after_hwframe')
+f(48,4975,1,3,'write')
+f(49,4975,1,0,'sun/nio/ch/SocketDispatcher.write0',0,0,1)
+f(50,4975,1,1,'sun/nio/ch/SocketDispatcher.write')
+f(51,4975,1,1,'sun/nio/ch/NioSocketImpl.tryWrite')
+f(52,4975,1,1,'sun/nio/ch/NioSocketImpl.implWrite')
+f(53,4975,1,1,'sun/nio/ch/NioSocketImpl.write')
+f(54,4975,1,1,'sun/nio/ch/NioSocketImpl$2.write')
+f(55,4975,1,1,'java/net/Socket$SocketOutputStream.write')
+f(56,4975,1,1,'java/io/BufferedOutputStream.flushBuffer')
+f(57,4975,1,1,'java/io/BufferedOutputStream.implFlush')
+f(58,4975,1,1,'java/io/BufferedOutputStream.flush')
+f(59,4975,1,1,'java/io/ObjectOutputStream$BlockDataOutputStream.flush')
+f(60,4975,1,1,'java/io/ObjectOutputStream.flush')
+f(61,4975,1,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.pushFrame')
+f(62,4975,1,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.lambda$new$0')
+f(63,4975,1,1,'org/openjdk/jmh/runner/link/BinaryLinkClient$$Lambda.0x00007f5204001c50.invoke')
+f(64,4975,1,1,'jdk/proxy1/$Proxy0.iteration')
+f(65,4975,1,1,'org/openjdk/jmh/runner/BaseRunner.runBenchmark')
+f(66,4975,1,1,'org/openjdk/jmh/runner/BaseRunner.runBenchmark')
+f(67,4975,1,1,'org/openjdk/jmh/runner/BaseRunner.doSingle')
+f(68,4975,1,1,'org/openjdk/jmh/runner/BaseRunner.runBenchmarksForked')
+f(69,4975,1,1,'org/openjdk/jmh/runner/ForkedRunner.run')
+f(70,4975,1,1,'org/openjdk/jmh/runner/ForkedMain.main')
+
+search();
+</script></body></html>
