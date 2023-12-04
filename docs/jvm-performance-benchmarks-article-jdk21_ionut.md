@@ -400,39 +400,44 @@ The C2 JIT Compiler iterates through the array of cached enum values, attempting
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT iterates through the array of cached enum values. However, when attempting to find a match for the `lookUpValue` within the enum values (i.e., the String comparison), it utilizes an intrinsic candidate.
+The Oracle GraalVM JIT iterates through the array of cached enum values. However, when attempting to compare the `lookUpValue` value against the enum values (i.e., String comparisons), it utilizes an intrinsic candidate for the byte array values.
 
 ```
-                                                            ; <--- loop begin
-  0x00007f9bb6d9c2e0:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
-  0x00007f9bb6d9c2e4:   jae    0x00007f9bb6d9c42c           ; jump if greater than or equal to 41 (exit the loop)
-  0x00007f9bb6d9c2ea:   mov    0x10(%rbx,%r10,4),%edi       ; load Car object from enum values array at index [rbx + r10 * 4 + 0x10]
-  0x00007f9bb6d9c2ef:   mov    0x18(,%rdi,8),%esi           ; load 'carValue' field from the Car object at offset 0x18
+                                                         ; <--- loop begin
+  0x07f9bb6d9c2e0:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
+  0x07f9bb6d9c2e4:   jae    0x07f9bb6d9c42c              ; jump if greater than or equal to 41 (exit the loop)
+  0x07f9bb6d9c2ea:   mov    0x10(%rbx,%r10,4),%edi       ; load Car object from enum values array at index [rbx + r10 * 4 + 0x10]
+  0x07f9bb6d9c2ef:   mov    0x18(,%rdi,8),%esi           ; load 'carValue' field from the Car object at offset 0x18
+  0x07f9bb6d9c2f6:   movsbl 0x10(,%rsi,8),%ecx           ; extract the String coder at offset 0x10
+  0x07f9bb6d9c2fe:   mov    0x14(,%rsi,8),%r8d           ; get the String byte array at offset 0x14
   ...
-  0x00007f9bb6d9c312:   inc    %eax
+  0x07f9bb6d9c312:   inc    %eax
+  ...
+  0x07f9bb6d9c329:   cmp    0xc(,%r8,8),%ebp             ; compare the String byte array lengths
+  0x07f9bb6d9c331:   jne    0x07f9bb6d9c37d              ; jump if lengths are not the same
   ...
   <--- Trigger the comparison of two byte array regions using an intrinsic stub -->
-  0x00007f9bb6d9c359:   call   0x00007f9bb6910580           ; call the runtime function for array region comparison
-                                                            ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-  0x00007f9bb6d9c360:   test   %eax,%eax                    ; test the result of the array region comparison
-  0x00007f9bb6d9c362:   jne    0x00007f9bb6d9c385           ; jump if ZF is not set (i.e., arrays are equal)
+  0x07f9bb6d9c359:   call   0x07f9bb6910580              ; call the runtime function for byte array region comparison
+                                                         ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
+  0x07f9bb6d9c360:   test   %eax,%eax                    ; test the result of the byte array region comparison
+  0x07f9bb6d9c362:   jne    0x07f9bb6d9c385              ; jump if ZF is not set (i.e., arrays are equal)
   ...
-  0x00007f9bb6d9c37d:   mov    %eax,%r10d                   ; r10d = eax
-  0x00007f9bb6d9c380:   jmp    0x00007f9bb6d9c2e0           ; <--- loop end (loop back if arrays are not equal)
+  0x07f9bb6d9c37d:   mov    %eax,%r10d                   ; r10d = eax
+  0x07f9bb6d9c380:   jmp    0x07f9bb6d9c2e0              ; <--- loop end (loop back if arrays are not equal)
 ```
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler employs a similar approach to the Oracle GraalVM JIT Compiler for comparing Strings (using the intrinsic stub). However, the generated assembly appears larger and less structured. The `perfasm` profiler we used to capture this information displays only a part of the assembly code. Consequently, we are unable to offer additional insights; further profiling might be necessary.
+The GraalVM CE JIT Compiler employs a similar approach to the Oracle GraalVM JIT Compiler for comparing Strings, using the intrinsic stub to compare byte arrays. However, the reported average response is marginally slower. A more comprehensive analysis, including profiling, may be required to provide additional insights.
 
 ### Analysis of enum_values
 
-Regarding the other `enum_values` benchmark, it is impacted by the object allocations triggered by the `Enum::values()` call that is an invoke virtual the to clone() method.
+Regarding the other `enum_values` benchmark, it is impacted by the object allocations triggered by the `Enum::values` call that is an invoke virtual the to clone() method.
 
 The following snapshot is from the C2 JIT Compiler output, although the same pattern occurs for the Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler.
 
 ```
-                                                         ; <--- (TLAB) Allocation (and partially initialization)
+                                                         ; <--- (TLAB) Allocation (and initialization)
   0x07f77984f8d83:   mov    0x1b8(%r15),%r13             ; r13 = r15 + 0x1b8 (offset calculation)
   0x07f77984f8d8a:   mov    %r13,%r10                    ; r10 = r13 (store calculated offset)
   0x07f77984f8d8d:   add    $0xb8,%r10                   ; r10 = r10 + 0xb8 (offset for comparison)
@@ -452,10 +457,10 @@ The following snapshot is from the C2 JIT Compiler output, although the same pat
   0x07f77984f8dec:   mov    %r13,%rsi
   0x07f77984f8def:   add    $0x10,%rsi
   0x07f77984f8df3:   mov    $0x15,%edx
-  0x07f77984f8df8:   movabs $0x62ae275c0,%r10            ; set enum values to the new memory address
-                                                         ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x000062ae275c0})}
-  0x07f77984f8e02:   movabs $0x62ae275c0,%rbx            ; set enum values to the new memory address
-                                                         ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x000062ae275c0})}
+  0x07f77984f8df8:   movabs $0x62ae275c0,%r10            ; load the enum values array address into register r10
+                                                         ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x062ae275c0})}
+  0x07f77984f8e02:   movabs $0x62ae275c0,%rbx            ; load the enum values array address into register rbx
+                                                         ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x062ae275c0})}
   0x07f77984f8e0c:   add    $0x10,%rbx
   0x07f77984f8e10:   mov    %rbx,%rdi
   0x07f77984f8e16:   movabs $0x7f7797f6a400,%r10
@@ -464,20 +469,20 @@ The following snapshot is from the C2 JIT Compiler output, although the same pat
                                                          ; - EnumValuesLookupBenchmark$Car::values
 ```
 
-The hottest regions in the report emphasize array allocation via `StubRoutines::jlong_disjoint_arraycopy`.
+The hottest regions in the report shows the `StubRoutines::jlong_disjoint_arraycopy`, which is the stub generator for copying long arrays when the source and destination arrays do not overlap. This routine is a result of an `Enum::values` call.
 
 ```
   ....[Hottest Regions]...............................................................................
   62.25%           c2, level 4  EnumValuesLookupBenchmark::enum_values, version 2, compile id 643
   13.47%           c2, level 4  EnumValuesLookupBenchmark::enum_values, version 2, compile id 643
-  9.31%          runtime stub  StubRoutines::jlong_disjoint_arraycopy
-  3.94%           c2, level 4  EnumValuesLookupBenchmark::enum_values, version 2, compile id 643
+  9.31%           runtime stub  StubRoutines::jlong_disjoint_arraycopy
+  3.94%            c2, level 4  EnumValuesLookupBenchmark::enum_values, version 2, compile id 643
 ```
 
 ### Conclusions
 
-- Try to avoid calling `Enum::values()`, especially within a loop, as it allocates a new array and assigns references to the enum values as elements. This can potentially generate a considerable amount of garbage.
-- When matching enum values to a String, which involves String comparisons, the Oracle GraalVM JIT generally outperforms the C2 JIT Compiler. This is not only because it uses an intrinsic for array regions comparison (unlike the C2 JIT Compiler) but also due to more structured code compared to the GraalVM CE JIT Compiler.
+- Try to avoid calling `Enum::values`, especially within a loop, as it allocates a new array and assigns references to the enum values as elements. This can potentially generate a considerable amount of garbage.
+- When comparing enum values to strings, which involves string comparisons in essence, the Oracle GraalVM JIT outperforms the C2 JIT Compiler in this benchmark. One significant factor is the utilization of an intrinsic method by the Oracle GraalVM JIT, enabling it to check if two strings are equal within a defined region, specified by a codepoint-based offset and length. Further details regarding this type of optimization can be found in the document [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf).
 
 ## IfConditionalBranchBenchmark
 ### Analysis
