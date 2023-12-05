@@ -485,11 +485,279 @@ The hottest regions in the report shows the `StubRoutines::jlong_disjoint_arrayc
 - When comparing enum values to strings, which involves string comparisons in essence, the Oracle GraalVM JIT outperforms the C2 JIT Compiler in this benchmark. One significant factor is the utilization of an intrinsic method by the Oracle GraalVM JIT, enabling it to check if two strings are equal within a defined region, specified by a codepoint-based offset and length. Further details regarding this type of optimization can be found in the document [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf).
 
 ## IfConditionalBranchBenchmark
-### Analysis
+
+This benchmark tests the conditional branch optimizations within a loop using:
+- a predictable branch pattern
+- an unpredictable branch pattern
+- no branch at all
+
+```
+  // All array[] values are randomly generated within [0, THRESHOLD)
+
+  @Benchmark
+  public int no_if_branch() {
+    int sum = 0;
+
+    for (final int value : array) {
+      sum += value;
+    }
+
+    return sum;
+  }
+  
+  @Benchmark
+  public int predictable_if_branch() {
+    int sum = 0;
+
+    for (final int value : array) {
+      if (value < THRESHOLD) {
+        sum += value;
+      }
+    }
+
+    return sum;
+  }
+  
+  @Benchmark
+  public int unpredictable_if_branch() {
+    int sum = 0;
+
+    for (final int value : array) {
+      if (value <= (THRESHOLD / 2)) {
+        sum += value;
+      }
+    }
+
+    return sum;
+  }  
+```
+
+Source code: [IfConditionalBranchBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/IfConditionalBranchBenchmark.java)
+
+[![IfConditionalBranchBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/IfConditionalBranchBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/IfConditionalBranchBenchmark.svg?raw=true)
+
+### Analysis of no_if_branch
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16 additions per unrolled loop cycle.
+
+```
+  // Main loop
+  
+  0x7f374863acda:   mov    0x18(%rsi),%ebp              ; get the array pointer
+  0x7f374863ace0:   mov    0xc(%r12,%rbp,8),%r11d       ; get the array length
+  0x7f374863ad06:   mov    0x10(%r12,%rbp,8),%eax       ; load the value of the first element
+  0x7f374863ad0b:   lea    (%r12,%rbp,8),%r8            ; get the array address
+  0x7f374863ad13:   mov    $0x1,%ecx                    ; initialize loop counter
+  0x7f374863ad2f:   mov    %r11d,%edx                   ; store array length
+                                                        ; <--- loop begin
+  0x7f374863ad50:   add    0x10(%r8,%rcx,4),%eax        ; add the value of the 1st element
+  0x7f374863ad55:   add    0x14(%r8,%rcx,4),%eax        ; add the value of the 2nd element
+  ...
+  <--- additional lines for adding other elements -->
+  ...
+  0x7f374863ad96:   add    0x48(%r8,%rcx,4),%eax        ; add the value of the 15th element
+  0x7f374863ad9b:   add    0x4c(%r8,%rcx,4),%eax        ; add the value of the 16th element
+  0x7f374863ada0:   add    $0x10,%ecx                   ; increment loop counter by 16
+  0x7f374863ada3:   cmp    %edx,%ecx                    ; compare loop counter with array length
+  0x7f374863ada5:   jl     0x7f374863ad50               ; <--- loop end (loop back if less)
+  ; eax stores the result of the main loop  
+```
+
+The post-loop processes the remaining elements individually, without unrolling:
+
+```
+  // Post loop
+                                                        ; <--- loop begin
+  0x7f374863adc0:   add    0x10(%r8,%rcx,4),%eax        ; add value of an element to eax
+  0x7f374863adc5:   inc    %ecx                         ; increment loop counter
+  0x7f374863adc7:   cmp    %r11d,%ecx                   ; compare loop counter with array length
+  0x7f374863adca:   jl     0x7f374863adc0               ; <--- loop end (loop back if less)
+  ; eax stores the result of the post loop  
+```
+
 #### Oracle GraalVM JIT Compiler
+
+Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+
+```
+  // Main loop
+
+  0x7fa68ad81b3f:   mov    0x18(%rsi),%eax              ; get the array pointer
+  0x7fa68ad81b42:   mov    0xc(,%rax,8),%r10d           ; get the array length
+  0x7fa68ad81b53:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+  0x7fa68ad81b57:   lea    0x10(%rax),%rax              ; get the address of the array
+  0x7fa68ad81b6a:   lea    -0x8(%r10),%r11              ; calculate (array length - 8)
+  0x7fa68ad81b6e:   mov    $0x0,%r8                     ; initialize loop counter
+                                                        ; <--- Loop begin
+  0x7fa68ad81b80:   vmovdqu (%rax,%r8,4),%ymm1          ; load 256 bits (8 integers) into %ymm1
+  0x7fa68ad81b86:   vpaddd %ymm1,%ymm0,%ymm0            ; packed integer addition: %ymm0 = %ymm0 + %ymm1
+  0x7fa68ad81b8a:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
+  0x7fa68ad81b8e:   cmp    %r11,%r8                     ; compare loop counter with (array length - 8)
+  0x7fa68ad81b91:   jle    0x7fa68ad81b80               ; <--- loop end (jump loop back if less)
+  ; ymm0 stores the result of the main loop  
+```
+
+The post-loop processes the remaining elements individually, without unrolling.
+
+```
+  // Post loop
+  
+  ...
+  <--- transfers data from ymm0 (256-bit AVX register) into r11d (32-bit register) -->
+  ...
+  ;                                                     <--- Loop begin
+  0x7fa68ad81bc0:   add    (%rax,%r8,4),%r11d           ; add the value of an element to r11d
+  0x7fa68ad81bc4:   inc    %r8                          ; increment the loop counter
+  0x7fa68ad81bc7:   cmp    %r10,%r8                     ; compare the loop counter with the array length
+  0x7fa68ad81bca:   jle    0x7fa68ad81bc0               ; <--- Loop end (Jump back if less)
+  ; r11d stores the result of the post loop  
+```
+
 #### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a factor of 16, enabling 16 additions to be processed per unrolled loop cycle. However, some registers are spilled onto the stack.
+
+```
+  // Main loop
+  0x00007f22eb23d83f:   mov    0x18(%rsi),%eax              ; get the array pointer
+  0x00007f22eb23d842:   mov    0xc(,%rax,8),%r10d           ; get the array length
+  0x00007f22eb23d85c:   mov    %r10d,%r8d                   ; copy array length to r8d
+  0x00007f22eb23d889:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+  ...
+  0x00007f22eb23d890:   mov    $0x1,%r11d                   ; initialize r11d for loop count
+  <--- Loop peeling -->
+  0x00007f22eb23d8a5:   inc    %r11d                        ; increment loop counter (r11d)
+  ...
+  0x00007f22eb23d8c0:   mov    %r11d,%r9d                   ; initialize loop counter r9d from r11d
+  ...
+                                                            ; <--- Loop beginning
+  0x00007f22eb23d8e0:   add    0x10(%rax,%r9,4),%r11d       ; add value of the 1st element to r11d
+  0x00007f22eb23d8e5:   movslq %r9d,%rcx                    ; sign-extend r9d to rcx for addressing
+  0x00007f22eb23d8e8:   mov    0x14(%rax,%rcx,4),%ebx       ; store the value of the 2nd element in ebx
+  0x00007f22eb23d8ec:   mov    0x18(%rax,%rcx,4),%edi       ; store the value of the 3rd element in edi
+  ...
+  0x00007f22eb23d910:   mov    %r9d,0x1c(%rsp)              ; spill r9d (the loop counter) onto the stack
+  0x00007f22eb23d915:   mov    0x38(%rax,%rcx,4),%r9d       ; store the value of the 11th element in r9d
+  0x00007f22eb23d91a:   mov    %r9d,0x18(%rsp)              ; spill the 11th element (r9d) onto the stack
+  0x00007f22eb23d91f:   mov    0x3c(%rax,%rcx,4),%r9d       ; store the value of the 12th element in r9d
+  0x00007f22eb23d924:   mov    %r9d,0x14(%rsp)              ; spill the 12th element (r9d) onto the stack
+  ...
+  0x00007f22eb23d93d:   mov    0x48(%rax,%rcx,4),%r9d       ; store the value of the 15th element in r9d
+  0x00007f22eb23d942:   add    %ebx,%r11d                   ; add the 2nd element to r11d
+  0x00007f22eb23d945:   add    %edi,%r11d                   ; add the 3rd element to the previous sum (r11d)
+  ...
+  0x00007f22eb23d95d:   add    0x18(%rsp),%r11d             ; load the 11th element from stack and add to r11d
+  0x00007f22eb23d962:   add    0x14(%rsp),%r11d             ; load the 12th element from stack and add to r11d
+  ...
+  0x00007f22eb23d971:   add    %r9d,%r11d                   ; add the 15th element to the sum (r11d)
+  0x00007f22eb23d974:   add    0x4c(%rax,%rcx,4),%r11d      ; add the 16th element to the sum (r11d)
+  0x00007f22eb23d979:   mov    0x1c(%rsp),%r9d              ; restore the loop counter from the stack
+  0x00007f22eb23d97e:   lea    0x10(%r9),%r9d               ; increment loop counter by 16
+  0x00007f22eb23d982:   mov    0x20(%rsp),%r8d              ; move saved value (i.e., array length) from stack to r8d
+  0x00007f22eb23d987:   cmp    %r9d,%r8d                    ; compare loop counter with saved value
+  0x00007f22eb23d98a:   jg     0x00007f22eb23d8e0           ; <--- loop end (jump loop back if greater)
+  ; r11d stores the result of the main loop
+```
+
+The post-loop processes the remaining elements individually, without unrolling.
+
+```
+  // Post loop
+                                                        ; <--- loop begin
+  0x7f22eb23d9a0:   add    0x10(%rax,%r9,4),%r11d       ; add the value of an element to r11d
+  0x7f22eb23d9a5:   inc    %r9d                         ; increment the loop counter
+  0x7f22eb23d9a8:   cmp    %r9d,%r10d                   ; compare the loop counter with the array length
+  0x7f22eb23d9ab:   jg     0x7f22eb23d9a0               ; <--- loop end (jump loop back if greater)
+  ; r11d stores the result of the main loop
+```
+
+### Analysis of unpredictable_if_branch
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler unrolls the main loop by a factor of 8, effectively handling 8 additions per unrolled loop cycle. To manage comparisons against a specified threshold value, the compiler employs the `cmovle` instruction.
+
+```
+  // Main loop
+  
+  0x7f510463a25a:   mov    0x18(%rsi),%ebp              ; get the array pointer
+  0x7f510463a260:   mov    0xc(%r12,%rbp,8),%ecx        ; get the array length
+  0x7f510463a281:   lea    (%r12,%rbp,8),%r14           ; get the array address
+  ...
+  0x7f510463a2b4:   mov    %ecx,%r13d                   ; move the array length to r13d
+                                                        ; <--- loop begin
+  0x7f510463a2f0:   mov    0x10(%r14,%rbp,4),%r10d      ; load the value of the 1st element into r10d
+  ...
+  0x7f510463a318:   lea    (%rax,%r10,1),%edx           ; calculate an address offset
+  0x7f510463a31c:   cmp    $0x800,%r10d                 ; compare against 2048 (THRESHOLD / 2)
+  0x7f510463a323:   cmovle %edx,%eax                    ; conditional move: move the value to eax if less than or equal
+  ...
+  <--- similar for the 2nd, 3rd, 4th, 5th, 6th, 7th, and 8th elements -->
+  ...
+  0x7f510463a38a:   add    $0x8,%ebp                    ; increment the loop counter
+  0x7f510463a38d:   cmp    %r13d,%ebp                   ; compare the loop counter with the array length
+  0x7f510463a390:   jl     0x7f510463a2f0               ; <--- loop end (jump loop back if less)
+  ; eax stores the result of the main loop
+```
+
+The post-loop handles the remaining elements individually, without loop unrolling, employing the conditional move (`cmovle`) instruction to evaluate if the array values exceed the specified threshold.
+
+#### Oracle GraalVM JIT Compiler
+
+Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+
+```
+  // Main loop
+  
+  0x7fd01ad7e9df:   mov    0x18(%rsi),%eax              ; get the array pointer
+  0x7fd01ad7e9e2:   mov    0xc(,%rax,8),%r10d           ; get the array length
+  0x7fd01ad7e9f3:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+  0x7fd01ad7e9f7:   lea    0x10(%rax),%rax              ; get the array address     
+  ...
+  0x7fd01ad7ea0e:   vmovdqa -0x96(%rip),%ymm1           ; load the value 'threshold'
+  0x7fd01ad7ea16:   mov    $0x0,%r8                     ; initialize loop counter r8 to 0x0
+  ...                                                   ; <--- loop begin
+  0x7fd01ad7ea20:   vmovdqu (%rax,%r8,4),%ymm2          ; load 256 bits (8 integers) into ymm2
+  0x7fd01ad7ea26:   vpaddd %ymm2,%ymm0,%ymm3            ; packed integer addition ymm3 = ymm0 + ymm2
+  0x7fd01ad7ea2a:   vpcmpgtd %ymm2,%ymm1,%ymm2          ; compare elements against 'threshold', setting 1s for greater elements in ymm2
+  0x7fd01ad7ea2e:   vpblendvb %ymm2,%ymm3,%ymm0,%ymm0   ; blend bytes based on ymm0 mask using ymm2 and ymm3, result in ymm0
+  0x7fd01ad7ea34:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
+  0x7fd01ad7ea38:   cmp    %r11,%r8                     ; compare the loop counter with the array length
+  0x7fd01ad7ea3b:   jle    0x7fd01ad7ea20               ; <--- loop end (jump loop back if less or equal)
+  ; ymm0 stores the result of the main loop
+```
+
+#### GraalVM CE JIT 
+
+The GraalVM CE JIT Compiler processes elements individually without loop unrolling, utilizing comparison and jump instructions to assess whether the array values surpass the predefined threshold.
+
+```
+  0x7f91d723d773:   mov    0x10(,%rax,8),%r11d          ; load the value of the first element
+  0x7f91d723d77b:   cmp    $0x801,%r11d                 ; compare the first element against the 'threshold'
+  0x7f91d723d782:   mov    $0x0,%r8d                    ; if greater, set r8d (i.e., the sum) to 0x0
+  0x7f91d723d788:   cmovl  %r11d,%r8d                   ; if less, set r8d to the first element
+  0x7f91d723d78c:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+  0x7f91d723d790:   mov    $0x1,%r11d                   ; initialize loop counter
+                                                        ; <--- Loop begin
+  0x7f91d723d7a0:   cmp    %r11d,%r10d                  ; compare loop counter with the array length
+  0x7f91d723d7a3:   jle    0x7f91d723d7c2               ; jump outside if less or equal
+  0x7f91d723d7a9:   mov    0x10(%rax,%r11,4),%r9d       ; load the value of an element in r9d
+  0x7f91d723d7ae:   inc    %r11d                        ; increment loop counter
+  0x7f91d723d7b1:   cmp    $0x801,%r9d                  ; compare against 'threshold'
+  0x7f91d723d7b8:   jge    0x7f91d723d7a0               ; jump loop back if greater or equal
+  0x7f91d723d7ba:   add    %r8d,%r9d                    ; add the element to the sum (r9d)
+  0x7f91d723d7bd:   mov    %r9d,%r8d                    ; move the sum back to r8d
+  0x7f91d723d7c0:   jmp    0x7f91d723d7a0               ; <--- Loop end (jump loop back)
+  ; r8d stores the result of the loop
+```
+
 ### Conclusions
+
+- Oracle GraalVM's JIT Compiler utilizes vectorized instructions, leveraging 256-bit wide AVX (Advanced Vector Extensions) registers for efficiently summing array elements.
+- The C2 JIT Compiler unrolls the main loop by a factor of 16 (`no_if_branch` scenario) or by a factor of 8 (`unpredictable_if_branch` scenario). However, due to its use of scalar operations instead of vectorized instructions, it does not achieve performance levels comparable to the Oracle GraalVM JIT Compiler.
+- The GraalVM CE JIT Compiler exhibits suboptimal behavior in these specific cases. For instance, it experiences register spills during the unrolling of the main loop by a factor of 16 (`no_if_branch` scenario). Alternatively, it may refrain from unrolling altogether (`unpredictable_if_branch` scenario) due to conditional comparisons within the loop body.
 
 ## LockCoarseningBenchmark
 ### Analysis
