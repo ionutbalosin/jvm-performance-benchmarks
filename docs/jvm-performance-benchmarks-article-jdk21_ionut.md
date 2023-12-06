@@ -806,7 +806,15 @@ The analysis below pertains to the `nested_synchronized` method, which is more i
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned, falling back to the Template Interpreter
+The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned (i.e., the compilation is disabled), falling back to the Template Interpreter.
+
+```
+  <task_queued compile_id='510' method='nested_synchronized ()I' bytes='211' level='3' comment='tiered'/>
+  <make_not_compilable level='3' reason='MethodCompilable_not_at_tier' method='nested_synchronized ()I' bytes='211'/>
+  
+  <task_queued compile_id='513' method='nested_synchronized ()I' bytes='211' comment='tiered'/>
+  <make_not_compilable level='4' reason='MethodCompilable_not_at_tier' method='nested_synchronized ()I' bytes='211'/>
+```
 
 The breakdown of the execution time in the hottest regions reveals various interpreter instructions
 
@@ -923,6 +931,9 @@ The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coa
 The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JIT Compiler in this benchmark.
 
 ### Conclusions
+
+- The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, leading to the best response time.
+- The C2 JIT Compiler shows limitations, potentially attributed to inlining heuristics or reaching the recompilation budget limit. Consequently, its performance tends to be slower than even GraalVM CE JIT Compiler in this benchmark.
 
 ## LockElisionBenchmark
 ### Analysis
