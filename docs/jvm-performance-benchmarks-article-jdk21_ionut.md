@@ -760,10 +760,168 @@ The GraalVM CE JIT Compiler processes elements individually without loop unrolli
 - The GraalVM CE JIT Compiler exhibits suboptimal behavior in these specific cases. For instance, it experiences register spills during the unrolling of the main loop by a factor of 16 (`no_if_branch` scenario). Alternatively, it may refrain from unrolling altogether (`unpredictable_if_branch` scenario) due to conditional comparisons within the loop body.
 
 ## LockCoarseningBenchmark
-### Analysis
+
+Testing how the compiler effectively coarsens or merges several adjacent synchronized blocks into one synchronized block can potentially reduce locking overhead. This optimization can be applied when the same lock object is used by multiple methods. However, it's important to note that while compilers can assist in coarsening or merging locks, it's not always guaranteed.
+
+```
+  @Benchmark
+  public int nested_synchronized() {
+    int result = defaultValue << 1;
+
+    synchronized (this) {             // 1st nested synchronized
+      result += incrementValue;
+      synchronized (this) {           // 2nd nested synchronized
+        result += incrementValue;
+        ...                           // 8th nested synchronized
+      }
+    }
+
+    return result;
+  }
+  
+  @Benchmark
+  public int conditional_nested_method_calls() {
+    int result = defaultValue << 1;
+
+    // all conditionals are evaluated to "true"
+    if (result > 1 << 5) {             // 1st synchronized
+      result = sum(result);
+      if (result > 1 << 5) {           // 2nd synchronized
+        result = sum(result);
+        ...                            // 8th synchronized
+      }
+    }
+
+    return result;
+  }  
+```
+
+Source code: [LockCoarseningBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LockCoarseningBenchmark.java)
+
+[![LockCoarseningBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LockCoarseningBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LockCoarseningBenchmark.svg?raw=true)
+
+### Analysis of nested_synchronized
+
+The analysis below pertains to the `nested_synchronized` method, which is more interesting due to the highest differences in performance.
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned, falling back to the Template Interpreter
+
+The breakdown of the execution time in the hottest regions reveals various interpreter instructions
+
+```
+  ....[Hottest Regions]...............................................................................
+    16.16%         interpreter  monitorenter  194 monitorenter  
+    10.18%         interpreter  fast_iaccess_0  221 fast_iaccess_0  
+     9.19%         interpreter  monitorexit  195 monitorexit  
+     8.11%         interpreter  goto  167 goto  
+     7.52%         interpreter  dup  89 dup  
+     6.97%         interpreter  istore_1  60 istore_1  
+     6.40%         interpreter  fast_aload_0  220 fast_aload_0  
+     5.98%         interpreter  aload  25 aload  
+     5.66%         interpreter  iadd  96 iadd  
+     5.45%         interpreter  astore  58 astore  
+     2.75%         interpreter  monitorexit  195 monitorexit  
+     ...
+```
+
 #### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, which involves eliminating redundant locks and aggregating multiple fine-grained locks into a single synchronized block. This consolidation of locks enhances performance by reducing synchronization overhead.
+
+```
+  0x7f994ad7c83f:   mov    %rsi,%r11
+  0x7f994ad7c845:   mov    0x10(%r11),%eax          ; load the field 'defaultValue' into eax
+  ...
+  0x7f994ad7c84d:   mov    %eax,%r9d                ; copy the value of eax to r9d (i.e., defaultValue)
+  0x7f994ad7c850:   shl    %r9d                     ; perform a left shift on the value in r9d by 1
+  <--- coarsened section (check if the lock is inflated, if not, try stack-locking, etc.) --->
+  ...
+  0x7f994ad7c886:   mov    0x14(%r11),%r8d          ; load the field 'incrementValue'
+  ...
+  0x7f994ad7c8c2:   shl    $0x3,%r8d                ; perform a left shift on the value in r8d by 0x3
+  0x7f994ad7c8c6:   add    %r8d,%r9d                ; add the values in r8d and r9d and store the result in r9d
+  0x7f994ad7c8c9:   mov    %r9d,%eax                ; move the value in r9d to eax
+  ; eax stores the result
+  <--- end of coarsened section --->
+```
+
 #### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler is able to compile the entire method, nevertheless it cannot merge the locks.
+
+```
+  0x7f096323c87f:   mov    %rsi,%r11
+  0x7f096323c885:   mov    0x10(%r11),%eax              ; load the field 'defaultValue' into eax
+  0x7f096323c88e:   mov    %eax,%r9d                    ; copy the value of %eax to %r9d (i.e., defaultValue)
+  0x7f096323c891:   shl    %r9d                         ; perform a left shift on the value in %r9d by 1
+  <--- 1st nested synchronized section --->
+  ...
+  0x7f096323c8d3:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to %r9d
+  <--- 2nd nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  <--- 3rd nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  <--- 4th nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  <--- 5th nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  <--- 6th nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  <--- 7th nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  <--- 8th nested synchronized section --->
+  ...
+  0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
+  ; r9d stores the result
+```
+
+### Analysis of conditional_nested_method_calls
+
+The analysis below pertains to the `conditional_nested_method_calls` method.
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler successfully compiles the method (e.g., c2, level 4). However, inlining plays a tricky role where distinct sections of the method are inlined at separate call sites, resulting in the generation of multiple compiled versions
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coarsening, and utilizes conditional instructions (e.g., `cmp`) to handle the additions.
+
+```
+  0x00007ffa1ad7dc3f:   mov    %rsi,%r11
+  0x00007ffa1ad7dc42:   mov    0x10(%r11),%eax          ; load the field 'defaultValue' into eax
+  ...
+  0x00007ffa1ad7dc46:   mov    %eax,%r8d                ; copy the value of eax to r8d (i.e., 'defaultValue')
+  0x00007ffa1ad7dc49:   shl    %r8d                     ; perform a left shift on the value in r8d by 1
+  <--- coarsened section --->
+  0x00007ffa1ad7dc4c:   cmp    $0x21,%r8d               ; compare r8d against value '1 << 5 + 1'
+  0x00007ffa1ad7dc50:   jl     0x00007ffa1ad7deed       ; jump if r8d is less
+  ...
+  0x00007ffa1ad7dc90:   mov    0x14(%r11),%r10d         ; get field 'incrementValue'
+  0x00007ffa1ad7dc94:   mov    %r8d,%eax                ; eax = 'defaultValue'
+  0x00007ffa1ad7dc97:   add    %r10d,%eax               ; eax = eax + r10d
+  ...
+  0x00007ffa1ad7dca0:   cmp    $0x21,%eax               ; compare eax against value '1 << 5 + 1'
+  0x00007ffa1ad7dca3:   jl     0x00007ffa1ad7dec7       ; jump if eax is less
+  0x00007ffa1ad7dca9:   add    %r10d,%eax               ; eax = eax + r10d
+  <--- similar pattern for other additions (e.g., cmp, jl, add) --->
+  ; eax stores the result
+  ...
+  <--- end of coarsened section --->
+```
+
+#### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JIT Compiler in this benchmark.
+
 ### Conclusions
 
 ## LockElisionBenchmark
