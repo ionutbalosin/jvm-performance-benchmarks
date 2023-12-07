@@ -1,7 +1,7 @@
 # JMH version: 1.37
 # VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
 # VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
-# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
 # Measurement: 5 iterations, 10 s each
@@ -12,259 +12,228 @@
 
 # Run progress: 0.00% complete, ETA 00:03:20
 # Fork: 1 of 1
-# Preparing profilers: LinuxPerfAsmProfiler
+# Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 143.125 ns/op
-# Warmup Iteration   2: 167.320 ns/op
-# Warmup Iteration   3: 111.327 ns/op
-# Warmup Iteration   4: 105.411 ns/op
-# Warmup Iteration   5: 105.418 ns/op
-Iteration   1: 105.477 ns/op
-Iteration   2: 105.305 ns/op
-Iteration   3: 106.063 ns/op
-Iteration   4: 104.906 ns/op
-Iteration   5: 106.885 ns/op
-# Processing profiler results: LinuxPerfAsmProfiler
+# Warmup Iteration   1: 119.813 ns/op
+# Warmup Iteration   2: 115.414 ns/op
+# Warmup Iteration   3: 113.308 ns/op
+# Warmup Iteration   4: 113.938 ns/op
+# Warmup Iteration   5: 113.053 ns/op
+Iteration   1: 113.363 ns/op
+Iteration   2: 128.320 ns/op
+Iteration   3: 138.667 ns/op
+Iteration   4: 115.700 ns/op
+Iteration   5: 117.902 ns/op
+# Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values":
-  105.727 ±(99.9%) 2.963 ns/op [Average]
-  (min, avg, max) = (104.906, 105.727, 106.885), stdev = 0.770
-  CI (99.9%): [102.764, 108.690] (assumes normal distribution)
+  122.790 ±(99.9%) 40.646 ns/op [Average]
+  (min, avg, max) = (113.363, 122.790, 138.667), stdev = 10.556
+  CI (99.9%): [82.145, 163.436] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values:asm":
-PrintAssembly processed: 225903 total address lines.
-Perf output processed (skipped 81.811 seconds):
- Column 1: cycles (49803 events)
+PrintAssembly processed: 220850 total address lines.
+Perf output processed (skipped 81.687 seconds):
+ Column 1: cycles (50923 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 1066
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values, version 2, compile id 1032 
 
-                      0x00007f76aadb2b59:   mov    %rax,%rbp
-                      0x00007f76aadb2b5c:   mov    %edi,%r13d
-                      0x00007f76aadb2b5f:   nop
-                      0x00007f76aadb2b60:   call   0x00007f76aa912e80           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-                      0x00007f76aadb2b65:   nop
-                      0x00007f76aadb2b66:   test   %eax,%eax
-          ╭           0x00007f76aadb2b68:   jne    0x00007f76aadb2cc5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@28 (line 147)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.00%  │           0x00007f76aadb2b6e:   mov    %r14d,%r10d
-          │           0x00007f76aadb2b71:   shl    $0x3,%r10                    ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@1 (line 73)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.97%  │           0x00007f76aadb2b75:   mov    %r10,0x8(%rsp)               ; ImmutableOopMap {rbp=Oop r10=Oop r11=Oop r14=NarrowOop [8]=Oop [16]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
-          │                                                                     ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          │                                                                     ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@28 (line 147)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.01%  │           0x00007f76aadb2b7a:   mov    0xc(,%r13,8),%r13d           ; implicit exception: dispatches to 0x00007f76aadb3267
-   0.00%  │           0x00007f76aadb2b82:   test   %r13d,%r13d
-          │           0x00007f76aadb2b85:   je     0x00007f76aadb2d20           ;* unwind (locked if synchronized)
-          │                                                                     ; - java.lang.String::equals@-3
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 147)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          │                                                                     ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-          │           0x00007f76aadb2b8b:   mov    $0x1,%r10d
-   0.92%  │           0x00007f76aadb2b91:   data16 data16 nopw 0x0(%rax,%rax,1)
-   0.01%  │           0x00007f76aadb2b9c:   data16 data16 xchg %ax,%ax
-  19.02%  │    ↗↗↗    0x00007f76aadb2ba0:   cmp    $0x29,%r10d
-          │    │││    0x00007f76aadb2ba4:   jae    0x00007f76aadb314e           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@11 (line 146)
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.03%  │    │││    0x00007f76aadb2baa:   mov    0x10(%r11,%r10,4),%eax       ; ImmutableOopMap {rax=NarrowOop rbp=Oop r11=Oop r14=NarrowOop [8]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
-          │    │││                                                              ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-          │    │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@9 (line 146)
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.93%  │    │││    0x00007f76aadb2baf:   mov    0x18(,%rax,8),%esi           ; implicit exception: dispatches to 0x00007f76aadb328d
-          │    │││                                                              ; ImmutableOopMap {rax=NarrowOop rbp=Oop rsi=NarrowOop r11=Oop r14=NarrowOop [8]=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
-          │    │││                                                              ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-          │    │││                                                              ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@9 (line 146)
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          │    │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.07%  │    │││    0x00007f76aadb2bb6:   movsbl 0x10(,%rsi,8),%edx           ; implicit exception: dispatches to 0x00007f76aadb32b0
-  19.20%  │    │││    0x00007f76aadb2bbe:   mov    0x14(,%rsi,8),%ecx
-   0.03%  │    │││    0x00007f76aadb2bc5:   cmp    %r14d,%esi
-          │╭   │││    0x00007f76aadb2bc8:   je     0x00007f76aadb2cbf           ;* unwind (locked if synchronized)
-          ││   │││                                                              ; - java.lang.String::equals@-3
-          ││   │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 147)
-          ││   │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││   │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.88%  ││   │││    0x00007f76aadb2bce:   mov    %r10d,%r9d
-   0.01%  ││   │││    0x00007f76aadb2bd1:   inc    %r9d                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          ││   │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@34 (line 146)
-          ││   │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││   │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-  17.73%  ││   │││    0x00007f76aadb2bd4:   cmp    %bl,%dl
-          ││╭  │││    0x00007f76aadb2bd6:   jne    0x00007f76aadb2c3a
-   0.06%  │││  │││    0x00007f76aadb2bdc:   nopl   0x0(%rax)
-   0.94%  │││  │││    0x00007f76aadb2be0:   test   %ecx,%ecx
-          │││  │││    0x00007f76aadb2be2:   je     0x00007f76aadb2df1
-   0.05%  │││  │││    0x00007f76aadb2be8:   cmp    0xc(,%rcx,8),%r13d
-   0.00%  │││╭ │││    0x00007f76aadb2bf0:   jne    0x00007f76aadb2c45
-   0.04%  ││││ │││    0x00007f76aadb2bf6:   mov    %eax,0x4(%rsp)
-   0.92%  ││││ │││    0x00007f76aadb2bfa:   shl    $0x3,%rcx
-   0.00%  ││││ │││    0x00007f76aadb2bfe:   mov    %rbp,%rsi
-          ││││ │││    0x00007f76aadb2c01:   mov    $0x10,%rdx
-   0.01%  ││││ │││    0x00007f76aadb2c08:   mov    $0x10,%r8                    ;* unwind (locked if synchronized)
-          ││││ │││                                                              ; - java.lang.String::equals@-3
-          ││││ │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 147)
-          ││││ │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││││ │││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.98%  ││││ │││    0x00007f76aadb2c0f:   mov    %r9d,%r11d
-   0.00%  ││││ │││    0x00007f76aadb2c12:   mov    %r13d,%r9d
-          ││││ │││    0x00007f76aadb2c15:   call   0x00007f76aa912e80           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-   0.00%  ││││ │││    0x00007f76aadb2c1a:   nop
-   0.01%  ││││ │││    0x00007f76aadb2c1b:   nopl   0x0(%rax,%rax,1)
-   0.98%  ││││ │││    0x00007f76aadb2c20:   test   %eax,%eax
-          ││││╭│││    0x00007f76aadb2c22:   jne    0x00007f76aadb2c4d           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││││││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@28 (line 147)
-          ││││││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││││││││                                                              ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.00%  ││││││││    0x00007f76aadb2c28:   mov    %r11d,%r10d
-   0.01%  ││││││││    0x00007f76aadb2c2b:   movabs $0x62a930fe0,%r11            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;[41] {0x000000062a930fe0})}
-   0.01%  │││││╰││    0x00007f76aadb2c35:   jmp    0x00007f76aadb2ba0
-          ││↘││ ││    0x00007f76aadb2c3a:   mov    %r9d,%r10d
-          ││ ││ ││    0x00007f76aadb2c3d:   data16 xchg %ax,%ax
-          ││ ││ ╰│    0x00007f76aadb2c40:   jmp    0x00007f76aadb2ba0
-  18.60%  ││ ↘│  │    0x00007f76aadb2c45:   mov    %r9d,%r10d
-   0.06%  ││  │  ╰    0x00007f76aadb2c48:   jmp    0x00007f76aadb2ba0
-          ││  ↘   ↗   0x00007f76aadb2c4d:   mov    0x4(%rsp),%eax
-   0.01%  ││      │   0x00007f76aadb2c51:   shl    $0x3,%rax                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@16 (line 146)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-          ││      │   0x00007f76aadb2c55:   mov    0x30(%rsp),%rsi              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@31 (line 148)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││      │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.98%  ││      │↗  0x00007f76aadb2c5a:   mov    0x40(%rsp),%r10
-          ││      ││  0x00007f76aadb2c5f:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@26 (line 237)
-          ││      ││  0x00007f76aadb2c62:   cmpb   $0x0,0x94(%rsi)
-   0.00%  ││      ││  0x00007f76aadb2c69:   jne    0x00007f76aadb2da5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@33 (line 238)
-   0.95%  ││      ││  0x00007f76aadb2c6f:   mov    0x458(%r15),%r11             ; ImmutableOopMap {rsi=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
-          ││      ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@33 (line 238)
-          ││      ││  0x00007f76aadb2c76:   test   %eax,(%r11)                  ;   {poll}
-   0.01%  ││      ││  0x00007f76aadb2c79:   mov    %r10,0x40(%rsp)
-          ││      ││  0x00007f76aadb2c7e:   movabs $0x62a930fe0,%r11            ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@13 (line 236)
-          ││      ││                                                            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;[41] {0x000000062a930fe0})}
-   0.87%  ││      ││  0x00007f76aadb2c88:   mov    0x20(%rsp),%rbx
-          ││      ││  0x00007f76aadb2c8d:   mov    0x10(%r11),%esi              ; ImmutableOopMap {rbx=Oop rsi=NarrowOop r11=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
-          ││      ││                                                            ;*aload {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@13 (line 236)
-          ││      ││  0x00007f76aadb2c91:   mov    0x18(,%rsi,8),%ecx           ; implicit exception: dispatches to 0x00007f76aadb32d3
-          ││      ││                                                            ; ImmutableOopMap {rcx=NarrowOop rbx=Oop rsi=NarrowOop r11=Oop [24]=Oop [32]=Oop [40]=Oop [48]=Oop }
-          ││      ││                                                            ;*aload {reexecute=1 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@13 (line 236)
-   0.00%  ││      ││  0x00007f76aadb2c98:   movsbl 0x10(,%rcx,8),%r8d           ; implicit exception: dispatches to 0x00007f76aadb32f6
-   0.92%  ││      ││  0x00007f76aadb2ca1:   mov    0x14(,%rcx,8),%r9d           ;* unwind (locked if synchronized)
-          ││      ││                                                            ; - java.lang.String::equals@-3
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 147)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-          ││      ││  0x00007f76aadb2ca9:   mov    0x14(%rbx),%r14d             ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@1 (line 73)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-          ││      ││  0x00007f76aadb2cad:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@16 (line 146)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-          ││      ││  0x00007f76aadb2cb1:   cmp    %ecx,%r14d
-          ││      ││  0x00007f76aadb2cb4:   jne    0x00007f76aadb2ae0
-          ││      ││  0x00007f76aadb2cba:   jmp    0x00007f76aadb2ce0           ;* unwind (locked if synchronized)
-          ││      ││                                                            ; - java.lang.String::equals@-3
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 147)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-          ││      ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-   0.00%  │↘      ││  0x00007f76aadb2cbf:   mov    %eax,0x4(%rsp)
-   0.89%  │       ╰│  0x00007f76aadb2cc3:   jmp    0x00007f76aadb2c4d
-          ↘        │  0x00007f76aadb2cc5:   mov    0x10(%rsp),%rax
-                   │  0x00007f76aadb2cca:   mov    0x30(%rsp),%rsi
-                   ╰  0x00007f76aadb2ccf:   jmp    0x00007f76aadb2c5a           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@31 (line 148)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 73)
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub@17 (line 236)
-                      0x00007f76aadb2cd1:   data16 data16 nopw 0x0(%rax,%rax,1)
-                      0x00007f76aadb2cdc:   data16 data16 xchg %ax,%ax          ;* unwind (locked if synchronized)
-                                                                                ; - java.lang.String::equals@-3
-                                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 147)
+                     # {method} {0x00007fa323479c28} &apos;cached_enum_values&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark&apos;
+                     #           [sp+0x30]  (sp of caller)
+                     0x00007fa3aada22c0:   mov    0x8(%rsi),%r10d
+                     0x00007fa3aada22c4:   movabs $0x7fa327000000,%r12
+                     0x00007fa3aada22ce:   add    %r12,%r10
+                     0x00007fa3aada22d1:   xor    %r12,%r12
+                     0x00007fa3aada22d4:   cmp    %r10,%rax
+                     0x00007fa3aada22d7:   jne    0x00007fa3aa6f9080           ;   {runtime_call ic_miss_stub}
+                     0x00007fa3aada22dd:   data16 xchg %ax,%ax
+                   [Verified Entry Point]
+   0.02%             0x00007fa3aada22e0:   mov    %eax,-0x14000(%rsp)
+   0.84%             0x00007fa3aada22e7:   sub    $0x28,%rsp
+   0.02%             0x00007fa3aada22eb:   nop
+   0.00%             0x00007fa3aada22ec:   cmpl   $0x1,0x20(%r15)
+   0.02%             0x00007fa3aada22f4:   jne    0x00007fa3aada27ed
+   0.80%             0x00007fa3aada22fa:   mov    %rbp,0x20(%rsp)
+   0.01%             0x00007fa3aada22ff:   mov    0x14(%rsi),%r11d
+   0.00%             0x00007fa3aada2303:   movabs $0x7fed3af88,%rbx            ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;[41] {0x00000007fed3af88})}
+   0.02%             0x00007fa3aada230d:   test   %r11d,%r11d
+                     0x00007fa3aada2310:   je     0x00007fa3aada24f3           ;* unwind (locked if synchronized)
+                                                                               ; - java.lang.String::equals@-3
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 150)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.77%             0x00007fa3aada2316:   mov    0x14(,%r11,8),%edx           ; ImmutableOopMap {rdx=NarrowOop rbx=Oop rsi=Oop r11=NarrowOop }
+                                                                               ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@0 (line 75)
+   0.06%             0x00007fa3aada231e:   mov    0xc(,%rdx,8),%ebp            ; implicit exception: dispatches to 0x00007fa3aada2811
+   0.23%             0x00007fa3aada2325:   movsbl 0x10(,%r11,8),%r13d          ;* unwind (locked if synchronized)
+                                                                               ; - java.lang.String::equals@-3
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 150)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.01%             0x00007fa3aada232e:   mov    %r11d,%r14d
+   0.89%             0x00007fa3aada2331:   shl    $0x3,%r14                    ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@1 (line 75)
+   0.00%             0x00007fa3aada2335:   mov    %r14,0x10(%rsp)
+   0.05%             0x00007fa3aada233a:   nopw   0x0(%rax,%rax,1)
+   0.00%             0x00007fa3aada2340:   test   %ebp,%ebp
+          ╭          0x00007fa3aada2342:   je     0x00007fa3aada2437
+   0.74%  │          0x00007fa3aada2348:   shl    $0x3,%rdx                    ;* unwind (locked if synchronized)
+          │                                                                    ; - java.lang.String::equals@-3
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 150)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+          │          0x00007fa3aada234c:   mov    %rdx,0x8(%rsp)
+   0.05%  │          0x00007fa3aada2351:   mov    $0x0,%r10d
+          │          0x00007fa3aada2357:   nopw   0x0(%rax,%rax,1)
+  18.76%  │    ↗↗↗   0x00007fa3aada2360:   cmp    $0x29,%r10d
+          │    │││   0x00007fa3aada2364:   jae    0x00007fa3aada24ac           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@11 (line 149)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.06%  │    │││   0x00007fa3aada236a:   mov    0x10(%rbx,%r10,4),%edi       ; ImmutableOopMap {rdx=Oop rbx=Oop rdi=NarrowOop r11=NarrowOop [8]=Oop [16]=Oop }
+          │    │││                                                             ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
+          │    │││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@9 (line 149)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.04%  │    │││   0x00007fa3aada236f:   mov    0x18(,%rdi,8),%esi           ; implicit exception: dispatches to 0x00007fa3aada2834
+          │    │││                                                             ; ImmutableOopMap {rdx=Oop rbx=Oop rsi=NarrowOop rdi=NarrowOop r11=NarrowOop [8]=Oop [16]=Oop }
+          │    │││                                                             ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
+          │    │││                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@9 (line 149)
+          │    │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.27%  │    │││   0x00007fa3aada2376:   movsbl 0x10(,%rsi,8),%ecx           ; implicit exception: dispatches to 0x00007fa3aada2857
+  19.36%  │    │││   0x00007fa3aada237e:   mov    0x14(,%rsi,8),%r8d
+   0.10%  │    │││   0x00007fa3aada2386:   cmp    %r11d,%esi
+          │╭   │││   0x00007fa3aada2389:   je     0x00007fa3aada2431           ;* unwind (locked if synchronized)
+          ││   │││                                                             ; - java.lang.String::equals@-3
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 150)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.01%  ││   │││   0x00007fa3aada238f:   mov    %r10d,%eax
+   0.00%  ││   │││   0x00007fa3aada2392:   inc    %eax                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@34 (line 149)
+          ││   │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+  17.62%  ││   │││   0x00007fa3aada2394:   cmp    %r13b,%cl
+          ││╭  │││   0x00007fa3aada2397:   jne    0x00007fa3aada23f5
+   0.28%  │││  │││   0x00007fa3aada239d:   data16 xchg %ax,%ax
+   0.02%  │││  │││   0x00007fa3aada23a0:   test   %r8d,%r8d
+          │││  │││   0x00007fa3aada23a3:   je     0x00007fa3aada24d4
+   0.20%  │││  │││   0x00007fa3aada23a9:   cmp    0xc(,%r8,8),%ebp
+          │││╭ │││   0x00007fa3aada23b1:   jne    0x00007fa3aada23fd
+   0.85%  ││││ │││   0x00007fa3aada23b7:   mov    %edi,0x4(%rsp)
+          ││││ │││   0x00007fa3aada23bb:   shl    $0x3,%r8
+   0.00%  ││││ │││   0x00007fa3aada23bf:   mov    %rdx,%rsi
+   0.83%  ││││ │││   0x00007fa3aada23c2:   mov    $0x10,%rdx
+   0.03%  ││││ │││   0x00007fa3aada23c9:   mov    %r8,%rcx
+   0.00%  ││││ │││   0x00007fa3aada23cc:   mov    $0x10,%r8
+          ││││ │││   0x00007fa3aada23d3:   mov    %ebp,%r9d                    ;* unwind (locked if synchronized)
+          ││││ │││                                                             ; - java.lang.String::equals@-3
+          ││││ │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 150)
+          ││││ │││                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.86%  ││││ │││   0x00007fa3aada23d6:   mov    %eax,%r14d
+   0.03%  ││││ │││   0x00007fa3aada23d9:   call   0x00007fa3aa912000           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
+   0.07%  ││││ │││   0x00007fa3aada23de:   nop
+          ││││ │││   0x00007fa3aada23df:   nop
+          ││││ │││   0x00007fa3aada23e0:   test   %eax,%eax
+          ││││╭│││   0x00007fa3aada23e2:   jne    0x00007fa3aada2405
+   0.84%  ││││││││   0x00007fa3aada23e8:   mov    %r14d,%r10d
+   0.05%  ││││││││   0x00007fa3aada23eb:   mov    0x8(%rsp),%rdx
+   0.04%  │││││╰││   0x00007fa3aada23f0:   jmp    0x00007fa3aada2360
+          ││↘││ ││   0x00007fa3aada23f5:   mov    %eax,%r10d
+          ││ ││ ╰│   0x00007fa3aada23f8:   jmp    0x00007fa3aada2360
+  18.73%  ││ ↘│  │   0x00007fa3aada23fd:   mov    %eax,%r10d
+   0.09%  ││  │  ╰   0x00007fa3aada2400:   jmp    0x00007fa3aada2360
+   0.86%  ││  ↘   ↗  0x00007fa3aada2405:   mov    0x4(%rsp),%edi               ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@28 (line 150)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+          ││      │  0x00007fa3aada2409:   shl    $0x3,%rdi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@16 (line 149)
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+   0.01%  ││      │  0x00007fa3aada240d:   mov    %rdi,%rax                    ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+          ││      │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@7 (line 75)
+          ││      │  0x00007fa3aada2410:   mov    0x20(%rsp),%rbp
+   0.93%  ││      │  0x00007fa3aada2415:   add    $0x28,%rsp
+          ││      │  0x00007fa3aada2419:   nopl   0x0(%rax)
+   0.00%  ││      │  0x00007fa3aada2420:   cmp    0x450(%r15),%rsp             ;   {poll_return}
+          ││      │  0x00007fa3aada2427:   ja     0x00007fa3aada27fd
+   0.00%  ││      │  0x00007fa3aada242d:   vzeroupper 
+   0.82%  ││      │  0x00007fa3aada2430:   ret    
+   0.00%  │↘      │  0x00007fa3aada2431:   mov    %edi,0x4(%rsp)
+   0.00%  │       ╰  0x00007fa3aada2435:   jmp    0x00007fa3aada2405           ;* unwind (locked if synchronized)
+          │                                                                    ; - java.lang.String::equals@-3
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@25 (line 150)
+          │                                                                    ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+          ↘          0x00007fa3aada2437:   mov    $0x0,%r10d
+                     0x00007fa3aada243d:   data16 xchg %ax,%ax
+                     0x00007fa3aada2440:   cmp    $0x29,%r10d
+                     0x00007fa3aada2444:   jae    0x00007fa3aada24ac           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromCachedValues@11 (line 149)
+                                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values@4 (line 75)
+                     0x00007fa3aada244a:   mov    0x10(%rbx,%r10,4),%r8d       ; ImmutableOopMap {rbx=Oop r8=NarrowOop r11=NarrowOop [16]=Oop }
 ....................................................................................................
-  87.13%  <total for region 1>
+  86.31%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  87.13%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 1066
-   2.98%                        <unknown>
-   2.77%                        <unknown>
-   2.03%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 1066
-   1.87%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 1066
-   1.02%                        <unknown>
-   0.19%                kernel  [unknown]
-   0.12%                kernel  [unknown]
-   0.10%                kernel  [unknown]
-   0.09%                kernel  [unknown]
-   0.07%                kernel  [unknown]
-   0.06%                kernel  [unknown]
-   0.04%                kernel  [unknown]
-   0.04%             libjvm.so  fileStream::write
-   0.03%                kernel  [unknown]
-   0.03%                kernel  [unknown]
-   0.02%             libjvm.so  CompilerOracle::has_option_value<bool>
-   0.02%             libjvm.so  ElfSymbolTable::lookup
-   0.02%                kernel  [unknown]
-   0.02%                kernel  [unknown]
-   1.37%  <...other 516 warm regions...>
+  86.31%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values, version 2, compile id 1032 
+   6.09%                        <unknown> 
+   3.55%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 5, compile id 1051 
+   0.39%                kernel  [unknown] 
+   0.38%                kernel  [unknown] 
+   0.17%                kernel  [unknown] 
+   0.16%                kernel  [unknown] 
+   0.16%                kernel  [unknown] 
+   0.13%                kernel  [unknown] 
+   0.12%                kernel  [unknown] 
+   0.10%                kernel  [unknown] 
+   0.09%                kernel  [unknown] 
+   0.08%                kernel  [unknown] 
+   0.08%                kernel  [unknown] 
+   0.07%                kernel  [unknown] 
+   0.07%                kernel  [unknown] 
+   0.05%                kernel  [unknown] 
+   0.05%                kernel  [unknown] 
+   0.05%                kernel  [unknown] 
+   0.04%                kernel  [unknown] 
+   1.86%  <...other 368 warm regions...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  91.03%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 6, compile id 1066
-   6.81%                        <unknown>
-   1.60%                kernel  [unknown]
-   0.04%             libjvm.so  fileStream::write
-   0.02%             libjvm.so  ElfSymbolTable::lookup
-   0.02%             libc.so.6  __vfprintf_internal
-   0.02%             libjvm.so  CompilerOracle::has_option_value<bool>
-   0.02%             libjvm.so  xmlStream::write_text
-   0.02%        hsdis-amd64.so  print_insn
-   0.01%             libjvm.so  defaultStream::write
-   0.01%             libc.so.6  __memmove_avx_unaligned_erms
-   0.01%             libc.so.6  __GI___libc_write
-   0.01%             libjvm.so  outputStream::do_vsnprintf_and_write_with_automatic_buffer
-   0.01%             libjvm.so  VMError::is_error_reported
-   0.01%   libjvmcicompiler.so  com.oracle.svm.core.util.Utf8::utf8ToString
-   0.01%             libc.so.6  _IO_file_xsputn@@GLIBC_2.2.5
-   0.01%             libjvm.so  readConfiguration0
-   0.01%   libjvmcicompiler.so  org.graalvm.compiler.hotspot.HotSpotForeignCallLinkageImpl::createCallingConvention
-   0.01%             libjvm.so  defaultStream::hold
-   0.01%             libc.so.6  __strcmp_avx2
-   0.34%  <...other 141 warm methods...>
+  86.31%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::cached_enum_values, version 2, compile id 1032 
+   6.30%                        <unknown> 
+   3.55%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_cached_enum_values_jmhTest::cached_enum_values_avgt_jmhStub, version 5, compile id 1051 
+   3.29%                kernel  [unknown] 
+   0.04%             libjvm.so  fileStream::write 
+   0.03%             libjvm.so  ElfSymbolTable::lookup 
+   0.03%             libjvm.so  CompilerOracle::has_option_value<bool> 
+   0.03%             libc.so.6  __vfprintf_internal 
+   0.03%             libjvm.so  xmlTextStream::flush 
+   0.02%  ld-linux-x86-64.so.2  __tls_get_addr 
+   0.02%             libjvm.so  defaultStream::hold 
+   0.02%        hsdis-amd64.so  print_insn 
+   0.02%             libc.so.6  __strchr_avx2 
+   0.01%             libc.so.6  __GI___libc_write 
+   0.01%             libjvm.so  HighResTimeSampler::take_sample 
+   0.01%             libc.so.6  _IO_setb 
+   0.01%             libjvm.so  outputStream::do_vsnprintf_and_write_with_automatic_buffer 
+   0.01%             libc.so.6  __GI___pthread_mutex_unlock_usercnt 
+   0.01%             libc.so.6  __mempcpy_avx_unaligned_erms 
+   0.01%             libc.so.6  _IO_fwrite 
+   0.24%  <...other 90 warm methods...>
 ....................................................................................................
  100.00%  <totals>
 
 ....[Distribution by Source]........................................................................
-  91.03%        jvmci, level 4
-   6.81%
-   1.60%                kernel
-   0.24%             libjvm.so
-   0.13%   libjvmcicompiler.so
-   0.11%             libc.so.6
-   0.03%           interpreter
-   0.02%        hsdis-amd64.so
-   0.01%  ld-linux-x86-64.so.2
-   0.00%           c1, level 1
-   0.00%           c1, level 3
-   0.00%                [vdso]
-   0.00%        libz.so.1.2.11
+  89.86%        jvmci, level 4
+   6.30%                      
+   3.29%                kernel
+   0.30%             libjvm.so
+   0.15%             libc.so.6
+   0.03%        hsdis-amd64.so
+   0.03%  ld-linux-x86-64.so.2
+   0.02%           interpreter
+   0.01%           c1, level 3
+   0.00%      Unknown, level 0
+   0.00%         perf-9615.map
 ....................................................................................................
  100.00%  <totals>
 
@@ -273,7 +242,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.En
 # JMH version: 1.37
 # VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
 # VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
-# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
 # Measurement: 5 iterations, 10 s each
@@ -284,307 +253,346 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.En
 
 # Run progress: 50.00% complete, ETA 00:02:20
 # Fork: 1 of 1
-# Preparing profilers: LinuxPerfAsmProfiler
+# Preparing profilers: LinuxPerfAsmProfiler 
 # Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 240.187 ns/op
-# Warmup Iteration   2: 242.388 ns/op
-# Warmup Iteration   3: 149.052 ns/op
-# Warmup Iteration   4: 147.707 ns/op
-# Warmup Iteration   5: 149.201 ns/op
-Iteration   1: 147.565 ns/op
-Iteration   2: 147.819 ns/op
-Iteration   3: 148.102 ns/op
-Iteration   4: 148.203 ns/op
-Iteration   5: 149.546 ns/op
-# Processing profiler results: LinuxPerfAsmProfiler
+# Warmup Iteration   1: 208.223 ns/op
+# Warmup Iteration   2: 210.302 ns/op
+# Warmup Iteration   3: 200.426 ns/op
+# Warmup Iteration   4: 195.126 ns/op
+# Warmup Iteration   5: 189.079 ns/op
+Iteration   1: 188.900 ns/op
+Iteration   2: 191.933 ns/op
+Iteration   3: 190.612 ns/op
+Iteration   4: 187.075 ns/op
+Iteration   5: 189.524 ns/op
+# Processing profiler results: LinuxPerfAsmProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values":
-  148.247 ±(99.9%) 2.957 ns/op [Average]
-  (min, avg, max) = (147.565, 148.247, 149.546), stdev = 0.768
-  CI (99.9%): [145.290, 151.205] (assumes normal distribution)
+  189.609 ±(99.9%) 7.032 ns/op [Average]
+  (min, avg, max) = (187.075, 189.609, 191.933), stdev = 1.826
+  CI (99.9%): [182.577, 196.641] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values:asm":
-PrintAssembly processed: 222813 total address lines.
-Perf output processed (skipped 79.812 seconds):
- Column 1: cycles (50833 events)
+PrintAssembly processed: 227363 total address lines.
+Perf output processed (skipped 83.764 seconds):
+ Column 1: cycles (51374 events)
 
 Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 5, compile id 1071
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values, version 2, compile id 1044 
 
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-                   0x00007feaaedaa04f:   mov    %r13d,%r9d
-                   0x00007feaaedaa052:   call   0x00007feaae910500           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-                   0x00007feaaedaa057:   nop
-                   0x00007feaaedaa058:   test   %eax,%eax
-                   0x00007feaaedaa05a:   jne    0x00007feaaedaa335           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@28 (line 138)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.65%           0x00007feaaedaa060:   mov    0x1c(%rsp),%r10d
-                   0x00007feaaedaa065:   mov    %r10d,%edi
-   0.04%           0x00007feaaedaa068:   shl    $0x3,%rdi                    ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@1 (line 78)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.63%           0x00007feaaedaa06c:   mov    %rdi,0x10(%rsp)              ; ImmutableOopMap {rdi=Oop r10=NarrowOop r11=Oop [16]=Oop [28]=NarrowOop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop }
-                                                                             ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-                                                                             ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@28 (line 138)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.03%           0x00007feaaedaa071:   mov    0xc(,%rbx,8),%ebx            ; implicit exception: dispatches to 0x00007feaaedaa8bc
-                   0x00007feaaedaa078:   mov    0x1b8(%r15),%rsi
-   0.03%           0x00007feaaedaa07f:   lea    0xb8(%rsi),%rdx
-   0.58%           0x00007feaaedaa086:   cmp    0x1c8(%r15),%rdx
-                   0x00007feaaedaa08d:   ja     0x00007feaaedaa3c0
-   0.02%           0x00007feaaedaa093:   mov    %rdx,0x1b8(%r15)
-   0.00%           0x00007feaaedaa09a:   prefetchw 0x178(%rsi)
-   0.04%           0x00007feaaedaa0a1:   prefetchw 0x1b8(%rsi)
-   0.67%           0x00007feaaedaa0a8:   prefetchw 0x1f8(%rsi)
-   0.26%           0x00007feaaedaa0af:   prefetchw 0x238(%rsi)               ;*getstatic $VALUES {reexecute=0 rethrow=0 return_oop=0}
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::values@0 (line 81)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@0 (line 137)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.18%           0x00007feaaedaa0b6:   movq   $0x1,(%rsi)
-   0.04%           0x00007feaaedaa0bd:   movl   $0x102a4b8,0x8(%rsi)         ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;[])}
-   0.55%           0x00007feaaedaa0c4:   movl   $0x29,0xc(%rsi)
-   0.04%           0x00007feaaedaa0cb:   movl   $0xc1880157,0x10(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400ab8})}
-   0.02%           0x00007feaaedaa0d2:   movl   $0xc1880776,0x14(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403bb0})}
-   0.04%           0x00007feaaedaa0d9:   movl   $0xc1880772,0x18(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403b90})}
-   1.01%           0x00007feaaedaa0e0:   movl   $0xc188076e,0x1c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403b70})}
-   0.35%           0x00007feaaedaa0e7:   movl   $0xc188076a,0x20(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403b50})}
-   0.12%           0x00007feaaedaa0ee:   movl   $0xc1880766,0x24(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403b30})}
-   0.39%           0x00007feaaedaa0f5:   movl   $0xc1880762,0x28(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403b10})}
-   0.28%           0x00007feaaedaa0fc:   movl   $0xc188075e,0x2c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403af0})}
-   0.24%           0x00007feaaedaa103:   movl   $0xc188075a,0x30(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403ad0})}
-   0.06%           0x00007feaaedaa10a:   movl   $0xc1880756,0x34(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403ab0})}
-   0.97%           0x00007feaaedaa111:   movl   $0xc1880752,0x38(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403a90})}
-   0.10%           0x00007feaaedaa118:   movl   $0xc188074e,0x3c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403a70})}
-   0.09%           0x00007feaaedaa11f:   movl   $0xc188074a,0x40(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403a50})}
-   0.14%           0x00007feaaedaa126:   movl   $0xc1880746,0x44(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403a30})}
-   0.49%           0x00007feaaedaa12d:   movl   $0xc1880742,0x48(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403a10})}
-   0.22%           0x00007feaaedaa134:   movl   $0xc188073e,0x4c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c4039f0})}
-   0.20%           0x00007feaaedaa13b:   movl   $0xc188073a,0x50(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c4039d0})}
-   0.53%           0x00007feaaedaa142:   movl   $0xc1880736,0x54(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c4039b0})}
-   0.61%           0x00007feaaedaa149:   movl   $0xc1880732,0x58(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403990})}
-   0.60%           0x00007feaaedaa150:   movl   $0xc188072e,0x5c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403970})}
-   0.69%           0x00007feaaedaa157:   movl   $0xc188072a,0x60(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403950})}
-   0.61%           0x00007feaaedaa15e:   movl   $0xc1880726,0x64(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403930})}
-   0.58%           0x00007feaaedaa165:   movl   $0xc1880722,0x68(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403910})}
-   0.64%           0x00007feaaedaa16c:   movl   $0xc188071e,0x6c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c4038f0})}
-   0.67%           0x00007feaaedaa173:   movl   $0xc188071a,0x70(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c4038d0})}
-   0.66%           0x00007feaaedaa17a:   movl   $0xc1880716,0x74(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c4038b0})}
-   0.66%           0x00007feaaedaa181:   movl   $0xc1880712,0x78(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403890})}
-   0.69%           0x00007feaaedaa188:   movl   $0xc188070e,0x7c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c403870})}
-   0.64%           0x00007feaaedaa18f:   movl   $0xc18801fe,0x80(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400ff0})}
-   0.66%           0x00007feaaedaa199:   movl   $0xc18801fa,0x84(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400fd0})}
-   0.66%           0x00007feaaedaa1a3:   movl   $0xc18801f6,0x88(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400fb0})}
-   0.60%           0x00007feaaedaa1ad:   movl   $0xc18801f2,0x8c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400f90})}
-   0.71%           0x00007feaaedaa1b7:   movl   $0xc18801ee,0x90(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400f70})}
-   0.60%           0x00007feaaedaa1c1:   movl   $0xc18801ea,0x94(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400f50})}
-   0.66%           0x00007feaaedaa1cb:   movl   $0xc18801e6,0x98(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400f30})}
-   0.69%           0x00007feaaedaa1d5:   movl   $0xc18801e2,0x9c(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400f10})}
-   0.60%           0x00007feaaedaa1df:   movl   $0xc18801de,0xa0(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400ef0})}
-   0.67%           0x00007feaaedaa1e9:   movl   $0xc18801da,0xa4(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400ed0})}
-   0.60%           0x00007feaaedaa1f3:   movl   $0xc18801d6,0xa8(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400eb0})}
-   0.68%           0x00007feaaedaa1fd:   movl   $0xc18801d2,0xac(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400e90})}
-   0.72%           0x00007feaaedaa207:   movl   $0xc18801ce,0xb0(%rsi)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x000000060c400e70})}
-   0.66%           0x00007feaaedaa211:   test   %ebx,%ebx
-                   0x00007feaaedaa213:   je     0x00007feaaedaa354           ;* unwind (locked if synchronized)
-                                                                             ; - java.lang.String::equals@-3
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 138)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-                                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.00%           0x00007feaaedaa219:   mov    $0x1,%r8d
-                   0x00007feaaedaa21f:   nop
-  10.88%      ↗↗↗  0x00007feaaedaa220:   cmp    $0x29,%r8d
-              │││  0x00007feaaedaa224:   jae    0x00007feaaedaa7bb           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@11 (line 137)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.65%      │││  0x00007feaaedaa22a:   mov    0x10(%rsi,%r8,4),%edx        ; ImmutableOopMap {rdx=NarrowOop rsi=Oop r10=NarrowOop r11=Oop [16]=Oop [28]=NarrowOop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop }
-              │││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-              │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@9 (line 137)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.27%      │││  0x00007feaaedaa22f:   mov    0x18(,%rdx,8),%ecx           ; implicit exception: dispatches to 0x00007feaaedaa8df
-              │││                                                            ; ImmutableOopMap {rcx=NarrowOop rdx=NarrowOop rsi=Oop r10=NarrowOop r11=Oop [16]=Oop [28]=NarrowOop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop }
-              │││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
-              │││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@9 (line 137)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   2.52%      │││  0x00007feaaedaa236:   movsbl 0x10(,%rcx,8),%r9d           ; implicit exception: dispatches to 0x00007feaaedaa902
-  11.20%      │││  0x00007feaaedaa23f:   mov    0x14(,%rcx,8),%eax           ;* unwind (locked if synchronized)
-              │││                                                            ; - java.lang.String::equals@-3
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 138)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.70%      │││  0x00007feaaedaa246:   shl    $0x3,%rdx                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@16 (line 137)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-              │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.30%      │││  0x00007feaaedaa24a:   cmp    %r10d,%ecx
-          ╭   │││  0x00007feaaedaa24d:   je     0x00007feaaedaa2d5           ;* unwind (locked if synchronized)
-          │   │││                                                            ; - java.lang.String::equals@-3
-          │   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 138)
-          │   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-          │   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   2.40%  │   │││  0x00007feaaedaa253:   mov    %r8d,%ecx
-  10.44%  │   │││  0x00007feaaedaa256:   inc    %ecx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
-          │   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@34 (line 137)
-          │   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-          │   │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.68%  │   │││  0x00007feaaedaa258:   nopl   0x0(%rax,%rax,1)
-   0.27%  │   │││  0x00007feaaedaa260:   cmp    %bpl,%r9b
-          │╭  │││  0x00007feaaedaa263:   jne    0x00007feaaedaa2c5
-   3.21%  ││  │││  0x00007feaaedaa269:   test   %eax,%eax
-          ││  │││  0x00007feaaedaa26b:   je     0x00007feaaedaa77b
-  10.34%  ││  │││  0x00007feaaedaa271:   cmp    0xc(,%rax,8),%ebx
-          ││╭ │││  0x00007feaaedaa278:   jne    0x00007feaaedaa2cd
-   1.49%  │││ │││  0x00007feaaedaa27e:   mov    %rdx,0x8(%rsp)
-   0.01%  │││ │││  0x00007feaaedaa283:   shl    $0x3,%rax
-   0.01%  │││ │││  0x00007feaaedaa287:   mov    %rsi,%r9
-   0.30%  │││ │││  0x00007feaaedaa28a:   mov    %r11,%rsi
-   0.41%  │││ │││  0x00007feaaedaa28d:   mov    $0x10,%rdx
-   0.00%  │││ │││  0x00007feaaedaa294:   mov    %ecx,%r14d
-   0.00%  │││ │││  0x00007feaaedaa297:   mov    %rax,%rcx
-   0.23%  │││ │││  0x00007feaaedaa29a:   mov    $0x10,%r8                    ;* unwind (locked if synchronized)
-          │││ │││                                                            ; - java.lang.String::equals@-3
-          │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 138)
-          │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-          │││ │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.42%  │││ │││  0x00007feaaedaa2a1:   mov    %r9,%r13
-          │││ │││  0x00007feaaedaa2a4:   mov    %ebx,%r9d
-   0.00%  │││ │││  0x00007feaaedaa2a7:   call   0x00007feaae910500           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-   0.01%  │││ │││  0x00007feaaedaa2ac:   nop
-   0.28%  │││ │││  0x00007feaaedaa2ad:   test   %eax,%eax
-          │││╭│││  0x00007feaaedaa2af:   jne    0x00007feaaedaa32e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@28 (line 138)
-          │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-          │││││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.35%  │││││││  0x00007feaaedaa2b5:   mov    %r14d,%r8d
-   0.00%  │││││││  0x00007feaaedaa2b8:   mov    %r13,%rsi
-   0.01%  │││││││  0x00007feaaedaa2bb:   mov    0x1c(%rsp),%r10d
-   0.67%  ││││╰││  0x00007feaaedaa2c0:   jmp    0x00007feaaedaa220
-          │↘││ ││  0x00007feaaedaa2c5:   mov    %ecx,%r8d
-          │ ││ ╰│  0x00007feaaedaa2c8:   jmp    0x00007feaaedaa220
-   1.63%  │ ↘│  │  0x00007feaaedaa2cd:   mov    %ecx,%r8d
-   2.06%  │  │  ╰  0x00007feaaedaa2d0:   jmp    0x00007feaaedaa220           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
-          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@11 (line 137)
-          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-          │  │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.05%  ↘  │     0x00007feaaedaa2d5:   mov    0x40(%rsp),%rsi              ;* unwind (locked if synchronized)
-             │                                                               ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@20 (line 236)
-   0.64%     │     0x00007feaaedaa2da:   mov    0x48(%rsp),%r10
-   0.00%     │     0x00007feaaedaa2df:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@26 (line 237)
-   0.00%     │     0x00007feaaedaa2e2:   cmpb   $0x0,0x94(%rsi)
-   0.05%     │     0x00007feaaedaa2e9:   jne    0x00007feaaedaa3fb           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@33 (line 238)
-   0.63%     │     0x00007feaaedaa2ef:   mov    0x458(%r15),%r11             ; ImmutableOopMap {rsi=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop }
-             │                                                               ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-             │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@33 (line 238)
-             │     0x00007feaaedaa2f6:   test   %eax,(%r11)                  ;   {poll}
-   0.00%     │     0x00007feaaedaa2f9:   mov    %r10,0x48(%rsp)
-   0.03%     │     0x00007feaaedaa2fe:   mov    0x20(%rsp),%rbx              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@13 (line 236)
-   0.62%     │     0x00007feaaedaa303:   mov    0x30(%rsp),%r10
-             │     0x00007feaaedaa308:   mov    0x18(%rbx),%ebp              ; ImmutableOopMap {rbp=NarrowOop r10=Oop [32]=Oop [40]=Oop [48]=Oop [56]=Oop [64]=Oop }
-             │                                                               ;*aload {reexecute=1 rethrow=0 return_oop=0}
-             │                                                               ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@13 (line 236)
-   0.00%     │     0x00007feaaedaa30b:   movsbl 0x10(,%rbp,8),%r13d          ; implicit exception: dispatches to 0x00007feaaedaa925
-   0.06%     │     0x00007feaaedaa314:   mov    0x14(,%rbp,8),%r14d          ;* unwind (locked if synchronized)
-             │                                                               ; - java.lang.String::equals@-3
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 138)
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.60%     │     0x00007feaaedaa31c:   mov    0x14(%r10),%r11d             ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@1 (line 78)
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-   0.00%     │     0x00007feaaedaa320:   cmp    %ebp,%r11d
-             │     0x00007feaaedaa323:   jne    0x00007feaaeda9fe0
-             │     0x00007feaaedaa329:   jmp    0x00007feaaedaa340           ;* unwind (locked if synchronized)
-             │                                                               ; - java.lang.String::equals@-3
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 138)
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 78)
-             │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub@17 (line 236)
-             ↘     0x00007feaaedaa32e:   mov    0x8(%rsp),%rdx
-                   0x00007feaaedaa333:   jmp    0x00007feaaedaa2d5
+                         # {method} {0x00007f0f43479cf8} &apos;enum_values&apos; &apos;()Lcom/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car;&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark&apos;
+                         #           [sp+0x30]  (sp of caller)
+                         0x00007f0fcad9cfc0:   mov    0x8(%rsi),%r10d
+                         0x00007f0fcad9cfc4:   movabs $0x7f0f47000000,%r12
+                         0x00007f0fcad9cfce:   add    %r12,%r10
+                         0x00007f0fcad9cfd1:   xor    %r12,%r12
+                         0x00007f0fcad9cfd4:   cmp    %r10,%rax
+                         0x00007f0fcad9cfd7:   jne    0x00007f0fca6f9080           ;   {runtime_call ic_miss_stub}
+                         0x00007f0fcad9cfdd:   data16 xchg %ax,%ax
+                       [Verified Entry Point]
+   0.01%                 0x00007f0fcad9cfe0:   mov    %eax,-0x14000(%rsp)
+   0.59%                 0x00007f0fcad9cfe7:   sub    $0x28,%rsp
+   0.00%                 0x00007f0fcad9cfeb:   nop
+   0.01%                 0x00007f0fcad9cfec:   cmpl   $0x1,0x20(%r15)
+   0.54%                 0x00007f0fcad9cff4:   jne    0x00007f0fcad9d417
+   0.00%                 0x00007f0fcad9cffa:   mov    %rbp,0x20(%rsp)
+   0.01%                 0x00007f0fcad9cfff:   mov    %rsi,%r10
+   0.01%                 0x00007f0fcad9d002:   mov    0x14(%r10),%r11d             ; ImmutableOopMap {r10=Oop r11=NarrowOop }
+                                                                                   ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                                   ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@0 (line 81)
+   0.54%                 0x00007f0fcad9d006:   mov    0x14(,%r11,8),%r8d           ; implicit exception: dispatches to 0x00007f0fcad9d466
+   0.04%                 0x00007f0fcad9d00e:   movsbl 0x10(,%r11,8),%ebx           ; ImmutableOopMap {r8=NarrowOop r10=Oop r11=NarrowOop }
+                                                                                   ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                                   ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@0 (line 81)
+   0.00%                 0x00007f0fcad9d017:   mov    0xc(,%r8,8),%ebp             ; implicit exception: dispatches to 0x00007f0fcad9d48d
+   0.18%                 0x00007f0fcad9d01f:   mov    0x1b8(%r15),%rsi
+   0.44%                 0x00007f0fcad9d026:   lea    0xb8(%rsi),%rdx
+                         0x00007f0fcad9d02d:   cmp    0x1c8(%r15),%rdx
+          ╭              0x00007f0fcad9d034:   ja     0x00007f0fcad9d362
+          │              0x00007f0fcad9d03a:   mov    %rdx,0x1b8(%r15)
+   0.08%  │              0x00007f0fcad9d041:   prefetchw 0x178(%rsi)
+   0.45%  │              0x00007f0fcad9d048:   prefetchw 0x1b8(%rsi)
+   0.17%  │              0x00007f0fcad9d04f:   prefetchw 0x1f8(%rsi)
+   0.19%  │              0x00007f0fcad9d056:   prefetchw 0x238(%rsi)
+   0.29%  │              0x00007f0fcad9d05d:   movq   $0x1,(%rsi)
+   0.44%  │              0x00007f0fcad9d064:   movl   $0x102a6c0,0x8(%rsi)         ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;[])}
+   0.00%  │              0x00007f0fcad9d06b:   movl   $0x29,0xc(%rsi)              ;*getstatic $VALUES {reexecute=0 rethrow=0 return_oop=0}
+          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::values@0 (line 84)
+          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@0 (line 140)
+          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.01%  │              0x00007f0fcad9d072:   mov    %rsi,%r13
+   0.08%  │              0x00007f0fcad9d075:   movl   $0xffda732c,0x10(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39960})}
+   0.48%  │              0x00007f0fcad9d07d:   movl   $0xffda733c,0x14(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed399e0})}
+   0.01%  │              0x00007f0fcad9d085:   movl   $0xffda734e,0x18(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39a70})}
+   0.01%  │              0x00007f0fcad9d08d:   movl   $0xffda7360,0x1c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39b00})}
+   0.13%  │              0x00007f0fcad9d095:   movl   $0xffda7370,0x20(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39b80})}
+   0.43%  │              0x00007f0fcad9d09d:   movl   $0xffda7380,0x24(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39c00})}
+   0.10%  │              0x00007f0fcad9d0a5:   movl   $0xffda738a,0x28(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39c50})}
+   0.04%  │              0x00007f0fcad9d0ad:   movl   $0xffda739a,0x2c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39cd0})}
+   0.66%  │              0x00007f0fcad9d0b5:   movl   $0xffda73aa,0x30(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39d50})}
+   0.07%  │              0x00007f0fcad9d0bd:   movl   $0xffda73bc,0x34(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39de0})}
+   0.05%  │              0x00007f0fcad9d0c5:   movl   $0xffda73cc,0x38(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39e60})}
+   0.48%  │              0x00007f0fcad9d0cd:   movl   $0xffda73dc,0x3c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39ee0})}
+   0.34%  │              0x00007f0fcad9d0d5:   movl   $0xffda73ec,0x40(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39f60})}
+   0.54%  │              0x00007f0fcad9d0dd:   movl   $0xffda73fc,0x44(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed39fe0})}
+   0.47%  │              0x00007f0fcad9d0e5:   movl   $0xffda740c,0x48(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a060})}
+   0.54%  │              0x00007f0fcad9d0ed:   movl   $0xffda741c,0x4c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a0e0})}
+   0.53%  │              0x00007f0fcad9d0f5:   movl   $0xffda742c,0x50(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a160})}
+   0.55%  │              0x00007f0fcad9d0fd:   movl   $0xffda743c,0x54(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a1e0})}
+   0.53%  │              0x00007f0fcad9d105:   movl   $0xffda744c,0x58(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a260})}
+   0.50%  │              0x00007f0fcad9d10d:   movl   $0xffda745c,0x5c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a2e0})}
+   0.55%  │              0x00007f0fcad9d115:   movl   $0xffda746c,0x60(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a360})}
+   0.58%  │              0x00007f0fcad9d11d:   movl   $0xffda747c,0x64(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a3e0})}
+   0.52%  │              0x00007f0fcad9d125:   movl   $0xffda748e,0x68(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a470})}
+   0.54%  │              0x00007f0fcad9d12d:   movl   $0xffda74a0,0x6c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a500})}
+   0.62%  │              0x00007f0fcad9d135:   movl   $0xffda74b2,0x70(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a590})}
+   0.56%  │              0x00007f0fcad9d13d:   movl   $0xffda74c2,0x74(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a610})}
+   0.53%  │              0x00007f0fcad9d145:   movl   $0xffda74d2,0x78(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a690})}
+   0.61%  │              0x00007f0fcad9d14d:   movl   $0xffda74e2,0x7c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a710})}
+   0.54%  │              0x00007f0fcad9d155:   movl   $0xffda74f4,0x80(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a7a0})}
+   0.61%  │              0x00007f0fcad9d160:   movl   $0xffda7506,0x84(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a830})}
+   0.54%  │              0x00007f0fcad9d16b:   movl   $0xffda7516,0x88(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a8b0})}
+   0.53%  │              0x00007f0fcad9d176:   movl   $0xffda7526,0x8c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a930})}
+   0.55%  │              0x00007f0fcad9d181:   movl   $0xffda7536,0x90(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3a9b0})}
+   0.52%  │              0x00007f0fcad9d18c:   movl   $0xffda7546,0x94(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3aa30})}
+   0.56%  │              0x00007f0fcad9d197:   movl   $0xffda7556,0x98(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3aab0})}
+   0.55%  │              0x00007f0fcad9d1a2:   movl   $0xffda7566,0x9c(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3ab30})}
+   0.54%  │              0x00007f0fcad9d1ad:   movl   $0xffda7576,0xa0(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3abb0})}
+   0.57%  │              0x00007f0fcad9d1b8:   movl   $0xffda7588,0xa4(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3ac40})}
+   0.55%  │              0x00007f0fcad9d1c3:   movl   $0xffda759a,0xa8(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3acd0})}
+   0.51%  │              0x00007f0fcad9d1ce:   movl   $0xffda75aa,0xac(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3ad50})}
+   0.56%  │              0x00007f0fcad9d1d9:   movl   $0xffda75bc,0xb0(%r13)       ;   {oop(a &apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;{0x00000007fed3ade0})}
+   0.59%  │              0x00007f0fcad9d1e4:   mov    %r11d,%r14d
+   0.00%  │              0x00007f0fcad9d1e7:   shl    $0x3,%r14                    ;*getfield lookUpValue {reexecute=0 rethrow=0 return_oop=0}
+          │                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@1 (line 81)
+   0.00%  │              0x00007f0fcad9d1eb:   mov    %r14,0x10(%rsp)
+   0.56%  │              0x00007f0fcad9d1f0:   test   %ebp,%ebp
+          │╭             0x00007f0fcad9d1f2:   je     0x00007f0fcad9d2f6
+   0.00%  ││             0x00007f0fcad9d1f8:   shl    $0x3,%r8                     ;* unwind (locked if synchronized)
+          ││                                                                       ; - java.lang.String::equals@-3
+          ││                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          ││                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          ││             0x00007f0fcad9d1fc:   mov    %r8,0x8(%rsp)
+   0.58%  ││             0x00007f0fcad9d201:   mov    $0x0,%r10d
+   0.00%  ││             0x00007f0fcad9d207:   nopw   0x0(%rax,%rax,1)
+   7.28%  ││    ↗↗↗      0x00007f0fcad9d210:   cmp    $0x29,%r10d
+          ││    │││      0x00007f0fcad9d214:   jae    0x00007f0fcad9d3b1           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@11 (line 140)
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.01%  ││    │││      0x00007f0fcad9d21a:   mov    0x10(%r13,%r10,4),%esi       ; ImmutableOopMap {rsi=NarrowOop r8=Oop r11=NarrowOop r13=Oop [8]=Oop [16]=Oop }
+          ││    │││                                                                ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
+          ││    │││                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@9 (line 140)
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.63%  ││    │││      0x00007f0fcad9d21f:   mov    0x18(,%rsi,8),%edx           ; implicit exception: dispatches to 0x00007f0fcad9d4b0
+          ││    │││                                                                ; ImmutableOopMap {rdx=NarrowOop rsi=NarrowOop r8=Oop r11=NarrowOop r13=Oop [8]=Oop [16]=Oop }
+          ││    │││                                                                ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
+          ││    │││                                                                ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@9 (line 140)
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   4.57%  ││    │││      0x00007f0fcad9d226:   movsbl 0x10(,%rdx,8),%ecx           ; implicit exception: dispatches to 0x00007f0fcad9d4d3
+   8.68%  ││    │││      0x00007f0fcad9d22e:   mov    0x14(,%rdx,8),%r9d           ;* unwind (locked if synchronized)
+          ││    │││                                                                ; - java.lang.String::equals@-3
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.07%  ││    │││      0x00007f0fcad9d236:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@16 (line 140)
+          ││    │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.04%  ││    │││      0x00007f0fcad9d23a:   nopw   0x0(%rax,%rax,1)
+   4.71%  ││    │││      0x00007f0fcad9d240:   cmp    %r11d,%edx
+          ││╭   │││      0x00007f0fcad9d243:   je     0x00007f0fcad9d2d9           ;* unwind (locked if synchronized)
+          │││   │││                                                                ; - java.lang.String::equals@-3
+          │││   │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          │││   │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   7.18%  │││   │││      0x00007f0fcad9d249:   mov    %r10d,%edi
+   0.03%  │││   │││      0x00007f0fcad9d24c:   inc    %edi                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+          │││   │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@34 (line 140)
+          │││   │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.03%  │││   │││      0x00007f0fcad9d24e:   cmp    %bl,%cl
+          │││╭  │││      0x00007f0fcad9d250:   jne    0x00007f0fcad9d2ab
+   4.98%  ││││  │││      0x00007f0fcad9d256:   test   %r9d,%r9d
+          ││││  │││      0x00007f0fcad9d259:   je     0x00007f0fcad9d3d9
+   9.45%  ││││  │││      0x00007f0fcad9d25f:   nop
+   0.05%  ││││  │││      0x00007f0fcad9d260:   cmp    0xc(,%r9,8),%ebp
+          ││││╭ │││      0x00007f0fcad9d268:   jne    0x00007f0fcad9d2b3
+   0.06%  │││││ │││      0x00007f0fcad9d26e:   mov    %rsi,(%rsp)
+   0.53%  │││││ │││      0x00007f0fcad9d272:   shl    $0x3,%r9
+          │││││ │││      0x00007f0fcad9d276:   mov    %r8,%rsi
+          │││││ │││      0x00007f0fcad9d279:   mov    $0x10,%rdx
+   0.02%  │││││ │││      0x00007f0fcad9d280:   mov    %r9,%rcx
+   0.54%  │││││ │││      0x00007f0fcad9d283:   mov    $0x10,%r8
+          │││││ │││      0x00007f0fcad9d28a:   mov    %ebp,%r9d                    ;* unwind (locked if synchronized)
+          │││││ │││                                                                ; - java.lang.String::equals@-3
+          │││││ │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          │││││ │││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │││││ │││      0x00007f0fcad9d28d:   mov    %edi,%r14d
+   0.02%  │││││ │││      0x00007f0fcad9d290:   call   0x00007f0fca910680           ;   {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
+   0.02%  │││││ │││      0x00007f0fcad9d295:   nop
+   0.59%  │││││ │││      0x00007f0fcad9d296:   test   %eax,%eax
+          │││││╭│││      0x00007f0fcad9d298:   jne    0x00007f0fcad9d2bb           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+          │││││││││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@28 (line 141)
+          │││││││││                                                                ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.00%  │││││││││      0x00007f0fcad9d29e:   mov    %r14d,%r10d
+          │││││││││      0x00007f0fcad9d2a1:   mov    0x8(%rsp),%r8
+   0.57%  ││││││╰││      0x00007f0fcad9d2a6:   jmp    0x00007f0fcad9d210
+          │││↘││ ││      0x00007f0fcad9d2ab:   mov    %edi,%r10d
+          │││ ││ ╰│      0x00007f0fcad9d2ae:   jmp    0x00007f0fcad9d210
+   8.59%  │││ ↘│  │      0x00007f0fcad9d2b3:   mov    %edi,%r10d
+   4.11%  │││  │  ╰      0x00007f0fcad9d2b6:   jmp    0x00007f0fcad9d210
+          │││  ↘         0x00007f0fcad9d2bb:   mov    (%rsp),%rax                  ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+          │││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@7 (line 81)
+          │││            0x00007f0fcad9d2bf:   mov    0x20(%rsp),%rbp
+          │││            0x00007f0fcad9d2c4:   add    $0x28,%rsp
+          │││            0x00007f0fcad9d2c8:   cmp    0x450(%r15),%rsp             ;   {poll_return}
+          │││            0x00007f0fcad9d2cf:   ja     0x00007f0fcad9d427
+          │││            0x00007f0fcad9d2d5:   vzeroupper 
+          │││            0x00007f0fcad9d2d8:   ret                                 ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+          │││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@11 (line 140)
+          │││                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+   0.48%  ││↘      ↗     0x00007f0fcad9d2d9:   mov    %rsi,%rax                    ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@7 (line 81)
+   0.01%  ││       │     0x00007f0fcad9d2dc:   mov    0x20(%rsp),%rbp
+   0.05%  ││       │     0x00007f0fcad9d2e1:   add    $0x28,%rsp
+   0.02%  ││       │     0x00007f0fcad9d2e5:   cmp    0x450(%r15),%rsp             ;   {poll_return}
+          ││       │     0x00007f0fcad9d2ec:   ja     0x00007f0fcad9d43b
+   0.52%  ││       │     0x00007f0fcad9d2f2:   vzeroupper 
+   0.58%  ││       │     0x00007f0fcad9d2f5:   ret                                 ;* unwind (locked if synchronized)
+          ││       │                                                               ; - java.lang.String::equals@-3
+          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          ││       │                                                               ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │↘       │     0x00007f0fcad9d2f6:   mov    $0x0,%r10d
+          │        │     0x00007f0fcad9d2fc:   nopl   0x0(%rax)
+          │        │ ↗↗  0x00007f0fcad9d300:   cmp    $0x29,%r10d
+          │        │ ││  0x00007f0fcad9d304:   jae    0x00007f0fcad9d3b1           ;*if_icmpge {reexecute=0 rethrow=0 return_oop=0}
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@11 (line 140)
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │        │ ││  0x00007f0fcad9d30a:   mov    0x10(%r13,%r10,4),%esi       ; ImmutableOopMap {rsi=NarrowOop r11=NarrowOop r13=Oop [16]=Oop }
+          │        │ ││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
+          │        │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@9 (line 140)
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │        │ ││  0x00007f0fcad9d30f:   mov    0x18(,%rsi,8),%edx           ; implicit exception: dispatches to 0x00007f0fcad9d4f6
+          │        │ ││                                                            ; ImmutableOopMap {rdx=NarrowOop rsi=NarrowOop r11=NarrowOop r13=Oop [16]=Oop }
+          │        │ ││                                                            ;*iload_3 {reexecute=1 rethrow=0 return_oop=0}
+          │        │ ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@9 (line 140)
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │        │ ││  0x00007f0fcad9d316:   movsbl 0x10(,%rdx,8),%eax           ; implicit exception: dispatches to 0x00007f0fcad9d519
+          │        │ ││  0x00007f0fcad9d31e:   mov    0x14(,%rdx,8),%r8d           ;* unwind (locked if synchronized)
+          │        │ ││                                                            ; - java.lang.String::equals@-3
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │        │ ││  0x00007f0fcad9d326:   shl    $0x3,%rsi                    ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@16 (line 140)
+          │        │ ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │        │ ││  0x00007f0fcad9d32a:   cmp    %r11d,%edx
+          │        ╰ ││  0x00007f0fcad9d32d:   je     0x00007f0fcad9d2d9           ;* unwind (locked if synchronized)
+          │          ││                                                            ; - java.lang.String::equals@-3
+          │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │          ││  0x00007f0fcad9d32f:   mov    %r10d,%edx
+          │          ││  0x00007f0fcad9d332:   inc    %edx                         ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+          │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@34 (line 140)
+          │          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │          ││  0x00007f0fcad9d334:   cmp    %bl,%al
+          │         ╭││  0x00007f0fcad9d336:   jne    0x00007f0fcad9d35d
+          │         │││  0x00007f0fcad9d33c:   nopl   0x0(%rax)
+          │         │││  0x00007f0fcad9d340:   test   %r8d,%r8d
+          │         │││  0x00007f0fcad9d343:   je     0x00007f0fcad9d3f8
+          │         │││  0x00007f0fcad9d349:   cmpl   $0x0,0xc(,%r8,8)
+          │         │││  0x00007f0fcad9d352:   je     0x00007f0fcad9d388           ;* unwind (locked if synchronized)
+          │         │││                                                            ; - java.lang.String::equals@-3
+          │         │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark$Car::fromValues@25 (line 141)
+          │         │││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@4 (line 81)
+          │         │││  0x00007f0fcad9d358:   mov    %edx,%r10d
+          │         │╰│  0x00007f0fcad9d35b:   jmp    0x00007f0fcad9d300
+          │         ↘ │  0x00007f0fcad9d35d:   mov    %edx,%r10d
+          │           ╰  0x00007f0fcad9d360:   jmp    0x00007f0fcad9d300
+   0.00%  ↘              0x00007f0fcad9d362:   movabs $0x7f0f4802a6c0,%rsi         ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/api/EnumValuesLookupBenchmark$Car&apos;[])}
+   0.00%                 0x00007f0fcad9d36c:   mov    $0x29,%edx
+                         0x00007f0fcad9d371:   call   0x00007f0fca90f700           ; ImmutableOopMap {r8=NarrowOop r10=Oop r11=NarrowOop }
+                                                                                   ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                                   ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@0 (line 81)
+                                                                                   ;   {runtime_call Stub&lt;new_array_or_null(KlassPointer,int)Object&gt;}
+                         0x00007f0fcad9d376:   nopl   0x0(%rax,%rax,1)             ; ImmutableOopMap {rax=Oop r8=NarrowOop r10=Oop r11=NarrowOop }
+                                                                                   ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
+                                                                                   ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values@0 (line 81)
+                         0x00007f0fcad9d37e:   test   %eax,(%rax)                  ; implicit exception: dispatches to 0x00007f0fcad9d53c
+                         0x00007f0fcad9d380:   mov    %rax,%r13
+                         0x00007f0fcad9d383:   jmp    0x00007f0fcad9d075           ;*getstatic $VALUES {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
-  89.02%  <total for region 1>
+  88.30%  <total for region 1>
 
 ....[Hottest Regions]...............................................................................
-  89.02%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 5, compile id 1071
-   2.35%                        <unknown>
-   1.72%                        <unknown>
-   1.45%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 5, compile id 1071
-   0.66%                        <unknown>
-   0.27%                kernel  [unknown]
-   0.25%                kernel  [unknown]
-   0.15%                kernel  [unknown]
-   0.15%                kernel  [unknown]
-   0.14%             libjvm.so  HeapRegionManager::par_iterate
-   0.11%                kernel  [unknown]
-   0.10%             libc.so.6  __memset_avx2_unaligned_erms
-   0.08%             libjvm.so  SpinPause
-   0.05%             libjvm.so  HeapRegionClaimer::claim_region
-   0.04%                kernel  [unknown]
-   0.04%             libjvm.so  WeakProcessor::Task::work<G1STWIsAliveClosure, G1KeepAliveClosure>
-   0.03%             libjvm.so  ElfSymbolTable::lookup
-   0.03%                kernel  [unknown]
-   0.03%                kernel  [unknown]
-   0.03%             libjvm.so  G1ScanCollectionSetRegionClosure::do_heap_region
-   3.31%  <...other 996 warm regions...>
+  88.30%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values, version 2, compile id 1044 
+   3.77%                        <unknown> 
+   1.82%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 5, compile id 1080 
+   0.61%                kernel  [unknown] 
+   0.34%                kernel  [unknown] 
+   0.30%                kernel  [unknown] 
+   0.20%                kernel  [unknown] 
+   0.17%                kernel  [unknown] 
+   0.16%                kernel  [unknown] 
+   0.13%                kernel  [unknown] 
+   0.12%                kernel  [unknown] 
+   0.11%             libjvm.so  G1RemSetScanState::G1ClearCardTableTask::~G1ClearCardTableTask 
+   0.09%                kernel  [unknown] 
+   0.09%             libjvm.so  stringStream::~stringStream 
+   0.09%                kernel  [unknown] 
+   0.09%                kernel  [unknown] 
+   0.08%             libjvm.so  G1CardSet::is_empty 
+   0.08%                kernel  [unknown] 
+   0.08%                kernel  [unknown] 
+   0.08%             libc.so.6  __memset_avx2_unaligned_erms 
+   3.29%  <...other 439 warm regions...>
 ....................................................................................................
-  99.99%  <totals>
+ 100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  90.47%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 5, compile id 1071
-   5.08%                        <unknown>
-   2.59%                kernel  [unknown]
-   0.14%             libjvm.so  HeapRegionManager::par_iterate
-   0.10%             libc.so.6  __memset_avx2_unaligned_erms
-   0.08%             libjvm.so  WeakProcessor::Task::work<G1STWIsAliveClosure, G1KeepAliveClosure>
-   0.08%             libjvm.so  SpinPause
-   0.05%             libjvm.so  HeapRegionClaimer::claim_region
-   0.03%             libjvm.so  ElfSymbolTable::lookup
-   0.03%                [vdso]  [unknown]
-   0.03%  ld-linux-x86-64.so.2  __tls_get_addr
-   0.03%             libjvm.so  G1ScanCollectionSetRegionClosure::do_heap_region
-   0.03%             libjvm.so  fileStream::write
-   0.02%             libc.so.6  __vfprintf_internal
-   0.02%             libjvm.so  InstanceKlass::allocate_objArray
-   0.02%             libjvm.so  G1CardSet::reset_table_scanner
-   0.02%             libjvm.so  ObjArrayAllocator::initialize
-   0.02%        hsdis-amd64.so  print_insn
-   0.02%             libjvm.so  G1FromCardCache::clear
-   0.02%             libjvm.so  WorkerThread::run
-   1.13%  <...other 301 warm methods...>
+  88.30%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark::enum_values, version 2, compile id 1044 
+   4.32%                kernel  [unknown] 
+   3.86%                        <unknown> 
+   1.82%        jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.jmh_generated.EnumValuesLookupBenchmark_enum_values_jmhTest::enum_values_avgt_jmhStub, version 5, compile id 1080 
+   0.11%             libjvm.so  G1RemSetScanState::G1ClearCardTableTask::~G1ClearCardTableTask 
+   0.09%             libjvm.so  stringStream::~stringStream 
+   0.08%             libjvm.so  G1CardSet::is_empty 
+   0.08%             libc.so.6  __memset_avx2_unaligned_erms 
+   0.06%             libjvm.so  HeapRegionManager::par_iterate 
+   0.05%             libjvm.so  ElfSymbolTable::lookup 
+   0.05%             libc.so.6  __vfprintf_internal 
+   0.04%             libjvm.so  FreeListAllocator::reset 
+   0.03%        hsdis-amd64.so  print_insn 
+   0.03%             libjvm.so  G1ScanCollectionSetRegionClosure::do_heap_region 
+   0.03%             libjvm.so  xmlStream::write_text 
+   0.03%             libjvm.so  InstanceKlass::allocate_objArray 
+   0.03%             libjvm.so  G1FromCardCache::clear 
+   0.03%             libc.so.6  __strchr_avx2 
+   0.02%             libjvm.so  defaultStream::hold 
+   0.02%             libjvm.so  G1CardSetMemoryManager::flush 
+   0.91%  <...other 190 warm methods...>
 ....................................................................................................
-  99.99%  <totals>
+ 100.00%  <totals>
 
 ....[Distribution by Source]........................................................................
-  90.47%        jvmci, level 4
-   5.08%
-   2.59%                kernel
-   1.37%             libjvm.so
-   0.36%             libc.so.6
-   0.03%           interpreter
-   0.03%                [vdso]
-   0.03%  ld-linux-x86-64.so.2
-   0.02%        hsdis-amd64.so
-   0.01%         perf-6607.map
+  90.12%        jvmci, level 4
+   4.32%                kernel
+   3.86%                      
+   1.25%             libjvm.so
+   0.33%             libc.so.6
+   0.05%        hsdis-amd64.so
+   0.02%           interpreter
+   0.02%                [vdso]
+   0.02%  ld-linux-x86-64.so.2
+   0.00%      Unknown, level 0
+   0.00%         perf-9746.map
+   0.00%           c1, level 3
+   0.00%            libjava.so
 ....................................................................................................
-  99.99%  <totals>
+ 100.00%  <totals>
 
 
 
-# Run complete. Total time: 00:04:36
+# Run complete. Total time: 00:04:40
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -598,8 +606,8 @@ works, and factor in a small probability of new VM bugs. Additionally, while com
 different JVMs are already problematic, the performance difference caused by different Blackhole
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
-Benchmark                                         Mode  Cnt    Score   Error  Units
-EnumValuesLookupBenchmark.cached_enum_values      avgt    5  105.727 ± 2.963  ns/op
-EnumValuesLookupBenchmark.cached_enum_values:asm  avgt           NaN            ---
-EnumValuesLookupBenchmark.enum_values             avgt    5  148.247 ± 2.957  ns/op
-EnumValuesLookupBenchmark.enum_values:asm         avgt           NaN            ---
+Benchmark                                         Mode  Cnt    Score    Error  Units
+EnumValuesLookupBenchmark.cached_enum_values      avgt    5  122.790 ± 40.646  ns/op
+EnumValuesLookupBenchmark.cached_enum_values:asm  avgt           NaN             ---
+EnumValuesLookupBenchmark.enum_values             avgt    5  189.609 ±  7.032  ns/op
+EnumValuesLookupBenchmark.enum_values:asm         avgt           NaN             ---
