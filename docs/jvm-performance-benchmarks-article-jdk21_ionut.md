@@ -763,16 +763,22 @@ The GraalVM CE JIT Compiler processes elements individually without loop unrolli
 
 Testing how the compiler effectively coarsens or merges several adjacent synchronized blocks into one synchronized block can potentially reduce locking overhead. This optimization can be applied when the same lock object is used by multiple methods. However, it's important to note that while compilers can assist in coarsening or merging locks, it's not always guaranteed.
 
+This benchmark operates on uncontended code-paths due to only one thread executing the benchmark methods. Consequently, the locks are never inflated to a full monitor. Similar scenarios may occur when utilizing older synchronized Java APIs (e.g., `Vector`, `Stack`, `Hashtable`, `StringBuffer`, etc.), or equivalents.
+
 ```
   @Benchmark
   public int nested_synchronized() {
     int result = defaultValue << 1;
 
-    synchronized (this) {             // 1st nested synchronized
+    synchronized (this) {             // 1st synchronized
       result += incrementValue;
-      synchronized (this) {           // 2nd nested synchronized
+      synchronized (this) {           // 2nd synchronized
         result += incrementValue;
-        ...                           // 8th nested synchronized
+        ...                           
+          synchronized (this) {       // 8th synchronized
+            result += incrementValue;
+          }
+        ...
       }
     }
 
@@ -784,11 +790,15 @@ Testing how the compiler effectively coarsens or merges several adjacent synchro
     int result = defaultValue << 1;
 
     // all conditionals are evaluated to "true"
-    if (result > 1 << 5) {             // 1st synchronized
-      result = sum(result);
-      if (result > 1 << 5) {           // 2nd synchronized
-        result = sum(result);
-        ...                            // 8th synchronized
+    if (result > 1 << 5) {             
+      result = sum(result);           // 1st synchronized
+      if (result > 1 << 5) {           
+        result = sum(result);         // 2nd synchronized
+        ...                            
+          if (result > 1 << 5) {      
+            result = sum(result);     // 8th synchronized
+          }  
+        ...
       }
     }
 
@@ -816,7 +826,7 @@ The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompila
   <make_not_compilable level='4' reason='MethodCompilable_not_at_tier' method='nested_synchronized ()I' bytes='211'/>
 ```
 
-The breakdown of the execution time in the hottest regions reveals various interpreter instructions
+The breakdown of the hottest regions reveals various Template Interpreter instructions.
 
 ```
   ....[Hottest Regions]...............................................................................
@@ -836,7 +846,7 @@ The breakdown of the execution time in the hottest regions reveals various inter
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, which involves eliminating redundant locks and aggregating multiple fine-grained locks into a single synchronized block. This consolidation of locks enhances performance by reducing synchronization overhead.
+The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, which involves eliminating redundant locks and aggregating the nested locks into a single synchronized block.
 
 ```
   0x7f994ad7c83f:   mov    %rsi,%r11
@@ -844,7 +854,7 @@ The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, wh
   ...
   0x7f994ad7c84d:   mov    %eax,%r9d                ; copy the value of eax to r9d (i.e., defaultValue)
   0x7f994ad7c850:   shl    %r9d                     ; perform a left shift on the value in r9d by 1
-  <--- coarsened section (check if the lock is inflated, if not, try stack-locking, etc.) --->
+  <--- coarsened section (i.e., the monitor is not inflated; stack/fast-locking ) --->
   ...
   0x7f994ad7c886:   mov    0x14(%r11),%r8d          ; load the field 'incrementValue'
   ...
@@ -857,35 +867,35 @@ The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, wh
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler is able to compile the entire method, nevertheless it cannot merge the locks.
+The GraalVM CE JIT Compiler is able to compile the entire method, nevertheless it does not merge the locks.
 
 ```
   0x7f096323c87f:   mov    %rsi,%r11
   0x7f096323c885:   mov    0x10(%r11),%eax              ; load the field 'defaultValue' into eax
   0x7f096323c88e:   mov    %eax,%r9d                    ; copy the value of %eax to %r9d (i.e., defaultValue)
   0x7f096323c891:   shl    %r9d                         ; perform a left shift on the value in %r9d by 1
-  <--- 1st nested synchronized section --->
+  <--- 1st synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c8d3:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to %r9d
-  <--- 2nd nested synchronized section --->
+  <--- 2nd synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 3rd nested synchronized section --->
+  <--- 3rd synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 4th nested synchronized section --->
+  <--- 4th synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 5th nested synchronized section --->
+  <--- 5th synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 6th nested synchronized section --->
+  <--- 6th synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 7th nested synchronized section --->
+  <--- 7th synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 8th nested synchronized section --->
+  <--- 8th synchronized section (i.e., the monitor is not inflated ) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
   ; r9d stores the result
@@ -897,7 +907,20 @@ The analysis below pertains to the `conditional_nested_method_calls` method.
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler successfully compiles the method (e.g., c2, level 4). However, inlining plays a tricky role where distinct sections of the method are inlined at separate call sites, resulting in the generation of multiple compiled versions
+The C2 JIT Compiler succeeds to compile the method. Nevertheless, the breakdown of the hottest regions illustrates the execution of various segments within the same compiled method version. This variance may occur due to the inlining of the `sum` method at different call sites, alongside limitations in the compiler's capability to merge the locks.
+
+```
+....[Hottest Regions]...............................................................................
+11.29%        c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
+10.57%        c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
+...
+2.15%         c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
+2.08%         c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
+0.76%              kernel  [unknown]
+0.51%         c2, level 4  LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 588
+```
+
+As a side note, the default settings in `-prof perfasm` display the hottest regions around the `lock cmpxchg` (compare-and-set) instructions, which are repeatedly printed in the generated output, indicating also various code regions. By running with `-prof perfasm:mergeMargin=<high_value>` (default is 32), these hot regions can be aggregated to present a clearer overall view.
 
 #### Oracle GraalVM JIT Compiler
 
@@ -932,8 +955,8 @@ The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JI
 
 ### Conclusions
 
-- The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, leading to the best response time.
-- The C2 JIT Compiler shows limitations, potentially attributed to inlining heuristics or reaching the recompilation budget limit. Consequently, its performance tends to be slower than even GraalVM CE JIT Compiler in this benchmark.
+- The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations when present. These optimizations lead to the shortest overall response time.
+- The C2 JIT Compiler exhibits limitations in (some of) these specific scenarios, causing it to 'bail out' to the Template Interpreter (`nested_synchronized` scenario). As a result, its performance tends to be slower than even the GraalVM CE JIT Compiler.
 
 ## LockElisionBenchmark
 ### Analysis
