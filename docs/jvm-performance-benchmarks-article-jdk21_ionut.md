@@ -826,21 +826,18 @@ The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompila
   <make_not_compilable level='4' reason='MethodCompilable_not_at_tier' method='nested_synchronized ()I' bytes='211'/>
 ```
 
-The breakdown of the hottest regions reveals various Template Interpreter instructions.
+The breakdown of the hottest regions by source indicates that the Interpreter dominates the execution.
 
 ```
-  ....[Hottest Regions]...............................................................................
-    16.16%         interpreter  monitorenter  194 monitorenter  
-    10.18%         interpreter  fast_iaccess_0  221 fast_iaccess_0  
-     9.19%         interpreter  monitorexit  195 monitorexit  
-     8.11%         interpreter  goto  167 goto  
-     7.52%         interpreter  dup  89 dup  
-     6.97%         interpreter  istore_1  60 istore_1  
-     6.40%         interpreter  fast_aload_0  220 fast_aload_0  
-     5.98%         interpreter  aload  25 aload  
-     5.66%         interpreter  iadd  96 iadd  
-     5.45%         interpreter  astore  58 astore  
-     2.75%         interpreter  monitorexit  195 monitorexit  
+  ....[Distribution by Source]........................................................................
+    91.17%           interpreter
+     3.47%                kernel
+     2.94%         perf-6990.map
+     1.31%             libjvm.so
+     0.90%           c2, level 4
+     0.14%             libc.so.6
+     0.03%        hsdis-amd64.so
+     0.03%  ld-linux-x86-64.so.2
      ...
 ```
 
@@ -854,7 +851,7 @@ The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, wh
   ...
   0x7f994ad7c84d:   mov    %eax,%r9d                ; copy the value of eax to r9d (i.e., defaultValue)
   0x7f994ad7c850:   shl    %r9d                     ; perform a left shift on the value in r9d by 1
-  <--- coarsened section (i.e., the monitor is not inflated; stack/fast-locking ) --->
+  <--- coarsened section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f994ad7c886:   mov    0x14(%r11),%r8d          ; load the field 'incrementValue'
   ...
@@ -874,28 +871,28 @@ The GraalVM CE JIT Compiler is able to compile the entire method, nevertheless i
   0x7f096323c885:   mov    0x10(%r11),%eax              ; load the field 'defaultValue' into eax
   0x7f096323c88e:   mov    %eax,%r9d                    ; copy the value of %eax to %r9d (i.e., defaultValue)
   0x7f096323c891:   shl    %r9d                         ; perform a left shift on the value in %r9d by 1
-  <--- 1st synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 1st synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c8d3:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to %r9d
-  <--- 2nd synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 2nd synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 3rd synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 3rd synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 4th synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 4th synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 5th synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 5th synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 6th synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 6th synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 7th synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 7th synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
-  <--- 8th synchronized section (i.e., the monitor is not inflated ) --->
+  <--- 8th synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   ...
   0x7f096323c913:   add    0x14(%r11),%r9d              ; add the field 'incrementValue' to r9d
   ; r9d stores the result
@@ -907,20 +904,32 @@ The analysis below pertains to the `conditional_nested_method_calls` method.
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler succeeds to compile the method. Nevertheless, the breakdown of the hottest regions illustrates the execution of various segments within the same compiled method version. This variance may occur due to the inlining of the `sum` method at different call sites, alongside limitations in the compiler's capability to merge the locks.
+The C2 JIT Compiler successfully inlines the `sum` methods in the caller and compiles the entire method. However, it does not merge certain locks within the compiled code.
 
 ```
-....[Hottest Regions]...............................................................................
-11.29%        c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
-10.57%        c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
-...
-2.15%         c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
-2.08%         c2, level 4  LockCoarseningBenchmark::conditional_nested_method_calls, version 2, compile id 550
-0.76%              kernel  [unknown]
-0.51%         c2, level 4  LockCoarseningBenchmark_conditional_nested_method_calls_jmhTest::conditional_nested_method_calls_avgt_jmhStub, version 6, compile id 588
+  0x00007fd3804f941d:   mov    0x10(%rsi),%r13d             ; load the 'defaultValue' field into r13d
+  0x00007fd3804f9421:   shl    %r13d                        ; left shift the value in r13d by 1
+  0x00007fd3804f9424:   cmp    $0x20,%r13d                  ; compare r13d against the value '1 << 5'
+  0x00007fd3804f9428:   jle    0x00007fd3804f9f37           ; jump if r13d is less than or equal to '1 << 5'
+  ...
+  <--- caller 'sum' method inlined --->
+  <--- 1st synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->                                                                                                                                                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@10 (line 177)
+  0x00007fd3804f9496:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
+  ...
+  0x00007fd3804f9534:   cmp    $0x20,%r13d
+  0x00007fd3804f9538:   jle    0x00007fd3804f9f50           ; jump if r13d is less than or equal to '1 << 5'
+  <--- caller 'sum' method inlined --->
+  <--- 2nd synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
+  0x00007fd3804f95a8:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
+  ...
+  <--- similar pattern for the 3rd, 4th, 5th, 6th, 7th, and 8th synchronized sections -->
+  ...
+  ; r13d stores the result of the main loop
+  0x00007fd3804f9cc6:   mov    %r13d,%eax                   ; move the sum result into eax
 ```
 
-As a side note, the default settings in `-prof perfasm` display the hottest regions around the `lock cmpxchg` (compare-and-set) instructions, which are repeatedly printed in the generated output, indicating also various code regions. By running with `-prof perfasm:mergeMargin=<high_value>` (default is 32), these hot regions can be aggregated to present a clearer overall view.
+As a side note, the default settings in `-prof perfasm` display the hottest regions around the `lock cmpxchg` (compare-and-set) instructions, but this may not assemble the entire compiled method. By running `-prof perfasm:mergeMargin=1024` (default value is 32), all hot regions can be aggregated to provide a comprehensive view. 
+Here are further details about the [mergeMargin](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/profile/AbstractPerfAsmProfiler.java#L120) option.
 
 #### Oracle GraalVM JIT Compiler
 
@@ -943,7 +952,7 @@ The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coa
   0x00007ffa1ad7dca0:   cmp    $0x21,%eax               ; compare eax against value '1 << 5 + 1'
   0x00007ffa1ad7dca3:   jl     0x00007ffa1ad7dec7       ; jump if eax is less
   0x00007ffa1ad7dca9:   add    %r10d,%eax               ; eax = eax + r10d
-  <--- similar pattern for other additions (e.g., cmp, jl, add) --->
+  <--- similar pattern for the 3rd, 4th, 5th, 6th, 7th, and 8th additions -->
   ; eax stores the result
   ...
   <--- end of coarsened section --->
@@ -955,8 +964,8 @@ The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JI
 
 ### Conclusions
 
-- The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations when present. These optimizations lead to the shortest overall response time.
-- The C2 JIT Compiler exhibits limitations in (some of) these specific scenarios, causing it to 'bail out' to the Template Interpreter (`nested_synchronized` scenario). As a result, its performance tends to be slower than even the GraalVM CE JIT Compiler.
+- The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations. These optimizations lead to the shortest overall response time.
+- The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT Compiler, in this benchmark.
 
 ## LockElisionBenchmark
 ### Analysis
