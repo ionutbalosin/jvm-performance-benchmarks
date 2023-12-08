@@ -1064,7 +1064,7 @@ The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JI
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler is capable of devirtualizing virtual calls and performs partial inlining up to a depth of 2.
+The C2 JIT Compiler is capable of devirtualizing `recursiveSum` virtual calls and performs partial inlining.
 
 ```
   0x7f1290636b5a:   mov    0x14(%rsi),%ebp         ; load the value of the 'incrementValue' field into ebp
@@ -1079,31 +1079,31 @@ The C2 JIT Compiler is capable of devirtualizing virtual calls and performs part
                                                    ; {optimized virtual_call}
   0x7f1290636b74:   add    %ebp,%eax               ; add 'incrementValue' to eax
   0x7f1290636b76:   add    %ebp,%eax               ; add 'incrementValue' to eax
-  ; eax stores the final result (defaultValue << 1 + 8 x incrementValue)
+  ; eax stores the final result
 ```
 
-The `recursiveSum` is partially inlined but also includes a recursive call to itself.
+The `recursiveSum` is partially inlined up to a depth of 2 but also includes a recursive call to itself.
 
 ```
-  recursiveSum
+   recursiveSum()
 
-    ↗ 0x7f1290636740:   mov    %eax,-0x14000(%rsp)      ; move the value in eax to the address -0x14000 in the stack
-    │ 0x7f129063675e:   mov    0x14(%rsi),%ebp          ; load the value of the 'incrementValue' field into ebp
-    │ 0x7f1290636761:   cmp    $0x1,%ecx                ; compare the value in ecx with 0x1
-  ╭ │ 0x7f1290636764:   je     0x7f1290636793           ; jump to 0x7f1290636793 if the comparison is equal (zero flag is set)
-  │ │ 0x7f1290636766:   add    $0xfffffffe,%ecx         ; decrement ecx by 2
-  │ ╰ 0x7f129063676b:   call   0x7f1290636740           ; <--- recursive call to itself
-  │                                                     ; invokevirtual recursiveSum
-  │                                                     ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-  │                                                     ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-  │                                                     ;   {optimized virtual_call}
-  │   0x7f1290636778:   add    %ebp,%eax                ; add 'incrementValue' to eax
-  │↗  0x7f129063677a:   add    %ebp,%eax                ; add 'incrementValue' to eax
-  ││  ...
-  ││  0x7f129063678e:   ret                             ; return from the function
-  ││  ...
-  ↘│  0x7f1290636793:   mov    %edx,%eax                ; move 'defaultValue' into eax
-   ╰  0x7f1290636795:   jmp    0x7f129063677a           ; jump to 0x7f129063677a (continuation)
+   ↗ 0x7f1290636740:   mov    %eax,-0x14000(%rsp)      ; move the value in eax to the address -0x14000 in the stack
+   │ 0x7f129063675e:   mov    0x14(%rsi),%ebp          ; load the value of the 'incrementValue' field into ebp
+   │ 0x7f1290636761:   cmp    $0x1,%ecx                ; compare the value in ecx with 0x1
+  ╭│ 0x7f1290636764:   je     0x7f1290636793           ; jump to 0x7f1290636793 if the comparison is equal (zero flag is set)
+  ││ 0x7f1290636766:   add    $0xfffffffe,%ecx         ; decrement ecx by 2
+  │╰ 0x7f129063676b:   call   0x7f1290636740           ; <--- recursive call to itself
+  │                                                    ; invokevirtual recursiveSum
+  │                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                    ;   {optimized virtual_call}
+  │  0x7f1290636778:   add    %ebp,%eax                ; add 'incrementValue' to eax
+  │↗ 0x7f129063677a:   add    %ebp,%eax                ; add 'incrementValue' to eax
+  ││ ...
+  ││ 0x7f129063678e:   ret                             ; return from the function
+  ││ ...
+  ↘│ 0x7f1290636793:   mov    %edx,%eax                ; move 'defaultValue' into eax
+   ╰ 0x7f1290636795:   jmp    0x7f129063677a           ; jump to 0x7f129063677a (continuation)
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -1121,45 +1121,67 @@ The Oracle GraalVM JIT Compiler eliminates all the virtual calls and further opt
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT is capable of devirtualizing virtual calls and performing partial inlining up to a depth of 6.
+The GraalVM CE JIT is capable of devirtualizing `recursiveSum` virtual calls and performs partial inlining.
 
 ```
-  0x7f5c6b2399df:   mov    0x10(%rsi),%edx         ; Load the value of the 'defaultValue' field into edx
-  0x7f5c6b2399e2:   mov    0x14(%rsi),%r10d        ; Load the value of the 'incrementValue' field into r10d
-  0x7f5c6b2399e6:   shl    %edx                    ; Perform a left shift on the value in edx by 1 (edx = 'defaultValue' << 1)
-  0x7f5c6b2399e8:   mov    $0x2,%ecx               ; Load the value 0x2 into ecx
-  0x7f5c6b2399ed:   mov    %r10d,0x4(%rsp)         ; Put the value from r10d (i.e., 'incrementValue') on the stack
-  0x7f5c6b2399f3:   call   0x7f5c6b239440          ; <--- call to recursiveSum six layers deep
-                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
-                                                   ; - LockElisionBenchmark::recursive_method_calls@11 (line 108)
-                                                   ;   {optimized virtual_call}
-  0x7f5c6b239a00:   mov    0x4(%rsp),%r10d         ; Get back the r10d (i.e., 'incrementValue') from the stack
-  0x7f5c6b239a05:   mov    %r10d,%r11d             ; r11d = 'incrementValue'
-  0x7f5c6b239a08:   shl    $0x2,%r11d              ; r11d = 'incrementValue' << 2
-  0x7f5c6b239a0c:   shl    %r10d                   ; r10d = 'incrementValue' << 1
-  0x7f5c6b239a0f:   add    %r10d,%r11d             ; r11d = r10d + r11d
-  0x7f5c6b239a12:   add    %r11d,%eax              ; eax = eax + r11d
+  0x7f977318f6df:   mov    0x10(%rsi),%edx          ; Load the value of the 'defaultValue' field into edx
+  0x7f977318f6e2:   mov    0x14(%rsi),%r10d         ; Load the value of the 'incrementValue' field into r10d
+  0x7f977318f6e6:   shl    %edx                     ; Perform a left shift on the value in edx by 1 (edx = 'defaultValue' << 1)
+  0x7f977318f6e8:   mov    $0x2,%ecx                ; move the value 0x2 into ecx
+  0x7f977318f6ed:   mov    %r10d,0x4(%rsp)          ; Put the value from r10d (i.e., 'incrementValue') on the stack + 0x4 address
+  0x7f977318f6f3:   call   0x7f977318ee40           ; <--- call to recursiveSum six layers deep
+                                                    ; invokevirtual recursiveSum
+                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                    ; - LockElisionBenchmark::recursive_method_calls@11 (line 108)
+                                                    ; {optimized virtual_call}
+  0x7f977318f700:   mov    0x4(%rsp),%r10d          ; Get back the r10d (i.e., 'incrementValue') from the stack + 0x4 address
+  0x7f977318f705:   mov    %r10d,%r11d              ; r11d = 'incrementValue'
+  0x7f977318f708:   shl    $0x2,%r11d               ; r11d = 'incrementValue' << 2
+  0x7f977318f70c:   shl    %r10d                    ; r10d = 'incrementValue' << 1
+  0x7f977318f70f:   add    %r10d,%r11d              ; r11d = r10d + r11d
+  0x7f977318f712:   add    %r11d,%eax               ; eax = eax + r11d
   ; eax stores the result
 ```
 
-The `recursiveSum` looks like this:
+The `recursiveSum` is partially inlined up to a depth of 6 but also includes a recursive call to itself.
 
 ```
-  recursiveSum
+  recursiveSum()
 
-  0x7f5c6b2394cc:   add    0x4(%rsp),%eax         ; add the value from the stack address + 0x4 (i.e., 'incrementValue') to eax
-  0x7f5c6b2394d0:   add    0x4(%rsp),%eax
-  0x7f5c6b2394d4:   add    0x4(%rsp),%eax
-  0x7f5c6b2394d8:   mov    0x4(%rsp),%r10d        ; move the value from the stack address + 0x4 (i.e., 'incrementValue') to r10d
-  0x7f5c6b2394dd:   add    %r10d,%eax             ; add the value from r10d (i.e., 'incrementValue') to eax
+   ↗ 0x7f977318ee40:   mov    %eax,-0x14000(%rsp)
+   │ 0x7f977318ee5f:   mov    0x14(%rsi),%r10d        ; Load the value of the 'incrementValue' field into r10d
+   │ ...
+   │ 0x7f977318ee95:   cmp    $0x5,%ecx               ; compare ecx against 0x5
+  ╭│ 0x7f977318ee98:   jge    0x7f977318ef2f          ; jump if greater or equal
+  ││ 0x7f977318eeac:   mov    %r10d,0x4(%rsp)         ; put the value from r10d (i.e., 'incrementValue') on the stack + 0x4 address
+  ││ 0x7f977318eeb1:   lea    -0x6(%rcx),%ecx         ; ecx = ecx - 6
+  │╰ 0x7f977318eeb7:   call   0x7f977318ee40          ; <--- recursive call to itself
+  │                                                   ; invokevirtual recursiveSum
+  │                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                   ; {optimized virtual_call}
+  │  0x7f977318eec4:   add    0x4(%rsp),%eax          ; add 'incrementValue' to eax
+  │↗ 0x7f977318eec8:   add    0x4(%rsp),%eax          ; add 'incrementValue' to eax
+  ││ ...
+  ││ 0x7f977318eef6:   ret
+  ││ ...
+  ↘│ 0x7f977318ef2f:   mov    %edx,%eax               ; move 'defaultValue' into eax
+   ╰ 0x7f977318ef36:   jmp    0x7f977318eec8
 ```
 
 ### Conclusions
+
+- The Oracle GraalVM JIT Compiler triggers removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall response time.
+- The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT Compiler that does a better job of inlining the recursive calls.
 
 ## LoopFusionBenchmark
 ### Analysis
