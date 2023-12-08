@@ -16,14 +16,14 @@ Florin Blanaru
 - [Context](#context)
 - [SetUp](#setup)
 - [JIT Compiler](#jit-compiler)
-  - [Benchmarks](#jit-benchmarks)
-  - [Geometric Mean](#jit-geometric-mean)
+    - [Benchmarks](#jit-benchmarks)
+    - [Geometric Mean](#jit-geometric-mean)
 - [API](#api)
-  - [Benchmarks](#api-benchmarks)
-  - [Geometric Mean](#api-geometric-mean)
+    - [Benchmarks](#api-benchmarks)
+    - [Geometric Mean](#api-geometric-mean)
 - [Miscellaneous](#miscellaneous)
-  - [Benchmarks](#miscellaneous-benchmarks)
-  - [Geometric Mean](#miscellaneous-geometric-mean)
+    - [Benchmarks](#miscellaneous-benchmarks)
+    - [Geometric Mean](#miscellaneous-geometric-mean)
 - [Overall Geometric Mean](#overall-geometric-mean)
 - [Final Thoughts](#final-thoughts)
 - [References](#references)
@@ -60,12 +60,12 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
 - Java Microbenchmark Harness (JMH) v1.37
 - each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also multi-threaded workloads (depending on the test case)
 - the benchmarks were run on the below machines:
-  1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
-  2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
+    1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
+    2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
 - to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine:
-  1. disabled the turbo-boost mode
-  2. set CPU governor to _performance_
-  3. disabled CPU hyper-threading
+    1. disabled the turbo-boost mode
+    2. set CPU governor to _performance_
+    3. disabled CPU hyper-threading
 
 # JIT Compiler
 
@@ -621,43 +621,43 @@ The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a facto
 
 ```
   // Main loop
-  0x00007f22eb23d83f:   mov    0x18(%rsi),%eax              ; get the array pointer
-  0x00007f22eb23d842:   mov    0xc(,%rax,8),%r10d           ; get the array length
-  0x00007f22eb23d85c:   mov    %r10d,%r8d                   ; copy array length to r8d
-  0x00007f22eb23d889:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+  0x7f22eb23d83f:   mov    0x18(%rsi),%eax              ; get the array pointer
+  0x7f22eb23d842:   mov    0xc(,%rax,8),%r10d           ; get the array length
+  0x7f22eb23d85c:   mov    %r10d,%r8d                   ; copy array length to r8d
+  0x7f22eb23d889:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
   ...
-  0x00007f22eb23d890:   mov    $0x1,%r11d                   ; initialize r11d for loop count
+  0x7f22eb23d890:   mov    $0x1,%r11d                   ; initialize r11d for loop count
   <--- Loop peeling -->
-  0x00007f22eb23d8a5:   inc    %r11d                        ; increment loop counter (r11d)
+  0x7f22eb23d8a5:   inc    %r11d                        ; increment loop counter (r11d)
   ...
-  0x00007f22eb23d8c0:   mov    %r11d,%r9d                   ; initialize loop counter r9d from r11d
+  0x7f22eb23d8c0:   mov    %r11d,%r9d                   ; initialize loop counter r9d from r11d
   ...
                                                             ; <--- Loop beginning
-  0x00007f22eb23d8e0:   add    0x10(%rax,%r9,4),%r11d       ; add value of the 1st element to r11d
-  0x00007f22eb23d8e5:   movslq %r9d,%rcx                    ; sign-extend r9d to rcx for addressing
-  0x00007f22eb23d8e8:   mov    0x14(%rax,%rcx,4),%ebx       ; store the value of the 2nd element in ebx
-  0x00007f22eb23d8ec:   mov    0x18(%rax,%rcx,4),%edi       ; store the value of the 3rd element in edi
+  0x7f22eb23d8e0:   add    0x10(%rax,%r9,4),%r11d       ; add value of the 1st element to r11d
+  0x7f22eb23d8e5:   movslq %r9d,%rcx                    ; sign-extend r9d to rcx for addressing
+  0x7f22eb23d8e8:   mov    0x14(%rax,%rcx,4),%ebx       ; store the value of the 2nd element in ebx
+  0x7f22eb23d8ec:   mov    0x18(%rax,%rcx,4),%edi       ; store the value of the 3rd element in edi
   ...
-  0x00007f22eb23d910:   mov    %r9d,0x1c(%rsp)              ; spill r9d (the loop counter) onto the stack
-  0x00007f22eb23d915:   mov    0x38(%rax,%rcx,4),%r9d       ; store the value of the 11th element in r9d
-  0x00007f22eb23d91a:   mov    %r9d,0x18(%rsp)              ; spill the 11th element (r9d) onto the stack
-  0x00007f22eb23d91f:   mov    0x3c(%rax,%rcx,4),%r9d       ; store the value of the 12th element in r9d
-  0x00007f22eb23d924:   mov    %r9d,0x14(%rsp)              ; spill the 12th element (r9d) onto the stack
+  0x7f22eb23d910:   mov    %r9d,0x1c(%rsp)              ; spill r9d (the loop counter) onto the stack
+  0x7f22eb23d915:   mov    0x38(%rax,%rcx,4),%r9d       ; store the value of the 11th element in r9d
+  0x7f22eb23d91a:   mov    %r9d,0x18(%rsp)              ; spill the 11th element (r9d) onto the stack
+  0x7f22eb23d91f:   mov    0x3c(%rax,%rcx,4),%r9d       ; store the value of the 12th element in r9d
+  0x7f22eb23d924:   mov    %r9d,0x14(%rsp)              ; spill the 12th element (r9d) onto the stack
   ...
-  0x00007f22eb23d93d:   mov    0x48(%rax,%rcx,4),%r9d       ; store the value of the 15th element in r9d
-  0x00007f22eb23d942:   add    %ebx,%r11d                   ; add the 2nd element to r11d
-  0x00007f22eb23d945:   add    %edi,%r11d                   ; add the 3rd element to the previous sum (r11d)
+  0x7f22eb23d93d:   mov    0x48(%rax,%rcx,4),%r9d       ; store the value of the 15th element in r9d
+  0x7f22eb23d942:   add    %ebx,%r11d                   ; add the 2nd element to r11d
+  0x7f22eb23d945:   add    %edi,%r11d                   ; add the 3rd element to the previous sum (r11d)
   ...
-  0x00007f22eb23d95d:   add    0x18(%rsp),%r11d             ; load the 11th element from stack and add to r11d
-  0x00007f22eb23d962:   add    0x14(%rsp),%r11d             ; load the 12th element from stack and add to r11d
+  0x7f22eb23d95d:   add    0x18(%rsp),%r11d             ; load the 11th element from stack and add to r11d
+  0x7f22eb23d962:   add    0x14(%rsp),%r11d             ; load the 12th element from stack and add to r11d
   ...
-  0x00007f22eb23d971:   add    %r9d,%r11d                   ; add the 15th element to the sum (r11d)
-  0x00007f22eb23d974:   add    0x4c(%rax,%rcx,4),%r11d      ; add the 16th element to the sum (r11d)
-  0x00007f22eb23d979:   mov    0x1c(%rsp),%r9d              ; restore the loop counter from the stack
-  0x00007f22eb23d97e:   lea    0x10(%r9),%r9d               ; increment loop counter by 16
-  0x00007f22eb23d982:   mov    0x20(%rsp),%r8d              ; move saved value (i.e., array length) from stack to r8d
-  0x00007f22eb23d987:   cmp    %r9d,%r8d                    ; compare loop counter with saved value
-  0x00007f22eb23d98a:   jg     0x00007f22eb23d8e0           ; <--- loop end (jump loop back if greater)
+  0x7f22eb23d971:   add    %r9d,%r11d                   ; add the 15th element to the sum (r11d)
+  0x7f22eb23d974:   add    0x4c(%rax,%rcx,4),%r11d      ; add the 16th element to the sum (r11d)
+  0x7f22eb23d979:   mov    0x1c(%rsp),%r9d              ; restore the loop counter from the stack
+  0x7f22eb23d97e:   lea    0x10(%r9),%r9d               ; increment loop counter by 16
+  0x7f22eb23d982:   mov    0x20(%rsp),%r8d              ; move saved value (i.e., array length) from stack to r8d
+  0x7f22eb23d987:   cmp    %r9d,%r8d                    ; compare loop counter with saved value
+  0x7f22eb23d98a:   jg     0x7f22eb23d8e0           ; <--- loop end (jump loop back if greater)
   ; r11d stores the result of the main loop
 ```
 
@@ -729,7 +729,7 @@ Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instr
   ; ymm0 stores the result of the main loop
 ```
 
-#### GraalVM CE JIT 
+#### GraalVM CE JIT
 
 The GraalVM CE JIT Compiler processes elements individually without loop unrolling, utilizing comparison and jump instructions to assess whether the array values surpass the predefined threshold.
 
@@ -907,28 +907,28 @@ The analysis below pertains to the `conditional_nested_method_calls` method.
 The C2 JIT Compiler successfully inlines the `sum` methods in the caller and compiles the entire method. However, it does not merge certain locks within the compiled code.
 
 ```
-  0x00007fd3804f941d:   mov    0x10(%rsi),%r13d             ; load the 'defaultValue' field into r13d
-  0x00007fd3804f9421:   shl    %r13d                        ; left shift the value in r13d by 1
-  0x00007fd3804f9424:   cmp    $0x20,%r13d                  ; compare r13d against the value '1 << 5'
-  0x00007fd3804f9428:   jle    0x00007fd3804f9f37           ; jump if r13d is less than or equal to '1 << 5'
+  0x7fd3804f941d:   mov    0x10(%rsi),%r13d             ; load the 'defaultValue' field into r13d
+  0x7fd3804f9421:   shl    %r13d                        ; left shift the value in r13d by 1
+  0x7fd3804f9424:   cmp    $0x20,%r13d                  ; compare r13d against the value '1 << 5'
+  0x7fd3804f9428:   jle    0x7fd3804f9f37           ; jump if r13d is less than or equal to '1 << 5'
   ...
   <--- caller 'sum' method inlined --->
   <--- 1st synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->                                                                                                                                                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@10 (line 177)
-  0x00007fd3804f9496:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
+  0x7fd3804f9496:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
   ...
-  0x00007fd3804f9534:   cmp    $0x20,%r13d
-  0x00007fd3804f9538:   jle    0x00007fd3804f9f50           ; jump if r13d is less than or equal to '1 << 5'
+  0x7fd3804f9534:   cmp    $0x20,%r13d
+  0x7fd3804f9538:   jle    0x7fd3804f9f50           ; jump if r13d is less than or equal to '1 << 5'
   <--- caller 'sum' method inlined --->
   <--- 2nd synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
-  0x00007fd3804f95a8:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
+  0x7fd3804f95a8:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
   ...
   <--- similar pattern for the 3rd, 4th, 5th, 6th, 7th, and 8th synchronized sections -->
   ...
   ; r13d stores the result of the main loop
-  0x00007fd3804f9cc6:   mov    %r13d,%eax                   ; move the sum result into eax
+  0x7fd3804f9cc6:   mov    %r13d,%eax                   ; move the sum result into eax
 ```
 
-As a side note, the default settings in `-prof perfasm` display the hottest regions around the `lock cmpxchg` (compare-and-set) instructions, but this may not assemble the entire compiled method. By running `-prof perfasm:mergeMargin=1024` (default value is 32), all hot regions can be aggregated to provide a comprehensive view. 
+As a side note, the default settings in `-prof perfasm` display the hottest regions around the `lock cmpxchg` (compare-and-set) instructions, but this may not assemble the entire compiled method. By running `-prof perfasm:mergeMargin=1024` (default value is 32), all hot regions can be aggregated to provide a comprehensive view.
 Here are further details about the [mergeMargin](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/profile/AbstractPerfAsmProfiler.java#L120) option.
 
 #### Oracle GraalVM JIT Compiler
@@ -936,22 +936,22 @@ Here are further details about the [mergeMargin](https://github.com/openjdk/jmh/
 The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coarsening, and utilizes conditional instructions (e.g., `cmp`) to handle the additions.
 
 ```
-  0x00007ffa1ad7dc3f:   mov    %rsi,%r11
-  0x00007ffa1ad7dc42:   mov    0x10(%r11),%eax          ; load the field 'defaultValue' into eax
+  0x7ffa1ad7dc3f:   mov    %rsi,%r11
+  0x7ffa1ad7dc42:   mov    0x10(%r11),%eax          ; load the field 'defaultValue' into eax
   ...
-  0x00007ffa1ad7dc46:   mov    %eax,%r8d                ; copy the value of eax to r8d (i.e., 'defaultValue')
-  0x00007ffa1ad7dc49:   shl    %r8d                     ; perform a left shift on the value in r8d by 1
+  0x7ffa1ad7dc46:   mov    %eax,%r8d                ; copy the value of eax to r8d (i.e., 'defaultValue')
+  0x7ffa1ad7dc49:   shl    %r8d                     ; perform a left shift on the value in r8d by 1
   <--- coarsened section --->
-  0x00007ffa1ad7dc4c:   cmp    $0x21,%r8d               ; compare r8d against value '1 << 5 + 1'
-  0x00007ffa1ad7dc50:   jl     0x00007ffa1ad7deed       ; jump if r8d is less
+  0x7ffa1ad7dc4c:   cmp    $0x21,%r8d               ; compare r8d against value '1 << 5 + 1'
+  0x7ffa1ad7dc50:   jl     0x7ffa1ad7deed       ; jump if r8d is less
   ...
-  0x00007ffa1ad7dc90:   mov    0x14(%r11),%r10d         ; get field 'incrementValue'
-  0x00007ffa1ad7dc94:   mov    %r8d,%eax                ; eax = 'defaultValue'
-  0x00007ffa1ad7dc97:   add    %r10d,%eax               ; eax = eax + r10d
+  0x7ffa1ad7dc90:   mov    0x14(%r11),%r10d         ; get field 'incrementValue'
+  0x7ffa1ad7dc94:   mov    %r8d,%eax                ; eax = 'defaultValue'
+  0x7ffa1ad7dc97:   add    %r10d,%eax               ; eax = eax + r10d
   ...
-  0x00007ffa1ad7dca0:   cmp    $0x21,%eax               ; compare eax against value '1 << 5 + 1'
-  0x00007ffa1ad7dca3:   jl     0x00007ffa1ad7dec7       ; jump if eax is less
-  0x00007ffa1ad7dca9:   add    %r10d,%eax               ; eax = eax + r10d
+  0x7ffa1ad7dca0:   cmp    $0x21,%eax               ; compare eax against value '1 << 5 + 1'
+  0x7ffa1ad7dca3:   jl     0x7ffa1ad7dec7       ; jump if eax is less
+  0x7ffa1ad7dca9:   add    %r10d,%eax               ; eax = eax + r10d
   <--- similar pattern for the 3rd, 4th, 5th, 6th, 7th, and 8th additions -->
   ; eax stores the result
   ...
@@ -968,10 +968,197 @@ The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JI
 - The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT Compiler, in this benchmark.
 
 ## LockElisionBenchmark
+
+Test how the compiler can elide/remove several adjacent locking blocks on non-shared objects, thus reducing the locking overhead.
+Synchronization on non-shared objects is pointless, and runtime does not have to do anything there.
+
+```
+  private final int DEPTH = 8;
+
+  @Benchmark
+  public int nested_synchronized() {
+    int result = defaultValue << 1;
+
+    Object lock = new Object();
+
+    synchronized (lock) {                   // 1st synchronized
+      result += incrementValue;
+      synchronized (lock) {                 // 1st synchronized
+        result += incrementValue;
+        ...
+          synchronized (lock) {             // 8th synchronized 
+            result += incrementValue;
+          }
+        ...
+      }
+    }
+
+    return result;
+  }
+  
+  @Benchmark
+  public int recursive_method_calls() {
+    int result = defaultValue << 1;
+    result = recursiveSum(result, DEPTH);
+    return result;
+  }
+  
+  public int recursiveSum(int aValue, int depth) {
+    Object lock = new Object();
+    synchronized (lock) {
+      if (depth == 0) {
+        return aValue;
+      }
+      return incrementValue + recursiveSum(aValue, depth - 1);
+    }
+  }    
+```
+
+Source code: [LockElisionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LockElisionBenchmark.java)
+
+[![LockElisionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LockElisionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LockElisionBenchmark.svg?raw=true)
+
 ### Analysis
+
+### Analysis of nested_synchronized
+
+The analysis below pertains to the `nested_synchronized` method, which is more interesting due to the highest differences in performance.
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned (i.e., the compilation is disabled), falling back to the Template Interpreter. This is the same limitation as in the case of `LockCoarseningBenchmark`.
+
+The breakdown of the hottest regions by source indicates that the Interpreter dominates the execution.
+
+```
+  ....[Distribution by Source]........................................................................
+    89.45%           interpreter
+     4.18%         perf-7796.map
+     3.69%                kernel
+     1.22%           c2, level 4
+     1.17%             libjvm.so
+     0.21%             libc.so.6
+     0.04%        hsdis-amd64.so
+     0.01%  ld-linux-x86-64.so.2
+     ...
+```
+
 #### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler optimizes code by removing the locks, and further optimizing the additions using shift operations, thereby performing strength reduction optimizations.
+
+```
+  0x7f9816d7e73a:   mov    0x10(%rsi),%eax        ; load the value of the 'defaultValue' field into eax
+  0x7f9816d7e73d:   mov    0x14(%rsi),%r10d       ; load the value of the 'incrementValue' field into r10d
+  0x7f9816d7e741:   shl    %eax                   ; perform a left shift on the value in eax by 1 (eax = eax << 1)
+  0x7f9816d7e743:   shl    $0x3,%r10d             ; perform a left shift on the value in r10d by 3 (r10d = r10d << 3)
+  0x7f9816d7e747:   add    %r10d,%eax             ; add the value in r10d to eax (eax = eax + r10d)
+  ; eax stores the result
+```
+
 #### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JIT Compiler in this benchmark.
+
+### Analysis of recursive_method_calls
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler is capable of devirtualizing virtual calls and performs partial inlining up to a depth of 2.
+
+```
+  0x7f1290636b5a:   mov    0x14(%rsi),%ebp         ; load the value of the 'incrementValue' field into ebp
+  0x7f1290636b5d:   mov    0x10(%rsi),%edx         ; load the value of the 'defaultValue' field into edx
+  0x7f1290636b60:   shl    %edx                    ; perform a left shift on the value in edx by 1 (edx = 'defaultValue' << 1)
+  0x7f1290636b62:   mov    $0x6,%ecx               ; move the value 0x6 into ecx
+  0x7f1290636b67:   call   0x7f1290636740          ; <--- call to recursiveSum two layers deep
+                                                   ; parameters passed: edx (result), ecx (stack depth)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursive_method_calls@11 (line 108)
+                                                   ; {optimized virtual_call}
+  0x7f1290636b74:   add    %ebp,%eax               ; add 'incrementValue' to eax
+  0x7f1290636b76:   add    %ebp,%eax               ; add 'incrementValue' to eax
+  ; eax stores the final result (defaultValue << 1 + 8 x incrementValue)
+```
+
+The `recursiveSum` is partially inlined but also includes a recursive call to itself.
+
+```
+  recursiveSum
+
+    ↗ 0x7f1290636740:   mov    %eax,-0x14000(%rsp)      ; move the value in eax to the address -0x14000 in the stack
+    │ 0x7f129063675e:   mov    0x14(%rsi),%ebp          ; load the value of the 'incrementValue' field into ebp
+    │ 0x7f1290636761:   cmp    $0x1,%ecx                ; compare the value in ecx with 0x1
+  ╭ │ 0x7f1290636764:   je     0x7f1290636793           ; jump to 0x7f1290636793 if the comparison is equal (zero flag is set)
+  │ │ 0x7f1290636766:   add    $0xfffffffe,%ecx         ; decrement ecx by 2
+  │ ╰ 0x7f129063676b:   call   0x7f1290636740           ; <--- recursive call to itself
+  │                                                     ; invokevirtual recursiveSum
+  │                                                     ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                     ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                     ;   {optimized virtual_call}
+  │   0x7f1290636778:   add    %ebp,%eax                ; add 'incrementValue' to eax
+  │↗  0x7f129063677a:   add    %ebp,%eax                ; add 'incrementValue' to eax
+  ││  ...
+  ││  0x7f129063678e:   ret                             ; return from the function
+  ││  ...
+  ↘│  0x7f1290636793:   mov    %edx,%eax                ; move 'defaultValue' into eax
+   ╰  0x7f1290636795:   jmp    0x7f129063677a           ; jump to 0x7f129063677a (continuation)
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler eliminates all the virtual calls and further optimizes the code by eliminating locks and performing strength reduction optimizations to calculate the final result.
+
+```
+  0x7fa406d7c5ba:   mov    0x10(%rsi),%eax              ; load the value of the 'defaultValue' field into eax
+  0x7fa406d7c5bd:   mov    0x14(%rsi),%r10d             ; load the value of the 'incrementValue' field into r10d
+  0x7fa406d7c5c1:   shl    %eax                         ; perform a left shift on the value in eax by 1 (eax = eax << 1)
+  0x7fa406d7c5c3:   shl    $0x3,%r10d                   ; perform a left shift on the value in r10d by 3 (r10d = r10d << 3)
+  0x7fa406d7c5c7:   add    %r10d,%eax                   ; add the value in r10d to eax (eax = eax + r10d)
+  ; eax stores the result
+```
+
+#### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT is capable of devirtualizing virtual calls and performing partial inlining up to a depth of 6.
+
+```
+  0x7f5c6b2399df:   mov    0x10(%rsi),%edx         ; Load the value of the 'defaultValue' field into edx
+  0x7f5c6b2399e2:   mov    0x14(%rsi),%r10d        ; Load the value of the 'incrementValue' field into r10d
+  0x7f5c6b2399e6:   shl    %edx                    ; Perform a left shift on the value in edx by 1 (edx = 'defaultValue' << 1)
+  0x7f5c6b2399e8:   mov    $0x2,%ecx               ; Load the value 0x2 into ecx
+  0x7f5c6b2399ed:   mov    %r10d,0x4(%rsp)         ; Put the value from r10d (i.e., 'incrementValue') on the stack
+  0x7f5c6b2399f3:   call   0x7f5c6b239440          ; <--- call to recursiveSum six layers deep
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+                                                   ; - LockElisionBenchmark::recursive_method_calls@11 (line 108)
+                                                   ;   {optimized virtual_call}
+  0x7f5c6b239a00:   mov    0x4(%rsp),%r10d         ; Get back the r10d (i.e., 'incrementValue') from the stack
+  0x7f5c6b239a05:   mov    %r10d,%r11d             ; r11d = 'incrementValue'
+  0x7f5c6b239a08:   shl    $0x2,%r11d              ; r11d = 'incrementValue' << 2
+  0x7f5c6b239a0c:   shl    %r10d                   ; r10d = 'incrementValue' << 1
+  0x7f5c6b239a0f:   add    %r10d,%r11d             ; r11d = r10d + r11d
+  0x7f5c6b239a12:   add    %r11d,%eax              ; eax = eax + r11d
+  ; eax stores the result
+```
+
+The `recursiveSum` looks like this:
+
+```
+  recursiveSum
+
+  0x7f5c6b2394cc:   add    0x4(%rsp),%eax         ; add the value from the stack address + 0x4 (i.e., 'incrementValue') to eax
+  0x7f5c6b2394d0:   add    0x4(%rsp),%eax
+  0x7f5c6b2394d4:   add    0x4(%rsp),%eax
+  0x7f5c6b2394d8:   mov    0x4(%rsp),%r10d        ; move the value from the stack address + 0x4 (i.e., 'incrementValue') to r10d
+  0x7f5c6b2394dd:   add    %r10d,%eax             ; add the value from r10d (i.e., 'incrementValue') to eax
+```
+
 ### Conclusions
 
 ## LoopFusionBenchmark
