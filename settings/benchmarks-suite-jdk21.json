@@ -158,6 +158,11 @@
       "name": "LockCoarseningBenchmark"
     },
     {
+      "name": "LockCoarseningBenchmark",
+      "outputFileName": "LockCoarseningBenchmark_2threads",
+      "jmhOpts": "-t 2"
+    },
+    {
       "name": "LockElisionBenchmark"
     },
     {
