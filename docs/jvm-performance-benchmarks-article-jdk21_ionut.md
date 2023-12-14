@@ -621,6 +621,7 @@ The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a facto
 
 ```
   // Main loop
+  
   0x7f22eb23d83f:   mov    0x18(%rsi),%eax              ; get the array pointer
   0x7f22eb23d842:   mov    0xc(,%rax,8),%r10d           ; get the array length
   0x7f22eb23d85c:   mov    %r10d,%r8d                   ; copy array length to r8d
@@ -632,7 +633,7 @@ The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a facto
   ...
   0x7f22eb23d8c0:   mov    %r11d,%r9d                   ; initialize loop counter r9d from r11d
   ...
-                                                            ; <--- Loop beginning
+                                                        ; <--- Loop beginning
   0x7f22eb23d8e0:   add    0x10(%rax,%r9,4),%r11d       ; add value of the 1st element to r11d
   0x7f22eb23d8e5:   movslq %r9d,%rcx                    ; sign-extend r9d to rcx for addressing
   0x7f22eb23d8e8:   mov    0x14(%rax,%rcx,4),%ebx       ; store the value of the 2nd element in ebx
@@ -657,7 +658,7 @@ The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a facto
   0x7f22eb23d97e:   lea    0x10(%r9),%r9d               ; increment loop counter by 16
   0x7f22eb23d982:   mov    0x20(%rsp),%r8d              ; move saved value (i.e., array length) from stack to r8d
   0x7f22eb23d987:   cmp    %r9d,%r8d                    ; compare loop counter with saved value
-  0x7f22eb23d98a:   jg     0x7f22eb23d8e0           ; <--- loop end (jump loop back if greater)
+  0x7f22eb23d98a:   jg     0x7f22eb23d8e0               ; <--- loop end (jump loop back if greater)
   ; r11d stores the result of the main loop
 ```
 
@@ -1189,11 +1190,85 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
 - The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT Compiler that does a better job of inlining the callee recursive calls.
 
 ## LoopFusionBenchmark
+
+The benchmark assesses if the compiler triggers loop fusion, an optimization aimed to merge the adjacent loops into one loop to reduce the loop overhead and improve run-time performance.
+
+```
+  @Benchmark
+  public void initial_loops() {
+    for (int i = 1; i < size; i++) {
+      A[i] = A[i - 1] + B[i];
+    }
+
+    for (int i = 1; i < size; i++) {
+      B[i] = B[i - 1] + A[i];
+    }
+  }
+  
+  @Benchmark
+  public void manual_loops_fusion() {
+    for (int i = 1; i < size; i++) {
+      A[i] = A[i - 1] + B[i];
+      B[i] = B[i - 1] + A[i];
+    }
+  }  
+```
+
+Source code: [LoopFusionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopFusionBenchmark.java)
+
+[![LoopFusionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopFusionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopFusionBenchmark.svg?raw=true)
+
 ### Analysis
-#### C2 JIT Compiler
-#### Oracle GraalVM JIT Compiler
-#### GraalVM CE JIT Compiler
+
+The analysis below pertains to the `initial_loops` method, which is more interesting due to the differences in performance.
+
+Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a factor of 8 and handle the dependent load/store operations in a comparable manner. For instance, the following code snippet illustrates a main loop optimized by the C2 JIT:
+
+```
+    // Main loop
+    
+    0x7f1534637522:   mov    $0x2,%esi                   ; initialize loop counter  
+    ...
+                                                         ; <--- loop begins
+  ↗ 0x7f1534637541:   mov    0x10(%r8,%rsi,4),%r10d      ; load array2[i] into register r10d
+  │ 0x7f1534637546:   add    0xc(%r9,%rsi,4),%r10d       ; add array1[i - 1] to register r10d
+  │ 0x7f153463754b:   mov    %r10d,0x10(%r9,%rsi,4)      ; store r10d (array1[i - 1] + array2[i]) into array1[i]
+  │ 0x7f1534637550:   add    0x14(%r8,%rsi,4),%r10d      ; add array2[i + 1] to register r10d
+  │ 0x7f1534637555:   mov    %r10d,0x14(%r9,%rsi,4)      ; store r10d (array1[i - 1] + array2[i] + array2[i + 1]) into array1[i + 1]
+  │ ...
+  │ 0x7f1534637596:   add    $0x8,%esi                   ; increment loop counter by 8
+  │ 0x7f1534637599:   cmp    %eax,%esi                   ; compare loop counter against eax
+  ╰ 0x7f153463759b:   jl     0x7f1534637541              ; <--- loop end (jump back to loop if less)
+```
+
+Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT Compiler, the GraalVM CE JIT Compiler produces less optimal code due to the additional load instructions.
+
+```
+  // Main loop
+
+    0x7f96ef24270a:   mov    $0x2,%r11d                  ; initialize loop counter
+    ...  
+                                                         ; <--- loop begin
+  ↗ 0x7f96ef242720:   mov    0x10(%r9,%r11,4),%r8d       ; load array2[i] into register r8d
+  │ 0x7f96ef242725:   movslq %r11d,%rdi                  ; sign-extend loop counter to rdi
+  │ 0x7f96ef242728:   add    0xc(%rcx,%rdi,4),%r8d       ; load array1[i - 1] into register r8d
+  │ 0x7f96ef24272d:   mov    %r8d,0x10(%rcx,%r11,4)      ; store array1[i] = array1[i - 1] + array2[i]
+  │ 0x7f96ef242732:   mov    0x14(%r9,%rdi,4),%r8d       ; load array2[i + 1] into register r8d
+  │ 0x7f96ef242737:   add    0x10(%rcx,%r11,4),%r8d      ; load array1[i] into register r8d
+  │ 0x7f96ef24273c:   mov    %r8d,0x14(%rcx,%rdi,4)      ; store array1[i + 1] = array1[i] + array2[i + 1]
+  │ 0x7f96ef242741:   mov    0x18(%r9,%rdi,4),%r8d       ; load array2[i + 2] into register r8d
+  │ 0x7f96ef242746:   add    0x14(%rcx,%rdi,4),%r8d      ; load array1[i + 1] into register r8d
+  │ 0x7f96ef24274b:   mov    %r8d,0x18(%rcx,%rdi,4)      ; store array1[i + 2] = array1[i + 1] + array2[i + 2]
+  │ ...
+  │ 0x7f96ef24279b:   lea    0x8(%r11),%r11d             ; increment loop counter by 8
+  │ 0x7f96ef2427a0:   cmp    %r11d,%ebx                  ; compare ebx against loop counter
+  ╰ 0x7f96ef2427a3:   jg     0x7f96ef242720              ; <--- loop end (jump loop back if greater)
+```
+
 ### Conclusions
+
+- None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loops_fusion` does not yield significant benefits. In fact, due to the data dependency between array elements within a loop cycle, manual_loops_fusion becomes less optimal rather than improving performance.
+- The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
 
 ## LoopInvariantCodeMotionBenchmark
 ### Analysis
