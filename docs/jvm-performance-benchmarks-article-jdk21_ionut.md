@@ -16,14 +16,14 @@ Florin Blanaru
 - [Context](#context)
 - [SetUp](#setup)
 - [JIT Compiler](#jit-compiler)
-    - [Benchmarks](#jit-benchmarks)
-    - [Geometric Mean](#jit-geometric-mean)
+  - [Benchmarks](#jit-benchmarks)
+  - [Geometric Mean](#jit-geometric-mean)
 - [API](#api)
-    - [Benchmarks](#api-benchmarks)
-    - [Geometric Mean](#api-geometric-mean)
+  - [Benchmarks](#api-benchmarks)
+  - [Geometric Mean](#api-geometric-mean)
 - [Miscellaneous](#miscellaneous)
-    - [Benchmarks](#miscellaneous-benchmarks)
-    - [Geometric Mean](#miscellaneous-geometric-mean)
+  - [Benchmarks](#miscellaneous-benchmarks)
+  - [Geometric Mean](#miscellaneous-geometric-mean)
 - [Overall Geometric Mean](#overall-geometric-mean)
 - [Final Thoughts](#final-thoughts)
 - [References](#references)
@@ -60,12 +60,12 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
 - Java Microbenchmark Harness (JMH) v1.37
 - each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also multi-threaded workloads (depending on the test case)
 - the benchmarks were run on the below machines:
-    1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
-    2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
+  1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
+  2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
 - to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine:
-    1. disabled the turbo-boost mode
-    2. set CPU governor to _performance_
-    3. disabled CPU hyper-threading
+  1. disabled the turbo-boost mode
+  2. set CPU governor to _performance_
+  3. disabled CPU hyper-threading
 
 # JIT Compiler
 
@@ -1271,6 +1271,16 @@ Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT
 - The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
 
 ## LoopInvariantCodeMotionBenchmark
+
+Test how the compiler deals with loop invariant code motion, in essence how it is able to move the invariant code before and after a loop.
+Hoisting and sinking are terms that Compiler refers to moving operations outside loops:
+- hoisting a load means to move the load so that it occurs before the loop
+- sinking a store means to move a store to occur after a loop
+
+Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopInvariantCodeMotionBenchmark.java)
+
+[![LoopInvariantCodeMotionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)
+
 ### Analysis
 #### C2 JIT Compiler
 #### Oracle GraalVM JIT Compiler
