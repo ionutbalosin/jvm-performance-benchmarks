@@ -1282,10 +1282,30 @@ Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbal
 [![LoopInvariantCodeMotionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)
 
 ### Analysis
+
+The hot methods identified by the `-prof perfasm` primarily consist of runtime-generated stubs, making it difficult to grasp the Compiler optimizations.
+Raising the `-prof perfasm:mergeMargin=<value>` to a higher setting could potentially offer deeper insights. However, the extensive volume of generated assembly code exceeds the scope (or knowledge) of our analysis.
+
+Consequently, we've opted to incorporate only the flame graphs and offer high-level insights about the utilized runtime stubs.
+
+The section below pertains to the `initial_loop` method.
+
 #### C2 JIT Compiler
+
+[![LoopInvariantCodeMotionBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+
 #### Oracle GraalVM JIT Compiler
+
+[![LoopInvariantCodeMotionBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+
 #### GraalVM CE JIT Compiler
+
+[![LoopInvariantCodeMotionBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+
 ### Conclusions
+
+- The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler use a different trigonometric stub, `AMD64MathStub.tan`, compared to the C2 JIT Compiler's `StubRoutines::libmTan`.
+- Overall, the GraalVM EE JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT Compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
 
 ## LoopReductionBenchmark
 ### Analysis
