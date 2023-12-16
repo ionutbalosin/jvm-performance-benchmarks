@@ -292,29 +292,121 @@ void allocateObjects() {
 
 ## MandelbrotVectorApiBenchmark
 
-... TODO ...
+This benchmark tests the performance of Project Panama's Vector API when used to compute the Mandelbrot set.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+The `baseline` benchmark uses single element computations and the JIT compilers might device to vectorize.
+The `vectorized` benchmark uses the Vector API to perform the equivalent computation.
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+```
+  @Benchmark
+  public Object vectorized() {
+    double threshold = 4;
 
-### Analysis
+    for (int row = 0;
+        row < DOUBLE_VECTOR_SPECIES.loopBound(size);
+        row += DOUBLE_VECTOR_SPECIES.length()) {
+      DoubleVector row_vector = DoubleVector.broadcast(DOUBLE_VECTOR_SPECIES, (double) row);
+
+      for (int col = 0;
+          col < DOUBLE_VECTOR_SPECIES.loopBound(size);
+          col += DOUBLE_VECTOR_SPECIES.length()) {
+        DoubleVector col_vector =
+            DoubleVector.broadcast(DOUBLE_VECTOR_SPECIES, (double) col).add(increments);
+        DoubleVector c_re = col_vector.sub(size / 2.0).mul(4.0 / size);
+        DoubleVector c_im = row_vector.sub(size / 2.0).mul(4.0 / size);
+
+        DoubleVector x = DoubleVector.zero(DOUBLE_VECTOR_SPECIES);
+        DoubleVector y = DoubleVector.zero(DOUBLE_VECTOR_SPECIES);
+
+        DoubleVector x_square = x.mul(x);
+        DoubleVector y_square = y.mul(y);
+
+        DoubleVector iter_vector = DoubleVector.zero(DOUBLE_VECTOR_SPECIES);
+        int iter = 0;
+        while (iter < iterations) {
+          DoubleVector x_new = x_square.sub(y_square).add(c_re);
+          y = x.add(x).mul(y).add(c_im);
+          x = x_new;
+
+          x_square = x.mul(x);
+          y_square = y.mul(y);
+
+          VectorMask<Double> comp_res =
+              x_square.add(y_square).compare(VectorOperators.LE, threshold);
+          iter_vector = iter_vector.add(ones, comp_res);
+          if (!comp_res.anyTrue()) {
+            break;
+          }
+          iter++;
+        }
+        DoubleVector res_vector =
+            DoubleVector.zero(DOUBLE_VECTOR_SPECIES)
+                .add(1, iter_vector.compare(VectorOperators.EQ, iterations));
+        res_vector.intoArray(result, row * size + col);
+      }
+    }
+    return result;
+  }
+```
+
+Source code: [MandelbrotVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/vector/MandelbrotVectorApiBenchmark.java)
+
+[![MandelbrotVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MandelbrotVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MandelbrotVectorApiBenchmark.svg?raw=true)
+
+### Analysis of vectorized
+
+The `baseline` benchmark performs equally well on all three JIT compilers. 
+The `vectorized` benchmark performs differently between the JIT compilers and the same trend is kept regardless of the 
+number of iterations or vector size used.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT compiler implements all the Vector API compiler intrinsics required to vectorize the benchmark body and
+therefore performs the fastert. It also unrolls the inner while loop of the benchmark by a factor of 4.
+
+```
+...                                                           ; more vectorized code above
+0x00007f99386729e9:   vblendvps %ymm15,%ymm4,%ymm13,%ymm13    ; vectorized code
+0x00007f99386729ef:   vtestps %ymm15,%ymm15                   ; if condition check of the inner while loop
+0x00007f99386729f4:   je     0x00007f9938672805               ; break if true. Jump to inner for loop
+0x00007f99386729fa:   add    $0x4,%r8d                        ; add while loop unroll factor
+0x00007f99386729fe:   xchg   %ax,%ax                          ; nop
+0x00007f9938672a00:   cmp    %esi,%r8d                        ; compare against loop bound
+0x00007f9938672a03:   jl     0x00007f9938672900               ; jump back to the while loop start if loop condition is true
+```
 
 #### Oracle GraalVM JIT Compiler
 
-... TODO ...
+The Oracle GraalVM JIT compiler also implements all the Vector API compiler intrinsics required to vectorize the benchmark
+body and generates similar assembly instructions as the C2 JIT compiler. One difference that can also account for the 
+performance difference is that the Oracle GraalVM JIT compiler does not unroll the inner while loop.
+
+```
+...                                                       ; more vectorized code above
+0x00007f8626da4400:   inc    %r14d                        ; increment the while loop induction variable by one
+0x00007f8626da4403:   cmp    %r14d,%r11d                  ; compare against loop bound
+0x00007f8626da4406:   jle    0x00007f8626da4495           ; exit loop if loop condition is false
+0x00007f8626da440c:   vmovupd %ymm13,0x10(%rsp)           ; loop body contains vectorized code
+...                                                       ; more vectorized code below
+```
 
 #### GraalVM CE JIT Compiler
 
-... TODO ...
+The GraalVM CE JIT compiler does not implement all the Vector API compiler intrinsics required to vectorize the benchmark
+body and therefore falls back to the Java implementation of the Vector API. This results in a significant performance 
+degradation and can be seen by looking at the hottest methods in the benchmark after inlining.
+
+```
+43.54%       jvmci, level 4  jdk.incubator.vector.DoubleVector$$Lambda.0x00007f61f80d0e80::apply, version 2, compile id 1265 
+27.72%       jvmci, level 4  jdk.incubator.vector.DoubleVector$$Lambda.0x00007f61f80d18d8::apply, version 2, compile id 1266 
+16.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1276
+```
 
 ### Conclusions
 
-... TODO ...
+Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
+and better than the `baseline` benchmark. 
+The GraalVM CE JIT compiler is not able (yet) to vectorize the benchmark body and falls back to the Java implementation of the Vector API. 
 
 ## MegamorphicInterfaceCallBenchmark
 
