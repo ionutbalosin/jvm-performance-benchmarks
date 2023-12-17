@@ -410,29 +410,209 @@ The GraalVM CE JIT compiler is not able (yet) to vectorize the benchmark body an
 
 ## MegamorphicInterfaceCallBenchmark
 
-... TODO ...
+This benchmark tests the performance of interface calls with a different number of targets. The JIT compiler is expected 
+to optimize interface calls to a single receiver type with an instanceof check followed by a static call to the concrete
+target method. This benchmark also tests the performance of manually splitting one call site into multiple monomorphic call sites.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+```
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+  @Benchmark
+  @OperationsPerInvocation(SIZE)
+  public void virtual_calls_chain() {
+    I[] instances = this.instances;
+    for (I instance : instances) {
+      instance.foo();
+    }
+  }
 
-### Analysis
+  // Manually split the call site to receive only one target -> monomorphic
+  @Benchmark
+  @OperationsPerInvocation(SIZE)
+  public void devirtualize_to_monomorphic() {
+    byte[] instanceIndex = this.instanceIndex;
+    I[] instances = this.instances;
+    for (int i = 0; i < SIZE; i++) {
+      I instance = instances[i];
+      switch (instanceIndex[i]) {
+        case 0:
+          instance.foo();
+          break;
+        ... same pattern for all of the remaining targets
+        case 5:
+          instance.foo();
+          break;
+        default:
+          throw new RuntimeException("Should not reach here.");
+      }
+    }
+  }
+
+  private static class C{1,..,6} implements I {}
+  interface I extends I5 {
+    private void baz() { foot_5(); }
+    default void foo() { baz(); }
+  }
+
+  interface I5 extends I4 {
+    private void baz_5() { foot_4(); }
+    default void foo_5() { baz_5(); }
+  }
+  ... same pattern for all of the remaining interface declarations
+  interface I1 {
+    static Wrapper wrapper = new Wrapper();
+    default void baz_1() { wrapper.x++; }
+    private void foo_1() { baz_1(); 
+  }
+
+```
+
+Source code: [MegamorphicInterfaceCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark.java)
+
+[![MegamorphicInterfaceCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MegamorphicInterfaceCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MegamorphicInterfaceCallBenchmark.svg?raw=true)
+
+### Analysis of virtual_calls_chain
+
+The `virtual_calls_chain` benchmark measures the performance of interface calls with a different number of targets at
+the call site.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT compiler is able to devirtualize and inline through the entire interface chain call sites that use up to 
+two different targets. In such cases, it also performs loop unrolling by a factor of 4 on the hot loop.
+
+```
+0x00007fd0d4638090:   mov    0x10(%r11,%rcx,4),%eax       ; load in %eax the oop from the instances array at offset %rcx  
+0x00007fd0d4638095:   mov    0x8(%r12,%rax,8),%r10d       ; load the klass word of the object in %r10d
+0x00007fd0d463809a:   nopw   0x0(%rax,%rax,1)             ; alignment nop
+0x00007fd0d46380a0:   cmp    $0x1084000,%r10d             ; compare the klass word with the expected target klass
+0x00007fd0d46380a7:   jne    0x00007fd0d463818d           ; jump if not equal to the slow path
+...                                                       ; similar checks replicated 3 more times due to unroll factor of 4
+0x00007fd0d4638112:   add    $0x4,%eax                    ; add 4 to the wrapper result
+0x00007fd0d4638115:   mov    %eax,0xc(%rbp)               ; store the eax result
+0x00007fd0d4638118:   add    $0x4,%ecx                    ; increment the loop induction variable by 4
+0x00007fd0d463811b:   cmp    %esi,%ecx                    ; compare against the loop bound
+0x00007fd0d463811d:   data16 xchg %ax,%ax                 ; alignment nop
+0x00007fd0d4638120:   jl     0x00007fd0d4638090           ; jump back to the loop start if loop condition is true
+```
+
+For more than three targets, the C2 JIT compiler always uses a series of interface calls to reach the target method.
 
 #### Oracle GraalVM JIT Compiler
 
-... TODO ...
+The Oracle GraalVM JIT compiler inlines for a number of targets lower or equal to four. If more targets are present
+(.e.g `virtual_calls_chain[MEGAMORPHIC_5]` and `virtual_calls_chain[MEGAMORPHIC_6]`), then it will check for 
+the first four targets. If none of the targets match, then it will use an interface call to reach the target method.
+
+```
+  0x00007f2092ff8576:   mov    0x8(,%rsi,8),%ebx            ; load the klass word of the object in %ebx
+  0x00007f2092ff857d:   cmp    $0x102c000,%ebx              ; check if instance of C2
+  0x00007f2092ff8583:   je     0x00007f2092ff86d3           ; jump to fully inlined C2 method
+  0x00007f2092ff8589:   cmp    $0x10259f0,%ebx              ; check if instance of C1
+  0x00007f2092ff858f:   je     0x00007f2092ff8709           ; jump to fully inlined C1 method
+  0x00007f2092ff8595:   cmp    $0x102c2c0,%ebx              ; check if instance of C3
+  0x00007f2092ff859b:   je     0x00007f2092ff86fd           ; jump to fully inlined C3 method
+  0x00007f2092ff85a1:   cmp    $0x102c580,%ebx              ; check if instance of C4
+  0x00007f2092ff85a7:   je     0x00007f2092ff8715           ; jump to fully inlined C4 method
+  0x00007f2092ff85ad:   mov    %r11d,0xc(%rsp)              ; save the loop induction variable to the stack in case of deoptimization
+  0x00007f2092ff85b2:   test   %eax,0x0(,%rsi,8)            ; deopt check 
+  0x00007f2092ff85b9:   shl    $0x3,%rsi                    ; compute the full address from the oop
+  0x00007f2092ff85bd:   movabs $0x7f1fd002cb00,%rax
+  0x00007f2092ff85c7:   call   0x00007f2092ff63a0           ; perform the interface call to reach the target method
+```
+
+If a dominant target is present (e.g. `virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`), then the Oracle GraalVM JIT compiler
+will devirtualize and inline for the common case and use the interface call for the remaining cases.
+
+```
+  // High-level pseudo-code of the optmization for a dominant target
+  if (receiver instanceof DominantTarget) {
+    // fast path. 
+    DominantTarget.method(); // inlined
+  } else {
+    // slow path. Use an interface call to reach the target method.
+    receiver.method();
+  }
+```
 
 #### GraalVM CE JIT Compiler
 
-... TODO ...
+The GraalVM CE JIT Compiler is able to devirtualize (and inline) through the chain of interface calls
+for all the number of targets used in the benchmark. It does not perform loop unrolling, but uses a series of compare and jump 
+instructions (by checking against the method constant pool) to check if the receiver is an instance of an expected target type. 
+Since in our benchmark all calls resolve to the same target method, the GraalVM CE JIT Compiler is able to inline only 
+once the target method.
+
+### Analysis of devirtualize_to_monomorphic
+
+The `devirtualize_to_monomorphic` benchmark measures the performance and effectiveness of trying to manually split
+a megamorphic call site into multiple monomorphic call sites. The benchmark uses a switch statement where each case
+will always resolve to the same target method. 
+
+#### C2 JIT Compiler and GraalVM CE JIT Compiler
+
+Both the C2 JIT compiler and the GraalVM CE JIT compiler are able to devirtualize and inline through the entire interface
+chain calls. The same applies when a dominant target is present. 
+
+```
+0x00007f21a7242090:   cmp    $0x1c20,%r11d                ; compare the loop induction variable against the loop bound
+0x00007f21a7242097:   jge    0x00007f21a72421bd           ; jump out of the loop if the loop condition is false
+0x00007f21a724209d:   mov    0x10(%r10,%r11,4),%ebx       ; load this.instances[i] in %ebx
+0x00007f21a72420a2:   movsbl 0x10(%r11,%r8,8),%edx        ; load this.instanceIndex[i] in %edx
+0x00007f21a72420a8:   mov    %r11d,%esi                   ; move the loop induction variable in %esi
+0x00007f21a72420ab:   inc    %esi                         ; increment the loop induction variable by one
+0x00007f21a72420ad:   inc    %r9d                         ; add 1 to the register containing the wrapper result
+0x00007f21a72420b0:   cmp    $0x3,%edx                    ; switch logic starts here. Compare the instanceIndex[i] against 3
+0x00007f21a72420b3:   jge    0x00007f21a72420dd           ; ... and through one or more jumps land on the correct case
+0x00007f21a72420b9:   cmp    $0x2,%edx                    
+0x00007f21a72420bc:   nopl   0x0(%rax)                    
+0x00007f21a72420c0:   jge    0x00007f21a724213d           
+0x00007f21a72420c6:   cmp    $0x0,%edx                    
+0x00007f21a72420c9:   je     0x00007f21a72420fd           
+0x00007f21a72420cf:   cmp    $0x1,%edx                    
+0x00007f21a72420d2:   je     0x00007f21a724211d           
+0x00007f21a72420d8:   jmp    0x00007f21a7242355           
+0x00007f21a72420dd:   cmp    $0x5,%edx                    
+0x00007f21a72420e0:   jg     0x00007f21a7242355           
+0x00007f21a72420e6:   cmp    $0x5,%edx
+0x00007f21a72420e9:   jge    0x00007f21a724219d
+0x00007f21a72420ef:   cmp    $0x3,%edx
+0x00007f21a72420f2:   je     0x00007f21a724215d
+0x00007f21a72420f8:   jmp    0x00007f21a724217d           ; switch logic ends here.
+0x00007f21a72420fd:   data16 xchg %ax,%ax                 ; alignment nop. Case 0 starts here
+0x00007f21a7242100:   cmpl   $0x1080810,0x8(,%rbx,8)      ; monomorphic call site check. Compare the klass word of the object in %rbx with the expected target klass  
+0x00007f21a724210b:   jne    0x00007f21a724229c           ; jump to the slow path if the check fails
+0x00007f21a7242111:   mov    %r9d,0xc(%rdi)               ; store the wrapper result in the field
+0x00007f21a7242115:   mov    %esi,%r11d                   ; move the loop induction variable in %r11d
+0x00007f21a7242118:   jmp    0x00007f21a7242090           ; jump back to the loop beginning
+... similar code for the remaining cases below ...
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT compiler is able to is able to devirtualize and inline only for a number of four call sites or less.
+For the remaining call sites, it will devirtualize up to a certain depth in the interface chain and then use an interface
+call. 
+
+```
+0x00007f7152d81f15:   shl    $0x3,%r9                     ; compute the full address from the oop
+0x00007f7152d81f19:   mov    %r9,%rsi                     ; move the full address in %rsi
+0x00007f7152d81f1c:   mov    %r9,0x10(%rsp)               ; save the full address to the stack
+0x00007f7152d81f21:   xchg   %ax,%ax                      ; nop
+0x00007f7152d81f23:   call   0x00007f7152d7fbc0           ; invokeinterface foo_4
+                                                          ; MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 246)
+                                                          ; MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 250)
+                                                          ; MegamorphicInterfaceCallBenchmark$I::baz@1 (line 256)
+                                                          ; MegamorphicInterfaceCallBenchmark$I::foo@1 (line 260)
+                                                          ; MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 159)
+                                                          ; {optimized virtual_call}
+```
 
 ### Conclusions
 
-... TODO ...
+When it comes to interface calls, GraalVM CE JIT performs best across all the benchmark configurations. It is then 
+closely followed by the Oracle GraalVM JIT compiler. The C2 JIT compiler does not perform very well when the number 
+of targets is higher than two. With small exceptions, all compilers perform equally well when manual call site
+splitting is applied.
 
 ## MegamorphicMethodCallBenchmark
 
