@@ -1308,10 +1308,96 @@ The section below pertains to the `initial_loop` method.
 - Overall, the GraalVM EE JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT Compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
 
 ## LoopReductionBenchmark
+
+Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by the number of additions within that loop.
+This optimization is based on the induction variable to strength the additions.
+
+```
+  @Benchmark
+  public void initial_loop() {
+    auto_reduction(iterations, offset);
+  }
+
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private int auto_reduction(final int iterations, int accumulator) {
+    for (int i = 0; i < iterations; ++i) {
+      accumulator++;
+    }
+    return accumulator;
+  }
+```
+
+Source code: [LoopReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopInvariantCodeMotionBenchmark.java)
+
+[![LoopReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopReductionBenchmark.svg?raw=true)
+
 ### Analysis
+
+The analysis below pertains to the `initial_loop` method, which is more interesting due to the differences in performance.
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler devirtualizes the `auto_reduction` call and performs loop reduction.
+
+```
+  initial_loop
+  
+  0x7fede06381da:   mov    0xc(%rsi),%edx             ; load the 'iterations' value into edx
+  0x7fede06381dd:   mov    0x10(%rsi),%ecx            ; load the 'offset' value into ecx
+  0x7fede06381e3:   call   0x7fede0637ea0             ; invokevirtual auto_reduction
+                                                      ; - LoopReductionBenchmark::initial_loop@9 (line 64)
+                                                      ; {optimized virtual_call}
+```
+
+```
+  auto_reduction (w/ loop reduction)
+  
+       0x7fede0637eba:   test   %edx,%edx             ; check if edx ('iterations') is zero
+  ╭    0x7fede0637ebc:   jle    0x7fede0637ee6        ; jump if edx ('iterations') is less than or equal to zero
+  │    0x7fede0637ebe:   mov    $0x1,%r10d            ; load 0x1 into r10d
+  │    0x7fede0637ec4:   cmp    %edx,%r10d            ; compare r10d (0x1) with edx ('iterations')
+  │╭   0x7fede0637ec7:   jge    0x7fede0637ee0        ; jump if greater than or equal
+  ││   0x7fede0637ec9:   add    %ecx,%edx             ; add ecx ('offset') to edx ('iterations')
+  ││↗  0x7fede0637ecb:   mov    %edx,%eax             ; move the result to eax
+  │││  ...
+  │││↗ 0x7fede0637ecd:   ret
+  ││││ ...
+  │↘││ 0x7fede0637ee0:   mov    %ecx,%edx             ; move ecx ('offset') into edx
+  │ ││ 0x7fede0637ee2:   inc    %edx                  ; increment edx ('offset')
+  │ ╰│ 0x7fede0637ee4:   jmp    0x7fede0637ecb
+  ↘  │ 0x7fede0637ee6:   mov    %ecx,%eax             ; move ecx ('offset') into eax
+     ╰ 0x7fede0637ee8:   jmp    0x7fede0637ecd        ; jump to return
+```
+
 #### Oracle GraalVM JIT Compiler
+
+Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and performs loop reduction but with less jumps instructions than C2 JIT Compiler.
+
+```
+  initial_loop
+  
+  0x7f4d82d7fb5f:   mov    0x10(%rsi),%ecx     ; load the 'offset' value into ecx
+  0x7f4d82d7fb62:   mov    0xc(%rsi),%edx      ; load the 'iterations' value into edx
+  0x7f4d82d7fb67:   call   0x7f4d82d7f820      ; invokevirtual auto_reduction
+                                               ; - LoopReductionBenchmark::initial_loop@9 (line 64)
+                                               ;   {optimized virtual_call}
+```
+
+```
+  auto_reduction (w/ loop reduction)
+  
+  0x7f4d82d7f83a:   test   %edx,%edx           ; check if edx ('iterations') is zero
+  0x7f4d82d7f83c:   mov    $0x0,%eax           ; eax = 0x0
+  0x7f4d82d7f841:   cmovl  %eax,%edx           ; move eax (0x0) to edx if 'iterations' is zero
+  0x7f4d82d7f844:   add    %edx,%ecx           ; add edx to ecx ('offset')
+  0x7f4d82d7f846:   mov    %ecx,%eax           ; move the result to eax
+  ...
+  0x7f4d82d7f859:   ret
+```
+
 #### GraalVM CE JIT Compiler
+
+
 ### Conclusions
 
 ## RecursiveMethodCallBenchmark
