@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.prime.PrimesBenchmark.eratosthenes_sieve","avgt",1,25,35.226755,0.366328,"ms/op",8388608
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.prime.PrimesBenchmark.miller_rabin","avgt",1,25,5181.516560,7.899987,"ms/op",8388608
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.prime.PrimesBenchmark.trial_division","avgt",1,25,4466.901130,2.758759,"ms/op",8388608

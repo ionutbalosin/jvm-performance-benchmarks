@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: strideType"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,3.166619,0.000564,"ns/op",LINEAR_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,7.674420,0.037597,"ns/op",RANDOM_PAGE_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.dependent_walk","avgt",1,25,4.069609,0.001931,"ns/op",RANDOM_HEAP_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,0.836965,0.006731,"ns/op",LINEAR_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,1.998546,0.011757,"ns/op",RANDOM_PAGE_WALK
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.MemoryAccessPatternsBenchmark.walk","avgt",1,25,14.908939,0.094050,"ns/op",RANDOM_HEAP_WALK

@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: coder","Param: length","Param: slice"
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringSubstringBenchmark.subsequence","avgt",1,25,14.013422,0.010490,"ns/op",LATIN1,1024,8
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringSubstringBenchmark.subsequence","avgt",1,25,22.648998,0.100716,"ns/op",UTF16,1024,8
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringSubstringBenchmark.substring","avgt",1,25,14.009664,0.003777,"ns/op",LATIN1,1024,8
+"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringSubstringBenchmark.substring","avgt",1,25,25.759640,11.154482,"ns/op",UTF16,1024,8

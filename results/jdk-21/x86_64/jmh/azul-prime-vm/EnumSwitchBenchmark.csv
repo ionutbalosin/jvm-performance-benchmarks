@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: branches"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.chained_ifs","avgt",1,25,0.994677,0.004381,"ns/op",3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.chained_ifs","avgt",1,25,1.307896,0.000835,"ns/op",6
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.chained_ifs","avgt",1,25,2.440986,0.000624,"ns/op",12
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.chained_ifs","avgt",1,25,3.581066,0.001063,"ns/op",24
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_expressions","avgt",1,25,11.777945,0.027185,"ns/op",3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_expressions","avgt",1,25,12.981190,0.018173,"ns/op",6
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_expressions","avgt",1,25,13.639796,0.039657,"ns/op",12
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_expressions","avgt",1,25,14.096303,0.025513,"ns/op",24
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_statements","avgt",1,25,11.586436,0.011918,"ns/op",3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_statements","avgt",1,25,12.880252,0.013293,"ns/op",6
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_statements","avgt",1,25,13.646801,0.004893,"ns/op",12
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.EnumSwitchBenchmark.switch_statements","avgt",1,25,14.110082,0.001033,"ns/op",24

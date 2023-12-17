@@ -1,0 +1,12 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: bytesSize"
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.doubles","avgt",1,25,10.085491,0.053324,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.ints","avgt",1,25,9.475541,0.026537,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.longs","avgt",1,25,10.139614,0.052851,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_boolean","avgt",1,25,2.612364,0.080561,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_bytes","avgt",1,25,1075.651062,0.405865,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_double","avgt",1,25,4.028782,0.130772,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_exponential","avgt",1,25,12.376809,0.037859,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_float","avgt",1,25,2.885419,0.000678,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_gaussian","avgt",1,25,36.166547,1.834689,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_int","avgt",1,25,2.659476,0.111971,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.random.ThreadLocalRandomBenchmark.next_long","avgt",1,25,2.678106,0.011263,"ns/op",1024

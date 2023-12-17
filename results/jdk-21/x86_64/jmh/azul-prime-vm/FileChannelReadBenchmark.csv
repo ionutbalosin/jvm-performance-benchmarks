@@ -1,0 +1,2 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize","Param: fileSize"
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.FileChannelReadBenchmark.read","avgt",1,25,1.519909,0.004018,"us/op",_1_KB,_64_MB

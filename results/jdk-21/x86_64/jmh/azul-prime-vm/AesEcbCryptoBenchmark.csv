@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.decrypt","avgt",1,25,18.987204,0.008200,"us/op",16384,128,AES/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.decrypt","avgt",1,25,20.414316,0.061721,"us/op",16384,128,AES/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.decrypt","avgt",1,25,18.662862,0.016924,"us/op",16384,192,AES/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.decrypt","avgt",1,25,20.052829,0.056606,"us/op",16384,192,AES/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.decrypt","avgt",1,25,19.106808,0.060809,"us/op",16384,256,AES/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.decrypt","avgt",1,25,20.763226,0.067447,"us/op",16384,256,AES/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.encrypt","avgt",1,25,18.796038,0.063457,"us/op",16384,128,AES/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.encrypt","avgt",1,25,20.612198,0.131889,"us/op",16384,128,AES/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.encrypt","avgt",1,25,18.879827,0.019994,"us/op",16384,192,AES/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.encrypt","avgt",1,25,20.528760,0.111337,"us/op",16384,192,AES/ECB/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.encrypt","avgt",1,25,19.164357,0.026221,"us/op",16384,256,AES/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesEcbCryptoBenchmark.encrypt","avgt",1,25,21.134714,0.145061,"us/op",16384,256,AES/ECB/PKCS5Padding

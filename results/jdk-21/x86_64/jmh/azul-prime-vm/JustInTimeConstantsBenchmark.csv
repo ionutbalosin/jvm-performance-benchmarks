@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.JustInTimeConstantsBenchmark.final_property","avgt",1,25,0.771728,0.000026,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.JustInTimeConstantsBenchmark.property","avgt",1,25,0.771722,0.000021,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.JustInTimeConstantsBenchmark.static_final_property","avgt",1,25,0.771743,0.000065,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.JustInTimeConstantsBenchmark.static_property","avgt",1,25,1.157502,0.000013,"ns/op"
