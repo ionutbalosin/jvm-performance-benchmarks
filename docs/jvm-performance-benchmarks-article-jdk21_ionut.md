@@ -1397,8 +1397,43 @@ Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and pe
 
 #### GraalVM CE JIT Compiler
 
+The generated code by the GraalVM CE JIT is abysmal.
+
+```
+  auto_reduction
+
+      0x7f16c31979c0:  cmp    $0x1,%edx              ; compare edx ('iterations') against 0x1
+  ╭   0x7f16c31979c3:  jl     0x7f16c3197a6e         ; jump if edx ('iterations') is less than 0x1
+  │   ...
+  │╭  0x7f16c31979e0:  jmp    0x7f16c3197a05 
+  ││↗ 0x7f16c3197a00:  inc    %ecx                   ; increment ecx ('offset')
+  │││ 0x7f16c3197a02:  inc    %r10d                  ; increment loop counter
+  │↘│ 0x7f16c3197a05:  cmp    %r10d,%eax             ; compare against eax ('iterations' or 0x2)
+  │ ╰ 0x7f16c3197a08:  jg     0x7f16c3197a00         ; jump back if greater
+  │   ...
+  │╭  0x7f16c3197a13:  jmp    0x7f16c3197a28
+  ││↗ 0x7f16c3197a20:  lea    0x10(%r11),%r11d
+  │││ 0x7f16c3197a24:  lea    0x10(%r10),%r10d
+  │↘│ 0x7f16c3197a28:  cmp    %r11d,%eax
+  │ ╰ 0x7f16c3197a2b:  jg     0x7f16c3197a20
+  │   ...
+  │╭  0x7f16c3197a2d:  jmp    0x7f16c3197a50
+  ││↗ 0x7f16c3197a40:  inc    %r11d                  ; increment r11d
+  │││ 0x7f16c3197a43:  inc    %r10d                  ; increment r10d
+  │↘│ 0x7f16c3197a50:  cmp    %r11d,%edx             ; compare edx ('iterations') against r11d
+  │ ╰ 0x7f16c3197a53:  jg     0x7f16c3197a40         ; jump back if greater
+  │↗  0x7f16c3197a55:  mov    %r10d,%eax             ; move r10d to eax
+  ││  ...
+  ││  0x7f16c3197a6d:  ret
+  ││  ...
+  ↘│  0x7f16c3197a6e:  mov    %ecx,%r10d             ; move ecx ('offset') to r10d
+   ╰  0x7f16c3197a71:  jmp    0x7f16c3197a55         ; jump back
+```
 
 ### Conclusions
+
+- The C2 JIT Compiler and the Oracle GraalVM JIT Compiler offer similar optimization patterns, hence achieving similar response times
+- The GraalVM CE JIT Compiler exhibits lower performance (i.e., poor optimizations) in this benchmark
 
 ## RecursiveMethodCallBenchmark
 ### Analysis
