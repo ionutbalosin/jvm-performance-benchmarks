@@ -1397,7 +1397,7 @@ Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and pe
 
 #### GraalVM CE JIT Compiler
 
-The generated code by the GraalVM CE JIT is abysmal.
+The `auto_reduction` generated code by the GraalVM CE JIT is abysmal.
 
 ```
   auto_reduction
