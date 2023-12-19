@@ -465,7 +465,7 @@ The following snapshot is from the C2 JIT Compiler output, although the same pat
   0x07f77984f8e10:   mov    %rbx,%rdi
   0x07f77984f8e16:   movabs $0x7f7797f6a400,%r10
   0x07f77984f8e20:   call   *%r10                        ; function call to handle enum values
-  0x07f77984f8e2b:   mov    (%rbx),%r11d                 ;*invokevirtual clone
+  0x07f77984f8e2b:   mov    (%rbx),%r11d                 ; invokevirtual clone
                                                          ; - EnumValuesLookupBenchmark$Car::values
 ```
 
@@ -1164,13 +1164,14 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
   ││ 0x7f977318eeac:   mov    %r10d,0x4(%rsp)       ; store %r10d (i.e., 'incrementValue') at stack address + 0x4
   ││ ...
   │╰ 0x7f977318eeb7:   call   0x7f977318ee40        ; <--- recursive call to itself
-  │                                                 ;*invokevirtual recursiveSum
+  │                                                 ; invokevirtual recursiveSum
   │                                                 ; - LockElisionBenchmark::recursiveSum@31 (line 227)
   │                                                 ; - LockElisionBenchmark::recursiveSum@31 (line 227)
   │                                                 ; - LockElisionBenchmark::recursiveSum@31 (line 227)
   │                                                 ; - LockElisionBenchmark::recursiveSum@31 (line 227)
   │                                                 ; - LockElisionBenchmark::recursiveSum@31 (line 227)
   │                                                 ; - LockElisionBenchmark::recursiveSum@31 (line 227)
+  │                                                 ; {optimized virtual_call}  
   │  ...
   │↗ 0x7f977318eed4:   add    0x4(%rsp),%eax        ; add 'incrementValue' to %eax
   ││ 0x7f977318eed8:   mov    0x4(%rsp),%r10d       ; move 'incrementValue' to %r10d
@@ -1313,6 +1314,12 @@ Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by th
 This optimization is based on the induction variable to strength the additions.
 
 ```
+  @Param({"1048576"})
+  private int iterations;
+
+  @Param({"128"})
+  private int offset;
+
   @Benchmark
   public void initial_loop() {
     auto_reduction(iterations, offset);
@@ -1327,7 +1334,7 @@ This optimization is based on the induction variable to strength the additions.
   }
 ```
 
-Source code: [LoopReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopInvariantCodeMotionBenchmark.java)
+Source code: [LoopReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopReductionBenchmark.java)
 
 [![LoopReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopReductionBenchmark.svg?raw=true)
 
@@ -1380,7 +1387,7 @@ Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and pe
   0x7f4d82d7fb62:   mov    0xc(%rsi),%edx      ; load the 'iterations' value into edx
   0x7f4d82d7fb67:   call   0x7f4d82d7f820      ; invokevirtual auto_reduction
                                                ; - LoopReductionBenchmark::initial_loop@9 (line 64)
-                                               ;   {optimized virtual_call}
+                                               ; {optimized virtual_call}
 ```
 
 ```
@@ -1436,11 +1443,176 @@ The `auto_reduction` generated code by the GraalVM CE JIT is abysmal.
 - The GraalVM CE JIT Compiler exhibits lower performance (i.e., poor optimizations) in this benchmark
 
 ## RecursiveMethodCallBenchmark
+
+The benchmark tests the performance of recursive method calls in classes, interfaces and lambda functions.
+Additionally, it tests the performance of static vs non-static recursive calls.
+
+In this benchmark, the ability to inline recursive calls plays an important role in the performance.
+
+```
+  private static final Object OBJECT = new Object();
+  
+  @Param({"256"})
+  int depth;
+  
+  @Benchmark
+  public Object class_non_static_method() {
+    return cls_non_static(depth);
+  }
+
+  private Object cls_non_static(int depth) {
+    if (depth == 0) {
+      return OBJECT;
+    }
+    return cls_non_static(depth - 1);
+  }
+```
+
+Source code: [RecursiveMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/RecursiveMethodCallBenchmark.java)
+
+[![RecursiveMethodCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/RecursiveMethodCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/RecursiveMethodCallBenchmark.svg?raw=true)
+
 ### Analysis
+
+The analysis below pertains to the `class_non_static_method` method, which is interesting due to the differences in performance.
+
+The other cases (e.g., `interface_non_static_method`, `interface_static_method`, `class_static_method`) where there is a significant difference in performance rely on similar patterns.
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and performs partial inlining up to a depth of 2.
+
+```
+  class_non_static_method
+  
+  0x7f14704f865a:   mov    0xc(%rsi),%edx                ; get field 'depth' into edx
+  0x7f14704f865d:   movabs $0x7ff034f48,%rax             ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007ff034f48})} into %rax
+  0x7f14704f8667:   test   %edx,%edx                     ; test if edx ('depth') is zero
+  0x7f14704f8669:   je     0x7f14704f8680                ; jump if zero
+  0x7f14704f866b:   cmp    $0x1,%edx                     ; compare edx ('depth') to the value 0x1
+  0x7f14704f866e:   je     0x7f14704f8680                ; jump if edx is equal to 0x1
+  0x7f14704f8670:   add    $0xfffffffe,%edx              ; decrement edx by 2
+  0x7f14704f8673:   call   0x7f14704f82c0                ; invokevirtual cls_non_static
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::class_non_static_method@5 (line 84)
+                                                         ; {optimized virtual_call}
+```
+
+```
+  cls_non_static
+  
+    ↗  0x7f14704f82c0:   mov    %eax,-0x14000(%rsp)
+    │  0x7f14704f82da:   movabs $0x7ff034f48,%rax        ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007ff034f48})} into %rax
+    │  0x7f14704f82e4:   test   %edx,%edx                ; test if edx ('depth') is zero
+   ╭│  0x7f14704f82e6:   je     0x7f14704f8300           ; jump if zero
+   ││  0x7f14704f82e8:   cmp    $0x1,%edx                ; compare edx ('depth') to the value 0x1
+  ╭││  0x7f14704f82eb:   je     0x7f14704f8300           ; jump if edx is equal to 0x1
+  │││  0x7f14704f82ed:   add    $0xfffffffe,%edx         ; decrement edx ('depth') by 2
+  ││╰  0x7f14704f82f3:   call   0x7f14704f82c0           ; <--- recursive call to itself
+  ││                                                     ; invokevirtual cls_non_static
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; {optimized virtual_call}
+  ││   ...
+  ↘↘   0x7f14704f8300:   add    $0x10,%rsp
+       ...
+       0x7f14704f8312:   ret
+```
+
 #### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` virtual calls and performs inlining up to a depth of 8.
+
+```
+  class_non_static_method
+  
+  0x00007f017ed9ea5f:   mov    0xc(%rsi),%edx            ; get field 'depth' into edx
+  ...
+  0x00007f017ed9eacb:   call   0x00007f017ed9e5c0        ; invokevirtual cls_non_static
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                         ; - RecursiveMethodCallBenchmark::class_non_static_method@5 (line 84)
+                                                         ; {optimized virtual_call}
+```
+
+```
+  cls_non_static
+  
+    ↗ 0x00007f017ed9e5c0:   mov    %eax,-0x14000(%rsp)
+    │ ...
+    │ 0x00007f017ed9e5fa:   cmp    $0x1,%edx             ; compare edx ('depth') against 0x1
+  ╭ │ 0x00007f017ed9e600:   je     0x00007f017ed9e66f    ; jump if equal to 0x1
+  │ │ ...
+  │ │ 0x00007f017ed9e63d:   cmp    $0x7,%edx             ; compare edx ('depth') against 0x7
+  │╭│ 0x00007f017ed9e640:   je     0x00007f017ed9e66f    ; jump if equal to 0x7
+  │││ 0x00007f017ed9e646:   lea    -0x8(%rdx),%edx       ; subtract 0x8 from edx
+  ││╰ 0x00007f017ed9e64b:   call   0x00007f017ed9e5c0    ; <--- recursive call to itself
+  ││                                                     ; invokevirtual cls_non_static
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                     ; {optimized virtual_call}
+  ││ ...
+  ││ 0x00007f017ed9e66e:   ret
+  ↘↘ 0x00007f017ed9e66f:   movabs $0x7fec34d58,%rax      ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x00000007fec34d58})}
+     ...
+     0x00007f017ed9e68f:   ret
+```
+
 #### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler is capable of devirtualizing `cls_non_static` virtual calls and performs partial inlining up to a depth of 6.
+
+```
+  cls_non_static
+  
+    ↗ 0x00007f46a719cac0:   mov    %eax,-0x14000(%rsp)
+    │ ...
+    │ 0x00007f46a719cae0:   test   %edx,%edx                ; test if edx ('depth') is zero
+  ╭ │ 0x00007f46a719cae2:   je     0x00007f46a719cb57       ; jump if edx is zero
+  │ │ 0x00007f46a719cae8:   cmp    $0x1,%edx                ; compare edx to the value 0x1
+  │╭│ 0x00007f46a719caeb:   je     0x00007f46a719cb78       ; jump if edx is equal to 0x1
+  │││ ...
+  │││ 0x00007f46a719cb30:   lea    -0x6(%rdx),%edx          ; subtract 0x6 from edx
+  ││╰ 0x00007f46a719cb33:   call   0x00007f46a719cac0       ; <--- recursive call to itself
+  ││                                                        ; invokevirtual cls_non_static
+  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                        ; {optimized virtual_call}
+  ││↗ 0x00007f46a719cb40:   mov    0x10(%rsp),%rbp
+  │││ ...
+  │││ 0x00007f46a719cb56:   ret
+  ↘││ 0x00007f46a719cb57:   movabs $0x7fea347c0,%rax       ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x00000007fea347c0})} into rax
+   ││ ...
+   ││ 0x00007f46a719cb77:   ret
+   ↘│ 0x00007f46a719cb78:   movabs $0x7fea347c0,%r10       ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x00000007fea347c0})} into r10
+    │ 0x00007f46a719cb82:   mov    %r10,%rax               ; rax = r10
+    ╰ 0x00007f46a719cb85:   jmp    0x00007f46a719cb40      ; jump back
+```
+
 ### Conclusions
+
+For lambda recursive calls (both static and non-static), all three JITs are capable of fully inlining and eliminating the recursive calls.
+
+When it comes to recursive calls in classes and interfaces (both static and non-static):
+- The C2 JIT Compiler can devirtualize and inline the recursive calls up to a depth of 2.
+- The GraalVM CE JIT Compiler can devirtualize and inline the recursive calls up to a depth of 6.
+- The Oracle GraalVM JIT Compiler can devirtualize and inline the recursive calls up to a depth of 8.
 
 ## ScalarReplacementBenchmark
 ### Analysis
