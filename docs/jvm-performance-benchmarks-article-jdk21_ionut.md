@@ -911,14 +911,14 @@ The C2 JIT Compiler successfully inlines the `sum` methods in the caller and com
   0x7fd3804f941d:   mov    0x10(%rsi),%r13d             ; load the 'defaultValue' field into r13d
   0x7fd3804f9421:   shl    %r13d                        ; left shift the value in r13d by 1
   0x7fd3804f9424:   cmp    $0x20,%r13d                  ; compare r13d against the value '1 << 5'
-  0x7fd3804f9428:   jle    0x7fd3804f9f37           ; jump if r13d is less than or equal to '1 << 5'
+  0x7fd3804f9428:   jle    0x7fd3804f9f37               ; jump if r13d is less than or equal to '1 << 5'
   ...
   <--- caller 'sum' method inlined --->
   <--- 1st synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->                                                                                                                                                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@10 (line 177)
   0x7fd3804f9496:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
   ...
   0x7fd3804f9534:   cmp    $0x20,%r13d
-  0x7fd3804f9538:   jle    0x7fd3804f9f50           ; jump if r13d is less than or equal to '1 << 5'
+  0x7fd3804f9538:   jle    0x7fd3804f9f50               ; jump if r13d is less than or equal to '1 << 5'
   <--- caller 'sum' method inlined --->
   <--- 2nd synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->
   0x7fd3804f95a8:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
@@ -944,14 +944,14 @@ The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coa
   0x7ffa1ad7dc49:   shl    %r8d                     ; perform a left shift on the value in r8d by 1
   <--- coarsened section --->
   0x7ffa1ad7dc4c:   cmp    $0x21,%r8d               ; compare r8d against value '1 << 5 + 1'
-  0x7ffa1ad7dc50:   jl     0x7ffa1ad7deed       ; jump if r8d is less
+  0x7ffa1ad7dc50:   jl     0x7ffa1ad7deed           ; jump if r8d is less
   ...
   0x7ffa1ad7dc90:   mov    0x14(%r11),%r10d         ; get field 'incrementValue'
   0x7ffa1ad7dc94:   mov    %r8d,%eax                ; eax = 'defaultValue'
   0x7ffa1ad7dc97:   add    %r10d,%eax               ; eax = eax + r10d
   ...
   0x7ffa1ad7dca0:   cmp    $0x21,%eax               ; compare eax against value '1 << 5 + 1'
-  0x7ffa1ad7dca3:   jl     0x7ffa1ad7dec7       ; jump if eax is less
+  0x7ffa1ad7dca3:   jl     0x7ffa1ad7dec7           ; jump if eax is less
   0x7ffa1ad7dca9:   add    %r10d,%eax               ; eax = eax + r10d
   <--- similar pattern for the 3rd, 4th, 5th, 6th, 7th, and 8th additions -->
   ; eax stores the result
