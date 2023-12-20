@@ -1880,7 +1880,6 @@ This benchmark tests how well the Compiler strengthens some arithmetic operation
   }
 ```
 
-
 Source code: [StrengthReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark.java)
 
 [![StrengthReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)
@@ -1926,6 +1925,144 @@ The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle Gra
 ### Conclusions
 
 - The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler trigger strength reduction for additions as well, unlike the C2 JIT Compiler, which does not perform this optimization.
+
+## TailRecursionBenchmark
+
+A tail-recursive function is a function where the last operation before the function returns is an invocation to the function itself.
+Tail-recursive optimization avoids allocating a new stack frame by re-writing the method into a completely iterative fashion.
+
+```
+ @Benchmark
+  public long tail_recursive() {
+    return recursive(n, 0);
+  }
+  
+  private long recursive(int n, long sum) {
+    if (n == 0) {
+      return sum;
+    } else {
+      return recursive(n - 1, sum + A[n % size]);
+    }
+  }  
+```
+
+Source code: [TailRecursionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TailRecursionBenchmark.java)
+
+[![TailRecursionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TailRecursionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TailRecursionBenchmark.svg?raw=true)
+
+### Analysis
+
+The analysis below pertains to the `tail_recursive` (i.e., `recursive`) method, which is more interesting due to the highest differences in performance.
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 2.
+
+```
+  recursive method
+  
+  ↗ 0x7fc12063aec0:   mov    %eax,-0x14000(%rsp)
+  │ ...
+  │ 0x7fc12063aee0:   test   %edx,%edx                    ; check if edx ('n') is zero
+  │ 0x7fc12063aee2:   je     0x7fc12063af73               ; jump if edx ('n') is zero
+  │ 0x7fc12063aee8:   mov    0x14(%rsi),%r8d              ; load array ('A') into r8d
+  │ ...
+  │ <-- Calculate 'n' modulo size ('1024') and store the result in r10d -->
+  │ ...
+  │ 0x7fc12063af07:   mov    0xc(%r12,%r8,8),%ebx         ; load array ('A') length
+  │ 0x7fc12063af0c:   mov    %edx,%ebp
+  │ 0x7fc12063af0e:   dec    %ebp
+  │ 0x7fc12063af10:   cmp    %ebx,%r10d                   ; compare the array ('A') length against r10d
+  │ 0x7fc12063af13:   jae    0x7fc12063af78               ; jump if greater than or equal
+  │ 0x7fc12063af19:   lea    (%r12,%r8,8),%r11
+  │ 0x7fc12063af1d:   movslq 0x10(%r11,%r10,4),%rax       ; load the array ('A') element value in rax
+  │ 0x7fc12063af22:   add    %rcx,%rax                    ; add rcx ('sum') to rax (array element)
+  │ ...
+  │ 0x7fc12063af2a:   lea    -0x2(%rdx),%r9d              ; r9d = rdx - 0x2 (i.e., recursive inlining depth)
+  │ ...
+  │ <-- Similar pattern for adding the next element of the array -->
+  │ ...
+  │ 0x7fc12063af4d:   add    %rax,%rcx                    ; accumulate sum to rcx ('sum')
+  │ 0x7fc12063af50:   mov    %r9d,%edx                    ; move r9d to edx
+  ╰ 0x7fc12063af53:   call   0x7fc12063aec0               ; <--- recursive call to itself
+                                                          ; invokevirtual recursive
+                                                          ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                          ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                          ; {optimized virtual_call}
+  ; rcx stores the sum of array ('A') elements                                                 
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler is able to deoptimize the tail `recursive` virtual call, nevertheless does not perform any inlining of the recursive method.
+
+```
+  recursive method
+  
+  0x7f362ed7f860:   test   %edx,%edx                  ; check if edx ('n') is zero
+  0x7f362ed7f862:   je     0x7f362ed7f8ce             ; jump if edx ('n') is zero
+  0x7f362ed7f868:   mov    0x14(%rsi),%r10d           ; load array ('A') into r10d
+  ...
+  <-- calculate 'n' modulo size ('1024') and store result in r8d -->
+  ...
+  0x7f362ed7f887:   cmp    0xc(,%r10,8),%r8d          ; compare r8d against the array ('A') length
+  0x7f362ed7f88f:   jae    0x7f362ed7f8ee             ; jump if greater than or equal
+  0x7f362ed7f895:   shl    $0x3,%r10                  ; shift left by 3 (multiply by 8)
+  0x7f362ed7f899:   dec    %edx                       ; decrement edx ('n')
+  0x7f362ed7f89b:   movslq 0x10(%r10,%r8,4),%r10      ; load element from array ('A') into r10
+  0x7f362ed7f8a0:   add    %r10,%rcx                  ; add r10 to rcx ('sum')
+  0x7f362ed7f8a3:   call   0x7f362e764380             ; <--- recursive call to itself
+                                                      ; invokevirtual recursive 
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ; {optimized virtual_call}
+  ; rcx stores the sum of array ('A') elements                                                 
+```
+
+#### GraalVM CE JIT Compiler
+
+The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 6.
+
+```
+  recursive method
+
+  ↗ 0x7f603b23ffc0:   mov    %eax,-0x14000(%rsp)
+  │ ...
+  │ 0x7f603b23ffe0:   test   %edx,%edx                ; check if edx ('n') is zero
+  │ 0x7f603b23ffe2:   je     0x7f603b24015f           ; jump if edx ('n') is zero
+  │ 0x7f603b23ffe8:   mov    0x14(%rsi),%r10d         ; load array ('A') into r10d
+  │ 0x7f603b23ffec:   mov    0xc(,%r10,8),%r11d       ; load array ('A') length
+  │ ...
+  │ <-- calculate 'n' modulo size ('1024') and store result in r9d -->
+  │ ...
+  │ 0x7f603b24000f:   cmp    %r9d,%r11d               ; compare the array ('A') length against r9d
+  │ 0x7f603b240012:   jbe    0x7f603b240192           ; jump if below than or equal 
+  │ 0x7f603b240018:   shl    $0x3,%r10                ; shift left by 3 (multiply by 8) for array ('A')       
+  │ 0x7f603b24001c:   movslq 0x10(%r10,%r9,4),%r8     ; load the array ('A') element value in r8
+  │ 0x7f603b240021:   add    %rcx,%r8                 ; add r8 (array element) to rcx ('sum')
+  │ ...
+  │ <-- similar pattern for adding the next fifth elements of the array -->
+  │ ...
+  │ 0x7f603b24012b:   lea    -0x6(%rdx),%edx          ; edx = rdx - 0x6 (i.e., recursive inlining depth)
+  │ ...
+  │ 0x7f603b240136:   mov    %r8,%rcx                 ; Move r8 to rcx ('sum')
+  ╰ 0x7f603b24013b:   call   0x7f603b23ffc0           ; <--- recursive call to itself
+                                                      ; invokevirtual recursive
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ; - TailRecursionBenchmark::recursive@23 (line 86)
+                                                      ;   {optimized virtual_call}
+    ; rcx stores the sum of array ('A') elements                                                 
+ ```
+
+### Conclusions
+
+The  main difference in `tail_recursive` behavior lies in the inlining capability of each compiler for tail recursive virtual calls:
+- The C2 JIT Compiler performs partial inlining up to a depth of 2.
+- The Oracle GraalVM JIT Compiler refrains from partial inlining, contributing to its relatively slower performance in this benchmark.
+- The GraalVM CE JIT Compiler triggers partial inlining capabilities up to a depth of 6.
 
 ## JIT Geometric Mean
 
