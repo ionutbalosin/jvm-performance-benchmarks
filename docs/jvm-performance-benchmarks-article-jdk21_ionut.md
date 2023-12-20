@@ -1615,11 +1615,142 @@ When it comes to recursive calls in classes and interfaces (both static and non-
 - The Oracle GraalVM JIT Compiler can devirtualize and inline the recursive calls up to a depth of 8.
 
 ## ScalarReplacementBenchmark
-### Analysis
+
+Compiler analyses the scope of a new object and decides whether it might be allocated or not on the heap.
+The method is called Escape Analysis (EA), which identifies if the newly created object is escaping or not into the heap.
+To not be confused, EA is not an optimization but rather an analysis phase for the optimizer.
+There are a few escape states:
+- NoEscape - the object cannot be visible outside the current method and thread.
+- ArgEscape - the object is passed as an argument to a method but cannot otherwise be visible outside the method or by other threads.
+- GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
+
+For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+
+```
+  @Benchmark
+  public HeavyWrapper branch_escape_obj() {
+    HeavyWrapper wrapper = new HeavyWrapper(value, size);
+    HeavyWrapper result;
+
+    // wrapper is NoEscape, because "objectEscapes" is always false, hence branch is never executed
+    if (objectEscapes) {
+      result = wrapper;
+    } else {
+      result = CACHED_WRAPPER;
+    }
+
+    return result;
+  }
+
+  @Benchmark
+  public boolean arg_escape_obj() {
+    HeavyWrapper wrapper1 = new HeavyWrapper(value, size);
+    HeavyWrapper wrapper2 = new HeavyWrapper(value, size);
+    boolean match = false;
+
+    // wrapper1 is NoEscape
+    // wrapper2 is:
+    //  - NoEscape if inlining of equals() succeeds
+    //  - ArgEscape if inlining fails or disabled
+    if (wrapper1.equals(wrapper2)) match = true;
+
+    return match;
+  }
+```
+
+Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark.java)
+
+[![ScalarReplacementBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)
+
+
+### Analysis of branch_escape_obj
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler allocates the `HeavyWrapper wrapper` object at the start of the method, as per its declaration. However, later on, as the comparison is always evaluated to false, the allocated object remains unnecessary.
+
+```
+  0x7f5ac04f7a5a:   mov    %rsi,0x8(%rsp)               ; store the rsi into the stack at an offset of 0x8
+  0x7f5ac04f7a5f:   mov    0x10(%rsi),%edx              ; move 'size' into register edx
+  0x7f5ac04f7a6e:   movslq %edx,%rcx                    ; sign-extend the value in edx into rcx
+  0x7f5ac04f7a71:   mov    0xc(%rsi),%r10d              ; move 'value' into r10d
+  0x7f5ac04f7a75:   mov    %r10d,(%rsp)                 ; move 'value' from r10d into the stack
+  ...
+  <--- Allocates the HeavyWrapper wrapper object --->
+  ...
+  0x7f5ac04f7b59:   mov    0x8(%rsp),%r10               ; load the value from the stack offset 0x8 into r10
+  0x7f5ac04f7b5e:   movzbl 0x14(%r10),%ebp              ; load and zero-extend the byte at field 'objectEscapes' into ebp
+  0x7f5ac04f7b63:   test   %ebp,%ebp                    ; test if 'objectEscapes' is true (non-zero)
+  0x7f5ac04f7b65:   jne    0x7f5ac04f7bb1               ; jump if the 'objectEscapes' value is true (branch taken if true)
+  0x7f5ac04f7b67:   mov    0x18(%r10),%r10d
+  0x7f5ac04f7b6b:   mov    %r10,%rax                    ; move 'CACHED_WRAPPER' into rax
+  0x7f5ac04f7b6e:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+  ...
+  0x7f5ac04f7b84:   ret
+```
+
 #### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler allocates the `HeavyWrapper wrapper` object only if the boolean condition imposes (i.e., it reorders the instructions), otherwise it uses the cached wrapper object, hence preventing unnecessary allocations.
+
+```
+     0x7f7ceada1b40:   cmpb   $0x0,0x14(%rsi)           ; compare byte at offset 0x14 (field 'objectEscapes') to zero
+  ╭  0x7f7ceada1b44:   jne    0x7f7ceada1b72            ; jump if not equal (branch not taken)
+  │  0x7f7ceada1b4a:   cmpl   $0x0,0x10(%rsi)           ; compare 'size' agaist 0x0 
+  │  0x7f7ceada1b4e:   jl     0x7f7ceada1b9a            ; jump if 'size' is less than 0x0  (branch not taken)
+  │  0x7f7ceada1b54:   mov    0x18(%rsi),%eax           ; move 'CACHED_WRAPPER' into rax
+  │  0x7f7ceada1b57:   shl    $0x3,%rax                 ; compressed oops (shift left by 3 for addressing)
+  │  ...
+  │  0x7f7ceada1b71:   ret
+  ↘  ...
+     0x7f7ceada1b8d:   call   0x7f7cea6ff17a            ; new array
+```
+
 #### GraalVM CE JIT Compiler
+
+The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler, which explains why this benchmark is much faster for the Graal Compiler.
+
+### Analysis of arg_escape_obj
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler triggers the allocations, inlines the equals method and returns `true`.
+
+```
+  0x7f05384f7fda:   mov    %rsi,%rdi
+  0x7f05384f7fdd:   mov    0x10(%rsi),%r10d        ; move 'size' into register r10d
+  0x7f05384f7fee:   movslq %r10d,%rcx              ; sign-extend the value in r10d into rcx
+  0x7f05384f7ff1:   mov    0xc(%rsi),%r8d          ; move 'value' into r8d
+  0x7f05384f7ff5:   lea    (%r8,%r8,1),%ebp        ; ebp = r8 + r8 * 1
+  ...
+  <--- Allocates the HeavyWrapper wrapper object --->
+  ...                       
+  0x7f05384f80ed:   mov    $0x1,%eax               ; set return value to true
+  ...
+  0x7f05384f8104:   ret
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler method returns `true` (since the `HeavyWrapper` objects are equal), optimizing the allocations.
+
+```
+   0x7fb9c2da03c0:   cmpl   $0x0,0x10(%rsi)          ; compare 'size' agaist 0x0
+╭  0x7fb9c2da03c4:   jl     0x7fb9c2da03ee           ; jump if 'size' is less than 0x0 (branch not taken)
+│  0x7fb9c2da03ca:   mov    $0x1,%eax                ; set return value to true
+│  ...
+│  0x7fb9c2da03ed:   ret    
+↘  ...
+   0x7fb9c2da0400:   call   0x7fb9c26ff17a           ; new array
+```
+
+#### GraalVM CE JIT Compiler
+
+The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+
 ### Conclusions
+
+- Both the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) do a better job of eliminating unnecessary allocations compared to the C2 JIT Compiler.
 
 ## TypeCheckBenchmark
 ### Analysis
