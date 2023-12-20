@@ -98,6 +98,10 @@ Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalo
 
 [![InfrastructureBaselineBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/InfrastructureBaselineBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/InfrastructureBaselineBenchmark.svg?raw=true)
 
+### Conclusions
+
+The results are identical. This increases the confidence in the benchmark results, across the selected JVMs.
+
 ## DeadMethodCallStoreBenchmark
 
 The benchmark assesses how the compiler could remove code (i.e., a dead method call store) that does not affect the program results.
@@ -1758,8 +1762,6 @@ The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle Gra
 #### Oracle GraalVM JIT Compiler
 #### GraalVM CE JIT Compiler
 ### Conclusions
-
-The results are identical. This increases the confidence in the benchmark results, across the selected JVMs.
 
 ## JIT Geometric Mean
 
