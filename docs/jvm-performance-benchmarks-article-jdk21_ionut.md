@@ -1757,11 +1757,97 @@ The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle Gra
 - Both the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) do a better job of eliminating unnecessary allocations compared to the C2 JIT Compiler.
 
 ## TypeCheckBenchmark
+
+This benchmark checks the performance of `instanceof` type check using multiple secondary super types (i.e., interfaces), none being of an `AutoCloseable` type.
+
+```
+  // Object obj = ManySecondarySuperTypes.Instance;
+
+  @Benchmark
+  public boolean instanceof_type_check() {
+    return closeNotAutoCloseable(obj);
+  }
+
+  public static boolean closeNotAutoCloseable(Object o) {
+    // it searches through the secondary supers (i.e., an array of objects) for a type match
+    // but does not find one since "o" is not an "AutoCloseable" type
+    if (o instanceof AutoCloseable) {
+      try {
+        ((AutoCloseable) o).close();
+        return true;
+      } catch (Exception ignore) {
+        return false;
+      }
+    } else {
+      // it always takes this slow path
+      return false;
+    }
+  }
+```
+
+Java, being a type-safe language, requires runtime type checking (based on metadata) to determine type compatibility. Within Hotspot, the class word contains a native pointer to the [VM Klass](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/oop.hpp#L58-L61) instance, including extensive metadata such as superclass types, implemented interfaces, and [more](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/klass.hpp#L128-L133).
+The efficiency of those runtime checks depends on the type metadata as well as further optimizations performed by the compiler.
+
+Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckBenchmark.java)
+
+[![TypeCheckBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckBenchmark.svg?raw=true)
+
 ### Analysis
+
 #### C2 JIT Compiler
+
+The C2 JIT Compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns the boolean.
+
+```
+      0x7f291c63815a:   mov    0xc(%rsi),%r10d              ; get field obj
+      0x7f291c638160:   mov    0x8(%r12,%r10,8),%r8d
+      0x7f291c638165:   movabs $0x7f28a300bab8,%rax         ; {metadata(&apos;java/lang/AutoCloseable&apos;)}
+      0x7f291c63816f:   movabs $0x7f28a3000000,%rsi         ; load known Klass* for ManySecondarySuperTypes
+      0x7f291c638179:   add    %r8,%rsi
+      0x7f291c63817c:   mov    0x20(%rsi),%r11              ; the cache field
+      0x7f291c638180:   cmp    %rax,%r11                    ; compare the 'obj' type against AutoCloseable
+  ╭   0x7f291c638183:   je     0x7f291c6381b7               ; jump if the types match (branch not taken)
+  │   0x7f291c638185:   mov    0x28(%rsi),%rdi              ; load the secondary supertypes array
+  │   0x7f291c638189:   mov    (%rdi),%ecx                  ; load the length of the array
+  │   0x7f291c63818b:   add    $0x8,%rdi                    ; skip the length field
+  │   0x7f291c63818f:   test   %rax,%rax
+  │   0x7f291c638192:   repnz scas %es:(%rdi),%rax          ; loop over the array
+  │                                                         ; ^ this loop is where the execution spends most of the time
+  │╭  0x7f291c638195:   jne    0x7f291c63819f               ; if not found, avoid setting the cache field
+  ││  0x7f291c63819b:   mov    %rax,0x20(%rsi)              ; set the cache field
+  │↘  0x7f291c63819f:   nop
+  │ ╭ 0x7f291c6381a0:   je     0x7f291c6381b7               ; if found, jump to the true branch of the type check
+  │ │ 0x7f291c6381a2:   xor    %eax,%eax                    ; return false
+  │ │ ...
+  │ │ 0x7f291c6381b6:   ret
+  ↘ ↘ ...
+      0x7f291c6381bf:   call   0x7f291c0c9f00               ; {runtime_call UncommonTrapBlob}
+```
+
 #### Oracle GraalVM JIT Compiler
+
+The GraalVM JIT Compiler reverses the if-condition comparison to take the faster path. It specifically checks against the `ManySecondarySuperTypes` type.
+
+```
+  0x7ff7d6d7ecbf:   mov    0xc(%rsi),%eax               ; get field obj
+  0x7ff7d6d7ecc2:   cmpl   $0x102bd38,0x8(,%rax,8)      ; compare the 'obj' type against ManySecondarySuperTypes
+                                                        ; {metadata(&apos;TypeCheckBenchmark$ManySecondarySuperTypes&apos;)}
+╭ 0x7ff7d6d7eccd:   jne    0x7ff7d6d7ecef               ; jump if not the same type
+│ 0x7ff7d6d7ecd3:   mov    $0x0,%eax                    ; return false
+│ ...
+│ 0x7ff7d6d7ecee:   ret
+↘ 0x7ff7d6d7ecef:   movl   $0xffffffcd,0x484(%r15)      ; instanceof check
+  0x7ff7d6d7ecfa:   movq   $0x14,0x490(%r15)
+  0x7ff7d6d7ed05:   call   0x7ff7d676a17a               ; {runtime_call DeoptimizationBlob}
+```
+
 #### GraalVM CE JIT Compiler
+
+The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+
 ### Conclusions
+
+- The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler optimize the type check by reversing the if condition (i.e., comparing against `ManySecondarySuperTypes` type) and taking the fast path (since a match is found), unlike the C2 JIT Compiler, which always checks the type against the supertypes array (no match is found).
 
 ## JIT Geometric Mean
 
