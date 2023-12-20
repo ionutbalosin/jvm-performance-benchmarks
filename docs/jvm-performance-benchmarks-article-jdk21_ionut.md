@@ -1681,7 +1681,7 @@ The C2 JIT Compiler allocates the `HeavyWrapper wrapper` object at the start of 
   0x7f5ac04f7b59:   mov    0x8(%rsp),%r10               ; load the value from the stack offset 0x8 into r10
   0x7f5ac04f7b5e:   movzbl 0x14(%r10),%ebp              ; load and zero-extend the byte at field 'objectEscapes' into ebp
   0x7f5ac04f7b63:   test   %ebp,%ebp                    ; test if 'objectEscapes' is true (non-zero)
-  0x7f5ac04f7b65:   jne    0x7f5ac04f7bb1               ; jump if the 'objectEscapes' value is true (branch taken if true)
+  0x7f5ac04f7b65:   jne    0x7f5ac04f7bb1               ; jump if the 'objectEscapes' value is true (branch not taken)
   0x7f5ac04f7b67:   mov    0x18(%r10),%r10d
   0x7f5ac04f7b6b:   mov    %r10,%rax                    ; move 'CACHED_WRAPPER' into rax
   0x7f5ac04f7b6e:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
