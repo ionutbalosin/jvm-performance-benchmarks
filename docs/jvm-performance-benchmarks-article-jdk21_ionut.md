@@ -1531,47 +1531,47 @@ The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` vi
 ```
   class_non_static_method
   
-  0x00007f017ed9ea5f:   mov    0xc(%rsi),%edx            ; get field 'depth' into edx
+  0x7f017ed9ea5f:   mov    0xc(%rsi),%edx            ; get field 'depth' into edx
   ...
-  0x00007f017ed9eacb:   call   0x00007f017ed9e5c0        ; invokevirtual cls_non_static
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-                                                         ; - RecursiveMethodCallBenchmark::class_non_static_method@5 (line 84)
-                                                         ; {optimized virtual_call}
+  0x7f017ed9eacb:   call   0x7f017ed9e5c0            ; invokevirtual cls_non_static
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+                                                     ; - RecursiveMethodCallBenchmark::class_non_static_method@5 (line 84)
+                                                     ; {optimized virtual_call}
 ```
 
 ```
   cls_non_static
   
-    ↗ 0x00007f017ed9e5c0:   mov    %eax,-0x14000(%rsp)
+    ↗ 0x7f017ed9e5c0:   mov    %eax,-0x14000(%rsp)
     │ ...
-    │ 0x00007f017ed9e5fa:   cmp    $0x1,%edx             ; compare edx ('depth') against 0x1
-  ╭ │ 0x00007f017ed9e600:   je     0x00007f017ed9e66f    ; jump if equal to 0x1
+    │ 0x7f017ed9e5fa:   cmp    $0x1,%edx             ; compare edx ('depth') against 0x1
+  ╭ │ 0x7f017ed9e600:   je     0x7f017ed9e66f        ; jump if equal to 0x1
   │ │ ...
-  │ │ 0x00007f017ed9e63d:   cmp    $0x7,%edx             ; compare edx ('depth') against 0x7
-  │╭│ 0x00007f017ed9e640:   je     0x00007f017ed9e66f    ; jump if equal to 0x7
-  │││ 0x00007f017ed9e646:   lea    -0x8(%rdx),%edx       ; subtract 0x8 from edx
-  ││╰ 0x00007f017ed9e64b:   call   0x00007f017ed9e5c0    ; <--- recursive call to itself
-  ││                                                     ; invokevirtual cls_non_static
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                     ; {optimized virtual_call}
+  │ │ 0x7f017ed9e63d:   cmp    $0x7,%edx             ; compare edx ('depth') against 0x7
+  │╭│ 0x7f017ed9e640:   je     0x7f017ed9e66f        ; jump if equal to 0x7
+  │││ 0x7f017ed9e646:   lea    -0x8(%rdx),%edx       ; subtract 0x8 from edx
+  ││╰ 0x7f017ed9e64b:   call   0x7f017ed9e5c0        ; <--- recursive call to itself
+  ││                                                 ; invokevirtual cls_non_static
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; {optimized virtual_call}
   ││ ...
-  ││ 0x00007f017ed9e66e:   ret
-  ↘↘ 0x00007f017ed9e66f:   movabs $0x7fec34d58,%rax      ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x00000007fec34d58})}
+  ││ 0x7f017ed9e66e:   ret
+  ↘↘ 0x7f017ed9e66f:   movabs $0x7fec34d58,%rax      ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007fec34d58})}
      ...
-     0x00007f017ed9e68f:   ret
+     0x7f017ed9e68f:   ret
 ```
 
 #### GraalVM CE JIT Compiler
@@ -1581,32 +1581,32 @@ The GraalVM CE JIT Compiler is capable of devirtualizing `cls_non_static` virtua
 ```
   cls_non_static
   
-    ↗ 0x00007f46a719cac0:   mov    %eax,-0x14000(%rsp)
+    ↗ 0x7f46a719cac0:   mov    %eax,-0x14000(%rsp)
     │ ...
-    │ 0x00007f46a719cae0:   test   %edx,%edx                ; test if edx ('depth') is zero
-  ╭ │ 0x00007f46a719cae2:   je     0x00007f46a719cb57       ; jump if edx is zero
-  │ │ 0x00007f46a719cae8:   cmp    $0x1,%edx                ; compare edx to the value 0x1
-  │╭│ 0x00007f46a719caeb:   je     0x00007f46a719cb78       ; jump if edx is equal to 0x1
+    │ 0x7f46a719cae0:   test   %edx,%edx             ; test if edx ('depth') is zero
+  ╭ │ 0x7f46a719cae2:   je     0x7f46a719cb57        ; jump if edx is zero
+  │ │ 0x7f46a719cae8:   cmp    $0x1,%edx             ; compare edx to the value 0x1
+  │╭│ 0x7f46a719caeb:   je     0x7f46a719cb78        ; jump if edx is equal to 0x1
   │││ ...
-  │││ 0x00007f46a719cb30:   lea    -0x6(%rdx),%edx          ; subtract 0x6 from edx
-  ││╰ 0x00007f46a719cb33:   call   0x00007f46a719cac0       ; <--- recursive call to itself
-  ││                                                        ; invokevirtual cls_non_static
-  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                        ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
-  ││                                                        ; {optimized virtual_call}
-  ││↗ 0x00007f46a719cb40:   mov    0x10(%rsp),%rbp
+  │││ 0x7f46a719cb30:   lea    -0x6(%rdx),%edx       ; subtract 0x6 from edx
+  ││╰ 0x7f46a719cb33:   call   0x7f46a719cac0        ; <--- recursive call to itself
+  ││                                                 ; invokevirtual cls_non_static
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
+  ││                                                 ; {optimized virtual_call}
+  ││↗ 0x7f46a719cb40:   mov    0x10(%rsp),%rbp
   │││ ...
-  │││ 0x00007f46a719cb56:   ret
-  ↘││ 0x00007f46a719cb57:   movabs $0x7fea347c0,%rax       ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x00000007fea347c0})} into rax
+  │││ 0x7f46a719cb56:   ret
+  ↘││ 0x7f46a719cb57:   movabs $0x7fea347c0,%rax     ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007fea347c0})} into rax
    ││ ...
-   ││ 0x00007f46a719cb77:   ret
-   ↘│ 0x00007f46a719cb78:   movabs $0x7fea347c0,%r10       ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x00000007fea347c0})} into r10
-    │ 0x00007f46a719cb82:   mov    %r10,%rax               ; rax = r10
-    ╰ 0x00007f46a719cb85:   jmp    0x00007f46a719cb40      ; jump back
+   ││ 0x7f46a719cb77:   ret
+   ↘│ 0x7f46a719cb78:   movabs $0x7fea347c0,%r10     ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007fea347c0})} into r10
+    │ 0x7f46a719cb82:   mov    %r10,%rax             ; rax = r10
+    ╰ 0x7f46a719cb85:   jmp    0x7f46a719cb40        ; jump back
 ```
 
 ### Conclusions
@@ -1698,16 +1698,16 @@ The C2 JIT Compiler allocates the `HeavyWrapper wrapper` object at the start of 
 The Oracle GraalVM JIT Compiler allocates the `HeavyWrapper wrapper` object only if the boolean condition imposes (i.e., it reorders the instructions), otherwise it uses the cached wrapper object, hence preventing unnecessary allocations.
 
 ```
-     0x7f7ceada1b40:   cmpb   $0x0,0x14(%rsi)           ; compare byte at offset 0x14 (field 'objectEscapes') to zero
-  ╭  0x7f7ceada1b44:   jne    0x7f7ceada1b72            ; jump if not equal (branch not taken)
-  │  0x7f7ceada1b4a:   cmpl   $0x0,0x10(%rsi)           ; compare 'size' agaist 0x0 
-  │  0x7f7ceada1b4e:   jl     0x7f7ceada1b9a            ; jump if 'size' is less than 0x0  (branch not taken)
-  │  0x7f7ceada1b54:   mov    0x18(%rsi),%eax           ; move 'CACHED_WRAPPER' into rax
-  │  0x7f7ceada1b57:   shl    $0x3,%rax                 ; compressed oops (shift left by 3 for addressing)
-  │  ...
-  │  0x7f7ceada1b71:   ret
-  ↘  ...
-     0x7f7ceada1b8d:   call   0x7f7cea6ff17a            ; new array
+    0x7f7ceada1b40:   cmpb   $0x0,0x14(%rsi)           ; compare byte at offset 0x14 (field 'objectEscapes') to zero
+  ╭ 0x7f7ceada1b44:   jne    0x7f7ceada1b72            ; jump if not equal (branch not taken)
+  │ 0x7f7ceada1b4a:   cmpl   $0x0,0x10(%rsi)           ; compare 'size' agaist 0x0 
+  │ 0x7f7ceada1b4e:   jl     0x7f7ceada1b9a            ; jump if 'size' is less than 0x0  (branch not taken)
+  │ 0x7f7ceada1b54:   mov    0x18(%rsi),%eax           ; move 'CACHED_WRAPPER' into rax
+  │ 0x7f7ceada1b57:   shl    $0x3,%rax                 ; compressed oops (shift left by 3 for addressing)
+  │ ...
+  │ 0x7f7ceada1b71:   ret
+  ↘ ...
+    0x7f7ceada1b8d:   call   0x7f7cea6ff17a            ; new array
 ```
 
 #### GraalVM CE JIT Compiler
@@ -1739,13 +1739,13 @@ The C2 JIT Compiler triggers the allocations, inlines the equals method and retu
 The Oracle GraalVM JIT Compiler method returns `true` (since the `HeavyWrapper` objects are equal), optimizing the allocations.
 
 ```
-   0x7fb9c2da03c0:   cmpl   $0x0,0x10(%rsi)          ; compare 'size' agaist 0x0
-╭  0x7fb9c2da03c4:   jl     0x7fb9c2da03ee           ; jump if 'size' is less than 0x0 (branch not taken)
-│  0x7fb9c2da03ca:   mov    $0x1,%eax                ; set return value to true
-│  ...
-│  0x7fb9c2da03ed:   ret    
-↘  ...
-   0x7fb9c2da0400:   call   0x7fb9c26ff17a           ; new array
+    0x7fb9c2da03c0:   cmpl   $0x0,0x10(%rsi)          ; compare 'size' agaist 0x0
+  ╭ 0x7fb9c2da03c4:   jl     0x7fb9c2da03ee           ; jump if 'size' is less than 0x0 (branch not taken)
+  │ 0x7fb9c2da03ca:   mov    $0x1,%eax                ; set return value to true
+  │ ...
+  │ 0x7fb9c2da03ed:   ret    
+  ↘ ...
+    0x7fb9c2da0400:   call   0x7fb9c26ff17a           ; new array
 ```
 
 #### GraalVM CE JIT Compiler
@@ -1848,6 +1848,84 @@ The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle Gra
 ### Conclusions
 
 - The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler optimize the type check by reversing the if condition (i.e., comparing against `ManySecondarySuperTypes` type) and taking the fast path (since a match is found), unlike the C2 JIT Compiler, which always checks the type against the supertypes array (no match is found).
+
+## StrengthReductionBenchmark
+
+A strength reduction is a compiler optimization where expensive operations are replaced with equivalent but less expensive operations.
+This benchmark tests how well the Compiler strengthens some arithmetic operations, as for example multiple additions, a multiplication in comparison to a bitwise shift operation.
+
+```
+  @Param({"true"})
+  private boolean isHeavy;
+
+  // a big prime number
+  @Param({"179426549"})
+  private long value;
+
+  @Benchmark
+  public long add() {
+    return doAdd();
+  }
+
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private long doAdd() {
+    long val = this.value;
+    return isHeavy
+        ? val + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val
+        : val;
+  }
+```
+
+
+Source code: [StrengthReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark.java)
+
+[![StrengthReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)
+
+### Analysis
+
+The analysis below pertains to the `nested_synchronized` method, which is more interesting due to the highest differences in performance.
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler performs a repetitive addition operation, summing all the values together iteratively.
+
+```
+  doAdd
+  
+  0x7fd710638cba:   mov    0x10(%rsi),%r10              ; get field 'value' into r10
+  0x7fd710638cbe:   movzbl 0xc(%rsi),%r8d               ; get field 'isHeavy' as a zero-extended byte into r8d
+  0x7fd710638cc3:   test   %r8d,%r8d                    ; test if 'isHeavy' is false
+  0x7fd710638cc6:   je     0x7fd710638d9d               ; jump if 'isHeavy' is false
+  0x7fd710638ccc:   lea    (%r10,%r10,1),%rax           ; rax = r10 * 2
+  0x7fd710638cd0:   add    %r10,%rax                    ; rax = rax + r10
+  ...
+  <-- Adds r10 ('value') to rax repetitively 60 times -->
+  ...
+  0x7fd710638d87:   add    %r10,%rax
+  ...
+  0x7fd710638d9c:   ret
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT Compiler replaces the additions with the shift operation, which is more efficient.
+
+```
+  0x7f99e2d80e4a:   mov    0x10(%rsi),%rax              ; get field 'value' into r10
+  0x7f99e2d80e4e:   shl    $0x6,%rax                    ; shift rax left by 6 bits (rax = rax << 6)
+```
+
+#### GraalVM CE JIT Compiler
+
+The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+
+### Conclusions
+
+- The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler trigger strength reduction for additions as well, unlike the C2 JIT Compiler, which does not perform this optimization.
 
 ## JIT Geometric Mean
 
