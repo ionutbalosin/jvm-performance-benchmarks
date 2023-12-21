@@ -102,6 +102,52 @@ Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalo
 
 The results are identical. This increases the confidence in the benchmark results, across the selected JVMs.
 
+## DeadArgumentEliminationBenchmark
+
+This benchmark assesses the removal of arguments that are directly dead, as well as arguments that are passed into function calls as dead arguments of other functions.
+
+The inliner plays a fundamental role as it aids in the identification of whether the arguments passed to the inlined function are utilized within the function's body or not.
+
+```
+  private final int DEPTH = 8;
+
+  @Benchmark
+  public int recursive_method_calls() {
+    final Object obj1 = new Object();
+    final Object obj2 = new Object();
+    final Object obj3 = new Object();
+    final Object obj4 = new Object();
+    final Object obj5 = new Object();
+    final Object obj6 = new Object();
+    final Object obj7 = new Object();
+    final Object obj8 = new Object();
+
+    return recursiveMethod(DEPTH, defaultValue, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
+  }
+  
+  private int recursiveMethod(
+      int depth, int aValue, Object obj1, Object obj2, Object obj3, 
+      Object obj4, Object obj5, Object obj6, Object obj7, Object obj8) {
+    if (depth == 0) {
+      return aValue;
+    }
+    return recursiveMethod(depth - 1, aValue, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
+  }  
+```
+
+Source code: [DeadArgumentEliminationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadArgumentEliminationBenchmark.java)
+
+[![DeadArgumentEliminationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadArgumentEliminationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadArgumentEliminationBenchmark.svg?raw=true)
+
+### Analysis
+
+The analysis below pertains to the `recursive_method_calls` method, which is more interesting due to the highest differences in performance.
+
+#### C2 JIT Compiler
+#### Oracle GraalVM JIT Compiler
+#### GraalVM CE JIT Compiler
+### Conclusions
+
 ## DeadMethodCallStoreBenchmark
 
 The benchmark assesses how the compiler could remove code (i.e., a dead method call store) that does not affect the program results.
