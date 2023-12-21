@@ -144,9 +144,89 @@ Source code: [DeadArgumentEliminationBenchmark.java](https://github.com/ionutbal
 The analysis below pertains to the `recursive_method_calls` method, which is more interesting due to the highest differences in performance.
 
 #### C2 JIT Compiler
+
+The C2 JIT Compiler is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 2.
+
+```
+  recursive_method_calls
+  
+  0x7fe3fc4f8635:   mov    0x10(%rsi),%ecx           ; move field 'defaultValue' to ecx, the 2nd parameter
+  0x7fe3fc4f8638:   mov    $0x6,%edx                 ; move 0x6 to edx ('depth'), the 1st parameter
+  ...
+  <-- stack manipulation operations for the other parameters -->
+  ...
+  0x7fe3fc4f866b:   call   0x7fe3fc4f7fc0            ; <--- call to recursiveMethod two layers deep
+                                                     ; invokevirtual recursiveMethod
+                                                     ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                     ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                     ; - DeadArgumentEliminationBenchmark::recursive_method_calls@89 (line 80)
+                                                     ; {optimized virtual_call}
+```
+
+```
+  recursiveMethod
+  
+     0x7fe3fc4f7fc0:   mov    %eax,-0x14000(%rsp)
+     ...
+     0x7fe3fc4f7fda:   test   %edx,%edx            ; test if 'depth' is zero
+   ╭ 0x7fe3fc4f7fdc:   je     0x7fe3fc4f803b       ; jump if zero
+   │ 0x7fe3fc4f7fe5:   add    $0xfffffffe,%edx     ; add -2 (in two's complement) to edx, effectively decrementing it by 2
+   │ ...
+   │ <-- stack manipulation operations for the other parameters -->
+   │ ...
+   │ 0x7fe3fc4f801b:   call   0x7fe3fc4f7fc0       ; <--- recursive call to itself
+   │                                               ; invokevirtual recursiveMethod
+   │                                               ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+   │                                               ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+   │                                               ; {optimized virtual_call}
+   │ ...
+  ↗│ 0x7fe3fc4f8028:   add    $0x40,%rsp
+  ││ ...
+  ││ 0x7fe3fc4f803a:   ret
+  ││ ...
+  │↘ 0x7fe3fc4f803b:   mov    %ecx,%eax            ; eax = ecx ('defaultValue')
+  ╰  0x7fe3fc4f8041:   jmp    0x7fe3fc4f8028
+```
+
 #### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT compiler inlines the `recursiveMethod`, eliminates dead arguments and returns the `defaultValue` directly.
+
+```
+  0x7fccbad9ce3a:   mov    0x10(%rsi),%eax         ; move field 'defaultValue' to eax
+  ...
+  0x7fccbad9ce4e:   ret
+```
+
 #### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler, akin to the C2 JIT Compiler, is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 6.
+
+```
+  recursive_method_calls
+  
+  0x7fb11718e9b3:   mov    0x10(%r10),%ecx          ; move field 'defaultValue' to ecx, the 2nd parameter
+  ...
+  0x7fb11718e9bd:   mov    $0x2,%edx                ; move 0x2 to edx ('depth'), the 1st parameter
+  ...
+  <-- stack manipulation operations for the other parameters -->
+  ...           
+  0x7fb11718e9e3:   call   0x7fb11718e240           ; <--- call to recursiveMethod six layers deep
+                                                    ; invokevirtual recursiveMethod
+                                                    ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                    ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                    ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                    ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                    ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                    ; - DeadArgumentEliminationBenchmark::recursiveMethod@26 (line 129)
+                                                    ; - DeadArgumentEliminationBenchmark::recursive_method_calls@89 (line 80)
+                                                    ; {optimized virtual_call}
+```
+
 ### Conclusions
+
+- The Oracle GraalVM JIT Compiler stands out as the sole compiler capable of completely eliminating dead arguments. 
+- In comparison, the C2 JIT Compiler has a limited capability for inlining recursive calls (`recursive_method_calls` scenario), resulting in slower response times compared to even the GraalVM CE JIT Compiler. However, in this benchmark, neither of these two compilers eliminates dead arguments since the full inlining of the callee method `recursiveMethod` isn't occurring.
 
 ## DeadMethodCallStoreBenchmark
 
@@ -1142,7 +1222,7 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
    │ 0x7f129063675e:   mov    0x14(%rsi),%ebp          ; load the value of the 'incrementValue' field into ebp
    │ 0x7f1290636761:   cmp    $0x1,%ecx                ; compare the value in ecx with 0x1
   ╭│ 0x7f1290636764:   je     0x7f1290636793           ; jump to 0x7f1290636793 if equal
-  ││ 0x7f1290636766:   add    $0xfffffffe,%ecx         ; decrement ecx by 2
+  ││ 0x7f1290636766:   add    $0xfffffffe,%ecx         ; add -2 (in two's complement) to ecx, effectively decrementing it by 2
   │╰ 0x7f129063676b:   call   0x7f1290636740           ; <--- recursive call to itself
   │                                                    ; invokevirtual recursiveSum
   │                                                    ; - LockElisionBenchmark::recursiveSum@31 (line 227)
@@ -1541,7 +1621,7 @@ The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and perf
   0x7f14704f8669:   je     0x7f14704f8680                ; jump if zero
   0x7f14704f866b:   cmp    $0x1,%edx                     ; compare edx ('depth') to the value 0x1
   0x7f14704f866e:   je     0x7f14704f8680                ; jump if edx is equal to 0x1
-  0x7f14704f8670:   add    $0xfffffffe,%edx              ; decrement edx by 2
+  0x7f14704f8670:   add    $0xfffffffe,%edx              ; add -2 (in two's complement) to edx, effectively decrementing it by 2
   0x7f14704f8673:   call   0x7f14704f82c0                ; invokevirtual cls_non_static
                                                          ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
                                                          ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
@@ -1558,7 +1638,7 @@ The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and perf
    ╭│  0x7f14704f82e6:   je     0x7f14704f8300           ; jump if zero
    ││  0x7f14704f82e8:   cmp    $0x1,%edx                ; compare edx ('depth') to the value 0x1
   ╭││  0x7f14704f82eb:   je     0x7f14704f8300           ; jump if edx is equal to 0x1
-  │││  0x7f14704f82ed:   add    $0xfffffffe,%edx         ; decrement edx ('depth') by 2
+  │││  0x7f14704f82ed:   add    $0xfffffffe,%edx         ; add -2 (in two's complement) to edx ('depth'), effectively decrementing it by 2
   ││╰  0x7f14704f82f3:   call   0x7f14704f82c0           ; <--- recursive call to itself
   ││                                                     ; invokevirtual cls_non_static
   ││                                                     ; - RecursiveMethodCallBenchmark::cls_non_static@12 (line 109)
