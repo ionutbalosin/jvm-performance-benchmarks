@@ -722,7 +722,7 @@ Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instr
   0x7fa68ad81b6e:   mov    $0x0,%r8                     ; initialize loop counter
                                                         ; <--- Loop begin
   0x7fa68ad81b80:   vmovdqu (%rax,%r8,4),%ymm1          ; load 256 bits (8 integers) into %ymm1
-  0x7fa68ad81b86:   vpaddd %ymm1,%ymm0,%ymm0            ; packed integer addition: %ymm0 = %ymm0 + %ymm1
+  0x7fa68ad81b86:   vpaddd %ymm1,%ymm0,%ymm0            ; packed integer addition: ymm0 = ymm0 + ymm1
   0x7fa68ad81b8a:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
   0x7fa68ad81b8e:   cmp    %r11,%r8                     ; compare loop counter with (array length - 8)
   0x7fa68ad81b91:   jle    0x7fa68ad81b80               ; <--- loop end (jump loop back if less)
@@ -1743,6 +1743,87 @@ When it comes to recursive calls in classes and interfaces (both static and non-
 - The C2 JIT Compiler can devirtualize and inline the recursive calls up to a depth of 2.
 - The GraalVM CE JIT Compiler can devirtualize and inline the recursive calls up to a depth of 6.
 - The Oracle GraalVM JIT Compiler can devirtualize and inline the recursive calls up to a depth of 8.
+
+## ScalarEvolutionAndLoopOptimizationBenchmark
+
+Check if the Compiler can recognize the existence of the induction variables and to replace it with simpler computations.
+This optimization is a special case of strength reduction where all loop iterations are strengthened to a mathematical formula.
+
+```
+  @Benchmark
+  public int scev_loop() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+      sum += i;
+    }
+    return sum;
+  }
+
+  @Benchmark
+  public int baseline() {
+    return ((size * (size + 1)) / 2);
+  }
+```
+
+Source code: [ScalarEvolutionAndLoopOptimizationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarEvolutionAndLoopOptimizationBenchmark.java)
+
+[![ScalarEvolutionAndLoopOptimizationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ScalarEvolutionAndLoopOptimizationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ScalarEvolutionAndLoopOptimizationBenchmark.svg?raw=true)
+
+### Analysis
+
+#### C2 JIT Compiler
+
+The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16 operations per unrolled loop cycle.
+
+```
+  // Main loop (from 0x1 ... to 0x3e80)
+  
+    0x7fc5d4639fba:   mov    0xc(%rsi),%r9d       ; load the field 'size' into r9d
+    0x7fc5d4639fd1:   mov    $0x1,%ebx            ; loop counter 
+    ...
+  ↗ 0x7fc5d463a020:   add    %ebx,%eax            ; eax = eax + ebx
+  │ ...
+  │ <-- repeat the same 7 times -->
+  │ ...
+  │ 0x7fc5d463a030:   lea    0x8(%rbx),%edx       ; edx = rbx + 0x8
+  │ 0x7fc5d463a033:   add    %edx,%eax            ; eax = eax + edx
+  │ ...
+  │ <-- repeat the same 5 times -->
+  │ ...
+  │ 0x7fc5d463a03f:   add    %ebx,%eax            ; eax = eax + ebx
+  │ 0x7fc5d463a041:   add    %ebx,%eax            ; eax = eax + ebx
+  │ 0x7fc5d463a043:   add    $0x48,%eax           ; eax = eax + 0x48
+  │ 0x7fc5d463a046:   add    $0x10,%ebx           ; increment loop counter by 0x10
+  │ 0x7fc5d463a049:   cmp    %ecx,%ebx            ; compare ebx to ecx
+  ╰ 0x7fc5d463a04b:   jl     0x7fc5d463a020       ; jump back to the loop if less than
+  ; eax stores the result of the main loop
+```
+
+#### Oracle GraalVM JIT Compiler
+
+Oracle GraalVM JIT Compiler sum the numbers using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+
+```
+  // Main loop
+
+    0x7fefded7ccfa:   mov    0xc(%rsi),%eax         ; load the field 'size' into eax
+    0x7fefded7cd2a:   lea    -0x8(%rax),%r10        ; r10 = rax - 0x8
+    0x7fefded7cd2e:   vmovdqa -0xb6(%rip),%ymm1
+    0x7fefded7cd36:   vmovdqa -0x9e(%rip),%ymm2
+    0x7fefded7cd3e:   mov    $0x0,%r11              ; loop counter
+    ...
+  ↗ 0x7fefded7cd60:   vmovdqu %ymm3,%ymm0           ; ymm3 = ymm0
+  │ 0x7fefded7cd64:   vpaddd %ymm1,%ymm0,%ymm3      ; packed integer addition: ymm3 = ymm0 + ymm1
+  │ 0x7fefded7cd68:   vpaddd %ymm0,%ymm2,%ymm2      ; packed integer addition: ymm2 = ymm2 + ymm0
+  │ 0x7fefded7cd6c:   lea    0x8(%r11),%r11         ; increment r11 (loop counter) by 8
+  │ 0x7fefded7cd70:   cmp    %r10,%r11              ; compare counter against loop size
+  ╰ 0x7fefded7cd73:   jle    0x7fefded7cd60         ; jump back if less equal
+    ; ymm2 stores the result of the main loop
+```
+
+#### GraalVM CE JIT Compiler
+
+### Conclusions
 
 ## ScalarReplacementBenchmark
 
