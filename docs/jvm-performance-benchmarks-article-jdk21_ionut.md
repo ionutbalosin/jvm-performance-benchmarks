@@ -735,9 +735,10 @@ The post-loop processes the remaining elements individually, without unrolling.
   // Post loop
   
   ...
-  <--- transfers data from ymm0 (256-bit AVX register) into r11d (32-bit register) -->
+  <-- transfers data from ymm0 (256-bit AVX register) into r11d (32-bit register) -->
   ...
-  ;                                                     <--- Loop begin
+  
+                                                        ; <--- Loop begin
   0x7fa68ad81bc0:   add    (%rax,%r8,4),%r11d           ; add the value of an element to r11d
   0x7fa68ad81bc4:   inc    %r8                          ; increment the loop counter
   0x7fa68ad81bc7:   cmp    %r10,%r8                     ; compare the loop counter with the array length
@@ -1773,57 +1774,137 @@ Source code: [ScalarEvolutionAndLoopOptimizationBenchmark.java](https://github.c
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16 operations per unrolled loop cycle.
+The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16 additions per unrolled loop cycle.
 
 ```
   // Main loop (from 0x1 ... to 0x3e80)
-  
-    0x7fc5d4639fba:   mov    0xc(%rsi),%r9d       ; load the field 'size' into r9d
-    0x7fc5d4639fd1:   mov    $0x1,%ebx            ; loop counter 
+
+    0x7f9ccc4f8dba:   mov    0xc(%rsi),%r9d       ; load the field 'size' into r9d
+    0x7f9ccc4f8dd1:   mov    $0x1,%ebx            ; initialize loop counter
+    0x7f9ccc4f8dca:   movslq %r9d,%r10            ; sign-extend r9d ('size') to r10
+    0x7f9ccc4f8dfd:   mov    %r10d,%ecx           ; ecx = r10d ('size')
     ...
-  ↗ 0x7fc5d463a020:   add    %ebx,%eax            ; eax = eax + ebx
+  ↗ 0x7f9ccc4f8e20:   add    %ebx,%eax            ; eax = eax + ebx
   │ ...
   │ <-- repeat the same 7 times -->
   │ ...
-  │ 0x7fc5d463a030:   lea    0x8(%rbx),%edx       ; edx = rbx + 0x8
-  │ 0x7fc5d463a033:   add    %edx,%eax            ; eax = eax + edx
+  │ 0x7f9ccc4f8e30:   lea    0x8(%rbx),%edx       ; edx = rbx + 0x8
+  │ 0x7f9ccc4f8e33:   add    %edx,%eax            ; eax = eax + edx
   │ ...
   │ <-- repeat the same 5 times -->
   │ ...
-  │ 0x7fc5d463a03f:   add    %ebx,%eax            ; eax = eax + ebx
-  │ 0x7fc5d463a041:   add    %ebx,%eax            ; eax = eax + ebx
-  │ 0x7fc5d463a043:   add    $0x48,%eax           ; eax = eax + 0x48
-  │ 0x7fc5d463a046:   add    $0x10,%ebx           ; increment loop counter by 0x10
-  │ 0x7fc5d463a049:   cmp    %ecx,%ebx            ; compare ebx to ecx
-  ╰ 0x7fc5d463a04b:   jl     0x7fc5d463a020       ; jump back to the loop if less than
+  │ 0x7f9ccc4f8e3f:   add    %ebx,%eax            ; eax = eax + ebx
+  │ 0x7f9ccc4f8e41:   add    %ebx,%eax            ; eax = eax + ebx
+  │ 0x7f9ccc4f8e43:   add    $0x48,%eax           ; eax = eax + 0x48
+  │ 0x7f9ccc4f8e46:   add    $0x10,%ebx           ; increment loop counter by 0x10
+  │ 0x7f9ccc4f8e49:   cmp    %ecx,%ebx            ; compare ebx to loop counter
+  ╰ 0x7f9ccc4f8e4b:   jl     0x7f9ccc4f8e20       ; jump back to the loop if less than
   ; eax stores the result of the main loop
+```
+
+The post-loop handles the remaining numbers individually, without loop unrolling.
+
+```
+  // Post loop
+  
+  ↗ 0x7f9ccc4f8e68:   add    %ebx,%eax            ; eax = eax + ebx
+  │ 0x7f9ccc4f8e6a:   inc    %ebx                 ; ebx = ebx + 1
+  │ 0x7f9ccc4f8e6c:   cmp    %r9d,%ebx            ; compare ebx to r9d ('size')
+  ╰ 0x7f9ccc4f8e6f:   jl     0x7f9ccc4f8e68       ; jump back to the loop if less than
+  ; eax stores the result of the post loop  
 ```
 
 #### Oracle GraalVM JIT Compiler
 
-Oracle GraalVM JIT Compiler sum the numbers using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+Oracle GraalVM JIT Compiler does the sum of numbers using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
 
 ```
   // Main loop
 
-    0x7fefded7ccfa:   mov    0xc(%rsi),%eax         ; load the field 'size' into eax
-    0x7fefded7cd2a:   lea    -0x8(%rax),%r10        ; r10 = rax - 0x8
-    0x7fefded7cd2e:   vmovdqa -0xb6(%rip),%ymm1
-    0x7fefded7cd36:   vmovdqa -0x9e(%rip),%ymm2
-    0x7fefded7cd3e:   mov    $0x0,%r11              ; loop counter
+    0x7f63a6d9db7a:   mov    0xc(%rsi),%eax         ; load the field 'size' into eax
+    0x7f63a6d9dbaa:   lea    -0x8(%rax),%r10        ; r10 = rax - 0x8
+    0x7f63a6d9dbae:   vmovdqa -0xb6(%rip),%ymm1
+    0x7f63a6d9dbb6:   vmovdqa -0x9e(%rip),%ymm2
+    0x7f63a6d9dbbe:   mov    $0x0,%r11              ; initialize loop counter
     ...
-  ↗ 0x7fefded7cd60:   vmovdqu %ymm3,%ymm0           ; ymm3 = ymm0
-  │ 0x7fefded7cd64:   vpaddd %ymm1,%ymm0,%ymm3      ; packed integer addition: ymm3 = ymm0 + ymm1
-  │ 0x7fefded7cd68:   vpaddd %ymm0,%ymm2,%ymm2      ; packed integer addition: ymm2 = ymm2 + ymm0
-  │ 0x7fefded7cd6c:   lea    0x8(%r11),%r11         ; increment r11 (loop counter) by 8
-  │ 0x7fefded7cd70:   cmp    %r10,%r11              ; compare counter against loop size
-  ╰ 0x7fefded7cd73:   jle    0x7fefded7cd60         ; jump back if less equal
+  ↗ 0x7f63a6d9dbe0:   vmovdqu %ymm3,%ymm0           ; ymm3 = ymm0
+  │ 0x7f63a6d9dbe4:   vpaddd %ymm1,%ymm0,%ymm3      ; packed integer addition: ymm3 = ymm0 + ymm1
+  │ 0x7f63a6d9dbe8:   vpaddd %ymm0,%ymm2,%ymm2      ; packed integer addition: ymm2 = ymm2 + ymm0
+  │ 0x7f63a6d9dbec:   lea    0x8(%r11),%r11         ; increment r11 (loop counter) by 8
+  │ 0x7f63a6d9dbf0:   cmp    %r10,%r11              ; compare counter against loop counter
+  ╰ 0x7f63a6d9dbf3:   jle    0x7f63a6d9dbe0         ; jump back if less equal
     ; ymm2 stores the result of the main loop
+```
+
+The post-loop handles the remaining numbers individually, without loop unrolling.
+
+```
+  // Post loop
+
+  ...
+  <--- transfers data from ymm2 (256-bit AVX register) into r8d (32-bit register) -->
+  ...
+   
+  ↗ 0x00007f63a6d9dc40:   mov    %r10d,%r9d
+  │ 0x00007f63a6d9dc43:   inc    %r9d
+  │ 0x00007f63a6d9dc46:   add    %r10d,%r8d
+  │ 0x00007f63a6d9dc49:   inc    %r11                 ; increment loop counter
+  │ 0x00007f63a6d9dc4c:   mov    %r9d,%r10d
+  │ 0x00007f63a6d9dc4f:   cmp    %rax,%r11            ; compare r11 to rax ('size')
+  ╰ 0x00007f63a6d9dc52:   jle    0x00007f63a6d9dc40   ; jump back if less equal
+    ; r8d stores the result of the post loop
 ```
 
 #### GraalVM CE JIT Compiler
 
+The C2 JIT Compiler expands the main loop by a factor of 16, allowing it to process 16 additions during each iteration of the unrolled loop. 
+
+However, the method used to compute the sum of consecutive numbers within the main loop appears to be quite efficient:
+- every unrolled loop iteration calculates the sum of 16 consecutive numbers, such as [1...16], [17...32], [33...48], [49...64], and so forth
+- within each unrolled loop iteration, the first number in the sequence (e.g., 1, 17, 33, 49, etc.) is shifted left by 4 bits
+- following the left shift, the value 0x78 (120) is added. This value is the difference between the sums of every 16 consecutive numbers within each sequence
+
+In summary: `sum(cycle) = x(t) << 4 + 0x78` where sum(cycle) represents the partial sum from the unrolled loop iteration, and x(t) denotes the initial element from the sequence.
+
+```
+  // Main loop
+  
+  0x7fe8bb19963a:   mov    0xc(%rsi),%eax               ; load the field 'size' into eax
+  0x7fe8bb199656:   mov    $0x0,%r8d                    ; initialize loop counter
+  0x7fe8bb19968b:   lea    -0x10(%rax),%r10d            ; r10d = rax - 0x10
+  0x7fe8bb19968f:   mov    %r8d,0x4(%rsp)
+  0x7fe8bb199694:   mov    %r11d,%r8d
+  0x7fe8bb199697:   mov    0x4(%rsp),%r11d              ; r11d = value stored previously in r8d
+  
+  ↗  0x7fe8bb1996c0:   lea    0x10(%r8),%r9d            ; r9d = r8 + 0x10
+  │  0x7fe8bb1996c4:   shl    $0x4,%r8d                 ; r8d = r8d << 0x4 (shift left by 4 bits)
+  │  0x7fe8bb1996c8:   add    %r8d,%r11d
+  │  0x7fe8bb1996cb:   lea    0x78(%r11),%r11d          ; r11d = r11d + 0x78 (120)
+  │  0x7fe8bb1996cf:   mov    %r9d,%r8d
+  │  0x7fe8bb1996d2:   cmp    %r8d,%r10d                ; compare r10d against r8d (loop counter)
+  ╰  0x7fe8bb1996d5:   jg     0x7fe8bb1996c0            ; jump if greater
+    ; r11d stores the result of the main loop
+```
+
+The post-loop handles the remaining numbers individually, without loop unrolling
+
+```
+  // Post loop
+  
+  ↗ 0x7fe8bb1996e0:   mov    %r8d,%r10d
+  │ 0x7fe8bb1996e3:   inc    %r10d                        
+  │ 0x7fe8bb1996e6:   add    %r8d,%r11d                 ; r11d stores the 'sum'
+  │ 0x7fe8bb1996e9:   mov    %r10d,%r8d                 ; update loop counter
+  │ 0x7fe8bb1996f0:   cmp    %r8d,%eax                  ; compare eax ('size') to r8d (loop counter)
+  ╰ 0x7fe8bb1996f3:   jg     0x7fe8bb1996e0             ; jump if greater 
+    ; r11d stores the result of the post loop
+```
+
 ### Conclusions
+
+- None of these compilers have implemented this optimization.
+- Nevertheless, the optimization triggered by the C2 JIT Compiler, which unrolls the main loop by a factor of 16 and sequentially performs the additions, appears to be less efficient compared to other compilers
+- Despite the fact that the Oracle GraalVM JIT Compiler utilizes vectorized instructions within the main unrolled loop, it seems to perform slower than the GraalVM CE JIT Compiler, which abstains from using vectorized instructions but employs an efficient formula with scalar instructions
 
 ## ScalarReplacementBenchmark
 
