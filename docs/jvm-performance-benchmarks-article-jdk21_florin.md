@@ -616,21 +616,202 @@ splitting is applied.
 
 ## MegamorphicMethodCallBenchmark
 
-... TODO ...
+This benchmark tests the performance of virtual calls with a different number of targets. The JIT compiler is expected
+to optimize virtual calls up to a certain number of targets. It also tests the performance of manually splitting one
+megamorphic call site into multiple monomorphic call sites.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+The benchmark is structured as follows:
+```
+  @Benchmark
+  @OperationsPerInvocation(SIZE)
+  public void virtual_call() {
+    CMath[] instances = this.instances;
+    for (CMath instance : instances) {
+      instance.compute();
+    }
+  }
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+  // Manually split the call site to receive only one target -> monomorphic
+  // Note: this is a trick trying to bypass some specific JVM limitations
+  @Benchmark
+  @OperationsPerInvocation(SIZE)
+  public void devirtualize_to_monomorphic() {
+    byte[] classIndex = this.classIndex;
+    CMath[] instances = this.instances;
+    for (int i = 0; i < SIZE; i++) {
+      CMath instance = instances[i];
+      switch (classIndex[i]) {
+        case 0:
+          instance.compute();
+          break;
+        case 1:
+          instance.compute();
+          break;
+        case 2:
+          instance.compute();
+          break;
+        case 3:
+          instance.compute();
+          break;
+        case 4:
+          instance.compute();
+          break;
+        case 5:
+          instance.compute();
+          break;
+        case 6:
+          instance.compute();
+          break;
+        case 7:
+          instance.compute();
+          break;
+        default:
+          throw new RuntimeException("Should not reach here.");
+      }
+    }
+  }
+  
+  private abstract static class CMath {
+    int c1, c2, c3, c4, c5, c6, c7, c8;
 
-### Analysis
+    public abstract int compute();
+  }
+  
+  private static class Alg1 extends CMath {
+    public int compute() {
+      return ++c1;
+    }
+  }
+  ... same pattern for all of the remaining classes
+  private static class Alg8 extends CMath {
+    public int compute() {
+      return ++c8;
+    }
+  }
+```
+
+In general, the runtime collects receiver-type statistics per call site during the execution of profiled code (in the 
+interpreter or the C1 JIT). These statistics are further used in the optimizing compiler (e.g., C2 JIT). If, for example,
+one call site `class.method()` has received only `Type1` even though there exists a `Type2` in the type hierarchy, the compiler 
+can add a guard that checks the receiver type is `Type1` and then call the `Type1` method directly. 
+This is called a monomorphic call site:
+
+```
+// High-level pseudo-code of the monomorphic call site optimization
+if (receiver instanceof Type1) {
+    // fast path
+    Type1.method();
+} else {
+    // slow path. Will deoptimize and rerun in the interpreter
+    deoptimize();
+}
+```
+
+A `bimorphic call site` is a call site that can check for two receivers types:
+
+```
+// High-level pseudo-code of the bimorphic call site optimization
+if (receiver instanceof Type1) {
+    // fast path
+    Type1.method();
+} else if (receiver instanceof Type2) {
+    // fast path
+    Type2.method();
+} else {
+    // slow path. Will deoptimize and rerun in the interpreter. Next time it JITs, it will use a virtual call
+    deoptimize();
+}
+```
+
+Once a call site becomes static, the compiler will be able to inline the target method and perform further optimizations.
+
+Source code: [MegamorphicMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicMethodCallBenchmark.java)
+
+[![MegamorphicMethodCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MegamorphicMethodCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MegamorphicMethodCallBenchmark.svg?raw=true)
+
+### Analysis of virtual_call
+
+The `virtual_call` benchmark measures the performance of virtual calls with a different number of targets at the call site.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT compiler is able to devirtualize and inline call sites that use up to two different targets. In such cases,
+it also performs loop unrolling by a factor of two.
+
+```
+0x00007f2cbc758990:   incl   0x10(%r11)                   ; increment the Alg2 counter    
+0x00007f2cbc758994:   add    $0x2,%edx                    ; add 2 to the loop induction variable
+0x00007f2cbc758997:   cmp    %eax,%edx                    ; compare against the loop bound
+0x00007f2cbc758999:   jge    0x00007f2cbc75895f           ; jump out of the loop if the loop condition is false
+0x00007f2cbc75899b:   mov    0x10(%rsi,%rdx,4),%r10d      ; load this.instances[i] in %r10d
+0x00007f2cbc7589a0:   mov    0x8(%r12,%r10,8),%r8d        ; load the klass word of the object in %r8d
+0x00007f2cbc7589a5:   lea    (%r12,%r10,8),%r11           ; load the object address in %r11
+0x00007f2cbc7589a9:   cmp    $0x1026638,%r8d              ; compare the klass word against MegamorphicMethodCallBenchmark$Alg2
+0x00007f2cbc7589b0:   je     0x00007f2cbc7589c1           ; if equal jump to the inlined method that increments the Alg2 counter 
+0x00007f2cbc7589b2:   cmp    $0x1026430,%r8d              ; compare the klass word againsst MegamorphicMethodCallBenchmark$Alg1
+0x00007f2cbc7589b9:   jne    0x00007f2cbc7589ed           ; if not equal jump to the slow path which deoptimizes in this case 
+0x00007f2cbc7589bb:   incl   0xc(%r11)                    ; increment the Alg1 counter
+0x00007f2cbc7589bf:   jmp    0x00007f2cbc7589c5           ; jump past the increment Alg2 counter code 
+0x00007f2cbc7589c1:   incl   0x10(%r11)                   ; increment the Alg2 counter
+0x00007f2cbc7589c5:   mov    0x14(%rsi,%rdx,4),%r11d      ; load this.instances[i + 1] in %r11d
+0x00007f2cbc7589ca:   mov    0x8(%r12,%r11,8),%r10d       ; load the klass word of the object in %r10d
+0x00007f2cbc7589cf:   shl    $0x3,%r11                    ; compute the full address from the oop
+0x00007f2cbc7589d3:   cmp    $0x1026638,%r10d             ; compare the klass word against MegamorphicMethodCallBenchmark$Alg2
+0x00007f2cbc7589da:   je     0x00007f2cbc758990           ; if equal jump to the inlined method that increments the Alg2 counter
+0x00007f2cbc7589dc:   cmp    $0x1026430,%r10d             ; compare the klass word against MegamorphicMethodCallBenchmark$Alg1
+0x00007f2cbc7589e3:   jne    0x00007f2cbc7589eb           ; if not equal jump to the slow path which deoptimizes in this case
+0x00007f2cbc7589e5:   incl   0xc(%r11)                    ; increment the Alg1 counter
+0x00007f2cbc7589e9:   jmp    0x00007f2cbc758994           ; jump back to the loop beginning
+```
+
+If the number of targets is higher than two, the C2 JIT compiler always uses a virtual call to reach the target method.
+
+```
+0x00007f41b8758e80:   mov    (%rsp),%r11                  ; load the instances array base address in %r11 from the stack
+0x00007f41b8758e84:   mov    0x10(%r11,%rbp,4),%r10d      ; load this.instances[i] in %r10d
+0x00007f41b8758e89:   mov    %r11,(%rsp)                  ; store the instances array base address on the stack
+0x00007f41b8758e8d:   mov    %r10,%rsi                    ; move the this.instances[i] in %rsi 
+0x00007f41b8758e90:   shl    $0x3,%rsi                    ; compute the full address from the oop
+0x00007f41b8758e94:   nop                                 ; alignment nop
+0x00007f41b8758e95:   movabs $0x7f40f8026430,%rax
+0x00007f41b8758e9f:   call   0x00007f41b7fa1e20           ; virtual call to the compute method
+0x00007f41b8758ea4:   nopl   0x214(%rax,%rax,1)           ; more nops
+0x00007f41b8758eac:   inc    %ebp                         ; increase the loop induction variable by one
+0x00007f41b8758eae:   cmp    0x8(%rsp),%ebp               ; compare against the loop bound
+0x00007f41b8758eb2:   jl     0x00007f41b8758e80           ; jump back to the loop beginning if the loop condition is true
+```
 
 #### Oracle GraalVM JIT Compiler
 
-... TODO ...
+The Oracle GraalVM JIT Compiler devirtualizes and inlines call sites that use up to four different targets. If the number
+of targets is higher, then the compiler will use a virtual call for the remaining targets.
+This can be observed either by looking at the generated assembly code or by looking at the hottest methods in the benchmark.
+
+Since the assembly code for the `virtual_call` method is quite large due to a loop unrolling factor of two, 
+only the equivalent high-level pseudo-code is shown below:
+```
+if (receiver instanceof Type1) {
+    // fast path
+    Type1.method();
+} else if (receiver instanceof Type2) {
+    // fast path
+    Type2.method();
+} else if (receiver instanceof Type3) {
+    // fast path
+    Type3.method();
+} else {
+    // slow path. Will not deoptimize, but rather use a virtual call for the remaining targets.
+    receiver.method();
+}
+```
+
+The hottest methods in the benchmark `virtual_call[MEGAMORPHIC_5]` are shown below. As expected, a single `compute` method 
+shows up in the list because the remaining methods have been inlined in `virtual_call`.  
+```
+....[Hottest Regions].....................................................
+  84.82%      jvmci, level 4  MegamorphicMethodCallBenchmark::virtual_call 
+  12.24%      jvmci, level 4  MegamorphicMethodCallBenchmark$Alg4::compute
+```
 
 #### GraalVM CE JIT Compiler
 
