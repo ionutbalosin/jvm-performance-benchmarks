@@ -1321,6 +1321,134 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
 - The Oracle GraalVM JIT Compiler triggers removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall response time.
 - The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT Compiler that does a better job of inlining the callee recursive calls.
 
+## LoopFissionBenchmark
+
+Loop fission breaks a larger loop body into smaller loops. Benefits of loop fission:
+- enable vectorization: if one loop is not vectorizable, splitting the loop into two loops, one of which is vectorizable and the other which is not can help the performance
+- avoid register spilling: in case of large loops with many variables, loop distribution can be used to avoid register spilling
+- better utilization of data locality (if by splitting one of the loops becomes also interchangeable)
+
+- This optimization is most efficient in multicore processors that can split a task into multiple tasks for each processor.
+
+Note: loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
+
+```
+  @Benchmark
+  public void initial_loop() {
+    for (int i = 1; i < size; i++) {
+      A[i] = A[i - 1] + C[i];
+      B[i] = A[i] + C[i];
+    }
+  }
+
+  @Benchmark
+  public void manual_loop_fission() {
+    for (int i = 1; i < size; i++) { // loop 1
+      A[i] = A[i - 1] + C[i];            
+    }
+
+    for (int i = 1; i < size; i++) { // loop 2
+      B[i] = A[i] + C[i];
+    }
+  }
+```
+
+Source code: [LoopFissionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopFissionBenchmark.java)
+
+[![LoopFissionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopFissionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopFissionBenchmark.svg?raw=true)
+
+### Analysis of manual_loop_fission
+
+The analysis below pertains to the `manual_loop_fission` method, which is more interesting due to the differences in performance.
+
+#### C2 JIT Compiler
+
+The C2 JIT compiler unrolls `loop 1` by a factor of 8 using scalar instructions, handling 8 additions per loop cycle within the `main loop 1`:
+
+```
+  ...
+  0x7f820c4f9c0f:   mov    $0x2,%ebx                        ; initialize loop counter
+  ...
+  
+  Main loop 1 (A[i] = A[i - 1] + C[i])
+  
+  ↗ 0x7f820c4f9c40:   mov    0x10(%r8,%rbx,4),%edx          ; load 'C[i]' into register edx
+  │ 0x7f820c4f9c45:   add    0xc(%r9,%rbx,4),%edx           ; add 'A[i-1]' to register edx
+  │ 0x7f820c4f9c4a:   mov    %edx,0x10(%r9,%rbx,4)          ; store edx ('A[i-1] + C[i]') into 'A[i]'
+  │ 0x7f820c4f9c4f:   add    0x14(%r8,%rbx,4),%edx          ; add 'C[i+1]' to register edx
+  │ 0x7f820c4f9c54:   mov    %edx,0x14(%r9,%rbx,4)          ; store edx ('A[i-1] + C[i] + C[i+1]') into 'A[i+1]'
+  │ 0x7f820c4f9c59:   add    0x18(%r8,%rbx,4),%edx          ; add 'C[i+2]' to register edx
+  │ 0x7f820c4f9c5e:   mov    %edx,0x18(%r9,%rbx,4)          ; store edx ('A[i-1] + C[i] + C[i+1] + C[i+2]') into 'A[i+2]'
+  │ ...
+  │ <-- Similar pattern for processing the next elements -->
+  │ ...
+  │ 0x7f820c4f9c95:   add    $0x8,%ebx                      ; increment loop counter by 8
+  │ 0x7f820c4f9c98:   cmp    %esi,%ebx                      ; compare counter against loop limit
+  ╰ 0x7f820c4f9c9a:   jl     0x7f820c4f9c40                 ; jump back if less
+  
+   <-- the post loop 1 processes the remaining elements individually -->
+```
+
+And for `loop 2` the C2 JIT compiler employs vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers. It handles 64 additions per loop cycle within the `main loop 2`:
+
+```
+   Main loop 2 (B[i] = A[i] + C[i])
+  
+  ↗ 0x7f820c4f9d70:   vmovdqu 0x10(%r8,%rbx,4),%ymm0        ; load 8 integers from array 'C' into ymm0
+  │ 0x7f820c4f9d77:   vpaddd 0x10(%r9,%rbx,4),%ymm0,%ymm0   ; add 8 integers from array 'A' to ymm0
+  │ 0x7f820c4f9d7e:   vmovdqu %ymm0,0x10(%r11,%rbx,4)       ; store the result in 'B'
+  │ ...
+  │ <-- similar pattern for processing the next elements -->
+  │ ...
+  │ 0x7f820c4f9e3c:   add    $0x40,%ebx                     ; increment loop counter by 0x40 (processing 64 integers)
+  │ 0x7f820c4f9e40:   cmp    %ecx,%ebx                      ; compare counter against loop limit
+  ╰ 0x7f820c4f9e42:   jl     0x7f820c4f9d70                 ; jump back if the loop counter is less than the limit
+  
+   <-- the first post loop 2 uses vectorized instructions to process 8 elements per loop cycle -->
+   <-- the second post loop 2 processes the remaining elements individually -->
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT compiler employs almost identical optimization patterns to the C2 JIT Compiler for this scenario. The only minor difference is that it handles 8 additions per loop cycle within the `main loop 2`, as opposed to 64.
+
+```
+  Main loop 2 (B[i] = A[i] + C[i])
+  
+  ↗ 0x7fd86ad9d040:   vmovdqu (%r9,%rbx,4),%ymm0           ; load 8 integers from array 'A' into ymm0
+  │ 0x7fd86ad9d046:   vmovdqu (%r10,%rbx,4),%ymm1          ; load 8 integers from array 'C' into ymm1
+  │ 0x7fd86ad9d04c:   vpaddd %ymm1,%ymm0,%ymm0             ; add 8 integers to ymm0
+  │ 0x7fd86ad9d050:   vmovdqu %ymm0,(%r11,%rbx,4)          ; store the result in 'B'
+  │ 0x7fd86ad9d056:   lea    0x8(%rbx),%rbx                ; increment loop counter by 8 (processing 8 integers)
+  │ 0x7fd86ad9d05a:   cmp    %rcx,%rbx                     ; compare counter against loop limit
+  ╰ 0x7fd86ad9d05d:   jle    0x7fd86ad9d040                ; jump back if the loop counter is less than the limit
+```
+
+#### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT Compiler unrolls the `main loop 2` by a factor of 8, but it abstains from using any vectorized instructions.
+
+```
+  Main loop 2 (B[i] = A[i] + C[i])
+  
+  ↗ 0x7ff4c319d840:   mov    0x10(%rcx,%r11,4),%r8d       ; load 'C[i]' into register r8d
+  │ 0x7ff4c319d845:   add    0x10(%r9,%r11,4),%r8d        ; add 'A[i]' into register r8d
+  │ 0x7ff4c319d84a:   mov    %r8d,0x10(%r13,%r11,4)       ; store the result ('A[i] + C[i]') in 'B[i]'
+  │ 0x7ff4c319d84f:   movslq %r11d,%r8                    ; extend loop counter to 64-bit in r8
+  │ 0x7ff4c319d852:   mov    0x14(%rcx,%r8,4),%edi        ; load 'C[i+1]' into register edi
+  │ 0x7ff4c319d857:   add    0x14(%r9,%r8,4),%edi         ; add 'A[i+1]' into register edi
+  │ 0x7ff4c319d85c:   mov    %edi,0x14(%r13,%r8,4)        ; store the result ('A[i+1] + C[i+1]') in 'B[i+1]'
+  │ ...
+  │ 0x7ff4c319d8bb:   lea    0x8(%r11),%r11d              ; increment loop counter by 8 (processing 8 integers)
+  │ 0x7ff4c319d8c0:   cmp    %r11d,%ebx                   ; compare loop counter against loop limit
+  ╰ 0x7ff4c319d8c3:   jg     0x7ff4c319d840               ; jump back if loop counter is greater than loop limit
+```
+
+### Conclusions
+
+- None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loop_fission` brings significant benefits as opposed to the default `initial_loop`.
+- The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler does not vectorize the fissed loop (when no data dependencies are present), making it slower than the other two compilers.
+
 ## LoopFusionBenchmark
 
 The benchmark assesses if the compiler triggers loop fusion, an optimization aimed to merge the adjacent loops into one loop to reduce the loop overhead and improve run-time performance.
