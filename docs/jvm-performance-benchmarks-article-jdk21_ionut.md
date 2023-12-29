@@ -2395,9 +2395,61 @@ This set of benchmarks is dedicated to larger programs using high-level Java API
 
 The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
 
-## Benchmark
+## StringPatternSplitBenchmark
 
-... TODO ...
+Measures the performance of splitting a very long text (i.e., a sequence of words separated by empty spaces) by either one or two characters, using the below methods:
+- `Pattern.split()`
+- `String.split()`
+
+`String.split()` has a fast-path for:
+- one-char String and this character is not one of the RegEx's meta characters `.$|()[{^?*+\\`
+- or two-char String and the first char is the backslash and the second is not the ascii digit or ascii letter.
+
+`Pattern.split()` reuses the pattern, it saves a few cycles in comparison to String.split()
+
+The number of allocations during this benchmark is not neglectable, and it influences the overall results. It could be partially mitigated by using a shorter text.
+
+```
+  @Param({"_", "__"})
+  private String regexp;
+
+  private String text;
+  private Pattern pattern;
+
+  @Benchmark
+  public String[] string_split() {
+    return text.split(regexp);
+  }
+
+  @Benchmark
+  public String[] pattern_split() {
+    return pattern.split(text);
+  }
+```
+
+Source code: [StringPatternSplitBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/string/StringPatternSplitBenchmark.java)
+
+[![StringPatternSplitBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)
+
+### Analysis
+
+The flame graphs below pertain to the `pattern_split` method.
+
+#### C2 JIT Compiler
+
+[![StringPatternSplitBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+
+#### Oracle GraalVM JIT Compiler
+
+[![StringPatternSplitBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+
+#### GraalVM CE JIT Compiler
+
+[![StringPatternSplitBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+
+### Conclusions
+
+At first glance, it appears that the Oracle GraalVM JIT Compiler does a better job of inlining. However, a more in-depth analysis might be necessary to identify the differences, as they may not be very obvious to reveal based solely on the generated assembly code.
 
 ## API Geometric Mean
 
