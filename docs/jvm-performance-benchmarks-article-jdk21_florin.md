@@ -1010,60 +1010,218 @@ the `method_args_buster` method:
 
 ### Conclusions
 
-The C2 JIT Compiler can fail sooner to compile a method that takes a large number of arguments than the Graal JIT Compilers.
+The C2 JIT Compiler can fail to compile methods that take a large number of arguments whereas this limit seems higher
+for the Graal JIT Compilers.
 Thankfully, most IDEs will warn the developer way before this threshold is reached.
 
 ## NpeControlFlowBenchmark
 
-... TODO ...
+This benchmark checks how the JIT compiler handles explicit control flow around `null` checks. Explicit null pointer
+checks are done by checking against `null`. Implicit null pointer checks are done by surrounding the code with a 
+`try {} catch (NullPointerException e) {}` block. Finally, a third option is done through the `Streams` API filter method.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+```
+  @Benchmark
+  public int try_npe_catch() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+      try {
+        sum += array[i].x;
+      } catch (NullPointerException ignored) {
+        sink(ignored);
+      }
+    }
+    return sum;
+  }
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+  @Benchmark
+  public int if_npe_continue() {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+      if (array[i] == null) {
+        continue;
+      }
+      sum += array[i].x;
+    }
+    return sum;
+  }
 
-### Analysis
+  @Benchmark
+  public long stream_filter_npe() {
+    return Arrays.stream(array)
+        .filter(wrapper -> wrapper != null)
+        .map(Wrapper::getX)
+        .reduce(0, Integer::sum);
+  }
+```
+
+The `size` below represents the number of elements in the array. The `nullThreshold` represents the number of `null`
+elements in the array. The `null` elements are randomly distributed in the array. A `nullThreshold` of 0 means that
+the array does not contain any `null` elements. A `nullThreshold` of 16 means that the array should have on average
+half of its elements set to `null`.
+
+
+Source code: [NpeControlFlowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeControlFlowBenchmark.java)
+
+[![NpeControlFlowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/NpeControlFlowBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/NpeControlFlowBenchmark.svg?raw=true)
+
+### Analysis of try_npe_catch
+
+Mostly all three JIT compilers perform the same in all benchmarks configurations apart from the `try_npe_catch` benchmark.
+Therefore, the section below will focus on the `try_npe_catch` benchmark when the `nullThreshold` is 16.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT Compiler is able to optimize and make use of a cached `NullPointerException` object
+when the same exception is thrown multiple times. This avoids allocating a new exception object on the iterations of 
+the loop when the `NullPointerException` is thrown. One side effect of this is that stack traces are not collected
+for the cached exception object. This optimization is enabled by default and can be disabled by using the 
+`-XX:-OmitStackTraceInFastThrow` flag.
 
-#### Oracle GraalVM JIT Compiler
+```
+0x00007f14a463aaa0:   add    0xc(%r12,%r10,8),%r14d       ; increment the accumulator %r14d with the value of array[i].x
+0x00007f14a463aaa5:   mov    0x458(%r15),%r10             ; load safepoint poll address in %r10 
+0x00007f14a463aaac:   mov    0x10(%rbp),%r8d              ; load the size filed in %r8d
+0x00007f14a463aab0:   inc    %ebx                         ; increment the loop induction variable
+0x00007f14a463aab2:   test   %eax,(%r10)                  ; safepoint poll check                  
+0x00007f14a463aab5:   cmp    %r8d,%ebx                    ; compare the loop induction variable against size
+0x00007f14a463aab8:   jge    0x00007f14a463ab2d           ; jump to return if the loop condition is false
+0x00007f14a463aabe:   mov    0x1c(%rbp),%r11d             ; load the array field (oop) in %r11d
+0x00007f14a463aac2:   test   %r11d,%r11d                  ; check if the array field is null
+0x00007f14a463aac5:   je     0x00007f14a463aa74           ; if null jump to the slow path
+0x00007f14a463aac7:   mov    0xc(%r12,%r11,8),%r8d        ; load the array length in %r8d
+0x00007f14a463aacc:   cmp    %r8d,%ebx                    ; compare the loop induction variable against the array length
+0x00007f14a463aacf:   jae    0x00007f14a463ab43           ; if greater or equal jump to the slow path and throw ArrayIndexOutOfBoundsException
+0x00007f14a463aad5:   lea    (%r12,%r11,8),%r10           ; compute the absolute address of the array
+0x00007f14a463aad9:   mov    0x10(%r10,%rbx,4),%r10d      ; load the object (oop) at array[i] in %r10d 
+0x00007f14a463aade:   xchg   %ax,%ax                      ; alignment nop
+0x00007f14a463aae0:   test   %r10d,%r10d                  ; check if the object is null
+0x00007f14a463aae3:   jne    0x00007f14a463aaa0           ; if not null jump to the accumulator increment
+0x00007f14a463aae5:   cmpb   $0x0,0x40(%r15)              
+0x00007f14a463aaea:   jne    0x00007f14a463aba5
+0x00007f14a463aaf0:   movabs $0x7ffc01020,%r10            ; load the cached NullPointerException object in %r10
+0x00007f14a463aafa:   mov    %r12d,0x14(%r10)             ; clear the `detailMessage` field of the cached exception object
+0x00007f14a463aafe:   mov    %ebx,0x4(%rsp)               ; store the loop induction variable on the stack
+0x00007f14a463ab02:   mov    %r14d,(%rsp)                 ; store the accumulator on the stack
+0x00007f14a463ab06:   mov    %rbp,%rsi                    ; move the `this` pointer in %rsi 
+0x00007f14a463ab09:   movabs $0x7ffc01020,%rdx            ; load the cached NullPointerException object in %rdx 
+0x00007f14a463ab13:   call   0x00007f14a40c4380           ; call the `sink` method from the benchmark
+0x00007f14a463ab18:   nopl   0x1000288(%rax,%rax,1)       ; alignment nop
+0x00007f14a463ab20:   mov    (%rsp),%r14d                 ; load the accumulator from the stack in %r14d
+0x00007f14a463ab24:   mov    0x4(%rsp),%ebx               ; load the loop induction variable from the stack in %ebx
+0x00007f14a463ab28:   jmp    0x00007f14a463aaa5           ; jump back to the loop beginning
+```
 
-... TODO ...
+Below, is a flamegraph of the `try_npe_catch` benchmark when the `nullThreshold` is 16. The flamegraph is generated
+using the [Async-profiler](https://github.com/async-profiler/async-profiler/).
 
-#### GraalVM CE JIT Compiler
+TODO:Florin replace the link with the correct one
 
-... TODO ...
+https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true
+
+[![NpeControlFlowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html?raw=true)
+
+#### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
+
+Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not make use of a cached `NullPointerException` object. 
+Instead, both compilers allocate a new exception and fill in the stack trace on each iteration of the loop when the 
+`NullPointerException` is thrown. This can once again be observed by looking at the generated flamegraph.
+
+TODO:Florin replace the link with the correct one
+
+https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true
+
+[![NpeControlFlowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html?raw=true)
+
+Opposed to the C2 JIT Compiler, the GraalVM based JIT compilers will spend additional time inside JVMCI and
+then filling in the stack trace.
 
 ### Conclusions
 
-... TODO ...
+All three JIT compilers perform close in all benchmark configurations apart from the `try_npe_catch` benchmark. The reason
+the C2 JIT Compiler performs better in this benchmark is because it uses a cached `NullPointerException` object and
+avoids filling the stack trace. This optimization is enabled by default and only happens when the same implicit exception 
+is thrown multiple times (e.g. in a hot loop). 
 
 ## NpeThrowBenchmark
 
-... TODO ...
+This benchmark tests the implicit vs explicit throw and catch of `NullPointerException` in a hot loop. The caller method
+contains a loop that catches the `NullPointerException` thrown by the callee and the callee is never inlined.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+An implicit `NullPointerException` is thrown when the code tries to access a field or invoke a method on a `null` object.
+An explicit `NullPointerException` is thrown when the code explicitly throws a `NullPointerException` object.
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+```
+  @Benchmark
+  public void throw_npe() {
+    for (Wrapper object : A) {
+      try {
+        {implicit, explicit}ThrowNpe(object);
+      } catch (NullPointerException e) {
+        // swallow exception
+      }
+    }
+  }
 
-### Analysis
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private int explicitThrowNpe(Wrapper o) {
+    if (o == null) {
+      throw new NullPointerException("Oops!");
+    }
+    return o.x;
+  }
+
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private int implicitThrowNpe(Wrapper o) {
+    return o.x;
+  }
+```
+
+Source code: [NpeThrowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/NpeThrowBenchmark.java)
+
+[![NpeThrowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/NpeThrowBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/NpeThrowBenchmark.svg?raw=true)
+
+For `threshold:0`, there are no `null` elements in the array. For `threshold:0.5`, on average, half of the elements in
+the array are `null`. For `threshold:1`, all elements in the array are `null`.
+
+### Analysis of implicit_throw_npe
+
+All three JIT compilers perform close in performance for all benchmark configurations except for the `implicit_throw_npe`,
+especially when the `threshold` is 0.5 or 1.0.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT Compiler, as in the case of the `NpeControlFlowBenchmark` benchmark, makes use of a cached
+`NullPointerException` object and directly calls into the exception handler (`OptoRuntime::handle_exception_C`). 
+A side effect of this optimization is that the stack trace is not collected.
 
-#### Oracle GraalVM JIT Compiler
+Below is the flamegraph generated by the `implicit_throw_npe` benchmark when the `threshold` is 1.0.
 
-... TODO ...
+TODO:Florin replace the link with the correct one
 
-#### GraalVM CE JIT Compiler
+https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true
 
-... TODO ...
+[![NpeThrowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.html?raw=true)
+
+#### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
+
+The Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not make use of a cached `NullPointerException` object.
+Instead, both compilers allocate a new exception and fill in the stack trace on each iteration of the loop (when the
+threshold is 1.0). This can once again be observed by looking at the generated flamegraph.
+
+TODO:Florin replace the link with the correct one
+
+https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true
+
+[![NpeThrowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.html?raw=true)
 
 ### Conclusions
 
-... TODO ...
+All three JIT compilers perform similar in performance when throwing explicit exceptions. 
+
+There is an important difference in performance however when throwing implicit exceptions. That is, the C2 JIT Compiler
+will avoid allocating a new exception object and filling in the stack trace when the same exception is thrown multiple
+times in the hot path.
 
 ## SepiaVectorApiBenchmark
 
