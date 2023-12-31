@@ -1225,55 +1225,143 @@ times in the hot path.
 
 ## SepiaVectorApiBenchmark
 
-... TODO ...
+This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
+Panama's Vector API. In this benchmark, the Vector API is used to apply a sepia filter to an input image.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+In the `baseline`, the benchmark applies the sepia filter using non-vectorized code (i.e. scalar code that might be
+auto-vectorized by the JIT compiler). In the `vectorized` version, the benchmark applies the sepia filter using the 
+Vector API. 
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/vector/SepiaVectorApiBenchmark.java)
 
-### Analysis
+[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
 
-#### C2 JIT Compiler
+### Analysis of vectorized
 
-... TODO ...
+All three JIT compilers perform similar in performance in the `baseline`. The focus of this section will therefore
+be on the `vectorized` benchmark.
 
-#### Oracle GraalVM JIT Compiler
+#### C2 JIT Compiler and Oracle GraalVM JIT Compiler 
 
-... TODO ...
+The C2 JIT Compiler and the Oracle GraalVM JIT Compiler implement the Vector API compiler intrinsics and are able to use
+256-bit AVX registers. Therefore, the performance of the benchmark is similar for both JIT compilers.
 
 #### GraalVM CE JIT Compiler
 
-... TODO ...
+The GraalVM CE JIT Compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
+to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
+by looking at the hottest methods in the benchmark after inlining.
+
+```
+....[Hottest Methods (after inlining)]..............................................................
+  58.64%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
+  19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
+  19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
+```
 
 ### Conclusions
 
-... TODO ...
+Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
+and better than the `baseline` benchmark.
+The GraalVM CE JIT compiler is not able to fully vectorize the benchmark body and falls back to the Java implementation of the Vector API.
 
 ## StackSpillingBenchmark
 
-... TODO ...
+This benchmark measures the cost of stack spilling. Stack spilling occurs when the register allocator runs out of
+available registers and starts using the stack to store intermediate values. Loads/stores from memory are much 
+slower than using CPU registers. 
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+The benchmark method contains a series of field loads followed by a series of fields stores. Normally, the JIT compiler 
+is expected to group together loads and stores, resulting in less register pressure. In order to force all the loads to
+be grouped before all the stores, the `load_store_spill*` benchmark contains a volatile read after the loads and before 
+the stores.
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+```
+  private void load_store_spill() {
+    // loads
+    int v00 = load0;
+    int v01 = load1;
+    ... more field loads ...
+    int v24 = load24;
 
-### Analysis
+    // volatile read to force all the loads to be grouped together before the stores
+    non_volatile_value = volatile_value;
+
+    // stores
+    store0 = v00;
+    store1 = v01;
+    ... more field stores ...
+    store24 = v24;
+  }
+```
+
+The C2 JIT compiler has an optimization that first tries to spill onto the FPU registers before spilling onto the stack.
+This optimization is enabled by default and can be disabled by using the `-XX:-UseFPUForSpilling` flag.
+
+TODO: Ionut: Regenerate this plot with the updated results
+
+Source code: [StackSpillingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/StackSpillingBenchmark.java)
+
+[![StackSpillingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StackSpillingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StackSpillingBenchmark.svg?raw=true)
+
+### Analysis of load_store_spill_use_fpu
+
+The JIT compilers perform similar in all the benchmarks except for the `load_store_spill_use_fpu` benchmark.
+Therefore, the analysis will focus on the `load_store_spill_use_fpu` benchmark.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT compiler is able to use the FPU registers to spill intermediate values before using the stack. This can be
+observed by looking at the generated assembly code. Below is a snippet:
 
-#### Oracle GraalVM JIT Compiler
+```
+0x00007f11bc63ab76:   mov    0x38(%r11),%r10d             ; load field load11 in scratch register %r10d
+0x00007f11bc63ab7a:   vmovd  %r10d,%xmm14                 ; move scratch register %r10d in %xmm14
+0x00007f11bc63ab7f:   mov    0x3c(%r11),%r10d             ; load field load12 in scratch register %r10d
+0x00007f11bc63ab83:   vmovd  %r10d,%xmm15                 ; move scratch register %r10d in %xmm15
+0x00007f11bc63ab88:   mov    0x40(%r11),%r11d             ; load field load13 in register %r11d
+0x00007f11bc63ab8c:   vmovq  %xmm0,%r10                   ; move `this` pointer in %r10
+0x00007f11bc63ab91:   mov    0x44(%r10),%r9d              ; load field load14 in register %r9d
+...
+0x00007f11bc63ac01:   mov    %r9d,0xa8(%rax)              ; store value of load14 to field store14
+0x00007f11bc63ac08:   mov    %r11d,0xa4(%rax)             ; store value of load13 to field store13
+0x00007f11bc63ac0f:   vmovd  %xmm15,%r10d                 ; move %xmm15 (field load12) in scratch register %r10d
+0x00007f11bc63ac14:   mov    %r10d,0xa0(%rax)             ; store scratch register %r10d to field store12
+0x00007f11bc63ac1b:   vmovd  %xmm14,%r10d                 ; move %xmm14 (field load11) in scratch register %r10d
+0x00007f11bc63ac20:   mov    %r10d,0x9c(%rax)             ; store scratch register %r10d to field store11 
+```
 
-... TODO ...
+#### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-#### GraalVM CE JIT Compiler
+The Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not perform (in this benchmark) the FPU optimization
+C2 does. Therefore, both compilers will spill intermediate values onto the stack once they run out of available registers.
 
-... TODO ...
+```
+0x00007fd0c6d82c37:   mov    0x34(%r10),%esi              ; load field load10 in register %esi
+0x00007fd0c6d82c3b:   mov    0x38(%r10),%r11d             ; load field load11 in scratch register %r11d
+0x00007fd0c6d82c3f:   mov    %r11d,0x4c(%rsp)             ; store value of load11 to stack
+0x00007fd0c6d82c44:   mov    0x3c(%r10),%r11d             ; load field load12 in scratch register %r11d
+0x00007fd0c6d82c48:   mov    %r11d,0x48(%rsp)             ; store value of load12 to stack
+0x00007fd0c6d82c4d:   mov    0x40(%r10),%r11d             ; load field load13 in scratch register %r11d
+0x00007fd0c6d82c51:   mov    %r11d,0x44(%rsp)             ; store value of load13 to stack
+0x00007fd0c6d82c56:   mov    0x44(%r10),%r11d             ; load field load14 in scratch register %r11d
+0x00007fd0c6d82c5a:   mov    %r11d,0x40(%rsp)             ; store value of load14 to stack
+...
+0x00007fd0c6d82d01:   mov    %esi,0x98(%r10)              ; store value of load10 to field store10
+0x00007fd0c6d82d08:   mov    0x4c(%rsp),%r11d             ; load value of load11 from stack in scratch register %r11d 
+0x00007fd0c6d82d0d:   mov    %r11d,0x9c(%r10)             ; store value of load11 to field store11
+0x00007fd0c6d82d14:   mov    0x48(%rsp),%r11d             ; load value of load12 from stack in scratch register %r11d
+0x00007fd0c6d82d19:   mov    %r11d,0xa0(%r10)             ; store value of load12 to field store12
+0x00007fd0c6d82d20:   mov    0x44(%rsp),%r11d             ; load value of load13 from stack in scratch register %r11d
+0x00007fd0c6d82d25:   mov    %r11d,0xa4(%r10)             ; store value of load13 to field store13
+0x00007fd0c6d82d2c:   mov    0x40(%rsp),%r11d             ; load value of load14 from stack in scratch register %r11d
+0x00007fd0c6d82d31:   mov    %r11d,0xa8(%r10)             ; store value of load14 to field store14
+```
 
 ### Conclusions
 
-... TODO ...
+The C2 JIT Compiler is able to use the FPU registers to spill intermediate values before using the stack. This optimization
+does not happen (for this benchmark) in the Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler.
 
 ## TypeCheckScalabilityBenchmark
 
