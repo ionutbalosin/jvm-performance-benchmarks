@@ -1365,37 +1365,178 @@ does not happen (for this benchmark) in the Oracle GraalVM JIT Compiler and the 
 
 ## TypeCheckScalabilityBenchmark
 
-... TODO ...
+This benchmark addresses the scalability issue happening while performing type checks (`instanceof`, `checkcast`, and similar)
+against interfaces (so-called secondary super types). This scalability issue is triggered by massive concurrent 
+updates to `Klass::_secondary_super_cache` from multiple threads, which in turn causes false sharing with its 
+surrounding fields e.g., `Klass::_secondary_supers` and cache line invalidations.
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+The JDK 21 snippet below shows both fields and what they are used for:
+```
+class Klass : public Metadata {
+  // ...
+  // Cache of last observed secondary supertype
+  Klass*      _secondary_super_cache;
+  // Array of all secondary supertypes
+  Array<Klass*>* _secondary_supers;
+  // ...
+```
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+Each time a type check is performed, the `Klass::_secondary_super_cache` is checked first. 
+If the cache does not contain the type being checked, then the `Klass::_secondary_supers` array is searched for the type. 
+If the type is found in the array, then the cache is updated with the type.
 
-### Analysis
+ 
+```
+  @Benchmark
+  @Threads({1, 2, 3 ,4})
+  public boolean is_duplicated_{1, 2, 3, 4}() {
+    return isDuplicated(msg);
+  }
+
+  private static boolean isDuplicated(Context message) {
+    Context actual = Objects.requireNonNull(message);
+    return ((InternalContext) actual).isDuplicated();
+  }
+
+  public interface Context {
+    // some public API
+  }
+
+  public interface InternalContext extends Context {
+    // internal framework API
+    boolean isDuplicated();
+  }
+  public static class DuplicatedContext implements InternalContext {
+    @Override
+    public boolean isDuplicated() {
+      return true;
+    }
+  }
+  public static class NonDuplicatedContext implements InternalContext {
+    @Override
+    public boolean isDuplicated() {
+      return false;
+    }
+  }
+```
+
+Source code: [TypeCheckScalabilityBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckScalabilityBenchmark.java)
+
+[![TypeCheckScalabilityBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)
+
+### Analysis of is_duplicated
+
+When `typePollution` is false, the benchmark uses a single type `DuplicatedContext` and the compilers are 
+able to optimize and avoid checking the cache and the secondary supertypes array. In this case, a guard is used 
+that checks if the receiver type is `DuplicatedContext` and then returns `true`.
+
+```
+0x00007fda40635fda:   mov    0x10(%rsi),%r10d             ; read oop msg in %r10d
+0x00007fda40635fde:   xchg   %ax,%ax                      ; nop
+0x00007fda40635fe0:   mov    0x8(%r12,%r10,8),%r8d        ; read klass word of object in %r8d 
+0x00007fda40635fe5:   cmp    $0x102acf8,%r8d              ; compare against DuplicatedContext klass
+0x00007fda40635fec:   jne    0x00007fda40636006           ; jump to deoptimization stub if not equal
+0x00007fda40635fee:   mov    $0x1,%eax                    ; move true to %eax
+0x00007fda40635ff3:   add    $0x20,%rsp                   ; pop the stack
+0x00007fda40635ff7:   pop    %rbp                         ; pop the frame pointer
+0x00007fda40635ff8:   cmp    0x450(%r15),%rsp             ; safepoint poll check
+0x00007fda40635fff:   ja     0x00007fda40636034           ; jump to safepoint handler if needed
+0x00007fda40636005:   ret                                 ; return
+```
+
+When `typePollution` is true, the benchmark uses two types and the compiler is not able to optimize as above. 
+In this case, each benchmark iteration will check the cache field, and if a miss occurs, it will iterate through the 
+secondary supertypes array. In a multithreaded context, the same cache line is read and written by multiple 
+threads, which causes false sharing and cache line invalidations.
+
+This behavior is best observed by looking at the number of L1 data cache misses.
+
+When typePollution is `false`, the number of reported L1 data cache misses is very low.
+```
+TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses               ≈ 10⁻⁵  #/op
+TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                     4.998   #/op
+```
+
+When typePollution is `true`, the number of reported L1 data cache misses is almost two per benchmark iteration.
+```
+TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses               1.818   #/op
+TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                     25.477  #/op   
+```
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT compiler is the slowest when `typePollution` is `true`. One interesting observation is that it remains
+slower even when the number of threads running is one (no false sharing occurring). That is, the C2 JIT Compiler is 
+in general slower at checking the secondary super types array. 
+The reason behind this is explained further below in the `TypeCheckSlowPathBenchmark`. 
 
-#### Oracle GraalVM JIT Compiler
+#### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-... TODO ...
+Overall, the Graal based JIT compilers perform close in performance. The only difference is that the GraalVM CE JIT
+Compiler generates additional memory loads for the `klass` word of the object before checking the secondary super types array.
+Additionally, the error margins of the two JIT compilers are quite large to draw any clear conclusions.
 
-#### GraalVM CE JIT Compiler
+For reference, below is a snippet of the generated assembly code for the GraalVM CE JIT Compiler:
+```
+0x00007f82a323d682:   mov    0x8(,%rax,8),%r10d           ; load klass word of the object in %r10d
+0x00007f82a323d68a:   movabs $0x7f8227000000,%r11         ; load the base address of the metaspace in %r11
+0x00007f82a323d694:   lea    (%r11,%r10,1),%r8            ; compute the address of the klass of the object
+0x00007f82a323d698:   movabs $0x7f822802b798,%r11         ; move klass Context to %r11
+0x00007f82a323d6a2:   cmp    0x20(%r8),%r11               ; compare the _secondary_super_cache with the klass Context
+0x00007f82a323d6a6:   je     0x00007f82a323d6b9           ; if equal jump to the fast path 
+0x00007f82a323d6ac:   cmp    $0x102b798,%r10d             ; compare the klass word with Context klass
+0x00007f82a323d6b3:   jne    0x00007f82a323d74e           ; if not equal jump to the slow path that iterates through the secondary super types array
+0x00007f82a323d6b9:   mov    0x8(,%rax,8),%r10d           ; Additional! load again the klass word of the object in %r10d
+0x00007f82a323d6c1:   movabs $0x7f8227000000,%r11         ; Additional! load the base address of the metaspace in %r11
+0x00007f82a323d6cb:   lea    (%r11,%r10,1),%r8            ; Additional! compute the address of the klass of the object
+0x00007f82a323d6cf:   movabs $0x7f822802b990,%r11         ; Additional! move klass InternalContext to %r11
+0x00007f82a323d6d9:   nopl   0x0(%rax)                    ; nop
+0x00007f82a323d6e0:   cmp    0x20(%r8),%r11               ; compare the _secondary_super_cache with the klass InternalContext
+0x00007f82a323d6e4:   je     0x00007f82a323d6f7           ; if equal jump to the fast path
+0x00007f82a323d6ea:   cmp    $0x102b990,%r10d             ; compare klass InternalContext to %r10d
+0x00007f82a323d6f1:   jne    0x00007f82a323d785           ; if not equal jump to the slow path that iterates through the secondary super types array
+...
+```
 
-... TODO ...
+Compared to the equivalent snippet generated by the Oracle GraalVM JIT Compiler: 
+```
+0x00007fcda2d7e5e2:   mov    0x8(,%rax,8),%r10d           ; load the klass word of the object in %r10d
+0x00007fcda2d7e5ea:   movabs $0x7fcd27000000,%rax         ; load the base address of the metaspace in %rax
+0x00007fcda2d7e5f4:   lea    (%rax,%r10,1),%r11           ; compute the address of the klass of the object
+0x00007fcda2d7e5f8:   movabs $0x7fcd2802b328,%rax         ; move klass Context to %rax
+0x00007fcda2d7e602:   cmp    0x20(%r11),%rax              ; compare the _secondary_super_cache with the klass Context
+0x00007fcda2d7e606:   je     0x00007fcda2d7e619           ; if equal jump to the fast path
+0x00007fcda2d7e60c:   cmp    $0x102b328,%r10d             ; compare the klass word with Context klass
+0x00007fcda2d7e613:   jne    0x00007fcda2d7e66e           ; if not equal jump to the slow path that iterates through the secondary super types array
+0x00007fcda2d7e619:   movabs $0x7fcd2802b520,%rax         ; move klass InternalContext to %rax
+0x00007fcda2d7e623:   cmp    0x20(%r11),%rax              ; compare the _secondary_super_cache with the klass InternalContext
+0x00007fcda2d7e627:   je     0x00007fcda2d7e63a           ; if equal jump to the fast path
+0x00007fcda2d7e62d:   cmp    $0x102b520,%r10d             ; compare the klass word with InternalContext klass
+0x00007fcda2d7e634:   jne    0x00007fcda2d7e6a5           ; if not equal jump to the slow path that iterates through the secondary super types array
+...
+```
 
 ### Conclusions
 
-... TODO ...
+This scalability issue is not specific to a particular JIT compiler, although some differences can be observed
+in the results.
+
+This issue is already discussed and reported in [JDK-8180450](https://bugs.openjdk.org/browse/JDK-8180450). A temporary
+backoff mechanism is proposed in [JDK-8316180](https://bugs.openjdk.org/browse/JDK-8316180) and implemented in
+[PR-15718](https://github.com/openjdk/jdk/pull/15718).
+This issue is also described in [Francesco Nigro’s post](https://redhatperf.github.io/post/type-check-scalability-issue/)
+and the [Netflix blog post](https://netflixtechblog.com/seeing-through-hardware-counters-a-journey-to-threefold-performance-increase-2721924a2822).
+
+The `TypeCheckSlowPathBenchmark` benchmark further investigates the performance of the slow path
+that iterates through the secondary super types array when false sharing is not occurring.
 
 ## TypeCheckSlowPathBenchmark
 
 ... TODO ...
 
-Source code: [TODOBenchmarkName.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/TODOBenchmarkName.java)
+Source code: [TypeCheckSlowPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckSlowPathBenchmark.java)
 
-[![TODOBenchmarkName.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TODOBenchmarkName.svg?raw=true)
+[![TypeCheckSlowPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)
 
 ### Analysis
 
