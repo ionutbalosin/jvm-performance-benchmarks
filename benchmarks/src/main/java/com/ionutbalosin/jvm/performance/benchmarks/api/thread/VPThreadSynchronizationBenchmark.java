@@ -26,6 +26,7 @@ import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
@@ -34,6 +35,7 @@ import java.util.stream.IntStream;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -41,81 +43,68 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
-/**
+/*
  * This benchmark assesses the performance of synchronized blocks in the context of virtual threads,
  * comparing them with platform threads. The synchronization mechanism is implemented using lock
  * objects, reentrant locks, and no locks at all. Within the synchronized execution block, different
  * backoff strategies (such as thread parking, sleeping, or none) are triggered.
  *
- * <p>Note: A virtual thread cannot be preempted during a synchronized block because it is pinned to
+ * The benchmark method submits a configurable number of tasks to an executor (i.e., a burst
+ * approach) and waits for all of them to complete. The executor is cached in the JMH state. The
+ * concurrency level for both platform and virtual threads is restricted to evaluate their
+ * performance under comparable conditions. The cost of tasks submission to the (initially idle)
+ * executor is included in the benchmark method, which we consider negligible for this particular
+ * use case.
+ *
+ * Note: A virtual thread cannot be preempted during a synchronized block because it is pinned to
  * its carrier.
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class VPThreadSynchronizationBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VPThreadSynchronizationBenchmark.*"
 
-  private final int CPUs = Runtime.getRuntime().availableProcessors();
+  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+
   private final Object objectLock = new Object();
   private final ReentrantLock reentrantLock = new ReentrantLock();
+  private int tasks;
 
-  @Param({"2"})
+  @Param({"256"})
   private int cpuLoadFactor;
 
-  @Param private ThreadType threadType;
   @Param private LockType lockType;
   @Param private BackoffType backoffType;
 
-  private int tasks;
-
-  @Setup()
-  public void setup() {
+  @Setup(Level.Trial)
+  public void up() {
     tasks = CPUs * cpuLoadFactor;
   }
 
   @Benchmark
-  public void synchronized_calls() {
-    try (final ExecutorService executor = getExecutorService()) {
-      IntStream.range(0, tasks).forEach(i -> executor.submit(synchronizedWork()));
-    }
+  public void synchronized_calls(ExecutorState executor) throws InterruptedException {
+    final CountDownLatch latch = new CountDownLatch(tasks);
+    IntStream.range(0, tasks).forEach(i -> executor.service.submit(synchronizedWork(latch)));
+    latch.await();
   }
 
-  public enum ThreadType {
-    VIRTUAL,
-    PLATFORM;
-  }
-
-  public enum LockType {
-    OBJECT_LOCK,
-    REENTRANT_LOCK,
-    NO_LOCK
-  }
-
-  public enum BackoffType {
-    NONE,
-    SLEEP,
-    PARK
-  }
-
-  private ExecutorService getExecutorService() {
-    return switch (threadType) {
-      case VIRTUAL -> newFixedThreadPool(CPUs, ofVirtual().factory());
-      case PLATFORM -> newFixedThreadPool(CPUs, ofPlatform().factory());
-    };
-  }
-
-  private Runnable synchronizedWork() {
+  private Runnable synchronizedWork(CountDownLatch latch) {
     return switch (lockType) {
       case OBJECT_LOCK -> () -> {
         synchronized (objectLock) {
-          backoff();
+          try {
+            backoff();
+          } finally {
+            latch.countDown();
+          }
         }
       };
       case REENTRANT_LOCK -> () -> {
@@ -124,9 +113,16 @@ public class VPThreadSynchronizationBenchmark {
           backoff();
         } finally {
           reentrantLock.unlock();
+          latch.countDown();
         }
       };
-      case NO_LOCK -> () -> backoff();
+      case NO_LOCK -> () -> {
+        try {
+          backoff();
+        } finally {
+          latch.countDown();
+        }
+      };
     };
   }
 
@@ -147,5 +143,47 @@ public class VPThreadSynchronizationBenchmark {
       default:
         throw new UnsupportedOperationException("Unsupported backoff type " + backoffType);
     }
+  }
+
+  @State(Scope.Benchmark)
+  public static class ExecutorState {
+
+    private ExecutorService service;
+
+    @Param private ThreadType threadType;
+
+    @Setup(Level.Trial)
+    public void up() {
+      service = getExecutorService();
+    }
+
+    @TearDown(Level.Trial)
+    public void down() {
+      service.shutdown();
+    }
+
+    private ExecutorService getExecutorService() {
+      return switch (threadType) {
+        case VIRTUAL -> newFixedThreadPool(CPUs, ofVirtual().factory());
+        case PLATFORM -> newFixedThreadPool(CPUs, ofPlatform().factory());
+      };
+    }
+  }
+
+  public enum ThreadType {
+    VIRTUAL,
+    PLATFORM;
+  }
+
+  public enum LockType {
+    OBJECT_LOCK,
+    REENTRANT_LOCK,
+    NO_LOCK
+  }
+
+  public enum BackoffType {
+    NONE,
+    SLEEP,
+    PARK
   }
 }

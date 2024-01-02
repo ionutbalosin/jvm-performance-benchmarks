@@ -30,6 +30,7 @@ import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
 import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingServer;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
@@ -65,7 +66,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class IoBlockingRoundtripChunksLatencyBenchmark {
 
@@ -83,7 +84,7 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
   @Param({"8"})
   private int cpuLoadFactor;
 
-  @Param({"4"})
+  @Param({"2"})
   private int bufferSize;
 
   @Param private ThreadType threadType;
@@ -95,9 +96,10 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
+    tasks = CPUs * cpuLoadFactor;
+
     data = new byte[bufferSize];
     random.nextBytes(data);
-    tasks = CPUs * cpuLoadFactor;
 
     server = new IoBlockingServer(HOST, PORT, threadType, data);
     server.start();
@@ -109,13 +111,38 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
   }
 
   @Benchmark
-  public void send_receive() {
-    try (final ExecutorService executor = getExecutorService()) {
-      IntStream.range(0, tasks)
-          .forEach(
-              i ->
-                  executor.submit(
-                      () -> sendReceiveChunks(HOST, PORT, data, messagesPerClient.get())));
+  public void send_receive(ExecutorState executor) throws InterruptedException {
+    final CountDownLatch latch = new CountDownLatch(tasks);
+    IntStream.range(0, tasks)
+        .forEach(
+            i ->
+                executor.service.submit(
+                    () -> sendReceiveChunks(HOST, PORT, data, messagesPerClient.get(), latch)));
+    latch.await();
+  }
+
+  @State(Scope.Benchmark)
+  public static class ExecutorState {
+
+    private ExecutorService service;
+
+    @Param private ThreadType threadType;
+
+    @Setup(Level.Trial)
+    public void up() {
+      service = getExecutorService();
+    }
+
+    @TearDown(Level.Trial)
+    public void down() {
+      service.shutdown();
+    }
+
+    private ExecutorService getExecutorService() {
+      return switch (threadType) {
+        case VIRTUAL -> newVirtualThreadPerTaskExecutor();
+        case PLATFORM -> newCachedThreadPool();
+      };
     }
   }
 
@@ -125,7 +152,7 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
   }
 
   public enum MessagesPerClient {
-    _50_K(50_000);
+    _10_K(10_000);
 
     private int value;
 
@@ -136,12 +163,5 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
     public int get() {
       return value;
     }
-  }
-
-  private ExecutorService getExecutorService() {
-    return switch (threadType) {
-      case VIRTUAL -> newVirtualThreadPerTaskExecutor();
-      case PLATFORM -> newCachedThreadPool();
-    };
   }
 }

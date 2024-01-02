@@ -23,6 +23,8 @@
 package com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlanner.readHolidayPlanner;
+import static java.lang.Thread.ofPlatform;
+import static java.lang.Thread.ofVirtual;
 
 import java.util.Random;
 import java.util.concurrent.ThreadFactory;
@@ -100,8 +102,8 @@ public class HolidayPlannerBenchmark {
 
   public static ThreadFactory setupThreadFactory(ThreadType threadType) {
     return switch (threadType) {
-      case VIRTUAL -> Thread.ofVirtual().factory();
-      case PLATFORM -> Thread.ofPlatform().factory();
+      case VIRTUAL -> ofVirtual().factory();
+      case PLATFORM -> ofPlatform().factory();
     };
   }
 

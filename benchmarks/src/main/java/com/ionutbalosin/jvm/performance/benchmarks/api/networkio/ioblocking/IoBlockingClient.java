@@ -30,12 +30,14 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 
 public class IoBlockingClient {
 
   private static final int CLIENT_SOCKET_TIMEOUT = 12_000;
 
-  public static void sendReceiveChunks(String host, int port, byte[] data, int messages) {
+  public static void sendReceiveChunks(
+      String host, int port, byte[] data, int messages, CountDownLatch latch) {
     try (Socket socket = new Socket()) {
       socket.setSoTimeout(CLIENT_SOCKET_TIMEOUT);
       socket.setSendBufferSize(SEND_BUFFER_LENGTH);
@@ -58,6 +60,8 @@ public class IoBlockingClient {
 
     } catch (Exception e) {
       throw new RuntimeException(e);
+    } finally {
+      latch.countDown();
     }
   }
 }
