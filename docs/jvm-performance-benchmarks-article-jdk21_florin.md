@@ -1532,26 +1532,104 @@ that iterates through the secondary super types array when false sharing is not 
 
 ## TypeCheckSlowPathBenchmark
 
-... TODO ...
+This benchmark checks the slow path of `instanceof` type checks using multiple secondary super types (i.e., interfaces)
+and always takes the slow path by iterating over the secondary super types array.
+
+Compared to the `TypeCheckScalabilityBenchmark`, this benchmark does not cause false sharing. It only compares 
+the performance of the slow path of type checking across the different JITs.
+
+```
+  @Benchmark
+  public boolean instanceof_type_check() {
+    return closeNotAutoCloseable(obj);
+  }
+
+  public static boolean closeNotAutoCloseable(Object o) {
+    // it searches through the secondary supers for a type match
+    // but does not find one since "o" is not an "AutoCloseable" type
+    if (o instanceof AutoCloseable) {
+      try {
+        ((AutoCloseable) o).close();
+        return true;
+      } catch (Exception ignore) {
+        return false;
+      }
+    } else {
+      // it always takes this slow path
+      return false;
+    }
+  }
+
+  private enum SomeCloseable implements AutoCloseable {
+    Instance;
+
+    @Override
+    public void close() throws Exception {}
+  }
+
+  private enum ManySecondarySuperTypes_{16, 32, 64, 128, 256} {
+      implements I1, I2, I3, ... I{16, 32, 64, 128, 256} {
+    Instance;
+  }
+```
 
 Source code: [TypeCheckSlowPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckSlowPathBenchmark.java)
 
 [![TypeCheckSlowPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)
 
-### Analysis
+### Analysis of instanceof_type_check
+
+For a low number of secondary super types `(16, 32, 64)`, the GraalVM JIT Compilers perform similarly and are faster than C2 JIT Compiler. 
+The performance gap between the Graal and C2 compilers decreases however as the number of secondary super types 
+increases.
 
 #### C2 JIT Compiler
 
-... TODO ...
+The C2 JIT compiler loops through the secondary super types array using a `repnz scas` [instruction](https://www.felixcloutier.com/x86/rep:repe:repz:repne:repnz#description).
 
-#### Oracle GraalVM JIT Compiler
+```
+ 0.17% 0x00007f1e7863b2a6:   mov    0x28(%rsi),%rdi        ; load the secondary_supers array in %rdi 
+       0x00007f1e7863b2aa:   mov    (%rdi),%ecx            ; load the size of the array in %ecx
+ 0.46% 0x00007f1e7863b2ac:   add    $0x8,%rdi              ; skip the length field
+       0x00007f1e7863b2b0:   test   %rax,%rax              ; set the zero flag to 0
+83.32% 0x00007f1e7863b2b3:   repnz scas %es:(%rdi),%rax    ; scan the array for the expected klass (AutoCloseable)
+ 6.34% 0x00007f1e7863b2b6:   jne    0x00007f1e7863b2c0     ; if not found jump to the false branch 
+       0x00007f1e7863b2bc:   mov    %rax,0x20(%rsi)        ; update the secondary_super_cache with the klass found
+ 1.56% 0x00007f1e7863b2c0:   je     0x00007f1e7863b285     ; jump to the true branch of the type check
+       0x00007f1e7863b2c2:   xor    %eax,%eax
+       0x00007f1e7863b2c4:   jmp    0x00007f1e7863b293     ; jump to the false branch of the type check
+```
 
-... TODO ...
+In modern CPUs, the `repnz (scas)` class of instructions can have a large setup overhead and therefore be slower than a 
+loop for a small number of elements. The performance of this class of instructions very much depends on the vendor and 
+CPU microarchitecture.
 
-#### GraalVM CE JIT Compiler
+#### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-... TODO ...
+Both GraalVM JIT Compilers iterate over the secondary super types array using a loop:
+
+```
+ 0.30% 0x00007f342f2470e0:   mov    %ecx,%ebx               ; move the loop counter in %ebx
+       0x00007f342f2470e2:   shl    $0x3,%ebx               ; multiply the loop counter by 8
+44.80% 0x00007f342f2470e5:   lea    0x8(%rbx),%ebx          ; load the address of the next element in the array in %ebx
+       0x00007f342f2470e8:   movslq %ebx,%rbx               ; sign extend the address to 64 bits
+ 0.34% 0x00007f342f2470eb:   mov    (%r8,%rbx,1),%rbx       ; load the klass from the secondary_supers array at index %ecx
+ 0.47% 0x00007f342f2470ef:   cmp    %rbx,%r10               ; compare the klass with the expected klass (AutoCloseable)
+       0x00007f342f2470f2:   je     0x00007f342f247106      ; if equal jump and store the klass in the secondary_super_cache
+44.10% 0x00007f342f2470f8:   inc    %ecx                    ; increment the loop counter
+       0x00007f342f2470fa:   cmp    %ecx,%r9d               ; compare the loop counter with the length of the secondary_supers array
+       0x00007f342f2470fd:   jg     0x00007f342f2470e0      ; if greater jump to the beginning of the loop 
+ 0.33% 0x00007f342f2470ff:   mov    $0x0,%eax               ; move false to %eax
+ 0.79% 0x00007f342f247104:   jmp    0x00007f342f24709c      ; jump to return assembly
+       0x00007f342f247106:   mov    %r10,0x20(%r11)         ; update the secondary_super_cache with the klass found
+       0x00007f342f24710a:   jmp    0x00007f342f24708b      ; match found so jump to different return assembly
+```
 
 ### Conclusions
 
-... TODO ...
+The C2 JIT Compiler can be slower than the GraalVM JIT Compilers when iterating through the secondary super types array (i.e.
+performing `instanceof` checks), especially when the number of secondary super types is not very large. 
+
+One of the reasons is that the C2 JIT Compiler uses the `repnz scas` instruction which can be slow on modern x86 architectures. 
+This issue is discussed in the [JDK mailing list](https://mail.openjdk.org/pipermail/hotspot-runtime-dev/2020-August/041056.html)
+and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
