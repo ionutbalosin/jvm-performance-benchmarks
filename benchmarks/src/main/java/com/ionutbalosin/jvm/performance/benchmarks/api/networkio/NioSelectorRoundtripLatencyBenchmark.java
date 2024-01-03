@@ -40,10 +40,11 @@ import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.*;
 
 /*
- * Measures the latency of TCP calls to send and receive a byte array using NIO (non-blocking I/O) and a selector.
- * The benchmark simulates a client-server interaction over a TCP connection.
- * The read_write() method sends a very small buffer from the client to the server, and the server immediately sends it back.
- * The time taken for this round-trip interaction is measured to gauge the latency of the communication.
+ * Measures the latency of TCP calls to send and receive a byte array using NIO (non-blocking I/O)
+ * and a selector. The benchmark simulates a client-server interaction over a TCP connection. The
+ * read_write() method sends a very small buffer from the client to the server, and the server
+ * immediately sends it back. The time taken for this round-trip interaction is measured to gauge
+ * the latency of the communication.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)

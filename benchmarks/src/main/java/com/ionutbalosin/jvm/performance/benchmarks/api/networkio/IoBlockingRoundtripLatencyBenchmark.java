@@ -24,16 +24,19 @@ package com.ionutbalosin.jvm.performance.benchmarks.api.networkio;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.HOST;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.PORT;
-import static java.util.Optional.ofNullable;
+import static java.lang.Thread.ofPlatform;
+import static java.lang.Thread.ofVirtual;
 
-import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingServer;
-import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils;
+import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.BufferSize;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.StandardSocketOptions;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -50,15 +53,11 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the latency of blocking TCP calls for sending and receiving multiple
- * chunks of messages using the blocking I/O (input/output) API. It involves communication between
- * multiple Clients and a Server. Each Client-to-Server interaction is handled within a virtual
- * thread or a platform thread.
- *
- * The benchmark method initiates multiple Clients, each of which connects to the Server. Within
- * each Client, multiple byte arrays (i.e., chunks of messages) are sequentially sent to the Server,
- * and the Client waits for the Server to echo each of them back. The time taken for these combined
- * send-receive Clients-to-Server interactions is measured to assess the overall latency.
+ * Measures the latency of blocking TCP calls to send and receive a byte array using the blocking
+ * I/O (input/output) API. The benchmark simulates a client-server interaction over a TCP
+ * connection. The benchmark method sends a byte buffer from the client to the server, and the
+ * server immediately sends it back. The time taken for this round-trip interaction is measured to
+ * gauge the latency of the communication.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -70,40 +69,62 @@ public class IoBlockingRoundtripLatencyBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*IoBlockingRoundtripLatencyBenchmark.*"
 
-  // Note: Setting these buffers too high might cause ENOBUFS on some systems (e.g., FreeBSD).
+  // Note: Setting send/recv buffers too high might cause ENOBUFS on some systems (e.g., FreeBSD).
   // In case of issues, please check the maximum socket send/receive buffer size for your system.
-  public static final int SEND_BUFFER_LENGTH = 4_096;
-  public static final int RECEIVE_BUFFER_LENGTH = 4_096;
-
-  // For a more accurate comparison between virtual threads and platform threads, set the
-  // parallelism count to match the level of parallelism used for scheduling virtual threads (if
-  // explicitly specified in the command line) or to the default number of available processors
-  // (otherwise). This parallelism count is further utilized to define the core pool size of
-  // platform threads but also to determine the tasks' load factor.
-  public static final int PARALLELISM_COUNT =
-      ofNullable(System.getProperty("jdk.virtualThreadScheduler.parallelism"))
-          .map(Integer::parseInt)
-          .orElse(Runtime.getRuntime().availableProcessors());
-
-  private static final int CLIENT_SOCKET_TIMEOUT = 24_000;
-
+  private final int SEND_BUFFER_LENGTH = 4_096;
+  private final int RECEIVE_BUFFER_LENGTH = 4_096;
+  private final int CLIENT_SOCKET_TIMEOUT = 24_000;
+  private final int MAX_INCOMING_CONNECTIONS = 1_000;
   private final Random random = new Random(16384);
 
-  @Param private NetworkUtils.BufferSize bufferSize;
-
-  @Param private ThreadType threadType;
-
-  private IoBlockingServer server;
+  private Thread serverThread;
+  private CountDownLatch serverLatch;
   private Socket clientSocket;
   private byte[] data, clientReadBuffer;
+
+  @Param private BufferSize bufferSize;
+  @Param private ThreadType threadType;
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
     data = new byte[bufferSize.get()];
     random.nextBytes(data);
 
-    server = new IoBlockingServer(HOST, PORT, threadType, data);
-    server.start();
+    serverLatch = new CountDownLatch(1);
+    serverThread =
+        getThread(
+            () -> {
+              try (ServerSocket serverSocket = new ServerSocket()) {
+                serverSocket.setOption(StandardSocketOptions.SO_REUSEADDR, true);
+                serverSocket.setOption(StandardSocketOptions.SO_REUSEPORT, true);
+                serverSocket.setOption(StandardSocketOptions.SO_RCVBUF, RECEIVE_BUFFER_LENGTH);
+                serverSocket.bind(new InetSocketAddress(HOST, PORT), MAX_INCOMING_CONNECTIONS);
+
+                serverLatch.countDown();
+
+                try (Socket socket = serverSocket.accept()) {
+                  InputStream in = socket.getInputStream();
+                  OutputStream out = socket.getOutputStream();
+                  byte[] readBuffer = new byte[data.length];
+
+                  while (true) {
+                    final int bytesRead = in.read(readBuffer);
+                    if (-1 == bytesRead) {
+                      break;
+                    }
+                    out.write(readBuffer, 0, bytesRead);
+                  }
+                } catch (Exception ignore) {
+                  // auto-close the socket
+                }
+
+              } catch (Exception ignore) {
+              }
+            });
+
+    serverThread.start();
+    // ensure that the server thread has started before the benchmark iterations
+    serverLatch.await();
 
     clientReadBuffer = new byte[data.length];
     clientSocket = new Socket();
@@ -116,7 +137,7 @@ public class IoBlockingRoundtripLatencyBenchmark {
   @TearDown(Level.Trial)
   public void tearDownTrial() throws IOException {
     clientSocket.close();
-    server.awaitTermination();
+    serverThread.interrupt();
   }
 
   @Benchmark
@@ -133,6 +154,13 @@ public class IoBlockingRoundtripLatencyBenchmark {
   public enum ThreadType {
     VIRTUAL,
     PLATFORM
+  }
+
+  private Thread getThread(Runnable runnable) {
+    return switch (threadType) {
+      case VIRTUAL -> ofVirtual().unstarted(runnable);
+      case PLATFORM -> ofPlatform().unstarted(runnable);
+    };
   }
 
   private void sanityCheck(int actualBytes, int expectedBytes) {
