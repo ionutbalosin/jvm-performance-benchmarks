@@ -56,9 +56,9 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * A configurable number of tasks are submitted to an executor using a burst approach, and the
  * benchmark awaits the completion of all these tasks. The executor is cached within the JMH state.
- * The parallelism level for both platform and virtual threads is restricted to evaluate their
- * performance under comparable conditions. The benchmark method includes the cost of task
- * submission to the initially idle executor, which, for this specific use case, is considered
+ * The parallelism level for both platform and virtual threads is restricted the same value to
+ * evaluate their performance under comparable conditions. The benchmark method includes the cost of
+ * task submission to the initially idle executor, which, for this specific use case, is considered
  * negligible.
  *
  * Note: When a virtual thread executes code inside a synchronized block or method it cannot be
@@ -75,12 +75,12 @@ public class VPThreadSynchronizationBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VPThreadSynchronizationBenchmark.*"
 
-  // For a more accurate comparison between virtual threads and platform threads, set the thread
-  // count to match the level of parallelism used for scheduling virtual threads (if explicitly
-  // specified in the command line) or to the default number of available processors (otherwise).
-  // Note: this thread count is further utilized to define the core pool size of platform threads
-  // but also to determine the tasks' load factor.
-  private static final int THREAD_COUNT =
+  // For a more accurate comparison between virtual threads and platform threads, set the
+  // parallelism count to match the level of parallelism used for scheduling virtual threads (if
+  // explicitly specified in the command line) or to the default number of available processors
+  // (otherwise). Note: this parallelism count is further utilized to define the core pool size of
+  // platform threads but also to determine the tasks' load factor.
+  private static final int PARALLELISM_COUNT =
       ofNullable(System.getProperty("jdk.virtualThreadScheduler.parallelism"))
           .map(Integer::parseInt)
           .orElse(Runtime.getRuntime().availableProcessors());
@@ -97,7 +97,7 @@ public class VPThreadSynchronizationBenchmark {
 
   @Setup(Level.Trial)
   public void setup() {
-    tasks = THREAD_COUNT * tasksLoadFactor;
+    tasks = PARALLELISM_COUNT * tasksLoadFactor;
   }
 
   @Benchmark
@@ -177,9 +177,9 @@ public class VPThreadSynchronizationBenchmark {
       return switch (threadType) {
           // Note: Virtual threads are not resource-intensive, there is never a need to pool them
           // Moreover, pooling virtual threads to restrict concurrency should be avoided and
-          // implemented using separate mechanisms
+          // implemented using separate mechanisms (such as semaphores)
         case VIRTUAL -> newVirtualThreadPerTaskExecutor();
-        case PLATFORM -> newFixedThreadPool(THREAD_COUNT, ofPlatform().factory());
+        case PLATFORM -> newFixedThreadPool(PARALLELISM_COUNT, ofPlatform().factory());
       };
     }
   }
