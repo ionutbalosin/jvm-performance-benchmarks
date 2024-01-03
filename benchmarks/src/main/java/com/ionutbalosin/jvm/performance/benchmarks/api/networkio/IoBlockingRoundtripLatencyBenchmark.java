@@ -26,9 +26,13 @@ import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.Ne
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.PORT;
 import static java.util.Optional.ofNullable;
 
-import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingClient;
 import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingServer;
-import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.BufferSize;
+import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -55,18 +59,16 @@ import org.openjdk.jmh.annotations.Warmup;
  * each Client, multiple byte arrays (i.e., chunks of messages) are sequentially sent to the Server,
  * and the Client waits for the Server to echo each of them back. The time taken for these combined
  * send-receive Clients-to-Server interactions is measured to assess the overall latency.
- *
- * References: - https://github.com/ebarlas/project-loom-c5m
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class IoBlockingRoundtripChunksLatencyBenchmark {
+public class IoBlockingRoundtripLatencyBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*IoBlockingRoundtripChunksLatencyBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*IoBlockingRoundtripLatencyBenchmark.*"
 
   // Note: Setting these buffers too high might cause ENOBUFS on some systems (e.g., FreeBSD).
   // In case of issues, please check the maximum socket send/receive buffer size for your system.
@@ -83,15 +85,17 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
           .map(Integer::parseInt)
           .orElse(Runtime.getRuntime().availableProcessors());
 
+  private static final int CLIENT_SOCKET_TIMEOUT = 24_000;
+
   private final Random random = new Random(16384);
 
-  @Param private BufferSize bufferSize;
+  @Param private NetworkUtils.BufferSize bufferSize;
+
   @Param private ThreadType threadType;
-  @Param private Chunks chunks;
 
   private IoBlockingServer server;
-  private IoBlockingClient client;
-  private byte[] data;
+  private Socket clientSocket;
+  private byte[] data, clientReadBuffer;
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
@@ -101,19 +105,29 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
     server = new IoBlockingServer(HOST, PORT, threadType, data);
     server.start();
 
-    client = new IoBlockingClient(HOST, PORT, threadType, data);
-    client.start();
+    clientReadBuffer = new byte[data.length];
+    clientSocket = new Socket();
+    clientSocket.setSoTimeout(CLIENT_SOCKET_TIMEOUT);
+    clientSocket.setSendBufferSize(SEND_BUFFER_LENGTH);
+    clientSocket.setReceiveBufferSize(RECEIVE_BUFFER_LENGTH);
+    clientSocket.connect(new InetSocketAddress(HOST, PORT), CLIENT_SOCKET_TIMEOUT);
   }
 
   @TearDown(Level.Trial)
-  public void tearDownTrial() {
-    client.terminate();
+  public void tearDownTrial() throws IOException {
+    clientSocket.close();
     server.awaitTermination();
   }
 
   @Benchmark
-  public void send_receive() {
-    client.sendReceiveChunks(chunks.get());
+  public void send_receive() throws IOException {
+    final InputStream in = clientSocket.getInputStream();
+    final OutputStream out = clientSocket.getOutputStream();
+
+    out.write(data, 0, data.length);
+    int bytesRead = in.read(clientReadBuffer, 0, clientReadBuffer.length);
+
+    sanityCheck(bytesRead, bufferSize.get());
   }
 
   public enum ThreadType {
@@ -121,17 +135,10 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
     PLATFORM
   }
 
-  public enum Chunks {
-    _10_K(10_000);
-
-    private int value;
-
-    Chunks(int value) {
-      this.value = value;
-    }
-
-    public int get() {
-      return value;
+  private void sanityCheck(int actualBytes, int expectedBytes) {
+    if (actualBytes != expectedBytes) {
+      throw new AssertionError(
+          "Number of bytes mismatch. Actual: " + actualBytes + ", expected: " + expectedBytes);
     }
   }
 }

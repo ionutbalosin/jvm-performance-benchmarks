@@ -22,14 +22,14 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.PARALLELISM_COUNT;
-import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.RECEIVE_BUFFER_LENGTH;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripLatencyBenchmark.PARALLELISM_COUNT;
+import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripLatencyBenchmark.RECEIVE_BUFFER_LENGTH;
 import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
-import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.ThreadType;
+import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripLatencyBenchmark.ThreadType;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
 
 public class IoBlockingServer {
 
-  private static final int MAX_INCOMING_CONNECTIONS = 10_000;
+  private static final int MAX_INCOMING_CONNECTIONS = 1_000;
 
   private final String host;
   private final ThreadType threadType;
@@ -105,9 +105,9 @@ public class IoBlockingServer {
   public void awaitTermination() {
     executor.shutdown();
     try {
-      if (!executor.awaitTermination(12, TimeUnit.SECONDS)) {
+      if (!executor.awaitTermination(24, TimeUnit.SECONDS)) {
         executor.shutdownNow();
-        if (!executor.awaitTermination(12, TimeUnit.SECONDS)) {
+        if (!executor.awaitTermination(24, TimeUnit.SECONDS)) {
           System.err.println("Server executor service pool did not terminate.");
         }
       }
