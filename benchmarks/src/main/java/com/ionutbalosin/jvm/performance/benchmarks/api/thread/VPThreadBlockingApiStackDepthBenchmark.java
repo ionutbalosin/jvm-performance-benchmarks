@@ -25,7 +25,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.api.thread;
 import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -49,29 +48,35 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark aims to measure the efficiency of mounting and unmounting virtual threads
- * by comparing this behavior with that of platform threads (OS-level threads)
- * when they interact with blocking APIs at varying thread stack depths.
+ * This benchmark aims to measure the efficiency of mounting and unmounting virtual threads by
+ * comparing this behavior with that of platform threads (OS-level threads) when they interact with
+ * blocking APIs at varying thread stack depths.
  *
- * Note: in typical scenarios, a virtual thread unmounts when it blocks on I/O or other blocking
- * operations in the JDK, such as BlockingQueue.take(). When the blocking operation is ready to
- * complete, the virtual thread is resubmitted to the scheduler, which mounts it on a carrier for execution.
+ * The stack frames of unmounted virtual threads are stored on the heap as stack-chunk objects.
+ * As the stack depth increases, more frames will need to be copied into the stack-chunk, expanding
+ * the list. Consequently, this adds more "pressure" to the garbage collector (GC) compared to
+ * platform threads.
  *
- * It is less expensive to block a virtual thread than a platform thread, since the latter will involve context switching.
- * Using virtual threads in the context of blocking API calls provides a noticeable benefit over traditional platform threads.
+ * Note: Typically, a virtual thread will unmount when it blocks on I/O or some other blocking
+ * operation in the JDK, such as BlockingQueue.take(). When the blocking operation is ready to
+ * complete (e.g., bytes have been received on a socket), it submits the virtual thread back to the
+ * scheduler, which will mount the virtual thread on a carrier to resume execution.
+ *
+ * Note: It is less expensive to block a virtual thread than a platform thread, since the latter
+ * will involve context switching. Using virtual threads in the context of blocking API calls
+ * provides a noticeable benefit over traditional platform threads.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
-public class VPThreadBlockingApiBenchmark {
+public class VPThreadBlockingApiStackDepthBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*VPThreadBlockingApiBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*VPThreadBlockingApiStackDepthBenchmark.*"
 
   private final Random random = new Random(16384);
-  private final int BYTES = 64;
 
   private Thread producerThread;
   private Thread consumerThread;
@@ -81,13 +86,16 @@ public class VPThreadBlockingApiBenchmark {
 
   @Param private ThreadType threadType;
 
+  @Param({"64"})
+  private int chunkSize;
+
   @Param({"1", "10", "100", "1000"})
   private int stackDepth;
 
   @Setup(Level.Trial)
-  public void setupTrial() throws Exception {
+  public void setupTrial() {
     queue = new SynchronousQueue<>();
-    data = new byte[BYTES];
+    data = new byte[chunkSize];
     random.nextBytes(data);
 
     producerThread =
@@ -108,7 +116,7 @@ public class VPThreadBlockingApiBenchmark {
   }
 
   @TearDown(Level.Trial)
-  public void tearDownTrial() throws Exception {
+  public void tearDownTrial() {
     producerThread.interrupt();
   }
 
@@ -128,7 +136,7 @@ public class VPThreadBlockingApiBenchmark {
   }
 
   @TearDown(Level.Invocation)
-  public void tearDownInvocation() throws IOException, ExecutionException, InterruptedException {
+  public void tearDownInvocation() throws ExecutionException, InterruptedException {
     if (!Arrays.equals(data, consumerFuture.get().array)) {
       throw new AssertionError("The byte arrays have different content.");
     }
@@ -174,7 +182,7 @@ public class VPThreadBlockingApiBenchmark {
 
     private byte[] take() {
       try {
-        // The blocking API may unmount (in the case of virtual threads) the carrier thread
+        // In the case of virtual threads, the blocking API unmounts from the carrier thread
         return queue.take();
       } catch (InterruptedException ignore) {
         return null;

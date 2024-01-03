@@ -396,7 +396,7 @@
       "name": "VectorizationScatterGatherPatternBenchmark"
     },
     {
-      "name": "VPThreadBlockingApiBenchmark"
+      "name": "VPThreadBlockingApiStackDepthBenchmark"
     },
     {
       "name": "VPThreadCpuBoundBenchmark"

@@ -67,18 +67,20 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
 public class VPThreadSynchronizationBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VPThreadSynchronizationBenchmark.*"
+  // Recommended command line options:
+  // - JMH options: -prof {Linux: perfnorm, Mac OS X: dtraceasm, Windows: xperfasm}
 
   // For a more accurate comparison between virtual threads and platform threads, set the
   // parallelism count to match the level of parallelism used for scheduling virtual threads (if
   // explicitly specified in the command line) or to the default number of available processors
-  // (otherwise). Note: this parallelism count is further utilized to define the core pool size of
+  // (otherwise). This parallelism count is further utilized to define the core pool size of
   // platform threads but also to determine the tasks' load factor.
   private static final int PARALLELISM_COUNT =
       ofNullable(System.getProperty("jdk.virtualThreadScheduler.parallelism"))
@@ -175,9 +177,9 @@ public class VPThreadSynchronizationBenchmark {
 
     private ExecutorService getExecutorService() {
       return switch (threadType) {
-          // Note: Virtual threads are not resource-intensive, there is never a need to pool them
+          // Note: Virtual threads are not resource-intensive, there is never a need to pool them.
           // Moreover, pooling virtual threads to restrict concurrency should be avoided and
-          // implemented using separate mechanisms (such as semaphores)
+          // implemented using separate mechanisms (such as semaphores).
         case VIRTUAL -> newVirtualThreadPerTaskExecutor();
         case PLATFORM -> newFixedThreadPool(PARALLELISM_COUNT, ofPlatform().factory());
       };

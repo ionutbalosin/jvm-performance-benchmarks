@@ -22,18 +22,15 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.networkio;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingClient.sendReceiveChunks;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.HOST;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.PORT;
-import static java.util.concurrent.Executors.newCachedThreadPool;
-import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
+import static java.util.Optional.ofNullable;
 
+import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingClient;
 import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking.IoBlockingServer;
+import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.utils.NetworkUtils.BufferSize;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -54,18 +51,17 @@ import org.openjdk.jmh.annotations.Warmup;
  * multiple Clients and a Server. Each Client-to-Server interaction is handled within a virtual
  * thread or a platform thread.
  *
- * The `send_receive()` method initiates multiple Clients, each of which connects to the Server.
- * Within each Client, multiple byte arrays (i.e., chunks of messages) are sequentially sent to the
- * Server, and the Client waits for the Server to echo each of them back. The time taken for these
- * combined send-receive Clients-to-Server interactions is measured to assess the overall latency.
+ * The benchmark method initiates multiple Clients, each of which connects to the Server. Within
+ * each Client, multiple byte arrays (i.e., chunks of messages) are sequentially sent to the Server,
+ * and the Client waits for the Server to echo each of them back. The time taken for these combined
+ * send-receive Clients-to-Server interactions is measured to assess the overall latency.
  *
- * References:
- * - https://github.com/ebarlas/project-loom-c5m
+ * References: - https://github.com/ebarlas/project-loom-c5m
  */
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.SECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
 public class IoBlockingRoundtripChunksLatencyBenchmark {
@@ -77,73 +73,47 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
   public static final int SEND_BUFFER_LENGTH = 4_096;
   public static final int RECEIVE_BUFFER_LENGTH = 4_096;
 
-  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+  // For a more accurate comparison between virtual threads and platform threads, set the
+  // parallelism count to match the level of parallelism used for scheduling virtual threads (if
+  // explicitly specified in the command line) or to the default number of available processors
+  // (otherwise). This parallelism count is further utilized to define the core pool size of
+  // platform threads but also to determine the tasks' load factor.
+  public static final int PARALLELISM_COUNT =
+      ofNullable(System.getProperty("jdk.virtualThreadScheduler.parallelism"))
+          .map(Integer::parseInt)
+          .orElse(Runtime.getRuntime().availableProcessors());
 
   private final Random random = new Random(16384);
 
-  @Param({"8"})
-  private int cpuLoadFactor;
-
-  @Param({"2"})
-  private int bufferSize;
-
+  @Param private BufferSize bufferSize;
   @Param private ThreadType threadType;
-  @Param private MessagesPerClient messagesPerClient;
+  @Param private Chunks chunks;
 
   private IoBlockingServer server;
+  private IoBlockingClient client;
   private byte[] data;
-  private int tasks;
 
   @Setup(Level.Trial)
   public void setupTrial() throws Exception {
-    tasks = CPUs * cpuLoadFactor;
-
-    data = new byte[bufferSize];
+    data = new byte[bufferSize.get()];
     random.nextBytes(data);
 
     server = new IoBlockingServer(HOST, PORT, threadType, data);
     server.start();
+
+    client = new IoBlockingClient(HOST, PORT, threadType, data);
+    client.start();
   }
 
   @TearDown(Level.Trial)
   public void tearDownTrial() {
+    client.terminate();
     server.awaitTermination();
   }
 
   @Benchmark
-  public void send_receive(ExecutorState executor) throws InterruptedException {
-    final CountDownLatch latch = new CountDownLatch(tasks);
-    IntStream.range(0, tasks)
-        .forEach(
-            i ->
-                executor.service.submit(
-                    () -> sendReceiveChunks(HOST, PORT, data, messagesPerClient.get(), latch)));
-    latch.await();
-  }
-
-  @State(Scope.Benchmark)
-  public static class ExecutorState {
-
-    private ExecutorService service;
-
-    @Param private ThreadType threadType;
-
-    @Setup(Level.Trial)
-    public void up() {
-      service = getExecutorService();
-    }
-
-    @TearDown(Level.Trial)
-    public void down() {
-      service.shutdown();
-    }
-
-    private ExecutorService getExecutorService() {
-      return switch (threadType) {
-        case VIRTUAL -> newVirtualThreadPerTaskExecutor();
-        case PLATFORM -> newCachedThreadPool();
-      };
-    }
+  public void send_receive() {
+    client.sendReceiveChunks(chunks.get());
   }
 
   public enum ThreadType {
@@ -151,12 +121,12 @@ public class IoBlockingRoundtripChunksLatencyBenchmark {
     PLATFORM
   }
 
-  public enum MessagesPerClient {
+  public enum Chunks {
     _10_K(10_000);
 
     private int value;
 
-    MessagesPerClient(int value) {
+    Chunks(int value) {
       this.value = value;
     }
 

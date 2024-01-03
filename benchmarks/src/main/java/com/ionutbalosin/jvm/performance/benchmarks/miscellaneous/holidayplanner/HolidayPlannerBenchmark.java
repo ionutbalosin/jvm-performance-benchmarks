@@ -59,9 +59,9 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class HolidayPlannerBenchmark {
 
@@ -70,11 +70,11 @@ public class HolidayPlannerBenchmark {
   private static final int MAX_TRIP_DURATION_DAYS = 3 * 365;
   private static final int MAX_TRAVELERS = 256;
   private static final int TOP_TEN_ATTRACTIONS = 10;
-  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+  private static final int PARALLELISM_COUNT = Runtime.getRuntime().availableProcessors();
   private static final Random random = new Random(16384);
 
   @Param({"256"})
-  private int cpuLoadFactor;
+  private int tasksLoadFactor;
 
   @Param private ThreadType threadType;
 
@@ -84,7 +84,7 @@ public class HolidayPlannerBenchmark {
 
   @Setup()
   public void setup() {
-    tasks = CPUs * cpuLoadFactor;
+    tasks = PARALLELISM_COUNT * tasksLoadFactor;
     tripDuration = random.nextInt(MAX_TRIP_DURATION_DAYS);
     numberOfTravelers = random.nextInt(MAX_TRAVELERS);
 

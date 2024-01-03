@@ -22,10 +22,11 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.PARALLELISM_COUNT;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.RECEIVE_BUFFER_LENGTH;
 import static java.lang.Thread.ofPlatform;
 import static java.lang.Thread.ofVirtual;
-import static java.util.concurrent.Executors.newCachedThreadPool;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
 import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.ThreadType;
@@ -115,7 +116,9 @@ public class IoBlockingServer {
       Thread.currentThread().interrupt();
     }
 
-    serverThread.interrupt();
+    if (serverThread != null) {
+      serverThread.interrupt();
+    }
   }
 
   private Thread getThread(Runnable runnable) {
@@ -127,8 +130,11 @@ public class IoBlockingServer {
 
   private ExecutorService getExecutorService() {
     return switch (threadType) {
+        // Note: Virtual threads are not resource-intensive, there is never a need to pool them.
+        // Moreover, pooling virtual threads to restrict concurrency should be avoided and
+        // implemented using separate mechanisms (such as semaphores).
       case VIRTUAL -> newVirtualThreadPerTaskExecutor();
-      case PLATFORM -> newCachedThreadPool();
+      case PLATFORM -> newFixedThreadPool(PARALLELISM_COUNT, ofPlatform().factory());
     };
   }
 }

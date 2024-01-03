@@ -23,8 +23,9 @@
 package com.ionutbalosin.jvm.performance.benchmarks.api.thread;
 
 import static java.lang.Thread.ofPlatform;
-import static java.lang.Thread.ofVirtual;
+import static java.util.Optional.ofNullable;
 import static java.util.concurrent.Executors.newFixedThreadPool;
+import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -48,12 +49,16 @@ import org.openjdk.jmh.infra.Blackhole;
 
 /*
  * This benchmark evaluates the performance of running CPU-bound (or CPU-intensive) tasks, which are
- * submitted to either a virtual thread executor service or a cached thread pool.
+ * submitted to either a virtual thread executor service or a cached thread pool. Additionally,
+ * various backoff strategies (e.g., thread parking, yield, or none) are triggered while running
+ * CPU-bound tasks. These strategies may (or may not) unpin the virtual thread from its carrier.
  *
- * The benchmark method submits a configurable number of tasks to an executor (i.e., a burst
- * approach) and waits for all of them to complete. The executor is cached in the JMH state. The
- * cost of tasks submission to the (initially idle) executor is included in the benchmark method,
- * which we consider negligible for this particular use case.
+ * A configurable number of tasks are submitted to an executor using a burst approach, and the
+ * benchmark awaits the completion of all these tasks. The executor is cached within the JMH state.
+ * The level of parallelism for both platform and virtual threads is set to the same value to
+ * facilitate an evaluation of their performance under comparable conditions. The benchmark method
+ * accounts for the task submission cost to the initially idle executor, which, within the scope of
+ * this specific use case, is deemed negligible.
  *
  * When a virtual thread executes CPU-bound code without involving any blocking I/O or other
  * blocking JDK methods, the virtual thread cannot be unmounted. Consequently, it will not yield and
@@ -62,28 +67,38 @@ import org.openjdk.jmh.infra.Blackhole;
  * an attempt to de-schedule the running thread and permit other threads to execute on the CPU,
  * thereby facilitating the unmounting of the virtual thread from its carrier.
  *
- * <p>Note: When the workload is CPU-bound, virtual threads may not offer a substantial improvement
- * in application throughput compared to traditional platform threads. Additionally, using virtual
- * threads just for in-memory processing is not their intended use case.
+ * Note: When the workload is CPU-bound, virtual threads may not offer a substantial improvement
+ * in application throughput compared to traditional platform threads. Additionally, in scenarios of
+ * CPU-bound workloads, having significantly more threads than processor cores does not necessarily
+ * enhance throughput. As a side note, using virtual threads solely for heavy in-memory processing
+ * may not align with their intended use case.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
 public class VPThreadCpuBoundBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*VPThreadCpuBoundBenchmark.*"
 
-  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+  // For a more accurate comparison between virtual threads and platform threads, set the
+  // parallelism count to match the level of parallelism used for scheduling virtual threads (if
+  // explicitly specified in the command line) or to the default number of available processors
+  // (otherwise). This parallelism count is further utilized to define the core pool size of
+  // platform threads but also to determine the tasks' load factor.
+  private static final int PARALLELISM_COUNT =
+      ofNullable(System.getProperty("jdk.virtualThreadScheduler.parallelism"))
+          .map(Integer::parseInt)
+          .orElse(Runtime.getRuntime().availableProcessors());
 
   private volatile boolean preventUnrolling = true;
 
   private int tasks;
 
   @Param({"16"})
-  private int cpuLoadFactor;
+  private int tasksLoadFactor;
 
   @Param private ThreadType threadType;
   @Param private BackoffType backoffType;
@@ -91,7 +106,7 @@ public class VPThreadCpuBoundBenchmark {
 
   @Setup(Level.Trial)
   public void up() {
-    tasks = CPUs * cpuLoadFactor;
+    tasks = PARALLELISM_COUNT * tasksLoadFactor;
   }
 
   @Benchmark
@@ -102,7 +117,7 @@ public class VPThreadCpuBoundBenchmark {
   }
 
   private void cpuBoundWork(CountDownLatch latch) {
-    // Process each chunk of tokens sequentially with potential back-off in between each chunk
+    // Consume each chunk of tokens sequentially with potential back-off in between each chunk.
     Blackhole.consumeCPU(cpuTokens.getTokens());
     for (int chunks = 1; chunks < cpuTokens.getChunks() && preventUnrolling; chunks++) {
       backoff();
@@ -145,8 +160,11 @@ public class VPThreadCpuBoundBenchmark {
 
     private ExecutorService getExecutorService() {
       return switch (threadType) {
-        case VIRTUAL -> newFixedThreadPool(CPUs, ofVirtual().factory());
-        case PLATFORM -> newFixedThreadPool(CPUs, ofPlatform().factory());
+          // Note: Virtual threads are not resource-intensive, there is never a need to pool them.
+          // Moreover, pooling virtual threads to restrict concurrency should be avoided and
+          // implemented using separate mechanisms (such as semaphores).
+        case VIRTUAL -> newVirtualThreadPerTaskExecutor();
+        case PLATFORM -> newFixedThreadPool(PARALLELISM_COUNT, ofPlatform().factory());
       };
     }
   }

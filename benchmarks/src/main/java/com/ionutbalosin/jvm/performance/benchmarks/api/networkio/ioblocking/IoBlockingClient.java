@@ -24,7 +24,10 @@ package com.ionutbalosin.jvm.performance.benchmarks.api.networkio.ioblocking;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.RECEIVE_BUFFER_LENGTH;
 import static com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.SEND_BUFFER_LENGTH;
+import static java.lang.Thread.ofPlatform;
+import static java.lang.Thread.ofVirtual;
 
+import com.ionutbalosin.jvm.performance.benchmarks.api.networkio.IoBlockingRoundtripChunksLatencyBenchmark.ThreadType;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -36,32 +39,86 @@ public class IoBlockingClient {
 
   private static final int CLIENT_SOCKET_TIMEOUT = 12_000;
 
-  public static void sendReceiveChunks(
-      String host, int port, byte[] data, int messages, CountDownLatch latch) {
-    try (Socket socket = new Socket()) {
+  private final ThreadType threadType;
+  private final byte[] data;
+  private final byte[] readBuffer;
+  private final Thread clientThread;
+  private final CountDownLatch clientLatch;
+
+  private Socket socket;
+  private InputStream in;
+  private OutputStream out;
+
+  public IoBlockingClient(String host, int port, ThreadType threadType, byte[] data) {
+    this.threadType = threadType;
+    this.data = data;
+    this.readBuffer = new byte[data.length];
+
+    this.clientThread = getThread(() -> serve(host, port));
+    this.clientLatch = new CountDownLatch(1);
+  }
+
+  public void start() throws InterruptedException {
+    clientThread.start();
+    // ensure that the client thread has started before the benchmark iterations
+    clientLatch.await();
+  }
+
+  private void serve(String host, int port) {
+    try {
+      socket = new Socket();
       socket.setSoTimeout(CLIENT_SOCKET_TIMEOUT);
       socket.setSendBufferSize(SEND_BUFFER_LENGTH);
       socket.setReceiveBufferSize(RECEIVE_BUFFER_LENGTH);
       socket.connect(new InetSocketAddress(host, port), CLIENT_SOCKET_TIMEOUT);
 
-      final InputStream in = socket.getInputStream();
-      final OutputStream out = socket.getOutputStream();
-      final byte[] readBuffer = new byte[data.length];
+      in = socket.getInputStream();
+      out = socket.getOutputStream();
 
-      int counter = 0;
-      while (counter < messages) {
+      clientLatch.countDown();
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void sendReceiveChunks(int chunks) {
+    try {
+      for (int i = 0; i < chunks; i++) {
         out.write(data, 0, data.length);
         in.read(readBuffer, 0, readBuffer.length);
-        if (!Arrays.equals(data, readBuffer)) {
-          throw new AssertionError("The byte arrays have different content");
-        }
-        counter++;
+        sanityCheck(data, readBuffer);
       }
 
     } catch (Exception e) {
       throw new RuntimeException(e);
-    } finally {
-      latch.countDown();
+    }
+  }
+
+  public void terminate() {
+    if (clientThread != null) {
+      clientThread.interrupt();
+    }
+
+    try {
+      if (socket != null && !socket.isClosed()) {
+        socket.close();
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private Thread getThread(Runnable runnable) {
+    return switch (threadType) {
+      case VIRTUAL -> ofVirtual().unstarted(runnable);
+      case PLATFORM -> ofPlatform().unstarted(runnable);
+    };
+  }
+
+  private void sanityCheck(byte[] data, byte[] readBuffer) {
+    if (!Arrays.equals(data, readBuffer)) {
+      throw new AssertionError("The byte arrays have different content");
     }
   }
 }
