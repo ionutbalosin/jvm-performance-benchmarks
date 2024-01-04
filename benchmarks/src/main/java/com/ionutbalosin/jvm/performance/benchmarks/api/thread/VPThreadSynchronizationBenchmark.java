@@ -48,7 +48,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark evaluates the performance of synchronized blocks in the context of virtual
+ * This benchmark evaluates the performance of running synchronized blocks in the context of virtual
  * threads, comparing them with platform threads. The synchronization mechanism is implemented using
  * lock objects, reentrant locks, and no locks at all. Additionally, various backoff strategies
  * (e.g., thread parking, sleeping, or none) are triggered within the synchronized execution block.
