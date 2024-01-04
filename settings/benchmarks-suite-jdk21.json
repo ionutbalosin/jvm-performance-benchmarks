@@ -143,7 +143,7 @@
       "name": "InstantBenchmark"
     },
     {
-      "name": "IoBlockingRoundtripChunksLatencyBenchmark"
+      "name": "IoBlockingRoundtripLatencyBenchmark"
     },
     {
       "name": "JustInTimeConstantsBenchmark"
@@ -396,7 +396,7 @@
       "name": "VectorizationScatterGatherPatternBenchmark"
     },
     {
-      "name": "VPThreadBlockingApiBenchmark"
+      "name": "VPThreadBlockingApiStackDepthBenchmark"
     },
     {
       "name": "VPThreadCpuBoundBenchmark"

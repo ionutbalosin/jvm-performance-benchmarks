@@ -23,6 +23,8 @@
 package com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlanner.readHolidayPlanner;
+import static java.lang.Thread.ofPlatform;
+import static java.lang.Thread.ofVirtual;
 
 import java.util.Random;
 import java.util.concurrent.ThreadFactory;
@@ -68,11 +70,11 @@ public class HolidayPlannerBenchmark {
   private static final int MAX_TRIP_DURATION_DAYS = 3 * 365;
   private static final int MAX_TRAVELERS = 256;
   private static final int TOP_TEN_ATTRACTIONS = 10;
-  private static final int CPUs = Runtime.getRuntime().availableProcessors();
+  private static final int PARALLELISM_COUNT = Runtime.getRuntime().availableProcessors();
   private static final Random random = new Random(16384);
 
   @Param({"256"})
-  private int cpuLoadFactor;
+  private int loadFactor;
 
   @Param private ThreadType threadType;
 
@@ -82,7 +84,7 @@ public class HolidayPlannerBenchmark {
 
   @Setup()
   public void setup() {
-    tasks = CPUs * cpuLoadFactor;
+    tasks = PARALLELISM_COUNT * loadFactor;
     tripDuration = random.nextInt(MAX_TRIP_DURATION_DAYS);
     numberOfTravelers = random.nextInt(MAX_TRAVELERS);
 
@@ -100,8 +102,8 @@ public class HolidayPlannerBenchmark {
 
   public static ThreadFactory setupThreadFactory(ThreadType threadType) {
     return switch (threadType) {
-      case VIRTUAL -> Thread.ofVirtual().factory();
-      case PLATFORM -> Thread.ofPlatform().factory();
+      case VIRTUAL -> ofVirtual().factory();
+      case PLATFORM -> ofPlatform().factory();
     };
   }
 
