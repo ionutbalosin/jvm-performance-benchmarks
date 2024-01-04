@@ -52,10 +52,17 @@ import org.openjdk.jmh.annotations.Warmup;
  * comparing this behavior with that of platform threads (OS-level threads) when they interact with
  * blocking APIs at varying thread stack depths.
  *
- * The stack frames of unmounted virtual threads are stored on the heap as stack-chunk objects.
- * As the stack depth increases, more frames will need to be copied into the stack-chunk, expanding
- * the list. Consequently, this adds more "pressure" to the garbage collector (GC) compared to
- * platform threads.
+ * The stack frames of unmounted virtual threads are stored in the heap as a list of stack-chunk
+ * objects (i.e., StackChunk OOP). Each stack-chunk object contains a blob that holds a stack
+ * segment, including several integral numbers of stack frames. A stack-chunk is entirely mutable
+ * during freeze and thaw (i.e., stack frames can be moved in and out via memcpy) as long as the
+ * garbage collector (GC) has not seen it yet. For some GCs, this typically occurs during the entire
+ * young generation phase.
+ *
+ * As the stack depth increases, more stack frames will require copying into the stack-chunks,
+ * potentially leading to the expansion of the stack-chunks list. Consequently, when using virtual
+ * threads this mechanism adds more 'pressure' on the runtime to manage them compared to platform
+ * threads.
  *
  * Note: Typically, a virtual thread will unmount when it blocks on I/O or some other blocking
  * operation in the JDK, such as BlockingQueue.take(). When the blocking operation is ready to
