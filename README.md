@@ -309,7 +309,7 @@ The benchmark plots are saved under the `results/jdk-$JDK_VERSION/$ARCH/plot` di
 
 # Contribute
 
-If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so through GitHub. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
+If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so by contacting us directly. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
 
 # License 
 
