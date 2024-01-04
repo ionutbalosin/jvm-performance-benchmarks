@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<style>
+	body {margin: 0; padding: 10px; background-color: #ffffff}
+	h1 {margin: 5px 0 0 0; font-size: 18px; font-weight: normal; text-align: center}
+	header {margin: -24px 0 5px 0; line-height: 24px}
+	button {font: 12px sans-serif; cursor: pointer}
+	p {margin: 5px 0 5px 0}
+	a {color: #0366d6}
+	#hl {position: absolute; display: none; overflow: hidden; white-space: nowrap; pointer-events: none; background-color: #ffffe0; outline: 1px solid #ffc000; height: 15px}
+	#hl span {padding: 0 3px 0 3px}
+	#status {overflow: hidden; white-space: nowrap}
+	#match {overflow: hidden; white-space: nowrap; display: none; float: right; text-align: right}
+	#reset {cursor: pointer}
+	#canvas {width: 100%; height: 768px}
+</style>
+</head>
+<body style='font: 12px Verdana, sans-serif'>
+<h1>CPU profile</h1>
+<header style='text-align: left'><button id='reverse' title='Reverse'>&#x1f53b;</button>&nbsp;&nbsp;<button id='search' title='Search'>&#x1f50d;</button></header>
+<header style='text-align: right'>Produced by <a href='https://github.com/jvm-profiling-tools/async-profiler'>async-profiler</a></header>
+<canvas id='canvas'></canvas>
+<div id='hl'><span></span></div>
+<p id='match'>Matched: <span id='matchval'></span> <span id='reset' title='Clear'>&#x274c;</span></p>
+<p id='status'>&nbsp;</p>
+<script>
+	// Copyright 2020 Andrei Pangin
+	// Licensed under the Apache License, Version 2.0.
+	'use strict';
+	var root, rootLevel, px, pattern;
+	var reverse = false;
+	const levels = Array(48);
+	for (let h = 0; h < levels.length; h++) {
+		levels[h] = [];
+	}
+
+	const canvas = document.getElementById('canvas');
+	const c = canvas.getContext('2d');
+	const hl = document.getElementById('hl');
+	const status = document.getElementById('status');
+
+	const canvasWidth = canvas.offsetWidth;
+	const canvasHeight = canvas.offsetHeight;
+	canvas.style.width = canvasWidth + 'px';
+	canvas.width = canvasWidth * (devicePixelRatio || 1);
+	canvas.height = canvasHeight * (devicePixelRatio || 1);
+	if (devicePixelRatio) c.scale(devicePixelRatio, devicePixelRatio);
+	c.font = document.body.style.font;
+
+	const palette = [
+		[0xb2e1b2, 20, 20, 20],
+		[0x50e150, 30, 30, 30],
+		[0x50cccc, 30, 30, 30],
+		[0xe15a5a, 30, 40, 40],
+		[0xc8c83c, 30, 30, 10],
+		[0xe17d00, 30, 30,  0],
+		[0xcce880, 20, 20, 20],
+	];
+
+	function getColor(p) {
+		const v = Math.random();
+		return '#' + (p[0] + ((p[1] * v) << 16 | (p[2] * v) << 8 | (p[3] * v))).toString(16);
+	}
+
+	function f(level, left, width, type, title, inln, c1, int) {
+		levels[level].push({left: left, width: width, color: getColor(palette[type]), title: title,
+			details: (int ? ', int=' + int : '') + (c1 ? ', c1=' + c1 : '') + (inln ? ', inln=' + inln : '')
+		});
+	}
+
+	function samples(n) {
+		return n === 1 ? '1 sample' : n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' samples';
+	}
+
+	function pct(a, b) {
+		return a >= b ? '100' : (100 * a / b).toFixed(2);
+	}
+
+	function findFrame(frames, x) {
+		let left = 0;
+		let right = frames.length - 1;
+
+		while (left <= right) {
+			const mid = (left + right) >>> 1;
+			const f = frames[mid];
+
+			if (f.left > x) {
+				right = mid - 1;
+			} else if (f.left + f.width <= x) {
+				left = mid + 1;
+			} else {
+				return f;
+			}
+		}
+
+		if (frames[left] && (frames[left].left - x) * px < 0.5) return frames[left];
+		if (frames[right] && (x - (frames[right].left + frames[right].width)) * px < 0.5) return frames[right];
+
+		return null;
+	}
+
+	function search(r) {
+		if (r === true && (r = prompt('Enter regexp to search:', '')) === null) {
+			return;
+		}
+
+		pattern = r ? RegExp(r) : undefined;
+		const matched = render(root, rootLevel);
+		document.getElementById('matchval').textContent = pct(matched, root.width) + '%';
+		document.getElementById('match').style.display = r ? 'inherit' : 'none';
+	}
+
+	function render(newRoot, newLevel) {
+		if (root) {
+			c.fillStyle = '#ffffff';
+			c.fillRect(0, 0, canvasWidth, canvasHeight);
+		}
+
+		root = newRoot || levels[0][0];
+		rootLevel = newLevel || 0;
+		px = canvasWidth / root.width;
+
+		const x0 = root.left;
+		const x1 = x0 + root.width;
+		const marked = [];
+
+		function mark(f) {
+			return marked[f.left] >= f.width || (marked[f.left] = f.width);
+		}
+
+		function totalMarked() {
+			let total = 0;
+			let left = 0;
+			Object.keys(marked).sort(function(a, b) { return a - b; }).forEach(function(x) {
+				if (+x >= left) {
+					total += marked[x];
+					left = +x + marked[x];
+				}
+			});
+			return total;
+		}
+
+		function drawFrame(f, y, alpha) {
+			if (f.left < x1 && f.left + f.width > x0) {
+				c.fillStyle = pattern && f.title.match(pattern) && mark(f) ? '#ee00ee' : f.color;
+				c.fillRect((f.left - x0) * px, y, f.width * px, 15);
+
+				if (f.width * px >= 21) {
+					const chars = Math.floor(f.width * px / 7);
+					const title = f.title.length <= chars ? f.title : f.title.substring(0, chars - 2) + '..';
+					c.fillStyle = '#000000';
+					c.fillText(title, Math.max(f.left - x0, 0) * px + 3, y + 12, f.width * px - 6);
+				}
+
+				if (alpha) {
+					c.fillStyle = 'rgba(255, 255, 255, 0.5)';
+					c.fillRect((f.left - x0) * px, y, f.width * px, 15);
+				}
+			}
+		}
+
+		for (let h = 0; h < levels.length; h++) {
+			const y = reverse ? h * 16 : canvasHeight - (h + 1) * 16;
+			const frames = levels[h];
+			for (let i = 0; i < frames.length; i++) {
+				drawFrame(frames[i], y, h < rootLevel);
+			}
+		}
+
+		return totalMarked();
+	}
+
+	canvas.onmousemove = function() {
+		const h = Math.floor((reverse ? event.offsetY : (canvasHeight - event.offsetY)) / 16);
+		if (h >= 0 && h < levels.length) {
+			const f = findFrame(levels[h], event.offsetX / px + root.left);
+			if (f) {
+				if (f != root) getSelection().removeAllRanges();
+				hl.style.left = (Math.max(f.left - root.left, 0) * px + canvas.offsetLeft) + 'px';
+				hl.style.width = (Math.min(f.width, root.width) * px) + 'px';
+				hl.style.top = ((reverse ? h * 16 : canvasHeight - (h + 1) * 16) + canvas.offsetTop) + 'px';
+				hl.firstChild.textContent = f.title;
+				hl.style.display = 'block';
+				canvas.title = f.title + '\n(' + samples(f.width) + f.details + ', ' + pct(f.width, levels[0][0].width) + '%)';
+				canvas.style.cursor = 'pointer';
+				canvas.onclick = function() {
+					if (f != root) {
+						render(f, h);
+						canvas.onmousemove();
+					}
+				};
+				status.textContent = 'Function: ' + canvas.title;
+				return;
+			}
+		}
+		canvas.onmouseout();
+	}
+
+	canvas.onmouseout = function() {
+		hl.style.display = 'none';
+		status.textContent = '\xa0';
+		canvas.title = '';
+		canvas.style.cursor = '';
+		canvas.onclick = '';
+	}
+
+	canvas.ondblclick = function() {
+		getSelection().selectAllChildren(hl);
+	}
+
+	document.getElementById('reverse').onclick = function() {
+		reverse = !reverse;
+		render();
+	}
+
+	document.getElementById('search').onclick = function() {
+		search(true);
+	}
+
+	document.getElementById('reset').onclick = function() {
+		search(false);
+	}
+
+	window.onkeydown = function() {
+		if (event.ctrlKey && event.keyCode === 70) {
+			event.preventDefault();
+			search(true);
+		} else if (event.keyCode === 27) {
+			search(false);
+		}
+	}
+
+f(0,0,48242,3,'all')
+f(1,0,1,3,'[no_Java_frame]')
+f(1,1,29,3,'[unknown]')
+f(2,1,3,3,'___pthread_cond_timedwait64')
+f(2,4,21,3,'__futex_abstimed_wait_cancelable64')
+f(3,13,1,5,'asm_sysvec_apic_timer_interrupt')
+f(4,13,1,5,'sysvec_apic_timer_interrupt')
+f(5,13,1,5,'irq_exit_rcu')
+f(6,13,1,5,'__irq_exit_rcu')
+f(7,13,1,5,'__do_softirq')
+f(8,13,1,5,'run_rebalance_domains')
+f(9,13,1,5,'update_blocked_averages')
+f(3,14,11,5,'entry_SYSCALL_64_after_hwframe')
+f(4,14,11,5,'do_syscall_64')
+f(5,14,10,5,'__x64_sys_futex')
+f(6,15,9,5,'do_futex')
+f(7,15,9,5,'futex_wait')
+f(8,16,8,5,'futex_wait_queue')
+f(9,16,2,5,'hrtimer_sleeper_start_expires')
+f(10,16,2,5,'hrtimer_start_range_ns')
+f(11,16,2,5,'_raw_spin_unlock_irqrestore')
+f(9,18,6,5,'schedule')
+f(10,18,6,5,'__schedule')
+f(11,18,6,5,'finish_task_switch.isra.0')
+f(5,24,1,5,'syscall_exit_to_user_mode')
+f(6,24,1,5,'exit_to_user_mode_prepare')
+f(7,24,1,5,'exit_to_user_mode_loop')
+f(8,24,1,5,'__rseq_handle_notify_resume')
+f(9,24,1,5,'rseq_ip_fixup')
+f(10,24,1,5,'__get_user_8')
+f(2,25,2,3,'__pthread_mutex_cond_lock')
+f(2,27,3,3,'_dl_update_slotinfo')
+f(1,30,2,3,'[unknown_Java]')
+f(2,30,1,1,'I2C/C2I adapters')
+f(2,31,1,1,'org/openjdk/jmh/infra/Blackhole.consume')
+f(1,32,1,3,'_IO_default_xsputn')
+f(1,33,1,3,'__close_nocancel')
+f(2,33,1,5,'entry_SYSCALL_64_after_hwframe')
+f(3,33,1,5,'do_syscall_64')
+f(4,33,1,5,'syscall_exit_to_user_mode')
+f(5,33,1,5,'exit_to_user_mode_prepare')
+f(6,33,1,5,'exit_to_user_mode_loop')
+f(7,33,1,5,'task_work_run')
+f(8,33,1,5,'____fput')
+f(9,33,1,5,'__fput')
+f(10,33,1,5,'call_rcu')
+f(11,33,1,5,'__call_rcu_common.constprop.0')
+f(1,34,1,3,'__condvar_cancel_waiting')
+f(1,35,48135,1,'java/lang/Thread.run')
+f(2,35,48135,1,'java/lang/Thread.runWith')
+f(3,35,48135,1,'java/util/concurrent/ThreadPoolExecutor$Worker.run')
+f(4,35,48135,1,'java/util/concurrent/ThreadPoolExecutor.runWorker')
+f(5,35,48135,1,'java/util/concurrent/FutureTask.run')
+f(6,35,48134,1,'java/util/concurrent/Executors$RunnableAdapter.call')
+f(7,35,48134,1,'java/util/concurrent/FutureTask.run')
+f(8,35,48134,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(9,35,48134,1,'org/openjdk/jmh/runner/BenchmarkHandler$BenchmarkTask.call')
+f(10,35,48134,1,'java/lang/reflect/Method.invoke')
+f(11,35,48134,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invoke')
+f(12,35,48134,1,'jdk/internal/reflect/DirectMethodHandleAccessor.invokeImpl')
+f(13,35,48134,1,'java/lang/invoke/LambdaForm$MH.0x00007ffb3402e400.invokeExact_MT')
+f(14,35,48134,1,'java/lang/invoke/LambdaForm$MH.0x00007ffb3402e000.invoke')
+f(15,35,48134,1,'java/lang/invoke/DirectMethodHandle$Holder.invokeSpecial')
+f(16,35,48134,1,'com/ionutbalosin/jvm/performance/benchmarks/compiler/jmh_generated/TypeSwitchBenchmark_if_instanceof_interface_array_jmhTest.if_instanceof_interface_array_AverageTime')
+f(17,35,48133,1,'com/ionutbalosin/jvm/performance/benchmarks/compiler/jmh_generated/TypeSwitchBenchmark_if_instanceof_interface_array_jmhTest.if_instanceof_interface_array_avgt_jmhStub',0,0,22)
+f(18,56,1,1,'I2C/C2I adapters')
+f(18,57,48111,1,'com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark.if_instanceof_interface_array')
+f(19,7068,1,5,'asm_sysvec_apic_timer_interrupt')
+f(20,7068,1,5,'sysvec_apic_timer_interrupt')
+f(21,7068,1,5,'irq_exit_rcu')
+f(22,7068,1,5,'__irq_exit_rcu')
+f(23,7068,1,5,'__do_softirq')
+f(24,7068,1,5,'run_rebalance_domains')
+f(25,7068,1,5,'update_blocked_averages')
+f(19,7069,41099,2,'com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark.if_instanceof',41099,0,0)
+f(20,47372,5,5,'asm_sysvec_apic_timer_interrupt')
+f(21,47372,5,5,'sysvec_apic_timer_interrupt')
+f(22,47372,5,5,'irq_exit_rcu')
+f(23,47372,5,5,'__irq_exit_rcu')
+f(24,47372,5,5,'__do_softirq')
+f(25,47372,5,5,'run_rebalance_domains')
+f(26,47372,3,5,'rebalance_domains')
+f(27,47372,1,5,'_find_next_and_bit')
+f(27,47373,2,5,'load_balance')
+f(28,47373,2,5,'find_busiest_group')
+f(29,47373,1,5,'update_sd_lb_stats.constprop.0')
+f(29,47374,1,5,'update_sd_pick_busiest')
+f(26,47375,2,5,'update_blocked_averages')
+f(20,47377,791,2,'java/lang/String.length',791,0,0)
+f(17,48168,1,1,'org/openjdk/jmh/runner/InfraControl.announceWarmupReady')
+f(18,48168,1,1,'org/openjdk/jmh/runner/InfraControlL2.announceWarmupReady')
+f(19,48168,1,1,'java/util/concurrent/CountDownLatch.countDown')
+f(20,48168,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer.releaseShared')
+f(21,48168,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer.signalNext')
+f(22,48168,1,0,'java/util/concurrent/locks/AbstractQueuedSynchronizer$Node.getAndUnsetStatus',0,0,1)
+f(6,48169,1,1,'java/util/concurrent/FutureTask.set')
+f(7,48169,1,1,'java/util/concurrent/FutureTask.finishCompletion')
+f(8,48169,1,1,'java/util/concurrent/ExecutorCompletionService$QueueingFuture.done')
+f(9,48169,1,1,'java/util/AbstractQueue.add')
+f(10,48169,1,1,'java/util/concurrent/LinkedBlockingQueue.offer')
+f(11,48169,1,1,'java/util/concurrent/LinkedBlockingQueue.signalNotEmpty')
+f(12,48169,1,1,'java/util/concurrent/locks/ReentrantLock.lock')
+f(13,48169,1,1,'java/util/concurrent/locks/ReentrantLock$Sync.lock')
+f(14,48169,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer.acquire')
+f(15,48169,1,4,'SharedRuntime::resolve_opt_virtual_call_C(JavaThread*)')
+f(16,48169,1,4,'SharedRuntime::resolve_helper(bool, bool, JavaThread*)')
+f(17,48169,1,4,'SharedRuntime::resolve_sub_helper(bool, bool, JavaThread*)')
+f(18,48169,1,4,'CompiledIC::compute_monomorphic_entry(methodHandle const&, Klass*, bool, bool, bool, CompiledICInfo&, JavaThread*)')
+f(1,48170,13,1,'org/openjdk/jmh/runner/ForkedMain.main')
+f(2,48170,13,1,'org/openjdk/jmh/runner/ForkedRunner.run')
+f(3,48170,13,1,'org/openjdk/jmh/runner/BaseRunner.runBenchmarksForked')
+f(4,48170,13,1,'org/openjdk/jmh/runner/BaseRunner.doSingle')
+f(5,48170,13,1,'org/openjdk/jmh/runner/BaseRunner.runBenchmark')
+f(6,48170,13,1,'org/openjdk/jmh/runner/BaseRunner.runBenchmark')
+f(7,48170,3,1,'jdk/proxy1/$Proxy0.iteration')
+f(8,48170,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient$$Lambda.0x00007ffb34003438.invoke')
+f(9,48170,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.lambda$new$0')
+f(10,48170,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.pushFrame')
+f(11,48170,3,1,'java/io/ObjectOutputStream.flush')
+f(12,48170,3,1,'java/io/ObjectOutputStream$BlockDataOutputStream.flush')
+f(13,48170,3,1,'java/io/BufferedOutputStream.flush')
+f(14,48170,3,1,'java/io/BufferedOutputStream.implFlush')
+f(15,48170,3,1,'java/io/BufferedOutputStream.flushBuffer')
+f(16,48170,3,1,'java/net/Socket$SocketOutputStream.write',0,0,1)
+f(17,48171,2,1,'sun/nio/ch/NioSocketImpl$2.write')
+f(18,48171,2,1,'sun/nio/ch/NioSocketImpl.write')
+f(19,48171,2,1,'sun/nio/ch/NioSocketImpl.implWrite')
+f(20,48171,2,1,'sun/nio/ch/NioSocketImpl.tryWrite')
+f(21,48171,1,1,'sun/nio/ch/SocketDispatcher.write')
+f(22,48171,1,0,'sun/nio/ch/SocketDispatcher.write0',0,0,1)
+f(23,48171,1,3,'write')
+f(24,48171,1,5,'entry_SYSCALL_64_after_hwframe')
+f(25,48171,1,5,'do_syscall_64')
+f(26,48171,1,5,'__x64_sys_write')
+f(27,48171,1,5,'ksys_write')
+f(28,48171,1,5,'vfs_write')
+f(29,48171,1,5,'sock_write_iter')
+f(30,48171,1,5,'sock_sendmsg')
+f(31,48171,1,5,'inet6_sendmsg')
+f(32,48171,1,5,'tcp_sendmsg')
+f(33,48171,1,5,'tcp_sendmsg_locked')
+f(34,48171,1,5,'tcp_push')
+f(35,48171,1,5,'__tcp_push_pending_frames')
+f(36,48171,1,5,'tcp_write_xmit')
+f(37,48171,1,5,'__tcp_transmit_skb')
+f(38,48171,1,5,'ip_queue_xmit')
+f(39,48171,1,5,'__ip_queue_xmit')
+f(40,48171,1,5,'ip_local_out')
+f(41,48171,1,5,'__ip_local_out')
+f(42,48171,1,5,'nf_hook_slow')
+f(43,48171,1,5,'nf_nat_ipv4_local_fn?[nf_nat]')
+f(21,48172,1,1,'sun/nio/ch/Util.getTemporaryDirectBuffer')
+f(22,48172,1,1,'jdk/internal/misc/CarrierThreadLocal.get')
+f(23,48172,1,1,'java/lang/System$2.getCarrierThreadLocal')
+f(24,48172,1,1,'java/lang/ThreadLocal.getCarrierThreadLocal')
+f(25,48172,1,1,'java/lang/ThreadLocal.get')
+f(26,48172,1,1,'java/lang/ThreadLocal$ThreadLocalMap.getEntry')
+f(27,48172,1,1,'java/lang/ref/Reference.refersTo')
+f(7,48173,3,1,'jdk/proxy1/$Proxy0.iterationResult')
+f(8,48173,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient$$Lambda.0x00007ffb34003438.invoke')
+f(9,48173,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.lambda$new$0')
+f(10,48173,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.pushFrame')
+f(11,48173,1,1,'java/io/ObjectOutputStream.flush')
+f(12,48173,1,1,'java/io/ObjectOutputStream$BlockDataOutputStream.flush')
+f(13,48173,1,1,'java/io/BufferedOutputStream.flush')
+f(14,48173,1,1,'java/io/BufferedOutputStream.implFlush')
+f(15,48173,1,1,'java/io/BufferedOutputStream.flushBuffer')
+f(16,48173,1,1,'java/net/Socket$SocketOutputStream.write')
+f(17,48173,1,1,'sun/nio/ch/NioSocketImpl$2.write')
+f(18,48173,1,1,'sun/nio/ch/NioSocketImpl.write')
+f(19,48173,1,1,'sun/nio/ch/NioSocketImpl.implWrite')
+f(20,48173,1,1,'sun/nio/ch/NioSocketImpl.beginWrite')
+f(21,48173,1,0,'sun/nio/ch/NativeThread.current',0,0,1)
+f(11,48174,2,1,'java/io/ObjectOutputStream.writeObject')
+f(12,48174,2,1,'java/io/ObjectOutputStream.writeObject0')
+f(13,48174,1,1,'java/io/ObjectOutputStream.writeOrdinaryObject')
+f(14,48174,1,1,'java/io/ObjectOutputStream.writeClassDesc')
+f(15,48174,1,1,'java/io/ObjectOutputStream.writeHandle')
+f(16,48174,1,1,'java/io/ObjectOutputStream$BlockDataOutputStream.writeInt')
+f(17,48174,1,1,'jdk/internal/util/ByteArray.setInt')
+f(18,48174,1,1,'java/lang/invoke/VarHandleGuards.guard_LII_V')
+f(19,48174,1,1,'java/lang/invoke/VarHandleByteArrayAsInts$ArrayHandle.set')
+f(20,48174,1,1,'jdk/internal/misc/Unsafe.putIntUnaligned')
+f(21,48174,1,1,'jdk/internal/misc/Unsafe.putIntUnaligned')
+f(22,48174,1,1,'jdk/internal/misc/Unsafe.putIntParts')
+f(23,48174,1,0,'jdk/internal/misc/Unsafe.putShort',0,0,1)
+f(24,48174,1,4,'InterpreterRuntime::frequency_counter_overflow(JavaThread*, unsigned char*)')
+f(25,48174,1,4,'InterpreterRuntime::frequency_counter_overflow_inner(JavaThread*, unsigned char*)')
+f(26,48174,1,4,'CompilationPolicy::event(methodHandle const&, methodHandle const&, int, int, CompLevel, CompiledMethod*, JavaThread*)')
+f(27,48174,1,4,'CompilationPolicy::compile(methodHandle const&, int, CompLevel, JavaThread*)')
+f(28,48174,1,4,'CompileBroker::compile_method(methodHandle const&, int, int, methodHandle const&, int, CompileTask::CompileReason, JavaThread*)')
+f(29,48174,1,4,'CompileBroker::compile_method(methodHandle const&, int, int, methodHandle const&, int, CompileTask::CompileReason, DirectiveSet*, JavaThread*)')
+f(30,48174,1,4,'AdapterHandlerLibrary::create_native_wrapper(methodHandle const&)')
+f(31,48174,1,4,'SharedRuntime::generate_native_wrapper(MacroAssembler*, methodHandle const&, int, BasicType*, VMRegPair*, BasicType)')
+f(32,48174,1,4,'MacroAssembler::set_last_Java_frame(Register, Register, Register, unsigned char*, Register)')
+f(33,48174,1,4,'MacroAssembler::lea(Address, AddressLiteral, Register)')
+f(34,48174,1,4,'Assembler::mov_literal64(Register, long, RelocationHolder const&)')
+f(13,48175,1,1,'java/io/ObjectStreamClass.hasWriteReplaceMethod')
+f(14,48175,1,1,'java/io/ObjectStreamClass.requireInitialized')
+f(7,48176,3,1,'org/openjdk/jmh/runner/BenchmarkHandler.runIteration')
+f(8,48176,1,1,'java/util/concurrent/ExecutorCompletionService.poll')
+f(9,48176,1,1,'java/util/concurrent/LinkedBlockingQueue.poll')
+f(10,48176,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer$ConditionObject.awaitNanos')
+f(11,48176,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer$ConditionObject.newConditionNode')
+f(12,48176,1,0,'java/util/concurrent/locks/AbstractQueuedSynchronizer.tryInitializeHead',0,0,1)
+f(8,48177,1,1,'org/openjdk/jmh/runner/BenchmarkHandler.startProfilers')
+f(9,48177,1,1,'org/openjdk/jmh/profile/AsyncProfiler.beforeIteration')
+f(10,48177,1,1,'org/openjdk/jmh/profile/AsyncProfiler.start')
+f(11,48177,1,1,'org/openjdk/jmh/profile/AsyncProfiler.execute')
+f(12,48177,1,1,'org/openjdk/jmh/profile/AsyncProfiler$JavaApi.execute')
+f(13,48177,1,0,'org/openjdk/jmh/profile/AsyncProfiler$JavaApi.execute0',0,0,1)
+f(14,48177,1,3,'Java_one_profiler_AsyncProfiler_execute0')
+f(15,48177,1,4,'Profiler::runInternal(Arguments&, std::ostream&)')
+f(16,48177,1,4,'Profiler::start(Arguments&, bool)')
+f(17,48177,1,4,'PerfEvents::start(Arguments&)')
+f(18,48177,1,3,'__GI___mmap')
+f(8,48178,1,1,'org/openjdk/jmh/runner/InfraControl.awaitWarmdownReady')
+f(9,48178,1,1,'org/openjdk/jmh/runner/InfraControlL2.awaitWarmdownReady')
+f(10,48178,1,1,'java/util/concurrent/CountDownLatch.await')
+f(11,48178,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer.acquireSharedInterruptibly')
+f(12,48178,1,1,'java/util/concurrent/locks/AbstractQueuedSynchronizer.acquire')
+f(13,48178,1,1,'java/util/concurrent/locks/LockSupport.park')
+f(14,48178,1,1,'jdk/internal/misc/Unsafe.park')
+f(15,48178,1,3,'[unknown]')
+f(16,48178,1,3,'___pthread_cond_wait')
+f(7,48179,4,1,'org/openjdk/jmh/runner/ForkedRunner$1.accept')
+f(8,48179,4,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.pushResults')
+f(9,48179,1,1,'java/lang/ClassLoader.loadClass')
+f(10,48179,1,1,'jdk/internal/loader/ClassLoaders$AppClassLoader.loadClass')
+f(11,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.loadClass')
+f(12,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.loadClassOrNull')
+f(13,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.findClassOnClassPathOrNull')
+f(14,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.defineClass')
+f(15,48179,1,1,'jdk/internal/loader/ClassLoaders$AppClassLoader.defineOrCheckPackage')
+f(16,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.defineOrCheckPackage')
+f(17,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.getAndVerifyPackage')
+f(18,48179,1,1,'jdk/internal/loader/BuiltinClassLoader.isSealed')
+f(19,48179,1,1,'java/lang/String.replace')
+f(20,48179,1,1,'java/lang/StringLatin1.replace')
+f(9,48180,3,1,'org/openjdk/jmh/runner/link/BinaryLinkClient.pushFrame')
+f(10,48180,3,1,'java/io/ObjectOutputStream.writeObject')
+f(11,48180,3,1,'java/io/ObjectOutputStream.writeObject0')
+f(12,48180,1,1,'java/io/ObjectOutputStream.writeOrdinaryObject')
+f(13,48180,1,1,'java/io/ObjectOutputStream.writeClassDesc')
+f(14,48180,1,1,'java/io/ObjectOutputStream.writeNonProxyDesc')
+f(15,48180,1,1,'java/io/ObjectOutputStream.writeClassDescriptor')
+f(16,48180,1,1,'java/io/ObjectStreamClass.writeNonProxy')
+f(17,48180,1,1,'java/io/ObjectOutputStream.writeTypeString')
+f(18,48180,1,1,'java/io/ObjectOutputStream.writeString')
+f(19,48180,1,0,'java/io/ObjectOutputStream$HandleTable.assign',0,0,1)
+f(12,48181,2,1,'java/io/ObjectStreamClass.lookup')
+f(13,48181,2,1,'java/io/ClassCache.get')
+f(14,48181,2,1,'java/lang/ClassValue.get')
+f(15,48181,2,1,'java/lang/ClassValue.getFromBackup')
+f(16,48181,2,1,'java/lang/ClassValue.getFromHashMap')
+f(17,48181,2,1,'java/io/ClassCache$1.computeValue')
+f(18,48181,2,1,'java/io/ClassCache$1.computeValue')
+f(19,48181,2,1,'java/io/ObjectStreamClass$Caches$1.computeValue')
+f(20,48181,2,1,'java/io/ObjectStreamClass$Caches$1.computeValue')
+f(21,48181,2,1,'java/io/ObjectStreamClass.<init>')
+f(22,48181,2,1,'java/security/AccessController.doPrivileged')
+f(23,48181,2,1,'java/security/AccessController.executePrivileged')
+f(24,48181,2,1,'java/io/ObjectStreamClass$2.run')
+f(25,48181,2,1,'java/io/ObjectStreamClass$2.run')
+f(26,48181,1,1,'java/io/ObjectStreamClass.getDeclaredSUID')
+f(27,48181,1,1,'java/lang/reflect/Field.getLong')
+f(28,48181,1,1,'java/lang/reflect/Field.getOverrideFieldAccessor')
+f(29,48181,1,1,'java/lang/reflect/Field.acquireOverrideFieldAccessor')
+f(30,48181,1,1,'jdk/internal/reflect/ReflectionFactory.newFieldAccessor')
+f(31,48181,1,1,'jdk/internal/reflect/MethodHandleAccessorFactory.newFieldAccessor')
+f(32,48181,1,1,'java/lang/invoke/MethodHandleImpl$1.unreflectField')
+f(33,48181,1,1,'java/lang/invoke/MethodHandles$Lookup.unreflectGetter')
+f(34,48181,1,1,'java/lang/invoke/MethodHandles$Lookup.unreflectField')
+f(35,48181,1,1,'java/lang/invoke/MemberName.<init>')
+f(36,48181,1,0,'java/lang/invoke/MethodHandleNatives.init',0,0,1)
+f(37,48181,1,3,'MHN_init_Mem')
+f(38,48181,1,4,'MethodHandles::init_MemberName(Handle, Handle, JavaThread*)')
+f(39,48181,1,4,'java_lang_invoke_MemberName::set_flags(oopDesc*, int)')
+f(26,48182,1,1,'java/io/ObjectStreamClass.getSerializableConstructor')
+f(27,48182,1,1,'jdk/internal/reflect/ReflectionFactory.newConstructorForSerialization')
+f(28,48182,1,1,'jdk/internal/reflect/ReflectionFactory.generateConstructor')
+f(29,48182,1,1,'jdk/internal/reflect/MethodAccessorGenerator.generateSerializationConstructor')
+f(30,48182,1,1,'jdk/internal/reflect/MethodAccessorGenerator.generate')
+f(31,48182,1,1,'java/security/AccessController.doPrivileged')
+f(32,48182,1,1,'java/security/AccessController.executePrivileged')
+f(33,48182,1,1,'jdk/internal/reflect/MethodAccessorGenerator$1.run')
+f(34,48182,1,1,'jdk/internal/reflect/MethodAccessorGenerator$1.run')
+f(35,48182,1,1,'jdk/internal/reflect/ClassDefiner.defineClass')
+f(36,48182,1,1,'java/lang/System$2.defineClass')
+f(37,48182,1,0,'java/lang/ClassLoader.defineClass1',0,0,1)
+f(38,48182,1,3,'Java_java_lang_ClassLoader_defineClass1')
+f(39,48182,1,3,'JVM_DefineClassWithSource')
+f(40,48182,1,3,'jvm_define_class_common(char const*, _jobject*, signed char const*, int, _jobject*, char const*, JavaThread*)')
+f(41,48182,1,4,'SystemDictionary::resolve_class_from_stream(ClassFileStream*, Symbol*, Handle, ClassLoadInfo const&, JavaThread*)')
+f(42,48182,1,4,'KlassFactory::create_from_stream(ClassFileStream*, Symbol*, ClassLoaderData*, ClassLoadInfo const&, JavaThread*)')
+f(43,48182,1,4,'ClassFileParser::post_process_parsed_stream(ClassFileStream const*, ConstantPool*, JavaThread*)')
+f(44,48182,1,4,'klassVtable::compute_vtable_size_and_num_mirandas(int*, int*, GrowableArray<Method*>*, Klass const*, Array<Method*>*, AccessFlags, unsigned short, Handle, Symbol*, Array<InstanceKlass*>*)')
+f(45,48182,1,4,'klassVtable::needs_new_vtable_entry(Method*, Klass const*, Handle, Symbol*, AccessFlags, unsigned short)')
+f(46,48182,1,4,'InstanceKlass::uncached_lookup_method(Symbol const*, Symbol const*, Klass::OverpassLookupMode, Klass::PrivateLookupMode) const')
+f(47,48182,1,4,'InstanceKlass::find_method_index(Array<Method*> const*, Symbol const*, Symbol const*, Klass::OverpassLookupMode, Klass::StaticLookupMode, Klass::PrivateLookupMode) [clone .constprop.0]')
+f(1,48183,59,3,'start_thread')
+f(2,48183,59,3,'thread_native_entry(Thread*)')
+f(3,48183,59,4,'Thread::call_run()')
+f(4,48183,1,4,'ConcurrentGCThread::run()')
+f(5,48183,1,4,'G1ServiceThread::run_service()')
+f(6,48183,1,3,'__lll_lock_wake')
+f(4,48184,40,4,'JavaThread::thread_main_inner() [clone .part.0]')
+f(5,48184,39,4,'CompileBroker::compiler_thread_loop()')
+f(6,48184,35,4,'CompileBroker::invoke_compiler_on_method(CompileTask*)')
+f(7,48184,35,4,'Compiler::compile_method(ciEnv*, ciMethod*, int, bool, DirectiveSet*)')
+f(8,48184,35,4,'Compilation::Compilation(AbstractCompiler*, ciEnv*, ciMethod*, int, BufferBlob*, bool, DirectiveSet*)')
+f(9,48184,35,4,'Compilation::compile_method()')
+f(10,48184,35,4,'Compilation::compile_java_method()')
+f(11,48184,23,4,'Compilation::build_hir() [clone .part.0]')
+f(12,48184,1,4,'GlobalValueNumbering::GlobalValueNumbering(IR*)')
+f(13,48184,1,4,'BlockBegin::iterate_preorder(BlockClosure*)')
+f(14,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(15,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(16,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(17,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(18,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(19,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(20,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(21,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(22,48184,1,4,'BlockBegin::iterate_preorder(GrowableArray<bool>&, BlockClosure*)')
+f(23,48184,1,4,'Op2::input_values_do(ValueVisitor*)')
+f(12,48185,21,4,'IR::IR(Compilation*, ciMethod*, int)')
+f(13,48185,21,4,'IRScope::IRScope(Compilation*, IRScope*, int, ciMethod*, int, bool)')
+f(14,48185,21,4,'GraphBuilder::GraphBuilder(Compilation*, IRScope*)')
+f(15,48185,21,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(16,48185,21,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(17,48185,1,4,'GraphBuilder::_goto(int, int)')
+f(18,48185,1,4,'resource_allocate_bytes(unsigned long, AllocFailStrategy::AllocFailEnum)')
+f(17,48186,20,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(18,48186,16,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(19,48186,16,4,'GraphBuilder::try_inline_full(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(20,48186,3,4,'DirectiveSet::should_inline(ciMethod*)')
+f(21,48186,3,3,'resolve_inlining_predicate(CompileCommand, methodHandle const&)')
+f(22,48186,3,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(20,48189,10,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(21,48189,10,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(22,48189,1,4,'GraphBuilder::access_field(Bytecodes::Code)')
+f(23,48189,1,4,'GraphBuilder::append_with_bci(Instruction*, int)')
+f(24,48189,1,4,'StoreField::visit(InstructionVisitor*)')
+f(22,48190,8,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(23,48190,6,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(24,48190,1,4,'DirectiveSet::should_not_inline(ciMethod*)')
+f(25,48190,1,4,'CompilerOracle::should_not_inline(methodHandle const&)')
+f(26,48190,1,3,'resolve_inlining_predicate(CompileCommand, methodHandle const&)')
+f(27,48190,1,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(24,48191,4,4,'GraphBuilder::try_inline_full(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(25,48191,2,4,'DirectiveSet::should_inline(ciMethod*)')
+f(26,48191,2,3,'resolve_inlining_predicate(CompileCommand, methodHandle const&)')
+f(27,48191,2,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(25,48193,2,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(26,48193,2,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(27,48193,1,4,'GraphBuilder::access_field(Bytecodes::Code)')
+f(28,48193,1,4,'ciBytecodeStream::get_field(bool&)')
+f(29,48193,1,4,'ciField::will_link(ciMethod*, Bytecodes::Code)')
+f(27,48194,1,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(28,48194,1,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(29,48194,1,4,'GraphBuilder::try_inline_full(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(30,48194,1,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(31,48194,1,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(32,48194,1,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(33,48194,1,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(34,48194,1,4,'GraphBuilder::try_inline_full(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(35,48194,1,4,'GraphBuilder::iterate_all_blocks(bool)')
+f(36,48194,1,4,'GraphBuilder::iterate_bytecodes_for_block(int)')
+f(37,48194,1,4,'GraphBuilder::invoke(Bytecodes::Code)')
+f(38,48194,1,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(39,48194,1,4,'DirectiveSet::should_not_inline(ciMethod*)')
+f(40,48194,1,4,'CompilerOracle::should_not_inline(methodHandle const&)')
+f(41,48194,1,3,'resolve_inlining_predicate(CompileCommand, methodHandle const&)')
+f(42,48194,1,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(24,48195,1,4,'GraphBuilder::try_method_handle_inline(ciMethod*, bool)')
+f(25,48195,1,4,'GraphBuilder::try_inline(ciMethod*, bool, bool, Bytecodes::Code, Instruction*)')
+f(26,48195,1,4,'DirectiveSet::should_not_inline(ciMethod*)')
+f(27,48195,1,4,'CompilerOracle::should_not_inline(methodHandle const&)')
+f(28,48195,1,3,'resolve_inlining_predicate(CompileCommand, methodHandle const&)')
+f(29,48195,1,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(30,48195,1,4,'MethodMatcher::matches(methodHandle const&) const')
+f(31,48195,1,4,'MethodMatcher::match(Symbol*, Symbol*, MethodMatcher::Mode) const [clone .part.0]')
+f(32,48195,1,4,'Symbol::as_C_string() const')
+f(23,48196,2,4,'ciBytecodeStream::get_method(bool&, ciSignature**)')
+f(24,48196,2,4,'ciEnv::get_method_by_index_impl(constantPoolHandle const&, int, Bytecodes::Code, ciInstanceKlass*)')
+f(25,48196,1,4,'ciEnv::lookup_method(ciInstanceKlass*, ciKlass*, Symbol*, Symbol*, Bytecodes::Code, constantTag)')
+f(26,48196,1,4,'LinkResolver::linktime_resolve_virtual_method_or_null(LinkInfo const&)')
+f(27,48196,1,4,'ExceptionMark::ExceptionMark()')
+f(25,48197,1,4,'ciObjectFactory::get_metadata(Metadata*)')
+f(26,48197,1,4,'ciObjectFactory::create_new_metadata(Metadata*)')
+f(27,48197,1,4,'Method::invocation_count() const')
+f(22,48198,1,4,'GraphBuilder::method_return(Instruction*, bool)')
+f(23,48198,1,4,'ValueStack::ValueStack(ValueStack*, ValueStack::Kind, int)')
+f(24,48198,1,5,'asm_exc_page_fault')
+f(25,48198,1,5,'exc_page_fault')
+f(26,48198,1,5,'do_user_addr_fault')
+f(27,48198,1,5,'handle_mm_fault')
+f(28,48198,1,5,'__handle_mm_fault')
+f(29,48198,1,5,'handle_pte_fault')
+f(30,48198,1,5,'do_anonymous_page')
+f(31,48198,1,5,'page_add_new_anon_rmap')
+f(32,48198,1,5,'__mod_lruvec_page_state')
+f(20,48199,1,4,'GraphBuilder::push_scope(ciMethod*, BlockBegin*)')
+f(21,48199,1,4,'IRScope::IRScope(Compilation*, IRScope*, int, ciMethod*, int, bool)')
+f(20,48200,2,4,'ciMethod::ensure_method_data()')
+f(21,48200,1,4,'ciMethod::ensure_method_data(methodHandle const&)')
+f(22,48200,1,4,'ciObjectFactory::get_metadata(Metadata*)')
+f(21,48201,1,4,'ciMethodData::load_data()')
+f(22,48201,1,4,'ReceiverTypeData::is_ReceiverTypeData() const')
+f(18,48202,1,4,'ValueNumberingEffects::kill_memory()')
+f(18,48203,3,4,'ciBytecodeStream::get_method(bool&, ciSignature**)')
+f(19,48203,3,4,'ciEnv::get_method_by_index_impl(constantPoolHandle const&, int, Bytecodes::Code, ciInstanceKlass*)')
+f(20,48203,3,4,'ciObjectFactory::get_metadata(Metadata*)')
+f(21,48203,3,4,'ciObjectFactory::create_new_metadata(Metadata*)')
+f(22,48203,1,3,'__tls_get_addr')
+f(22,48204,2,4,'ciMethod::ciMethod(methodHandle const&, ciInstanceKlass*)')
+f(23,48204,2,4,'CompilerOracle::tag_blackhole_if_possible(methodHandle const&)')
+f(24,48204,2,4,'bool CompilerOracle::has_option_value<bool>(methodHandle const&, CompileCommand, bool&)')
+f(12,48206,1,4,'RangeCheckElimination::eliminate(IR*)')
+f(13,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(14,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(15,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(16,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(17,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(18,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(19,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(20,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(21,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(22,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(23,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(24,48206,1,4,'RangeCheckEliminator::calc_bounds(BlockBegin*, BlockBegin*)')
+f(11,48207,3,4,'Compilation::emit_code_body()')
+f(12,48207,1,4,'CodeBuffer::finalize_stubs()')
+f(13,48207,1,3,'bool emit_shared_stubs_to_interp<MacroAssembler, 0>(CodeBuffer*, GrowableArray<SharedStubToInterpRequest>*)')
+f(14,48207,1,4,'CodeSection::relocate(unsigned char*, RelocationHolder const&, int)')
+f(15,48207,1,4,'Arena::Arealloc(void*, unsigned long, unsigned long, AllocFailStrategy::AllocFailEnum)')
+f(12,48208,1,4,'LIR_Assembler::emit_code(BlockList*)')
+f(13,48208,1,4,'LIR_Assembler::emit_lir_list(LIR_List*)')
+f(14,48208,1,4,'LIR_Assembler::emit_call(LIR_OpJavaCall*)')
+f(15,48208,1,4,'LIR_Assembler::call(LIR_OpJavaCall*, relocInfo::relocType)')
+f(16,48208,1,4,'LIR_Assembler::add_call_info(int, CodeEmitInfo*)')
+f(17,48208,1,4,'CodeEmitInfo::record_debug_info(DebugInformationRecorder*, int)')
+f(18,48208,1,4,'DebugInformationRecorder::describe_scope(int, methodHandle const&, ciMethod*, int, bool, bool, bool, bool, bool, bool, DebugToken*, DebugToken*, DebugToken*)')
+f(19,48208,1,4,'DebugInformationRecorder::find_sharable_decode_offset(int)')
+f(12,48209,1,4,'LIR_Assembler::emit_slow_case_stubs()')
+f(13,48209,1,4,'CounterOverflowStub::emit_code(LIR_Assembler*)')
+f(14,48209,1,4,'LIR_Assembler::add_call_info(int, CodeEmitInfo*)')
+f(15,48209,1,4,'CodeEmitInfo::record_debug_info(DebugInformationRecorder*, int)')
+f(16,48209,1,4,'DebugInformationRecorder::create_scope_values(GrowableArray<ScopeValue*>*)')
+f(17,48209,1,3,'__memcmp_avx2_movbe')
+f(11,48210,9,4,'Compilation::emit_lir()')
+f(12,48210,1,4,'BlockList::iterate_forward(BlockClosure*)')
+f(13,48210,1,4,'non-virtual thunk to LIRGenerator::block_do(BlockBegin*)')
+f(14,48210,1,4,'LIRGenerator::do_ProfileInvoke(ProfileInvoke*)')
+f(15,48210,1,4,'methodHandle::~methodHandle()')
+f(12,48211,8,4,'LinearScan::do_linear_scan()')
+f(13,48211,2,4,'LinearScan::allocate_registers()')
+f(14,48211,2,4,'LinearScanWalker::activate_current()')
+f(15,48211,1,4,'IntervalWalker::append_to_unhandled(Interval**, Interval*)')
+f(15,48212,1,4,'LinearScanWalker::alloc_free_reg(Interval*)')
+f(16,48212,1,4,'LinearScanWalker::free_collect_inactive_fixed(Interval*)')
+f(13,48213,2,4,'LinearScan::assign_reg_num(GrowableArray<LIR_Op*>*, IntervalWalker*)')
+f(14,48213,2,4,'LIR_OpVisitState::visit(LIR_Op*)')
+f(15,48214,1,4,'LIR_OpVisitState::append(LIR_Opr&, LIR_OpVisitState::OprMode) [clone .constprop.0]')
+f(13,48215,2,4,'LinearScan::build_intervals()')
+f(13,48217,2,4,'LinearScan::resolve_data_flow()')
+f(14,48218,1,4,'Interval::split_child_at_op_id(int, LIR_OpVisitState::OprMode)')
+f(6,48219,4,4,'CompileQueue::get(CompilerThread*)')
+f(7,48219,1,4,'CompilationPolicy::select_task(CompileQueue*)')
+f(7,48220,3,4,'JVMCICompiler::on_empty_queue(CompileQueue*, CompilerThread*)')
+f(8,48220,3,4,'JVMCIRuntime::detach_thread(JavaThread*, char const*, bool)')
+f(9,48220,3,4,'JVMCIRuntime::destroy_shared_library_javavm()')
+f(10,48220,3,4,'int com.oracle.svm.core.code.IsolateEnterStub::JNIInvocationInterface_DestroyJavaVM_7a5b190b972294dd00cc207df293d2ebf2dacdd1(com.oracle.svm.core.jni.headers.JNIJavaVM)')
+f(11,48220,3,4,'int com.oracle.svm.core.graal.snippets.CEntryPointSnippets::tearDownIsolate()')
+f(12,48220,3,4,'int com.oracle.svm.core.Isolates::tearDownCurrent()')
+f(13,48220,2,4,'bool com.oracle.svm.core.genscavenge.HeapImpl::tearDown()')
+f(14,48220,2,4,'void com.oracle.svm.core.genscavenge.YoungGeneration::tearDown()')
+f(15,48220,2,4,'void com.oracle.svm.core.genscavenge.Space::tearDown()')
+f(16,48220,2,4,'void com.oracle.svm.core.genscavenge.HeapChunkProvider::freeAlignedChunkList(com.oracle.svm.core.genscavenge.AlignedHeapChunk$AlignedHeader)')
+f(17,48220,2,3,'__GI___munmap')
+f(18,48220,2,5,'entry_SYSCALL_64_after_hwframe')
+f(19,48220,2,5,'do_syscall_64')
+f(20,48220,2,5,'__x64_sys_munmap')
+f(21,48220,2,5,'__vm_munmap')
+f(22,48220,2,5,'do_mas_munmap')
+f(23,48220,2,5,'do_mas_align_munmap')
+f(24,48220,2,5,'unmap_region')
+f(25,48220,2,5,'tlb_finish_mmu')
+f(26,48220,2,5,'tlb_batch_pages_flush')
+f(27,48220,2,5,'free_pages_and_swap_cache')
+f(28,48220,2,5,'release_pages')
+f(29,48220,1,5,'__mem_cgroup_uncharge_list')
+f(30,48220,1,5,'uncharge_folio')
+f(29,48221,1,5,'_raw_spin_unlock_irqrestore')
+f(13,48222,1,4,'int com.oracle.svm.core.posix.linux.LinuxImageHeapProvider::freeImageHeap(org.graalvm.word.PointerBase)')
+f(14,48222,1,3,'__GI___munmap')
+f(15,48222,1,5,'entry_SYSCALL_64_after_hwframe')
+f(16,48222,1,5,'do_syscall_64')
+f(17,48222,1,5,'__x64_sys_munmap')
+f(18,48222,1,5,'__vm_munmap')
+f(19,48222,1,5,'do_mas_munmap')
+f(20,48222,1,5,'do_mas_align_munmap')
+f(21,48222,1,5,'unmap_region')
+f(22,48222,1,5,'unmap_vmas')
+f(23,48222,1,5,'unmap_single_vma')
+f(24,48222,1,5,'unmap_page_range')
+f(25,48222,1,5,'zap_pmd_range.isra.0')
+f(26,48222,1,5,'zap_pte_range')
+f(5,48223,1,4,'MonitorDeflationThread::monitor_deflation_thread_entry(JavaThread*, JavaThread*)')
+f(6,48223,1,4,'ObjectSynchronizer::is_async_deflation_needed()')
+f(7,48223,1,3,'clock_gettime@plt')
+f(4,48224,1,4,'PeriodicTask::real_time_tick(int)')
+f(4,48225,17,4,'WatcherThread::run()')
+f(5,48225,2,4,'PeriodicTask::real_time_tick(int)')
+f(6,48225,1,4,'Mutex::lock_without_safepoint_check()')
+f(7,48225,1,3,'__tls_get_addr_slow')
+f(6,48226,1,3,'__tls_get_addr')
+f(5,48227,1,4,'StatSamplerTask::task()')
+f(5,48228,10,4,'WatcherThread::sleep() const')
+f(6,48230,4,4,'Monitor::wait_without_safepoint_check(unsigned long)')
+f(7,48231,1,4,'PlatformMonitor::wait(unsigned long)')
+f(7,48232,2,3,'___pthread_cond_timedwait64')
+f(6,48234,4,3,'clock_gettime@@GLIBC_2.17')
+f(5,48238,4,3,'__lll_lock_wake')
+f(6,48239,3,5,'entry_SYSCALL_64_after_hwframe')
+f(7,48239,1,5,'__x64_sys_futex')
+f(7,48240,2,5,'do_syscall_64')
+f(8,48240,2,5,'__x64_sys_futex')
+f(9,48240,2,5,'do_futex')
+f(10,48240,1,5,'futex_hash')
+f(10,48241,1,5,'get_futex_key')
+
+search();
+</script></body></html>

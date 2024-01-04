@@ -1,0 +1,635 @@
+
+c2, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod, version 2, compile id 800
+
+                                                                            0x00007f2d20505c8c:   0xf4f4f4f4
+                                                                            0x00007f2d20505c90:   0xf4f4f4f4      0xf4f4f4f4f4f4f4f4
+                                                                            0x00007f2d20505c94:   0xf4f4f4f4
+                                                                            0x00007f2d20505c98:   0xf4f4f4f4      0xf4f4f4f4f4f4f4f4
+                                                                            0x00007f2d20505c9c:   0xf4f4f4f4
+                                                                          --------------------------------------------------------------------------------
+                                                                          [Verified Entry Point]
+                                                                            # {method} {0x00007f2c9747bcc0} &apos;switchWhenMethod&apos; &apos;(Lcom/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$I;)I&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark&apos;
+                                                                            # parm0:    rsi:rsi   = &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$I&apos;
+                                                                            #           [sp+0x40]  (sp of caller)
+   0.19%                                                                    0x00007f2d20505ca0:   mov    %eax,-0x14000(%rsp)          ;   {no_reloc}
+   1.35%                                                                    0x00007f2d20505ca7:   push   %rbp
+   0.02%                                                                    0x00007f2d20505ca8:   sub    $0x30,%rsp
+   0.25%                                                                    0x00007f2d20505cac:   cmpl   $0x1,0x20(%r15)
+   1.30%                                                                    0x00007f2d20505cb4:   jne    0x00007f2d205065ca           ;*synchronization entry
+                                                                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@-1 (line 246)
+   0.03%                                                                    0x00007f2d20505cba:   mov    %rsi,%r10
+   0.17%                                                                    0x00007f2d20505cbd:   data16 xchg %ax,%ax
+   0.06%                                                                    0x00007f2d20505cc0:   mov    0x8(%rsi),%r11d              ; implicit exception: dispatches to 0x00007f2d205063fc
+                                                                                                                                      ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                                                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@454 (line 261)
+   5.73%                                                                    0x00007f2d20505cc4:   xor    %r9d,%r9d                    ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
+                                                                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@9 (line 246)
+   0.23%                                     ↗    ↗   ↗  ↗  ↗     ↗ ↗    ↗  0x00007f2d20505cc7:   test   %r9d,%r9d
+          ╭                                  │    │   │  │  │     │ │    │  0x00007f2d20505cca:   je     0x00007f2d20505cde
+   0.16%  │                                  │    │   │  │  │     │ │    │  0x00007f2d20505ccc:   movslq %r9d,%r8
+   0.45%  │                                  │    │   │  │  │     │ │    │  0x00007f2d20505ccf:   movabs $0x7f2d20505b80,%rcx         ;   {section_word}
+   0.02%  │                                  │    │   │  │  │     │ │    │  0x00007f2d20505cd9:   jmp    *-0x8(%rcx,%r8,8)            ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
+          │                                  │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@39
+          │                                  │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+          │                                  │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+          │                                  │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+          │                                  │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+   0.01%  ↘                                  │    │   │  │  │     │ │    │  0x00007f2d20505cde:   xchg   %ax,%ax
+   0.03%                                     │    │   │  │  │     │ │    │  0x00007f2d20505ce0:   cmp    $0x1029da0,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$AsIs&apos;)}
+           ╭                                 │    │   │  │  │     │ │    │  0x00007f2d20505ce7:   jne    0x00007f2d20505d01
+   2.69%   │                                 │    │   │  │  │     │ │    │  0x00007f2d20505ce9:   xor    %r8d,%r8d                    ;*goto {reexecute=0 rethrow=0 return_oop=0}
+           │                                 │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@302
+           │                                 │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+           │                                 │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+           │                                 │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+           │                                 │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+   2.63%   │ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗ ↗   │    │   │  │  │     │ │    │  0x00007f2d20505cec:   movslq %r8d,%r8
+   4.99%   │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505cef:   shl    $0x3,%r8
+   2.63%   │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505cf3:   movabs $0x7f2d20505c08,%r9          ;   {section_word}
+   0.21%   │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505cfd:   jmp    *(%r9,%r8,1)                 ;*tableswitch {reexecute=0 rethrow=0 return_oop=0}
+           │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@16 (line 246)
+   1.50%   ↘ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d01:   cmp    $0x102ad98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$LongToInt&apos;)}
+            ╭│ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d08:   jne    0x00007f2d20505d12
+   2.15%    ││ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d0a:   mov    $0x2,%r8d
+   1.33%    │╰ │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d10:   jmp    0x00007f2d20505cec
+   2.31%    ↘  │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d12:   data16 nopw 0x0(%rax,%rax,1)
+   0.01%       │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d1c:   data16 data16 xchg %ax,%ax
+               │ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d20:   cmp    $0x102a190,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ShortToInt&apos;)}
+   0.00%      ╭│ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d27:   jne    0x00007f2d20505d31
+   1.92%      ││ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d29:   mov    $0x4,%r8d
+   1.22%      │╰ │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d2f:   jmp    0x00007f2d20505cec
+   1.22%      ↘  │ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d31:   cmp    $0x102a998,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ByteToInt&apos;)}
+                ╭│ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d38:   jne    0x00007f2d20505d42
+   1.97%        ││ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d3a:   mov    $0x6,%r8d
+   1.09%        │╰ │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d40:   jmp    0x00007f2d20505cec
+   1.03%        ↘  │ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d42:   cmp    $0x102ab98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$CharToInt&apos;)}
+                  ╭│ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d49:   jne    0x00007f2d20505d53
+   1.96%          ││ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d4b:   mov    $0x8,%r8d
+   1.34%          │╰ │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d51:   jmp    0x00007f2d20505cec
+   0.94%          ↘  │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d53:   nopw   0x0(%rax,%rax,1)
+   0.02%             │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d5c:   data16 data16 xchg %ax,%ax
+                     │ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d60:   cmp    $0x102a798,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$DoubleToInt&apos;)}
+                    ╭│ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d67:   jne    0x00007f2d20505d74
+   1.90%            ││ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d69:   mov    $0xa,%r8d
+   1.22%            │╰ │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d6f:   jmp    0x00007f2d20505cec
+   0.87%            ↘  │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d74:   nopl   0x0(%rax,%rax,1)
+   0.03%               │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d7c:   data16 data16 xchg %ax,%ax
+                       │ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d80:   cmp    $0x102a598,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$FloatToInt&apos;)}
+                      ╭│ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d87:   jne    0x00007f2d20505d94
+   1.21%              ││ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d89:   mov    $0xc,%r8d
+   0.78%              │╰ │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d8f:   jmp    0x00007f2d20505cec
+   1.21%              ↘  │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d94:   nopl   0x0(%rax,%rax,1)
+   0.12%                 │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505d9c:   data16 data16 xchg %ax,%ax
+                         │ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505da0:   cmp    $0x102a390,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$StringLength&apos;)}
+                        ╭│ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505da7:   jne    0x00007f2d20505db4
+   0.47%                ││ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505da9:   mov    $0xe,%r8d
+   0.32%                │╰ │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505daf:   jmp    0x00007f2d20505cec
+                        ↘  │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505db4:   mov    $0xffffffcd,%esi
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505db9:   mov    %r10,(%rsp)
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dbd:   xchg   %ax,%ax
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dbf:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop }
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic profileBoolean {reexecute=1 rethrow=0 return_oop=0}
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - (reexecute) java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@46
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@91
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@135
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dc4:   nopl   0x534(%rax,%rax,1)           ;*invokestatic profileBoolean {reexecute=0 rethrow=0 return_oop=0}
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@46
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c084c00::guard@89
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@13
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@91
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@135
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                           │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.02%                   │ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dcc:   cmp    $0x102ad98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$LongToInt&apos;)}
+                          ╭│ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dd3:   jne    0x00007f2d20505de5
+   0.09%                  ││ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dd5:   mov    $0x3,%r8d
+   0.00%                  ││ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ddb:   nopl   0x0(%rax,%rax,1)
+   0.00%                  │╰ │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505de0:   jmp    0x00007f2d20505cec
+                          ↘  │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505de5:   mov    $0xffffff66,%esi
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dea:   mov    %r10,(%rsp)
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505dee:   mov    %r10,0x8(%rsp)
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505df3:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@171
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505df8:   nopl   0x1000568(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@171
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                             │ │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.02%                     │ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e00:   cmp    $0x102ab98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$CharToInt&apos;)}
+                            ╭│ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e07:   jne    0x00007f2d20505e14
+   0.12%                    ││ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e09:   mov    $0x9,%r8d
+                            │╰ │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e0f:   jmp    0x00007f2d20505cec
+                            ↘  │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e14:   mov    $0xffffff66,%esi
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e19:   mov    %r10,(%rsp)
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e1d:   mov    %r10,0x8(%rsp)
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e22:   nop
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e23:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@247
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e28:   nopl   0x2000598(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@247
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                               │ │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.02%                       │ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e30:   cmp    $0x102a998,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ByteToInt&apos;)}
+                              ╭│ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e37:   jne    0x00007f2d20505e45
+   0.09%                      ││ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e39:   mov    $0x7,%r8d
+   0.00%                      ││ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e3f:   nop
+                              │╰ │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e40:   jmp    0x00007f2d20505cec
+                              ↘  │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e45:   mov    $0xffffff66,%esi
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e4a:   mov    %r10,(%rsp)
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e4e:   mov    %r10,0x8(%rsp)
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e53:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@221
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e58:   nopl   0x30005c8(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@221
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                 │ │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.11%                         │ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e60:   cmp    $0x102a798,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$DoubleToInt&apos;)}
+                                ╭│ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e67:   jne    0x00007f2d20505e74
+   0.01%                        ││ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e69:   mov    $0xb,%r8d
+   0.02%                        │╰ │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e6f:   jmp    0x00007f2d20505cec
+                                ↘  │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e74:   mov    $0xffffff66,%esi
+                                   │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e79:   mov    %r10,(%rsp)
+                                   │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e7d:   mov    %r10,0x8(%rsp)
+                                   │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e82:   nop
+                                   │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e83:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@273
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                                   │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e88:   nopl   0x40005f8(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@273
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                   │ │ │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.03%                           │ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e90:   cmp    $0x102a190,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ShortToInt&apos;)}
+                                  ╭│ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e97:   jne    0x00007f2d20505ea5
+   0.11%                          ││ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e99:   mov    $0x5,%r8d
+   0.00%                          ││ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505e9f:   nop
+                                  │╰ │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ea0:   jmp    0x00007f2d20505cec
+                                  ↘  │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ea5:   mov    $0xffffff66,%esi
+                                     │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505eaa:   mov    %r10,(%rsp)
+                                     │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505eae:   mov    %r10,0x8(%rsp)
+                                     │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505eb3:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@195
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                                     │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505eb8:   nopl   0x5000628(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@195
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                     │ │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.09%                             │ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ec0:   cmp    $0x102a598,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$FloatToInt&apos;)}
+                                    ╭│ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ec7:   jne    0x00007f2d20505ed4
+   0.02%                            ││ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ec9:   mov    $0xd,%r8d
+                                    │╰ │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ecf:   jmp    0x00007f2d20505cec
+                                    ↘  │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ed4:   mov    $0xffffff66,%esi
+                                       │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ed9:   mov    %r10,(%rsp)
+                                       │ │   │    │   │  │  │     │ │    │  0x00007f2d20505edd:   mov    %r10,0x8(%rsp)
+                                       │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ee2:   nop
+                                       │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ee3:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                                       │ │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@299
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                       │ │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                                       │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ee8:   nopl   0x6000658(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@299
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                       │ │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                       │ │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.02%                               │ │   │    │   │  │  │     │ │    │  0x00007f2d20505ef0:   cmp    $0x1029da0,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$AsIs&apos;)}
+                                      ╭│ │   │    │   │  │  │     │ │    │  0x00007f2d20505ef7:   jne    0x00007f2d20505f05
+   0.10%                              ││ │   │    │   │  │  │     │ │    │  0x00007f2d20505ef9:   mov    $0x1,%r8d
+                                      ││ │   │    │   │  │  │     │ │    │  0x00007f2d20505eff:   nop
+                                      │╰ │   │    │   │  │  │     │ │    │  0x00007f2d20505f00:   jmp    0x00007f2d20505cec
+                                      ↘  │   │    │   │  │  │     │ │    │  0x00007f2d20505f05:   mov    $0xffffff66,%esi
+                                         │   │    │   │  │  │     │ │    │  0x00007f2d20505f0a:   mov    %r10,(%rsp)
+                                         │   │    │   │  │  │     │ │    │  0x00007f2d20505f0e:   mov    %r10,0x8(%rsp)
+                                         │   │    │   │  │  │     │ │    │  0x00007f2d20505f13:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                                         │   │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@147
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                         │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                         │   │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                                         │   │    │   │  │  │     │ │    │  0x00007f2d20505f18:   nopl   0x7000688(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@147
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                         │   │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                         │   │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                         │   │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.19%                                 │   │    │   │  │  │     │ │    │  0x00007f2d20505f20:   cmp    $0x102a390,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$StringLength&apos;)}
+                                        ╭│   │    │   │  │  │     │ │    │  0x00007f2d20505f27:   jne    0x00007f2d20505f34
+   0.03%                                ││   │    │   │  │  │     │ │    │  0x00007f2d20505f29:   mov    $0xf,%r8d
+   0.00%                                │╰   │    │   │  │  │     │ │    │  0x00007f2d20505f2f:   jmp    0x00007f2d20505cec
+                                        ↘    │    │   │  │  │     │ │    │  0x00007f2d20505f34:   mov    $0xffffff66,%esi
+                                             │    │   │  │  │     │ │    │  0x00007f2d20505f39:   mov    %r10,(%rsp)
+                                             │    │   │  │  │     │ │    │  0x00007f2d20505f3d:   mov    %r10,0x8(%rsp)
+                                             │    │   │  │  │     │ │    │  0x00007f2d20505f42:   nop
+                                             │    │   │  │  │     │ │    │  0x00007f2d20505f43:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop [8]=Oop }
+                                             │    │   │  │  │     │ │    │                                                            ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@325
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                             │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                             │    │   │  │  │     │ │    │                                                            ;   {runtime_call UncommonTrapBlob}
+                                             │    │   │  │  │     │ │    │  0x00007f2d20505f48:   nopl   0x80006b8(%rax,%rax,1)       ;*invokestatic linkToSpecial {reexecute=0 rethrow=0 return_oop=0}
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$DMH/0x00007f2c9c008c00::invokeSpecial@11
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c083800::invoke@21
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c085400::invoke@33
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c087c00::tableSwitch@325
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b400::delegate@14
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08a800::invoke@114
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.invoke.LambdaForm$MH/0x00007f2c9c08b000::linkToTargetMethod@6
+                                             │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@11 (line 246)
+                                             │    │   │  │  │     │ │    │                                                            ;   {other}
+   0.25%                                     │    │   │  │  │     │ │    │  0x00007f2d20505f50:   cmp    $0x102a390,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$StringLength&apos;)}
+                                             │    │   │  │  │     │ │    │  0x00007f2d20505f57:   jne    0x00007f2d20506294           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                             │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@471 (line 262)
+   0.01%                                     │    │   │  │  │     │ │    │  0x00007f2d20505f5d:   mov    0xc(%r10),%r11d              ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                             │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@478 (line 262)
+   0.01%                                     │    │   │  │  │     │ │    │  0x00007f2d20505f61:   mov    0x14(%r12,%r11,8),%r10d      ; implicit exception: dispatches to 0x00007f2d20506440
+                                             │    │   │  │  │     │ │    │                                                            ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.String::length@1 (line 1519)
+                                             │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@481 (line 262)
+   0.26%                                     │    │   │  │  │     │ │    │  0x00007f2d20505f66:   mov    0xc(%r12,%r10,8),%r8d        ; implicit exception: dispatches to 0x00007f2d20506454
+   0.60%                                     │    │   │  │  │     │ │    │  0x00007f2d20505f6b:   movsbl 0x10(%r12,%r11,8),%r10d
+   0.00%                                     │    │   │  │  │     │ │    │  0x00007f2d20505f71:   sarx   %r10d,%r8d,%eax              ;*ishr {reexecute=0 rethrow=0 return_oop=0}
+                                             │    │   │  │  │     │ │    │                                                            ; - java.lang.String::length@9 (line 1519)
+                                             │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@481 (line 262)
+   0.17%                                  ╭  │    │   │  │  │     │ │    │  0x00007f2d20505f76:   jmp    0x00007f2d20506256
+   1.14%                                  │  │    │   │  │  │     │ │    │  0x00007f2d20505f7b:   nopl   0x0(%rax,%rax,1)
+   0.00%                                  │  │    │   │  │  │     │ │    │  0x00007f2d20505f80:   cmp    $0x102a190,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ShortToInt&apos;)}
+                                          │  │    │   │  │  │     │ │    │  0x00007f2d20505f87:   jne    0x00007f2d205062ac
+   0.02%                                  │  │    │   │  │  │     │ │    │  0x00007f2d20505f8d:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │  │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@198 (line 251)
+                                          │  │    │   │  │  │     │ │    │  0x00007f2d20505f90:   movswl 0xc(%r8),%eax                ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │  │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@205 (line 251)
+   0.33%                                  │  │    │   │  │  │     │ │    │  0x00007f2d20505f95:   test   $0x1,%al
+                                          │╭ │    │   │  │  │     │ │    │  0x00007f2d20505f97:   jne    0x00007f2d20505fa5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          ││ │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@210 (line 251)
+   0.19%                                  ││ │    │   │  │  │     │ │    │  0x00007f2d20505f99:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          ││ │    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@224 (line 251)
+   0.02%                                  ││ │    │   │  │  │     │ │    │  0x00007f2d20505f9b:   nopl   0x0(%rax,%rax,1)
+                                          ││╭│    │   │  │  │     │ │    │  0x00007f2d20505fa0:   jmp    0x00007f2d20506256
+   0.13%                                  │↘││    │   │  │  │     │ │    │  0x00007f2d20505fa5:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ ││    │   │  │  │     │ │    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ ││    │   │  │  │     │ │    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@215 (line 251)
+   0.04%                                  │ ││    │   │  │  │     │ │    │  0x00007f2d20505fac:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ ││    │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@215 (line 251)
+                                          │ ││    │   │  │  │     │ │    │                                                            ;   {poll}
+   0.28%                                  │ ││    │   │  │  │     │ │    │  0x00007f2d20505faf:   mov    $0x5,%r9d
+                                          │ │╰    │   │  │  │     │ │    │  0x00007f2d20505fb5:   jmp    0x00007f2d20505cc7
+   0.20%                                  │ │     │   │  │  │     │ │    │  0x00007f2d20505fba:   nopw   0x0(%rax,%rax,1)
+   0.01%                                  │ │     │   │  │  │     │ │    │  0x00007f2d20505fc0:   cmp    $0x102a598,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$FloatToInt&apos;)}
+                                          │ │     │   │  │  │     │ │    │  0x00007f2d20505fc7:   jne    0x00007f2d205063e4           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │     │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@418 (line 260)
+   0.01%                                  │ │     │   │  │  │     │ │    │  0x00007f2d20505fcd:   vmovss 0xc(%r10),%xmm1
+   0.04%                                  │ │     │   │  │  │     │ │    │  0x00007f2d20505fd3:   vcvttss2si %xmm1,%eax
+   0.49%                                  │ │     │   │  │  │     │ │    │  0x00007f2d20505fd7:   cmp    $0x80000000,%eax
+                                          │ │     │   │  │  │     │ │    │  0x00007f2d20505fdc:   je     0x00007f2d205065b6           ;*f2i {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │     │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@428 (line 260)
+   0.09%                                  │ │ ╭   │   │  │  │     │ │    │  0x00007f2d20505fe2:   jmp    0x00007f2d20506256
+   0.40%                                  │ │ │   │   │  │  │     │ │    │  0x00007f2d20505fe7:   cmp    $0x1029da0,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$AsIs&apos;)}
+                                          │ │ │   │   │  │  │     │ │    │  0x00007f2d20505fee:   jne    0x00007f2d205063b4           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ │   │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@135 (line 248)
+   0.01%                                  │ │ │   │   │  │  │     │ │    │  0x00007f2d20505ff4:   mov    0xc(%r10),%eax               ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ │   │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@142 (line 248)
+   0.01%                                  │ │ │╭  │   │  │  │     │ │    │  0x00007f2d20505ff8:   jmp    0x00007f2d20506256
+   1.16%                                  │ │ ││  │   │  │  │     │ │    │  0x00007f2d20505ffd:   data16 xchg %ax,%ax
+   0.01%                                  │ │ ││  │   │  │  │     │ │    │  0x00007f2d20506000:   cmp    $0x102a998,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ByteToInt&apos;)}
+                                          │ │ ││  │   │  │  │     │ │    │  0x00007f2d20506007:   jne    0x00007f2d2050633c
+   0.02%                                  │ │ ││  │   │  │  │     │ │    │  0x00007f2d2050600d:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││  │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@243 (line 253)
+   0.01%                                  │ │ ││  │   │  │  │     │ │    │  0x00007f2d20506010:   movsbl 0xc(%r8),%eax                ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││  │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@250 (line 253)
+   0.43%                                  │ │ ││  │   │  │  │     │ │    │  0x00007f2d20506015:   test   $0x1,%al
+                                          │ │ ││╭ │   │  │  │     │ │    │  0x00007f2d20506017:   jne    0x00007f2d20506025           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ │││ │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@255 (line 253)
+   0.11%                                  │ │ │││ │   │  │  │     │ │    │  0x00007f2d20506019:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ │││ │   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@270 (line 253)
+   0.03%                                  │ │ │││ │   │  │  │     │ │    │  0x00007f2d2050601b:   nopl   0x0(%rax,%rax,1)
+                                          │ │ │││╭│   │  │  │     │ │    │  0x00007f2d20506020:   jmp    0x00007f2d20506256
+   0.10%                                  │ │ ││↘││   │  │  │     │ │    │  0x00007f2d20506025:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ │ ││ ││   │  │  │     │ │    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ │ ││ ││   │  │  │     │ │    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@261 (line 253)
+   0.03%                                  │ │ ││ ││   │  │  │     │ │    │  0x00007f2d2050602c:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ ││   │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@261 (line 253)
+                                          │ │ ││ ││   │  │  │     │ │    │                                                            ;   {poll}
+   0.40%                                  │ │ ││ ││   │  │  │     │ │    │  0x00007f2d2050602f:   mov    $0x7,%r9d
+                                          │ │ ││ │╰   │  │  │     │ │    │  0x00007f2d20506035:   jmp    0x00007f2d20505cc7
+   0.36%                                  │ │ ││ │    │  │  │     │ │    │  0x00007f2d2050603a:   nopw   0x0(%rax,%rax,1)
+   0.01%                                  │ │ ││ │    │  │  │     │ │    │  0x00007f2d20506040:   cmp    $0x102a190,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ShortToInt&apos;)}
+                                          │ │ ││ │    │  │  │     │ │    │  0x00007f2d20506047:   jne    0x00007f2d20506384           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │    │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@229 (line 252)
+   0.00%                                  │ │ ││ │    │  │  │     │ │    │  0x00007f2d2050604d:   movswl 0xc(%r10),%eax               ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │    │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@236 (line 252)
+   0.12%                                  │ │ ││ │ ╭  │  │  │     │ │    │  0x00007f2d20506052:   jmp    0x00007f2d20506256
+   1.12%                                  │ │ ││ │ │  │  │  │     │ │    │  0x00007f2d20506057:   nopw   0x0(%rax,%rax,1)
+   0.01%                                  │ │ ││ │ │  │  │  │     │ │    │  0x00007f2d20506060:   cmp    $0x102ab98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$CharToInt&apos;)}
+                                          │ │ ││ │ │  │  │  │     │ │    │  0x00007f2d20506067:   jne    0x00007f2d20506324
+   0.02%                                  │ │ ││ │ │  │  │  │     │ │    │  0x00007f2d2050606d:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │  │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@289 (line 255)
+   0.01%                                  │ │ ││ │ │  │  │  │     │ │    │  0x00007f2d20506070:   movzwl 0xc(%r8),%eax                ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │  │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@296 (line 255)
+   0.31%                                  │ │ ││ │ │  │  │  │     │ │    │  0x00007f2d20506075:   test   $0x1,%al
+                                          │ │ ││ │ │╭ │  │  │     │ │    │  0x00007f2d20506077:   jne    0x00007f2d20506085           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ ││ │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@301 (line 255)
+   0.15%                                  │ │ ││ │ ││ │  │  │     │ │    │  0x00007f2d20506079:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ ││ │  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@316 (line 255)
+   0.04%                                  │ │ ││ │ ││ │  │  │     │ │    │  0x00007f2d2050607b:   nopl   0x0(%rax,%rax,1)
+   0.00%                                  │ │ ││ │ ││╭│  │  │     │ │    │  0x00007f2d20506080:   jmp    0x00007f2d20506256
+   0.16%                                  │ │ ││ │ │↘││  │  │     │ │    │  0x00007f2d20506085:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ │ ││ │ │ ││  │  │     │ │    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ ││  │  │     │ │    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@307 (line 255)
+   0.09%                                  │ │ ││ │ │ ││  │  │     │ │    │  0x00007f2d2050608c:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ ││  │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@307 (line 255)
+                                          │ │ ││ │ │ ││  │  │     │ │    │                                                            ;   {poll}
+   0.30%                                  │ │ ││ │ │ ││  │  │     │ │    │  0x00007f2d2050608f:   mov    $0x9,%r9d
+                                          │ │ ││ │ │ │╰  │  │     │ │    │  0x00007f2d20506095:   jmp    0x00007f2d20505cc7
+   0.14%                                  │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d2050609a:   nopw   0x0(%rax,%rax,1)
+   0.00%                                  │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d205060a0:   cmp    $0x102a798,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$DoubleToInt&apos;)}
+                                          │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d205060a7:   jne    0x00007f2d205063cc           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │   │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@369 (line 258)
+   0.02%                                  │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d205060ad:   vmovsd 0x10(%r10),%xmm0
+   0.09%                                  │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d205060b3:   vcvttsd2si %xmm0,%eax
+   0.45%                                  │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d205060b7:   cmp    $0x80000000,%eax
+                                          │ │ ││ │ │ │   │  │     │ │    │  0x00007f2d205060bc:   je     0x00007f2d205065a2           ;*d2i {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │   │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@379 (line 258)
+   0.08%                                  │ │ ││ │ │ │ ╭ │  │     │ │    │  0x00007f2d205060c2:   jmp    0x00007f2d20506256
+   1.08%                                  │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060c7:   cmp    $0x102a798,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$DoubleToInt&apos;)}
+                                          │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060ce:   jne    0x00007f2d2050630c
+   0.02%                                  │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060d4:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │ │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@335 (line 257)
+   0.02%                                  │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060d7:   vmovsd 0x10(%r8),%xmm0
+   0.48%                                  │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060dd:   vcvttsd2si %xmm0,%eax
+   1.64%                                  │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060e1:   cmp    $0x80000000,%eax
+                                          │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060e6:   je     0x00007f2d2050658e           ;*d2i {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │ │  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@345 (line 257)
+   0.04%                                  │ │ ││ │ │ │ │ │  │     │ │    │  0x00007f2d205060ec:   test   $0x1,%al
+                                          │ │ ││ │ │ │ │╭│  │     │ │    │  0x00007f2d205060ee:   je     0x00007f2d20506105           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │││  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@348 (line 257)
+   0.06%                                  │ │ ││ │ │ │ │││  │     │ │    │  0x00007f2d205060f0:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ │ ││ │ │ │ │││  │     │ │    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │││  │     │ │    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@354 (line 257)
+   0.14%                                  │ │ ││ │ │ │ │││  │     │ │    │  0x00007f2d205060f7:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │││  │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@354 (line 257)
+                                          │ │ ││ │ │ │ │││  │     │ │    │                                                            ;   {poll}
+   0.03%                                  │ │ ││ │ │ │ │││  │     │ │    │  0x00007f2d205060fa:   mov    $0xb,%r9d
+   0.01%                                  │ │ ││ │ │ │ ││╰  │     │ │    │  0x00007f2d20506100:   jmp    0x00007f2d20505cc7
+   0.12%                                  │ │ ││ │ │ │ │↘   │     │ │    │  0x00007f2d20506105:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │    │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@364 (line 257)
+   0.09%                                  │ │ ││ │ │ │ │  ╭ │     │ │    │  0x00007f2d20506107:   jmp    0x00007f2d20506256
+   1.10%                                  │ │ ││ │ │ │ │  │ │     │ │    │  0x00007f2d2050610c:   cmp    $0x1029da0,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$AsIs&apos;)}
+                                          │ │ ││ │ │ │ │  │ │     │ │    │  0x00007f2d20506113:   jne    0x00007f2d205062dc
+   0.02%                                  │ │ ││ │ │ │ │  │ │     │ │    │  0x00007f2d20506119:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │ │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@107 (line 247)
+   0.00%                                  │ │ ││ │ │ │ │  │ │     │ │    │  0x00007f2d2050611c:   mov    0xc(%r8),%eax                ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │ │     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@112 (line 247)
+   0.41%                                  │ │ ││ │ │ │ │  │ │     │ │    │  0x00007f2d20506120:   test   $0x1,%al
+                                          │ │ ││ │ │ │ │  │╭│     │ │    │  0x00007f2d20506122:   je     0x00007f2d20506139           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │││     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@117 (line 247)
+   0.12%                                  │ │ ││ │ │ │ │  │││     │ │    │  0x00007f2d20506124:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ │ ││ │ │ │ │  │││     │ │    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │││     │ │    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@122 (line 247)
+   0.01%                                  │ │ ││ │ │ │ │  │││     │ │    │  0x00007f2d2050612b:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │││     │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@122 (line 247)
+                                          │ │ ││ │ │ │ │  │││     │ │    │                                                            ;   {poll}
+   0.28%                                  │ │ ││ │ │ │ │  │││     │ │    │  0x00007f2d2050612e:   mov    $0x1,%r9d
+                                          │ │ ││ │ │ │ │  ││╰     │ │    │  0x00007f2d20506134:   jmp    0x00007f2d20505cc7
+   0.09%                                  │ │ ││ │ │ │ │  │↘      │ │    │  0x00007f2d20506139:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │       │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@130 (line 247)
+   0.00%                                  │ │ ││ │ │ │ │  │       │ │    │  0x00007f2d2050613b:   nopl   0x0(%rax,%rax,1)
+   0.00%                                  │ │ ││ │ │ │ │  │  ╭    │ │    │  0x00007f2d20506140:   jmp    0x00007f2d20506256
+   0.35%                                  │ │ ││ │ │ │ │  │  │    │ │    │  0x00007f2d20506145:   cmp    $0x102a998,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$ByteToInt&apos;)}
+                                          │ │ ││ │ │ │ │  │  │    │ │    │  0x00007f2d2050614c:   jne    0x00007f2d2050636c           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │    │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@275 (line 254)
+   0.00%                                  │ │ ││ │ │ │ │  │  │    │ │    │  0x00007f2d20506152:   movsbl 0xc(%r10),%eax               ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │    │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@282 (line 254)
+   0.01%                                  │ │ ││ │ │ │ │  │  │╭   │ │    │  0x00007f2d20506157:   jmp    0x00007f2d20506256
+   0.24%                                  │ │ ││ │ │ │ │  │  ││   │ │    │  0x00007f2d2050615c:   nopl   0x0(%rax)
+                                          │ │ ││ │ │ │ │  │  ││   │ │    │  0x00007f2d20506160:   cmp    $0x102ab98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$CharToInt&apos;)}
+                                          │ │ ││ │ │ │ │  │  ││   │ │    │  0x00007f2d20506167:   jne    0x00007f2d20506354           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  ││   │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@321 (line 256)
+   0.01%                                  │ │ ││ │ │ │ │  │  ││   │ │    │  0x00007f2d2050616d:   movzwl 0xc(%r10),%eax               ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  ││   │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@328 (line 256)
+   0.09%                                  │ │ ││ │ │ │ │  │  ││╭  │ │    │  0x00007f2d20506172:   jmp    0x00007f2d20506256
+   1.25%                                  │ │ ││ │ │ │ │  │  │││  │ │    │  0x00007f2d20506177:   nopw   0x0(%rax,%rax,1)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││  │ │    │  0x00007f2d20506180:   cmp    $0x102ad98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$LongToInt&apos;)}
+                                          │ │ ││ │ │ │ │  │  │││  │ │    │  0x00007f2d20506187:   jne    0x00007f2d205062c4
+   0.02%                                  │ │ ││ │ │ │ │  │  │││  │ │    │  0x00007f2d2050618d:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││  │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@149 (line 249)
+   0.00%                                  │ │ ││ │ │ │ │  │  │││  │ │    │  0x00007f2d20506190:   mov    0x10(%r8),%r9                ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││  │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@156 (line 249)
+   0.41%                                  │ │ ││ │ │ │ │  │  │││  │ │    │  0x00007f2d20506194:   test   $0x1,%r9b
+                                          │ │ ││ │ │ │ │  │  │││╭ │ │    │  0x00007f2d20506198:   jne    0x00007f2d205061a5           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  ││││ │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@163 (line 249)
+   0.14%                                  │ │ ││ │ │ │ │  │  ││││ │ │    │  0x00007f2d2050619a:   mov    %r9d,%eax
+   0.00%                                  │ │ ││ │ │ │ │  │  ││││ │ │    │  0x00007f2d2050619d:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  ││││ │ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@178 (line 249)
+   0.02%                                  │ │ ││ │ │ │ │  │  ││││ │ │    │  0x00007f2d2050619f:   nop
+                                          │ │ ││ │ │ │ │  │  ││││╭│ │    │  0x00007f2d205061a0:   jmp    0x00007f2d20506256
+   0.12%                                  │ │ ││ │ │ │ │  │  │││↘││ │    │  0x00007f2d205061a5:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ │ ││ │ │ │ │  │  │││ ││ │    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ ││ │    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@168 (line 249)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ ││ │    │  0x00007f2d205061ac:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ ││ │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@168 (line 249)
+                                          │ │ ││ │ │ │ │  │  │││ ││ │    │                                                            ;   {poll}
+   0.30%                                  │ │ ││ │ │ │ │  │  │││ ││ │    │  0x00007f2d205061af:   mov    $0x3,%r9d
+                                          │ │ ││ │ │ │ │  │  │││ │╰ │    │  0x00007f2d205061b5:   jmp    0x00007f2d20505cc7
+   0.75%                                  │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061ba:   nopw   0x0(%rax,%rax,1)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061c0:   cmp    $0x102a598,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$FloatToInt&apos;)}
+                                          │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061c7:   jne    0x00007f2d205062f4
+   0.08%                                  │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061cd:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │  │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@384 (line 259)
+                                          │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061d0:   vmovss 0xc(%r8),%xmm0
+   0.50%                                  │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061d6:   vcvttss2si %xmm0,%eax
+   1.49%                                  │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061da:   cmp    $0x80000000,%eax
+                                          │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061df:   je     0x00007f2d2050657a           ;*f2i {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │  │    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@394 (line 259)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ │  │    │  0x00007f2d205061e5:   test   $0x1,%al
+                                          │ │ ││ │ │ │ │  │  │││ │ ╭│    │  0x00007f2d205061e7:   je     0x00007f2d205061fe           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │ ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@397 (line 259)
+   0.07%                                  │ │ ││ │ │ │ │  │  │││ │ ││    │  0x00007f2d205061e9:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                          │ │ ││ │ │ │ │  │  │││ │ ││    │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │ ││    │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@403 (line 259)
+   0.14%                                  │ │ ││ │ │ │ │  │  │││ │ ││    │  0x00007f2d205061f0:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │ ││    │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@403 (line 259)
+                                          │ │ ││ │ │ │ │  │  │││ │ ││    │                                                            ;   {poll}
+   0.02%                                  │ │ ││ │ │ │ │  │  │││ │ ││    │  0x00007f2d205061f3:   mov    $0xd,%r9d
+                                          │ │ ││ │ │ │ │  │  │││ │ │╰    │  0x00007f2d205061f9:   jmp    0x00007f2d20505cc7
+   0.11%                                  │ │ ││ │ │ │ │  │  │││ │ ↘     │  0x00007f2d205061fe:   shl    %eax                         ;*imul {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │       │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@413 (line 259)
+   0.13%                                  │ │ ││ │ │ │ │  │  │││ │   ╭   │  0x00007f2d20506200:   jmp    0x00007f2d20506256
+   0.38%                                  │ │ ││ │ │ │ │  │  │││ │   │   │  0x00007f2d20506205:   cmp    $0x102ad98,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$LongToInt&apos;)}
+                                          │ │ ││ │ │ │ │  │  │││ │   │   │  0x00007f2d2050620c:   jne    0x00007f2d2050639c           ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@183 (line 250)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ │   │   │  0x00007f2d20506212:   mov    0x10(%r10),%r10
+   0.09%                                  │ │ ││ │ │ │ │  │  │││ │   │   │  0x00007f2d20506216:   mov    %r10d,%eax                   ;*l2i {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │   │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@193 (line 250)
+                                          │ │ ││ │ │ │ │  │  │││ │   │╭  │  0x00007f2d20506219:   jmp    0x00007f2d20506256
+   0.75%                                  │ │ ││ │ │ │ │  │  │││ │   ││  │  0x00007f2d2050621b:   nopl   0x0(%rax,%rax,1)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ │   ││  │  0x00007f2d20506220:   cmp    $0x102a390,%r11d             ;   {metadata(&apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeSwitchBenchmark$StringLength&apos;)}
+                                          │ │ ││ │ │ │ │  │  │││ │   ││╭ │  0x00007f2d20506227:   jne    0x00007f2d2050627e
+   0.10%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d2050622d:   mov    %r10,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@433 (line 261)
+   0.00%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d20506230:   mov    0xc(%r8),%r9d                ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@440 (line 261)
+   0.29%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d20506234:   mov    0x14(%r12,%r9,8),%ebx        ; implicit exception: dispatches to 0x00007f2d20506418
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ; - java.lang.String::length@1 (line 1519)
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@443 (line 261)
+   1.06%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d20506239:   nopl   0x0(%rax)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d20506240:   mov    0xc(%r12,%rbx,8),%ecx        ; implicit exception: dispatches to 0x00007f2d2050642c
+   0.89%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d20506245:   movsbl 0x10(%r12,%r9,8),%ebx
+   0.00%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d2050624b:   sarx   %ebx,%ecx,%eax               ;*ishr {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ; - java.lang.String::length@9 (line 1519)
+                                          │ │ ││ │ │ │ │  │  │││ │   │││ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@443 (line 261)
+   0.20%                                  │ │ ││ │ │ │ │  │  │││ │   │││ │  0x00007f2d20506250:   test   $0x1,%al
+                                          │ │ ││ │ │ │ │  │  │││ │   │││╭│  0x00007f2d20506252:   jne    0x00007f2d20506269           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@448 (line 261)
+   0.01%                                  │ │ ││ │ │ │ │  │  │││ │   │││││  0x00007f2d20506254:   shl    %eax                         ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                          │ │ ││ │ │ │ │  │  │││ │   │││││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@467 (line 261)
+   0.53%                                  ↘ ↘ ↘↘ ↘ ↘ ↘ ↘  ↘  ↘↘↘ ↘   ↘↘│││  0x00007f2d20506256:   add    $0x30,%rsp
+   0.58%                                                               │││  0x00007f2d2050625a:   pop    %rbp
+   2.33%                                                               │││  0x00007f2d2050625b:   cmp    0x450(%r15),%rsp             ;   {poll_return}
+                                                                       │││  0x00007f2d20506262:   ja     0x00007f2d20506564
+   1.35%                                                               │││  0x00007f2d20506268:   ret
+   0.19%                                                               │↘│  0x00007f2d20506269:   mov    0x458(%r15),%r9              ; ImmutableOopMap {r10=Oop r8=Oop }
+                                                                       │ │                                                            ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                                                                       │ │                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@454 (line 261)
+   0.00%                                                               │ │  0x00007f2d20506270:   test   %eax,(%r9)                   ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                                                       │ │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@454 (line 261)
+                                                                       │ │                                                            ;   {poll}
+   0.01%                                                               │ │  0x00007f2d20506273:   mov    $0xf,%r9d
+                                                                       │ ╰  0x00007f2d20506279:   jmp    0x00007f2d20505cc7
+                                                                       ↘    0x00007f2d2050627e:   mov    $0xffffffde,%esi
+                                                                            0x00007f2d20506283:   mov    %r10,(%rsp)
+                                                                            0x00007f2d20506287:   call   0x00007f2d1ff8af00           ; ImmutableOopMap {[0]=Oop }
+                                                                                                                                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                                                                                                      ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeSwitchBenchmark::switchWhenMethod@433 (line 261)
+                                                                                                                                      ;   {runtime_call UncommonTrapBlob}
+                                                                            0x00007f2d2050628c:   nopl   0x110009fc(%rax,%rax,1)      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+
+

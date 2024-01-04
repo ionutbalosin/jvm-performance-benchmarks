@@ -39,15 +39,16 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * Measures the latency of blocking TCP calls to send and receive a byte array using NIO (non-blocking I/O).
- * The benchmark simulates a client-server interaction over a TCP connection.
- * The benchmark method sends a byte buffer from the client to the server, and the server immediately sends it back.
- * The time taken for this round-trip interaction is measured to gauge the latency of the communication.
+ * Measures the latency of blocking TCP calls to send and receive a byte array using NIO
+ * (non-blocking I/O). The benchmark simulates a client-server interaction over a TCP connection.
+ * The benchmark method sends a byte buffer from the client to the server, and the server
+ * immediately sends it back. The time taken for this round-trip interaction is measured to gauge
+ * the latency of the communication.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 5, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
 public class NioBlockingRoundtripLatencyBenchmark {
