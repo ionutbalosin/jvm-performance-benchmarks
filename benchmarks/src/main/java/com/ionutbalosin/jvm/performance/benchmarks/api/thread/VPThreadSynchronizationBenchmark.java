@@ -67,9 +67,9 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class VPThreadSynchronizationBenchmark {
 
@@ -91,7 +91,7 @@ public class VPThreadSynchronizationBenchmark {
   private final ReentrantLock reentrantLock = new ReentrantLock();
   private int tasks;
 
-  @Param({"256"})
+  @Param({"384"})
   private int loadFactor;
 
   @Param private LockType lockType;
