@@ -92,14 +92,14 @@ public class VPThreadSynchronizationBenchmark {
   private int tasks;
 
   @Param({"256"})
-  private int tasksLoadFactor;
+  private int loadFactor;
 
   @Param private LockType lockType;
   @Param private BackoffType backoffType;
 
   @Setup(Level.Trial)
   public void setup() {
-    tasks = PARALLELISM_COUNT * tasksLoadFactor;
+    tasks = PARALLELISM_COUNT * loadFactor;
   }
 
   @Benchmark

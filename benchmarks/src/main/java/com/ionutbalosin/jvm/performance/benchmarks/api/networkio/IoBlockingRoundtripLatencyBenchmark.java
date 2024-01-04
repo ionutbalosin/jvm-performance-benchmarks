@@ -146,7 +146,7 @@ public class IoBlockingRoundtripLatencyBenchmark {
     final OutputStream out = clientSocket.getOutputStream();
 
     out.write(data, 0, data.length);
-    int bytesRead = in.read(clientReadBuffer, 0, clientReadBuffer.length);
+    final int bytesRead = in.read(clientReadBuffer, 0, clientReadBuffer.length);
 
     sanityCheck(bytesRead, bufferSize.get());
   }

@@ -74,7 +74,7 @@ public class HolidayPlannerBenchmark {
   private static final Random random = new Random(16384);
 
   @Param({"256"})
-  private int tasksLoadFactor;
+  private int loadFactor;
 
   @Param private ThreadType threadType;
 
@@ -84,7 +84,7 @@ public class HolidayPlannerBenchmark {
 
   @Setup()
   public void setup() {
-    tasks = PARALLELISM_COUNT * tasksLoadFactor;
+    tasks = PARALLELISM_COUNT * loadFactor;
     tripDuration = random.nextInt(MAX_TRIP_DURATION_DAYS);
     numberOfTravelers = random.nextInt(MAX_TRAVELERS);
 

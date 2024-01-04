@@ -87,7 +87,7 @@ public class VPThreadBlockingApiStackDepthBenchmark {
   @Param private ThreadType threadType;
 
   @Param({"64"})
-  private int chunkSize;
+  private int dataSize;
 
   @Param({"1", "10", "100", "1000"})
   private int stackDepth;
@@ -95,7 +95,7 @@ public class VPThreadBlockingApiStackDepthBenchmark {
   @Setup(Level.Trial)
   public void setupTrial() {
     queue = new SynchronousQueue<>();
-    data = new byte[chunkSize];
+    data = new byte[dataSize];
     random.nextBytes(data);
 
     producerThread =

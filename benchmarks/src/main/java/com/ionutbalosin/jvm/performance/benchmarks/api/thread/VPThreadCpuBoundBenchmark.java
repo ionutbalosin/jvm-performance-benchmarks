@@ -98,7 +98,7 @@ public class VPThreadCpuBoundBenchmark {
   private int tasks;
 
   @Param({"16"})
-  private int tasksLoadFactor;
+  private int loadFactor;
 
   @Param private ThreadType threadType;
   @Param private BackoffType backoffType;
@@ -106,7 +106,7 @@ public class VPThreadCpuBoundBenchmark {
 
   @Setup(Level.Trial)
   public void up() {
-    tasks = PARALLELISM_COUNT * tasksLoadFactor;
+    tasks = PARALLELISM_COUNT * loadFactor;
   }
 
   @Benchmark
