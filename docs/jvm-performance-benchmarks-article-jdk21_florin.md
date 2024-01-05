@@ -72,11 +72,8 @@ requires the computation of the square of the induction variable and the loop bo
 three JIT compilers are not able to remove or simplify the loop.
 
 ```
-  0x00007fddd74bab60:   mov    0x458(%r15),%r8              ; ImmutableOopMap {}
-                                                            ;*lload {reexecute=1 rethrow=0 return_oop=0}
-                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.CanonicalizeInductionVariableBenchmark::auto_canonicalize@7 (line 78)
-                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.CanonicalizeInductionVariableBenchmark::canonicalize@4 (line 63)
-  0x00007fddd74bab67:   test   %eax,(%r8)                   ;   {poll}
+  0x00007fddd74bab60:   mov    0x458(%r15),%r8              ; load the safepoint pool address in %r8
+  0x00007fddd74bab67:   test   %eax,(%r8)                   ; safepoint pool
   0x00007fddd74bab6a:   inc    %r11                         ; increment the loop result variable
   0x00007fddd74bab6d:   inc    %r10                         ; increment the induction variable
   0x00007fddd74bab70:   mov    %r10,%r8                     ; perform the loop condition computation
@@ -294,7 +291,7 @@ void allocateObjects() {
 
 This benchmark tests the performance of Project Panama's Vector API when used to compute the Mandelbrot set.
 
-The `baseline` benchmark uses single element computations and the JIT compilers might device to vectorize.
+The `baseline` benchmark uses single element computations and the JIT compilers might decide to auto-vectorize.
 The `vectorized` benchmark uses the Vector API to perform the equivalent computation.
 
 ```
@@ -357,12 +354,12 @@ Source code: [MandelbrotVectorApiBenchmark.java](https://github.com/ionutbalosin
 
 The `baseline` benchmark performs equally well on all three JIT compilers. 
 The `vectorized` benchmark performs differently between the JIT compilers and the same trend is kept regardless of the 
-number of iterations or vector size used.
+number of iterations or used vector size.
 
 #### C2 JIT Compiler
 
-The C2 JIT compiler implements all the Vector API compiler intrinsics required to vectorize the benchmark body and
-therefore performs the fastert. It also unrolls the inner while loop of the benchmark by a factor of 4.
+The C2 JIT compiler implements all the Vector API compiler intrinsics required to vectorize the benchmark body. 
+It also unrolls the inner while loop of the benchmark by a factor of 4.
 
 ```
 ...                                                           ; more vectorized code above
@@ -378,7 +375,7 @@ therefore performs the fastert. It also unrolls the inner while loop of the benc
 #### Oracle GraalVM JIT Compiler
 
 The Oracle GraalVM JIT compiler also implements all the Vector API compiler intrinsics required to vectorize the benchmark
-body and generates similar assembly instructions as the C2 JIT compiler. One difference that can also account for the 
+body and generates similar assembly instructions as the C2 JIT compiler. One difference that could also account for the 
 performance difference is that the Oracle GraalVM JIT compiler does not unroll the inner while loop.
 
 ```
@@ -406,7 +403,7 @@ degradation and can be seen by looking at the hottest methods in the benchmark a
 
 Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
 and better than the `baseline` benchmark. 
-The GraalVM CE JIT compiler is not able (yet) to vectorize the benchmark body and falls back to the Java implementation of the Vector API. 
+The GraalVM CE JIT compiler is not (yet) able to vectorize the benchmark body and falls back to the Java implementation of the Vector API. 
 
 ## MegamorphicInterfaceCallBenchmark
 
@@ -438,7 +435,7 @@ target method. This benchmark also tests the performance of manually splitting o
           instance.foo();
           break;
         ... same pattern for all of the remaining targets
-        case 5:
+        case 6:
           instance.foo();
           break;
         default:
@@ -449,7 +446,7 @@ target method. This benchmark also tests the performance of manually splitting o
 
   private static class C{1,..,6} implements I {}
   interface I extends I5 {
-    private void baz() { foot_5(); }
+    private void baz() { foo_5(); }
     default void foo() { baz(); }
   }
 
@@ -459,7 +456,7 @@ target method. This benchmark also tests the performance of manually splitting o
   }
   ... same pattern for all of the remaining interface declarations
   interface I1 {
-    static Wrapper wrapper = new Wrapper();
+    Wrapper wrapper = new Wrapper();
     default void baz_1() { wrapper.x++; }
     private void foo_1() { baz_1(); 
   }
@@ -477,7 +474,7 @@ the call site.
 
 #### C2 JIT Compiler
 
-The C2 JIT compiler is able to devirtualize and inline through the entire interface chain call sites that use up to 
+The C2 JIT compiler is able to devirtualize and inline through the entire interface call chains at call sites that use up to 
 two different targets. In such cases, it also performs loop unrolling by a factor of 4 on the hot loop.
 
 ```
@@ -631,8 +628,6 @@ The benchmark is structured as follows:
     }
   }
 
-  // Manually split the call site to receive only one target -> monomorphic
-  // Note: this is a trick trying to bypass some specific JVM limitations
   @Benchmark
   @OperationsPerInvocation(SIZE)
   public void devirtualize_to_monomorphic() {
@@ -692,7 +687,7 @@ The benchmark is structured as follows:
 
 In general, the runtime collects receiver-type statistics per call site during the execution of profiled code (in the 
 interpreter or the C1 JIT). These statistics are further used in the optimizing compiler (e.g., C2 JIT). If, for example,
-one call site `class.method()` has received only `Type1` even though there exists a `Type2` in the type hierarchy, the compiler 
+one call site `object.method()` has received only `Type1` even though there exists a `Type2` in the type hierarchy, the compiler 
 can add a guard that checks the receiver type is `Type1` and then call the `Type1` method directly. 
 This is called a monomorphic call site:
 
@@ -700,7 +695,7 @@ This is called a monomorphic call site:
 // High-level pseudo-code of the monomorphic call site optimization
 if (receiver instanceof Type1) {
     // fast path
-    Type1.method();
+    ((Type1) receiver).method();
 } else {
     // slow path. Will deoptimize and rerun in the interpreter
     deoptimize();
@@ -713,10 +708,10 @@ A `bimorphic call site` is a call site that can check for two receivers types:
 // High-level pseudo-code of the bimorphic call site optimization
 if (receiver instanceof Type1) {
     // fast path
-    Type1.method();
+    ((Type1) receiver).method();
 } else if (receiver instanceof Type2) {
     // fast path
-    Type2.method();
+    ((Type2) receiver).method();
 } else {
     // slow path. Will deoptimize and rerun in the interpreter. Next time it JITs, it will use a virtual call
     deoptimize();
@@ -776,7 +771,7 @@ If the number of targets is higher than two, the C2 JIT compiler always uses a v
 0x00007f41b8758e95:   movabs $0x7f40f8026430,%rax
 0x00007f41b8758e9f:   call   0x00007f41b7fa1e20           ; virtual call to the compute method
 0x00007f41b8758ea4:   nopl   0x214(%rax,%rax,1)           ; more nops
-0x00007f41b8758eac:   inc    %ebp                         ; increase the loop induction variable by one
+0x00007f41b8758eac:   inc    %ebp                         ; increment the loop induction variable by one
 0x00007f41b8758eae:   cmp    0x8(%rsp),%ebp               ; compare against the loop bound
 0x00007f41b8758eb2:   jl     0x00007f41b8758e80           ; jump back to the loop beginning if the loop condition is true
 ```
@@ -792,20 +787,23 @@ the equivalent high-level pseudo-code is shown below:
 ```
 if (receiver instanceof Type1) {
     // fast path
-    Type1.method();
+    ((Type1) receiver).method();
 } else if (receiver instanceof Type2) {
     // fast path
-    Type2.method();
+    ((Type2) receiver).method();
 } else if (receiver instanceof Type3) {
     // fast path
-    Type3.method();
+    ((Type3) receiver).method();
+} else if (receiver instanceof Type4) {
+    // fast path
+    ((Type4) receiver).method();
 } else {
     // slow path. Will not deoptimize, but rather use a virtual call for the remaining targets.
     receiver.method();
 }
 ```
 
-The hottest methods in the benchmark `virtual_call[MEGAMORPHIC_5]` are shown below. As expected, a single `compute` method 
+The hottest methods in the benchmark `virtual_call[MEGAMORPHIC_5]` are shown below. A single `compute` method 
 shows up in the list because the remaining methods have been inlined in `virtual_call`.  
 ```
 ....[Hottest Regions].....................................................
@@ -821,8 +819,8 @@ number of targets used in benchmark.
 **Note**: When generating assembly, we forced the compiler not to inline the 
 benchmark method into the JMH stub. In this case, the `virtual_call[MEGAMORPHIC_8]` benchmark
 performed similar in performance to the `virtual_call[MEGAMORPHIC_7]` benchmark. 
-There can be multiple reasons that can limit this kind of compiler optimizations
-and some of them are: the size of the generated code, inlining decisions taken 
+There can be multiple reasons that can affect the compiler optimizations we expect to see.
+Some of them are: the size of the generated code, inlining decisions taken 
 for the caller and different profile information collected by 
 the C1 compiler and the interpreter.
 
@@ -832,14 +830,14 @@ Below is the assembly code for the `virtual_call[MEGAMORPHIC_7]` benchmark:
 0x00007f9587241de3:   jle    0x00007f9587241edc           ; jump out of the loop if the loop condition is false
 0x00007f9587241de9:   mov    0x10(%r10,%r8,4),%r9d        ; load this.instances[i] in %r9
 0x00007f9587241dee:   mov    0x8(,%r9,8),%ecx             ; load the klass word of this.instances[i] in %ecx
-0x00007f9587241df6:   movabs $0x7f9507000000,%rbx         ; move the heap base in %rbx
-0x00007f9587241e00:   lea    (%rbx,%rcx,1),%rcx           ; load the address of the klass word in %rcx
+0x00007f9587241df6:   movabs $0x7f9507000000,%rbx         ; move the metaspace base in %rbx
+0x00007f9587241e00:   lea    (%rbx,%rcx,1),%rcx           ; load the address of the klass in %rcx
 0x00007f9587241e04:   mov    %r8d,%ebx                    ; move the loop induction variable in %ebx
 0x00007f9587241e07:   inc    %ebx                         ; increment the loop induction variable by one
-0x00007f9587241e09:   cmp    -0x190(%rip),%rcx            ; compare the klass word against one of the expected targets.
-                                                          ; the expected klass words are stored in the constant pool by the GraalVM CE JIT Compiler 
+0x00007f9587241e09:   cmp    -0x190(%rip),%rcx            ; compare the klass against one of the expected targets.
+                                                          ; the expected klasses are stored in the constant pool 
 0x00007f9587241e10:   je     0x00007f9587241e6c           ; if equal jump to the inlined method that increments the Alg1 counter   
-0x00007f9587241e16:   cmp    -0x195(%rip),%rcx            ; compare the klass word against one of the expected targets
+0x00007f9587241e16:   cmp    -0x195(%rip),%rcx            ; compare the klass against one of the expected targets
 0x00007f9587241e1d:   data16 xchg %ax,%ax                 ; alignment nop
 0x00007f9587241e20:   je     0x00007f9587241e7c           ; if equal jump to the inlined method that increments the Alg2 counter
 ... similar code for the remaining targets below ...
@@ -926,7 +924,7 @@ for the `devirtualize_to_monomorphic[MEGAMORPHIC_8]` benchmark:
 0x00007f374063c50c:   mov    0x10(%rdx,%r9,4),%r11d       ; load this.instances[i] in %r11d
 0x00007f374063c511:   movsbl 0x10(%rax,%r9,1),%ecx        ; load this.classIndex[i] in %ecx
 0x00007f374063c517:   cmp    $0x8,%ecx                    ; check if the classIndex[i] is greater or equal to 8
-0x00007f374063c51a:   jae    0x00007f374063c531           ; if true (i.e. default case) jump to default path which in this case deoptimizes
+0x00007f374063c51a:   jae    0x00007f374063c531           ; if true (i.e. default case) jump to default path of the switch statement which in this case deoptimizes
 0x00007f374063c51c:   movslq %ecx,%r9                     ; move the classIndex[i] in %r9
 0x00007f374063c51f:   shl    $0x3,%r9                     ; compute the full address from the oop
 0x00007f374063c523:   movabs $0x7f374063c300,%rbx         ; move the base of the jump table in %rbx
@@ -1031,7 +1029,7 @@ Thankfully, most IDEs will warn the developer way before this threshold is reach
 
 ## NpeControlFlowBenchmark
 
-This benchmark checks how the JIT compiler handles explicit control flow around `null` checks. Explicit null pointer
+This benchmark checks how the JIT compiler handles control flow around `null` checks. Explicit null pointer
 checks are done by checking against `null`. Implicit null pointer checks are done by surrounding the code with a 
 `try {} catch (NullPointerException e) {}` block. Finally, a third option is done through the `Streams` API filter method.
 
@@ -1082,14 +1080,14 @@ Source code: [NpeControlFlowBenchmark.java](https://github.com/ionutbalosin/jvm-
 
 ### Analysis of try_npe_catch
 
-Mostly all three JIT compilers perform the same in all benchmarks configurations apart from the `try_npe_catch` benchmark.
+All three JIT compilers perform similar in all benchmarks configurations apart from the `try_npe_catch` benchmark.
 Therefore, the section below will focus on the `try_npe_catch` benchmark when the `nullThreshold` is 16.
 
 #### C2 JIT Compiler
 
 The C2 JIT Compiler is able to optimize and make use of a cached `NullPointerException` object
 when the same exception is thrown multiple times. This avoids allocating a new exception object on the iterations of 
-the loop when the `NullPointerException` is thrown. One side effect of this is that stack traces are not collected
+the loop when the `NullPointerException` is thrown. One side effect is that stack traces are not collected
 for the cached exception object. This optimization is enabled by default and can be disabled by using the 
 `-XX:-OmitStackTraceInFastThrow` flag.
 
@@ -1115,7 +1113,7 @@ for the cached exception object. This optimization is enabled by default and can
 0x00007f14a463aae5:   cmpb   $0x0,0x40(%r15)              
 0x00007f14a463aaea:   jne    0x00007f14a463aba5
 0x00007f14a463aaf0:   movabs $0x7ffc01020,%r10            ; load the cached NullPointerException object in %r10
-0x00007f14a463aafa:   mov    %r12d,0x14(%r10)             ; clear the `detailMessage` field of the cached exception object
+0x00007f14a463aafa:   mov    %r12d,0x14(%r10)             ; clear the `detailedMessage` field of the cached exception object
 0x00007f14a463aafe:   mov    %ebx,0x4(%rsp)               ; store the loop induction variable on the stack
 0x00007f14a463ab02:   mov    %r14d,(%rsp)                 ; store the accumulator on the stack
 0x00007f14a463ab06:   mov    %rbp,%rsi                    ; move the `this` pointer in %rsi 
@@ -1163,7 +1161,7 @@ is thrown multiple times (e.g. in a hot loop).
 This benchmark tests the implicit vs explicit throw and catch of `NullPointerException` in a hot loop. The caller method
 contains a loop that catches the `NullPointerException` thrown by the callee and the callee is never inlined.
 
-An implicit `NullPointerException` is thrown when the code tries to access a field or invoke a method on a `null` object.
+An implicit `NullPointerException` is thrown when the code tries to access a field or invoke a method of a `null` object.
 An explicit `NullPointerException` is thrown when the code explicitly throws a `NullPointerException` object.
 
 ```
@@ -1234,7 +1232,7 @@ https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk
 
 All three JIT compilers perform similar in performance when throwing explicit exceptions. 
 
-There is an important difference in performance however when throwing implicit exceptions. That is, the C2 JIT Compiler
+There is an important performance difference however when throwing implicit exceptions. That is, the C2 JIT Compiler
 will avoid allocating a new exception object and filling in the stack trace when the same exception is thrown multiple
 times in the hot path.
 
@@ -1288,7 +1286,7 @@ slower than using CPU registers.
 
 The benchmark method contains a series of field loads followed by a series of fields stores. Normally, the JIT compiler 
 is expected to group together loads and stores, resulting in less register pressure. In order to force all the loads to
-be grouped before all the stores, the `load_store_spill*` benchmark contains a volatile read after the loads and before 
+be grouped before all the stores, the `load_store_spill*` benchmark contains a volatile read after the loads but before 
 the stores.
 
 ```
@@ -1381,7 +1379,7 @@ does not happen (for this benchmark) in the Oracle GraalVM JIT Compiler and the 
 ## TypeCheckScalabilityBenchmark
 
 This benchmark addresses the scalability issue happening while performing type checks (`instanceof`, `checkcast`, and similar)
-against interfaces (so-called secondary super types). This scalability issue is triggered by massive concurrent 
+against interfaces (so-called secondary super types). The scalability issue is triggered by massive concurrent 
 updates to `Klass::_secondary_super_cache` from multiple threads, which in turn causes false sharing with its 
 surrounding fields e.g., `Klass::_secondary_supers` and cache line invalidations.
 
@@ -1480,10 +1478,10 @@ TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                   
 
 #### C2 JIT Compiler
 
-The C2 JIT compiler is the slowest when `typePollution` is `true`. One interesting observation is that it remains
-slower even when the number of threads running is one (no false sharing occurring). That is, the C2 JIT Compiler is 
+The C2 JIT compiler is the slowest when `typePollution` is `true`. One interesting observation is that C2 remains
+slower even when the number of threads running is equal to one (no false sharing occurring). That is, the C2 JIT Compiler is 
 in general slower at checking the secondary super types array. 
-The reason behind this is explained further below in the `TypeCheckSlowPathBenchmark`. 
+The reason behind this is explained in the `TypeCheckSlowPathBenchmark`. 
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
@@ -1562,6 +1560,7 @@ the performance of the slow path of type checking across the different JITs.
   public static boolean closeNotAutoCloseable(Object o) {
     // it searches through the secondary supers for a type match
     // but does not find one since "o" is not an "AutoCloseable" type
+    // "o" is actually of type "ManySecondarySuperTypes_*"
     if (o instanceof AutoCloseable) {
       try {
         ((AutoCloseable) o).close();
@@ -1626,8 +1625,8 @@ Both GraalVM JIT Compilers iterate over the secondary super types array using a 
 ```
  0.30% 0x00007f342f2470e0:   mov    %ecx,%ebx               ; move the loop counter in %ebx
        0x00007f342f2470e2:   shl    $0x3,%ebx               ; multiply the loop counter by 8
-44.80% 0x00007f342f2470e5:   lea    0x8(%rbx),%ebx          ; load the address of the next element in the array in %ebx
-       0x00007f342f2470e8:   movslq %ebx,%rbx               ; sign extend the address to 64 bits
+44.80% 0x00007f342f2470e5:   lea    0x8(%rbx),%ebx          ; skip the length field; compute the byte offset of the element in the secondary_supers array in %ebx
+       0x00007f342f2470e8:   movslq %ebx,%rbx               ; sign extend to 64 bits
  0.34% 0x00007f342f2470eb:   mov    (%r8,%rbx,1),%rbx       ; load the klass from the secondary_supers array at index %ecx
  0.47% 0x00007f342f2470ef:   cmp    %rbx,%r10               ; compare the klass with the expected klass (AutoCloseable)
        0x00007f342f2470f2:   je     0x00007f342f247106      ; if equal jump and store the klass in the secondary_super_cache
@@ -1635,9 +1634,9 @@ Both GraalVM JIT Compilers iterate over the secondary super types array using a 
        0x00007f342f2470fa:   cmp    %ecx,%r9d               ; compare the loop counter with the length of the secondary_supers array
        0x00007f342f2470fd:   jg     0x00007f342f2470e0      ; if greater jump to the beginning of the loop 
  0.33% 0x00007f342f2470ff:   mov    $0x0,%eax               ; move false to %eax
- 0.79% 0x00007f342f247104:   jmp    0x00007f342f24709c      ; jump to return assembly
+ 0.79% 0x00007f342f247104:   jmp    0x00007f342f24709c      ; jump to not found label
        0x00007f342f247106:   mov    %r10,0x20(%r11)         ; update the secondary_super_cache with the klass found
-       0x00007f342f24710a:   jmp    0x00007f342f24708b      ; match found so jump to different return assembly
+       0x00007f342f24710a:   jmp    0x00007f342f24708b      ; match found so jump to found label
 ```
 
 ### Conclusions
