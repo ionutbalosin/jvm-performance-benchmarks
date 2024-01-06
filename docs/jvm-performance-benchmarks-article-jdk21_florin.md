@@ -1647,3 +1647,194 @@ performing `instanceof` checks), especially when the number of secondary super t
 One of the reasons is that the C2 JIT Compiler uses the `repnz scas` instruction which can be slow on modern x86 architectures. 
 This issue is discussed in the [JDK mailing list](https://mail.openjdk.org/pipermail/hotspot-runtime-dev/2020-August/041056.html)
 and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
+
+# Miscellaneous
+
+This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT benchmarks with another class of benchmarks.
+
+## Miscellaneous Benchmarks
+
+The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
+
+## DijkstraShortestPathBenchmark
+
+Dijkstra's algorithm is an algorithm for finding the shortest paths between a random source node and all other nodes in 
+a graph.
+The benchmark uses two alternative approaches, each using different data structures to represent the graph, as follows:
+- an adjacency matrix
+- an adjacency list with a binary heap (min heap)
+
+Adjacency Matrix: This implementation uses an adjacency matrix representation of the graph combined with a standard priority queue (binary heap).
+The adjacency matrix represents the graph as a 2D array, where the value in the matrix indicates the weight of the edge between two nodes.
+This approach is suitable for dense graphs but can be inefficient for sparse graphs due to its space usage.
+The time complexity is O(V^2) due to the cost of accessing the matrix for each node during relaxation.
+
+Adjacency List with Binary Heap (Min Heap): This implementation uses a standard binary heap (min heap) combined with an adjacency list representation of the graph.
+The binary heap is implemented manually using a list of queues (buckets).
+It can offer better performance than binary heaps for dense graphs with small and non-negative edge weights.
+Its time complexity is O((V + E) log V).
+
+Note: these implementations offer different trade-offs in terms of time complexity, space efficiency, and performance characteristics.
+The best choice of implementation depends on the specific graph structure, the distribution of edge weights, etc.
+
+Source code: [DijkstraShortestPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/dijkstrashortestpath/DijkstraShortestPathBenchmark.java)
+
+[![DijkstraShortestPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DijkstraShortestPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DijkstraShortestPathBenchmark.svg?raw=true)
+
+
+## GameOfLifeBenchmark
+
+Conway's Game of Life, is a cellular automaton devised by mathematician John Conway in 1970.
+It is a mathematical "zero-player" game, meaning that its evolution is determined by its initial state, with no further input required.
+
+The Game of Life is played on a 2D grid of cells, where each cell can be in one of two states: alive or dead (0 or 1).
+The game progresses through generations, with the state of each cell in a generation being determined by the state of its neighboring cells
+in the previous generation according to a set of rules. These rules are based on the concept of birth, death, and survival:
+- Birth: A dead cell with exactly three live neighbors becomes a live.
+- Death: A live cell with fewer than two live neighbors (underpopulation) or more than three live neighbors (overpopulation) becomes a dead cell.
+- Survival: A live cell with two or three live neighbors remains alive.
+
+Despite its simple rules, the Game of Life can produce complex and intricate patterns, including gliders (moving structures),
+oscillators (repeating patterns), and even structures that can act as logic gates and memory cells.
+
+The benchmark involves several alternative strategies:
+- Game of Life with Functional Programming
+- Game of Life with Imperative Style
+
+
+Source code: [GameOfLifeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/gameoflife/GameOfLifeBenchmark.java)
+
+[![GameOfLifeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)
+
+
+## HuffmanCodingBenchmark
+
+Huffman encoding is an algorithm devised by David A. Huffman of MIT in 1952 for compressing text data to make a file
+occupy a smaller number of bytes. This relatively simple compression algorithm is powerful enough that variations of it
+are still used today in computer networks, fax machines, modems, HDTV, and other areas.
+
+The steps involved in Huffman encoding a given text source file into a destination compressed file are:
+- count frequencies: examine a source file's contents and count the number of occurrences of each character
+- build encoding tree: build a binary tree with a particular structure, where each node represents a character
+and its count of occurrences in the file. A priority queue is used to help build the tree along the way.
+- build encoding map: traverse the binary tree to discover the binary encodings of each character
+- encode data: re-examine the source file's contents, and for each character, output the encoded binary version of
+that character to the destination file.
+
+
+Source code: [HuffmanCodingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/huffmancoding/HuffmanCodingBenchmark.java)
+
+[![HuffmanCodingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)
+
+
+## KnapsackBenchmark
+
+The knapsack problem is a classic optimization problem in computer science and combinatorial optimization.
+Given a set of items, each with a value and weight, and a knapsack with a maximum weight capacity,
+the objective is to select items to maximize the total value while ensuring that the sum of their weights does not exceed the knapsack's capacity.
+
+The knapsack problem has two main variations:
+ - 0/1 Knapsack Problem: each item can be either included (0/1 choice) or excluded from the knapsack.
+An item cannot be partially included. This means you can either take an item entirely or leave it out.
+ - Fractional Knapsack Problem: there can take fractions of items, allowing to include parts of an item based on its weight.
+
+Some important notes regarding the knapsack problem:
+- The 0/1 Knapsack problem is commonly tackled using dynamic programming, owing to its complex nature.
+- The Fractional Knapsack problem is typically solved through a greedy algorithm. This is mainly because a 0/1 version of the Fractional Knapsack problem doesn't exist.
+
+The benchmark involves several alternative strategies:
+- Knapsack with Dynamic Programming (for the 0/1 version)
+- Knapsack with Greedy Programming (for the 0/1 version)
+- Fractional Knapsack (with Greedy Programming)
+
+
+Source code: [KnapsackBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/knapsack/KnapsackBenchmark.java)
+
+[![KnapsackBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/KnapsackBenchmark.svg?raw=true)
+
+
+## PalindromeBenchmark
+
+Iterates through a list of Strings read from a file and checks, for each String, if it is a palindrome.
+The benchmark uses a few alternative approaches:
+- trampolines
+- recursive
+- iterative
+
+The trampoline pattern is used for implementing algorithms recursively but without
+blowing the stack (as an alternative to recursive functions).
+A trampoline is an iteration applying a list of functions, where each function returns
+the next function to be called.
+
+The result (i.e., number of palindromes) is compared against a known constant number
+to be sure the computation is not wrong.
+
+
+Source code: [PalindromeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/palindrome/PalindromeBenchmark.java)
+
+[![PalindromeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PalindromeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PalindromeBenchmark.svg?raw=true)
+
+
+## PopulationVarianceBenchmark
+
+This benchmark generates a population of different ages and then calculates the age variation.
+Population variance is the average of the distances from each data point in a particular population
+to the mean squared. It indicates how data points spread out in the population.
+Population variance is an important measure of dispersion used in statistics.
+
+
+Source code: [PopulationVarianceBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/populationvariance/PopulationVarianceBenchmark.java)
+
+[![PopulationVarianceBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)
+
+
+## PrimesBenchmark
+
+Calculates the count of prime numbers up to a specified threshold (e.g., N).
+The benchmark employs several alternative methods:
+- Sieve of Eratosthenes
+- Trial division (i.e., checking if a number is prime by dividing it by all possible divisors up to the square root of the number.)
+- Miller-Rabin primality test
+
+The resulting count of prime numbers is compared against the Prime Number Theorem to ensure the accuracy of the computation.
+
+
+Source code: [PrimesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/prime/PrimesBenchmark.java)
+
+[![PrimesBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PrimesBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PrimesBenchmark.svg?raw=true)
+
+
+## PublicationStatisticsBenchmark
+
+This benchmark extensively uses the Collectors/Streams API to perform a bunch of operations on a list of publications and their authors
+producing different final results (i.e., statistics), including:
+- the year(s) with the most publications
+- the number of publications for each author
+- the author who published the most articles
+- the authors who have never collaborated with the same publication twice
+- the year of the first publication
+- the year of the last publication
+- the publication with the most authors (for each year).
+- the pair of authors who published the most publications together (for each year).
+
+The list of publications is randomly generated at the beginning of the benchmark and consists of 100,000 items,
+with each publication having a maximum of 9 authors. All of these publications are generated between the years 1900 and 2000,
+and in total, they have around 100 distinct types.
+The total number of authors is 1,000 (which means, on average, every author could potentially write around 100 articles).
+
+
+Source code: [PublicationStatisticsBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/publicationstatistics/PublicationStatisticsBenchmark.java)
+
+[![PublicationStatisticsBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PublicationStatisticsBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PublicationStatisticsBenchmark.svg?raw=true)
+
+## WordFrequencyBenchmark
+
+Computes the word frequencies/occurrences from a text file.
+The benchmark uses a few alternative approaches:
+- iterative
+- parallel streams
+- pattern streams
+
+Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/wordfrequency/WordFrequencyBenchmark.java)
+
+[![WordFrequencyBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/WordFrequencyBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/WordFrequencyBenchmark.svg?raw=true)
