@@ -1,0 +1,2193 @@
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = NONE, loadFactor = 384, lockType = OBJECT_LOCK, threadType = VIRTUAL)
+
+# Run progress: 0.00% complete, ETA 00:30:00
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 2.114 ms/op
+# Warmup Iteration   2: 1.768 ms/op
+# Warmup Iteration   3: 1.798 ms/op
+# Warmup Iteration   4: 1.820 ms/op
+# Warmup Iteration   5: 1.868 ms/op
+Iteration   1: 1.800 ms/op
+Iteration   2: 1.833 ms/op
+Iteration   3: 1.870 ms/op
+Iteration   4: 1.909 ms/op
+Iteration   5: 1.849 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  1.852 ±(99.9%) 0.156 ms/op [Average]
+  (min, avg, max) = (1.800, 1.852, 1.909), stdev = 0.041
+  CI (99.9%): [1.696, 2.009] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.818 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.550 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  63944.244 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  560622.893 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  364367.637 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  9054.278 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  87.244 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  24809.452 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1275.289 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  41536.335 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  2009.029 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  360084.050 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  5.119 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  3729279.597 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  625.501 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  557077.151 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  30.164 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  371306.582 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  136.942 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  187.269 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  2050994.568 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = NONE, loadFactor = 384, lockType = OBJECT_LOCK, threadType = PLATFORM)
+
+# Run progress: 5.56% complete, ETA 00:31:41
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1.305 ms/op
+# Warmup Iteration   2: 1.168 ms/op
+# Warmup Iteration   3: 1.120 ms/op
+# Warmup Iteration   4: 1.095 ms/op
+# Warmup Iteration   5: 1.029 ms/op
+Iteration   1: 1.051 ms/op
+Iteration   2: 1.098 ms/op
+Iteration   3: 1.101 ms/op
+Iteration   4: 1.086 ms/op
+Iteration   5: 1.095 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  1.086 ±(99.9%) 0.079 ms/op [Average]
+  (min, avg, max) = (1.051, 1.086, 1.101), stdev = 0.020
+  CI (99.9%): [1.008, 1.165] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.618 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.618 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  18162.647 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  306043.813 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  144844.449 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  9300.575 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  7.714 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  6570.799 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  242.771 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  9803.298 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  1036.091 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  176730.137 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  5.789 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  1567369.513 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  290.633 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  305426.427 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  28.759 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  145523.317 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  171.114 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  140.305 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  968781.207 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = NONE, loadFactor = 384, lockType = REENTRANT_LOCK, threadType = VIRTUAL)
+
+# Run progress: 11.11% complete, ETA 00:30:37
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 2.144 ms/op
+# Warmup Iteration   2: 1.812 ms/op
+# Warmup Iteration   3: 1.846 ms/op
+# Warmup Iteration   4: 1.912 ms/op
+# Warmup Iteration   5: 1.908 ms/op
+Iteration   1: 1.931 ms/op
+Iteration   2: 1.929 ms/op
+Iteration   3: 1.828 ms/op
+Iteration   4: 1.914 ms/op
+Iteration   5: 1.969 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  1.914 ±(99.9%) 0.202 ms/op [Average]
+  (min, avg, max) = (1.828, 1.914, 1.969), stdev = 0.053
+  CI (99.9%): [1.712, 2.117] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.801 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.555 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  65398.717 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  595207.705 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  372588.001 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  10173.295 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  111.755 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  24451.687 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1440.664 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  41371.901 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  2100.373 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  384876.810 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  5.362 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  3903538.576 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  641.879 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  594641.839 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  30.073 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  374208.326 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  167.399 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  196.969 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  2167028.592 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = NONE, loadFactor = 384, lockType = REENTRANT_LOCK, threadType = PLATFORM)
+
+# Run progress: 16.67% complete, ETA 00:28:57
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1.437 ms/op
+# Warmup Iteration   2: 1.286 ms/op
+# Warmup Iteration   3: 1.283 ms/op
+# Warmup Iteration   4: 1.258 ms/op
+# Warmup Iteration   5: 1.297 ms/op
+Iteration   1: 1.392 ms/op
+Iteration   2: 1.372 ms/op
+Iteration   3: 1.229 ms/op
+Iteration   4: 1.231 ms/op
+Iteration   5: 1.423 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  1.329 ±(99.9%) 0.356 ms/op [Average]
+  (min, avg, max) = (1.229, 1.329, 1.423), stdev = 0.092
+  CI (99.9%): [0.973, 1.685] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.902 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.526 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  23863.157 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  327157.161 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  150732.273 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  10055.442 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  8.463 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  8637.499 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  192.656 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  15790.646 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  1144.349 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  183540.396 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  5.876 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  1936255.764 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  308.111 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  326359.845 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  29.848 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  151072.240 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  143.350 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  131.481 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  1018171.873 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = NONE, loadFactor = 384, lockType = NO_LOCK, threadType = VIRTUAL)
+
+# Run progress: 22.22% complete, ETA 00:27:07
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 2.006 ms/op
+# Warmup Iteration   2: 1.703 ms/op
+# Warmup Iteration   3: 1.712 ms/op
+# Warmup Iteration   4: 1.765 ms/op
+# Warmup Iteration   5: 1.789 ms/op
+Iteration   1: 1.781 ms/op
+Iteration   2: 1.812 ms/op
+Iteration   3: 1.775 ms/op
+Iteration   4: 1.777 ms/op
+Iteration   5: 1.765 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  1.782 ±(99.9%) 0.068 ms/op [Average]
+  (min, avg, max) = (1.765, 1.782, 1.812), stdev = 0.018
+  CI (99.9%): [1.714, 1.850] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.819 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.550 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  60664.136 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  522884.286 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  339948.743 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  8642.237 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  65.357 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  22618.524 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1308.372 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  39265.923 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  1601.980 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  335924.352 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  5.183 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  3612838.698 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  599.826 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  511488.314 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  25.365 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  340685.227 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  197.382 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  139.533 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  1986622.034 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = NONE, loadFactor = 384, lockType = NO_LOCK, threadType = PLATFORM)
+
+# Run progress: 27.78% complete, ETA 00:25:14
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1.262 ms/op
+# Warmup Iteration   2: 1.046 ms/op
+# Warmup Iteration   3: 1.055 ms/op
+# Warmup Iteration   4: 1.064 ms/op
+# Warmup Iteration   5: 1.094 ms/op
+Iteration   1: 1.098 ms/op
+Iteration   2: 1.106 ms/op
+Iteration   3: 1.088 ms/op
+Iteration   4: 1.091 ms/op
+Iteration   5: 1.071 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  1.091 ±(99.9%) 0.051 ms/op [Average]
+  (min, avg, max) = (1.071, 1.091, 1.106), stdev = 0.013
+  CI (99.9%): [1.040, 1.142] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.733 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.577 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  18710.046 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  294761.721 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  135904.673 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  9081.416 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  10.786 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  6568.974 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  213.682 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  11185.514 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  1018.336 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  165886.405 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  6.084 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  1628165.505 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  298.213 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  291861.804 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  28.928 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  135872.345 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  140.386 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  130.303 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  939384.788 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = SLEEP, loadFactor = 384, lockType = OBJECT_LOCK, threadType = VIRTUAL)
+
+# Run progress: 33.33% complete, ETA 00:23:20
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 6.701 ms/op
+# Warmup Iteration   2: 5.346 ms/op
+# Warmup Iteration   3: 5.457 ms/op
+# Warmup Iteration   4: 5.514 ms/op
+# Warmup Iteration   5: 5.569 ms/op
+Iteration   1: 5.654 ms/op
+Iteration   2: 5.273 ms/op
+Iteration   3: 5.337 ms/op
+Iteration   4: 5.587 ms/op
+Iteration   5: 5.467 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  5.463 ±(99.9%) 0.621 ms/op [Average]
+  (min, avg, max) = (5.273, 5.463, 5.654), stdev = 0.161
+  CI (99.9%): [4.842, 6.085] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.548 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.646 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  100529.107 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  1766832.105 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  1075590.185 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  77890.722 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  333.005 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  35146.915 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1595.124 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  59762.872 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  32401.875 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  1416752.383 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  107.658 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  10569702.556 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  1349.367 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  1758431.649 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  101.751 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  1075130.192 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  828.112 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  952.126 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  6829091.198 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = SLEEP, loadFactor = 384, lockType = OBJECT_LOCK, threadType = PLATFORM)
+
+# Run progress: 38.89% complete, ETA 00:21:24
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 133.958 ms/op
+# Warmup Iteration   2: 128.498 ms/op
+# Warmup Iteration   3: 127.836 ms/op
+# Warmup Iteration   4: 127.166 ms/op
+# Warmup Iteration   5: 127.250 ms/op
+Iteration   1: 127.056 ms/op
+Iteration   2: 127.534 ms/op
+Iteration   3: 127.455 ms/op
+Iteration   4: 127.037 ms/op
+Iteration   5: 127.386 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  127.294 ±(99.9%) 0.892 ms/op [Average]
+  (min, avg, max) = (127.037, 127.294, 127.534), stdev = 0.232
+  CI (99.9%): [126.402, 128.186] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.446 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.692 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  507531.781 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  6560708.016 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  4519413.547 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  1593504.566 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  2988.551 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  86080.313 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  2315.384 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  63991.925 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  120784.006 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  4765917.302 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  3061.017 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  35911434.398 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  12241.487 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  6183569.658 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  1121.715 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  4036067.862 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  10912.423 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  83636.741 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  24835815.976 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = SLEEP, loadFactor = 384, lockType = REENTRANT_LOCK, threadType = VIRTUAL)
+
+# Run progress: 44.44% complete, ETA 00:19:29
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 136.469 ms/op
+# Warmup Iteration   2: 121.400 ms/op
+# Warmup Iteration   3: 112.039 ms/op
+# Warmup Iteration   4: 110.286 ms/op
+# Warmup Iteration   5: 109.172 ms/op
+Iteration   1: 110.217 ms/op
+Iteration   2: 110.345 ms/op
+Iteration   3: 110.984 ms/op
+Iteration   4: 110.080 ms/op
+Iteration   5: 108.995 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  110.124 ±(99.9%) 2.772 ms/op [Average]
+  (min, avg, max) = (108.995, 110.124, 110.984), stdev = 0.720
+  CI (99.9%): [107.352, 112.897] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.902 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.526 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  1438818.566 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  13514272.133 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  8375956.565 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  3578625.334 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  998.824 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  322892.414 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  3237.438 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  410442.526 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  262553.894 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  10021914.520 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  4259.661 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  103727357.090 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  13308.105 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  13650166.711 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  544.647 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  8370108.228 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  28283.594 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  192038.890 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  54548694.147 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = SLEEP, loadFactor = 384, lockType = REENTRANT_LOCK, threadType = PLATFORM)
+
+# Run progress: 50.00% complete, ETA 00:17:33
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 135.579 ms/op
+# Warmup Iteration   2: 132.391 ms/op
+# Warmup Iteration   3: 130.767 ms/op
+# Warmup Iteration   4: 130.341 ms/op
+# Warmup Iteration   5: 129.871 ms/op
+Iteration   1: 129.667 ms/op
+Iteration   2: 129.189 ms/op
+Iteration   3: 129.314 ms/op
+Iteration   4: 130.412 ms/op
+Iteration   5: 130.148 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  129.746 ±(99.9%) 2.027 ms/op [Average]
+  (min, avg, max) = (129.189, 129.746, 130.412), stdev = 0.526
+  CI (99.9%): [127.719, 131.773] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  2.419 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.413 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  544453.630 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  8166426.437 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  5209878.158 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  1914072.179 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  516.911 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  86109.358 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1838.256 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  78708.514 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  144821.811 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  7953866.247 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  3022.175 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  92278306.209 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  9195.148 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  8209276.771 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  551.723 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  4859157.092 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  11531.512 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  98272.978 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  38147082.178 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = SLEEP, loadFactor = 384, lockType = NO_LOCK, threadType = VIRTUAL)
+
+# Run progress: 55.56% complete, ETA 00:15:37
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 11.184 ms/op
+# Warmup Iteration   2: 8.322 ms/op
+# Warmup Iteration   3: 5.568 ms/op
+# Warmup Iteration   4: 5.528 ms/op
+# Warmup Iteration   5: 5.507 ms/op
+Iteration   1: 5.492 ms/op
+Iteration   2: 5.542 ms/op
+Iteration   3: 5.474 ms/op
+Iteration   4: 5.512 ms/op
+Iteration   5: 5.514 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  5.507 ±(99.9%) 0.098 ms/op [Average]
+  (min, avg, max) = (5.474, 5.507, 5.542), stdev = 0.025
+  CI (99.9%): [5.409, 5.605] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.065 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.939 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  133835.970 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  2320363.257 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  1261322.461 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  64189.287 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  448.671 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  41342.786 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  3759.808 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  50476.374 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  54166.681 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  1481386.132 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  37.857 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  8849347.128 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  3030.100 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  2329002.986 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  211.656 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  1254309.598 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  1084.954 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  7780.141 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  8306009.615 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = SLEEP, loadFactor = 384, lockType = NO_LOCK, threadType = PLATFORM)
+
+# Run progress: 61.11% complete, ETA 00:13:40
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 33.770 ms/op
+# Warmup Iteration   2: 32.238 ms/op
+# Warmup Iteration   3: 32.241 ms/op
+# Warmup Iteration   4: 32.270 ms/op
+# Warmup Iteration   5: 32.199 ms/op
+Iteration   1: 32.065 ms/op
+Iteration   2: 32.276 ms/op
+Iteration   3: 32.162 ms/op
+Iteration   4: 32.856 ms/op
+Iteration   5: 32.134 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  32.299 ±(99.9%) 1.235 ms/op [Average]
+  (min, avg, max) = (32.065, 32.299, 32.856), stdev = 0.321
+  CI (99.9%): [31.063, 33.534] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.357 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.737 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  379834.610 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  4059292.040 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  2501237.291 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  993855.002 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  156.240 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  67318.665 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  779.737 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  50379.525 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  73238.416 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  2989818.212 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  1539.344 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  21911014.870 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  3240.547 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  3968495.232 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  311.150 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  2403987.469 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  5302.253 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  45482.540 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  16142461.821 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = PARK, loadFactor = 384, lockType = OBJECT_LOCK, threadType = VIRTUAL)
+
+# Run progress: 66.67% complete, ETA 00:11:43
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 6.352 ms/op
+# Warmup Iteration   2: 4.589 ms/op
+# Warmup Iteration   3: 4.670 ms/op
+# Warmup Iteration   4: 4.700 ms/op
+# Warmup Iteration   5: 4.863 ms/op
+Iteration   1: 4.614 ms/op
+Iteration   2: 4.653 ms/op
+Iteration   3: 4.636 ms/op
+Iteration   4: 4.632 ms/op
+Iteration   5: 4.632 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  4.633 ±(99.9%) 0.053 ms/op [Average]
+  (min, avg, max) = (4.614, 4.633, 4.653), stdev = 0.014
+  CI (99.9%): [4.580, 4.686] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.596 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.627 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  99242.961 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  1550142.448 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  954348.572 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  65606.469 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  377.731 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  36415.678 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1592.518 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  60035.687 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  24315.143 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  1166267.298 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  74.740 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  9200194.631 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  1284.474 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  1554802.719 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  73.039 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  948053.321 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  834.130 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  904.479 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  5764622.243 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = PARK, loadFactor = 384, lockType = OBJECT_LOCK, threadType = PLATFORM)
+
+# Run progress: 72.22% complete, ETA 00:09:46
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 133.724 ms/op
+# Warmup Iteration   2: 127.914 ms/op
+# Warmup Iteration   3: 126.380 ms/op
+# Warmup Iteration   4: 126.355 ms/op
+# Warmup Iteration   5: 126.671 ms/op
+Iteration   1: 126.243 ms/op
+Iteration   2: 126.480 ms/op
+Iteration   3: 125.639 ms/op
+Iteration   4: 125.658 ms/op
+Iteration   5: 126.258 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  126.056 ±(99.9%) 1.477 ms/op [Average]
+  (min, avg, max) = (125.639, 126.056, 126.480), stdev = 0.383
+  CI (99.9%): [124.579, 127.532] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.421 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.704 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  486386.357 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  6072800.106 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  3943288.636 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  1876709.450 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  1392.044 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  84448.492 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  4934.923 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  80401.652 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  104365.323 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  4933733.765 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  3060.753 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  40098828.907 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  11855.519 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  7443291.318 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  851.169 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  4303934.483 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  12483.074 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  83846.371 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  28214993.210 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = PARK, loadFactor = 384, lockType = REENTRANT_LOCK, threadType = VIRTUAL)
+
+# Run progress: 77.78% complete, ETA 00:07:49
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 132.956 ms/op
+# Warmup Iteration   2: 107.528 ms/op
+# Warmup Iteration   3: 109.380 ms/op
+# Warmup Iteration   4: 110.576 ms/op
+# Warmup Iteration   5: 107.959 ms/op
+Iteration   1: 106.197 ms/op
+Iteration   2: 108.231 ms/op
+Iteration   3: 107.391 ms/op
+Iteration   4: 105.513 ms/op
+Iteration   5: 108.308 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  107.128 ±(99.9%) 4.776 ms/op [Average]
+  (min, avg, max) = (105.513, 107.128, 108.308), stdev = 1.240
+  CI (99.9%): [102.352, 111.904] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.896 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.527 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  1438730.342 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  13322979.070 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  8200317.350 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  3472038.248 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  1015.797 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  309865.346 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  3179.250 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  390350.490 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  254543.288 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  9787910.000 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  4187.262 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  101752639.586 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  14066.061 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  13213791.052 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  584.295 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  8227638.998 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  19724.662 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  192070.396 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  53674138.944 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = PARK, loadFactor = 384, lockType = REENTRANT_LOCK, threadType = PLATFORM)
+
+# Run progress: 83.33% complete, ETA 00:05:52
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 133.153 ms/op
+# Warmup Iteration   2: 130.339 ms/op
+# Warmup Iteration   3: 128.943 ms/op
+# Warmup Iteration   4: 128.264 ms/op
+# Warmup Iteration   5: 127.795 ms/op
+Iteration   1: 127.941 ms/op
+Iteration   2: 127.413 ms/op
+Iteration   3: 128.098 ms/op
+Iteration   4: 128.529 ms/op
+Iteration   5: 127.862 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  127.969 ±(99.9%) 1.554 ms/op [Average]
+  (min, avg, max) = (127.413, 127.969, 128.529), stdev = 0.404
+  CI (99.9%): [126.415, 129.523] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  2.504 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.399 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  575713.827 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  8255354.084 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  5417631.037 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  1978998.186 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  633.997 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  89261.910 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1027.591 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  79248.825 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  124046.000 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  7693920.559 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  3031.388 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  92808808.723 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  9542.052 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  8202093.406 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  363.358 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  5163535.235 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  9399.729 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  103283.987 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  37071122.349 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = PARK, loadFactor = 384, lockType = NO_LOCK, threadType = VIRTUAL)
+
+# Run progress: 88.89% complete, ETA 00:03:54
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 13.414 ms/op
+# Warmup Iteration   2: 5.646 ms/op
+# Warmup Iteration   3: 5.448 ms/op
+# Warmup Iteration   4: 5.505 ms/op
+# Warmup Iteration   5: 5.398 ms/op
+Iteration   1: 5.489 ms/op
+Iteration   2: 5.575 ms/op
+Iteration   3: 5.445 ms/op
+Iteration   4: 5.515 ms/op
+Iteration   5: 5.530 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  5.511 ±(99.9%) 0.185 ms/op [Average]
+  (min, avg, max) = (5.445, 5.511, 5.575), stdev = 0.048
+  CI (99.9%): [5.326, 5.696] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.135 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.881 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  142453.562 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  2293389.250 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  1231142.649 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  79790.497 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  394.445 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  45463.639 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  3887.201 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  56549.827 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  55787.370 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  1473957.506 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  63.500 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  9436610.012 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  2938.383 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  2306203.395 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  192.582 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  1238495.161 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  1143.403 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  8365.803 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  8317696.655 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21.0.1, Java HotSpot(TM) 64-Bit Server VM, 21.0.1+12-jvmci-23.1-b19
+# VM invoker: /usr/lib/jvm/graalvm-ee-jdk-21.0.1+12.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls
+# Parameters: (backoffType = PARK, loadFactor = 384, lockType = NO_LOCK, threadType = PLATFORM)
+
+# Run progress: 94.44% complete, ETA 00:01:57
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 33.967 ms/op
+# Warmup Iteration   2: 31.589 ms/op
+# Warmup Iteration   3: 31.603 ms/op
+# Warmup Iteration   4: 31.762 ms/op
+# Warmup Iteration   5: 31.754 ms/op
+Iteration   1: 31.781 ms/op
+Iteration   2: 31.715 ms/op
+Iteration   3: 31.701 ms/op
+Iteration   4: 31.555 ms/op
+Iteration   5: 31.636 ms/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls":
+  31.678 ±(99.9%) 0.330 ms/op [Average]
+  (min, avg, max) = (31.555, 31.678, 31.781), stdev = 0.086
+  CI (99.9%): [31.347, 32.008] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:CPI":
+  1.343 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:IPC":
+  0.745 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses":
+  400125.902 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads":
+  3831958.876 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores":
+  2348749.530 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses":
+  964731.599 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses":
+  240.154 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads":
+  64930.308 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses":
+  1135.397 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores":
+  50638.320 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses":
+  63933.506 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:branches":
+  2904863.497 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:context-switches":
+  1540.931 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:cycles":
+  20690000.838 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses":
+  3382.889 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads":
+  3948616.413 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses":
+  309.325 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores":
+  2397289.695 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses":
+  10478.896 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads":
+  39526.927 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls:instructions":
+  15409821.296 #/op
+
+
+# Run complete. Total time: 00:35:12
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                                                  (backoffType)  (loadFactor)      (lockType)  (threadType)  Mode  Cnt          Score   Error      Units
+VPThreadSynchronizationBenchmark.synchronized_calls                                 NONE           384     OBJECT_LOCK       VIRTUAL  avgt    5          1.852 ± 0.156      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             NONE           384     OBJECT_LOCK       VIRTUAL  avgt               1.818          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             NONE           384     OBJECT_LOCK       VIRTUAL  avgt               0.550          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           NONE           384     OBJECT_LOCK       VIRTUAL  avgt           63944.244               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 NONE           384     OBJECT_LOCK       VIRTUAL  avgt          560622.893               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                NONE           384     OBJECT_LOCK       VIRTUAL  avgt          364367.637               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           NONE           384     OBJECT_LOCK       VIRTUAL  avgt            9054.278               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 NONE           384     OBJECT_LOCK       VIRTUAL  avgt              87.244               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       NONE           384     OBJECT_LOCK       VIRTUAL  avgt           24809.452               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                NONE           384     OBJECT_LOCK       VIRTUAL  avgt            1275.289               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      NONE           384     OBJECT_LOCK       VIRTUAL  avgt           41536.335               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   NONE           384     OBJECT_LOCK       VIRTUAL  avgt            2009.029               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        NONE           384     OBJECT_LOCK       VIRTUAL  avgt          360084.050               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                NONE           384     OBJECT_LOCK       VIRTUAL  avgt               5.119               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          NONE           384     OBJECT_LOCK       VIRTUAL  avgt         3729279.597               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                NONE           384     OBJECT_LOCK       VIRTUAL  avgt             625.501               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      NONE           384     OBJECT_LOCK       VIRTUAL  avgt          557077.151               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               NONE           384     OBJECT_LOCK       VIRTUAL  avgt              30.164               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     NONE           384     OBJECT_LOCK       VIRTUAL  avgt          371306.582               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                NONE           384     OBJECT_LOCK       VIRTUAL  avgt             136.942               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      NONE           384     OBJECT_LOCK       VIRTUAL  avgt             187.269               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    NONE           384     OBJECT_LOCK       VIRTUAL  avgt         2050994.568               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 NONE           384     OBJECT_LOCK      PLATFORM  avgt    5          1.086 ± 0.079      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             NONE           384     OBJECT_LOCK      PLATFORM  avgt               1.618          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             NONE           384     OBJECT_LOCK      PLATFORM  avgt               0.618          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           NONE           384     OBJECT_LOCK      PLATFORM  avgt           18162.647               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 NONE           384     OBJECT_LOCK      PLATFORM  avgt          306043.813               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                NONE           384     OBJECT_LOCK      PLATFORM  avgt          144844.449               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           NONE           384     OBJECT_LOCK      PLATFORM  avgt            9300.575               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 NONE           384     OBJECT_LOCK      PLATFORM  avgt               7.714               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       NONE           384     OBJECT_LOCK      PLATFORM  avgt            6570.799               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                NONE           384     OBJECT_LOCK      PLATFORM  avgt             242.771               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      NONE           384     OBJECT_LOCK      PLATFORM  avgt            9803.298               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   NONE           384     OBJECT_LOCK      PLATFORM  avgt            1036.091               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        NONE           384     OBJECT_LOCK      PLATFORM  avgt          176730.137               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                NONE           384     OBJECT_LOCK      PLATFORM  avgt               5.789               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          NONE           384     OBJECT_LOCK      PLATFORM  avgt         1567369.513               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                NONE           384     OBJECT_LOCK      PLATFORM  avgt             290.633               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      NONE           384     OBJECT_LOCK      PLATFORM  avgt          305426.427               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               NONE           384     OBJECT_LOCK      PLATFORM  avgt              28.759               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     NONE           384     OBJECT_LOCK      PLATFORM  avgt          145523.317               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                NONE           384     OBJECT_LOCK      PLATFORM  avgt             171.114               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      NONE           384     OBJECT_LOCK      PLATFORM  avgt             140.305               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    NONE           384     OBJECT_LOCK      PLATFORM  avgt          968781.207               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 NONE           384  REENTRANT_LOCK       VIRTUAL  avgt    5          1.914 ± 0.202      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             NONE           384  REENTRANT_LOCK       VIRTUAL  avgt               1.801          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             NONE           384  REENTRANT_LOCK       VIRTUAL  avgt               0.555          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           NONE           384  REENTRANT_LOCK       VIRTUAL  avgt           65398.717               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 NONE           384  REENTRANT_LOCK       VIRTUAL  avgt          595207.705               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                NONE           384  REENTRANT_LOCK       VIRTUAL  avgt          372588.001               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           NONE           384  REENTRANT_LOCK       VIRTUAL  avgt           10173.295               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 NONE           384  REENTRANT_LOCK       VIRTUAL  avgt             111.755               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       NONE           384  REENTRANT_LOCK       VIRTUAL  avgt           24451.687               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                NONE           384  REENTRANT_LOCK       VIRTUAL  avgt            1440.664               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      NONE           384  REENTRANT_LOCK       VIRTUAL  avgt           41371.901               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   NONE           384  REENTRANT_LOCK       VIRTUAL  avgt            2100.373               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        NONE           384  REENTRANT_LOCK       VIRTUAL  avgt          384876.810               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                NONE           384  REENTRANT_LOCK       VIRTUAL  avgt               5.362               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          NONE           384  REENTRANT_LOCK       VIRTUAL  avgt         3903538.576               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                NONE           384  REENTRANT_LOCK       VIRTUAL  avgt             641.879               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      NONE           384  REENTRANT_LOCK       VIRTUAL  avgt          594641.839               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               NONE           384  REENTRANT_LOCK       VIRTUAL  avgt              30.073               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     NONE           384  REENTRANT_LOCK       VIRTUAL  avgt          374208.326               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                NONE           384  REENTRANT_LOCK       VIRTUAL  avgt             167.399               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      NONE           384  REENTRANT_LOCK       VIRTUAL  avgt             196.969               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    NONE           384  REENTRANT_LOCK       VIRTUAL  avgt         2167028.592               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 NONE           384  REENTRANT_LOCK      PLATFORM  avgt    5          1.329 ± 0.356      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             NONE           384  REENTRANT_LOCK      PLATFORM  avgt               1.902          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             NONE           384  REENTRANT_LOCK      PLATFORM  avgt               0.526          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           NONE           384  REENTRANT_LOCK      PLATFORM  avgt           23863.157               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 NONE           384  REENTRANT_LOCK      PLATFORM  avgt          327157.161               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                NONE           384  REENTRANT_LOCK      PLATFORM  avgt          150732.273               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           NONE           384  REENTRANT_LOCK      PLATFORM  avgt           10055.442               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 NONE           384  REENTRANT_LOCK      PLATFORM  avgt               8.463               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       NONE           384  REENTRANT_LOCK      PLATFORM  avgt            8637.499               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                NONE           384  REENTRANT_LOCK      PLATFORM  avgt             192.656               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      NONE           384  REENTRANT_LOCK      PLATFORM  avgt           15790.646               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   NONE           384  REENTRANT_LOCK      PLATFORM  avgt            1144.349               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        NONE           384  REENTRANT_LOCK      PLATFORM  avgt          183540.396               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                NONE           384  REENTRANT_LOCK      PLATFORM  avgt               5.876               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          NONE           384  REENTRANT_LOCK      PLATFORM  avgt         1936255.764               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                NONE           384  REENTRANT_LOCK      PLATFORM  avgt             308.111               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      NONE           384  REENTRANT_LOCK      PLATFORM  avgt          326359.845               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               NONE           384  REENTRANT_LOCK      PLATFORM  avgt              29.848               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     NONE           384  REENTRANT_LOCK      PLATFORM  avgt          151072.240               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                NONE           384  REENTRANT_LOCK      PLATFORM  avgt             143.350               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      NONE           384  REENTRANT_LOCK      PLATFORM  avgt             131.481               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    NONE           384  REENTRANT_LOCK      PLATFORM  avgt         1018171.873               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 NONE           384         NO_LOCK       VIRTUAL  avgt    5          1.782 ± 0.068      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             NONE           384         NO_LOCK       VIRTUAL  avgt               1.819          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             NONE           384         NO_LOCK       VIRTUAL  avgt               0.550          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           NONE           384         NO_LOCK       VIRTUAL  avgt           60664.136               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 NONE           384         NO_LOCK       VIRTUAL  avgt          522884.286               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                NONE           384         NO_LOCK       VIRTUAL  avgt          339948.743               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           NONE           384         NO_LOCK       VIRTUAL  avgt            8642.237               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 NONE           384         NO_LOCK       VIRTUAL  avgt              65.357               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       NONE           384         NO_LOCK       VIRTUAL  avgt           22618.524               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                NONE           384         NO_LOCK       VIRTUAL  avgt            1308.372               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      NONE           384         NO_LOCK       VIRTUAL  avgt           39265.923               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   NONE           384         NO_LOCK       VIRTUAL  avgt            1601.980               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        NONE           384         NO_LOCK       VIRTUAL  avgt          335924.352               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                NONE           384         NO_LOCK       VIRTUAL  avgt               5.183               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          NONE           384         NO_LOCK       VIRTUAL  avgt         3612838.698               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                NONE           384         NO_LOCK       VIRTUAL  avgt             599.826               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      NONE           384         NO_LOCK       VIRTUAL  avgt          511488.314               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               NONE           384         NO_LOCK       VIRTUAL  avgt              25.365               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     NONE           384         NO_LOCK       VIRTUAL  avgt          340685.227               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                NONE           384         NO_LOCK       VIRTUAL  avgt             197.382               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      NONE           384         NO_LOCK       VIRTUAL  avgt             139.533               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    NONE           384         NO_LOCK       VIRTUAL  avgt         1986622.034               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 NONE           384         NO_LOCK      PLATFORM  avgt    5          1.091 ± 0.051      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             NONE           384         NO_LOCK      PLATFORM  avgt               1.733          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             NONE           384         NO_LOCK      PLATFORM  avgt               0.577          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           NONE           384         NO_LOCK      PLATFORM  avgt           18710.046               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 NONE           384         NO_LOCK      PLATFORM  avgt          294761.721               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                NONE           384         NO_LOCK      PLATFORM  avgt          135904.673               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           NONE           384         NO_LOCK      PLATFORM  avgt            9081.416               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 NONE           384         NO_LOCK      PLATFORM  avgt              10.786               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       NONE           384         NO_LOCK      PLATFORM  avgt            6568.974               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                NONE           384         NO_LOCK      PLATFORM  avgt             213.682               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      NONE           384         NO_LOCK      PLATFORM  avgt           11185.514               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   NONE           384         NO_LOCK      PLATFORM  avgt            1018.336               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        NONE           384         NO_LOCK      PLATFORM  avgt          165886.405               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                NONE           384         NO_LOCK      PLATFORM  avgt               6.084               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          NONE           384         NO_LOCK      PLATFORM  avgt         1628165.505               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                NONE           384         NO_LOCK      PLATFORM  avgt             298.213               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      NONE           384         NO_LOCK      PLATFORM  avgt          291861.804               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               NONE           384         NO_LOCK      PLATFORM  avgt              28.928               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     NONE           384         NO_LOCK      PLATFORM  avgt          135872.345               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                NONE           384         NO_LOCK      PLATFORM  avgt             140.386               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      NONE           384         NO_LOCK      PLATFORM  avgt             130.303               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    NONE           384         NO_LOCK      PLATFORM  avgt          939384.788               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt    5          5.463 ± 0.621      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                            SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt               1.548          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                            SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt               0.646          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses          SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt          100529.107               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt         1766832.105               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores               SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt         1075590.185               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses          SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt           77890.722               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt             333.005               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                      SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt           35146.915               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses               SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt            1595.124               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                     SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt           59762.872               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                  SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt           32401.875               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                       SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt         1416752.383               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches               SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt             107.658               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                         SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt        10569702.556               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses               SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt            1349.367               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                     SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt         1758431.649               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses              SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt             101.751               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                    SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt         1075130.192               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses               SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt             828.112               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                     SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt             952.126               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                   SLEEP           384     OBJECT_LOCK       VIRTUAL  avgt         6829091.198               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                SLEEP           384     OBJECT_LOCK      PLATFORM  avgt    5        127.294 ± 0.892      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                            SLEEP           384     OBJECT_LOCK      PLATFORM  avgt               1.446          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                            SLEEP           384     OBJECT_LOCK      PLATFORM  avgt               0.692          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses          SLEEP           384     OBJECT_LOCK      PLATFORM  avgt          507531.781               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                SLEEP           384     OBJECT_LOCK      PLATFORM  avgt         6560708.016               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores               SLEEP           384     OBJECT_LOCK      PLATFORM  avgt         4519413.547               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses          SLEEP           384     OBJECT_LOCK      PLATFORM  avgt         1593504.566               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                SLEEP           384     OBJECT_LOCK      PLATFORM  avgt            2988.551               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                      SLEEP           384     OBJECT_LOCK      PLATFORM  avgt           86080.313               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses               SLEEP           384     OBJECT_LOCK      PLATFORM  avgt            2315.384               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                     SLEEP           384     OBJECT_LOCK      PLATFORM  avgt           63991.925               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                  SLEEP           384     OBJECT_LOCK      PLATFORM  avgt          120784.006               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                       SLEEP           384     OBJECT_LOCK      PLATFORM  avgt         4765917.302               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches               SLEEP           384     OBJECT_LOCK      PLATFORM  avgt            3061.017               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                         SLEEP           384     OBJECT_LOCK      PLATFORM  avgt        35911434.398               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses               SLEEP           384     OBJECT_LOCK      PLATFORM  avgt           12241.487               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                     SLEEP           384     OBJECT_LOCK      PLATFORM  avgt         6183569.658               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses              SLEEP           384     OBJECT_LOCK      PLATFORM  avgt            1121.715               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                    SLEEP           384     OBJECT_LOCK      PLATFORM  avgt         4036067.862               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses               SLEEP           384     OBJECT_LOCK      PLATFORM  avgt           10912.423               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                     SLEEP           384     OBJECT_LOCK      PLATFORM  avgt           83636.741               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                   SLEEP           384     OBJECT_LOCK      PLATFORM  avgt        24835815.976               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt    5        110.124 ± 2.772      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                            SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt               1.902          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                            SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt               0.526          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses          SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt         1438818.566               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt        13514272.133               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores               SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt         8375956.565               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses          SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt         3578625.334               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt             998.824               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                      SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt          322892.414               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses               SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt            3237.438               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                     SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt          410442.526               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                  SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt          262553.894               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                       SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt        10021914.520               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches               SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt            4259.661               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                         SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt       103727357.090               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses               SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt           13308.105               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                     SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt        13650166.711               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses              SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt             544.647               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                    SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt         8370108.228               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses               SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt           28283.594               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                     SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt          192038.890               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                   SLEEP           384  REENTRANT_LOCK       VIRTUAL  avgt        54548694.147               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt    5        129.746 ± 2.027      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                            SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt               2.419          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                            SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt               0.413          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses          SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt          544453.630               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt         8166426.437               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores               SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt         5209878.158               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses          SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt         1914072.179               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt             516.911               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                      SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt           86109.358               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses               SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt            1838.256               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                     SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt           78708.514               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                  SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt          144821.811               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                       SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt         7953866.247               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches               SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt            3022.175               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                         SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt        92278306.209               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses               SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt            9195.148               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                     SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt         8209276.771               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses              SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt             551.723               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                    SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt         4859157.092               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses               SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt           11531.512               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                     SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt           98272.978               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                   SLEEP           384  REENTRANT_LOCK      PLATFORM  avgt        38147082.178               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                SLEEP           384         NO_LOCK       VIRTUAL  avgt    5          5.507 ± 0.098      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                            SLEEP           384         NO_LOCK       VIRTUAL  avgt               1.065          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                            SLEEP           384         NO_LOCK       VIRTUAL  avgt               0.939          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses          SLEEP           384         NO_LOCK       VIRTUAL  avgt          133835.970               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                SLEEP           384         NO_LOCK       VIRTUAL  avgt         2320363.257               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores               SLEEP           384         NO_LOCK       VIRTUAL  avgt         1261322.461               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses          SLEEP           384         NO_LOCK       VIRTUAL  avgt           64189.287               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                SLEEP           384         NO_LOCK       VIRTUAL  avgt             448.671               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                      SLEEP           384         NO_LOCK       VIRTUAL  avgt           41342.786               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses               SLEEP           384         NO_LOCK       VIRTUAL  avgt            3759.808               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                     SLEEP           384         NO_LOCK       VIRTUAL  avgt           50476.374               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                  SLEEP           384         NO_LOCK       VIRTUAL  avgt           54166.681               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                       SLEEP           384         NO_LOCK       VIRTUAL  avgt         1481386.132               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches               SLEEP           384         NO_LOCK       VIRTUAL  avgt              37.857               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                         SLEEP           384         NO_LOCK       VIRTUAL  avgt         8849347.128               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses               SLEEP           384         NO_LOCK       VIRTUAL  avgt            3030.100               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                     SLEEP           384         NO_LOCK       VIRTUAL  avgt         2329002.986               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses              SLEEP           384         NO_LOCK       VIRTUAL  avgt             211.656               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                    SLEEP           384         NO_LOCK       VIRTUAL  avgt         1254309.598               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses               SLEEP           384         NO_LOCK       VIRTUAL  avgt            1084.954               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                     SLEEP           384         NO_LOCK       VIRTUAL  avgt            7780.141               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                   SLEEP           384         NO_LOCK       VIRTUAL  avgt         8306009.615               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                SLEEP           384         NO_LOCK      PLATFORM  avgt    5         32.299 ± 1.235      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                            SLEEP           384         NO_LOCK      PLATFORM  avgt               1.357          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                            SLEEP           384         NO_LOCK      PLATFORM  avgt               0.737          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses          SLEEP           384         NO_LOCK      PLATFORM  avgt          379834.610               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                SLEEP           384         NO_LOCK      PLATFORM  avgt         4059292.040               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores               SLEEP           384         NO_LOCK      PLATFORM  avgt         2501237.291               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses          SLEEP           384         NO_LOCK      PLATFORM  avgt          993855.002               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                SLEEP           384         NO_LOCK      PLATFORM  avgt             156.240               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                      SLEEP           384         NO_LOCK      PLATFORM  avgt           67318.665               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses               SLEEP           384         NO_LOCK      PLATFORM  avgt             779.737               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                     SLEEP           384         NO_LOCK      PLATFORM  avgt           50379.525               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                  SLEEP           384         NO_LOCK      PLATFORM  avgt           73238.416               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                       SLEEP           384         NO_LOCK      PLATFORM  avgt         2989818.212               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches               SLEEP           384         NO_LOCK      PLATFORM  avgt            1539.344               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                         SLEEP           384         NO_LOCK      PLATFORM  avgt        21911014.870               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses               SLEEP           384         NO_LOCK      PLATFORM  avgt            3240.547               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                     SLEEP           384         NO_LOCK      PLATFORM  avgt         3968495.232               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses              SLEEP           384         NO_LOCK      PLATFORM  avgt             311.150               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                    SLEEP           384         NO_LOCK      PLATFORM  avgt         2403987.469               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses               SLEEP           384         NO_LOCK      PLATFORM  avgt            5302.253               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                     SLEEP           384         NO_LOCK      PLATFORM  avgt           45482.540               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                   SLEEP           384         NO_LOCK      PLATFORM  avgt        16142461.821               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 PARK           384     OBJECT_LOCK       VIRTUAL  avgt    5          4.633 ± 0.053      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             PARK           384     OBJECT_LOCK       VIRTUAL  avgt               1.596          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             PARK           384     OBJECT_LOCK       VIRTUAL  avgt               0.627          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           PARK           384     OBJECT_LOCK       VIRTUAL  avgt           99242.961               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 PARK           384     OBJECT_LOCK       VIRTUAL  avgt         1550142.448               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                PARK           384     OBJECT_LOCK       VIRTUAL  avgt          954348.572               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           PARK           384     OBJECT_LOCK       VIRTUAL  avgt           65606.469               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 PARK           384     OBJECT_LOCK       VIRTUAL  avgt             377.731               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       PARK           384     OBJECT_LOCK       VIRTUAL  avgt           36415.678               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                PARK           384     OBJECT_LOCK       VIRTUAL  avgt            1592.518               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      PARK           384     OBJECT_LOCK       VIRTUAL  avgt           60035.687               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   PARK           384     OBJECT_LOCK       VIRTUAL  avgt           24315.143               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        PARK           384     OBJECT_LOCK       VIRTUAL  avgt         1166267.298               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                PARK           384     OBJECT_LOCK       VIRTUAL  avgt              74.740               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          PARK           384     OBJECT_LOCK       VIRTUAL  avgt         9200194.631               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                PARK           384     OBJECT_LOCK       VIRTUAL  avgt            1284.474               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      PARK           384     OBJECT_LOCK       VIRTUAL  avgt         1554802.719               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               PARK           384     OBJECT_LOCK       VIRTUAL  avgt              73.039               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     PARK           384     OBJECT_LOCK       VIRTUAL  avgt          948053.321               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                PARK           384     OBJECT_LOCK       VIRTUAL  avgt             834.130               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      PARK           384     OBJECT_LOCK       VIRTUAL  avgt             904.479               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    PARK           384     OBJECT_LOCK       VIRTUAL  avgt         5764622.243               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 PARK           384     OBJECT_LOCK      PLATFORM  avgt    5        126.056 ± 1.477      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             PARK           384     OBJECT_LOCK      PLATFORM  avgt               1.421          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             PARK           384     OBJECT_LOCK      PLATFORM  avgt               0.704          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           PARK           384     OBJECT_LOCK      PLATFORM  avgt          486386.357               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 PARK           384     OBJECT_LOCK      PLATFORM  avgt         6072800.106               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                PARK           384     OBJECT_LOCK      PLATFORM  avgt         3943288.636               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           PARK           384     OBJECT_LOCK      PLATFORM  avgt         1876709.450               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 PARK           384     OBJECT_LOCK      PLATFORM  avgt            1392.044               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       PARK           384     OBJECT_LOCK      PLATFORM  avgt           84448.492               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                PARK           384     OBJECT_LOCK      PLATFORM  avgt            4934.923               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      PARK           384     OBJECT_LOCK      PLATFORM  avgt           80401.652               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   PARK           384     OBJECT_LOCK      PLATFORM  avgt          104365.323               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        PARK           384     OBJECT_LOCK      PLATFORM  avgt         4933733.765               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                PARK           384     OBJECT_LOCK      PLATFORM  avgt            3060.753               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          PARK           384     OBJECT_LOCK      PLATFORM  avgt        40098828.907               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                PARK           384     OBJECT_LOCK      PLATFORM  avgt           11855.519               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      PARK           384     OBJECT_LOCK      PLATFORM  avgt         7443291.318               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               PARK           384     OBJECT_LOCK      PLATFORM  avgt             851.169               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     PARK           384     OBJECT_LOCK      PLATFORM  avgt         4303934.483               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                PARK           384     OBJECT_LOCK      PLATFORM  avgt           12483.074               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      PARK           384     OBJECT_LOCK      PLATFORM  avgt           83846.371               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    PARK           384     OBJECT_LOCK      PLATFORM  avgt        28214993.210               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 PARK           384  REENTRANT_LOCK       VIRTUAL  avgt    5        107.128 ± 4.776      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             PARK           384  REENTRANT_LOCK       VIRTUAL  avgt               1.896          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             PARK           384  REENTRANT_LOCK       VIRTUAL  avgt               0.527          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           PARK           384  REENTRANT_LOCK       VIRTUAL  avgt         1438730.342               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 PARK           384  REENTRANT_LOCK       VIRTUAL  avgt        13322979.070               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                PARK           384  REENTRANT_LOCK       VIRTUAL  avgt         8200317.350               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           PARK           384  REENTRANT_LOCK       VIRTUAL  avgt         3472038.248               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 PARK           384  REENTRANT_LOCK       VIRTUAL  avgt            1015.797               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       PARK           384  REENTRANT_LOCK       VIRTUAL  avgt          309865.346               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                PARK           384  REENTRANT_LOCK       VIRTUAL  avgt            3179.250               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      PARK           384  REENTRANT_LOCK       VIRTUAL  avgt          390350.490               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   PARK           384  REENTRANT_LOCK       VIRTUAL  avgt          254543.288               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        PARK           384  REENTRANT_LOCK       VIRTUAL  avgt         9787910.000               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                PARK           384  REENTRANT_LOCK       VIRTUAL  avgt            4187.262               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          PARK           384  REENTRANT_LOCK       VIRTUAL  avgt       101752639.586               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                PARK           384  REENTRANT_LOCK       VIRTUAL  avgt           14066.061               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      PARK           384  REENTRANT_LOCK       VIRTUAL  avgt        13213791.052               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               PARK           384  REENTRANT_LOCK       VIRTUAL  avgt             584.295               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     PARK           384  REENTRANT_LOCK       VIRTUAL  avgt         8227638.998               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                PARK           384  REENTRANT_LOCK       VIRTUAL  avgt           19724.662               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      PARK           384  REENTRANT_LOCK       VIRTUAL  avgt          192070.396               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    PARK           384  REENTRANT_LOCK       VIRTUAL  avgt        53674138.944               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 PARK           384  REENTRANT_LOCK      PLATFORM  avgt    5        127.969 ± 1.554      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             PARK           384  REENTRANT_LOCK      PLATFORM  avgt               2.504          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             PARK           384  REENTRANT_LOCK      PLATFORM  avgt               0.399          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           PARK           384  REENTRANT_LOCK      PLATFORM  avgt          575713.827               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 PARK           384  REENTRANT_LOCK      PLATFORM  avgt         8255354.084               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                PARK           384  REENTRANT_LOCK      PLATFORM  avgt         5417631.037               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           PARK           384  REENTRANT_LOCK      PLATFORM  avgt         1978998.186               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 PARK           384  REENTRANT_LOCK      PLATFORM  avgt             633.997               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       PARK           384  REENTRANT_LOCK      PLATFORM  avgt           89261.910               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                PARK           384  REENTRANT_LOCK      PLATFORM  avgt            1027.591               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      PARK           384  REENTRANT_LOCK      PLATFORM  avgt           79248.825               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   PARK           384  REENTRANT_LOCK      PLATFORM  avgt          124046.000               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        PARK           384  REENTRANT_LOCK      PLATFORM  avgt         7693920.559               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                PARK           384  REENTRANT_LOCK      PLATFORM  avgt            3031.388               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          PARK           384  REENTRANT_LOCK      PLATFORM  avgt        92808808.723               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                PARK           384  REENTRANT_LOCK      PLATFORM  avgt            9542.052               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      PARK           384  REENTRANT_LOCK      PLATFORM  avgt         8202093.406               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               PARK           384  REENTRANT_LOCK      PLATFORM  avgt             363.358               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     PARK           384  REENTRANT_LOCK      PLATFORM  avgt         5163535.235               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                PARK           384  REENTRANT_LOCK      PLATFORM  avgt            9399.729               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      PARK           384  REENTRANT_LOCK      PLATFORM  avgt          103283.987               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    PARK           384  REENTRANT_LOCK      PLATFORM  avgt        37071122.349               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 PARK           384         NO_LOCK       VIRTUAL  avgt    5          5.511 ± 0.185      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             PARK           384         NO_LOCK       VIRTUAL  avgt               1.135          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             PARK           384         NO_LOCK       VIRTUAL  avgt               0.881          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           PARK           384         NO_LOCK       VIRTUAL  avgt          142453.562               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 PARK           384         NO_LOCK       VIRTUAL  avgt         2293389.250               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                PARK           384         NO_LOCK       VIRTUAL  avgt         1231142.649               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           PARK           384         NO_LOCK       VIRTUAL  avgt           79790.497               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 PARK           384         NO_LOCK       VIRTUAL  avgt             394.445               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       PARK           384         NO_LOCK       VIRTUAL  avgt           45463.639               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                PARK           384         NO_LOCK       VIRTUAL  avgt            3887.201               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      PARK           384         NO_LOCK       VIRTUAL  avgt           56549.827               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   PARK           384         NO_LOCK       VIRTUAL  avgt           55787.370               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        PARK           384         NO_LOCK       VIRTUAL  avgt         1473957.506               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                PARK           384         NO_LOCK       VIRTUAL  avgt              63.500               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          PARK           384         NO_LOCK       VIRTUAL  avgt         9436610.012               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                PARK           384         NO_LOCK       VIRTUAL  avgt            2938.383               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      PARK           384         NO_LOCK       VIRTUAL  avgt         2306203.395               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               PARK           384         NO_LOCK       VIRTUAL  avgt             192.582               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     PARK           384         NO_LOCK       VIRTUAL  avgt         1238495.161               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                PARK           384         NO_LOCK       VIRTUAL  avgt            1143.403               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      PARK           384         NO_LOCK       VIRTUAL  avgt            8365.803               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    PARK           384         NO_LOCK       VIRTUAL  avgt         8317696.655               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls                                 PARK           384         NO_LOCK      PLATFORM  avgt    5         31.678 ± 0.330      ms/op
+VPThreadSynchronizationBenchmark.synchronized_calls:CPI                             PARK           384         NO_LOCK      PLATFORM  avgt               1.343          clks/insn
+VPThreadSynchronizationBenchmark.synchronized_calls:IPC                             PARK           384         NO_LOCK      PLATFORM  avgt               0.745          insns/clk
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-load-misses           PARK           384         NO_LOCK      PLATFORM  avgt          400125.902               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-loads                 PARK           384         NO_LOCK      PLATFORM  avgt         3831958.876               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-dcache-stores                PARK           384         NO_LOCK      PLATFORM  avgt         2348749.530               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:L1-icache-load-misses           PARK           384         NO_LOCK      PLATFORM  avgt          964731.599               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-load-misses                 PARK           384         NO_LOCK      PLATFORM  avgt             240.154               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-loads                       PARK           384         NO_LOCK      PLATFORM  avgt           64930.308               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-store-misses                PARK           384         NO_LOCK      PLATFORM  avgt            1135.397               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:LLC-stores                      PARK           384         NO_LOCK      PLATFORM  avgt           50638.320               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branch-misses                   PARK           384         NO_LOCK      PLATFORM  avgt           63933.506               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:branches                        PARK           384         NO_LOCK      PLATFORM  avgt         2904863.497               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:context-switches                PARK           384         NO_LOCK      PLATFORM  avgt            1540.931               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:cycles                          PARK           384         NO_LOCK      PLATFORM  avgt        20690000.838               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-load-misses                PARK           384         NO_LOCK      PLATFORM  avgt            3382.889               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-loads                      PARK           384         NO_LOCK      PLATFORM  avgt         3948616.413               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-store-misses               PARK           384         NO_LOCK      PLATFORM  avgt             309.325               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:dTLB-stores                     PARK           384         NO_LOCK      PLATFORM  avgt         2397289.695               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-load-misses                PARK           384         NO_LOCK      PLATFORM  avgt           10478.896               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:iTLB-loads                      PARK           384         NO_LOCK      PLATFORM  avgt           39526.927               #/op
+VPThreadSynchronizationBenchmark.synchronized_calls:instructions                    PARK           384         NO_LOCK      PLATFORM  avgt        15409821.296               #/op
