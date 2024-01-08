@@ -1840,15 +1840,15 @@ The section below pertains to the `initial_loop` method.
 
 #### C2 JIT Compiler
 
-[![LoopInvariantCodeMotionBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
 
 #### Oracle GraalVM JIT Compiler
 
-[![LoopInvariantCodeMotionBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
 
 #### GraalVM CE JIT Compiler
 
-[![LoopInvariantCodeMotionBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
 
 ### Conclusions
 
@@ -2830,11 +2830,7 @@ for the cached exception object. This optimization is enabled by default and can
 Below, is a flamegraph of the `try_npe_catch` benchmark when the `nullThreshold` is 16. The flamegraph is generated
 using the [Async-profiler](https://github.com/async-profiler/async-profiler/).
 
-TODO:Florin replace the link with the correct one
-
-https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true
-
-[![NpeControlFlowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html?raw=true)
+[![NpeControlFlowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html)
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
@@ -2842,11 +2838,7 @@ Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not make use of a
 Instead, both compilers allocate a new exception and fill in the stack trace on each iteration of the loop when the
 `NullPointerException` is thrown. This can once again be observed by looking at the generated flamegraph.
 
-TODO:Florin replace the link with the correct one
-
-https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true
-
-[![NpeControlFlowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html?raw=true)
+[![NpeControlFlowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html)
 
 Opposed to the C2 JIT Compiler, the GraalVM based JIT compilers will spend additional time inside JVMCI and
 then filling in the stack trace.
@@ -2912,11 +2904,7 @@ A side effect of this optimization is that the stack trace is not collected.
 
 Below is the flamegraph generated by the `implicit_throw_npe` benchmark when the `threshold` is 1.0.
 
-TODO:Florin replace the link with the correct one
-
-https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true
-
-[![NpeThrowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.html?raw=true)
+[![NpeThrowBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.html)
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
@@ -2924,11 +2912,7 @@ The Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not make use 
 Instead, both compilers allocate a new exception and fill in the stack trace on each iteration of the loop (when the
 threshold is 1.0). This can once again be observed by looking at the generated flamegraph.
 
-TODO:Florin replace the link with the correct one
-
-https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true
-
-[![NpeThrowBenchmark.svg](/home/gogu/git/jvm-performance-benchmarks/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.html?raw=true)
+[![NpeThrowBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.html)
 
 ### Conclusions
 
@@ -3483,8 +3467,6 @@ the stores.
 
 The C2 JIT compiler has an optimization that first tries to spill onto the FPU registers before spilling onto the stack.
 This optimization is enabled by default and can be disabled by using the `-XX:-UseFPUForSpilling` flag.
-
-TODO: Ionut: Regenerate this plot with the updated results
 
 Source code: [StackSpillingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/StackSpillingBenchmark.java)
 
@@ -4214,15 +4196,15 @@ The flame graphs below pertain to the `pattern_split` method.
 
 #### C2 JIT Compiler
 
-[![StringPatternSplitBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+[![StringPatternSplitBenchmar.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
 
 #### Oracle GraalVM JIT Compiler
 
-[![StringPatternSplitBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+[![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
 
 #### GraalVM CE JIT Compiler
 
-[![StringPatternSplitBenchmark](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+[![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
 
 ### Conclusions
 
