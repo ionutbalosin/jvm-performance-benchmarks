@@ -146,12 +146,12 @@ and replace the return value with a constant value (i.e. `reducedLength`).
 Both C2 and the Oracle GraalVM JIT compilers are able to remove the loop and replace the return value with a constant.
 
 ```
-  0x00007f8f80757bba:   mov    $0x400000,%eax               ; move the constant value into the return register
-  0x00007f8f80757bbf:   add    $0x10,%rsp
-  0x00007f8f80757bc3:   pop    %rbp
-  0x00007f8f80757bc4:   cmp    0x450(%r15),%rsp             ;   {poll_return}
-  0x00007f8f80757bcb:   ja     0x00007f8f80757bd2
-  0x00007f8f80757bd1:   ret                                 ; return the constant value (eax)
+  0x7f8f80757bba:   mov    $0x400000,%eax               ; move the constant value into the return register
+  0x7f8f80757bbf:   add    $0x10,%rsp
+  0x7f8f80757bc3:   pop    %rbp
+  0x7f8f80757bc4:   cmp    0x450(%r15),%rsp             ;   {poll_return}
+  0x7f8f80757bcb:   ja     0x7f8f80757bd2
+  0x7f8f80757bd1:   ret                                 ; return the constant value (eax)
 ```
 
 #### GraalVM CE JIT Compiler
@@ -160,14 +160,14 @@ The GraalVM CE JIT compiler is able to compute the return value of the function 
 however to remove the loop, resulting in an empty bodied loop whose induction variable, `rax`, is overwritten.
 
 ``` 
-  0x00007f05a74bbce0:   inc    %rax                         ; increment the induction variable
-  0x00007f05a74bbce3:   cmp    $0x400000,%rax               ; compare the induction variable with the loop bound
-  0x00007f05a74bbcea:   jne    0x00007f05a74bbce0           ; jump back to the increment instruction if loop condition is true
-  0x00007f05a74bbcec:   mov    $0x400000,%rax               ; overwrite the induction variable with the loop result
-  0x00007f05a74bbcf3:   add    $0x18,%rsp
-  0x00007f05a74bbcf7:   cmp    0x450(%r15),%rsp             ;   {poll_return}
-  0x00007f05a74bbcfe:   ja     0x00007f05a74bbd12
-  0x00007f05a74bbd04:   ret                                 ; return the constant value (rax)
+  ↗ 0x7f05a74bbce0:   inc    %rax                         ; increment the induction variable
+  │ 0x7f05a74bbce3:   cmp    $0x400000,%rax               ; compare the induction variable with the loop bound
+  ╰ 0x7f05a74bbcea:   jne    0x7f05a74bbce0               ; jump back to the increment instruction if loop condition is true
+    0x7f05a74bbcec:   mov    $0x400000,%rax               ; overwrite the induction variable with the loop result
+    0x7f05a74bbcf3:   add    $0x18,%rsp
+    0x7f05a74bbcf7:   cmp    0x450(%r15),%rsp             ; {poll_return}
+    0x7f05a74bbcfe:   ja     0x7f05a74bbd12
+    0x7f05a74bbd04:   ret                                 ; return the constant value (rax)
 ```
 
 ### Analysis of canonicalize
@@ -176,15 +176,15 @@ requires the computation of the square of the induction variable and the loop bo
 three JIT compilers are not able to remove or simplify the loop.
 
 ```
-  0x00007fddd74bab60:   mov    0x458(%r15),%r8              ; load the safepoint pool address in %r8
-  0x00007fddd74bab67:   test   %eax,(%r8)                   ; safepoint pool
-  0x00007fddd74bab6a:   inc    %r11                         ; increment the loop result variable
-  0x00007fddd74bab6d:   inc    %r10                         ; increment the induction variable
-  0x00007fddd74bab70:   mov    %r10,%r8                     ; perform the loop condition computation
-  0x00007fddd74bab73:   imul   %r10,%r8                     ; ^ 
-  0x00007fddd74bab77:   cmp    %r8,%rax                     ; compare against the loop bound
-  0x00007fddd74bab7a:   jg     0x00007fddd74bab60           ; jump back to the loop start if loop condition is true
-  0x00007fddd74bab7c:   mov    %r11,%rax                    ; place the result in the return register
+  ↗ 0x7fddd74bab60:   mov    0x458(%r15),%r8              ; load the safepoint pool address in %r8
+  │ 0x7fddd74bab67:   test   %eax,(%r8)                   ; safepoint pool
+  │ 0x7fddd74bab6a:   inc    %r11                         ; increment the loop result variable
+  │ 0x7fddd74bab6d:   inc    %r10                         ; increment the induction variable
+  │ 0x7fddd74bab70:   mov    %r10,%r8                     ; perform the loop condition computation
+  │ 0x7fddd74bab73:   imul   %r10,%r8                     ; ^ 
+  │ 0x7fddd74bab77:   cmp    %r8,%rax                     ; compare against the loop bound
+  ╰ 0x7fddd74bab7a:   jg     0x7fddd74bab60               ; jump back to the loop start if loop condition is true
+    0x7fddd74bab7c:   mov    %r11,%rax                    ; place the result in the return register
 ```
 
 ### Conclusions
@@ -396,22 +396,22 @@ are performed in the generated assembly code and stored in the `Wrapper` object 
 generated assembly code is the same for all eight allocations.
 
 ```
-  0x00007f0e90639089:   mov    0x1b8(%r15),%rbx             ; load the TLAB top
-  0x00007f0e90639090:   mov    %rbx,%r10
-  0x00007f0e90639093:   add    $0x10,%r10                   ; bump pointer allocation in TLAB; allocate sizeof(Object) (16 bytes)
-  0x00007f0e90639097:   nopw   0x0(%rax,%rax,1)             ; alignment nop
-  0x00007f0e906390a0:   cmp    0x1c8(%r15),%r10             ; TLAB bounds check
-  0x00007f0e906390a7:   jae    0x00007f0e90639905           ; Jump to slow path if TLAB is full. Try to request a new TLAB.
-  0x00007f0e906390ad:   mov    %r10,0x1b8(%r15)             ; TLAB allocation successful, update TLAB top.
-  0x00007f0e906390b4:   prefetchw 0xc0(%r10)                ; prefetch for the next allocation
-  0x00007f0e906390bc:   movq   $0x1,(%rbx)                  ; set the mark word of the object (0x1 to mark it as unlocked)
-  0x00007f0e906390c3:   movl   $0xe80,0x8(%rbx)             ; store the klass word  {metadata(&apos;java/lang/Object&apos;)}
-  0x00007f0e906390ca:   mov    %r12d,0xc(%rbx)
-  0x00007f0e906390ce:   cmpb   $0x0,0x40(%r15)
-  0x00007f0e906390d3:   jne    0x00007f0e9063949c
-  0x00007f0e906390d9:   mov    %rbx,%r11                    ; store the object reference in the local variable
-  0x00007f0e906390dc:   shr    $0x3,%r11                    ; compute the oop from the full address
-  0x00007f0e906390e0:   mov    %r11d,0x10(%rbp)             ; store the oop in the field
+  0x7f0e90639089:   mov    0x1b8(%r15),%rbx             ; load the TLAB top
+  0x7f0e90639090:   mov    %rbx,%r10
+  0x7f0e90639093:   add    $0x10,%r10                   ; bump pointer allocation in TLAB; allocate sizeof(Object) (16 bytes)
+  0x7f0e90639097:   nopw   0x0(%rax,%rax,1)             ; alignment nop
+  0x7f0e906390a0:   cmp    0x1c8(%r15),%r10             ; TLAB bounds check
+  0x7f0e906390a7:   jae    0x7f0e90639905               ; jump to slow path if TLAB is full. Try to request a new TLAB.
+  0x7f0e906390ad:   mov    %r10,0x1b8(%r15)             ; TLAB allocation successful, update TLAB top.
+  0x7f0e906390b4:   prefetchw 0xc0(%r10)                ; prefetch for the next allocation
+  0x7f0e906390bc:   movq   $0x1,(%rbx)                  ; set the mark word of the object (0x1 to mark it as unlocked)
+  0x7f0e906390c3:   movl   $0xe80,0x8(%rbx)             ; store the klass word  {metadata(&apos;java/lang/Object&apos;)}
+  0x7f0e906390ca:   mov    %r12d,0xc(%rbx)
+  0x7f0e906390ce:   cmpb   $0x0,0x40(%r15)
+  0x7f0e906390d3:   jne    0x7f0e9063949c
+  0x7f0e906390d9:   mov    %rbx,%r11                    ; store the object reference in the local variable
+  0x7f0e906390dc:   shr    $0x3,%r11                    ; compute the oop from the full address
+  0x7f0e906390e0:   mov    %r11d,0x10(%rbp)             ; store the oop in the field
   ...
   ^ the above sequence is repeated for the remaining 7 allocations
 ```
@@ -423,40 +423,40 @@ able to generate more compact assembly code for the grouped allocations that all
 and pipelining. On the fast path, it also performs a single TLAB allocation for the sum of the sizes of all the objects.
 
 ```
-  0x00007f62bad7dfdf:   mov    0x1b8(%r15),%rax            ; load the TLAB top
-  0x00007f62bad7dfe6:   lea    0xb0(%rax),%rsi             ; bump pointer allocation in TLAB = 48 (sizeof(Wrapper)) + 16 * 8 (sizeof(Object))
-  0x00007f62bad7dfed:   cmp    0x1c8(%r15),%rsi            ; TLAB bounds check
-  0x00007f62bad7dff4:   ja     0x00007f62bad7e151          ; jump to slow path if TLAB is full.
-  0x00007f62bad7dffa:   mov    %rsi,0x1b8(%r15)            ; TLAB allocation successful, update TLAB top.
-  0x00007f62bad7e001:   prefetchw 0x170(%rax)              ; prefetches for allocated objects and the next allocation
-  0x00007f62bad7e008:   prefetchw 0x1b0(%rax)              ; ^
-  0x00007f62bad7e00f:   prefetchw 0x1f0(%rax)              ; ^
-  0x00007f62bad7e016:   prefetchw 0x230(%rax)              ; ^
-  0x00007f62bad7e01d:   data16 xchg %ax,%ax                ; alignment nop
-  0x00007f62bad7e020:   test   %rax,%rax                   ; edge case when TLAB allocation failed and a new TLAB was requested (rax = 0)
-  0x00007f62bad7e023:   je     0x00007f62bad7e15d          ; ^ 
-  0x00007f62bad7e029:   mov    %rax,%rsi                   ; rsi = rax = Wrapper object address
-  0x00007f62bad7e02c:   lea    0x30(%rax),%r10             ; r10 = address of the first Object field
-  0x00007f62bad7e030:   lea    0x40(%rax),%r11             ; r11 = address of the second Object field
-  0x00007f62bad7e034:   lea    0x50(%rax),%r8              ; r8 = address of the third Object field
-  0x00007f62bad7e038:   lea    0x60(%rax),%r9              ; r9 = address of the fourth Object field
-  0x00007f62bad7e03c:   lea    0x70(%rax),%rcx             ; rcx = address of the fifth Object field
-  0x00007f62bad7e040:   lea    0x80(%rax),%rbx             ; rbx = address of the sixth Object field
-  0x00007f62bad7e047:   lea    0x90(%rax),%rdi             ; rdi = address of the seventh Object field
-  0x00007f62bad7e04e:   lea    0xa0(%rax),%rdx             ; rdx = address of the eighth Object field
-  0x00007f62bad7e055:   movq   $0x1,(%rax)                 ; set the mark word of the Wrapper object (0x1 to mark it as unlocked)
-  0x00007f62bad7e05c:   movl   $0x102bd88,0x8(%rax)        ; store the klass word of the Wrapper object
-  0x00007f62bad7e063:   shr    $0x3,%r10                   ; compute the oop of the first Object field
-  0x00007f62bad7e067:   mov    %r10d,0xc(%rax)             ; store the oop in the field
-  0x00007f62bad7e06b:   shr    $0x3,%r11                   ; compute the oop of the second Object field
-  0x00007f62bad7e06f:   mov    %r11d,0x10(%rax)            ; store the oop in the field
+  0x7f62bad7dfdf:   mov    0x1b8(%r15),%rax            ; load the TLAB top
+  0x7f62bad7dfe6:   lea    0xb0(%rax),%rsi             ; bump pointer allocation in TLAB = 48 (sizeof(Wrapper)) + 16 * 8 (sizeof(Object))
+  0x7f62bad7dfed:   cmp    0x1c8(%r15),%rsi            ; TLAB bounds check
+  0x7f62bad7dff4:   ja     0x7f62bad7e151              ; jump to slow path if TLAB is full.
+  0x7f62bad7dffa:   mov    %rsi,0x1b8(%r15)            ; TLAB allocation successful, update TLAB top.
+  0x7f62bad7e001:   prefetchw 0x170(%rax)              ; prefetches for allocated objects and the next allocation
+  0x7f62bad7e008:   prefetchw 0x1b0(%rax)              ; ^
+  0x7f62bad7e00f:   prefetchw 0x1f0(%rax)              ; ^
+  0x7f62bad7e016:   prefetchw 0x230(%rax)              ; ^
+  0x7f62bad7e01d:   data16 xchg %ax,%ax                ; alignment nop
+  0x7f62bad7e020:   test   %rax,%rax                   ; edge case when TLAB allocation failed and a new TLAB was requested (rax = 0)
+  0x7f62bad7e023:   je     0x7f62bad7e15d              ; ^ 
+  0x7f62bad7e029:   mov    %rax,%rsi                   ; rsi = rax = Wrapper object address
+  0x7f62bad7e02c:   lea    0x30(%rax),%r10             ; r10 = address of the first Object field
+  0x7f62bad7e030:   lea    0x40(%rax),%r11             ; r11 = address of the second Object field
+  0x7f62bad7e034:   lea    0x50(%rax),%r8              ; r8 = address of the third Object field
+  0x7f62bad7e038:   lea    0x60(%rax),%r9              ; r9 = address of the fourth Object field
+  0x7f62bad7e03c:   lea    0x70(%rax),%rcx             ; rcx = address of the fifth Object field
+  0x7f62bad7e040:   lea    0x80(%rax),%rbx             ; rbx = address of the sixth Object field
+  0x7f62bad7e047:   lea    0x90(%rax),%rdi             ; rdi = address of the seventh Object field
+  0x7f62bad7e04e:   lea    0xa0(%rax),%rdx             ; rdx = address of the eighth Object field
+  0x7f62bad7e055:   movq   $0x1,(%rax)                 ; set the mark word of the Wrapper object (0x1 to mark it as unlocked)
+  0x7f62bad7e05c:   movl   $0x102bd88,0x8(%rax)        ; store the klass word of the Wrapper object
+  0x7f62bad7e063:   shr    $0x3,%r10                   ; compute the oop of the first Object field
+  0x7f62bad7e067:   mov    %r10d,0xc(%rax)             ; store the oop in the field
+  0x7f62bad7e06b:   shr    $0x3,%r11                   ; compute the oop of the second Object field
+  0x7f62bad7e06f:   mov    %r11d,0x10(%rax)            ; store the oop in the field
   ... same pattern for the remaining 6 Object fields
-  0x00007f62bad7e09f:   movq   $0x1,0x30(%rax)             ; set the mark word of the first Object field (0x1 to mark it as unlocked)
-  0x00007f62bad7e0a7:   movl   $0xe80,0x38(%rax)           ; store the klass word of the first Object field
-  0x00007f62bad7e0ae:   movq   $0x1,0x40(%rax)             ; set the mark word of the second Object field (0x1 to mark it as unlocked)
-  0x00007f62bad7e0b6:   movl   $0xe80,0x48(%rax)           ; store the klass word of the second Object field
+  0x7f62bad7e09f:   movq   $0x1,0x30(%rax)             ; set the mark word of the first Object field (0x1 to mark it as unlocked)
+  0x7f62bad7e0a7:   movl   $0xe80,0x38(%rax)           ; store the klass word of the first Object field
+  0x7f62bad7e0ae:   movq   $0x1,0x40(%rax)             ; set the mark word of the second Object field (0x1 to mark it as unlocked)
+  0x7f62bad7e0b6:   movl   $0xe80,0x48(%rax)           ; store the klass word of the second Object field
   ... same pattern for the remaining 6 Object fields
-  0x00007f62bad7e129:   mov    %rsi,%rax                   ; move the Wrapper object address into the return register
+  0x7f62bad7e129:   mov    %rsi,%rax                   ; move the Wrapper object address into the return register
 ```
 
 ### Analysis of wrapper_obj_dse_inter_procedural
@@ -573,38 +573,37 @@ Additionally, it unrolls the main loop by a factor of 16, thereby handling 16 op
 ```
   // Main loop (from 0x5 ... to 0x3e2)
   
-  0x7f044c636b7a:   mov    $0x5,%r9d                         ; r9d = 5 (loop counter)
-                                                             ; <--- loop begin
-  0x7f044c636ba0:   vaddsd %xmm1,%xmm0,%xmm0                 ; xmm0 = xmm0 + xmm1
-  0x7f044c636ba4:   mov    %r10d,%r9d                        ; r9d = r10d 
-  0x7f044c636ba7:   lea    0x1e(%r9),%r11d                   ; r11d = r9 + 0x1e (i.e., offset 30)
-  0x7f044c636bab:   lea    0x1a(%r9),%r8d                    ; r8d = r9 + 0x1a (i.e., offset 26)
-  0x7f044c636baf:   vcvtsi2sd %r11d,%xmm1,%xmm1              ; convert r11d to double and store in xmm1
-  0x7f044c636bb4:   vdivsd %xmm1,%xmm2,%xmm3                 ; xmm3 = xmm2 / xmm1
-                                                             ; xmm2 stores the 4.0 value
-  0x7f044c636bb8:   vcvtsi2sd %r8d,%xmm1,%xmm1               ; convert r8d to double and store in xmm1
-  0x7f044c636bbd:   vdivsd %xmm1,%xmm2,%xmm4                 ; xmm4 = xmm2 / xmm1
-  ...
-  <--- similar for offsets 0x1c, 0x18, 0x10, 0x8 -->
-  <--- store results in xmm5, xmm6, xmm7, xmm8 -->
-  ...
-  0x7f044c636bf5:   lea    0x2(%r9),%r11d // 2               ; set r11d = r9 + 0x2 (i.e., offset 2)
-  0x7f044c636bf9:   lea    0x4(%r9),%r8d  // 4               ; set r8d = r9 + 0x4 (i.e., offset 4)
-  0x7f044c636bfd:   vcvtsi2sd %r11d,%xmm1,%xmm1              ; convert r11d to double and store in xmm1
-  0x7f044c636c02:   vdivsd %xmm1,%xmm2,%xmm1                 ; xmm1 = xmm2 / xmm1
-  0x7f044c636c06:   vsubsd %xmm1,%xmm0,%xmm0                 ; xmm0 = xmm0 - xmm1
-  0x7f044c636c0a:   vcvtsi2sd %r8d,%xmm1,%xmm1               ; convert r8d to double and store in xmm1
-  0x7f044c636c0f:   vdivsd %xmm1,%xmm2,%xmm1                 ; xmm1 = xmm2 / xmm1
-  0x7f044c636c13:   vaddsd %xmm1,%xmm0,%xmm0                 ; xmm0 = xmm0 + xmm1
-  ...
-  <--- similar for offsets 0x6, 0xa, 0xc, 0xe, 0x12, 0x14, 0x16, 0x20 -->
-  <--- the results are alternatively stored in xmm0, xmm1 -->
-  ...
-  0x7f044c636ca6:   lea    0x20(%r9),%r10d                   ; set r10d = r9 + 0x20 (i.e., offset 32)
-  0x7f044c636caa:   vcvtsi2sd %r10d,%xmm1,%xmm1              ; convert r10d to double and store in xmm1
-  0x7f044c636caf:   vdivsd %xmm1,%xmm2,%xmm1                 ; xmm1 = xmm2 / xmm1
-  0x7f044c636cc0:   cmp    $0x3e2,%r10d                      ; compare against 994
-  0x7f044c636cc7:   jl     0x7f044c636ba0                    ; <--- loop end (loop back if less)
+    0x7f044c636b7a:   mov    $0x5,%r9d                         ; r9d = 5 (loop counter)
+  ↗ 0x7f044c636ba0:   vaddsd %xmm1,%xmm0,%xmm0                 ; xmm0 = xmm0 + xmm1
+  │ 0x7f044c636ba4:   mov    %r10d,%r9d                        ; r9d = r10d 
+  │ 0x7f044c636ba7:   lea    0x1e(%r9),%r11d                   ; r11d = r9 + 0x1e (i.e., offset 30)
+  │ 0x7f044c636bab:   lea    0x1a(%r9),%r8d                    ; r8d = r9 + 0x1a (i.e., offset 26)
+  │ 0x7f044c636baf:   vcvtsi2sd %r11d,%xmm1,%xmm1              ; convert r11d to double and store in xmm1
+  │ 0x7f044c636bb4:   vdivsd %xmm1,%xmm2,%xmm3                 ; xmm3 = xmm2 / xmm1
+  │                                                            ; xmm2 stores the 4.0 value
+  │ 0x7f044c636bb8:   vcvtsi2sd %r8d,%xmm1,%xmm1               ; convert r8d to double and store in xmm1
+  │ 0x7f044c636bbd:   vdivsd %xmm1,%xmm2,%xmm4                 ; xmm4 = xmm2 / xmm1
+  │ ...
+  │ <--- similar for offsets 0x1c, 0x18, 0x10, 0x8 -->
+  │ <--- store results in xmm5, xmm6, xmm7, xmm8 -->
+  │ ...
+  │ 0x7f044c636bf5:   lea    0x2(%r9),%r11d // 2               ; set r11d = r9 + 0x2 (i.e., offset 2)
+  │ 0x7f044c636bf9:   lea    0x4(%r9),%r8d  // 4               ; set r8d = r9 + 0x4 (i.e., offset 4)
+  │ 0x7f044c636bfd:   vcvtsi2sd %r11d,%xmm1,%xmm1              ; convert r11d to double and store in xmm1
+  │ 0x7f044c636c02:   vdivsd %xmm1,%xmm2,%xmm1                 ; xmm1 = xmm2 / xmm1
+  │ 0x7f044c636c06:   vsubsd %xmm1,%xmm0,%xmm0                 ; xmm0 = xmm0 - xmm1
+  │ 0x7f044c636c0a:   vcvtsi2sd %r8d,%xmm1,%xmm1               ; convert r8d to double and store in xmm1
+  │ 0x7f044c636c0f:   vdivsd %xmm1,%xmm2,%xmm1                 ; xmm1 = xmm2 / xmm1
+  │ 0x7f044c636c13:   vaddsd %xmm1,%xmm0,%xmm0                 ; xmm0 = xmm0 + xmm1
+  │ ...
+  │ <--- similar for offsets 0x6, 0xa, 0xc, 0xe, 0x12, 0x14, 0x16, 0x20 -->
+  │ <--- the results are alternatively stored in xmm0, xmm1 -->
+  │ ...
+  │ 0x7f044c636ca6:   lea    0x20(%r9),%r10d                   ; set r10d = r9 + 0x20 (i.e., offset 32)
+  │ 0x7f044c636caa:   vcvtsi2sd %r10d,%xmm1,%xmm1              ; convert r10d to double and store in xmm1
+  │ 0x7f044c636caf:   vdivsd %xmm1,%xmm2,%xmm1                 ; xmm1 = xmm2 / xmm1
+  │ 0x7f044c636cc0:   cmp    $0x3e2,%r10d                      ; compare against 994
+  ╰ 0x7f044c636cc7:   jl     0x7f044c636ba0                    ; loop back if less
   ; xmm1 stores the result of the main loop
 ```
 
@@ -613,22 +612,21 @@ The post-loop processes the remaining elements individually, without unrolling:
 ```
   // Post loop (0x3e2 ... 0x3e8)
   
-  0x7f044c636ccd:   add    $0x20,%r9d            ; r9d = r9d + 0x20 (loop counter)
-  0x7f044c636cd1:   mov    $0x1,%r10d            ; r10d = 1
-                                                 ; <--- loop begin
-  0x7f044c636cd7:   test   %r10d,%r10d           ; check if r10d is zero
-  0x7f044c636cda:   je     0x7f044c636ce2        ; jump if r10d == 0
-  0x7f044c636cdc:   vaddsd %xmm1,%xmm0,%xmm0     ; xmm0 = xmm0 + xmm1
-  0x7f044c636ce0:   jmp    0x7f044c636ce6
-  0x7f044c636ce2:   vsubsd %xmm1,%xmm0,%xmm0     ; xmm0 = xmm0 - xmm1
-  0x7f044c636ce6:   add    $0x2,%r9d             ; r9d = r9d + 2 (increment by loop stride)
-  0x7f044c636cea:   cmp    $0x3e8,%r9d           ; compare against 1000
-  0x7f044c636cf1:   jge    0x7f044c636d02        ; exit loop if greater or equal
-  0x7f044c636cf3:   vcvtsi2sd %r9d,%xmm1,%xmm1   ; convert r9d to double and store in xmm1
-  0x7f044c636cf8:   vdivsd %xmm1,%xmm2,%xmm1     ; xmm1 = xmm2 / xmm1
-  0x7f044c636cfc:   xor    $0x1,%r10d            ; r10d = r10d XOR 1 (i.e., toggle r10d between 0 and 1)
-  0x7f044c636d00:   jmp    0x7f044c636cd7        ; <--- loop end (jump loop back)
-  ; xmm1 stores the result of the post loop
+    0x7f044c636ccd:   add    $0x20,%r9d            ; r9d = r9d + 0x20 (loop counter)
+    0x7f044c636cd1:   mov    $0x1,%r10d            ; r10d = 1
+  ↗ 0x7f044c636cd7:   test   %r10d,%r10d           ; check if r10d is zero
+  │ 0x7f044c636cda:   je     0x7f044c636ce2        ; jump if r10d == 0
+  │ 0x7f044c636cdc:   vaddsd %xmm1,%xmm0,%xmm0     ; xmm0 = xmm0 + xmm1
+  │ 0x7f044c636ce0:   jmp    0x7f044c636ce6
+  │ 0x7f044c636ce2:   vsubsd %xmm1,%xmm0,%xmm0     ; xmm0 = xmm0 - xmm1
+  │ 0x7f044c636ce6:   add    $0x2,%r9d             ; r9d = r9d + 2 (increment by loop stride)
+  │ 0x7f044c636cea:   cmp    $0x3e8,%r9d           ; compare against 1000
+  │ 0x7f044c636cf1:   jge    0x7f044c636d02        ; exit loop if greater or equal
+  │ 0x7f044c636cf3:   vcvtsi2sd %r9d,%xmm1,%xmm1   ; convert r9d to double and store in xmm1
+  │ 0x7f044c636cf8:   vdivsd %xmm1,%xmm2,%xmm1     ; xmm1 = xmm2 / xmm1
+  │ 0x7f044c636cfc:   xor    $0x1,%r10d            ; r10d = r10d XOR 1 (i.e., toggle r10d between 0 and 1)
+  ╰ 0x7f044c636d00:   jmp    0x7f044c636cd7        ; jump loop back
+    ; xmm1 stores the result of the post loop
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -640,27 +638,26 @@ It achieves optimization by unrolling the main loop by a factor of 8, allowing 8
 ```
   // Main loop (0x5 ... 0x3d8)
   
-  0x7f0ac2d7d86a:   mov    $0x5,%r10d                   ; r10d = 5 (loop counter)
-                                                        ; <--- loop begin
-  0x7f0ac2d7d880:   lea    0x10(%r10),%r11d             ; r11d = r10 + 0x10 (i.e., offset 16)
-  0x7f0ac2d7d884:   vxorpd %xmm2,%xmm2,%xmm2            ; zero out xmm2
-  0x7f0ac2d7d888:   vcvtsi2sd %r10d,%xmm2,%xmm2         ; convert r10d to double and store in xmm2
-  0x7f0ac2d7d88d:   vdivsd %xmm2,%xmm0,%xmm2            ; xmm2 = xmm0 / xmm2
-  0x7f0ac2d7d891:   vaddsd %xmm2,%xmm1,%xmm1            ; xmm1 = xmm1 + xmm2
-  
-  0x7f0ac2d7d895:   lea    0x2(%r10),%r8d               ; r8d = r10 + 0x2 (i.e., offset 2)
-  0x7f0ac2d7d899:   vxorpd %xmm2,%xmm2,%xmm2            ; zero out xmm2
-  0x7f0ac2d7d89d:   vcvtsi2sd %r8d,%xmm2,%xmm2          ; convert r8d to double and store in xmm2
-  0x7f0ac2d7d8a2:   vdivsd %xmm2,%xmm0,%xmm2            ; xmm2 = xmm0 / xmm2
-  0x7f0ac2d7d8a6:   vsubsd %xmm2,%xmm1,%xmm1            ; xmm1 = xmm1 - xmm2
-  ...
-  <--- similar for offsets 0x4, 0x6, 0x8, 0xa, 0xc, 0xe -->
-  <--- the results are alternatively stored in xmm0, xmm1 -->
-  ...
-  0x7f0ac2d7d928:   mov    %r11d,%r10d                  ; r10d = r11d 
-  0x7f0ac2d7d92b:   cmp    $0x3d8,%r10d                 ; compare against 984 
-  0x7f0ac2d7d932:   jb     0x7f0ac2d7d880               ; <--- loop end (loop back if below)
-  ; xmm1 stores the result of the main loop
+    0x7f0ac2d7d86a:   mov    $0x5,%r10d                   ; r10d = 5 (loop counter)
+  ↗ 0x7f0ac2d7d880:   lea    0x10(%r10),%r11d             ; r11d = r10 + 0x10 (i.e., offset 16)
+  │ 0x7f0ac2d7d884:   vxorpd %xmm2,%xmm2,%xmm2            ; zero out xmm2
+  │ 0x7f0ac2d7d888:   vcvtsi2sd %r10d,%xmm2,%xmm2         ; convert r10d to double and store in xmm2
+  │ 0x7f0ac2d7d88d:   vdivsd %xmm2,%xmm0,%xmm2            ; xmm2 = xmm0 / xmm2
+  │ 0x7f0ac2d7d891:   vaddsd %xmm2,%xmm1,%xmm1            ; xmm1 = xmm1 + xmm2
+  │ 
+  │ 0x7f0ac2d7d895:   lea    0x2(%r10),%r8d               ; r8d = r10 + 0x2 (i.e., offset 2)
+  │ 0x7f0ac2d7d899:   vxorpd %xmm2,%xmm2,%xmm2            ; zero out xmm2
+  │ 0x7f0ac2d7d89d:   vcvtsi2sd %r8d,%xmm2,%xmm2          ; convert r8d to double and store in xmm2
+  │ 0x7f0ac2d7d8a2:   vdivsd %xmm2,%xmm0,%xmm2            ; xmm2 = xmm0 / xmm2
+  │ 0x7f0ac2d7d8a6:   vsubsd %xmm2,%xmm1,%xmm1            ; xmm1 = xmm1 - xmm2
+  │ ...
+  │ <--- similar for offsets 0x4, 0x6, 0x8, 0xa, 0xc, 0xe -->
+  │ <--- the results are alternatively stored in xmm0, xmm1 -->
+  │ ...
+  │ 0x7f0ac2d7d928:   mov    %r11d,%r10d                  ; r10d = r11d 
+  │ 0x7f0ac2d7d92b:   cmp    $0x3d8,%r10d                 ; compare against 984 
+  ╰ 0x7f0ac2d7d932:   jb     0x7f0ac2d7d880               ; loop back if below
+    ; xmm1 stores the result of the main loop
 ```
 
 The post-loop processes the remaining elements individually, without unrolling:
@@ -668,28 +665,28 @@ The post-loop processes the remaining elements individually, without unrolling:
 ```
   // Post loop (0x3d8 ... 0x3e8)
 
-  0x7f0ac2d7d938:   mov    %r10d,%r11d            ; r11 = r10 (loop counter)
-  0x7f0ac2d7d93b:   mov    $0x1,%r10d             ; r10d = 0x1
-                                                  ; <--- loop begin
-  0x7f0ac2d7d950:   cmp    $0x3e8,%r11d           ; compare against 1000
-  0x7f0ac2d7d957:   jae    0x7f0ac2d7d996         ; exit loop if greater or equal
-  0x7f0ac2d7d95d:   lea    0x2(%r11),%r8d         ; r8d = r11 + 2 (increment by loop stride)
-  0x7f0ac2d7d961:   mov    %r10d,%r9d             ; r9d = r10d
-  0x7f0ac2d7d964:   xor    $0x1,%r9d              ; toggle the least significant bit of r9d (i.e., r10d)
-  0x7f0ac2d7d968:   vxorpd %xmm2,%xmm2,%xmm2      ; zero out xmm2
-  0x7f0ac2d7d96c:   vcvtsi2sd %r11d,%xmm2,%xmm2   ; convert r11d to double and store in xmm2
-  0x7f0ac2d7d971:   vdivsd %xmm2,%xmm0,%xmm2      ; xmm2 = xmm0 / xmm2
-  0x7f0ac2d7d975:   test   %r10d,%r10d            ; check r10d is zero
-  0x7f0ac2d7d978:   jne    0x7f0ac2d7d98a         ; jump if r10d != 0 (for subtraction)
-  0x7f0ac2d7d97e:   vsubsd %xmm2,%xmm1,%xmm1      ; xmm1 = xmm1 - xmm2
-  0x7f0ac2d7d982:   mov    %r8d,%r11d             ; r11d = r8d
-  0x7f0ac2d7d985:   mov    %r9d,%r10d             ; r10d = r9d
-  0x7f0ac2d7d988:   jmp    0x7f0ac2d7d950         ; <--- loop end (subtract loop)
-  0x7f0ac2d7d98a:   vaddsd %xmm2,%xmm1,%xmm1      ; xmm1 = xmm1 + xmm2
-  0x7f0ac2d7d98e:   mov    %r8d,%r11d             ; r11d = r8d
-  0x7f0ac2d7d991:   mov    %r9d,%r10d             ; r10d = r9d
-  0x7f0ac2d7d994:   jmp    0x7f0ac2d7d950         ; <--- loop end (addition loop)
-  ; xmm1 stores the result of the post loop
+      0x7f0ac2d7d938:   mov    %r10d,%r11d            ; r11 = r10 (loop counter)
+      0x7f0ac2d7d93b:   mov    $0x1,%r10d             ; r10d = 0x1
+      ...
+  ↗↗  0x7f0ac2d7d950:   cmp    $0x3e8,%r11d           ; compare against 1000
+  ││  0x7f0ac2d7d957:   jae    0x7f0ac2d7d996         ; exit loop if greater or equal
+  ││  0x7f0ac2d7d95d:   lea    0x2(%r11),%r8d         ; r8d = r11 + 2 (increment by loop stride)
+  ││  0x7f0ac2d7d961:   mov    %r10d,%r9d             ; r9d = r10d
+  ││  0x7f0ac2d7d964:   xor    $0x1,%r9d              ; toggle the least significant bit of r9d (i.e., r10d)
+  ││  0x7f0ac2d7d968:   vxorpd %xmm2,%xmm2,%xmm2      ; zero out xmm2
+  ││  0x7f0ac2d7d96c:   vcvtsi2sd %r11d,%xmm2,%xmm2   ; convert r11d to double and store in xmm2
+  ││  0x7f0ac2d7d971:   vdivsd %xmm2,%xmm0,%xmm2      ; xmm2 = xmm0 / xmm2
+  ││  0x7f0ac2d7d975:   test   %r10d,%r10d            ; check r10d is zero
+  ││╭ 0x7f0ac2d7d978:   jne    0x7f0ac2d7d98a         ; jump if r10d != 0 (for subtraction)
+  │││ 0x7f0ac2d7d97e:   vsubsd %xmm2,%xmm1,%xmm1      ; xmm1 = xmm1 - xmm2
+  │││ 0x7f0ac2d7d982:   mov    %r8d,%r11d             ; r11d = r8d
+  │││ 0x7f0ac2d7d985:   mov    %r9d,%r10d             ; r10d = r9d
+  │╰│ 0x7f0ac2d7d988:   jmp    0x7f0ac2d7d950         ; end subtract loop)
+  │ ↘ 0x7f0ac2d7d98a:   vaddsd %xmm2,%xmm1,%xmm1      ; xmm1 = xmm1 + xmm2
+  │   0x7f0ac2d7d98e:   mov    %r8d,%r11d             ; r11d = r8d
+  │   0x7f0ac2d7d991:   mov    %r9d,%r10d             ; r10d = r9d
+  ╰   0x7f0ac2d7d994:   jmp    0x7f0ac2d7d950         ; end addition loop)
+      ; xmm1 stores the result of the post loop
 ```
 
 #### GraalVM CE JIT Compiler
@@ -699,35 +696,35 @@ The GraalVM CE JIT Compiler cannot completely remove the loops associated with t
 ```
   Dead loop (appears four times; i.e., equivalent to the number of dead method calls)
 
-  0x7f94ab23c48d:   mov    $0x5,%r10d                ; r10 = 5  (loop counter)
-                                                     ; <--- loop begin
-  0x7f94ab23c4a0:   lea    0x2(%r10),%r10d           ; r10d = r10 + 2 (increment by loop stride)
-  0x7f94ab23c4a4:   cmp    $0x3e8,%r10d              ; compare against 1000
-  0x7f94ab23c4ab:   jl     0x7f94ab23c4a0            ; <--- loop end (loop back if less than 1000)
+    0x7f94ab23c48d:   mov    $0x5,%r10d                ; r10 = 5  (loop counter)
+    ...
+  ↗ 0x7f94ab23c4a0:   lea    0x2(%r10),%r10d           ; r10d = r10 + 2 (increment by loop stride)
+  │ 0x7f94ab23c4a4:   cmp    $0x3e8,%r10d              ; compare against 1000
+  ╰ 0x7f94ab23c4ab:   jl     0x7f94ab23c4a0            ; loop back if less than 1000
 ```
 
 Subsequently, the loop corresponding to the non-dead store method call is not unrolled.
 
 ```
-  0x7f94ab23c4fd:   mov    $0x1,%r11d               ; r11 = 1
-  0x7f94ab23c503:   mov    $0x5,%r10d               ; r10 = 5  (loop counter)
-                                                    ; <--- loop begin
-  0x7f94ab23c510:   cmp    $0x3e8,%r10d             ; compare against 1000
-  0x7f94ab23c517:   jge    0x7f94ab23c54c           ; exit loop if greater or equal
-  0x7f94ab23c51d:   vcvtsi2sd %r10d,%xmm2,%xmm2     ; convert r10d to double and store in xmm2
-  0x7f94ab23c522:   vdivsd %xmm2,%xmm0,%xmm2        ; xmm2 = xmm0 / xmm2
-  0x7f94ab23c526:   mov    %r11d,%r8d               ; r8 = r11
-  0x7f94ab23c529:   xor    $0x1,%r8d                ; r8 = r8 XOR 1 (toggle the least significant bit of r8)
-  0x7f94ab23c52d:   lea    0x2(%r10),%r10d          ; r10d = r10 + 2 (increment by loop stride)
-  0x7f94ab23c531:   test   %r11d,%r11d              ; check r11d is zero
-  0x7f94ab23c534:   jne    0x7f94ab23c543           ; jump if r11d != 0 (for subtraction)
-  0x7f94ab23c53a:   vsubsd %xmm2,%xmm1,%xmm1        ; xmm1 = xmm1 - xmm2
-  0x7f94ab23c53e:   mov    %r8d,%r11d
-  0x7f94ab23c541:   jmp    0x7f94ab23c510           ; <--- loop end (subtract loop)
-  0x7f94ab23c543:   vaddsd %xmm1,%xmm2,%xmm1        ; xmm1 = xmm1 + xmm2
-  0x7f94ab23c547:   mov    %r8d,%r11d
-  0x7f94ab23c54a:   jmp    0x7f94ab23c510           ; <--- loop end (addition loop)
-  ; xmm1 stores the result of the loop
+      0x7f94ab23c4fd:   mov    $0x1,%r11d               ; r11 = 1
+      0x7f94ab23c503:   mov    $0x5,%r10d               ; r10 = 5  (loop counter)
+      ...
+  ↗↗  0x7f94ab23c510:   cmp    $0x3e8,%r10d             ; compare against 1000
+  ││  0x7f94ab23c517:   jge    0x7f94ab23c54c           ; exit loop if greater or equal
+  ││  0x7f94ab23c51d:   vcvtsi2sd %r10d,%xmm2,%xmm2     ; convert r10d to double and store in xmm2
+  ││  0x7f94ab23c522:   vdivsd %xmm2,%xmm0,%xmm2        ; xmm2 = xmm0 / xmm2
+  ││  0x7f94ab23c526:   mov    %r11d,%r8d               ; r8 = r11
+  ││  0x7f94ab23c529:   xor    $0x1,%r8d                ; r8 = r8 XOR 1 (toggle the least significant bit of r8)
+  ││  0x7f94ab23c52d:   lea    0x2(%r10),%r10d          ; r10d = r10 + 2 (increment by loop stride)
+  ││  0x7f94ab23c531:   test   %r11d,%r11d              ; check r11d is zero
+  ││╭ 0x7f94ab23c534:   jne    0x7f94ab23c543           ; jump if r11d != 0 (for subtraction)
+  │││ 0x7f94ab23c53a:   vsubsd %xmm2,%xmm1,%xmm1        ; xmm1 = xmm1 - xmm2
+  │││ 0x7f94ab23c53e:   mov    %r8d,%r11d
+  │╰│ 0x7f94ab23c541:   jmp    0x7f94ab23c510           ; end subtract loop
+  │ ↘ 0x7f94ab23c543:   vaddsd %xmm1,%xmm2,%xmm1        ; xmm1 = xmm1 + xmm2
+  │   0x7f94ab23c547:   mov    %r8d,%r11d
+  ╰   0x7f94ab23c54a:   jmp    0x7f94ab23c510           ; end addition loop
+      ; xmm1 stores the result of the loop
 ```
 
 ### Conclusions
@@ -801,19 +798,19 @@ The analysis below pertains to the `cached_enum_values` method, which is the pri
 The C2 JIT Compiler iterates through the array of cached enum values, attempting to locate a match for the `lookUpValue` by utilizing the `String::equals` method.
 
 ```
-  0x7f2fe44fa213:   mov    $0x2,%r10d                   ; Initialize loop counter r10d = 2
-  0x7f2fe44fa219:   jmp    0x7f2fe44fa22d
-                                                        ; <--- loop begin
-  0x7f2fe44fa220:   inc    %r10d                        ; increment loop counter
-  0x7f2fe44fa223:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
-  0x7f2fe44fa227:   jge    0x7f2fe44fa388               ; jump if greater than or equal to exit loop
-  0x7f2fe44fa22d:   mov    0x10(%rdx,%r10,4),%ebx       ; load Car object from enum values array at index [rdx + r10 * 4 + 16]
-  0x7f2fe44fa232:   mov    0x18(%r12,%rbx,8),%edi       ; load 'carValue' field from the Car object at offset 0x18
-  ...
-  <--- Trigges the comparison between 'carValue' and 'lookUpValue' value -->
-  ...
-  0x7f2fe44fa269:   jne    0x7f2fe44fa220               ; <--- loop end (loop back if not equal)
-                                                        ; - java.lang.String::equals
+    0x7f2fe44fa213:   mov    $0x2,%r10d                   ; Initialize loop counter r10d = 2
+    0x7f2fe44fa219:   jmp    0x7f2fe44fa22d
+    ...
+  ↗ 0x7f2fe44fa220:   inc    %r10d                        ; increment loop counter
+  │ 0x7f2fe44fa223:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
+  │ 0x7f2fe44fa227:   jge    0x7f2fe44fa388               ; jump if greater than or equal to exit loop
+  │ 0x7f2fe44fa22d:   mov    0x10(%rdx,%r10,4),%ebx       ; load Car object from enum values array at index [rdx + r10 * 4 + 16]
+  │ 0x7f2fe44fa232:   mov    0x18(%r12,%rbx,8),%edi       ; load 'carValue' field from the Car object at offset 0x18
+  │ ...
+  │ <--- Trigges the comparison between 'carValue' and 'lookUpValue' value -->
+  │ ...
+  ╰ 0x7f2fe44fa269:   jne    0x7f2fe44fa220               ; loop back if not equal
+                                                          ; - java.lang.String::equals
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -821,27 +818,26 @@ The C2 JIT Compiler iterates through the array of cached enum values, attempting
 The Oracle GraalVM JIT iterates through the array of cached enum values. However, when attempting to compare the `lookUpValue` value against the enum values (i.e., String comparisons), it utilizes an intrinsic candidate for the byte array values.
 
 ```
-                                                         ; <--- loop begin
-  0x07f9bb6d9c2e0:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
-  0x07f9bb6d9c2e4:   jae    0x07f9bb6d9c42c              ; jump if greater than or equal to 41 (exit the loop)
-  0x07f9bb6d9c2ea:   mov    0x10(%rbx,%r10,4),%edi       ; load Car object from enum values array at index [rbx + r10 * 4 + 0x10]
-  0x07f9bb6d9c2ef:   mov    0x18(,%rdi,8),%esi           ; load 'carValue' field from the Car object at offset 0x18
-  0x07f9bb6d9c2f6:   movsbl 0x10(,%rsi,8),%ecx           ; extract the String coder at offset 0x10
-  0x07f9bb6d9c2fe:   mov    0x14(,%rsi,8),%r8d           ; get the String byte array at offset 0x14
-  ...
-  0x07f9bb6d9c312:   inc    %eax
-  ...
-  0x07f9bb6d9c329:   cmp    0xc(,%r8,8),%ebp             ; compare the String byte array lengths
-  0x07f9bb6d9c331:   jne    0x07f9bb6d9c37d              ; jump if lengths are not the same
-  ...
-  <--- Trigger the comparison of two byte array regions using an intrinsic stub -->
-  0x07f9bb6d9c359:   call   0x07f9bb6910580              ; call the runtime function for byte array region comparison
-                                                         ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-  0x07f9bb6d9c360:   test   %eax,%eax                    ; test the result of the byte array region comparison
-  0x07f9bb6d9c362:   jne    0x07f9bb6d9c385              ; jump if ZF is not set (i.e., arrays are equal)
-  ...
-  0x07f9bb6d9c37d:   mov    %eax,%r10d                   ; r10d = eax
-  0x07f9bb6d9c380:   jmp    0x07f9bb6d9c2e0              ; <--- loop end (loop back if arrays are not equal)
+  ↗ 0x07f9bb6d9c2e0:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
+  │ 0x07f9bb6d9c2e4:   jae    0x07f9bb6d9c42c              ; jump if greater than or equal to 41 (exit the loop)
+  │ 0x07f9bb6d9c2ea:   mov    0x10(%rbx,%r10,4),%edi       ; load Car object from enum values array at index [rbx + r10 * 4 + 0x10]
+  │ 0x07f9bb6d9c2ef:   mov    0x18(,%rdi,8),%esi           ; load 'carValue' field from the Car object at offset 0x18
+  │ 0x07f9bb6d9c2f6:   movsbl 0x10(,%rsi,8),%ecx           ; extract the String coder at offset 0x10
+  │ 0x07f9bb6d9c2fe:   mov    0x14(,%rsi,8),%r8d           ; get the String byte array at offset 0x14
+  │ ...
+  │ 0x07f9bb6d9c312:   inc    %eax
+  │ ...
+  │ 0x07f9bb6d9c329:   cmp    0xc(,%r8,8),%ebp             ; compare the String byte array lengths
+  │ 0x07f9bb6d9c331:   jne    0x07f9bb6d9c37d              ; jump if lengths are not the same
+  │ ...
+  │ <--- Trigger the comparison of two byte array regions using an intrinsic stub -->
+  │ 0x07f9bb6d9c359:   call   0x07f9bb6910580              ; call the runtime function for byte array region comparison
+  │                                                        ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
+  │ 0x07f9bb6d9c360:   test   %eax,%eax                    ; test the result of the byte array region comparison
+  │ 0x07f9bb6d9c362:   jne    0x07f9bb6d9c385              ; jump if ZF is not set (i.e., arrays are equal)
+  │ ...
+  │ 0x07f9bb6d9c37d:   mov    %eax,%r10d                   ; r10d = eax
+  ╰ 0x07f9bb6d9c380:   jmp    0x07f9bb6d9c2e0              ; loop back if arrays are not equal
 ```
 
 #### GraalVM CE JIT Compiler
@@ -963,36 +959,36 @@ The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16
 ```
   // Main loop
   
-  0x7f374863acda:   mov    0x18(%rsi),%ebp              ; get the array pointer
-  0x7f374863ace0:   mov    0xc(%r12,%rbp,8),%r11d       ; get the array length
-  0x7f374863ad06:   mov    0x10(%r12,%rbp,8),%eax       ; load the value of the first element
-  0x7f374863ad0b:   lea    (%r12,%rbp,8),%r8            ; get the array address
-  0x7f374863ad13:   mov    $0x1,%ecx                    ; initialize loop counter
-  0x7f374863ad2f:   mov    %r11d,%edx                   ; store array length
-                                                        ; <--- loop begin
-  0x7f374863ad50:   add    0x10(%r8,%rcx,4),%eax        ; add the value of the 1st element
-  0x7f374863ad55:   add    0x14(%r8,%rcx,4),%eax        ; add the value of the 2nd element
-  ...
-  <--- additional lines for adding other elements -->
-  ...
-  0x7f374863ad96:   add    0x48(%r8,%rcx,4),%eax        ; add the value of the 15th element
-  0x7f374863ad9b:   add    0x4c(%r8,%rcx,4),%eax        ; add the value of the 16th element
-  0x7f374863ada0:   add    $0x10,%ecx                   ; increment loop counter by 16
-  0x7f374863ada3:   cmp    %edx,%ecx                    ; compare loop counter with array length
-  0x7f374863ada5:   jl     0x7f374863ad50               ; <--- loop end (loop back if less)
-  ; eax stores the result of the main loop  
+    0x7f374863acda:   mov    0x18(%rsi),%ebp              ; get the array pointer
+    0x7f374863ace0:   mov    0xc(%r12,%rbp,8),%r11d       ; get the array length
+    0x7f374863ad06:   mov    0x10(%r12,%rbp,8),%eax       ; load the value of the first element
+    0x7f374863ad0b:   lea    (%r12,%rbp,8),%r8            ; get the array address
+    0x7f374863ad13:   mov    $0x1,%ecx                    ; initialize loop counter
+    0x7f374863ad2f:   mov    %r11d,%edx                   ; store array length
+    ...
+  ↗ 0x7f374863ad50:   add    0x10(%r8,%rcx,4),%eax        ; add the value of the 1st element
+  │ 0x7f374863ad55:   add    0x14(%r8,%rcx,4),%eax        ; add the value of the 2nd element
+  │ ...
+  │ <--- additional lines for adding other elements -->
+  │ ...
+  │ 0x7f374863ad96:   add    0x48(%r8,%rcx,4),%eax        ; add the value of the 15th element
+  │ 0x7f374863ad9b:   add    0x4c(%r8,%rcx,4),%eax        ; add the value of the 16th element
+  │ 0x7f374863ada0:   add    $0x10,%ecx                   ; increment loop counter by 16
+  │ 0x7f374863ada3:   cmp    %edx,%ecx                    ; compare loop counter with array length
+  ╰ 0x7f374863ada5:   jl     0x7f374863ad50               ; loop back if less
+    ; eax stores the result of the main loop  
 ```
 
 The post-loop processes the remaining elements individually, without unrolling:
 
 ```
   // Post loop
-                                                        ; <--- loop begin
-  0x7f374863adc0:   add    0x10(%r8,%rcx,4),%eax        ; add value of an element to eax
-  0x7f374863adc5:   inc    %ecx                         ; increment loop counter
-  0x7f374863adc7:   cmp    %r11d,%ecx                   ; compare loop counter with array length
-  0x7f374863adca:   jl     0x7f374863adc0               ; <--- loop end (loop back if less)
-  ; eax stores the result of the post loop  
+
+  ↗ 0x7f374863adc0:   add    0x10(%r8,%rcx,4),%eax        ; add value of an element to eax
+  │ 0x7f374863adc5:   inc    %ecx                         ; increment loop counter
+  │ 0x7f374863adc7:   cmp    %r11d,%ecx                   ; compare loop counter with array length
+  ╰ 0x7f374863adca:   jl     0x7f374863adc0               ; loop back if less
+    ; eax stores the result of the post loop  
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -1002,19 +998,19 @@ Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instr
 ```
   // Main loop
 
-  0x7fa68ad81b3f:   mov    0x18(%rsi),%eax              ; get the array pointer
-  0x7fa68ad81b42:   mov    0xc(,%rax,8),%r10d           ; get the array length
-  0x7fa68ad81b53:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
-  0x7fa68ad81b57:   lea    0x10(%rax),%rax              ; get the address of the array
-  0x7fa68ad81b6a:   lea    -0x8(%r10),%r11              ; calculate (array length - 8)
-  0x7fa68ad81b6e:   mov    $0x0,%r8                     ; initialize loop counter
-                                                        ; <--- Loop begin
-  0x7fa68ad81b80:   vmovdqu (%rax,%r8,4),%ymm1          ; load 256 bits (8 integers) into %ymm1
-  0x7fa68ad81b86:   vpaddd %ymm1,%ymm0,%ymm0            ; packed integer addition: ymm0 = ymm0 + ymm1
-  0x7fa68ad81b8a:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
-  0x7fa68ad81b8e:   cmp    %r11,%r8                     ; compare loop counter with (array length - 8)
-  0x7fa68ad81b91:   jle    0x7fa68ad81b80               ; <--- loop end (jump loop back if less)
-  ; ymm0 stores the result of the main loop  
+    0x7fa68ad81b3f:   mov    0x18(%rsi),%eax              ; get the array pointer
+    0x7fa68ad81b42:   mov    0xc(,%rax,8),%r10d           ; get the array length
+    0x7fa68ad81b53:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+    0x7fa68ad81b57:   lea    0x10(%rax),%rax              ; get the address of the array
+    0x7fa68ad81b6a:   lea    -0x8(%r10),%r11              ; calculate (array length - 8)
+    0x7fa68ad81b6e:   mov    $0x0,%r8                     ; initialize loop counter
+    ...
+  ↗ 0x7fa68ad81b80:   vmovdqu (%rax,%r8,4),%ymm1          ; load 256 bits (8 integers) into %ymm1
+  │ 0x7fa68ad81b86:   vpaddd %ymm1,%ymm0,%ymm0            ; packed integer addition: ymm0 = ymm0 + ymm1
+  │ 0x7fa68ad81b8a:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
+  │ 0x7fa68ad81b8e:   cmp    %r11,%r8                     ; compare loop counter with (array length - 8)
+  ╰ 0x7fa68ad81b91:   jle    0x7fa68ad81b80               ; jump loop back if less
+    ; ymm0 stores the result of the main loop  
 ```
 
 The post-loop processes the remaining elements individually, without unrolling.
@@ -1022,16 +1018,14 @@ The post-loop processes the remaining elements individually, without unrolling.
 ```
   // Post loop
   
-  ...
-  <-- transfers data from ymm0 (256-bit AVX register) into r11d (32-bit register) -->
-  ...
-  
-                                                        ; <--- Loop begin
-  0x7fa68ad81bc0:   add    (%rax,%r8,4),%r11d           ; add the value of an element to r11d
-  0x7fa68ad81bc4:   inc    %r8                          ; increment the loop counter
-  0x7fa68ad81bc7:   cmp    %r10,%r8                     ; compare the loop counter with the array length
-  0x7fa68ad81bca:   jle    0x7fa68ad81bc0               ; <--- Loop end (Jump back if less)
-  ; r11d stores the result of the post loop  
+    ...
+    <-- transfers data from ymm0 (256-bit AVX register) into r11d (32-bit register) -->
+    ...
+  ↗ 0x7fa68ad81bc0:   add    (%rax,%r8,4),%r11d           ; add the value of an element to r11d
+  │ 0x7fa68ad81bc4:   inc    %r8                          ; increment the loop counter
+  │ 0x7fa68ad81bc7:   cmp    %r10,%r8                     ; compare the loop counter with the array length
+  ╰ 0x7fa68ad81bca:   jle    0x7fa68ad81bc0               ; jump back if less
+    ; r11d stores the result of the post loop  
 ```
 
 #### GraalVM CE JIT Compiler
@@ -1041,56 +1035,55 @@ The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a facto
 ```
   // Main loop
   
-  0x7f22eb23d83f:   mov    0x18(%rsi),%eax              ; get the array pointer
-  0x7f22eb23d842:   mov    0xc(,%rax,8),%r10d           ; get the array length
-  0x7f22eb23d85c:   mov    %r10d,%r8d                   ; copy array length to r8d
-  0x7f22eb23d889:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
-  ...
-  0x7f22eb23d890:   mov    $0x1,%r11d                   ; initialize r11d for loop count
-  <--- Loop peeling -->
-  0x7f22eb23d8a5:   inc    %r11d                        ; increment loop counter (r11d)
-  ...
-  0x7f22eb23d8c0:   mov    %r11d,%r9d                   ; initialize loop counter r9d from r11d
-  ...
-                                                        ; <--- Loop beginning
-  0x7f22eb23d8e0:   add    0x10(%rax,%r9,4),%r11d       ; add value of the 1st element to r11d
-  0x7f22eb23d8e5:   movslq %r9d,%rcx                    ; sign-extend r9d to rcx for addressing
-  0x7f22eb23d8e8:   mov    0x14(%rax,%rcx,4),%ebx       ; store the value of the 2nd element in ebx
-  0x7f22eb23d8ec:   mov    0x18(%rax,%rcx,4),%edi       ; store the value of the 3rd element in edi
-  ...
-  0x7f22eb23d910:   mov    %r9d,0x1c(%rsp)              ; spill r9d (the loop counter) onto the stack
-  0x7f22eb23d915:   mov    0x38(%rax,%rcx,4),%r9d       ; store the value of the 11th element in r9d
-  0x7f22eb23d91a:   mov    %r9d,0x18(%rsp)              ; spill the 11th element (r9d) onto the stack
-  0x7f22eb23d91f:   mov    0x3c(%rax,%rcx,4),%r9d       ; store the value of the 12th element in r9d
-  0x7f22eb23d924:   mov    %r9d,0x14(%rsp)              ; spill the 12th element (r9d) onto the stack
-  ...
-  0x7f22eb23d93d:   mov    0x48(%rax,%rcx,4),%r9d       ; store the value of the 15th element in r9d
-  0x7f22eb23d942:   add    %ebx,%r11d                   ; add the 2nd element to r11d
-  0x7f22eb23d945:   add    %edi,%r11d                   ; add the 3rd element to the previous sum (r11d)
-  ...
-  0x7f22eb23d95d:   add    0x18(%rsp),%r11d             ; load the 11th element from stack and add to r11d
-  0x7f22eb23d962:   add    0x14(%rsp),%r11d             ; load the 12th element from stack and add to r11d
-  ...
-  0x7f22eb23d971:   add    %r9d,%r11d                   ; add the 15th element to the sum (r11d)
-  0x7f22eb23d974:   add    0x4c(%rax,%rcx,4),%r11d      ; add the 16th element to the sum (r11d)
-  0x7f22eb23d979:   mov    0x1c(%rsp),%r9d              ; restore the loop counter from the stack
-  0x7f22eb23d97e:   lea    0x10(%r9),%r9d               ; increment loop counter by 16
-  0x7f22eb23d982:   mov    0x20(%rsp),%r8d              ; move saved value (i.e., array length) from stack to r8d
-  0x7f22eb23d987:   cmp    %r9d,%r8d                    ; compare loop counter with saved value
-  0x7f22eb23d98a:   jg     0x7f22eb23d8e0               ; <--- loop end (jump loop back if greater)
-  ; r11d stores the result of the main loop
+    0x7f22eb23d83f:   mov    0x18(%rsi),%eax              ; get the array pointer
+    0x7f22eb23d842:   mov    0xc(,%rax,8),%r10d           ; get the array length
+    0x7f22eb23d85c:   mov    %r10d,%r8d                   ; copy array length to r8d
+    0x7f22eb23d889:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+    ...
+    0x7f22eb23d890:   mov    $0x1,%r11d                   ; initialize r11d for loop count
+    <--- Loop peeling -->
+    0x7f22eb23d8a5:   inc    %r11d                        ; increment loop counter (r11d)
+    ...
+    0x7f22eb23d8c0:   mov    %r11d,%r9d                   ; initialize loop counter r9d from r11d
+    ...
+  ↗ 0x7f22eb23d8e0:   add    0x10(%rax,%r9,4),%r11d       ; add value of the 1st element to r11d
+  │ 0x7f22eb23d8e5:   movslq %r9d,%rcx                    ; sign-extend r9d to rcx for addressing
+  │ 0x7f22eb23d8e8:   mov    0x14(%rax,%rcx,4),%ebx       ; store the value of the 2nd element in ebx
+  │ 0x7f22eb23d8ec:   mov    0x18(%rax,%rcx,4),%edi       ; store the value of the 3rd element in edi
+  │ ...
+  │ 0x7f22eb23d910:   mov    %r9d,0x1c(%rsp)              ; spill r9d (the loop counter) onto the stack
+  │ 0x7f22eb23d915:   mov    0x38(%rax,%rcx,4),%r9d       ; store the value of the 11th element in r9d
+  │ 0x7f22eb23d91a:   mov    %r9d,0x18(%rsp)              ; spill the 11th element (r9d) onto the stack
+  │ 0x7f22eb23d91f:   mov    0x3c(%rax,%rcx,4),%r9d       ; store the value of the 12th element in r9d
+  │ 0x7f22eb23d924:   mov    %r9d,0x14(%rsp)              ; spill the 12th element (r9d) onto the stack
+  │ ...
+  │ 0x7f22eb23d93d:   mov    0x48(%rax,%rcx,4),%r9d       ; store the value of the 15th element in r9d
+  │ 0x7f22eb23d942:   add    %ebx,%r11d                   ; add the 2nd element to r11d
+  │ 0x7f22eb23d945:   add    %edi,%r11d                   ; add the 3rd element to the previous sum (r11d)
+  │ ...
+  │ 0x7f22eb23d95d:   add    0x18(%rsp),%r11d             ; load the 11th element from stack and add to r11d
+  │ 0x7f22eb23d962:   add    0x14(%rsp),%r11d             ; load the 12th element from stack and add to r11d
+  │ ...
+  │ 0x7f22eb23d971:   add    %r9d,%r11d                   ; add the 15th element to the sum (r11d)
+  │ 0x7f22eb23d974:   add    0x4c(%rax,%rcx,4),%r11d      ; add the 16th element to the sum (r11d)
+  │ 0x7f22eb23d979:   mov    0x1c(%rsp),%r9d              ; restore the loop counter from the stack
+  │ 0x7f22eb23d97e:   lea    0x10(%r9),%r9d               ; increment loop counter by 16
+  │ 0x7f22eb23d982:   mov    0x20(%rsp),%r8d              ; move saved value (i.e., array length) from stack to r8d
+  │ 0x7f22eb23d987:   cmp    %r9d,%r8d                    ; compare loop counter with saved value
+  ╰ 0x7f22eb23d98a:   jg     0x7f22eb23d8e0               ; jump loop back if greater
+    ; r11d stores the result of the main loop
 ```
 
 The post-loop processes the remaining elements individually, without unrolling.
 
 ```
   // Post loop
-                                                        ; <--- loop begin
-  0x7f22eb23d9a0:   add    0x10(%rax,%r9,4),%r11d       ; add the value of an element to r11d
-  0x7f22eb23d9a5:   inc    %r9d                         ; increment the loop counter
-  0x7f22eb23d9a8:   cmp    %r9d,%r10d                   ; compare the loop counter with the array length
-  0x7f22eb23d9ab:   jg     0x7f22eb23d9a0               ; <--- loop end (jump loop back if greater)
-  ; r11d stores the result of the main loop
+
+  ↗ 0x7f22eb23d9a0:   add    0x10(%rax,%r9,4),%r11d       ; add the value of an element to r11d
+  │ 0x7f22eb23d9a5:   inc    %r9d                         ; increment the loop counter
+  │ 0x7f22eb23d9a8:   cmp    %r9d,%r10d                   ; compare the loop counter with the array length
+  ╰ 0x7f22eb23d9ab:   jg     0x7f22eb23d9a0               ; jump loop back if greater
+    ; r11d stores the result of the main loop
 ```
 
 ### Analysis of unpredictable_if_branch
@@ -1102,24 +1095,24 @@ The C2 JIT Compiler unrolls the main loop by a factor of 8, effectively handling
 ```
   // Main loop
   
-  0x7f510463a25a:   mov    0x18(%rsi),%ebp              ; get the array pointer
-  0x7f510463a260:   mov    0xc(%r12,%rbp,8),%ecx        ; get the array length
-  0x7f510463a281:   lea    (%r12,%rbp,8),%r14           ; get the array address
-  ...
-  0x7f510463a2b4:   mov    %ecx,%r13d                   ; move the array length to r13d
-                                                        ; <--- loop begin
-  0x7f510463a2f0:   mov    0x10(%r14,%rbp,4),%r10d      ; load the value of the 1st element into r10d
-  ...
-  0x7f510463a318:   lea    (%rax,%r10,1),%edx           ; calculate an address offset
-  0x7f510463a31c:   cmp    $0x800,%r10d                 ; compare against 2048 (THRESHOLD / 2)
-  0x7f510463a323:   cmovle %edx,%eax                    ; conditional move: move the value to eax if less than or equal
-  ...
-  <--- similar for the 2nd, 3rd, 4th, 5th, 6th, 7th, and 8th elements -->
-  ...
-  0x7f510463a38a:   add    $0x8,%ebp                    ; increment the loop counter
-  0x7f510463a38d:   cmp    %r13d,%ebp                   ; compare the loop counter with the array length
-  0x7f510463a390:   jl     0x7f510463a2f0               ; <--- loop end (jump loop back if less)
-  ; eax stores the result of the main loop
+    0x7f510463a25a:   mov    0x18(%rsi),%ebp              ; get the array pointer
+    0x7f510463a260:   mov    0xc(%r12,%rbp,8),%ecx        ; get the array length
+    0x7f510463a281:   lea    (%r12,%rbp,8),%r14           ; get the array address
+    ...
+    0x7f510463a2b4:   mov    %ecx,%r13d                   ; move the array length to r13d
+    ...
+  ↗ 0x7f510463a2f0:   mov    0x10(%r14,%rbp,4),%r10d      ; load the value of the 1st element into r10d
+  │ ...
+  │ 0x7f510463a318:   lea    (%rax,%r10,1),%edx           ; calculate an address offset
+  │ 0x7f510463a31c:   cmp    $0x800,%r10d                 ; compare against 2048 (THRESHOLD / 2)
+  │ 0x7f510463a323:   cmovle %edx,%eax                    ; conditional move: move the value to eax if less than or equal
+  │ ...
+  │ <--- similar for the 2nd, 3rd, 4th, 5th, 6th, 7th, and 8th elements -->
+  │ ...
+  │ 0x7f510463a38a:   add    $0x8,%ebp                    ; increment the loop counter
+  │ 0x7f510463a38d:   cmp    %r13d,%ebp                   ; compare the loop counter with the array length
+  ╰ 0x7f510463a390:   jl     0x7f510463a2f0               ; jump loop back if less
+    ; eax stores the result of the main loop
 ```
 
 The post-loop handles the remaining elements individually, without loop unrolling, employing the conditional move (`cmovle`) instruction to evaluate if the array values exceed the specified threshold.
@@ -1131,22 +1124,22 @@ Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instr
 ```
   // Main loop
   
-  0x7fd01ad7e9df:   mov    0x18(%rsi),%eax              ; get the array pointer
-  0x7fd01ad7e9e2:   mov    0xc(,%rax,8),%r10d           ; get the array length
-  0x7fd01ad7e9f3:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
-  0x7fd01ad7e9f7:   lea    0x10(%rax),%rax              ; get the array address     
-  ...
-  0x7fd01ad7ea0e:   vmovdqa -0x96(%rip),%ymm1           ; load the value 'threshold'
-  0x7fd01ad7ea16:   mov    $0x0,%r8                     ; initialize loop counter r8 to 0x0
-  ...                                                   ; <--- loop begin
-  0x7fd01ad7ea20:   vmovdqu (%rax,%r8,4),%ymm2          ; load 256 bits (8 integers) into ymm2
-  0x7fd01ad7ea26:   vpaddd %ymm2,%ymm0,%ymm3            ; packed integer addition ymm3 = ymm0 + ymm2
-  0x7fd01ad7ea2a:   vpcmpgtd %ymm2,%ymm1,%ymm2          ; compare elements against 'threshold', setting 1s for greater elements in ymm2
-  0x7fd01ad7ea2e:   vpblendvb %ymm2,%ymm3,%ymm0,%ymm0   ; blend bytes based on ymm0 mask using ymm2 and ymm3, result in ymm0
-  0x7fd01ad7ea34:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
-  0x7fd01ad7ea38:   cmp    %r11,%r8                     ; compare the loop counter with the array length
-  0x7fd01ad7ea3b:   jle    0x7fd01ad7ea20               ; <--- loop end (jump loop back if less or equal)
-  ; ymm0 stores the result of the main loop
+    0x7fd01ad7e9df:   mov    0x18(%rsi),%eax              ; get the array pointer
+    0x7fd01ad7e9e2:   mov    0xc(,%rax,8),%r10d           ; get the array length
+    0x7fd01ad7e9f3:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+    0x7fd01ad7e9f7:   lea    0x10(%rax),%rax              ; get the array address     
+    ...
+    0x7fd01ad7ea0e:   vmovdqa -0x96(%rip),%ymm1           ; load the value 'threshold'
+    0x7fd01ad7ea16:   mov    $0x0,%r8                     ; initialize loop counter r8 to 0x0
+    ...
+  ↗ 0x7fd01ad7ea20:   vmovdqu (%rax,%r8,4),%ymm2          ; load 256 bits (8 integers) into ymm2
+  │ 0x7fd01ad7ea26:   vpaddd %ymm2,%ymm0,%ymm3            ; packed integer addition ymm3 = ymm0 + ymm2
+  │ 0x7fd01ad7ea2a:   vpcmpgtd %ymm2,%ymm1,%ymm2          ; compare elements against 'threshold', setting 1s for greater elements in ymm2
+  │ 0x7fd01ad7ea2e:   vpblendvb %ymm2,%ymm3,%ymm0,%ymm0   ; blend bytes based on ymm0 mask using ymm2 and ymm3, result in ymm0
+  │ 0x7fd01ad7ea34:   lea    0x8(%r8),%r8                 ; increment loop counter by 8
+  │ 0x7fd01ad7ea38:   cmp    %r11,%r8                     ; compare the loop counter with the array length
+  ╰ 0x7fd01ad7ea3b:   jle    0x7fd01ad7ea20               ; <--- loop end (jump loop back if less or equal)
+    ; ymm0 stores the result of the main loop
 ```
 
 #### GraalVM CE JIT
@@ -1154,23 +1147,23 @@ Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instr
 The GraalVM CE JIT Compiler processes elements individually without loop unrolling, utilizing comparison and jump instructions to assess whether the array values surpass the predefined threshold.
 
 ```
-  0x7f91d723d773:   mov    0x10(,%rax,8),%r11d          ; load the value of the first element
-  0x7f91d723d77b:   cmp    $0x801,%r11d                 ; compare the first element against the 'threshold'
-  0x7f91d723d782:   mov    $0x0,%r8d                    ; if greater, set r8d (i.e., the sum) to 0x0
-  0x7f91d723d788:   cmovl  %r11d,%r8d                   ; if less, set r8d to the first element
-  0x7f91d723d78c:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
-  0x7f91d723d790:   mov    $0x1,%r11d                   ; initialize loop counter
-                                                        ; <--- Loop begin
-  0x7f91d723d7a0:   cmp    %r11d,%r10d                  ; compare loop counter with the array length
-  0x7f91d723d7a3:   jle    0x7f91d723d7c2               ; jump outside if less or equal
-  0x7f91d723d7a9:   mov    0x10(%rax,%r11,4),%r9d       ; load the value of an element in r9d
-  0x7f91d723d7ae:   inc    %r11d                        ; increment loop counter
-  0x7f91d723d7b1:   cmp    $0x801,%r9d                  ; compare against 'threshold'
-  0x7f91d723d7b8:   jge    0x7f91d723d7a0               ; jump loop back if greater or equal
-  0x7f91d723d7ba:   add    %r8d,%r9d                    ; add the element to the sum (r9d)
-  0x7f91d723d7bd:   mov    %r9d,%r8d                    ; move the sum back to r8d
-  0x7f91d723d7c0:   jmp    0x7f91d723d7a0               ; <--- Loop end (jump loop back)
-  ; r8d stores the result of the loop
+     0x7f91d723d773:   mov    0x10(,%rax,8),%r11d          ; load the value of the first element
+     0x7f91d723d77b:   cmp    $0x801,%r11d                 ; compare the first element against the 'threshold'
+     0x7f91d723d782:   mov    $0x0,%r8d                    ; if greater, set r8d (i.e., the sum) to 0x0
+     0x7f91d723d788:   cmovl  %r11d,%r8d                   ; if less, set r8d to the first element
+     0x7f91d723d78c:   shl    $0x3,%rax                    ; compressed oops (shift left by 3 for addressing)
+     0x7f91d723d790:   mov    $0x1,%r11d                   ; initialize loop counter
+     ...
+  ↗↗ 0x7f91d723d7a0:   cmp    %r11d,%r10d                  ; compare loop counter with the array length
+  ││ 0x7f91d723d7a3:   jle    0x7f91d723d7c2               ; jump outside if less or equal
+  ││ 0x7f91d723d7a9:   mov    0x10(%rax,%r11,4),%r9d       ; load the value of an element in r9d
+  ││ 0x7f91d723d7ae:   inc    %r11d                        ; increment loop counter
+  ││ 0x7f91d723d7b1:   cmp    $0x801,%r9d                  ; compare against 'threshold'
+  │╰ 0x7f91d723d7b8:   jge    0x7f91d723d7a0               ; jump loop back if greater or equal
+  │  0x7f91d723d7ba:   add    %r8d,%r9d                    ; add the element to the sum (r9d)
+  │  0x7f91d723d7bd:   mov    %r9d,%r8d                    ; move the sum back to r8d
+  ╰  0x7f91d723d7c0:   jmp    0x7f91d723d7a0               ; jump loop back
+    ; r8d stores the result of the loop
 ```
 
 ### Conclusions
@@ -1333,7 +1326,7 @@ The C2 JIT Compiler successfully inlines the `sum` methods in the caller and com
   0x7fd3804f9428:   jle    0x7fd3804f9f37               ; jump if r13d is less than or equal to '1 << 5'
   ...
   <--- caller 'sum' method inlined --->
-  <--- 1st synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->                                                                                                                                                                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.LockCoarseningBenchmark::conditional_nested_method_calls@10 (line 177)
+  <--- 1st synchronized section (i.e., the monitor is not inflated; stack/fast-locking) --->                                                                                                                                                                                                                       
   0x7fd3804f9496:   add    0x14(%rbp),%r13d             ; add the 'incrementValue' field to r13d
   ...
   0x7fd3804f9534:   cmp    $0x20,%r13d
@@ -1777,7 +1770,6 @@ Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a facto
     
     0x7f1534637522:   mov    $0x2,%esi                   ; initialize loop counter  
     ...
-                                                         ; <--- loop begins
   ↗ 0x7f1534637541:   mov    0x10(%r8,%rsi,4),%r10d      ; load array2[i] into register r10d
   │ 0x7f1534637546:   add    0xc(%r9,%rsi,4),%r10d       ; add array1[i - 1] to register r10d
   │ 0x7f153463754b:   mov    %r10d,0x10(%r9,%rsi,4)      ; store r10d (array1[i - 1] + array2[i]) into array1[i]
@@ -1786,7 +1778,7 @@ Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a facto
   │ ...
   │ 0x7f1534637596:   add    $0x8,%esi                   ; increment loop counter by 8
   │ 0x7f1534637599:   cmp    %eax,%esi                   ; compare loop counter against eax
-  ╰ 0x7f153463759b:   jl     0x7f1534637541              ; <--- loop end (jump back to loop if less)
+  ╰ 0x7f153463759b:   jl     0x7f1534637541              ; jump back to loop if less
 ```
 
 Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT Compiler, the GraalVM CE JIT Compiler produces less optimal code due to the additional load instructions.
@@ -1796,7 +1788,6 @@ Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT
 
     0x7f96ef24270a:   mov    $0x2,%r11d                  ; initialize loop counter
     ...  
-                                                         ; <--- loop begin
   ↗ 0x7f96ef242720:   mov    0x10(%r9,%r11,4),%r8d       ; load array2[i] into register r8d
   │ 0x7f96ef242725:   movslq %r11d,%rdi                  ; sign-extend loop counter to rdi
   │ 0x7f96ef242728:   add    0xc(%rcx,%rdi,4),%r8d       ; load array1[i - 1] into register r8d
@@ -1810,7 +1801,7 @@ Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT
   │ ...
   │ 0x7f96ef24279b:   lea    0x8(%r11),%r11d             ; increment loop counter by 8
   │ 0x7f96ef2427a0:   cmp    %r11d,%ebx                  ; compare ebx against loop counter
-  ╰ 0x7f96ef2427a3:   jg     0x7f96ef242720              ; <--- loop end (jump loop back if greater)
+  ╰ 0x7f96ef2427a3:   jg     0x7f96ef242720              ; jump loop back if greater
 ```
 
 ### Conclusions
@@ -2064,14 +2055,16 @@ The C2 JIT compiler implements all the Vector API compiler intrinsics required t
 It also unrolls the inner while loop of the benchmark by a factor of 4.
 
 ```
-...                                                           ; more vectorized code above
-0x00007f99386729e9:   vblendvps %ymm15,%ymm4,%ymm13,%ymm13    ; vectorized code
-0x00007f99386729ef:   vtestps %ymm15,%ymm15                   ; if condition check of the inner while loop
-0x00007f99386729f4:   je     0x00007f9938672805               ; break if true. Jump to inner for loop
-0x00007f99386729fa:   add    $0x4,%r8d                        ; add while loop unroll factor
-0x00007f99386729fe:   xchg   %ax,%ax                          ; nop
-0x00007f9938672a00:   cmp    %esi,%r8d                        ; compare against loop bound
-0x00007f9938672a03:   jl     0x00007f9938672900               ; jump back to the while loop start if loop condition is true
+  ...
+  ; more vectorized code above 
+  ...                                                       
+  0x7f99386729e9:   vblendvps %ymm15,%ymm4,%ymm13,%ymm13    ; vectorized code
+  0x7f99386729ef:   vtestps %ymm15,%ymm15                   ; if condition check of the inner while loop
+  0x7f99386729f4:   je     0x7f9938672805                   ; break if true. Jump to inner for loop
+  0x7f99386729fa:   add    $0x4,%r8d                        ; add while loop unroll factor
+  0x7f99386729fe:   xchg   %ax,%ax                          ; nop
+  0x7f9938672a00:   cmp    %esi,%r8d                        ; compare against loop bound
+  0x7f9938672a03:   jl     0x7f9938672900                   ; jump back to the while loop start if loop condition is true
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -2081,12 +2074,14 @@ body and generates similar assembly instructions as the C2 JIT compiler. One dif
 performance difference is that the Oracle GraalVM JIT compiler does not unroll the inner while loop.
 
 ```
-...                                                       ; more vectorized code above
-0x00007f8626da4400:   inc    %r14d                        ; increment the while loop induction variable by one
-0x00007f8626da4403:   cmp    %r14d,%r11d                  ; compare against loop bound
-0x00007f8626da4406:   jle    0x00007f8626da4495           ; exit loop if loop condition is false
-0x00007f8626da440c:   vmovupd %ymm13,0x10(%rsp)           ; loop body contains vectorized code
-...                                                       ; more vectorized code below
+  ...
+  ; more vectorized code above 
+  ...                                                       
+  0x7f8626da4400:   inc    %r14d                            ; increment the while loop induction variable by one
+  0x7f8626da4403:   cmp    %r14d,%r11d                      ; compare against loop bound
+  0x7f8626da4406:   jle    0x7f8626da4495                   ; exit loop if loop condition is false
+  0x7f8626da440c:   vmovupd %ymm13,0x10(%rsp)               ; loop body contains vectorized code
+  ...                                                       ; more vectorized code below
 ```
 
 #### GraalVM CE JIT Compiler
@@ -2096,9 +2091,9 @@ body and therefore falls back to the Java implementation of the Vector API. This
 degradation and can be seen by looking at the hottest methods in the benchmark after inlining.
 
 ```
-43.54%       jvmci, level 4  jdk.incubator.vector.DoubleVector$$Lambda.0x00007f61f80d0e80::apply, version 2, compile id 1265 
-27.72%       jvmci, level 4  jdk.incubator.vector.DoubleVector$$Lambda.0x00007f61f80d18d8::apply, version 2, compile id 1266 
-16.66%       jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1276
+  43.54%       jvmci, level 4  jdk.incubator.vector.DoubleVector$$Lambda.0x7f61f80d0e80::apply, version 2, compile id 1265 
+  27.72%       jvmci, level 4  jdk.incubator.vector.DoubleVector$$Lambda.0x7f61f80d18d8::apply, version 2, compile id 1266 
+  16.66%       jvmci, level 4  MandelbrotVectorApiBenchmark::vectorized, version 5, compile id 1276
 ```
 
 ### Conclusions
@@ -2180,18 +2175,18 @@ The C2 JIT compiler is able to devirtualize and inline through the entire interf
 two different targets. In such cases, it also performs loop unrolling by a factor of 4 on the hot loop.
 
 ```
-0x00007fd0d4638090:   mov    0x10(%r11,%rcx,4),%eax       ; load in %eax the oop from the instances array at offset %rcx  
-0x00007fd0d4638095:   mov    0x8(%r12,%rax,8),%r10d       ; load the klass word of the object in %r10d
-0x00007fd0d463809a:   nopw   0x0(%rax,%rax,1)             ; alignment nop
-0x00007fd0d46380a0:   cmp    $0x1084000,%r10d             ; compare the klass word with the expected target klass
-0x00007fd0d46380a7:   jne    0x00007fd0d463818d           ; jump if not equal to the slow path
-...                                                       ; similar checks replicated 3 more times due to unroll factor of 4
-0x00007fd0d4638112:   add    $0x4,%eax                    ; add 4 to the wrapper result
-0x00007fd0d4638115:   mov    %eax,0xc(%rbp)               ; store the eax result
-0x00007fd0d4638118:   add    $0x4,%ecx                    ; increment the loop induction variable by 4
-0x00007fd0d463811b:   cmp    %esi,%ecx                    ; compare against the loop bound
-0x00007fd0d463811d:   data16 xchg %ax,%ax                 ; alignment nop
-0x00007fd0d4638120:   jl     0x00007fd0d4638090           ; jump back to the loop start if loop condition is true
+  ↗ 0x7fd0d4638090:   mov    0x10(%r11,%rcx,4),%eax       ; load in %eax the oop from the instances array at offset %rcx  
+  │ 0x7fd0d4638095:   mov    0x8(%r12,%rax,8),%r10d       ; load the klass word of the object in %r10d
+  │ 0x7fd0d463809a:   nopw   0x0(%rax,%rax,1)             ; alignment nop
+  │ 0x7fd0d46380a0:   cmp    $0x1084000,%r10d             ; compare the klass word with the expected target klass
+  │ 0x7fd0d46380a7:   jne    0x7fd0d463818d               ; jump if not equal to the slow path
+  │ ...                                                   ; similar checks replicated 3 more times due to unroll factor of 4
+  │ 0x7fd0d4638112:   add    $0x4,%eax                    ; add 4 to the wrapper result
+  │ 0x7fd0d4638115:   mov    %eax,0xc(%rbp)               ; store the eax result
+  │ 0x7fd0d4638118:   add    $0x4,%ecx                    ; increment the loop induction variable by 4
+  │ 0x7fd0d463811b:   cmp    %esi,%ecx                    ; compare against the loop bound
+  │ 0x7fd0d463811d:   data16 xchg %ax,%ax                 ; alignment nop
+  ╰ 0x7fd0d4638120:   jl     0x7fd0d4638090               ; jump back to the loop start if loop condition is true
 ```
 
 For more than three targets, the C2 JIT compiler always uses a series of interface calls to reach the target method.
@@ -2203,20 +2198,20 @@ The Oracle GraalVM JIT compiler inlines for a number of targets lower or equal t
 the first four targets. If none of the targets match, then it will use an interface call to reach the target method.
 
 ```
-  0x00007f2092ff8576:   mov    0x8(,%rsi,8),%ebx            ; load the klass word of the object in %ebx
-  0x00007f2092ff857d:   cmp    $0x102c000,%ebx              ; check if instance of C2
-  0x00007f2092ff8583:   je     0x00007f2092ff86d3           ; jump to fully inlined C2 method
-  0x00007f2092ff8589:   cmp    $0x10259f0,%ebx              ; check if instance of C1
-  0x00007f2092ff858f:   je     0x00007f2092ff8709           ; jump to fully inlined C1 method
-  0x00007f2092ff8595:   cmp    $0x102c2c0,%ebx              ; check if instance of C3
-  0x00007f2092ff859b:   je     0x00007f2092ff86fd           ; jump to fully inlined C3 method
-  0x00007f2092ff85a1:   cmp    $0x102c580,%ebx              ; check if instance of C4
-  0x00007f2092ff85a7:   je     0x00007f2092ff8715           ; jump to fully inlined C4 method
-  0x00007f2092ff85ad:   mov    %r11d,0xc(%rsp)              ; save the loop induction variable to the stack in case of deoptimization
-  0x00007f2092ff85b2:   test   %eax,0x0(,%rsi,8)            ; deopt check 
-  0x00007f2092ff85b9:   shl    $0x3,%rsi                    ; compute the full address from the oop
-  0x00007f2092ff85bd:   movabs $0x7f1fd002cb00,%rax
-  0x00007f2092ff85c7:   call   0x00007f2092ff63a0           ; perform the interface call to reach the target method
+  0x7f2092ff8576:   mov    0x8(,%rsi,8),%ebx            ; load the klass word of the object in %ebx
+  0x7f2092ff857d:   cmp    $0x102c000,%ebx              ; check if instance of C2
+  0x7f2092ff8583:   je     0x7f2092ff86d3               ; jump to fully inlined C2 method
+  0x7f2092ff8589:   cmp    $0x10259f0,%ebx              ; check if instance of C1
+  0x7f2092ff858f:   je     0x7f2092ff8709               ; jump to fully inlined C1 method
+  0x7f2092ff8595:   cmp    $0x102c2c0,%ebx              ; check if instance of C3
+  0x7f2092ff859b:   je     0x7f2092ff86fd               ; jump to fully inlined C3 method
+  0x7f2092ff85a1:   cmp    $0x102c580,%ebx              ; check if instance of C4
+  0x7f2092ff85a7:   je     0x7f2092ff8715               ; jump to fully inlined C4 method
+  0x7f2092ff85ad:   mov    %r11d,0xc(%rsp)              ; save the loop induction variable to the stack in case of deoptimization
+  0x7f2092ff85b2:   test   %eax,0x0(,%rsi,8)            ; deopt check 
+  0x7f2092ff85b9:   shl    $0x3,%rsi                    ; compute the full address from the oop
+  0x7f2092ff85bd:   movabs $0x7f1fd002cb00,%rax
+  0x7f2092ff85c7:   call   0x7f2092ff63a0               ; perform the interface call to reach the target method
 ```
 
 If a dominant target is present (e.g. `virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`), then the Oracle GraalVM JIT compiler
@@ -2253,37 +2248,37 @@ Both the C2 JIT compiler and the GraalVM CE JIT compiler are able to devirtualiz
 chain calls. The same applies when a dominant target is present.
 
 ```
-0x00007f21a7242090:   cmp    $0x1c20,%r11d                ; compare the loop induction variable against the loop bound
-0x00007f21a7242097:   jge    0x00007f21a72421bd           ; jump out of the loop if the loop condition is false
-0x00007f21a724209d:   mov    0x10(%r10,%r11,4),%ebx       ; load this.instances[i] in %ebx
-0x00007f21a72420a2:   movsbl 0x10(%r11,%r8,8),%edx        ; load this.instanceIndex[i] in %edx
-0x00007f21a72420a8:   mov    %r11d,%esi                   ; move the loop induction variable in %esi
-0x00007f21a72420ab:   inc    %esi                         ; increment the loop induction variable by one
-0x00007f21a72420ad:   inc    %r9d                         ; add 1 to the register containing the wrapper result
-0x00007f21a72420b0:   cmp    $0x3,%edx                    ; switch logic starts here. Compare the instanceIndex[i] against 3
-0x00007f21a72420b3:   jge    0x00007f21a72420dd           ; ... and through one or more jumps land on the correct case
-0x00007f21a72420b9:   cmp    $0x2,%edx                    
-0x00007f21a72420bc:   nopl   0x0(%rax)                    
-0x00007f21a72420c0:   jge    0x00007f21a724213d           
-0x00007f21a72420c6:   cmp    $0x0,%edx                    
-0x00007f21a72420c9:   je     0x00007f21a72420fd           
-0x00007f21a72420cf:   cmp    $0x1,%edx                    
-0x00007f21a72420d2:   je     0x00007f21a724211d           
-0x00007f21a72420d8:   jmp    0x00007f21a7242355           
-0x00007f21a72420dd:   cmp    $0x5,%edx                    
-0x00007f21a72420e0:   jg     0x00007f21a7242355           
-0x00007f21a72420e6:   cmp    $0x5,%edx
-0x00007f21a72420e9:   jge    0x00007f21a724219d
-0x00007f21a72420ef:   cmp    $0x3,%edx
-0x00007f21a72420f2:   je     0x00007f21a724215d
-0x00007f21a72420f8:   jmp    0x00007f21a724217d           ; switch logic ends here.
-0x00007f21a72420fd:   data16 xchg %ax,%ax                 ; alignment nop. Case 0 starts here
-0x00007f21a7242100:   cmpl   $0x1080810,0x8(,%rbx,8)      ; monomorphic call site check. Compare the klass word of the object in %rbx with the expected target klass  
-0x00007f21a724210b:   jne    0x00007f21a724229c           ; jump to the slow path if the check fails
-0x00007f21a7242111:   mov    %r9d,0xc(%rdi)               ; store the wrapper result in the field
-0x00007f21a7242115:   mov    %esi,%r11d                   ; move the loop induction variable in %r11d
-0x00007f21a7242118:   jmp    0x00007f21a7242090           ; jump back to the loop beginning
-... similar code for the remaining cases below ...
+  ↗ 0x7f21a7242090:   cmp    $0x1c20,%r11d                ; compare the loop induction variable against the loop bound
+  │ 0x7f21a7242097:   jge    0x7f21a72421bd               ; jump out of the loop if the loop condition is false
+  │ 0x7f21a724209d:   mov    0x10(%r10,%r11,4),%ebx       ; load this.instances[i] in %ebx
+  │ 0x7f21a72420a2:   movsbl 0x10(%r11,%r8,8),%edx        ; load this.instanceIndex[i] in %edx
+  │ 0x7f21a72420a8:   mov    %r11d,%esi                   ; move the loop induction variable in %esi
+  │ 0x7f21a72420ab:   inc    %esi                         ; increment the loop induction variable by one
+  │ 0x7f21a72420ad:   inc    %r9d                         ; add 1 to the register containing the wrapper result
+  │ 0x7f21a72420b0:   cmp    $0x3,%edx                    ; switch logic starts here. Compare the instanceIndex[i] against 3
+  │ 0x7f21a72420b3:   jge    0x7f21a72420dd               ; ... and through one or more jumps land on the correct case
+  │ 0x7f21a72420b9:   cmp    $0x2,%edx                    
+  │ 0x7f21a72420bc:   nopl   0x0(%rax)                    
+  │ 0x7f21a72420c0:   jge    0x7f21a724213d           
+  │ 0x7f21a72420c6:   cmp    $0x0,%edx                    
+  │ 0x7f21a72420c9:   je     0x7f21a72420fd           
+  │ 0x7f21a72420cf:   cmp    $0x1,%edx                    
+  │ 0x7f21a72420d2:   je     0x7f21a724211d           
+  │ 0x7f21a72420d8:   jmp    0x7f21a7242355           
+  │ 0x7f21a72420dd:   cmp    $0x5,%edx                    
+  │ 0x7f21a72420e0:   jg     0x7f21a7242355           
+  │ 0x7f21a72420e6:   cmp    $0x5,%edx
+  │ 0x7f21a72420e9:   jge    0x7f21a724219d
+  │ 0x7f21a72420ef:   cmp    $0x3,%edx
+  │ 0x7f21a72420f2:   je     0x7f21a724215d
+  │ 0x7f21a72420f8:   jmp    0x7f21a724217d               ; switch logic ends here.
+  │ 0x7f21a72420fd:   data16 xchg %ax,%ax                 ; alignment nop. Case 0 starts here
+  │ 0x7f21a7242100:   cmpl   $0x1080810,0x8(,%rbx,8)      ; monomorphic call site check. Compare the klass word of the object in %rbx with the expected target klass  
+  │ 0x7f21a724210b:   jne    0x7f21a724229c               ; jump to the slow path if the check fails
+  │ 0x7f21a7242111:   mov    %r9d,0xc(%rdi)               ; store the wrapper result in the field
+  │ 0x7f21a7242115:   mov    %esi,%r11d                   ; move the loop induction variable in %r11d
+  ╰ 0x7f21a7242118:   jmp    0x7f21a7242090               ; jump back to the loop beginning
+    ... similar code for the remaining cases below ...
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -2293,17 +2288,17 @@ For the remaining call sites, it will devirtualize up to a certain depth in the 
 call.
 
 ```
-0x00007f7152d81f15:   shl    $0x3,%r9                     ; compute the full address from the oop
-0x00007f7152d81f19:   mov    %r9,%rsi                     ; move the full address in %rsi
-0x00007f7152d81f1c:   mov    %r9,0x10(%rsp)               ; save the full address to the stack
-0x00007f7152d81f21:   xchg   %ax,%ax                      ; nop
-0x00007f7152d81f23:   call   0x00007f7152d7fbc0           ; invokeinterface foo_4
-                                                          ; MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 246)
-                                                          ; MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 250)
-                                                          ; MegamorphicInterfaceCallBenchmark$I::baz@1 (line 256)
-                                                          ; MegamorphicInterfaceCallBenchmark$I::foo@1 (line 260)
-                                                          ; MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 159)
-                                                          ; {optimized virtual_call}
+  0x7f7152d81f15:   shl    $0x3,%r9                     ; compute the full address from the oop
+  0x7f7152d81f19:   mov    %r9,%rsi                     ; move the full address in %rsi
+  0x7f7152d81f1c:   mov    %r9,0x10(%rsp)               ; save the full address to the stack
+  0x7f7152d81f21:   xchg   %ax,%ax                      ; nop
+  0x7f7152d81f23:   call   0x7f7152d7fbc0               ; invokeinterface foo_4
+                                                        ; MegamorphicInterfaceCallBenchmark$I5::baz_5@1 (line 246)
+                                                        ; MegamorphicInterfaceCallBenchmark$I5::foo_5@1 (line 250)
+                                                        ; MegamorphicInterfaceCallBenchmark$I::baz@1 (line 256)
+                                                        ; MegamorphicInterfaceCallBenchmark$I::foo@1 (line 260)
+                                                        ; MegamorphicInterfaceCallBenchmark::devirtualize_to_monomorphic@66 (line 159)
+                                                        ; {optimized virtual_call}
 ```
 
 ### Conclusions
@@ -2394,30 +2389,30 @@ can add a guard that checks the receiver type is `Type1` and then call the `Type
 This is called a monomorphic call site:
 
 ```
-// High-level pseudo-code of the monomorphic call site optimization
-if (receiver instanceof Type1) {
-    // fast path
-    ((Type1) receiver).method();
-} else {
-    // slow path. Will deoptimize and rerun in the interpreter
-    deoptimize();
-}
+  // High-level pseudo-code of the monomorphic call site optimization
+  if (receiver instanceof Type1) {
+      // fast path
+      ((Type1) receiver).method();
+  } else {
+      // slow path. Will deoptimize and rerun in the interpreter
+      deoptimize();
+  }
 ```
 
 A `bimorphic call site` is a call site that can check for two receivers types:
 
 ```
-// High-level pseudo-code of the bimorphic call site optimization
-if (receiver instanceof Type1) {
-    // fast path
-    ((Type1) receiver).method();
-} else if (receiver instanceof Type2) {
-    // fast path
-    ((Type2) receiver).method();
-} else {
-    // slow path. Will deoptimize and rerun in the interpreter. Next time it JITs, it will use a virtual call
-    deoptimize();
-}
+  // High-level pseudo-code of the bimorphic call site optimization
+  if (receiver instanceof Type1) {
+      // fast path
+      ((Type1) receiver).method();
+  } else if (receiver instanceof Type2) {
+      // fast path
+      ((Type2) receiver).method();
+  } else {
+      // slow path. Will deoptimize and rerun in the interpreter. Next time it JITs, it will use a virtual call
+      deoptimize();
+  }
 ```
 
 Once a call site becomes static, the compiler will be able to inline the target method and perform further optimizations.
@@ -2436,46 +2431,46 @@ The C2 JIT compiler is able to devirtualize and inline call sites that use up to
 it also performs loop unrolling by a factor of two.
 
 ```
-0x00007f2cbc758990:   incl   0x10(%r11)                   ; increment the Alg2 counter    
-0x00007f2cbc758994:   add    $0x2,%edx                    ; add 2 to the loop induction variable
-0x00007f2cbc758997:   cmp    %eax,%edx                    ; compare against the loop bound
-0x00007f2cbc758999:   jge    0x00007f2cbc75895f           ; jump out of the loop if the loop condition is false
-0x00007f2cbc75899b:   mov    0x10(%rsi,%rdx,4),%r10d      ; load this.instances[i] in %r10d
-0x00007f2cbc7589a0:   mov    0x8(%r12,%r10,8),%r8d        ; load the klass word of the object in %r8d
-0x00007f2cbc7589a5:   lea    (%r12,%r10,8),%r11           ; load the object address in %r11
-0x00007f2cbc7589a9:   cmp    $0x1026638,%r8d              ; compare the klass word against MegamorphicMethodCallBenchmark$Alg2
-0x00007f2cbc7589b0:   je     0x00007f2cbc7589c1           ; if equal jump to the inlined method that increments the Alg2 counter 
-0x00007f2cbc7589b2:   cmp    $0x1026430,%r8d              ; compare the klass word againsst MegamorphicMethodCallBenchmark$Alg1
-0x00007f2cbc7589b9:   jne    0x00007f2cbc7589ed           ; if not equal jump to the slow path which deoptimizes in this case 
-0x00007f2cbc7589bb:   incl   0xc(%r11)                    ; increment the Alg1 counter
-0x00007f2cbc7589bf:   jmp    0x00007f2cbc7589c5           ; jump past the increment Alg2 counter code 
-0x00007f2cbc7589c1:   incl   0x10(%r11)                   ; increment the Alg2 counter
-0x00007f2cbc7589c5:   mov    0x14(%rsi,%rdx,4),%r11d      ; load this.instances[i + 1] in %r11d
-0x00007f2cbc7589ca:   mov    0x8(%r12,%r11,8),%r10d       ; load the klass word of the object in %r10d
-0x00007f2cbc7589cf:   shl    $0x3,%r11                    ; compute the full address from the oop
-0x00007f2cbc7589d3:   cmp    $0x1026638,%r10d             ; compare the klass word against MegamorphicMethodCallBenchmark$Alg2
-0x00007f2cbc7589da:   je     0x00007f2cbc758990           ; if equal jump to the inlined method that increments the Alg2 counter
-0x00007f2cbc7589dc:   cmp    $0x1026430,%r10d             ; compare the klass word against MegamorphicMethodCallBenchmark$Alg1
-0x00007f2cbc7589e3:   jne    0x00007f2cbc7589eb           ; if not equal jump to the slow path which deoptimizes in this case
-0x00007f2cbc7589e5:   incl   0xc(%r11)                    ; increment the Alg1 counter
-0x00007f2cbc7589e9:   jmp    0x00007f2cbc758994           ; jump back to the loop beginning
+    0x7f2cbc758990:   incl   0x10(%r11)                   ; increment the Alg2 counter    
+  ↗ 0x7f2cbc758994:   add    $0x2,%edx                    ; add 2 to the loop induction variable
+  │ 0x7f2cbc758997:   cmp    %eax,%edx                    ; compare against the loop bound
+  │ 0x7f2cbc758999:   jge    0x7f2cbc75895f               ; jump out of the loop if the loop condition is false
+  │ 0x7f2cbc75899b:   mov    0x10(%rsi,%rdx,4),%r10d      ; load this.instances[i] in %r10d
+  │ 0x7f2cbc7589a0:   mov    0x8(%r12,%r10,8),%r8d        ; load the klass word of the object in %r8d
+  │ 0x7f2cbc7589a5:   lea    (%r12,%r10,8),%r11           ; load the object address in %r11
+  │ 0x7f2cbc7589a9:   cmp    $0x1026638,%r8d              ; compare the klass word against MegamorphicMethodCallBenchmark$Alg2
+  │ 0x7f2cbc7589b0:   je     0x7f2cbc7589c1               ; if equal jump to the inlined method that increments the Alg2 counter 
+  │ 0x7f2cbc7589b2:   cmp    $0x1026430,%r8d              ; compare the klass word againsst MegamorphicMethodCallBenchmark$Alg1
+  │ 0x7f2cbc7589b9:   jne    0x7f2cbc7589ed               ; if not equal jump to the slow path which deoptimizes in this case 
+  │ 0x7f2cbc7589bb:   incl   0xc(%r11)                    ; increment the Alg1 counter
+  │ 0x7f2cbc7589bf:   jmp    0x7f2cbc7589c5               ; jump past the increment Alg2 counter code 
+  │ 0x7f2cbc7589c1:   incl   0x10(%r11)                   ; increment the Alg2 counter
+  │ 0x7f2cbc7589c5:   mov    0x14(%rsi,%rdx,4),%r11d      ; load this.instances[i + 1] in %r11d
+  │ 0x7f2cbc7589ca:   mov    0x8(%r12,%r11,8),%r10d       ; load the klass word of the object in %r10d
+  │ 0x7f2cbc7589cf:   shl    $0x3,%r11                    ; compute the full address from the oop
+  │ 0x7f2cbc7589d3:   cmp    $0x1026638,%r10d             ; compare the klass word against MegamorphicMethodCallBenchmark$Alg2
+  │ 0x7f2cbc7589da:   je     0x7f2cbc758990               ; if equal jump to the inlined method that increments the Alg2 counter
+  │ 0x7f2cbc7589dc:   cmp    $0x1026430,%r10d             ; compare the klass word against MegamorphicMethodCallBenchmark$Alg1
+  │ 0x7f2cbc7589e3:   jne    0x7f2cbc7589eb               ; if not equal jump to the slow path which deoptimizes in this case
+  │ 0x7f2cbc7589e5:   incl   0xc(%r11)                    ; increment the Alg1 counter
+  ╰ 0x7f2cbc7589e9:   jmp    0x7f2cbc758994               ; jump back to the loop beginning
 ```
 
 If the number of targets is higher than two, the C2 JIT compiler always uses a virtual call to reach the target method.
 
 ```
-0x00007f41b8758e80:   mov    (%rsp),%r11                  ; load the instances array base address in %r11 from the stack
-0x00007f41b8758e84:   mov    0x10(%r11,%rbp,4),%r10d      ; load this.instances[i] in %r10d
-0x00007f41b8758e89:   mov    %r11,(%rsp)                  ; store the instances array base address on the stack
-0x00007f41b8758e8d:   mov    %r10,%rsi                    ; move the this.instances[i] in %rsi 
-0x00007f41b8758e90:   shl    $0x3,%rsi                    ; compute the full address from the oop
-0x00007f41b8758e94:   nop                                 ; alignment nop
-0x00007f41b8758e95:   movabs $0x7f40f8026430,%rax
-0x00007f41b8758e9f:   call   0x00007f41b7fa1e20           ; virtual call to the compute method
-0x00007f41b8758ea4:   nopl   0x214(%rax,%rax,1)           ; more nops
-0x00007f41b8758eac:   inc    %ebp                         ; increment the loop induction variable by one
-0x00007f41b8758eae:   cmp    0x8(%rsp),%ebp               ; compare against the loop bound
-0x00007f41b8758eb2:   jl     0x00007f41b8758e80           ; jump back to the loop beginning if the loop condition is true
+  ↗ 0x7f41b8758e80:   mov    (%rsp),%r11                  ; load the instances array base address in %r11 from the stack
+  │ 0x7f41b8758e84:   mov    0x10(%r11,%rbp,4),%r10d      ; load this.instances[i] in %r10d
+  │ 0x7f41b8758e89:   mov    %r11,(%rsp)                  ; store the instances array base address on the stack
+  │ 0x7f41b8758e8d:   mov    %r10,%rsi                    ; move the this.instances[i] in %rsi 
+  │ 0x7f41b8758e90:   shl    $0x3,%rsi                    ; compute the full address from the oop
+  │ 0x7f41b8758e94:   nop                                 ; alignment nop
+  │ 0x7f41b8758e95:   movabs $0x7f40f8026430,%rax
+  │ 0x7f41b8758e9f:   call   0x7f41b7fa1e20               ; virtual call to the compute method
+  │ 0x7f41b8758ea4:   nopl   0x214(%rax,%rax,1)           ; more nops
+  │ 0x7f41b8758eac:   inc    %ebp                         ; increment the loop induction variable by one
+  │ 0x7f41b8758eae:   cmp    0x8(%rsp),%ebp               ; compare against the loop bound
+  ╰ 0x7f41b8758eb2:   jl     0x7f41b8758e80               ; jump back to the loop beginning if the loop condition is true
 ```
 
 #### Oracle GraalVM JIT Compiler
@@ -2486,31 +2481,32 @@ This can be observed either by looking at the generated assembly code or by look
 
 Since the assembly code for the `virtual_call` method is quite large due to a loop unrolling factor of two,
 the equivalent high-level pseudo-code is shown below:
+
 ```
-if (receiver instanceof Type1) {
-    // fast path
-    ((Type1) receiver).method();
-} else if (receiver instanceof Type2) {
-    // fast path
-    ((Type2) receiver).method();
-} else if (receiver instanceof Type3) {
-    // fast path
-    ((Type3) receiver).method();
-} else if (receiver instanceof Type4) {
-    // fast path
-    ((Type4) receiver).method();
-} else {
-    // slow path. Will not deoptimize, but rather use a virtual call for the remaining targets.
-    receiver.method();
-}
+  if (receiver instanceof Type1) {
+      // fast path
+      ((Type1) receiver).method();
+  } else if (receiver instanceof Type2) {
+      // fast path
+      ((Type2) receiver).method();
+  } else if (receiver instanceof Type3) {
+      // fast path
+      ((Type3) receiver).method();
+  } else if (receiver instanceof Type4) {
+      // fast path
+      ((Type4) receiver).method();
+  } else {
+      // slow path. Will not deoptimize, but rather use a virtual call for the remaining targets.
+      receiver.method();
+  }
 ```
 
 The hottest methods in the benchmark `virtual_call[MEGAMORPHIC_5]` are shown below. A single `compute` method
 shows up in the list because the remaining methods have been inlined in `virtual_call`.
 ```
-....[Hottest Regions].....................................................
-  84.82%      jvmci, level 4  MegamorphicMethodCallBenchmark::virtual_call 
-  12.24%      jvmci, level 4  MegamorphicMethodCallBenchmark$Alg4::compute
+  ....[Hottest Regions].....................................................
+    84.82%      jvmci, level 4  MegamorphicMethodCallBenchmark::virtual_call 
+    12.24%      jvmci, level 4  MegamorphicMethodCallBenchmark$Alg4::compute
 ```
 
 #### GraalVM CE JIT Compiler
@@ -2528,34 +2524,34 @@ the C1 compiler and the interpreter.
 
 Below is the assembly code for the `virtual_call[MEGAMORPHIC_7]` benchmark:
 ```
-0x00007f9587241de0:   cmp    %r8d,%r11d                   ; compare the loop induction variable against the loop bound
-0x00007f9587241de3:   jle    0x00007f9587241edc           ; jump out of the loop if the loop condition is false
-0x00007f9587241de9:   mov    0x10(%r10,%r8,4),%r9d        ; load this.instances[i] in %r9
-0x00007f9587241dee:   mov    0x8(,%r9,8),%ecx             ; load the klass word of this.instances[i] in %ecx
-0x00007f9587241df6:   movabs $0x7f9507000000,%rbx         ; move the metaspace base in %rbx
-0x00007f9587241e00:   lea    (%rbx,%rcx,1),%rcx           ; load the address of the klass in %rcx
-0x00007f9587241e04:   mov    %r8d,%ebx                    ; move the loop induction variable in %ebx
-0x00007f9587241e07:   inc    %ebx                         ; increment the loop induction variable by one
-0x00007f9587241e09:   cmp    -0x190(%rip),%rcx            ; compare the klass against one of the expected targets.
-                                                          ; the expected klasses are stored in the constant pool 
-0x00007f9587241e10:   je     0x00007f9587241e6c           ; if equal jump to the inlined method that increments the Alg1 counter   
-0x00007f9587241e16:   cmp    -0x195(%rip),%rcx            ; compare the klass against one of the expected targets
-0x00007f9587241e1d:   data16 xchg %ax,%ax                 ; alignment nop
-0x00007f9587241e20:   je     0x00007f9587241e7c           ; if equal jump to the inlined method that increments the Alg2 counter
-... similar code for the remaining targets below ...
-0x00007f9587241e67:   jmp    0x00007f9587241f96           ; if none of the targets match, then jump to the slow path which deoptimizes
-0x00007f9587241e6c:   incl   0xc(,%r9,8)                  ; increment the c1 field
-0x00007f9587241e74:   mov    %ebx,%r8d                    ; move the loop induction variable in %r8d
-0x00007f9587241e77:   jmp    0x00007f9587241de0           ; jump back to the loop beginning
-0x00007f9587241e7c:   incl   0x10(,%r9,8)                 ; increment the c2 field
-0x00007f9587241e84:   mov    %ebx,%r8d                    ; move the loop induction variable in %r8d
-0x00007f9587241e87:   jmp    0x00007f9587241de0           ; jump back to the loop beginning
-... similar code for the remaining targets below ...
-0x00007f9587241edc:   mov    0x10(%rsp),%rbp 
-0x00007f9587241ee1:   add    $0x18,%rsp                   ; pop the stack
-0x00007f9587241ee5:   cmp    0x450(%r15),%rsp             ; safepoint poll check
-0x00007f9587241eec:   ja     0x00007f958724200f           ; jump to safepoint handling if required
-0x00007f9587241ef2:   ret                                 ; return to the caller
+  ↗↗ 0x7f9587241de0:   cmp    %r8d,%r11d                   ; compare the loop induction variable against the loop bound
+  ││ 0x7f9587241de3:   jle    0x7f9587241edc               ; jump out of the loop if the loop condition is false
+  ││ 0x7f9587241de9:   mov    0x10(%r10,%r8,4),%r9d        ; load this.instances[i] in %r9
+  ││ 0x7f9587241dee:   mov    0x8(,%r9,8),%ecx             ; load the klass word of this.instances[i] in %ecx
+  ││ 0x7f9587241df6:   movabs $0x7f9507000000,%rbx         ; move the metaspace base in %rbx
+  ││ 0x7f9587241e00:   lea    (%rbx,%rcx,1),%rcx           ; load the address of the klass in %rcx
+  ││ 0x7f9587241e04:   mov    %r8d,%ebx                    ; move the loop induction variable in %ebx
+  ││ 0x7f9587241e07:   inc    %ebx                         ; increment the loop induction variable by one
+  ││ 0x7f9587241e09:   cmp    -0x190(%rip),%rcx            ; compare the klass against one of the expected targets.
+  ││                                                       ; the expected klasses are stored in the constant pool 
+  ││ 0x7f9587241e10:   je     0x7f9587241e6c               ; if equal jump to the inlined method that increments the Alg1 counter   
+  ││ 0x7f9587241e16:   cmp    -0x195(%rip),%rcx            ; compare the klass against one of the expected targets
+  ││ 0x7f9587241e1d:   data16 xchg %ax,%ax                 ; alignment nop
+  ││ 0x7f9587241e20:   je     0x7f9587241e7c               ; if equal jump to the inlined method that increments the Alg2 counter
+  ││ ... similar code for the remaining targets below ...
+  ││ 0x7f9587241e67:   jmp    0x7f9587241f96               ; if none of the targets match, then jump to the slow path which deoptimizes
+  ││ 0x7f9587241e6c:   incl   0xc(,%r9,8)                  ; increment the c1 field
+  ││ 0x7f9587241e74:   mov    %ebx,%r8d                    ; move the loop induction variable in %r8d
+  │╰ 0x7f9587241e77:   jmp    0x7f9587241de0               ; jump back to the loop beginning
+  │  0x7f9587241e7c:   incl   0x10(,%r9,8)                 ; increment the c2 field
+  │  0x7f9587241e84:   mov    %ebx,%r8d                    ; move the loop induction variable in %r8d
+  ╰  0x7f9587241e87:   jmp    0x7f9587241de0               ; jump back to the loop beginning
+     ... similar code for the remaining targets below ...
+     0x7f9587241edc:   mov    0x10(%rsp),%rbp 
+     0x7f9587241ee1:   add    $0x18,%rsp                   ; pop the stack
+     0x7f9587241ee5:   cmp    0x450(%r15),%rsp             ; safepoint poll check
+     0x7f9587241eec:   ja     0x7f958724200f               ; jump to safepoint handling if required
+     0x7f9587241ef2:   ret                                 ; return to the caller
 ```
 
 ### Analysis of devirtualize_to_monomorphic
@@ -2567,50 +2563,50 @@ will always resolve to the same target method.
 Overall, all JVMs perform the same and are able to devirtualize and inline at the call sites. Below is the assembly
 code generated by the GraalVM CE JIT Compiler for the `devirtualize_to_monomorphic[MEGAMORPHIC_8]` benchmark:
 ``` 
-0x00007fa0032421a0:   cmp    $0x9d80,%r11d                ; compare the loop induction variable against the loop bound
-0x00007fa0032421a7:   jge    0x00007fa003242349           ; jump out of the loop if the loop condition is false
-0x00007fa0032421ad:   mov    0x10(%r10,%r11,4),%r9d       ; load this.instances[i] in %r9d
-0x00007fa0032421b2:   movsbl 0x10(%r11,%r8,8),%ebx        ; load this.classIndex[i] in %ebx
-0x00007fa0032421b8:   mov    %r11d,%edi                   ; move the loop induction variable in %edi
-0x00007fa0032421bb:   inc    %edi                         ; increment the loop induction variable by one
-0x00007fa0032421bd:   cmp    $0x5,%ebx                    ; switch logic starts here.
-0x00007fa0032421c0:   jge    0x00007fa003242205
-0x00007fa0032421c6:   cmp    $0x3,%ebx
-0x00007fa0032421c9:   jge    0x00007fa0032421f4
-0x00007fa0032421cf:   cmp    $0x2,%ebx
-0x00007fa0032421d2:   jge    0x00007fa003242327
-0x00007fa0032421d8:   cmp    $0x0,%ebx
-0x00007fa0032421db:   nopl   0x0(%rax,%rax,1)
-0x00007fa0032421e0:   je     0x00007fa003242247
-0x00007fa0032421e6:   cmp    $0x1,%ebx
-0x00007fa0032421e9:   je     0x00007fa003242269
-0x00007fa0032421ef:   jmp    0x00007fa003242569
-0x00007fa0032421f4:   cmp    $0x3,%ebx
-0x00007fa0032421f7:   je     0x00007fa00324228b
-0x00007fa0032421fd:   data16 xchg %ax,%ax
-0x00007fa003242200:   jmp    0x00007fa0032422cf
-0x00007fa003242205:   cmp    $0x7,%ebx
-0x00007fa003242208:   jg     0x00007fa003242569
-0x00007fa00324220e:   cmp    $0x7,%ebx
-0x00007fa003242211:   jge    0x00007fa003242225
-0x00007fa003242217:   cmp    $0x5,%ebx
-0x00007fa00324221a:   je     0x00007fa003242305
-0x00007fa003242220:   jmp    0x00007fa0032422ad           ; switch logic ends here.
-0x00007fa003242225:   cmpl   $0x1084a28,0x8(,%r9,8)       ; compare the klass word against the Alg8 klass 
-0x00007fa003242231:   jne    0x00007fa003242460           ; if not equal jump to the slow path which deoptimizes in this case
-0x00007fa003242237:   incl   0x28(,%r9,8)                 ; increment the c8 field
-0x00007fa00324223f:   mov    %edi,%r11d                   ; move the increment induction variable to %r11d
-0x00007fa003242242:   jmp    0x00007fa0032421a0           ; jump back to the loop beginning
-0x00007fa003242247:   cmpl   $0x102bad0,0x8(,%r9,8)       ; compare the klass word against the Alg1 klass 
-0x00007fa003242253:   jne    0x00007fa00324258d           ; jump to the slow path which deoptimizes in this case
-0x00007fa003242259:   incl   0xc(,%r9,8)                  ; increment the c1 field
-0x00007fa003242261:   mov    %edi,%r11d                   ; move the increment induction variable to %r11d
-0x00007fa003242264:   jmp    0x00007fa0032421a0           ; jump back to the loop beginning
-... similar code for the remaining cases below ...
-0x00007fa00324234e:   add    $0x18,%rsp                   ; pop the stack
-0x00007fa003242352:   cmp    0x450(%r15),%rsp             ; safepoint poll check
-0x00007fa003242359:   ja     0x00007fa0032425f9           ; jump to safepoint handling if required
-0x00007fa00324235f:   ret                                 ; return to the caller
+  ↗↗ 0x7fa0032421a0:   cmp    $0x9d80,%r11d                ; compare the loop induction variable against the loop bound
+  ││ 0x7fa0032421a7:   jge    0x7fa003242349               ; jump out of the loop if the loop condition is false
+  ││ 0x7fa0032421ad:   mov    0x10(%r10,%r11,4),%r9d       ; load this.instances[i] in %r9d
+  ││ 0x7fa0032421b2:   movsbl 0x10(%r11,%r8,8),%ebx        ; load this.classIndex[i] in %ebx
+  ││ 0x7fa0032421b8:   mov    %r11d,%edi                   ; move the loop induction variable in %edi
+  ││ 0x7fa0032421bb:   inc    %edi                         ; increment the loop induction variable by one
+  ││ 0x7fa0032421bd:   cmp    $0x5,%ebx                    ; switch logic starts here.
+  ││ 0x7fa0032421c0:   jge    0x7fa003242205
+  ││ 0x7fa0032421c6:   cmp    $0x3,%ebx
+  ││ 0x7fa0032421c9:   jge    0x7fa0032421f4
+  ││ 0x7fa0032421cf:   cmp    $0x2,%ebx
+  ││ 0x7fa0032421d2:   jge    0x7fa003242327
+  ││ 0x7fa0032421d8:   cmp    $0x0,%ebx
+  ││ 0x7fa0032421db:   nopl   0x0(%rax,%rax,1)
+  ││ 0x7fa0032421e0:   je     0x7fa003242247
+  ││ 0x7fa0032421e6:   cmp    $0x1,%ebx
+  ││ 0x7fa0032421e9:   je     0x7fa003242269
+  ││ 0x7fa0032421ef:   jmp    0x7fa003242569
+  ││ 0x7fa0032421f4:   cmp    $0x3,%ebx
+  ││ 0x7fa0032421f7:   je     0x7fa00324228b
+  ││ 0x7fa0032421fd:   data16 xchg %ax,%ax
+  ││ 0x7fa003242200:   jmp    0x7fa0032422cf
+  ││ 0x7fa003242205:   cmp    $0x7,%ebx
+  ││ 0x7fa003242208:   jg     0x7fa003242569
+  ││ 0x7fa00324220e:   cmp    $0x7,%ebx
+  ││ 0x7fa003242211:   jge    0x7fa003242225
+  ││ 0x7fa003242217:   cmp    $0x5,%ebx
+  ││ 0x7fa00324221a:   je     0x7fa003242305
+  ││ 0x7fa003242220:   jmp    0x7fa0032422ad               ; switch logic ends here.
+  ││ 0x7fa003242225:   cmpl   $0x1084a28,0x8(,%r9,8)       ; compare the klass word against the Alg8 klass 
+  ││ 0x7fa003242231:   jne    0x7fa003242460               ; if not equal jump to the slow path which deoptimizes in this case
+  ││ 0x7fa003242237:   incl   0x28(,%r9,8)                 ; increment the c8 field
+  ││ 0x7fa00324223f:   mov    %edi,%r11d                   ; move the increment induction variable to %r11d
+  │╰ 0x7fa003242242:   jmp    0x7fa0032421a0               ; jump back to the loop beginning
+  │  0x7fa003242247:   cmpl   $0x102bad0,0x8(,%r9,8)       ; compare the klass word against the Alg1 klass 
+  │  0x7fa003242253:   jne    0x7fa00324258d               ; jump to the slow path which deoptimizes in this case
+  │  0x7fa003242259:   incl   0xc(,%r9,8)                  ; increment the c1 field
+  │  0x7fa003242261:   mov    %edi,%r11d                   ; move the increment induction variable to %r11d
+  ╰  0x7fa003242264:   jmp    0x7fa0032421a0               ; jump back to the loop beginning
+     ... similar code for the remaining cases below ...
+     0x7fa00324234e:   add    $0x18,%rsp                   ; pop the stack
+     0x7fa003242352:   cmp    0x450(%r15),%rsp             ; safepoint poll check
+     0x7fa003242359:   ja     0x7fa0032425f9               ; jump to safepoint handling if required
+     0x7fa00324235f:   ret                                 ; return to the caller
 ```
 
 The only exception in regard to the performance of the benchmark is with the C2 Compiler in
@@ -2621,16 +2617,17 @@ of targets is higher than seven.
 
 Below is the relevant snippet of the assembly code generated by the C2 JIT Compiler
 for the `devirtualize_to_monomorphic[MEGAMORPHIC_8]` benchmark:
+
 ```
-0x00007f374063c509:   movslq %r8d,%r9                     ; move the loop induction variable in %r9
-0x00007f374063c50c:   mov    0x10(%rdx,%r9,4),%r11d       ; load this.instances[i] in %r11d
-0x00007f374063c511:   movsbl 0x10(%rax,%r9,1),%ecx        ; load this.classIndex[i] in %ecx
-0x00007f374063c517:   cmp    $0x8,%ecx                    ; check if the classIndex[i] is greater or equal to 8
-0x00007f374063c51a:   jae    0x00007f374063c531           ; if true (i.e. default case) jump to default path of the switch statement which in this case deoptimizes
-0x00007f374063c51c:   movslq %ecx,%r9                     ; move the classIndex[i] in %r9
-0x00007f374063c51f:   shl    $0x3,%r9                     ; compute the full address from the oop
-0x00007f374063c523:   movabs $0x7f374063c300,%rbx         ; move the base of the jump table in %rbx
-0x00007f374063c52d:   jmp    *(%rbx,%r9,1)                ; jump to the relevant entry in the jump table
+  0x7f374063c509:   movslq %r8d,%r9                     ; move the loop induction variable in %r9
+  0x7f374063c50c:   mov    0x10(%rdx,%r9,4),%r11d       ; load this.instances[i] in %r11d
+  0x7f374063c511:   movsbl 0x10(%rax,%r9,1),%ecx        ; load this.classIndex[i] in %ecx
+  0x7f374063c517:   cmp    $0x8,%ecx                    ; check if the classIndex[i] is greater or equal to 8
+  0x7f374063c51a:   jae    0x7f374063c531               ; if true (i.e. default case) jump to default path of the switch statement which in this case deoptimizes
+  0x7f374063c51c:   movslq %ecx,%r9                     ; move the classIndex[i] in %r9
+  0x7f374063c51f:   shl    $0x3,%r9                     ; compute the full address from the oop
+  0x7f374063c523:   movabs $0x7f374063c300,%rbx         ; move the base of the jump table in %rbx
+  0x7f374063c52d:   jmp    *(%rbx,%r9,1)                ; jump to the relevant entry in the jump table
 ```
 
 ### Conclusions
@@ -2689,25 +2686,27 @@ this method that is executed is JITed by the C1 compiler. The C1 compiler does n
 into the `tooManyArgsMethod` method, resulting in a long chain of calls.
 
 Below is a snippet of the assembly code generated by the C1 compiler for the `tooManyArgsMethod` benchmark:
+
 ```
-... similar assembly above...
-0x00007f8afc638ce7:   call   0x00007f8afc6382a0           ; call the Math::round method
-0x00007f8afc638cec:   nopl   0x20004dc(%rax,%rax,1)       ; alignment nops
-0x00007f8afc638cf4:   mov    0x30(%rsp),%rsi              ; load the intermediate result from the stack in %rsi
-0x00007f8afc638cf9:   add    %rax,%rsi                    ; add the Math::round result to the intermediate result
-0x00007f8afc638cfc:   vmovsd 0x230(%rsp),%xmm0            ; load the next argument in %xmm0
-0x00007f8afc638d05:   mov    %rsi,0x38(%rsp)              ; store the intermediate result on the stack
-0x00007f8afc638d0a:   nopl   0x0(%rax,%rax,1)             ; alignment nops
-0x00007f8afc638d0f:   call   0x00007f8afc6382a0           ; call the Math::round method again
-... similar assembly below...
+  ... similar assembly above...
+  0x7f8afc638ce7:   call   0x7f8afc6382a0               ; call the Math::round method
+  0x7f8afc638cec:   nopl   0x20004dc(%rax,%rax,1)       ; alignment nops
+  0x7f8afc638cf4:   mov    0x30(%rsp),%rsi              ; load the intermediate result from the stack in %rsi
+  0x7f8afc638cf9:   add    %rax,%rsi                    ; add the Math::round result to the intermediate result
+  0x7f8afc638cfc:   vmovsd 0x230(%rsp),%xmm0            ; load the next argument in %xmm0
+  0x7f8afc638d05:   mov    %rsi,0x38(%rsp)              ; store the intermediate result on the stack
+  0x7f8afc638d0a:   nopl   0x0(%rax,%rax,1)             ; alignment nops
+  0x7f8afc638d0f:   call   0x7f8afc6382a0               ; call the Math::round method again
+  ... similar assembly below...
 ```
 
 The hottest methods in the benchmark are shown below:
+
 ```
-....[Hottest Regions]...............................................................................
-  57.56%         c2, level 4  java.lang.Math::round 
-  33.80%         c1, level 1  com.ionutbalosin.jvm.performance.benchmarks.compiler.MethodArgsBusterBenchmark::tooManyArgsMethod 
-   5.13%         c1, level 1  com.ionutbalosin.jvm.performance.benchmarks.compiler.MethodArgsBusterBenchmark::method_args_buster
+  ....[Hottest Regions]...............................................................................
+    57.56%         c2, level 4  java.lang.Math::round 
+    33.80%         c1, level 1  MethodArgsBusterBenchmark::tooManyArgsMethod 
+     5.13%         c1, level 1  MethodArgsBusterBenchmark::method_args_buster
 ```
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
@@ -2715,12 +2714,13 @@ The hottest methods in the benchmark are shown below:
 Both the Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler are able to inline the `tooManyArgsMethod` method
 and return a constant value. Below is a section of the assembly code generated by the GraalVM CE JIT Compiler for
 the `method_args_buster` method:
+
 ```
-0x00007fb65323c2ba:   mov    $0xcc,%rax                   ; move 204, the constant result of the method in the return register %rax
-0x00007fb65323c2c1:   add    $0x18,%rsp                   ; pop the stack
-0x00007fb65323c2c5:   cmp    0x450(%r15),%rsp             ; check if a safepoint is required
-0x00007fb65323c2cc:   ja     0x00007fb65323c2e0           ; jump to safepoint handling if required
-0x00007fb65323c2d2:   ret                                 ; return to the caller
+  0x7fb65323c2ba:   mov    $0xcc,%rax                   ; move 204, the constant result of the method in the return register %rax
+  0x7fb65323c2c1:   add    $0x18,%rsp                   ; pop the stack
+  0x7fb65323c2c5:   cmp    0x450(%r15),%rsp             ; check if a safepoint is required
+  0x7fb65323c2cc:   ja     0x7fb65323c2e0           ; jump to safepoint handling if required
+  0x7fb65323c2d2:   ret                                 ; return to the caller
 ```
 
 ### Conclusions
@@ -2794,37 +2794,37 @@ for the cached exception object. This optimization is enabled by default and can
 `-XX:-OmitStackTraceInFastThrow` flag.
 
 ```
-0x00007f14a463aaa0:   add    0xc(%r12,%r10,8),%r14d       ; increment the accumulator %r14d with the value of array[i].x
-0x00007f14a463aaa5:   mov    0x458(%r15),%r10             ; load safepoint poll address in %r10 
-0x00007f14a463aaac:   mov    0x10(%rbp),%r8d              ; load the size filed in %r8d
-0x00007f14a463aab0:   inc    %ebx                         ; increment the loop induction variable
-0x00007f14a463aab2:   test   %eax,(%r10)                  ; safepoint poll check                  
-0x00007f14a463aab5:   cmp    %r8d,%ebx                    ; compare the loop induction variable against size
-0x00007f14a463aab8:   jge    0x00007f14a463ab2d           ; jump to return if the loop condition is false
-0x00007f14a463aabe:   mov    0x1c(%rbp),%r11d             ; load the array field (oop) in %r11d
-0x00007f14a463aac2:   test   %r11d,%r11d                  ; check if the array field is null
-0x00007f14a463aac5:   je     0x00007f14a463aa74           ; if null jump to the slow path
-0x00007f14a463aac7:   mov    0xc(%r12,%r11,8),%r8d        ; load the array length in %r8d
-0x00007f14a463aacc:   cmp    %r8d,%ebx                    ; compare the loop induction variable against the array length
-0x00007f14a463aacf:   jae    0x00007f14a463ab43           ; if greater or equal jump to the slow path and throw ArrayIndexOutOfBoundsException
-0x00007f14a463aad5:   lea    (%r12,%r11,8),%r10           ; compute the absolute address of the array
-0x00007f14a463aad9:   mov    0x10(%r10,%rbx,4),%r10d      ; load the object (oop) at array[i] in %r10d 
-0x00007f14a463aade:   xchg   %ax,%ax                      ; alignment nop
-0x00007f14a463aae0:   test   %r10d,%r10d                  ; check if the object is null
-0x00007f14a463aae3:   jne    0x00007f14a463aaa0           ; if not null jump to the accumulator increment
-0x00007f14a463aae5:   cmpb   $0x0,0x40(%r15)              
-0x00007f14a463aaea:   jne    0x00007f14a463aba5
-0x00007f14a463aaf0:   movabs $0x7ffc01020,%r10            ; load the cached NullPointerException object in %r10
-0x00007f14a463aafa:   mov    %r12d,0x14(%r10)             ; clear the `detailedMessage` field of the cached exception object
-0x00007f14a463aafe:   mov    %ebx,0x4(%rsp)               ; store the loop induction variable on the stack
-0x00007f14a463ab02:   mov    %r14d,(%rsp)                 ; store the accumulator on the stack
-0x00007f14a463ab06:   mov    %rbp,%rsi                    ; move the `this` pointer in %rsi 
-0x00007f14a463ab09:   movabs $0x7ffc01020,%rdx            ; load the cached NullPointerException object in %rdx 
-0x00007f14a463ab13:   call   0x00007f14a40c4380           ; call the `sink` method from the benchmark
-0x00007f14a463ab18:   nopl   0x1000288(%rax,%rax,1)       ; alignment nop
-0x00007f14a463ab20:   mov    (%rsp),%r14d                 ; load the accumulator from the stack in %r14d
-0x00007f14a463ab24:   mov    0x4(%rsp),%ebx               ; load the loop induction variable from the stack in %ebx
-0x00007f14a463ab28:   jmp    0x00007f14a463aaa5           ; jump back to the loop beginning
+    0x7f14a463aaa0:   add    0xc(%r12,%r10,8),%r14d       ; increment the accumulator %r14d with the value of array[i].x
+  ↗ 0x7f14a463aaa5:   mov    0x458(%r15),%r10             ; load safepoint poll address in %r10 
+  │ 0x7f14a463aaac:   mov    0x10(%rbp),%r8d              ; load the size filed in %r8d
+  │ 0x7f14a463aab0:   inc    %ebx                         ; increment the loop induction variable
+  │ 0x7f14a463aab2:   test   %eax,(%r10)                  ; safepoint poll check                  
+  │ 0x7f14a463aab5:   cmp    %r8d,%ebx                    ; compare the loop induction variable against size
+  │ 0x7f14a463aab8:   jge    0x7f14a463ab2d               ; jump to return if the loop condition is false
+  │ 0x7f14a463aabe:   mov    0x1c(%rbp),%r11d             ; load the array field (oop) in %r11d
+  │ 0x7f14a463aac2:   test   %r11d,%r11d                  ; check if the array field is null
+  │ 0x7f14a463aac5:   je     0x7f14a463aa74               ; if null jump to the slow path
+  │ 0x7f14a463aac7:   mov    0xc(%r12,%r11,8),%r8d        ; load the array length in %r8d
+  │ 0x7f14a463aacc:   cmp    %r8d,%ebx                    ; compare the loop induction variable against the array length
+  │ 0x7f14a463aacf:   jae    0x7f14a463ab43               ; if greater or equal jump to the slow path and throw ArrayIndexOutOfBoundsException
+  │ 0x7f14a463aad5:   lea    (%r12,%r11,8),%r10           ; compute the absolute address of the array
+  │ 0x7f14a463aad9:   mov    0x10(%r10,%rbx,4),%r10d      ; load the object (oop) at array[i] in %r10d 
+  │ 0x7f14a463aade:   xchg   %ax,%ax                      ; alignment nop
+  │ 0x7f14a463aae0:   test   %r10d,%r10d                  ; check if the object is null
+  │ 0x7f14a463aae3:   jne    0x7f14a463aaa0               ; if not null jump to the accumulator increment
+  │ 0x7f14a463aae5:   cmpb   $0x0,0x40(%r15)              
+  │ 0x7f14a463aaea:   jne    0x7f14a463aba5
+  │ 0x7f14a463aaf0:   movabs $0x7ffc01020,%r10            ; load the cached NullPointerException object in %r10
+  │ 0x7f14a463aafa:   mov    %r12d,0x14(%r10)             ; clear the `detailedMessage` field of the cached exception object
+  │ 0x7f14a463aafe:   mov    %ebx,0x4(%rsp)               ; store the loop induction variable on the stack
+  │ 0x7f14a463ab02:   mov    %r14d,(%rsp)                 ; store the accumulator on the stack
+  │ 0x7f14a463ab06:   mov    %rbp,%rsi                    ; move the `this` pointer in %rsi 
+  │ 0x7f14a463ab09:   movabs $0x7ffc01020,%rdx            ; load the cached NullPointerException object in %rdx 
+  │ 0x7f14a463ab13:   call   0x7f14a40c4380               ; call the `sink` method from the benchmark
+  │ 0x7f14a463ab18:   nopl   0x1000288(%rax,%rax,1)       ; alignment nop
+  │ 0x7f14a463ab20:   mov    (%rsp),%r14d                 ; load the accumulator from the stack in %r14d
+  │ 0x7f14a463ab24:   mov    0x4(%rsp),%ebx               ; load the loop induction variable from the stack in %ebx
+  ╰ 0x7f14a463ab28:   jmp    0x7f14a463aaa5               ; jump back to the loop beginning
 ```
 
 Below, is a flamegraph of the `try_npe_catch` benchmark when the `nullThreshold` is 16. The flamegraph is generated
@@ -3193,14 +3193,13 @@ The post-loop handles the remaining numbers individually, without loop unrolling
   ...
   <--- transfers data from ymm2 (256-bit AVX register) into r8d (32-bit register) -->
   ...
-   
-  ↗ 0x00007f63a6d9dc40:   mov    %r10d,%r9d
-  │ 0x00007f63a6d9dc43:   inc    %r9d
-  │ 0x00007f63a6d9dc46:   add    %r10d,%r8d
-  │ 0x00007f63a6d9dc49:   inc    %r11                 ; increment loop counter
-  │ 0x00007f63a6d9dc4c:   mov    %r9d,%r10d
-  │ 0x00007f63a6d9dc4f:   cmp    %rax,%r11            ; compare r11 to rax ('size')
-  ╰ 0x00007f63a6d9dc52:   jle    0x00007f63a6d9dc40   ; jump back if less equal
+  ↗ 0x7f63a6d9dc40:   mov    %r10d,%r9d
+  │ 0x7f63a6d9dc43:   inc    %r9d
+  │ 0x7f63a6d9dc46:   add    %r10d,%r8d
+  │ 0x7f63a6d9dc49:   inc    %r11                 ; increment loop counter
+  │ 0x7f63a6d9dc4c:   mov    %r9d,%r10d
+  │ 0x7f63a6d9dc4f:   cmp    %rax,%r11            ; compare r11 to rax ('size')
+  ╰ 0x7f63a6d9dc52:   jle    0x7f63a6d9dc40       ; jump back if less equal
     ; r8d stores the result of the post loop
 ```
 
@@ -3424,7 +3423,7 @@ by looking at the hottest methods in the benchmark after inlining.
 
 ```
 ....[Hottest Methods (after inlining)]..............................................................
-  58.64%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.api.vector.SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
+  58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
   19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
   19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
 ```
@@ -3483,20 +3482,20 @@ The C2 JIT compiler is able to use the FPU registers to spill intermediate value
 observed by looking at the generated assembly code. Below is a snippet:
 
 ```
-0x00007f11bc63ab76:   mov    0x38(%r11),%r10d             ; load field load11 in scratch register %r10d
-0x00007f11bc63ab7a:   vmovd  %r10d,%xmm14                 ; move scratch register %r10d in %xmm14
-0x00007f11bc63ab7f:   mov    0x3c(%r11),%r10d             ; load field load12 in scratch register %r10d
-0x00007f11bc63ab83:   vmovd  %r10d,%xmm15                 ; move scratch register %r10d in %xmm15
-0x00007f11bc63ab88:   mov    0x40(%r11),%r11d             ; load field load13 in register %r11d
-0x00007f11bc63ab8c:   vmovq  %xmm0,%r10                   ; move `this` pointer in %r10
-0x00007f11bc63ab91:   mov    0x44(%r10),%r9d              ; load field load14 in register %r9d
-...
-0x00007f11bc63ac01:   mov    %r9d,0xa8(%rax)              ; store value of load14 to field store14
-0x00007f11bc63ac08:   mov    %r11d,0xa4(%rax)             ; store value of load13 to field store13
-0x00007f11bc63ac0f:   vmovd  %xmm15,%r10d                 ; move %xmm15 (field load12) in scratch register %r10d
-0x00007f11bc63ac14:   mov    %r10d,0xa0(%rax)             ; store scratch register %r10d to field store12
-0x00007f11bc63ac1b:   vmovd  %xmm14,%r10d                 ; move %xmm14 (field load11) in scratch register %r10d
-0x00007f11bc63ac20:   mov    %r10d,0x9c(%rax)             ; store scratch register %r10d to field store11 
+  0x7f11bc63ab76:   mov    0x38(%r11),%r10d             ; load field load11 in scratch register %r10d
+  0x7f11bc63ab7a:   vmovd  %r10d,%xmm14                 ; move scratch register %r10d in %xmm14
+  0x7f11bc63ab7f:   mov    0x3c(%r11),%r10d             ; load field load12 in scratch register %r10d
+  0x7f11bc63ab83:   vmovd  %r10d,%xmm15                 ; move scratch register %r10d in %xmm15
+  0x7f11bc63ab88:   mov    0x40(%r11),%r11d             ; load field load13 in register %r11d
+  0x7f11bc63ab8c:   vmovq  %xmm0,%r10                   ; move `this` pointer in %r10
+  0x7f11bc63ab91:   mov    0x44(%r10),%r9d              ; load field load14 in register %r9d
+  ...
+  0x7f11bc63ac01:   mov    %r9d,0xa8(%rax)              ; store value of load14 to field store14
+  0x7f11bc63ac08:   mov    %r11d,0xa4(%rax)             ; store value of load13 to field store13
+  0x7f11bc63ac0f:   vmovd  %xmm15,%r10d                 ; move %xmm15 (field load12) in scratch register %r10d
+  0x7f11bc63ac14:   mov    %r10d,0xa0(%rax)             ; store scratch register %r10d to field store12
+  0x7f11bc63ac1b:   vmovd  %xmm14,%r10d                 ; move %xmm14 (field load11) in scratch register %r10d
+  0x7f11bc63ac20:   mov    %r10d,0x9c(%rax)             ; store scratch register %r10d to field store11 
 ```
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
@@ -3505,25 +3504,25 @@ The Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not perform (
 C2 does. Therefore, both compilers will spill intermediate values onto the stack once they run out of available registers.
 
 ```
-0x00007fd0c6d82c37:   mov    0x34(%r10),%esi              ; load field load10 in register %esi
-0x00007fd0c6d82c3b:   mov    0x38(%r10),%r11d             ; load field load11 in scratch register %r11d
-0x00007fd0c6d82c3f:   mov    %r11d,0x4c(%rsp)             ; store value of load11 to stack
-0x00007fd0c6d82c44:   mov    0x3c(%r10),%r11d             ; load field load12 in scratch register %r11d
-0x00007fd0c6d82c48:   mov    %r11d,0x48(%rsp)             ; store value of load12 to stack
-0x00007fd0c6d82c4d:   mov    0x40(%r10),%r11d             ; load field load13 in scratch register %r11d
-0x00007fd0c6d82c51:   mov    %r11d,0x44(%rsp)             ; store value of load13 to stack
-0x00007fd0c6d82c56:   mov    0x44(%r10),%r11d             ; load field load14 in scratch register %r11d
-0x00007fd0c6d82c5a:   mov    %r11d,0x40(%rsp)             ; store value of load14 to stack
-...
-0x00007fd0c6d82d01:   mov    %esi,0x98(%r10)              ; store value of load10 to field store10
-0x00007fd0c6d82d08:   mov    0x4c(%rsp),%r11d             ; load value of load11 from stack in scratch register %r11d 
-0x00007fd0c6d82d0d:   mov    %r11d,0x9c(%r10)             ; store value of load11 to field store11
-0x00007fd0c6d82d14:   mov    0x48(%rsp),%r11d             ; load value of load12 from stack in scratch register %r11d
-0x00007fd0c6d82d19:   mov    %r11d,0xa0(%r10)             ; store value of load12 to field store12
-0x00007fd0c6d82d20:   mov    0x44(%rsp),%r11d             ; load value of load13 from stack in scratch register %r11d
-0x00007fd0c6d82d25:   mov    %r11d,0xa4(%r10)             ; store value of load13 to field store13
-0x00007fd0c6d82d2c:   mov    0x40(%rsp),%r11d             ; load value of load14 from stack in scratch register %r11d
-0x00007fd0c6d82d31:   mov    %r11d,0xa8(%r10)             ; store value of load14 to field store14
+  0x7fd0c6d82c37:   mov    0x34(%r10),%esi              ; load field load10 in register %esi
+  0x7fd0c6d82c3b:   mov    0x38(%r10),%r11d             ; load field load11 in scratch register %r11d
+  0x7fd0c6d82c3f:   mov    %r11d,0x4c(%rsp)             ; store value of load11 to stack
+  0x7fd0c6d82c44:   mov    0x3c(%r10),%r11d             ; load field load12 in scratch register %r11d
+  0x7fd0c6d82c48:   mov    %r11d,0x48(%rsp)             ; store value of load12 to stack
+  0x7fd0c6d82c4d:   mov    0x40(%r10),%r11d             ; load field load13 in scratch register %r11d
+  0x7fd0c6d82c51:   mov    %r11d,0x44(%rsp)             ; store value of load13 to stack
+  0x7fd0c6d82c56:   mov    0x44(%r10),%r11d             ; load field load14 in scratch register %r11d
+  0x7fd0c6d82c5a:   mov    %r11d,0x40(%rsp)             ; store value of load14 to stack
+  ...
+  0x7fd0c6d82d01:   mov    %esi,0x98(%r10)              ; store value of load10 to field store10
+  0x7fd0c6d82d08:   mov    0x4c(%rsp),%r11d             ; load value of load11 from stack in scratch register %r11d 
+  0x7fd0c6d82d0d:   mov    %r11d,0x9c(%r10)             ; store value of load11 to field store11
+  0x7fd0c6d82d14:   mov    0x48(%rsp),%r11d             ; load value of load12 from stack in scratch register %r11d
+  0x7fd0c6d82d19:   mov    %r11d,0xa0(%r10)             ; store value of load12 to field store12
+  0x7fd0c6d82d20:   mov    0x44(%rsp),%r11d             ; load value of load13 from stack in scratch register %r11d
+  0x7fd0c6d82d25:   mov    %r11d,0xa4(%r10)             ; store value of load13 to field store13
+  0x7fd0c6d82d2c:   mov    0x40(%rsp),%r11d             ; load value of load14 from stack in scratch register %r11d
+  0x7fd0c6d82d31:   mov    %r11d,0xa8(%r10)             ; store value of load14 to field store14
 ```
 
 ### Conclusions
@@ -3861,7 +3860,6 @@ Each time a type check is performed, the `Klass::_secondary_super_cache` is chec
 If the cache does not contain the type being checked, then the `Klass::_secondary_supers` array is searched for the type.
 If the type is found in the array, then the cache is updated with the type.
 
-
 ```
   @Benchmark
   @Threads({1, 2, 3 ,4})
@@ -3907,17 +3905,17 @@ able to optimize and avoid checking the cache and the secondary supertypes array
 that checks if the receiver type is `DuplicatedContext` and then returns `true`.
 
 ```
-0x00007fda40635fda:   mov    0x10(%rsi),%r10d             ; read oop msg in %r10d
-0x00007fda40635fde:   xchg   %ax,%ax                      ; nop
-0x00007fda40635fe0:   mov    0x8(%r12,%r10,8),%r8d        ; read klass word of object in %r8d 
-0x00007fda40635fe5:   cmp    $0x102acf8,%r8d              ; compare against DuplicatedContext klass
-0x00007fda40635fec:   jne    0x00007fda40636006           ; jump to deoptimization stub if not equal
-0x00007fda40635fee:   mov    $0x1,%eax                    ; move true to %eax
-0x00007fda40635ff3:   add    $0x20,%rsp                   ; pop the stack
-0x00007fda40635ff7:   pop    %rbp                         ; pop the frame pointer
-0x00007fda40635ff8:   cmp    0x450(%r15),%rsp             ; safepoint poll check
-0x00007fda40635fff:   ja     0x00007fda40636034           ; jump to safepoint handler if needed
-0x00007fda40636005:   ret                                 ; return
+  0x7fda40635fda:   mov    0x10(%rsi),%r10d             ; read oop msg in %r10d
+  0x7fda40635fde:   xchg   %ax,%ax                      ; nop
+  0x7fda40635fe0:   mov    0x8(%r12,%r10,8),%r8d        ; read klass word of object in %r8d 
+  0x7fda40635fe5:   cmp    $0x102acf8,%r8d              ; compare against DuplicatedContext klass
+  0x7fda40635fec:   jne    0x7fda40636006               ; jump to deoptimization stub if not equal
+  0x7fda40635fee:   mov    $0x1,%eax                    ; move true to %eax
+  0x7fda40635ff3:   add    $0x20,%rsp                   ; pop the stack
+  0x7fda40635ff7:   pop    %rbp                         ; pop the frame pointer
+  0x7fda40635ff8:   cmp    0x450(%r15),%rsp             ; safepoint poll check
+  0x7fda40635fff:   ja     0x7fda40636034               ; jump to safepoint handler if needed
+  0x7fda40636005:   ret                                 ; return
 ```
 
 When `typePollution` is true, the benchmark uses two types and the compiler is not able to optimize as above.
@@ -3928,15 +3926,17 @@ threads, which causes false sharing and cache line invalidations.
 This behavior is best observed by looking at the number of L1 data cache misses.
 
 When typePollution is `false`, the number of reported L1 data cache misses is very low.
+
 ```
-TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses               ≈ 10⁻⁵  #/op
-TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                     4.998   #/op
+  TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses               ≈ 10⁻⁵  #/op
+  TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                     4.998   #/op
 ```
 
 When typePollution is `true`, the number of reported L1 data cache misses is almost two per benchmark iteration.
+
 ```
-TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses               1.818   #/op
-TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                     25.477  #/op   
+  TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-load-misses               1.818   #/op
+  TypeCheckScalabilityBenchmark.is_duplicated_4:L1-dcache-loads                     25.477  #/op   
 ```
 
 #### C2 JIT Compiler
@@ -3954,42 +3954,42 @@ Additionally, the error margins of the two JIT compilers are quite large to draw
 
 For reference, below is a snippet of the generated assembly code for the GraalVM CE JIT Compiler:
 ```
-0x00007f82a323d682:   mov    0x8(,%rax,8),%r10d           ; load klass word of the object in %r10d
-0x00007f82a323d68a:   movabs $0x7f8227000000,%r11         ; load the base address of the metaspace in %r11
-0x00007f82a323d694:   lea    (%r11,%r10,1),%r8            ; compute the address of the klass of the object
-0x00007f82a323d698:   movabs $0x7f822802b798,%r11         ; move klass Context to %r11
-0x00007f82a323d6a2:   cmp    0x20(%r8),%r11               ; compare the _secondary_super_cache with the klass Context
-0x00007f82a323d6a6:   je     0x00007f82a323d6b9           ; if equal jump to the fast path 
-0x00007f82a323d6ac:   cmp    $0x102b798,%r10d             ; compare the klass word with Context klass
-0x00007f82a323d6b3:   jne    0x00007f82a323d74e           ; if not equal jump to the slow path that iterates through the secondary super types array
-0x00007f82a323d6b9:   mov    0x8(,%rax,8),%r10d           ; Additional! load again the klass word of the object in %r10d
-0x00007f82a323d6c1:   movabs $0x7f8227000000,%r11         ; Additional! load the base address of the metaspace in %r11
-0x00007f82a323d6cb:   lea    (%r11,%r10,1),%r8            ; Additional! compute the address of the klass of the object
-0x00007f82a323d6cf:   movabs $0x7f822802b990,%r11         ; Additional! move klass InternalContext to %r11
-0x00007f82a323d6d9:   nopl   0x0(%rax)                    ; nop
-0x00007f82a323d6e0:   cmp    0x20(%r8),%r11               ; compare the _secondary_super_cache with the klass InternalContext
-0x00007f82a323d6e4:   je     0x00007f82a323d6f7           ; if equal jump to the fast path
-0x00007f82a323d6ea:   cmp    $0x102b990,%r10d             ; compare klass InternalContext to %r10d
-0x00007f82a323d6f1:   jne    0x00007f82a323d785           ; if not equal jump to the slow path that iterates through the secondary super types array
-...
+  0x7f82a323d682:   mov    0x8(,%rax,8),%r10d           ; load klass word of the object in %r10d
+  0x7f82a323d68a:   movabs $0x7f8227000000,%r11         ; load the base address of the metaspace in %r11
+  0x7f82a323d694:   lea    (%r11,%r10,1),%r8            ; compute the address of the klass of the object
+  0x7f82a323d698:   movabs $0x7f822802b798,%r11         ; move klass Context to %r11
+  0x7f82a323d6a2:   cmp    0x20(%r8),%r11               ; compare the _secondary_super_cache with the klass Context
+  0x7f82a323d6a6:   je     0x7f82a323d6b9               ; if equal jump to the fast path 
+  0x7f82a323d6ac:   cmp    $0x102b798,%r10d             ; compare the klass word with Context klass
+  0x7f82a323d6b3:   jne    0x7f82a323d74e               ; if not equal jump to the slow path that iterates through the secondary super types array
+  0x7f82a323d6b9:   mov    0x8(,%rax,8),%r10d           ; Additional! load again the klass word of the object in %r10d
+  0x7f82a323d6c1:   movabs $0x7f8227000000,%r11         ; Additional! load the base address of the metaspace in %r11
+  0x7f82a323d6cb:   lea    (%r11,%r10,1),%r8            ; Additional! compute the address of the klass of the object
+  0x7f82a323d6cf:   movabs $0x7f822802b990,%r11         ; Additional! move klass InternalContext to %r11
+  0x7f82a323d6d9:   nopl   0x0(%rax)                    ; nop
+  0x7f82a323d6e0:   cmp    0x20(%r8),%r11               ; compare the _secondary_super_cache with the klass InternalContext
+  0x7f82a323d6e4:   je     0x7f82a323d6f7               ; if equal jump to the fast path
+  0x7f82a323d6ea:   cmp    $0x102b990,%r10d             ; compare klass InternalContext to %r10d
+  0x7f82a323d6f1:   jne    0x7f82a323d785               ; if not equal jump to the slow path that iterates through the secondary super types array
+  ...
 ```
 
 Compared to the equivalent snippet generated by the Oracle GraalVM JIT Compiler:
 ```
-0x00007fcda2d7e5e2:   mov    0x8(,%rax,8),%r10d           ; load the klass word of the object in %r10d
-0x00007fcda2d7e5ea:   movabs $0x7fcd27000000,%rax         ; load the base address of the metaspace in %rax
-0x00007fcda2d7e5f4:   lea    (%rax,%r10,1),%r11           ; compute the address of the klass of the object
-0x00007fcda2d7e5f8:   movabs $0x7fcd2802b328,%rax         ; move klass Context to %rax
-0x00007fcda2d7e602:   cmp    0x20(%r11),%rax              ; compare the _secondary_super_cache with the klass Context
-0x00007fcda2d7e606:   je     0x00007fcda2d7e619           ; if equal jump to the fast path
-0x00007fcda2d7e60c:   cmp    $0x102b328,%r10d             ; compare the klass word with Context klass
-0x00007fcda2d7e613:   jne    0x00007fcda2d7e66e           ; if not equal jump to the slow path that iterates through the secondary super types array
-0x00007fcda2d7e619:   movabs $0x7fcd2802b520,%rax         ; move klass InternalContext to %rax
-0x00007fcda2d7e623:   cmp    0x20(%r11),%rax              ; compare the _secondary_super_cache with the klass InternalContext
-0x00007fcda2d7e627:   je     0x00007fcda2d7e63a           ; if equal jump to the fast path
-0x00007fcda2d7e62d:   cmp    $0x102b520,%r10d             ; compare the klass word with InternalContext klass
-0x00007fcda2d7e634:   jne    0x00007fcda2d7e6a5           ; if not equal jump to the slow path that iterates through the secondary super types array
-...
+  0x7fcda2d7e5e2:   mov    0x8(,%rax,8),%r10d           ; load the klass word of the object in %r10d
+  0x7fcda2d7e5ea:   movabs $0x7fcd27000000,%rax         ; load the base address of the metaspace in %rax
+  0x7fcda2d7e5f4:   lea    (%rax,%r10,1),%r11           ; compute the address of the klass of the object
+  0x7fcda2d7e5f8:   movabs $0x7fcd2802b328,%rax         ; move klass Context to %rax
+  0x7fcda2d7e602:   cmp    0x20(%r11),%rax              ; compare the _secondary_super_cache with the klass Context
+  0x7fcda2d7e606:   je     0x7fcda2d7e619               ; if equal jump to the fast path
+  0x7fcda2d7e60c:   cmp    $0x102b328,%r10d             ; compare the klass word with Context klass
+  0x7fcda2d7e613:   jne    0x7fcda2d7e66e               ; if not equal jump to the slow path that iterates through the secondary super types array
+  0x7fcda2d7e619:   movabs $0x7fcd2802b520,%rax         ; move klass InternalContext to %rax
+  0x7fcda2d7e623:   cmp    0x20(%r11),%rax              ; compare the _secondary_super_cache with the klass InternalContext
+  0x7fcda2d7e627:   je     0x7fcda2d7e63a               ; if equal jump to the fast path
+  0x7fcda2d7e62d:   cmp    $0x102b520,%r10d             ; compare the klass word with InternalContext klass
+  0x7fcda2d7e634:   jne    0x7fcda2d7e6a5               ; if not equal jump to the slow path that iterates through the secondary super types array
+  ...
 ```
 
 ### Conclusions
@@ -4065,16 +4065,16 @@ increases.
 The C2 JIT compiler loops through the secondary super types array using a `repnz scas` [instruction](https://www.felixcloutier.com/x86/rep:repe:repz:repne:repnz#description).
 
 ```
- 0.17% 0x00007f1e7863b2a6:   mov    0x28(%rsi),%rdi        ; load the secondary_supers array in %rdi 
-       0x00007f1e7863b2aa:   mov    (%rdi),%ecx            ; load the size of the array in %ecx
- 0.46% 0x00007f1e7863b2ac:   add    $0x8,%rdi              ; skip the length field
-       0x00007f1e7863b2b0:   test   %rax,%rax              ; set the zero flag to 0
-83.32% 0x00007f1e7863b2b3:   repnz scas %es:(%rdi),%rax    ; scan the array for the expected klass (AutoCloseable)
- 6.34% 0x00007f1e7863b2b6:   jne    0x00007f1e7863b2c0     ; if not found jump to the false branch 
-       0x00007f1e7863b2bc:   mov    %rax,0x20(%rsi)        ; update the secondary_super_cache with the klass found
- 1.56% 0x00007f1e7863b2c0:   je     0x00007f1e7863b285     ; jump to the true branch of the type check
-       0x00007f1e7863b2c2:   xor    %eax,%eax
-       0x00007f1e7863b2c4:   jmp    0x00007f1e7863b293     ; jump to the false branch of the type check
+   0.17% 0x7f1e7863b2a6:   mov    0x28(%rsi),%rdi        ; load the secondary_supers array in %rdi 
+         0x7f1e7863b2aa:   mov    (%rdi),%ecx            ; load the size of the array in %ecx
+   0.46% 0x7f1e7863b2ac:   add    $0x8,%rdi              ; skip the length field
+         0x7f1e7863b2b0:   test   %rax,%rax              ; set the zero flag to 0
+  83.32% 0x7f1e7863b2b3:   repnz scas %es:(%rdi),%rax    ; scan the array for the expected klass (AutoCloseable)
+   6.34% 0x7f1e7863b2b6:   jne    0x7f1e7863b2c0         ; if not found jump to the false branch 
+         0x7f1e7863b2bc:   mov    %rax,0x20(%rsi)        ; update the secondary_super_cache with the klass found
+   1.56% 0x7f1e7863b2c0:   je     0x7f1e7863b285         ; jump to the true branch of the type check
+         0x7f1e7863b2c2:   xor    %eax,%eax
+         0x7f1e7863b2c4:   jmp    0x7f1e7863b293         ; jump to the false branch of the type check
 ```
 
 In modern CPUs, the `repnz (scas)` class of instructions can have a large setup overhead and therefore be slower than a
@@ -4086,20 +4086,20 @@ CPU microarchitecture.
 Both GraalVM JIT Compilers iterate over the secondary super types array using a loop:
 
 ```
- 0.30% 0x00007f342f2470e0:   mov    %ecx,%ebx               ; move the loop counter in %ebx
-       0x00007f342f2470e2:   shl    $0x3,%ebx               ; multiply the loop counter by 8
-44.80% 0x00007f342f2470e5:   lea    0x8(%rbx),%ebx          ; skip the length field; compute the byte offset of the element in the secondary_supers array in %ebx
-       0x00007f342f2470e8:   movslq %ebx,%rbx               ; sign extend to 64 bits
- 0.34% 0x00007f342f2470eb:   mov    (%r8,%rbx,1),%rbx       ; load the klass from the secondary_supers array at index %ecx
- 0.47% 0x00007f342f2470ef:   cmp    %rbx,%r10               ; compare the klass with the expected klass (AutoCloseable)
-       0x00007f342f2470f2:   je     0x00007f342f247106      ; if equal jump and store the klass in the secondary_super_cache
-44.10% 0x00007f342f2470f8:   inc    %ecx                    ; increment the loop counter
-       0x00007f342f2470fa:   cmp    %ecx,%r9d               ; compare the loop counter with the length of the secondary_supers array
-       0x00007f342f2470fd:   jg     0x00007f342f2470e0      ; if greater jump to the beginning of the loop 
- 0.33% 0x00007f342f2470ff:   mov    $0x0,%eax               ; move false to %eax
- 0.79% 0x00007f342f247104:   jmp    0x00007f342f24709c      ; jump to not found label
-       0x00007f342f247106:   mov    %r10,0x20(%r11)         ; update the secondary_super_cache with the klass found
-       0x00007f342f24710a:   jmp    0x00007f342f24708b      ; match found so jump to found label
+   0.30% 0x7f342f2470e0:   mov    %ecx,%ebx               ; move the loop counter in %ebx
+         0x7f342f2470e2:   shl    $0x3,%ebx               ; multiply the loop counter by 8
+  44.80% 0x7f342f2470e5:   lea    0x8(%rbx),%ebx          ; skip the length field; compute the byte offset of the element in the secondary_supers array in %ebx
+         0x7f342f2470e8:   movslq %ebx,%rbx               ; sign extend to 64 bits
+   0.34% 0x7f342f2470eb:   mov    (%r8,%rbx,1),%rbx       ; load the klass from the secondary_supers array at index %ecx
+   0.47% 0x7f342f2470ef:   cmp    %rbx,%r10               ; compare the klass with the expected klass (AutoCloseable)
+         0x7f342f2470f2:   je     0x7f342f247106          ; if equal jump and store the klass in the secondary_super_cache
+  44.10% 0x7f342f2470f8:   inc    %ecx                    ; increment the loop counter
+         0x7f342f2470fa:   cmp    %ecx,%r9d               ; compare the loop counter with the length of the secondary_supers array
+         0x7f342f2470fd:   jg     0x7f342f2470e0          ; if greater jump to the beginning of the loop 
+   0.33% 0x7f342f2470ff:   mov    $0x0,%eax               ; move false to %eax
+   0.79% 0x7f342f247104:   jmp    0x7f342f24709c          ; jump to not found label
+         0x7f342f247106:   mov    %r10,0x20(%r11)         ; update the secondary_super_cache with the klass found
+         0x7f342f24710a:   jmp    0x7f342f24708b          ; match found so jump to found label
 ```
 
 ### Conclusions
