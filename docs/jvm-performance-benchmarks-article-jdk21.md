@@ -58,14 +58,14 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
 
 - Java Development Kit (JDK) 21
 - Java Microbenchmark Harness (JMH) v1.37
-- each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also multi-threaded workloads (depending on the test case)
-- the benchmarks were run on the below machines:
+- Each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also multi-threaded workloads (depending on the test case)
+- The benchmarks were run on the below machines:
     1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
     2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
-- to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine:
-    1. disabled the turbo-boost mode
-    2. set CPU governor to _performance_
-    3. disabled CPU hyper-threading
+- To eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine:
+    1. Disabled the turbo-boost mode
+    2. Set CPU governor to _performance_
+    3. Disabled CPU hyper-threading
 
 # JIT Compiler
 
@@ -1611,7 +1611,7 @@ Loop fission breaks a larger loop body into smaller loops. Benefits of loop fiss
 
 - This optimization is most efficient in multicore processors that can split a task into multiple tasks for each processor.
 
-Note: loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
+**Note:** loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
 
 ```
   @Benchmark
@@ -4154,6 +4154,90 @@ This set of benchmarks is dedicated to larger programs using high-level Java API
 
 The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
 
+## AesEcbCryptoBenchmark
+
+Encrypts and decrypts data using the Advanced Encryption Standard (AES) algorithm in Electronic Codebook (ECB) mode with both padding and no padding options. 
+The process involves various key sizes. It's important to note that AES/ECB mode does not require initialization vectors (IVs) or GCM (Galois/Counter Mode), unlike some other encryption modes.
+
+Source code: [AesEcbCryptoBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/crypto/AesEcbCryptoBenchmark.java)
+
+[![AesEcbCryptoBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/AesEcbCryptoBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/AesEcbCryptoBenchmark.svg?raw=true)
+
+## ByteArrayInputStreamBenchmark
+
+Measures the time it takes to read byte array chunks using a ByteArrayInputStream and includes a sanity check to verify the number of bytes read.
+
+All of these I/O benchmarks are affected by various factors, including:
+- Underlying File System: Different file systems (such as NTFS, ext4, FAT32) might employ distinct strategies for caching, block allocation, and metadata management, thereby impacting I/O performance.
+- Hardware: The hardware utilized, including specifications of the hard drive or solid-state drive (SSD),  such as rotational speed, data transfer rates, and seek times.
+- Disk Subsystem: The physical hardware components responsible for storing and retrieving data, encompassing factors like disk speed, storage technology (HDD vs. SSD), and more.
+- Operating System Disk Scheduler: The OS disk scheduler manages the order in which read and write requests are processed on the storage device. Various schedulers prioritize requests differently, influencing the sequence and efficiency of I/O operations.
+- Caching: Both the OS and hardware often employ caching mechanisms to boost the I/O performance. This entails frequently accessed data being stored in a cache to curtail the necessity of accessing slower storage media, such as disks.
+- File Size and Data Patterns: The size of files being read or written and the patterns of data access can exert influence on I/O performance. Sequential access might outpace random access, and disparities in performance characteristics might emerge between larger and smaller files.
+
+Source code: [ByteArrayInputStreamBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/diskio/ByteArrayInputStreamBenchmark.java)
+
+[![ByteArrayInputStreamBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ByteArrayInputStreamBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ByteArrayInputStreamBenchmark.svg?raw=true)
+
+## DsaEcSignatureBenchmark
+
+This benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths, key lengths and hash sizes.
+
+Source code: [DsaEcSignatureBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/signature/DsaEcSignatureBenchmark.java)
+
+[![DsaEcSignatureBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DsaEcSignatureBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DsaEcSignatureBenchmark.svg?raw=true)
+
+## HmacCryptoBenchmark
+
+Generates an HMAC (Hash-based Message Authentication Code) for an input byte array using various algorithms (e.g., MD5, SHA*).
+No explicit provider is specified; thus, the standard JDK provider is used.
+
+Source code: [HmacCryptoBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/crypto/HmacCryptoBenchmark.java)
+
+[![HmacCryptoBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HmacCryptoBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HmacCryptoBenchmark.svg?raw=true)
+
+## MessageDigestBenchmark
+
+Generates a message digest (i.e., a hash representation) for an input byte array using various algorithms (e.g., MD5, SHA, SHA3).
+No explicit provider is declared; thus, the standard JDK provider is utilized.
+
+Source code: [MessageDigestBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/messagedigest/MessageDigestBenchmark.java)
+
+[![MessageDigestBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MessageDigestBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/MessageDigestBenchmark.svg?raw=true)
+
+## StringConcatenationBenchmark
+
+Benchmark measuring the performance of various concatenation methods using different data types (e.g., String, int, float, char, long, double, boolean, Object):
+- `StringBuilder`
+- `StringBuffer`
+- `String.concat()`
+- `plus` operator
+- `StringTemplate`
+
+The input String and char contain characters encoded in either Latin-1 or UTF-16.
+
+**Note:** The benchmarking process may involve varying numbers of allocations, which could affect the overall results without fundamentally altering the outcomes.
+
+Source code: [StringConcatenationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/string/StringConcatenationBenchmark.java)
+
+[![StringConcatenationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringConcatenationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringConcatenationBenchmark.svg?raw=true)
+
+## StringFormatBenchmark
+
+This benchmark measures the performance of different formatting approaches utilizing various data types (e.g., String, int, float, char, long, double, boolean, Object) using different methods:
+- `String.format()`
+- `MessageFormat`
+- `String.formatted()`
+- `FormatProcessor`
+
+The input String and char consist of characters encoded in either Latin-1 or UTF-16.
+
+**Note:** The benchmarking process may involve a varying number of allocations, potentially influencing the overall results, albeit without fundamentally altering the outcomes.
+
+Source code: [StringFormatBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/string/StringFormatBenchmark.java)
+
+[![StringFormatBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringFormatBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringFormatBenchmark.svg?raw=true)
+
 ## StringPatternSplitBenchmark
 
 Measures the performance of splitting a very long text (i.e., a sequence of words separated by empty spaces) by either one or two characters, using the below methods:
@@ -4208,7 +4292,68 @@ The flame graphs below pertain to the `pattern_split` method.
 
 ### Conclusions
 
-At first glance, it appears that the Oracle GraalVM JIT Compiler does a better job of inlining. However, a more in-depth analysis might be necessary to identify the differences, as they may not be very obvious to reveal based solely on the generated assembly code.
+At first glance, it appears that the Oracle GraalVM JIT Compiler does a better job of inlining. However, a more in-depth 
+analysis might be necessary to identify the differences, as they may not be very obvious to reveal based solely on the generated assembly code.
+
+## VPThreadBlockingApiStackDepthBenchmark
+
+This benchmark aims to measure the efficiency of mounting and unmounting virtual threads by comparing this behavior with 
+that of platform threads (OS-level threads) when they interact with blocking APIs at varying thread stack depths.
+
+The stack frames of unmounted virtual threads are stored in the heap as a list of stack-chunk objects (i.e., StackChunk OOP). 
+Each stack-chunk object contains a blob that holds a stack segment, including several integral numbers of stack frames. 
+A stack-chunk is entirely mutable during freeze and thaw (i.e., stack frames can be moved in and out via memcpy) as long as 
+the garbage collector (GC) has not seen it yet. For some GCs, this typically occurs during the entire young generation phase.
+
+As the stack depth increases, more stack frames will require copying into the stack-chunks, potentially leading to the expansion of the stack-chunks list. 
+Consequently, when using virtual threads this mechanism adds more 'pressure' on the runtime to manage them compared to platform threads.
+
+Typically, a virtual thread will unmount when it blocks on I/O or some other blocking operation in the JDK, such as BlockingQueue.take(). 
+When the blocking operation is ready to complete (e.g., bytes have been received on a socket), it submits the virtual thread back to the scheduler, 
+which will mount the virtual thread on a carrier to resume execution.
+
+**Note:** It is less expensive to block a virtual thread than a platform thread, since the latter will involve context switching. 
+Using virtual threads in the context of blocking API calls provides a noticeable benefit over traditional platform threads.
+
+Source code: [VPThreadBlockingApiStackDepthBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadBlockingApiStackDepthBenchmark.java)
+
+[![VPThreadBlockingApiStackDepthBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadBlockingApiStackDepthBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadBlockingApiStackDepthBenchmark.svg?raw=true)
+
+## VPThreadCpuBoundBenchmark
+
+This benchmark evaluates the performance of running CPU-bound (or CPU-intensive) tasks, which are submitted to either a virtual thread executor service or a cached thread pool. 
+Additionally, various backoff strategies (e.g., thread parking, yield, or none) are triggered while running CPU-bound tasks. These strategies may (or may not) unpin the virtual thread from its carrier.
+
+A configurable number of tasks are submitted to an executor using a burst approach, and the benchmark awaits the completion of all these tasks. The executor is cached within the JMH state.
+The level of parallelism for both platform and virtual threads is set to the same value to facilitate an evaluation of their performance under comparable conditions. 
+The benchmark method accounts for the task submission cost to the initially idle executor, which, within the scope of this specific use case, is deemed negligible.
+ 
+When a virtual thread executes CPU-bound code without involving any blocking I/O or other blocking JDK methods, the virtual thread cannot be unmounted. Consequently, it will not yield and may continue to occupy its carrier thread until it completes its computation. 
+To address this, the CPU-bound tasks include explicit various backoff strategies (such as yielding, or parking) in an attempt to de-schedule the running thread and permit other threads to execute on the CPU, thereby facilitating the unmounting of the virtual thread from its carrier.
+
+**Note:** When the workload is CPU-bound, virtual threads may not offer a substantial improvement in application throughput compared to traditional platform threads. Additionally, in scenarios of CPU-bound workloads, having significantly more threads than processor cores does not necessarily enhance throughput. 
+As a side note, using virtual threads solely for heavy in-memory processing may not align with their intended use case.
+
+Source code: [VPThreadCpuBoundBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadCpuBoundBenchmark.java)
+
+[![VPThreadCpuBoundBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadCpuBoundBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadCpuBoundBenchmark.svg?raw=true)
+
+## VPThreadSynchronizationBenchmark
+
+This benchmark evaluates the performance of running synchronized blocks in the context of virtual threads, comparing them with platform threads. 
+The synchronization mechanism is implemented using lock objects, reentrant locks, and no locks at all. 
+Additionally, various backoff strategies (e.g., thread parking, sleeping, or none) are triggered within the synchronized execution block.
+These strategies may (or may not) unpin the virtual thread from its carrier.
+
+A configurable number of tasks are submitted to an executor using a burst approach, and the benchmark awaits the completion of all these tasks. 
+The executor is cached within the JMH state. The parallelism level for both platform and virtual threads is restricted the same value to evaluate their performance under comparable conditions. 
+The benchmark method includes the cost of task submission to the initially idle executor, which, for this specific use case, is considered negligible.
+
+**Note:** When a virtual thread executes code inside a synchronized block or method it cannot be unmounted during the blocking operation because it is pinned to its carrier (i.e., the platform thread).
+
+Source code: [VPThreadSynchronizationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadSynchronizationBenchmark.java)
+
+[![VPThreadSynchronizationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark.svg?raw=true)
 
 ## API Geometric Mean
 
@@ -4227,7 +4372,7 @@ No. | JVM distribution | Arcitecture | Normalized Geometric Mean   | Nr.of.Bench
 2   | OpenJDK          | x86_64      | 1                           | 723              | ns/op          
 3   | GraalVM CE       | x86_64      | 1.02                        | 723              | ns/op           
 
-**Note:** The first in the row is the fastest, and the last in the row is the slowest
+_Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
@@ -4237,7 +4382,7 @@ No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchma
 2   | GraalVM CE       | arm64       | 0.99                      | 723              | ns/op
 3   | OpenJDK          | arm64       | 1                         | 723              | ns/op
 
-**Note:** The first in the row is the fastest, and the last in the row is the slowest
+_Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean for GraalVM EE is the fastest.
 OpenJDK and GraalVM CE are very close and interchangeable.
@@ -4268,13 +4413,13 @@ The binary heap is implemented manually using a list of queues (buckets).
 It can offer better performance than binary heaps for dense graphs with small and non-negative edge weights.
 Its time complexity is O((V + E) log V).
 
-Note: these implementations offer different trade-offs in terms of time complexity, space efficiency, and performance characteristics.
+**Note:** these implementations offer different trade-offs in terms of time complexity, space efficiency, and performance characteristics.
+
 The best choice of implementation depends on the specific graph structure, the distribution of edge weights, etc.
 
 Source code: [DijkstraShortestPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/dijkstrashortestpath/DijkstraShortestPathBenchmark.java)
 
 [![DijkstraShortestPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DijkstraShortestPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DijkstraShortestPathBenchmark.svg?raw=true)
-
 
 ## GameOfLifeBenchmark
 
@@ -4295,11 +4440,9 @@ The benchmark involves several alternative strategies:
 - Game of Life with Functional Programming
 - Game of Life with Imperative Style
 
-
 Source code: [GameOfLifeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/gameoflife/GameOfLifeBenchmark.java)
 
 [![GameOfLifeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)
-
 
 ## HuffmanCodingBenchmark
 
@@ -4315,11 +4458,9 @@ The steps involved in Huffman encoding a given text source file into a destinati
 - encode data: re-examine the source file's contents, and for each character, output the encoded binary version of
   that character to the destination file.
 
-
 Source code: [HuffmanCodingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/huffmancoding/HuffmanCodingBenchmark.java)
 
 [![HuffmanCodingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)
-
 
 ## KnapsackBenchmark
 
@@ -4341,11 +4482,9 @@ The benchmark involves several alternative strategies:
 - Knapsack with Greedy Programming (for the 0/1 version)
 - Fractional Knapsack (with Greedy Programming)
 
-
 Source code: [KnapsackBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/knapsack/KnapsackBenchmark.java)
 
 [![KnapsackBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/KnapsackBenchmark.svg?raw=true)
-
 
 ## PalindromeBenchmark
 
@@ -4363,11 +4502,9 @@ the next function to be called.
 The result (i.e., number of palindromes) is compared against a known constant number
 to be sure the computation is not wrong.
 
-
 Source code: [PalindromeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/palindrome/PalindromeBenchmark.java)
 
 [![PalindromeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PalindromeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PalindromeBenchmark.svg?raw=true)
-
 
 ## PopulationVarianceBenchmark
 
@@ -4376,11 +4513,9 @@ Population variance is the average of the distances from each data point in a pa
 to the mean squared. It indicates how data points spread out in the population.
 Population variance is an important measure of dispersion used in statistics.
 
-
 Source code: [PopulationVarianceBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/populationvariance/PopulationVarianceBenchmark.java)
 
 [![PopulationVarianceBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)
-
 
 ## PrimesBenchmark
 
@@ -4392,11 +4527,9 @@ The benchmark employs several alternative methods:
 
 The resulting count of prime numbers is compared against the Prime Number Theorem to ensure the accuracy of the computation.
 
-
 Source code: [PrimesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/prime/PrimesBenchmark.java)
 
 [![PrimesBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PrimesBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/PrimesBenchmark.svg?raw=true)
-
 
 ## PublicationStatisticsBenchmark
 
@@ -4415,7 +4548,6 @@ The list of publications is randomly generated at the beginning of the benchmark
 with each publication having a maximum of 9 authors. All of these publications are generated between the years 1900 and 2000,
 and in total, they have around 100 distinct types.
 The total number of authors is 1,000 (which means, on average, every author could potentially write around 100 articles).
-
 
 Source code: [PublicationStatisticsBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/publicationstatistics/PublicationStatisticsBenchmark.java)
 
@@ -4446,21 +4578,21 @@ The process of generating the normalized geometric mean is:
 
 No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
 ----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | x86_64      | 0.87                      | 80               | ns/op
-2   | OpenJDK          | x86_64      | 1                         | 80               | ns/op
-3   | GraalVM CE       | x86_64      | 1.1                       | 80               | ns/op
+1   | GraalVM EE       | x86_64      | 0.87                      | 82               | ns/op
+2   | OpenJDK          | x86_64      | 1                         | 82               | ns/op
+3   | GraalVM CE       | x86_64      | 1.09                      | 82               | ns/op
 
-**Note:** The first in the row is the fastest, and the last in the row is the slowest
+_Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
 No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
 ----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | arm64       | 0.91                      | 80               | ns/op
-2   | OpenJDK          | arm64       | 1                         | 80               | ns/op
-3   | GraalVM CE       | arm64       | 1.13                      | 80               | ns/op
+1   | GraalVM EE       | arm64       | 0.91                      | 82               | ns/op
+2   | OpenJDK          | arm64       | 1                         | 82               | ns/op
+3   | GraalVM CE       | arm64       | 1.13                      | 82               | ns/op
 
-**Note:** The first in the row is the fastest, and the last in the row is the slowest
+_Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
@@ -4470,7 +4602,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 ## Overall Geometric Mean
 
-This section describes the normalized GM for the entire benchmarks categories, having in total 1104 benchmarks.
+This section describes the normalized GM for the entire benchmarks categories, having in total 1106 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -4481,41 +4613,42 @@ The process of generating the normalized geometric mean is:
 
 No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
 ----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | x86_64      | 0.77                      | 1104             | ns/op
-2   | OpenJDK          | x86_64      | 1                         | 1104             | ns/op
-3   | GraalVM CE       | x86_64      | 1.03                      | 1104             | ns/op
+1   | GraalVM EE       | x86_64      | 0.77                      | 1106             | ns/op
+2   | OpenJDK          | x86_64      | 1                         | 1106             | ns/op
+3   | GraalVM CE       | x86_64      | 1.03                      | 1106             | ns/op
 
-**Note:** The first in the row is the fastest, and the last in the row is the slowest
+_Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
 No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
 ----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | arm64       | 0.83                      | 1104             | ns/op
-2   | OpenJDK          | arm64       | 1                         | 1104             | ns/op
-3   | GraalVM CE       | arm64       | 1.08                      | 1104             | ns/op
+1   | GraalVM EE       | arm64       | 0.83                      | 1106             | ns/op
+2   | OpenJDK          | arm64       | 1                         | 1106             | ns/op
+3   | GraalVM CE       | arm64       | 1.08                      | 1106             | ns/op
 
-**Note:** The first in the row is the fastest, and the last in the row is the slowest
+_Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. GraalVM EE is the fastest
-2. OpenJDK is in the middle
-3. GraalVM CE is the slowest
+1. GraalVM EE is the fastest across all benchmarks
+2. OpenJDK is in the middle across all benchmarks
+3. GraalVM CE is the slowest across all benchmarks
 
 # Final Thoughts
 
 In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 and arm64.
 We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations.
 
-... TODO ...
+**... TODO ...**
 
 In case you want to contribute to this project, feel free to reach out or open a pull request on
 [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks/).
 
 # References
-- [OpenJDK sources](https://github.com/openjdk/jdk)
-- [GraalVM sources](https://github.com/oracle/graal)
-- [JHM sources](https://github.com/openjdk/jmh)
+- [OpenJDK](https://github.com/openjdk/jdk) source code
+- [GraalVM](https://github.com/oracle/graal) source code
+- [JHM](https://github.com/openjdk/jmh) source code
+- [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [async-profiler](https://github.com/async-profiler/async-profiler)
 - [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
