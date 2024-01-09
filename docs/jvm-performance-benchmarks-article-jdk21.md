@@ -1844,7 +1844,7 @@ The section below pertains to the `initial_loop` method.
 ### Conclusions
 
 - The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler use a different trigonometric stub, `AMD64MathStub.tan`, compared to the C2 JIT Compiler's `StubRoutines::libmTan`.
-- Overall, the GraalVM EE JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT Compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
+- Overall, the Oracle GraalVM JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT Compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
 
 ## LoopReductionBenchmark
 
@@ -4122,27 +4122,27 @@ The process of generating the normalized geometric mean is:
 
 ## x86_64
 
-No. | JIT            | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|----------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE JIT | x86_64      | 0.65                      | 301              | ns/op
-2   | C2 JIT         | x86_64      | 1                         | 301              | ns/op
-3   | GraalVM CE JIT | x86_64      | 1.06                      | 301              | ns/op
+Rank | JIT                | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|--------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM JIT | x86_64      | 0.65                      | 301               | ns/op
+2    | C2 JIT             | x86_64      | 1                         | 301               | ns/op
+3    | GraalVM CE JIT     | x86_64      | 1.06                      | 301               | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
 ## arm64
 
-No. | JIT            | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|----------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE JIT | x86_64      | 0.76                      | 301              | ns/op
-2   | C2 JIT         | x86_64      | 1                         | 301              | ns/op
-3   | GraalVM CE JIT | x86_64      | 1.31                      | 301              | ns/op
+Rank | JIT                | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|--------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM JIT | x86_64      | 0.76                      | 301               | ns/op
+2    | C2 JIT             | x86_64      | 1                         | 301               | ns/op
+3    | GraalVM CE JIT     | x86_64      | 1.31                      | 301               | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. GraalVM EE JIT is the fastest
+1. Oracle GraalVM JIT is the fastest
 2. C2 JIT is in the middle
 3. GraalVM CE JIT is the slowest
 
@@ -4366,25 +4366,25 @@ The process of generating the normalized geometric mean is:
 
 ## x86_64
 
-No. | JVM distribution | Arcitecture | Normalized Geometric Mean   | Nr.of.Benchmarks | Unit
-----|------------------|-------------|-----------------------------|------------------|--------
-1   | GraalVM EE       | x86_64      | 0.82                        | 723              | ns/op        
-2   | OpenJDK          | x86_64      | 1                           | 723              | ns/op          
-3   | GraalVM CE       | x86_64      | 1.02                        | 723              | ns/op           
+Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean   | Nr. of Benchmarks | Unit
+-----|-------------------|-------------|-----------------------------|-------------------|--------
+1    | Oracle GraalVM    | x86_64      | 0.82                        | 723               | ns/op        
+2    | OpenJDK           | x86_64      | 1                           | 723               | ns/op          
+3    | GraalVM CE        | x86_64      | 1.02                        | 723               | ns/op           
 
 _Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
-No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | arm64       | 0.86                      | 723              | ns/op
-2   | GraalVM CE       | arm64       | 0.99                      | 723              | ns/op
-3   | OpenJDK          | arm64       | 1                         | 723              | ns/op
+Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|-------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM    | arm64       | 0.86                      | 723               | ns/op
+2    | GraalVM CE        | arm64       | 0.99                      | 723               | ns/op
+3    | OpenJDK           | arm64       | 1                         | 723               | ns/op
 
 _Note: The first in the row is the fastest, and the last in the row is the slowest._
 
-To summarize, on both architectures the normalized geometric mean for GraalVM EE is the fastest.
+To summarize, on both architectures the normalized geometric mean for Oracle GraalVM is the fastest.
 OpenJDK and GraalVM CE are very close and interchangeable.
 
 # Miscellaneous
@@ -4576,27 +4576,27 @@ The process of generating the normalized geometric mean is:
 
 ## x86_64
 
-No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | x86_64      | 0.87                      | 82               | ns/op
-2   | OpenJDK          | x86_64      | 1                         | 82               | ns/op
-3   | GraalVM CE       | x86_64      | 1.09                      | 82               | ns/op
+Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|-------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM    | x86_64      | 0.87                      | 82                | ns/op
+2    | OpenJDK           | x86_64      | 1                         | 82                | ns/op
+3    | GraalVM CE        | x86_64      | 1.09                      | 82                | ns/op
 
 _Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
-No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | arm64       | 0.91                      | 82               | ns/op
-2   | OpenJDK          | arm64       | 1                         | 82               | ns/op
-3   | GraalVM CE       | arm64       | 1.13                      | 82               | ns/op
+Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|-------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM    | arm64       | 0.91                      | 82                | ns/op
+2    | OpenJDK           | arm64       | 1                         | 82                | ns/op
+3    | GraalVM CE        | arm64       | 1.13                      | 82                | ns/op
 
 _Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. GraalVM EE is the fastest
+1. Oracle GraalVM is the fastest
 2. OpenJDK is in the middle
 3. GraalVM CE is the slowest
 
@@ -4611,33 +4611,33 @@ The process of generating the normalized geometric mean is:
 
 ## x86_64
 
-No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | x86_64      | 0.77                      | 1106             | ns/op
-2   | OpenJDK          | x86_64      | 1                         | 1106             | ns/op
-3   | GraalVM CE       | x86_64      | 1.03                      | 1106             | ns/op
+Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|-------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM    | x86_64      | 0.77                      | 1106              | ns/op
+2    | OpenJDK           | x86_64      | 1                         | 1106              | ns/op
+3    | GraalVM CE        | x86_64      | 1.03                      | 1106              | ns/op
 
 _Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
-No. | JVM distribution | Arcitecture | Normalized Geometric Mean | Nr.of.Benchmarks | Unit
-----|------------------|-------------|---------------------------|------------------|--------
-1   | GraalVM EE       | arm64       | 0.83                      | 1106             | ns/op
-2   | OpenJDK          | arm64       | 1                         | 1106             | ns/op
-3   | GraalVM CE       | arm64       | 1.08                      | 1106             | ns/op
+Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+-----|-------------------|-------------|---------------------------|-------------------|--------
+1    | Oracle GraalVM    | arm64       | 0.83                      | 1106              | ns/op
+2    | OpenJDK           | arm64       | 1                         | 1106              | ns/op
+3    | GraalVM CE        | arm64       | 1.08                      | 1106              | ns/op
 
 _Note: The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. GraalVM EE is the fastest across all benchmarks
+1. Oracle GraalVM is the fastest across all benchmarks
 2. OpenJDK is in the middle across all benchmarks
 3. GraalVM CE is the slowest across all benchmarks
 
 # Final Thoughts
 
-In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 and arm64.
+In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and Oracle GraalVM) on both x86_64 and arm64.
 We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations.
 
 **... TODO ...**
