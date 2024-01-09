@@ -30,25 +30,22 @@ Florin Blanaru
 
 # Context
 
-The current article describes a series of Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, and Graal JIT.  The benchmarks are structured in three distinct categories:
-1. **JIT Compiler**: This category is dedicated to assessing JIT compiler optimizations by following specific handwritten code patterns. It assesses common optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, etc.
+The current article describes a series of Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, and Graal JIT.  The benchmarks are structured in three distinct (artificial) categories:
+1. **Compiler**: This category is dedicated to assessing JIT compiler optimizations by following specific handwritten code patterns. It assesses common optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, vectorization, etc.
 2. **Api**: This category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util`, `java.text`, `java.time`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
 3. **Miscellaneous**: This category covers a broader spectrum of classical programs (e.g., Dijkstra's shortest path, factorial, Fibonacci, Game of Life, image rotation, knapsack problem, N queens, palindrome, Huffman coding/encoding, Lempel-Ziv-Welch compression, etc.) using different techniques (e.g., dynamic programming, greedy algorithms, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
-For some of the benchmarks (i.e., where there are notable differences) we provide an in-depth analysis (i.e., optimized generated assembly code, flame graphs, etc.).
+The categorization is for informative purposes to better organize and direct the focus of our benchmarks, ranging from low-level (Compiler benchmarks) to high-level (API and Miscellaneous) benchmarks.
 
-The list of included JIT compilers is:
-- C2 (Server) JIT
-- Graal JIT
+For this report we aggregated in total a number of **1106 benchmark runs**, including all three categories.
 
-The list of included JMVs is:
-- OpenJDK 21
-- GraalVM Community Edition (CE) 21+35.1
-- Oracle GraalVM Edition 21+35.1
+The list of JIT compilers included (comprising the JVM and architecture) is as follows:
 
-The list of included architectures is:
-- x86_64
-- arm64
+JIT               | JVM                    | Arcitecture 
+------------------|------------------------|----------------
+C2 (Server) JIT   | OpenJDK 21             | x86_64, arm64         
+Graal JIT         | GraalVM CE 21+35.1     | x86_64, arm64      
+Graal JIT         | Oracle GraalVM 21+35.1 | x86_64, arm64      
 
 This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) project. For any further information (not explicitly mentioned here) including the OS tuning settings, the deliberate decision on choosing these JVMs and/or specific JDKs, etc., please check out the repository.
 
@@ -63,21 +60,14 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
     1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
     2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
 - To eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine:
-    1. Disabled the turbo-boost mode
+    1. Disabled the _turbo-boost_ mode
     2. Set CPU governor to _performance_
-    3. Disabled CPU hyper-threading
+    3. Disabled CPU _hyper-threading_
 
 # JIT Compiler
 
-This section describes the results obtained from running the JIT benchmarks. The current benchmarks focus on various optimizations that are generally available in compilers, such as inlining, loop unrolling, escape analysis, devirtualization, null-check, and range-check elimination, dead code elimination, etc.
-
-The list of JIT compilers (including the JVM and the architecture) is:
-
-JIT       | JVM                    | Arcitecture 
-----------|------------------------|----------------
-C2 JIT    | OpenJDK 21             | x86_64, arm64         
-Graal JIT | GraalVM CE 21+35.1     | x86_64, arm64      
-Graal JIT | Oracle GraalVM 21+35.1 | x86_64, arm64      
+This section presents the results obtained from running the JIT benchmarks. As mentioned earlier, these benchmarks primarily target different optimizations commonly found in compilers. 
+For the benchmarks that show significant differences, we provide a comprehensive analysis, including optimized generated assembly code, flame graphs, etc.
 
 ## JIT Benchmarks
 
