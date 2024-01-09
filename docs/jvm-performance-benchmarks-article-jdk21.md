@@ -1,5 +1,7 @@
 # JVM Performance Comparison for JDK 21
 
+> Current status: undergoing review. Please refrain from sharing this on social media without the authors' permission.
+
 ## Authors
 
 Ionut Balosin
