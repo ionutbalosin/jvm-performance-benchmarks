@@ -4114,23 +4114,23 @@ The process of generating the normalized geometric mean is:
 
 ## x86_64
 
-Rank | JIT                | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+Rank | JVM distribution   | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|--------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM JIT | x86_64      | 0.65                      | 301               | ns/op
-2    | C2 JIT             | x86_64      | 1                         | 301               | ns/op
-3    | GraalVM CE JIT     | x86_64      | 1.06                      | 301               | ns/op
+1    | Oracle GraalVM     | x86_64      | 0.65                      | 301               | ns/op
+2    | OpenJDK            | x86_64      | 1                         | 301               | ns/op
+3    | GraalVM CE         | x86_64      | 1.06                      | 301               | ns/op
 
-**Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
-Rank | JIT                | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
+Rank | JVM distribution   | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|--------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM JIT | x86_64      | 0.76                      | 301               | ns/op
-2    | C2 JIT             | x86_64      | 1                         | 301               | ns/op
-3    | GraalVM CE JIT     | x86_64      | 1.31                      | 301               | ns/op
+1    | Oracle GraalVM     | x86_64      | 0.76                      | 301               | ns/op
+2    | OpenJDK            | x86_64      | 1                         | 301               | ns/op
+3    | GraalVM CE         | x86_64      | 1.31                      | 301               | ns/op
 
-**Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
@@ -4364,7 +4364,7 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean   | Nr. of Be
 2    | OpenJDK           | x86_64      | 1                           | 723               | ns/op          
 3    | GraalVM CE        | x86_64      | 1.02                        | 723               | ns/op           
 
-_Note: The first in the row is the fastest, and the last in the row is the slowest._
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
@@ -4374,7 +4374,7 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benc
 2    | GraalVM CE        | arm64       | 0.99                      | 723               | ns/op
 3    | OpenJDK           | arm64       | 1                         | 723               | ns/op
 
-_Note: The first in the row is the fastest, and the last in the row is the slowest._
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean for Oracle GraalVM is the fastest.
 OpenJDK and GraalVM CE are very close and interchangeable.
@@ -4559,7 +4559,7 @@ Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-p
 
 ## Miscellaneous Geometric Mean
 
-This section describes the normalized GM for the entire miscellaneous benchmarks category, having in total 80 benchmarks.
+This section describes the normalized GM for the entire miscellaneous benchmarks category, having in total 82 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -4574,7 +4574,7 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benc
 2    | OpenJDK           | x86_64      | 1                         | 82                | ns/op
 3    | GraalVM CE        | x86_64      | 1.09                      | 82                | ns/op
 
-_Note: The first in the row is the fastest, and the last in the row is the slowest._
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
@@ -4584,7 +4584,7 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benc
 2    | OpenJDK           | arm64       | 1                         | 82                | ns/op
 3    | GraalVM CE        | arm64       | 1.13                      | 82                | ns/op
 
-_Note: The first in the row is the fastest, and the last in the row is the slowest._
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
@@ -4609,7 +4609,7 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benc
 2    | OpenJDK           | x86_64      | 1                         | 1106              | ns/op
 3    | GraalVM CE        | x86_64      | 1.03                      | 1106              | ns/op
 
-_Note: The first in the row is the fastest, and the last in the row is the slowest._
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 ## arm64
 
@@ -4619,7 +4619,7 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benc
 2    | OpenJDK           | arm64       | 1                         | 1106              | ns/op
 3    | GraalVM CE        | arm64       | 1.08                      | 1106              | ns/op
 
-_Note: The first in the row is the fastest, and the last in the row is the slowest._
+_The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
