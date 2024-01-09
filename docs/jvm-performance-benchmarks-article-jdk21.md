@@ -5,13 +5,13 @@
 ## Authors
 
 Ionut Balosin
-- Website: www.ionutbalosin.com
-- X: @ionutbalosin
-- Mastodon: ionutbalosin@mastodon.social
+: Website: www.ionutbalosin.com<br/>
+  X: @ionutbalosin<br/>
+  Mastodon: ionutbalosin@mastodon.social<br/>
 
 Florin Blanaru
-- X: @gigiblender
-- Mastodon: gigiblender@mastodon.online
+: X: @gigiblender<br/>
+  Mastodon: gigiblender@mastodon.online<br/>
 
 # Content
 
