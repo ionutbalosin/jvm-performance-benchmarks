@@ -4631,9 +4631,9 @@ _Note: The first in the row is the fastest, and the last in the row is the slowe
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. Oracle GraalVM is the fastest across all benchmarks
-2. OpenJDK is in the middle across all benchmarks
-3. GraalVM CE is the slowest across all benchmarks
+1. Oracle GraalVM is the fastest
+2. OpenJDK is in the middle
+3. GraalVM CE is the slowest
 
 # Final Thoughts
 
