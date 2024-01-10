@@ -317,11 +317,11 @@
     },
     {
       "name": "StringConcatenationBenchmark",
+      "jvmArgsAppend": "--enable-preview",
       "jmhOpts": "-prof gc"
     },
     {
-      "name": "StringContainsBenchmark",
-      "jvmArgsAppend": "--enable-preview"
+      "name": "StringContainsBenchmark"
     },
     {
       "name": "StringEqualsBenchmark"
