@@ -1,6 +1,6 @@
 # JVM Performance Comparison for JDK 21
 
-> Current status: undergoing review. Please refrain from sharing this on social media without the authors' permission.
+> Current status: WIP (e.g., undergoing review). At this stage, please refrain from sharing it on social media without the authors' permission.
 
 ## Authors
 
@@ -27,6 +27,7 @@ Florin Blanaru
     - [Benchmarks](#miscellaneous-benchmarks)
     - [Geometric Mean](#miscellaneous-geometric-mean)
 - [Overall Geometric Mean](#overall-geometric-mean)
+- [Overall Conclusions](#overall-conclusions)
 - [Final Thoughts](#final-thoughts)
 - [References](#references)
 
@@ -4140,11 +4141,13 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 # API
 
-This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT benchmarks with another class of benchmarks.
+This set of benchmarks targets common APIs from both the Java Platform, Standard Edition (Java SE) and the Java Development Kit (JDK).
 
 ## API Benchmarks
 
-The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
+The API benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
+
+**Note:** Only a small subset of the API benchmarks are included here; in general, we selected those with significant differences or representing various APIs. For the complete set, please refer to the repository and the generated plots.
 
 ## AesEcbCryptoBenchmark
 
@@ -4159,7 +4162,7 @@ Source code: [AesEcbCryptoBenchmark.java](https://github.com/ionutbalosin/jvm-pe
 
 Measures the time it takes to read byte array chunks using a ByteArrayInputStream and includes a sanity check to verify the number of bytes read.
 
-All of these I/O benchmarks are affected by various factors, including:
+**Note:** This I/O benchmark might be affected by various factors, including:
 - Underlying File System: Different file systems (such as NTFS, ext4, FAT32) might employ distinct strategies for caching, block allocation, and metadata management, thereby impacting I/O performance.
 - Hardware: The hardware utilized, including specifications of the hard drive or solid-state drive (SSD),  such as rotational speed, data transfer rates, and seek times.
 - Disk Subsystem: The physical hardware components responsible for storing and retrieving data, encompassing factors like disk speed, storage technology (HDD vs. SSD), and more.
@@ -4173,7 +4176,7 @@ Source code: [ByteArrayInputStreamBenchmark.java](https://github.com/ionutbalosi
 
 ## DsaEcSignatureBenchmark
 
-This benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths, key lengths and hash sizes.
+The benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths, key lengths and hash sizes.
 
 Source code: [DsaEcSignatureBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/signature/DsaEcSignatureBenchmark.java)
 
@@ -4208,11 +4211,52 @@ Benchmark measuring the performance of various concatenation methods using diffe
 
 The input String and char contain characters encoded in either Latin-1 or UTF-16.
 
-**Note:** The benchmarking process may involve varying numbers of allocations, which could affect the overall results without fundamentally altering the outcomes.
+**Note:** The benchmark might encompass different allocations, potentially impacting the overall results.
+
+```
+  @Benchmark
+  public String string_builder() {
+    // Do not explicitly set a capacity
+    return new StringBuilder()
+        .append(aString).append(anInt).append(aFloat).append(aChar)
+        .append(aLong).append(aDouble).append(aBool).append(anObject)
+        .toString();
+  }
+
+  @Benchmark
+  public String string_buffer() {
+    // Do not explicitly set a capacity
+    return new StringBuffer()
+        .append(aString).append(anInt).append(aFloat).append(aChar)
+        .append(aLong).append(aDouble).append(aBool).append(anObject)
+        .toString();
+  }
+
+  @Benchmark
+  public String string_concat() {
+    return new String()
+        .concat(aString).concat(valueOf(anInt)).concat(valueOf(aFloat)).concat(valueOf(aChar))
+        .concat(valueOf(aLong)).concat(valueOf(aDouble)).concat(valueOf(aBool)).concat(valueOf(anObject));
+  }
+
+  @Benchmark
+  public String plus_operator() {
+    return aString + anInt + aFloat+ aChar + aLong + aDouble + aBool + anObject ;
+  }
+
+  @Benchmark
+  public String string_template() {
+    return STR."\{aString}\{anInt}\{aFloat}\{aChar}\{aLong}\{aDouble}\{aBool}\{anObject}";
+  }
+```
 
 Source code: [StringConcatenationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/string/StringConcatenationBenchmark.java)
 
 [![StringConcatenationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringConcatenationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringConcatenationBenchmark.svg?raw=true)
+
+### Remarks
+
+TODO: recheck if with Florin new measurements
 
 ## StringFormatBenchmark
 
@@ -4224,11 +4268,43 @@ This benchmark measures the performance of different formatting approaches utili
 
 The input String and char consist of characters encoded in either Latin-1 or UTF-16.
 
-**Note:** The benchmarking process may involve a varying number of allocations, potentially influencing the overall results, albeit without fundamentally altering the outcomes.
+**Note:** The benchmark might encompass different allocations, potentially impacting the overall results.
+
+```
+  @Benchmark
+  public String string_format() {
+    return String.format(
+        "%s%d%.8f%s%d%.17f%b%s", aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
+  }
+
+  @Benchmark
+  public String message_format() {
+    final MessageFormat mf =
+        new MessageFormat(
+            "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
+    return mf.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
+  }
+
+  @Benchmark
+  public String string_formatted() {
+    return "%s%d%.8f%s%d%.17f%b%s".formatted(aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
+  }
+
+  @Benchmark
+  public String format_processor() {
+    return FMT."%s\{aString}%d\{anInt}%.8f\{aFloat}%s\{aChar}%d\{aLong}%.17f\{aDouble}%b\{aBool}%s\{anObject}";
+  }
+```
 
 Source code: [StringFormatBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/string/StringFormatBenchmark.java)
 
 [![StringFormatBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringFormatBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringFormatBenchmark.svg?raw=true)
+
+### Remarks
+
+The `FMT` template processor (see [JEP 430: String Templates](https://openjdk.org/jeps/430)) demonstrates significantly lower response times (i.e., better performance) compared to all other methods tested in this benchmark. 
+
+On the other side, `MessageFormat` shows considerably slower performance and should be avoided in real applications, either used directly or indirectly.
 
 ## StringPatternSplitBenchmark
 
@@ -4282,34 +4358,10 @@ The flame graphs below pertain to the `pattern_split` method.
 
 [![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
 
-### Conclusions
+### Remarks
 
 At first glance, it appears that the Oracle GraalVM JIT Compiler does a better job of inlining. However, a more in-depth 
 analysis might be necessary to identify the differences, as they may not be very obvious to reveal based solely on the generated assembly code.
-
-## VPThreadBlockingApiStackDepthBenchmark
-
-This benchmark aims to measure the efficiency of mounting and unmounting virtual threads by comparing this behavior with 
-that of platform threads (OS-level threads) when they interact with blocking APIs at varying thread stack depths.
-
-The stack frames of unmounted virtual threads are stored in the heap as a list of stack-chunk objects (i.e., StackChunk OOP). 
-Each stack-chunk object contains a blob that holds a stack segment, including several integral numbers of stack frames. 
-A stack-chunk is entirely mutable during freeze and thaw (i.e., stack frames can be moved in and out via memcpy) as long as 
-the garbage collector (GC) has not seen it yet. For some GCs, this typically occurs during the entire young generation phase.
-
-As the stack depth increases, more stack frames will require copying into the stack-chunks, potentially leading to the expansion of the stack-chunks list. 
-Consequently, when using virtual threads this mechanism adds more 'pressure' on the runtime to manage them compared to platform threads.
-
-Typically, a virtual thread will unmount when it blocks on I/O or some other blocking operation in the JDK, such as BlockingQueue.take(). 
-When the blocking operation is ready to complete (e.g., bytes have been received on a socket), it submits the virtual thread back to the scheduler, 
-which will mount the virtual thread on a carrier to resume execution.
-
-**Note:** It is less expensive to block a virtual thread than a platform thread, since the latter will involve context switching. 
-Using virtual threads in the context of blocking API calls provides a noticeable benefit over traditional platform threads.
-
-Source code: [VPThreadBlockingApiStackDepthBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadBlockingApiStackDepthBenchmark.java)
-
-[![VPThreadBlockingApiStackDepthBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadBlockingApiStackDepthBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadBlockingApiStackDepthBenchmark.svg?raw=true)
 
 ## VPThreadCpuBoundBenchmark
 
@@ -4323,12 +4375,15 @@ The benchmark method accounts for the task submission cost to the initially idle
 When a virtual thread executes CPU-bound code without involving any blocking I/O or other blocking JDK methods, the virtual thread cannot be unmounted. Consequently, it will not yield and may continue to occupy its carrier thread until it completes its computation. 
 To address this, the CPU-bound tasks include explicit various backoff strategies (such as yielding, or parking) in an attempt to de-schedule the running thread and permit other threads to execute on the CPU, thereby facilitating the unmounting of the virtual thread from its carrier.
 
-**Note:** When the workload is CPU-bound, virtual threads may not offer a substantial improvement in application throughput compared to traditional platform threads. Additionally, in scenarios of CPU-bound workloads, having significantly more threads than processor cores does not necessarily enhance throughput. 
-As a side note, using virtual threads solely for heavy in-memory processing may not align with their intended use case.
-
 Source code: [VPThreadCpuBoundBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadCpuBoundBenchmark.java)
 
 [![VPThreadCpuBoundBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadCpuBoundBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadCpuBoundBenchmark.svg?raw=true)
+
+### Remarks
+
+When the workload is CPU-bound, virtual threads may not offer a substantial improvement in application throughput compared to traditional platform threads. Additionally, in scenarios of CPU-bound workloads, having significantly more threads than processor cores does not necessarily enhance throughput.
+
+As a side note, also using virtual threads solely for heavy in-memory processing may not align with their intended use case.
 
 ## VPThreadSynchronizationBenchmark
 
@@ -4345,7 +4400,23 @@ The benchmark method includes the cost of task submission to the initially idle 
 
 Source code: [VPThreadSynchronizationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadSynchronizationBenchmark.java)
 
-[![VPThreadSynchronizationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark.svg?raw=true)
+[![VPThreadSynchronizationBenchmark_param_backoffType_NONE.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_NONE.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_NONE.svg?raw=true)
+
+[![VPThreadSynchronizationBenchmark_param_backoffType_PARK.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_PARK.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_PARK.svg?raw=true)
+
+### Remarks
+
+#### Remarks for backoffType:NONE
+
+In the scenario of `backoffType:NONE` (while the carrier is not released), the platform threads exhibit better average response times compared to virtual threads for both synchronized and non-synchronized methods.
+
+TODO: recheck if with Florin new measurements + add some samples
+
+#### Remarks for backoffType:PARK
+
+In the scenario of `backoffType:PARK` (which triggers the virtual thread to be unmounted from its carrier), the virtual threads demonstrate better average response times compared to platform threads for both synchronized and non-synchronized methods.
+
+TODO: recheck if with Florin new measurements + add some samples
 
 ## API Geometric Mean
 
@@ -4381,11 +4452,13 @@ OpenJDK and GraalVM CE are very close and interchangeable.
 
 # Miscellaneous
 
-This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT benchmarks with another class of benchmarks.
+This set of benchmarks covers a broader spectrum of classical programs using different techniques, various programming styles, and high-level Java APIs.
 
 ## Miscellaneous Benchmarks
 
 The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
+
+**Note:** Only a small subset of the miscellaneous benchmarks are included here; in general, we selected those with significant differences or representing various APIs. For the complete set, please refer to the repository and the generated plots.
 
 ## DijkstraShortestPathBenchmark
 
@@ -4627,15 +4700,24 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 2. OpenJDK is in the middle
 3. GraalVM CE is the slowest
 
-# Final Thoughts
+# Overall Conclusions
 
 In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and Oracle GraalVM) on both x86_64 and arm64.
 We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations.
 
 **... TODO ...**
 
-In case you want to contribute to this project, feel free to reach out or open a pull request on
-[GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks/).
+# Final Thoughts
+
+This report should not be considered as a final verdict on which JVM distribution is the best.
+We aimed to provide an accurate analysis based on our knowledge, emphasizing transparency and avoiding bias toward any particular JVM. 
+Our objective does not include promoting or favoring any JVM over another, and we are not responsible for influencing marketing or usage.
+
+Additionally, micro-benchmarking is often not the best indicator of how good a system will be in a production environment.
+Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks.
+It might also be useful to software engineers who want to have a better understanding of the class of optimizations available in a given JVM distribution.
+
+We dedicated our spare time to this project voluntarily and without any financial compensation, but we highly encourage any form of involvement. If you wish to contribute to this project, please feel free to contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks).
 
 # References
 - [OpenJDK](https://github.com/openjdk/jdk) source code

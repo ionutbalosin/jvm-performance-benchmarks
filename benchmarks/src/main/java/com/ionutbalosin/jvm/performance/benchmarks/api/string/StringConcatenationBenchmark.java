@@ -51,8 +51,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * The input String and char contain characters encoded in either Latin-1 or UTF-16.
  *
- * Note: The benchmarking process may involve varying numbers of allocations, which could affect
- * the overall results without fundamentally altering the outcomes.
+ * Note: The benchmark might encompass different allocations, potentially impacting the overall results.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
