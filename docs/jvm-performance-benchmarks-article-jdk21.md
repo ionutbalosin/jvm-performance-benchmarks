@@ -4408,15 +4408,148 @@ Source code: [VPThreadSynchronizationBenchmark.java](https://github.com/ionutbal
 
 #### Remarks for backoffType:NONE
 
-In the scenario of `backoffType:NONE` (while the carrier is not released), the platform threads exhibit better average response times compared to virtual threads for both synchronized and non-synchronized methods.
+In this scenario, platform threads demonstrate lower execution times (i.e., better performance) compared to virtual threads across the tested synchronization mechanisms. 
+Based on the reported performance event statistics, the major differences between virtual and platform threads can be summarized as follows:
 
-TODO: recheck if with Florin new measurements + add some samples
+- Virtual threads exhibit higher instructions per cycle (`IPC`) than platform threads across diverse synchronization methods.
+- Cache misses (e.g., `L1-dcache-load-misses`, `LLC-load-misses`) are generally higher in virtual threads.
+- Virtual threads tend to have more `branches` and `branch-misses` than platform threads, implying potentially increased overhead in conditional operations or code execution flow.
+- `context-switches` occur more frequently in platform threads than in virtual threads.
+- Virtual threads typically consume more CPU `cycles` than platform threads.
+
+```
+// Platform thread stats
+
+Perf Event                 (lockType)  Mode               Score              Units
+IPC                       OBJECT_LOCK  avgt               0.596          insns/clk
+L1-dcache-load-misses     OBJECT_LOCK  avgt           42399.031               #/op
+LLC-load-misses           OBJECT_LOCK  avgt               8.115               #/op
+branch-misses             OBJECT_LOCK  avgt            3187.952               #/op
+branches                  OBJECT_LOCK  avgt          373101.145               #/op
+context-switches          OBJECT_LOCK  avgt              56.866               #/op
+cycles                    OBJECT_LOCK  avgt         3291424.505               #/op
+
+IPC                    REENTRANT_LOCK  avgt               0.593          insns/clk
+L1-dcache-load-misses  REENTRANT_LOCK  avgt           45007.877               #/op
+LLC-load-misses        REENTRANT_LOCK  avgt               8.138               #/op
+branch-misses          REENTRANT_LOCK  avgt            3328.792               #/op
+branches               REENTRANT_LOCK  avgt          388046.866               #/op
+context-switches       REENTRANT_LOCK  avgt              59.633               #/op
+cycles                 REENTRANT_LOCK  avgt         3462417.099               #/op
+
+IPC                           NO_LOCK  avgt               0.566          insns/clk
+L1-dcache-load-misses         NO_LOCK  avgt           42033.874               #/op
+LLC-load-misses               NO_LOCK  avgt               7.947               #/op
+branch-misses                 NO_LOCK  avgt            3027.985               #/op
+branches                      NO_LOCK  avgt          342940.528               #/op
+context-switches              NO_LOCK  avgt              54.597               #/op
+cycles                        NO_LOCK  avgt         3182397.387               #/op
+```
+
+```
+// Virtual thread  stats
+
+Perf Event                 (lockType)  Mode               Score              Units
+IPC                       OBJECT_LOCK  avgt               1.272          insns/clk
+L1-dcache-load-misses     OBJECT_LOCK  avgt          196249.216               #/op
+LLC-load-misses           OBJECT_LOCK  avgt             799.745               #/op
+branch-misses             OBJECT_LOCK  avgt           30627.527               #/op
+branches                  OBJECT_LOCK  avgt         3710927.299               #/op
+context-switches          OBJECT_LOCK  avgt               8.620               #/op
+cycles                    OBJECT_LOCK  avgt        17970218.767               #/op
+
+IPC                    REENTRANT_LOCK  avgt               1.254          insns/clk
+L1-dcache-load-misses  REENTRANT_LOCK  avgt          206329.513               #/op
+LLC-load-misses        REENTRANT_LOCK  avgt             804.014               #/op
+branch-misses          REENTRANT_LOCK  avgt           31657.944               #/op
+branches               REENTRANT_LOCK  avgt         3737761.434               #/op
+context-switches       REENTRANT_LOCK  avgt               8.665               #/op
+cycles                 REENTRANT_LOCK  avgt        18440844.889               #/op
+
+IPC                           NO_LOCK  avgt               1.284          insns/clk
+L1-dcache-load-misses         NO_LOCK  avgt          180438.009               #/op
+LLC-load-misses               NO_LOCK  avgt             762.020               #/op
+branch-misses                 NO_LOCK  avgt           29958.780               #/op
+branches                      NO_LOCK  avgt         3693926.389               #/op
+context-switches              NO_LOCK  avgt               8.596               #/op
+cycles                        NO_LOCK  avgt        17792312.604               #/op
+```
 
 #### Remarks for backoffType:PARK
 
-In the scenario of `backoffType:PARK` (which triggers the virtual thread to be unmounted from its carrier), the virtual threads demonstrate better average response times compared to platform threads for both synchronized and non-synchronized methods.
+In this scenario, virtual threads demonstrate lower execution times (i.e., better performance) compared to platform threads across the tested synchronization mechanisms.
+Based on the reported performance event statistics, the major differences between virtual and platform threads can be summarized as follows:
 
-TODO: recheck if with Florin new measurements + add some samples
+- Virtual threads exhibit higher instructions per cycle (`IPC`) than platform threads across diverse synchronization methods.
+- Cache miss rates (`L1-dcache-load-misses`, `L1-icache-load-misses`) are generally higher for virtual threads compared to platform threads.
+- Virtual threads tend to have typically lower `LLC-load-misses` compared to platform threads.
+- The number of `branches` is generally higher in platform threads than in virtual threads.
+- `context-switches` typically occur more frequently in platform threads than in virtual threads.
+- Platform threads typically consume more CPU `cycles` than virtual threads.
+
+```
+// Platform thread stats
+
+Perf Event                 (lockType)  Mode               Score              Units
+IPC                       OBJECT_LOCK  avgt               0.687          insns/clk
+L1-dcache-load-misses     OBJECT_LOCK  avgt          640480.970               #/op
+L1-icache-load-misses     OBJECT_LOCK  avgt         2323545.394               #/op
+LLC-load-misses           OBJECT_LOCK  avgt            4576.228               #/op
+branch-misses             OBJECT_LOCK  avgt          165016.601               #/op
+branches                  OBJECT_LOCK  avgt         7692129.353               #/op
+context-switches          OBJECT_LOCK  avgt            4614.475               #/op
+cycles                    OBJECT_LOCK  avgt        58254748.922               #/op
+
+IPC                    REENTRANT_LOCK  avgt               0.476          insns/clk
+L1-dcache-load-misses  REENTRANT_LOCK  avgt         1035894.902               #/op
+L1-icache-load-misses  REENTRANT_LOCK  avgt         2777082.744               #/op
+LLC-load-misses        REENTRANT_LOCK  avgt            1832.722               #/op
+branch-misses          REENTRANT_LOCK  avgt          241965.715               #/op
+branches               REENTRANT_LOCK  avgt        13410429.953               #/op
+context-switches       REENTRANT_LOCK  avgt            4597.790               #/op
+cycles                 REENTRANT_LOCK  avgt       134215963.863               #/op
+
+IPC                           NO_LOCK  avgt               0.767          insns/clk
+L1-dcache-load-misses         NO_LOCK  avgt          433751.100               #/op
+L1-icache-load-misses         NO_LOCK  avgt         1235885.657               #/op
+LLC-load-misses               NO_LOCK  avgt             674.073               #/op
+branch-misses                 NO_LOCK  avgt           90173.994               #/op
+branches                      NO_LOCK  avgt         4060838.177               #/op
+context-switches              NO_LOCK  avgt            2311.858               #/op
+cycles                        NO_LOCK  avgt        25152425.987               #/op
+```
+
+```
+// Virtual thread  stats
+
+Perf Event                 (lockType)  Mode               Score              Units
+IPC                       OBJECT_LOCK  avgt               0.946          insns/clk
+L1-dcache-load-misses     OBJECT_LOCK  avgt          449792.578               #/op
+L1-icache-load-misses     OBJECT_LOCK  avgt          521808.324               #/op
+LLC-load-misses           OBJECT_LOCK  avgt             940.029               #/op
+branch-misses             OBJECT_LOCK  avgt           86623.166               #/op
+branches                  OBJECT_LOCK  avgt         5401765.289               #/op
+context-switches          OBJECT_LOCK  avgt             309.747               #/op
+cycles                    OBJECT_LOCK  avgt        31854171.315               #/op
+
+IPC                    REENTRANT_LOCK  avgt               0.562          insns/clk
+L1-dcache-load-misses  REENTRANT_LOCK  avgt         2108434.887               #/op
+L1-icache-load-misses  REENTRANT_LOCK  avgt         4706842.285               #/op
+LLC-load-misses        REENTRANT_LOCK  avgt            2639.517               #/op
+branch-misses          REENTRANT_LOCK  avgt          447183.746               #/op
+branches               REENTRANT_LOCK  avgt        16424976.383               #/op
+context-switches       REENTRANT_LOCK  avgt            5217.440               #/op
+cycles                 REENTRANT_LOCK  avgt       158322287.830               #/op
+
+IPC                           NO_LOCK  avgt               0.983          insns/clk
+L1-dcache-load-misses         NO_LOCK  avgt          598629.320               #/op
+L1-icache-load-misses         NO_LOCK  avgt          431933.099               #/op
+LLC-load-misses               NO_LOCK  avgt            1340.012               #/op
+branch-misses                 NO_LOCK  avgt          150567.950               #/op
+branches                      NO_LOCK  avgt         5867568.869               #/op
+context-switches              NO_LOCK  avgt             208.967               #/op
+cycles                        NO_LOCK  avgt        35865001.555               #/op
+```
 
 ## API Geometric Mean
 
