@@ -4924,7 +4924,7 @@ Additionally, micro-benchmarking is often not the best indicator of how good a s
 Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks.
 It might also be useful to software engineers who want to have a better understanding of the class of optimizations available in a given JVM distribution.
 
-While this project is a personal and non-profit endeavor, we warmly welcome and value any form of involvement. If you wish to contribute to this project, please feel free to contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks).
+*Join us in making a difference! Our free-time, and non-profit project welcomes and values any form of involvement. Contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks) to contribute to the Java community.*
 
 # References
 - [OpenJDK](https://github.com/openjdk/jdk) source code
