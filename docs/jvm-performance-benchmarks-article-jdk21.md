@@ -4971,20 +4971,20 @@ Nevertheless, it has a limited set of intrinsics and vectorization support, alon
 
 # Final Thoughts
 
-This report should not be considered as a final verdict on which JVM distribution is the best.
-We aimed to provide an accurate analysis based on our knowledge, emphasizing transparency and avoiding bias toward any particular JVM. 
-Our objective does not include promoting or favoring any JVM over another, and we are not responsible for influencing marketing or usage.
+This report should not be considered as a final verdict on which JVM distribution is the best. 
+Our goal is to offer an accurate and transparent analysis based on our knowledge, avoiding bias toward any specific JVM. 
+We do not aim to promote or favor any JVM over another, and we are not responsible for influencing marketing or community adoption.
 
 Additionally, micro-benchmarking is often not the best indicator of how good a system will be in a production environment.
 Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks.
 It might also be useful to software engineers who want to have a better understanding of the class of optimizations available in a given JVM distribution.
 
-*Join us in making a difference! Our free-time, and non-profit project welcomes and values any form of involvement. Contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks) to contribute to the Java community.*
+> Join us in making a difference! Our free-time, and non-profit project welcomes and values any form of involvement. Contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks) to contribute to the Java community.
 
 # References
-- [OpenJDK](https://github.com/openjdk/jdk) source code
-- [GraalVM](https://github.com/oracle/graal) source code
-- [JHM](https://github.com/openjdk/jmh) source code
+- [OpenJDK](https://github.com/openjdk/jdk) sources
+- [GraalVM](https://github.com/oracle/graal) sources
+- [JHM](https://github.com/openjdk/jmh) sources
 - [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [async-profiler](https://github.com/async-profiler/async-profiler)
 - [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
