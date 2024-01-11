@@ -4266,7 +4266,7 @@ Source code: [StringConcatenationBenchmark.java](https://github.com/ionutbalosin
 
 ### Remarks
 
-TODO: recheck if with Florin new measurements
+The `STR` template processor (refer to [JEP 430: String Templates](https://openjdk.org/jeps/430)) and the `plus` operator exhibit lower response times (i.e., better performance) compared to other methods tested in this benchmark.
 
 ## StringFormatBenchmark
 
@@ -4312,7 +4312,7 @@ Source code: [StringFormatBenchmark.java](https://github.com/ionutbalosin/jvm-pe
 
 ### Remarks
 
-The `FMT` template processor (see [JEP 430: String Templates](https://openjdk.org/jeps/430)) demonstrates significantly lower response times (i.e., better performance) compared to all other methods tested in this benchmark. 
+The `FMT` template processor (refer to [JEP 430: String Templates](https://openjdk.org/jeps/430)) demonstrates significantly lower response times (i.e., better performance) compared to all other methods tested in this benchmark. 
 
 On the other side, `MessageFormat` shows considerably slower performance and should be avoided in real applications, either used directly or indirectly.
 
