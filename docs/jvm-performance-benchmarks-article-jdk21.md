@@ -3284,13 +3284,16 @@ Compiler analyses the scope of a new object and decides whether it might be allo
 The method is called Escape Analysis (EA), which identifies if the newly created object is escaping or not into the heap.
 To not be confused, EA is not an optimization but rather an analysis phase for the optimizer.
 There are a few escape states:
-- NoEscape - the object cannot be visible outside the current method and thread.
-- ArgEscape - the object is passed as an argument to a method but cannot otherwise be visible outside the method or by other threads.
-- GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
+- `NoEscape` - The object does not escape the method or thread, and it is not passed to a call.
+- `ArgEscape` - The object does not escape the method or thread, but it is passed as an argument to a call or referenced by an argument, and it does not escape during the call.
+- `GlobalEscape` - The object can escape the method or the thread, which means that such an object is visible outside the method or thread.
 
-For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+For `NoEscape` objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called `Scalar Replacement` optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
 
 ```
+  @Param(value = {"false"})
+  private boolean objectEscapes;
+
   @Benchmark
   public HeavyWrapper branch_escape_obj() {
     HeavyWrapper wrapper = new HeavyWrapper(value, size);
@@ -3325,7 +3328,6 @@ For NoEscape objects, the Compiler can remap accesses to the object fields to ac
 Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/ScalarReplacementBenchmark.java)
 
 [![ScalarReplacementBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)
-
 
 ### Analysis of branch_escape_obj
 
@@ -3372,7 +3374,7 @@ The Oracle GraalVM JIT Compiler allocates the `HeavyWrapper wrapper` object only
 
 #### GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler, which explains why this benchmark is much faster for the Graal Compiler.
+The GraalVM CE JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler, which explains why this benchmark is much faster for the Graal Compiler.
 
 ### Analysis of arg_escape_obj
 
@@ -3410,12 +3412,13 @@ The Oracle GraalVM JIT Compiler method returns `true` (since the `HeavyWrapper` 
 
 #### GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+The GraalVM CE JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
 
 ### Conclusions
 
-Both the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) do a better job of eliminating unnecessary allocations compared to the C2 JIT Compiler.
+In cases where the object does not escape the method or the thread (e.g., `no_escape`, `no_escape_array_obj`), all compilers are able to eliminate the heap allocations.
 
+In cases where the object is passed as an argument but still does not escape the current thread (e.g., `arg_escape_obj`) or is guarded by a global boolean condition (even though that condition does not allow the object to escape; e.g., `branch_escape_obj`), and the object remains visible only to the current thread, only the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) can eliminate unnecessary allocations.
 ## SepiaVectorApiBenchmark
 
 This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
