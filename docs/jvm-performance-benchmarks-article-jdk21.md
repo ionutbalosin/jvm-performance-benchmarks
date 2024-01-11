@@ -3419,6 +3419,7 @@ The GraalVM CE JIT Compiler performs the same optimization as the Oracle GraalVM
 In cases where the object does not escape the method or the thread (e.g., `no_escape`, `no_escape_array_obj`), all compilers are able to eliminate the heap allocations.
 
 In cases where the object is passed as an argument but still does not escape the current thread (e.g., `arg_escape_obj`) or is guarded by a global boolean condition (even though that condition does not allow the object to escape; e.g., `branch_escape_obj`), and the object remains visible only to the current thread, only the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) can eliminate unnecessary allocations.
+
 ## SepiaVectorApiBenchmark
 
 This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
