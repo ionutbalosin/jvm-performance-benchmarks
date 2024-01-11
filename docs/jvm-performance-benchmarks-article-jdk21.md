@@ -1606,11 +1606,12 @@ Loop fission breaks a larger loop body into smaller loops. Benefits of loop fiss
 
 - This optimization is most efficient in multicore processors that can split a task into multiple tasks for each processor.
 
-**Note:** Loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
+Loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
 
 ```
   @Benchmark
   public void initial_loop() {
+    // Initial loop with explicit broken loop vectorization (i.e., read-after-write)
     for (int i = 1; i < size; i++) {
       A[i] = A[i - 1] + C[i];
       B[i] = A[i] + C[i];
@@ -1619,10 +1620,12 @@ Loop fission breaks a larger loop body into smaller loops. Benefits of loop fiss
 
   @Benchmark
   public void manual_loop_fission() {
+    // Loop 1: Breaks loop vectorization (i.e., read-after-write)
     for (int i = 1; i < size; i++) { // loop 1
       A[i] = A[i - 1] + C[i];            
     }
 
+    // Loop 2: Able to be vectorized
     for (int i = 1; i < size; i++) { // loop 2
       B[i] = A[i] + C[i];
     }
@@ -1722,7 +1725,7 @@ The GraalVM CE JIT Compiler unrolls the `main loop 2` by a factor of 8, but it a
 
 ### Conclusions
 
-- None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loop_fission` brings significant benefits as opposed to the default `initial_loop`.
+- None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loop_fission` brings significant benefits as opposed to the default `initial_loop` since the `loop 2` becomes vectorizable. This is also a useful pattern to apply in normal application code.
 - The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler does not vectorize the fissed loop (when no data dependencies are present), making it slower than the other two compilers.
 
 ## LoopFusionBenchmark
@@ -1754,9 +1757,11 @@ Source code: [LoopFusionBenchmark.java](https://github.com/ionutbalosin/jvm-perf
 
 [![LoopFusionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopFusionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopFusionBenchmark.svg?raw=true)
 
-### Analysis
+### Analysis of initial_loops
 
 The analysis below pertains to the `initial_loops` method, which is more interesting due to the differences in performance.
+
+#### C2 JIT Compiler and GraalVM CE JIT Compiler
 
 Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a factor of 8 and handle the dependent load/store operations in a comparable manner. For instance, the following code snippet illustrates a main loop optimized by the C2 JIT:
 
@@ -1775,6 +1780,8 @@ Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a facto
   │ 0x7f1534637599:   cmp    %eax,%esi                   ; compare loop counter against eax
   ╰ 0x7f153463759b:   jl     0x7f1534637541              ; jump back to loop if less
 ```
+
+#### GraalVM CE JIT Compiler
 
 Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT Compiler, the GraalVM CE JIT Compiler produces less optimal code due to the additional load instructions.
 
@@ -1801,7 +1808,7 @@ Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT
 
 ### Conclusions
 
-- None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loops_fusion` does not yield significant benefits. In fact, due to the data dependency between array elements within a loop cycle, manual_loops_fusion becomes less optimal rather than improving performance.
+- None of these compilers has implemented this optimization. Moreover, in this benchmark, it appears that `manual_loops_fusion` does not yield significant benefits. In fact, due to the data dependency between array elements within a loop cycle, `manual_loops_fusion` becomes less optimal rather than improving performance, as opposed to the previous `LoopFissionBenchmark` (in case there are data dependencies within the loop cycles).
 - The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
 
 ## LoopInvariantCodeMotionBenchmark
