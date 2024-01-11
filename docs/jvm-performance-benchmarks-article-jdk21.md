@@ -4174,6 +4174,16 @@ Source code: [ByteArrayInputStreamBenchmark.java](https://github.com/ionutbalosi
 
 [![ByteArrayInputStreamBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ByteArrayInputStreamBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ByteArrayInputStreamBenchmark.svg?raw=true)
 
+## DateTimeFormatterBenchmark
+
+Evaluates the performance of DateTimeFormatter creation using various styles and patterns available in Java's DateTimeFormatter API. 
+This benchmark measures the efficiency of DateTimeFormatter instantiation for localized date, time, and datetime formats employing different styles. 
+Additionally, it assesses the speed of DateTimeFormatter creation using a custom-defined pattern with specific formatting elements and locale.
+
+Source code: [DateTimeFormatterBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/time/DateTimeFormatterBenchmark.java)
+
+[![DateTimeFormatterBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DateTimeFormatterBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DateTimeFormatterBenchmark.svg?raw=true)
+
 ## DsaEcSignatureBenchmark
 
 The benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths, key lengths and hash sizes.
@@ -4914,7 +4924,7 @@ Additionally, micro-benchmarking is often not the best indicator of how good a s
 Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks.
 It might also be useful to software engineers who want to have a better understanding of the class of optimizations available in a given JVM distribution.
 
-We dedicated our spare time to this project voluntarily and without any financial compensation, but we highly encourage any form of involvement. If you wish to contribute to this project, please feel free to contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks).
+While this project is a personal and non-profit endeavor, we warmly welcome and value any form of involvement. If you wish to contribute to this project, please feel free to contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks).
 
 # References
 - [OpenJDK](https://github.com/openjdk/jdk) source code
