@@ -4951,10 +4951,23 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 # Overall Conclusions
 
-In this article, we compared three different JVM distributions (OpenJDK, Oracle GraalVM, and GraalVM CE) on both x86_64 and arm64.
+In this article, we compared three different JVM distributions (OpenJDK, Oracle GraalVM, and GraalVM CE) on both `x86_64` and `arm64` architectures.
 We used a set of JMH benchmarks to evaluate the performance of the JIT compilers, considering a non-exhaustive set of optimizations.
 
-**... TODO ...**
+We can conclude that the Oracle GraalVM JIT compiler outperforms the C2 JIT compiler (and GraalVM CE JIT) in the majority of the benchmarks. 
+Overall, it is approximately 29.87% faster than C2 JIT on `x86_64` and around 20.48% faster on `arm64`.
+In particular, optimizations such as better partial escape analysis, more aggressive inter-procedural inlining heuristics 
+(including polymorphic inlining, method recursive inlining, constructor inlining, etc.), compact TLAB allocation code for grouped allocations, 
+extended vectorized support, and, in general, cleaner and more compact CPU assembly instructions make a difference.
+
+C2 JIT and GraalVM CE JIT perform very closely overall, but there are fundamental differences between these two compilers.
+In contrast to GraalVM CE JIT, the C2 JIT compiler offers an extended set of intrinsics and vectorization support, 
+along with a better mechanism for handling exceptions when the same exception is thrown multiple times in the hot path. 
+However, C2 JIT exhibits limited inter-procedural inlining heuristics, constrained devirtualization of polymorphic calls 
+(i.e., when the number of targets is higher than two), and, in some very specific cases, it even falls back to the Interpreter 
+without the ability to further optimize to a higher tier.
+On the other hand, GraalVM CE JIT, compared to C2 JIT, demonstrates superior partial escape analysis and inlining heuristics. 
+Nevertheless, it has a limited set of intrinsics and vectorization support, along with poor loop optimizations.
 
 # Final Thoughts
 
