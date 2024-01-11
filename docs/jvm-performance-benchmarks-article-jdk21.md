@@ -130,7 +130,7 @@ Source code: [CanonicalizeInductionVariableBenchmark.java](https://github.com/io
 
 ### Analysis of baseline
 
-The body of the loop in the baseline method is empty and the only side effect of the loop is the increment of the induction
+The body of the loop in the `baseline` method is empty and the only side effect of the loop is the increment of the induction
 variable that is then returned by the benchmark method. Therefore, it should be safe for the compiler to remove the loop
 and replace the return value with a constant value (i.e. `reducedLength`).
 
@@ -142,7 +142,7 @@ Both C2 and the Oracle GraalVM JIT compilers are able to remove the loop and rep
   0x7f8f80757bba:   mov    $0x400000,%eax               ; move the constant value into the return register
   0x7f8f80757bbf:   add    $0x10,%rsp
   0x7f8f80757bc3:   pop    %rbp
-  0x7f8f80757bc4:   cmp    0x450(%r15),%rsp             ;   {poll_return}
+  0x7f8f80757bc4:   cmp    0x450(%r15),%rsp             ; {poll_return}
   0x7f8f80757bcb:   ja     0x7f8f80757bd2
   0x7f8f80757bd1:   ret                                 ; return the constant value (eax)
 ```
@@ -198,6 +198,7 @@ The inliner plays a fundamental role as it aids in the identification of whether
 
   @Benchmark
   public int recursive_method_calls() {
+    // allocate 'dead argument' objects
     final Object obj1 = new Object();
     final Object obj2 = new Object();
     final Object obj3 = new Object();
@@ -207,6 +208,7 @@ The inliner plays a fundamental role as it aids in the identification of whether
     final Object obj7 = new Object();
     final Object obj8 = new Object();
 
+    // only the defaultValue will 'survive'
     return recursiveMethod(DEPTH, defaultValue, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
   }
   
@@ -224,7 +226,7 @@ Source code: [DeadArgumentEliminationBenchmark.java](https://github.com/ionutbal
 
 [![DeadArgumentEliminationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadArgumentEliminationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadArgumentEliminationBenchmark.svg?raw=true)
 
-### Analysis
+### Analysis of recursive_method_calls
 
 The analysis below pertains to the `recursive_method_calls` method, which is more interesting due to the highest differences in performance.
 
@@ -233,7 +235,7 @@ The analysis below pertains to the `recursive_method_calls` method, which is mor
 The C2 JIT Compiler is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 2.
 
 ```
-  recursive_method_calls
+  recursive_method_calls()
   
   0x7fe3fc4f8635:   mov    0x10(%rsi),%ecx           ; move field 'defaultValue' to ecx, the 2nd parameter
   0x7fe3fc4f8638:   mov    $0x6,%edx                 ; move 0x6 to edx ('depth'), the 1st parameter
@@ -249,7 +251,7 @@ The C2 JIT Compiler is capable of devirtualizing `recursiveMethod` virtual calls
 ```
 
 ```
-  recursiveMethod
+  recursiveMethod()
   
      0x7fe3fc4f7fc0:   mov    %eax,-0x14000(%rsp)
      ...
@@ -288,7 +290,7 @@ The Oracle GraalVM JIT compiler inlines the `recursiveMethod`, eliminates dead a
 The GraalVM CE JIT Compiler, akin to the C2 JIT Compiler, is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 6.
 
 ```
-  recursive_method_calls
+  recursive_method_calls()
   
   0x7fb11718e9b3:   mov    0x10(%r10),%ecx          ; move field 'defaultValue' to ecx, the 2nd parameter
   ...
@@ -553,7 +555,7 @@ Source code: [DeadMethodCallStoreBenchmark.java](https://github.com/ionutbalosin
 
 [![DeadMethodCallStoreBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadMethodCallStoreBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadMethodCallStoreBenchmark.svg?raw=true)
 
-### Analysis
+### Analysis of method_call_dse
 
 The analysis below pertains to the `method_call_dse` method, which is the primary focus of the benchmark.
 
@@ -726,7 +728,7 @@ Subsequently, the loop corresponding to the non-dead store method call is not un
 - Oracle GraalVM JIT successfully eliminates the dead method calls and triggers loop unrolling by a factor of 8, handling the remaining elements in a post loop without unrolling.
 - C2 JIT also eliminates dead method calls, performing loop unrolling by a factor of 16 for the main loop and handling the remaining elements in a post loop without unrolling.
 
-Despite employing a more aggressive unrolling approach, C2 JIT does not necessarily outperform Oracle GraalVM JIT. Even though both JITs rely on double-precision scalar floating-point instructions with SIMD capabilities via SSE/AVX extensions, Oracle GraalVM JIT may issue more optimized instructions for the hardware used. However, a thorough examination involving advanced profiling and detailed code analysis could provide a better understanding of these differences.
+Despite employing a more aggressive unrolling approach, C2 JIT does not necessarily outperform Oracle GraalVM JIT. Even though both JITs rely on double-precision scalar floating-point instructions with SIMD capabilities via SSE/AVX extensions, Oracle GraalVM JIT appears to issue more compact and predictable instructions for the hardware we used.
 
 ## EnumValuesLookupBenchmark
 
@@ -1169,7 +1171,7 @@ The GraalVM CE JIT Compiler processes elements individually without loop unrolli
 
 Testing how the compiler effectively coarsens or merges several adjacent synchronized blocks into one synchronized block can potentially reduce locking overhead. This optimization can be applied when the same lock object is used by multiple methods. However, it's important to note that while compilers can assist in coarsening or merging locks, it's not always guaranteed.
 
-This benchmark operates on uncontended code-paths due to only one thread executing the benchmark methods. Consequently, the locks are never inflated to a full monitor. Similar scenarios may occur when utilizing older synchronized Java APIs (e.g., `Vector`, `Stack`, `Hashtable`, `StringBuffer`, etc.), or equivalents.
+**Note:** This benchmark operates on uncontended code-paths due to only one thread executing the benchmark methods. Consequently, the locks are never inflated to a full monitor. Similar scenarios may occur when utilizing older synchronized Java APIs (e.g., `Vector`, `Stack`, `Hashtable`, `StringBuffer`, etc.), or equivalents.
 
 ```
   @Benchmark
@@ -1371,7 +1373,7 @@ The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JI
 ### Conclusions
 
 - The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations. These optimizations lead to the shortest overall response time.
-- The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT Compiler, in this benchmark.
+- The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT Compiler, in this benchmark.
 
 ## LockElisionBenchmark
 
@@ -1593,7 +1595,7 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
 ### Conclusions
 
 - The Oracle GraalVM JIT Compiler triggers removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall response time.
-- The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to 'bail out' to the Template Interpreter. Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT Compiler that does a better job of inlining the callee recursive calls.
+- The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT Compiler that does a better job of inlining the callee recursive calls.
 
 ## LoopFissionBenchmark
 
@@ -1604,7 +1606,7 @@ Loop fission breaks a larger loop body into smaller loops. Benefits of loop fiss
 
 - This optimization is most efficient in multicore processors that can split a task into multiple tasks for each processor.
 
-**Note:** loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
+**Note:** Loop fission is the opposite of loop fusion. Although loop fusion is useful to reduce memory loads, it can be counter-productive to have unrelated operations jammed together into a single loop nest.
 
 ```
   @Benchmark
@@ -1666,7 +1668,7 @@ The C2 JIT compiler unrolls `loop 1` by a factor of 8 using scalar instructions,
 And for `loop 2` the C2 JIT compiler employs vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers. It handles 64 additions per loop cycle within the `main loop 2`:
 
 ```
-   Main loop 2 (B[i] = A[i] + C[i])
+  // Main loop 2 (B[i] = A[i] + C[i])
   
   ↗ 0x7f820c4f9d70:   vmovdqu 0x10(%r8,%rbx,4),%ymm0        ; load 8 integers from array 'C' into ymm0
   │ 0x7f820c4f9d77:   vpaddd 0x10(%r9,%rbx,4),%ymm0,%ymm0   ; add 8 integers from array 'A' to ymm0
@@ -1687,7 +1689,7 @@ And for `loop 2` the C2 JIT compiler employs vectorized instructions that operat
 The Oracle GraalVM JIT compiler employs almost identical optimization patterns to the C2 JIT Compiler for this scenario. The only minor difference is that it handles 8 additions per loop cycle within the `main loop 2`, as opposed to 64.
 
 ```
-  Main loop 2 (B[i] = A[i] + C[i])
+  // Main loop 2 (B[i] = A[i] + C[i])
   
   ↗ 0x7fd86ad9d040:   vmovdqu (%r9,%rbx,4),%ymm0           ; load 8 integers from array 'A' into ymm0
   │ 0x7fd86ad9d046:   vmovdqu (%r10,%rbx,4),%ymm1          ; load 8 integers from array 'C' into ymm1
@@ -1703,7 +1705,7 @@ The Oracle GraalVM JIT compiler employs almost identical optimization patterns t
 The GraalVM CE JIT Compiler unrolls the `main loop 2` by a factor of 8, but it abstains from using any vectorized instructions.
 
 ```
-  Main loop 2 (B[i] = A[i] + C[i])
+  // Main loop 2 (B[i] = A[i] + C[i])
   
   ↗ 0x7ff4c319d840:   mov    0x10(%rcx,%r11,4),%r8d       ; load 'C[i]' into register r8d
   │ 0x7ff4c319d845:   add    0x10(%r9,%r11,4),%r8d        ; add 'A[i]' into register r8d
@@ -1759,7 +1761,7 @@ The analysis below pertains to the `initial_loops` method, which is more interes
 Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a factor of 8 and handle the dependent load/store operations in a comparable manner. For instance, the following code snippet illustrates a main loop optimized by the C2 JIT:
 
 ```
-    // Main loop
+  // Main loop
     
     0x7f1534637522:   mov    $0x2,%esi                   ; initialize loop counter  
     ...
@@ -1878,7 +1880,7 @@ The analysis below pertains to the `initial_loop` method, which is more interest
 The C2 JIT Compiler devirtualizes the `auto_reduction` call and performs loop reduction.
 
 ```
-  initial_loop
+  initial_loop()
   
   0x7fede06381da:   mov    0xc(%rsi),%edx             ; load the 'iterations' value into edx
   0x7fede06381dd:   mov    0x10(%rsi),%ecx            ; load the 'offset' value into ecx
@@ -1912,7 +1914,7 @@ The C2 JIT Compiler devirtualizes the `auto_reduction` call and performs loop re
 Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and performs loop reduction but with less jumps instructions than C2 JIT Compiler.
 
 ```
-  initial_loop
+  initial_loop()
   
   0x7f4d82d7fb5f:   mov    0x10(%rsi),%ecx     ; load the 'offset' value into ecx
   0x7f4d82d7fb62:   mov    0xc(%rsi),%edx      ; load the 'iterations' value into edx
@@ -1938,7 +1940,7 @@ Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and pe
 The `auto_reduction` generated code by the GraalVM CE JIT is abysmal.
 
 ```
-  auto_reduction
+  auto_reduction()
 
       0x7f16c31979c0:  cmp    $0x1,%edx              ; compare edx ('iterations') against 0x1
   ╭   0x7f16c31979c3:  jl     0x7f16c3197a6e         ; jump if edx ('iterations') is less than 0x1
@@ -2102,7 +2104,6 @@ to optimize interface calls to a single receiver type with an instanceof check f
 target method. This benchmark also tests the performance of manually splitting one call site into multiple monomorphic call sites.
 
 ```
-
   @Benchmark
   @OperationsPerInvocation(SIZE)
   public void virtual_calls_chain() {
@@ -2150,7 +2151,6 @@ target method. This benchmark also tests the performance of manually splitting o
     default void baz_1() { wrapper.x++; }
     private void foo_1() { baz_1(); 
   }
-
 ```
 
 Source code: [MegamorphicInterfaceCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/MegamorphicInterfaceCallBenchmark.java)
@@ -2956,7 +2956,7 @@ The other cases (e.g., `interface_non_static_method`, `interface_static_method`,
 The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and performs partial inlining up to a depth of 2.
 
 ```
-  class_non_static_method
+  class_non_static_method()
   
   0x7f14704f865a:   mov    0xc(%rsi),%edx                ; get field 'depth' into edx
   0x7f14704f865d:   movabs $0x7ff034f48,%rax             ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007ff034f48})} into %rax
@@ -2973,7 +2973,7 @@ The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and perf
 ```
 
 ```
-  cls_non_static
+  cls_non_static()
   
     ↗  0x7f14704f82c0:   mov    %eax,-0x14000(%rsp)
     │  0x7f14704f82da:   movabs $0x7ff034f48,%rax        ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007ff034f48})} into %rax
@@ -2998,7 +2998,7 @@ The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and perf
 The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` virtual calls and performs inlining up to a depth of 8.
 
 ```
-  class_non_static_method
+  class_non_static_method()
   
   0x7f017ed9ea5f:   mov    0xc(%rsi),%edx            ; get field 'depth' into edx
   ...
@@ -3015,7 +3015,7 @@ The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` vi
 ```
 
 ```
-  cls_non_static
+  cls_non_static()
   
     ↗ 0x7f017ed9e5c0:   mov    %eax,-0x14000(%rsp)
     │ ...
@@ -3048,7 +3048,7 @@ The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` vi
 The GraalVM CE JIT Compiler is capable of devirtualizing `cls_non_static` virtual calls and performs partial inlining up to a depth of 6.
 
 ```
-  cls_non_static
+  cls_non_static()
   
     ↗ 0x7f46a719cac0:   mov    %eax,-0x14000(%rsp)
     │ ...
@@ -3415,10 +3415,10 @@ to the Java implementation of the Vector API which results in a significant perf
 by looking at the hottest methods in the benchmark after inlining.
 
 ```
-....[Hottest Methods (after inlining)]..............................................................
-  58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
-  19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
-  19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
+  ....[Hottest Methods (after inlining)]..............................................................
+    58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
+    19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
+    19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
 ```
 
 ### Conclusions
@@ -3567,7 +3567,7 @@ The analysis below pertains to the `nested_synchronized` method, which is more i
 The C2 JIT Compiler performs a repetitive addition operation, summing all the values together iteratively.
 
 ```
-  doAdd
+  doAdd()
   
   0x7fd710638cba:   mov    0x10(%rsi),%r10              ; get field 'value' into r10
   0x7fd710638cbe:   movzbl 0xc(%rsi),%r8d               ; get field 'isHeavy' as a zero-extended byte into r8d
@@ -3633,7 +3633,7 @@ The analysis below pertains to the `tail_recursive` (i.e., `recursive`) method, 
 The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 2.
 
 ```
-  recursive method
+  recursive()
   
   ↗ 0x7fc12063aec0:   mov    %eax,-0x14000(%rsp)
   │ ...
@@ -3671,7 +3671,7 @@ The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual ca
 The Oracle GraalVM JIT Compiler is able to deoptimize the tail `recursive` virtual call, nevertheless does not perform any inlining of the recursive method.
 
 ```
-  recursive method
+  recursive()
   
   0x7f362ed7f860:   test   %edx,%edx                  ; check if edx ('n') is zero
   0x7f362ed7f862:   je     0x7f362ed7f8ce             ; jump if edx ('n') is zero
@@ -3697,7 +3697,7 @@ The Oracle GraalVM JIT Compiler is able to deoptimize the tail `recursive` virtu
 The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 6.
 
 ```
-  recursive method
+  recursive()
 
   ↗ 0x7f603b23ffc0:   mov    %eax,-0x14000(%rsp)
   │ ...
@@ -3840,13 +3840,14 @@ surrounding fields e.g., `Klass::_secondary_supers` and cache line invalidations
 
 The JDK 21 snippet below shows both fields and what they are used for:
 ```
-class Klass : public Metadata {
-  // ...
-  // Cache of last observed secondary supertype
-  Klass*      _secondary_super_cache;
-  // Array of all secondary supertypes
-  Array<Klass*>* _secondary_supers;
-  // ...
+  class Klass : public Metadata {
+    // ...
+    // Cache of last observed secondary supertype
+    Klass*      _secondary_super_cache;
+    // Array of all secondary supertypes
+    Array<Klass*>* _secondary_supers;
+    // ...
+  }  
 ```
 
 Each time a type check is performed, the `Klass::_secondary_super_cache` is checked first.
@@ -4494,61 +4495,61 @@ Based on the reported performance event statistics, the major differences betwee
 - Virtual threads consume more CPU `cycles` than platform threads.
 
 ```
-// Platform thread stats
-
-Perf Event                 (lockType)  Mode               Score              Units
-IPC                       OBJECT_LOCK  avgt               0.596          insns/clk
-L1-dcache-load-misses     OBJECT_LOCK  avgt           42399.031               #/op
-LLC-load-misses           OBJECT_LOCK  avgt               8.115               #/op
-branch-misses             OBJECT_LOCK  avgt            3187.952               #/op
-branches                  OBJECT_LOCK  avgt          373101.145               #/op
-context-switches          OBJECT_LOCK  avgt              56.866               #/op
-cycles                    OBJECT_LOCK  avgt         3291424.505               #/op
-
-IPC                    REENTRANT_LOCK  avgt               0.593          insns/clk
-L1-dcache-load-misses  REENTRANT_LOCK  avgt           45007.877               #/op
-LLC-load-misses        REENTRANT_LOCK  avgt               8.138               #/op
-branch-misses          REENTRANT_LOCK  avgt            3328.792               #/op
-branches               REENTRANT_LOCK  avgt          388046.866               #/op
-context-switches       REENTRANT_LOCK  avgt              59.633               #/op
-cycles                 REENTRANT_LOCK  avgt         3462417.099               #/op
-
-IPC                           NO_LOCK  avgt               0.566          insns/clk
-L1-dcache-load-misses         NO_LOCK  avgt           42033.874               #/op
-LLC-load-misses               NO_LOCK  avgt               7.947               #/op
-branch-misses                 NO_LOCK  avgt            3027.985               #/op
-branches                      NO_LOCK  avgt          342940.528               #/op
-context-switches              NO_LOCK  avgt              54.597               #/op
-cycles                        NO_LOCK  avgt         3182397.387               #/op
+  // Platform thread stats
+  
+  Perf Event                 (lockType)  Mode               Score              Units
+  IPC                       OBJECT_LOCK  avgt               0.596          insns/clk
+  L1-dcache-load-misses     OBJECT_LOCK  avgt           42399.031               #/op
+  LLC-load-misses           OBJECT_LOCK  avgt               8.115               #/op
+  branch-misses             OBJECT_LOCK  avgt            3187.952               #/op
+  branches                  OBJECT_LOCK  avgt          373101.145               #/op
+  context-switches          OBJECT_LOCK  avgt              56.866               #/op
+  cycles                    OBJECT_LOCK  avgt         3291424.505               #/op
+  
+  IPC                    REENTRANT_LOCK  avgt               0.593          insns/clk
+  L1-dcache-load-misses  REENTRANT_LOCK  avgt           45007.877               #/op
+  LLC-load-misses        REENTRANT_LOCK  avgt               8.138               #/op
+  branch-misses          REENTRANT_LOCK  avgt            3328.792               #/op
+  branches               REENTRANT_LOCK  avgt          388046.866               #/op
+  context-switches       REENTRANT_LOCK  avgt              59.633               #/op
+  cycles                 REENTRANT_LOCK  avgt         3462417.099               #/op
+  
+  IPC                           NO_LOCK  avgt               0.566          insns/clk
+  L1-dcache-load-misses         NO_LOCK  avgt           42033.874               #/op
+  LLC-load-misses               NO_LOCK  avgt               7.947               #/op
+  branch-misses                 NO_LOCK  avgt            3027.985               #/op
+  branches                      NO_LOCK  avgt          342940.528               #/op
+  context-switches              NO_LOCK  avgt              54.597               #/op
+  cycles                        NO_LOCK  avgt         3182397.387               #/op
 ```
 
 ```
-// Virtual thread  stats
-
-Perf Event                 (lockType)  Mode               Score              Units
-IPC                       OBJECT_LOCK  avgt               1.272          insns/clk
-L1-dcache-load-misses     OBJECT_LOCK  avgt          196249.216               #/op
-LLC-load-misses           OBJECT_LOCK  avgt             799.745               #/op
-branch-misses             OBJECT_LOCK  avgt           30627.527               #/op
-branches                  OBJECT_LOCK  avgt         3710927.299               #/op
-context-switches          OBJECT_LOCK  avgt               8.620               #/op
-cycles                    OBJECT_LOCK  avgt        17970218.767               #/op
-
-IPC                    REENTRANT_LOCK  avgt               1.254          insns/clk
-L1-dcache-load-misses  REENTRANT_LOCK  avgt          206329.513               #/op
-LLC-load-misses        REENTRANT_LOCK  avgt             804.014               #/op
-branch-misses          REENTRANT_LOCK  avgt           31657.944               #/op
-branches               REENTRANT_LOCK  avgt         3737761.434               #/op
-context-switches       REENTRANT_LOCK  avgt               8.665               #/op
-cycles                 REENTRANT_LOCK  avgt        18440844.889               #/op
-
-IPC                           NO_LOCK  avgt               1.284          insns/clk
-L1-dcache-load-misses         NO_LOCK  avgt          180438.009               #/op
-LLC-load-misses               NO_LOCK  avgt             762.020               #/op
-branch-misses                 NO_LOCK  avgt           29958.780               #/op
-branches                      NO_LOCK  avgt         3693926.389               #/op
-context-switches              NO_LOCK  avgt               8.596               #/op
-cycles                        NO_LOCK  avgt        17792312.604               #/op
+  // Virtual thread  stats
+  
+  Perf Event                 (lockType)  Mode               Score              Units
+  IPC                       OBJECT_LOCK  avgt               1.272          insns/clk
+  L1-dcache-load-misses     OBJECT_LOCK  avgt          196249.216               #/op
+  LLC-load-misses           OBJECT_LOCK  avgt             799.745               #/op
+  branch-misses             OBJECT_LOCK  avgt           30627.527               #/op
+  branches                  OBJECT_LOCK  avgt         3710927.299               #/op
+  context-switches          OBJECT_LOCK  avgt               8.620               #/op
+  cycles                    OBJECT_LOCK  avgt        17970218.767               #/op
+  
+  IPC                    REENTRANT_LOCK  avgt               1.254          insns/clk
+  L1-dcache-load-misses  REENTRANT_LOCK  avgt          206329.513               #/op
+  LLC-load-misses        REENTRANT_LOCK  avgt             804.014               #/op
+  branch-misses          REENTRANT_LOCK  avgt           31657.944               #/op
+  branches               REENTRANT_LOCK  avgt         3737761.434               #/op
+  context-switches       REENTRANT_LOCK  avgt               8.665               #/op
+  cycles                 REENTRANT_LOCK  avgt        18440844.889               #/op
+  
+  IPC                           NO_LOCK  avgt               1.284          insns/clk
+  L1-dcache-load-misses         NO_LOCK  avgt          180438.009               #/op
+  LLC-load-misses               NO_LOCK  avgt             762.020               #/op
+  branch-misses                 NO_LOCK  avgt           29958.780               #/op
+  branches                      NO_LOCK  avgt         3693926.389               #/op
+  context-switches              NO_LOCK  avgt               8.596               #/op
+  cycles                        NO_LOCK  avgt        17792312.604               #/op
 ```
 
 #### Analysis of backoffType:PARK
@@ -4562,61 +4563,61 @@ Based on the reported performance event statistics, the major differences betwee
 - Platform threads consume more CPU `cycles` than virtual threads.
 
 ```
-// Platform thread stats
-
-Perf Event                 (lockType)  Mode               Score              Units
-IPC                       OBJECT_LOCK  avgt               0.687          insns/clk
-L1-dcache-load-misses     OBJECT_LOCK  avgt          640480.970               #/op
-LLC-load-misses           OBJECT_LOCK  avgt            4576.228               #/op
-branch-misses             OBJECT_LOCK  avgt          165016.601               #/op
-branches                  OBJECT_LOCK  avgt         7692129.353               #/op
-context-switches          OBJECT_LOCK  avgt            4614.475               #/op
-cycles                    OBJECT_LOCK  avgt        58254748.922               #/op
-
-IPC                    REENTRANT_LOCK  avgt               0.476          insns/clk
-L1-dcache-load-misses  REENTRANT_LOCK  avgt         1035894.902               #/op
-LLC-load-misses        REENTRANT_LOCK  avgt            1832.722               #/op
-branch-misses          REENTRANT_LOCK  avgt          241965.715               #/op
-branches               REENTRANT_LOCK  avgt        13410429.953               #/op
-context-switches       REENTRANT_LOCK  avgt            4597.790               #/op
-cycles                 REENTRANT_LOCK  avgt       134215963.863               #/op
-
-IPC                           NO_LOCK  avgt               0.767          insns/clk
-L1-dcache-load-misses         NO_LOCK  avgt          433751.100               #/op
-LLC-load-misses               NO_LOCK  avgt             674.073               #/op
-branch-misses                 NO_LOCK  avgt           90173.994               #/op
-branches                      NO_LOCK  avgt         4060838.177               #/op
-context-switches              NO_LOCK  avgt            2311.858               #/op
-cycles                        NO_LOCK  avgt        25152425.987               #/op
+  // Platform thread stats
+  
+  Perf Event                 (lockType)  Mode               Score              Units
+  IPC                       OBJECT_LOCK  avgt               0.687          insns/clk
+  L1-dcache-load-misses     OBJECT_LOCK  avgt          640480.970               #/op
+  LLC-load-misses           OBJECT_LOCK  avgt            4576.228               #/op
+  branch-misses             OBJECT_LOCK  avgt          165016.601               #/op
+  branches                  OBJECT_LOCK  avgt         7692129.353               #/op
+  context-switches          OBJECT_LOCK  avgt            4614.475               #/op
+  cycles                    OBJECT_LOCK  avgt        58254748.922               #/op
+  
+  IPC                    REENTRANT_LOCK  avgt               0.476          insns/clk
+  L1-dcache-load-misses  REENTRANT_LOCK  avgt         1035894.902               #/op
+  LLC-load-misses        REENTRANT_LOCK  avgt            1832.722               #/op
+  branch-misses          REENTRANT_LOCK  avgt          241965.715               #/op
+  branches               REENTRANT_LOCK  avgt        13410429.953               #/op
+  context-switches       REENTRANT_LOCK  avgt            4597.790               #/op
+  cycles                 REENTRANT_LOCK  avgt       134215963.863               #/op
+  
+  IPC                           NO_LOCK  avgt               0.767          insns/clk
+  L1-dcache-load-misses         NO_LOCK  avgt          433751.100               #/op
+  LLC-load-misses               NO_LOCK  avgt             674.073               #/op
+  branch-misses                 NO_LOCK  avgt           90173.994               #/op
+  branches                      NO_LOCK  avgt         4060838.177               #/op
+  context-switches              NO_LOCK  avgt            2311.858               #/op
+  cycles                        NO_LOCK  avgt        25152425.987               #/op
 ```
 
 ```
-// Virtual thread  stats
-
-Perf Event                 (lockType)  Mode               Score              Units
-IPC                       OBJECT_LOCK  avgt               0.946          insns/clk
-L1-dcache-load-misses     OBJECT_LOCK  avgt          449792.578               #/op
-LLC-load-misses           OBJECT_LOCK  avgt             940.029               #/op
-branch-misses             OBJECT_LOCK  avgt           86623.166               #/op
-branches                  OBJECT_LOCK  avgt         5401765.289               #/op
-context-switches          OBJECT_LOCK  avgt             309.747               #/op
-cycles                    OBJECT_LOCK  avgt        31854171.315               #/op
-
-IPC                    REENTRANT_LOCK  avgt               0.562          insns/clk
-L1-dcache-load-misses  REENTRANT_LOCK  avgt         2108434.887               #/op
-LLC-load-misses        REENTRANT_LOCK  avgt            2639.517               #/op
-branch-misses          REENTRANT_LOCK  avgt          447183.746               #/op
-branches               REENTRANT_LOCK  avgt        16424976.383               #/op
-context-switches       REENTRANT_LOCK  avgt            5217.440               #/op
-cycles                 REENTRANT_LOCK  avgt       158322287.830               #/op
-
-IPC                           NO_LOCK  avgt               0.983          insns/clk
-L1-dcache-load-misses         NO_LOCK  avgt          598629.320               #/op
-LLC-load-misses               NO_LOCK  avgt            1340.012               #/op
-branch-misses                 NO_LOCK  avgt          150567.950               #/op
-branches                      NO_LOCK  avgt         5867568.869               #/op
-context-switches              NO_LOCK  avgt             208.967               #/op
-cycles                        NO_LOCK  avgt        35865001.555               #/op
+  // Virtual thread  stats
+  
+  Perf Event                 (lockType)  Mode               Score              Units
+  IPC                       OBJECT_LOCK  avgt               0.946          insns/clk
+  L1-dcache-load-misses     OBJECT_LOCK  avgt          449792.578               #/op
+  LLC-load-misses           OBJECT_LOCK  avgt             940.029               #/op
+  branch-misses             OBJECT_LOCK  avgt           86623.166               #/op
+  branches                  OBJECT_LOCK  avgt         5401765.289               #/op
+  context-switches          OBJECT_LOCK  avgt             309.747               #/op
+  cycles                    OBJECT_LOCK  avgt        31854171.315               #/op
+  
+  IPC                    REENTRANT_LOCK  avgt               0.562          insns/clk
+  L1-dcache-load-misses  REENTRANT_LOCK  avgt         2108434.887               #/op
+  LLC-load-misses        REENTRANT_LOCK  avgt            2639.517               #/op
+  branch-misses          REENTRANT_LOCK  avgt          447183.746               #/op
+  branches               REENTRANT_LOCK  avgt        16424976.383               #/op
+  context-switches       REENTRANT_LOCK  avgt            5217.440               #/op
+  cycles                 REENTRANT_LOCK  avgt       158322287.830               #/op
+  
+  IPC                           NO_LOCK  avgt               0.983          insns/clk
+  L1-dcache-load-misses         NO_LOCK  avgt          598629.320               #/op
+  LLC-load-misses               NO_LOCK  avgt            1340.012               #/op
+  branch-misses                 NO_LOCK  avgt          150567.950               #/op
+  branches                      NO_LOCK  avgt         5867568.869               #/op
+  context-switches              NO_LOCK  avgt             208.967               #/op
+  cycles                        NO_LOCK  avgt        35865001.555               #/op
 ```
 
 ### Conclusions
@@ -4685,7 +4686,7 @@ The binary heap is implemented manually using a list of queues (buckets).
 It can offer better performance than binary heaps for dense graphs with small and non-negative edge weights.
 Its time complexity is O((V + E) log V).
 
-**Note:** these implementations offer different trade-offs in terms of time complexity, space efficiency, and performance characteristics.
+**Note:** These implementations offer different trade-offs in terms of time complexity, space efficiency, and performance characteristics.
 
 The best choice of implementation depends on the specific graph structure, the distribution of edge weights, etc.
 

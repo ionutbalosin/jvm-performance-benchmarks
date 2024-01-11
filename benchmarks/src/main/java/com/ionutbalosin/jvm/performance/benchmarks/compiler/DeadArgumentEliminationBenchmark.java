@@ -67,6 +67,7 @@ public class DeadArgumentEliminationBenchmark {
 
   @Benchmark
   public int recursive_method_calls() {
+    // Allocate 'dead argument' objects
     final Object obj1 = new Object();
     final Object obj2 = new Object();
     final Object obj3 = new Object();
@@ -76,6 +77,7 @@ public class DeadArgumentEliminationBenchmark {
     final Object obj7 = new Object();
     final Object obj8 = new Object();
 
+    // Only the defaultValue will 'survive'
     return recursiveMethod(DEPTH, defaultValue, obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8);
   }
 
