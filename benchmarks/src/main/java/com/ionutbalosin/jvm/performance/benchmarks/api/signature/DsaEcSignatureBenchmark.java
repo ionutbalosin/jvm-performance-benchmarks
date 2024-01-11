@@ -43,7 +43,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths,
+ * The benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths,
  * key lengths and hash sizes.
  */
 @BenchmarkMode(Mode.AverageTime)

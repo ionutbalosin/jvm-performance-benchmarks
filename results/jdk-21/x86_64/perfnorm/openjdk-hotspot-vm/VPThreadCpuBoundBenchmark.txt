@@ -1,6 +1,6 @@
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
 # VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
@@ -15,91 +15,91 @@
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfNormProfiler 
 # Profilers consume stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 439.444 ms/op
-# Warmup Iteration   2: 437.371 ms/op
-# Warmup Iteration   3: 432.190 ms/op
-# Warmup Iteration   4: 438.742 ms/op
-# Warmup Iteration   5: 438.679 ms/op
-Iteration   1: 433.804 ms/op
-Iteration   2: 434.075 ms/op
-Iteration   3: 432.937 ms/op
-Iteration   4: 432.496 ms/op
-Iteration   5: 431.940 ms/op
+# Warmup Iteration   1: 113.256 ms/op
+# Warmup Iteration   2: 112.363 ms/op
+# Warmup Iteration   3: 112.328 ms/op
+# Warmup Iteration   4: 111.827 ms/op
+# Warmup Iteration   5: 111.820 ms/op
+Iteration   1: 111.916 ms/op
+Iteration   2: 111.932 ms/op
+Iteration   3: 112.006 ms/op
+Iteration   4: 111.907 ms/op
+Iteration   5: 112.390 ms/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks":
-  433.051 ±(99.9%) 3.429 ms/op [Average]
-  (min, avg, max) = (431.940, 433.051, 434.075), stdev = 0.891
-  CI (99.9%): [429.621, 436.480] (assumes normal distribution)
+  112.030 ±(99.9%) 0.789 ms/op [Average]
+  (min, avg, max) = (111.907, 112.030, 112.390), stdev = 0.205
+  CI (99.9%): [111.241, 112.819] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI":
-  0.906 clks/insn
+  0.905 clks/insn
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC":
   1.104 insns/clk
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses":
-  119614.780 #/op
+  125343.290 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads":
-  1332106.479 #/op
+  1256513.069 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores":
-  661328.597 #/op
+  640397.114 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses":
-  266946.831 #/op
+  308709.889 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses":
-  1428.392 #/op
+  593.021 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads":
-  24198.563 #/op
+  37356.132 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses":
-  1430.995 #/op
+  492.714 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores":
-  18377.737 #/op
+  26698.677 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses":
-  81355.960 #/op
+  94685.166 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches":
-  40784733.069 #/op
+  61042519.288 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches":
-  94.987 #/op
+  300.247 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles":
-  1126714886.223 #/op
+  1688224075.173 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses":
-  2425.634 #/op
+  3325.206 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads":
-  1203153.261 #/op
+  1348893.957 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses":
-  1070.144 #/op
+  1306.508 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores":
-  568961.827 #/op
+  707018.576 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses":
-  1775.377 #/op
+  2808.401 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads":
-  3629.120 #/op
+  5474.034 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions":
-  1243614031.261 #/op
+  1864466785.437 #/op
 
 
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
 # VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
@@ -110,95 +110,95 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThrea
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks
 # Parameters: (backoffType = NONE, cpuTokens = _500_K, loadFactor = 16, threadType = PLATFORM)
 
-# Run progress: 16.67% complete, ETA 00:09:29
+# Run progress: 16.67% complete, ETA 00:08:40
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfNormProfiler 
 # Profilers consume stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 435.694 ms/op
-# Warmup Iteration   2: 437.086 ms/op
-# Warmup Iteration   3: 432.601 ms/op
-# Warmup Iteration   4: 435.821 ms/op
-# Warmup Iteration   5: 436.417 ms/op
-Iteration   1: 432.135 ms/op
-Iteration   2: 433.857 ms/op
-Iteration   3: 432.610 ms/op
-Iteration   4: 431.833 ms/op
-Iteration   5: 431.830 ms/op
+# Warmup Iteration   1: 112.827 ms/op
+# Warmup Iteration   2: 112.094 ms/op
+# Warmup Iteration   3: 112.162 ms/op
+# Warmup Iteration   4: 112.071 ms/op
+# Warmup Iteration   5: 112.062 ms/op
+Iteration   1: 112.088 ms/op
+Iteration   2: 111.882 ms/op
+Iteration   3: 111.985 ms/op
+Iteration   4: 111.908 ms/op
+Iteration   5: 111.887 ms/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks":
-  432.453 ±(99.9%) 3.262 ms/op [Average]
-  (min, avg, max) = (431.830, 432.453, 433.857), stdev = 0.847
-  CI (99.9%): [429.191, 435.715] (assumes normal distribution)
+  111.950 ±(99.9%) 0.336 ms/op [Average]
+  (min, avg, max) = (111.882, 111.950, 112.088), stdev = 0.087
+  CI (99.9%): [111.614, 112.286] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI":
-  0.906 clks/insn
+  0.905 clks/insn
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC":
   1.104 insns/clk
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses":
-  56606.957 #/op
+  93409.594 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads":
-  785925.815 #/op
+  1209214.680 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores":
-  448614.985 #/op
+  580904.468 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses":
-  268825.304 #/op
+  291116.775 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses":
-  1490.270 #/op
+  410.094 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads":
-  18611.432 #/op
+  31017.142 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses":
-  806.981 #/op
+  94.836 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores":
-  6294.972 #/op
+  11919.579 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses":
-  66544.025 #/op
+  98971.562 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches":
-  40550741.672 #/op
+  60899287.861 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches":
-  93.363 #/op
+  295.979 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles":
-  1125907330.947 #/op
+  1687506925.663 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses":
-  2365.742 #/op
+  3077.454 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads":
-  842849.147 #/op
+  1034694.659 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses":
-  1028.947 #/op
+  1260.190 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores":
-  416647.635 #/op
+  549831.246 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses":
-  1456.293 #/op
+  1873.930 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads":
-  2586.160 #/op
+  3665.559 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions":
-  1243028985.249 #/op
+  1863837850.863 #/op
 
 
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
 # VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
@@ -209,95 +209,95 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThrea
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks
 # Parameters: (backoffType = YIELD, cpuTokens = _500_K, loadFactor = 16, threadType = VIRTUAL)
 
-# Run progress: 33.33% complete, ETA 00:07:47
+# Run progress: 33.33% complete, ETA 00:07:00
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfNormProfiler 
 # Profilers consume stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 441.127 ms/op
-# Warmup Iteration   2: 432.624 ms/op
-# Warmup Iteration   3: 428.904 ms/op
-# Warmup Iteration   4: 434.047 ms/op
-# Warmup Iteration   5: 431.016 ms/op
-Iteration   1: 431.178 ms/op
-Iteration   2: 430.934 ms/op
-Iteration   3: 428.093 ms/op
-Iteration   4: 428.601 ms/op
-Iteration   5: 427.936 ms/op
+# Warmup Iteration   1: 112.267 ms/op
+# Warmup Iteration   2: 111.100 ms/op
+# Warmup Iteration   3: 110.912 ms/op
+# Warmup Iteration   4: 110.869 ms/op
+# Warmup Iteration   5: 110.887 ms/op
+Iteration   1: 110.859 ms/op
+Iteration   2: 110.958 ms/op
+Iteration   3: 110.793 ms/op
+Iteration   4: 110.815 ms/op
+Iteration   5: 110.858 ms/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks":
-  429.348 ±(99.9%) 6.086 ms/op [Average]
-  (min, avg, max) = (427.936, 429.348, 431.178), stdev = 1.580
-  CI (99.9%): [423.263, 435.434] (assumes normal distribution)
+  110.857 ±(99.9%) 0.244 ms/op [Average]
+  (min, avg, max) = (110.793, 110.857, 110.958), stdev = 0.063
+  CI (99.9%): [110.613, 111.101] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI":
-  0.906 clks/insn
+  0.905 clks/insn
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC":
-  1.103 insns/clk
+  1.104 insns/clk
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses":
-  152896.905 #/op
+  137235.283 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads":
-  1730803.100 #/op
+  1370369.404 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores":
-  849811.595 #/op
+  790305.947 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses":
-  360080.782 #/op
+  376876.249 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses":
-  2043.109 #/op
+  644.825 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads":
-  34953.962 #/op
+  44876.438 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses":
-  3000.333 #/op
+  482.400 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores":
-  26540.690 #/op
+  26475.505 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses":
-  101627.409 #/op
+  98979.638 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches":
-  41177415.714 #/op
+  60988654.790 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches":
-  91.987 #/op
+  263.139 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles":
-  1129759771.175 #/op
+  1689014899.894 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses":
-  3091.132 #/op
+  3818.747 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads":
-  2098043.987 #/op
+  1490354.967 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses":
-  1172.810 #/op
+  1107.572 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores":
-  894346.366 #/op
+  761765.058 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses":
-  1862.648 #/op
+  2487.973 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads":
-  4415.118 #/op
+  5987.115 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions":
-  1246555611.864 #/op
+  1865286873.465 #/op
 
 
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
 # VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
@@ -308,95 +308,95 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThrea
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks
 # Parameters: (backoffType = YIELD, cpuTokens = _500_K, loadFactor = 16, threadType = PLATFORM)
 
-# Run progress: 50.00% complete, ETA 00:05:53
+# Run progress: 50.00% complete, ETA 00:05:16
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfNormProfiler 
 # Profilers consume stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 436.388 ms/op
-# Warmup Iteration   2: 432.606 ms/op
-# Warmup Iteration   3: 432.367 ms/op
-# Warmup Iteration   4: 436.786 ms/op
-# Warmup Iteration   5: 435.846 ms/op
-Iteration   1: 431.208 ms/op
-Iteration   2: 433.341 ms/op
-Iteration   3: 433.086 ms/op
-Iteration   4: 431.769 ms/op
-Iteration   5: 430.846 ms/op
+# Warmup Iteration   1: 113.316 ms/op
+# Warmup Iteration   2: 112.586 ms/op
+# Warmup Iteration   3: 112.007 ms/op
+# Warmup Iteration   4: 112.094 ms/op
+# Warmup Iteration   5: 112.106 ms/op
+Iteration   1: 111.807 ms/op
+Iteration   2: 112.266 ms/op
+Iteration   3: 112.173 ms/op
+Iteration   4: 112.511 ms/op
+Iteration   5: 112.198 ms/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks":
-  432.050 ±(99.9%) 4.296 ms/op [Average]
-  (min, avg, max) = (430.846, 432.050, 433.341), stdev = 1.116
-  CI (99.9%): [427.755, 436.346] (assumes normal distribution)
+  112.191 ±(99.9%) 0.975 ms/op [Average]
+  (min, avg, max) = (111.807, 112.191, 112.511), stdev = 0.253
+  CI (99.9%): [111.216, 113.166] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI":
   0.906 clks/insn
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC":
-  1.103 insns/clk
+  1.104 insns/clk
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses":
-  78373.759 #/op
+  102186.387 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads":
-  1091837.934 #/op
+  1326829.867 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores":
-  552233.582 #/op
+  672759.957 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses":
-  316076.400 #/op
+  345438.154 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses":
-  1403.703 #/op
+  403.163 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads":
-  21415.886 #/op
+  35222.986 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses":
-  279.419 #/op
+  465.193 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores":
-  6637.163 #/op
+  14338.363 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses":
-  77629.589 #/op
+  100090.678 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches":
-  40692445.729 #/op
+  60984352.574 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches":
-  148.573 #/op
+  304.530 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles":
-  1126800260.033 #/op
+  1689114639.538 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses":
-  2361.735 #/op
+  3214.522 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads":
-  867392.618 #/op
+  1679473.783 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses":
-  1054.734 #/op
+  1171.638 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores":
-  471525.498 #/op
+  727420.491 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses":
-  1477.605 #/op
+  2002.065 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads":
-  2339.855 #/op
+  4462.530 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions":
-  1243337632.633 #/op
+  1864117020.290 #/op
 
 
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
 # VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
@@ -407,95 +407,95 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThrea
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks
 # Parameters: (backoffType = PARK, cpuTokens = _500_K, loadFactor = 16, threadType = VIRTUAL)
 
-# Run progress: 66.67% complete, ETA 00:03:56
+# Run progress: 66.67% complete, ETA 00:03:31
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfNormProfiler 
 # Profilers consume stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 455.010 ms/op
-# Warmup Iteration   2: 439.706 ms/op
-# Warmup Iteration   3: 432.631 ms/op
-# Warmup Iteration   4: 435.377 ms/op
-# Warmup Iteration   5: 443.010 ms/op
-Iteration   1: 431.020 ms/op
-Iteration   2: 433.483 ms/op
-Iteration   3: 432.336 ms/op
-Iteration   4: 432.341 ms/op
-Iteration   5: 433.560 ms/op
+# Warmup Iteration   1: 113.878 ms/op
+# Warmup Iteration   2: 111.936 ms/op
+# Warmup Iteration   3: 111.824 ms/op
+# Warmup Iteration   4: 111.631 ms/op
+# Warmup Iteration   5: 111.728 ms/op
+Iteration   1: 111.552 ms/op
+Iteration   2: 111.582 ms/op
+Iteration   3: 111.397 ms/op
+Iteration   4: 111.679 ms/op
+Iteration   5: 111.779 ms/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks":
-  432.548 ±(99.9%) 4.002 ms/op [Average]
-  (min, avg, max) = (431.020, 432.548, 433.560), stdev = 1.039
-  CI (99.9%): [428.546, 436.550] (assumes normal distribution)
+  111.598 ±(99.9%) 0.552 ms/op [Average]
+  (min, avg, max) = (111.397, 111.598, 111.779), stdev = 0.143
+  CI (99.9%): [111.046, 112.149] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI":
-  0.909 clks/insn
+  0.908 clks/insn
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC":
-  1.100 insns/clk
+  1.101 insns/clk
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses":
-  273135.647 #/op
+  307835.770 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads":
-  2737041.401 #/op
+  3092841.758 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores":
-  1422131.185 #/op
+  1844734.425 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses":
-  812156.592 #/op
+  752232.874 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses":
-  1805.707 #/op
+  806.380 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads":
-  75236.221 #/op
+  93198.497 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses":
-  2234.842 #/op
+  987.812 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores":
-  61948.907 #/op
+  88875.550 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses":
-  131776.156 #/op
+  134787.088 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches":
-  41998568.208 #/op
+  62365350.216 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches":
-  598.475 #/op
+  990.267 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles":
-  1136938228.642 #/op
+  1699547170.127 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses":
-  4215.688 #/op
+  5951.811 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads":
-  2783270.221 #/op
+  3265211.356 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses":
-  1521.514 #/op
+  1767.264 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores":
-  1457270.041 #/op
+  1832841.871 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses":
-  4859.169 #/op
+  8697.231 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads":
-  8608.890 #/op
+  10891.011 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions":
-  1250178596.240 #/op
+  1871390215.235 #/op
 
 
 # JMH version: 1.37
 # VM version: JDK 21, OpenJDK 64-Bit Server VM, 21+35-2513
-# VM invoker: /usr/lib/jvm/openjdk-21/bin/java
+# VM invoker: /home/gogu/bench_jdks/jdk-21/bin/java
 # VM options: -Xms4g -Xmx4g -XX:+AlwaysPreTouch
 # Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
 # Warmup: 5 iterations, 10 s each
@@ -506,27 +506,27 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThrea
 # Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks
 # Parameters: (backoffType = PARK, cpuTokens = _500_K, loadFactor = 16, threadType = PLATFORM)
 
-# Run progress: 83.33% complete, ETA 00:01:58
+# Run progress: 83.33% complete, ETA 00:01:45
 # Fork: 1 of 1
 # Preparing profilers: LinuxPerfNormProfiler 
 # Profilers consume stderr from target VM, use -v EXTRA to copy to console
-# Warmup Iteration   1: 443.037 ms/op
-# Warmup Iteration   2: 441.144 ms/op
-# Warmup Iteration   3: 438.972 ms/op
-# Warmup Iteration   4: 442.635 ms/op
-# Warmup Iteration   5: 440.680 ms/op
-Iteration   1: 437.809 ms/op
-Iteration   2: 437.871 ms/op
-Iteration   3: 439.921 ms/op
-Iteration   4: 438.518 ms/op
-Iteration   5: 438.774 ms/op
+# Warmup Iteration   1: 116.919 ms/op
+# Warmup Iteration   2: 116.253 ms/op
+# Warmup Iteration   3: 116.127 ms/op
+# Warmup Iteration   4: 116.144 ms/op
+# Warmup Iteration   5: 115.988 ms/op
+Iteration   1: 115.710 ms/op
+Iteration   2: 115.934 ms/op
+Iteration   3: 116.083 ms/op
+Iteration   4: 115.918 ms/op
+Iteration   5: 116.202 ms/op
 # Processing profiler results: LinuxPerfNormProfiler 
 
 
 Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks":
-  438.578 ±(99.9%) 3.299 ms/op [Average]
-  (min, avg, max) = (437.809, 438.578, 439.921), stdev = 0.857
-  CI (99.9%): [435.279, 441.878] (assumes normal distribution)
+  115.969 ±(99.9%) 0.716 ms/op [Average]
+  (min, avg, max) = (115.710, 115.969, 116.202), stdev = 0.186
+  CI (99.9%): [115.253, 116.685] (assumes normal distribution)
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI":
   0.907 clks/insn
@@ -535,64 +535,64 @@ Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThrea
   1.103 insns/clk
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses":
-  157906.946 #/op
+  178352.200 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads":
-  1835322.082 #/op
+  2061042.734 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores":
-  1043007.166 #/op
+  1080297.142 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses":
-  529901.899 #/op
+  579031.340 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses":
-  2020.453 #/op
+  515.281 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads":
-  43599.428 #/op
+  55271.233 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses":
-  401.469 #/op
+  438.759 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores":
-  23978.391 #/op
+  20151.166 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses":
-  83980.333 #/op
+  120128.948 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches":
-  41391829.380 #/op
+  61622857.010 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches":
-  329.706 #/op
+  658.553 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles":
-  1131041679.636 #/op
+  1693081057.939 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses":
-  3147.512 #/op
+  4974.001 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads":
-  1860971.086 #/op
+  2233275.154 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses":
-  1369.369 #/op
+  1404.988 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores":
-  1049120.974 #/op
+  1178523.285 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses":
-  2426.378 #/op
+  3162.032 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads":
-  8451.243 #/op
+  18517.239 #/op
 
 Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions":
-  1247058541.847 #/op
+  1867092271.246 #/op
 
 
-# Run complete. Total time: 00:11:51
+# Run complete. Total time: 00:10:34
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -607,135 +607,135 @@ different JVMs are already problematic, the performance difference caused by dif
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
 Benchmark                                                        (backoffType)  (cpuTokens)  (loadFactor)  (threadType)  Mode  Cnt           Score   Error      Units
-VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 NONE       _500_K            16       VIRTUAL  avgt    5         433.051 ± 3.429      ms/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             NONE       _500_K            16       VIRTUAL  avgt                0.906          clks/insn
+VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 NONE       _500_K            16       VIRTUAL  avgt    5         112.030 ± 0.789      ms/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             NONE       _500_K            16       VIRTUAL  avgt                0.905          clks/insn
 VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                             NONE       _500_K            16       VIRTUAL  avgt                1.104          insns/clk
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           NONE       _500_K            16       VIRTUAL  avgt           119614.780               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 NONE       _500_K            16       VIRTUAL  avgt          1332106.479               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                NONE       _500_K            16       VIRTUAL  avgt           661328.597               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           NONE       _500_K            16       VIRTUAL  avgt           266946.831               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 NONE       _500_K            16       VIRTUAL  avgt             1428.392               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       NONE       _500_K            16       VIRTUAL  avgt            24198.563               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                NONE       _500_K            16       VIRTUAL  avgt             1430.995               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      NONE       _500_K            16       VIRTUAL  avgt            18377.737               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   NONE       _500_K            16       VIRTUAL  avgt            81355.960               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        NONE       _500_K            16       VIRTUAL  avgt         40784733.069               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                NONE       _500_K            16       VIRTUAL  avgt               94.987               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          NONE       _500_K            16       VIRTUAL  avgt       1126714886.223               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                NONE       _500_K            16       VIRTUAL  avgt             2425.634               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      NONE       _500_K            16       VIRTUAL  avgt          1203153.261               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               NONE       _500_K            16       VIRTUAL  avgt             1070.144               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     NONE       _500_K            16       VIRTUAL  avgt           568961.827               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                NONE       _500_K            16       VIRTUAL  avgt             1775.377               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      NONE       _500_K            16       VIRTUAL  avgt             3629.120               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    NONE       _500_K            16       VIRTUAL  avgt       1243614031.261               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 NONE       _500_K            16      PLATFORM  avgt    5         432.453 ± 3.262      ms/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             NONE       _500_K            16      PLATFORM  avgt                0.906          clks/insn
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           NONE       _500_K            16       VIRTUAL  avgt           125343.290               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 NONE       _500_K            16       VIRTUAL  avgt          1256513.069               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                NONE       _500_K            16       VIRTUAL  avgt           640397.114               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           NONE       _500_K            16       VIRTUAL  avgt           308709.889               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 NONE       _500_K            16       VIRTUAL  avgt              593.021               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       NONE       _500_K            16       VIRTUAL  avgt            37356.132               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                NONE       _500_K            16       VIRTUAL  avgt              492.714               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      NONE       _500_K            16       VIRTUAL  avgt            26698.677               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   NONE       _500_K            16       VIRTUAL  avgt            94685.166               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        NONE       _500_K            16       VIRTUAL  avgt         61042519.288               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                NONE       _500_K            16       VIRTUAL  avgt              300.247               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          NONE       _500_K            16       VIRTUAL  avgt       1688224075.173               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                NONE       _500_K            16       VIRTUAL  avgt             3325.206               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      NONE       _500_K            16       VIRTUAL  avgt          1348893.957               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               NONE       _500_K            16       VIRTUAL  avgt             1306.508               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     NONE       _500_K            16       VIRTUAL  avgt           707018.576               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                NONE       _500_K            16       VIRTUAL  avgt             2808.401               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      NONE       _500_K            16       VIRTUAL  avgt             5474.034               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    NONE       _500_K            16       VIRTUAL  avgt       1864466785.437               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 NONE       _500_K            16      PLATFORM  avgt    5         111.950 ± 0.336      ms/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             NONE       _500_K            16      PLATFORM  avgt                0.905          clks/insn
 VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                             NONE       _500_K            16      PLATFORM  avgt                1.104          insns/clk
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           NONE       _500_K            16      PLATFORM  avgt            56606.957               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 NONE       _500_K            16      PLATFORM  avgt           785925.815               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                NONE       _500_K            16      PLATFORM  avgt           448614.985               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           NONE       _500_K            16      PLATFORM  avgt           268825.304               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 NONE       _500_K            16      PLATFORM  avgt             1490.270               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       NONE       _500_K            16      PLATFORM  avgt            18611.432               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                NONE       _500_K            16      PLATFORM  avgt              806.981               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      NONE       _500_K            16      PLATFORM  avgt             6294.972               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   NONE       _500_K            16      PLATFORM  avgt            66544.025               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        NONE       _500_K            16      PLATFORM  avgt         40550741.672               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                NONE       _500_K            16      PLATFORM  avgt               93.363               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          NONE       _500_K            16      PLATFORM  avgt       1125907330.947               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                NONE       _500_K            16      PLATFORM  avgt             2365.742               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      NONE       _500_K            16      PLATFORM  avgt           842849.147               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               NONE       _500_K            16      PLATFORM  avgt             1028.947               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     NONE       _500_K            16      PLATFORM  avgt           416647.635               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                NONE       _500_K            16      PLATFORM  avgt             1456.293               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      NONE       _500_K            16      PLATFORM  avgt             2586.160               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    NONE       _500_K            16      PLATFORM  avgt       1243028985.249               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks                                YIELD       _500_K            16       VIRTUAL  avgt    5         429.348 ± 6.086      ms/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                            YIELD       _500_K            16       VIRTUAL  avgt                0.906          clks/insn
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                            YIELD       _500_K            16       VIRTUAL  avgt                1.103          insns/clk
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses          YIELD       _500_K            16       VIRTUAL  avgt           152896.905               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                YIELD       _500_K            16       VIRTUAL  avgt          1730803.100               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores               YIELD       _500_K            16       VIRTUAL  avgt           849811.595               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses          YIELD       _500_K            16       VIRTUAL  avgt           360080.782               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                YIELD       _500_K            16       VIRTUAL  avgt             2043.109               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                      YIELD       _500_K            16       VIRTUAL  avgt            34953.962               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses               YIELD       _500_K            16       VIRTUAL  avgt             3000.333               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                     YIELD       _500_K            16       VIRTUAL  avgt            26540.690               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                  YIELD       _500_K            16       VIRTUAL  avgt           101627.409               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                       YIELD       _500_K            16       VIRTUAL  avgt         41177415.714               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches               YIELD       _500_K            16       VIRTUAL  avgt               91.987               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                         YIELD       _500_K            16       VIRTUAL  avgt       1129759771.175               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses               YIELD       _500_K            16       VIRTUAL  avgt             3091.132               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                     YIELD       _500_K            16       VIRTUAL  avgt          2098043.987               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses              YIELD       _500_K            16       VIRTUAL  avgt             1172.810               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                    YIELD       _500_K            16       VIRTUAL  avgt           894346.366               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses               YIELD       _500_K            16       VIRTUAL  avgt             1862.648               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                     YIELD       _500_K            16       VIRTUAL  avgt             4415.118               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                   YIELD       _500_K            16       VIRTUAL  avgt       1246555611.864               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks                                YIELD       _500_K            16      PLATFORM  avgt    5         432.050 ± 4.296      ms/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           NONE       _500_K            16      PLATFORM  avgt            93409.594               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 NONE       _500_K            16      PLATFORM  avgt          1209214.680               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                NONE       _500_K            16      PLATFORM  avgt           580904.468               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           NONE       _500_K            16      PLATFORM  avgt           291116.775               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 NONE       _500_K            16      PLATFORM  avgt              410.094               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       NONE       _500_K            16      PLATFORM  avgt            31017.142               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                NONE       _500_K            16      PLATFORM  avgt               94.836               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      NONE       _500_K            16      PLATFORM  avgt            11919.579               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   NONE       _500_K            16      PLATFORM  avgt            98971.562               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        NONE       _500_K            16      PLATFORM  avgt         60899287.861               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                NONE       _500_K            16      PLATFORM  avgt              295.979               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          NONE       _500_K            16      PLATFORM  avgt       1687506925.663               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                NONE       _500_K            16      PLATFORM  avgt             3077.454               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      NONE       _500_K            16      PLATFORM  avgt          1034694.659               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               NONE       _500_K            16      PLATFORM  avgt             1260.190               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     NONE       _500_K            16      PLATFORM  avgt           549831.246               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                NONE       _500_K            16      PLATFORM  avgt             1873.930               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      NONE       _500_K            16      PLATFORM  avgt             3665.559               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    NONE       _500_K            16      PLATFORM  avgt       1863837850.863               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks                                YIELD       _500_K            16       VIRTUAL  avgt    5         110.857 ± 0.244      ms/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                            YIELD       _500_K            16       VIRTUAL  avgt                0.905          clks/insn
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                            YIELD       _500_K            16       VIRTUAL  avgt                1.104          insns/clk
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses          YIELD       _500_K            16       VIRTUAL  avgt           137235.283               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                YIELD       _500_K            16       VIRTUAL  avgt          1370369.404               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores               YIELD       _500_K            16       VIRTUAL  avgt           790305.947               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses          YIELD       _500_K            16       VIRTUAL  avgt           376876.249               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                YIELD       _500_K            16       VIRTUAL  avgt              644.825               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                      YIELD       _500_K            16       VIRTUAL  avgt            44876.438               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses               YIELD       _500_K            16       VIRTUAL  avgt              482.400               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                     YIELD       _500_K            16       VIRTUAL  avgt            26475.505               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                  YIELD       _500_K            16       VIRTUAL  avgt            98979.638               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                       YIELD       _500_K            16       VIRTUAL  avgt         60988654.790               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches               YIELD       _500_K            16       VIRTUAL  avgt              263.139               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                         YIELD       _500_K            16       VIRTUAL  avgt       1689014899.894               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses               YIELD       _500_K            16       VIRTUAL  avgt             3818.747               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                     YIELD       _500_K            16       VIRTUAL  avgt          1490354.967               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses              YIELD       _500_K            16       VIRTUAL  avgt             1107.572               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                    YIELD       _500_K            16       VIRTUAL  avgt           761765.058               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses               YIELD       _500_K            16       VIRTUAL  avgt             2487.973               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                     YIELD       _500_K            16       VIRTUAL  avgt             5987.115               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                   YIELD       _500_K            16       VIRTUAL  avgt       1865286873.465               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks                                YIELD       _500_K            16      PLATFORM  avgt    5         112.191 ± 0.975      ms/op
 VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                            YIELD       _500_K            16      PLATFORM  avgt                0.906          clks/insn
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                            YIELD       _500_K            16      PLATFORM  avgt                1.103          insns/clk
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses          YIELD       _500_K            16      PLATFORM  avgt            78373.759               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                YIELD       _500_K            16      PLATFORM  avgt          1091837.934               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores               YIELD       _500_K            16      PLATFORM  avgt           552233.582               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses          YIELD       _500_K            16      PLATFORM  avgt           316076.400               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                YIELD       _500_K            16      PLATFORM  avgt             1403.703               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                      YIELD       _500_K            16      PLATFORM  avgt            21415.886               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses               YIELD       _500_K            16      PLATFORM  avgt              279.419               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                     YIELD       _500_K            16      PLATFORM  avgt             6637.163               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                  YIELD       _500_K            16      PLATFORM  avgt            77629.589               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                       YIELD       _500_K            16      PLATFORM  avgt         40692445.729               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches               YIELD       _500_K            16      PLATFORM  avgt              148.573               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                         YIELD       _500_K            16      PLATFORM  avgt       1126800260.033               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses               YIELD       _500_K            16      PLATFORM  avgt             2361.735               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                     YIELD       _500_K            16      PLATFORM  avgt           867392.618               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses              YIELD       _500_K            16      PLATFORM  avgt             1054.734               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                    YIELD       _500_K            16      PLATFORM  avgt           471525.498               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses               YIELD       _500_K            16      PLATFORM  avgt             1477.605               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                     YIELD       _500_K            16      PLATFORM  avgt             2339.855               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                   YIELD       _500_K            16      PLATFORM  avgt       1243337632.633               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 PARK       _500_K            16       VIRTUAL  avgt    5         432.548 ± 4.002      ms/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             PARK       _500_K            16       VIRTUAL  avgt                0.909          clks/insn
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                             PARK       _500_K            16       VIRTUAL  avgt                1.100          insns/clk
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           PARK       _500_K            16       VIRTUAL  avgt           273135.647               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 PARK       _500_K            16       VIRTUAL  avgt          2737041.401               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                PARK       _500_K            16       VIRTUAL  avgt          1422131.185               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           PARK       _500_K            16       VIRTUAL  avgt           812156.592               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 PARK       _500_K            16       VIRTUAL  avgt             1805.707               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       PARK       _500_K            16       VIRTUAL  avgt            75236.221               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                PARK       _500_K            16       VIRTUAL  avgt             2234.842               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      PARK       _500_K            16       VIRTUAL  avgt            61948.907               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   PARK       _500_K            16       VIRTUAL  avgt           131776.156               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        PARK       _500_K            16       VIRTUAL  avgt         41998568.208               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                PARK       _500_K            16       VIRTUAL  avgt              598.475               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          PARK       _500_K            16       VIRTUAL  avgt       1136938228.642               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                PARK       _500_K            16       VIRTUAL  avgt             4215.688               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      PARK       _500_K            16       VIRTUAL  avgt          2783270.221               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               PARK       _500_K            16       VIRTUAL  avgt             1521.514               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     PARK       _500_K            16       VIRTUAL  avgt          1457270.041               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                PARK       _500_K            16       VIRTUAL  avgt             4859.169               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      PARK       _500_K            16       VIRTUAL  avgt             8608.890               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    PARK       _500_K            16       VIRTUAL  avgt       1250178596.240               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 PARK       _500_K            16      PLATFORM  avgt    5         438.578 ± 3.299      ms/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                            YIELD       _500_K            16      PLATFORM  avgt                1.104          insns/clk
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses          YIELD       _500_K            16      PLATFORM  avgt           102186.387               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                YIELD       _500_K            16      PLATFORM  avgt          1326829.867               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores               YIELD       _500_K            16      PLATFORM  avgt           672759.957               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses          YIELD       _500_K            16      PLATFORM  avgt           345438.154               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                YIELD       _500_K            16      PLATFORM  avgt              403.163               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                      YIELD       _500_K            16      PLATFORM  avgt            35222.986               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses               YIELD       _500_K            16      PLATFORM  avgt              465.193               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                     YIELD       _500_K            16      PLATFORM  avgt            14338.363               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                  YIELD       _500_K            16      PLATFORM  avgt           100090.678               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                       YIELD       _500_K            16      PLATFORM  avgt         60984352.574               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches               YIELD       _500_K            16      PLATFORM  avgt              304.530               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                         YIELD       _500_K            16      PLATFORM  avgt       1689114639.538               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses               YIELD       _500_K            16      PLATFORM  avgt             3214.522               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                     YIELD       _500_K            16      PLATFORM  avgt          1679473.783               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses              YIELD       _500_K            16      PLATFORM  avgt             1171.638               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                    YIELD       _500_K            16      PLATFORM  avgt           727420.491               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses               YIELD       _500_K            16      PLATFORM  avgt             2002.065               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                     YIELD       _500_K            16      PLATFORM  avgt             4462.530               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                   YIELD       _500_K            16      PLATFORM  avgt       1864117020.290               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 PARK       _500_K            16       VIRTUAL  avgt    5         111.598 ± 0.552      ms/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             PARK       _500_K            16       VIRTUAL  avgt                0.908          clks/insn
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                             PARK       _500_K            16       VIRTUAL  avgt                1.101          insns/clk
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           PARK       _500_K            16       VIRTUAL  avgt           307835.770               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 PARK       _500_K            16       VIRTUAL  avgt          3092841.758               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                PARK       _500_K            16       VIRTUAL  avgt          1844734.425               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           PARK       _500_K            16       VIRTUAL  avgt           752232.874               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 PARK       _500_K            16       VIRTUAL  avgt              806.380               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       PARK       _500_K            16       VIRTUAL  avgt            93198.497               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                PARK       _500_K            16       VIRTUAL  avgt              987.812               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      PARK       _500_K            16       VIRTUAL  avgt            88875.550               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   PARK       _500_K            16       VIRTUAL  avgt           134787.088               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        PARK       _500_K            16       VIRTUAL  avgt         62365350.216               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                PARK       _500_K            16       VIRTUAL  avgt              990.267               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          PARK       _500_K            16       VIRTUAL  avgt       1699547170.127               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                PARK       _500_K            16       VIRTUAL  avgt             5951.811               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      PARK       _500_K            16       VIRTUAL  avgt          3265211.356               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               PARK       _500_K            16       VIRTUAL  avgt             1767.264               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     PARK       _500_K            16       VIRTUAL  avgt          1832841.871               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                PARK       _500_K            16       VIRTUAL  avgt             8697.231               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      PARK       _500_K            16       VIRTUAL  avgt            10891.011               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    PARK       _500_K            16       VIRTUAL  avgt       1871390215.235               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks                                 PARK       _500_K            16      PLATFORM  avgt    5         115.969 ± 0.716      ms/op
 VPThreadCpuBoundBenchmark.cpu_bound_tasks:CPI                             PARK       _500_K            16      PLATFORM  avgt                0.907          clks/insn
 VPThreadCpuBoundBenchmark.cpu_bound_tasks:IPC                             PARK       _500_K            16      PLATFORM  avgt                1.103          insns/clk
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           PARK       _500_K            16      PLATFORM  avgt           157906.946               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 PARK       _500_K            16      PLATFORM  avgt          1835322.082               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                PARK       _500_K            16      PLATFORM  avgt          1043007.166               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           PARK       _500_K            16      PLATFORM  avgt           529901.899               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 PARK       _500_K            16      PLATFORM  avgt             2020.453               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       PARK       _500_K            16      PLATFORM  avgt            43599.428               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                PARK       _500_K            16      PLATFORM  avgt              401.469               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      PARK       _500_K            16      PLATFORM  avgt            23978.391               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   PARK       _500_K            16      PLATFORM  avgt            83980.333               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        PARK       _500_K            16      PLATFORM  avgt         41391829.380               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                PARK       _500_K            16      PLATFORM  avgt              329.706               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          PARK       _500_K            16      PLATFORM  avgt       1131041679.636               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                PARK       _500_K            16      PLATFORM  avgt             3147.512               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      PARK       _500_K            16      PLATFORM  avgt          1860971.086               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               PARK       _500_K            16      PLATFORM  avgt             1369.369               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     PARK       _500_K            16      PLATFORM  avgt          1049120.974               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                PARK       _500_K            16      PLATFORM  avgt             2426.378               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      PARK       _500_K            16      PLATFORM  avgt             8451.243               #/op
-VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    PARK       _500_K            16      PLATFORM  avgt       1247058541.847               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-load-misses           PARK       _500_K            16      PLATFORM  avgt           178352.200               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-loads                 PARK       _500_K            16      PLATFORM  avgt          2061042.734               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-dcache-stores                PARK       _500_K            16      PLATFORM  avgt          1080297.142               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:L1-icache-load-misses           PARK       _500_K            16      PLATFORM  avgt           579031.340               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-load-misses                 PARK       _500_K            16      PLATFORM  avgt              515.281               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-loads                       PARK       _500_K            16      PLATFORM  avgt            55271.233               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-store-misses                PARK       _500_K            16      PLATFORM  avgt              438.759               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:LLC-stores                      PARK       _500_K            16      PLATFORM  avgt            20151.166               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branch-misses                   PARK       _500_K            16      PLATFORM  avgt           120128.948               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:branches                        PARK       _500_K            16      PLATFORM  avgt         61622857.010               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:context-switches                PARK       _500_K            16      PLATFORM  avgt              658.553               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:cycles                          PARK       _500_K            16      PLATFORM  avgt       1693081057.939               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-load-misses                PARK       _500_K            16      PLATFORM  avgt             4974.001               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-loads                      PARK       _500_K            16      PLATFORM  avgt          2233275.154               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-store-misses               PARK       _500_K            16      PLATFORM  avgt             1404.988               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:dTLB-stores                     PARK       _500_K            16      PLATFORM  avgt          1178523.285               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-load-misses                PARK       _500_K            16      PLATFORM  avgt             3162.032               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:iTLB-loads                      PARK       _500_K            16      PLATFORM  avgt            18517.239               #/op
+VPThreadCpuBoundBenchmark.cpu_bound_tasks:instructions                    PARK       _500_K            16      PLATFORM  avgt       1867092271.246               #/op
