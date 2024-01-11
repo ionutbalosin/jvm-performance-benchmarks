@@ -3225,14 +3225,16 @@ The post-loop handles the remaining numbers individually, without loop unrolling
 
 #### GraalVM CE JIT Compiler
 
-The C2 JIT Compiler expands the main loop by a factor of 16, allowing it to process 16 additions during each iteration of the unrolled loop.
+The GraalVM CE JIT Compiler expands the main loop by a factor of 16, allowing it to process 16 additions during each iteration of the unrolled loop.
 
-However, the method used to compute the sum of consecutive numbers within the main loop appears to be quite efficient:
-- every unrolled loop iteration calculates the sum of 16 consecutive numbers, such as [1...16], [17...32], [33...48], [49...64], and so forth
-- within each unrolled loop iteration, the first number in the sequence (e.g., 1, 17, 33, 49, etc.) is shifted left by 4 bits
-- following the left shift, the value 0x78 (120) is added. This value is the difference between the sums of every 16 consecutive numbers within each sequence
+The method used for calculating the sum of consecutive numbers within the primary loop demonstrates notable efficiency. 
+Each iteration of the unrolled loop computes the sum of every 16 consecutive numbers, such as [1...16], [17...32], [33...48], [49...64], and so on. 
+Within each unrolled loop iteration:
 
-In summary: `sum(cycle) = x(t) << 4 + 0x78` where sum(cycle) represents the partial sum from the unrolled loop iteration, and x(t) denotes the initial element from the sequence.
+- The initial number in the sequence (e.g., 1, 17, 33, 49, etc.) is shifted left by 4 bits,
+- Subsequently, 0x78 (e.g., 120) is added. This value represents the disparity between the sums of every 16 consecutive numbers within each sequence.
+
+In essence, the sum within a single unrolled loop iteration is expressed as `seq(Ti) << 4 + 0x78`, where `seq(Ti)` is the initial element from the sequence.
 
 ```
   // Main loop
