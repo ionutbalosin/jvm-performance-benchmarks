@@ -33,12 +33,12 @@ Florin Blanaru
 
 # Context
 
-The current article describes a series of Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, and Graal JIT.  The benchmarks are structured in three distinct (artificial) categories:
+The current article describes a series of Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) compilers, such as C2 JIT, and Graal JIT.  The benchmarks are structured in three distinct (artificial) categories:
 1. **Compiler**: This category is dedicated to assessing JIT compiler optimizations by following specific handwritten code patterns. It assesses common optimizations found in compilers, including inlining, loop unrolling, escape analysis, devirtualization, null-check elimination, range-check elimination, dead code elimination, vectorization, etc.
 2. **Api**: This category includes benchmarks targeting common APIs from both the Java Platform, Standard Edition (Java SE) (e.g., `java.io`, `java.nio`, `java.net`, `java.security`, `java.util`, `java.text`, `java.time`, etc.) and the Java Development Kit (JDK) (e.g., `jdk.incubator.vector`, etc.).
 3. **Miscellaneous**: This category covers a broader spectrum of classical programs (e.g., Dijkstra's shortest path, factorial, Fibonacci, Game of Life, image rotation, knapsack problem, N queens, palindrome, Huffman coding/encoding, Lempel-Ziv-Welch compression, etc.) using different techniques (e.g., dynamic programming, greedy algorithms, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
-The categorization is for informative purposes to better organize and direct the focus of our benchmarks, ranging from low-level (Compiler benchmarks) to high-level (API and Miscellaneous) benchmarks.
+The categorization is for informative purposes to better organize and direct the focus of our benchmarks, ranging from low-level (compiler benchmarks) to high-level (API and Miscellaneous) benchmarks.
 
 For this report we aggregated in total a number of **1106 benchmark runs**, including all three categories.
 
@@ -232,7 +232,7 @@ The analysis below pertains to the `recursive_method_calls` method, which is mor
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 2.
+The C2 JIT compiler is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 2.
 
 ```
   recursive_method_calls()
@@ -287,7 +287,7 @@ The Oracle GraalVM JIT compiler inlines the `recursiveMethod`, eliminates dead a
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler, akin to the C2 JIT Compiler, is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 6.
+The GraalVM CE JIT compiler, akin to the C2 JIT compiler, is capable of devirtualizing `recursiveMethod` virtual calls and performs inlining up to a depth of 6.
 
 ```
   recursive_method_calls()
@@ -312,9 +312,9 @@ The GraalVM CE JIT Compiler, akin to the C2 JIT Compiler, is capable of devirtua
 
 ### Conclusions
 
-The Oracle GraalVM JIT Compiler stands out as the sole compiler capable of completely eliminating dead arguments.
+The Oracle GraalVM JIT compiler stands out as the sole compiler capable of completely eliminating dead arguments.
 
-In comparison, the C2 JIT Compiler has a limited capability for inlining recursive calls (`recursive_method_calls` scenario), resulting in slower response times compared to even the GraalVM CE JIT Compiler. However, in this benchmark, neither of these two compilers eliminates dead arguments since the full inlining of the callee method `recursiveMethod` isn't occurring.
+In comparison, the C2 JIT compiler has a limited capability for inlining recursive calls (`recursive_method_calls` scenario), resulting in slower response times compared to even the GraalVM CE JIT compiler. However, in this benchmark, neither of these two compilers eliminates dead arguments since the full inlining of the callee method `recursiveMethod` isn't occurring.
 
 ## DeadLocalAllocationStoreBenchmark
 
@@ -687,7 +687,7 @@ The post-loop processes the remaining elements individually, without unrolling:
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler cannot completely remove the loops associated with the dead store method calls; hence, they persist as dead loops.
+The GraalVM CE JIT compiler cannot completely remove the loops associated with the dead store method calls; hence, they persist as dead loops.
 
 ```
   Dead loop (appears four times; i.e., equivalent to the number of dead method calls)
@@ -793,7 +793,7 @@ The analysis below pertains to the `cached_enum_values` method, which is the pri
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler iterates through the array of cached enum values, attempting to locate a match for the `lookUpValue` by utilizing the `String::equals` method.
+The C2 JIT compiler iterates through the array of cached enum values, attempting to locate a match for the `lookUpValue` by utilizing the `String::equals` method.
 
 ```
     0x7f2fe44fa213:   mov    $0x2,%r10d                   ; Initialize loop counter r10d = 2
@@ -840,13 +840,13 @@ The Oracle GraalVM JIT iterates through the array of cached enum values. However
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler employs a similar approach to the Oracle GraalVM JIT Compiler for comparing Strings, using the intrinsic stub to compare byte arrays. However, the reported average response is marginally slower. A more comprehensive analysis, including profiling, may be required to provide additional insights.
+The GraalVM CE JIT compiler employs a similar approach to the Oracle GraalVM JIT compiler for comparing Strings, using the intrinsic stub to compare byte arrays. However, the reported average response is marginally slower. A more comprehensive analysis, including profiling, may be required to provide additional insights.
 
 ### Analysis of enum_values
 
 Regarding the other `enum_values` benchmark, it is impacted by the object allocations triggered by the `Enum::values` call that is an invoke virtual the to clone() method.
 
-The following snapshot is from the C2 JIT Compiler output, although the same pattern occurs for the Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler.
+The following snapshot is from the C2 JIT compiler output, although the same pattern occurs for the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT).
 
 ```
                                                          ; <--- (TLAB) Allocation (and initialization)
@@ -895,7 +895,7 @@ The hottest regions in the report shows the `StubRoutines::jlong_disjoint_arrayc
 
 Try to avoid calling `Enum::values`, especially within a loop, as it allocates a new array and assigns references to the enum values as elements. This can potentially generate a considerable amount of garbage.
 
-When comparing enum values to strings, which involves string comparisons in essence, the Oracle GraalVM JIT outperforms the C2 JIT Compiler in this benchmark. One significant factor is the utilization of an intrinsic method by the Oracle GraalVM JIT, enabling it to check if two strings are equal within a defined region, specified by a codepoint-based offset and length. Further details regarding this type of optimization can be found in the document [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf).
+When comparing enum values to strings, which involves string comparisons in essence, the Oracle GraalVM JIT outperforms the C2 JIT compiler in this benchmark. One significant factor is the utilization of an intrinsic method by the Oracle GraalVM JIT, enabling it to check if two strings are equal within a defined region, specified by a codepoint-based offset and length. Further details regarding this type of optimization can be found in the document [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf).
 
 ## IfConditionalBranchBenchmark
 
@@ -953,7 +953,7 @@ Source code: [IfConditionalBranchBenchmark.java](https://github.com/ionutbalosin
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16 additions per unrolled loop cycle.
+The C2 JIT compiler unrolls the main loop by a factor of 16, thereby handling 16 additions per unrolled loop cycle.
 
 ```
   // Main loop
@@ -992,7 +992,7 @@ The post-loop processes the remaining elements individually, without unrolling:
 
 #### Oracle GraalVM JIT Compiler
 
-Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+Oracle GraalVM JIT compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
 
 ```
   // Main loop
@@ -1029,7 +1029,7 @@ The post-loop processes the remaining elements individually, without unrolling.
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler optimizes the main loop by unrolling it with a factor of 16, enabling 16 additions to be processed per unrolled loop cycle. However, some registers are spilled onto the stack.
+The GraalVM CE JIT compiler optimizes the main loop by unrolling it with a factor of 16, enabling 16 additions to be processed per unrolled loop cycle. However, some registers are spilled onto the stack.
 
 ```
   // Main loop
@@ -1089,7 +1089,7 @@ The post-loop processes the remaining elements individually, without unrolling.
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler unrolls the main loop by a factor of 8, effectively handling 8 additions per unrolled loop cycle. To manage comparisons against a specified threshold value, the compiler employs the `cmovle` instruction.
+The C2 JIT compiler unrolls the main loop by a factor of 8, effectively handling 8 additions per unrolled loop cycle. To manage comparisons against a specified threshold value, the compiler employs the `cmovle` instruction.
 
 ```
   // Main loop
@@ -1118,7 +1118,7 @@ The post-loop handles the remaining elements individually, without loop unrollin
 
 #### Oracle GraalVM JIT Compiler
 
-Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+Oracle GraalVM JIT compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
 
 ```
   // Main loop
@@ -1143,7 +1143,7 @@ Oracle GraalVM JIT Compiler does to sum of elements array using vectorized instr
 
 #### GraalVM CE JIT
 
-The GraalVM CE JIT Compiler processes elements individually without loop unrolling, utilizing comparison and jump instructions to assess whether the array values surpass the predefined threshold.
+The GraalVM CE JIT compiler processes elements individually without loop unrolling, utilizing comparison and jump instructions to assess whether the array values surpass the predefined threshold.
 
 ```
      0x7f91d723d773:   mov    0x10(,%rax,8),%r11d          ; load the value of the first element
@@ -1167,11 +1167,11 @@ The GraalVM CE JIT Compiler processes elements individually without loop unrolli
 
 ### Conclusions
 
-Oracle GraalVM's JIT Compiler utilizes vectorized instructions, leveraging 256-bit wide AVX (Advanced Vector Extensions) registers for efficiently summing array elements.
+Oracle GraalVM's JIT compiler utilizes vectorized instructions, leveraging 256-bit wide AVX (Advanced Vector Extensions) registers for efficiently summing array elements.
 
-The C2 JIT Compiler unrolls the main loop by a factor of 16 (`no_if_branch` scenario) or by a factor of 8 (`unpredictable_if_branch` scenario). However, due to its use of scalar operations instead of vectorized instructions, it does not achieve performance levels comparable to the Oracle GraalVM JIT Compiler.
+The C2 JIT compiler unrolls the main loop by a factor of 16 (`no_if_branch` scenario) or by a factor of 8 (`unpredictable_if_branch` scenario). However, due to its use of scalar operations instead of vectorized instructions, it does not achieve performance levels comparable to the Oracle GraalVM JIT compiler.
 
-The GraalVM CE JIT Compiler exhibits suboptimal behavior in these specific cases. For instance, it experiences register spills during the unrolling of the main loop by a factor of 16 (`no_if_branch` scenario). Alternatively, it may refrain from unrolling altogether (`unpredictable_if_branch` scenario) due to conditional comparisons within the loop body.
+The GraalVM CE JIT compiler exhibits suboptimal behavior in these specific cases. For instance, it experiences register spills during the unrolling of the main loop by a factor of 16 (`no_if_branch` scenario). Alternatively, it may refrain from unrolling altogether (`unpredictable_if_branch` scenario) due to conditional comparisons within the loop body.
 
 ## LockCoarseningBenchmark
 
@@ -1230,7 +1230,7 @@ The analysis below pertains to the `nested_synchronized` method, which is more i
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned (i.e., the compilation is disabled), falling back to the Template Interpreter.
+The C2 JIT compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned (i.e., the compilation is disabled), falling back to the Template Interpreter.
 
 ```
   <task_queued compile_id='510' method='nested_synchronized ()I' bytes='211' level='3' comment='tiered'/>
@@ -1257,7 +1257,7 @@ The breakdown of the hottest regions by source indicates that the Interpreter do
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, which involves eliminating redundant locks and aggregating the nested locks into a single synchronized block.
+The Oracle GraalVM JIT compiler optimizes code by performing lock coarsening, which involves eliminating redundant locks and aggregating the nested locks into a single synchronized block.
 
 ```
   0x7f994ad7c83f:   mov    %rsi,%r11
@@ -1278,7 +1278,7 @@ The Oracle GraalVM JIT Compiler optimizes code by performing lock coarsening, wh
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler is able to compile the entire method, nevertheless it does not merge the locks.
+The GraalVM CE JIT compiler is able to compile the entire method, nevertheless it does not merge the locks.
 
 ```
   0x7f096323c87f:   mov    %rsi,%r11
@@ -1318,7 +1318,7 @@ The analysis below pertains to the `conditional_nested_method_calls` method.
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler successfully inlines the `sum` methods in the caller and compiles the entire method. However, it does not merge certain locks within the compiled code.
+The C2 JIT compiler successfully inlines the `sum` methods in the caller and compiles the entire method. However, it does not merge certain locks within the compiled code.
 
 ```
   0x7fd3804f941d:   mov    0x10(%rsi),%r13d             ; load the 'defaultValue' field into r13d
@@ -1347,7 +1347,7 @@ Here are further details about the [mergeMargin](https://github.com/openjdk/jmh/
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coarsening, and utilizes conditional instructions (e.g., `cmp`) to handle the additions.
+The Oracle GraalVM JIT compiler inlines the `sum` method calls, employs lock coarsening, and utilizes conditional instructions (e.g., `cmp`) to handle the additions.
 
 ```
   0x7ffa1ad7dc3f:   mov    %rsi,%r11
@@ -1374,15 +1374,15 @@ The Oracle GraalVM JIT Compiler inlines the `sum` method calls, employs lock coa
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JIT Compiler in this benchmark.
+The GraalVM CE JIT compiler utilizes a similar approach to the Oracle GraalVM JIT compiler in this benchmark.
 
 ### Conclusions
 
-The Oracle GraalVM JIT Compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations. These optimizations lead to the shortest overall response time.
+The Oracle GraalVM JIT compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations. These optimizations lead to the shortest overall response time.
 
-The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. 
+The C2 JIT compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. 
 
-Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT Compiler, in this benchmark.
+Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT compiler, in this benchmark.
 
 ## LockElisionBenchmark
 
@@ -1443,7 +1443,7 @@ The analysis below pertains to the `nested_synchronized` method, which is more i
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned (i.e., the compilation is disabled), falling back to the Template Interpreter. This is the same limitation as in the case of `LockCoarseningBenchmark`.
+The C2 JIT compiler fails to reduce the deoptimization rate and hits a recompilation limit. Consequently, the method is abandoned (i.e., the compilation is disabled), falling back to the Template Interpreter. This is the same limitation as in the case of `LockCoarseningBenchmark`.
 
 The breakdown of the hottest regions by source indicates that the Interpreter dominates the execution.
 
@@ -1462,7 +1462,7 @@ The breakdown of the hottest regions by source indicates that the Interpreter do
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler optimizes code by removing the locks, and further optimizing the additions using shift operations, thereby performing strength reduction optimizations.
+The Oracle GraalVM JIT compiler optimizes code by removing the locks, and further optimizing the additions using shift operations, thereby performing strength reduction optimizations.
 
 ```
   0x7f9816d7e73a:   mov    0x10(%rsi),%eax        ; load the value of the 'defaultValue' field into eax
@@ -1475,13 +1475,13 @@ The Oracle GraalVM JIT Compiler optimizes code by removing the locks, and furthe
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler utilizes a similar approach to the Oracle GraalVM JIT Compiler in this benchmark.
+The GraalVM CE JIT compiler utilizes a similar approach to the Oracle GraalVM JIT compiler in this benchmark.
 
 ### Analysis of recursive_method_calls
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler is capable of devirtualizing `recursiveSum` virtual calls and performs partial inlining up to a depth of 2.
+The C2 JIT compiler is capable of devirtualizing `recursiveSum` virtual calls and performs partial inlining up to a depth of 2.
 
 ```
   0x7f1290636b5a:   mov    0x14(%rsi),%ebp         ; load the value of the 'incrementValue' field into ebp
@@ -1525,7 +1525,7 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler eliminates all the virtual calls and further optimizes the code by eliminating locks and performing strength reduction optimizations to calculate the final result.
+The Oracle GraalVM JIT compiler eliminates all the virtual calls and further optimizes the code by eliminating locks and performing strength reduction optimizations to calculate the final result.
 
 ```
   0x7fa406d7c5ba:   mov    0x10(%rsi),%eax              ; load the value of the 'defaultValue' field into eax
@@ -1603,11 +1603,11 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
 
 ### Conclusions
 
-The Oracle GraalVM JIT Compiler triggers removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall response time.
+The Oracle GraalVM JIT compiler triggers removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall response time.
 
-The C2 JIT Compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. 
+The C2 JIT compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. 
 
-Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT Compiler that does a better job of inlining the callee recursive calls.
+Within the `recursive_method_calls`, although the recursive callee method is partially inlined, its performance tends to be slower even than the GraalVM CE JIT compiler that does a better job of inlining the callee recursive calls.
 
 ## LoopFissionBenchmark
 
@@ -1701,7 +1701,7 @@ And for `loop 2` the C2 JIT compiler employs vectorized instructions that operat
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT compiler employs almost identical optimization patterns to the C2 JIT Compiler for this scenario. The only minor difference is that it handles 8 additions per loop cycle within the `main loop 2`, as opposed to 64.
+The Oracle GraalVM JIT compiler employs almost identical optimization patterns to the C2 JIT compiler for this scenario. The only minor difference is that it handles 8 additions per loop cycle within the `main loop 2`, as opposed to 64.
 
 ```
   // Main loop 2 (B[i] = A[i] + C[i])
@@ -1717,7 +1717,7 @@ The Oracle GraalVM JIT compiler employs almost identical optimization patterns t
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler unrolls the `main loop 2` by a factor of 8, but it abstains from using any vectorized instructions.
+The GraalVM CE JIT compiler unrolls the `main loop 2` by a factor of 8, but it abstains from using any vectorized instructions.
 
 ```
   // Main loop 2 (B[i] = A[i] + C[i])
@@ -1739,7 +1739,7 @@ The GraalVM CE JIT Compiler unrolls the `main loop 2` by a factor of 8, but it a
 
 None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loop_fission` brings significant benefits as opposed to the default `initial_loop` since the `loop 2` becomes vectorizable. This is also a useful pattern to apply in normal application code.
 
-The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler does not vectorize the fissed loop (when no data dependencies are present), making it slower than the other two compilers.
+The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT compiler does not vectorize the fissed loop (when no data dependencies are present), making it slower than the other two compilers.
 
 ## LoopFusionBenchmark
 
@@ -1776,7 +1776,7 @@ The analysis below pertains to the `initial_loops` method, which is more interes
 
 #### C2 JIT Compiler and GraalVM CE JIT Compiler
 
-Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a factor of 8 and handle the dependent load/store operations in a comparable manner. For instance, the following code snippet illustrates a main loop optimized by the C2 JIT:
+Both the C2 JIT and Oracle GraalVM JIT compilers unroll the main loop by a factor of 8 and handle the dependent load/store operations in a comparable manner. For instance, the following code snippet illustrates a main loop optimized by the C2 JIT:
 
 ```
   // Main loop
@@ -1796,7 +1796,7 @@ Both the C2 JIT and Oracle GraalVM JIT Compilers unroll the main loop by a facto
 
 #### GraalVM CE JIT Compiler
 
-Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT Compiler, the GraalVM CE JIT Compiler produces less optimal code due to the additional load instructions.
+Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT compiler, the GraalVM CE JIT compiler produces less optimal code due to the additional load instructions.
 
 ```
   // Main loop
@@ -1823,12 +1823,12 @@ Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT
 
 None of these compilers has implemented this optimization. Moreover, in this benchmark, it appears that `manual_loops_fusion` does not yield significant benefits. In fact, due to the data dependency between array elements within a loop cycle, `manual_loops_fusion` becomes less optimal rather than improving performance, as opposed to the previous `LoopFissionBenchmark` (in case there are data dependencies within the loop cycles).
 
-The C2 JIT Compiler and Oracle GraalVM JIT Compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT Compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
+The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
 
 ## LoopInvariantCodeMotionBenchmark
 
 Test how the compiler deals with loop invariant code motion, in essence how it is able to move the invariant code before and after a loop.
-Hoisting and sinking are terms that Compiler refers to moving operations outside loops:
+Hoisting and sinking are terms that compiler refers to moving operations outside loops:
 - hoisting a load means to move the load so that it occurs before the loop
 - sinking a store means to move a store to occur after a loop
 
@@ -1838,7 +1838,7 @@ Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbal
 
 ### Analysis
 
-The hot methods identified by the `-prof perfasm` primarily consist of runtime-generated stubs, making it difficult to grasp the Compiler optimizations.
+The hot methods identified by the `-prof perfasm` primarily consist of runtime-generated stubs, making it difficult to grasp the compiler optimizations.
 Raising the `-prof perfasm:mergeMargin=<value>` to a higher setting could potentially offer deeper insights. However, the extensive volume of generated assembly code exceeds the scope (or knowledge) of our analysis.
 
 Consequently, we've opted to incorporate only the flame graphs and offer high-level insights about the utilized runtime stubs.
@@ -1859,8 +1859,8 @@ The section below pertains to the `initial_loop` method.
 
 ### Remarks
 
-- The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler use a different trigonometric stub, `AMD64MathStub.tan`, compared to the C2 JIT Compiler's `StubRoutines::libmTan`.
-- Overall, the Oracle GraalVM JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT Compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
+- The GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) use a different trigonometric stub, `AMD64MathStub.tan`, compared to the C2 JIT compiler's `StubRoutines::libmTan`.
+- Overall, the Oracle GraalVM JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
 
 ## LoopReductionBenchmark
 
@@ -1898,7 +1898,7 @@ The analysis below pertains to the `initial_loop` method, which is more interest
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler devirtualizes the `auto_reduction` call and performs loop reduction.
+The C2 JIT compiler devirtualizes the `auto_reduction` call and performs loop reduction.
 
 ```
   initial_loop()
@@ -1932,7 +1932,7 @@ The C2 JIT Compiler devirtualizes the `auto_reduction` call and performs loop re
 
 #### Oracle GraalVM JIT Compiler
 
-Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and performs loop reduction but with less jumps instructions than C2 JIT Compiler.
+Similarly, the Oracle GraalVM JIT devirtualizes the `auto_reduction` call and performs loop reduction but with less jumps instructions than C2 JIT compiler.
 
 ```
   initial_loop()
@@ -1993,9 +1993,9 @@ The `auto_reduction` generated code by the GraalVM CE JIT is abysmal.
 
 ### Conclusions
 
-The C2 JIT Compiler and the Oracle GraalVM JIT Compiler offer similar optimization patterns, hence achieving similar response times.
+The C2 JIT compiler and the Oracle GraalVM JIT compiler offer similar optimization patterns, hence achieving similar response times.
 
-The GraalVM CE JIT Compiler exhibits lower performance (i.e., poor optimizations) in this benchmark.
+The GraalVM CE JIT compiler exhibits lower performance (i.e., poor optimizations) in this benchmark.
 
 ## MandelbrotVectorApiBenchmark
 
@@ -2246,10 +2246,10 @@ will devirtualize and inline for the common case and use the interface call for 
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler is able to devirtualize (and inline) through the chain of interface calls
+The GraalVM CE JIT compiler is able to devirtualize (and inline) through the chain of interface calls
 for all the number of targets used in the benchmark. It does not perform loop unrolling, but uses a series of compare and jump
 instructions (by checking against the method constant pool) to check if the receiver is an instance of an expected target type.
-Since in our benchmark all calls resolve to the same target method, the GraalVM CE JIT Compiler is able to inline only
+Since in our benchmark all calls resolve to the same target method, the GraalVM CE JIT compiler is able to inline only
 once the target method.
 
 ### Analysis of devirtualize_to_monomorphic
@@ -2493,7 +2493,7 @@ If the number of targets is higher than two, the C2 JIT compiler always uses a v
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler devirtualizes and inlines call sites that use up to four different targets. If the number
+The Oracle GraalVM JIT compiler devirtualizes and inlines call sites that use up to four different targets. If the number
 of targets is higher, then the compiler will use a virtual call for the remaining targets.
 This can be observed either by looking at the generated assembly code or by looking at the hottest methods in the benchmark.
 
@@ -2529,7 +2529,7 @@ shows up in the list because the remaining methods have been inlined in `virtual
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler is able to devirtualize and inline call sites regardless of the
+The GraalVM CE JIT compiler is able to devirtualize and inline call sites regardless of the
 number of targets used in benchmark.
 
 **Note**: When generating assembly, we forced the compiler not to inline the
@@ -2579,7 +2579,7 @@ a megamorphic call site into multiple monomorphic call sites. The benchmark uses
 will always resolve to the same target method.
 
 Overall, all JVMs perform the same and are able to devirtualize and inline at the call sites. Below is the assembly
-code generated by the GraalVM CE JIT Compiler for the `devirtualize_to_monomorphic[MEGAMORPHIC_8]` benchmark:
+code generated by the GraalVM CE JIT compiler for the `devirtualize_to_monomorphic[MEGAMORPHIC_8]` benchmark:
 ``` 
   ↗↗ 0x7fa0032421a0:   cmp    $0x9d80,%r11d                ; compare the loop induction variable against the loop bound
   ││ 0x7fa0032421a7:   jge    0x7fa003242349               ; jump out of the loop if the loop condition is false
@@ -2627,13 +2627,13 @@ code generated by the GraalVM CE JIT Compiler for the `devirtualize_to_monomorph
      0x7fa00324235f:   ret                                 ; return to the caller
 ```
 
-The only exception in regard to the performance of the benchmark is with the C2 Compiler in
-`devirtualize_to_monomorphic[MEGAMORPHIC_8]`. The reason the C2 Compiler does not perform similar to the other compilers
+The only exception in regard to the performance of the benchmark is with the C2 compiler in
+`devirtualize_to_monomorphic[MEGAMORPHIC_8]`. The reason the C2 compiler does not perform similar to the other compilers
 and to the `devirtualize_to_monomorphic[MEGAMORPHIC_7]` benchmark is that it switches from using binary search over
-switch ranges (as shown in the above assembly snippet of GraalVM CE JIT Compiler) to using a jump table when the number
+switch ranges (as shown in the above assembly snippet of GraalVM CE JIT compiler) to using a jump table when the number
 of targets is higher than seven.
 
-Below is the relevant snippet of the assembly code generated by the C2 JIT Compiler
+Below is the relevant snippet of the assembly code generated by the C2 JIT compiler
 for the `devirtualize_to_monomorphic[MEGAMORPHIC_8]` benchmark:
 
 ```
@@ -2729,8 +2729,8 @@ The hottest methods in the benchmark are shown below:
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-Both the Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler are able to inline the `tooManyArgsMethod` method
-and return a constant value. Below is a section of the assembly code generated by the GraalVM CE JIT Compiler for
+Both the Oracle GraalVM JIT compiler and the GraalVM CE JIT compiler are able to inline the `tooManyArgsMethod` method
+and return a constant value. Below is a section of the assembly code generated by the GraalVM CE JIT compiler for
 the `method_args_buster` method:
 
 ```
@@ -2743,8 +2743,8 @@ the `method_args_buster` method:
 
 ### Conclusions
 
-The C2 JIT Compiler fails to compile methods that take a large number of arguments whereas this limit seems higher
-for the Graal JIT Compilers.
+The C2 JIT compiler fails to compile methods that take a large number of arguments whereas this limit seems higher
+for the Graal JIT compilers.
 Thankfully, most IDEs will warn the developer way before this threshold is reached.
 
 ## NpeControlFlowBenchmark
@@ -2805,7 +2805,7 @@ Therefore, the section below will focus on the `try_npe_catch` benchmark when th
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler is able to optimize and make use of a cached `NullPointerException` object
+The C2 JIT compiler is able to optimize and make use of a cached `NullPointerException` object
 when the same exception is thrown multiple times. This avoids allocating a new exception object on the iterations of
 the loop when the `NullPointerException` is thrown. One side effect is that stack traces are not collected
 for the cached exception object. This optimization is enabled by default and can be disabled by using the
@@ -2852,19 +2852,19 @@ using the [Async-profiler](https://github.com/async-profiler/async-profiler/).
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not make use of a cached `NullPointerException` object.
+Oracle GraalVM JIT compiler and the GraalVM CE JIT compiler do not make use of a cached `NullPointerException` object.
 Instead, both compilers allocate a new exception and fill in the stack trace on each iteration of the loop when the
 `NullPointerException` is thrown. This can once again be observed by looking at the generated flamegraph.
 
 [![NpeControlFlowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeControlFlowBenchmark.try_npe_catch-AverageTime-nullThreshold-16-size-262144/flame-cpu-forward.html)
 
-Opposed to the C2 JIT Compiler, the GraalVM based JIT compilers will spend additional time inside JVMCI and
+Opposed to the C2 JIT compiler, the GraalVM based JIT compilers will spend additional time inside JVMCI and
 then filling in the stack trace.
 
 ### Conclusions
 
 All three JIT compilers perform close in all benchmark configurations apart from the `try_npe_catch` benchmark. The reason
-the C2 JIT Compiler performs better in this benchmark is because it uses a cached `NullPointerException` object and
+the C2 JIT compiler performs better in this benchmark is because it uses a cached `NullPointerException` object and
 avoids filling the stack trace. This optimization is enabled by default and only happens when the same implicit exception
 is thrown multiple times (e.g. in a hot loop).
 
@@ -2916,7 +2916,7 @@ especially when the `threshold` is 0.5 or 1.0.
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler, as in the case of the `NpeControlFlowBenchmark` benchmark, makes use of a cached
+The C2 JIT compiler, as in the case of the `NpeControlFlowBenchmark` benchmark, makes use of a cached
 `NullPointerException` object and directly calls into the exception handler (`OptoRuntime::handle_exception_C`).
 A side effect of this optimization is that the stack trace is not collected.
 
@@ -2926,7 +2926,7 @@ Below is the flamegraph generated by the `implicit_throw_npe` benchmark when the
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not make use of a cached `NullPointerException` object.
+The Oracle GraalVM JIT compiler and the GraalVM CE JIT compiler do not make use of a cached `NullPointerException` object.
 Instead, both compilers allocate a new exception and fill in the stack trace on each iteration of the loop (when the
 threshold is 1.0). This can once again be observed by looking at the generated flamegraph.
 
@@ -2936,7 +2936,7 @@ threshold is 1.0). This can once again be observed by looking at the generated f
 
 All three JIT compilers perform similar in performance when throwing explicit exceptions.
 
-There is an important performance difference however when throwing implicit exceptions. That is, the C2 JIT Compiler
+There is an important performance difference however when throwing implicit exceptions. That is, the C2 JIT compiler
 will avoid allocating a new exception object and filling in the stack trace when the same exception is thrown multiple
 times in the hot path.
 
@@ -2980,7 +2980,7 @@ The other cases (e.g., `interface_non_static_method`, `interface_static_method`,
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and performs partial inlining up to a depth of 2.
+The C2 JIT compiler is capable of devirtualizing `cls_non_static` calls and performs partial inlining up to a depth of 2.
 
 ```
   class_non_static_method()
@@ -3022,7 +3022,7 @@ The C2 JIT Compiler is capable of devirtualizing `cls_non_static` calls and perf
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` virtual calls and performs inlining up to a depth of 8.
+The Oracle GraalVM JIT compiler is capable of devirtualizing `cls_non_static` virtual calls and performs inlining up to a depth of 8.
 
 ```
   class_non_static_method()
@@ -3072,7 +3072,7 @@ The Oracle GraalVM JIT Compiler is capable of devirtualizing `cls_non_static` vi
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler is capable of devirtualizing `cls_non_static` virtual calls and performs partial inlining up to a depth of 6.
+The GraalVM CE JIT compiler is capable of devirtualizing `cls_non_static` virtual calls and performs partial inlining up to a depth of 6.
 
 ```
   cls_non_static()
@@ -3110,13 +3110,13 @@ The GraalVM CE JIT Compiler is capable of devirtualizing `cls_non_static` virtua
 For lambda recursive calls (both `lambda_static` and `lambda_non_static`), all three JITs are capable of fully inlining and eliminating the recursive calls.
 
 When it comes to recursive calls in classes and interfaces (`class_static_method`, `class_non_static_method`, `interface_static_method`, `interface_non_static_method`):
-- The C2 JIT Compiler can devirtualize and inline the recursive calls up to a depth of 2.
-- The GraalVM CE JIT Compiler can devirtualize and inline the recursive calls up to a depth of 6.
-- The Oracle GraalVM JIT Compiler can devirtualize and inline the recursive calls up to a depth of 8.
+- The C2 JIT compiler can devirtualize and inline the recursive calls up to a depth of 2.
+- The GraalVM CE JIT compiler can devirtualize and inline the recursive calls up to a depth of 6.
+- The Oracle GraalVM JIT compiler can devirtualize and inline the recursive calls up to a depth of 8.
 
 ## ScalarEvolutionAndLoopOptimizationBenchmark
 
-Check if the Compiler can recognize the existence of the induction variables and to replace it with simpler computations.
+Check if the compiler can recognize the existence of the induction variables and to replace it with simpler computations.
 This optimization is a special case of strength reduction where all loop iterations are strengthened to a mathematical formula.
 
 ```
@@ -3143,7 +3143,7 @@ Source code: [ScalarEvolutionAndLoopOptimizationBenchmark.java](https://github.c
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler unrolls the main loop by a factor of 16, thereby handling 16 additions per unrolled loop cycle.
+The C2 JIT compiler unrolls the main loop by a factor of 16, thereby handling 16 additions per unrolled loop cycle.
 
 ```
   // Main loop (from 0x1 ... to 0x3e80)
@@ -3185,7 +3185,7 @@ The post-loop handles the remaining numbers individually, without loop unrolling
 
 #### Oracle GraalVM JIT Compiler
 
-Oracle GraalVM JIT Compiler does the sum of numbers using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+Oracle GraalVM JIT compiler does the sum of numbers using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
 
 ```
   // Main loop
@@ -3225,7 +3225,7 @@ The post-loop handles the remaining numbers individually, without loop unrolling
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler expands the main loop by a factor of 16, allowing it to process 16 additions during each iteration of the unrolled loop.
+The GraalVM CE JIT compiler expands the main loop by a factor of 16, allowing it to process 16 additions during each iteration of the unrolled loop.
 
 The method used for calculating the sum of consecutive numbers within the primary loop demonstrates notable efficiency. 
 Each iteration of the unrolled loop computes the sum of every 16 consecutive numbers, such as [1...16], [17...32], [33...48], [49...64], and so on. 
@@ -3274,9 +3274,9 @@ The post-loop handles the remaining numbers individually, without loop unrolling
 
 None of these compilers have implemented this optimization.
 
-Nevertheless, the optimization triggered by the C2 JIT Compiler, which unrolls the main loop by a factor of 16 and sequentially performs the additions, appears to be less efficient compared to other compilers.
+Nevertheless, the optimization triggered by the C2 JIT compiler, which unrolls the main loop by a factor of 16 and sequentially performs the additions, appears to be less efficient compared to other compilers.
 
-Despite the fact that the Oracle GraalVM JIT Compiler utilizes vectorized instructions within the main unrolled loop, it seems to perform slower than the GraalVM CE JIT Compiler, which abstains from using vectorized instructions but employs an efficient formula with scalar instructions.
+Despite the fact that the Oracle GraalVM JIT compiler utilizes vectorized instructions within the main unrolled loop, it seems to perform slower than the GraalVM CE JIT compiler, which abstains from using vectorized instructions but employs an efficient formula with scalar instructions.
 
 ## ScalarReplacementBenchmark
 
@@ -3288,7 +3288,7 @@ There are a few escape states:
 - `ArgEscape` - The object does not escape the method or thread, but it is passed as an argument to a call or referenced by an argument, and it does not escape during the call.
 - `GlobalEscape` - The object can escape the method or the thread, which means that such an object is visible outside the method or thread.
 
-For `NoEscape` objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called `Scalar Replacement` optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+For `NoEscape` objects, the compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called `Scalar Replacement` optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
 
 ```
   @Param(value = {"false"})
@@ -3333,7 +3333,7 @@ Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/j
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler allocates the `HeavyWrapper wrapper` object at the start of the method, as per its declaration. However, later on, as the comparison is always evaluated to false, the allocated object remains unnecessary.
+The C2 JIT compiler allocates the `HeavyWrapper wrapper` object at the start of the method, as per its declaration. However, later on, as the comparison is always evaluated to false, the allocated object remains unnecessary.
 
 ```
   0x7f5ac04f7a5a:   mov    %rsi,0x8(%rsp)               ; store the rsi into the stack at an offset of 0x8
@@ -3357,7 +3357,7 @@ The C2 JIT Compiler allocates the `HeavyWrapper wrapper` object at the start of 
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler allocates the `HeavyWrapper wrapper` object only if the boolean condition imposes (i.e., it reorders the instructions), otherwise it uses the cached wrapper object, hence preventing unnecessary allocations.
+The Oracle GraalVM JIT compiler allocates the `HeavyWrapper wrapper` object only if the boolean condition imposes (i.e., it reorders the instructions), otherwise it uses the cached wrapper object, hence preventing unnecessary allocations.
 
 ```
     0x7f7ceada1b40:   cmpb   $0x0,0x14(%rsi)           ; compare byte at offset 0x14 (field 'objectEscapes') to zero
@@ -3374,13 +3374,13 @@ The Oracle GraalVM JIT Compiler allocates the `HeavyWrapper wrapper` object only
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler, which explains why this benchmark is much faster for the Graal Compiler.
+The GraalVM CE JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler, which explains why this benchmark is much faster for the Graal compiler.
 
 ### Analysis of arg_escape_obj
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler triggers the allocations, inlines the equals method and returns `true`.
+The C2 JIT compiler triggers the allocations, inlines the equals method and returns `true`.
 
 ```
   0x7f05384f7fda:   mov    %rsi,%rdi
@@ -3398,7 +3398,7 @@ The C2 JIT Compiler triggers the allocations, inlines the equals method and retu
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler method returns `true` (since the `HeavyWrapper` objects are equal), optimizing the allocations.
+The Oracle GraalVM JIT compiler method returns `true` (since the `HeavyWrapper` objects are equal), optimizing the allocations.
 
 ```
     0x7fb9c2da03c0:   cmpl   $0x0,0x10(%rsi)          ; compare 'size' agaist 0x0
@@ -3412,7 +3412,7 @@ The Oracle GraalVM JIT Compiler method returns `true` (since the `HeavyWrapper` 
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+The GraalVM CE JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
 
 ### Conclusions
 
@@ -3440,12 +3440,12 @@ be on the `vectorized` benchmark.
 
 #### C2 JIT Compiler and Oracle GraalVM JIT Compiler
 
-The C2 JIT Compiler and the Oracle GraalVM JIT Compiler implement the Vector API compiler intrinsics and are able to use
+The C2 JIT compiler and the Oracle GraalVM JIT compiler implement the Vector API compiler intrinsics and are able to use
 256-bit AVX registers. Therefore, the performance of the benchmark is similar for both JIT compilers.
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT Compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
+The GraalVM CE JIT compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
 to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
 by looking at the hottest methods in the benchmark after inlining.
 
@@ -3493,7 +3493,7 @@ the stores.
   }
 ```
 
-The C2 JIT compiler has an optimization that first tries to spill onto the FPU registers before spilling onto the stack.
+**Note:** The C2 JIT compiler has an optimization that first tries to spill onto the FPU registers before spilling onto the stack.
 This optimization is enabled by default and can be disabled by using the `-XX:-UseFPUForSpilling` flag.
 
 Source code: [StackSpillingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/StackSpillingBenchmark.java)
@@ -3529,7 +3529,7 @@ observed by looking at the generated assembly code. Below is a snippet:
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler do not perform (in this benchmark) the FPU optimization
+The Oracle GraalVM JIT compiler and the GraalVM CE JIT compiler do not perform (in this benchmark) the FPU optimization
 C2 does. Therefore, both compilers will spill intermediate values onto the stack once they run out of available registers.
 
 ```
@@ -3556,13 +3556,13 @@ C2 does. Therefore, both compilers will spill intermediate values onto the stack
 
 ### Conclusions
 
-The C2 JIT Compiler is able to use the FPU registers to spill intermediate values before using the stack. This optimization
-does not happen (for this benchmark) in the Oracle GraalVM JIT Compiler and the GraalVM CE JIT Compiler.
+The C2 JIT compiler is able to use the FPU registers to spill intermediate values before using the stack. This optimization
+does not happen (for this benchmark) in the Oracle GraalVM JIT compiler and the GraalVM CE JIT compiler.
 
 ## StrengthReductionBenchmark
 
 A strength reduction is a compiler optimization where expensive operations are replaced with equivalent but less expensive operations.
-This benchmark tests how well the Compiler strengthens some arithmetic operations, as for example multiple additions, a multiplication in comparison to a bitwise shift operation.
+This benchmark tests how well the compiler strengthens some arithmetic operations, as for example multiple additions, a multiplication in comparison to a bitwise shift operation.
 
 ```
   @Param({"true"})
@@ -3585,7 +3585,7 @@ This benchmark tests how well the Compiler strengthens some arithmetic operation
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
-            + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val // i.e., 64 additions
         : val;
   }
 ```
@@ -3594,13 +3594,13 @@ Source code: [StrengthReductionBenchmark.java](https://github.com/ionutbalosin/j
 
 [![StrengthReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)
 
-### Analysis of nested_synchronized
+### Analysis of add
 
-The analysis below pertains to the `nested_synchronized` method, which is more interesting due to the highest differences in performance.
+The analysis below pertains to the `add` method, which is more interesting due to the highest differences in performance.
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler performs a repetitive addition operation, summing all the values together iteratively.
+The C2 JIT compiler performs a repetitive addition operation, summing all the values together iteratively.
 
 ```
   doAdd()
@@ -3621,24 +3621,26 @@ The C2 JIT Compiler performs a repetitive addition operation, summing all the va
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler replaces the additions with the shift operation, which is more efficient.
+The Oracle GraalVM JIT compiler replaces the additions with the shift operation, which is more efficient.
 
 ```
+  doAdd()
+  
   0x7f99e2d80e4a:   mov    0x10(%rsi),%rax              ; get field 'value' into r10
   0x7f99e2d80e4e:   shl    $0x6,%rax                    ; shift rax left by 6 bits (rax = rax << 6)
 ```
 
 #### GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+The Oracle GraalVM JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
 
 ### Conclusions
 
-The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler trigger strength reduction for additions as well, unlike the C2 JIT Compiler, which does not perform this optimization.
+In the case of the `add` benchmark, the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) trigger strength reduction for additions, unlike the C2 JIT compiler, which adds the values individually.
 
 ## TailRecursionBenchmark
 
-A tail-recursive function is a function where the last operation before the function returns is an invocation to the function itself.
+A [tail-recursive](https://en.wikipedia.org/wiki/Tail_call) function is a function where the last operation before the function returns is an invocation to the function itself.
 Tail-recursive optimization avoids allocating a new stack frame by re-writing the method into a completely iterative fashion.
 
 ```
@@ -3666,7 +3668,7 @@ The analysis below pertains to the `tail_recursive` (i.e., `recursive`) method, 
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 2.
+The C2 JIT compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 2.
 
 ```
   recursive()
@@ -3704,7 +3706,7 @@ The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual ca
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT Compiler is able to deoptimize the tail `recursive` virtual call, nevertheless does not perform any inlining of the recursive method.
+The Oracle GraalVM JIT compiler is able to deoptimize the tail `recursive` virtual call, nevertheless does not perform any inlining of the `recursive` method.
 
 ```
   recursive()
@@ -3730,7 +3732,7 @@ The Oracle GraalVM JIT Compiler is able to deoptimize the tail `recursive` virtu
 
 #### GraalVM CE JIT Compiler
 
-The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 6.
+The C2 JIT compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 6.
 
 ```
   recursive()
@@ -3769,10 +3771,10 @@ The C2 JIT Compiler is capable of devirtualizing the tail `recursive` virtual ca
 
 ### Conclusions
 
-The  main difference in `tail_recursive` behavior lies in the inlining capability of each compiler for tail recursive virtual calls:
-- The C2 JIT Compiler performs partial inlining up to a depth of 2.
-- The Oracle GraalVM JIT Compiler refrains from partial inlining, contributing to its relatively slower performance in this benchmark.
-- The GraalVM CE JIT Compiler triggers partial inlining capabilities up to a depth of 6.
+The  main difference in case of `tail_recursive` benchmark lies in the inlining capability of each compiler for tail recursive virtual calls:
+- The C2 JIT compiler performs partial inlining up to a depth of 2.
+- The Oracle GraalVM JIT compiler refrains from partial inlining, resulting in relatively slower performance in this benchmark
+- The GraalVM CE JIT compiler triggers partial inlining up to a depth of 6.
 
 ## TypeCheckBenchmark
 
@@ -3803,7 +3805,7 @@ This benchmark checks the performance of `instanceof` type check using multiple 
   }
 ```
 
-Java, being a type-safe language, requires runtime type checking (based on metadata) to determine type compatibility. Within Hotspot, the class word contains a native pointer to the [VM Klass](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/oop.hpp#L58-L61) instance, including extensive metadata such as superclass types, implemented interfaces, and [more](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/klass.hpp#L128-L133).
+Java, being a type-safe language, requires runtime type checking (based on metadata) to determine type compatibility. Within Hotspot, the class word contains a native pointer to the [VM Klass](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/oop.hpp#L57) instance, including extensive metadata such as superclass types, implemented interfaces, and [more](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/klass.hpp#L128-L133).
 The efficiency of those runtime checks depends on the type metadata as well as further optimizations performed by the compiler.
 
 Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckBenchmark.java)
@@ -3814,7 +3816,7 @@ Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-perfo
 
 #### C2 JIT Compiler
 
-The C2 JIT Compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns the boolean.
+The C2 JIT compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns the boolean.
 
 ```
       0x7f291c63815a:   mov    0xc(%rsi),%r10d              ; get field obj
@@ -3844,7 +3846,7 @@ The C2 JIT Compiler takes the slow path and searches through the secondary super
 
 #### Oracle GraalVM JIT Compiler
 
-The GraalVM JIT Compiler reverses the if-condition comparison to take the faster path. It specifically checks against the `ManySecondarySuperTypes` type.
+The GraalVM JIT compiler reverses the if-condition comparison to take the faster path. It specifically checks against the `ManySecondarySuperTypes` type.
 
 ```
   0x7ff7d6d7ecbf:   mov    0xc(%rsi),%eax               ; get field obj
@@ -3861,11 +3863,11 @@ The GraalVM JIT Compiler reverses the if-condition comparison to take the faster
 
 #### GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT Compiler performs the same optimization as the Oracle GraalVM JIT Compiler.
+The Oracle GraalVM JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
 
 ### Conclusions
 
-The Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler optimize the type check by reversing the if condition (i.e., comparing against `ManySecondarySuperTypes` type) and taking the fast path (since a match is found), unlike the C2 JIT Compiler, which always checks the type against the supertypes array (no match is found).
+The GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) optimize the type check by reversing the if condition (i.e., comparing against `ManySecondarySuperTypes` type) and taking the fast path (since a match is found), unlike the C2 JIT compiler, which always checks the type against the supertypes array (no match is found).
 
 ## TypeCheckScalabilityBenchmark
 
@@ -3972,17 +3974,17 @@ When typePollution is `true`, the number of reported L1 data cache misses is alm
 #### C2 JIT Compiler
 
 The C2 JIT compiler is the slowest when `typePollution` is `true`. One interesting observation is that C2 remains
-slower even when the number of threads running is equal to one (no false sharing occurring). That is, the C2 JIT Compiler is
+slower even when the number of threads running is equal to one (no false sharing occurring). That is, the C2 JIT compiler is
 in general slower at checking the secondary super types array.
 The reason behind this is explained in the `TypeCheckSlowPathBenchmark`.
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
 Overall, the Graal based JIT compilers perform close in performance. The only difference is that the GraalVM CE JIT
-Compiler generates additional memory loads for the `klass` word of the object before checking the secondary super types array.
+compiler generates additional memory loads for the `klass` word of the object before checking the secondary super types array.
 Additionally, the error margins of the two JIT compilers are quite large to draw any clear conclusions.
 
-For reference, below is a snippet of the generated assembly code for the GraalVM CE JIT Compiler:
+For reference, below is a snippet of the generated assembly code for the GraalVM CE JIT compiler:
 ```
   0x7f82a323d682:   mov    0x8(,%rax,8),%r10d           ; load klass word of the object in %r10d
   0x7f82a323d68a:   movabs $0x7f8227000000,%r11         ; load the base address of the metaspace in %r11
@@ -4004,7 +4006,7 @@ For reference, below is a snippet of the generated assembly code for the GraalVM
   ...
 ```
 
-Compared to the equivalent snippet generated by the Oracle GraalVM JIT Compiler:
+Compared to the equivalent snippet generated by the Oracle GraalVM JIT compiler:
 ```
   0x7fcda2d7e5e2:   mov    0x8(,%rax,8),%r10d           ; load the klass word of the object in %r10d
   0x7fcda2d7e5ea:   movabs $0x7fcd27000000,%rax         ; load the base address of the metaspace in %rax
@@ -4086,7 +4088,7 @@ Source code: [TypeCheckSlowPathBenchmark.java](https://github.com/ionutbalosin/j
 
 ### Analysis of instanceof_type_check
 
-For a low number of secondary super types `(16, 32, 64)`, the GraalVM JIT Compilers perform similarly and are faster than C2 JIT Compiler.
+For a low number of secondary super types `(16, 32, 64)`, the GraalVM JIT compilers perform similarly and are faster than C2 JIT compiler.
 The performance gap between the Graal and C2 compilers decreases however as the number of secondary super types
 increases.
 
@@ -4113,7 +4115,7 @@ CPU microarchitecture.
 
 #### Oracle GraalVM JIT Compiler and GraalVM CE JIT Compiler
 
-Both GraalVM JIT Compilers iterate over the secondary super types array using a loop:
+Both GraalVM JIT compilers iterate over the secondary super types array using a loop:
 
 ```
    0.30% 0x7f342f2470e0:   mov    %ecx,%ebx               ; move the loop counter in %ebx
@@ -4134,21 +4136,21 @@ Both GraalVM JIT Compilers iterate over the secondary super types array using a 
 
 ### Conclusions
 
-The C2 JIT Compiler can be slower than the GraalVM JIT Compilers when iterating through the secondary super types array (i.e.
+The C2 JIT compiler can be slower than the GraalVM JIT compilers when iterating through the secondary super types array (i.e.
 performing `instanceof` checks), especially when the number of secondary super types is not very large.
 
-One of the reasons is that the C2 JIT Compiler uses the `repnz scas` instruction which can be slow on modern x86 architectures.
+One of the reasons is that the C2 JIT compiler uses the `repnz scas` instruction which can be slow on modern x86 architectures.
 This issue is discussed in the [JDK mailing list](https://mail.openjdk.org/pipermail/hotspot-runtime-dev/2020-August/041056.html)
 and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
 
 ## JIT Geometric Mean
 
-This section describes the normalized GM for the entire JIT-related benchmark category, having in total 301 benchmarks.
+This section describes the normalized geometric mean (GM) for the entire JIT-related benchmark category, having in total 301 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
-- all benchmark scores are converted to the same unit (e.g., "ns/op")
-- the resulting geometric mean is normalized to C2 JIT
+- All benchmark scores are converted to the same unit (e.g., "ns/op").
+- The resulting geometric mean is normalized to OpenJDK (i.e., C2 JIT).
 
 ## x86_64
 
@@ -4172,9 +4174,9 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. Oracle GraalVM JIT is the fastest
-2. C2 JIT is in the middle
-3. GraalVM CE JIT is the slowest
+1. Oracle GraalVM JIT is the fastest.
+2. C2 JIT is in the middle.
+3. GraalVM CE JIT is the slowest.
 
 # API
 
@@ -4184,7 +4186,7 @@ This set of benchmarks targets common APIs from both the Java Platform, Standard
 
 The API benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
 
-**Note:** Only a small subset of the API benchmarks are included here; in general, we selected those with significant differences or representing various APIs. For the complete set, please refer to the repository and the generated plots.
+**Note:** Only a small subset of the API benchmarks are included here; in general, we selected those with significant performance differences or representing various APIs. For the complete set, please refer to the repository and the generated plots.
 
 ## AesEcbCryptoBenchmark
 
@@ -4256,7 +4258,7 @@ Benchmark measuring the performance of various concatenation methods using diffe
 - `plus` operator
 - `StringTemplate`
 
-The input String and char contain characters encoded in either Latin-1 or UTF-16.
+The input String and char contain characters encoded in either `Latin-1` or `UTF-16`.
 
 **Note:** The benchmark might encompass different allocations, potentially impacting the overall results.
 
@@ -4313,7 +4315,7 @@ This benchmark measures the performance of different formatting approaches utili
 - `String.formatted()`
 - `FormatProcessor`
 
-The input String and char consist of characters encoded in either Latin-1 or UTF-16.
+The input String and char consist of characters encoded in either `Latin-1` or `UTF-16`.
 
 **Note:** The benchmark might encompass different allocations, potentially impacting the overall results.
 
@@ -4389,7 +4391,7 @@ Source code: [StringPatternSplitBenchmark.java](https://github.com/ionutbalosin/
 
 [![StringPatternSplitBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)
 
-### Analysis
+### Analysis of pattern_split
 
 The flame graphs below pertain to the `pattern_split` method.
 
@@ -4407,7 +4409,7 @@ The flame graphs below pertain to the `pattern_split` method.
 
 ### Remarks
 
-At first glance, it appears that the Oracle GraalVM JIT Compiler does a better job of inlining. However, a more in-depth 
+At first glance, it appears that the Oracle GraalVM JIT compiler does a better job of inlining. However, a more in-depth 
 analysis might be necessary to identify the differences, as they may not be very obvious to reveal based solely on the generated assembly code.
 
 ## VPThreadCpuBoundBenchmark
@@ -4669,8 +4671,8 @@ This section describes the normalized GM for the entire miscellaneous benchmarks
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
-- all benchmark scores are converted to the same unit (e.g., "ns/op")
-- the resulting geometric mean is normalized to OpenJDK
+- All benchmark scores are converted to the same unit (e.g., "ns/op")
+- The resulting geometric mean is normalized to OpenJDK
 
 ## x86_64
 
@@ -4692,8 +4694,10 @@ Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benc
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
-To summarize, on both architectures the normalized geometric mean for Oracle GraalVM is the fastest.
-OpenJDK and GraalVM CE are very close and interchangeable.
+To summarize, on both architectures based on the normalized geometric mean:
+
+1. Oracle GraalVM is the fastest.
+2. OpenJDK and GraalVM CE are very close and have interchangeable positions.
 
 # Miscellaneous
 
@@ -4703,15 +4707,15 @@ This set of benchmarks covers a broader spectrum of classical programs using dif
 
 The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
 
-**Note:** Only a small subset of the miscellaneous benchmarks are included here; in general, we selected those with significant differences or representing various APIs. For the complete set, please refer to the repository and the generated plots.
+**Note:** Only a small subset of the miscellaneous benchmarks are included here; in general, we selected those with significant performance differences or representing various APIs. For the complete set, please refer to the repository and the generated plots.
 
 ## DijkstraShortestPathBenchmark
 
 Dijkstra's algorithm is an algorithm for finding the shortest paths between a random source node and all other nodes in
 a graph.
 The benchmark uses two alternative approaches, each using different data structures to represent the graph, as follows:
-- an adjacency matrix
-- an adjacency list with a binary heap (min heap)
+1. an adjacency matrix
+2. an adjacency list with a binary heap (min heap)
 
 Adjacency Matrix: This implementation uses an adjacency matrix representation of the graph combined with a standard priority queue (binary heap).
 The adjacency matrix represents the graph as a 2D array, where the value in the matrix indicates the weight of the edge between two nodes.
@@ -4739,9 +4743,9 @@ It is a mathematical "zero-player" game, meaning that its evolution is determine
 The Game of Life is played on a 2D grid of cells, where each cell can be in one of two states: alive or dead (0 or 1).
 The game progresses through generations, with the state of each cell in a generation being determined by the state of its neighboring cells
 in the previous generation according to a set of rules. These rules are based on the concept of birth, death, and survival:
-- Birth: A dead cell with exactly three live neighbors becomes a live.
-- Death: A live cell with fewer than two live neighbors (underpopulation) or more than three live neighbors (overpopulation) becomes a dead cell.
-- Survival: A live cell with two or three live neighbors remains alive.
+- **Birth:** A dead cell with exactly three live neighbors becomes a live.
+- **Death:** A live cell with fewer than two live neighbors (underpopulation) or more than three live neighbors (overpopulation) becomes a dead cell.
+- **Survival:** A live cell with two or three live neighbors remains alive.
 
 Despite its simple rules, the Game of Life can produce complex and intricate patterns, including gliders (moving structures),
 oscillators (repeating patterns), and even structures that can act as logic gates and memory cells.
@@ -4881,8 +4885,8 @@ This section describes the normalized GM for the entire miscellaneous benchmarks
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
-- all benchmark scores are converted to the same unit (e.g., "ns/op")
-- the resulting geometric mean is normalized to OpenJDK
+- All benchmark scores are converted to the same unit (e.g., "ns/op")
+- The resulting geometric mean is normalized to OpenJDK
 
 ## x86_64
 
@@ -4906,18 +4910,18 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. Oracle GraalVM is the fastest
-2. OpenJDK is in the middle
-3. GraalVM CE is the slowest
+1. Oracle GraalVM is the fastest.
+2. OpenJDK is in the middle.
+3. GraalVM CE is the slowest.
 
 ## Overall Geometric Mean
 
-This section describes the normalized GM for the entire benchmarks categories, having in total 1106 benchmarks.
+This section describes the normalized GM for all categories, having in total 1106 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
-- all benchmark scores are converted to the same unit (e.g., "ns/op")
-- the resulting geometric mean is normalized to OpenJDK
+- All benchmark scores are converted to the same unit (e.g., "ns/op")
+- The resulting geometric mean is normalized to OpenJDK
 
 ## x86_64
 
@@ -4941,14 +4945,14 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 To summarize, on both architectures the normalized geometric mean is consistent:
 
-1. Oracle GraalVM is the fastest
-2. OpenJDK is in the middle
-3. GraalVM CE is the slowest
+1. Oracle GraalVM is the fastest.
+2. OpenJDK is in the middle.
+3. GraalVM CE is slightly slower than OpenJDK.
 
 # Overall Conclusions
 
-In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and Oracle GraalVM) on both x86_64 and arm64.
-We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations.
+In this article, we compared three different JVM distributions (OpenJDK, Oracle GraalVM, and GraalVM CE) on both x86_64 and arm64.
+We used a set of JMH benchmarks to evaluate the performance of the JIT compilers, considering a non-exhaustive set of optimizations.
 
 **... TODO ...**
 
