@@ -4398,24 +4398,90 @@ The benchmark method includes the cost of task submission to the initially idle 
 
 **Note:** When a virtual thread executes code inside a synchronized block or method it cannot be unmounted during the blocking operation because it is pinned to its carrier (i.e., the platform thread).
 
+```
+  @Param({"384"})
+  private int loadFactor;
+
+  @Param private LockType lockType;
+  @Param private BackoffType backoffType;
+
+  @Benchmark
+  public void synchronized_calls(ExecutorState executor) throws InterruptedException {
+    final CountDownLatch latch = new CountDownLatch(tasks);
+    IntStream.range(0, tasks).forEach(i -> executor.service.submit(synchronizedWork(latch)));
+    latch.await();
+  }
+
+  private Runnable synchronizedWork(CountDownLatch latch) {
+    return switch (lockType) {
+      case OBJECT_LOCK -> () -> {
+        synchronized (objectLock) {
+          try {
+            backoff();
+          } finally {
+            latch.countDown();
+          }
+        }
+      };
+      case REENTRANT_LOCK -> () -> {
+        reentrantLock.lock();
+        try {
+          backoff();
+        } finally {
+          reentrantLock.unlock();
+          latch.countDown();
+        }
+      };
+      case NO_LOCK -> () -> {
+        try {
+          backoff();
+        } finally {
+          latch.countDown();
+        }
+      };
+    };
+  }
+
+  private void backoff() {
+    switch (backoffType) {
+      case NONE:
+        break;
+      case SLEEP:
+        try {
+          Thread.sleep(0, 1);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+        break;
+      case PARK:
+        LockSupport.parkNanos(1);
+        break;
+      default:
+        throw new UnsupportedOperationException("Unsupported backoff type " + backoffType);
+    }
+  }
+```
+
+The total number of tasks to be executed by either a virtual or a platform thread is proportional to the number of available CPUs multiplied by a factor of 384 (i.e., which makes 384 x 6 = 2,304 on the particular target machine the benchmark was run on).
+
 Source code: [VPThreadSynchronizationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadSynchronizationBenchmark.java)
 
 [![VPThreadSynchronizationBenchmark_param_backoffType_NONE.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_NONE.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_NONE.svg?raw=true)
 
 [![VPThreadSynchronizationBenchmark_param_backoffType_PARK.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_PARK.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/VPThreadSynchronizationBenchmark_param_backoffType_PARK.svg?raw=true)
 
-### Remarks
+### Analysis
 
-#### Remarks for backoffType:NONE
+#### Analysis of backoffType:NONE
 
 In this scenario, platform threads demonstrate lower execution times (i.e., better performance) compared to virtual threads across the tested synchronization mechanisms. 
 Based on the reported performance event statistics, the major differences between virtual and platform threads can be summarized as follows:
 
-- Virtual threads exhibit higher instructions per cycle (`IPC`) than platform threads across diverse synchronization methods.
-- Cache misses (e.g., `L1-dcache-load-misses`, `LLC-load-misses`) are generally higher in virtual threads.
-- Virtual threads tend to have more `branches` and `branch-misses` than platform threads, implying potentially increased overhead in conditional operations or code execution flow.
+- Virtual threads exhibit slightly higher instructions per cycle (`IPC`) than platform threads.
+- Platform threads have relatively lower cache misses (e.g., `L1-dcache-load-misses`, `LLC-load-misses`) than virtual threads.
+- Platform threads tend to have less `branches` and `branch-misses` than platform virtual.
 - `context-switches` occur more frequently in platform threads than in virtual threads.
-- Virtual threads typically consume more CPU `cycles` than platform threads.
+- Virtual threads consume more CPU `cycles` than platform threads.
 
 ```
 // Platform thread stats
@@ -4475,17 +4541,15 @@ context-switches              NO_LOCK  avgt               8.596               #/
 cycles                        NO_LOCK  avgt        17792312.604               #/op
 ```
 
-#### Remarks for backoffType:PARK
+#### Analysis of backoffType:PARK
 
 In this scenario, virtual threads demonstrate lower execution times (i.e., better performance) compared to platform threads across the tested synchronization mechanisms.
 Based on the reported performance event statistics, the major differences between virtual and platform threads can be summarized as follows:
 
-- Virtual threads exhibit higher instructions per cycle (`IPC`) than platform threads across diverse synchronization methods.
-- Cache miss rates (`L1-dcache-load-misses`, `L1-icache-load-misses`) are generally higher for virtual threads compared to platform threads.
+- Virtual threads exhibit slightly higher instructions per cycle (`IPC`) than platform threads.
 - Virtual threads tend to have typically lower `LLC-load-misses` compared to platform threads.
-- The number of `branches` is generally higher in platform threads than in virtual threads.
-- `context-switches` typically occur more frequently in platform threads than in virtual threads.
-- Platform threads typically consume more CPU `cycles` than virtual threads.
+- `context-switches` occur more frequently in platform threads than in virtual threads.
+- Platform threads consume more CPU `cycles` than virtual threads.
 
 ```
 // Platform thread stats
@@ -4493,7 +4557,6 @@ Based on the reported performance event statistics, the major differences betwee
 Perf Event                 (lockType)  Mode               Score              Units
 IPC                       OBJECT_LOCK  avgt               0.687          insns/clk
 L1-dcache-load-misses     OBJECT_LOCK  avgt          640480.970               #/op
-L1-icache-load-misses     OBJECT_LOCK  avgt         2323545.394               #/op
 LLC-load-misses           OBJECT_LOCK  avgt            4576.228               #/op
 branch-misses             OBJECT_LOCK  avgt          165016.601               #/op
 branches                  OBJECT_LOCK  avgt         7692129.353               #/op
@@ -4502,7 +4565,6 @@ cycles                    OBJECT_LOCK  avgt        58254748.922               #/
 
 IPC                    REENTRANT_LOCK  avgt               0.476          insns/clk
 L1-dcache-load-misses  REENTRANT_LOCK  avgt         1035894.902               #/op
-L1-icache-load-misses  REENTRANT_LOCK  avgt         2777082.744               #/op
 LLC-load-misses        REENTRANT_LOCK  avgt            1832.722               #/op
 branch-misses          REENTRANT_LOCK  avgt          241965.715               #/op
 branches               REENTRANT_LOCK  avgt        13410429.953               #/op
@@ -4511,7 +4573,6 @@ cycles                 REENTRANT_LOCK  avgt       134215963.863               #/
 
 IPC                           NO_LOCK  avgt               0.767          insns/clk
 L1-dcache-load-misses         NO_LOCK  avgt          433751.100               #/op
-L1-icache-load-misses         NO_LOCK  avgt         1235885.657               #/op
 LLC-load-misses               NO_LOCK  avgt             674.073               #/op
 branch-misses                 NO_LOCK  avgt           90173.994               #/op
 branches                      NO_LOCK  avgt         4060838.177               #/op
@@ -4525,7 +4586,6 @@ cycles                        NO_LOCK  avgt        25152425.987               #/
 Perf Event                 (lockType)  Mode               Score              Units
 IPC                       OBJECT_LOCK  avgt               0.946          insns/clk
 L1-dcache-load-misses     OBJECT_LOCK  avgt          449792.578               #/op
-L1-icache-load-misses     OBJECT_LOCK  avgt          521808.324               #/op
 LLC-load-misses           OBJECT_LOCK  avgt             940.029               #/op
 branch-misses             OBJECT_LOCK  avgt           86623.166               #/op
 branches                  OBJECT_LOCK  avgt         5401765.289               #/op
@@ -4534,7 +4594,6 @@ cycles                    OBJECT_LOCK  avgt        31854171.315               #/
 
 IPC                    REENTRANT_LOCK  avgt               0.562          insns/clk
 L1-dcache-load-misses  REENTRANT_LOCK  avgt         2108434.887               #/op
-L1-icache-load-misses  REENTRANT_LOCK  avgt         4706842.285               #/op
 LLC-load-misses        REENTRANT_LOCK  avgt            2639.517               #/op
 branch-misses          REENTRANT_LOCK  avgt          447183.746               #/op
 branches               REENTRANT_LOCK  avgt        16424976.383               #/op
@@ -4543,13 +4602,18 @@ cycles                 REENTRANT_LOCK  avgt       158322287.830               #/
 
 IPC                           NO_LOCK  avgt               0.983          insns/clk
 L1-dcache-load-misses         NO_LOCK  avgt          598629.320               #/op
-L1-icache-load-misses         NO_LOCK  avgt          431933.099               #/op
 LLC-load-misses               NO_LOCK  avgt            1340.012               #/op
 branch-misses                 NO_LOCK  avgt          150567.950               #/op
 branches                      NO_LOCK  avgt         5867568.869               #/op
 context-switches              NO_LOCK  avgt             208.967               #/op
 cycles                        NO_LOCK  avgt        35865001.555               #/op
 ```
+
+### Conclusions
+
+This benchmark dispels the myth that replacing platform threads in the application with virtual threads will always increase performance. 
+In general, virtual threads have fewer context switches and potentially higher IPC than platform threads, but the overall performance may also depend on various other factors. 
+Therefore, the decision to simply switch from platform threads to virtual threads should be carefully considered since virtual threads have very specific use cases and are not always the best choice.
 
 ## API Geometric Mean
 
