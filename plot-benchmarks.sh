@@ -24,22 +24,22 @@
 
 check_command_line_options() {
   if [ ! $# -eq 1 ] && [ ! $# -eq 2 ]; then
-    echo "Usage: ./plot-benchmarks <jdk-version> [<arch>]"
+    echo "Usage: ./plot-benchmarks.sh <jdk-version> [<arch>]"
     echo ""
     echo "Options:"
     echo "  jdk-version   Java version identifier for the generated results. Supported values are {11, 17, 21}."
     echo "  arch          Target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture. Supported values are {x86_64, arm64}."
     echo ""
     echo "Examples:"
-    echo "  ./plot-benchmarks 11"
-    echo "  ./plot-benchmarks 11 x86_64"
-    echo "  ./plot-benchmarks 11 arm64"
-    echo "  ./plot-benchmarks 17"
-    echo "  ./plot-benchmarks 17 x86_64"
-    echo "  ./plot-benchmarks 17 arm64"
-    echo "  ./plot-benchmarks 21"
-    echo "  ./plot-benchmarks 21 x86_64"
-    echo "  ./plot-benchmarks 21 arm64"
+    echo "  ./plot-benchmarks.sh 11"
+    echo "  ./plot-benchmarks.sh 11 x86_64"
+    echo "  ./plot-benchmarks.sh 11 arm64"
+    echo "  ./plot-benchmarks.sh 17"
+    echo "  ./plot-benchmarks.sh 17 x86_64"
+    echo "  ./plot-benchmarks.sh 17 arm64"
+    echo "  ./plot-benchmarks.sh 21"
+    echo "  ./plot-benchmarks.sh 21 x86_64"
+    echo "  ./plot-benchmarks.sh 21 arm64"
     echo ""
     return 1
   fi
