@@ -48,14 +48,14 @@ import org.openjdk.jmh.annotations.Warmup;
  * sub-tasks, processes them in parallel, and returns their results, which are subsequently
  * aggregated to form the final response.
  *
- * Since by default each sub-task is executed within a virtual thread, the implementation also
- * compares the performance of using platform threads.
+ * The implementation compares the performance of using virtual threads with platform threads.
  *
- * To generate a realistic CPU load, the number of tasks created is proportional to the available
- * number of processors multiplied by a load factor.
+ * To simulate a realistic CPU load, the number of tasks is directly proportional to the
+ * available processors multiplied by a load factor. The total tasks for virtual or platform threads
+ * are determined by multiplying the available CPUs by a load factor.
  *
  * References:
- * - https://github.com/JosePaumard/JDK20_2023-Loom-Lab
+ *  - https://github.com/JosePaumard/JDK20_2023-Loom-Lab
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)

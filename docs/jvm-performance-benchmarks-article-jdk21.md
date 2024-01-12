@@ -4447,6 +4447,9 @@ The benchmark method includes the cost of task submission to the initially idle 
 
 **Note:** When a virtual thread executes code inside a synchronized block or method it cannot be unmounted during the blocking operation because it is pinned to its carrier (i.e., the platform thread).
 
+The total number of tasks to be executed by either a virtual or a platform thread is proportional to the number of available
+CPUs multiplied by a factor of `384` (i.e., which makes `384 x 6 = 2,304` on the particular `x86_64` target machine the benchmark was run on).
+
 ```
   @Param({"384"})
   private int loadFactor;
@@ -4510,8 +4513,6 @@ The benchmark method includes the cost of task submission to the initially idle 
     }
   }
 ```
-
-The total number of tasks to be executed by either a virtual or a platform thread is proportional to the number of available CPUs multiplied by a factor of 384 (i.e., which makes 384 x 6 = 2,304 on the particular target machine the benchmark was run on).
 
 Source code: [VPThreadSynchronizationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/thread/VPThreadSynchronizationBenchmark.java)
 
@@ -4758,6 +4759,21 @@ Source code: [GameOfLifeBenchmark.java](https://github.com/ionutbalosin/jvm-perf
 
 [![GameOfLifeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/GameOfLifeBenchmark.svg?raw=true)
 
+## HolidayPlannerBenchmark
+
+This benchmark simulates a holiday planning system that utilizes the `structured concurrency API` to collect necessary 
+information from multiple sources for trip planning. These sources include quotations, tourist attractions, and weather data. 
+Each of these sources divides the work into sub-tasks, processes them in parallel, and returns their results, which are subsequently
+aggregated to form the final response.
+The implementation compares the performance of using virtual threads with platform threads. 
+
+The total number of tasks to be executed by either a virtual or a platform thread is proportional to the number of available
+CPUs multiplied by a factor of `256` (i.e., which makes `256 x 6 = 1,536` on the particular `x86_64` target machine the benchmark was run on).
+
+Source code: [HolidayPlannerBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/miscellaneous/holidayplanner/HolidayPlannerBenchmark.java)
+
+[![HolidayPlannerBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HolidayPlannerBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/HolidayPlannerBenchmark.svg?raw=true)
+
 ## HuffmanCodingBenchmark
 
 Huffman encoding is an algorithm devised by David A. Huffman of MIT in 1952 for compressing text data to make a file
@@ -4951,21 +4967,23 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 # Overall Conclusions
 
-In this article, we compared three different JVM distributions (OpenJDK, Oracle GraalVM, and GraalVM CE) on both `x86_64` and `arm64` architectures.
+In this article, we compared three different JVM distributions (OpenJDK, Oracle GraalVM, and GraalVM CE) on both `x86_64` and `arm64` architectures. 
 We used a set of JMH benchmarks to evaluate the performance of the JIT compilers, considering a non-exhaustive set of optimizations.
 
-We can conclude that the Oracle GraalVM JIT compiler outperforms the C2 JIT compiler (and GraalVM CE JIT) in the majority of the benchmarks. 
-Overall, it is approximately 29.87% faster than C2 JIT on `x86_64` and around 20.48% faster on `arm64`.
-In particular, optimizations such as better partial escape analysis, more aggressive inter-procedural inlining heuristics 
-(including polymorphic inlining, method recursive inlining, constructor inlining, etc.), compact TLAB allocation code for grouped allocations, 
-extended vectorized support, and, in general, cleaner and more compact CPU assembly instructions make a difference.
+We conclude that the Oracle GraalVM JIT compiler outperforms the C2 JIT compiler (and GraalVM CE JIT compiler) in the majority of the benchmarks. 
+Overall, the Oracle GraalVM JIT compiler is approximately `29.87%` faster than C2 JIT on `x86_64` and around `20.48%` faster on `arm64`. 
+Optimizations such as improved partial escape analysis, more aggressive inter-procedural inlining heuristics (including polymorphic inlining, 
+method recursive inlining, constructor inlining, etc.), compact TLAB allocation code for grouped allocations, extended vectorized support, 
+and (in general) cleaner and more compact CPU assembly instructions make a significant difference.
 
-C2 JIT and GraalVM CE JIT perform very closely overall, but there are fundamental differences between these two compilers.
-In contrast to GraalVM CE JIT, the C2 JIT compiler offers an extended set of intrinsics and vectorization support, 
+Based on the normalized geometric mean, the C2 JIT and GraalVM CE JIT score closely overall, but there are fundamental differences between these two compilers.
+
+The C2 JIT compiler, in contrast to GraalVM CE JIT, offers a broader set of intrinsics and vectorization support, 
 along with a better mechanism for handling exceptions when the same exception is thrown multiple times in the hot path. 
 However, C2 JIT exhibits limited inter-procedural inlining heuristics, constrained devirtualization of polymorphic calls 
-(i.e., when the number of targets is higher than two), and, in some very specific cases, it even falls back to the Interpreter 
-without the ability to further optimize to a higher tier.
+(i.e., when the number of targets is higher than two), and, in some very specific cases, it even falls back to the 
+Interpreter without the ability to further optimize to a higher tier.
+
 On the other hand, GraalVM CE JIT, compared to C2 JIT, demonstrates superior partial escape analysis and inlining heuristics. 
 Nevertheless, it has a limited set of intrinsics and vectorization support, along with poor loop optimizations.
 
