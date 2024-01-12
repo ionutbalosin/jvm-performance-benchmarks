@@ -88,7 +88,8 @@ public class StrengthReductionBenchmark {
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
-            + val + val + val + val + val + val + val // i.e., 64 additions
+            + val + val + val + val + val + val + val
+        // i.e., 64 additions
         : val;
   }
 
