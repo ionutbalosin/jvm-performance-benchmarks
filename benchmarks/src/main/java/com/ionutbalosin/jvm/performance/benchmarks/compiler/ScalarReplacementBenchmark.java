@@ -1,7 +1,7 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2023 Ionut Balosin
+ * Copyright (C) 2019 - 2024 Ionut Balosin
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -35,18 +35,22 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- *
  * Compiler analyses the scope of a new object and decides whether it might be allocated or not on the heap.
  * The method is called Escape Analysis (EA), which identifies if the newly created object is escaping or not into the heap.
- * To not be confused, EA is not an optimization but rather an analysis phase for the optimizer.
- * There are few escape states:
- * - NoEscape - the object cannot be visible outside the current method and thread.
- * - ArgEscape - the object is passed as an argument to a method but cannot otherwise be visible outside the method or by other threads.
- * - GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
- * For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
  *
- * References:
- * - https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
+ * To not be confused, EA is not an optimization but rather an analysis phase for the optimizer.
+ *
+ * There are few escape states:
+ * - `NoEscape` - The object does not escape the method or thread, and it is not passed to a call.
+ * - `ArgEscape` - The object does not escape the method or thread, but it is passed as an argument to a call or referenced by an argument,
+ * and it does not escape during the call.
+ * - `GlobalEscape` - The object can escape the method or the thread, which means that such an object is visible outside the method or thread.
+ *
+ * For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands:
+ * which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate
+ * the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+ *
+ * References: - https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

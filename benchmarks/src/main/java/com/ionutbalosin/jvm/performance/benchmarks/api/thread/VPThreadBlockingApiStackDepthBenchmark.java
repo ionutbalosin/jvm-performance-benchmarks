@@ -1,7 +1,7 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2023 Ionut Balosin
+ * Copyright (C) 2019 - 2024 Ionut Balosin
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -58,11 +58,6 @@ import org.openjdk.jmh.annotations.Warmup;
  * during freeze and thaw (i.e., stack frames can be moved in and out via memcpy) as long as the
  * garbage collector (GC) has not seen it yet. For some GCs, this typically occurs during the entire
  * young generation phase.
- *
- * As the stack depth increases, more stack frames will require copying into the stack-chunks,
- * potentially leading to the expansion of the stack-chunks list. Consequently, when using virtual
- * threads this mechanism adds more 'pressure' on the runtime to manage them compared to platform
- * threads.
  *
  * Note: Typically, a virtual thread will unmount when it blocks on I/O or some other blocking
  * operation in the JDK, such as BlockingQueue.take(). When the blocking operation is ready to

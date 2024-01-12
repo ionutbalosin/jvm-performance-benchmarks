@@ -318,7 +318,7 @@ Please see the [LICENSE](./license/LICENSE) file for full license.
 ```
 JVM Performance Benchmarks
 
-Copyright (C) 2019 - 2023 Ionut Balosin
+Copyright (C) 2019 - 2024 Ionut Balosin
 
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file

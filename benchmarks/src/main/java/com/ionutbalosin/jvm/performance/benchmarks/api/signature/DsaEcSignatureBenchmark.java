@@ -1,7 +1,7 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2023 Ionut Balosin
+ * Copyright (C) 2019 - 2024 Ionut Balosin
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -43,7 +43,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths,
+ * The benchmark measures the performance of ECDSA (elliptic curve DSA) using different message lengths,
  * key lengths and hash sizes.
  */
 @BenchmarkMode(Mode.AverageTime)

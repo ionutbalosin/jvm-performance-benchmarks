@@ -1,7 +1,7 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2023 Ionut Balosin
+ * Copyright (C) 2019 - 2024 Ionut Balosin
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -64,6 +64,10 @@ import org.openjdk.jmh.annotations.Warmup;
  * Note: When a virtual thread executes code inside a synchronized block or method it cannot be
  * unmounted during the blocking operation because it is pinned to its carrier (i.e., the platform
  * thread).
+ *
+ * To simulate a realistic CPU load, the number of tasks is directly proportional to the
+ * available processors multiplied by a load factor. The total tasks for virtual or platform threads
+ * are determined by multiplying the available CPUs by a load factor.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)

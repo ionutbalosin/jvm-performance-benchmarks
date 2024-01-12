@@ -1,7 +1,7 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2023 Ionut Balosin
+ * Copyright (C) 2019 - 2024 Ionut Balosin
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -52,8 +52,7 @@ import static java.util.FormatProcessor.FMT;
  *
  * The input String and char consist of characters encoded in either Latin-1 or UTF-16.
  *
- * Note: The benchmarking process may involve a varying number of allocations, potentially influencing
- * the overall results, albeit without fundamentally altering the outcomes.
+ * Note: The benchmark might encompass different allocations, potentially impacting the overall results.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

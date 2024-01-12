@@ -1,7 +1,7 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2023 Ionut Balosin
+ * Copyright (C) 2019 - 2024 Ionut Balosin
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -89,6 +89,7 @@ public class StrengthReductionBenchmark {
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val + val + val + val + val + val + val + val
             + val + val + val + val + val + val + val
+        // i.e., 64 additions
         : val;
   }
 

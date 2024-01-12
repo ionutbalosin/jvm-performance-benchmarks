@@ -1,0 +1,983 @@
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 1, threadType = VIRTUAL)
+
+# Run progress: 0.00% complete, ETA 00:13:20
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 32.438 us/op
+# Warmup Iteration   2: 31.109 us/op
+# Warmup Iteration   3: 31.625 us/op
+# Warmup Iteration   4: 31.246 us/op
+# Warmup Iteration   5: 31.431 us/op
+Iteration   1: 31.088 us/op
+Iteration   2: 31.222 us/op
+Iteration   3: 31.158 us/op
+Iteration   4: 31.080 us/op
+Iteration   5: 31.142 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  31.138 ±(99.9%) 0.222 us/op [Average]
+  (min, avg, max) = (31.080, 31.138, 31.222), stdev = 0.058
+  CI (99.9%): [30.916, 31.360] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.917 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.522 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  1678.501 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  14417.859 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  9085.295 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  3487.601 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  0.180 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  317.602 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  1.787 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  469.920 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  265.750 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  10887.855 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  4.305 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  106206.123 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  16.543 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  14807.145 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  0.492 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  9138.865 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  19.372 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  160.584 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  55390.483 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 1, threadType = PLATFORM)
+
+# Run progress: 12.50% complete, ETA 00:12:03
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 188.664 us/op
+# Warmup Iteration   2: 191.252 us/op
+# Warmup Iteration   3: 194.300 us/op
+# Warmup Iteration   4: 193.741 us/op
+# Warmup Iteration   5: 191.145 us/op
+Iteration   1: 192.544 us/op
+Iteration   2: 191.595 us/op
+Iteration   3: 191.631 us/op
+Iteration   4: 191.381 us/op
+Iteration   5: 191.396 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  191.709 ±(99.9%) 1.849 us/op [Average]
+  (min, avg, max) = (191.381, 191.709, 192.544), stdev = 0.480
+  CI (99.9%): [189.861, 193.558] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.986 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.503 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  4507.905 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  32209.485 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  17869.100 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  10016.279 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  25.491 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  1700.130 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  218.528 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  1161.618 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  1034.297 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  25674.021 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  6.433 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  223582.666 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  247.803 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  24837.170 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  26.667 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  17453.107 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  197.215 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  287.474 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  112554.110 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 10, threadType = VIRTUAL)
+
+# Run progress: 25.00% complete, ETA 00:10:26
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 74.639 us/op
+# Warmup Iteration   2: 67.646 us/op
+# Warmup Iteration   3: 67.192 us/op
+# Warmup Iteration   4: 67.566 us/op
+# Warmup Iteration   5: 68.387 us/op
+Iteration   1: 67.772 us/op
+Iteration   2: 67.547 us/op
+Iteration   3: 67.364 us/op
+Iteration   4: 67.407 us/op
+Iteration   5: 67.479 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  67.514 ±(99.9%) 0.618 us/op [Average]
+  (min, avg, max) = (67.364, 67.514, 67.772), stdev = 0.160
+  CI (99.9%): [66.896, 68.132] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  2.026 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.494 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  3917.833 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  38306.832 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  23665.781 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  8594.701 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  0.514 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  995.067 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  6.916 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  1077.564 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  760.143 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  28852.260 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  11.401 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  298370.762 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  48.917 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  38754.260 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  1.380 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  23798.915 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  49.351 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  468.466 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  147285.522 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 10, threadType = PLATFORM)
+
+# Run progress: 37.50% complete, ETA 00:08:43
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 268.707 us/op
+# Warmup Iteration   2: 268.451 us/op
+# Warmup Iteration   3: 267.873 us/op
+# Warmup Iteration   4: 268.608 us/op
+# Warmup Iteration   5: 267.979 us/op
+Iteration   1: 267.582 us/op
+Iteration   2: 267.216 us/op
+Iteration   3: 266.700 us/op
+Iteration   4: 267.253 us/op
+Iteration   5: 266.450 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  267.040 ±(99.9%) 1.758 us/op [Average]
+  (min, avg, max) = (266.450, 267.040, 267.582), stdev = 0.457
+  CI (99.9%): [265.283, 268.798] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.869 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.535 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  6248.740 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  51907.385 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  30110.188 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  13725.416 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  52.699 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  2060.626 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  304.625 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  1540.389 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  1290.731 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  40412.051 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  15.156 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  344856.841 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  330.238 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  42125.498 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  32.926 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  28013.129 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  254.308 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  529.957 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  184524.105 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 100, threadType = VIRTUAL)
+
+# Run progress: 50.00% complete, ETA 00:06:59
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 279.902 us/op
+# Warmup Iteration   2: 258.163 us/op
+# Warmup Iteration   3: 255.765 us/op
+# Warmup Iteration   4: 254.139 us/op
+# Warmup Iteration   5: 259.055 us/op
+Iteration   1: 258.431 us/op
+Iteration   2: 252.295 us/op
+Iteration   3: 260.778 us/op
+Iteration   4: 258.840 us/op
+Iteration   5: 247.873 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  255.643 ±(99.9%) 20.731 us/op [Average]
+  (min, avg, max) = (247.873, 255.643, 260.778), stdev = 5.384
+  CI (99.9%): [234.912, 276.375] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.885 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.531 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  16667.718 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  182785.901 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  113846.514 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  28525.027 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  5.368 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  4181.276 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  871.665 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  5212.179 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  3968.418 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  124573.691 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  36.149 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  1317676.742 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  331.607 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  181083.026 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  35.181 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  113377.460 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  357.661 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  1181.330 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  699144.476 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 100, threadType = PLATFORM)
+
+# Run progress: 62.50% complete, ETA 00:05:14
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1272.727 us/op
+# Warmup Iteration   2: 1260.530 us/op
+# Warmup Iteration   3: 1263.493 us/op
+# Warmup Iteration   4: 1259.509 us/op
+# Warmup Iteration   5: 1261.525 us/op
+Iteration   1: 1259.719 us/op
+Iteration   2: 1266.335 us/op
+Iteration   3: 1261.852 us/op
+Iteration   4: 1264.253 us/op
+Iteration   5: 1260.098 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  1262.451 ±(99.9%) 10.839 us/op [Average]
+  (min, avg, max) = (1259.719, 1262.451, 1266.335), stdev = 2.815
+  CI (99.9%): [1251.613, 1273.290] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.831 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.546 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  19418.087 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  221495.911 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  133543.949 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  51656.512 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  81.750 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  4521.592 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  157.470 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  4290.198 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  5147.869 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  165723.317 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  104.779 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  1406720.331 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  746.345 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  182727.124 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  59.407 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  125130.841 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  637.113 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  2492.184 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  768301.175 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 1000, threadType = VIRTUAL)
+
+# Run progress: 75.00% complete, ETA 00:03:30
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 1656.244 us/op
+# Warmup Iteration   2: 1494.733 us/op
+# Warmup Iteration   3: 1500.645 us/op
+# Warmup Iteration   4: 1481.835 us/op
+# Warmup Iteration   5: 1469.864 us/op
+Iteration   1: 1526.962 us/op
+Iteration   2: 1523.013 us/op
+Iteration   3: 1520.299 us/op
+Iteration   4: 1513.704 us/op
+Iteration   5: 1506.599 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  1518.115 ±(99.9%) 30.992 us/op [Average]
+  (min, avg, max) = (1506.599, 1518.115, 1526.962), stdev = 8.048
+  CI (99.9%): [1487.124, 1549.107] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.817 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.550 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  102715.164 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  1324811.133 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  825096.292 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  149807.301 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  180.035 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  26292.873 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  8310.701 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  38603.783 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  29412.199 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  853935.831 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  172.335 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  8989188.964 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  2292.750 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  1298958.472 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  282.870 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  816691.999 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  1419.490 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  5219.397 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  4947055.298 #/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-jvmci-23.1-b15
+# VM invoker: /home/gogu/bench_jdks/graalvm-jdk-21+35.1/bin/java
+# VM options: -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:-UnlockExperimentalVMOptions -Xms4g -Xmx4g -XX:+AlwaysPreTouch
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls
+# Parameters: (dataSize = 64, stackDepth = 1000, threadType = PLATFORM)
+
+# Run progress: 87.50% complete, ETA 00:01:45
+# Fork: 1 of 1
+# Preparing profilers: LinuxPerfNormProfiler 
+# Profilers consume stderr from target VM, use -v EXTRA to copy to console
+# Warmup Iteration   1: 10279.419 us/op
+# Warmup Iteration   2: 10277.386 us/op
+# Warmup Iteration   3: 10365.695 us/op
+# Warmup Iteration   4: 10295.302 us/op
+# Warmup Iteration   5: 10256.556 us/op
+Iteration   1: 10381.067 us/op
+Iteration   2: 10313.580 us/op
+Iteration   3: 10318.747 us/op
+Iteration   4: 10292.924 us/op
+Iteration   5: 10406.519 us/op
+# Processing profiler results: LinuxPerfNormProfiler 
+
+
+Result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls":
+  10342.567 ±(99.9%) 187.104 us/op [Average]
+  (min, avg, max) = (10292.924, 10342.567, 10406.519), stdev = 48.590
+  CI (99.9%): [10155.463, 10529.672] (assumes normal distribution)
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI":
+  1.683 clks/insn
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC":
+  0.594 insns/clk
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses":
+  163540.190 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads":
+  2155184.600 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores":
+  1202004.761 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses":
+  407667.765 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses":
+  231.431 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads":
+  25912.241 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses":
+  354.500 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores":
+  31544.688 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses":
+  40508.495 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches":
+  1678231.837 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches":
+  996.175 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles":
+  13235539.166 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses":
+  2870.118 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads":
+  1557037.522 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses":
+  203.734 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores":
+  1055773.600 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses":
+  3651.468 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads":
+  24617.409 #/op
+
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions":
+  7865317.818 #/op
+
+
+# Run complete. Total time: 00:14:00
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                                                    (dataSize)  (stackDepth)  (threadType)  Mode  Cnt         Score     Error      Units
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64             1       VIRTUAL  avgt    5        31.138 ±   0.222      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64             1       VIRTUAL  avgt              1.917            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64             1       VIRTUAL  avgt              0.522            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64             1       VIRTUAL  avgt           1678.501                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64             1       VIRTUAL  avgt          14417.859                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64             1       VIRTUAL  avgt           9085.295                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64             1       VIRTUAL  avgt           3487.601                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64             1       VIRTUAL  avgt              0.180                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64             1       VIRTUAL  avgt            317.602                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64             1       VIRTUAL  avgt              1.787                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64             1       VIRTUAL  avgt            469.920                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64             1       VIRTUAL  avgt            265.750                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64             1       VIRTUAL  avgt          10887.855                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64             1       VIRTUAL  avgt              4.305                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64             1       VIRTUAL  avgt         106206.123                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64             1       VIRTUAL  avgt             16.543                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64             1       VIRTUAL  avgt          14807.145                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64             1       VIRTUAL  avgt              0.492                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64             1       VIRTUAL  avgt           9138.865                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64             1       VIRTUAL  avgt             19.372                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64             1       VIRTUAL  avgt            160.584                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64             1       VIRTUAL  avgt          55390.483                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64             1      PLATFORM  avgt    5       191.709 ±   1.849      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64             1      PLATFORM  avgt              1.986            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64             1      PLATFORM  avgt              0.503            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64             1      PLATFORM  avgt           4507.905                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64             1      PLATFORM  avgt          32209.485                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64             1      PLATFORM  avgt          17869.100                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64             1      PLATFORM  avgt          10016.279                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64             1      PLATFORM  avgt             25.491                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64             1      PLATFORM  avgt           1700.130                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64             1      PLATFORM  avgt            218.528                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64             1      PLATFORM  avgt           1161.618                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64             1      PLATFORM  avgt           1034.297                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64             1      PLATFORM  avgt          25674.021                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64             1      PLATFORM  avgt              6.433                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64             1      PLATFORM  avgt         223582.666                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64             1      PLATFORM  avgt            247.803                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64             1      PLATFORM  avgt          24837.170                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64             1      PLATFORM  avgt             26.667                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64             1      PLATFORM  avgt          17453.107                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64             1      PLATFORM  avgt            197.215                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64             1      PLATFORM  avgt            287.474                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64             1      PLATFORM  avgt         112554.110                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64            10       VIRTUAL  avgt    5        67.514 ±   0.618      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64            10       VIRTUAL  avgt              2.026            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64            10       VIRTUAL  avgt              0.494            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64            10       VIRTUAL  avgt           3917.833                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64            10       VIRTUAL  avgt          38306.832                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64            10       VIRTUAL  avgt          23665.781                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64            10       VIRTUAL  avgt           8594.701                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64            10       VIRTUAL  avgt              0.514                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64            10       VIRTUAL  avgt            995.067                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64            10       VIRTUAL  avgt              6.916                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64            10       VIRTUAL  avgt           1077.564                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64            10       VIRTUAL  avgt            760.143                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64            10       VIRTUAL  avgt          28852.260                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64            10       VIRTUAL  avgt             11.401                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64            10       VIRTUAL  avgt         298370.762                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64            10       VIRTUAL  avgt             48.917                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64            10       VIRTUAL  avgt          38754.260                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64            10       VIRTUAL  avgt              1.380                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64            10       VIRTUAL  avgt          23798.915                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64            10       VIRTUAL  avgt             49.351                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64            10       VIRTUAL  avgt            468.466                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64            10       VIRTUAL  avgt         147285.522                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64            10      PLATFORM  avgt    5       267.040 ±   1.758      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64            10      PLATFORM  avgt              1.869            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64            10      PLATFORM  avgt              0.535            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64            10      PLATFORM  avgt           6248.740                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64            10      PLATFORM  avgt          51907.385                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64            10      PLATFORM  avgt          30110.188                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64            10      PLATFORM  avgt          13725.416                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64            10      PLATFORM  avgt             52.699                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64            10      PLATFORM  avgt           2060.626                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64            10      PLATFORM  avgt            304.625                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64            10      PLATFORM  avgt           1540.389                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64            10      PLATFORM  avgt           1290.731                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64            10      PLATFORM  avgt          40412.051                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64            10      PLATFORM  avgt             15.156                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64            10      PLATFORM  avgt         344856.841                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64            10      PLATFORM  avgt            330.238                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64            10      PLATFORM  avgt          42125.498                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64            10      PLATFORM  avgt             32.926                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64            10      PLATFORM  avgt          28013.129                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64            10      PLATFORM  avgt            254.308                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64            10      PLATFORM  avgt            529.957                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64            10      PLATFORM  avgt         184524.105                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64           100       VIRTUAL  avgt    5       255.643 ±  20.731      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64           100       VIRTUAL  avgt              1.885            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64           100       VIRTUAL  avgt              0.531            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64           100       VIRTUAL  avgt          16667.718                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64           100       VIRTUAL  avgt         182785.901                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64           100       VIRTUAL  avgt         113846.514                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64           100       VIRTUAL  avgt          28525.027                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64           100       VIRTUAL  avgt              5.368                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64           100       VIRTUAL  avgt           4181.276                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64           100       VIRTUAL  avgt            871.665                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64           100       VIRTUAL  avgt           5212.179                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64           100       VIRTUAL  avgt           3968.418                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64           100       VIRTUAL  avgt         124573.691                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64           100       VIRTUAL  avgt             36.149                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64           100       VIRTUAL  avgt        1317676.742                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64           100       VIRTUAL  avgt            331.607                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64           100       VIRTUAL  avgt         181083.026                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64           100       VIRTUAL  avgt             35.181                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64           100       VIRTUAL  avgt         113377.460                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64           100       VIRTUAL  avgt            357.661                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64           100       VIRTUAL  avgt           1181.330                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64           100       VIRTUAL  avgt         699144.476                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64           100      PLATFORM  avgt    5      1262.451 ±  10.839      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64           100      PLATFORM  avgt              1.831            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64           100      PLATFORM  avgt              0.546            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64           100      PLATFORM  avgt          19418.087                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64           100      PLATFORM  avgt         221495.911                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64           100      PLATFORM  avgt         133543.949                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64           100      PLATFORM  avgt          51656.512                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64           100      PLATFORM  avgt             81.750                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64           100      PLATFORM  avgt           4521.592                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64           100      PLATFORM  avgt            157.470                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64           100      PLATFORM  avgt           4290.198                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64           100      PLATFORM  avgt           5147.869                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64           100      PLATFORM  avgt         165723.317                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64           100      PLATFORM  avgt            104.779                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64           100      PLATFORM  avgt        1406720.331                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64           100      PLATFORM  avgt            746.345                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64           100      PLATFORM  avgt         182727.124                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64           100      PLATFORM  avgt             59.407                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64           100      PLATFORM  avgt         125130.841                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64           100      PLATFORM  avgt            637.113                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64           100      PLATFORM  avgt           2492.184                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64           100      PLATFORM  avgt         768301.175                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64          1000       VIRTUAL  avgt    5      1518.115 ±  30.992      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64          1000       VIRTUAL  avgt              1.817            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64          1000       VIRTUAL  avgt              0.550            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64          1000       VIRTUAL  avgt         102715.164                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64          1000       VIRTUAL  avgt        1324811.133                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64          1000       VIRTUAL  avgt         825096.292                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64          1000       VIRTUAL  avgt         149807.301                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64          1000       VIRTUAL  avgt            180.035                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64          1000       VIRTUAL  avgt          26292.873                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64          1000       VIRTUAL  avgt           8310.701                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64          1000       VIRTUAL  avgt          38603.783                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64          1000       VIRTUAL  avgt          29412.199                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64          1000       VIRTUAL  avgt         853935.831                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64          1000       VIRTUAL  avgt            172.335                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64          1000       VIRTUAL  avgt        8989188.964                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64          1000       VIRTUAL  avgt           2292.750                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64          1000       VIRTUAL  avgt        1298958.472                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64          1000       VIRTUAL  avgt            282.870                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64          1000       VIRTUAL  avgt         816691.999                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64          1000       VIRTUAL  avgt           1419.490                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64          1000       VIRTUAL  avgt           5219.397                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64          1000       VIRTUAL  avgt        4947055.298                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls                                64          1000      PLATFORM  avgt    5     10342.567 ± 187.104      us/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:CPI                            64          1000      PLATFORM  avgt              1.683            clks/insn
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:IPC                            64          1000      PLATFORM  avgt              0.594            insns/clk
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-load-misses          64          1000      PLATFORM  avgt         163540.190                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-loads                64          1000      PLATFORM  avgt        2155184.600                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-dcache-stores               64          1000      PLATFORM  avgt        1202004.761                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:L1-icache-load-misses          64          1000      PLATFORM  avgt         407667.765                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-load-misses                64          1000      PLATFORM  avgt            231.431                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-loads                      64          1000      PLATFORM  avgt          25912.241                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-store-misses               64          1000      PLATFORM  avgt            354.500                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:LLC-stores                     64          1000      PLATFORM  avgt          31544.688                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branch-misses                  64          1000      PLATFORM  avgt          40508.495                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:branches                       64          1000      PLATFORM  avgt        1678231.837                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:context-switches               64          1000      PLATFORM  avgt            996.175                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:cycles                         64          1000      PLATFORM  avgt       13235539.166                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-load-misses               64          1000      PLATFORM  avgt           2870.118                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-loads                     64          1000      PLATFORM  avgt        1557037.522                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-store-misses              64          1000      PLATFORM  avgt            203.734                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:dTLB-stores                    64          1000      PLATFORM  avgt        1055773.600                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-load-misses               64          1000      PLATFORM  avgt           3651.468                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:iTLB-loads                     64          1000      PLATFORM  avgt          24617.409                 #/op
+VPThreadBlockingApiStackDepthBenchmark.blocking_calls:instructions                   64          1000      PLATFORM  avgt        7865317.818                 #/op
