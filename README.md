@@ -6,8 +6,6 @@
   JVM Performance Benchmarks
 </h1>
 
----
-
 This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
 The benchmarks are structured in three distinct categories:
