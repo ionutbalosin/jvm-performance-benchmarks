@@ -1,8 +1,8 @@
-<p style="text-align: center;">
+<p align="center">
   <img alt="JvmPerformanceBenchmarks" title="JvmPerformanceBenchmarks" src="./docs/images/jpb_logo_320.png">
 </p>
 
-<h1 style="text-align: center;">
+<h1 align="center">
   JVM Performance Benchmarks
 </h1>
 
