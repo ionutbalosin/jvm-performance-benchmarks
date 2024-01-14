@@ -4977,7 +4977,7 @@ We used a set of JMH benchmarks to evaluate the performance of the JIT compilers
 
 Based on the normalized overall geometric mean, the Oracle GraalVM JIT compiler is the fastest, followed by the C2 JIT compiler, and then the GraalVM CE JIT compiler.
 
-The Oracle GraalVM JIT compiler obtains a geometric mean score improvement of approximately `23%` on `x86_64` and `17%` on `arm64` compared to the C2 JIT compiler. 
+The Oracle GraalVM JIT compiler obtains a geometric mean performance improvement of approximately `23%` on `x86_64` and `17%` on `arm64` compared to the C2 JIT compiler. 
 Optimizations such as improved partial escape analysis, more aggressive inlining (including polymorphic inlining, 
 recursive method inlining, constructor inlining, etc.), compact TLAB allocation code for grouped allocations, extended vectorization support, 
 and (in general) cleaner and more compact CPU assembly instructions make a significant difference.
