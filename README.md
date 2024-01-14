@@ -1,8 +1,10 @@
-# Java Virtual Machine (JVM) Performance Benchmarks
-
 <p align="center">
   <img alt="JvmPerformanceBenchmarks" title="JvmPerformanceBenchmarks" src="./docs/images/jpb_logo_320.png">
 </p>
+
+<h1 align="center">
+  JVM Performance Benchmarks
+</h1>
 
 This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
@@ -12,6 +14,8 @@ The benchmarks are structured in three distinct categories:
 3. **Miscellaneous**: This category covers a broader spectrum of classical programs (e.g., Dijkstra's shortest path, factorial, Fibonacci, Game of Life, image rotation, knapsack problem, N queens, palindrome, Huffman coding/encoding, Lempel-Ziv-Welch compression, etc.) using different techniques (e.g., dynamic programming, greedy algorithms, backtracking, divide and conquer, etc.), various programming styles (e.g., iterative, functional), and high-level Java APIs (e.g., streams, lambdas, fork-join, collections, etc.).
 
 All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](https://github.com/openjdk/jmh) library.
+
+---
 
 ## Contents
 
