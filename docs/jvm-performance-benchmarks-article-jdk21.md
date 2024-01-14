@@ -58,7 +58,7 @@ This article is based on the [jvm-performance-benchmarks](https://github.com/ion
 
 - Java Development Kit (JDK) 21
 - Java Microbenchmark Harness (JMH) v1.37
-- Each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, both single-threaded but also multi-threaded workloads (depending on the test case)
+- Each benchmark uses 5x10s warm-up iterations, 5x10s measurement iterations, and 5 JVM forks, for both single-threaded and multi-threaded workloads (depending on the test case)
 - The benchmarks were run on the below machines:
     1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Ventura 13.6.1
     2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
@@ -314,7 +314,7 @@ The GraalVM CE JIT compiler, akin to the C2 JIT compiler, is capable of devirtua
 
 The Oracle GraalVM JIT compiler stands out as the sole compiler capable of completely eliminating dead arguments.
 
-In comparison, the C2 JIT compiler has a limited capability for inlining recursive calls (`recursive_method_calls` scenario), resulting in slower response times compared to even the GraalVM CE JIT compiler. However, in this benchmark, neither of these two compilers eliminates dead arguments since the full inlining of the callee method `recursiveMethod` isn't occurring.
+In comparison, the C2 JIT compiler has a limited capability for inlining recursive calls (`recursive_method_calls` scenario), resulting in slower execution times compared to the GraalVM CE JIT compiler. However, in this benchmark, neither of the two compilers eliminates dead arguments since full inlining of the callee method `recursiveMethod` does not occur.
 
 ## DeadLocalAllocationStoreBenchmark
 
@@ -1169,13 +1169,13 @@ The GraalVM CE JIT compiler processes elements individually without loop unrolli
 
 Oracle GraalVM's JIT compiler utilizes vectorized instructions, leveraging 256-bit wide AVX (Advanced Vector Extensions) registers for efficiently summing array elements.
 
-The C2 JIT compiler unrolls the main loop by a factor of 16 (`no_if_branch` scenario) or by a factor of 8 (`unpredictable_if_branch` scenario). However, due to its use of scalar operations instead of vectorized instructions, it does not achieve performance levels comparable to the Oracle GraalVM JIT compiler.
+The C2 JIT compiler unrolls the main loop by a factor of 16 (`no_if_branch` scenario) or by a factor of 8 (`unpredictable_if_branch` scenario). However, due to its use of scalar operations instead of vectorized instructions, it does not achieve the performance of the Oracle GraalVM JIT compiler.
 
 The GraalVM CE JIT compiler exhibits suboptimal behavior in these specific cases. For instance, it experiences register spills during the unrolling of the main loop by a factor of 16 (`no_if_branch` scenario). Alternatively, it may refrain from unrolling altogether (`unpredictable_if_branch` scenario) due to conditional comparisons within the loop body.
 
 ## LockCoarseningBenchmark
 
-Testing how the compiler effectively coarsens or merges several adjacent synchronized blocks into one synchronized block can potentially reduce locking overhead. This optimization can be applied when the same lock object is used by multiple methods. However, it's important to note that while compilers can assist in coarsening or merging locks, it's not always guaranteed.
+This benchmark tests how the compiler coarsens or merges several adjacent synchronized blocks into one synchronized block, which can potentially reduce the locking overhead. This optimization can be applied when the same lock object is used by multiple methods. However, it's important to note that while compilers can assist in coarsening or merging locks, it's not always guaranteed.
 
 **Note:** This benchmark operates on uncontended code-paths due to only one thread executing the benchmark methods. Consequently, the locks are never inflated to a full monitor. Similar scenarios may occur when utilizing older synchronized Java APIs (e.g., `Vector`, `Stack`, `Hashtable`, `StringBuffer`, etc.), or equivalents.
 
@@ -1378,16 +1378,16 @@ The GraalVM CE JIT compiler utilizes a similar approach to the Oracle GraalVM JI
 
 ### Conclusions
 
-The Oracle GraalVM JIT compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations. These optimizations lead to the shortest overall response time.
+The Oracle GraalVM JIT compiler triggers lock coarsening and eliminates redundant locks, including the inlining of target method invocations. These optimizations lead to the shortest overall execution time.
 
 The C2 JIT compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. 
 
-Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be slower even than the GraalVM CE JIT compiler, in this benchmark.
+Within the `conditional_nested_method_calls`, although the callee method is inlined at various call sites, the failure to merge the locks remains an issue. Consequently, its performance tends to be lower even than the GraalVM CE JIT compiler, in this benchmark.
 
 ## LockElisionBenchmark
 
 Test how the compiler can elide/remove several adjacent locking blocks on non-shared objects, thus reducing the locking overhead.
-Synchronization on non-shared objects is pointless, and runtime does not have to do anything there.
+Synchronization on non-shared objects is pointless, and the runtime does not have to do anything in such cases.
 
 ```
   private final int DEPTH = 8;
@@ -1603,7 +1603,7 @@ The `recursiveSum` is partially inlined along with a recursive call to itself, t
 
 ### Conclusions
 
-The Oracle GraalVM JIT compiler triggers removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall response time.
+The Oracle GraalVM JIT compiler removes the locks and inlines the target method invocations. These optimizations lead to the shortest overall execution time.
 
 The C2 JIT compiler exhibits limitations in the `nested_synchronized` scenario, leading it to _bail out_ to the Template Interpreter. 
 
@@ -1737,9 +1737,9 @@ The GraalVM CE JIT compiler unrolls the `main loop 2` by a factor of 8, but it a
 
 ### Conclusions
 
-None of these compilers have implemented this optimization. Moreover, in this benchmark, it appears that `manual_loop_fission` brings significant benefits as opposed to the default `initial_loop` since the `loop 2` becomes vectorizable. This is also a useful pattern to apply in normal application code.
+None of the compilers implement this optimization. Moreover, in this benchmark, it appears that `manual_loop_fission` brings significant benefits as opposed to the default `initial_loop` since the `loop 2` becomes vectorizable. This is also a useful pattern to apply in normal application code.
 
-The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT compiler does not vectorize the fissed loop (when no data dependencies are present), making it slower than the other two compilers.
+The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT compiler does not vectorize the second loop (when no data dependencies are present), resulting in lower performance than the other two compilers.
 
 ## LoopFusionBenchmark
 
@@ -1821,7 +1821,7 @@ Despite using an unrolling factor of 8, akin to the C2 JIT or Oracle GraalVM JIT
 
 ### Conclusions
 
-None of these compilers has implemented this optimization. Moreover, in this benchmark, it appears that `manual_loops_fusion` does not yield significant benefits. In fact, due to the data dependency between array elements within a loop cycle, `manual_loops_fusion` becomes less optimal rather than improving performance, as opposed to the previous `LoopFissionBenchmark` (in case there are data dependencies within the loop cycles).
+None of the compilers has implemented this optimization. Moreover, in this benchmark, it appears that `manual_loops_fusion` does not yield significant benefits. In fact, due to the data dependency between array elements within a loop cycle, `manual_loops_fusion` becomes less optimal rather than improving performance, as opposed to the previous `LoopFissionBenchmark` (where there are data dependencies within the loop cycles).
 
 The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
 
@@ -1847,15 +1847,15 @@ The section below pertains to the `initial_loop` method.
 
 #### C2 JIT Compiler
 
-[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.html)
 
 #### Oracle GraalVM JIT Compiler
 
-[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.html)
 
 #### GraalVM CE JIT Compiler
 
-[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-reverse.html)
+[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.html)
 
 ### Remarks
 
@@ -3116,7 +3116,7 @@ When it comes to recursive calls in classes and interfaces (`class_static_method
 
 ## ScalarEvolutionAndLoopOptimizationBenchmark
 
-Check if the compiler can recognize the existence of the induction variables and to replace it with simpler computations.
+This benchmark checks if the compiler can recognize the existence of the induction variables and to replace it with simpler computations.
 This optimization is a special case of strength reduction where all loop iterations are strengthened to a mathematical formula.
 
 ```
@@ -3272,7 +3272,7 @@ The post-loop handles the remaining numbers individually, without loop unrolling
 
 ### Conclusions
 
-None of these compilers have implemented this optimization.
+None of the compilers have implemented this optimization.
 
 Nevertheless, the optimization triggered by the C2 JIT compiler, which unrolls the main loop by a factor of 16 and sequentially performs the additions, appears to be less efficient compared to other compilers.
 
@@ -3280,9 +3280,9 @@ Despite the fact that the Oracle GraalVM JIT compiler utilizes vectorized instru
 
 ## ScalarReplacementBenchmark
 
-Compiler analyses the scope of a new object and decides whether it might be allocated or not on the heap.
-The method is called Escape Analysis (EA), which identifies if the newly created object is escaping or not into the heap.
-To not be confused, EA is not an optimization but rather an analysis phase for the optimizer.
+The compiler can analyse the scope of a new object and decide whether it can be allocated or not on the stack instead of the heap.
+The method is called Escape Analysis (EA), and it identifies if an object allocation is escaping the current scope.
+To not be confused, EA is not an optimization but rather an analysis phase of the optimizer.
 There are a few escape states:
 - `NoEscape` - The object does not escape the method or thread, and it is not passed to a call.
 - `ArgEscape` - The object does not escape the method or thread, but it is passed as an argument to a call or referenced by an argument, and it does not escape during the call.
@@ -3706,7 +3706,7 @@ The C2 JIT compiler is capable of devirtualizing the tail `recursive` virtual ca
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT compiler is able to deoptimize the tail `recursive` virtual call, nevertheless does not perform any inlining of the `recursive` method.
+The Oracle GraalVM JIT compiler is able to devirtualize the tail `recursive` virtual call, nevertheless does not perform any inlining of the `recursive` method.
 
 ```
   recursive()
@@ -3732,7 +3732,7 @@ The Oracle GraalVM JIT compiler is able to deoptimize the tail `recursive` virtu
 
 #### GraalVM CE JIT Compiler
 
-The C2 JIT compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 6.
+The GraalVM CE JIT compiler is capable of devirtualizing the tail `recursive` virtual call and performs partial inlining up to a depth of 6.
 
 ```
   recursive()
@@ -3773,7 +3773,7 @@ The C2 JIT compiler is capable of devirtualizing the tail `recursive` virtual ca
 
 The  main difference in case of `tail_recursive` benchmark lies in the inlining capability of each compiler for tail recursive virtual calls:
 - The C2 JIT compiler performs partial inlining up to a depth of 2.
-- The Oracle GraalVM JIT compiler refrains from partial inlining, resulting in relatively slower performance in this benchmark
+- The Oracle GraalVM JIT compiler refrains from partial inlining, resulting in relatively lower performance in this benchmark
 - The GraalVM CE JIT compiler triggers partial inlining up to a depth of 6.
 
 ## TypeCheckBenchmark
@@ -3808,6 +3808,11 @@ This benchmark checks the performance of `instanceof` type check using multiple 
 Java, being a type-safe language, requires runtime type checking (based on metadata) to determine type compatibility. Within Hotspot, the class word contains a native pointer to the [VM Klass](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/oop.hpp#L57) instance, including extensive metadata such as superclass types, implemented interfaces, and [more](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/klass.hpp#L128-L133).
 The efficiency of those runtime checks depends on the type metadata as well as further optimizations performed by the compiler.
 
+**Note**: The difference between this benchmark and the `TypeCheckSlowPathBenchmark` benchmark is that in this benchmark a single
+object of type `ManySecondarySuperTypes`, which is not an `AutoCloseable`, is always used.
+In the setup method of the `TypeCheckSlowPathBenchmark`, both an `AutoCloseable` object and a `ManySecondarySuperTypes` object are used,
+forcing all compilers to compile both branches of the `if` condition.
+
 Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckBenchmark.java)
 
 [![TypeCheckBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckBenchmark.svg?raw=true)
@@ -3816,7 +3821,7 @@ Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-perfo
 
 #### C2 JIT Compiler
 
-The C2 JIT compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns the boolean.
+The C2 JIT compiler takes the slow path and searches through the secondary supers (i.e., an array of interfaces) for a `AutoCloseable` type match. Since it does not find one, it returns `false`.
 
 ```
       0x7f291c63815a:   mov    0xc(%rsi),%r10d              ; get field obj
@@ -4305,7 +4310,7 @@ Source code: [StringConcatenationBenchmark.java](https://github.com/ionutbalosin
 
 ### Remarks
 
-The `STR` template processor (refer to [JEP 430: String Templates](https://openjdk.org/jeps/430)) and the `plus` operator exhibit lower response times (i.e., better performance) compared to other methods tested in this benchmark.
+The `STR` template processor (refer to [JEP 430: String Templates](https://openjdk.org/jeps/430)) and the `plus` operator exhibit lower execution times (i.e., better performance) compared to other methods tested in this benchmark.
 
 ## StringFormatBenchmark
 
@@ -4351,7 +4356,7 @@ Source code: [StringFormatBenchmark.java](https://github.com/ionutbalosin/jvm-pe
 
 ### Remarks
 
-The `FMT` template processor (refer to [JEP 430: String Templates](https://openjdk.org/jeps/430)) demonstrates significantly lower response times (i.e., better performance) compared to all other methods tested in this benchmark. 
+The `FMT` template processor (refer to [JEP 430: String Templates](https://openjdk.org/jeps/430)) demonstrates significantly lower execution times (i.e., better performance) compared to all other methods tested in this benchmark. 
 
 On the other side, `MessageFormat` shows considerably slower performance and should be avoided in real applications, either used directly or indirectly.
 
@@ -4397,15 +4402,15 @@ The flame graphs below pertain to the `pattern_split` method.
 
 #### C2 JIT Compiler
 
-[![StringPatternSplitBenchmar.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+[![StringPatternSplitBenchmar.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-forward.html)
 
 #### Oracle GraalVM JIT Compiler
 
-[![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+[![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-forward.html)
 
 #### GraalVM CE JIT Compiler
 
-[![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-reverse.html)
+[![StringPatternSplitBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternSplitBenchmark.pattern_split-AverageTime-regexp-__/flame-cpu-forward.html)
 
 ### Remarks
 
@@ -4970,19 +4975,20 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 In this article, we compared three different JVM distributions (OpenJDK, Oracle GraalVM, and GraalVM CE) on both `x86_64` and `arm64` architectures. 
 We used a set of JMH benchmarks to evaluate the performance of the JIT compilers, considering a non-exhaustive set of optimizations.
 
-We conclude that the Oracle GraalVM JIT compiler outperforms the C2 JIT compiler (and GraalVM CE JIT compiler) in the majority of the benchmarks. 
-Overall, the Oracle GraalVM JIT compiler is approximately `29.87%` faster than C2 JIT on `x86_64` and around `20.48%` faster on `arm64`. 
-Optimizations such as improved partial escape analysis, more aggressive inter-procedural inlining heuristics (including polymorphic inlining, 
-method recursive inlining, constructor inlining, etc.), compact TLAB allocation code for grouped allocations, extended vectorized support, 
+Based on the normalized overall geometric mean, the Oracle GraalVM JIT compiler is the fastest, followed by the C2 JIT compiler, and then the GraalVM CE JIT compiler.
+
+The Oracle GraalVM JIT compiler obtains a geometric mean performance improvement of approximately `23%` on `x86_64` and `17%` on `arm64` compared to the C2 JIT compiler. 
+Optimizations such as improved partial escape analysis, more aggressive inlining (including polymorphic inlining, 
+recursive method inlining, constructor inlining, etc.), compact TLAB allocation code for grouped allocations, extended vectorization support, 
 and (in general) cleaner and more compact CPU assembly instructions make a significant difference.
 
-Based on the normalized geometric mean, the C2 JIT and GraalVM CE JIT score closely overall, but there are fundamental differences between these two compilers.
+The C2 JIT and GraalVM CE JIT score closely overall, but there are fundamental differences between these two compilers.
 
 The C2 JIT compiler, in contrast to GraalVM CE JIT, offers a broader set of intrinsics and vectorization support, 
 along with a better mechanism for handling exceptions when the same exception is thrown multiple times in the hot path. 
-However, C2 JIT exhibits limited inter-procedural inlining heuristics, constrained devirtualization of polymorphic calls 
-(i.e., when the number of targets is higher than two), and, in some very specific cases, it even falls back to the 
-Interpreter without the ability to further optimize to a higher tier.
+However, C2 JIT exhibits limited inlining heuristics, constrained devirtualization of megamorphic calls 
+(i.e., when the number of targets is higher than two), and, in some very specific cases, it can fail to compile resulting
+in execution of C1 compiled-code or even the Interpreter.
 
 On the other hand, GraalVM CE JIT, compared to C2 JIT, demonstrates superior partial escape analysis and inlining heuristics. 
 Nevertheless, it has a limited set of intrinsics and vectorization support, along with poor loop optimizations.
