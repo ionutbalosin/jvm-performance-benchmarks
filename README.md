@@ -1,10 +1,12 @@
+<h1 align="center">
+  JVM Performance Benchmarks
+</h1>
+
 <p align="center">
   <img alt="JvmPerformanceBenchmarks" title="JvmPerformanceBenchmarks" src="./docs/images/jpb_logo_320.png">
 </p>
 
-<h1 align="center">
-  JVM Performance Benchmarks
-</h1>
+---
 
 This repository contains various Java Virtual Machine (JVM) benchmarks with a primary focus on top-tier Just-In-Time (JIT) Compilers, such as C2 JIT, Graal JIT, and the Falcon JIT.
 
