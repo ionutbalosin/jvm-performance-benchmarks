@@ -1,10 +1,9 @@
-<h1 align="center">
-  JVM Performance Benchmarks
-</h1>
-
 <p align="center">
   <img alt="JvmPerformanceBenchmarks" title="JvmPerformanceBenchmarks" src="./docs/images/jpb_logo_320.png">
 </p>
+
+<h1 align="center">JVM Performance Benchmarks</h1>
+<h4 align="center">⚡️ Exploring JITs and APIs for Peak Performance ⚡️</h4>
 
 ---
 
