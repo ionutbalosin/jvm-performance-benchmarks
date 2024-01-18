@@ -1,7 +1,7 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: backoffType","Param: cpuLoadFactor","Param: cpuTokens","Param: threadType"
-"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,3.531029,0.002428,"s/op",NONE,16,_1_M,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,3.530923,0.001926,"s/op",NONE,16,_1_M,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,3.547428,0.020236,"s/op",YIELD,16,_1_M,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,3.531431,0.002345,"s/op",YIELD,16,_1_M,PLATFORM
-"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,3.662310,0.052745,"s/op",PARK,16,_1_M,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,3.618780,0.001670,"s/op",PARK,16,_1_M,PLATFORM
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: backoffType","Param: cpuTokens","Param: loadFactor","Param: threadType"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,90.374501,0.065738,"ms/op",NONE,_500_K,16,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,90.639251,0.247747,"ms/op",NONE,_500_K,16,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,90.264130,0.251686,"ms/op",YIELD,_500_K,16,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,90.842643,0.436131,"ms/op",YIELD,_500_K,16,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,91.599983,0.308232,"ms/op",PARK,_500_K,16,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadCpuBoundBenchmark.cpu_bound_tasks","avgt",1,25,94.607918,0.238141,"ms/op",PARK,_500_K,16,PLATFORM
