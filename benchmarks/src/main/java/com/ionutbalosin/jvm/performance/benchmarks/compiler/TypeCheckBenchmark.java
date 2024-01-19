@@ -25,10 +25,12 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -43,7 +45,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * References:
  * - code examples by Francesco Nigro (Twitter: @forked_franz)
- * - https://gist.github.com/franz1981/e46823dbaeb576c1a3344683b2319db8
+ * - https://github.com/franz1981/java-puzzles/commit/e083daa22878511c475135b5863b861471e617a6
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -55,18 +57,51 @@ public class TypeCheckBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*TypeCheckSlowPathBenchmark.*"
 
-  private Object obj;
+  private Object[] instances;
+
+  @Param({"0", "1", "2", "3"})
+  private int types;
+
+  private int index;
 
   @Setup
   public void setup() {
-    obj = ManySecondarySuperTypes.Instance;
+    instances = new Object[1 + types];
+    switch (types) {
+      case 0:
+        instances[0] = ManySecondarySuperTypes.Instance;
+        break;
+      case 1:
+        instances[0] = ManySecondarySuperTypes.Instance;
+        instances[1] = ManySecondarySuperTypes1.Instance;
+        break;
+      case 2:
+        instances[0] = ManySecondarySuperTypes.Instance;
+        instances[1] = ManySecondarySuperTypes1.Instance;
+        instances[2] = ManySecondarySuperTypes2.Instance;
+        break;
+      case 3:
+        instances[0] = ManySecondarySuperTypes.Instance;
+        instances[1] = ManySecondarySuperTypes1.Instance;
+        instances[2] = ManySecondarySuperTypes2.Instance;
+        instances[3] = ManySecondarySuperTypes3.Instance;
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + types);
+    }
   }
 
   @Benchmark
   public boolean instanceof_type_check() {
-    return closeNotAutoCloseable(obj);
+    int nextIdx = index;
+    index++;
+    if (index == types + 1) {
+      index = 0;
+    }
+    return closeNotAutoCloseable(instances[nextIdx]);
   }
 
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public static boolean closeNotAutoCloseable(Object o) {
     // it searches through the secondary supers (i.e., an array of objects) for a type match
     // but does not find one since "o" is not an "AutoCloseable" type
@@ -100,6 +135,18 @@ public class TypeCheckBenchmark {
   public interface I8 {}
 
   private enum ManySecondarySuperTypes implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes1 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes2 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes3 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 }
