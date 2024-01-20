@@ -55,36 +55,36 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class TypeCheckBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*TypeCheckSlowPathBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*TypeCheckBenchmark.*"
 
   private Object[] instances;
 
-  @Param({"0", "1", "2", "3"})
+  @Param({"1", "2", "3", "4"})
   private int types;
 
   private int index;
 
   @Setup
   public void setup() {
-    instances = new Object[1 + types];
+    instances = new Object[types];
     switch (types) {
-      case 0:
-        instances[0] = ManySecondarySuperTypes.Instance;
-        break;
       case 1:
-        instances[0] = ManySecondarySuperTypes.Instance;
-        instances[1] = ManySecondarySuperTypes1.Instance;
+        instances[0] = ManySecondarySuperTypes1.Instance;
         break;
       case 2:
-        instances[0] = ManySecondarySuperTypes.Instance;
-        instances[1] = ManySecondarySuperTypes1.Instance;
-        instances[2] = ManySecondarySuperTypes2.Instance;
+        instances[0] = ManySecondarySuperTypes1.Instance;
+        instances[1] = ManySecondarySuperTypes2.Instance;
         break;
       case 3:
-        instances[0] = ManySecondarySuperTypes.Instance;
-        instances[1] = ManySecondarySuperTypes1.Instance;
-        instances[2] = ManySecondarySuperTypes2.Instance;
-        instances[3] = ManySecondarySuperTypes3.Instance;
+        instances[0] = ManySecondarySuperTypes1.Instance;
+        instances[1] = ManySecondarySuperTypes2.Instance;
+        instances[2] = ManySecondarySuperTypes3.Instance;
+        break;
+      case 4:
+        instances[0] = ManySecondarySuperTypes1.Instance;
+        instances[1] = ManySecondarySuperTypes2.Instance;
+        instances[2] = ManySecondarySuperTypes3.Instance;
+        instances[3] = ManySecondarySuperTypes4.Instance;
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + types);
@@ -93,12 +93,7 @@ public class TypeCheckBenchmark {
 
   @Benchmark
   public boolean instanceof_type_check() {
-    int nextIdx = index;
-    index++;
-    if (index == types + 1) {
-      index = 0;
-    }
-    return closeNotAutoCloseable(instances[nextIdx]);
+    return closeNotAutoCloseable(instances[nextPosition()]);
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
@@ -118,6 +113,14 @@ public class TypeCheckBenchmark {
     }
   }
 
+  private int nextPosition() {
+    int nextIdx = index;
+    if (++index >= types) {
+      index = 0;
+    }
+    return nextIdx;
+  }
+
   public interface I1 {}
 
   public interface I2 {}
@@ -134,10 +137,6 @@ public class TypeCheckBenchmark {
 
   public interface I8 {}
 
-  private enum ManySecondarySuperTypes implements I1, I2, I3, I4, I5, I6, I7, I8 {
-    Instance
-  }
-
   private enum ManySecondarySuperTypes1 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
@@ -147,6 +146,10 @@ public class TypeCheckBenchmark {
   }
 
   private enum ManySecondarySuperTypes3 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes4 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 }
