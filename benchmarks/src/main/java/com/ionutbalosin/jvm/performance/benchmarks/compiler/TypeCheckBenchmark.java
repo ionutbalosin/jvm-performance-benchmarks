@@ -46,6 +46,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * References:
  * - code examples by Francesco Nigro (Twitter: @forked_franz)
  * - https://github.com/franz1981/java-puzzles/commit/e083daa22878511c475135b5863b861471e617a6
+ * - https://github.com/openjdk/jdk/pull/14375
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
