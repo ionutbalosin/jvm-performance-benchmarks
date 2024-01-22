@@ -58,7 +58,14 @@ compiler_names_map <- setNames(as.list(compiler_names), jvm_identifiers)
 
 # Define the list of benchmarks to be excluded from the geometric mean calculation
 excluded_benchmark_files <- c(
-  "InfrastructureBaselineBenchmark.csv"
+  "InfrastructureBaselineBenchmark.csv",
+  # Exclude benchmarks with errors on Azul Prime VM
+  "MandelbrotVectorApiBenchmark.csv",
+  "PalindromeBenchmark.csv",
+  "SepiaVectorApiBenchmark.csv",
+  "SortVectorApiBenchmark.csv",
+  "TailRecursionBenchmark.csv",
+  "VectorApiBenchmark.csv"
 )
 
 # Remove duplicate elements to ensure the benchmark list has unique entries

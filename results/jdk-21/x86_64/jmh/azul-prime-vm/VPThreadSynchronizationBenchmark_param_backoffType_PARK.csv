@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..backoffType","Param..loadFactor","Param..lockType","Param..threadType"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,5.060822,0.097285,"ms/op","PARK",384,"OBJECT_LOCK","VIRTUAL"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,130.642775,0.095074,"ms/op","PARK",384,"OBJECT_LOCK","PLATFORM"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,47.957476,0.222108,"ms/op","PARK",384,"REENTRANT_LOCK","VIRTUAL"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,130.514966,0.117857,"ms/op","PARK",384,"REENTRANT_LOCK","PLATFORM"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,8.230521,0.184766,"ms/op","PARK",384,"NO_LOCK","VIRTUAL"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,20.459077,0.032725,"ms/op","PARK",384,"NO_LOCK","PLATFORM"

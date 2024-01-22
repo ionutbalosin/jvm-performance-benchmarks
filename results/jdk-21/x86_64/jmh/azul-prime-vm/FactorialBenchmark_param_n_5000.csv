@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..n"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,724.327719,2.128478,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,112938.296049,25.595231,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,5267.218788,10.314068,"us/op",5000
