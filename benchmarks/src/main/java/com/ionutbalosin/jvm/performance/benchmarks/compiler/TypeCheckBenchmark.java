@@ -97,7 +97,6 @@ public class TypeCheckBenchmark {
     return closeNotAutoCloseable(instances[nextPosition()]);
   }
 
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public static boolean closeNotAutoCloseable(Object o) {
     // it searches through the secondary supers (i.e., an array of objects) for a type match
     // but does not find one since "o" is not an "AutoCloseable" type
