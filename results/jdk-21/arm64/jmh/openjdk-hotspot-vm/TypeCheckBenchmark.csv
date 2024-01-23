@@ -1,5 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: types"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,5.285150,0.980990,"ns/op",1
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,5.986925,0.025282,"ns/op",2
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,5.925047,0.028095,"ns/op",3
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,5.903585,0.024829,"ns/op",4
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,4.842477,0.037013,"ns/op",1
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,5.053368,0.089530,"ns/op",2
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,5.005815,0.073075,"ns/op",3
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,4.942497,0.031471,"ns/op",4
