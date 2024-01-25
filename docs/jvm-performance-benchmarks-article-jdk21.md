@@ -40,7 +40,7 @@ The current article describes a series of Java Virtual Machine (JVM) benchmarks 
 
 The categorization is for informative purposes to better organize and direct the focus of our benchmarks, ranging from low-level (compiler benchmarks) to high-level (API and Miscellaneous) benchmarks.
 
-For this report we aggregated in total a number of **1106 benchmark runs**, including all three categories.
+For this report we aggregated in total a number of **1109 benchmark runs**, including all three categories.
 
 The list of JIT compilers included (comprising the JVM and architecture) is as follows:
 
@@ -3781,11 +3781,28 @@ The  main difference in case of `tail_recursive` benchmark lies in the inlining 
 This benchmark checks the performance of `instanceof` type check using multiple secondary super types (i.e., interfaces), none being of an `AutoCloseable` type.
 
 ```
-  // Object obj = ManySecondarySuperTypes.Instance;
-
+  private Object[] instances;
+  
+  @Param({"1", "2", "3", "4"})
+  private int types;
+  
+    instances = new Object[types];
+    switch (types) {
+      case 1:
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        break;
+      case 2:
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
+        break;
+      // ...
+      default:
+        throw new IllegalStateException("Unexpected value: " + types);
+    }  
+  
   @Benchmark
   public boolean instanceof_type_check() {
-    return closeNotAutoCloseable(obj);
+    return closeNotAutoCloseable(instances[nextPosition()]);
   }
 
   public static boolean closeNotAutoCloseable(Object o) {
@@ -3799,25 +3816,33 @@ This benchmark checks the performance of `instanceof` type check using multiple 
         return false;
       }
     } else {
-      // it always takes this slow path
+      // it always takes this path
       return false;
     }
   }
+  
+  private enum ManySecondarySuperTypes_1 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+  
+  private enum ManySecondarySuperTypes_2 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }  
 ```
 
 Java, being a type-safe language, requires runtime type checking (based on metadata) to determine type compatibility. Within Hotspot, the class word contains a native pointer to the [VM Klass](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/oop.hpp#L57) instance, including extensive metadata such as superclass types, implemented interfaces, and [more](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/oops/klass.hpp#L128-L133).
 The efficiency of those runtime checks depends on the type metadata as well as further optimizations performed by the compiler.
 
-**Note**: The difference between this benchmark and the `TypeCheckSlowPathBenchmark` benchmark is that in this benchmark a single
-object of type `ManySecondarySuperTypes`, which is not an `AutoCloseable`, is always used.
-In the setup method of the `TypeCheckSlowPathBenchmark`, both an `AutoCloseable` object and a `ManySecondarySuperTypes` object are used,
-forcing all compilers to compile both branches of the `if` condition.
+**Note**: The difference between this benchmark and the `TypeCheckSlowPathBenchmark` lies in the fact that, in this benchmark, none of the types used `ManySecondarySuperTypes_{1, 2, 3, 4}` are instances of `AutoCloseable`. 
+Furthermore, in the setup method of the `TypeCheckSlowPathBenchmark`, both an `AutoCloseable` object and a `ManySecondarySuperTypes_{16, 32, 64, 128, 256}` object are used, forcing all compilers to compile both branches of the `if` condition.
 
 Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/TypeCheckBenchmark.java)
 
 [![TypeCheckBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/TypeCheckBenchmark.svg?raw=true)
 
-### Analysis
+### Analysis of types 1
+
+The analysis below pertains to the `types=1` scenario, which is more interesting due to the highest differences in performance.
 
 #### C2 JIT Compiler
 
@@ -3827,7 +3852,7 @@ The C2 JIT compiler takes the slow path and searches through the secondary super
       0x7f291c63815a:   mov    0xc(%rsi),%r10d              ; get field obj
       0x7f291c638160:   mov    0x8(%r12,%r10,8),%r8d
       0x7f291c638165:   movabs $0x7f28a300bab8,%rax         ; {metadata(&apos;java/lang/AutoCloseable&apos;)}
-      0x7f291c63816f:   movabs $0x7f28a3000000,%rsi         ; load known Klass* for ManySecondarySuperTypes
+      0x7f291c63816f:   movabs $0x7f28a3000000,%rsi         ; load known Klass* for ManySecondarySuperTypes_1
       0x7f291c638179:   add    %r8,%rsi
       0x7f291c63817c:   mov    0x20(%rsi),%r11              ; the cache field
       0x7f291c638180:   cmp    %rax,%r11                    ; compare the 'obj' type against AutoCloseable
@@ -3851,12 +3876,12 @@ The C2 JIT compiler takes the slow path and searches through the secondary super
 
 #### Oracle GraalVM JIT Compiler
 
-The GraalVM JIT compiler reverses the if-condition comparison to take the faster path. It specifically checks against the `ManySecondarySuperTypes` type.
+The GraalVM JIT compiler takes the fast path by directly checking against the `ManySecondarySuperTypes_1` type. Since there is a match, it simply returns `false` without searching through the secondary super types.
 
 ```
   0x7ff7d6d7ecbf:   mov    0xc(%rsi),%eax               ; get field obj
-  0x7ff7d6d7ecc2:   cmpl   $0x102bd38,0x8(,%rax,8)      ; compare the 'obj' type against ManySecondarySuperTypes
-                                                        ; {metadata(&apos;TypeCheckBenchmark$ManySecondarySuperTypes&apos;)}
+  0x7ff7d6d7ecc2:   cmpl   $0x102bd38,0x8(,%rax,8)      ; compare the 'obj' type against ManySecondarySuperTypes_1
+                                                        ; {metadata(&apos;TypeCheckBenchmark$ManySecondarySuperTypes_1&apos;)}
 ╭ 0x7ff7d6d7eccd:   jne    0x7ff7d6d7ecef               ; jump if not the same type
 │ 0x7ff7d6d7ecd3:   mov    $0x0,%eax                    ; return false
 │ ...
@@ -3872,7 +3897,7 @@ The Oracle GraalVM JIT compiler performs the same optimization as the Oracle Gra
 
 ### Conclusions
 
-The GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) optimize the type check by reversing the if condition (i.e., comparing against `ManySecondarySuperTypes` type) and taking the fast path (since a match is found), unlike the C2 JIT compiler, which always checks the type against the supertypes array (no match is found).
+The GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) optimize the type check by specializing the if condition (i.e., comparing against the `ManySecondarySuperTypes_1` type) and taking the fast path, as a match is found, unlike the C2 JIT compiler, which always checks the type against the supertypes array (no match is found).
 
 ## TypeCheckScalabilityBenchmark
 
@@ -4150,7 +4175,7 @@ and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
 
 ## JIT Geometric Mean
 
-This section describes the normalized geometric mean (GM) for the entire JIT-related benchmark category, having in total 301 benchmarks.
+This section describes the normalized geometric mean (GM) for the entire JIT-related benchmark category, having in total 304 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -4161,9 +4186,9 @@ The process of generating the normalized geometric mean is:
 
 Rank | JVM distribution   | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|--------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM     | x86_64      | 0.65                      | 301               | ns/op
-2    | OpenJDK            | x86_64      | 1                         | 301               | ns/op
-3    | GraalVM CE         | x86_64      | 1.06                      | 301               | ns/op
+1    | Oracle GraalVM     | x86_64      | 0.65                      | 304               | ns/op
+2    | OpenJDK            | x86_64      | 1                         | 304               | ns/op
+3    | GraalVM CE         | x86_64      | 1.06                      | 304               | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -4171,9 +4196,9 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 Rank | JVM distribution   | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|--------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM     | x86_64      | 0.76                      | 301               | ns/op
-2    | OpenJDK            | x86_64      | 1                         | 301               | ns/op
-3    | GraalVM CE         | x86_64      | 1.31                      | 301               | ns/op
+1    | Oracle GraalVM     | x86_64      | 0.76                      | 304               | ns/op
+2    | OpenJDK            | x86_64      | 1                         | 304               | ns/op
+3    | GraalVM CE         | x86_64      | 1.31                      | 304               | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -4937,7 +4962,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 ## Overall Geometric Mean
 
-This section describes the normalized GM for all categories, having in total 1106 benchmarks.
+This section describes the normalized GM for all categories, having in total 1109 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -4948,9 +4973,9 @@ The process of generating the normalized geometric mean is:
 
 Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|-------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM    | x86_64      | 0.77                      | 1106              | ns/op
-2    | OpenJDK           | x86_64      | 1                         | 1106              | ns/op
-3    | GraalVM CE        | x86_64      | 1.03                      | 1106              | ns/op
+1    | Oracle GraalVM    | x86_64      | 0.77                      | 1109              | ns/op
+2    | OpenJDK           | x86_64      | 1                         | 1109              | ns/op
+3    | GraalVM CE        | x86_64      | 1.03                      | 1109              | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -4958,9 +4983,9 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|-------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM    | arm64       | 0.83                      | 1106              | ns/op
-2    | OpenJDK           | arm64       | 1                         | 1106              | ns/op
-3    | GraalVM CE        | arm64       | 1.08                      | 1106              | ns/op
+1    | Oracle GraalVM    | arm64       | 0.83                      | 1109              | ns/op
+2    | OpenJDK           | arm64       | 1                         | 1109              | ns/op
+3    | GraalVM CE        | arm64       | 1.08                      | 1109              | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 

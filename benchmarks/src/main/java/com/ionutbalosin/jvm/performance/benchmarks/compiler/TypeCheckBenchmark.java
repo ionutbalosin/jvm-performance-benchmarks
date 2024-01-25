@@ -69,22 +69,22 @@ public class TypeCheckBenchmark {
     instances = new Object[types];
     switch (types) {
       case 1:
-        instances[0] = ManySecondarySuperTypes1.Instance;
+        instances[0] = ManySecondarySuperTypes_1.Instance;
         break;
       case 2:
-        instances[0] = ManySecondarySuperTypes1.Instance;
-        instances[1] = ManySecondarySuperTypes2.Instance;
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
         break;
       case 3:
-        instances[0] = ManySecondarySuperTypes1.Instance;
-        instances[1] = ManySecondarySuperTypes2.Instance;
-        instances[2] = ManySecondarySuperTypes3.Instance;
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
+        instances[2] = ManySecondarySuperTypes_3.Instance;
         break;
       case 4:
-        instances[0] = ManySecondarySuperTypes1.Instance;
-        instances[1] = ManySecondarySuperTypes2.Instance;
-        instances[2] = ManySecondarySuperTypes3.Instance;
-        instances[3] = ManySecondarySuperTypes4.Instance;
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
+        instances[2] = ManySecondarySuperTypes_3.Instance;
+        instances[3] = ManySecondarySuperTypes_4.Instance;
         break;
       default:
         throw new IllegalStateException("Unexpected value: " + types);
@@ -107,7 +107,7 @@ public class TypeCheckBenchmark {
         return false;
       }
     } else {
-      // it always takes this slow path
+      // it always takes this path
       return false;
     }
   }
@@ -136,19 +136,19 @@ public class TypeCheckBenchmark {
 
   public interface I8 {}
 
-  private enum ManySecondarySuperTypes1 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+  private enum ManySecondarySuperTypes_1 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 
-  private enum ManySecondarySuperTypes2 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+  private enum ManySecondarySuperTypes_2 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 
-  private enum ManySecondarySuperTypes3 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+  private enum ManySecondarySuperTypes_3 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 
-  private enum ManySecondarySuperTypes4 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+  private enum ManySecondarySuperTypes_4 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 }
