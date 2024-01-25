@@ -29,6 +29,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -43,7 +44,8 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * References:
  * - code examples by Francesco Nigro (Twitter: @forked_franz)
- * - https://gist.github.com/franz1981/e46823dbaeb576c1a3344683b2319db8
+ * - https://github.com/franz1981/java-puzzles/commit/e083daa22878511c475135b5863b861471e617a6
+ * - https://github.com/openjdk/jdk/pull/14375
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -53,18 +55,45 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class TypeCheckBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*TypeCheckSlowPathBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*TypeCheckBenchmark.*"
 
-  private Object obj;
+  private Object[] instances;
+
+  @Param({"1", "2", "3", "4"})
+  private int types;
+
+  private int index;
 
   @Setup
   public void setup() {
-    obj = ManySecondarySuperTypes.Instance;
+    instances = new Object[types];
+    switch (types) {
+      case 1:
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        break;
+      case 2:
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
+        break;
+      case 3:
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
+        instances[2] = ManySecondarySuperTypes_3.Instance;
+        break;
+      case 4:
+        instances[0] = ManySecondarySuperTypes_1.Instance;
+        instances[1] = ManySecondarySuperTypes_2.Instance;
+        instances[2] = ManySecondarySuperTypes_3.Instance;
+        instances[3] = ManySecondarySuperTypes_4.Instance;
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + types);
+    }
   }
 
   @Benchmark
   public boolean instanceof_type_check() {
-    return closeNotAutoCloseable(obj);
+    return closeNotAutoCloseable(instances[nextPosition()]);
   }
 
   public static boolean closeNotAutoCloseable(Object o) {
@@ -78,9 +107,17 @@ public class TypeCheckBenchmark {
         return false;
       }
     } else {
-      // it always takes this slow path
+      // it always takes this path
       return false;
     }
+  }
+
+  private int nextPosition() {
+    int nextIdx = index;
+    if (++index >= types) {
+      index = 0;
+    }
+    return nextIdx;
   }
 
   public interface I1 {}
@@ -99,7 +136,19 @@ public class TypeCheckBenchmark {
 
   public interface I8 {}
 
-  private enum ManySecondarySuperTypes implements I1, I2, I3, I4, I5, I6, I7, I8 {
+  private enum ManySecondarySuperTypes_1 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes_2 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes_3 implements I1, I2, I3, I4, I5, I6, I7, I8 {
+    Instance
+  }
+
+  private enum ManySecondarySuperTypes_4 implements I1, I2, I3, I4, I5, I6, I7, I8 {
     Instance
   }
 }
