@@ -1774,7 +1774,7 @@ The C2 compiler takes the slow path and searches through the secondary supers (i
 
 ## JIT Geometric Mean
 
-This section describes the normalized GM for the entire JIT-related benchmark category, having in total 302 benchmarks. 
+This section describes the normalized GM for the entire JIT-related benchmark category, having in total 301 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -1787,7 +1787,7 @@ No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 ----|----------------|-------------|---------------------------|--------
 1   | GraalVM EE JIT | x86_64      | 0.72                      | ns/op
 2   | C2 JIT         | x86_64      | 1                         | ns/op
-3   | GraalVM CE JIT | x86_64      | 1.22                      | ns/op
+3   | GraalVM CE JIT | x86_64      | 1.23                      | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
@@ -1795,9 +1795,9 @@ No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 
 No. | JIT            | Arcitecture | Normalized Geometric Mean | Unit
 ----|----------------|-------------|---------------------------|--------
-1   | GraalVM EE JIT | arm64       | 0.84                      | ns/op
+1   | GraalVM EE JIT | arm64       | 0.85                      | ns/op
 2   | C2 JIT         | arm64       | 1                         | ns/op
-3   | GraalVM CE JIT | arm64       | 1.53                      | ns/op
+3   | GraalVM CE JIT | arm64       | 1.54                      | ns/op
 
 **Note:** The first in the row is the fastest JIT, and the last in the row is the slowest JIT
 
