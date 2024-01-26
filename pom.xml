@@ -12,7 +12,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <jdk17.version>17</jdk17.version>
         <jdk11.version>11</jdk11.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jmh.version>1.36</jmh.version>
@@ -35,6 +34,9 @@
 
         <profile>
             <id>jdk11_profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -85,59 +87,6 @@
                         </executions>
                     </plugin>
 
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>jdk17_profile</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven.compiler.plugin}</version>
-                        <configuration>
-                            <annotationProcessorPaths>
-                                <path>
-                                    <groupId>org.openjdk.jmh</groupId>
-                                    <artifactId>jmh-generator-annprocess</artifactId>
-                                    <version>${jmh.version}</version>
-                                </path>
-                            </annotationProcessorPaths>
-                            <source>${jdk17.version}</source>
-                            <target>${jdk17.version}</target>
-                            <compilerArgs>
-                                <arg>--add-modules=jdk.incubator.vector</arg>
-                                <arg>--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED</arg>
-                                <arg>--add-exports=java.management/sun.management=ALL-UNNAMED</arg>
-                                <arg>--enable-preview</arg>
-                            </compilerArgs>
-                            <jdkToolchain>
-                                <version>${jdk17.version}</version>
-                            </jdkToolchain>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.openjdk.jmh</groupId>
-                                <artifactId>jmh-generator-annprocess</artifactId>
-                                <version>${jmh.version}</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <id>default-compile</id>
-                                <configuration>
-                                    <jdkToolchain>
-                                        <version>${jdk17.version}</version>
-                                    </jdkToolchain>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>

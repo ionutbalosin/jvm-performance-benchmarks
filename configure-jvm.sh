@@ -28,19 +28,7 @@ configure_openjdk11_hotspot_vm() {
   export JVM_IDENTIFIER="openjdk-hotspot-vm"
 }
 
-configure_openjdk17_hotspot_vm() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="OpenJDK HotSpot VM"
-  export JVM_IDENTIFIER="openjdk-hotspot-vm"
-}
-
 configure_graalvm_ce_jdk11() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="GraalVM CE"
-  export JVM_IDENTIFIER="graalvm-ce"
-}
-
-configure_graalvm_ce_jdk17() {
   export JAVA_HOME="<path_to_jdk>"
   export JVM_NAME="GraalVM CE"
   export JVM_IDENTIFIER="graalvm-ce"
@@ -52,19 +40,10 @@ configure_graalvm_ee_jdk11() {
   export JVM_IDENTIFIER="graalvm-ee"
 }
 
-configure_graalvm_ee_jdk17() {
-  export JAVA_HOME="<path_to_jdk>"
-  export JVM_NAME="GraalVM EE"
-  export JVM_IDENTIFIER="graalvm-ee"
-}
-
 echo "Select the JDK/JVM:"
 echo "    1) - jdk-11 / OpenJDK HotSpot VM"
 echo "    2) - jdk-11 / GraalVM CE"
 echo "    3) - jdk-11 / GraalVM EE"
-echo "    4) - jdk-17 / OpenJDK HotSpot VM"
-echo "    5) - jdk-17 / GraalVM CE"
-echo "    6) - jdk-17 / GraalVM EE"
 echo ""
 
 while :; do
@@ -80,18 +59,6 @@ while :; do
     ;;
   3)
     configure_graalvm_ee_jdk11
-    break
-    ;;
-  4)
-    configure_openjdk17_hotspot_vm
-    break
-    ;;
-  5)
-    configure_graalvm_ce_jdk17
-    break
-    ;;
-  6)
-    configure_graalvm_ee_jdk17
     break
     ;;
   *)

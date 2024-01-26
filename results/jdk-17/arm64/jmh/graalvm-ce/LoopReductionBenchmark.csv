@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: iterations","Param: offset"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.initial_loop","avgt",1,25,"20346,372345","4,064289","ns/op",1048576,128
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.LoopReductionBenchmark.manual_loop_reduction","avgt",1,25,"2,081580","0,000731","ns/op",1048576,128

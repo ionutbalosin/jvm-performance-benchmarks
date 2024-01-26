@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark.method_call_baseline","avgt",1,25,"439,385250","0,099748","ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.DeadMethodCallStoreBenchmark.method_call_dse","avgt",1,25,"1151,729711","0,519171","ns/op"
