@@ -1,5 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.BranchlessBitwiseBenchmark.a_less_than_zero_return_b_else_a","avgt",1,25,11.966308,0.015223,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.BranchlessBitwiseBenchmark.a_less_than_zero_return_b_else_a_baseline","avgt",1,25,11.957901,0.010502,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.BranchlessBitwiseBenchmark.x_equals_y_return_a_else_b","avgt",1,25,13.395617,0.066643,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.BranchlessBitwiseBenchmark.x_equals_y_return_a_else_b_baseline","avgt",1,25,12.678868,0.089350,"ns/op"

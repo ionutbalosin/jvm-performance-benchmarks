@@ -1,4 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.array_multiply","avgt",1,25,3819.897287,1.427648,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.big_integer_multiply","avgt",1,25,205.480076,0.711392,"us/op",1000
-"com.ionutbalosin.jvm.performance.benchmarks.macro.factorial.FactorialBenchmark.fork_join","avgt",1,25,210.506118,3.958375,"us/op",1000

@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.macro.prime.PrimesBenchmark.eratosthenes_sieve","avgt",1,25,"14,243713","0,211452","ms/op",8388608
-"com.ionutbalosin.jvm.performance.benchmarks.macro.prime.PrimesBenchmark.sqrt_stream","avgt",1,25,"1087,090443","2,041358","ms/op",8388608
