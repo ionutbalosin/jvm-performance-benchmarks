@@ -46,7 +46,7 @@ import static java.util.FormatProcessor.FMT;
  * This benchmark measures the performance of different formatting approaches utilizing various data types
  * (e.g., String, int, float, char, long, double, boolean, Object) using different methods:
  * - String.format()
- * - MessageFormat
+ * - MessageFormat.format() with both constant or dynamically allocated message formatter in the benchmark method
  * - String.formatted()
  * - FormatProcessor
  *
@@ -67,6 +67,8 @@ public class StringFormatBenchmark {
   // - JMH options: -prof gc
 
   private final Random random = new Random(16384);
+  private final MessageFormat MESSAGE_FORMAT = new MessageFormat(
+          "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
 
   private String aString;
   private int anInt;
@@ -101,11 +103,16 @@ public class StringFormatBenchmark {
   }
 
   @Benchmark
-  public String message_format() {
+  public String message_format_new() {
     final MessageFormat mf =
         new MessageFormat(
             "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
     return mf.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
+  }
+
+  @Benchmark
+  public String message_format_constant() {
+    return MESSAGE_FORMAT.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
   }
 
   @Benchmark
