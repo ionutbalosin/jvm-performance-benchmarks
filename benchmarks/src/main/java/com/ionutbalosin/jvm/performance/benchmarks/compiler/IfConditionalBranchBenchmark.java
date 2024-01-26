@@ -80,7 +80,8 @@ public class IfConditionalBranchBenchmark {
     return sum;
   }
 
-  // this must be equivalent or very close to baseline()
+  // all values are less than the THRESHOLD, therefore the condition is true and the branch is
+  // always taken. This could be equivalent or very close to no_if_branch()
   @Benchmark
   public int predictable_if_branch() {
     int sum = 0;
@@ -94,6 +95,8 @@ public class IfConditionalBranchBenchmark {
     return sum;
   }
 
+  // some values are bigger and some are smaller than THRESHOLD / 2, making this condition
+  // unpredictable
   @Benchmark
   public int unpredictable_if_branch() {
     int sum = 0;

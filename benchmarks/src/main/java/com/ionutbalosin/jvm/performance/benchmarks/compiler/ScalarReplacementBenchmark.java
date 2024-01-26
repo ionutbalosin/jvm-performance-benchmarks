@@ -47,8 +47,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * - `GlobalEscape` - The object can escape the method or the thread, which means that such an object is visible outside the method or thread.
  *
  * For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands:
- * which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate
- * the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+ * which leads to so-called Scalar Replacement optimization.
  *
  * References: - https://shipilev.net/jvm/anatomy-quarks/18-scalar-replacement/
  */
