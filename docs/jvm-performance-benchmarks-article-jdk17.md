@@ -1,6 +1,6 @@
 # JVM Performance Comparison for JDK 17
 
-## Authors 
+## Authors
 
 Ionut Balosin
 - Website: www.ionutbalosin.com
@@ -18,9 +18,9 @@ Florin Blanaru
 - [JIT Compilers](#jit-compilers)
   - [Benchmarks](#jit-benchmarks)
   - [Geometric Mean](#jit-geometric-mean)
-- [Macro](#macro)
-  - [Benchmarks](#macro-benchmarks)
-  - [Geometric Mean](#macro-geometric-mean)
+- [Miscellaneous](#miscellaneous)
+  - [Benchmarks](#miscellaneous-benchmarks)
+  - [Geometric Mean](#miscellaneous-geometric-mean)
 - [Garbage Collectors](#garbage-collectors)
   - [Overview](#gc-overview)
   - [Barriers](#gc-barriers)
@@ -31,7 +31,7 @@ Florin Blanaru
 
 The current article describes a series of Java Virtual Machine (JVM) benchmarks targeting the Just-In-Time (JIT) Compilers to assess different JIT Compiler optimizations by following specific code patterns. At a first glance, even though some of these patterns might rarely appear directly in the user programs, they could occur after a few optimizations (e.g., inlining of high-level operations).
 
-In addition, there is a small set of benchmarks (i.e., a macro category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is only complementary but not the main purpose of this work.
+In addition, there is a small set of benchmarks (i.e., a miscellaneous category) covering larger programs (e.g., Fibonacci, Huffman coding/encoding, factorial, palindrome, etc.) using some high-level Java APIs (e.g., streams, lambdas, fork-join, etc.). Nevertheless, this is only complementary but not the main purpose of this work.
 
 For a few benchmarks (i.e., the most representative, in our opinion) we provide an in-depth analysis (i.e., optimized generated assembly code, flame graphs, etc.), as well as the normalized geometric mean.
 
@@ -62,7 +62,7 @@ We are very thankful to [Volker Simonis](https://twitter.com/volker_simonis), [G
 - the benchmarks were run on the below machines:
   1. Apple MacBook Pro, M1 Chip 10-Core, 16-Core Neural Engine, 32GB RAM, macOS Monterey 12.6.1
   2. Dell XPS 15 7590, Intel Core i7-9750H 6-Core, 32GB RAM, Ubuntu 20.04 LTS
-- to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine: 
+- to eliminate potential sources of performance non-determinism, the below OS tunings were performed on the Intel machine:
   1. disabled the turbo-boost mode
   2. set CPU governor to _performance_
   3. disabled CPU hyper-threading
@@ -97,9 +97,9 @@ This is particularly useful in case of a comparison between different types of J
 
 > A comparison between different JVMs might not be further relevant unless, at least, the baseline is the same.
 
-Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java)
+Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java)
 
-[![InfrastructureBaselineBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/InfrastructureBaselineBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/InfrastructureBaselineBenchmark.svg?raw=true)
+[![InfrastructureBaselineBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/InfrastructureBaselineBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/InfrastructureBaselineBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -133,9 +133,9 @@ constant value.
   }
 ```
 
-Source code: [CanonicalizeInductionVariableBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/CanonicalizeInductionVariableBenchmark.java) 
+Source code: [CanonicalizeInductionVariableBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/CanonicalizeInductionVariableBenchmark.java)
 
-[![CanonicalizeInductionVariableBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/CanonicalizeInductionVariableBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/CanonicalizeInductionVariableBenchmark.svg?raw=true)
+[![CanonicalizeInductionVariableBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/CanonicalizeInductionVariableBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/CanonicalizeInductionVariableBenchmark.svg?raw=true)
 
 ### Conclusions:
 We can see that OpenJDK and GraalVM (CE or EE) perform the same in the `canonicalize` benchmark method.
@@ -197,9 +197,9 @@ dead allocations even across function boundaries, provided the functions are inl
   }  
 ```
 
-Source code: [DeadLocalAllocationStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark.java)
+Source code: [DeadLocalAllocationStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadLocalAllocationStoreBenchmark.java)
 
-[![DeadLocalAllocationStoreBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/DeadLocalAllocationStoreBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/DeadLocalAllocationStoreBenchmark.svg?raw=true)
+[![DeadLocalAllocationStoreBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/DeadLocalAllocationStoreBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/DeadLocalAllocationStoreBenchmark.svg?raw=true)
 
 ### Conclusions:
 We can see that in general GraalVM CE, EE and OpenJDK have similar performance. However, there are some outliers:
@@ -236,7 +236,7 @@ We can see that in general GraalVM CE, EE and OpenJDK have similar performance. 
   constructor but are not able to remove the redundant allocations.
 
 One interesting optimization GraalVM EE performs is to check if a sequence of allocations all fit in the same TLAB. If this is the case,
-then it is able to take a fast path for allocations where the TLAB bound check is removed. This optimization allows for the 
+then it is able to take a fast path for allocations where the TLAB bound check is removed. This optimization allows for the
 compiler to move instructions together as shown above. OpenJDK and GraalVM CE do not perform this optimization.
 
 ```
@@ -301,9 +301,9 @@ The benchmark assesses how the compiler could remove code (i.e., a dead method c
   }  
 ```
 
-Source code: [DeadMethodCallStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadMethodCallStoreBenchmark.java)
+Source code: [DeadMethodCallStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/DeadMethodCallStoreBenchmark.java)
 
-[![DeadMethodCallStoreBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/DeadMethodCallStoreBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/DeadMethodCallStoreBenchmark.svg?raw=true)
+[![DeadMethodCallStoreBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/DeadMethodCallStoreBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/DeadMethodCallStoreBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -390,9 +390,9 @@ public static Car fromCachedValues(String value) {
 }
 ```
 
-Source code: [EnumValueLookupBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark.java)
+Source code: [EnumValueLookupBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/EnumValueLookupBenchmark.java)
 
-[![EnumValueLookupBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/EnumValueLookupBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/EnumValueLookupBenchmark.svg?raw=true)
+[![EnumValueLookupBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/EnumValueLookupBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/EnumValueLookupBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -400,8 +400,8 @@ The `enum_values` benchmark is impacted by the object allocations triggered by t
 
 Caching these values and using the cached structure instead of calling `enum::values()` reduces the number of allocations.
 
-Looking at the `cached_enum_values` benchmark, it can be seen that OpenJDK is faster than both GraalVM CE and EE. The reason behind 
-is that OpenJDK uses a different intrinsic for string comparison. GraalVM CE and EE will call into a stub method 
+Looking at the `cached_enum_values` benchmark, it can be seen that OpenJDK is faster than both GraalVM CE and EE. The reason behind
+is that OpenJDK uses a different intrinsic for string comparison. GraalVM CE and EE will call into a stub method
 that performs byte-wise comparison.
 
 ```
@@ -456,9 +456,9 @@ Tests the conditional branch optimizations within a loop using:
   }  
 ```
 
-Source code: [IfConditionalBranchBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/IfConditionalBranchBenchmark.java)
+Source code: [IfConditionalBranchBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/IfConditionalBranchBenchmark.java)
 
-[![IfConditionalBranchBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/IfConditionalBranchBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/IfConditionalBranchBenchmark.svg?raw=true)
+[![IfConditionalBranchBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/IfConditionalBranchBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/IfConditionalBranchBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -553,9 +553,9 @@ OpenJDK specifics:
 }
 ```
 
-Source code: [LockCoarseningBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark.java)
+Source code: [LockCoarseningBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockCoarseningBenchmark.java)
 
-[![LockCoarseningBenchmark_withBiasedLocking.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withBiasedLocking.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withBiasedLocking.svg?raw=true)
+[![LockCoarseningBenchmark_withBiasedLocking.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withBiasedLocking.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withBiasedLocking.svg?raw=true)
 
 ### Conclusions:
 
@@ -606,7 +606,7 @@ By contrast, GraalVM EE JIT can coarse all the nested locks in one block and per
   0x7fbfd6b19ab2:   mov    %r9d,%eax          <--- ireturn
 ```
 
-[![LockCoarseningBenchmark_withoutBiasedLocking.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withoutBiasedLocking.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withoutBiasedLocking.svg?raw=true)
+[![LockCoarseningBenchmark_withoutBiasedLocking.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withoutBiasedLocking.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LockCoarseningBenchmark_withoutBiasedLocking.svg?raw=true)
 
 ### Conclusions:
 
@@ -673,9 +673,9 @@ Synchronization on non-shared objects is pointless, and runtime does not have to
   }  
 ```
 
-Source code: [LockElisionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark.java)
+Source code: [LockElisionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LockElisionBenchmark.java)
 
-[![LockElisionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockElisionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LockElisionBenchmark.svg?raw=true)
+[![LockElisionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LockElisionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LockElisionBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -772,9 +772,9 @@ The benchmark assesses if the compiler triggers loop fusion, an optimization aim
   }
 ```
 
-Source code: [LoopFusionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopFusionBenchmark.java)
+Source code: [LoopFusionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopFusionBenchmark.java)
 
-[![LoopFusionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LoopFusionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LoopFusionBenchmark.svg?raw=true)
+[![LoopFusionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LoopFusionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LoopFusionBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -822,9 +822,9 @@ Hoisting and sinking are terms that Compiler refers to moving operations outside
 - hoisting a load means to move the load so that it occurs before the loop
 - sinking a store means to move a store to occur after a loop
 
-Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopInvariantCodeMotionBenchmark.java)
+Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopInvariantCodeMotionBenchmark.java)
 
-[![LoopInvariantCodeMotionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)
+[![LoopInvariantCodeMotionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -878,14 +878,14 @@ This optimization is based on the induction variable to strength the additions.
   private int auto_reduction(final int iterations, int accumulator) {
     for (int i = 0; i < iterations; ++i) {
       accumulator++;
-    }
+    } 
     return accumulator;
   }
 ```
 
-Source code: [LoopReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopReductionBenchmark.java)
+Source code: [LoopReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/LoopReductionBenchmark.java)
 
-[![LoopReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LoopReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/LoopReductionBenchmark.svg?raw=true)
+[![LoopReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LoopReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/LoopReductionBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -936,9 +936,9 @@ This benchmark tests the performance of Project Panama's Vector API when used to
 As of the time of writing, the Vector API is still an incubator module in OpenJDK and the API and the implementation
 are subject to change between releases.
 
-Source code: [MandelbrotVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MandelbrotVectorApiBenchmark.java)
+Source code: [MandelbrotVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MandelbrotVectorApiBenchmark.java)
 
-[![MandelbrotVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MandelbrotVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MandelbrotVectorApiBenchmark.svg?raw=true)
+[![MandelbrotVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MandelbrotVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MandelbrotVectorApiBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1015,12 +1015,12 @@ if (receiver instanceof Type1) {
 Once a call site becomes static, the compiler will be able to inline the target method and perform further
 optimizations. OpenJDK (using the C2 JIT) can devirtualize up to two different targets of a virtual call, for more targets a vtable/itable call is used.
 
-Source code: [MegamorphicMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark.java)
+Source code: [MegamorphicMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicMethodCallBenchmark.java)
 
 The `virtual_call` benchmark measures the performance of virtual calls with a different number of targets. The
 `devirtualize_to_monomorphic` benchmark tries to manually devirtualize call sites to be monomorphic.
 
-[![MegamorphicMethodCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MegamorphicMethodCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MegamorphicMethodCallBenchmark.svg?raw=true)
+[![MegamorphicMethodCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MegamorphicMethodCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MegamorphicMethodCallBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1086,12 +1086,12 @@ The class hierarchy used in the benchmark is the following:
   }
 ```
 
-Source code: [MegamorphicInterfaceCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark.java)
+Source code: [MegamorphicInterfaceCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MegamorphicInterfaceCallBenchmark.java)
 
 The `virtual_calls_chain` benchmark measures the performance of interface calls with a different number of targets.
 The `devirtualize_to_monomorphic` benchmark tries to manually devirtualize call sites to be monomorphic.
 
-[![MegamorphicInterfaceCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MegamorphicInterfaceCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MegamorphicInterfaceCallBenchmark.svg?raw=true)
+[![MegamorphicInterfaceCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MegamorphicInterfaceCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MegamorphicInterfaceCallBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1101,7 +1101,7 @@ Looking at the figure above and the assembly generated for the `virtual_calls_ch
 
   Starting from three targets or more that are evenly distributed in the benchmark, it always uses a series of interface calls
   to reach the target method.
-  
+
   If a dominant target is present (`virtual_calls_chain[MEGAMORPHIC_6_DOMINANT_TARGET]`),
   then C2 JIT will add a guard, devirtualize and inline the call to the dominant target:
 
@@ -1168,9 +1168,9 @@ if a method takes a large number of arguments, the JIT may bail out when trying 
   }
 ```
 
-Source code: [MethodArgsBusterBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MethodArgsBusterBenchmark.java)
+Source code: [MethodArgsBusterBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/MethodArgsBusterBenchmark.java)
 
-[![MethodArgsBusterBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MethodArgsBusterBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/MethodArgsBusterBenchmark.svg?raw=true)
+[![MethodArgsBusterBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MethodArgsBusterBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/MethodArgsBusterBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1218,9 +1218,9 @@ Since the array elements might be null, some tests explicitly check for null oth
   }
 ```
 
-Source code: [NpeControlFlowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark.java)
+Source code: [NpeControlFlowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeControlFlowBenchmark.java)
 
-[![NpeControlFlowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/NpeControlFlowBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/NpeControlFlowBenchmark.svg?raw=true)
+[![NpeControlFlowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/NpeControlFlowBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/NpeControlFlowBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1271,7 +1271,7 @@ On modern hardware guarding for nulls is (probably) cheap and it could bring a s
 
 ## NpeThrowBenchmark
 
-This benchmark tests the implicit vs explicit throw and catch of `NullPointerException` in a hot loop. 
+This benchmark tests the implicit vs explicit throw and catch of `NullPointerException` in a hot loop.
 The caller method contains a loop that catches the `NullPointerException` thrown by the callee. The callee is never inlined:
 
 ```
@@ -1302,9 +1302,9 @@ The caller method contains a loop that catches the `NullPointerException` thrown
 For `threshold = 0`, the benchmark does not throw any `NullPointerException`. For `threshold = 1`, the
 benchmark always throws `NullPointerException`.
 
-Source code: [NpeThrowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeThrowBenchmark.java)
+Source code: [NpeThrowBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/NpeThrowBenchmark.java)
 
-[![NpeThrowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/NpeThrowBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/NpeThrowBenchmark.svg?raw=true)
+[![NpeThrowBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/NpeThrowBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/NpeThrowBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1314,10 +1314,10 @@ For implicit throws however, OpenJDK is around 35x faster than both GraalVM CE a
 we look at the flamegraphs generated by JMH (and [async-profiler](https://github.com/async-profiler/async-profiler))
 for the `implicit_throw_npe` benchmark.
 
-[![openjdk-hotspot-vm-flame-cpu-forward](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)
+[![openjdk-hotspot-vm-flame-cpu-forward](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)
 The flame graph generated by OpenJDK for the `implicit_throw_npe` benchmark.
 
-[![graalvm-ce-flame-cpu-forward](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)
+[![graalvm-ce-flame-cpu-forward](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.micro.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe-AverageTime-size-1024-threshold-1.0/flame-cpu-forward.png?raw=true)
 The flame graph generated by GraalVM CE for the `implicit_throw_npe` benchmark. GraalVM EE generates a similar flame graph.
 
 Looking at the flame graph for GraalVM CE (and EE), we can see that a call to
@@ -1336,9 +1336,9 @@ Additionally, it tests the performance of static vs non-static recursive calls.
 
 In this benchmark, the ability to inline recursive calls plays an important role in the performance.
 
-Source code: [RecursiveMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/RecursiveMethodCallBenchmark.java)
+Source code: [RecursiveMethodCallBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/RecursiveMethodCallBenchmark.java)
 
-[![RecursiveMethodCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/RecursiveMethodCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/RecursiveMethodCallBenchmark.svg?raw=true)
+[![RecursiveMethodCallBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/RecursiveMethodCallBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/RecursiveMethodCallBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1346,7 +1346,7 @@ For lambda recursive calls, all three JVMs are able to fully inline and remove t
 
 For class and interface recursive calls (static and non-static):
 - OpenJDK always generates a recursive call (static or virtual)
-- GraalVM CE is able to partially inline up to a depth of 6 
+- GraalVM CE is able to partially inline up to a depth of 6
 - GraalVM EE will go up to a depth of 8
 
 For example, the below code instructions pertains to GraalVM CE:
@@ -1384,7 +1384,7 @@ There are a few escape states:
 - NoEscape - the object cannot be visible outside the current method and thread.
 - ArgEscape - the object is passed as an argument to a method but cannot otherwise be visible outside the method or by other threads.
 - GlobalEscape - the object can escape the method or the thread. It means that an object with GlobalEscape state is visible outside method/thread.
-  
+
 For NoEscape objects, the Compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called Scalar Replacement optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
 
 ```
@@ -1415,9 +1415,9 @@ For NoEscape objects, the Compiler can remap accesses to the object fields to ac
   }
 ```
 
-Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark.java)
+Source code: [ScalarReplacementBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/ScalarReplacementBenchmark.java)
 
-[![ScalarReplacementBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)
+[![ScalarReplacementBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/ScalarReplacementBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1471,9 +1471,9 @@ In the case of `arg_escape_obj` benchmark, the C2 JIT is (again) one order of ma
 This benchmark is similar to the `MandelbrotVectorApiBenchmark` in that it tests the performance of Project Panama's
 Vector API. However, in this benchmark the Vector API is used to apply a sepia filter to an input image.
 
-Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/SepiaVectorApiBenchmark.java)
+Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/SepiaVectorApiBenchmark.java)
 
-[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
+[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1515,9 +1515,9 @@ after the loads and before the stores.
 Additionally, the register allocator in C2 JIT is able to [use FPU registers](https://shipilev.net/jvm/anatomy-quarks/20-fpu-spills/)
 to store intermediate values before starting to spill on the stack. GraalVM CE and EE do not have this optimization.
 
-Source code: [StackSpillingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/StackSpillingBenchmark.java)
+Source code: [StackSpillingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/StackSpillingBenchmark.java)
 
-[![StackSpillingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/StackSpillingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/StackSpillingBenchmark.svg?raw=true)
+[![StackSpillingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/StackSpillingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/StackSpillingBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1557,21 +1557,21 @@ The number of allocations during this benchmark is not neglectable, and it influ
   2. two-char String and the first char is the backslash and the second is not the ascii digit or ascii letter
 - `Pattern.split()` reuses the pattern, it saves a few cycles in comparison to `String.split()`
 
-Source code: [StringPatternSplitBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/StringPatternSplitBenchmark.java)
+Source code: [StringPatternSplitBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/StringPatternSplitBenchmark.java)
 
-[![StringPatternSplitBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)
+[![StringPatternSplitBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/StringPatternSplitBenchmark.svg?raw=true)
 
 ### Conclusions:
 
-Using `string_split()` by one character is quite fast, even faster in comparison to `pattern_split()`. This is a take-away we should remind when writing code for business applications. 
+Using `string_split()` by one character is quite fast, even faster in comparison to `pattern_split()`. This is a take-away we should remind when writing code for business applications.
 
 In general, for this benchmark, the emitted assembly code is quite verbose but, as a high-level observation, GraalVM EE JIT does a better job of inlining and devirtualizing the virtual calls in comparison to C2 JIT, which also explains the difference in performance.
 
 ## TypeCheckScalabilityBenchmark
 
-This benchmark addresses the scalability issue happening while performing type checks (`instanceof`, `checkcast`, and similar) 
+This benchmark addresses the scalability issue happening while performing type checks (`instanceof`, `checkcast`, and similar)
 against interfaces (so-called secondary super types).
-This scalability issue is triggered by massive concurrent updates to `Klass::_secondary_super_cache` from 
+This scalability issue is triggered by massive concurrent updates to `Klass::_secondary_super_cache` from
 multiple threads, which in turn causes false sharing with its surrounding fields e.g., `Klass::_secondary_supers`.
 
 The JDK 17 snippet below shows both fields and what they are used for:
@@ -1585,16 +1585,16 @@ class Klass : public Metadata {
     // ...
 }
 ```
- 
-Each time a type check is performed, the `Klass::_secondary_super_cache` is checked first. If the cache does not 
+
+Each time a type check is performed, the `Klass::_secondary_super_cache` is checked first. If the cache does not
 contain the type being checked, then the `Klass::_secondary_supers` array is searched for the type. If the type is
 found in the array, then the cache is updated with the type.
 
 This issue is further discussed in [Francesco Nigro's post](https://redhatperf.github.io/post/type-check-scalability-issue/) and [Netflix blog post](https://netflixtechblog.com/seeing-through-hardware-counters-a-journey-to-threefold-performance-increase-2721924a2822) and has been reported in [JDK-8180450](https://bugs.openjdk.org/browse/JDK-8180450).
 
-Source code: [TypeCheckScalabilityBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark.java)
+Source code: [TypeCheckScalabilityBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckScalabilityBenchmark.java)
 
-[![TypeCheckScalabilitybenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)
+[![TypeCheckScalabilitybenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/TypeCheckScalabilityBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1611,7 +1611,7 @@ In a multithreaded context, the same cache line is read and written by multiple 
 
 This behaviour is best observed by looking at the number of L1 data cache misses.
 
-When `typePollution` is false, the number of reported L1 data cache misses is very low. 
+When `typePollution` is false, the number of reported L1 data cache misses is very low.
 
 ```
 "TypeCheckScalabilityBenchmark.is_duplicated_3:L1-dcache-load-misses":
@@ -1629,7 +1629,7 @@ When `typePollution` is true, the number of reported L1 data cache misses is aro
   10.085 #/op
 ```
 
-Overall, all JITs perform similarly when `typePollution` is false. The same applies when `typePollution` is true. However, the error margin is 
+Overall, all JITs perform similarly when `typePollution` is false. The same applies when `typePollution` is true. However, the error margin is
 higher in this case and the results are not as consistent due to false sharing.
 
 One interesting observation is that C2 is slower than Graal JITs when `typePollution` is true and
@@ -1638,15 +1638,15 @@ behind this is explained further below in the `TypeCheckSlowPathBenchmark`.
 
 ## TypeCheckSlowPathBenchmark
 
-This benchmark checks the slow path of `instanceof` type check using multiple secondary super types (i.e., interfaces) 
+This benchmark checks the slow path of `instanceof` type check using multiple secondary super types (i.e., interfaces)
 and always takes the slow path e.g., by iterating over the secondary super types array.
 
-Compared to the `TypeCheckScalabilityBenchmark`, this benchmark does not cause false sharing. 
+Compared to the `TypeCheckScalabilityBenchmark`, this benchmark does not cause false sharing.
 It only compares the performance of the slow path of type checking across the different JITs.
 
-Source code: [TypeCheckSlowPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckSlowPathBenchmark.java)
+Source code: [TypeCheckSlowPathBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckSlowPathBenchmark.java)
 
-[![TypeCheckSlowPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)
+[![TypeCheckSlowPathBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/TypeCheckSlowPathBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1690,8 +1690,8 @@ C2, instead, loops using a `repnz` [operation prefix](https://www.felixcloutier.
    6cd45:   jmp    6cce3                   <--- jump to the false branch of the type check
 ```
 
-In modern CPUs, the `repnz scas` class of instructions can have a large setup overhead and therefore be slower than a loop for a small number of elements. 
-The performance of this class of instructions very much depends on the vendor and CPU microarchitecture. 
+In modern CPUs, the `repnz scas` class of instructions can have a large setup overhead and therefore be slower than a loop for a small number of elements.
+The performance of this class of instructions very much depends on the vendor and CPU microarchitecture.
 In fact, the [AMD optimization guide](https://www.amd.com/system/files/TechDocs/24594.pdf) recommends using a loop instead in certain cases.
 
 This issue is also mentioned in the JDK mailing list [here](https://mail.openjdk.org/pipermail/hotspot-runtime-dev/2020-August/041056.html)
@@ -1723,9 +1723,9 @@ This benchmark checks the performance of `instanceof` type check using multiple 
   }
 ```
 
-Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckBenchmark.java)
+Source code: [TypeCheckBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/micro/compiler/TypeCheckBenchmark.java)
 
-[![TypeCheckBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/TypeCheckBenchmark.svg?raw=true)
+[![TypeCheckBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/TypeCheckBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/TypeCheckBenchmark.svg?raw=true)
 
 ### Conclusions:
 
@@ -1774,7 +1774,7 @@ The C2 compiler takes the slow path and searches through the secondary supers (i
 
 ## JIT Geometric Mean
 
-This section describes the normalized GM for the entire JIT-related benchmark category, having in total 301 benchmarks. 
+This section describes the normalized GM for the entire JIT-related benchmark category, having in total 301 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -1807,13 +1807,13 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 2. C2 JIT is in the middle
 3. GraalVM CE JIT is the slowest
 
-# Macro
+# Miscellaneous
 
 This set of benchmarks is dedicated to larger programs using high-level Java APIs (e.g., stream, lambda, fork-join, etc.). It is created to complement the existing JIT benchmarks with another class of benchmarks.
 
-## Macro Benchmarks
+## Miscellaneous Benchmarks
 
-The macro benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
+The miscellaneous benchmarks are measured in [average time per operation](https://github.com/openjdk/jmh/blob/master/jmh-core/src/main/java/org/openjdk/jmh/annotations/Mode.java#L52), which is the score reported by the JMH.
 
 ## HuffmanCodingBenchmark
 
@@ -1825,9 +1825,9 @@ The steps involved in Huffman encoding a given text source file into a destinati
 - build encoding map: traverse the binary tree to discover the binary encodings of each character
 - encode data: re-examine the source file's contents, and for each character, output the encoded binary version of that character to the destination file.
 
-Source code: [HuffmanCodingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/huffmancoding/HuffmanCodingBenchmark.java)
+Source code: [HuffmanCodingBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/huffmancoding/HuffmanCodingBenchmark.java)
 
-[![HuffmanCodingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)
+[![HuffmanCodingBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/HuffmanCodingBenchmark.svg?raw=true)
 
 ## PalindromeBenchmark
 
@@ -1839,18 +1839,18 @@ The benchmark uses a few alternative approaches:
 
 The trampoline pattern is used for implementing algorithms recursively but without blowing the stack (as an alternative to recursive functions). A trampoline is an iteration applying a list of functions, where each function returns the next function to be called.
 
-Source code: [PalindromeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/palindrome/PalindromeBenchmark.java)
+Source code: [PalindromeBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/palindrome/PalindromeBenchmark.java)
 
-[![PalindromeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/PalindromeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/PalindromeBenchmark.svg?raw=true)
+[![PalindromeBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/PalindromeBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/PalindromeBenchmark.svg?raw=true)
 
 ## PopulationVarianceBenchmark
 
 This benchmark generates a population of different ages and then calculates the age variation.
 Population variance is the average of the distances from each data point in a particular population to the mean squared. It indicates how data points spread out in the population. Population variance is an important measure of dispersion used in statistics.
 
-Source code: [PopulationVarianceBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/populationvariance/PopulationVarianceBenchmark.java)
+Source code: [PopulationVarianceBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/populationvariance/PopulationVarianceBenchmark.java)
 
-[![PopulationVarianceBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)
+[![PopulationVarianceBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/PopulationVarianceBenchmark.svg?raw=true)
 
 ## PrimesBenchmark
 
@@ -1858,9 +1858,9 @@ Computes the number of prime numbers until a threshold (e.g., N) number. The ben
 - sieve of Eratosthenes
 - a stream of prime numbers
 
-Source code: [PrimesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/prime/PrimesBenchmark.java)
+Source code: [PrimesBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/prime/PrimesBenchmark.java)
 
-[![PrimesBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/PrimesBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/PrimesBenchmark.svg?raw=true)
+[![PrimesBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/PrimesBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/PrimesBenchmark.svg?raw=true)
 
 ## WordFrequencyBenchmark
 
@@ -1869,13 +1869,13 @@ Computes the word frequencies/occurrences from a text file. The benchmark uses a
 - parallel streams
 - pattern streams
 
-Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/wordfrequency/WordFrequencyBenchmark.java)
+Source code: [WordFrequencyBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/macro/wordfrequency/WordFrequencyBenchmark.java)
 
-[![WordFrequencyBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/WordFrequencyBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-17/x86_64/plot/WordFrequencyBenchmark.svg?raw=true)
+[![WordFrequencyBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/WordFrequencyBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/v2.0/results/jdk-17/x86_64/plot/WordFrequencyBenchmark.svg?raw=true)
 
-## Macro Geometric Mean
+## Miscellaneous Geometric Mean
 
-This section describes the normalized GM for the entire macro benchmarks category, having in total 27 benchmarks. 
+This section describes the normalized GM for the entire miscellaneous benchmarks category, having in total 27 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -1989,17 +1989,17 @@ Depending on the mode, Shenandoah GC disables some of these barriers.
 
 # Final Thoughts
 
-In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 and arm64. 
-We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations. 
+In this article we compared three different JVM distributions (OpenJDK, GraalVM CE and GraalVM EE) on both x86_64 and arm64.
+We used a set of JMH benchmarks to assess the performance of the JIT compilers performing a non-exhaustive set of optimizations.
 
 In general, we can conclude that the GraalVM EE JIT compiler outperforms C2 JIT. In particular, optimizations like partial escape analysis, and better inlining (including polymorphic inlining) make a difference. GraalVM CE JIT, instead, has a reduced set of optimizations in comparison to C2 JIT, that makes it slower.
 
 OpenJDK still offers a good mixture between C2 JIT with an extended set of intrinsics and rich vectorization support, as well as the full set of Garbage Collectors (including ZGC and Shenandoah GC). Even though maybe, in terms of JIT C2 is not on the same parity as Graal JIT from the EE, the JVM does a good job overall.
 
-This report should not be considered as a final verdict on which JVM distribution is the best. 
+This report should not be considered as a final verdict on which JVM distribution is the best.
 As it can be seen in the results, there are cases where one distribution is faster than the other and vice-versa, depending on the benchmark.
 Micro-benchmarking is often not the best indicator of how good a system will be in a production environment.
-Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks. 
+Instead, it is a starting point for further investigation and could be used as a reference for future benchmarks.
 It might also be useful to developers who want to have a better understanding of the class of optimizations available in a given JVM distribution.
 
 In case you want to contribute to this project, feel free to reach out or open a pull request on
