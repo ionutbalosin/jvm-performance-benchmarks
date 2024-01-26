@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.iterative","avgt",1,25,266.109839,0.003793,"us/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TailRecursionBenchmark.tail_recursive","avgt",1,25,3000.911599,2.848011,"us/op",262144

@@ -1,2 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.MethodArgsBusterBenchmark.method_args_buster","avgt",1,25,0.578718,0.000052,"ns/op"
