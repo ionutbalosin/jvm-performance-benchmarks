@@ -56,9 +56,11 @@ public class LoopInvariantCodeMotionBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*LoopInvariantCodeMotionBenchmark.*"
 
-  @Param({"32768"})
+  @Param({"16384"})
   private int iterations;
 
+  // The compiler won't perform optimizations based on the volatile constant. However, at runtime,
+  // it will always have the same value, ensuring reproducible results.
   private volatile long value = System.nanoTime();
 
   @Benchmark
@@ -67,12 +69,12 @@ public class LoopInvariantCodeMotionBenchmark {
     long value = this.value;
     int iterations = this.iterations;
 
-    for (int i = 1; i < iterations; i++) {
-      double aux1 = foo((i - 1) * value) + foo(value);
-      double aux2 = 1 - foo((i - 1) * value) * foo(value);
+    for (int i = 1; i <= iterations; i++) {
+      double aux1 = taylorSeries((i - 1) * value) + taylorSeries(value);
+      double aux2 = 1 - taylorSeries((i - 1) * value) * taylorSeries(value);
 
       sum += aux1 / aux2;
-      result = foo(sum);
+      result = taylorSeries(sum);
     }
 
     return result;
@@ -84,16 +86,16 @@ public class LoopInvariantCodeMotionBenchmark {
     long value = this.value;
     int iterations = this.iterations;
 
-    for (int i = 1; i < iterations; i++) {
+    for (int i = 1; i <= iterations; i++) {
       // common subexpressions elimination
-      double constFoo = foo(value);
-      double varFoo = foo((i - 1) * value);
+      double constSeries = taylorSeries(value);
+      double varSeries = taylorSeries((i - 1) * value);
 
-      double aux1 = varFoo + constFoo;
-      double aux2 = 1 - varFoo * constFoo;
+      double aux1 = varSeries + constSeries;
+      double aux2 = 1 - varSeries * constSeries;
 
       sum += aux1 / aux2;
-      result = foo(sum);
+      result = taylorSeries(sum);
     }
 
     return result;
@@ -106,17 +108,17 @@ public class LoopInvariantCodeMotionBenchmark {
     int iterations = this.iterations;
 
     // manual hoisting (i.e., loop independent)
-    double constFoo = foo(value);
+    double constSeries = taylorSeries(value);
 
-    for (int i = 1; i < iterations; i++) {
-      double aux1 = foo((i - 1) * value) + constFoo;
-      double aux2 = 1 - foo((i - 1) * value) * constFoo;
+    for (int i = 1; i <= iterations; i++) {
+      double aux1 = taylorSeries((i - 1) * value) + constSeries;
+      double aux2 = 1 - taylorSeries((i - 1) * value) * constSeries;
 
       sum += aux1 / aux2;
     }
 
     // manual sinking (i.e., loop independent)
-    result = foo(sum);
+    result = taylorSeries(sum);
 
     return result;
   }
@@ -128,34 +130,35 @@ public class LoopInvariantCodeMotionBenchmark {
     int iterations = this.iterations;
 
     // manual hoisting (i.e., loop independent)
-    double constFoo = foo(value);
+    double constSeries = taylorSeries(value);
 
-    for (int i = 1; i < iterations; i++) {
+    for (int i = 1; i <= iterations; i++) {
       // common subexpression elimination
-      double varFoo = foo((i - 1) * value);
+      double varSeries = taylorSeries((i - 1) * value);
 
-      double aux1 = varFoo + constFoo;
-      double aux2 = 1 - varFoo * constFoo;
+      double aux1 = varSeries + constSeries;
+      double aux2 = 1 - varSeries * constSeries;
 
       sum += aux1 / aux2;
     }
 
     // manual sinking (i.e., loop independent)
-    result = foo(sum);
+    result = taylorSeries(sum);
 
     return result;
   }
 
   /*
    * Taylor series expansion for e^(-x^2)
-   * Formula used: 1 - x^2/2! + x^4/4! - * x^6/6! + ... + x^2048/2048!
+   * Formula used: 1 - x^2/2! + x^4/4! - x^6/6! + ... + (-1)^n * x^(2n)/(2n)!
    */
-  public static double foo(double value) {
+  public static double taylorSeries(double value) {
+    final int TAYLOR_SERIES_LIMIT = 2048;
     double result = 1.0;
     double term = 1.0;
 
-    for (int n = 1; n < 2048; n++) {
-      term *= -value * value / n;
+    for (int i = 1; i <= TAYLOR_SERIES_LIMIT; i++) {
+      term *= -value * value / i;
       result += term;
     }
 
