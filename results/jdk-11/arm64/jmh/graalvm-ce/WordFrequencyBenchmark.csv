@@ -1,4 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency.WordFrequencyBenchmark.iterative","avgt",1,25,"12,566616","0,087904","ms/op"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency.WordFrequencyBenchmark.parallel_stream","avgt",1,25,"7,111091","0,029484","ms/op"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency.WordFrequencyBenchmark.pattern_stream","avgt",1,25,"12,429292","0,752889","ms/op"

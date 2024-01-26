@@ -1,4 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: regexp"
-"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_find","avgt",1,25,"745,466071","19,714020","us/op","^(.*[aeuio].*){3,}$"
-"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.pattern_matches","avgt",1,25,"738,657031","24,271597","us/op","^(.*[aeuio].*){3,}$"
-"com.ionutbalosin.jvm.performance.benchmarks.api.string.StringPatternMatcherBenchmark.string_matches","avgt",1,25,"895,255695","4,932117","us/op","^(.*[aeuio].*){3,}$"

@@ -1,5 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score.Error..99.9..","Unit","Param..arraySize","Param..vectorSize"
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,2.59818,0.012815,"us/op",64,64
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,2.933806,0.010283,"us/op",64,128
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,5.042819,0.046713,"us/op",64,256
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SortVectorApiBenchmark.sortVector","avgt",1,25,10.385787,0.074877,"us/op",64,512

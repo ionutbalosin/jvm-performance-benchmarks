@@ -1,9 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: iterations","Param: size"
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline","avgt",1,25,33.051770,0.110195,"ms/op",1000,256
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline","avgt",1,25,131.378734,0.530012,"ms/op",1000,512
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline","avgt",1,25,64.628936,0.084274,"ms/op",2000,256
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.baseline","avgt",1,25,257.912482,0.591824,"ms/op",2000,512
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized","avgt",1,25,2.407322,0.000243,"ms/op",1000,256
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized","avgt",1,25,9.001192,0.001065,"ms/op",1000,512
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized","avgt",1,25,4.671561,0.000329,"ms/op",2000,256
-"com.ionutbalosin.jvm.performance.benchmarks.api.vector.MandelbrotVectorApiBenchmark.vectorized","avgt",1,25,17.477311,0.002067,"ms/op",2000,512

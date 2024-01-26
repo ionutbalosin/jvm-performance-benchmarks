@@ -1,7 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size","Param: threshold"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe","avgt",1,25,5940.809589,3.557483,"ns/op",1024,0.0
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe","avgt",1,25,2976845.978844,62725.234848,"ns/op",1024,0.5
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.explicit_throw_npe","avgt",1,25,5916508.162145,24273.539598,"ns/op",1024,1.0
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe","avgt",1,25,5942.691089,4.014202,"ns/op",1024,0.0
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe","avgt",1,25,247751.392994,5655.573591,"ns/op",1024,0.5
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.NpeThrowBenchmark.implicit_throw_npe","avgt",1,25,470479.075335,7260.608045,"ns/op",1024,1.0

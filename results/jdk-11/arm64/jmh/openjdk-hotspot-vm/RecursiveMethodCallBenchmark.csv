@@ -1,7 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: depth"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_non_static_method","avgt",1,25,"611,503468","0,295630","ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.class_static_method","avgt",1,25,"610,928697","0,268980","ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_non_static_method","avgt",1,25,"635,457671","0,659724","ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.interface_static_method","avgt",1,25,"610,471783","0,377880","ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_non_static","avgt",1,25,"2,658081","0,001608","ns/op",256
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.RecursiveMethodCallBenchmark.lambda_static","avgt",1,25,"2,706110","0,009090","ns/op",256

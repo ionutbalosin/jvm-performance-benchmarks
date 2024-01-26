@@ -1,5 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: objectEscapes","Param: size","Param: value"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.arg_escape_obj","avgt",1,25,0.771597,0.000010,"ns/op",false,128,3
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.branch_escape_obj","avgt",1,25,1.543229,0.000135,"ns/op",false,128,3
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape","avgt",1,25,0.964482,0.000015,"ns/op",false,128,3
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarReplacementBenchmark.no_escape_array_obj","avgt",1,25,1.157402,0.000097,"ns/op",false,128,3

@@ -1,4 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: size"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.no_if_branch","avgt",1,25,"2503,305857","0,359195","ns/op",16384
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.predictable_if_branch","avgt",1,25,"11731,945908","5,957036","ns/op",16384
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.IfConditionalBranchBenchmark.unpredictable_if_branch","avgt",1,25,"5004,947016","2,148546","ns/op",16384

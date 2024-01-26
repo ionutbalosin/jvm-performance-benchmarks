@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.cached_enum_values","avgt",1,25,"22,341679","0,005314","ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.api.EnumValuesLookupBenchmark.enum_values","avgt",1,25,"27,480033","0,052082","ns/op"

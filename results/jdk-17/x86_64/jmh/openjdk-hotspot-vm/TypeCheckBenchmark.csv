@@ -1,2 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckBenchmark.instanceof_type_check","avgt",1,25,33.518075,0.003787,"ns/op"

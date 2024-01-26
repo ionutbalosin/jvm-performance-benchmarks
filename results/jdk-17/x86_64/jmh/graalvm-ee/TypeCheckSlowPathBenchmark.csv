@@ -1,6 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: supertypes"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,19.684658,1.657264,"ns/op",16
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,32.903959,1.413901,"ns/op",32
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,60.199733,0.293842,"ns/op",64
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,126.862824,0.059560,"ns/op",128
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.TypeCheckSlowPathBenchmark.instanceof_type_check","avgt",1,25,239.538401,2.038389,"ns/op",256
