@@ -36,8 +36,8 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /*
  * Test how the compiler handles loop invariant code motion, examining its ability to move method
- * calls that are loop-invariant both before and after the loop, as well as to perform common
- * subexpression elimination within the loop.
+ * calls that are loop-invariant both before and after the loop, as well as to perform method call
+ * common subexpression elimination within the loop.
  *
  * Hoisting and sinking are terms that Compiler refers to moving operations outside loops:
  * - hoisting a load means to move the load so that it occurs before the loop
@@ -56,7 +56,7 @@ public class LoopInvariantCodeMotionBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*LoopInvariantCodeMotionBenchmark.*"
 
-  @Param({"16384"})
+  @Param({"20480"})
   private int iterations;
 
   // The compiler won't perform optimizations based on the volatile constant. However, at runtime,
