@@ -2077,7 +2077,7 @@ performance difference is that the Oracle GraalVM JIT compiler does not unroll t
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT compiler does not implement all the Vector API compiler intrinsics required to vectorize the benchmark
+The GraalVM CE JIT compiler does not implement the Vector API compiler intrinsics required to vectorize the benchmark
 body and therefore falls back to the Java implementation of the Vector API. This results in a significant performance
 degradation and can be seen by looking at the hottest methods in the benchmark after inlining.
 
@@ -2119,7 +2119,7 @@ The C2 JIT compiler and the Oracle GraalVM JIT compiler implement the Vector API
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
+The GraalVM CE JIT compiler does not implement the Vector API compiler intrinsics. It does therefore fallback
 to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
 by looking at the hottest methods in the benchmark after inlining.
 
