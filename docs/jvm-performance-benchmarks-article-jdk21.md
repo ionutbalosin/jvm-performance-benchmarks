@@ -416,7 +416,7 @@ generated assembly code is the same for all eight allocations.
 
 The Oracle GraalVM JIT compiler is faster than the C2 and GraalVM CE JIT compilers. The reason for this is that it is
 able to generate more compact assembly code for the grouped allocations that allows for better prefetching
-and pipelining. On the fast path, it also performs a single TLAB allocation for the sum of the sizes of all the objects.
+and pipelining. On the fast path, it also performs a single **thread-local allocation buffer** ([TLAB](https://openjdk.org/groups/hotspot/docs/HotSpotGlossary.html)) allocation for the sum of the sizes of all the objects.
 
 ```
   0x7f62bad7dfdf:   mov    0x1b8(%r15),%rax            ; load the TLAB top
