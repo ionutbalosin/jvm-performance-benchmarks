@@ -312,7 +312,7 @@ The GraalVM CE JIT compiler, akin to the C2 JIT compiler, is capable of devirtua
 
 ### Conclusions
 
-The Oracle GraalVM JIT compiler stands out as the sole compiler capable of completely eliminating dead arguments.
+The Oracle GraalVM JIT compiler, in this scenario, was able to eliminate the dead arguments. This effect appears to be mostly a result of more aggressive inlining.
 
 In comparison, the C2 JIT compiler has a limited capability for inlining recursive calls (`recursive_method_calls` scenario), resulting in slower execution times compared to the GraalVM CE JIT compiler. However, in this benchmark, neither of the two compilers eliminates dead arguments since full inlining of the callee method `recursiveMethod` does not occur.
 
@@ -416,7 +416,7 @@ generated assembly code is the same for all eight allocations.
 
 The Oracle GraalVM JIT compiler is faster than the C2 and GraalVM CE JIT compilers. The reason for this is that it is
 able to generate more compact assembly code for the grouped allocations that allows for better prefetching
-and pipelining. On the fast path, it also performs a single TLAB allocation for the sum of the sizes of all the objects.
+and pipelining. On the fast path, it also performs a single **thread-local allocation buffer** ([TLAB](https://openjdk.org/groups/hotspot/docs/HotSpotGlossary.html)) allocation for the sum of the sizes of all the objects.
 
 ```
   0x7f62bad7dfdf:   mov    0x1b8(%r15),%rax            ; load the TLAB top
@@ -562,7 +562,8 @@ The analysis below pertains to the `method_call_dse` method, which is the primar
 
 #### C2 JIT Compiler
 
-The C2 JIT compiler optimizes the code by eliminating dead store method calls and applying inlining to the `computePi` method. Inside the loop, there's a boolean flag determining whether to add or subtract the value `4.0 / i` to the result. However, the compiler optimizes this logic, removing the conditional statements.
+The C2 JIT compiler inlines all the `computePi` methods, and then the dead operations are removed.
+Without inlining of the call target, a compiler (in general) wouldn't see the dead operation eliminated since it would not know if the callee has side effects that cannot be eliminated.
 
 Additionally, it unrolls the main loop by a factor of 16, thereby handling 16 operations per unrolled loop cycle. To compute the results, the compiler leverages double-precision scalar floating-point instructions with SIMD capabilities, utilizing SSE/AVX extensions.
 
@@ -656,6 +657,8 @@ It achieves optimization by unrolling the main loop by a factor of 8, allowing 8
     ; xmm1 stores the result of the main loop
 ```
 
+Of interest in this listing are the `vxorpd` instructions (used to zero out the target registers before each convert instruction), which might help to avoid the pipeline stalls due to false dependencies.
+
 The post-loop processes the remaining elements individually, without unrolling:
 
 ```
@@ -725,7 +728,7 @@ Subsequently, the loop corresponding to the non-dead store method call is not un
 
 ### Conclusions
 
-The GraalVM CE JIT exibits suboptimal optimizations in this scenario, lacking loop unrolling and unable to eliminate loops related to dead method calls.
+In this scenario, the GraalVM CE JIT exibits suboptimal optimizations, lacking loop unrolling and unable to eliminate loops related to dead method calls.
 
 Oracle GraalVM JIT successfully eliminates the dead method calls and triggers loop unrolling by a factor of 8, handling the remaining elements in a post loop without unrolling.
 
@@ -922,6 +925,7 @@ This benchmark tests the conditional branch optimizations within a loop using:
   public int predictable_if_branch() {
     int sum = 0;
 
+    // all values are less than the THRESHOLD, therefore the condition is true and the branch is always taken    
     for (final int value : array) {
       if (value < THRESHOLD) {
         sum += value;
@@ -935,6 +939,7 @@ This benchmark tests the conditional branch optimizations within a loop using:
   public int unpredictable_if_branch() {
     int sum = 0;
 
+    // some values are bigger and some are smaller than 'THRESHOLD / 2', making this condition unpredictable
     for (final int value : array) {
       if (value <= (THRESHOLD / 2)) {
         sum += value;
@@ -1118,7 +1123,7 @@ The post-loop handles the remaining elements individually, without loop unrollin
 
 #### Oracle GraalVM JIT Compiler
 
-Oracle GraalVM JIT compiler does to sum of elements array using vectorized instructions that operate on 256-bit wide AVX (Advanced Vector Extensions) registers, thereby handling 8 additions per unrolled loop cycle.
+Oracle GraalVM JIT compiler uses vectorized instructions to perform the sum of elements in an array. It operates on 256-bit wide AVX (Advanced Vector Extensions) registers, allowing for 8 additions per unrolled loop cycle. This enables parallel handling of additions per unrolled loop iteration, leading to faster execution.
 
 ```
   // Main loop
@@ -1217,6 +1222,10 @@ This benchmark tests how the compiler coarsens or merges several adjacent synchr
     }
 
     return result;
+  }
+  
+  public synchronized int sum(int aValue) {
+    return aValue + incrementValue;
   }  
 ```
 
@@ -1347,7 +1356,7 @@ Here are further details about the [mergeMargin](https://github.com/openjdk/jmh/
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT compiler inlines the `sum` method calls, employs lock coarsening, and utilizes conditional instructions (e.g., `cmp`) to handle the additions.
+The Oracle GraalVM JIT compiler inlines the `sum` method calls and coarsens the locks.
 
 ```
   0x7ffa1ad7dc3f:   mov    %rsi,%r11
@@ -3288,7 +3297,7 @@ There are a few escape states:
 - `ArgEscape` - The object does not escape the method or thread, but it is passed as an argument to a call or referenced by an argument, and it does not escape during the call.
 - `GlobalEscape` - The object can escape the method or the thread, which means that such an object is visible outside the method or thread.
 
-For `NoEscape` objects, the compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called `Scalar Replacement` optimization. If stack allocation was really done, it would allocate the entire object storage on the stack, including the header and the fields, and reference it in the generated code.
+For `NoEscape` objects, the compiler can remap accesses to the object fields to accesses to synthetic local operands: which leads to so-called `Scalar Replacement` optimization.
 
 ```
   @Param(value = {"false"})
@@ -5033,7 +5042,7 @@ It might also be useful to software engineers who want to have a better understa
 # References
 - [OpenJDK](https://github.com/openjdk/jdk) sources
 - [GraalVM](https://github.com/oracle/graal) sources
-- [JHM](https://github.com/openjdk/jmh) sources
+- [JMH](https://github.com/openjdk/jmh) sources
 - [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [async-profiler](https://github.com/async-profiler/async-profiler)
 - [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
