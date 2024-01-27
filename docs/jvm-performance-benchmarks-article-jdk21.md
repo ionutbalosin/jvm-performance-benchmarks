@@ -925,7 +925,7 @@ This benchmark tests the conditional branch optimizations within a loop using:
   public int predictable_if_branch() {
     int sum = 0;
 
-    // all values are less than the THRESHOLD, therefore the condition is true and the branch is always taken    
+    // all values are less than the 'THRESHOLD', therefore the condition is true and the branch is always taken    
     for (final int value : array) {
       if (value < THRESHOLD) {
         sum += value;
