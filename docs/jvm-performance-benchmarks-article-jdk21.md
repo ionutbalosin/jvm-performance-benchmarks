@@ -5042,7 +5042,7 @@ It might also be useful to software engineers who want to have a better understa
 # References
 - [OpenJDK](https://github.com/openjdk/jdk) sources
 - [GraalVM](https://github.com/oracle/graal) sources
-- [JHM](https://github.com/openjdk/jmh) sources
+- [JMH](https://github.com/openjdk/jmh) sources
 - [Aleksey Shipilëv: One Stop Page](https://shipilev.net)
 - [async-profiler](https://github.com/async-profiler/async-profiler)
 - [How to not lie with statistics: the correct way to summarize benchmark results](https://dl.acm.org/doi/pdf/10.1145/5666.5673) - Philip J Fleming, John J Wallace
