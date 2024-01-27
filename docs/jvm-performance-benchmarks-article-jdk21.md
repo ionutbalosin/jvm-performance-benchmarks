@@ -101,6 +101,8 @@ This benchmark checks if the compiler is capable of simplifying loops, transform
 that depends on it into a simpler form. In some cases, the loop can be completely removed and the body of the loop can
 be replaced with a constant value.
 
+Ideally, a compiler should be able to optimize `canonicalize` and `baseline` to a form that is equivalent to `manual_canonicalize`.
+
 ```
   @Benchmark
   public long baseline() {
@@ -797,53 +799,113 @@ The analysis below pertains to the `cached_enum_values` method, which is the pri
 #### C2 JIT Compiler
 
 The C2 JIT compiler iterates through the array of cached enum values, attempting to locate a match for the `lookUpValue` by utilizing the `String::equals` method.
+To achieve this, it performs loop peeling for the first two iterations, then checks for object reference equality, coder equality, byte array length equality, and finally triggers the byte array comparison.
 
 ```
-    0x7f2fe44fa213:   mov    $0x2,%r10d                   ; Initialize loop counter r10d = 2
-    0x7f2fe44fa219:   jmp    0x7f2fe44fa22d
-    ...
-  ↗ 0x7f2fe44fa220:   inc    %r10d                        ; increment loop counter
-  │ 0x7f2fe44fa223:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
-  │ 0x7f2fe44fa227:   jge    0x7f2fe44fa388               ; jump if greater than or equal to exit loop
-  │ 0x7f2fe44fa22d:   mov    0x10(%rdx,%r10,4),%ebx       ; load Car object from enum values array at index [rdx + r10 * 4 + 16]
-  │ 0x7f2fe44fa232:   mov    0x18(%r12,%rbx,8),%edi       ; load 'carValue' field from the Car object at offset 0x18
-  │ ...
-  │ <--- Trigges the comparison between 'carValue' and 'lookUpValue' value -->
-  │ ...
-  ╰ 0x7f2fe44fa269:   jne    0x7f2fe44fa220               ; loop back if not equal
-                                                          ; - java.lang.String::equals
+        0x00007fa1a84f7cda:   movabs $0x7ff03b178,%rdx            ; load the enum values array address into register rbx
+                                                                  ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x00000007ff03b178})}
+        0x00007fa1a84f7ced:   mov    0x14(%rsi),%r11d             ; load 'lookUpValue'
+        0x00007fa1a84f7d09:   movsbl 0x10(%r12,%r11,8),%r9d       ; load 'coder' field (i.e., byte) of 'lookUpValue'
+        0x00007fa1a84f7d18:   mov    0x14(%r12,%r11,8),%ebx       ; load 'value' field (i.e., byte[]) of 'lookUpValue'
+        0x00007fa1a84f7d22:   mov    0xc(%r12,%rbx,8),%r8d        ; load the byte[] length of 'lookUpValue'
+        ...
+        <-- loop peeling for the first two iterations -->
+        ...
+        0x00007fa1a84f7f13:   mov    $0x2,%r10d                   ; initialize loop counter r10d = 2
+  ╭     0x00007fa1a84f7f19:   jmp    0x00007fa1a84f7f2d
+  │
+  │  ↗↗ 0x00007fa1a84f7f20:   inc    %r10d                        ; increment loop counter
+  │  ││ 0x00007fa1a84f7f23:   cmp    $0x29,%r10d                  ; compare against 41 (i.e., enum values array length)
+  │  ││ 0x00007fa1a84f7f27:   jge    0x00007fa1a84f8088           ; jump if greater than or equal to exit loop
+  ↘  ││ 0x00007fa1a84f7f2d:   mov    0x10(%rdx,%r10,4),%ebx       ; load Car object from enum values array at index [rdx + r10 * 4 + 16]
+     ││ 0x00007fa1a84f7f32:   mov    0x18(%r12,%rbx,8),%edi       ; load 'carValue' field from the Car object at offset 0x18
+     ││ 0x00007fa1a84f7f40:   movsbl 0x10(%r12,%rdi,8),%ecx       ; load 'coder' field (i.e., byte) of 'carValue'
+     ││ 0x00007fa1a84f7f46:   lea    (%r12,%rbx,8),%r13           ; load the Car object
+     ││ 0x00007fa1a84f7f4a:   cmp    %r11d,%edi                   ; compare if the 'carValue' is the same as 'lookUpValue'
+   ╭ ││ 0x00007fa1a84f7f4d:   je     0x00007fa1a84f8035           ; jump if they are equal
+   │ ││                                                           ; - java.lang.String::equals@2 (line 1858)
+   │ ││ 0x00007fa1a84f7f53:   cmp    %r9d,%ecx                    ; compare coders of 'carValue' (ecx) and 'lookUpValue' (r9d)
+   │╭││ 0x00007fa1a84f7f56:   jne    0x00007fa1a84f8054           ; jump if are not equal
+   ││││                                                           ; - java.lang.String::equals@33 (line 1861)
+   ││││ 0x00007fa1a84f7f5c:   mov    0x14(%r12,%rdi,8),%ebx       ; load 'value' field (i.e., byte[]) of 'carValue'
+   ││││                                                           ; - java.lang.String::equals@37 (line 1861)
+   ││││ 0x00007fa1a84f7f61:   mov    0xc(%r12,%rbx,8),%ecx        ; load the 'value' length (i.e., byte[]) of 'carValue'
+   ││││ 0x00007fa1a84f7f66:   cmp    %r8d,%ecx                    ; compare 'carValue' value length against 'lookUpValue' value length
+   ││╰│ 0x00007fa1a84f7f69:   jne    0x00007fa1a84f7f20           ; jump back if not equal
+   ││ │                                                           ; - java.lang.String::equals@44 (line 1863)
+   ││ │ 0x00007fa1a84f7f6b:   lea    (%r12,%rbx,8),%rdi           ; load 'value' field (i.e., byte[]) of Car object
+   ││ │                                                           ; - java.lang.String::equals@37 (line 1861)
+   ││ │ 0x00007fa1a84f7f6f:   lea    0x10(%r12,%rbx,8),%rdi       ; load byte[] content of Car object
+   ││ │ ...
+   ││ │ <--- Intrinsic stub for byte array comparison --->
+   ││ │ ...                                                       ; - java.lang.String::equals@44 (line 1863)
+   ││ │ 0x00007fa1a84f802d:   test   %eax,%eax
+   ││ ╰ 0x00007fa1a84f802f:   je     0x00007fa1a84f7f20           ; jump back
+   ↘│   0x00007fa1a84f8035:   mov    %r13,%rax
+    │   ...
+    │   0x00007fa1a84f804d:   ret
+    │   0x00007fa1a84f804e:   mov    $0x1,%r10d
+    ↘   0x00007fa1a84f8054:   mov    %r13,%rbp
+      ╭ 0x00007fa1a84f8057:   jmp    0x00007fa1a84f805f
+      │ ...
+      ↘ 0x00007fa1a84f805f:   mov    $0xffffff45,%esi
+        ...
 ```
 
 #### Oracle GraalVM JIT Compiler
 
-The Oracle GraalVM JIT iterates through the array of cached enum values. However, when attempting to compare the `lookUpValue` value against the enum values (i.e., String comparisons), it utilizes an intrinsic candidate for the byte array values.
+The Oracle GraalVM JIT iterates through the array of cached enum values. When attempting to compare the `lookUpValue` value against the enum values (i.e., String comparisons), it utilizes an intrinsic candidate (e.g., `IntrinsicStubsGen.arrayRegionEqualsS1S1`) for the byte array values. 
+Unlike C2 JIT Compiler, it does not perform loop peeling, has a slightly reduced number of branch conditional jumps, and, for example, to compare the String coders, it uses a byte register (`cmp %r13b,%cl`) instead of a 32-bit register.
 
 ```
-  ↗ 0x07f9bb6d9c2e0:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
-  │ 0x07f9bb6d9c2e4:   jae    0x07f9bb6d9c42c              ; jump if greater than or equal to 41 (exit the loop)
-  │ 0x07f9bb6d9c2ea:   mov    0x10(%rbx,%r10,4),%edi       ; load Car object from enum values array at index [rbx + r10 * 4 + 0x10]
-  │ 0x07f9bb6d9c2ef:   mov    0x18(,%rdi,8),%esi           ; load 'carValue' field from the Car object at offset 0x18
-  │ 0x07f9bb6d9c2f6:   movsbl 0x10(,%rsi,8),%ecx           ; extract the String coder at offset 0x10
-  │ 0x07f9bb6d9c2fe:   mov    0x14(,%rsi,8),%r8d           ; get the String byte array at offset 0x14
-  │ ...
-  │ 0x07f9bb6d9c312:   inc    %eax
-  │ ...
-  │ 0x07f9bb6d9c329:   cmp    0xc(,%r8,8),%ebp             ; compare the String byte array lengths
-  │ 0x07f9bb6d9c331:   jne    0x07f9bb6d9c37d              ; jump if lengths are not the same
-  │ ...
-  │ <--- Trigger the comparison of two byte array regions using an intrinsic stub -->
-  │ 0x07f9bb6d9c359:   call   0x07f9bb6910580              ; call the runtime function for byte array region comparison
-  │                                                        ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
-  │ 0x07f9bb6d9c360:   test   %eax,%eax                    ; test the result of the byte array region comparison
-  │ 0x07f9bb6d9c362:   jne    0x07f9bb6d9c385              ; jump if ZF is not set (i.e., arrays are equal)
-  │ ...
-  │ 0x07f9bb6d9c37d:   mov    %eax,%r10d                   ; r10d = eax
-  ╰ 0x07f9bb6d9c380:   jmp    0x07f9bb6d9c2e0              ; loop back if arrays are not equal
+      0x7fa3aada2303:   movabs $0x7fed3af88,%rbx            ; load the enum values array address into register rbx
+                                                            ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x0007fed3af88})}
+      0x7fa3aada2316:   mov    0x14(,%r11,8),%edx           ; load 'value' field (i.e., byte[]) of 'lookUpValue'
+      0x7fa3aada231e:   mov    0xc(,%rdx,8),%ebp            ; load the byte[] length of 'lookUpValue'
+      0x7fa3aada2325:   movsbl 0x10(,%r11,8),%r13d          ; load 'coder' field (i.e., byte) of 'lookUpValue'
+      ...
+      0x7fa3aada2348:   shl    $0x3,%rdx                    ;* unwind (locked if synchronized)
+                                                            ; - java.lang.String::equals@-3
+      0x7fa3aada2351:   mov    $0x0,%r10d                   ; initialize loop counter r10d
+    ↗ 0x7fa3aada2360:   cmp    $0x29,%r10d                  ; compare against 41 (enum values array length)
+    │ 0x7fa3aada2364:   jae    0x7fa3aada24ac               ; jump if greater than or equal to 41 (exit the loop)
+    │ 0x7fa3aada236a:   mov    0x10(%rbx,%r10,4),%edi       ; load Car object from enum values array at index [rbx + r10 * 4 + 0x10]
+    │ 0x7fa3aada236f:   mov    0x18(,%rdi,8),%esi           ; load 'carValue' field from the Car object at offset 0x18
+    │ 0x7fa3aada2376:   movsbl 0x10(,%rsi,8),%ecx           ; extract the 'carValue' coder at offset 0x10
+    │ 0x7fa3aada237e:   mov    0x14(,%rsi,8),%r8d           ; get the 'carValue' byte[] at offset 0x14
+    │ 0x7fa3aada2386:   cmp    %r11d,%esi                   ; compare if the 'carValue' is the same as 'lookUpValue'
+    │ 0x7fa3aada2389:   je     0x7fa3aada2431               ; jump if they are equal
+    │                                                       ; - java.lang.String::equals@-3
+    │ 0x7fa3aada238f:   mov    %r10d,%eax
+    │ 0x7fa3aada2392:   inc    %eax                         ; increment loop counter
+    │ 0x7fa3aada2394:   cmp    %r13b,%cl                    ; compare coders of 'carValue' (low byte of the rcx) and 'lookUpValue' (low byte of register r13)
+    │ 0x7fa3aada2397:   jne    0x7fa3aada23f5               ; jump if coders are not equal
+    │ ...
+    │ 0x7fa3aada23a9:   cmp    0xc(,%r8,8),%ebp             ; compare the byte array lengths
+   ╭│ 0x7fa3aada23b1:   jne    0x7fa3aada23fd               ; jump if lengths are not the same
+   ││ ...
+   ││ <--- Trigger the comparison of two byte array regions using an intrinsic stub -->
+   ││ ...
+   ││ 0x7fa3aada23d9:   call   0x7fa3aa912000               ; call the runtime function for byte array region comparison
+   ││                                                       ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
+   ││ ...
+   ││ 0x7fa3aada23e0:   test   %eax,%eax                    ; test the result of the byte array region comparison
+  ╭││ 0x7fa3aada23e2:   jne    0x7fa3aada2405               ; jump if ZF is not set (i.e., arrays are equal)
+  │││ ...
+  │↘│ 0x7fa3aada23fd:   mov    %eax,%r10d                   ; r10d = eax
+  │ ╰ 0x7fa3aada2400:   jmp    0x7fa3aada2360               ; loop back if arrays are not equal
+  ↘   0x7fa3aada2405:   mov    0x4(%rsp),%edi               : load Car object from stack
+      0x7fa3aada2409:   shl    $0x3,%rdi
+      0x7fa3aada240d:   mov    %rdi,%rax
+      ...
+      0x7fa3aada2430:   ret
 ```
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT compiler employs a similar approach to the Oracle GraalVM JIT compiler for comparing Strings, using the intrinsic stub to compare byte arrays. However, the reported average response is marginally slower. A more comprehensive analysis, including profiling, may be required to provide additional insights.
+The GraalVM CE JIT compiler performs loop peeling for the first iteration but, other than that, employs a very similar approach to the Oracle GraalVM JIT compiler for comparing Strings. It utilizes the same intrinsic candidate (e.g., `IntrinsicStubsGen.arrayRegionEqualsS1S1`).
+
+Overall, the reported average response time for the `cached_enum_values` scenario is very small (e.g., 10 ns or even less) among these three compilers.
 
 ### Analysis of enum_values
 
@@ -2075,7 +2137,7 @@ performance difference is that the Oracle GraalVM JIT compiler does not unroll t
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT compiler does not implement all the Vector API compiler intrinsics required to vectorize the benchmark
+The GraalVM CE JIT compiler does not implement the Vector API compiler intrinsics required to vectorize the benchmark
 body and therefore falls back to the Java implementation of the Vector API. This results in a significant performance
 degradation and can be seen by looking at the hottest methods in the benchmark after inlining.
 
@@ -2091,6 +2153,49 @@ Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark
 and better than the `baseline` benchmark.
 
 The GraalVM CE JIT compiler is not (yet) able to vectorize the benchmark body and falls back to the Java implementation of the Vector API.
+
+## SepiaVectorApiBenchmark
+
+This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
+Panama's Vector API. In this benchmark, the Vector API is used to apply a sepia filter to an input image.
+
+In the `baseline`, the benchmark applies the sepia filter using non-vectorized code (i.e. scalar code that might be
+auto-vectorized by the JIT compiler). In the `vectorized` version, the benchmark applies the sepia filter using the
+Vector API.
+
+Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/vector/SepiaVectorApiBenchmark.java)
+
+[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
+
+### Analysis of vectorized
+
+All three JIT compilers perform similar in performance in the `baseline`. The focus of this section will therefore
+be on the `vectorized` benchmark.
+
+#### C2 JIT Compiler and Oracle GraalVM JIT Compiler
+
+The C2 JIT compiler and the Oracle GraalVM JIT compiler implement the Vector API compiler intrinsics and are able to use
+256-bit AVX registers. Therefore, the performance of the benchmark is similar for both JIT compilers.
+
+#### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT compiler does not implement the Vector API compiler intrinsics. It does therefore fallback
+to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
+by looking at the hottest methods in the benchmark after inlining.
+
+```
+  ....[Hottest Methods (after inlining)]..............................................................
+    58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
+    19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
+    19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
+```
+
+### Conclusions
+
+Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
+and better than the `baseline` benchmark.
+
+The GraalVM CE JIT compiler is not able to fully vectorize the benchmark body and falls back to the Java implementation of the Vector API.
 
 ## MegamorphicInterfaceCallBenchmark
 
@@ -3391,49 +3496,6 @@ The GraalVM CE JIT compiler performs the same optimization as the Oracle GraalVM
 In cases where the object does not escape the method or the thread (e.g., `no_escape`, `no_escape_array_obj`), all compilers are able to eliminate the heap allocations.
 
 In cases where the object is passed as an argument but still does not escape the current thread (e.g., `arg_escape_obj`) or is guarded by a global boolean condition (even though that condition does not allow the object to escape; e.g., `branch_escape_obj`), and the object remains visible only to the current thread, only the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) can eliminate unnecessary allocations.
-
-## SepiaVectorApiBenchmark
-
-This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
-Panama's Vector API. In this benchmark, the Vector API is used to apply a sepia filter to an input image.
-
-In the `baseline`, the benchmark applies the sepia filter using non-vectorized code (i.e. scalar code that might be
-auto-vectorized by the JIT compiler). In the `vectorized` version, the benchmark applies the sepia filter using the
-Vector API.
-
-Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/vector/SepiaVectorApiBenchmark.java)
-
-[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
-
-### Analysis of vectorized
-
-All three JIT compilers perform similar in performance in the `baseline`. The focus of this section will therefore
-be on the `vectorized` benchmark.
-
-#### C2 JIT Compiler and Oracle GraalVM JIT Compiler
-
-The C2 JIT compiler and the Oracle GraalVM JIT compiler implement the Vector API compiler intrinsics and are able to use
-256-bit AVX registers. Therefore, the performance of the benchmark is similar for both JIT compilers.
-
-#### GraalVM CE JIT Compiler
-
-The GraalVM CE JIT compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
-to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
-by looking at the hottest methods in the benchmark after inlining.
-
-```
-  ....[Hottest Methods (after inlining)]..............................................................
-    58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
-    19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
-    19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
-```
-
-### Conclusions
-
-Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
-and better than the `baseline` benchmark.
-
-The GraalVM CE JIT compiler is not able to fully vectorize the benchmark body and falls back to the Java implementation of the Vector API.
 
 ## StackSpillingBenchmark
 
