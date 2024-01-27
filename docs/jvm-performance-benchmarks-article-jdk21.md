@@ -1834,43 +1834,6 @@ None of the compilers has implemented this optimization. Moreover, in this bench
 
 The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performance characteristics. However, the GraalVM CE JIT compiler tends to generate less optimal code, resulting in more frequent load and store instructions.
 
-## LoopInvariantCodeMotionBenchmark
-
-Test how the compiler deals with loop invariant code motion, in essence how it is able to move the invariant code before and after a loop.
-Hoisting and sinking are terms that compiler refers to moving operations outside loops:
-- hoisting a load means to move the load so that it occurs before the loop
-- sinking a store means to move a store to occur after a loop
-
-Source code: [LoopInvariantCodeMotionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/LoopInvariantCodeMotionBenchmark.java)
-
-[![LoopInvariantCodeMotionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/LoopInvariantCodeMotionBenchmark.svg?raw=true)
-
-### Analysis
-
-The hot methods identified by the `-prof perfasm` primarily consist of runtime-generated stubs, making it difficult to grasp the compiler optimizations.
-Raising the `-prof perfasm:mergeMargin=<value>` to a higher setting could potentially offer deeper insights. However, the extensive volume of generated assembly code exceeds the scope (or knowledge) of our analysis.
-
-Consequently, we've opted to incorporate only the flame graphs and offer high-level insights about the utilized runtime stubs.
-
-The section below pertains to the `initial_loop` method.
-
-#### C2 JIT Compiler
-
-[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/openjdk-hotspot-vm/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.html)
-
-#### Oracle GraalVM JIT Compiler
-
-[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ee/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.html)
-
-#### GraalVM CE JIT Compiler
-
-[![LoopInvariantCodeMotionBenchmark.png](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.png?raw=true)](https://htmlpreview.github.io?https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/flamegraph/graal-ce/com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop-AverageTime-iterations-16384/flame-cpu-forward.html)
-
-### Remarks
-
-- The GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) use a different trigonometric stub, `AMD64MathStub.tan`, compared to the C2 JIT compiler's `StubRoutines::libmTan`.
-- Overall, the Oracle GraalVM JIT exhibits better performance. However, there is a noticeable difference in cases where the C2 JIT compiler operates slower, notably in the `initial_loop` benchmark. Further analysis may be required to better understand the underlying reasons.
-
 ## LoopReductionBenchmark
 
 Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by the number of additions within that loop.
