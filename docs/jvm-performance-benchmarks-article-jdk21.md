@@ -101,6 +101,8 @@ This benchmark checks if the compiler is capable of simplifying loops, transform
 that depends on it into a simpler form. In some cases, the loop can be completely removed and the body of the loop can
 be replaced with a constant value.
 
+Ideally, a compiler should be able to optimize `canonicalize` and `baseline` to a form that is equivalent to `manual_canonicalize`.
+
 ```
   @Benchmark
   public long baseline() {
@@ -2092,6 +2094,49 @@ and better than the `baseline` benchmark.
 
 The GraalVM CE JIT compiler is not (yet) able to vectorize the benchmark body and falls back to the Java implementation of the Vector API.
 
+## SepiaVectorApiBenchmark
+
+This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
+Panama's Vector API. In this benchmark, the Vector API is used to apply a sepia filter to an input image.
+
+In the `baseline`, the benchmark applies the sepia filter using non-vectorized code (i.e. scalar code that might be
+auto-vectorized by the JIT compiler). In the `vectorized` version, the benchmark applies the sepia filter using the
+Vector API.
+
+Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/vector/SepiaVectorApiBenchmark.java)
+
+[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
+
+### Analysis of vectorized
+
+All three JIT compilers perform similar in performance in the `baseline`. The focus of this section will therefore
+be on the `vectorized` benchmark.
+
+#### C2 JIT Compiler and Oracle GraalVM JIT Compiler
+
+The C2 JIT compiler and the Oracle GraalVM JIT compiler implement the Vector API compiler intrinsics and are able to use
+256-bit AVX registers. Therefore, the performance of the benchmark is similar for both JIT compilers.
+
+#### GraalVM CE JIT Compiler
+
+The GraalVM CE JIT compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
+to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
+by looking at the hottest methods in the benchmark after inlining.
+
+```
+  ....[Hottest Methods (after inlining)]..............................................................
+    58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
+    19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
+    19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
+```
+
+### Conclusions
+
+Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
+and better than the `baseline` benchmark.
+
+The GraalVM CE JIT compiler is not able to fully vectorize the benchmark body and falls back to the Java implementation of the Vector API.
+
 ## MegamorphicInterfaceCallBenchmark
 
 This benchmark tests the performance of interface calls with a different number of targets. The JIT compiler is expected
@@ -3391,49 +3436,6 @@ The GraalVM CE JIT compiler performs the same optimization as the Oracle GraalVM
 In cases where the object does not escape the method or the thread (e.g., `no_escape`, `no_escape_array_obj`), all compilers are able to eliminate the heap allocations.
 
 In cases where the object is passed as an argument but still does not escape the current thread (e.g., `arg_escape_obj`) or is guarded by a global boolean condition (even though that condition does not allow the object to escape; e.g., `branch_escape_obj`), and the object remains visible only to the current thread, only the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) can eliminate unnecessary allocations.
-
-## SepiaVectorApiBenchmark
-
-This benchmark is similar to the `MandelbrotVectorApiBenchmark` benchmark in that it tests the performance of Project
-Panama's Vector API. In this benchmark, the Vector API is used to apply a sepia filter to an input image.
-
-In the `baseline`, the benchmark applies the sepia filter using non-vectorized code (i.e. scalar code that might be
-auto-vectorized by the JIT compiler). In the `vectorized` version, the benchmark applies the sepia filter using the
-Vector API.
-
-Source code: [SepiaVectorApiBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/api/vector/SepiaVectorApiBenchmark.java)
-
-[![SepiaVectorApiBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/SepiaVectorApiBenchmark.svg?raw=true)
-
-### Analysis of vectorized
-
-All three JIT compilers perform similar in performance in the `baseline`. The focus of this section will therefore
-be on the `vectorized` benchmark.
-
-#### C2 JIT Compiler and Oracle GraalVM JIT Compiler
-
-The C2 JIT compiler and the Oracle GraalVM JIT compiler implement the Vector API compiler intrinsics and are able to use
-256-bit AVX registers. Therefore, the performance of the benchmark is similar for both JIT compilers.
-
-#### GraalVM CE JIT Compiler
-
-The GraalVM CE JIT compiler does not fully implement the Vector API compiler intrinsics. It does therefore fallback
-to the Java implementation of the Vector API which results in a significant performance degradation. This can be seen
-by looking at the hottest methods in the benchmark after inlining.
-
-```
-  ....[Hottest Methods (after inlining)]..............................................................
-    58.64%      jvmci, level 4  SepiaVectorApiBenchmark::vectorized, version 4, compile id 1219 
-    19.45%      jvmci, level 4  jdk.internal.vm.vector.VectorSupport::blend, version 2, compile id 1194 
-    19.03%      jvmci, level 4  jdk.incubator.vector.FloatVector::lambda$compareTemplate$61, version 2, compile id 1203
-```
-
-### Conclusions
-
-Both C2 and the Oracle GraalVM JIT compilers are able to vectorize the benchmark body and perform close in performance
-and better than the `baseline` benchmark.
-
-The GraalVM CE JIT compiler is not able to fully vectorize the benchmark body and falls back to the Java implementation of the Vector API.
 
 ## StackSpillingBenchmark
 
