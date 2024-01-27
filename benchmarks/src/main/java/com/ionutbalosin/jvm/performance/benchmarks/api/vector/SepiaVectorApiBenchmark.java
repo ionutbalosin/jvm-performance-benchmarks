@@ -23,6 +23,7 @@
 package com.ionutbalosin.jvm.performance.benchmarks.api.vector;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import jdk.incubator.vector.*;
 import org.openjdk.jmh.annotations.*;
@@ -73,10 +74,11 @@ public class SepiaVectorApiBenchmark {
     resultR = new float[size];
     resultG = new float[size];
     resultB = new float[size];
+    Random random = new Random(1234);
     for (int i = 0; i < size; i++) {
-      inputR[i] = Float.MIN_VALUE + (float) Math.random() * Float.MAX_VALUE;
-      inputG[i] = Float.MIN_VALUE + (float) Math.random() * Float.MAX_VALUE;
-      inputB[i] = Float.MIN_VALUE + (float) Math.random() * Float.MAX_VALUE;
+      inputR[i] = Float.MIN_VALUE + random.nextFloat() * Float.MAX_VALUE;
+      inputG[i] = Float.MIN_VALUE + random.nextFloat() * Float.MAX_VALUE;
+      inputB[i] = Float.MIN_VALUE + random.nextFloat() * Float.MAX_VALUE;
     }
   }
 
