@@ -73,6 +73,11 @@ public class SepiaVectorApiBenchmark {
     resultR = new float[size];
     resultG = new float[size];
     resultB = new float[size];
+    for (int i = 0; i < size; i++) {
+      inputR[i] = Float.MIN_VALUE + (float) Math.random() * Float.MAX_VALUE;
+      inputG[i] = Float.MIN_VALUE + (float) Math.random() * Float.MAX_VALUE;
+      inputB[i] = Float.MIN_VALUE + (float) Math.random() * Float.MAX_VALUE;
+    }
   }
 
   @Benchmark
