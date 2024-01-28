@@ -528,12 +528,16 @@ and pipelining. On the fast path, it also performs a single **thread-local alloc
   0x7f62bad7e067:   mov    %r10d,0xc(%rax)             ; store the oop in the field
   0x7f62bad7e06b:   shr    $0x3,%r11                   ; compute the oop of the second Object field
   0x7f62bad7e06f:   mov    %r11d,0x10(%rax)            ; store the oop in the field
-  ... same pattern for the remaining 6 Object fields
+  ...
+  <-- same pattern for the remaining 6 Object fields -->
+  ...
   0x7f62bad7e09f:   movq   $0x1,0x30(%rax)             ; set the mark word of the first Object field (0x1 to mark it as unlocked)
   0x7f62bad7e0a7:   movl   $0xe80,0x38(%rax)           ; store the klass word of the first Object field
   0x7f62bad7e0ae:   movq   $0x1,0x40(%rax)             ; set the mark word of the second Object field (0x1 to mark it as unlocked)
   0x7f62bad7e0b6:   movl   $0xe80,0x48(%rax)           ; store the klass word of the second Object field
-  ... same pattern for the remaining 6 Object fields
+  ...
+  <-- same pattern for the remaining 6 Object fields -->
+  ...
   0x7f62bad7e129:   mov    %rsi,%rax                   ; move the Wrapper object address into the return register
 ```
 
@@ -883,53 +887,53 @@ It employs loop peeling for the first two iterations, then checks for object ref
 Finally, the compiler utilizes AVX instructions to perform Strings byte array comparison.
 
 ```
-        0x00007fa1a84f7cda:   movabs $0x7ff03b178,%rdx            ; load the enum values array address into register rdx
-                                                                  ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x00000007ff03b178})}
-        0x00007fa1a84f7ced:   mov    0x14(%rsi),%r11d             ; load 'lookUpValue'
-        0x00007fa1a84f7d09:   movsbl 0x10(%r12,%r11,8),%r9d       ; load 'coder' field (i.e., byte) of 'lookUpValue'
-        0x00007fa1a84f7d18:   mov    0x14(%r12,%r11,8),%ebx       ; load 'value' field (i.e., byte[]) of 'lookUpValue'
-        0x00007fa1a84f7d22:   mov    0xc(%r12,%rbx,8),%r8d        ; load the byte[] length of 'lookUpValue'
+        0x07fa1a84f7cda:   movabs $0x7ff03b178,%rdx            ; load the enum values array address into register rdx
+                                                               ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x00007ff03b178})}
+        0x07fa1a84f7ced:   mov    0x14(%rsi),%r11d             ; load 'lookUpValue'
+        0x07fa1a84f7d09:   movsbl 0x10(%r12,%r11,8),%r9d       ; load 'coder' field (i.e., byte) of 'lookUpValue'
+        0x07fa1a84f7d18:   mov    0x14(%r12,%r11,8),%ebx       ; load 'value' field (i.e., byte[]) of 'lookUpValue'
+        0x07fa1a84f7d22:   mov    0xc(%r12,%rbx,8),%r8d        ; load the byte[] length of 'lookUpValue'
         ...
         <-- loop peeling for the first two iterations -->
         ...
-        0x00007fa1a84f7f13:   mov    $0x2,%r10d                   ; initialize loop counter r10d = 2
-  ╭     0x00007fa1a84f7f19:   jmp    0x00007fa1a84f7f2d
+        0x07fa1a84f7f13:   mov    $0x2,%r10d                   ; initialize loop counter r10d = 2
+  ╭     0x07fa1a84f7f19:   jmp    0x07fa1a84f7f2d
   │
-  │  ↗↗ 0x00007fa1a84f7f20:   inc    %r10d                        ; increment loop counter
-  │  ││ 0x00007fa1a84f7f23:   cmp    $0x29,%r10d                  ; compare against 41 (i.e., enum values array length)
-  │  ││ 0x00007fa1a84f7f27:   jge    0x00007fa1a84f8088           ; jump if greater than or equal to exit loop
-  ↘  ││ 0x00007fa1a84f7f2d:   mov    0x10(%rdx,%r10,4),%ebx       ; load Car object from enum values array at index [rdx + r10 * 4 + 16]
-     ││ 0x00007fa1a84f7f32:   mov    0x18(%r12,%rbx,8),%edi       ; load 'carValue' field from the Car object at offset 0x18
-     ││ 0x00007fa1a84f7f40:   movsbl 0x10(%r12,%rdi,8),%ecx       ; load 'coder' field (i.e., byte) of 'carValue'
-     ││ 0x00007fa1a84f7f46:   lea    (%r12,%rbx,8),%r13           ; load the Car object
-     ││ 0x00007fa1a84f7f4a:   cmp    %r11d,%edi                   ; compare if the 'carValue' is the same as 'lookUpValue'
-   ╭ ││ 0x00007fa1a84f7f4d:   je     0x00007fa1a84f8035           ; jump if they are equal
-   │ ││                                                           ; - java.lang.String::equals@2 (line 1858)
-   │ ││ 0x00007fa1a84f7f53:   cmp    %r9d,%ecx                    ; compare coders of 'carValue' (ecx) and 'lookUpValue' (r9d)
-   │╭││ 0x00007fa1a84f7f56:   jne    0x00007fa1a84f8054           ; jump if are not equal
-   ││││                                                           ; - java.lang.String::equals@33 (line 1861)
-   ││││ 0x00007fa1a84f7f5c:   mov    0x14(%r12,%rdi,8),%ebx       ; load 'value' field (i.e., byte[]) of 'carValue'
-   ││││                                                           ; - java.lang.String::equals@37 (line 1861)
-   ││││ 0x00007fa1a84f7f61:   mov    0xc(%r12,%rbx,8),%ecx        ; load the 'value' length (i.e., byte[]) of 'carValue'
-   ││││ 0x00007fa1a84f7f66:   cmp    %r8d,%ecx                    ; compare 'carValue' value length against 'lookUpValue' value length
-   ││╰│ 0x00007fa1a84f7f69:   jne    0x00007fa1a84f7f20           ; jump back if not equal
-   ││ │                                                           ; - java.lang.String::equals@44 (line 1863)
-   ││ │ 0x00007fa1a84f7f6b:   lea    (%r12,%rbx,8),%rdi           ; load 'value' field (i.e., byte[]) of Car object
-   ││ │                                                           ; - java.lang.String::equals@37 (line 1861)
-   ││ │ 0x00007fa1a84f7f6f:   lea    0x10(%r12,%rbx,8),%rdi       ; load byte[] content of Car object
+  │  ↗↗ 0x07fa1a84f7f20:   inc    %r10d                        ; increment loop counter
+  │  ││ 0x07fa1a84f7f23:   cmp    $0x29,%r10d                  ; compare against 41 (i.e., enum values array length)
+  │  ││ 0x07fa1a84f7f27:   jge    0x07fa1a84f8088              ; jump if greater than or equal to exit loop
+  ↘  ││ 0x07fa1a84f7f2d:   mov    0x10(%rdx,%r10,4),%ebx       ; load Car object from enum values array at index [rdx + r10 * 4 + 16]
+     ││ 0x07fa1a84f7f32:   mov    0x18(%r12,%rbx,8),%edi       ; load 'carValue' field from the Car object at offset 0x18
+     ││ 0x07fa1a84f7f40:   movsbl 0x10(%r12,%rdi,8),%ecx       ; load 'coder' field (i.e., byte) of 'carValue'
+     ││ 0x07fa1a84f7f46:   lea    (%r12,%rbx,8),%r13           ; load the Car object
+     ││ 0x07fa1a84f7f4a:   cmp    %r11d,%edi                   ; compare if the 'carValue' is the same as 'lookUpValue'
+   ╭ ││ 0x07fa1a84f7f4d:   je     0x07fa1a84f8035              ; jump if they are equal
+   │ ││                                                        ; - java.lang.String::equals@2 (line 1858)
+   │ ││ 0x07fa1a84f7f53:   cmp    %r9d,%ecx                    ; compare coders of 'carValue' (ecx) and 'lookUpValue' (r9d)
+   │╭││ 0x07fa1a84f7f56:   jne    0x07fa1a84f8054              ; jump if are not equal
+   ││││                                                        ; - java.lang.String::equals@33 (line 1861)
+   ││││ 0x07fa1a84f7f5c:   mov    0x14(%r12,%rdi,8),%ebx       ; load 'value' field (i.e., byte[]) of 'carValue'
+   ││││                                                        ; - java.lang.String::equals@37 (line 1861)
+   ││││ 0x07fa1a84f7f61:   mov    0xc(%r12,%rbx,8),%ecx        ; load the 'value' length (i.e., byte[]) of 'carValue'
+   ││││ 0x07fa1a84f7f66:   cmp    %r8d,%ecx                    ; compare 'carValue' value length against 'lookUpValue' value length
+   ││╰│ 0x07fa1a84f7f69:   jne    0x07fa1a84f7f20              ; jump back if not equal
+   ││ │                                                        ; - java.lang.String::equals@44 (line 1863)
+   ││ │ 0x07fa1a84f7f6b:   lea    (%r12,%rbx,8),%rdi           ; load 'value' field (i.e., byte[]) of Car object
+   ││ │                                                        ; - java.lang.String::equals@37 (line 1861)
+   ││ │ 0x07fa1a84f7f6f:   lea    0x10(%r12,%rbx,8),%rdi       ; load byte[] content of Car object
    ││ │ ...
    ││ │ <--- Vectorized operations using YMM registers for byte array comparison --->
-   ││ │ ...                                                       ; - java.lang.String::equals@44 (line 1863)
-   ││ │ 0x00007fa1a84f802d:   test   %eax,%eax
-   ││ ╰ 0x00007fa1a84f802f:   je     0x00007fa1a84f7f20           ; jump back
-   ↘│   0x00007fa1a84f8035:   mov    %r13,%rax
+   ││ │ ...                                                    ; - java.lang.String::equals@44 (line 1863)
+   ││ │ 0x07fa1a84f802d:   test   %eax,%eax
+   ││ ╰ 0x07fa1a84f802f:   je     0x07fa1a84f7f20              ; jump back
+   ↘│   0x07fa1a84f8035:   mov    %r13,%rax
     │   ...
-    │   0x00007fa1a84f804d:   ret
-    │   0x00007fa1a84f804e:   mov    $0x1,%r10d
-    ↘   0x00007fa1a84f8054:   mov    %r13,%rbp
-      ╭ 0x00007fa1a84f8057:   jmp    0x00007fa1a84f805f
+    │   0x07fa1a84f804d:   ret
+    │   0x07fa1a84f804e:   mov    $0x1,%r10d
+    ↘   0x07fa1a84f8054:   mov    %r13,%rbp
+      ╭ 0x07fa1a84f8057:   jmp    0x07fa1a84f805f
       │ ...
-      ↘ 0x00007fa1a84f805f:   mov    $0xffffff45,%esi
+      ↘ 0x07fa1a84f805f:   mov    $0xffffff45,%esi
         ...
 ```
 
@@ -940,7 +944,7 @@ Unlike C2 JIT Compiler, it does not perform loop peeling, has a slightly reduced
 
 ```
       0x7fa3aada2303:   movabs $0x7fed3af88,%rbx            ; load the enum values array address into register rbx
-                                                            ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x0007fed3af88})}
+                                                            ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x7fed3af88})}
       0x7fa3aada2316:   mov    0x14(,%r11,8),%edx           ; load 'value' field (i.e., byte[]) of 'lookUpValue'
       0x7fa3aada231e:   mov    0xc(,%rdx,8),%ebp            ; load the byte[] length of 'lookUpValue'
       0x7fa3aada2325:   movsbl 0x10(,%r11,8),%r13d          ; load 'coder' field (i.e., byte) of 'lookUpValue'
@@ -1040,7 +1044,9 @@ The hottest regions in the report shows the `StubRoutines::jlong_disjoint_arrayc
 
 Try to avoid calling `Enum::values`, especially within a loop, as it allocates a new array and assigns references to the enum values as elements. This can potentially generate a considerable amount of garbage.
 
-When comparing enum values to strings, which involves string comparisons in essence, the Oracle GraalVM JIT outperforms the C2 JIT compiler in this benchmark. One significant factor is the utilization of an intrinsic method by the Oracle GraalVM JIT, enabling it to check if two strings are equal within a defined region, specified by a codepoint-based offset and length. Further details regarding this type of optimization can be found in the document [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf).
+For the `cached_enum_values` scenario, the Oracle GraalVM JIT slightly outperforms the C2 JIT compiler in this benchmark. 
+
+Although GraalVM compilers utilize an intrinsic method that enables checking if two strings are equal within a defined region specified by a codepoint-based offset and length (for more details, see [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf)), in our benchmark, since the entire string is compared, this may not provide significant benefits compared to the method used by the C2 compiler (e.g., vectorized operations using YMM registers for byte array comparison).
 
 ## IfConditionalBranchBenchmark
 
@@ -1067,7 +1073,8 @@ This benchmark tests the conditional branch optimizations within a loop using:
   public int predictable_if_branch() {
     int sum = 0;
 
-    // all values are less than the 'THRESHOLD', therefore the condition is true and the branch is always taken    
+    // all values are less than the 'THRESHOLD', 
+    // therefore the condition is true and the branch is always taken    
     for (final int value : array) {
       if (value < THRESHOLD) {
         sum += value;
@@ -1081,7 +1088,8 @@ This benchmark tests the conditional branch optimizations within a loop using:
   public int unpredictable_if_branch() {
     int sum = 0;
 
-    // some values are bigger and some are smaller than 'THRESHOLD / 2', making this condition unpredictable
+    // some values are bigger and some are smaller than 'THRESHOLD / 2', 
+    // making this condition unpredictable
     for (final int value : array) {
       if (value <= (THRESHOLD / 2)) {
         sum += value;
@@ -2305,7 +2313,7 @@ target method. This benchmark also tests the performance of manually splitting o
         case 0:
           instance.foo();
           break;
-        ... same pattern for all of the remaining targets
+        // ... same pattern for all of the remaining targets
         case 6:
           instance.foo();
           break;
@@ -2325,7 +2333,7 @@ target method. This benchmark also tests the performance of manually splitting o
     private void baz_5() { foot_4(); }
     default void foo_5() { baz_5(); }
   }
-  ... same pattern for all of the remaining interface declarations
+  // ... same pattern for all of the remaining interface declarations
   interface I1 {
     Wrapper wrapper = new Wrapper();
     default void baz_1() { wrapper.x++; }
@@ -2549,7 +2557,7 @@ The benchmark is structured as follows:
       return ++c1;
     }
   }
-  ... same pattern for all of the remaining classes
+  // ... same pattern for all of the remaining classes
   private static class Alg8 extends CMath {
     public int compute() {
       return ++c8;
@@ -3143,7 +3151,7 @@ The C2 JIT compiler is capable of devirtualizing `cls_non_static` calls and perf
   class_non_static_method()
   
   0x7f14704f865a:   mov    0xc(%rsi),%edx                ; get field 'depth' into edx
-  0x7f14704f865d:   movabs $0x7ff034f48,%rax             ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007ff034f48})} into %rax
+  0x7f14704f865d:   movabs $0x7ff034f48,%rax             ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x7ff034f48})} into %rax
   0x7f14704f8667:   test   %edx,%edx                     ; test if edx ('depth') is zero
   0x7f14704f8669:   je     0x7f14704f8680                ; jump if zero
   0x7f14704f866b:   cmp    $0x1,%edx                     ; compare edx ('depth') to the value 0x1
@@ -3160,7 +3168,7 @@ The C2 JIT compiler is capable of devirtualizing `cls_non_static` calls and perf
   cls_non_static()
   
     ↗  0x7f14704f82c0:   mov    %eax,-0x14000(%rsp)
-    │  0x7f14704f82da:   movabs $0x7ff034f48,%rax        ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007ff034f48})} into %rax
+    │  0x7f14704f82da:   movabs $0x7ff034f48,%rax        ; load the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x7ff034f48})} into %rax
     │  0x7f14704f82e4:   test   %edx,%edx                ; test if edx ('depth') is zero
    ╭│  0x7f14704f82e6:   je     0x7f14704f8300           ; jump if zero
    ││  0x7f14704f82e8:   cmp    $0x1,%edx                ; compare edx ('depth') to the value 0x1
@@ -3222,7 +3230,7 @@ The Oracle GraalVM JIT compiler is capable of devirtualizing `cls_non_static` vi
   ││                                                 ; {optimized virtual_call}
   ││ ...
   ││ 0x7f017ed9e66e:   ret
-  ↘↘ 0x7f017ed9e66f:   movabs $0x7fec34d58,%rax      ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007fec34d58})}
+  ↘↘ 0x7f017ed9e66f:   movabs $0x7fec34d58,%rax      ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x7fec34d58})}
      ...
      0x7f017ed9e68f:   ret
 ```
@@ -3254,10 +3262,10 @@ The GraalVM CE JIT compiler is capable of devirtualizing `cls_non_static` virtua
   ││↗ 0x7f46a719cb40:   mov    0x10(%rsp),%rbp
   │││ ...
   │││ 0x7f46a719cb56:   ret
-  ↘││ 0x7f46a719cb57:   movabs $0x7fea347c0,%rax     ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007fea347c0})} into rax
+  ↘││ 0x7f46a719cb57:   movabs $0x7fea347c0,%rax     ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x7fea347c0})} into rax
    ││ ...
    ││ 0x7f46a719cb77:   ret
-   ↘│ 0x7f46a719cb78:   movabs $0x7fea347c0,%r10     ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x0007fea347c0})} into r10
+   ↘│ 0x7f46a719cb78:   movabs $0x7fea347c0,%r10     ; move the OBJECT constant {oop(a &apos;java/lang/Object&apos;{0x7fea347c0})} into r10
     │ 0x7f46a719cb82:   mov    %r10,%rax             ; rax = r10
     ╰ 0x7f46a719cb85:   jmp    0x7f46a719cb40        ; jump back
 ```
