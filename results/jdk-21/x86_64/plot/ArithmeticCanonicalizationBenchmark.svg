@@ -109,6 +109,6 @@
 <text x='691.55' y='600.57' style='font-size: 14.40px; font-family: "Liberation Sans";' textLength='84.69px' lengthAdjust='spacingAndGlyphs'>GraalVM CE</text>
 <text x='811.45' y='600.57' style='font-size: 14.40px; font-family: "Liberation Sans";' textLength='152.61px' lengthAdjust='spacingAndGlyphs'>OpenJDK HotSpot VM</text>
 <text x='999.28' y='600.57' style='font-size: 14.40px; font-family: "Liberation Sans";' textLength='112.37px' lengthAdjust='spacingAndGlyphs'>Oracle GraalVM</text>
-<text x='276.04' y='27.30' style='font-size: 18.00px; font-family: "Liberation Sans";' textLength='270.36px' lengthAdjust='spacingAndGlyphs'>StrengthReductionBenchmark</text>
+<text x='276.04' y='27.30' style='font-size: 18.00px; font-family: "Liberation Sans";' textLength='344.59px' lengthAdjust='spacingAndGlyphs'>ArithmeticCanonicalizationBenchmark</text>
 </g>
 </svg>
