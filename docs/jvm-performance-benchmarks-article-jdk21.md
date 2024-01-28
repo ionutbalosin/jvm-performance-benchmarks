@@ -95,6 +95,86 @@ Source code: [InfrastructureBaselineBenchmark.java](https://github.com/ionutbalo
 
 The results are identical. This increases the confidence in the benchmark results, across the selected JVMs.
 
+## ArithmeticCanonicalizationBenchmark
+
+This benchmark checks if the compiler performs arithmetic canonicalization, a process that involves transforming arithmetic 
+expressions into a canonical form. This transformation includes restructuring expressions to a common, simplified form. 
+Canonical forms are easier to analyze and optimize, potentially leading to better code generation and improved performance.
+
+```
+  @Param({"true"})
+  private boolean isHeavy;
+
+  // a big prime number
+  @Param({"179426549"})
+  private long value;
+
+  @Benchmark
+  public long add() {
+    return doAdd();
+  }
+
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  private long doAdd() {
+    long val = this.value;
+    return isHeavy
+        ? val + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
+            + val + val + val + val + val + val + val // i.e., 64 additions
+        : val;
+  }
+```
+
+Source code: [ArithmeticCanonicalizationBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark.java)
+
+[![ArithmeticCanonicalizationBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ArithmeticCanonicalizationBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/ArithmeticCanonicalizationBenchmark.svg?raw=true)
+
+### Analysis of add
+
+The analysis below pertains to the `add` method, which is more interesting due to the highest differences in performance.
+
+#### C2 JIT Compiler
+
+The C2 JIT compiler performs a repetitive addition operation, summing all the values together iteratively.
+
+```
+  doAdd()
+  
+  0x7fd710638cba:   mov    0x10(%rsi),%r10              ; get field 'value' into r10
+  0x7fd710638cbe:   movzbl 0xc(%rsi),%r8d               ; get field 'isHeavy' as a zero-extended byte into r8d
+  0x7fd710638cc3:   test   %r8d,%r8d                    ; test if 'isHeavy' is false
+  0x7fd710638cc6:   je     0x7fd710638d9d               ; jump if 'isHeavy' is false
+  0x7fd710638ccc:   lea    (%r10,%r10,1),%rax           ; rax = r10 * 2
+  0x7fd710638cd0:   add    %r10,%rax                    ; rax = rax + r10
+  ...
+  <-- Adds r10 ('value') to rax repetitively 60 times -->
+  ...
+  0x7fd710638d87:   add    %r10,%rax
+  ...
+  0x7fd710638d9c:   ret
+```
+
+#### Oracle GraalVM JIT Compiler
+
+The Oracle GraalVM JIT compiler replaces the additions with the shift operation, which is more efficient.
+
+```
+  doAdd()
+  
+  0x7f99e2d80e4a:   mov    0x10(%rsi),%rax              ; get field 'value' into r10
+  0x7f99e2d80e4e:   shl    $0x6,%rax                    ; shift rax left by 6 bits (rax = rax << 6)
+```
+
+#### GraalVM CE JIT Compiler
+
+The Oracle GraalVM JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
+
+### Conclusions
+
+In the case of the `add` benchmark, the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) trigger strength reduction for additions, unlike the C2 JIT compiler, which adds the values individually.
+
 ## CanonicalizeInductionVariableBenchmark
 
 This benchmark checks if the compiler is capable of simplifying loops, transforming the induction variable and computations
@@ -3592,85 +3672,6 @@ C2 does. Therefore, both compilers will spill intermediate values onto the stack
 
 The C2 JIT compiler is able to use the FPU registers to spill intermediate values before using the stack. This optimization
 does not happen (for this benchmark) in the Oracle GraalVM JIT compiler and the GraalVM CE JIT compiler.
-
-## StrengthReductionBenchmark
-
-A strength reduction is a compiler optimization where expensive operations are replaced with equivalent but less expensive operations.
-This benchmark tests how well the compiler strengthens some arithmetic operations, as for example multiple additions, a multiplication in comparison to a bitwise shift operation.
-
-```
-  @Param({"true"})
-  private boolean isHeavy;
-
-  // a big prime number
-  @Param({"179426549"})
-  private long value;
-
-  @Benchmark
-  public long add() {
-    return doAdd();
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private long doAdd() {
-    long val = this.value;
-    return isHeavy
-        ? val + val + val + val + val + val + val + val + val + val + val + val + val + val + val
-            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
-            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
-            + val + val + val + val + val + val + val + val + val + val + val + val + val + val
-            + val + val + val + val + val + val + val // i.e., 64 additions
-        : val;
-  }
-```
-
-Source code: [StrengthReductionBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark.java)
-
-[![StrengthReductionBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/StrengthReductionBenchmark.svg?raw=true)
-
-### Analysis of add
-
-The analysis below pertains to the `add` method, which is more interesting due to the highest differences in performance.
-
-#### C2 JIT Compiler
-
-The C2 JIT compiler performs a repetitive addition operation, summing all the values together iteratively.
-
-```
-  doAdd()
-  
-  0x7fd710638cba:   mov    0x10(%rsi),%r10              ; get field 'value' into r10
-  0x7fd710638cbe:   movzbl 0xc(%rsi),%r8d               ; get field 'isHeavy' as a zero-extended byte into r8d
-  0x7fd710638cc3:   test   %r8d,%r8d                    ; test if 'isHeavy' is false
-  0x7fd710638cc6:   je     0x7fd710638d9d               ; jump if 'isHeavy' is false
-  0x7fd710638ccc:   lea    (%r10,%r10,1),%rax           ; rax = r10 * 2
-  0x7fd710638cd0:   add    %r10,%rax                    ; rax = rax + r10
-  ...
-  <-- Adds r10 ('value') to rax repetitively 60 times -->
-  ...
-  0x7fd710638d87:   add    %r10,%rax
-  ...
-  0x7fd710638d9c:   ret
-```
-
-#### Oracle GraalVM JIT Compiler
-
-The Oracle GraalVM JIT compiler replaces the additions with the shift operation, which is more efficient.
-
-```
-  doAdd()
-  
-  0x7f99e2d80e4a:   mov    0x10(%rsi),%rax              ; get field 'value' into r10
-  0x7f99e2d80e4e:   shl    $0x6,%rax                    ; shift rax left by 6 bits (rax = rax << 6)
-```
-
-#### GraalVM CE JIT Compiler
-
-The Oracle GraalVM JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
-
-### Conclusions
-
-In the case of the `add` benchmark, the GraalVM compilers (Oracle GraalVM JIT and GraalVM CE JIT) trigger strength reduction for additions, unlike the C2 JIT compiler, which adds the values individually.
 
 ## TailRecursionBenchmark
 

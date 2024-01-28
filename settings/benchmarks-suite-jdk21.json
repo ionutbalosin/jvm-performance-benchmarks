@@ -18,6 +18,9 @@
       "name": "AesGcmCryptoBenchmark"
     },
     {
+      "name": "ArithmeticCanonicalizationBenchmark"
+    },
+    {
       "name": "BlowfishCbcCryptoBenchmark"
     },
     {
@@ -308,9 +311,6 @@
     },
     {
       "name": "StackTraceBenchmark"
-    },
-    {
-      "name": "StrengthReductionBenchmark"
     },
     {
       "name": "StringCompareLexBenchmark"

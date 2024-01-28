@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: isHeavy","Param: value"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.add","avgt",1,25,6.958538,0.020222,"ns/op",true,179426549
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.multiply","avgt",1,25,6.952425,0.010168,"ns/op",true,179426549
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.shift","avgt",1,25,6.943863,0.008087,"ns/op",true,179426549

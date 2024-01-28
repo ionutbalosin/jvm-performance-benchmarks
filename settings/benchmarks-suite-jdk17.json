@@ -6,6 +6,9 @@
   },
   "benchmarks": [
     {
+      "name": "ArithmeticCanonicalizationBenchmark"
+    },
+    {
       "name": "BranchlessBitwiseBenchmark"
     },
     {
@@ -123,9 +126,6 @@
     },
     {
       "name": "StackSpillingBenchmark"
-    },
-    {
-      "name": "StrengthReductionBenchmark"
     },
     {
       "name": "StringConcatenationBenchmark",

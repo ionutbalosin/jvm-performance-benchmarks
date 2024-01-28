@@ -36,11 +36,10 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * A strength reduction is a compiler optimization where expensive operations are replaced with equivalent but less expensive operations.
- * This benchmark tests how well the Compiler strengthens some arithmetic operations, as for example multiple additions, a multiplication in comparison to a bitwise shift operation.
- *
- * References:
- * - https://en.wikipedia.org/wiki/Strength_reduction
+ * This benchmark checks if the compiler performs arithmetic canonicalization, a process that
+ * involves transforming arithmetic expressions into a canonical form. This transformation includes
+ * restructuring expressions to a common, simplified form. Canonical forms are easier to analyze and
+ * optimize, potentially leading to better code generation and improved performance.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -48,9 +47,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StrengthReductionBenchmark {
+public class ArithmeticCanonicalizationBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*StrengthReductionBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*ArithmeticCanonicalizationBenchmark.*"
 
   @Param({"true"})
   private boolean isHeavy;

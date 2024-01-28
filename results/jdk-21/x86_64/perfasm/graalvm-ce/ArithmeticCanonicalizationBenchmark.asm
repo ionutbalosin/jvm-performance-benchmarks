@@ -8,7 +8,7 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.add
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.add
 # Parameters: (isHeavy = true, value = 179426549)
 
 # Run progress: 0.00% complete, ETA 00:05:00
@@ -28,12 +28,12 @@ Iteration   5: 12.147 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.add":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.add":
   12.118 ±(99.9%) 0.278 ns/op [Average]
   (min, avg, max) = (12.046, 12.118, 12.221), stdev = 0.072
   CI (99.9%): [11.839, 12.396] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.add:asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.add:asm":
 PrintAssembly processed: 217019 total address lines.
 Perf output processed (skipped 60.336 seconds):
  Column 1: cycles (50713 events)
@@ -42,57 +42,57 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub, version 6, compile id 990 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub, version 6, compile id 990 
 
               0x00007fc4c7244c10:   mov    0x18(%rsp),%rsi
               0x00007fc4c7244c15:   data16 data16 nopw 0x0(%rax,%rax,1)
               0x00007fc4c7244c20:   cmpb   $0x0,0x94(%rsi)
               0x00007fc4c7244c27:   jne    0x00007fc4c7244cba           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
               0x00007fc4c7244c2d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007fc4c7244c36:   jmp    0x00007fc4c7244c4f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@13 (line 194)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@13 (line 194)
           │   0x00007fc4c7244c3b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
    3.16%  │↗  0x00007fc4c7244c40:   mov    0x458(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
           ││  0x00007fc4c7244c47:   test   %eax,(%r11)                  ;   {poll}
    1.88%  ││  0x00007fc4c7244c4a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@13 (line 194)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@13 (line 194)
           ↘│  0x00007fc4c7244c4f:   mov    0x8(%rsp),%r10
    1.94%   │  0x00007fc4c7244c54:   mov    %r10,%rsi
            │  0x00007fc4c7244c57:   call   0x00007fc4c6c2f380           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual add {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@17 (line 194)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@17 (line 194)
            │                                                            ;   {optimized virtual_call}
    8.06%   │  0x00007fc4c7244c5c:   nopl   0x500024c(%rax,%rax,1)       ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@20 (line 194)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@20 (line 194)
            │                                                            ;   {other}
    1.56%   │  0x00007fc4c7244c64:   mov    0x20(%rsp),%r10
   19.64%   │  0x00007fc4c7244c69:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@26 (line 195)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@26 (line 195)
    3.11%   │  0x00007fc4c7244c6c:   mov    0x18(%rsp),%rsi
            │  0x00007fc4c7244c71:   cmpb   $0x0,0x94(%rsi)
   13.58%   ╰  0x00007fc4c7244c78:   je     0x00007fc4c7244c40           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@33 (line 196)
               0x00007fc4c7244c7a:   mov    %r10,0x20(%rsp)              ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@36 (line 197)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@36 (line 197)
               0x00007fc4c7244c7f:   nop
               0x00007fc4c7244c80:   call   0x00007fc4df566df0           ;   {runtime_call os::javaTimeNanos()}
               0x00007fc4c7244c85:   nop
               0x00007fc4c7244c86:   mov    0x10(%rsp),%rdx
               0x00007fc4c7244c8b:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub@40 (line 197)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub@40 (line 197)
               0x00007fc4c7244c8f:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   52.93%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::add, version 2, compile id 954 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::add, version 2, compile id 954
 
-                # {method} {0x00007fc44747d140} &apos;add&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark&apos;
+                # {method} {0x00007fc44747d140} &apos;add&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark&apos;
                 #           [sp+0x20]  (sp of caller)
                 0x00007fc4c723f520:   mov    0x8(%rsi),%r10d
                 0x00007fc4c723f524:   movabs $0x7fc44b000000,%r12
@@ -112,7 +112,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
           │ │   0x00007fc4c723f560:   data16 xchg %ax,%ax
    1.05%  │ │   0x00007fc4c723f563:   call   0x00007fc4bf8772c0           ; ImmutableOopMap {}
           │ │                                                             ;*invokevirtual doAdd {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::add@1 (line 71)
+          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::add@1 (line 71)
           │ │                                                             ;   {optimized virtual_call}
   14.66%  │ │   0x00007fc4c723f568:   nopl   0x1d8(%rax,%rax,1)           ;   {other}
           │ │   0x00007fc4c723f570:   mov    0x10(%rsp),%rbp
@@ -132,9 +132,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
   28.60%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd, version 2, compile id 956 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd, version 2, compile id 956
 
-             # {method} {0x00007fc44747d468} &apos;doAdd&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark&apos;
+             # {method} {0x00007fc44747d468} &apos;doAdd&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007fc4c723f800:   mov    0x8(%rsi),%r10d
              0x00007fc4c723f804:   movabs $0x7fc44b000000,%r12
@@ -153,11 +153,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
    1.71%     0x00007fc4c723f83f:   nop
    0.55%     0x00007fc4c723f840:   cmpb   $0x0,0xc(%rsi)
           ╭  0x00007fc4c723f844:   je     0x00007fc4c723f86e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd@9 (line 89)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd@9 (line 89)
    1.75%  │  0x00007fc4c723f84a:   mov    0x10(%rsi),%rax              ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd@1 (line 88)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd@1 (line 88)
    0.79%  │  0x00007fc4c723f84e:   shl    $0x6,%rax                    ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd@138 (line 94)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd@138 (line 94)
    0.63%  │  0x00007fc4c723f852:   mov    0x10(%rsp),%rbp
    2.97%  │  0x00007fc4c723f857:   add    $0x18,%rsp
    0.33%  │  0x00007fc4c723f85b:   nopl   0x0(%rax,%rax,1)
@@ -165,20 +165,20 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
           │  0x00007fc4c723f867:   ja     0x00007fc4c723f89e
           │  0x00007fc4c723f86d:   ret    
           ↘  0x00007fc4c723f86e:   movl   $0xffffffed,0x484(%r15)      ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd@9 (line 89)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd@9 (line 89)
              0x00007fc4c723f879:   movq   $0x14,0x490(%r15)
              0x00007fc4c723f884:   call   0x00007fc4c6c3517a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd@0 (line 88)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd@0 (line 88)
                                                                        ;   {runtime_call DeoptimizationBlob}
              0x00007fc4c723f889:   nopl   0x0(%rax,%rax,1)
 ....................................................................................................
   16.20%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  52.93%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub, version 6, compile id 990 
-  28.60%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::add, version 2, compile id 954 
-  16.20%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd, version 2, compile id 956 
+  52.93%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub, version 6, compile id 990 
+  28.60%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::add, version 2, compile id 954
+  16.20%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd, version 2, compile id 956
    0.59%              kernel  [unknown] 
    0.09%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -201,9 +201,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  52.93%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_add_jmhTest::add_avgt_jmhStub, version 6, compile id 990 
-  28.60%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::add, version 2, compile id 954 
-  16.20%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doAdd, version 2, compile id 956 
+  52.93%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_add_jmhTest::add_avgt_jmhStub, version 6, compile id 990 
+  28.60%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::add, version 2, compile id 954
+  16.20%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doAdd, version 2, compile id 956
    1.93%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%           libjvm.so  fileStream::write 
@@ -252,7 +252,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.multiply
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.multiply
 # Parameters: (isHeavy = true, value = 179426549)
 
 # Run progress: 33.33% complete, ETA 00:03:48
@@ -272,12 +272,12 @@ Iteration   5: 12.221 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.multiply":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.multiply":
   12.180 ±(99.9%) 0.331 ns/op [Average]
   (min, avg, max) = (12.078, 12.180, 12.298), stdev = 0.086
   CI (99.9%): [11.848, 12.511] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.multiply:asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.multiply:asm":
 PrintAssembly processed: 216703 total address lines.
 Perf output processed (skipped 60.320 seconds):
  Column 1: cycles (51008 events)
@@ -286,57 +286,57 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub, version 6, compile id 986 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub, version 6, compile id 986 
 
               0x00007f474b243010:   mov    0x18(%rsp),%rsi
               0x00007f474b243015:   data16 data16 nopw 0x0(%rax,%rax,1)
               0x00007f474b243020:   cmpb   $0x0,0x94(%rsi)
               0x00007f474b243027:   jne    0x00007f474b2430ba           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
               0x00007f474b24302d:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f474b243036:   jmp    0x00007f474b24304f           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@13 (line 194)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@13 (line 194)
           │   0x00007f474b24303b:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
    3.12%  │↗  0x00007f474b243040:   mov    0x458(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
           ││  0x00007f474b243047:   test   %eax,(%r11)                  ;   {poll}
    1.84%  ││  0x00007f474b24304a:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@13 (line 194)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@13 (line 194)
           ↘│  0x00007f474b24304f:   mov    0x8(%rsp),%r10
    1.55%   │  0x00007f474b243054:   mov    %r10,%rsi
            │  0x00007f474b243057:   call   0x00007f474ac2f380           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual multiply {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@17 (line 194)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@17 (line 194)
            │                                                            ;   {optimized virtual_call}
    4.89%   │  0x00007f474b24305c:   nopl   0x500024c(%rax,%rax,1)       ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@20 (line 194)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@20 (line 194)
            │                                                            ;   {other}
    1.32%   │  0x00007f474b243064:   mov    0x20(%rsp),%r10
   22.85%   │  0x00007f474b243069:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@26 (line 195)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@26 (line 195)
    3.17%   │  0x00007f474b24306c:   mov    0x18(%rsp),%rsi
            │  0x00007f474b243071:   cmpb   $0x0,0x94(%rsi)
   12.50%   ╰  0x00007f474b243078:   je     0x00007f474b243040           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@33 (line 196)
               0x00007f474b24307a:   mov    %r10,0x20(%rsp)              ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@36 (line 197)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@36 (line 197)
               0x00007f474b24307f:   nop
               0x00007f474b243080:   call   0x00007f47643ffdf0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f474b243085:   nop
               0x00007f474b243086:   mov    0x10(%rsp),%rdx
               0x00007f474b24308b:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@40 (line 197)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub@40 (line 197)
               0x00007f474b24308f:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   51.24%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::multiply, version 2, compile id 947 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::multiply, version 2, compile id 947
 
-                # {method} {0x00007f46cb47d228} &apos;multiply&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark&apos;
+                # {method} {0x00007f46cb47d228} &apos;multiply&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark&apos;
                 #           [sp+0x20]  (sp of caller)
                 0x00007f474b23d8a0:   mov    0x8(%rsi),%r10d
                 0x00007f474b23d8a4:   movabs $0x7f46cf000000,%r12
@@ -356,7 +356,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
           │ │   0x00007f474b23d8e0:   data16 xchg %ax,%ax
    0.91%  │ │   0x00007f474b23d8e3:   call   0x00007f474ac2f380           ; ImmutableOopMap {}
           │ │                                                             ;*invokevirtual doMultiply {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::multiply@1 (line 77)
+          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::multiply@1 (line 77)
           │ │                                                             ;   {optimized virtual_call}
   14.83%  │ │   0x00007f474b23d8e8:   nopl   0x1d8(%rax,%rax,1)           ;   {other}
           │ │   0x00007f474b23d8f0:   mov    0x10(%rsp),%rbp
@@ -376,9 +376,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
   28.82%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply, version 2, compile id 949 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply, version 2, compile id 949
 
-             # {method} {0x00007f46cb47d310} &apos;doMultiply&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark&apos;
+             # {method} {0x00007f46cb47d310} &apos;doMultiply&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f474b23de80:   mov    0x8(%rsi),%r10d
              0x00007f474b23de84:   movabs $0x7f46cf000000,%r12
@@ -397,11 +397,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
    2.77%     0x00007f474b23debf:   nop
    0.38%     0x00007f474b23dec0:   cmpb   $0x0,0xc(%rsi)
           ╭  0x00007f474b23dec4:   je     0x00007f474b23deee           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply@9 (line 83)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply@9 (line 83)
    2.01%  │  0x00007f474b23deca:   mov    0x10(%rsi),%rax              ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply@1 (line 82)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply@1 (line 82)
    0.79%  │  0x00007f474b23dece:   shl    $0x6,%rax                    ;*lmul {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply@16 (line 83)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply@16 (line 83)
    0.34%  │  0x00007f474b23ded2:   mov    0x10(%rsp),%rbp
    4.31%  │  0x00007f474b23ded7:   add    $0x18,%rsp
    0.02%  │  0x00007f474b23dedb:   nopl   0x0(%rax,%rax,1)
@@ -409,20 +409,20 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
           │  0x00007f474b23dee7:   ja     0x00007f474b23df1e
           │  0x00007f474b23deed:   ret    
           ↘  0x00007f474b23deee:   movl   $0xffffffed,0x484(%r15)      ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply@9 (line 83)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply@9 (line 83)
              0x00007f474b23def9:   movq   $0x14,0x490(%r15)
              0x00007f474b23df04:   call   0x00007f474ac3517a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply@0 (line 82)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply@0 (line 82)
                                                                        ;   {runtime_call DeoptimizationBlob}
              0x00007f474b23df09:   nopl   0x0(%rax,%rax,1)
 ....................................................................................................
   17.40%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  51.24%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub, version 6, compile id 986 
-  28.82%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::multiply, version 2, compile id 947 
-  17.40%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply, version 2, compile id 949 
+  51.24%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub, version 6, compile id 986 
+  28.82%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::multiply, version 2, compile id 947
+  17.40%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply, version 2, compile id 949
    1.21%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
    0.07%              kernel  [unknown] 
@@ -445,9 +445,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  51.24%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_multiply_jmhTest::multiply_avgt_jmhStub, version 6, compile id 986 
-  28.82%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::multiply, version 2, compile id 947 
-  17.40%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doMultiply, version 2, compile id 949 
+  51.24%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_multiply_jmhTest::multiply_avgt_jmhStub, version 6, compile id 986 
+  28.82%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::multiply, version 2, compile id 947
+  17.40%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doMultiply, version 2, compile id 949
    2.23%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%           libjvm.so  ElfSymbolTable::lookup 
@@ -494,7 +494,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.shift
+# Benchmark: com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.shift
 # Parameters: (isHeavy = true, value = 179426549)
 
 # Run progress: 66.67% complete, ETA 00:01:53
@@ -514,12 +514,12 @@ Iteration   5: 12.091 ns/op
 # Processing profiler results: LinuxPerfAsmProfiler 
 
 
-Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.shift":
+Result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.shift":
   12.096 ±(99.9%) 0.423 ns/op [Average]
   (min, avg, max) = (12.009, 12.096, 12.285), stdev = 0.110
   CI (99.9%): [11.673, 12.519] (assumes normal distribution)
 
-Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark.shift:asm":
+Secondary result "com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark.shift:asm":
 PrintAssembly processed: 219852 total address lines.
 Perf output processed (skipped 60.309 seconds):
  Column 1: cycles (50609 events)
@@ -528,57 +528,57 @@ Hottest code regions (>10.00% "cycles" events):
  Event counts are percents of total event count.
 
 ....[Hottest Region 1]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub, version 6, compile id 993 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub, version 6, compile id 993 
 
               0x00007f52a3244190:   mov    0x18(%rsp),%rsi
               0x00007f52a3244195:   data16 data16 nopw 0x0(%rax,%rax,1)
               0x00007f52a32441a0:   cmpb   $0x0,0x94(%rsi)
               0x00007f52a32441a7:   jne    0x00007f52a324423a           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
               0x00007f52a32441ad:   movq   $0x1,0x20(%rsp)
           ╭   0x00007f52a32441b6:   jmp    0x00007f52a32441cf           ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@13 (line 194)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@13 (line 194)
           │   0x00007f52a32441bb:   nopl   0x0(%rax,%rax,1)             ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
+          │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
    3.16%  │↗  0x00007f52a32441c0:   mov    0x458(%r15),%r11             ; ImmutableOopMap {rsi=Oop [0]=Oop [8]=Oop [16]=Oop [24]=Oop }
           ││                                                            ;*ifeq {reexecute=1 rethrow=0 return_oop=0}
-          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
+          ││                                                            ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
           ││  0x00007f52a32441c7:   test   %eax,(%r11)                  ;   {poll}
    2.04%  ││  0x00007f52a32441ca:   mov    %r10,0x20(%rsp)              ;*aload {reexecute=0 rethrow=0 return_oop=0}
-          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@13 (line 194)
+          ││                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@13 (line 194)
           ↘│  0x00007f52a32441cf:   mov    0x8(%rsp),%r10
    1.64%   │  0x00007f52a32441d4:   mov    %r10,%rsi
            │  0x00007f52a32441d7:   call   0x00007f52a2c2f380           ; ImmutableOopMap {[0]=Oop [8]=Oop [16]=Oop [24]=Oop }
            │                                                            ;*invokevirtual shift {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@17 (line 194)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@17 (line 194)
            │                                                            ;   {optimized virtual_call}
    7.31%   │  0x00007f52a32441dc:   nopl   0x500024c(%rax,%rax,1)       ;* unwind (locked if synchronized)
            │                                                            ; - org.openjdk.jmh.infra.Blackhole::consume@-3
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@20 (line 194)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@20 (line 194)
            │                                                            ;   {other}
    1.60%   │  0x00007f52a32441e4:   mov    0x20(%rsp),%r10
   19.76%   │  0x00007f52a32441e9:   inc    %r10                         ;*ladd {reexecute=0 rethrow=0 return_oop=0}
-           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@26 (line 195)
+           │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@26 (line 195)
    3.19%   │  0x00007f52a32441ec:   mov    0x18(%rsp),%rsi
            │  0x00007f52a32441f1:   cmpb   $0x0,0x94(%rsi)
   13.21%   ╰  0x00007f52a32441f8:   je     0x00007f52a32441c0           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@33 (line 196)
               0x00007f52a32441fa:   mov    %r10,0x20(%rsp)              ;*aload_1 {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@36 (line 197)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@36 (line 197)
               0x00007f52a32441ff:   nop
               0x00007f52a3244200:   call   0x00007f52bc479df0           ;   {runtime_call os::javaTimeNanos()}
               0x00007f52a3244205:   nop
               0x00007f52a3244206:   mov    0x10(%rsp),%rdx
               0x00007f52a324420b:   mov    %rax,0x30(%rdx)              ;*putfield stopTime {reexecute=0 rethrow=0 return_oop=0}
-                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub@40 (line 197)
+                                                                        ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub@40 (line 197)
               0x00007f52a324420f:   movq   $0x0,0x20(%rdx)              ;*putfield realTime {reexecute=0 rethrow=0 return_oop=0}
 ....................................................................................................
   51.91%  <total for region 1>
 
 ....[Hottest Region 2]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::shift, version 2, compile id 959 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::shift, version 2, compile id 959
 
-                # {method} {0x00007f522347d078} &apos;shift&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark&apos;
+                # {method} {0x00007f522347d078} &apos;shift&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark&apos;
                 #           [sp+0x20]  (sp of caller)
                 0x00007f52a323d5a0:   mov    0x8(%rsi),%r10d
                 0x00007f52a323d5a4:   movabs $0x7f5227000000,%r12
@@ -598,7 +598,7 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
           │ │   0x00007f52a323d5e0:   data16 xchg %ax,%ax
    0.74%  │ │   0x00007f52a323d5e3:   call   0x00007f52a2c2f380           ; ImmutableOopMap {}
           │ │                                                             ;*invokevirtual doShift {reexecute=0 rethrow=0 return_oop=0}
-          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::shift@1 (line 65)
+          │ │                                                             ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::shift@1 (line 65)
           │ │                                                             ;   {optimized virtual_call}
   15.04%  │ │   0x00007f52a323d5e8:   nopl   0x1d8(%rax,%rax,1)           ;   {other}
           │ │   0x00007f52a323d5f0:   mov    0x10(%rsp),%rbp
@@ -618,9 +618,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
   29.59%  <total for region 2>
 
 ....[Hottest Region 3]..............................................................................
-jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift, version 2, compile id 960 
+jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift, version 2, compile id 960
 
-             # {method} {0x00007f522347d560} &apos;doShift&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/StrengthReductionBenchmark&apos;
+             # {method} {0x00007f522347d560} &apos;doShift&apos; &apos;()J&apos; in &apos;com/ionutbalosin/jvm/performance/benchmarks/compiler/ArithmeticCanonicalizationBenchmark&apos;
              #           [sp+0x20]  (sp of caller)
              0x00007f52a323d880:   mov    0x8(%rsi),%r10d
              0x00007f52a323d884:   movabs $0x7f5227000000,%r12
@@ -639,11 +639,11 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
    2.14%     0x00007f52a323d8bf:   nop
    0.47%     0x00007f52a323d8c0:   cmpb   $0x0,0xc(%rsi)
           ╭  0x00007f52a323d8c4:   je     0x00007f52a323d8ee           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift@9 (line 101)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift@9 (line 101)
    1.88%  │  0x00007f52a323d8ca:   mov    0x10(%rsi),%rax              ;*getfield value {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift@1 (line 100)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift@1 (line 100)
    0.74%  │  0x00007f52a323d8ce:   shl    $0x6,%rax                    ;*lshl {reexecute=0 rethrow=0 return_oop=0}
-          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift@15 (line 101)
+          │                                                            ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift@15 (line 101)
    0.57%  │  0x00007f52a323d8d2:   mov    0x10(%rsp),%rbp
    3.56%  │  0x00007f52a323d8d7:   add    $0x18,%rsp
    0.16%  │  0x00007f52a323d8db:   nopl   0x0(%rax,%rax,1)
@@ -651,20 +651,20 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
           │  0x00007f52a323d8e7:   ja     0x00007f52a323d91e
           │  0x00007f52a323d8ed:   ret    
           ↘  0x00007f52a323d8ee:   movl   $0xffffffed,0x484(%r15)      ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
-                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift@9 (line 101)
+                                                                       ; - com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift@9 (line 101)
              0x00007f52a323d8f9:   movq   $0x14,0x490(%r15)
              0x00007f52a323d904:   call   0x00007f52a2c3517a           ; ImmutableOopMap {rsi=Oop }
                                                                        ;*aload_0 {reexecute=1 rethrow=0 return_oop=0}
-                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift@0 (line 100)
+                                                                       ; - (reexecute) com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift@0 (line 100)
                                                                        ;   {runtime_call DeoptimizationBlob}
              0x00007f52a323d909:   nopl   0x0(%rax,%rax,1)
 ....................................................................................................
   16.72%  <total for region 3>
 
 ....[Hottest Regions]...............................................................................
-  51.91%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub, version 6, compile id 993 
-  29.59%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::shift, version 2, compile id 959 
-  16.72%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift, version 2, compile id 960 
+  51.91%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub, version 6, compile id 993 
+  29.59%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::shift, version 2, compile id 959
+  16.72%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift, version 2, compile id 960
    0.47%              kernel  [unknown] 
    0.11%              kernel  [unknown] 
    0.08%              kernel  [unknown] 
@@ -687,9 +687,9 @@ jvmci, level 4, com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthRed
  100.00%  <totals>
 
 ....[Hottest Methods (after inlining)]..............................................................
-  51.91%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.StrengthReductionBenchmark_shift_jmhTest::shift_avgt_jmhStub, version 6, compile id 993 
-  29.59%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::shift, version 2, compile id 959 
-  16.72%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.StrengthReductionBenchmark::doShift, version 2, compile id 960 
+  51.91%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.jmh_generated.ArithmeticCanonicalizationBenchmark_shift_jmhTest::shift_avgt_jmhStub, version 6, compile id 993 
+  29.59%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::shift, version 2, compile id 959
+  16.72%      jvmci, level 4  com.ionutbalosin.jvm.performance.benchmarks.compiler.ArithmeticCanonicalizationBenchmark::doShift, version 2, compile id 960
    1.43%              kernel  [unknown] 
    0.05%                      <unknown> 
    0.02%           libjvm.so  fileStream::write 
@@ -743,9 +743,9 @@ different JVMs are already problematic, the performance difference caused by dif
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
 Benchmark                                (isHeavy)    (value)  Mode  Cnt   Score   Error  Units
-StrengthReductionBenchmark.add                true  179426549  avgt    5  12.118 ± 0.278  ns/op
-StrengthReductionBenchmark.add:asm            true  179426549  avgt          NaN            ---
-StrengthReductionBenchmark.multiply           true  179426549  avgt    5  12.180 ± 0.331  ns/op
-StrengthReductionBenchmark.multiply:asm       true  179426549  avgt          NaN            ---
-StrengthReductionBenchmark.shift              true  179426549  avgt    5  12.096 ± 0.423  ns/op
-StrengthReductionBenchmark.shift:asm          true  179426549  avgt          NaN            ---
+ArithmeticCanonicalizationBenchmark.add                true  179426549  avgt    5  12.118 ± 0.278  ns/op
+ArithmeticCanonicalizationBenchmark.add:asm            true  179426549  avgt          NaN            ---
+ArithmeticCanonicalizationBenchmark.multiply           true  179426549  avgt    5  12.180 ± 0.331  ns/op
+ArithmeticCanonicalizationBenchmark.multiply:asm       true  179426549  avgt          NaN            ---
+ArithmeticCanonicalizationBenchmark.shift              true  179426549  avgt    5  12.096 ± 0.423  ns/op
+ArithmeticCanonicalizationBenchmark.shift:asm          true  179426549  avgt          NaN            ---
