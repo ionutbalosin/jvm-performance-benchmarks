@@ -36,10 +36,13 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /*
- * This benchmark checks if the compiler performs arithmetic canonicalization, a process that
+ * This benchmark checks whether the compiler performs arithmetic canonicalization, a process that
  * involves transforming arithmetic expressions into a canonical form. This transformation includes
  * restructuring expressions to a common, simplified form. Canonical forms are easier to analyze and
  * optimize, potentially leading to better code generation and improved performance.
+ *
+ * Note: While replacing multiple operations with one, the canonicalized expression might even be
+ * more expensive than one of the original operations.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -66,17 +69,6 @@ public class ArithmeticCanonicalizationBenchmark {
   @Benchmark
   public long add() {
     return doAdd();
-  }
-
-  @Benchmark
-  public long multiply() {
-    return doMultiply();
-  }
-
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  private long doMultiply() {
-    long val = this.value;
-    return isHeavy ? val * 64 : val;
   }
 
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)

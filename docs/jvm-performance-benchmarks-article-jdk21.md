@@ -29,6 +29,7 @@ Florin Blanaru
 - [Overall Geometric Mean](#overall-geometric-mean)
 - [Overall Conclusions](#overall-conclusions)
 - [Final Thoughts](#final-thoughts)
+- [Acknowledgements](#acknowledgements)
 - [References](#references)
 
 # Context
@@ -97,7 +98,7 @@ The results are identical. This increases the confidence in the benchmark result
 
 ## ArithmeticCanonicalizationBenchmark
 
-This benchmark checks if the compiler performs arithmetic canonicalization, a process that involves transforming arithmetic 
+This benchmark checks whether the compiler performs arithmetic canonicalization, a process that involves transforming arithmetic 
 expressions into a canonical form. This transformation includes restructuring expressions to a common, simplified form. 
 Canonical forms are easier to analyze and optimize, potentially leading to better code generation and improved performance.
 
@@ -1043,7 +1044,6 @@ The hottest regions in the report shows the `StubRoutines::jlong_disjoint_arrayc
 Try to avoid calling `Enum::values`, especially within a loop, as it allocates a new array and assigns references to the enum values as elements. This can potentially generate a considerable amount of garbage.
 
 For the `cached_enum_values` scenario, the Oracle GraalVM JIT slightly outperforms the C2 JIT compiler in this benchmark. 
-Nevertheless, the differences in average response times are very small (e.g., approx. 10 ns/op or even less) among all three compilers.
 
 Although GraalVM compilers utilize an intrinsic method that enables checking if two strings are equal within a defined region specified by a codepoint-based offset and length (for more details, see [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf)), in our benchmark, since the entire string is compared, this may not provide significant benefits compared to the method used by the C2 compiler (e.g., vectorized operations using YMM registers for byte array comparison).
 
@@ -5073,6 +5073,10 @@ Instead, it is a starting point for further investigation and could be used as a
 It might also be useful to software engineers who want to have a better understanding of the class of optimizations available in a given JVM distribution.
 
 > Join us in making a difference! Our free-time, and non-profit project welcomes and values any form of involvement. Contact us directly or open a pull request on [GitHub](https://github.com/ionutbalosin/jvm-performance-benchmarks) to contribute to the Java community.
+
+# Acknowledgements
+
+We are very thankful to the members of the Oracle GraalVM team for their review and helpful suggestions.
 
 # References
 - [OpenJDK](https://github.com/openjdk/jdk) sources
