@@ -41,7 +41,7 @@ The current article describes a series of Java Virtual Machine (JVM) benchmarks 
 
 The categorization is for informative purposes to better organize and direct the focus of our benchmarks, ranging from low-level (compiler benchmarks) to high-level (API and Miscellaneous) benchmarks.
 
-For this report we aggregated in total a number of **1109 benchmark runs**, including all three categories.
+For this report we aggregated in total a number of **1112 benchmark runs**, including all three categories.
 
 The list of JIT compilers included (comprising the JVM and architecture) is as follows:
 
@@ -4219,7 +4219,7 @@ and in [JDK-8251318](https://bugs.openjdk.org/browse/JDK-8251318).
 
 ## JIT Geometric Mean
 
-This section describes the normalized geometric mean (GM) for the entire JIT-related benchmark category, having in total 304 benchmarks.
+This section describes the normalized geometric mean (GM) for the entire JIT-related benchmark category, having in total 305 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -4230,9 +4230,9 @@ The process of generating the normalized geometric mean is:
 
 Rank | JVM distribution   | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|--------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM     | x86_64      | 0.65                      | 304               | ns/op
-2    | OpenJDK            | x86_64      | 1                         | 304               | ns/op
-3    | GraalVM CE         | x86_64      | 1.06                      | 304               | ns/op
+1    | Oracle GraalVM     | x86_64      | 0.64                      | 305               | ns/op
+2    | OpenJDK            | x86_64      | 1                         | 305               | ns/op
+3    | GraalVM CE         | x86_64      | 1.06                      | 305               | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -4240,9 +4240,9 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 Rank | JVM distribution   | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|--------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM     | x86_64      | 0.76                      | 304               | ns/op
-2    | OpenJDK            | x86_64      | 1                         | 304               | ns/op
-3    | GraalVM CE         | x86_64      | 1.31                      | 304               | ns/op
+1    | Oracle GraalVM     | x86_64      | 0.76                      | 305               | ns/op
+2    | OpenJDK            | x86_64      | 1                         | 305               | ns/op
+3    | GraalVM CE         | x86_64      | 1.31                      | 305               | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -4385,7 +4385,7 @@ The `STR` template processor (refer to [JEP 430: String Templates](https://openj
 
 This benchmark measures the performance of different formatting approaches utilizing various data types (e.g., String, int, float, char, long, double, boolean, Object) using different methods:
 - `String.format()`
-- `MessageFormat`
+- `MessageFormat.format()` with both constant or dynamically allocated message formatter in the benchmark method
 - `String.formatted()`
 - `FormatProcessor`
 
@@ -4401,11 +4401,16 @@ The input String and char consist of characters encoded in either `Latin-1` or `
   }
 
   @Benchmark
-  public String message_format() {
+  public String message_format_new() {
     final MessageFormat mf =
         new MessageFormat(
             "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
     return mf.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
+  }
+  
+  @Benchmark
+  public String message_format_constant() {
+    return MESSAGE_FORMAT.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
   }
 
   @Benchmark
@@ -4742,7 +4747,7 @@ Therefore, the decision to simply switch from platform threads to virtual thread
 
 ## API Geometric Mean
 
-This section describes the normalized GM for the entire miscellaneous benchmarks category, having in total 723 benchmarks.
+This section describes the normalized GM for the entire miscellaneous benchmarks category, having in total 725 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -4753,9 +4758,9 @@ The process of generating the normalized geometric mean is:
 
 Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean   | Nr. of Benchmarks | Unit
 -----|-------------------|-------------|-----------------------------|-------------------|--------
-1    | Oracle GraalVM    | x86_64      | 0.82                        | 723               | ns/op        
-2    | OpenJDK           | x86_64      | 1                           | 723               | ns/op          
-3    | GraalVM CE        | x86_64      | 1.02                        | 723               | ns/op           
+1    | Oracle GraalVM    | x86_64      | 0.82                        | 725               | ns/op        
+2    | OpenJDK           | x86_64      | 1                           | 725               | ns/op          
+3    | GraalVM CE        | x86_64      | 1.02                        | 725               | ns/op           
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -4763,9 +4768,9 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|-------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM    | arm64       | 0.86                      | 723               | ns/op
-2    | GraalVM CE        | arm64       | 0.99                      | 723               | ns/op
-3    | OpenJDK           | arm64       | 1                         | 723               | ns/op
+1    | Oracle GraalVM    | arm64       | 0.86                      | 725               | ns/op
+2    | GraalVM CE        | arm64       | 0.99                      | 725               | ns/op
+3    | OpenJDK           | arm64       | 1                         | 725               | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -5006,7 +5011,7 @@ To summarize, on both architectures the normalized geometric mean is consistent:
 
 ## Overall Geometric Mean
 
-This section describes the normalized GM for all categories, having in total 1109 benchmarks.
+This section describes the normalized GM for all categories, having in total 1112 benchmarks.
 This is purely informative to have a high-level understanding of the overall benchmark scores.
 
 The process of generating the normalized geometric mean is:
@@ -5017,9 +5022,9 @@ The process of generating the normalized geometric mean is:
 
 Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|-------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM    | x86_64      | 0.77                      | 1109              | ns/op
-2    | OpenJDK           | x86_64      | 1                         | 1109              | ns/op
-3    | GraalVM CE        | x86_64      | 1.03                      | 1109              | ns/op
+1    | Oracle GraalVM    | x86_64      | 0.77                      | 1112              | ns/op
+2    | OpenJDK           | x86_64      | 1                         | 1112              | ns/op
+3    | GraalVM CE        | x86_64      | 1.03                      | 1112              | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
@@ -5027,9 +5032,9 @@ _The first in the row is the fastest, and the last in the row is the slowest._
 
 Rank | JVM distribution  | Arcitecture | Normalized Geometric Mean | Nr. of Benchmarks | Unit
 -----|-------------------|-------------|---------------------------|-------------------|--------
-1    | Oracle GraalVM    | arm64       | 0.83                      | 1109              | ns/op
-2    | OpenJDK           | arm64       | 1                         | 1109              | ns/op
-3    | GraalVM CE        | arm64       | 1.08                      | 1109              | ns/op
+1    | Oracle GraalVM    | arm64       | 0.83                      | 1112              | ns/op
+2    | OpenJDK           | arm64       | 1                         | 1112              | ns/op
+3    | GraalVM CE        | arm64       | 1.08                      | 1112              | ns/op
 
 _The first in the row is the fastest, and the last in the row is the slowest._
 
