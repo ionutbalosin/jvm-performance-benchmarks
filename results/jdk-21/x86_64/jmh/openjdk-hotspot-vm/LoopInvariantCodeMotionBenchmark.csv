@@ -1,3 +1,5 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: iterations"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop","avgt",1,25,4281.253745,58.239053,"us/op",16384
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_loop_hoisting_and_sinking","avgt",1,25,1203.406788,14.934233,"us/op",16384
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop","avgt",1,25,537.776739,0.342511,"ms/op",20480
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_cse","avgt",1,25,419.767020,0.050347,"ms/op",20480
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_hoist_and_sink","avgt",1,25,346.211361,0.516372,"ms/op",20480
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_hoist_and_sink_cse","avgt",1,25,150.030152,0.001688,"ms/op",20480
