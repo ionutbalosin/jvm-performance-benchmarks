@@ -39,6 +39,9 @@ import org.openjdk.jmh.annotations.Warmup;
  * Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by the number of additions within that loop.
  * This optimization is based on the induction variable to strength the additions.
  *
+ * Note: From a compiler point of view, this benchmark is the same as CanonicalizeInductionVariableBenchmark
+ * TODO: Consider merging this one into that one or just dropping this.
+ *
  * References:
  * - https://www.javatpoint.com/loop-optimization
  */
