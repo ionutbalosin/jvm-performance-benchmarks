@@ -39,6 +39,8 @@ import org.openjdk.jmh.annotations.Warmup;
  * calls that are loop-invariant both before and after the loop, as well as to perform method call
  * common subexpression elimination within the loop.
  *
+ * Note: The hoisting or sinking of method calls may be a challenge for the compiler, even in cases when they are intrinsic calls.
+ *
  * Hoisting and sinking are terms that Compiler refers to moving operations outside loops:
  * - hoisting a load means to move the load so that it occurs before the loop
  * - sinking a store means to move a store to occur after a loop
