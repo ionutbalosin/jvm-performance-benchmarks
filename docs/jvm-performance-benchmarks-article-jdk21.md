@@ -987,9 +987,7 @@ Unlike C2 JIT Compiler, it does not perform loop peeling, has a slightly reduced
 
 #### GraalVM CE JIT Compiler
 
-The GraalVM CE JIT compiler performs loop peeling for the first iteration but, other than that, employs a very similar approach to the Oracle GraalVM JIT compiler for comparing Strings. It utilizes the same intrinsic candidate (e.g., `IntrinsicStubsGen.arrayRegionEqualsS1S1`).
-
-Overall, the reported average response time for the `cached_enum_values` scenario is very small (e.g., approx. 10 ns/op or even less) among these three compilers.
+The GraalVM CE JIT compiler performs loop peeling for the first iteration but, other than that, employs a very similar approach to the Oracle GraalVM JIT compiler for comparing Strings. It utilizes the same intrinsic stub (e.g., `IntrinsicStubsGen.arrayRegionEqualsS1S1`).
 
 ### Analysis of enum_values
 
@@ -1045,6 +1043,7 @@ The hottest regions in the report shows the `StubRoutines::jlong_disjoint_arrayc
 Try to avoid calling `Enum::values`, especially within a loop, as it allocates a new array and assigns references to the enum values as elements. This can potentially generate a considerable amount of garbage.
 
 For the `cached_enum_values` scenario, the Oracle GraalVM JIT slightly outperforms the C2 JIT compiler in this benchmark. 
+Nevertheless, the differences in average response times are very small (e.g., approx. 10 ns/op or even less) among all three compilers.
 
 Although GraalVM compilers utilize an intrinsic method that enables checking if two strings are equal within a defined region specified by a codepoint-based offset and length (for more details, see [TruffleStrings: a Highly Optimized Cross-Language String Implementation](https://graalworkshop.github.io/2022/slides/4_TruffleStrings.pdf)), in our benchmark, since the entire string is compared, this may not provide significant benefits compared to the method used by the C2 compiler (e.g., vectorized operations using YMM registers for byte array comparison).
 
@@ -1988,6 +1987,8 @@ The C2 JIT compiler and Oracle GraalVM JIT compiler demonstrate similar performa
 
 Loop reduction (or loop reduce) benchmark tests if a loop could be reduced by the number of additions within that loop.
 This optimization is based on the induction variable to strength the additions.
+
+**Note:** From a compiler point of view, this benchmark is the same as `CanonicalizeInductionVariableBenchmark`.
 
 ```
   @Param({"1048576"})
