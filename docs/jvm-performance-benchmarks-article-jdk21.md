@@ -798,11 +798,12 @@ The analysis below pertains to the `cached_enum_values` method, which is the pri
 
 #### C2 JIT Compiler
 
-The C2 JIT compiler iterates through the array of cached enum values, attempting to locate a match for the `lookUpValue` by utilizing the `String::equals` method.
-To achieve this, it performs loop peeling for the first two iterations, then checks for object reference equality, coder equality, byte array length equality, and finally triggers the byte array comparison.
+The C2 JIT compiler iterates through the array of cached enum values, attempting to find a match for the `lookUpValue`. 
+It employs loop peeling for the first two iterations, then checks for object reference equality, String coder equality, and String byte arrays length equality. 
+Finally, the compiler utilizes AVX instructions to perform Strings byte array comparison.
 
 ```
-        0x00007fa1a84f7cda:   movabs $0x7ff03b178,%rdx            ; load the enum values array address into register rbx
+        0x00007fa1a84f7cda:   movabs $0x7ff03b178,%rdx            ; load the enum values array address into register rdx
                                                                   ; {oop(a &apos;EnumValuesLookupBenchmark$Car&apos;[41] {0x00000007ff03b178})}
         0x00007fa1a84f7ced:   mov    0x14(%rsi),%r11d             ; load 'lookUpValue'
         0x00007fa1a84f7d09:   movsbl 0x10(%r12,%r11,8),%r9d       ; load 'coder' field (i.e., byte) of 'lookUpValue'
@@ -837,7 +838,7 @@ To achieve this, it performs loop peeling for the first two iterations, then che
    ││ │                                                           ; - java.lang.String::equals@37 (line 1861)
    ││ │ 0x00007fa1a84f7f6f:   lea    0x10(%r12,%rbx,8),%rdi       ; load byte[] content of Car object
    ││ │ ...
-   ││ │ <--- Intrinsic stub for byte array comparison --->
+   ││ │ <--- Vectorized operations using YMM registers for byte array comparison --->
    ││ │ ...                                                       ; - java.lang.String::equals@44 (line 1863)
    ││ │ 0x00007fa1a84f802d:   test   %eax,%eax
    ││ ╰ 0x00007fa1a84f802f:   je     0x00007fa1a84f7f20           ; jump back
@@ -884,8 +885,7 @@ Unlike C2 JIT Compiler, it does not perform loop peeling, has a slightly reduced
     │ 0x7fa3aada23a9:   cmp    0xc(,%r8,8),%ebp             ; compare the byte array lengths
    ╭│ 0x7fa3aada23b1:   jne    0x7fa3aada23fd               ; jump if lengths are not the same
    ││ ...
-   ││ <--- Trigger the comparison of two byte array regions using an intrinsic stub -->
-   ││ ...
+   ││ <--- Trigger the comparison of two byte array regions using an intrinsic stub  -->
    ││ 0x7fa3aada23d9:   call   0x7fa3aa912000               ; call the runtime function for byte array region comparison
    ││                                                       ; {runtime_call Stub&lt;IntrinsicStubsGen.arrayRegionEqualsS1S1&gt;}
    ││ ...
@@ -905,7 +905,7 @@ Unlike C2 JIT Compiler, it does not perform loop peeling, has a slightly reduced
 
 The GraalVM CE JIT compiler performs loop peeling for the first iteration but, other than that, employs a very similar approach to the Oracle GraalVM JIT compiler for comparing Strings. It utilizes the same intrinsic candidate (e.g., `IntrinsicStubsGen.arrayRegionEqualsS1S1`).
 
-Overall, the reported average response time for the `cached_enum_values` scenario is very small (e.g., 10 ns or even less) among these three compilers.
+Overall, the reported average response time for the `cached_enum_values` scenario is very small (e.g., approx. 10 ns/op or even less) among these three compilers.
 
 ### Analysis of enum_values
 
