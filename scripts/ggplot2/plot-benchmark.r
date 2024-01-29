@@ -25,17 +25,20 @@ source("./scripts/ggplot2/plot-utils.r")
 
 # Retrieve command line arguments in a very specific order
 args <- commandArgs(TRUE)
-if (length(args) != 14) {
-  stop("Usage: Rscript script.R <jmh_output_folder> <geometric_mean_output_folder>
+if (length(args) != 16) {
+  stop("Usage: Rscript script.R <jdk_version> <arch>
+        <geometric_mean_output_folder> <jmh_output_folder> <geometric_mean_output_folder>
         <openjdk_hotspot_vm_identifier> <graalvm_ce_identifier> <graalvm_ee_identifier> <azul_prime_vm_identifier>
         <openjdk_hotspot_vm_name> <graalvm_ce_name> <graalvm_ee_name> <azul_prime_vm_name>
         <openjdk_hotspot_vm_color_palette> <graalvm_ce_color_palette> <graalvm_ee_color_palette> <azul_prime_vm_color_palette>")
 }
-jmh_output_folder <- args[1]
-plot_output_folder <- args[2]
-jvm_identifiers <- args[3:6]
-jvm_names <- args[7:10]
-jvm_color_palettes <- args[11:14]
+jdk_version <- args[1]
+arch <- args[2]
+jmh_output_folder <- args[3]
+plot_output_folder <- args[4]
+jvm_identifiers <- args[5:8]
+jvm_names <- args[9:12]
+jvm_color_palettes <- args[13:16]
 
 # Creates maps
 jvm_names_map <- setNames(as.list(jvm_names), jvm_identifiers)
@@ -50,10 +53,12 @@ jvm_color_palettes_map <- setNames(as.list(jvm_color_palettes), jvm_names)
 #       +--> /graalvm-ee/BenchmarkResult.csv
 #       +--> /azul-prime-vm/BenchmarkResult.csv
 # Use "openjdk-hotspot-vm" as the reference, which is conventionally passed as the 3rd argument.
-openjdk_hotspot_vm <- args[3]
+openjdk_hotspot_vm <- args[5]
 reference_path <- paste(jmh_output_folder, openjdk_hotspot_vm, sep = "/")
 
 benchmark_files <- list.files(path = reference_path, full.names = FALSE)
+benchmark_jdk_arch <- paste("JDK-", jdk_version, " / ", arch, sep = "")
+
 for (benchmark_file in benchmark_files) {
   benchmark_file_basename <- tools::file_path_sans_ext(benchmark_file)
 
@@ -76,7 +81,7 @@ for (benchmark_file in benchmark_files) {
   }
 
   data <- cleanAndPrepareBenchmarkData(data)
-  plot <- createBenchmarkBarChart(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, jvm_color_palettes_map)
+  plot <- createBenchmarkBarChart(data, "JvmIdentifier", "Legend", "Benchmark", data$Unit[1], benchmark_file_basename, benchmark_jdk_arch, jvm_color_palettes_map)
   saveBenchmarkBarChartToSVG(data, plot, plot_output_folder, benchmark_file_basename)
 
   cat("Summary:", trimws(summary, "both"), "\n")
