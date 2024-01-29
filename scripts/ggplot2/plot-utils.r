@@ -113,19 +113,19 @@ cleanAndPrepareBenchmarkData <- function(data) {
 }
 
 # Function to generate a bar chart plot
-createBenchmarkBarChart <- function(data, fill, fillLabel, xLabel, yLabel, title, color_palette) {
+createBenchmarkBarChart <- function(data, fill, fillLabel, xLabel, yLabel, title, caption, color_palette) {
   plot <- ggplot(data, aes(x = Benchmark, y = Score, fill = data[, fill], ymin = Score - Error, ymax = Score + Error))
   plot <- plot + geom_bar(stat = "identity", color = NA, position = "dodge", width = .7)
   plot <- plot + geom_text(aes(label = paste(Score, Unit, sep = " ")), color = "black", hjust = -0.05, vjust = -.75, position = position_dodge(.7), size = 4)
   plot <- plot + geom_errorbar(width = .175, linewidth = .6, alpha = .7, position = position_dodge(.7))
-  plot <- plot + labs(x = xLabel, y = yLabel, fill = fillLabel, title = title)
+  plot <- plot + labs(x = xLabel, y = yLabel, fill = fillLabel, title = title, caption = caption)
   plot <- plot + geom_hline(yintercept = 0)
   plot <- plot + coord_flip(clip = "off")
   plot <- plot + theme(
-    text = element_text(size = 18),
-    panel.background = element_rect(fill = NA, colour = NA, linewidth = 0.5, linetype = "solid"),
-    panel.grid.major = element_line(linewidth = 0.5, linetype = "solid", colour = "grey95"),
-    panel.grid.minor = element_line(linewidth = 0.25, linetype = "solid", colour = "grey95"),
+    text = element_text(size = unit(18, "pt")),
+    panel.background = element_rect(fill = NA, colour = NA, linewidth = unit(0.5, "pt"), linetype = "solid"),
+    panel.grid.major = element_line(linewidth = unit(0.5, "pt"), linetype = "solid", colour = "grey95"),
+    panel.grid.minor = element_line(linewidth = unit(0.25, "pt"), linetype = "solid", colour = "grey95"),
     legend.spacing.y = unit(0.3, "cm"),
     legend.position = "bottom",
     plot.title = element_text(size = 18),
@@ -133,7 +133,7 @@ createBenchmarkBarChart <- function(data, fill, fillLabel, xLabel, yLabel, title
     plot.caption = element_text(hjust = 1),
     plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")
   )
-  plot <- plot + guides(fill = guide_legend(byrow = TRUE))
+  plot <- plot + guides(fill = guide_legend(byrow = TRUE, reverse = TRUE))
   plot <- plot + scale_fill_manual(fillLabel, values = color_palette)
 
   return(plot)
