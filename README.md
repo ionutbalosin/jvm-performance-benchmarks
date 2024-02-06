@@ -22,6 +22,7 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 
 - [Authors](#authors)
 - [Purpose](#purpose)
+- [Publications](#publications)
 - [JMH Caveats](#jmh-caveats)
 - [OS Tuning](#os-tuning)
 - [JVM Coverage](#jvm-coverage)
@@ -37,14 +38,16 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 
 ## Authors
 
-Ionut Balosin
-- Website: [www.ionutbalosin.com](www.ionutbalosin.com)
-- Twitter: [@ionutbalosin](https://twitter.com/ionutbalosin)
-- Mastodon: [@ionutbalosin@mastodon.social](https://mastodon.social/@ionutbalosin)
+**Ionut Balosin**
+- Website: [www.ionutbalosin.com](https://www.ionutbalosin.com)
+- X: [@ionutbalosin](https://twitter.com/ionutbalosin)
+- GitHub: [@ionutbalosin](https://github.com/ionutbalosin)
+- Mastodon: [@ionutbalosin](https://mastodon.social/@ionutbalosin)
 
-Florin Blanaru
-- Twitter: [@gigiblender](https://twitter.com/gigiblender)
-- Mastodon: [@gigiblender@mastodon.online](https://mastodon.online/@gigiblender)
+**Florin Blanaru**
+- X: [@gigiblender](https://twitter.com/gigiblender)
+- GitHub: [@gigiblender](https://github.com/gigiblender)
+- Mastodon: [@gigiblender](https://mastodon.online/@gigiblender)
 
 ## Purpose
 
@@ -60,6 +63,12 @@ Each benchmark focuses on a specific execution pattern or task that could be ful
 - Benchmarking the entire Java SE APIs or JDK APIs, but only the most commonly used APIs
 - Benchmarking large applications (e.g., web-based microservices, etc.)
 - Benchmarking Garbage Collectors, as using micro-benchmarks to assess the performance of Garbage Collectors may lead to misleading conclusions
+
+## Publications
+
+Current publications that rely on benchmarks from this repository can be found at:
+- [JVM Performance Comparison for JDK 21](https://ionutbalosin.com/2024/02/jvm-performance-comparison-for-jdk-21)
+- [JVM Performance Comparison for JDK 17](https://ionutbalosin.com/2023/03/jvm-performance-comparison-for-jdk-17)
 
 ## JMH Caveats
 

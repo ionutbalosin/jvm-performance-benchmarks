@@ -1,17 +1,17 @@
 # JVM Performance Comparison for JDK 21
 
-> Current status: WIP (e.g., undergoing review). At this stage, please refrain from sharing it on social media without the authors' permission.
-
 ## Authors
 
-Ionut Balosin
-- Website: www.ionutbalosin.com
-- X: @ionutbalosin
--  Mastodon: ionutbalosin@mastodon.social
+**Ionut Balosin**
+- Website: [www.ionutbalosin.com](https://www.ionutbalosin.com)
+- X: [@ionutbalosin](https://twitter.com/ionutbalosin)
+- GitHub: [@ionutbalosin](https://github.com/ionutbalosin)
+- Mastodon: [@ionutbalosin](https://mastodon.social/@ionutbalosin)
 
-Florin Blanaru
-- X: @gigiblender
-- Mastodon: gigiblender@mastodon.online
+**Florin Blanaru**
+- X: [@gigiblender](https://twitter.com/gigiblender)
+- GitHub: [@gigiblender](https://github.com/gigiblender)
+- Mastodon: [@gigiblender](https://mastodon.online/@gigiblender)
 
 # Content
 
@@ -54,6 +54,8 @@ Graal JIT         | Oracle GraalVM 21+35.1 | x86_64, arm64
 This article is based on the [jvm-performance-benchmarks](https://github.com/ionutbalosin/jvm-performance-benchmarks) project. For any further information (not explicitly mentioned here) including the OS tuning settings, the deliberate decision on choosing these JVMs and/or specific JDKs, etc., please check out the repository.
 
 > The reference architecture (and, subsequently, the benchmarks analysis) for this article is x86_64, and arm64 is only included in the geometric mean score section for comparison.
+
+In this article, we present benchmarks and a comparison for JDK 21. For information related to JDK 17, please refer to our previous article [JVM Performance Comparison for JDK 17](https://ionutbalosin.com/2023/03/jvm-performance-comparison-for-jdk-17).
 
 # SetUp
 
@@ -457,7 +459,7 @@ boundaries when inlining occurs.
   }
 ```
 
-Source code: [DeadLocalAllocationStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/DeadLocalAllocationStoreBenchmark.java)
+Source code: [DeadLocalAllocationStoreBenchmark.java](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/compiler/DeadLocalAllocationStoreBenchmark.java)
 
 [![DeadLocalAllocationStoreBenchmark.svg](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadLocalAllocationStoreBenchmark.svg?raw=true)](https://github.com/ionutbalosin/jvm-performance-benchmarks/blob/main/results/jdk-21/x86_64/plot/DeadLocalAllocationStoreBenchmark.svg?raw=true)
 
