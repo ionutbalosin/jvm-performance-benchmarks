@@ -172,7 +172,7 @@ The Oracle GraalVM JIT compiler replaces the additions with the shift operation,
 
 #### GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
+The GraalVM CE JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
 
 ### Conclusions
 
@@ -3939,7 +3939,7 @@ The GraalVM JIT compiler takes the fast path by directly checking against the `M
 
 #### GraalVM CE JIT Compiler
 
-The Oracle GraalVM JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
+The GraalVM CE JIT compiler performs the same optimization as the Oracle GraalVM JIT compiler.
 
 ### Conclusions
 
