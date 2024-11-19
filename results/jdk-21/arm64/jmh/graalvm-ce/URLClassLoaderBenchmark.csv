@@ -1,2 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.api.classloader.URLClassLoaderBenchmark.load_classes","avgt",1,25,86.839628,2.150864,"ms/op"

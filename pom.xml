@@ -6,9 +6,9 @@
 
     <name>JVM Performance Benchmarks</name>
 
-    <groupId>jvm.performance.benchmarks</groupId>
+    <groupId>dev.chainguard.jvm.performance.benchmarks</groupId>
     <artifactId>jvm-performance-benchmarks</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -55,13 +55,16 @@
             <properties>
                 <jdk.version>17</jdk.version>
                 <spotlessExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java
+                    **/TypeSwitchBenchmark.java,**/StringConcatenation*Benchmark.java,**/StringFormat*Benchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingRoundtripLatencyBenchmark.java,**/VPThread*.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java
+                    **/TypeSwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingRoundtripLatencyBenchmark.java,**/VPThread*.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
                 </compilerExcludedFiles>
                 <compilerArgs>
-                    --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
                 </compilerArgs>
             </properties>
         </profile>
@@ -74,10 +77,16 @@
             <properties>
                 <jdk.version>21</jdk.version>
                 <spotlessExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java
+                    **/TypeSwitchBenchmark.java,**/StringConcatenation*Benchmark.java,**/StringFormat*Benchmark.java
                 </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/holidayplanner/**/*.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
                 <compilerArgs>
-                    --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
                 </compilerArgs>
             </properties>
         </profile>
@@ -155,7 +164,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.openjdk.jmh.Main</mainClass>
+                                    <mainClass>dev.chainguard.jvm.performance.benchmarks.BenchmarkRunner</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -170,6 +179,7 @@
                 <configuration>
                     <java>
                         <excludes>
+                            **/chainguard/**/*,
                             ${spotlessExcludedFiles}
                         </excludes>
                         <googleJavaFormat>

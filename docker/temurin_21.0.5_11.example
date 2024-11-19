@@ -1,0 +1,11 @@
+FROM eclipse-temurin:21.0.5_11-jdk
+
+COPY --chown=root:root . /home/build/
+WORKDIR /home/build
+RUN /home/build/mvnw -P jdk21_profile package
+
+FROM eclipse-temurin:21.0.5_11-jre
+
+COPY --from=0 /home/build/benchmarks/target/benchmarks.jar /app/
+
+ENTRYPOINT ["java", "-jar", "/app/benchmarks.jar"]

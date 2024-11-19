@@ -1,0 +1,11 @@
+FROM cgr.dev/chainguard-private/jdk:openjdk-21.0.5
+
+COPY --chown=java:java . /home/build/
+WORKDIR /home/build
+RUN /home/build/mvnw -P jdk21_profile package
+
+FROM cgr.dev/chainguard-private/jre:openjdk-21.0.5
+
+COPY --from=0 /home/build/benchmarks/target/benchmarks.jar /app/
+
+ENTRYPOINT ["java", "-jar", "/app/benchmarks.jar"]

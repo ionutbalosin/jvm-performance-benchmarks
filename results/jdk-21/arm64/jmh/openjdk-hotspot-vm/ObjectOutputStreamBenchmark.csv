@@ -1,2 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.ObjectOutputStreamBenchmark.write","avgt",1,25,2.148810,0.018986,"us/op"

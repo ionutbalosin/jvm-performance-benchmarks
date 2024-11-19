@@ -24,6 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.imagerotate;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.imagerotate.ImageRotate.rotateImage;
 
+import dev.chainguard.jvm.performance.benchmarks.BenchmarkHelper;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -67,8 +68,7 @@ public class ImageRotateBenchmark {
   // $ java -jar */*/benchmarks.jar ".*ImageRotateBenchmark.*"
 
   private final String FILE_TYPE = "jpeg";
-  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private final String FILE_NAME = CURRENT_DIR + "/benchmarks/src/main/resources/food_banquet.jpg";
+  private final String FILE_NAME = BenchmarkHelper.copyResource("food_banquet.jpg");
 
   // Each quadrant number corresponds to clockwise degrees, as follows:
   // 1 - rotate 90 degrees clockwise

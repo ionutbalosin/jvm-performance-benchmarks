@@ -22,23 +22,15 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
-import static java.lang.String.valueOf;
-
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
+import org.openjdk.jmh.annotations.*;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
+
+// This is a clone of public class StringContainsBenchmark { containing only string template related benchmarks
 
 /**
  * Benchmark measuring the performance of various concatenation methods using different data types
@@ -59,7 +51,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StringConcatenationBenchmark {
+public class StringConcatenationTemplateBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*StringConcatenationBenchmark.*"
   // Recommended command line options:
@@ -94,50 +86,7 @@ public class StringConcatenationBenchmark {
   }
 
   @Benchmark
-  public String string_builder() {
-    // Do not explicitly set a capacity
-    return new StringBuilder()
-        .append(aString)
-        .append(anInt)
-        .append(aFloat)
-        .append(aChar)
-        .append(aLong)
-        .append(aDouble)
-        .append(aBool)
-        .append(anObject)
-        .toString();
-  }
-
-  @Benchmark
-  public String string_buffer() {
-    // Do not explicitly set a capacity
-    return new StringBuffer()
-        .append(aString)
-        .append(anInt)
-        .append(aFloat)
-        .append(aChar)
-        .append(aLong)
-        .append(aDouble)
-        .append(aBool)
-        .append(anObject)
-        .toString();
-  }
-
-  @Benchmark
-  public String string_concat() {
-    return new String()
-        .concat(aString)
-        .concat(valueOf(anInt))
-        .concat(valueOf(aFloat))
-        .concat(valueOf(aChar))
-        .concat(valueOf(aLong))
-        .concat(valueOf(aDouble))
-        .concat(valueOf(aBool))
-        .concat(valueOf(anObject));
-  }
-
-  @Benchmark
-  public String plus_operator() {
-    return aString + anInt + aFloat+ aChar + aLong + aDouble + aBool + anObject ;
+  public String string_template() {
+    return STR."\{aString}\{anInt}\{aFloat}\{aChar}\{aLong}\{aDouble}\{aBool}\{anObject}";
   }
 }

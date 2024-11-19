@@ -28,6 +28,7 @@ import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.palindrome.func
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.palindrome.iterative.IterativePredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.palindrome.recursive.RecursivePredicate;
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.palindrome.trampoline.TrampolinePredicate;
+import dev.chainguard.jvm.performance.benchmarks.BenchmarkHelper;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -76,8 +77,7 @@ public class PalindromeBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*PalindromeBenchmark.*"
 
-  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private final String FILE_NAME = CURRENT_DIR + "/benchmarks/src/main/resources/palindrome.list";
+  private final String FILE_NAME = BenchmarkHelper.copyResource("palindrome.list");
   // Expected number of palindromes in the file "palindrome.list" is known to be 29
   private final int EXPECTED_PALINDROME_COUNT = 29;
 

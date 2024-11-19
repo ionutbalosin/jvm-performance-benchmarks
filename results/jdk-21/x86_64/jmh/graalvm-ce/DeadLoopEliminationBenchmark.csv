@@ -1,4 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: useLoopResult"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.baseline","avgt",1,25,0.771719,0.000281,"ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.conditional_dead_loop","avgt",1,25,23144.799957,0.989649,"ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.dead_loop","avgt",1,25,501.470882,0.296012,"ns/op",false

@@ -24,6 +24,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import dev.chainguard.jvm.performance.benchmarks.BenchmarkHelper;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -71,8 +72,7 @@ public class StringPatternSplitBenchmark {
   // - JMH options: -prof gc
 
   private final String SPACE = "\\s+";
-  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private final String FILE_NAME = CURRENT_DIR + "/benchmarks/src/main/resources/lorem_ipsum.txt";
+  private final String FILE_NAME = BenchmarkHelper.copyResource("lorem_ipsum.txt");
 
   @Param({"_", "__"})
   private String regexp;

@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: loadFactor","Param: threadType"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlannerBenchmark.travel_planner","avgt",1,25,1.932683,0.025789,"ms/op",256,VIRTUAL
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlannerBenchmark.travel_planner","avgt",1,25,245.427731,4.333356,"ms/op",256,PLATFORM

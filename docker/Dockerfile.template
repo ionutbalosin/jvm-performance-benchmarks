@@ -1,0 +1,11 @@
+FROM ${JDK_IMAGE}
+
+COPY --chown=${BUILD_USER}:${BUILD_USER} . /home/build/
+WORKDIR /home/build
+RUN /home/build/mvnw -P jdk${JDK_VERSION}_profile package
+
+FROM ${JRE_IMAGE}
+
+COPY --from=0 /home/build/benchmarks/target/benchmarks.jar /app/
+
+ENTRYPOINT ["java", "-jar", "/app/benchmarks.jar"]

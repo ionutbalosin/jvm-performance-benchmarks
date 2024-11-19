@@ -25,6 +25,7 @@ package com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency;
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency.functional.ParallelStreamWordFrequency;
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency.functional.PatternStreamWordFrequency;
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.wordfrequency.iterative.IterativeWordFrequency;
+import dev.chainguard.jvm.performance.benchmarks.BenchmarkHelper;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -58,9 +59,7 @@ public class WordFrequencyBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*WordFrequencyBenchmark.*"
 
-  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
-  private final String FILE_NAME =
-      CURRENT_DIR + "/benchmarks/src/main/resources/word_frequency.txt";
+  private final String FILE_NAME = BenchmarkHelper.copyResource("word_frequency.txt");
 
   @Setup()
   public void setup() throws IOException, URISyntaxException {

@@ -23,23 +23,16 @@
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.annotations.*;
 
 import java.text.MessageFormat;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
+import static java.util.FormatProcessor.FMT;
+
+// This is a clone of StringFormatBenchmark containing only string template related benchmarks
 
 /*
  * This benchmark measures the performance of different formatting approaches utilizing various data types
@@ -59,7 +52,7 @@ import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.Strin
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5)
 @State(Scope.Benchmark)
-public class StringFormatBenchmark {
+public class StringFormatTemplateBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*StringFormatBenchmark.*"
   // Recommended command line options:
@@ -96,26 +89,7 @@ public class StringFormatBenchmark {
   }
 
   @Benchmark
-  public String string_format() {
-    return String.format(
-        "%s%d%.8f%s%d%.17f%b%s", aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
-  }
-
-  @Benchmark
-  public String message_format_new() {
-    final MessageFormat mf =
-        new MessageFormat(
-            "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
-    return mf.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
-  }
-
-  @Benchmark
-  public String message_format_constant() {
-    return MESSAGE_FORMAT.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
-  }
-
-  @Benchmark
-  public String string_formatted() {
-    return "%s%d%.8f%s%d%.17f%b%s".formatted(aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
+  public String format_processor() {
+    return FMT."%s\{aString}%d\{anInt}%.8f\{aFloat}%s\{aChar}%d\{aLong}%.17f\{aDouble}%b\{aBool}%s\{anObject}";
   }
 }

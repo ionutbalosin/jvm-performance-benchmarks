@@ -22,6 +22,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.classloader;
 
+import dev.chainguard.jvm.performance.benchmarks.BenchmarkHelper;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
@@ -56,9 +57,8 @@ public class URLClassLoaderBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*URLClassLoaderBenchmark.*"
 
-  private final String CURRENT_DIR = System.getProperty("user.dir", ".");
   private final String FILE_NAME =
-      CURRENT_DIR + "/benchmarks/src/main/resources/org_springframework_spring-core-6.0.9.jar";
+      BenchmarkHelper.copyResource("org_springframework_spring-core-6.0.9.jar");
   // Define the expected number of classes in the "org_springframework_spring-core-6.0.9.jar"
   private final int EXPECTED_CLASSES_COUNT = 1_000;
   // Define the accepted error threshold for classes that cannot be loaded
