@@ -1,5 +1,7 @@
 package dev.chainguard.jvm.performance.benchmarks;
 
+import java.io.File;
+import java.nio.file.Path;
 import org.apache.commons.cli.*;
 import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jmh.infra.IterationParams;
@@ -26,6 +28,7 @@ import static org.openjdk.jmh.results.format.ResultFormatType.JSON;
 
 public class BenchmarkRunner {
     public static final String REGEXP_ALL = ".";
+    public static final String DEFAULT_RESULTS_FILE = "/tmp/results.json";
 
     public static final Option OPTION_NAME = Option.builder()
             .option("n")
@@ -49,11 +52,20 @@ public class BenchmarkRunner {
             .hasArg()
             .build();
 
+    public static final Option OPTION_FILE = Option.builder()
+        .option("f")
+        .longOpt("file")
+        .desc("Results file location. Default: " + DEFAULT_RESULTS_FILE)
+        .hasArg()
+        .build();
+
     public static void main(String[] args) throws RunnerException, IOException, ParseException {
         Options options = new Options()
                 .addOption(OPTION_NAME)
                 .addOption(OPTION_SPLIT)
-                .addOption(OPTION_PROFILE);
+                .addOption(OPTION_PROFILE)
+                .addOption(OPTION_FILE);
+
         if (args.length == 0) {
             printHelp(options);
             return;
@@ -91,11 +103,15 @@ public class BenchmarkRunner {
         if (cmdline.hasOption(OPTION_NAME)) {
             benchmarks = filterBenchmarks(benchmarks, cmdline);
         }
+        File resultsPath = new File(DEFAULT_RESULTS_FILE);
+        if (cmdline.hasOption(OPTION_FILE)) {
+            resultsPath = new File(cmdline.getOptionValue(OPTION_FILE));
+        }
 
         OptionsBuilder jmhOptions = new OptionsBuilder();
         jmhOptions
                 .resultFormat(JSON)
-                .result("/tmp/results.json");
+                .result(resultsPath.getAbsolutePath());
         profile.apply(jmhOptions);
 
         Runner runner = new JmhReflections.HijackedRunner(jmhOptions, benchmarks);

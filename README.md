@@ -10,8 +10,8 @@ Running this tool with different [minor] versions should bring no difference in 
 
 ## Java runner
 Benchmark suite can be run using a Java-based runner, simply by executing `java -jar benchmarks.jar` command.
-Running it without any args will print help message. The results json from `run` command will land in `/tmp/results.json`
-file sa different jdk images may have different write permissions and `/tmp` should always be available.
+Running it without any args will print help message. The results json from `run` command will by def.
+land in `/tmp/results.json`. It can be changed by `-f` option.
 
 Merge results from multiple runs with a simple
 ```shell
