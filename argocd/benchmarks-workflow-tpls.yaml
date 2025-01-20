@@ -1,0 +1,577 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: benchmarks
+spec:
+  templates:
+    - name: compare
+      parallelism: 2
+      inputs:
+        parameters:
+          # JDK that will be used to compile benchmarks
+          - name: target-jdk-image
+            value: "BAD IMAGE"
+          # JRE that will be used to run benchmarks
+          - name: target-jre-image
+            value: "BAD IMAGE"
+          # JDK that will be used to compile benchmarks
+          - name: reference-jdk-image
+            value: "BAD IMAGE"
+          # JRE that will be used to run benchmarks
+          - name: reference-jre-image
+            value: "BAD IMAGE"
+          # Registry to keep benchmark builds for future use
+          - name: image-build-repository
+            value: "gcr.io/ecosystems-squad"
+          # Registry to store benchmarks results
+          - name: benchmarks-bucket
+            value: "benchmarks"
+          # MVN profile used during benchmarks compilation
+          - name: benchmarks-build-profile
+            value: "BAD PROFILE"
+          # Benchmarks profile STANDARD should be used for real measurements
+          - name: benchmarks-run-profile
+            value: "STANDARD"
+          # On how many groups benchmark run should be split to speed up
+          - name: parallelism
+            value: 30
+          # For testing only to not spawn to many machines when parallelism is large
+          - name: limit
+            value: ""
+      dag:
+        failFast: true
+        tasks:
+          - name: checkout
+            template: checkout
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "target"
+
+          - name: build-benchmarks-files
+            template: build-benchmarks-files
+            arguments:
+              parameters:
+                - name: benchmarks-bucket
+                  value: "{{inputs.parameters.benchmarks-bucket}}"
+                - name: target-jre-image
+                  value: "{{inputs.parameters.target-jre-image}}"
+                - name: reference-jre-image
+                  value: "{{inputs.parameters.reference-jre-image}}"
+                - name: benchmarks-run-profile
+                  value: "{{inputs.parameters.benchmarks-run-profile}}"
+
+          - name: check-existence
+            dependencies:
+              - "checkout"
+              - "build-benchmarks-files"
+            template: check-existence
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "target"
+                - name: benchmarks-bucket
+                  value: "{{inputs.parameters.benchmarks-bucket}}"
+                - name: target-jdk-image
+                  value: "{{inputs.parameters.target-jdk-image}}"
+                - name: target-jre-image
+                  value: "{{inputs.parameters.target-jre-image}}"
+                - name: reference-jdk-image
+                  value: "{{inputs.parameters.reference-jdk-image}}"
+                - name: reference-jre-image
+                  value: "{{inputs.parameters.reference-jre-image}}"
+                - name: target-jre-benchmark-file
+                  value: "{{tasks.build-benchmarks-files.outputs.parameters.target-jre-benchmark-file}}"
+                - name: reference-jre-benchmark-file
+                  value: "{{tasks.build-benchmarks-files.outputs.parameters.reference-jre-benchmark-file}}"
+                - name: benchmarks-run-profile
+                  value: "{{inputs.parameters.benchmarks-run-profile}}"
+
+          - name: trigger-benchmark
+            template: benchmarks-run
+            dependencies:
+              - "check-existence"
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "{{item.checkout_volume}}"
+                - name: jdk-image
+                  value: "{{item.target_jdk}}"
+                - name: jre-image
+                  value: "{{item.target_jre}}"
+                - name: image-build-repository
+                  value: "{{inputs.parameters.image-build-repository}}"
+                - name: benchmarks-bucket
+                  value: "{{inputs.parameters.benchmarks-bucket}}"
+                - name: benchmark-file
+                  value: "{{item.benchmark_file}}"
+                - name: benchmarks-build-profile
+                  value: "{{inputs.parameters.benchmarks-build-profile}}"
+                - name: benchmarks-run-profile
+                  value: "{{inputs.parameters.benchmarks-run-profile}}"
+                - name: parallelism
+                  value: "{{inputs.parameters.parallelism}}"
+                - name: limit
+                  value: "{{inputs.parameters.limit}}"
+            withParam: "{{tasks.check-existence.outputs.parameters.benchmark-runs}}"
+
+          - name: benchmark-compare
+            template: benchmark-compare
+            dependencies:
+              - "trigger-benchmark"
+            arguments:
+              parameters:
+                - name: target-jdk-image
+                  value: "{{inputs.parameters.target-jdk-image}}"
+                - name: target-jre-image
+                  value: "{{inputs.parameters.target-jre-image}}"
+                - name: reference-jdk-image
+                  value: "{{inputs.parameters.reference-jdk-image}}"
+                - name: reference-jre-image
+                  value: "{{inputs.parameters.reference-jre-image}}"
+                - name: benchmarks-bucket
+                  value: "{{inputs.parameters.benchmarks-bucket}}"
+                - name: target-jre-benchmark-file
+                  value: "{{tasks.build-benchmarks-files.outputs.parameters.target-jre-benchmark-file}}"
+                - name: reference-jre-benchmark-file
+                  value: "{{tasks.build-benchmarks-files.outputs.parameters.reference-jre-benchmark-file}}"
+                - name: target-jre-compare-file
+                  value: "{{tasks.build-benchmarks-files.outputs.parameters.target-jre-compare-file}}"
+                - name: reference-jre-compare-file
+                  value: "{{tasks.build-benchmarks-files.outputs.parameters.reference-jre-compare-file}}"
+                - name: benchmarks-run-profile
+                  value: "{{inputs.parameters.benchmarks-run-profile}}"
+                - name: checkout-volume
+                  value: "target"
+
+    - name: build-benchmarks-files
+      inputs:
+        parameters:
+          - name: target-jre-image
+          - name: reference-jre-image
+          - name: benchmarks-run-profile
+      script:
+        image: "gcr.io/ecosystems-squad/python_base:latest"
+        command: [ "bash" ]
+        source: |
+          set -euo pipefail
+          target_image=$(echo "{{inputs.parameters.target-jre-image}}" | rev | cut -d / -f 1 | rev)
+          reference_image=$(echo "{{inputs.parameters.reference-jre-image}}" | rev | cut -d / -f 1 | rev)
+          echo "${target_image}/{{inputs.parameters.benchmarks-run-profile}}.json" > target_benchmark.txt
+          echo "${reference_image}/{{inputs.parameters.benchmarks-run-profile}}.json" > reference_benchmark.txt
+          echo "${target_image}/compare/${reference_image}/{{inputs.parameters.benchmarks-run-profile}}.json" > target_compare.txt
+          echo "${reference_image}/compare/${target_image}/{{inputs.parameters.benchmarks-run-profile}}.json" > reference_compare.txt
+          echo "Benchmark files:"
+          echo " - target benchmark: $(cat target_benchmark.txt)"
+          echo " - reference benchmark: $(cat reference_benchmark.txt)"
+          echo " - target compare: $(cat target_compare.txt)"
+          echo " - reference compare: $(cat reference_compare.txt)"
+      outputs:
+        parameters:
+          - name: target-jre-benchmark-file
+            valueFrom:
+              path: target_benchmark.txt
+          - name: reference-jre-benchmark-file
+            valueFrom:
+              path: reference_benchmark.txt
+          - name: target-jre-compare-file
+            valueFrom:
+              path: target_compare.txt
+          - name: reference-jre-compare-file
+            valueFrom:
+              path: reference_compare.txt
+
+    - name: check-existence
+      inputs:
+        parameters:
+          - name: checkout-volume
+          - name: benchmarks-bucket
+          - name: target-jdk-image
+          - name: target-jre-image
+          - name: reference-jdk-image
+          - name: reference-jre-image
+          - name: target-jre-benchmark-file
+          - name: reference-jre-benchmark-file
+      script:
+        image: "gcr.io/ecosystems-squad/python_base:latest"
+        command: [ "bash" ]
+        source: |
+          set -euo pipefail
+          echo "Generate required benchmark builds for comparison"
+          ./ecosystems-jvm-performance-benchmarks/argocd/helpers/genruns.sh \
+            "{{inputs.parameters.benchmarks-bucket}}" \
+            "{{inputs.parameters.target-jre-benchmark-file}}" \
+            "{{inputs.parameters.reference-jre-benchmark-file}}" \
+            "{{inputs.parameters.target-jdk-image}}" \
+            "{{inputs.parameters.target-jre-image}}" \
+            "{{inputs.parameters.reference-jdk-image}}" \
+            "{{inputs.parameters.reference-jre-image}}" > runs.json
+          echo "Generated benchmarks runs:"
+          cat runs.json
+        workingDir: /workspace
+        volumeMounts:
+          - name: workspace-{{inputs.parameters.checkout-volume}}
+            mountPath: /workspace
+      outputs:
+        parameters:
+          - name: benchmark-runs
+            valueFrom:
+              path: runs.json
+
+    - name: benchmarks-run
+      inputs:
+        parameters:
+          - name: checkout-volume
+          - name: jdk-image
+          - name: jre-image
+          - name: image-build-repository
+          - name: benchmark-file
+          - name: benchmarks-bucket
+          - name: benchmarks-build-profile
+          - name: benchmarks-run-profile
+          - name: parallelism
+          - name: limit
+      # Unfortunately seems we cant use inputs here :( so we set some reasonably large
+      # value here. There are ~1000 benchmarks. So with 500 we will have 2 in each split
+      parallelism: 500
+      dag:
+        failFast: true
+        tasks:
+          - name: checkout
+            template: checkout
+            # We already did that in first step
+            when: "{{inputs.parameters.checkout-volume}} != target"
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "{{inputs.parameters.checkout-volume}}"
+
+          - name: init-run
+            dependencies:
+              - "checkout"
+            template: init-run
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "{{inputs.parameters.checkout-volume}}"
+                - name: jdk-image
+                  value: "{{inputs.parameters.jdk-image}}"
+                - name: jre-image
+                  value: "{{inputs.parameters.jre-image}}"
+                - name: image-build-repository
+                  value: "{{inputs.parameters.image-build-repository}}"
+                - name: parallelism
+                  value: "{{inputs.parameters.parallelism}}"
+                - name: limit
+                  value: "{{inputs.parameters.limit}}"
+
+          - name: build-benchmarks
+            dependencies:
+              - "init-run"
+            template: build-benchmarks
+            when: "'{{tasks.init-run.outputs.parameters.existing-image-tag}}' == ''"
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "{{inputs.parameters.checkout-volume}}"
+                - name: jdk-image
+                  value: "{{inputs.parameters.jdk-image}}"
+                - name: jre-image
+                  value: "{{inputs.parameters.jre-image}}"
+                - name: image-build-repository
+                  value: "{{inputs.parameters.image-build-repository}}"
+                - name: build-image-tag
+                  value: "{{tasks.init-run.outputs.parameters.build-image-tag}}"
+                - name: benchmarks-build-profile
+                  value: "{{inputs.parameters.benchmarks-build-profile}}"
+
+
+          - name: run-benchmarks-split
+            template: run-benchmarks-split
+            dependencies:
+              - "build-benchmarks"
+            arguments:
+              parameters:
+                - name: id
+                  value: "{{item.id}}"
+                - name: split_arg
+                  value: "{{item.split_arg}}"
+                - name: image-build-repository
+                  value: "{{inputs.parameters.image-build-repository}}"
+                - name: build-image-tag
+                  value: "{{tasks.init-run.outputs.parameters.build-image-tag}}"
+                - name: benchmarks-run-profile
+                  value: "{{inputs.parameters.benchmarks-run-profile}}"
+                - name: benchmarks-bucket
+                  value: "{{inputs.parameters.benchmarks-bucket}}"
+                - name: benchmark-file
+                  value: "{{inputs.parameters.benchmark-file}}"
+            withParam: "{{tasks.init-run.outputs.parameters.benchmark-splits}}"
+
+          - name: aggregate
+            template: aggregate
+            dependencies:
+              - "run-benchmarks-split"
+            arguments:
+              parameters:
+                - name: checkout-volume
+                  value: "{{inputs.parameters.checkout-volume}}"
+                - name: jre-image
+                  value: "{{inputs.parameters.jre-image}}"
+                - name: benchmarks-bucket
+                  value: "{{inputs.parameters.benchmarks-bucket}}"
+                - name: benchmark-file
+                  value: "{{inputs.parameters.benchmark-file}}"
+                - name: benchmarks-run-profile
+                  value: "{{inputs.parameters.benchmarks-run-profile}}"
+                - name: benchmark-results
+                  value: "{{tasks.run-benchmarks-split.outputs.parameters.benchmark-results}}"
+
+    - name: checkout
+      inputs:
+        parameters:
+          # Volume will be used to check out
+          - name: checkout-volume
+      script:
+        image: "gcr.io/ecosystems-squad/python_base:latest"
+        env:
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: github-token
+                key: GITHUB_TOKEN
+        command: [ "bash" ]
+        source: |
+          set -euo pipefail
+          echo "Clone repository"
+          cd /workspace
+          # TODO remove branch select
+          gh repo clone chainguard-dev/ecosystems-jvm-performance-benchmarks
+        workingDir: /workspace
+        volumeMounts:
+          - name: workspace-{{inputs.parameters.checkout-volume}}
+            mountPath: /workspace
+
+    - name: init-run
+      inputs:
+        parameters:
+          # Volume to be used
+          - name: checkout-volume
+          # JDK that will be used to compile benchmarks
+          - name: jdk-image
+          # JRE that will be used to run benchmarks
+          - name: jre-image
+          # Registry to keep benchmark builds for future use
+          - name: image-build-repository
+          # On how many groups benchmark run should be split to speed up
+          - name: parallelism
+          # For testing only to not spawn to many machines when parallelism is large
+          - name: limit
+      script:
+        image: "gcr.io/ecosystems-squad/python_base:latest"
+        env:
+          - name: GITHUB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: github-token
+                key: GITHUB_TOKEN
+        command: [ "bash" ]
+        source: |
+          set -euo pipefail
+
+          echo "Generate splits"
+          ./ecosystems-jvm-performance-benchmarks/argocd/helpers/gensplits.sh \
+            {{inputs.parameters.parallelism}} \
+            {{inputs.parameters.limit}} > benchmarks.json
+          
+          echo "Identify build image tag"
+          image_name=$(echo "{{inputs.parameters.jre-image}}" | cut -d ':' -f 1 | rev | cut -d / -f 1 | rev)
+          image_tag=$(echo "{{inputs.parameters.jre-image}}" | cut -d ':' -f 2)
+          build_image_tag="${image_name}_${image_tag}"
+          echo "${build_image_tag}" > build_image_tag.txt
+          
+          existing_image_tag=$(gcloud artifacts docker tags list \
+            {{inputs.parameters.image-build-repository}}/benchmarks \
+            --format json | 
+            jq -r ".[] | select(.tag | endswith(\"/${build_image_tag}\")).tag" |
+            rev | cut -d / -f 1 | rev )
+          echo "${existing_image_tag}" > existing_image_tag.txt
+        workingDir: /workspace
+        volumeMounts:
+          - name: workspace-{{inputs.parameters.checkout-volume}}
+            mountPath: /workspace
+      outputs:
+        parameters:
+          - name: benchmark-splits
+            valueFrom:
+              path: /workspace/benchmarks.json
+          - name: build-image-tag
+            valueFrom:
+              path: /workspace/build_image_tag.txt
+          - name: existing-image-tag
+            valueFrom:
+              path: /workspace/existing_image_tag.txt
+
+    - name: build-benchmarks
+      inputs:
+        parameters:
+          - name: checkout-volume
+          - name: jdk-image
+          - name: jre-image
+          - name: image-build-repository
+          - name: build-image-tag
+          - name: benchmarks-build-profile
+      container:
+        image: gcr.io/kaniko-project/executor:latest
+        args:
+          - "--dockerfile=docker/Dockerfile"
+          - "--context=/workspace/ecosystems-jvm-performance-benchmarks"
+          - "--destination={{inputs.parameters.image-build-repository}}/benchmarks:{{inputs.parameters.build-image-tag}}"
+          - "--build-arg"
+          - "JDK_IMAGE={{inputs.parameters.jdk-image}}"
+          - "--build-arg"
+          - "JRE_IMAGE={{inputs.parameters.jre-image}}"
+          - "--build-arg"
+          - "BUILD_PROFILE={{inputs.parameters.benchmarks-build-profile}}"
+        volumeMounts:
+          - name: workspace-{{inputs.parameters.checkout-volume}}
+            mountPath: /workspace
+
+    - name: run-benchmarks-split
+      inputs:
+        parameters:
+          - name: id
+          - name: image-build-repository
+          - name: build-image-tag
+          - name: benchmarks-run-profile
+          - name: split_arg
+          - name: benchmarks-bucket
+          - name: benchmark-file
+      container:
+        image: "{{inputs.parameters.image-build-repository}}/benchmarks:{{inputs.parameters.build-image-tag}}"
+        command:
+          - "java"
+          # This needs to be 5g as benchmark run forks for each test.
+          # Each fork inherits settings so we double RAM usage
+          - "-Xmx5g"
+          - "-jar"
+          - "/app/benchmarks.jar"
+          - "run"
+          - "-p"
+          - "{{inputs.parameters.benchmarks-run-profile}}"
+          - "-s"
+          - "{{inputs.parameters.split_arg}}"
+          - "-f"
+          - "benchmark-results.json"
+        workingDir: /workspace
+        resources:
+          requests:
+            ephemeral-storage: 4Gi
+            memory: 12Gi
+            cpu: 2
+          limits:
+            ephemeral-storage: 4Gi
+            memory: 12Gi
+            cpu: 2
+      outputs:
+        parameters:
+          - name: benchmark-results
+            value: "{{inputs.parameters.benchmark-file}}.part{{inputs.parameters.id}}"
+        artifacts:
+          - name: benchmark-results
+            path: /workspace/benchmark-results.json
+            archive: {}
+            gcs:
+              bucket: "{{inputs.parameters.benchmarks-bucket}}"
+              key: "{{inputs.parameters.benchmark-file}}.part{{inputs.parameters.id}}"
+      metadata:
+        labels:
+          benchmarks: split-run
+      # TODO in future enforce specific repeatable machine type
+      # https://gcloud-compute.com/us-central1/n2-standard-2.html
+      tolerations: [ ]
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  benchmarks: split-run
+              topologyKey: "kubernetes.io/hostname"
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    benchmarks: split-run
+                topologyKey: "kubernetes.io/hostname"
+
+    - name: aggregate
+      inputs:
+        parameters:
+          - name: checkout-volume
+          - name: jre-image
+          - name: benchmarks-bucket
+          - name: benchmark-file
+          - name: benchmarks-run-profile
+          - name: benchmark-results
+      script:
+        image: "gcr.io/ecosystems-squad/python_base:latest"
+        command: [ "bash" ]
+        source: |
+          set -euo pipefail
+          echo "Input benchmark split parts"
+          echo '{{inputs.parameters.benchmark-results}}' | jq -r ".[]"
+          for path in $(echo '{{inputs.parameters.benchmark-results}}' | jq -r ".[]"); do
+            file_name=$(echo "${path}" | rev | cut -d / -f 1 | rev)
+            gcloud storage cp "gs://{{inputs.parameters.benchmarks-bucket}}/${path}" ${file_name}
+            gcloud storage rm "gs://{{inputs.parameters.benchmarks-bucket}}/${path}"
+          done
+          echo "Downloaded benchmark split parts"
+          ls -al *.json.part* 
+          echo "Merge benchmark split parts"
+          cat *.json.part* | jq  '.[]' | jq -s > benchmark-results.json
+          gcloud storage cp /workspace/benchmark-results.json "gs://{{inputs.parameters.benchmarks-bucket}}/{{inputs.parameters.benchmark-file}}"
+        workingDir: /workspace
+        volumeMounts:
+          - name: workspace-{{inputs.parameters.checkout-volume}}
+            mountPath: /workspace
+
+    - name: benchmark-compare
+      inputs:
+        parameters:
+          - name: target-jre-image
+          - name: reference-jre-image
+          - name: target-jre-benchmark-file
+          - name: reference-jre-benchmark-file
+          - name: target-jre-compare-file
+          - name: reference-jre-compare-file
+          - name: benchmarks-bucket
+          - name: benchmarks-run-profile
+          - name: checkout-volume
+      script:
+        image: "gcr.io/ecosystems-squad/python_base:latest"
+        command: [ "bash" ]
+        source: |
+          set -euo pipefail
+          
+          echo "Comparing below files:"
+          echo " - {{inputs.parameters.target-jre-benchmark-file}}"
+          gcloud storage cp "gs://{{inputs.parameters.benchmarks-bucket}}/{{inputs.parameters.target-jre-benchmark-file}}" target.json
+    
+          echo " - {{inputs.parameters.reference-jre-benchmark-file}}"
+          gcloud storage cp "gs://{{inputs.parameters.benchmarks-bucket}}/{{inputs.parameters.reference-jre-benchmark-file}}" reference.json
+          
+          echo "Run compare"
+          ./ecosystems-jvm-performance-benchmarks/argocd/helpers/compare.sh \
+            ./target.json ./reference.json > benchmark_compare.json
+          
+          gcloud storage cp \
+            benchmark_compare.json \
+            "gs://{{inputs.parameters.benchmarks-bucket}}/{{inputs.parameters.target-jre-compare-file}}"
+          gcloud storage cp \
+            benchmark_compare.json \
+            "gs://{{inputs.parameters.benchmarks-bucket}}/{{inputs.parameters.reference-jre-compare-file}}"
+        workingDir: /workspace
+        volumeMounts:
+          - name: workspace-{{inputs.parameters.checkout-volume}}
+            mountPath: /workspace

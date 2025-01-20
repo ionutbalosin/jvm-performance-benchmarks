@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: benchmarks-
+  annotations:
+    chainguard.dev/runner: "benchmarks"
+spec:
+  entrypoint: compare
+  podDisruptionBudget:
+    minAvailable: 100
+  arguments:
+    parameters:
+      - name: target-jdk-image
+        value: "BAD IMAGE"
+      - name: target-jre-image
+        value: "BAD IMAGE"
+      - name: reference-jdk-image
+        value: "BAD IMAGE"
+      - name: reference-jre-image
+        value: "BAD IMAGE"
+      - name: image-build-repository
+        value: "gcr.io/ecosystems-squad"
+      - name: benchmarks-bucket
+        value: "benchmarks"
+      - name: benchmarks-build-profile
+        value: "BAD PROFILE"
+      - name: benchmarks-run-profile
+        value: "STANDARD"
+      - name: parallelism
+        value: 30
+      - name: limit
+        value: ""
+  serviceAccountName: argo-workflow
+  # keep workflows for 1d (86,400 seconds)
+  ttlStrategy:
+    secondsAfterCompletion: 86400
+    secondsAfterFailure: 86400
+    secondsAfterSuccess: 86400
+  # must complete in 48h (172,800 seconds)
+  activeDeadlineSeconds: 172800
+  podGC:
+    strategy: OnPodSuccess
+  archiveLogs: true
+  securityContext:
+    runAsUser: 0
+  workflowTemplateRef:
+    name: benchmarks
+  volumeClaimTemplates:
+    - metadata:
+        name: workspace-target
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi
+    - metadata:
+        name: workspace-reference
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi
