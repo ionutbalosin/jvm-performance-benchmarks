@@ -39,13 +39,63 @@
             <properties>
                 <jdk.version>11</jdk.version>
                 <spotlessExcludedFiles>
-                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingRoundtripLatencyBenchmark.java,**/VPThread*.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java,**/StringWhitespaceBenchmark.java,**/api/time/**.java
+                    **/*SwitchBenchmark.java,
+                    **/holidayplanner/**/*.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/StringConcatenationBenchmark.java,
+                    **/StringFormatBenchmark.java,
+                    **/StringWhitespaceBenchmark.java,
+                    **/api/time/**.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/*SwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingRoundtripLatencyBenchmark.java,**/VPThread*.java,**/*VectorApiBenchmark.java,**/RandomGeneratorBenchmark.java,**/ThreadLocalRandomBenchmark.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java,**/StringWhitespaceBenchmark.java,**/api/time/**.java
+                    **/*SwitchBenchmark.java,
+                    **/holidayplanner/**/*.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/*VectorApiBenchmark.java,
+                    **/RandomGeneratorBenchmark.java,
+                    **/ThreadLocalRandomBenchmark.java,
+                    **/StringConcatenationBenchmark.java,
+                    **/StringFormatBenchmark.java,
+                    **/StringWhitespaceBenchmark.java,
+                    **/api/time/**.java
                 </compilerExcludedFiles>
                 <compilerArgs>
                     --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk16_profile</id>
+            <properties>
+                <jdk.version>16</jdk.version>
+                <spotlessExcludedFiles>
+                    **/*SwitchBenchmark.java,
+                    **/holidayplanner/**/*.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,**/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java,
+                    **/StringWhitespaceBenchmark.java,
+                    **/api/time/**.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/*SwitchBenchmark.java,
+                    **/holidayplanner/**/*.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/StringConcatenationBenchmark.java,
+                    **/StringFormatBenchmark.java,
+                    **/RandomGeneratorBenchmark.java,
+                    **/api/time/**.java,
+                    **/ThreadLocalRandomBenchmark.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
                 </compilerArgs>
             </properties>
         </profile>
@@ -55,10 +105,89 @@
             <properties>
                 <jdk.version>17</jdk.version>
                 <spotlessExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/StringConcatenation*Benchmark.java,**/StringFormat*Benchmark.java
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/holidayplanner/**/*.java,**/IoBlockingRoundtripLatencyBenchmark.java,**/VPThread*.java,**/StringConcatenationBenchmark.java,**/StringFormatBenchmark.java,
+                    **/TypeSwitchBenchmark.java,
+                    **/holidayplanner/**/*.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/StringConcatenationBenchmark.java,
+                    **/StringFormatBenchmark.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk18_profile</id>
+            <properties>
+                <jdk.version>18</jdk.version>
+                <spotlessExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/holidayplanner/**/*.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk19_profile</id>
+            <properties>
+                <jdk.version>19</jdk.version>
+                <spotlessExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/holidayplanner/**/*.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk20_profile</id>
+            <properties>
+                <jdk.version>20</jdk.version>
+                <spotlessExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/IoBlockingRoundtripLatencyBenchmark.java,
+                    **/VPThread*.java,
+                    **/holidayplanner/**/*.java,
                     **/*VectorApiBenchmark.java,
                     **/*StringFormatTemplateBenchmark.java,
                     **/*StringConcatenationTemplateBenchmark.java
@@ -77,7 +206,57 @@
             <properties>
                 <jdk.version>21</jdk.version>
                 <spotlessExcludedFiles>
-                    **/TypeSwitchBenchmark.java,**/StringConcatenation*Benchmark.java,**/StringFormat*Benchmark.java
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/holidayplanner/**/*.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk22_profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jdk.version>22</jdk.version>
+                <spotlessExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
+                </spotlessExcludedFiles>
+                <compilerExcludedFiles>
+                    **/holidayplanner/**/*.java,
+                    **/*VectorApiBenchmark.java,
+                    **/*StringFormatTemplateBenchmark.java,
+                    **/*StringConcatenationTemplateBenchmark.java
+                </compilerExcludedFiles>
+                <compilerArgs>
+                    --add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk23_profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jdk.version>23</jdk.version>
+                <spotlessExcludedFiles>
+                    **/TypeSwitchBenchmark.java,
+                    **/StringConcatenation*Benchmark.java,
+                    **/StringFormat*Benchmark.java
                 </spotlessExcludedFiles>
                 <compilerExcludedFiles>
                     **/holidayplanner/**/*.java,
