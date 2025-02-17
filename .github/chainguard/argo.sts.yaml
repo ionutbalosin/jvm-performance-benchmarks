@@ -1,0 +1,6 @@
+issuer: https://accounts.google.com
+
+subject_pattern: "115299508116395915328"
+
+permissions:
+  contents: read
