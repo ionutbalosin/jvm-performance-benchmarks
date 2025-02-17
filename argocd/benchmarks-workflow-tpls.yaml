@@ -47,6 +47,10 @@ spec:
               parameters:
                 - name: checkout-volume
                   value: "target"
+                - name: repository
+                  value: chainguard-dev/ecosystems-jvm-performance-benchmarks
+                - name: identity
+                  value: argo
 
           - name: build-benchmarks-files
             template: build-benchmarks-files
@@ -245,6 +249,10 @@ spec:
               parameters:
                 - name: checkout-volume
                   value: "{{inputs.parameters.checkout-volume}}"
+                - name: repository
+                  value: chainguard-dev/ecosystems-jvm-performance-benchmarks
+                - name: identity
+                  value: argo
 
           - name: init-run
             dependencies:
@@ -332,21 +340,28 @@ spec:
         parameters:
           # Volume will be used to check out
           - name: checkout-volume
+          - name: repository
+          - name: identity
       script:
         image: "gcr.io/ecosystems-squad/python_base:latest"
-        env:
-          - name: GITHUB_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: github-token
-                key: GITHUB_TOKEN
         command: [ "bash" ]
         source: |
           set -euo pipefail
-          echo "Clone repository"
+          echo "Obtaining GitHub auth token"
+          identity_token=$(gcloud auth print-identity-token --audiences=octo-sts.dev)
+          sts_response=$(curl -H "Authorization: Bearer ${identity_token}" \
+            "https://octo-sts.dev/sts/exchange?scope={{inputs.parameters.repository}}&identity={{inputs.parameters.identity}}")
+          export GITHUB_TOKEN=$(echo ${sts_response} | jq -r .token)
+          if [[ ${GITHUB_TOKEN} == "" || ${GITHUB_TOKEN} == "null" ]]; then
+            echo "Failed to obtain GitHub token for current identity"
+            echo ${sts_response} | jq -r .token
+            exit 1
+          else
+            echo "Token generated"
+          fi
+          echo "Cloning repository"
           cd /workspace
-          # TODO remove branch select
-          gh repo clone chainguard-dev/ecosystems-jvm-performance-benchmarks
+          gh repo clone {{inputs.parameters.repository}}
         workingDir: /workspace
         volumeMounts:
           - name: workspace-{{inputs.parameters.checkout-volume}}
