@@ -1,7 +1,13 @@
 /*
  * JVM Performance Benchmarks
  *
- * Copyright (C) 2019 - 2024 Ionut Balosin
+ * Copyright (C) 2019-2025 Ionut Balosin
+ * Website:      www.ionutbalosin.com
+ * Social Media:
+ *   LinkedIn:   ionutbalosin
+ *   Bluesky:    @ionutbalosin.bsky.social
+ *   X:          @ionutbalosin
+ *   Mastodon:   ionutbalosin@mastodon.social
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -160,9 +166,9 @@ public class VPThreadCpuBoundBenchmark {
 
     private ExecutorService getExecutorService() {
       return switch (threadType) {
-          // Note: Virtual threads are not resource-intensive, there is never a need to pool them.
-          // Moreover, pooling virtual threads to restrict concurrency should be avoided and
-          // implemented using separate mechanisms (such as semaphores).
+        // Note: Virtual threads are not resource-intensive, there is never a need to pool them.
+        // Moreover, pooling virtual threads to restrict concurrency should be avoided and
+        // implemented using separate mechanisms (such as semaphores).
         case VIRTUAL -> newVirtualThreadPerTaskExecutor();
         case PLATFORM -> newFixedThreadPool(PARALLELISM_COUNT, ofPlatform().factory());
       };

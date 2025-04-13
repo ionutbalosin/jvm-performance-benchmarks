@@ -1,7 +1,13 @@
 #
 # JVM Performance Benchmarks
 #
-# Copyright (C) 2019 - 2024 Ionut Balosin
+# Copyright (C) 2019-2025 Ionut Balosin
+# Website:      www.ionutbalosin.com
+# Social Media:
+#   LinkedIn:   ionutbalosin
+#   Bluesky:    @ionutbalosin.bsky.social
+#   X:          @ionutbalosin
+#   Mastodon:   ionutbalosin@mastodon.social
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
