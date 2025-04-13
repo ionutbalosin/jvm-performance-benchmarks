@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: bufferSize","Param: tcpNoDelay"
-"com.ionutbalosin.jvm.performance.benchmarks.api.networkio.NioSelectorRoundtripLatencyBenchmark.send_receive","avgt",1,25,21.518131,0.137114,"us/op",_1_KB,true
-"com.ionutbalosin.jvm.performance.benchmarks.api.networkio.NioSelectorRoundtripLatencyBenchmark.send_receive","avgt",1,25,21.451344,0.123766,"us/op",_1_KB,false

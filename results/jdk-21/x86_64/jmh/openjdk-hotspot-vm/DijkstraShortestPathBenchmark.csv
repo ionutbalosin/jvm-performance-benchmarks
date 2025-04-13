@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: nodes"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.dijkstrashortestpath.DijkstraShortestPathBenchmark.adjacency_list_binary_heap","avgt",1,25,508.347491,4.632469,"ms/op",8192
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.dijkstrashortestpath.DijkstraShortestPathBenchmark.adjacency_matrix","avgt",1,25,141.454342,1.459130,"ms/op",8192

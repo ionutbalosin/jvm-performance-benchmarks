@@ -1,5 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.decrypt","avgt",1,25,1.057289,0.000737,"ms/op",16384,168,DESede/ECB/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.decrypt","avgt",1,25,1.062323,0.001148,"ms/op",16384,168,DESede/ECB/PKCS5Padding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.encrypt","avgt",1,25,1.057251,0.001529,"ms/op",16384,168,DESede/ECB/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.DesEcbCryptoBenchmark.encrypt","avgt",1,25,1.064285,0.001359,"ms/op",16384,168,DESede/ECB/PKCS5Padding

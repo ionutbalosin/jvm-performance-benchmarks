@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: magicNumber","Param: size"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopUnswitchBenchmark.initial_loop","avgt",1,25,2641.948259,4.580448,"us/op",64,262144
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopUnswitchBenchmark.manual_loop_unswitch","avgt",1,25,605.797906,6.719347,"us/op",64,262144

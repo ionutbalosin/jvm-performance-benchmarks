@@ -1,3 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.lzwcodec.LzwCodecBenchmark.compress","avgt",1,25,31.333941,0.278905,"ms/op",262144
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.lzwcodec.LzwCodecBenchmark.decompress","avgt",1,25,0.899194,0.003984,"ms/op",262144

@@ -1,4 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.knapsack.KnapsackBenchmark.dynamic","avgt",1,25,857.598278,4.485619,"ms/op"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.knapsack.KnapsackBenchmark.greedy_fractional","avgt",1,25,0.574136,0.011308,"ms/op"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.knapsack.KnapsackBenchmark.greedy_zero_one","avgt",1,25,0.811664,0.008886,"ms/op"
