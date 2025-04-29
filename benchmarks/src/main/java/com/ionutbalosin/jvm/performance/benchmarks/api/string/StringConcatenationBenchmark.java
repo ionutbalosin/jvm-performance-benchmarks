@@ -46,7 +46,7 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-/**
+/*
  * Benchmark measuring the performance of various concatenation methods using different data types
  * (e.g., String, int, float, char, long, double, boolean, Object):
  * - StringBuilder
@@ -144,11 +144,6 @@ public class StringConcatenationBenchmark {
 
   @Benchmark
   public String plus_operator() {
-    return aString + anInt + aFloat+ aChar + aLong + aDouble + aBool + anObject ;
-  }
-
-  @Benchmark
-  public String string_template() {
-    return STR."\{aString}\{anInt}\{aFloat}\{aChar}\{aLong}\{aDouble}\{aBool}\{anObject}";
+    return aString + anInt + aFloat + aChar + aLong + aDouble + aBool + anObject;
   }
 }

@@ -30,7 +30,6 @@ package com.ionutbalosin.jvm.performance.benchmarks.compiler;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import org.openjdk.jmh.annotations.*;
 
 /*
@@ -60,17 +59,18 @@ public class TypeSwitchBenchmark {
     asIsArray = new AsIs[SIZE];
     Random random = new Random(16384);
     for (int i = 0; i < SIZE; i++) {
-      interfaceArray[i] = switch (random.nextInt(0, Integer.MAX_VALUE) % 8) {
-        case 0 -> new AsIs(i);
-        case 1 -> new LongToInt(i);
-        case 2 -> new ShortToInt((short) i);
-        case 3 -> new ByteToInt((byte) i);
-        case 4 -> new CharToInt((char) i);
-        case 5 -> new DoubleToInt(i);
-        case 6 -> new FloatToInt(i);
-        case 7 -> new StringLength("" + i);
-        default -> throw new AssertionError();
-      };
+      interfaceArray[i] =
+          switch (random.nextInt(0, Integer.MAX_VALUE) % 8) {
+            case 0 -> new AsIs(i);
+            case 1 -> new LongToInt(i);
+            case 2 -> new ShortToInt((short) i);
+            case 3 -> new ByteToInt((byte) i);
+            case 4 -> new CharToInt((char) i);
+            case 5 -> new DoubleToInt(i);
+            case 6 -> new FloatToInt(i);
+            case 7 -> new StringLength("" + i);
+            default -> throw new AssertionError();
+          };
 
       asIsArray[i] = new AsIs(i);
     }

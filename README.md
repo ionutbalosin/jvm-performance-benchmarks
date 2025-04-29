@@ -84,7 +84,7 @@ For this reason, the fully supported JVMs are all HotSpot-based VMs, including v
 
 Starting with OpenJDK 17, the compiler supports blackholes ([JDK-8259316](https://bugs.openjdk.org/browse/JDK-8259316)). This optimization is available in [HotSpot](https://github.com/openjdk/jdk/blob/master/src/hotspot/share/opto/library_call.cpp#L7843) and the [Graal compiler](https://github.com/oracle/graal/blob/master/compiler/src/org.graalvm.compiler.nodes/src/org/graalvm/compiler/nodes/debug/BlackholeNode.java).
 
-To ensure a fair comparison between OpenJDK 11 and OpenJDK 17, compiler blackholes should be manually disabled in the benchmarks. 
+To ensure a fair comparison between OpenJDK 11 and OpenJDK 17 (or any newer version), compiler blackholes should be manually disabled in the benchmarks. 
 
 The cost of `Blackhole.consume()` is zero (the compiler will not emit any instructions for the call) when compiler blackholes are enabled and supported by the top-tier JIT compiler of the underlying JVM.
 
@@ -160,6 +160,7 @@ At present, the benchmark is configured to work only with the latest JDK Long-Te
  11 - LTS     |
  17 - LTS     |
  21 - LTS     |
+ 25 - LTS     |
 
 If you need another LTS (or non-LTS) version, you will need to configure it manually.
 
@@ -216,6 +217,7 @@ The benchmarks are organized into suites (i.e., benchmark suites). To run a benc
 - [benchmarks-suite-jdk11.json](./settings/benchmarks-suite-jdk11.json)
 - [benchmarks-suite-jdk17.json](./settings/benchmarks-suite-jdk17.json)
 - [benchmarks-suite-jdk21.json](./settings/benchmarks-suite-jdk21.json)
+- [benchmarks-suite-jdk25.json](./settings/benchmarks-suite-jdk25.json)
 
 The benchmark suite will sequentially execute all the tests defined in the configuration file.
 
@@ -230,7 +232,7 @@ There are several reasons why such a custom configuration is necessary:
 On the main branch, we adhere to a forward-only approach for newly created benchmarks that function with the latest LTS release. We do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
 
 Examples:
-- A newer suite (e.g., JDK 21 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite.
+- A newer suite (e.g., JDK 25 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite.
 - A benchmark that previously functioned within a specific suite (e.g., JDK 17 suite) might no longer operate. This change could be due to the inclusion of additional benchmark methods that rely on newer language features (e.g., JDK 21) not present in the previous JDK version (e.g., JDK 17).
 
 To avoid these inconsistencies on the main branch, we recommend switching to the appropriate JDK release branch when running on a previous JDK and initiating the suite from there.
@@ -249,9 +251,9 @@ Running these commands will build the benchmark suite only, without executing an
 For building and running the benchmark suite (e.g., via the `./run-benchmarks.sh` command), please refer to the next section.
 
 ```bash
-./mvnw -P jdk$<jdk-version>_profile clean package
+./mvnw -P jdk<version>_profile clean package
 ```
-Replace `<jdk-version>` with either 11, 17, or 21. If you omit specifying the profile, JDK profile 21 will be selected by default.
+Replace `<version>` with either 11, 17, 21, or 25. If you omit specifying the profile, JDK profile 25 will be selected by default.
 
 Examples:
 ```bash
@@ -265,6 +267,9 @@ Examples:
 ```
 ```bash
 ./mvnw -P jdk21_profile clean package
+```
+```bash
+./mvnw -P jdk25_profile clean package
 ```
 
 ## Run the benchmarks suite

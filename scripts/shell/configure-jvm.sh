@@ -77,11 +77,10 @@ set_environment_variables() {
   fi
   export PATH=$JAVA_HOME/bin:$PATH
 
-  supported_jdk_versions=("11" "17" "21")
   JDK_VERSION=$(java -XshowSettings:properties 2>&1 >/dev/null | grep 'java.specification.version' | awk '{split($0, array, "="); print array[2]}' | xargs)
-  if [[ " ${supported_jdk_versions[*]} " != *" ${JDK_VERSION} "* ]]; then
+  if [[ " ${SUPPORTED_JDK_VERSIONS[*]} " != *" ${JDK_VERSION} "* ]]; then
     echo ""
-    echo "ERROR: Unsupported JDK version ${JDK_VERSION}. Cannot proceed! Currently, only the following JDK versions are allowed: ${supported_jdk_versions[*]}."
+    echo "ERROR: Unsupported JDK version ${JDK_VERSION}. Cannot proceed! Currently, only the following JDK versions are allowed: ${SUPPORTED_JDK_VERSIONS[*]}."
     return 1
   fi
   export JDK_VERSION

@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <uberjar.name>benchmarks</uberjar.name>
         <maven.compiler.plugin>3.14.0</maven.compiler.plugin>
-        <maven.shade.plugin>3.5.0</maven.shade.plugin>
+        <maven.shade.plugin>3.6.0</maven.shade.plugin>
         <org.openjdk.jmh>1.37</org.openjdk.jmh>
         <spotless.maven.plugin>2.44.3</spotless.maven.plugin>
         <google.java.format>1.26.0</google.java.format>
@@ -68,9 +68,6 @@
 
         <profile>
             <id>jdk21_profile</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <jdk.version>21</jdk.version>
                 <spotlessExcludedFiles>
@@ -78,6 +75,21 @@
                 </spotlessExcludedFiles>
                 <compilerArgs>
                     --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--add-exports=java.management/sun.management=ALL-UNNAMED,--enable-preview
+                </compilerArgs>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>jdk25_profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jdk.version>25</jdk.version>
+                <spotlessExcludedFiles>
+                </spotlessExcludedFiles>
+                <compilerArgs>
+                    --add-modules=jdk.incubator.vector,--add-exports=java.base/jdk.internal.vm.annotation=ALL-UNNAMED,--enable-preview
                 </compilerArgs>
             </properties>
         </profile>

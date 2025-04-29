@@ -28,7 +28,12 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.api.string;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
+
 import com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.Coder;
+import java.text.MessageFormat;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -40,13 +45,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-
-import java.text.MessageFormat;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import static com.ionutbalosin.jvm.performance.benchmarks.api.string.utils.StringUtils.generateCharArray;
-import static java.util.FormatProcessor.FMT;
 
 /*
  * This benchmark measures the performance of different formatting approaches utilizing various data types
@@ -73,7 +71,8 @@ public class StringFormatBenchmark {
   // - JMH options: -prof gc
 
   private final Random random = new Random(16384);
-  private final MessageFormat MESSAGE_FORMAT = new MessageFormat(
+  private final MessageFormat MESSAGE_FORMAT =
+      new MessageFormat(
           "{0}{1,number,0}{2,number,0.00000000}{3}{4,number,0}{5,number,0.00000000000000000}{6}{7,number,0}");
 
   private String aString;
@@ -118,16 +117,13 @@ public class StringFormatBenchmark {
 
   @Benchmark
   public String message_format_constant() {
-    return MESSAGE_FORMAT.format(new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
+    return MESSAGE_FORMAT.format(
+        new Object[] {aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject});
   }
 
   @Benchmark
   public String string_formatted() {
-    return "%s%d%.8f%s%d%.17f%b%s".formatted(aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
-  }
-
-  @Benchmark
-  public String format_processor() {
-    return FMT."%s\{aString}%d\{anInt}%.8f\{aFloat}%s\{aChar}%d\{aLong}%.17f\{aDouble}%b\{aBool}%s\{anObject}";
+    return "%s%d%.8f%s%d%.17f%b%s"
+        .formatted(aString, anInt, aFloat, aChar, aLong, aDouble, aBool, anObject);
   }
 }
