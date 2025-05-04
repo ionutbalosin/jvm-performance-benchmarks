@@ -20,7 +20,6 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 
 ## Contents
 
-- [Authors](#authors)
 - [Purpose](#purpose)
 - [Publications](#publications)
 - [JMH Caveats](#jmh-caveats)
@@ -28,26 +27,15 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 - [JVM Coverage](#jvm-coverage)
 - [JDK Coverage](#jdk-coverage)
 - [JIT Coverage](#jit-coverage)
-- [Benchmarks Suites](#benchmarks-suites)
-- [Infrastructure Baseline Benchmark](#infrastructure-baseline-benchmark)
-- [Build the Benchmarks Suite](#build-the-benchmarks-suite)
-- [Run the Benchmarks Suite](#run-the-benchmarks-suite)
+- [Benchmarks Suite](#benchmarks-suite)
+  - [Main Branch Forward and Backward Compatibility](#main-branch-forward-and-backward-compatibility)
+  - [Infrastructure Baseline Benchmark](#infrastructure-baseline-benchmark)
+  - [Build the Benchmarks Suite](#build-the-benchmarks-suite)
+  - [Run the Benchmarks Suite](#run-the-benchmarks-suite)
 - [Benchmark Plots](#benchmark-plots)
+- [Authors](#authors)
 - [Contribute](#contribute)
 - [License](#license)
-
-## Authors
-
-**Ionut Balosin**
-- Website: [www.ionutbalosin.com](https://www.ionutbalosin.com)
-- X: [@ionutbalosin](https://twitter.com/ionutbalosin)
-- GitHub: [@ionutbalosin](https://github.com/ionutbalosin)
-- Mastodon: [@ionutbalosin](https://mastodon.social/@ionutbalosin)
-
-**Florin Blanaru**
-- X: [@gigiblender](https://twitter.com/gigiblender)
-- GitHub: [@gigiblender](https://github.com/gigiblender)
-- Mastodon: [@gigiblender](https://mastodon.online/@gigiblender)
 
 ## Purpose
 
@@ -126,13 +114,13 @@ Windows is not the primary focus of this benchmark, so the script [configure-os-
 
 The table below summarizes the JVM distributions included in the benchmark. For transparency, we provide a brief explanation of why others are not supported.
 
-JVM Distribution     | Included  | Build
--------------------- |-----------| -------------------------------------------------------
-OpenJDK HotSpot VM   | Yes       | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads)                        
-GraalVM CE           | Yes       | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)                       
-Oracle GraalVM `(1)`   | Yes       | [Download](https://www.graalvm.org/downloads)                      
-Azul Prime VM        | Yes `(2)` | [Download](https://www.azul.com/downloads)
-Eclipse OpenJ9 VM    | No `(3)`  | NA
+| JVM Distribution        | Included  | Build                                                                        |
+|-------------------------|-----------|------------------------------------------------------------------------------|
+| OpenJDK HotSpot VM      | Yes       | [Download](https://projects.eclipse.org/projects/adoptium.temurin/downloads) |
+| GraalVM CE              | Yes       | [Download](https://github.com/graalvm/graalvm-ce-builds/releases)            |
+| Oracle GraalVM `(1)`    | Yes       | [Download](https://www.graalvm.org/downloads)                                |
+| Azul Prime VM           | Yes `(2)` | [Download](https://www.azul.com/downloads)                                   |
+| Eclipse OpenJ9 VM       | No `(3)`  | NA                                                                           |
 
 **Notes:**
 - `(1)` Oracle GraalVM was formerly known as GraalVM EE
@@ -153,16 +141,17 @@ Currently, Eclipse OpenJ9 is **out of scope** until a suitable alternative is id
 
 ## JDK Coverage
 
-At present, the benchmark is configured to work only with the latest JDK Long-Term Support (LTS) versions.
+Currently, the benchmark is configured to work only with the latest JDK Long-Term Support (LTS) version 25.
 
- Version      |
---------------|
- 11 - LTS     |
- 17 - LTS     |
- 21 - LTS     |
- 25 - LTS     |
+For support of previous JDK LTS versions, please refer to the corresponding releases listed below:
 
-If you need another LTS (or non-LTS) version, you will need to configure it manually.
+| Previously Supported JDK LTS Versions                                                                                 |
+|-----------------------------------------------------------------------------------------------------------------------|
+| [JVM Performance Benchmarks for JDK 11](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v1.0) |
+| [JVM Performance Benchmarks for JDK 17](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v2.0)                    |
+| [JVM Performance Benchmarks for JDK 21](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v3.0)                    |
+
+If you require support for a different LTS or non-LTS version, you will need to configure it manually.
 
 ### Configure JDK
 
@@ -184,39 +173,36 @@ After installing the JDK, you must update the JDK path in the configuration prop
 Linux OS:
 
 ```properties
-OPENJDK_HOTSPOT_VM_HOME="/usr/lib/jvm/openjdk-17.0.5"
+OPENJDK_HOTSPOT_VM_HOME="/usr/lib/jvm/openjdk-25"
 ```
 
 Mac OS:
 
 ```properties
-OPENJDK_HOTSPOT_VM_HOME="/Library/Java/JavaVirtualMachines/openjdk-17.0.5/Contents/Home"
+OPENJDK_HOTSPOT_VM_HOME="/Library/Java/JavaVirtualMachines/openjdk-25/Contents/Home"
 ```
 
 Windows OS:
 
 ```properties
-OPENJDK_HOTSPOT_VM_HOME="/c/Program_Dev/Java/openjdk-17.0.5"
+OPENJDK_HOTSPOT_VM_HOME="/c/Program_Dev/Java/openjdk-25"
 ```
 
 ## JIT Coverage
 
 The table below summarizes the top-tier JIT compilers targeted by these benchmarks.
 
-JVM Distribution   | Top-tier JIT Compiler
------------------- |--------------
-OpenJDK HotSpot VM | C2 JIT
-GraalVM CE         | Graal JIT
-Oracle GraalVM     | Graal JIT   
-Azul Prime VM      | Falcon JIT   
+| JVM Distribution   | Top-tier JIT Compiler |
+|--------------------|-----------------------|
+| OpenJDK HotSpot VM | C2 JIT                |
+| GraalVM CE         | Graal JIT             |
+| Oracle GraalVM     | Graal JIT             |
+| Azul Prime VM      | Falcon JIT            |
 
-## Benchmarks suites
+## Benchmarks Suite
 
-The benchmarks are organized into suites (i.e., benchmark suites). To run a benchmark suite on a specific JDK version, it requires a highly specific configuration. There are predefined benchmark suites provided in JSON configuration files for each supported JDK LTS version:
+The benchmarks are organized into suites (i.e., benchmark suites). To run a benchmark suite on a specific JDK version, it requires a highly specific configuration. There are predefined benchmark suites provided in JSON configuration files for the supported JDK LTS version:
 
-- [benchmarks-suite-jdk11.json](./settings/benchmarks-suite-jdk11.json)
-- [benchmarks-suite-jdk17.json](./settings/benchmarks-suite-jdk17.json)
-- [benchmarks-suite-jdk21.json](./settings/benchmarks-suite-jdk21.json)
 - [benchmarks-suite-jdk25.json](./settings/benchmarks-suite-jdk25.json)
 
 The benchmark suite will sequentially execute all the tests defined in the configuration file.
@@ -227,7 +213,7 @@ There are several reasons why such a custom configuration is necessary:
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
-### Main branch forward and backward compatibility
+### Main Branch Forward and Backward Compatibility
 
 On the main branch, we adhere to a forward-only approach for newly created benchmarks that function with the latest LTS release. We do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
 
@@ -237,7 +223,7 @@ Examples:
 
 To avoid these inconsistencies on the main branch, we recommend switching to the appropriate JDK release branch when running on a previous JDK and initiating the suite from there.
 
-## Infrastructure baseline benchmark
+### Infrastructure Baseline Benchmark
 
 We provide a baseline benchmark for the infrastructure, [InfrastructureBaselineBenchmark](./benchmarks/src/main/java/com/ionutbalosin/jvm/performance/benchmarks/InfrastructureBaselineBenchmark.java), which can be used to assess the infrastructure overhead for the code being measured.
 
@@ -245,34 +231,23 @@ This benchmark evaluates the performance of empty methods both with and without 
 
 This benchmark is particularly valuable when comparing different JVMs and JDKs. It is recommended to run it before any other real benchmark to establish baseline performance metrics. If the results of the infrastructure baseline benchmark differ, it may not be meaningful to compare the results of other benchmarks across different JVMs and JDKs.
 
-## Build the benchmarks suite
+### Build the Benchmarks Suite
 
-Running these commands will build the benchmark suite only, without executing any benchmarks.
-For building and running the benchmark suite (e.g., via the `./run-benchmarks.sh` command), please refer to the next section.
+Running one of the following commands will build the benchmark suite without executing any benchmarks:
 
-```bash
-./mvnw -P jdk<version>_profile clean package
-```
-Replace `<version>` with either 11, 17, 21, or 25. If you omit specifying the profile, JDK profile 25 will be selected by default.
-
-Examples:
 ```bash
 ./mvnw clean package
 ```
-```bash
-./mvnw -P jdk11_profile clean package
-```
-```bash
-./mvnw -P jdk17_profile clean package
-```
-```bash
-./mvnw -P jdk21_profile clean package
-```
+
+Or, to use the default `jdk25_profile`:
+
 ```bash
 ./mvnw -P jdk25_profile clean package
 ```
 
-## Run the benchmarks suite
+To build and run the benchmark suite (e.g., using the `./run-benchmarks.sh` script), please refer to the next section.
+
+### Run the benchmarks suite
 
 Running a benchmark suite triggers the complete setup process in a highly interactive manner, allowing the user to choose which steps to skip. The process includes the following:
 - Configure the operating system.
@@ -280,7 +255,7 @@ Running a benchmark suite triggers the complete setup process in a highly intera
 - Configure JMH (e.g., selecting the benchmark suite for the specific JDK, etc.).
 - Compile the benchmarks using a JDK Maven profile.
 
-### Dry run
+#### Dry run
 
 The *dry run* mode simulates all the commands without altering any OS settings or executing benchmarks. We recommend using this as a preliminary check before running the benchmarks.
 ```bash
@@ -289,7 +264,7 @@ The *dry run* mode simulates all the commands without altering any OS settings o
 
 **Note:** You should execute this command with `sudo` to simulate the OS configuration settings. This is necessary, even in *dry run* mode, to access certain system configuration files that would otherwise be inaccessible. However, please note that it will not have any impact on the actual OS settings.
 
-### Normal run
+#### Normal run
 
 ```bash
 ./run-benchmarks.sh | tee run-benchmarks.out
@@ -299,7 +274,7 @@ The *dry run* mode simulates all the commands without altering any OS settings o
 
 The benchmark results are saved under the `results/jdk-$JDK_VERSION/$ARCH/jmh/$JVM_IDENTIFIER` directory.
 
-### Bash scripts on Windows
+#### Bash scripts on Windows
 
 To properly execute bash scripts on Windows there are a few alternatives:
 - [GIT bash](https://git-scm.com/downloads)
@@ -325,6 +300,27 @@ Before generating the benchmarks, the script triggers a few additional steps:
 - Calculate the normalized geometric mean for each benchmark category (e.g., micro-optimizations, JDK API, miscellaneous). The results of the normalized geometric mean are saved under the `results/jdk-$JDK_VERSION/$ARCH/geomean` directory.
 
 The benchmark plots are saved under the `results/jdk-$JDK_VERSION/$ARCH/plot` directory.
+
+## Authors
+
+**Ionut Balosin**
+- Website:      [www.ionutbalosin.com](https://www.ionutbalosin.com)
+- Social Media:
+  - LinkedIn:   [ionutbalosin](https://www.linkedin.com/in/ionutbalosin)
+  - Bluesky:    [@ionutbalosin.bsky.social](https://bsky.app/profile/ionutbalosin.bsky.social)
+  - X:          [@ionutbalosin](https://twitter.com/ionutbalosin)
+  - Mastodon:   [@ionutbalosin](https://mastodon.social/@ionutbalosin)
+
+### Past Contributors
+
+**Florin Blanaru**
+- Social Media:
+  - LinkedIn:   [florinblanaru](https://www.linkedin.com/in/florin-blanaru-03a411153)
+  - X:          [@gigiblender](https://twitter.com/gigiblender)
+  - GitHub:     [@gigiblender](https://github.com/gigiblender)
+  - Mastodon:   [@gigiblender](https://mastodon.online/@gigiblender)
+
+Florin Blanaru contributed to the early stages of the project and is gratefully acknowledged for his past involvement.
 
 # Contribute
 
