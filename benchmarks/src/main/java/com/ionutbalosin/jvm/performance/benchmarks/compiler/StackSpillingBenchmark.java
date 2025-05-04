@@ -144,7 +144,7 @@ public class StackSpillingBenchmark {
   }
 
   @Benchmark
-  @Fork(jvmArgsAppend = "-XX:-UseFPUForSpilling")
+  @Fork(jvmArgsPrepend = "-XX:-UseFPUForSpilling")
   public void load_store_spill_no_fpu() {
     load_store_spill();
   }

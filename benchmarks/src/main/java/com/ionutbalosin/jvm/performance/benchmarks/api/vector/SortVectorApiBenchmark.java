@@ -45,9 +45,7 @@ import org.openjdk.jmh.annotations.*;
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Benchmark)
-@Fork(
-    value = 5,
-    jvmArgsAppend = {"--add-modules=jdk.incubator.vector"})
+@Fork(value = 5, jvmArgsPrepend = "--add-modules=jdk.incubator.vector")
 public class SortVectorApiBenchmark {
 
   @Param({"64", "1024", "65536"})

@@ -49,9 +49,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(
-    value = 5,
-    jvmArgsAppend = {"-Xss64M"})
+@Fork(value = 5, jvmArgsPrepend = "-Xss64M")
 @State(Scope.Benchmark)
 public class TailRecursionBenchmark {
 

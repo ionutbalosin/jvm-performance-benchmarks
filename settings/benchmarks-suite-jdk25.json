@@ -127,8 +127,7 @@
       "name": "HmacCryptoBenchmark"
     },
     {
-      "name": "HolidayPlannerBenchmark",
-      "jvmArgsAppend": "--enable-preview"
+      "name": "HolidayPlannerBenchmark"
     },
     {
       "name": "HuffmanCodingBenchmark"
@@ -190,8 +189,7 @@
       "name": "LzwCodecBenchmark"
     },
     {
-      "name": "MandelbrotVectorApiBenchmark",
-      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+      "name": "MandelbrotVectorApiBenchmark"
     },
     {
       "name": "MegamorphicInterfaceCallBenchmark"
@@ -296,15 +294,13 @@
       "name": "ScalarReplacementBenchmark"
     },
     {
-      "name": "SepiaVectorApiBenchmark",
-      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+      "name": "SepiaVectorApiBenchmark"
     },
     {
       "name": "SequentialCollectionReadAccessBenchmark"
     },
     {
-      "name": "SortVectorApiBenchmark",
-      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+      "name": "SortVectorApiBenchmark"
     },
     {
       "name": "StackSpillingBenchmark"
@@ -378,8 +374,7 @@
       "name": "VarArgsBenchmark"
     },
     {
-      "name": "VectorApiBenchmark",
-      "jvmArgsAppend": "--add-modules=jdk.incubator.vector"
+      "name": "VectorApiBenchmark"
     },
     {
       "name": "VectorizationPatternsMultipleFloatArraysBenchmark"

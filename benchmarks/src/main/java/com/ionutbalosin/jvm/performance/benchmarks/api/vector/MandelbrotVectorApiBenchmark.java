@@ -40,7 +40,7 @@ import org.openjdk.jmh.annotations.*;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5, jvmArgsAppend = "--add-modules=jdk.incubator.vector")
+@Fork(value = 5, jvmArgsPrepend = "--add-modules=jdk.incubator.vector")
 @State(Scope.Benchmark)
 public class MandelbrotVectorApiBenchmark {
 

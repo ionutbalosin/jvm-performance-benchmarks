@@ -73,7 +73,11 @@ run_benchmark() {
   TEST_NAME=$(remove_spaces "$2")
   JMH_OPTS=$(remove_spaces "$3")
   JVM_ARGS_APPEND=$(remove_spaces "$4")
-  CMD="java $JVM_OPTS -jar \"$JMH_JAR\" \"\\\\.$TEST_NAME\\\\.\" $JMH_OPTS -jvmArgsAppend \"$JVM_ARGS_APPEND\""
+
+  CMD="java $JVM_OPTS -jar \"$JMH_JAR\" \"\\\\.$TEST_NAME\\\\.\" $JMH_OPTS"
+  if [ -n "$JVM_ARGS_APPEND" ]; then
+    CMD="$CMD -jvmArgsAppend \"$JVM_ARGS_APPEND\""
+  fi
 
   echo ""
   echo "Running $TEST_NAME benchmark ..."

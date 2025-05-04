@@ -70,17 +70,18 @@ public class RandomGeneratorBenchmark {
   private int bytesSize;
 
   @Param({
-    "L128X1024MixRandom",
-    "L128X128MixRandom",
-    "L128X256MixRandom",
+    // TODO: create a separate SecureRandom benchmark
+    // "SecureRandom",
+    "Random",
+    "SplittableRandom",
     "L32X64MixRandom",
-    "L64X1024MixRandom",
     "L64X128MixRandom",
     "L64X128StarStarRandom",
     "L64X256MixRandom",
-    "Random",
-    "SecureRandom",
-    "SplittableRandom",
+    "L64X1024MixRandom",
+    "L128X128MixRandom",
+    "L128X256MixRandom",
+    "L128X1024MixRandom",
     "Xoroshiro128PlusPlus",
     "Xoshiro256PlusPlus"
   })
