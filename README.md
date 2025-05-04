@@ -54,7 +54,7 @@ Each benchmark focuses on a specific execution pattern or task that could be ful
 
 ## Publications
 
-Current publications that rely on benchmarks from this repository can be found at:
+Existing publications that rely on benchmarks from this repository can be found at:
 - [JVM Performance Comparison for JDK 21](https://ionutbalosin.com/2024/02/jvm-performance-comparison-for-jdk-21)
 - [JVM Performance Comparison for JDK 17](https://ionutbalosin.com/2023/03/jvm-performance-comparison-for-jdk-17)
 
