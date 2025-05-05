@@ -18,7 +18,7 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 
 ---
 
-## Contents
+## Content
 
 - [Purpose](#purpose)
 - [Publications](#publications)
@@ -28,21 +28,20 @@ All benchmarks are implemented using the [Java Microbenchmark Harness (JMH)](htt
 - [JDK Coverage](#jdk-coverage)
 - [JIT Coverage](#jit-coverage)
 - [Benchmarks Suite](#benchmarks-suite)
-  - [Main Branch Forward and Backward Compatibility](#main-branch-forward-and-backward-compatibility)
+  - [Main Branch Compatibility](#main-branch-compatibility)
   - [Infrastructure Baseline Benchmark](#infrastructure-baseline-benchmark)
   - [Build the Benchmarks Suite](#build-the-benchmarks-suite)
   - [Run the Benchmarks Suite](#run-the-benchmarks-suite)
 - [Benchmark Plots](#benchmark-plots)
-- [Authors](#authors)
 - [Contribute](#contribute)
 - [License](#license)
 
 ## Purpose
 
 The main objectives of this project are:
-1. To evaluate common JIT compiler optimizations found in compilers.
-2. To assess the performance of a JIT compiler while executing commonly used Java SE APIs and JDK APIs.
-3. To evaluate the performance of a JIT compiler across a wider variety of high-level programs.
+1. 🔍 To evaluate common JIT compiler optimizations found in compilers.
+2. 🚀 To assess the performance of a JIT compiler while executing commonly used Java SE APIs and JDK APIs.
+3. 📊 To evaluate the performance of a JIT compiler across a wider variety of high-level programs.
 
 Each benchmark focuses on a specific execution pattern or task that could be fully optimized under ideal conditions (i.e., clean profiles). While some of these patterns might rarely appear directly in user programs, they can emerge after several optimizations, such as inlining high-level operations. Real-life applications can have varying conditions, making benchmarks not always a reliable predictor on a larger scale. Nonetheless, even though artificial benchmarks may not capture the complete truth, they can still offer valuable insights when properly implemented.
 
@@ -54,9 +53,9 @@ Each benchmark focuses on a specific execution pattern or task that could be ful
 
 ## Publications
 
-Existing publications that rely on benchmarks from this repository can be found at:
-- [JVM Performance Comparison for JDK 21](https://ionutbalosin.com/2024/02/jvm-performance-comparison-for-jdk-21)
-- [JVM Performance Comparison for JDK 17](https://ionutbalosin.com/2023/03/jvm-performance-comparison-for-jdk-17)
+Below are widely referenced and well-regarded articles in the Java community, based on benchmarks from this repository, available for you to read:
+- 📚 [JVM Performance Comparison for JDK 21 - Article](https://ionutbalosin.com/2024/02/jvm-performance-comparison-for-jdk-21)
+- 📚 [JVM Performance Comparison for JDK 17 - Article](https://ionutbalosin.com/2023/03/jvm-performance-comparison-for-jdk-17)
 
 ## JMH Caveats
 
@@ -145,11 +144,11 @@ Currently, the benchmark is configured to work only with the latest JDK Long-Ter
 
 For support of previous JDK LTS versions, please refer to the corresponding releases listed below:
 
-| Previously Supported JDK LTS Versions                                                                                 |
-|-----------------------------------------------------------------------------------------------------------------------|
-| [JVM Performance Benchmarks for JDK 11](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v1.0) |
-| [JVM Performance Benchmarks for JDK 17](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v2.0)                    |
-| [JVM Performance Benchmarks for JDK 21](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v3.0)                    |
+| Previously Supported JDK LTS Versions                                                                                           |
+|---------------------------------------------------------------------------------------------------------------------------------|
+| [JVM Performance Benchmarks for JDK 11 - Release](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v1.0) |
+| [JVM Performance Benchmarks for JDK 17 - Release](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v2.0)           |
+| [JVM Performance Benchmarks for JDK 21 - Release](https://github.com/ionutbalosin/jvm-performance-benchmarks/releases/tag/v3.0)           |
 
 If you require support for a different LTS or non-LTS version, you will need to configure it manually.
 
@@ -213,7 +212,7 @@ There are several reasons why such a custom configuration is necessary:
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
-### Main Branch Forward and Backward Compatibility
+### Main Branch Compatibility
 
 On the main branch, we adhere to a forward-only approach for newly created benchmarks that function with the latest LTS release. We do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
 
@@ -301,32 +300,22 @@ Before generating the benchmarks, the script triggers a few additional steps:
 
 The benchmark plots are saved under the `results/jdk-$JDK_VERSION/$ARCH/plot` directory.
 
-## Authors
+## Contribute
 
-**Ionut Balosin**
-- Website:      [www.ionutbalosin.com](https://www.ionutbalosin.com)
-- Social Media:
-  - LinkedIn:   [ionutbalosin](https://www.linkedin.com/in/ionutbalosin)
-  - Bluesky:    [@ionutbalosin.bsky.social](https://bsky.app/profile/ionutbalosin.bsky.social)
-  - X:          [@ionutbalosin](https://twitter.com/ionutbalosin)
-  - Mastodon:   [@ionutbalosin](https://mastodon.social/@ionutbalosin)
+If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so by contacting us directly. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
 
 ### Past Contributors
 
-**Florin Blanaru**
+Special acknowledgements to the past contributors, with major contributors to this project listed below:
+
+**Florin Blanaru** contributed to the early stages of the project and is gratefully acknowledged for his past involvement.
 - Social Media:
   - LinkedIn:   [florinblanaru](https://www.linkedin.com/in/florin-blanaru-03a411153)
   - X:          [@gigiblender](https://twitter.com/gigiblender)
   - GitHub:     [@gigiblender](https://github.com/gigiblender)
   - Mastodon:   [@gigiblender](https://mastodon.online/@gigiblender)
 
-Florin Blanaru contributed to the early stages of the project and is gratefully acknowledged for his past involvement.
-
-# Contribute
-
-If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so by contacting us directly. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
-
-# License 
+## License 
 
 Please see the [LICENSE](./license/LICENSE) file for full license.
 
