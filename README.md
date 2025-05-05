@@ -208,7 +208,7 @@ The benchmark suite will sequentially execute all the tests defined in the confi
 
 There are several reasons why such a custom configuration is necessary:
 
-- To selectively pass different JVM arguments for subsequent runs of the same benchmark (e.g., first run with biased locking enabled, second run with biased locking disabled, etc.).
+- To selectively pass different JVM arguments for subsequent runs of the same benchmark (e.g., first run with X amount of heap memory, second run with Y amount of heap memory, etc.).
 - To selectively pass different JMH options for subsequent runs of the same benchmark (e.g., first run with one thread, second run with two threads, etc.).
 - To selectively control which benchmarks to include/exclude for a specific JDK version.
 
@@ -217,10 +217,10 @@ There are several reasons why such a custom configuration is necessary:
 On the main branch, we adhere to a forward-only approach for newly created benchmarks that function with the latest LTS release. We do not intend to include a newly created benchmark in an older suite that has already been executed and published at the time of writing the benchmark. We are following a forward-only approach for newly created benchmarks.
 
 Examples:
-- A newer suite (e.g., JDK 25 suite) may include benchmarks that are compatible with an older JDK version (e.g., JDK 17) but are not part of that older suite (e.g., JDK 17 suite). This is because the benchmark was added after the creation, launch, and publication of the older suite.
-- A benchmark that previously functioned within a specific suite (e.g., JDK 17 suite) might no longer operate. This change could be due to the inclusion of additional benchmark methods that rely on newer language features (e.g., JDK 21) not present in the previous JDK version (e.g., JDK 17).
+- A newer suite (e.g., JDK 25 suite) may include additional benchmarks that, while compatible with older JDK versions (e.g., JDK 21), will not be part of the older suite (e.g., JDK 21 suite), as the benchmark was added later.
+- An existing benchmark from an older suite (e.g., JDK 21 suite) may be omitted or modified in a newer suite (e.g., JDK 25 suite). This is due to ongoing benchmark refactoring to improve, update, and ensure compliance with newer JDK features.
 
-To avoid these inconsistencies on the main branch, we recommend switching to the appropriate JDK release branch when running on a previous JDK and initiating the suite from there.
+If running a benchmark suite for an older JDK LTS version different from the main version, we recommend switching to the corresponding JDK release branch and running it from there.
 
 ### Infrastructure Baseline Benchmark
 
@@ -250,7 +250,7 @@ To build and run the benchmark suite (e.g., using the `./run-benchmarks.sh` scri
 
 Running a benchmark suite triggers the complete setup process in a highly interactive manner, allowing the user to choose which steps to skip. The process includes the following:
 - Configure the operating system.
-- Configure the JVM (e.g., setting JAVA_HOME, etc.).
+- Configure the JVM (e.g., setting `JAVA_HOME`, etc.).
 - Configure JMH (e.g., selecting the benchmark suite for the specific JDK, etc.).
 - Compile the benchmarks using a JDK Maven profile.
 
@@ -302,11 +302,11 @@ The benchmark plots are saved under the `results/jdk-$JDK_VERSION/$ARCH/plot` di
 
 ## Contribute
 
-If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so by contacting us directly. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
+🤝 If you are interested in contributing code or providing any form of support, **including sponsorship**, you are encouraged to do so by contacting us directly. You can contribute by sending a pull request, raising an issue with an attached patch, or by directly contacting us.
 
 ### Past Contributors
 
-Special acknowledgements to the past contributors, with major contributors to this project listed below:
+🏆 Special acknowledgements to the past contributors, with major contributors to this project listed below:
 
 **Florin Blanaru** contributed to the early stages of the project and is gratefully acknowledged for his past involvement.
 - Social Media:
