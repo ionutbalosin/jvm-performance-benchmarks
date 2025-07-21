@@ -36,10 +36,11 @@ import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
 /*
- * Columnar Databases filteration benchmark using new Vector.compress API added as part of JDK 19.
+ * Columnar Databases filtration benchmark using new Vector.compress API added as part of JDK 19.
  *
  * References:
  *  - JEP 426: Vector API (Fourth Incubator): https://openjdk.org/jeps/426
+ *  - https://github.com/jatin-bhateja/external_staging/tree/main/VectorizedAlgos
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
