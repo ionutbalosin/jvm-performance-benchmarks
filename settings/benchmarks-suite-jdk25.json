@@ -45,6 +45,9 @@
       "name": "CodeCacheBusterBenchmark"
     },
     {
+      "name": "ColumnarDBFilterBenchmark"
+    },
+    {
       "name": "ClockBenchmark"
     },
     {
@@ -387,6 +390,9 @@
     },
     {
       "name": "VectorizationScatterGatherPatternBenchmark"
+    },
+    {
+      "name": "VectorizedScanOperationBenchmark"
     },
     {
       "name": "VPThreadBlockingApiStackDepthBenchmark"
