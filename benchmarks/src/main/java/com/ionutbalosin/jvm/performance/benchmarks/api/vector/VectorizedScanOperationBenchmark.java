@@ -43,6 +43,7 @@ import org.openjdk.jmh.infra.Blackhole;
  *  - JEP 426: Vector API (Fourth Incubator): https://openjdk.org/jeps/426
  *  - https://en.wikipedia.org/wiki/Prefix_sum
  *  - https://www.intel.com/content/www/us/en/developer/articles/technical/optimize-scan-operations-explicit-vectorization.html
+ *  - https://github.com/jatin-bhateja/external_staging/tree/main/VectorizedAlgos
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
