@@ -356,15 +356,6 @@
       "name": "ThreadLocalRandomBenchmark"
     },
     {
-      "name": "TypeCheckBenchmark"
-    },
-    {
-      "name": "TypeCheckScalabilityBenchmark"
-    },
-    {
-      "name": "TypeCheckSlowPathBenchmark"
-    },
-    {
       "name": "TypeSwitchBenchmark"
     },
     {
