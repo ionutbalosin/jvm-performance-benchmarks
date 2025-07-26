@@ -26,15 +26,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-
 package com.ionutbalosin.jvm.performance.benchmarks.api.vector;
 
-import java.util.stream.IntStream;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import jdk.incubator.vector.*;
 import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.infra.Blackhole;
 
 /*
  * Inclusive scan operation acceleration using Java VectorAPIs.
@@ -58,18 +55,18 @@ public class VectorizedScanOperationBenchmark {
 
   public static final VectorSpecies<Double> DSPECIES = DoubleVector.SPECIES_PREFERRED;
 
-  public static double [] input;
-  public static double [] result;
+  public static double[] input;
+  public static double[] result;
 
   @Setup
   public static void BMSetup() {
-    input = IntStream.range(0, size).mapToDouble( i -> (double)i).toArray();
+    input = IntStream.range(0, size).mapToDouble(i -> (double) i).toArray();
     result = new double[size];
   }
 
   @Benchmark
   public static void serial_scan() {
-    double running_sum  = 0.0;
+    double running_sum = 0.0;
     for (int i = 0; i < result.length; i++) {
       // Every iteration adds one element to memorized sum.
       running_sum += input[i];
@@ -92,9 +89,12 @@ public class VectorizedScanOperationBenchmark {
      TMP3 = Shuf3(TMP2).Mask3  :  A    (A+B)  (A+B+C) (A+B+C+D)  (A+B+C+D+E)  (A+B+C+DE+F) (A+B+C+D+E+F+G)  (A+B+C+D+E+F+G+H)
   */
 
-  public static final VectorShuffle<Double> SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2, 4, 4, 6, 6);
-  public static final VectorShuffle<Double> SHUF2 = VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1, 4, 4, 5, 5);
-  public static final VectorShuffle<Double> SHUF3 = VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0, 3, 3, 3, 3);
+  public static final VectorShuffle<Double> SHUF1 =
+      VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2, 4, 4, 6, 6);
+  public static final VectorShuffle<Double> SHUF2 =
+      VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1, 4, 4, 5, 5);
+  public static final VectorShuffle<Double> SHUF3 =
+      VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0, 3, 3, 3, 3);
   public static final VectorMask<Double> MASK1 = VectorMask.fromLong(DSPECIES, 0xAA);
   public static final VectorMask<Double> MASK2 = VectorMask.fromLong(DSPECIES, 0xCC);
   public static final VectorMask<Double> MASK3 = VectorMask.fromLong(DSPECIES, 0xF0);

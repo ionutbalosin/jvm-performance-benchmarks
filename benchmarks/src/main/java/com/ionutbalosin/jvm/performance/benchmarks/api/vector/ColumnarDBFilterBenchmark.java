@@ -26,14 +26,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package com.ionutbalosin.jvm.performance.benchmarks.api.vector;
 
-import java.util.stream.IntStream;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import jdk.incubator.vector.*;
 import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.infra.Blackhole;
 
 /*
  * Columnar Databases filtration benchmark using new Vector.compress API added as part of JDK 19.
@@ -73,7 +71,7 @@ public class ColumnarDBFilterBenchmark {
     int[] intArr = this.intArr;
     for (int i = 0, j = 0; i < intArr.length; i++) {
       if (intArr[i] > pivot) {
-         resultArr[j++] = intArr[i];
+        resultArr[j++] = intArr[i];
       }
     }
   }
@@ -93,7 +91,7 @@ public class ColumnarDBFilterBenchmark {
     }
     for (; i < intArr.length; i++) {
       if (intArr[i] > pivot) {
-         resultArr[j++] = intArr[i];
+        resultArr[j++] = intArr[i];
       }
     }
   }
@@ -103,7 +101,7 @@ public class ColumnarDBFilterBenchmark {
     int[] intArr = this.intArr;
     for (int i = 0, j = 0; i < intArr.length; i++) {
       if ((intArr[i] & 1) == 0) {
-         resultArr[j++] = intArr[i];
+        resultArr[j++] = intArr[i];
       }
     }
   }
@@ -122,7 +120,7 @@ public class ColumnarDBFilterBenchmark {
     }
     for (; i < intArr.length; i++) {
       if ((intArr[i] & 1) == 0) {
-         resultArr[j++] = intArr[i];
+        resultArr[j++] = intArr[i];
       }
     }
   }
