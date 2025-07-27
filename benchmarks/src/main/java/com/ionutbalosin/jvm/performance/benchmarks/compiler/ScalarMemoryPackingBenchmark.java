@@ -32,18 +32,11 @@ import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.*;
 
 /*
- * Benchmarks Load/Store combining optimizations in the JIT compiler. Tests how the compiler
- * combines adjacent memory operations into wider loads/stores.
+ * Benchmarks memory access combining optimizations in the JIT compiler.
+ * Tests how the compiler combines adjacent scalar memory operations into wider accesses.
  *
- * Load/store combining is a crucial optimization where the JIT compiler:
- * - Combines multiple adjacent byte/short loads into wider int/long loads
- * - Merges sequential stores into single wider store operations
- * - Reduces memory bandwidth usage and improves cache efficiency
- * - Eliminates redundant memory operations
- *
- * Note: This benchmark is highly dependent on CPU vectorization support (SSE, AVX, NEON, etc.)
- * Results may vary significantly based on available SIMD instruction sets.
- * On platforms without strong vectorization support, performance differences may be minimal.
+ * This benchmark focuses specifically on load/store combining at the instruction level,
+ * distinct from higher-level vectorization pattern optimizations.
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -51,9 +44,9 @@ import org.openjdk.jmh.annotations.*;
 @Measurement(iterations = 2, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1)
 @State(Scope.Benchmark)
-public class LoadStoreCombiningBenchmark {
+public class ScalarMemoryPackingBenchmark {
 
-  // $ java -jar */*/benchmarks.jar ".*LoadStoreCombiningBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*ScalarMemoryPackingBenchmark.*"
 
   @Param({"262144"})
   private int size;
