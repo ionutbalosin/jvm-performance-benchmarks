@@ -17,8 +17,8 @@
         <maven.compiler.plugin>3.14.0</maven.compiler.plugin>
         <maven.shade.plugin>3.6.0</maven.shade.plugin>
         <org.openjdk.jmh>1.37</org.openjdk.jmh>
-        <spotless.maven.plugin>2.44.3</spotless.maven.plugin>
-        <google.java.format>1.26.0</google.java.format>
+        <spotless.maven.plugin>2.46.1</spotless.maven.plugin>
+        <google.java.format>1.28.0</google.java.format>
     </properties>
 
     <modules>
