@@ -40,9 +40,9 @@ import org.openjdk.jmh.annotations.*;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 2, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 2, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class ScalarMemoryPackingBenchmark {
 
@@ -79,7 +79,7 @@ public class ScalarMemoryPackingBenchmark {
   public int sequential_byte_loads() {
     int result = 0;
     for (int i = 0; i < byteArray.length - 7; i += 8) {
-      // Sequential byte loads - JIT could combine these into wider int/long loads
+      // Sequential byte loads - JIT might combine these into wider int/long loads
       byte b0 = byteArray[i];
       byte b1 = byteArray[i + 1];
       byte b2 = byteArray[i + 2];
@@ -119,7 +119,7 @@ public class ScalarMemoryPackingBenchmark {
   public int sequential_short_loads() {
     int result = 0;
     for (int i = 0; i < shortArray.length - 3; i += 4) {
-      // Sequential short loads - JIT could combine these into wider int/long loads
+      // Sequential short loads - JIT might combine these into wider int/long loads
       short s0 = shortArray[i];
       short s1 = shortArray[i + 1];
       short s2 = shortArray[i + 2];
@@ -134,7 +134,7 @@ public class ScalarMemoryPackingBenchmark {
   public int sequential_int_loads() {
     int result = 0;
     for (int i = 0; i < intArray.length - 1; i += 2) {
-      // Sequential int loads - JIT could combine these into wider long loads
+      // Sequential int loads - JIT might combine these into wider long loads
       int i0 = intArray[i];
       int i1 = intArray[i + 1];
 
@@ -146,7 +146,7 @@ public class ScalarMemoryPackingBenchmark {
   @Benchmark
   public byte[] sequential_byte_stores() {
     for (int i = 0; i < byteArray.length - 7; i += 8) {
-      // Sequential byte stores - could be potentially combined into wider stores
+      // Sequential byte stores - might be potentially combined into wider stores
       byteArray[i] = (byte) 0x01;
       byteArray[i + 1] = (byte) 0x02;
       byteArray[i + 2] = (byte) 0x03;
@@ -178,7 +178,7 @@ public class ScalarMemoryPackingBenchmark {
   @Benchmark
   public short[] sequential_short_stores() {
     for (int i = 0; i < shortArray.length - 3; i += 4) {
-      // Sequential short stores - could be potentially combined
+      // Sequential short stores - might be potentially combined
       shortArray[i] = (short) 0x1234;
       shortArray[i + 1] = (short) 0x5678;
       shortArray[i + 2] = (short) 0x9ABC;
@@ -190,7 +190,7 @@ public class ScalarMemoryPackingBenchmark {
   @Benchmark
   public int[] sequential_int_stores() {
     for (int i = 0; i < intArray.length - 1; i += 2) {
-      // Sequential int stores - could be potentially combined
+      // Sequential int stores - might be potentially combined
       intArray[i] = 0x12345678;
       intArray[i + 1] = 0x9ABCDEF0;
     }
@@ -221,7 +221,6 @@ public class ScalarMemoryPackingBenchmark {
   @Benchmark
   public byte[] copy_first_into_second_half_array() {
     // Memory copy pattern - should demonstrate both load and store combining
-    // Tests end-to-end combining: load combining + store combining
     int halfSize = byteArray.length / 2;
     for (int i = 0; i < halfSize - 7; i += 8) {
       byteArray[halfSize + i] = byteArray[i];
