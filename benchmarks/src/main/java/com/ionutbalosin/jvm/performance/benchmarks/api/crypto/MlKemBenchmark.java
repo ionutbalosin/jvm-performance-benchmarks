@@ -29,7 +29,10 @@
 package com.ionutbalosin.jvm.performance.benchmarks.api.crypto;
 
 import java.security.*;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.NamedParameterSpec;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.*;
@@ -40,20 +43,30 @@ import org.openjdk.jmh.annotations.*;
  * cryptography, measuring encapsulation and decapsulation performance across all three standardized
  * parameter sets (ML-KEM-512, ML-KEM-768, ML-KEM-1024).
  *
- * This benchmark evaluates the quantum-resistant key exchange primitives introduced in JEP 496,
- * which are essential for securing future communications against quantum computer attacks using
- * Shor's algorithm.
+ * This benchmark evaluates the quantum-resistant key exchange primitives, which are essential
+ * for securing future communications against quantum computer attacks using Shor's algorithm.
+ * ML-KEM is standardized by NIST in FIPS 203 as a replacement for classical
+ * key exchange mechanisms that are vulnerable to quantum computing attacks.
  *
- * Measured operations:
- * - Sender-side key encapsulation (generates shared secret and the ciphertext)
- * - Receiver-side key decapsulation (recovers shared secret from ciphertext)
+ * The benchmark provides comprehensive performance analysis of:
+ * - Core KEM operations: encapsulation (sender-side) and decapsulation (receiver-side)
+ * - Key encoding operations: PKCS#8 private key and X.509 public key encoding/decoding
  *
- * The benchmark validates cryptographic correctness by ensuring both parties derive identical
- * secret keys, then measures the performance impact of different ML-KEM security levels.
+ * Performance characteristics vary significantly across parameter sets:
+ * - ML-KEM-512: Fastest performance, provides quantum security equivalent to AES-128
+ * - ML-KEM-768: Balanced performance/security, provides quantum security equivalent to AES-192
+ * - ML-KEM-1024: Highest security, provides quantum security equivalent to AES-256
+ *
+ * Key technical aspects measured:
+ * - Encapsulation: Generates shared secret and ciphertext from receiver's public key
+ * - Decapsulation: Recovers shared secret from ciphertext using receiver's private key
+ * - Key serialization: Performance impact of encoding/decoding keys for storage/transmission
  *
  * References:
  * - https://openjdk.org/jeps/496
+ * - NIST FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard
  */
+
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
@@ -66,15 +79,13 @@ public class MlKemBenchmark {
 
   private final SecureRandom secureRandom = new SecureRandom(new byte[] {0x1, 0x2, 0x3, 0x4});
 
-  @Param({"ML-KEM"})
-  private String algorithm;
-
   @Param({"ML-KEM-512", "ML-KEM-768", "ML-KEM-1024"})
   private String parameterSpec;
 
   private KeyPair keyPair;
   private KEM kem;
   private KEM.Encapsulated preEncapsulated;
+  private KeyFactory keyFactory;
 
   @Setup()
   public void setup() throws Exception {
@@ -87,11 +98,12 @@ public class MlKemBenchmark {
               throw new IllegalArgumentException("Unsupported parameter spec: " + parameterSpec);
         };
 
-    final KeyPairGenerator kpg = KeyPairGenerator.getInstance(algorithm);
+    final KeyPairGenerator kpg = KeyPairGenerator.getInstance("ML-KEM");
     kpg.initialize(namedParameterSpec, secureRandom);
     keyPair = kpg.generateKeyPair();
 
-    kem = KEM.getInstance(algorithm);
+    kem = KEM.getInstance("ML-KEM");
+    keyFactory = KeyFactory.getInstance("ML-KEM");
 
     // Pre-generate encapsulated data to avoid measuring encapsulation overhead in the decapsulate()
     // benchmark
@@ -116,6 +128,20 @@ public class MlKemBenchmark {
     return decapsulate(preEncapsulated);
   }
 
+  @Benchmark
+  public PrivateKey pkcs8_private_key_encode() throws InvalidKeySpecException {
+    final PKCS8EncodedKeySpec p8spec =
+        keyFactory.getKeySpec(keyPair.getPrivate(), PKCS8EncodedKeySpec.class);
+    return keyFactory.generatePrivate(p8spec);
+  }
+
+  @Benchmark
+  public PublicKey x509_public_key_encode() throws InvalidKeySpecException {
+    final X509EncodedKeySpec x509spec =
+        keyFactory.getKeySpec(keyPair.getPublic(), X509EncodedKeySpec.class);
+    return keyFactory.generatePublic(x509spec);
+  }
+
   public SecretKey decapsulate(KEM.Encapsulated encapsulated)
       throws InvalidKeyException, DecapsulateException {
     final KEM.Decapsulator decapsulator = kem.newDecapsulator(keyPair.getPrivate());
@@ -125,9 +151,7 @@ public class MlKemBenchmark {
   private void sanityCheck(SecretKey encapsulated, SecretKey decapsulated) {
     if (!Arrays.equals(encapsulated.getEncoded(), decapsulated.getEncoded())) {
       throw new AssertionError(
-          String.format(
-              "ML-KEM keys don't match for algorithm %s and parameter spec %s",
-              algorithm, parameterSpec));
+          String.format("ML-KEM keys don't match for parameter spec %s", parameterSpec));
     }
   }
 }
