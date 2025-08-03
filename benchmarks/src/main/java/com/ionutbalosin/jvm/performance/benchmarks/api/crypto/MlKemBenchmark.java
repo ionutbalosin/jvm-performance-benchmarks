@@ -56,16 +56,21 @@ import org.openjdk.jmh.annotations.*;
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@Warmup(iterations = 1, time = 3, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 1, time = 3, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 1)
+@Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 5)
 @State(Scope.Benchmark)
 public class MlKemBenchmark {
 
   // $ java -jar */*/benchmarks.jar ".*MlKemBenchmark.*"
 
-  @Param({"ML-KEM-512", "ML-KEM-768", "ML-KEM-1024"})
+  private final SecureRandom secureRandom = new SecureRandom(new byte[] {0x1, 0x2, 0x3, 0x4});
+
+  @Param({"ML-KEM"})
   private String algorithm;
+
+  @Param({"ML-KEM-512", "ML-KEM-768", "ML-KEM-1024"})
+  private String parameterSpec;
 
   private KeyPair keyPair;
   private KEM kem;
@@ -74,22 +79,24 @@ public class MlKemBenchmark {
   @Setup()
   public void setup() throws Exception {
     final NamedParameterSpec namedParameterSpec =
-        switch (algorithm) {
+        switch (parameterSpec) {
           case "ML-KEM-512" -> NamedParameterSpec.ML_KEM_512;
           case "ML-KEM-768" -> NamedParameterSpec.ML_KEM_768;
           case "ML-KEM-1024" -> NamedParameterSpec.ML_KEM_1024;
-          default -> throw new IllegalArgumentException("Unsupported algorithm: " + algorithm);
+          default ->
+              throw new IllegalArgumentException("Unsupported parameter spec: " + parameterSpec);
         };
 
-    final KeyPairGenerator kpg = KeyPairGenerator.getInstance("ML-KEM");
-    kpg.initialize(namedParameterSpec);
+    final KeyPairGenerator kpg = KeyPairGenerator.getInstance(algorithm);
+    kpg.initialize(namedParameterSpec, secureRandom);
     keyPair = kpg.generateKeyPair();
 
-    kem = KEM.getInstance("ML-KEM");
+    kem = KEM.getInstance(algorithm);
 
     // Pre-generate encapsulated data to avoid measuring encapsulation overhead in the decapsulate()
     // benchmark
-    final KEM.Encapsulator encapsulator = kem.newEncapsulator(keyPair.getPublic());
+    final KEM.Encapsulator encapsulator =
+        kem.newEncapsulator(keyPair.getPublic(), null, secureRandom);
     preEncapsulated = encapsulator.encapsulate();
 
     // make sure the results are equivalent before any further benchmarking
@@ -97,8 +104,9 @@ public class MlKemBenchmark {
   }
 
   @Benchmark
-  public byte[] encapsulate() throws InvalidKeyException {
-    final KEM.Encapsulator encapsulator = kem.newEncapsulator(keyPair.getPublic());
+  public byte[] encapsulate() throws InvalidKeyException, InvalidAlgorithmParameterException {
+    final KEM.Encapsulator encapsulator =
+        kem.newEncapsulator(keyPair.getPublic(), null, secureRandom);
     final KEM.Encapsulated encapsulated = encapsulator.encapsulate();
     return encapsulated.encapsulation();
   }
@@ -118,8 +126,8 @@ public class MlKemBenchmark {
     if (!Arrays.equals(encapsulated.getEncoded(), decapsulated.getEncoded())) {
       throw new AssertionError(
           String.format(
-              "ML-KEM key validation failed for %s: encapsulated and decapsulated keys don't match",
-              algorithm));
+              "ML-KEM keys don't match for algorithm %s and parameter spec %s",
+              algorithm, parameterSpec));
     }
   }
 }

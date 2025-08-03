@@ -35,7 +35,6 @@ import static com.ionutbalosin.jvm.performance.benchmarks.api.crypto.util.Crypto
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidParameterSpecException;
 import java.util.Arrays;
 import java.util.Random;
@@ -75,7 +74,6 @@ public class AesGcmCryptoBenchmark {
   // $ java -jar */*/benchmarks.jar ".*AesGcmCryptoBenchmark.*"
 
   private final Random random = new Random(16384);
-  private final SecureRandom secureRandom = new SecureRandom(new byte[] {0x1, 0x2, 0x3, 0x4});
   private byte[] data, dataEncrypted, dataDecrypted;
   private Cipher encryptCipher, decryptCipher;
   private SecretKey secretKey;
