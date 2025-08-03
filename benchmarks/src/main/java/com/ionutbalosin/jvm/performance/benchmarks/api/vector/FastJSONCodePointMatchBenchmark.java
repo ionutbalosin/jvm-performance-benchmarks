@@ -49,8 +49,8 @@ import org.openjdk.jmh.annotations.*;
  *  - JEP 489: Vector API (Ninth Incubator): https://openjdk.org/jeps/489
  *  - Parsing Gigabytes of JSON per Second : https://arxiv.org/abs/1902.08318
  */
-@BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 5, jvmArgsPrepend = "--add-modules=jdk.incubator.vector")
