@@ -127,6 +127,9 @@
       "name": "GameOfLifeBenchmark"
     },
     {
+      "name": "HashMapCompositeKeyBenchmark"
+    },
+    {
       "name": "HmacCryptoBenchmark"
     },
     {
@@ -292,6 +295,9 @@
     },
     {
       "name": "ScalarEvolutionAndLoopOptimizationBenchmark"
+    },
+    {
+      "name": "ScalarMemoryPackingBenchmark"
     },
     {
       "name": "ScalarReplacementBenchmark"
