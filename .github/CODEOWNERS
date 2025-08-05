@@ -1,2 +1,6 @@
-# These owners will be the default owners for everything in the repo.
-* @ionutbalosin @gigiblender
+# CODEOWNERS
+# This file defines the default code owners for this repository.
+# Code owners are automatically requested for review when someone opens a pull request.
+
+# Global Owners
+* @ionutbalosin @gigiblender @chriswhocodes
