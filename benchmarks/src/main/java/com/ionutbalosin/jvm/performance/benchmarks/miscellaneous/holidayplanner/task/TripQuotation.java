@@ -50,23 +50,24 @@ public record TripQuotation(String source, Status status, double price) {
     this(null, status, 0);
   }
 
-  public static class QuotationScope extends StructuredTaskScope<TripQuotation> {
+  /** Custom Joiner that collects successful quotations and finds the best one (lowest price). */
+  public static class BestQuotationJoiner
+      implements StructuredTaskScope.Joiner<TripQuotation, TripQuotation> {
 
     private final Collection<TripQuotation> quotations = new ConcurrentLinkedQueue<>();
 
-    public QuotationScope(String name, ThreadFactory factory) {
-      super(name, factory);
-    }
-
     @Override
-    protected void handleComplete(Subtask<? extends TripQuotation> subtask) {
+    public boolean onComplete(StructuredTaskScope.Subtask<? extends TripQuotation> subtask) {
       switch (subtask.state()) {
         case SUCCESS -> this.quotations.add(subtask.get());
         case FAILED, UNAVAILABLE -> {}
       }
+      // Return false to continue collecting all quotations (don't cancel scope early)
+      return false;
     }
 
-    private TripQuotation getBestTripQuotation() {
+    @Override
+    public TripQuotation result() throws Throwable {
       return this.quotations.stream()
           .min(Comparator.comparing(TripQuotation::price))
           .orElse(TRIP_QUOTATION_UNAVAILABLE);
@@ -87,13 +88,18 @@ public record TripQuotation(String source, Status status, double price) {
 
   private static TripQuotation getQuotation(
       List<Callable<TripQuotation>> tasks, ThreadFactory threadFactory) {
-    try (final QuotationScope scope = new QuotationScope("Trip Quotation", threadFactory)) {
-      for (Callable<TripQuotation> task : tasks) {
-        scope.fork(task);
-      }
-      scope.join();
-      return scope.getBestTripQuotation();
+    try (final StructuredTaskScope<TripQuotation, TripQuotation> scope =
+        StructuredTaskScope.open(
+            new BestQuotationJoiner(),
+            cf -> cf.withName("Trip Quotation").withThreadFactory(threadFactory))) {
+
+      tasks.forEach(scope::fork);
+      return scope.join();
+
     } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      return TRIP_QUOTATION_UNAVAILABLE;
+    } catch (Exception e) {
       return TRIP_QUOTATION_UNAVAILABLE;
     }
   }

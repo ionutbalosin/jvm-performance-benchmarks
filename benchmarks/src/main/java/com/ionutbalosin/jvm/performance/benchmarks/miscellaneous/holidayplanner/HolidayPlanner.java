@@ -28,6 +28,7 @@
  */
 package com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner;
 
+import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlannerBenchmark.setupThreadFactory;
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.task.TouristAttraction.getTopTouristAttractions;
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.task.TripQuotation.getQuotation;
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.task.Weather.getWeather;
@@ -41,42 +42,64 @@ import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.atomic.AtomicReference;
 
 public record HolidayPlanner(
-    Status status, TripQuotation quotation, List<TouristAttraction> attractions, Weather weather) {
+    TripQuotation quotation, List<TouristAttraction> attractions, Weather weather) {
 
-  public static final HolidayPlanner HOLIDAY_PLANNER_UNAVAILABLE = new HolidayPlanner(Status.ERROR);
+  public static final HolidayPlanner HOLIDAY_PLANNER_UNAVAILABLE =
+      new HolidayPlanner(
+          TripQuotation.TRIP_QUOTATION_UNAVAILABLE, List.of(), Weather.WEATHER_UNAVAILABLE);
 
-  public HolidayPlanner(Status status) {
-    this(status, null, List.of(), null);
-  }
+  /**
+   * Custom Joiner that collects all three types of holiday planning data: quotation, attractions,
+   * and weather.
+   */
+  public static class HolidayPlannerJoiner
+      implements StructuredTaskScope.Joiner<Object, HolidayPlanner> {
 
-  public HolidayPlanner(
-      TripQuotation quotation, List<TouristAttraction> attractions, Weather weather) {
-    this(Status.SUCCESS, quotation, attractions, weather);
-  }
-
-  public static final class HolidayPlannerTaskScope extends StructuredTaskScope {
-
-    private AtomicReference<TripQuotation> quotation = new AtomicReference<>();
-    private AtomicReference<List<TouristAttraction>> attractions = new AtomicReference<>();
-    private AtomicReference<Weather> weather = new AtomicReference<>();
+    private final AtomicReference<TripQuotation> quotation = new AtomicReference<>();
+    private final AtomicReference<List<TouristAttraction>> attractions = new AtomicReference<>();
+    private final AtomicReference<Weather> weather = new AtomicReference<>();
 
     @Override
-    protected void handleComplete(Subtask subtask) {
-      switch (subtask.state()) {
-        case SUCCESS -> {
-          switch (subtask.get()) {
-            case TripQuotation quotation -> this.quotation.set(quotation);
-            case List attractions -> this.attractions.set(attractions);
-            case Weather weather -> this.weather.set(weather);
-            default -> throw new UnsupportedOperationException("Unexpected value " + subtask.get());
+    public boolean onComplete(StructuredTaskScope.Subtask<? extends Object> subtask) {
+      if (subtask.state() == StructuredTaskScope.Subtask.State.SUCCESS) {
+        Object result = subtask.get();
+
+        switch (result) {
+          case TripQuotation q -> quotation.set(q);
+          case Weather w -> weather.set(w);
+          case List<?> list -> {
+            if (!list.isEmpty()) {
+              try {
+                @SuppressWarnings("unchecked")
+                List<TouristAttraction> attractionList = (List<TouristAttraction>) list;
+                // Verify the first element is indeed a TouristAttraction
+                if (attractionList.get(0) instanceof TouristAttraction) {
+                  attractions.set(attractionList);
+                }
+              } catch (ClassCastException e) {
+                // Ignore if cast fails
+              }
+            }
           }
+          default -> {} // ignore unexpected types
         }
-        case FAILED, UNAVAILABLE -> {}
       }
+      // Always return false to wait for all subtasks to complete
+      return false;
     }
 
-    public HolidayPlanner getHolidayPlanner() {
-      return new HolidayPlanner(this.quotation.get(), this.attractions.get(), this.weather.get());
+    @Override
+    public HolidayPlanner result() throws Throwable {
+      TripQuotation finalQuotation = quotation.get();
+      List<TouristAttraction> finalAttractions = attractions.get();
+      Weather finalWeather = weather.get();
+
+      // Return unavailable planner if any component is missing
+      if (finalQuotation == null || finalAttractions == null || finalWeather == null) {
+        return HOLIDAY_PLANNER_UNAVAILABLE;
+      }
+
+      return new HolidayPlanner(finalQuotation, finalAttractions, finalWeather);
     }
   }
 
@@ -86,21 +109,24 @@ public record HolidayPlanner(
       int tripDuration,
       int numberOfTravelers,
       int topAttractions) {
-    try (final HolidayPlannerTaskScope scope = new HolidayPlannerTaskScope()) {
+
+    try (final StructuredTaskScope<Object, HolidayPlanner> scope =
+        StructuredTaskScope.open(
+            new HolidayPlannerJoiner(),
+            cf ->
+                cf.withName("Holiday Planner").withThreadFactory(setupThreadFactory(threadType)))) {
+
       scope.fork(() -> getQuotation(threadType, tasks, tripDuration, numberOfTravelers));
       scope.fork(() -> getTopTouristAttractions(threadType, tasks, topAttractions));
       scope.fork(() -> getWeather(threadType));
 
-      scope.join();
-      return scope.getHolidayPlanner();
+      return scope.join();
 
     } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      return HOLIDAY_PLANNER_UNAVAILABLE;
+    } catch (Exception e) {
       return HOLIDAY_PLANNER_UNAVAILABLE;
     }
-  }
-
-  private enum Status {
-    SUCCESS,
-    ERROR;
   }
 }
