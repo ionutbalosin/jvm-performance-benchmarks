@@ -231,6 +231,9 @@
       "name": "NioSelectorRoundtripLatencyBenchmark"
     },
     {
+      "name": "MlDsaBenchmark"
+    },
+    {
       "name": "MlKemBenchmark"
     },
     {
