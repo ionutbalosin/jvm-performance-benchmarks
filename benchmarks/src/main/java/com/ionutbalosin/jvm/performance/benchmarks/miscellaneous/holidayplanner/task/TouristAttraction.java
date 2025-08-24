@@ -39,8 +39,8 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.ThreadFactory;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public record TouristAttraction(String source, String name, float rating) {
 
@@ -73,8 +73,7 @@ public record TouristAttraction(String source, String name, float rating) {
           "Surfing Adventure");
 
   public static List<TouristAttraction> getTopTouristAttractions(
-      ThreadType threadType, int attractionSources, int topAttractions)
-      throws InterruptedException {
+      ThreadType threadType, int attractionSources, int topAttractions) {
     final List<Callable<TouristAttraction>> tasks = new ArrayList<>();
     for (int i = 0; i < attractionSources; i++) {
       final String sourceId = "Tourist Attraction Source " + i;
@@ -98,12 +97,20 @@ public record TouristAttraction(String source, String name, float rating) {
   private static List<TouristAttraction> getTouristAttractions(
       List<Callable<TouristAttraction>> tasks, ThreadFactory threadFactory) {
 
-    try (var scope =
-        new StructuredTaskScope.ShutdownOnFailure("Tourist Attraction", threadFactory)) {
-      final List<? extends Supplier<TouristAttraction>> suppliers =
-          tasks.stream().map(scope::fork).toList();
-      scope.join().throwIfFailed();
-      return suppliers.stream().map(Supplier::get).toList();
+    try (final StructuredTaskScope<
+            TouristAttraction, Stream<StructuredTaskScope.Subtask<TouristAttraction>>>
+        scope =
+            StructuredTaskScope.open(
+                StructuredTaskScope.Joiner.<TouristAttraction>allSuccessfulOrThrow(),
+                cf -> cf.withName("Tourist Attraction").withThreadFactory(threadFactory))) {
+
+      tasks.forEach(scope::fork);
+
+      return scope.join().map(subtask -> subtask.get()).collect(Collectors.toList());
+
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      return Collections.emptyList();
     } catch (Exception e) {
       return Collections.emptyList();
     }

@@ -31,18 +31,14 @@ package com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner
 import static com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlannerBenchmark.setupThreadFactory;
 
 import com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.holidayplanner.HolidayPlannerBenchmark;
-import java.time.Instant;
+import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.concurrent.ThreadFactory;
-import java.util.function.Supplier;
+import java.util.concurrent.atomic.AtomicReference;
 
 public record Weather(
     String source,
@@ -55,7 +51,7 @@ public record Weather(
 
   public static final Weather WEATHER_UNAVAILABLE = new Weather(Status.ERROR);
   private static final Random random = new Random(16384);
-  private static final int SECONDS = 1;
+  private static final Duration TIMEOUT = Duration.ofSeconds(1);
   private static final WeatherCondition[] cachedWeatherConditions = WeatherCondition.values();
 
   public Weather(Status status) {
@@ -64,6 +60,34 @@ public record Weather(
 
   public Weather(String source, Status status) {
     this(source, status, null, 0, 0, 0, 0);
+  }
+
+  /** Custom Joiner that returns the first successful weather result. */
+  public static class FirstSuccessfulWeatherJoiner
+      implements StructuredTaskScope.Joiner<Weather, Weather> {
+
+    private final AtomicReference<Weather> firstSuccessfulWeather = new AtomicReference<>();
+
+    @Override
+    public boolean onComplete(StructuredTaskScope.Subtask<? extends Weather> subtask) {
+      if (subtask.state() == StructuredTaskScope.Subtask.State.SUCCESS) {
+        Weather weather = subtask.get();
+        if (weather.status == Status.SUCCESS) {
+          // Found first successful weather, try to set it and cancel scope
+          if (firstSuccessfulWeather.compareAndSet(null, weather)) {
+            return true; // Cancel scope since we found what we need
+          }
+        }
+      }
+      // Continue waiting for other subtasks if we haven't found a successful one yet
+      return false;
+    }
+
+    @Override
+    public Weather result() throws Throwable {
+      Weather weather = firstSuccessfulWeather.get();
+      return weather != null ? weather : WEATHER_UNAVAILABLE;
+    }
   }
 
   // Iterate through the list of weather sources and return only the one that has returned success.
@@ -78,40 +102,15 @@ public record Weather(
   }
 
   private static Weather getWeather(List<Callable<Weather>> tasks, ThreadFactory threadFactory) {
-    return getWeatherFromSources(tasks, threadFactory).stream()
-        .filter(weatherFuture -> Future.State.SUCCESS == weatherFuture.state())
-        .map(Weather::getWeather)
-        .filter(weather -> Status.SUCCESS == weather.status)
-        .findFirst()
-        .orElse(WEATHER_UNAVAILABLE);
-  }
+    try (final StructuredTaskScope<Weather, Weather> scope =
+        StructuredTaskScope.open(
+            new FirstSuccessfulWeatherJoiner(),
+            cf -> cf.withName("Weather").withThreadFactory(threadFactory).withTimeout(TIMEOUT))) {
 
-  private static <Weather> List<Future<Weather>> getWeatherFromSources(
-      List<Callable<Weather>> tasks, ThreadFactory threadFactory) {
-    try (var scope = new StructuredTaskScope.ShutdownOnFailure("Weather", threadFactory)) {
-      final List<? extends Supplier<Future<Weather>>> weatherFutures =
-          tasks.stream().map(task -> asWeatherFuture(task)).map(scope::fork).toList();
-      scope.joinUntil(Instant.now().plusSeconds(SECONDS));
-      return weatherFutures.stream().map(Supplier::get).toList();
+      tasks.forEach(scope::fork);
+
+      return scope.join();
     } catch (Exception e) {
-      return Collections.emptyList();
-    }
-  }
-
-  private static <Weather> Callable<Future<Weather>> asWeatherFuture(Callable<Weather> task) {
-    return () -> {
-      try {
-        return CompletableFuture.completedFuture(task.call());
-      } catch (Exception e) {
-        return CompletableFuture.failedFuture(e);
-      }
-    };
-  }
-
-  private static Weather getWeather(Future<Weather> weatherFuture) {
-    try {
-      return weatherFuture.get();
-    } catch (InterruptedException | ExecutionException e) {
       return WEATHER_UNAVAILABLE;
     }
   }

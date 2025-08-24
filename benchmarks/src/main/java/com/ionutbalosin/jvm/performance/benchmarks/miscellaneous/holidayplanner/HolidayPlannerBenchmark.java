@@ -62,6 +62,7 @@ import org.openjdk.jmh.annotations.Warmup;
  *
  * References:
  *  - https://github.com/JosePaumard/JDK20_2023-Loom-Lab
+ *  - https://openjdk.org/jeps/505
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -71,7 +72,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class HolidayPlannerBenchmark {
 
-  // $ java --enable-preview -jar */*/benchmarks.jar ".*HolidayPlannerBenchmark.*"
+  // $ java -jar */*/benchmarks.jar ".*HolidayPlannerBenchmark.*"
 
   private static final int MAX_TRIP_DURATION_DAYS = 3 * 365;
   private static final int MAX_TRAVELERS = 256;
@@ -80,13 +81,13 @@ public class HolidayPlannerBenchmark {
   private static final Random random = new Random(16384);
 
   @Param({"256"})
-  private int loadFactor;
+  private int loadFactor = 256;
 
   @Param private ThreadType threadType;
 
   private int tasks;
-  int tripDuration;
-  int numberOfTravelers;
+  private int tripDuration;
+  private int numberOfTravelers;
 
   @Setup()
   public void setup() {
