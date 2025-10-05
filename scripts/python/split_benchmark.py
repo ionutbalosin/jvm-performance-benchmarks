@@ -36,11 +36,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from split_utils import split_and_write_benchmark_results_to_file
 
+# Define a function to split and process benchmarks
 def split_and_process_benchmark(jvm_identifiers, benchmark_file, param_name, column_values):
-    """
-    Define a function to split and process benchmarks
-    Python equivalent of R's splitAndProcessBenchmark function
-    """
     column_name = f"Param..{param_name}"
     for jvm_identifier in jvm_identifiers:
         benchmark_name = os.path.splitext(benchmark_file)[0]

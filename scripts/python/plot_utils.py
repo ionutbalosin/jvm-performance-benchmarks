@@ -34,13 +34,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import re
-from .utils import read_csv_results_from_file
+from utils import read_csv_results_from_file
 
+# Function to read the benchmark results from a CSV file and append a JVM column identifier
 def read_benchmark_results_with_jvm_identifier(benchmark_file_path, identifier):
-    """
-    Function to read the benchmark results from a CSV file and append a JVM column identifier
-    Python equivalent of R's readBenchmarkResultsWithJvmIdentifier function
-    """
     result = read_csv_results_from_file(benchmark_file_path)
     
     if not result.empty:
@@ -48,11 +45,8 @@ def read_benchmark_results_with_jvm_identifier(benchmark_file_path, identifier):
     
     return result
 
+# Function to concatenate all benchmark Param columns
 def concatenate_benchmark_param_columns(data):
-    """
-    Function to concatenate all benchmark Param columns
-    Python equivalent of R's concatenateBenchmarkParamColumns function
-    """
     result = []
     
     # Extract all Param columns in a data frame
@@ -77,11 +71,8 @@ def concatenate_benchmark_param_columns(data):
     
     return result
 
+# Function to process the benchmark results
 def clean_and_prepare_benchmark_data(data):
-    """
-    Function to process the benchmark results
-    Python equivalent of R's cleanAndPrepareBenchmarkData function
-    """
     if data.empty:
         return data
     
@@ -127,11 +118,8 @@ def clean_and_prepare_benchmark_data(data):
     
     return data
 
+# Function to generate a bar chart plot
 def create_benchmark_bar_chart(data, fill, fill_label, x_label, y_label, title, caption, color_palette):
-    """
-    Function to generate a bar chart plot
-    Python equivalent of R's createBenchmarkBarChart function
-    """
     if data.empty:
         return None
     
@@ -190,11 +178,8 @@ def create_benchmark_bar_chart(data, fill, fill_label, x_label, y_label, title, 
     plt.tight_layout()
     return fig
 
+# Function to save the plot to an SVG output file
 def save_benchmark_bar_chart_to_svg(data, plot, path, benchmark_file_basename):
-    """
-    Function to save the plot to an SVG output file
-    Python equivalent of R's saveBenchmarkBarChartToSVG function
-    """
     if not data.empty and plot is not None:
         # Create the path if it does not exist
         if not os.path.exists(path):

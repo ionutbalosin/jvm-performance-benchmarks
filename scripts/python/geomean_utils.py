@@ -32,13 +32,10 @@ import pandas as pd
 import numpy as np
 import os
 import re
-from .utils import read_csv_results_from_file, calculate_geometric_mean
+from utils import read_csv_results_from_file, calculate_geometric_mean
 
+# Apply column sanitizations on the data frame
 def sanitize_benchmark_data(data):
-    """
-    Apply column sanitizations on the data frame
-    Python equivalent of R's sanitizeBenchmarkData function
-    """
     # Delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
     data = data[~data['Benchmark'].str.contains(':·', na=False)]
     
@@ -53,11 +50,8 @@ def sanitize_benchmark_data(data):
     
     return data
 
+# Sanitize and merge all benchmark results for different benchmark files into a single data frame
 def sanitize_and_merge_benchmark_results(jmh_output_folder, jvm_identifier, benchmark_files):
-    """
-    Sanitize and merge all benchmark results for different benchmark files into a single data frame
-    Python equivalent of R's sanitizeAndMergeBenchmarkResults function
-    """
     result = pd.DataFrame()
     
     for benchmark_file in benchmark_files:
@@ -72,11 +66,8 @@ def sanitize_and_merge_benchmark_results(jmh_output_folder, jvm_identifier, benc
     
     return result
 
+# Convert all average time scores to "ns/op" (for consistency across all benchmark results)
 def standardize_benchmark_time_units(data):
-    """
-    Convert all average time scores to "ns/op" (for consistency across all benchmark results)
-    Python equivalent of R's standardizeBenchmarkTimeUnits function
-    """
     if data.empty or 'Unit' not in data.columns or 'Score' not in data.columns:
         return data
     
@@ -102,12 +93,8 @@ def standardize_benchmark_time_units(data):
     
     return data
 
+# Calculate the geometric mean report (e.g., the geomean score and the total number of benchmarks) for average time scores
 def calculate_geometric_mean_report(jmh_output_folder, jvm_identifier, benchmark_files):
-    """
-    Calculate the geometric mean report (e.g., the geomean score and the total number of benchmarks) 
-    for average time scores
-    Python equivalent of R's calculateGeometricMeanReport function
-    """
     data = sanitize_and_merge_benchmark_results(jmh_output_folder, jvm_identifier, benchmark_files)
     data = standardize_benchmark_time_units(data)
     

@@ -30,13 +30,10 @@
 
 import pandas as pd
 import os
-from .utils import read_csv_results_from_file, write_data_to_csv_file
+from utils import read_csv_results_from_file, write_data_to_csv_file
 
+# Function to split benchmark results from a single data frame based on a specified column and values
 def split_benchmark_results(path, benchmark_file, column_name, column_values):
-    """
-    Function to split benchmark results from a single data frame based on a specified column and values
-    Python equivalent of R's splitBenchmarkResults function
-    """
     result = pd.DataFrame()
     
     benchmark_file_path = os.path.join(path, benchmark_file)
@@ -49,13 +46,10 @@ def split_benchmark_results(path, benchmark_file, column_name, column_values):
     
     return result
 
+# Function to split and write benchmark results to an output file
 def split_and_write_benchmark_results_to_file(jmh_output_folder, jvm_identifier, 
                                             benchmark_file, column_name, 
                                             column_values, output_file):
-    """
-    Function to split and write benchmark results to an output file
-    Python equivalent of R's splitAndWriteBenchmarkResultsToFile function
-    """
     benchmark_base_path = os.path.join(jmh_output_folder, jvm_identifier)
     data = split_benchmark_results(benchmark_base_path, benchmark_file, column_name, column_values)
     

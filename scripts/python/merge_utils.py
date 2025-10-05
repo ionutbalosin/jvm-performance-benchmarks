@@ -30,14 +30,11 @@
 
 import pandas as pd
 import os
-from .utils import read_csv_results_from_file, write_data_to_csv_file
+from utils import read_csv_results_from_file, write_data_to_csv_file
 
+# Merge all benchmark results for different JIT results into a single data frame
+# and append a new column "<column_name>":"<column_values>" as a differentiator
 def merge_benchmark_results(path, benchmark_file_paths, column_name, column_values):
-    """
-    Merge all benchmark results for different JIT results into a single data frame
-    and append a new column "<column_name>":"<column_values>" as a differentiator
-    Python equivalent of R's mergeBenchmarkResults function
-    """
     result = pd.DataFrame()
     
     for i, benchmark_file_path in enumerate(benchmark_file_paths):
@@ -52,14 +49,10 @@ def merge_benchmark_results(path, benchmark_file_paths, column_name, column_valu
     
     return result
 
+# Merge and write to a single output file multiple benchmark results for different JIT results, corresponding to a single JVM
 def merge_and_write_benchmark_results_to_file(jmh_output_folder, jvm_identifier, 
                                             benchmark_file_paths, column_name, 
                                             column_values, output_file):
-    """
-    Merge and write to a single output file multiple benchmark results for different JIT results,
-    corresponding to a single JVM
-    Python equivalent of R's mergeAndWriteBenchmarkResultsToFile function
-    """
     if len(benchmark_file_paths) != len(column_values):
         print("Error: the number of files must be equal to the number of columns")
         return None

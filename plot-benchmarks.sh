@@ -91,10 +91,9 @@ set_environment_variables() {
 }
 
 select_processing_language() {
-  echo ""
   echo "Select the processing language for benchmark analysis:"
-  echo "1) R (original)"
-  echo "2) Python (new implementation)"
+  echo "1) R"
+  echo "2) Python"
   
   while true; do
     read -p "Enter your choice (1 or 2): " INPUT_KEY
@@ -328,7 +327,7 @@ fi
 
 echo ""
 echo "+================================+"
-echo "| [1/8] Configuration Properties |"
+echo "| [1/9] Configuration Properties |"
 echo "+================================+"
 if ! load_config_properties; then
   exit 1
@@ -336,32 +335,32 @@ fi
 
 echo ""
 echo "+=============================+"
-echo "| [2/8] Hardware Architecture |"
+echo "| [2/9] Hardware Architecture |"
 echo "+=============================+"
 . ./scripts/shell/configure-arch.sh
 
 echo ""
 echo "+========================+"
-echo "| [3/8] OS Configuration |"
+echo "| [3/9] OS Configuration |"
 echo "+========================+"
 . ./scripts/shell/configure-os.sh || exit 1
 
 echo ""
 echo "+========================+"
-echo "| [4/8] JQ Configuration |"
+echo "| [4/9] JQ Configuration |"
 echo "+========================+"
 . ./scripts/shell/configure-jq.sh || exit 1
 
 echo ""
 echo "+=============================+"
-echo "| [5/8] Environment Variables |"
+echo "| [5/9] Environment Variables |"
 echo "+=============================+"
 set_environment_variables "$@" || exit 1
 
 echo ""
-echo "+================================+"
-echo "| [5.5/8] Processing Language    |"
-echo "+================================+"
+echo "+===========================+"
+echo "| [6/9] Processing Language |"
+echo "+===========================+"
 select_processing_language
 
 echo ""
@@ -369,7 +368,7 @@ read -r -p "If the above configuration is accurate, press ENTER to proceed or CT
 
 echo ""
 echo "+=====================================+"
-echo "| [6/8] Pre-process Benchmark Results |"
+echo "| [7/9] Pre-process Benchmark Results |"
 echo "+=====================================+"
 if ! preprocess_benchmark_results; then
   exit 1
@@ -377,7 +376,7 @@ fi
 
 echo ""
 echo "+=======================================================+"
-echo "| [7/8] Calculate Benchmarks' Normalized Geometric Mean |"
+echo "| [8/9] Calculate Benchmarks' Normalized Geometric Mean |"
 echo "+=======================================================+"
 if ! calculate_benchmarks_geometric_mean; then
   exit 1
@@ -385,6 +384,6 @@ fi
 
 echo ""
 echo "+======================+"
-echo "| [8/8] Plot Benchmark |"
+echo "| [9/9] Plot Benchmark |"
 echo "+======================+"
 plot_benchmarks

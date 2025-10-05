@@ -28,6 +28,7 @@
 # under the License.
 #
 
+import pandas as pd
 import sys
 import os
 
@@ -37,11 +38,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from geomean_utils import calculate_geometric_mean_report
 from utils import write_data_to_csv_file
 
+# Calculate and normalize geometric mean
 def calculate_normalized_geometric_mean(jvm_identifier, name_map, benchmark_files, reference_geomean, column_name):
-    """
-    Calculate and normalize geometric mean
-    Python equivalent of R's calculateNormalizedGeometricMean function
-    """
     report_geomean = calculate_geometric_mean_report(jmh_output_folder, jvm_identifier, benchmark_files)
     normalized_geomean = report_geomean['geomean'] / reference_geomean if reference_geomean else float('nan')
     
@@ -158,5 +156,4 @@ def main():
         write_data_to_csv_file(geometric_mean_output_folder, "summary.csv", all_result)
 
 if __name__ == "__main__":
-    import pandas as pd
     main()

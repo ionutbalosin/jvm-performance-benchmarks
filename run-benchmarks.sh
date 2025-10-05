@@ -91,10 +91,9 @@ set_environment_variables() {
 }
 
 select_processing_language() {
-  echo ""
   echo "Select the processing language for benchmark analysis:"
-  echo "1) R (original)"
-  echo "2) Python (new implementation)"
+  echo "1) R"
+  echo "2) Python"
   
   while true; do
     read -p "Enter your choice (1 or 2): " INPUT_KEY
@@ -359,9 +358,6 @@ echo "+=============================+"
 set_environment_variables "$@" || exit 1
 
 echo ""
-echo "+================================+"
-echo "| [5.5/8] Processing Language    |"
-echo "+================================+"
 select_processing_language
 
 echo ""

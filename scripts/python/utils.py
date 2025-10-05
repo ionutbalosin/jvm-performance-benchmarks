@@ -35,11 +35,8 @@ import sys
 import importlib
 import subprocess
 
+# Function to load a library and install if not available
 def load_library(name):
-    """
-    Function to load a library and install if not available
-    Python equivalent of R's loadLibrary function
-    """
     try:
         importlib.import_module(name)
     except ImportError:
@@ -52,11 +49,8 @@ required_libraries = ['pandas', 'numpy', 'matplotlib', 'seaborn']
 for lib in required_libraries:
     load_library(lib)
 
+# Read the CSV results from file
 def read_csv_results_from_file(file_path):
-    """
-    Read the CSV results from file
-    Python equivalent of R's readCsvResultsFromFile function
-    """
     result = pd.DataFrame()
     
     try:
@@ -69,11 +63,8 @@ def read_csv_results_from_file(file_path):
     
     return result
 
+# Write the CSV results to file
 def write_data_to_csv_file(path, file, data):
-    """
-    Write the CSV results to file
-    Python equivalent of R's writeDataToCsvFile function
-    """
     try:
         if not os.path.exists(path):
             os.makedirs(path)
@@ -85,10 +76,8 @@ def write_data_to_csv_file(path, file, data):
         print(f"Error: {e}")
         print(f"Cannot write to {os.path.join(path, file)}. File skipped.")
 
+# Clean and prepare benchmark data for plotting
 def clean_and_prepare_benchmark_data(data):
-    """
-    Clean and prepare benchmark data for plotting
-    """
     if data.empty:
         return data
     
@@ -103,10 +92,8 @@ def clean_and_prepare_benchmark_data(data):
     
     return data
 
+# Calculate geometric mean of a series of values
 def calculate_geometric_mean(values):
-    """
-    Calculate geometric mean of a series of values
-    """
     values = np.array(values)
     values = values[values > 0]  # Remove non-positive values
     if len(values) == 0:
