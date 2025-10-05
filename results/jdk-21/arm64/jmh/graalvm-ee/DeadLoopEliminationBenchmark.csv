@@ -1,4 +1,4 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: useLoopResult"
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.baseline","avgt",1,15,"0,370433","0,000559","ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.conditional_dead_loop","avgt",1,15,"10117,069455","239,842155","ns/op",false
-"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.dead_loop","avgt",1,15,"0,374650","0,020593","ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.baseline","avgt",1,1,"0,373446",NaN,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.conditional_dead_loop","avgt",1,1,"10688,096634",NaN,"ns/op",false
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.DeadLoopEliminationBenchmark.dead_loop","avgt",1,1,"0,371391",NaN,"ns/op",false

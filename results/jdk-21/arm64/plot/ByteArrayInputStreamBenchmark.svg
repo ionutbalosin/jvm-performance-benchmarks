@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1440.00pt' height='340.16pt' viewBox='0 0 1440.00 340.16'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHwxNDQwLjAwfDAuMDB8MzQwLjE2'>
+    <rect x='0.00' y='0.00' width='1440.00' height='340.16' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHwxNDQwLjAwfDAuMDB8MzQwLjE2)'>
+<rect x='0.00' y='0.00' width='1440.00' height='340.16' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+<rect x='273.70' y='36.34' width='1152.13' height='193.96' style='stroke-width: 1.07; stroke: none;' />
+<polyline points='451.99,230.30 451.99,36.34 ' style='stroke-width: 0.53; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='703.82,230.30 703.82,36.34 ' style='stroke-width: 0.53; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='955.66,230.30 955.66,36.34 ' style='stroke-width: 0.53; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='1207.50,230.30 1207.50,36.34 ' style='stroke-width: 0.53; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='273.70,133.32 1425.83,133.32 ' style='stroke-width: 1.07; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='326.07,230.30 326.07,36.34 ' style='stroke-width: 1.07; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='577.90,230.30 577.90,36.34 ' style='stroke-width: 1.07; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='829.74,230.30 829.74,36.34 ' style='stroke-width: 1.07; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='1081.58,230.30 1081.58,36.34 ' style='stroke-width: 1.07; stroke: #F2F2F2; stroke-linecap: butt;' />
+<polyline points='1333.42,230.30 1333.42,36.34 ' style='stroke-width: 1.07; stroke: #F2F2F2; stroke-linecap: butt;' />
+<rect x='326.07' y='105.03' width='1047.39' height='28.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #648FFF;' />
+<rect x='326.07' y='133.32' width='982.42' height='28.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFB000;' />
+<rect x='326.07' y='76.74' width='1028.75' height='28.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FE6100;' />
+<rect x='326.07' y='161.60' width='1033.54' height='28.29' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #785EF0;' />
+<text x='1376.43' y='113.07' style='font-size: 11.38px; font-family: "Arial";' textLength='59.45px' lengthAdjust='spacingAndGlyphs'>41.59 ns/op</text>
+<text x='1311.46' y='141.35' style='font-size: 11.38px; font-family: "Arial";' textLength='59.45px' lengthAdjust='spacingAndGlyphs'>39.01 ns/op</text>
+<text x='1357.79' y='84.78' style='font-size: 11.38px; font-family: "Arial";' textLength='59.45px' lengthAdjust='spacingAndGlyphs'>40.85 ns/op</text>
+<text x='1362.58' y='169.64' style='font-size: 11.38px; font-family: "Arial";' textLength='59.45px' lengthAdjust='spacingAndGlyphs'>41.04 ns/op</text>
+<line x1='326.07' y1='230.30' x2='326.07' y2='36.34' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='268.77' y='130.69' text-anchor='end' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='28.80px' lengthAdjust='spacingAndGlyphs'>read</text>
+<text x='268.77' y='146.24' text-anchor='end' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='235.17px' lengthAdjust='spacingAndGlyphs'>(chunkSize:_1_KB, fileSize:_64_MB)</text>
+<polyline points='270.96,133.32 273.70,133.32 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='326.07,233.04 326.07,230.30 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='577.90,233.04 577.90,230.30 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='829.74,233.04 829.74,230.30 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='1081.58,233.04 1081.58,230.30 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='1333.42,233.04 1333.42,230.30 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<text x='326.07' y='245.53' text-anchor='middle' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='8.00px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='577.90' y='245.53' text-anchor='middle' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='829.74' y='245.53' text-anchor='middle' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='1081.58' y='245.53' text-anchor='middle' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='1333.42' y='245.53' text-anchor='middle' style='font-size: 14.40px;fill: #4D4D4D; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='849.76' y='264.19' text-anchor='middle' style='font-size: 18.00px; font-family: "Arial";' textLength='44.05px' lengthAdjust='spacingAndGlyphs'>ns/op</text>
+<text transform='translate(27.06,133.32) rotate(-90)' text-anchor='middle' style='font-size: 18.00px; font-family: "Arial";' textLength='91.06px' lengthAdjust='spacingAndGlyphs'>Benchmark</text>
+<rect x='546.26' y='278.94' width='607.01' height='28.24' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='551.74' y='299.50' style='font-size: 18.00px; font-family: "Arial";' textLength='60.09px' lengthAdjust='spacingAndGlyphs'>Legend</text>
+<rect x='617.31' y='284.42' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<rect x='618.02' y='285.13' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FE6100;' />
+<rect x='748.71' y='284.42' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<rect x='749.42' y='285.13' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #648FFF;' />
+<rect x='920.88' y='284.42' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<rect x='921.59' y='285.13' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFB000;' />
+<rect x='1029.87' y='284.42' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
+<rect x='1030.58' y='285.13' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #785EF0;' />
+<text x='640.07' y='298.21' style='font-size: 14.40px; font-family: "Arial";' textLength='103.16px' lengthAdjust='spacingAndGlyphs'>Oracle GraalVM</text>
+<text x='771.47' y='298.21' style='font-size: 14.40px; font-family: "Arial";' textLength='143.94px' lengthAdjust='spacingAndGlyphs'>OpenJDK HotSpot VM</text>
+<text x='943.64' y='298.21' style='font-size: 14.40px; font-family: "Arial";' textLength='80.75px' lengthAdjust='spacingAndGlyphs'>GraalVM CE</text>
+<text x='1052.63' y='298.21' style='font-size: 14.40px; font-family: "Arial";' textLength='95.16px' lengthAdjust='spacingAndGlyphs'>Azul Prime VM</text>
+<text x='273.70' y='27.06' style='font-size: 18.00px; font-family: "Arial";' textLength='268.17px' lengthAdjust='spacingAndGlyphs'>ByteArrayInputStreamBenchmark</text>
+<text x='1425.83' y='322.96' text-anchor='end' style='font-size: 14.40px; font-family: "Arial";' textLength='100.77px' lengthAdjust='spacingAndGlyphs'>JDK-21 / arm64</text>
+</g>
+</g>
+</svg>

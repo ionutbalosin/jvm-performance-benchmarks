@@ -1,3 +1,3 @@
 "Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: nodes"
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.dijkstrashortestpath.DijkstraShortestPathBenchmark.adjacency_list_binary_heap","avgt",1,15,"111,486951","1,253809","ms/op",8192
-"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.dijkstrashortestpath.DijkstraShortestPathBenchmark.adjacency_matrix","avgt",1,15,"66,041132","2,506230","ms/op",8192
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.dijkstrashortestpath.DijkstraShortestPathBenchmark.adjacency_list_binary_heap","avgt",1,1,"144,003875",NaN,"ms/op",8192
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.dijkstrashortestpath.DijkstraShortestPathBenchmark.adjacency_matrix","avgt",1,1,"72,667491",NaN,"ms/op",8192
