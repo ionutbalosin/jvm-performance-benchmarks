@@ -1,2 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: chunkSize","Param: fileSize"
-"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.CharArrayWriterBenchmark.write","avgt",1,1,"3,755749",NaN,"ms/op",_1_KB,_64_MB

@@ -1,5 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
-"com.ionutbalosin.jvm.performance.benchmarks.api.time.DateTimeFormatterBenchmark.of_localized_date","avgt",1,1,"3,167625",NaN,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.api.time.DateTimeFormatterBenchmark.of_localized_datetime","avgt",1,1,"3,195829",NaN,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.api.time.DateTimeFormatterBenchmark.of_localized_time","avgt",1,1,"3,159575",NaN,"ns/op"
-"com.ionutbalosin.jvm.performance.benchmarks.api.time.DateTimeFormatterBenchmark.of_pattern","avgt",1,1,"211,296533",NaN,"ns/op"

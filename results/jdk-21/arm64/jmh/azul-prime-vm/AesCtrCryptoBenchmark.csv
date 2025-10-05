@@ -1,7 +1,0 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCtrCryptoBenchmark.decrypt","avgt",1,1,"2,583039",NaN,"us/op",16384,128,AES/CTR/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCtrCryptoBenchmark.decrypt","avgt",1,1,"2,647636",NaN,"us/op",16384,192,AES/CTR/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCtrCryptoBenchmark.decrypt","avgt",1,1,"2,681323",NaN,"us/op",16384,256,AES/CTR/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCtrCryptoBenchmark.encrypt","avgt",1,1,"2,591791",NaN,"us/op",16384,128,AES/CTR/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCtrCryptoBenchmark.encrypt","avgt",1,1,"2,662100",NaN,"us/op",16384,192,AES/CTR/NoPadding
-"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCtrCryptoBenchmark.encrypt","avgt",1,1,"2,862517",NaN,"us/op",16384,256,AES/CTR/NoPadding

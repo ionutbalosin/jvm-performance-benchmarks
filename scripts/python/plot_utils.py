@@ -31,7 +31,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import os
 import re
 from utils import read_csv_results_from_file
