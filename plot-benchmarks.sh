@@ -134,7 +134,7 @@ merge_split_benchmark_results() {
       echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
       return 1
     fi
-  else
+  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
     if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/merge_benchmark.$PROCESSING_EXTENSION \
         $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
       $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/split_benchmark.$PROCESSING_EXTENSION \
@@ -146,6 +146,10 @@ merge_split_benchmark_results() {
       echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
       return 1
     fi
+  else
+    echo ""
+    echo "ERROR: An error occurred while recognising processing language!"
+    return 1
   fi
 }
 
@@ -218,7 +222,7 @@ benchmarks_geometric_mean() {
       echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
       return 1
     fi
-  else
+  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
     if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/geomean_benchmark.$PROCESSING_EXTENSION \
         "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
         "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
@@ -233,6 +237,10 @@ benchmarks_geometric_mean() {
       echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
       return 1
     fi
+  else
+    echo ""
+    echo "ERROR: An error occurred while recognising processing language!"
+    return 1  
   fi
 }
 
@@ -278,7 +286,7 @@ plot_benchmarks() {
       echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
       return 1
     fi
-  else
+  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
     if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/plot_benchmark.$PROCESSING_EXTENSION \
         "$JDK_VERSION" "$BENCHMARKS_ARCH" \
         "$JMH_OUTPUT_FOLDER" "$PLOT_OUTPUT_FOLDER" \
@@ -292,6 +300,10 @@ plot_benchmarks() {
       echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
       return 1
     fi
+  else
+    echo ""
+    echo "ERROR: An error occurred while recognising processing language!"
+    return 1  
   fi
 }
 
