@@ -90,16 +90,65 @@ set_environment_variables() {
   echo "Plot output folder: $PLOT_OUTPUT_FOLDER"
 }
 
+select_processing_language() {
+  echo "Select the processing language for benchmark analysis:"
+  echo "1) R"
+  echo "2) Python"
+  
+  while true; do
+    read -p "Enter your choice (1 or 2): " INPUT_KEY
+    case $INPUT_KEY in
+    1)
+      export PROCESSING_LANGUAGE="R"
+      export PROCESSING_SCRIPT_DIR="./scripts/ggplot2"
+      export PROCESSING_EXTENSION="r"
+      export PROCESSING_COMMAND="R"
+      echo "Selected: R processing"
+      break
+      ;;
+    2)
+      export PROCESSING_LANGUAGE="Python"
+      export PROCESSING_SCRIPT_DIR="./scripts/python"
+      export PROCESSING_EXTENSION="py"
+      export PROCESSING_COMMAND="python3"
+      echo "Selected: Python processing"
+      break
+      ;;
+    *)
+      echo "Sorry, I don't understand. Try again!"
+      ;;
+    esac
+  done
+}
+
 merge_split_benchmark_results() {
-  if R <./scripts/ggplot2/merge-benchmark.r --no-save \
-    --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
-    R <./scripts/ggplot2/split-benchmark.r --no-save \
-      --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
-    echo ""
-    echo "Benchmark result files successfully pre-processed."
+  if [ "$PROCESSING_LANGUAGE" = "R" ]; then
+    if $PROCESSING_COMMAND <$PROCESSING_SCRIPT_DIR/merge-benchmark.$PROCESSING_EXTENSION --no-save \
+      --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
+      $PROCESSING_COMMAND <$PROCESSING_SCRIPT_DIR/split-benchmark.$PROCESSING_EXTENSION --no-save \
+        --args $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
+      echo ""
+      echo "Benchmark result files successfully pre-processed."
+    else
+      echo ""
+      echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
+      return 1
+    fi
+  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
+    if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/merge_benchmark.$PROCESSING_EXTENSION \
+        $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
+      $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/split_benchmark.$PROCESSING_EXTENSION \
+        $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER; then
+      echo ""
+      echo "Benchmark result files successfully pre-processed."
+    else
+      echo ""
+      echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
+      return 1
+    fi
   else
     echo ""
-    echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
+    echo "ERROR: An error occurred while recognising processing language!"
     return 1
   fi
 }
@@ -158,19 +207,40 @@ benchmarks_geometric_mean() {
   miscellaneous_benchmark_files=($(extract_benchmark_files "miscellaneous"))
   echo "Identified ${#miscellaneous_benchmark_files[@]} 'miscellaneous' benchmarks (possibly including duplicates)."
 
-  if R <./scripts/ggplot2/geomean-benchmark.r --no-save \
-    --args "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
-    "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
-    "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
-    "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT" \
-    "${#api_benchmark_files[@]}" "${#compiler_benchmark_files[@]}" "${#miscellaneous_benchmark_files[@]}" \
-    "${api_benchmark_files[@]}" "${compiler_benchmark_files[@]}" "${miscellaneous_benchmark_files[@]}"; then
-    echo ""
-    echo "Benchmarks' normalized geometric mean successfully calculated."
+  if [ "$PROCESSING_LANGUAGE" = "R" ]; then
+    if $PROCESSING_COMMAND <$PROCESSING_SCRIPT_DIR/geomean-benchmark.$PROCESSING_EXTENSION --no-save \
+      --args "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
+      "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
+      "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
+      "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT" \
+      "${#api_benchmark_files[@]}" "${#compiler_benchmark_files[@]}" "${#miscellaneous_benchmark_files[@]}" \
+      "${api_benchmark_files[@]}" "${compiler_benchmark_files[@]}" "${miscellaneous_benchmark_files[@]}"; then
+      echo ""
+      echo "Benchmarks' normalized geometric mean successfully calculated."
+    else
+      echo ""
+      echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
+      return 1
+    fi
+  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
+    if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/geomean_benchmark.$PROCESSING_EXTENSION \
+        "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
+        "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
+        "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
+        "$OPENJDK_HOTSPOT_VM_JIT" "$GRAAL_VM_CE_JIT" "$GRAAL_VM_EE_JIT" "$AZUL_PRIME_VM_JIT" \
+        "${#api_benchmark_files[@]}" "${#compiler_benchmark_files[@]}" "${#miscellaneous_benchmark_files[@]}" \
+        "${api_benchmark_files[@]}" "${compiler_benchmark_files[@]}" "${miscellaneous_benchmark_files[@]}"; then
+      echo ""
+      echo "Benchmarks' normalized geometric mean successfully calculated."
+    else
+      echo ""
+      echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
+      return 1
+    fi
   else
     echo ""
-    echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
-    return 1
+    echo "ERROR: An error occurred while recognising processing language!"
+    return 1  
   fi
 }
 
@@ -202,18 +272,38 @@ calculate_benchmarks_geometric_mean() {
 }
 
 plot_benchmarks() {
-  if R <./scripts/ggplot2/plot-benchmark.r --no-save \
-    --args "$JDK_VERSION" "$BENCHMARKS_ARCH" \
-    "$JMH_OUTPUT_FOLDER" "$PLOT_OUTPUT_FOLDER" \
-    "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
-    "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
-    "$OPENJDK_HOTSPOT_VM_COLOR_PALETTE" "$GRAAL_VM_CE_COLOR_PALETTE" "$GRAAL_VM_EE_COLOR_PALETTE" "$AZUL_PRIME_VM_COLOR_PALETTE"; then
-    echo ""
-    echo "Benchmark plots successfully generated."
+  if [ "$PROCESSING_LANGUAGE" = "R" ]; then
+    if $PROCESSING_COMMAND <$PROCESSING_SCRIPT_DIR/plot-benchmark.$PROCESSING_EXTENSION --no-save \
+      --args "$JDK_VERSION" "$BENCHMARKS_ARCH" \
+      "$JMH_OUTPUT_FOLDER" "$PLOT_OUTPUT_FOLDER" \
+      "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
+      "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
+      "$OPENJDK_HOTSPOT_VM_COLOR_PALETTE" "$GRAAL_VM_CE_COLOR_PALETTE" "$GRAAL_VM_EE_COLOR_PALETTE" "$AZUL_PRIME_VM_COLOR_PALETTE"; then
+      echo ""
+      echo "Benchmark plots successfully generated."
+    else
+      echo ""
+      echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
+      return 1
+    fi
+  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
+    if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/plot_benchmark.$PROCESSING_EXTENSION \
+        "$JDK_VERSION" "$BENCHMARKS_ARCH" \
+        "$JMH_OUTPUT_FOLDER" "$PLOT_OUTPUT_FOLDER" \
+        "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
+        "$OPENJDK_HOTSPOT_VM_NAME" "$GRAAL_VM_CE_NAME" "$GRAAL_VM_EE_NAME" "$AZUL_PRIME_VM_NAME" \
+        "$OPENJDK_HOTSPOT_VM_COLOR_PALETTE" "$GRAAL_VM_CE_COLOR_PALETTE" "$GRAAL_VM_EE_COLOR_PALETTE" "$AZUL_PRIME_VM_COLOR_PALETTE"; then
+      echo ""
+      echo "Benchmark plots successfully generated."
+    else
+      echo ""
+      echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
+      return 1
+    fi
   else
     echo ""
-    echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
-    return 1
+    echo "ERROR: An error occurred while recognising processing language!"
+    return 1  
   fi
 }
 
@@ -249,7 +339,7 @@ fi
 
 echo ""
 echo "+================================+"
-echo "| [1/8] Configuration Properties |"
+echo "| [1/9] Configuration Properties |"
 echo "+================================+"
 if ! load_config_properties; then
   exit 1
@@ -257,34 +347,40 @@ fi
 
 echo ""
 echo "+=============================+"
-echo "| [2/8] Hardware Architecture |"
+echo "| [2/9] Hardware Architecture |"
 echo "+=============================+"
 . ./scripts/shell/configure-arch.sh
 
 echo ""
 echo "+========================+"
-echo "| [3/8] OS Configuration |"
+echo "| [3/9] OS Configuration |"
 echo "+========================+"
 . ./scripts/shell/configure-os.sh || exit 1
 
 echo ""
 echo "+========================+"
-echo "| [4/8] JQ Configuration |"
+echo "| [4/9] JQ Configuration |"
 echo "+========================+"
 . ./scripts/shell/configure-jq.sh || exit 1
 
 echo ""
 echo "+=============================+"
-echo "| [5/8] Environment Variables |"
+echo "| [5/9] Environment Variables |"
 echo "+=============================+"
 set_environment_variables "$@" || exit 1
+
+echo ""
+echo "+===========================+"
+echo "| [6/9] Processing Language |"
+echo "+===========================+"
+select_processing_language
 
 echo ""
 read -r -p "If the above configuration is accurate, press ENTER to proceed or CTRL+C to abort ... "
 
 echo ""
 echo "+=====================================+"
-echo "| [6/8] Pre-process Benchmark Results |"
+echo "| [7/9] Pre-process Benchmark Results |"
 echo "+=====================================+"
 if ! preprocess_benchmark_results; then
   exit 1
@@ -292,7 +388,7 @@ fi
 
 echo ""
 echo "+=======================================================+"
-echo "| [7/8] Calculate Benchmarks' Normalized Geometric Mean |"
+echo "| [8/9] Calculate Benchmarks' Normalized Geometric Mean |"
 echo "+=======================================================+"
 if ! calculate_benchmarks_geometric_mean; then
   exit 1
@@ -300,6 +396,6 @@ fi
 
 echo ""
 echo "+======================+"
-echo "| [8/8] Plot Benchmark |"
+echo "| [9/9] Plot Benchmark |"
 echo "+======================+"
 plot_benchmarks

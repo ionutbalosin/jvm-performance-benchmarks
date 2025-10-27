@@ -7,6 +7,7 @@ target/
 !**/src/test/**/target/
 *-schema-library/src/main/java/**
 generated-products.sql
+__pycache__
 
 ### STS ###
 .apt_generated
