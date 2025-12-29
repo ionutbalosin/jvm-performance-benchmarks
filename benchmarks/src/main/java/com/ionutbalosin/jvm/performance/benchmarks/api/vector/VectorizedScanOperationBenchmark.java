@@ -53,8 +53,6 @@ public class VectorizedScanOperationBenchmark {
   @Param({"4096", "10000"})
   public static int size;
 
-  public static final VectorSpecies<Double> DSPECIES = DoubleVector.SPECIES_PREFERRED;
-
   public static double[] input;
   public static double[] result;
 
@@ -74,7 +72,7 @@ public class VectorizedScanOperationBenchmark {
     }
   }
 
-  /* Algorithm Description:-
+  /* Algorithm Description (512-bit):-
      Input                     :  A      B     C   D      E    F     G    H
      Shuf1                     :  0      0     2   2      4    4     6    6
      Mask1                     :  0      1     0   1      0    1     0    1
@@ -89,15 +87,40 @@ public class VectorizedScanOperationBenchmark {
      TMP3 = Shuf3(TMP2).Mask3  :  A    (A+B)  (A+B+C) (A+B+C+D)  (A+B+C+D+E)  (A+B+C+DE+F) (A+B+C+D+E+F+G)  (A+B+C+D+E+F+G+H)
   */
 
-  public static final VectorShuffle<Double> SHUF1 =
-      VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2, 4, 4, 6, 6);
-  public static final VectorShuffle<Double> SHUF2 =
-      VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1, 4, 4, 5, 5);
-  public static final VectorShuffle<Double> SHUF3 =
-      VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0, 3, 3, 3, 3);
-  public static final VectorMask<Double> MASK1 = VectorMask.fromLong(DSPECIES, 0xAA);
-  public static final VectorMask<Double> MASK2 = VectorMask.fromLong(DSPECIES, 0xCC);
-  public static final VectorMask<Double> MASK3 = VectorMask.fromLong(DSPECIES, 0xF0);
+  public static final VectorSpecies<Double> DSPECIES = DoubleVector.SPECIES_PREFERRED;
+  public static final VectorShuffle<Double> SHUF1;
+  public static final VectorShuffle<Double> SHUF2;
+  public static final VectorShuffle<Double> SHUF3;
+  public static final VectorMask<Double> MASK1;
+  public static final VectorMask<Double> MASK2;
+  public static final VectorMask<Double> MASK3;
+
+  static {
+    int vectorLength = DSPECIES.length();
+
+    if (vectorLength == 4) {
+      // For 4-element vectors (E.g., 256-bit vectors; AVX/AVX2)
+      SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2);
+      SHUF2 = VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1);
+      SHUF3 = VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0);
+      MASK1 = VectorMask.fromLong(DSPECIES, 0xA); // 1010 in binary
+      MASK2 = VectorMask.fromLong(DSPECIES, 0xC); // 1100 in binary
+      MASK3 = VectorMask.fromLong(DSPECIES, 0x8); // 1000 in binary
+    } else if (vectorLength == 8) {
+      // For 8-element vectors (E.g., 512-bit vectors; AVX-512)
+      SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2, 4, 4, 6, 6);
+      SHUF2 = VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1, 4, 4, 5, 5);
+      SHUF3 = VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0, 3, 3, 3, 3);
+      MASK1 = VectorMask.fromLong(DSPECIES, 0xAA);
+      MASK2 = VectorMask.fromLong(DSPECIES, 0xCC);
+      MASK3 = VectorMask.fromLong(DSPECIES, 0xF0);
+    } else {
+      throw new UnsupportedOperationException(
+          "Unsupported vector length: "
+              + vectorLength
+              + ". This benchmark supports only vector lengths of 4 or 8.");
+    }
+  }
 
   @Benchmark
   public static void vector_scan() {
