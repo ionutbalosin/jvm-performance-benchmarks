@@ -14,11 +14,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <uberjar.name>benchmarks</uberjar.name>
-        <maven.compiler.plugin>3.14.0</maven.compiler.plugin>
-        <maven.shade.plugin>3.6.0</maven.shade.plugin>
+        <maven.compiler.plugin>3.14.1</maven.compiler.plugin>
+        <maven.shade.plugin>3.6.1</maven.shade.plugin>
         <org.openjdk.jmh>1.37</org.openjdk.jmh>
-        <spotless.maven.plugin>2.46.1</spotless.maven.plugin>
-        <google.java.format>1.28.0</google.java.format>
+        <spotless.maven.plugin>3.1.0</spotless.maven.plugin>
+        <google.java.format>1.33.0</google.java.format>
+        <bouncycastle.version>1.83</bouncycastle.version>
     </properties>
 
     <modules>
