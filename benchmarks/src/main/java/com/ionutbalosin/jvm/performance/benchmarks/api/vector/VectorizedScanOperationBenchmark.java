@@ -72,7 +72,7 @@ public class VectorizedScanOperationBenchmark {
     }
   }
 
-  /* Algorithm Description (512-bit):-
+  /* Algorithm Description for 8-element vectors (E.g., 512-bit vectors; AVX-512):-
      Input                     :  A      B     C   D      E    F     G    H
      Shuf1                     :  0      0     2   2      4    4     6    6
      Mask1                     :  0      1     0   1      0    1     0    1
@@ -103,9 +103,9 @@ public class VectorizedScanOperationBenchmark {
       SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2);
       SHUF2 = VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1);
       SHUF3 = VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0);
-      MASK1 = VectorMask.fromLong(DSPECIES, 0xA); // 1010 in binary
-      MASK2 = VectorMask.fromLong(DSPECIES, 0xC); // 1100 in binary
-      MASK3 = VectorMask.fromLong(DSPECIES, 0x8); // 1000 in binary
+      MASK1 = VectorMask.fromLong(DSPECIES, 0xA);
+      MASK2 = VectorMask.fromLong(DSPECIES, 0xC);
+      MASK3 = VectorMask.fromLong(DSPECIES, 0x8);
     } else if (vectorLength == 8) {
       // For 8-element vectors (E.g., 512-bit vectors; AVX-512)
       SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2, 4, 4, 6, 6);
