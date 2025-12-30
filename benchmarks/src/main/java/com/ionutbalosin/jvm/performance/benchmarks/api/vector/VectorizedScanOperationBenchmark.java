@@ -72,21 +72,6 @@ public class VectorizedScanOperationBenchmark {
     }
   }
 
-  /* Algorithm Description for 8-element vectors (E.g., 512-bit vectors; AVX-512):-
-     Input                     :  A      B     C   D      E    F     G    H
-     Shuf1                     :  0      0     2   2      4    4     6    6
-     Mask1                     :  0      1     0   1      0    1     0    1
-     TMP1 = Shuf1(Input).Mask1 :  A    (A+B)   C  (C+D)   E  (F+E)   G   (G+H)
-
-     Shuf2                     :  0      0     1          1      4    4      5          5
-     Mask2                     :  0      0     1          1      0    0      1          1
-     TMP2 = Shuf2(TMP1).Mask2  :  A    (A+B)  (A+B+C) (A+B+C+D)  E    (E+F) (E+F+G)  (E+F+G+H)
-
-     Shuf3                     :  0      0     1          1         3           3            3                3
-     Mask3                     :  0      0     0          0         1           1            1                1
-     TMP3 = Shuf3(TMP2).Mask3  :  A    (A+B)  (A+B+C) (A+B+C+D)  (A+B+C+D+E)  (A+B+C+DE+F) (A+B+C+D+E+F+G)  (A+B+C+D+E+F+G+H)
-  */
-
   public static final VectorSpecies<Double> DSPECIES = DoubleVector.SPECIES_PREFERRED;
   public static final VectorShuffle<Double> SHUF1;
   public static final VectorShuffle<Double> SHUF2;
@@ -97,15 +82,14 @@ public class VectorizedScanOperationBenchmark {
 
   static {
     int vectorLength = DSPECIES.length();
-
     if (vectorLength == 4) {
       // For 4-element vectors (E.g., 256-bit vectors; AVX/AVX2)
       SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2);
       SHUF2 = VectorShuffle.fromValues(DSPECIES, 0, 0, 1, 1);
-      SHUF3 = VectorShuffle.fromValues(DSPECIES, 0, 0, 0, 0);
+      SHUF3 = null; // SHUF3 is not required for 256-bit
       MASK1 = VectorMask.fromLong(DSPECIES, 0xA);
       MASK2 = VectorMask.fromLong(DSPECIES, 0xC);
-      MASK3 = VectorMask.fromLong(DSPECIES, 0x8);
+      MASK3 = null; // MASK3 is not required for 256-bit
     } else if (vectorLength == 8) {
       // For 8-element vectors (E.g., 512-bit vectors; AVX-512)
       SHUF1 = VectorShuffle.fromValues(DSPECIES, 0, 0, 2, 2, 4, 4, 6, 6);
@@ -124,6 +108,57 @@ public class VectorizedScanOperationBenchmark {
 
   @Benchmark
   public static void vector_scan() {
+    int vectorLength = DSPECIES.length();
+    if (vectorLength == 4) {
+      // Optimized kernel for 256-bit vectors (4 elements)
+      vector_scan_256bit();
+    } else if (vectorLength == 8) {
+      // Kernel for 512-bit vectors (8 elements)
+      vector_scan_512bit();
+    }
+  }
+
+  /*
+  Algorithm Description for 4-element vectors (E.g., 256-bit vectors; AVX/AVX2):-
+  Input                     :  A      B       C        D
+  Shuf1                     :  0      0       2        2
+  Mask1                     :  0      1       0        1
+  TMP1 = Shuf1(Input).Mask1 :  A    (A+B)     C      (C+D)
+
+  Shuf2                     :  0      0       1        1
+  Mask2                     :  0      0       1        1
+  TMP2 = Shuf2(TMP1).Mask2  :  A    (A+B)  (A+B+C)  (A+B+C+D)
+  */
+  private static void vector_scan_256bit() {
+    DoubleVector init = DoubleVector.broadcast(DSPECIES, 0.0);
+    for (int i = 0; i < DSPECIES.loopBound(input.length); i += DSPECIES.length()) {
+      DoubleVector vec0 = DoubleVector.fromArray(DSPECIES, input, i);
+      var vec1 = vec0.rearrange(SHUF1, MASK1);
+      var vec2 = vec1.lanewise(VectorOperators.ADD, vec0);
+      var vec3 = vec2.rearrange(SHUF2, MASK2);
+      vec2 = vec3.lanewise(VectorOperators.ADD, vec2);
+      vec2 = vec2.lanewise(VectorOperators.ADD, init);
+      init = DoubleVector.broadcast(DSPECIES, result[i + DSPECIES.length() - 1]);
+      vec2.intoArray(result, i);
+    }
+  }
+
+  /*
+  Algorithm Description for 8-element vectors (E.g., 512-bit vectors; AVX-512):-
+  Input                     :  A      B     C    D     E    F     G     H
+  Shuf1                     :  0      0     2    2     4    4     6     6
+  Mask1                     :  0      1     0    1     0    1     0     1
+  TMP1 = Shuf1(Input).Mask1 :  A    (A+B)   C  (C+D)   E  (E+F)   G   (G+H)
+
+  Shuf2                     :  0      0     1          1      4    4      5          5
+  Mask2                     :  0      0     1          1      0    0      1          1
+  TMP2 = Shuf2(TMP1).Mask2  :  A    (A+B)  (A+B+C) (A+B+C+D)  E    (E+F) (E+F+G)  (E+F+G+H)
+
+  Shuf3                     :  0      0     1          1         3           3            3                3
+  Mask3                     :  0      0     0          0         1           1            1                1
+  TMP3 = Shuf3(TMP2).Mask3  :  A    (A+B)  (A+B+C) (A+B+C+D)  (A+B+C+D+E)  (A+B+C+D+E+F) (A+B+C+D+E+F+G)  (A+B+C+D+E+F+G+H)
+  */
+  private static void vector_scan_512bit() {
     DoubleVector init = DoubleVector.broadcast(DSPECIES, 0.0);
     for (int i = 0; i < DSPECIES.loopBound(input.length); i += DSPECIES.length()) {
       DoubleVector vec0 = DoubleVector.fromArray(DSPECIES, input, i);
