@@ -105,9 +105,7 @@ public class MandelbrotVectorApiBenchmark {
   public Object vectorized() {
     double threshold = 4;
 
-    for (int row = 0;
-        row < DOUBLE_VECTOR_SPECIES.loopBound(size);
-        row += DOUBLE_VECTOR_SPECIES.length()) {
+    for (int row = 0; row < DOUBLE_VECTOR_SPECIES.loopBound(size); row++) {
       DoubleVector row_vector = DoubleVector.broadcast(DOUBLE_VECTOR_SPECIES, (double) row);
 
       for (int col = 0;
