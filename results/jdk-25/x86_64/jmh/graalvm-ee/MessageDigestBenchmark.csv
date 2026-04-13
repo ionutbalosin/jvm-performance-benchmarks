@@ -1,0 +1,12 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: algorithm","Param: length"
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,22.639339,0.003933,"us/op",MD5,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,10.338268,0.003403,"us/op",SHA-1,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,13.101217,0.008729,"us/op",SHA-224,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,13.101517,0.006742,"us/op",SHA-256,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,30.070965,0.014870,"us/op",SHA-384,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,30.045773,0.005326,"us/op",SHA-512/224,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,30.052780,0.006031,"us/op",SHA-512/256,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,36.346934,0.008320,"us/op",SHA3-224,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,38.551142,0.006537,"us/op",SHA3-256,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,50.390857,0.009889,"us/op",SHA3-384,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.messagedigest.MessageDigestBenchmark.digest","avgt",1,25,72.665283,0.011750,"us/op",SHA3-512,16384

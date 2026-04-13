@@ -1,0 +1,11 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.copy_first_into_second_half_array","avgt",1,25,38.662130,0.282523,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.interleaved_load_store","avgt",1,25,19.013962,0.006917,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.non_sequential_byte_loads","avgt",1,25,36.046817,0.008076,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.non_sequential_byte_stores","avgt",1,25,21.275271,0.001794,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.sequential_byte_loads","avgt",1,25,67.650597,0.078183,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.sequential_byte_stores","avgt",1,25,46.163653,0.002105,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.sequential_int_loads","avgt",1,25,17.649396,0.006579,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.sequential_int_stores","avgt",1,25,19.993514,0.001921,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.sequential_short_loads","avgt",1,25,29.932176,0.012747,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.ScalarMemoryPackingBenchmark.sequential_short_stores","avgt",1,25,23.650284,0.034208,"us/op",262144

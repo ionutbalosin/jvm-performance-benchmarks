@@ -1,0 +1,17 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,188.362982,0.564814,"us/op",1024,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,188.339938,0.587020,"us/op",1024,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,1127.216149,3.420140,"us/op",2048,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,1131.521333,5.804452,"us/op",2048,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,3454.938556,11.679974,"us/op",3072,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,3454.802093,9.804079,"us/op",3072,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,7429.212640,13.484063,"us/op",4096,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.decrypt","avgt",1,25,7430.198199,11.977659,"us/op",4096,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,11.301008,0.059479,"us/op",1024,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,12.092085,0.092955,"us/op",1024,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,39.873912,0.154418,"us/op",2048,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,41.022080,0.142786,"us/op",2048,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,78.129639,0.370036,"us/op",3072,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,79.601928,0.524360,"us/op",3072,RSA/ECB/PKCS1Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,134.900090,0.606079,"us/op",4096,RSA/ECB/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.RsaEcbCryptoBenchmark.encrypt","avgt",1,25,136.557919,0.589934,"us/op",4096,RSA/ECB/PKCS1Padding

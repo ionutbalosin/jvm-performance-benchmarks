@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: parameterSpec"
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.pkcs8_private_key_encode","avgt",1,25,1.598063,0.015521,"us/op",16384,ML-DSA-44
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.pkcs8_private_key_encode","avgt",1,25,2.506059,0.021592,"us/op",16384,ML-DSA-65
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.pkcs8_private_key_encode","avgt",1,25,3.029898,0.026761,"us/op",16384,ML-DSA-87
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.sign","avgt",1,25,206.310935,1.351383,"us/op",16384,ML-DSA-44
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.sign","avgt",1,25,300.419092,2.551980,"us/op",16384,ML-DSA-65
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.sign","avgt",1,25,378.258210,3.634057,"us/op",16384,ML-DSA-87
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.verify","avgt",1,25,104.824223,0.783811,"us/op",16384,ML-DSA-44
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.verify","avgt",1,25,145.366688,1.372943,"us/op",16384,ML-DSA-65
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.verify","avgt",1,25,216.742126,2.242859,"us/op",16384,ML-DSA-87
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.x509_public_key_encode","avgt",1,25,1.835924,0.018048,"us/op",16384,ML-DSA-44
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.x509_public_key_encode","avgt",1,25,2.717925,0.023371,"us/op",16384,ML-DSA-65
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.MlDsaBenchmark.x509_public_key_encode","avgt",1,25,3.560415,0.026010,"us/op",16384,ML-DSA-87

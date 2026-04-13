@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopFusionBenchmark.initial_loops","avgt",1,25,264.128463,0.065124,"us/op",262144
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopFusionBenchmark.manual_loops_fusion","avgt",1,25,592.968550,1.260665,"us/op",262144

@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.FastJSONCodePointMatchBenchmark.match_avx2","avgt",1,25,449.389675,0.774219,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.FastJSONCodePointMatchBenchmark.match_avx2","avgt",1,25,881.050669,7.512802,"ns/op",2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.FastJSONCodePointMatchBenchmark.match_avx512","avgt",1,25,3333.490564,61.424860,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.FastJSONCodePointMatchBenchmark.match_avx512","avgt",1,25,6666.867173,50.754586,"ns/op",2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.FastJSONCodePointMatchBenchmark.match_scalar","avgt",1,25,942.468521,7.290272,"ns/op",1024
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.FastJSONCodePointMatchBenchmark.match_scalar","avgt",1,25,2034.616749,26.242741,"ns/op",2048

@@ -1,0 +1,2 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: chunkSize"
+"com.ionutbalosin.jvm.performance.benchmarks.api.diskio.PipedOutputStreamBenchmark.write","avgt",1,25,7.873733,0.046664,"us/op",_1_KB
