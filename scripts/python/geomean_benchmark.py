@@ -36,7 +36,36 @@ import os
 sys.path.insert(0, os.path.dirname(__file__))
 
 from geomean_utils import calculate_geometric_mean_report
-from utils import write_data_to_csv_file
+
+
+# Prepare and write geomean results to a CSV file with standardized column names
+def write_geomean_results(output_folder, output_file, data):
+    column_name_map = {
+        'Normalized Geometric Mean': 'Normalized.Geometric.Mean',
+        'Nr of Benchmarks': 'Nr.of.Benchmarks',
+        'Benchmarks Unit': 'Benchmarks.Unit',
+    }
+    formatted = data.rename(columns=column_name_map)
+
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    file_path = os.path.join(output_folder, output_file)
+
+    with open(file_path, 'w', newline='') as f:
+        f.write(','.join(f'"{col}"' for col in formatted.columns) + '\n')
+        for _, row in formatted.iterrows():
+            cells = []
+            for col_name, val in row.items():
+                if pd.isna(val):
+                    cells.append('NA')
+                elif pd.api.types.is_integer_dtype(formatted[col_name]):
+                    cells.append(str(int(val)))
+                elif pd.api.types.is_float_dtype(formatted[col_name]):
+                    cells.append(f'{val:.15g}')
+                else:
+                    cells.append(f'"{val}"')
+            f.write(','.join(cells) + '\n')
 
 # Calculate and normalize geometric mean
 def calculate_normalized_geometric_mean(jvm_identifier, name_map, benchmark_files, reference_geomean, column_name):
@@ -120,7 +149,7 @@ def main():
     
     if api_summaries:
         api_result = pd.concat(api_summaries, ignore_index=True)
-        write_data_to_csv_file(geometric_mean_output_folder, "api.csv", api_result)
+        write_geomean_results(geometric_mean_output_folder, "api.csv", api_result)
     
     # Calculate the geometric mean of Compiler benchmarks
     reference_geomean = calculate_geometric_mean_report(jmh_output_folder, openjdk_hotspot_vm, compiler_benchmark_files)['geomean']
@@ -131,7 +160,7 @@ def main():
     
     if compiler_summaries:
         compiler_result = pd.concat(compiler_summaries, ignore_index=True)
-        write_data_to_csv_file(geometric_mean_output_folder, "compiler.csv", compiler_result)
+        write_geomean_results(geometric_mean_output_folder, "compiler.csv", compiler_result)
     
     # Calculate the geometric mean of miscellaneous benchmarks
     reference_geomean = calculate_geometric_mean_report(jmh_output_folder, openjdk_hotspot_vm, miscellaneous_benchmark_files)['geomean']
@@ -142,7 +171,7 @@ def main():
     
     if miscellaneous_summaries:
         miscellaneous_result = pd.concat(miscellaneous_summaries, ignore_index=True)
-        write_data_to_csv_file(geometric_mean_output_folder, "miscellaneous.csv", miscellaneous_result)
+        write_geomean_results(geometric_mean_output_folder, "miscellaneous.csv", miscellaneous_result)
     
     # Calculate the geometric mean of all benchmarks
     reference_geomean = calculate_geometric_mean_report(jmh_output_folder, openjdk_hotspot_vm, all_benchmark_files)['geomean']
@@ -153,7 +182,7 @@ def main():
     
     if all_summaries:
         all_result = pd.concat(all_summaries, ignore_index=True)
-        write_data_to_csv_file(geometric_mean_output_folder, "summary.csv", all_result)
+        write_geomean_results(geometric_mean_output_folder, "summary.csv", all_result)
 
 if __name__ == "__main__":
     main()
