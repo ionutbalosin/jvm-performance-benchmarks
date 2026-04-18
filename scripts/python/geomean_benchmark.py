@@ -94,9 +94,9 @@ def main():
     ]
     
     # Remove duplicate elements to ensure the benchmark list has unique entries
-    api_benchmark_files = list(set(api_benchmark_files))
-    compiler_benchmark_files = list(set(compiler_benchmark_files))
-    miscellaneous_benchmark_files = list(set(miscellaneous_benchmark_files))
+    api_benchmark_files = list(set(f.strip() for f in api_benchmark_files))
+    compiler_benchmark_files = list(set(f.strip() for f in compiler_benchmark_files))
+    miscellaneous_benchmark_files = list(set(f.strip() for f in miscellaneous_benchmark_files))
     
     # Remove elements that are present in the exclusion list
     api_benchmark_files = [f for f in api_benchmark_files if f not in excluded_benchmark_files]
