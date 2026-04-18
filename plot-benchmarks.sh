@@ -33,7 +33,7 @@ check_command_line_options() {
     echo "Usage: ./plot-benchmarks.sh <jdk-version> [<arch>]"
     echo ""
     echo "Options:"
-    echo "  jdk-version   Java version identifier for the generated results. Supported values are {11, 17, 21}."
+    echo "  jdk-version   Java version identifier for the generated results. Supported values are {11, 17, 21, 25}."
     echo "  arch          Target architecture for the generated results. If not specified, it is automatically detected based on the current target architecture. Supported values are {x86_64, arm64}."
     echo ""
     echo "Examples:"
@@ -46,6 +46,9 @@ check_command_line_options() {
     echo "  ./plot-benchmarks.sh 21"
     echo "  ./plot-benchmarks.sh 21 x86_64"
     echo "  ./plot-benchmarks.sh 21 arm64"
+    echo "  ./plot-benchmarks.sh 25"
+    echo "  ./plot-benchmarks.sh 25 x86_64"
+    echo "  ./plot-benchmarks.sh 25 arm64"
     echo ""
     return 1
   fi
@@ -134,7 +137,7 @@ merge_split_benchmark_results() {
       echo "ERROR: An error occurred while merging or splitting benchmark result files, unable to continue!"
       return 1
     fi
-  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
+  elif [ "$PROCESSING_LANGUAGE" = "Python" ]; then
     if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/merge_benchmark.$PROCESSING_EXTENSION \
         $JMH_OUTPUT_FOLDER $OPENJDK_HOTSPOT_VM_IDENTIFIER $GRAAL_VM_CE_IDENTIFIER $GRAAL_VM_EE_IDENTIFIER $AZUL_PRIME_VM_IDENTIFIER &&
       $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/split_benchmark.$PROCESSING_EXTENSION \
@@ -222,7 +225,7 @@ benchmarks_geometric_mean() {
       echo "ERROR: An error occurred while calculating the normalized geometric mean of benchmarks, unable to continue!"
       return 1
     fi
-  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
+  elif [ "$PROCESSING_LANGUAGE" = "Python" ]; then
     if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/geomean_benchmark.$PROCESSING_EXTENSION \
         "$JMH_OUTPUT_FOLDER" "$GEOMETRIC_MEAN_OUTPUT_FOLDER" \
         "$OPENJDK_HOTSPOT_VM_IDENTIFIER" "$GRAAL_VM_CE_IDENTIFIER" "$GRAAL_VM_EE_IDENTIFIER" "$AZUL_PRIME_VM_IDENTIFIER" \
@@ -286,7 +289,7 @@ plot_benchmarks() {
       echo "ERROR: An error occurred while plotting benchmark results, unable to continue!"
       return 1
     fi
-  else if [ "$PROCESSING_LANGUAGE" = "Python" ]; then
+  elif [ "$PROCESSING_LANGUAGE" = "Python" ]; then
     if $PROCESSING_COMMAND $PROCESSING_SCRIPT_DIR/plot_benchmark.$PROCESSING_EXTENSION \
         "$JDK_VERSION" "$BENCHMARKS_ARCH" \
         "$JMH_OUTPUT_FOLDER" "$PLOT_OUTPUT_FOLDER" \

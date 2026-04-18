@@ -282,9 +282,42 @@ To properly execute bash scripts on Windows there are a few alternatives:
 
 ## Benchmark plots
 
-### Install R/ggplot2
+### Install R or Python
 
-The benchmark plot generation is based on [R/ggplot2](https://ggplot2.tidyverse.org/) that needs to be installed upfront.
+The benchmark plot generation requires either **R** or **Python** to be installed upfront. You can choose one of the following options:
+
+- **Option 1: R/ggplot2** - [R/ggplot2](https://ggplot2.tidyverse.org/) for plot generation
+  - On Ubuntu/Debian: `sudo apt install r-base`
+  - On macOS: `brew install r`
+
+- **Option 2: Python** - Python 3.x with required libraries for plot generation
+  - On Ubuntu/Debian: `sudo apt install python3 python3-pip`
+  - On macOS: `brew install python3`
+
+During the plot generation process, you will be prompted to select which language to use.
+
+### Install required R packages
+
+If you choose to use **R** for plot generation, you need to install the required system dependencies and R packages upfront.
+
+#### System dependencies (Ubuntu/Debian)
+
+```bash
+sudo apt install build-essential git pkg-config libfreetype6-dev libpng-dev libtiff-dev libjpeg-dev libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+```
+
+#### R packages
+
+```bash
+sudo R --vanilla --quiet -e "install.packages(c('ggplot2', 'svglite', 'styler', 'plyr', 'psych'), repos='http://cran.us.r-project.org')"
+```
+
+The required packages are:
+- **ggplot2** - For plot generation
+- **svglite** - For SVG output format
+- **styler** - For code formatting
+- **plyr** - For data manipulation
+- **psych** - For statistical functions
 
 ### Generate the benchmark plots
 
