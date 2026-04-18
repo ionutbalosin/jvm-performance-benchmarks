@@ -37,7 +37,7 @@ from utils import read_csv_results_from_file, calculate_geometric_mean
 # Apply column sanitizations on the data frame
 def sanitize_benchmark_data(data):
     # Delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
-    data = data[~data['Benchmark'].str.contains(':·', na=False)]
+    data = data[~data['Benchmark'].str.contains(r':[^\s]', regex=True, na=False)]
     
     # Replace commas with dots for Score columns for consistency
     if 'Score' in data.columns:

@@ -81,7 +81,7 @@ concatenateBenchmarkParamColumns <- function(data) {
 # Function to process the benchmark results
 cleanAndPrepareBenchmarkData <- function(data) {
   # Delete rows containing profile stats in the Benchmark name
-  data <- data[!grepl(":.", data$Benchmark), ]
+  data <- data[!grepl(":[^\\s]", data$Benchmark), ]
 
   # Remove the package name from the Benchmark name
   data$Benchmark <- sub("^.+\\.", "", data$Benchmark)

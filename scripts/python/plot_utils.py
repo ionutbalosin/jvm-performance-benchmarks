@@ -76,7 +76,7 @@ def clean_and_prepare_benchmark_data(data):
         return data
     
     # Delete rows containing profile stats in the Benchmark name
-    data = data[~data['Benchmark'].str.contains(':·', na=False)]
+    data = data[~data['Benchmark'].str.contains(r':[^\s]', regex=True, na=False)]
     
     # Remove the package name from the Benchmark name
     data['Benchmark'] = data['Benchmark'].str.replace(r'^.+\.', '', regex=True)

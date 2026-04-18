@@ -33,7 +33,7 @@ source("./scripts/ggplot2/utils.r")
 # Apply column sanitizations on the data frame
 sanitizeBenchmarkData <- function(data) {
   # Delete the rows containing profile stats in the Benchmark name (e.g., gc:·gc.alloc.rate)
-  data <- data[!grepl(":.", data$Benchmark), ]
+  data <- data[!grepl(":[^\\s]", data$Benchmark), ]
 
   # Replace commas with dots for Score and Error columns for consistency
   data$Score <- as.numeric(gsub(",", ".", data$Score))

@@ -319,6 +319,20 @@ The required packages are:
 - **plyr** - For data manipulation
 - **psych** - For statistical functions
 
+### Install required Python packages
+
+If you choose to use **Python** for plot generation, install the required Python packages via apt (to avoid externally-managed-environment errors):
+
+```bash
+sudo apt install python3-pandas python3-numpy python3-matplotlib python3-seaborn
+```
+
+The required packages are:
+- **pandas** - For data manipulation and CSV handling
+- **numpy** - For numerical computations
+- **matplotlib** - For plot generation
+- **seaborn** - For statistical data visualization
+
 ### Generate the benchmark plots
 
 To generate all benchmark plots corresponding to one `<jdk-version>` and (optionally,) a specific `<arch>`, run the below command:
