@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorizedScanOperationBenchmark.serial_scan","thrpt",1,25,201786.754186,14.840334,"ops/s",4096
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorizedScanOperationBenchmark.serial_scan","thrpt",1,25,82387.715147,4.112615,"ops/s",10000
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorizedScanOperationBenchmark.vector_scan","thrpt",1,25,639035.993419,3378.987762,"ops/s",4096
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.VectorizedScanOperationBenchmark.vector_scan","thrpt",1,25,264785.765651,1095.174927,"ops/s",10000

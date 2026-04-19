@@ -1,0 +1,9 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: algorithm","Param: messageLength"
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,597.867390,1.343844,"us/op",Ed25519,64
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,599.918181,1.472821,"us/op",Ed25519,512
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,605.672504,1.513444,"us/op",Ed25519,2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,666.703443,1.842865,"us/op",Ed25519,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,2083.759772,5.089385,"us/op",Ed448,64
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,2092.848017,9.804448,"us/op",Ed448,512
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,2100.823524,8.206332,"us/op",Ed448,2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEdSignatureBenchmark.sign","avgt",1,25,2171.170970,9.121536,"us/op",Ed448,16384

@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: algorithm","Param: messageLength"
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,145.668801,0.248460,"us/op",secp256r1,64
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,145.927661,0.226836,"us/op",secp256r1,512
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,147.108400,0.144402,"us/op",secp256r1,2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,158.657583,0.279030,"us/op",secp256r1,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1056.982009,3.746067,"us/op",secp384r1,64
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1049.953926,2.325333,"us/op",secp384r1,512
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1057.099650,2.790084,"us/op",secp384r1,2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1078.575326,3.517998,"us/op",secp384r1,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1888.847727,4.067052,"us/op",secp521r1,64
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1889.271644,3.809680,"us/op",secp521r1,512
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1883.520222,2.529557,"us/op",secp521r1,2048
+"com.ionutbalosin.jvm.performance.benchmarks.api.signature.DsaEcSignatureBenchmark.sign","avgt",1,25,1912.184220,4.354778,"us/op",secp521r1,16384

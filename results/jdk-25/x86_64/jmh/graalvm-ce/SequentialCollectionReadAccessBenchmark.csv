@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: gc","Param: shuffle"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,2.304710,0.068489,"ns/op",false,false
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,2.598690,0.057851,"ns/op",false,true
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,2.125027,0.263277,"ns/op",true,false
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.array_list","avgt",1,25,2.477664,0.070307,"ns/op",true,true
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,2.179164,0.107181,"ns/op",false,false
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,2.297120,0.047504,"ns/op",false,true
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,1.936521,0.242174,"ns/op",true,false
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.integer_array","avgt",1,25,2.201962,0.065172,"ns/op",true,true
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,2.521966,0.142708,"ns/op",false,false
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,4.613839,0.038551,"ns/op",false,true
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,2.463446,0.225101,"ns/op",true,false
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.memoryaccess.SequentialCollectionReadAccessBenchmark.linked_list","avgt",1,25,4.581259,0.253445,"ns/op",true,true

@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SepiaVectorApiBenchmark.baseline","avgt",1,25,108.384075,0.005036,"us/op",32768
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SepiaVectorApiBenchmark.baseline","avgt",1,25,261.882797,9.222825,"us/op",65536
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SepiaVectorApiBenchmark.vectorized","avgt",1,25,21.146140,1.677487,"us/op",32768
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.SepiaVectorApiBenchmark.vectorized","avgt",1,25,52.813759,4.369642,"us/op",65536

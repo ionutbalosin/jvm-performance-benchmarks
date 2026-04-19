@@ -1,0 +1,4 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.api.uuid.UUIDBenchmark.from_bytes","avgt",1,25,145.735998,2.214587,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.api.uuid.UUIDBenchmark.from_string","avgt",1,25,21.939098,0.512535,"ns/op"
+"com.ionutbalosin.jvm.performance.benchmarks.api.uuid.UUIDBenchmark.to_string","avgt",1,25,12.199736,0.080427,"ns/op"

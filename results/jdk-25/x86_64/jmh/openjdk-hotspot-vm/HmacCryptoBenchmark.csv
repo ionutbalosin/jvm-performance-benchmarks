@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: algorithm","Param: length"
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,22.957475,0.004646,"us/op",HmacMD5,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,10.519036,0.004032,"us/op",HmacSHA1,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,13.328035,0.006966,"us/op",HmacSHA224,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,13.331603,0.006405,"us/op",HmacSHA256,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,31.041435,0.009795,"us/op",HmacSHA384,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,31.023927,0.039351,"us/op",HmacSHA512,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,31.014936,0.005220,"us/op",HmacSHA512/224,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,31.011711,0.006355,"us/op",HmacSHA512/256,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,37.399789,0.012506,"us/op",HmacSHA3-224,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,39.561382,0.004705,"us/op",HmacSHA3-256,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,51.392264,0.006565,"us/op",HmacSHA3-384,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.HmacCryptoBenchmark.mac","avgt",1,25,73.679093,0.006479,"us/op",HmacSHA3-512,16384

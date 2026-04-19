@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: keyLength","Param: mapSize"
+"com.ionutbalosin.jvm.performance.benchmarks.api.HashMapCompositeKeyBenchmark.composite_key_lookup","avgt",1,25,58.914666,1.451027,"ns/op",64,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.HashMapCompositeKeyBenchmark.composite_key_put","avgt",1,25,69.945349,1.758274,"ns/op",64,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.HashMapCompositeKeyBenchmark.string_key_lookup","avgt",1,25,134.173026,1.555984,"ns/op",64,16384
+"com.ionutbalosin.jvm.performance.benchmarks.api.HashMapCompositeKeyBenchmark.string_key_put","avgt",1,25,150.450665,2.352607,"ns/op",64,16384

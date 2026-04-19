@@ -1,0 +1,9 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.baseline_query_GT_pivot","thrpt",1,25,7559.181647,14.686443,"ops/s",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.baseline_query_GT_pivot","thrpt",1,25,1888.629556,9.430276,"ops/s",1048576
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.baseline_query_IS_EVEN_pivot","thrpt",1,25,7120.641461,11.066030,"ops/s",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.baseline_query_IS_EVEN_pivot","thrpt",1,25,1781.561497,3.087386,"ops/s",1048576
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.vectorized_query_GT_pivot","thrpt",1,25,8353.933940,182.049171,"ops/s",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.vectorized_query_GT_pivot","thrpt",1,25,2082.573555,38.119544,"ops/s",1048576
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.vectorized_query_IS_EVEN_pivot","thrpt",1,25,4921.286145,941.213641,"ops/s",262144
+"com.ionutbalosin.jvm.performance.benchmarks.api.vector.ColumnarDBFilterBenchmark.vectorized_query_IS_EVEN_pivot","thrpt",1,25,493.828040,34.276045,"ops/s",1048576

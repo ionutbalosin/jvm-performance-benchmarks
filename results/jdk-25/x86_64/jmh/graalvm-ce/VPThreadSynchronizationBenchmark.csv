@@ -1,0 +1,19 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: backoffType","Param: loadFactor","Param: lockType","Param: threadType"
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,31.982937,13.100036,"ms/op",NONE,384,OBJECT_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,4.766307,0.320554,"ms/op",NONE,384,OBJECT_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,13.719727,0.788079,"ms/op",NONE,384,REENTRANT_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,5.066059,0.343479,"ms/op",NONE,384,REENTRANT_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,14.512081,1.746384,"ms/op",NONE,384,NO_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,4.462045,0.401278,"ms/op",NONE,384,NO_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,356.060420,11.653127,"ms/op",SLEEP,384,OBJECT_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,988.151280,1.687411,"ms/op",SLEEP,384,OBJECT_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,213.481499,9.110341,"ms/op",SLEEP,384,REENTRANT_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,988.447101,1.966985,"ms/op",SLEEP,384,REENTRANT_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,16.603772,0.645658,"ms/op",SLEEP,384,NO_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,25.255082,0.692264,"ms/op",SLEEP,384,NO_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,362.545256,17.907106,"ms/op",PARK,384,OBJECT_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,989.063432,1.952425,"ms/op",PARK,384,OBJECT_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,213.407834,7.928509,"ms/op",PARK,384,REENTRANT_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,986.526121,1.581886,"ms/op",PARK,384,REENTRANT_LOCK,PLATFORM
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,18.187425,1.793450,"ms/op",PARK,384,NO_LOCK,VIRTUAL
+"com.ionutbalosin.jvm.performance.benchmarks.api.thread.VPThreadSynchronizationBenchmark.synchronized_calls","avgt",1,25,25.529931,0.977078,"ms/op",PARK,384,NO_LOCK,PLATFORM

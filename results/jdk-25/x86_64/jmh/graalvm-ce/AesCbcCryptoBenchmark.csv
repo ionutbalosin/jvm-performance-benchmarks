@@ -1,0 +1,13 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: dataSize","Param: keySize","Param: transformation"
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,3.010791,0.024649,"us/op",16384,128,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,4.582479,0.031914,"us/op",16384,128,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,3.306418,0.031207,"us/op",16384,192,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,4.941945,0.072154,"us/op",16384,192,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,3.665969,0.042461,"us/op",16384,256,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.decrypt","avgt",1,25,5.221068,0.047362,"us/op",16384,256,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,11.882985,0.182096,"us/op",16384,128,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,14.003546,0.137602,"us/op",16384,128,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,13.663965,0.159155,"us/op",16384,192,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,15.884449,0.118203,"us/op",16384,192,AES/CBC/PKCS5Padding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,15.629269,0.243638,"us/op",16384,256,AES/CBC/NoPadding
+"com.ionutbalosin.jvm.performance.benchmarks.api.crypto.AesCbcCryptoBenchmark.encrypt","avgt",1,25,17.811572,0.169121,"us/op",16384,256,AES/CBC/PKCS5Padding

@@ -76,7 +76,7 @@ def clean_and_prepare_benchmark_data(data):
         return data
     
     # Delete rows containing profile stats in the Benchmark name
-    data = data[~data['Benchmark'].str.contains(':·', na=False)]
+    data = data[~data['Benchmark'].str.contains(r':[^\s]', regex=True, na=False)]
     
     # Remove the package name from the Benchmark name
     data['Benchmark'] = data['Benchmark'].str.replace(r'^.+\.', '', regex=True)
@@ -124,7 +124,9 @@ def create_benchmark_bar_chart(data, fill, fill_label, x_label, y_label, title, 
     
     # Set up the plot style
     plt.style.use('default')
-    fig, ax = plt.subplots(figsize=(20, max(4, len(data) * 0.8)))
+    # Height proportional to the number of data rows plus 4 cm (as a minimum), matching R's formula
+    height_cm = len(data) * 2 + 4
+    fig, ax = plt.subplots(figsize=(50.8 / 2.54, height_cm / 2.54))
     
     # Create the bar plot
     unique_jvms = data[fill].unique()
@@ -160,7 +162,6 @@ def create_benchmark_bar_chart(data, fill, fill_label, x_label, y_label, title, 
     ax.set_ylabel(x_label)
     ax.set_xlabel(y_label)
     ax.set_title(title, fontsize=16, pad=20)
-    ax.legend(title=fill_label, loc='lower right')
     
     # Set y-tick labels to benchmark names
     unique_benchmarks = data['Benchmark'].unique()
@@ -174,7 +175,15 @@ def create_benchmark_bar_chart(data, fill, fill_label, x_label, y_label, title, 
     # Add caption
     fig.text(1.0, 0.02, caption, ha='right', va='bottom', fontsize=10)
     
+    # Layout first, then reserve fixed space at bottom for legend
     plt.tight_layout()
+    fig.subplots_adjust(bottom=fig.subplotpars.bottom + 0.03)
+    
+    # Legend on figure level in the reserved bottom space (always below xlabel)
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, title=fill_label, loc='lower center',
+              ncol=len(unique_jvms), frameon=False, fontsize=10)
+    
     return fig
 
 # Function to save the plot to an SVG output file
@@ -184,13 +193,7 @@ def save_benchmark_bar_chart_to_svg(data, plot, path, benchmark_file_basename):
         if not os.path.exists(path):
             os.makedirs(path)
         
-        # Set the height proportional to the number of rows plus some minimum
-        height = max(8, len(data) * 0.8 + 2)
-        
-        # Update figure size
-        plot.set_size_inches(20, height)
-        
-        # Save the plot
+        # Save the plot (figure size already set in create_benchmark_bar_chart)
         output_path = os.path.join(path, f"{benchmark_file_basename}.svg")
         plot.savefig(output_path, format='svg', dpi=320, bbox_inches='tight')
         plt.close(plot)

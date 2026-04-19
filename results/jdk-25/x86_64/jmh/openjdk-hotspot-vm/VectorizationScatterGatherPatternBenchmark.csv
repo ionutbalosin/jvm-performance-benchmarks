@@ -1,0 +1,2 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: size"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.VectorizationScatterGatherPatternBenchmark.scatter_gather","avgt",1,25,178.654197,3.149369,"us/op",262144

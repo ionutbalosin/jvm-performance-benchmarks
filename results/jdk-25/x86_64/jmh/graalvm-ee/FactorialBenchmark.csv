@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: n"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,148.298329,1.319866,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.divide_and_conquer_big_integer_multiply","avgt",1,25,328.695172,3.933237,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,3188.779410,0.373888,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_array_multiply","avgt",1,25,103248.499381,5.101373,"us/op",5000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,147.452376,1.086257,"us/op",1000
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.factorial.FactorialBenchmark.iterative_big_integer_multiply","avgt",1,25,5131.375697,40.897651,"us/op",5000

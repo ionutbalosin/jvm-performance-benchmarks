@@ -1,0 +1,5 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit","Param: iterations"
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.initial_loop","avgt",1,25,262.098189,0.010293,"ms/op",20480
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_cse","avgt",1,25,156.896032,0.005655,"ms/op",20480
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_hoist_and_sink","avgt",1,25,105.453740,0.003775,"ms/op",20480
+"com.ionutbalosin.jvm.performance.benchmarks.compiler.LoopInvariantCodeMotionBenchmark.manual_hoist_and_sink_cse","avgt",1,25,52.811484,0.001624,"ms/op",20480

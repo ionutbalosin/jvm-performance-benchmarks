@@ -1,0 +1,3 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.gameoflife.GameOfLifeBenchmark.functional","avgt",1,25,100.371433,2.544597,"ms/op"
+"com.ionutbalosin.jvm.performance.benchmarks.miscellaneous.gameoflife.GameOfLifeBenchmark.iterative","avgt",1,25,23.598716,0.219177,"ms/op"
