@@ -1,42 +1,18 @@
 {
   "globals": {
     "jvmOpts": "",
-    "jmhOpts": "-foe true -wi 5 -w 10 -i 5 -r 10 -f 5 -rf csv -rff ((outputFilePath)).csv",
+    "jmhOpts": "-foe true -wi 5 -w 10 -i 5 -r 10 -f 1 -prof perfasm -o ((outputFilePath)).asm",
     "jvmArgsAppend": "-Xms4g -Xmx4g -XX:+AlwaysPreTouch"
   },
   "benchmarks": [
     {
-      "name": "AesCbcCryptoBenchmark"
-    },
-    {
       "name": "AesCtrCryptoBenchmark"
-    },
-    {
-      "name": "AesEcbCryptoBenchmark"
-    },
-    {
-      "name": "AesGcmCryptoBenchmark"
     },
     {
       "name": "ArithmeticCanonicalizationBenchmark"
     },
     {
       "name": "BlowfishCbcCryptoBenchmark"
-    },
-    {
-      "name": "BranchlessBitwiseBenchmark"
-    },
-    {
-      "name": "ByteArrayInputStreamBenchmark"
-    },
-    {
-      "name": "ByteArrayOutputStreamBenchmark"
-    },
-    {
-      "name": "CanonicalizeInductionVariableBenchmark"
-    },
-    {
-      "name": "CharArrayReaderBenchmark"
     },
     {
       "name": "CharArrayWriterBenchmark"
@@ -46,18 +22,6 @@
     },
     {
       "name": "ColumnarDBFilterBenchmark"
-    },
-    {
-      "name": "ClockBenchmark"
-    },
-    {
-      "name": "DateTimeFormatterBenchmark"
-    },
-    {
-      "name": "DateTimeFormatterFormatBenchmark"
-    },
-    {
-      "name": "DateTimeFormatterParseBenchmark"
     },
     {
       "name": "DeadArgumentEliminationBenchmark"
@@ -73,12 +37,6 @@
       "name": "DeadMethodCallStoreBenchmark"
     },
     {
-      "name": "DesCbcCryptoBenchmark"
-    },
-    {
-      "name": "DesEcbCryptoBenchmark"
-    },
-    {
       "name": "DijkstraShortestPathBenchmark"
     },
     {
@@ -88,55 +46,10 @@
       "name": "DsaEdSignatureBenchmark"
     },
     {
-      "name": "DsaSignatureBenchmark"
-    },
-    {
-      "name": "EnumSwitchBenchmark"
-    },
-    {
-      "name": "EnumValuesLookupBenchmark"
-    },
-    {
-      "name": "FactorialBenchmark"
-    },
-    {
-      "name": "FalseSharingBenchmark"
-    },
-    {
       "name": "FastJSONCodePointMatchBenchmark"
     },
     {
-      "name": "FibonacciBenchmark"
-    },
-    {
-      "name": "FileChannelReadBenchmark"
-    },
-    {
-      "name": "FileChannelWriteBenchmark"
-    },
-    {
-      "name": "FileInputStreamBenchmark"
-    },
-    {
-      "name": "FileOutputStreamBenchmark"
-    },
-    {
-      "name": "FilterInputStreamBenchmark"
-    },
-    {
-      "name": "FilterOutputStreamBenchmark"
-    },
-    {
       "name": "GameOfLifeBenchmark"
-    },
-    {
-      "name": "HashMapCompositeKeyBenchmark"
-    },
-    {
-      "name": "HmacCryptoBenchmark"
-    },
-    {
-      "name": "HolidayPlannerBenchmark"
     },
     {
       "name": "HuffmanCodingBenchmark"
@@ -145,25 +58,7 @@
       "name": "IfConditionalBranchBenchmark"
     },
     {
-      "name": "ImageRotateBenchmark"
-    },
-    {
-      "name": "InfrastructureBaselineBenchmark"
-    },
-    {
-      "name": "InstantBenchmark"
-    },
-    {
-      "name": "IoBlockingRoundtripLatencyBenchmark"
-    },
-    {
-      "name": "JustInTimeConstantsBenchmark"
-    },
-    {
       "name": "KnapsackBenchmark"
-    },
-    {
-      "name": "LocalDateTimeBenchmark"
     },
     {
       "name": "LockCoarseningBenchmark"
@@ -177,64 +72,13 @@
       "name": "LockElisionBenchmark"
     },
     {
-      "name": "LoopFissionBenchmark"
-    },
-    {
-      "name": "LoopFusionBenchmark"
-    },
-    {
-      "name": "LoopInterchangeBenchmark"
-    },
-    {
-      "name": "LoopInvariantCodeMotionBenchmark"
-    },
-    {
-      "name": "LoopReductionBenchmark"
-    },
-    {
-      "name": "LoopUnswitchBenchmark"
-    },
-    {
-      "name": "LzwCodecBenchmark"
-    },
-    {
-      "name": "MandelbrotVectorApiBenchmark"
-    },
-    {
       "name": "MegamorphicInterfaceCallBenchmark"
     },
     {
       "name": "MegamorphicMethodCallBenchmark"
     },
     {
-      "name": "MemoryAccessPatternsBenchmark"
-    },
-    {
-      "name": "MemoryMappedReadBenchmark"
-    },
-    {
-      "name": "MemoryMappedWriteBenchmark"
-    },
-    {
-      "name": "MessageDigestBenchmark"
-    },
-    {
       "name": "MethodArgsBusterBenchmark"
-    },
-    {
-      "name": "NioBlockingRoundtripLatencyBenchmark"
-    },
-    {
-      "name": "NioNonBlockingRoundtripLatencyBenchmark"
-    },
-    {
-      "name": "NioSelectorRoundtripLatencyBenchmark"
-    },
-    {
-      "name": "MlDsaBenchmark"
-    },
-    {
-      "name": "MlKemBenchmark"
     },
     {
       "name": "NpeControlFlowBenchmark"
@@ -243,64 +87,7 @@
       "name": "NpeThrowBenchmark"
     },
     {
-      "name": "NQueensBenchmark"
-    },
-    {
-      "name": "ObjectInputStreamBenchmark"
-    },
-    {
-      "name": "ObjectOutputStreamBenchmark"
-    },
-    {
-      "name": "ObjectStreamClassBenchmark"
-    },
-    {
-      "name": "OffsetDateTimeBenchmark"
-    },
-    {
-      "name": "PalindromeBenchmark"
-    },
-    {
-      "name": "PipedInputStreamBenchmark"
-    },
-    {
-      "name": "PipedOutputStreamBenchmark"
-    },
-    {
-      "name": "PipedReaderBenchmark"
-    },
-    {
-      "name": "PipedWriterBenchmark"
-    },
-    {
-      "name": "PopulationVarianceBenchmark"
-    },
-    {
-      "name": "PrimesBenchmark"
-    },
-    {
-      "name": "PublicationStatisticsBenchmark"
-    },
-    {
-      "name": "RandomAccessFileBenchmark"
-    },
-    {
-      "name": "RandomGeneratorBenchmark"
-    },
-    {
-      "name": "ReaderBenchmark"
-    },
-    {
       "name": "RecursiveMethodCallBenchmark"
-    },
-    {
-      "name": "RsaEcbCryptoBenchmark"
-    },
-    {
-      "name": "RsaSignatureBenchmark"
-    },
-    {
-      "name": "RsaSsaPssSignatureBenchmark"
     },
     {
       "name": "ScalarEvolutionAndLoopOptimizationBenchmark"
@@ -312,26 +99,10 @@
       "name": "ScalarReplacementBenchmark"
     },
     {
-      "name": "SepiaVectorApiBenchmark"
-    },
-    {
-      "name": "SequentialCollectionReadAccessBenchmark"
-    },
-    {
       "name": "SortVectorApiBenchmark"
     },
     {
-      "name": "StackSpillingBenchmark"
-    },
-    {
-      "name": "StackTraceBenchmark"
-    },
-    {
       "name": "StringCompareLexBenchmark"
-    },
-    {
-      "name": "StringConcatenationBenchmark",
-      "jmhOpts": "-prof gc"
     },
     {
       "name": "StringContainsBenchmark"
@@ -340,20 +111,11 @@
       "name": "StringEqualsBenchmark"
     },
     {
-      "name": "StringFormatBenchmark"
-    },
-    {
       "name": "StringIndexOfBenchmark"
-    },
-    {
-      "name": "StringPatternMatcherBenchmark"
     },
     {
       "name": "StringPatternSplitBenchmark",
       "jmhOpts": "-prof gc"
-    },
-    {
-      "name": "StringReplaceBenchmark"
     },
     {
       "name": "StringSubstringBenchmark"
@@ -362,37 +124,7 @@
       "name": "StringSwitchBenchmark"
     },
     {
-      "name": "StringWhitespaceBenchmark"
-    },
-    {
       "name": "TailRecursionBenchmark"
-    },
-    {
-      "name": "ThreadLocalRandomBenchmark"
-    },
-    {
-      "name": "TypeSwitchBenchmark"
-    },
-    {
-      "name": "URLClassLoaderBenchmark"
-    },
-    {
-      "name": "UUIDBenchmark"
-    },
-    {
-      "name": "VarArgsBenchmark"
-    },
-    {
-      "name": "VectorApiBenchmark"
-    },
-    {
-      "name": "VectorizationPatternsMultipleFloatArraysBenchmark"
-    },
-    {
-      "name": "VectorizationPatternsMultipleIntArraysBenchmark"
-    },
-    {
-      "name": "VectorizationPatternsSingleIntArrayBenchmark"
     },
     {
       "name": "VectorizationScatterGatherPatternBenchmark"
@@ -401,22 +133,7 @@
       "name": "VectorizedScanOperationBenchmark"
     },
     {
-      "name": "VPThreadBlockingApiStackDepthBenchmark"
-    },
-    {
-      "name": "VPThreadCpuBoundBenchmark"
-    },
-    {
       "name": "VPThreadSynchronizationBenchmark"
-    },
-    {
-      "name": "WordFrequencyBenchmark"
-    },
-    {
-      "name": "WriterBenchmark"
-    },
-    {
-      "name": "ZonedDateTimeBenchmark"
     }
   ]
 }
